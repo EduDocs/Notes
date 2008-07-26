@@ -66,21 +66,21 @@ This latter space is a possible sample space for the rolling of a die.
 \label{section:ProbabilityLaws}
 
 A \emph{probability law} specifies the likelihood of any event related to an experiment.
-Formally, a probability law assigns to every event $A$ a number $\Prob (A)$, called the \emph{probability of event $A$}, such that the following axioms are satisfied.
+Formally, a probability law assigns to every event $A$ a number $\Pr (A)$, called the \emph{probability of event $A$}, such that the following axioms are satisfied.
 \begin{enumerate}
-\item \textbf{(Nonnegativity)} $\Prob (A) \geq 0$, for every event $A$.
+\item \textbf{(Nonnegativity)} $\Pr (A) \geq 0$, for every event $A$.
 \item \textbf{(Normalization)} The probability of the sample space $\Omega$ is equal to one,
 \begin{equation*}
-\Prob (\Omega) = 1 .
+\Pr (\Omega) = 1 .
 \end{equation*}
 \item \textbf{(Countable Additivity)} If $A$ and $B$ are disjoint events with $A \cap B = \emptyset$, then the probability of their union satisfies
 \begin{equation*}
-\Prob (A \cup B) = \Prob (A) + \Prob(B) .
+\Pr (A \cup B) = \Pr (A) + \Pr(B) .
 \end{equation*}
 More generally, if $A_1, A_2, \ldots$ is a sequence of disjoint events and $\bigcup_{k=1}^{\infty} A_k$ is itself an admissible event then
 \begin{equation*}
-\Prob \left( \bigcup_{k=1}^{\infty} A_k \right)
-= \sum_{k = 1}^{\infty} \Prob (A_k) .
+\Pr \left( \bigcup_{k=1}^{\infty} A_k \right)
+= \sum_{k = 1}^{\infty} \Pr (A_k) .
 \end{equation*}
 \end{enumerate}
 
@@ -88,12 +88,12 @@ A number of properties can be deduced from the three axioms of probability.
 We prove two such properties below.
 The first property describes the relation between inclusion and probabilities.
 \begin{proposition}
-If $A \subset B$, then $\Prob (A) \leq \Prob (B)$.
+If $A \subset B$, then $\Pr (A) \leq \Pr (B)$.
 \end{proposition}
 Since $A \subset B$, we have $B = A \cup (B - A)$.
 Noting that $A$ and $B - A$ are disjoint sets, we get
 \begin{equation*}
-\Prob (B) = \Prob (A) + \Prob (B - A) \geq \Prob (A) ,
+\Pr (B) = \Pr (A) + \Pr (B - A) \geq \Pr (A) ,
 \end{equation*}
 where the inequality follows from the nonnegativity of probability laws.
 
@@ -103,20 +103,20 @@ where the inequality follows from the nonnegativity of probability laws.
 
 The second property specifies the probability of the union of two events that are not necessarily mutually exclusive.
 \begin{proposition}
-$\Prob (A \cup B) = \Prob (A) + \Prob (B) - \Prob (A \cap B)$.
+$\Pr (A \cup B) = \Pr (A) + \Pr (B) - \Pr (A \cap B)$.
 \end{proposition}
 
 Using the third axiom of probability on the disjoint sets $A$ and $(A \cup B) - A$, we can write
 \begin{equation*}
-\Prob (A \cup B)
-= \Prob (A) + \Prob ((A \cup B) - A)
-= \Prob (A) + \Prob (B - A) .
+\Pr (A \cup B)
+= \Pr (A) + \Pr ((A \cup B) - A)
+= \Pr (A) + \Pr (B - A) .
 \end{equation*}
 Similarly, applying the third axiom to $A \cap B$ and $B - (A \cap B)$, we obtain
 \begin{equation*}
-\Prob (B)
-= \Prob (A \cap B) + \Prob (B - (A \cap B))
-= \Prob (A \cap B) + \Prob (B - A) .
+\Pr (B)
+= \Pr (A \cap B) + \Pr (B - (A \cap B))
+= \Pr (A \cap B) + \Pr (B - A) .
 \end{equation*}
 Combining these two equations yields the desired result.
 
@@ -132,19 +132,19 @@ Denote a sample space $\Omega$ containing $n$ elements by $\Omega = \{ s_1, s_2,
 Any event in $\Omega$ is of the form $A = \{ s_i \in \Omega | i \in I \}$, where $I$ is a subset of the integers one through $n$.
 The probability of event $A$ is therefore given by the third axiom of probability,
 \begin{equation*}
-\Prob (A)
-= \Prob ( \{ s_i \in \Omega | i \in I \} )
-= \sum_{i \in I} \Prob (s_i) .
+\Pr (A)
+= \Pr ( \{ s_i \in \Omega | i \in I \} )
+= \sum_{i \in I} \Pr (s_i) .
 \end{equation*}
 Note that, by definition, distinct outcomes are always disjoint events.
 
 If in addition all the elements of $\Omega$ are equally likely with
 \begin{equation*}
-\Prob (s_1) = \Prob (s_2) = \cdots = \Prob (s_n) = \frac{1}{n} ,
+\Pr (s_1) = \Pr (s_2) = \cdots = \Pr (s_n) = \frac{1}{n} ,
 \end{equation*}
 then the probability of an event $A$ becomes
 \begin{equation*}
-\Prob (A) = \frac{ |A| }{n}
+\Pr (A) = \frac{ |A| }{n}
 = \frac{ \text{number of elements in $A$} }{n} .
 \end{equation*}
 
@@ -154,9 +154,9 @@ The probability of observing any of the faces labeled one through six is $1/6$.
 The probability of any event can easily be computed by counting the number of distinct outcomes included in the event.
 For instance, the probability of rolling a prime number is
 \begin{equation*}
-\Prob (\text{outcome is prime})
-= \Prob ( \{ 2, 3, 5 \} )
-= \Prob (2) + \Prob(3) + \Prob(5) = \frac{3}{6} .
+\Pr (\text{outcome is prime})
+= \Pr ( \{ 2, 3, 5 \} )
+= \Pr (2) + \Pr(3) + \Pr(5) = \frac{3}{6} .
 \end{equation*}
 \end{example}
 
@@ -166,13 +166,13 @@ For instance, the probability of rolling a prime number is
 Consider a sample space that consists of a countably infinite number of elements, $\Omega = \{ s_1, s_2, \ldots \}$.
 Again, a probability law on $\Omega$ is specified by the probabilities of individual outcomes.
 An event in $\Omega$ can be written as $A = \{ s_j \in \Omega | j \in J \}$, where $J$ is a subset of the positive integers.
-Using the third axiom of probability, $\Prob (A)$ is given by
+Using the third axiom of probability, $\Pr (A)$ is given by
 \begin{equation*}
-\Prob (A)
-= \Prob ( \{ s_j \in \Omega | j \in J \} )
-= \sum_{j \in J} \Prob (s_j) .
+\Pr (A)
+= \Pr ( \{ s_j \in \Omega | j \in J \} )
+= \sum_{j \in J} \Pr (s_j) .
 \end{equation*}
-The possibly infinite sum $\sum_{j \in J} \Prob (s_j)$ always converges since the summands are nonnegative and the sum is bounded above by one.
+The possibly infinite sum $\sum_{j \in J} \Pr (s_j)$ always converges since the summands are nonnegative and the sum is bounded above by one.
 It is therefore well-defined.
 
 \begin{example} \label{example:CoinTossSequence}
@@ -182,13 +182,13 @@ The sample space for this experiment is $\Omega = \{ 1, 2, \ldots \}$, a countab
 The probability of observing heads on the first trial is $0.5$; and, the probability of observing heads for the first time on trial $n$ is $2^{-n}$.
 The probability of the entire sample space is equal to
 \begin{equation*}
-\Prob ( \Omega ) = \sum_{k=1}^{\infty} \Prob (k)
+\Pr ( \Omega ) = \sum_{k=1}^{\infty} \Pr (k)
 = \sum_{k=1}^{\infty} \frac{1}{2^k} = 1 .
 \end{equation*}
 The probability of the number of coin tosses being even is
 \begin{equation*}
-\Prob ( \text{outcome is even} )
-= \sum_{k=1}^{\infty} \Prob (2k)
+\Pr ( \text{outcome is even} )
+= \sum_{k=1}^{\infty} \Pr (2k)
 = \sum_{k = 1}^{\infty} \frac{1}{2^{2k}}
 = \frac{1}{4} \frac{1}{ \left( 1 - \frac{1}{4} \right) }
 = \frac{1}{3} .
@@ -212,11 +212,11 @@ To develop an understanding of uncountable probabilistic models, we consider the
 \end{center}
 
 Suppose that one element is chosen at random from this interval, and that all the elements are equally likely.
-By the first axiom of probability, we have $\Prob \left( [0,1] \right) = 1$.
+By the first axiom of probability, we have $\Pr \left( [0,1] \right) = 1$.
 Furthermore, if two intervals have the same length, the probabilities of the outcome falling in either interval should be identical.
 For instance,
-$\Prob \left( \left( 0, 0.25 \right) \right)
-= \Prob \left( \left( 0.75, 1 \right) \right)$.
+$\Pr \left( \left( 0, 0.25 \right) \right)
+= \Pr \left( \left( 0.75, 1 \right) \right)$.
 
 \begin{center}
 \includegraphics[height=1.18cm]{Figures/2Chapter/intervals}
@@ -224,7 +224,7 @@ $\Prob \left( \left( 0, 0.25 \right) \right)
 
 In an extension of the previous observation, we define the probability of an open interval $(a, b)$ where $0 \leq a < b \leq 1$ by
 \begin{equation} \label{equation:DefinitionProbabilityLaw1}
-\Prob ( (a,b) ) = b - a .
+\Pr ( (a,b) ) = b - a .
 \end{equation}
 Using the third axiom of probability, it is then possible to find the probability of a finite or countable union of disjoint open intervals.
 
@@ -234,7 +234,7 @@ Using the third axiom of probability, it is then possible to find the probabilit
 
 Specifically, for constants $0 \leq a_1 < b_1 < a_2 < b_2 < \cdots \leq 1$, we have
 \begin{equation*}
-\Prob \left( \bigcup_{k=1}^{\infty} (a_k,b_k) \right)
+\Pr \left( \bigcup_{k=1}^{\infty} (a_k,b_k) \right)
 = \sum_{k=1}^{\infty} b_k - a_k .
 \end{equation*}
 The probabilities of more complex events can be obtained by considering additional elementary set operations.
@@ -245,23 +245,23 @@ Note that we can give an alternative means of computing the probability of an in
 Again, consider the open interval $(a, b)$ where $0 \leq a < b \leq 1$.
 The probability of the outcome falling in this  interval is equal to
 \begin{equation*}
-\Prob ( (a, b) ) = b - a = \int_a^b dx = \int_{(a,b)} dx .
+\Pr ( (a, b) ) = b - a = \int_a^b dx = \int_{(a,b)} dx .
 \end{equation*}
 Moreover, for $0 \leq a_1 < b_1 < a_2 < b_2 < \cdots \leq 1$, we can write
 \begin{equation*}
-\Prob \left( \bigcup_{k=1}^{\infty} (a_k,b_k) \right)
+\Pr \left( \bigcup_{k=1}^{\infty} (a_k,b_k) \right)
 = \sum_{k=1}^{\infty} \left( b_k - a_k \right)
 = \int_{\bigcup_{k=1}^{\infty} (a_k,b_k)} dx .
 \end{equation*}
 It appears that the probability of an admissible event $A$ is given by the integral
 \begin{equation*}
-\Prob (A) = \int_{A} dx .
+\Pr (A) = \int_{A} dx .
 \end{equation*}
 This is indeed accurate for the experiment at hand.
 In fact, the class of admissible events for this experiment is simply the collection of all sets for which the integral $\int_A dx$ can be computed.
 In other words, if a number is chosen at random from $[0,1]$ then the probability of this number falling in the measurable set $A \subset [0,1]$ is
 \begin{equation*}
-\Prob (A) = \int_{A} dx .
+\Pr (A) = \int_{A} dx .
 \end{equation*}
 In this book, we will see many probabilitic models with uncountably infinite sample spaces.
 The mathematical tools required to handle such models will be treated alongside.
@@ -270,7 +270,7 @@ The mathematical tools required to handle such models will be treated alongside.
 Suppose that a participant at a gameshow is required to spin the wheel of misfortune, a perfect circle with unit circumference.
 When subjected to a vigorous spin, the wheel is equally likely to stop anywhere along its periphery.
 The sampling space for this experiment is $[0, 1)$, an uncountable set.
-Its probability is given by $\Prob ([0, 1)) = 1$.
+Its probability is given by $\Pr ([0, 1)) = 1$.
 
 \begin{center}
 \includegraphics[height=3.15cm]{Figures/2Chapter/wheel}
@@ -278,15 +278,15 @@ Its probability is given by $\Prob ([0, 1)) = 1$.
 
 The probability that the wheel stops in the first quadrant is given by
 \begin{equation*}
-\Prob \left( \left[ 0, \frac{1}{4} \right) \right) = \frac{1}{4}.
+\Pr \left( \left[ 0, \frac{1}{4} \right) \right) = \frac{1}{4}.
 \end{equation*}
 Similarly, the probability that the wheel stops in an interval $(a, b)$ where $0 \leq a \leq b < 1$ is
 \begin{equation*}
-\Prob ((a,b)) = b - a.
+\Pr ((a,b)) = b - a.
 \end{equation*}
 If $B \subset [0, 1)$ is the measurable set representing a winning outcome, then the probability of success at the wheel is
 \begin{equation*}
-\Prob(B) = \int_B d\ell.
+\Pr(B) = \int_B d\ell.
 \end{equation*}
 \end{example}
 

@@ -24,30 +24,30 @@ In particular, it is reasonable to assign a probability of $1/3$ to each of the 
 Note that we can express the probability of getting, say, a three given that the outcome is an odd number as
 \begin{equation*}
 \begin{split}
-\Prob (\text{3 given } \{ \text{odd numbers} \})
-&= \frac{\Prob (\text{3 and } \{ \text{odd numbers} \})}
-{\Prob (\text{odd numbers})} \\
-&= \frac{\Prob(3)}{\Prob (\{1,3,5\})} = \frac{1}{3} .
+\Pr (\text{3 given } \{ \text{odd numbers} \})
+&= \frac{\Pr (\text{3 and } \{ \text{odd numbers} \})}
+{\Pr (\text{odd numbers})} \\
+&= \frac{\Pr(3)}{\Pr (\{1,3,5\})} = \frac{1}{3} .
 \end{split}
 \end{equation*}
 \end{example}
 
 This argument can be generalized by introducing a formal definition for the concept of conditional probability.
-Let $B$ be an event such that $\Prob (B) > 0$.
-A conditional probability law assigns to every event $A$ a number $\Prob (A|B)$, termed the \emph{conditional probability of $A$ given $B$}, such that
+Let $B$ be an event such that $\Pr (B) > 0$.
+A conditional probability law assigns to every event $A$ a number $\Pr (A|B)$, termed the \emph{conditional probability of $A$ given $B$}, such that
 \begin{equation} \label{equation:ConditionalProbability}
-\Prob (A | B) = \frac{\Prob (A \cap B)}{\Prob (B)}.
+\Pr (A | B) = \frac{\Pr (A \cap B)}{\Pr (B)}.
 \end{equation}
-We can show that the set of conditional probabilities $\{ \Prob (A | B) \}$ specifies a valid probability law, as defined in Section~\ref{section:ProbabilityLaws}.
+We can show that the set of conditional probabilities $\{ \Pr (A | B) \}$ specifies a valid probability law, as defined in Section~\ref{section:ProbabilityLaws}.
 For every event $A$, we have
 \begin{equation*}
-\Prob (A|B) = \frac{\Prob (A \cap B)}{\Prob (B)} \geq 0.
+\Pr (A|B) = \frac{\Pr (A \cap B)}{\Pr (B)} \geq 0.
 \end{equation*}
-That is, $\Prob (A|B)$ is nonnegative.
+That is, $\Pr (A|B)$ is nonnegative.
 The probability of the sample space $\Omega$ is equal to
 \begin{equation*}
-\Prob (\Omega | B) = \frac{\Prob (\Omega \cap B)}{\Prob (B)}
-= \frac{\Prob (B)}{\Prob (B)} = 1 .
+\Pr (\Omega | B) = \frac{\Pr (\Omega \cap B)}{\Pr (B)}
+= \frac{\Pr (B)}{\Pr (B)} = 1 .
 \end{equation*}
 If $A_1, A_2, \ldots$ is a sequence of disjoint events, then
 \begin{equation*}
@@ -56,11 +56,11 @@ A_1 \cap B, A_2 \cap B, \ldots
 is also a sequence of disjoint events and
 \begin{equation*}
 \begin{split}
-\Prob \left( \bigcup_{k=1}^{\infty} A_k \Big| B \right)
-&= \frac{\Prob \left( \left( \bigcup_{k=1}^{\infty} A_k \right) \cap B \right)}{\Prob (B)}
-= \frac{\Prob \left( \bigcup_{k=1}^{\infty} (A_k \cap B ) \right)}{\Prob (B)} \\
-&= \sum_{k = 1}^{\infty} \frac{ \Prob (A_k \cap B ) }{\Prob (B)}
-= \sum_{k = 1}^{\infty} \Prob (A_k | B) ,
+\Pr \left( \bigcup_{k=1}^{\infty} A_k \Big| B \right)
+&= \frac{\Pr \left( \left( \bigcup_{k=1}^{\infty} A_k \right) \cap B \right)}{\Pr (B)}
+= \frac{\Pr \left( \bigcup_{k=1}^{\infty} (A_k \cap B ) \right)}{\Pr (B)} \\
+&= \sum_{k = 1}^{\infty} \frac{ \Pr (A_k \cap B ) }{\Pr (B)}
+= \sum_{k = 1}^{\infty} \Pr (A_k | B) ,
 \end{split}
 \end{equation*}
 where the third equality follows from the third axiom of probability applied to the set $\bigcup_{k=1}^{\infty} (A_k \cap B )$.
@@ -74,10 +74,10 @@ In this example, $A = \{ 2 \}$ and $B$ is the set of even numbers.
 The probability that the outcome is two given that the number of tosses is even is equal to
 \begin{equation*}
 \begin{split}
-\Prob ( 2 | \text{even numbers} )
-&= \frac{\Prob ( 2 \cap \{ \text{even numbers} \} )}
-{\Prob (\text{even numbers})} \\
-&= \frac{\Prob (2)}{\Prob (\text{even numbers})} \\
+\Pr ( 2 | \text{even numbers} )
+&= \frac{\Pr ( 2 \cap \{ \text{even numbers} \} )}
+{\Pr (\text{even numbers})} \\
+&= \frac{\Pr (2)}{\Pr (\text{even numbers})} \\
 &= \frac{1/4}{1/3}
 = \frac{3}{4} .
 \end{split}
@@ -90,17 +90,17 @@ The definiton of conditional probability can be employed to compute the probabil
 Let $A_1, A_2, \ldots, A_n$ be a collection of events.
 The probability of events $A_1$ through $A_n$ taking place at the same time is given by
 \begin{equation} \label{equation:SimultaneousEvents}
-\Prob \left( \bigcap_{k=1}^n A_k \right)
-= \Prob (A_1) \Prob (A_2 | A_1) \Prob (A_3 | A_1 \cap A_2)
-\cdots \Prob \left( A_n \bigg| \bigcap_{k=1}^{n-1} A_k \right) .
+\Pr \left( \bigcap_{k=1}^n A_k \right)
+= \Pr (A_1) \Pr (A_2 | A_1) \Pr (A_3 | A_1 \cap A_2)
+\cdots \Pr \left( A_n \bigg| \bigcap_{k=1}^{n-1} A_k \right) .
 \end{equation}
 This formula can be verified by expanding each of the conditional probabilities using \eqref{equation:ConditionalProbability},
 \begin{equation*}
-\Prob \left( \bigcap_{k=1}^n A_k \right)
-= \Prob (A_1) \frac{\Prob (A_2 \cap A_1)}{\Prob (A_1)}
-\frac{\Prob (A_1 \cap A_2 \cap A_3)}{\Prob (A_1 \cap A_2)}
-\cdots \frac{\Prob \left( \bigcap_{k=1}^{n} A_k \right)}
-{\Prob \left( \bigcap_{k=1}^{n-1} A_k \right)} .
+\Pr \left( \bigcap_{k=1}^n A_k \right)
+= \Pr (A_1) \frac{\Pr (A_2 \cap A_1)}{\Pr (A_1)}
+\frac{\Pr (A_1 \cap A_2 \cap A_3)}{\Pr (A_1 \cap A_2)}
+\cdots \frac{\Pr \left( \bigcap_{k=1}^{n} A_k \right)}
+{\Pr \left( \bigcap_{k=1}^{n-1} A_k \right)} .
 \end{equation*}
 
 \begin{example}
@@ -112,7 +112,7 @@ The probability of drawing a blue ball the second time given that the first ball
 Finally, the probability of drawing a blue ball the third time given that the previous two balls are blue is $6/10$.
 Using \eqref{equation:SimultaneousEvents}, we can compute the probability drawing three blue balls
 \begin{equation*}
-\Prob (\text{3 blue balls})
+\Pr (\text{3 blue balls})
 = \frac{8}{12} \frac{7}{11} \frac{6}{10}
 = \frac{14}{55} .
 \end{equation*}
@@ -128,7 +128,7 @@ Using \eqref{equation:SimultaneousEvents}, we can compute the probability drawin
 The probability of events $A$ and $B$ occuring at the same time can be calculated as a special case of \eqref{equation:SimultaneousEvents}.
 For two events, this computational formula simplifies to
 \begin{equation} \label{equation:ProbabilityIntersection}
-\Prob (A \cap B) = \Prob (A|B) \Prob (B) .
+\Pr (A \cap B) = \Pr (A|B) \Pr (B) .
 \end{equation}
 We can also obtain this equation directly from the definition of conditional probability.
 This property is a key observation that plays a central role in establishing two important results, the total probability theorem and Bayes' rule.
@@ -144,12 +144,12 @@ Visually, a partition divides an entire set into disjoint subsets.
 
 \begin{theorem}[Total Probability Theorem] \label{theorem:TotalProbability}
 Let $A_1, A_2, \ldots, A_n$ be a collection of events that forms a partition of the sample space $\Omega$.
-Suppose that $\Prob (A_k) > 0$ for all $k$.
+Suppose that $\Pr (A_k) > 0$ for all $k$.
 Then for any event $B$ we can write
 \begin{equation*}
 \begin{split}
-\Prob (B) &= \Prob (A_1 \cap B) + \Prob (A_2 \cap B) + \cdots + \Prob (A_n \cap B) \\
-&= \Prob (A_1) \Prob (B | A_1) + \Prob (A_2) \Prob (B | A_2) + \cdots + \Prob (A_n) \Prob (B | A_n ) .
+\Pr (B) &= \Pr (A_1 \cap B) + \Pr (A_2 \cap B) + \cdots + \Pr (A_n \cap B) \\
+&= \Pr (A_1) \Pr (B | A_1) + \Pr (A_2) \Pr (B | A_2) + \cdots + \Pr (A_n) \Pr (B | A_n ) .
 \end{split}
 \end{equation*}
 \end{theorem}
@@ -167,11 +167,11 @@ are also disjoint.
 Combining these two facts, we get
 \begin{equation*}
 \begin{split}
-\Prob (B)
-&= \Prob \left( B \cap \left( \bigcup_{k=1}^n A_k \right) \right)
-= \Prob \left( \bigcup_{k=1}^n (B \cap A_k) \right) \\
-&= \sum_{k=1}^n \Prob \left( B \cap A_k \right)
-= \sum_{k=1}^n \Prob (A_k) \Prob \left( B |A_k \right) ,
+\Pr (B)
+&= \Pr \left( B \cap \left( \bigcup_{k=1}^n A_k \right) \right)
+= \Pr \left( \bigcup_{k=1}^n (B \cap A_k) \right) \\
+&= \sum_{k=1}^n \Pr \left( B \cap A_k \right)
+= \sum_{k=1}^n \Pr (A_k) \Pr \left( B |A_k \right) ,
 \end{split}
 \end{equation*}
 where the fourth equality is obtained by applying the third axiom of probability.
@@ -184,7 +184,7 @@ A graphical interpretation of Theorem~\ref{theorem:TotalProbability} is illustra
 Event $B$ can be decomposed into the disjoint union of $A_1 \cap B, A_2 \cap B, \ldots, A_n \cap B$.
 The probability of event $B$ can then be computed by adding
 \begin{equation*}
-\Prob (A_1 \cap B), \Prob (A_2 \cap B), \ldots, \Prob (A_n \cap B) .
+\Pr (A_1 \cap B), \Pr (A_2 \cap B), \ldots, \Pr (A_n \cap B) .
 \end{equation*}
 
 \begin{example}
@@ -195,18 +195,18 @@ What is the probability of obtaining a red ball?
 
 In this problem, there are three events of interest.
 If we denote the drawing of a red ball by $r$ and the drawing of a blue ball by $b$, then these three events can be represented by $\{ r, br, bb \}$.
-The probability of drawing a red ball initially is $\Prob (r) = 4/12$.
+The probability of drawing a red ball initially is $\Pr (r) = 4/12$.
 The probabilities of drawing two balls can be computed using \eqref{equation:SimultaneousEvents}, and they are given by
 \begin{align*}
-\Prob (br) &= \frac{8}{12} \frac{4}{11} = \frac{8}{33} \\
-\Prob (bb) &= \frac{8}{12} \frac{7}{11} = \frac{14}{33} .
+\Pr (br) &= \frac{8}{12} \frac{4}{11} = \frac{8}{33} \\
+\Pr (bb) &= \frac{8}{12} \frac{7}{11} = \frac{14}{33} .
 \end{align*}
 Let $R$ denote the event that a red ball is obtained during the experiment.
-The overall probability of getting a red ball, $\Prob (R)$, can be computed by applying the total probability theorem
+The overall probability of getting a red ball, $\Pr (R)$, can be computed by applying the total probability theorem
 \begin{equation*}
 \begin{split}
-\Prob (R) &= \Prob (R \cap r) + \Prob (R \cap br) + \Prob (R \cap bb) \\
-&= \Prob(r) \Prob (R|r) + \Prob(br) \Prob (R|br) + \Prob(bb) \Prob (R|bb) \\
+\Pr (R) &= \Pr (R \cap r) + \Pr (R \cap br) + \Pr (R \cap bb) \\
+&= \Pr(r) \Pr (R|r) + \Pr(br) \Pr (R|br) + \Pr(bb) \Pr (R|bb) \\
 &= \frac{1}{3} \cdot 1 + \frac{8}{33} \cdot 1 + \frac{14}{33} \cdot 0
 = \frac{19}{33} .
 \end{split}
@@ -221,14 +221,14 @@ It relates the conditional probability of $A$ given $B$ to the conditional proba
 
 \begin{theorem}[Bayes' Rule]
 Let $A_1, A_2, \ldots, A_n$ be a collection of events that forms a partition of the sample space $\Omega$.
-Suppose that $\Prob (A_k) > 0$ for all $k$.
-Then for any event $B$ such that $\Prob (B) > 0$, we can write
+Suppose that $\Pr (A_k) > 0$ for all $k$.
+Then for any event $B$ such that $\Pr (B) > 0$, we can write
 \begin{equation*}
 \begin{split}
-\Prob (A_i | B)
-&= \frac{ \Prob (A_i) \Prob (B | A_i) }{ \Prob (B) } \\
-&= \frac{ \Prob (A_i) \Prob (B | A_i) }
-{ \sum_{k=1}^n \Prob (A_k) \Prob (B | A_k) } .
+\Pr (A_i | B)
+&= \frac{ \Pr (A_i) \Pr (B | A_i) }{ \Pr (B) } \\
+&= \frac{ \Pr (A_i) \Pr (B | A_i) }
+{ \sum_{k=1}^n \Pr (A_k) \Pr (B | A_k) } .
 \end{split}
 \end{equation*}
 \end{theorem}
@@ -236,16 +236,16 @@ Then for any event $B$ such that $\Prob (B) > 0$, we can write
 Bayes' rule is easily verified.
 We expand the probability of $A_i \cap B$ using \eqref{equation:ProbabilityIntersection} twice, and we get
 \begin{equation*}
-\Prob (A_i \cap B) = \Prob (A_i | B) \Prob (B) = \Prob (B | A_i) \Prob (A_i).
+\Pr (A_i \cap B) = \Pr (A_i | B) \Pr (B) = \Pr (B | A_i) \Pr (A_i).
 \end{equation*}
 Rearranging the terms yields the first equality.
 The second equality is obtained by writing
 \begin{equation*}
 \begin{split}
-\Prob (B) &= \Prob (B \cap \Omega)
-= \Prob \left( B \cap \left( \bigcup_{k=1}^n A_k \right) \right) \\
-&= \sum_{k=1}^n \Prob (B \cap A_k)
-= \sum_{k=1}^n \Prob (A_k) \Prob (B | A_k) .
+\Pr (B) &= \Pr (B \cap \Omega)
+= \Pr \left( B \cap \left( \bigcup_{k=1}^n A_k \right) \right) \\
+&= \sum_{k=1}^n \Pr (B \cap A_k)
+= \sum_{k=1}^n \Pr (A_k) \Pr (B | A_k) .
 \end{split}
 \end{equation*}
 The application of the third axiom of probability is justified because $A_1, A_2, \ldots, A_n$ are disjoint events.
@@ -261,8 +261,8 @@ Let $D$ denote the event that the person has the disease, and let $P$ be the eve
 Using Bayes' rule, we can easily compute the probability that a person who tested positive has the disease,
 \begin{equation*}
 \begin{split}
-\Prob (D|P)
-&= \frac{ \Prob(D) \Prob(P|D) }{ \Prob(D) \Prob(P|D) + \Prob(D^c) \Prob(P|D^c) } \\
+\Pr (D|P)
+&= \frac{ \Pr(D) \Pr(P|D) }{ \Pr(D) \Pr(P|D) + \Pr(D^c) \Pr(P|D^c) } \\
 &= \frac{ 0.01 \cdot 0.95 }{ 0.01 \cdot 0.95 + 0.99 \cdot 0.05 } \\
 &\approx 0.1610 .
 \end{split}
@@ -273,13 +273,13 @@ Although the test is fairly accurate, the probability that a person with a posit
 
 \section{Independence}
 \label{section:Independence}
-Events $A$ and $B$ are said to be \emph{independent} if $\Prob (A \cap B) = \Prob(A) \Prob(B)$.
+Events $A$ and $B$ are said to be \emph{independent} if $\Pr (A \cap B) = \Pr(A) \Pr(B)$.
 Interestingly, independence is closely linked to the concept of condtional probability.
-If $\Prob(B) > 0$ and events $A$ and $B$ are independent, then
+If $\Pr(B) > 0$ and events $A$ and $B$ are independent, then
 \begin{equation*}
-\Prob (A | B) = \frac{ \Prob (A \cap B) }{\Prob (B)}
-= \frac{ \Prob (A) \Prob(B) }{\Prob (B)}
-= \Prob (A).
+\Pr (A | B) = \frac{ \Pr (A \cap B) }{\Pr (B)}
+= \frac{ \Pr (A) \Pr(B) }{\Pr (B)}
+= \Pr (A).
 \end{equation*}
 The \emph{a priori} probability of event $A$ is identical to the \emph{a posteriori} probability of $A$ given $B$.
 That is, if $A$ is independent of $B$, then $B$ contains no information about $A$.
@@ -293,26 +293,26 @@ The sample space for this experiment is composed of thirty-six equally likely ou
 Consider the probability of getting a four on the red die given that the blue die shows a six,
 \begin{equation*}
 \begin{split}
-\Prob (\text{red = 4} | \text{blue = 6})
-&= \frac{ \Prob (\text{red = 4} \cap \text{blue = 6}) }
-{ \Prob (\text{blue = 6}) } \\
-&= \frac{1}{6} = \Prob (\text{red = 4}) .
+\Pr (\text{red = 4} | \text{blue = 6})
+&= \frac{ \Pr (\text{red = 4} \cap \text{blue = 6}) }
+{ \Pr (\text{blue = 6}) } \\
+&= \frac{1}{6} = \Pr (\text{red = 4}) .
 \end{split}
 \end{equation*}
 From this equation, we gather that
 \begin{equation*}
-\Prob (\text{red = 4} \cap \text{blue = 6})
-= \Prob (\text{red = 4}) \Prob (\text{blue = 6}) .
+\Pr (\text{red = 4} \cap \text{blue = 6})
+= \Pr (\text{red = 4}) \Pr (\text{blue = 6}) .
 \end{equation*}
 Thus, rolling a four on the red die and rolling a six on the blue die are independent events.
 
 Similarly, consider the probability of obtaining a four on the red die given that the sum of the two dice is eleven,
 \begin{equation*}
 \begin{split}
-\Prob (\text{red = 4} | \text{sum = 11})
-&= \frac{ \Prob (\text{red = 4} \cap \text{sum = 11}) }
-{ \Prob (\text{sum = 11}) } = 0 \\
-&\neq \frac{1}{6} = \Prob (\text{red = 4}) .
+\Pr (\text{red = 4} | \text{sum = 11})
+&= \frac{ \Pr (\text{red = 4} \cap \text{sum = 11}) }
+{ \Pr (\text{sum = 11}) } = 0 \\
+&\neq \frac{1}{6} = \Pr (\text{red = 4}) .
 \end{split}
 \end{equation*}
 In this case, we conclude that getting a four on the red die and a sum total of eleven are not independent events.
@@ -322,9 +322,9 @@ The basic idea of independence seems intuitively clear: if knowledge about the o
 Yet independent events are not necessarily easy to visualize in terms of the sample space.
 A common mistake is to assume that two events are independent if they are disjoint.
 Two mutually exclusive events can hardly be independent.
-If $\Prob (A) > 0$, $\Prob (B) > 0$, and $\Prob (A \cap B) = 0$ then
+If $\Pr (A) > 0$, $\Pr (B) > 0$, and $\Pr (A \cap B) = 0$ then
 \begin{equation*}
-\Prob (A \cap B) = 0 < \Prob (A) \Prob(B).
+\Pr (A \cap B) = 0 < \Pr (A) \Pr(B).
 \end{equation*}
 Hence $A$ and $B$ cannot be independent if they are disjoint, non-trivial sets.
 
@@ -334,8 +334,8 @@ Hence $A$ and $B$ cannot be independent if they are disjoint, non-trivial sets.
 The concept of independence can be extended to multiple events.
 The events $A_1, A_2, \ldots, A_n$ are \emph{independent} provided that
 \begin{equation*}
-\Prob \left( \bigcap_{k \in S} A_k \right)
-= \prod_{k \in S} \Prob (A_k) ,
+\Pr \left( \bigcap_{k \in S} A_k \right)
+= \prod_{k \in S} \Pr (A_k) ,
 \end{equation*}
 for every subset $S$ of $\{1, 2, \ldots, n\}$.
 
@@ -343,14 +343,14 @@ For instance, consider a collection of three events, $A$, $B$, and $C$.
 These events are independent if
 \begin{equation} \label{equation:ThreeIndependentEvents}
 \begin{split}
-\Prob (A \cap B) &= \Prob (A) \Prob (B) \\
-\Prob (A \cap C) &= \Prob (A) \Prob (C) \\
-\Prob (B \cap C) &= \Prob (B) \Prob (C)
+\Pr (A \cap B) &= \Pr (A) \Pr (B) \\
+\Pr (A \cap C) &= \Pr (A) \Pr (C) \\
+\Pr (B \cap C) &= \Pr (B) \Pr (C)
 \end{split}
 \end{equation}
 and, in addition,
 \begin{equation*}
-\Prob (A \cap B \cap C) = \Prob (A) \Prob (B) \Prob(C) .
+\Pr (A \cap B \cap C) = \Pr (A) \Pr (B) \Pr(C) .
 \end{equation*}
 The three equalities in \eqref{equation:ThreeIndependentEvents} assert that $A$, $B$, and $C$ are \emph{pairwise independent}.
 Note that the fourth condition does not follow from the first three conditions, nor does it imply any of them.
@@ -364,12 +364,12 @@ Finally, let $C$ be the event that the two coins show distinct sides.
 These three events each have a probability of $1/2$.
 Futhermore, we have
 \begin{equation*}
-\Prob (A \cap B) = \Prob (A \cap C) = \Prob (B \cap C) = \frac{1}{4} .
+\Pr (A \cap B) = \Pr (A \cap C) = \Pr (B \cap C) = \frac{1}{4} .
 \end{equation*}
 That is, these events are pairwise independent.
 However, we observe that
 \begin{equation*}
-\Prob (A \cap B \cap C) = 0 \neq \frac{1}{8} = \Prob (A) \Prob (B) \Prob (C) .
+\Pr (A \cap B \cap C) = 0 \neq \frac{1}{8} = \Pr (A) \Pr (B) \Pr (C) .
 \end{equation*}
 Clearly, events $A$, $B$, and $C$ are not independent.
 \end{example}
@@ -381,44 +381,44 @@ Let $B$ be the event that the number on the red die is either two, three, or fou
 Also, let $C$ be the event that the product of the two dice is twelve.
 The individual probabilities of these events are
 \begin{align*}
-\Prob (A) &= \Prob (\text{red is odd}) = \frac{1}{2} \\
-\Prob (B) &= \Prob (\text{red} \in \{2, 3, 4\}) = \frac{1}{2} \\
-\Prob (C) &= \Prob (\text{product = 12}) = \frac{4}{36} .
+\Pr (A) &= \Pr (\text{red is odd}) = \frac{1}{2} \\
+\Pr (B) &= \Pr (\text{red} \in \{2, 3, 4\}) = \frac{1}{2} \\
+\Pr (C) &= \Pr (\text{product = 12}) = \frac{4}{36} .
 \end{align*}
 Also, note that these events are not pairwise independent because
 \begin{align*}
-\Prob (A \cap B) &= \frac{1}{6} \neq \frac{1}{4} = \Prob(A) \Prob(B) \\
-\Prob (A \cap C) &= \frac{1}{36} \neq \frac{1}{18} = \Prob(A) \Prob(C) \\
-\Prob (B \cap C) &= \frac{1}{12} \neq \frac{1}{18} = \Prob(B) \Prob(C) .
+\Pr (A \cap B) &= \frac{1}{6} \neq \frac{1}{4} = \Pr(A) \Pr(B) \\
+\Pr (A \cap C) &= \frac{1}{36} \neq \frac{1}{18} = \Pr(A) \Pr(C) \\
+\Pr (B \cap C) &= \frac{1}{12} \neq \frac{1}{18} = \Pr(B) \Pr(C) .
 \end{align*}
 Thus, the multiple events $A$, $B$, and $C$ are not independent.
 On the other hand, the probability of these three events occurring simultaneously is
 \begin{equation*}
-\Prob (A \cap B \cap C) = \frac{1}{36}
+\Pr (A \cap B \cap C) = \frac{1}{36}
 = \frac{1}{2} \cdot \frac{1}{2} \cdot \frac{4}{36}
-= \Prob (A) \Prob (B) \Prob (C) .
+= \Pr (A) \Pr (B) \Pr (C) .
 \end{equation*}
 \end{example}
 
 \subsection{Conditional Independence}
 
-We introduced earlier the meaning of conditional probability, and we showed that the set of conditional probabilities $\{ \Prob (A|B) \}$ specifies a valid probability law.
+We introduced earlier the meaning of conditional probability, and we showed that the set of conditional probabilities $\{ \Pr (A|B) \}$ specifies a valid probability law.
 It is therefore possible to discuss independence with respect to conditional probability.
 We say that events $A_1$ and $A_2$ are \emph{conditionally independent} if
 \begin{equation*}
-\Prob (A_1 \cap A_2 | B) = \Prob (A_1 | B) \Prob (A_2 | B) .
+\Pr (A_1 \cap A_2 | B) = \Pr (A_1 | B) \Pr (A_2 | B) .
 \end{equation*}
 Note that if $A_1$ and $A_2$ are conditionally independent given event $B$, we can use equation \eqref{equation:ConditionalProbability} to write
 \begin{equation*}
 \begin{split}
-\Prob (A_1 \cap A_2 | B) &= \frac{ \Prob (A_1 \cap A_2 \cap  B) }{\Prob (B)} \\
-&= \frac{ \Prob (B) \Prob (A_1 | B) \Prob (A_2 | A_1 \cap  B) }{\Prob (B)} \\
-&= \Prob (A_1 | B) \Prob (A_2 | A_1 \cap  B) .
+\Pr (A_1 \cap A_2 | B) &= \frac{ \Pr (A_1 \cap A_2 \cap  B) }{\Pr (B)} \\
+&= \frac{ \Pr (B) \Pr (A_1 | B) \Pr (A_2 | A_1 \cap  B) }{\Pr (B)} \\
+&= \Pr (A_1 | B) \Pr (A_2 | A_1 \cap  B) .
 \end{split}
 \end{equation*}
-Under the assumption that $\Prob (A_1 | B) > 0$, we can combine the previous two expressions and get
+Under the assumption that $\Pr (A_1 | B) > 0$, we can combine the previous two expressions and get
 \begin{equation*}
-\Prob (A_2 | A_1 \cap  B) = \Prob (A_2 | B) .
+\Pr (A_2 | A_1 \cap  B) = \Pr (A_2 | B) .
 \end{equation*}
 This latter result asserts that given event $B$ has occurred, the additional information that $A_1$ also occurred does not affect the conditional probability of $A_2$.
 It is easy to show that conditional independence is a symmetric relation.
@@ -430,24 +430,24 @@ We denote by $B$ the event that the coin is tossed more than one time.
 Moreover, we let $A_1$ be the event that the number of trials is an even number, and $A_2$ be the event that the number of trials is less than six.
 The conditional probabilities of $A_1$ and $A_2$ given that the coin is tossed more than once are
 \begin{align*}
-\Prob (A_1 | B) &= \frac{ \Prob (A_1 \cap B) }{ \Prob (B) }
+\Pr (A_1 | B) &= \frac{ \Pr (A_1 \cap B) }{ \Pr (B) }
 = \frac{1/3}{1/2} = \frac{2}{3} \\
-\Prob (A_2 | B) &= \frac{ \Prob (A_2 \cap B) }{ \Prob (B) }
+\Pr (A_2 | B) &= \frac{ \Pr (A_2 \cap B) }{ \Pr (B) }
 = \frac{15/32}{1/2} = \frac{15}{16} .
 \end{align*}
 The joint probability of events $A_1$ and $A_2$ given $B$ is equal to
 \begin{equation*}
 \begin{split}
-\Prob (A_1 \cap A_2 | B) &= \frac{ \Prob (A_1 \cap A_2 \cap B) }{ \Prob (B) } \\
+\Pr (A_1 \cap A_2 | B) &= \frac{ \Pr (A_1 \cap A_2 \cap B) }{ \Pr (B) } \\
 &= \frac{5/16}{1/2} = \frac{5}{8} = \frac{2}{3} \cdot \frac{15}{16} \\
-&= \Prob (A_1 | B) \Prob (A_2 | B) .
+&= \Pr (A_1 | B) \Pr (A_2 | B) .
 \end{split}
 \end{equation*}
 It follows that $A_1$ and $A_2$ are conditionally independent given $B$.
 In particular, we have
 \begin{align*}
-\Prob (A_2 | A_1 \cap  B) &= \Prob (A_2 | B) \\
-\Prob (A_1 | A_2 \cap  B) &= \Prob (A_1 | B) .
+\Pr (A_2 | A_1 \cap  B) &= \Pr (A_2 | B) \\
+\Pr (A_1 | A_2 \cap  B) &= \Pr (A_1 | B) .
 \end{align*}
 We emphasize that events $A_1$ and $A_2$ are not independent with respect to the unconditional probability law.
 \end{example}
@@ -458,21 +458,21 @@ Two events which are independent with respect to the unconditional probability l
 Two dice are rolled at the same time, a red die and a blue die.
 We can easily compute the probability of simultaneously getting a two on the red die and a six on the blue die,
 \begin{equation*}
-\Prob (\text{red = 2} \cap \text{blue = 6}) = \frac{1}{36}
-= \Prob (\text{red = 2}) \Prob (\text{blue = 6}) .
+\Pr (\text{red = 2} \cap \text{blue = 6}) = \frac{1}{36}
+= \Pr (\text{red = 2}) \Pr (\text{blue = 6}) .
 \end{equation*}
 Clearly, these two events are independent.
 
 Now, consider the probability of rolling a two on the red die and a six on the blue die given that the sum of the two dice is an odd number.
 The individual conditional probabilities are given by
 \begin{equation*}
-\Prob (\text{red = 2} | \text{sum is odd})
-= \Prob (\text{blue = 6} | \text{sum is odd})
+\Pr (\text{red = 2} | \text{sum is odd})
+= \Pr (\text{blue = 6} | \text{sum is odd})
 = \frac{1}{6},
 \end{equation*}
 whereas the joint conditional probability is
 \begin{equation*}
-\Prob (\text{red = 2} \cap \text{blue = 6} | \text{sum is odd})
+\Pr (\text{red = 2} \cap \text{blue = 6} | \text{sum is odd})
 = 0 .
 \end{equation*}
 These two events are not conditionally independent.
@@ -481,8 +481,8 @@ These two events are not conditionally independent.
 We can also extend conditional independence to several events.
 The events $A_1, A_2, \ldots, A_n$ are conditionally independent given $B$ if
 \begin{equation*}
-\Prob \left( \bigcap_{k \in S} A_k \Big| B \right)
-= \prod_{k \in S} \Prob (A_k | B)
+\Pr \left( \bigcap_{k \in S} A_k \Big| B \right)
+= \prod_{k \in S} \Pr (A_k | B)
 \end{equation*}
 for every subset $S$ of $\{1, 2, \ldots, n\}$.
 
@@ -490,21 +490,21 @@ for every subset $S$ of $\{1, 2, \ldots, n\}$.
 \section{Equivalent Notations}
 
 In the study of probability, we are frequently interested in the probability of multiple events occurring simultaneously.
-So far, we have expressed the joint probability of events $A$ and $B$ using the notation $\Prob (A \cap B)$.
+So far, we have expressed the joint probability of events $A$ and $B$ using the notation $\Pr (A \cap B)$.
 For mathematical convenience, we also represent the probability that two events occur at the same time by
 \begin{equation*}
-\Prob (A, B) = \Prob (A \cap B) .
+\Pr (A, B) = \Pr (A \cap B) .
 \end{equation*}
 This alternate notation easily extends to the joint probability of several events.
 We denote the joint probability of events $A_1, A_2, \ldots, A_n$ by
 \begin{equation*}
-\Prob (A_1, A_2, \ldots, A_n) =
-\Prob \left( \bigcap_{k=1}^n A_k \right) .
+\Pr (A_1, A_2, \ldots, A_n) =
+\Pr \left( \bigcap_{k=1}^n A_k \right) .
 \end{equation*}
 Conditional probabilities can be written using a similar format.
 The probability of $A$ given events $B_1, B_2, \ldots, B_n$ becomes
 \begin{equation*}
-\Prob (A | B_1, B_2, \ldots, B_n) =
-\Prob \left( A \bigg| \bigcap_{k=1}^n B_k \right) .
+\Pr (A | B_1, B_2, \ldots, B_n) =
+\Pr \left( A \bigg| \bigcap_{k=1}^n B_k \right) .
 \end{equation*}
 From this point forward, we use these equivalent notations interchangeably.

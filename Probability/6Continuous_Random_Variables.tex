@@ -19,12 +19,12 @@ In particular, we develop a continuous counterpart to the probability mass funct
 We begin this chapter by introducing a general concept which can be used to bridge our understanding of discrete and continuous random variables.
 The \emph{cumulative distribution function} (CDF) of a random variable $X$ is defined as the probability of the event $\{X \leq x \}$,
 \begin{equation*}
-F_X (x) = \Prob ( \{ X \leq x \} ) = \Prob (X \leq x).
+F_X (x) = \Pr ( \{ X \leq x \} ) = \Pr (X \leq x).
 \end{equation*}
 In terms of the underlying sample space, the function $F_X (x)$ represents the probability of the set of all outcomes in $\Omega$ for which $X$ is less than or equal to $x$,
 \begin{equation*}
-F_X (x) = \Prob \left( X^{-1} ( (- \infty, x]) \right)
-= \Prob (\{ \omega \in \Omega | X(\omega) \leq x \}).
+F_X (x) = \Pr \left( X^{-1} ( (- \infty, x]) \right)
+= \Pr (\{ \omega \in \Omega | X(\omega) \leq x \}).
 \end{equation*}
 In essence, the CDF is a convenient way to specify the probability of all events of the form $X \in (-\infty, x]$.
 
@@ -39,15 +39,15 @@ Suppose $x_1 < x_2$, then we can write $\{ X \leq x_2 \}$ as the union of the tw
 It follows that
 \begin{equation} \label{equation:MonotoneIncreasingCDF}
 \begin{split}
-F_X (x_2) &= \Prob (X \leq x_2) \\
-&= \Prob (X \leq x_1) + \Prob (x_1 < X \leq x_2) \\
-&\geq \Prob (X \leq x_1) = F_X (x_1).
+F_X (x_2) &= \Pr (X \leq x_2) \\
+&= \Pr (X \leq x_1) + \Pr (x_1 < X \leq x_2) \\
+&\geq \Pr (X \leq x_1) = F_X (x_1).
 \end{split}
 \end{equation}
 The CDF is a monotone non-decreasing function.
 We note from \eqref{equation:MonotoneIncreasingCDF} that the probability of $X$ falling in the interval $(x_1, x_2]$ is
 \begin{equation} \label{equation:IntervalCDF}
-\Prob (x_1 < X \leq x_2) = F_X (x_2) - F_X (x_1).
+\Pr (x_1 < X \leq x_2) = F_X (x_2) - F_X (x_1).
 \end{equation}
 
 \subsection{Discrete Random Variables}
@@ -59,7 +59,7 @@ F_X (x) = \sum_{k \leq x} p_X (k),
 \end{equation*}
 and its PMF can be computed using the formula
 \begin{equation*}
-p_X (k) = \Prob ( X \leq k) - \Prob (X \leq k -1 ) = F_X (k) - F_X (k-1).
+p_X (k) = \Pr ( X \leq k) - \Pr (X \leq k -1 ) = F_X (k) - F_X (k-1).
 \end{equation*}
 
 \begin{example}
@@ -115,12 +115,12 @@ This is somewhat restrictive, however the PDF is very convenient as it can be em
 
 For $x_1 < x_2$, we can combine the definition of $f_X(x)$ and \eqref{equation:IntervalCDF} to get
 \begin{equation*}
-\Prob (x_1 < X \leq x_2) = \int_{x_1}^{x_2} f_X (\xi) d\xi .
+\Pr (x_1 < X \leq x_2) = \int_{x_1}^{x_2} f_X (\xi) d\xi .
 \end{equation*}
 Furthermore, it is easily seen that for any continuous random variable
 \begin{equation*}
 \begin{split}
-\Prob (X = x_2) &= \lim_{x_1 \uparrow x_2} \Prob (x_1 < X \leq x_2) \\
+\Pr (X = x_2) &= \lim_{x_1 \uparrow x_2} \Pr (x_1 < X \leq x_2) \\
 &= \lim_{x_1 \uparrow x_2} \int_{x_1}^{x_2} f_X (\xi) d\xi \\
 &= \int_{x_2}^{x_2} f_X (\xi) d\xi = 0.
 \end{split}
@@ -128,23 +128,23 @@ Furthermore, it is easily seen that for any continuous random variable
 If $X$ is a continuous random variable, then the probability that $X = x$ for any single real number $x$ is zero.
 An immediate corollary of this observation is that
 \begin{equation*}
-\Prob (x_1 < X < x_2)
-= \Prob (x_1 \leq X < x_2)
-= \Prob (x_1 < X \leq x_2)
-= \Prob (x_1 \leq X \leq x_2) .
+\Pr (x_1 < X < x_2)
+= \Pr (x_1 \leq X < x_2)
+= \Pr (x_1 < X \leq x_2)
+= \Pr (x_1 \leq X \leq x_2) .
 \end{equation*}
 In other words, the inclusion or exclusion of the endpoints of an interval does not affect the probability of the corresponding interval when $X$ is a continuous random variable.
 
 We can derive properties for the PDF of continuous random variable $X$ based on the axioms of probability laws.
 First, the probability that $X$ is a real number is given by
 \begin{equation*}
-\Prob (-\infty < X < \infty) = \int_{-\infty}^{\infty} f_X (\xi) d\xi = 1.
+\Pr (-\infty < X < \infty) = \int_{-\infty}^{\infty} f_X (\xi) d\xi = 1.
 \end{equation*}
 Thus, $f_X (x)$ must integrate to one.
 Also, since the probabilities of events are nonnegative, we must have $f_X (x) \geq 0$ (almost) everywhere.
 Finally, given a measurable set $S$, the probability that $X \in S$ equals
 \begin{equation*}
-\Prob (X \in S) = \int_S f_X (\xi) d\xi .
+\Pr (X \in S) = \int_S f_X (\xi) d\xi .
 \end{equation*}
 This formula can be used to compute the probability of any admissible set $S$.
 
@@ -162,7 +162,7 @@ where $m$ and $\sigma > 0$ are constants.
 The CDF of a Gaussian random variable does not admit a closed-form expression, but it can be expressed as
 \begin{equation*}
 \begin{split}
-F_X (x) &= \Prob (X \leq x) \\
+F_X (x) &= \Pr (X \leq x) \\
 &= \frac{1}{\sqrt{2 \pi} \sigma}
 \int_{- \infty}^{x} e^{- \frac{(\xi - m)^2}{2 \sigma^2}} d\xi \\
 &= \frac{1}{\sqrt{2 \pi}}
@@ -189,13 +189,13 @@ Let $s \in \{ -1, 1 \}$ be the transmitted signal, $N$ be the value of the therm
 An error can occur in one of two possible ways: $s = 1$ was transmitted and $Z$ is less than zero, or $s = -1$ was transmitted and $Z$ is greater than zero.
 Using the total probability theorem, we get
 \begin{equation*}
-\Prob (\text{error}) = \Prob (Z \geq 0 | s = -1) \Prob (s = -1)
-+ \Prob (Z \leq 0 | s = 1) \Prob (s = 1).
+\Pr (\text{error}) = \Pr (Z \geq 0 | s = -1) \Pr (s = -1)
++ \Pr (Z \leq 0 | s = 1) \Pr (s = 1).
 \end{equation*}
 By the symmetry of the problem, it is easily argued that
 \begin{equation*}
 \begin{split}
-\Prob (\text{error}) &= \Prob (Z \geq 0 | s = -1) = \Prob (N > 1) \\
+\Pr (\text{error}) &= \Pr (Z \geq 0 | s = -1) = \Pr (N > 1) \\
 &= \int_{1}^{\infty} \frac{1}{\sqrt{2 \pi} \sigma}
 e^{- \frac{\xi^2}{2 \sigma^2}} d\xi \\
 &= 1 - \Phi \left( \frac{1}{\sigma} \right) .
@@ -300,8 +300,8 @@ p_{Y_n} (y) = \left\{ \begin{array}{ll}
 For any $x \geq 0$, the CDF of the random variable $Y_n$ can be computed as
 \begin{equation*}
 \begin{split}
-\Prob (Y_n \leq x)
-= \Prob (X_n \leq n x)
+\Pr (Y_n \leq x)
+= \Pr (X_n \leq n x)
 &= \sum_{k = 1}^{\lfloor n x \rfloor} p_{X_n} (k) \\
 &= \sum_{k = 1}^{\lfloor n x \rfloor} (1 - p_n)^{k-1} p_n \\
 % &= p_n \frac{1 - (1 - p_n)^{\lfloor n x \rfloor}}{1 - (1 - p_n)} \\
@@ -311,7 +311,7 @@ For any $x \geq 0$, the CDF of the random variable $Y_n$ can be computed as
 In the limit, as $n$ grows unbounded, we get
 \begin{equation*}
 \begin{split}
-\lim_{n \rightarrow \infty} \Prob (Y_n \leq x)
+\lim_{n \rightarrow \infty} \Pr (Y_n \leq x)
 &= \lim_{n \rightarrow \infty} \left[ 1 - (1 - p_n)^{\lfloor n x \rfloor} \right] \\
 &= 1 - \lim_{n \rightarrow \infty}
 \left( 1 - \frac{\lambda}{n} \right)^{\lfloor n x \rfloor} \\
@@ -323,7 +323,7 @@ Thus, the sequence of scaled geometric random variable $\{ Y_n \}$ converges in 
 \paragraph{Memoryless Property:}
 An interesting feature of the exponential random variable is that it satisfies the \emph{memoryless property},
 \begin{equation*}
-\Prob (X > t + u | X > t) = \Prob (X > u).
+\Pr (X > t + u | X > t) = \Pr (X > u).
 \end{equation*}
 The proof of this fact is a straightforward application of conditional probability.
 Suppose that $X$ is an exponential random variable with parameter $\lambda$.
@@ -331,11 +331,11 @@ Also, let $t$ and $u$ be two positive numbers.
 The memoryless property is obtained by expanding the conditional probability using definition \eqref{equation:ConditionalProbability},
 \begin{equation*}
 \begin{split}
-\Prob (X > t + u | X > t)
-&= \frac{\Prob( \{ X > t + u \} \cap \{ X > t \} ) }{ \Prob ( X > t ) } \\
-&= \frac{\Prob( X > t + u ) }{ \Prob ( X > t ) } \\
+\Pr (X > t + u | X > t)
+&= \frac{\Pr( \{ X > t + u \} \cap \{ X > t \} ) }{ \Pr ( X > t ) } \\
+&= \frac{\Pr( X > t + u ) }{ \Pr ( X > t ) } \\
 &= \frac{e^{- \lambda (t + u)} }{ e^{- \lambda t } } \\
-&= e^{- \lambda u } = \Prob (X > u).
+&= e^{- \lambda u } = \Pr (X > u).
 \end{split}
 \end{equation*}
 In reality, the exponential random variable is the only continuous random variable that satisfies the memoryless property.
@@ -454,15 +454,15 @@ Much like in the discrete case, it is possible to create a new random variable $
 Specifically, if $g$ is a continuous function and $X$ is a continuous random variable, then so is $Y = g(X)$.
 Given $X$ and $g$, the probability that $Y$ falls in a specific set $S$ depends on both the function $g$ and the CDF of $X$,
 \begin{equation*}
-\Prob (Y \in S) = \Prob (g(X) \in S) 
-= \Prob (X \in g^{-1}(S)).
+\Pr (Y \in S) = \Pr (g(X) \in S) 
+= \Pr (X \in g^{-1}(S)).
 \end{equation*}
 
 To gain insight into this problem, it is best to first consider the situation where $g$ is a differentiable and strictly increasing function.
 In this case, we can write the CDF of $Y$ as
 \begin{equation*}
-F_Y(y) = \Prob (Y \leq y) = \Prob (g(X) \leq y)
-= \Prob \left( X \leq g^{-1}(y) \right)
+F_Y(y) = \Pr (Y \leq y) = \Pr (g(X) \leq y)
+= \Pr \left( X \leq g^{-1}(y) \right)
 = F_X \left( g^{-1} (y) \right) .
 \end{equation*}
 Differentiating this equation with respect to $y$, we obtain the PDF of $Y$
@@ -484,8 +484,8 @@ f_Y (y) = f_X (x) \left. \frac{dx}{dy} \right|_{x = g^{-1}(y)}
 On the other hand, suppose that $g$ is a differentiable and decreasing function.
 In this case, The CDF of the random variable $Y = g(X)$ becomes
 \begin{equation*}
-F_Y(y) = \Prob (g(X) \leq y)
-= \Prob \left( X \geq g^{-1}(y) \right)
+F_Y(y) = \Pr (g(X) \leq y)
+= \Pr \left( X \geq g^{-1}(y) \right)
 = 1 - F_X \left( g^{-1} (y) \right) ,
 \end{equation*}
 and its PDF is given by
@@ -640,7 +640,7 @@ f_{X, Y} (x, y) dx dy = 1.
 Furthermore, for a measurable set $S$, the probability that $(X,Y) \in S$ can be computed through the integral
 \begin{equation*}
 \begin{split}
-\Prob ((X,Y) \in S)
+\Pr ((X,Y) \in S)
 &= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty}
 \SetIn_{S}(x,y) f_{X, Y} (x, y) dx dy \\
 &= \int \int_{S}
@@ -649,8 +649,8 @@ f_{X, Y} (x, y) dx dy .
 \end{equation*}
 If $S$ is the rectangular set $S = \{ (x,y) | a \leq x \leq b, c \leq y \leq d \}$, then the probability that $(X,Y) \in S$ becomes the typical integral
 \begin{equation*}
-\Prob ((X,Y) \in S)
-\Prob (a \leq X \leq b, c \leq Y \leq d)
+\Pr ((X,Y) \in S)
+\Pr (a \leq X \leq b, c \leq Y \leq d)
 = \int_{a}^{b} \int_{c}^{d}
 f_{X, Y} (x, y) dx dy .
 \end{equation*}
@@ -662,7 +662,7 @@ f_{X, Y} (x, y) dx dy .
 
 It is also possible to obtain the joint CDF of a pair of random variables
 \begin{equation*}
-F_{X,Y} (x,y) = \Prob (X \leq x, Y \leq y) .
+F_{X,Y} (x,y) = \Pr (X \leq x, Y \leq y) .
 \end{equation*}
 For continuous random variables, the joint CDF of $X$ and $Y$ can derived for their joint PDF,
 \begin{equation*}
@@ -688,20 +688,20 @@ For a fixed value $X = x$, the conditional PDF $f_{Y|X} (y|x)$ is a legitimate P
 \begin{example}
 \end{example}
 
-Let $Y$ be an event such that $\Prob (Y \in S) > 0$.
+Let $Y$ be an event such that $\Pr (Y \in S) > 0$.
 The conditional PDF of $Y$ given $\{ Y \in S \}$ is defined by
 \begin{equation*}
 f_{Y|S} (y)
-= \left\{ \begin{array}{cc} \frac{ f_Y(y) }{\Prob (Y \in S)}, & y \in S \\
+= \left\{ \begin{array}{cc} \frac{ f_Y(y) }{\Pr (Y \in S)}, & y \in S \\
 0, & \text{otherwise}. \end{array} \right.
 \end{equation*}
 This PDF can be used to compute the conditional probability of specific events given $Y \in S$.
 Let $T$ be a measurable set, then
 \begin{equation*}
 \begin{split}
-\Prob ( Y \in T | Y \in S)
-&= \frac{ \Prob ( Y \in T \cap Y \in S) }{ \Prob ( Y \in S) } \\
-&= \frac{ \int_{Y \cap T} f_Y(y) dy }{ \Prob ( Y \in S) } \\
+\Pr ( Y \in T | Y \in S)
+&= \frac{ \Pr ( Y \in T \cap Y \in S) }{ \Pr ( Y \in S) } \\
+&= \frac{ \int_{Y \cap T} f_Y(y) dy }{ \Pr ( Y \in S) } \\
 &= \int_{T} f_{Y|S} (y) dy .
 \end{split}
 \end{equation*}
@@ -741,9 +741,9 @@ provided that $f_X(x) \neq 0$.
 Furthermore, if $X$ and $Y$ are independent random variables then the two events $\{ X \in S \}$ and $\{ Y \in T \}$ are independent,
 \begin{equation*}
 \begin{split}
-\Prob (X \in S, Y \in T) &= \int_S \int_T f_{X,Y} (x,y) dy dx \\
+\Pr (X \in S, Y \in T) &= \int_S \int_T f_{X,Y} (x,y) dy dx \\
 &= \int_S f_X (x) dx \int_T f_Y (y) dy \\
-&= \Prob (X \in S) \Prob (Y \in T).
+&= \Pr (X \in S) \Pr (Y \in T).
 \end{split}
 \end{equation*}
 

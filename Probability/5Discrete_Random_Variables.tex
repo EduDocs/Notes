@@ -41,13 +41,13 @@ A discrete random variable $X$ is characterized by the probability of each of th
 We identify the probabilities of individual elements in the range of $X$ using the \emph{probability mass function} (PMF) of $X$, which we denote by $p_X$.
 If $x$ is a possible value of $X$ then the \emph{probability mass} of $x$, written $p_X (x)$, is defined by
 \begin{equation} \label{equation:PMF}
-p_X (x) = \Prob ( \{ X = x \} ) = \Prob ( X = x ) .
+p_X (x) = \Pr ( \{ X = x \} ) = \Pr ( X = x ) .
 \end{equation}
 Equivalently, we can think of $p_X (x)$ as the probability of the set of all outcomes in $\Omega$ for which $X$ is equal to $x$,
 \begin{equation*}
 p_X (x)
-= \Prob (  X^{-1} (x)  )
-= \Prob ( \{ \omega \in \Omega | X(\omega) = x \} ) .
+= \Pr (  X^{-1} (x)  )
+= \Pr ( \{ \omega \in \Omega | X(\omega) = x \} ) .
 \end{equation*}
 
 \begin{figure}[ht]
@@ -68,7 +68,7 @@ Note that the sets defined by $\{ \omega \in \Omega | X(\omega) = x \}$ are disj
 Thus, \eqref{equation:NormalizationPMF} follows immediately from the countable additivity axiom and the normalization axiom of probability laws.
 In general, if $X$ is a discrete random variable and $S$ is a subset of $X(\Omega)$, we can write
 \begin{equation} \label{equation:FunctionPMF}
-\Prob (S) = \Prob \left( \{ \omega \in \Omega | X(\omega) \in S \} \right) = \sum_{x \in S} p_X (x) .
+\Pr (S) = \Pr \left( \{ \omega \in \Omega | X(\omega) \in S \} \right) = \sum_{x \in S} p_X (x) .
 \end{equation}
 This equation provides an explicit formula to compute the probability of any subset of $X (\Omega)$.
 
@@ -88,7 +88,7 @@ p_X (3) = p_X (4) = p_X (5) = \frac{1}{3}.
 \end{equation*}
 If $S$ denotes the event that the sum of the two numbers is odd, then the probability of the sum being odd can be computed as follows,
 \begin{equation*}
-\Prob (S) = \Prob ( \{ 3, 5 \} )
+\Pr (S) = \Pr ( \{ 3, 5 \} )
 = p_X (3) + p_X (5) = \frac{2}{3} .
 \end{equation*}
 \end{example}
@@ -133,7 +133,7 @@ Suppose $X$ is the sum of $n$ independent and identically distributed Bernoulli 
 Then $X$ is called a \emph{binomial random variable} with parameters $n$ and $p$.
 The PMF of $X$ is given by
 \begin{equation*}
-p_X (k) = \Prob (X = k)
+p_X (k) = \Pr (X = k)
 = \binom{n}{k} p^k (1-p)^{n-k},
 \end{equation*}
 where $k = 0, 1, \ldots n$.
@@ -167,8 +167,8 @@ p_X (k) = \binom{12}{k} \left( \frac{1}{12} \right)^k
 where $k = 0, 1, \ldots, 12$.
 The probability of winning more than \$40 is
 \begin{equation*}
-\Prob (\$10 \times X > \$40)
-= \Prob (X > 4)
+\Pr (\$10 \times X > \$40)
+= \Pr (X > 4)
 = \sum_{k=5}^{12} \binom{12}{k} \frac{11^{n-k}}{12^n} .
 \end{equation*}
 \end{example}
@@ -217,7 +217,7 @@ Suppose $\lambda$ is fixed and let $p_n = \lambda/n$.
 For $k = 1, 2, \ldots n$, we define the PMF of the random variable $X_n$ as
 \begin{equation*}
 \begin{split}
-p_{X_n} (k) &= \Prob (X_n = k)
+p_{X_n} (k) &= \Pr (X_n = k)
 = \binom{n}{k} p_n^k (1-p_n)^{n-k} \\
 &= \frac{n!}{k!(n-k)!} \left( \frac{\lambda}{n} \right)^k
 \left( 1 - \frac{\lambda}{n} \right)^{n-k} \\
@@ -255,7 +255,7 @@ The probability of making four or more errors can be approximated using a Poisso
 Thus, we can approximate the probability that a block of $1000$ bits has four or more errors by
 \begin{equation*}
 \begin{split}
-\Prob [ N \geq 4 ] &= 1 - \Prob [ N < 4 ]
+\Pr [ N \geq 4 ] &= 1 - \Pr [ N < 4 ]
 \approx 1 - \sum_{k=0}^3 \frac{\lambda^k}{k!} e^{-\lambda} \\
 &= 1 - e^{-10} \left( 1 + 10 + 50 + \frac{500}{3} \right) \\
 &\approx 0.01034 .
@@ -303,19 +303,19 @@ where $k = 1, 2, \ldots$
 \paragraph{Memoryless Property:}
 The geometric random variable satisfies the \emph{memoryless property},
 \begin{equation*}
-\Prob (X = k + j | X > k) = \Prob (X = j).
+\Pr (X = k + j | X > k) = \Pr (X = j).
 \end{equation*}
 This can be proved by using the propeties of conditional probability.
 Let $X$ be a geometric random variable with parameter $p$, and assume that $k$ and $j$ are positive integers.
 We can write the conditional probability of $X$ as
 \begin{equation*}
 \begin{split}
-\Prob (X = k + j | X > k)
-&= \frac{\Prob( \{ X =  k + j \} \cap \{ X > k \} ) }{ \Prob ( X > k ) } \\
-&= \frac{\Prob( X = k + j ) }{ \Prob ( X > k ) }
+\Pr (X = k + j | X > k)
+&= \frac{\Pr( \{ X =  k + j \} \cap \{ X > k \} ) }{ \Pr ( X > k ) } \\
+&= \frac{\Pr( X = k + j ) }{ \Pr ( X > k ) }
 = \frac{(1 - p)^{k + j - 1} p }{ (1 - p)^k  } \\
 &= (1 - p)^{j - 1} p
-= \Prob (X = j).
+= \Pr (X = j).
 \end{split}
 \end{equation*}
 In words, the probability that the number of trials carried out before completion is equal to $k + j$ given $k$ unsuccessful trials is equal to the unconditioned probability that the total number of trials is $j$.
@@ -682,8 +682,8 @@ The random pair $(X, Y)$ is characterized by the \emph{joint probability mass fu
 If $x$ is a possible value of $X$ and $y$ is a possible value of $Y$, then the probability mass of $(x, y)$ is given by
 \begin{equation*}
 \begin{split}
-p_{X,Y} (x, y) &= \Prob ( \{ X = x \} \cap \{ Y = y \} ) \\
-&= \Prob ( X = x, Y = y ).
+p_{X,Y} (x, y) &= \Pr ( \{ X = x \} \cap \{ Y = y \} ) \\
+&= \Pr ( X = x, Y = y ).
 \end{split}
 \end{equation*}
 Note the similarity between the definition of the joint PMF and \eqref{equation:PMF}.
@@ -692,7 +692,7 @@ Suppose that $S$ is a subset of $X(\Omega) \times Y(\Omega)$.
 We can express the probability of event $S$ as
 \begin{equation*}
 \begin{split}
-\Prob (S) &= \Prob (\{ \omega \in \Omega | (X(\omega), Y(\omega)) \in S \}) \\
+\Pr (S) &= \Pr (\{ \omega \in \Omega | (X(\omega), Y(\omega)) \in S \}) \\
 &= \sum_{(x,y) \in S} p_{X,Y} (x, y) .
 \end{split}
 \end{equation*}
@@ -818,8 +818,8 @@ Let $X$ and $Y$ be two random variables associated with the same experiment.
 The \emph{conditional probability mass function} of $Y$ given $X = x$, denoted by $p_{Y|X}$, is defined by
 \begin{equation*}
 \begin{split}
-p_{Y|X} (y|x) &= \Prob ( Y = y | X = x) \\
-&= \frac{\Prob (\{Y = y\} \cap \{ X = x \})}{\Prob (X = x)} \\
+p_{Y|X} (y|x) &= \Pr ( Y = y | X = x) \\
+&= \frac{\Pr (\{Y = y\} \cap \{ X = x \})}{\Pr (X = x)} \\
 &= \frac{ p_{X,Y} (x,y) }{p_X(x)},
 \end{split}
 \end{equation*}
@@ -850,11 +850,11 @@ We also wish to find the probability that the first ball is a one given that the
 The probability that the number on the first ball is a one is given by the marginal distribution of the first drawing, which was computed in example~\ref{example:JointPMFwoReplacement}.
 It is equal to
 \begin{equation*}
-\Prob ( \text{first ball} = 1) = 1/3.
+\Pr ( \text{first ball} = 1) = 1/3.
 \end{equation*}
 To compute the probability that the first ball is a one conditioned on the second ball being a two, we use the joint PMF derived in example~\ref{example:JointPMFwoReplacement},
 \begin{equation*}
-\Prob (\text{first ball} =1 | \text{ second ball} =2) = \frac{1/6}{1/3} = 1/2 .
+\Pr (\text{first ball} =1 | \text{ second ball} =2) = \frac{1/6}{1/3} = 1/2 .
 \end{equation*}
 The conditioning affects the probability of the first number drawn being equal to one.
 \end{example}
@@ -871,17 +871,17 @@ This formula can be use to compute the joint PMF of $X$ and $Y$ sequentially.
 %\begin{example}
 %\end{example}
 
-It is possible to define the conditional PMF of a random variable $X$, conditioned on an event $S$ where $\Prob (X \in S) > 0$.
+It is possible to define the conditional PMF of a random variable $X$, conditioned on an event $S$ where $\Pr (X \in S) > 0$.
 Let $X$ be a random variable associated with a particular experiment, and let $S$ be a non-trivial event corresponding to this experiment.
 The conditional PMF of $X$ given $S$ is defined by
 \begin{equation} \label{equation:ConditionalEventPMF}
-p_{X|S} (x) = \Prob (X = x | S)
-= \frac{\Prob (\{X = x\} \cap S)}{\Prob (S)} .
+p_{X|S} (x) = \Pr (X = x | S)
+= \frac{\Pr (\{X = x\} \cap S)}{\Pr (S)} .
 \end{equation}
 Note that the sets $\{ X = x \}$ form a partition of $\Omega$ as $x$ ranges over all the possible values in $X (\Omega)$.
 By the total probability theorem, we deduce that
 \begin{equation*}
-\sum_{x \in X(\Omega)} \Prob ( \{X = x\} \cap S) = \Prob (S)
+\sum_{x \in X(\Omega)} \Pr ( \{X = x\} \cap S) = \Pr (S)
 \end{equation*}
 and, consequently, we get
 \begin{equation*}
@@ -963,9 +963,9 @@ The conditonal PMF of $C$ given that the total number of beverages sold equals t
 \begin{equation} \label{equation:ConditionalPoisson}
 \begin{split}
 p_{C|B} (k | 10)
-&= \frac{ \Prob \left( \{ C = k \} \cap \{ B = 10 \} \right) }
-{ \Prob (B = 10) } \\
-&= \frac{ \Prob ( C = k ) \Prob ( L = 10-k ) }{ \Prob (B = 10) } \\
+&= \frac{ \Pr \left( \{ C = k \} \cap \{ B = 10 \} \right) }
+{ \Pr (B = 10) } \\
+&= \frac{ \Pr ( C = k ) \Pr ( L = 10-k ) }{ \Pr (B = 10) } \\
 &= \frac{ \frac{ 10^k p^k }{ k!} e^{-10p}
 \frac{10^{10-k} (1-p)^{10-k}}{(10-k)!} e^{-10(1-p)} }
 { \frac{ 10^{10} }{ 10!} e^{-10} } \\
@@ -982,7 +982,7 @@ Note that we have used the splitting property of the Poisson PMF in \eqref{equat
 \end{example}
 
 We can define the expectation of $X$ conditioned on an event $S$ in an analogous manner.
-Let $S$ be an event such that $\Prob (S) > 0$.
+Let $S$ be an event such that $\Pr (S) > 0$.
 The conditional expectation of $X$ given $S$ is
 \begin{equation*}
 \Expect [X | S] = \sum_{x \in X(\Omega)} x p_{X|S} (x) ,
@@ -1079,7 +1079,7 @@ We saw that a random variable can also be independent from an event.
 Let $X$ be a random variable and let $S$ be a non-trivial event.
 The variable $X$ is \emph{independent} of $S$ if
 \begin{equation*}
-\Prob (\{X = x \} \cap S ) = p_X (x) \Prob (S)
+\Pr (\{X = x \} \cap S ) = p_X (x) \Pr (S)
 \end{equation*}
 for every $x \in X(\Omega)$.
 In particular, if $X$ is independent of event $S$ then

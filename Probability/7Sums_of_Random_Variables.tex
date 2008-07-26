@@ -363,7 +363,7 @@ i_S = \inf_{ x \in S } g (x) .
 \end{equation*}
 The Chebyshev inequality states that
 \begin{equation*}
-i_S \Prob (X \in S)
+i_S \Pr (X \in S)
 \leq \Expect \left[ g(X) \right] .
 \end{equation*}
 The definition of $i_S$ and the fact that $g$ is nonnegative imply that
@@ -374,7 +374,7 @@ for any value of $x$.
 Taking the expectactions of these functions with respect to $X$, we get
 \begin{equation*}
 \Expect \left[ i_S \SetIn_S (X) \right]
-= i_S \Prob (X \in S) \leq \Expect [g (X)] .
+= i_S \Pr (X \in S) \leq \Expect [g (X)] .
 \end{equation*}
 
 
@@ -384,11 +384,11 @@ Let $g(x) = x^2$ and $S = \{ x | |x| \geq a \}$ where $a$ is a positive constant
 We wish to find a bound on the probability that $|X|$ exceeds $a$.
 Using the Chebyshev inequality we have $i_S = \inf_{x \in S} x^2 = a^2$ and, consequently,
 \begin{equation*}
-a^2 \Prob (X \in S) \leq \Expect [X^2] .
+a^2 \Pr (X \in S) \leq \Expect [X^2] .
 \end{equation*}
 Since $a$ is a positive real number, we can rewrite this equation as
 \begin{equation*}
-\Prob (X \in S) \leq \frac{\Expect [X^2]}{a^2} .
+\Pr (X \in S) \leq \frac{\Expect [X^2]}{a^2} .
 \end{equation*}
 
 \begin{example}
@@ -400,7 +400,7 @@ p_X (x) = \left\{ \begin{array}{ll} 1 - \frac{b^2}{a^2}, & x = 0 \\
 \frac{b^2}{a^2}, & x = a \\
 0, & \text{otherwise.} \end{array} \right.
 \end{equation*}
-Then, $\Expect \left[ X^2 \right] = b^2$ and $\Prob (X \in S) = b^2 / a^2$.
+Then, $\Expect \left[ X^2 \right] = b^2$ and $\Pr (X \in S) = b^2 / a^2$.
 That is, the Chebyshev inequality is tight.
 \end{example}
 
@@ -545,8 +545,8 @@ Thus, the sum of two independent Gaussian random variables is also Gaussian.
 Let $X_1, X_2, \ldots$ be independent identically distributed random variables with mean $m$.
 For every $\epsilon > 0$, we have
 \begin{equation*}
-\Prob \left( |S_n - m| \geq \epsilon \right)
-= \Prob \left( \left| \frac{X_1 + \cdots + X_n}{n} - m \right| \geq \epsilon \right) \rightarrow 0.
+\Pr \left( |S_n - m| \geq \epsilon \right)
+= \Pr \left( \left| \frac{X_1 + \cdots + X_n}{n} - m \right| \geq \epsilon \right) \rightarrow 0.
 \end{equation*}
 \end{theorem}
 \begin{proof}
@@ -566,7 +566,7 @@ Using independence, we also have
 \end{equation*}
 We apply the Chebyshev inequality and obtain
 \begin{equation*}
-\Prob (|M_n - m| \geq \epsilon) \leq \frac{ \sigma^2}{n \epsilon^2} .
+\Pr (|M_n - m| \geq \epsilon) \leq \frac{ \sigma^2}{n \epsilon^2} .
 \end{equation*}
 for any $\epsilon > 0$.
 \end{proof}
