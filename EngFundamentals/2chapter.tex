@@ -1,0 +1,1175 @@
+\chapter{Linear Algebra}
+
+
+\section{Fields}
+
+Consider a set $F$ of objects and two operations on the elements of $F$, addition and multiplication.
+For every pair of elements $s, t \in F$ then $(s + t) \in F$.
+For every pair of elements $s, t \in F$ then $st \in F$.
+Suppose that these two operations satisfy
+\begin{enumerate}
+\item addition is commutative: $s + t = t + s \; \forall s, t \in F$
+\item addition is associative: $r + (s + t) = (r + s) + t \; \forall r, s, t \in F$
+\item to each $s \in F$ there exists a unique element $(-s) \in F$ such that $s + (-s) = 0$
+\item multiplication is commutative: $st = ts \; \forall s,t \in F$
+\item multiplication is associative: $r(st) = (rs)t \; \forall r, s, t \in F$
+\item there is a unique non-zero element $1 \in F$ such that $s1 = s \; \forall s \in F$
+\item to each $s \in F - 0$ there exists a unique element $s^{-1} \in F$ such that $s s^{-1} = 1$
+\item multiplication distributes over addition: $r (s + t) = rs + rt \; \forall r, s, t \in F$.
+\end{enumerate}
+Then, the set $F$ together with these two operations is a \emph{field}.
+
+\begin{example}
+The real numbers with the usual operations of addition and multiplication form a field.
+The complex numbers with these two operations also form a field.
+\end{example}
+
+\begin{example}
+The set of integers with addition and multiplication is not a field.
+\end{example}
+
+\begin{problem} \label{problem:RationalNumbers}
+Is the set of rational numbers a subfield of the real numbers?
+\end{problem}
+
+\begin{example}
+Is the set of all real numbers of the form $s + t \sqrt{2}$, where $s$ and $t$ are rational, a subfield of the complex numbers?
+
+The set $F = \left\{ s + t \sqrt{2} : s, t \in \RationalNumbers \right\}$ together with the standard addition and multiplication is a field.
+Let $s, t, u, v \in \RationalNumbers$,
+\begin{gather*}
+s + t \sqrt{2} + u + v \sqrt{2} = (s+u) + (t+v) \sqrt{2} \in F \\
+\left( s + t \sqrt{2} \right) \left( u + v \sqrt{2} \right) = (su + 2 tv) + (sv + tu) \sqrt{2} \in F \\
+\left( s + t \sqrt{2} \right)^{-1} = \frac{ s - t \sqrt{2} }{ s^2 + 2 t^2 }
+= \frac{ s }{ s^2 + 2 t^2 } - \frac{ t }{ s^2 + 2 t^2 } \sqrt{2} \in F
+\end{gather*}
+Again, the remaining properties are straightforward to prove.
+The field $s + t \sqrt{2}$, where $s$ and $t$ are rational, is a subfield of the complex numbers.
+\end{example}
+
+
+\section{Matrices}
+
+Let $F$ be a field and consider the problem of finding $n$ scalars $x_1, \ldots, x_n$ which satisfy the conditions
+\begin{equation} \label{equation:SystemOfEquations}
+\begin{array}{ccccccccc}
+a_{11} x_1 & + & a_{12} x_2 & + & \cdots & + & a_{1n} x_n & = & y_1 \\
+a_{21} x_1 & + & a_{22} x_2 & + & \cdots & + & a_{2n} x_n & = & y_2 \\
+\vdots & & \vdots  & & & & \vdots & & \vdots \\
+a_{m1} x_1 & + & a_{m2} x_2 & + & \cdots & + & a_{mn} x_n & = & y_m
+\end{array}
+\end{equation}
+where $\{ y_i : 1 \leq i \leq n \} \subset F$ and $\{ a_{ij} : 1 \leq i \leq m, 1 \leq j \leq n \} \subset F$.
+These conditons form a \emph{system of $m$ linear equations in $n$ unknowns}.
+A shorthand notation for~\eqref{equation:SystemOfEquations} is the matrix equation
+\begin{equation*}
+A \vecnot{x} = \vecnot{y},
+\end{equation*}
+where $A$ is the matrix representation given by
+\begin{equation*}
+A = \left[ \begin{array}{cccc}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+a_{21} & a_{22} & \cdots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{m1} & a_{m2} & \cdots & a_{mn}
+\end{array} \right]
+\end{equation*}
+and $\vecnot{x}$, $\vecnot{y}$ denote
+\begin{align*}
+\vecnot{x} &= (x_1, \ldots, x_n)^T \\
+\vecnot{y} &= (y_1, \ldots, y_m)^T .
+\end{align*}
+
+\begin{definition}
+Let $A$ be an $m \times n$ matrix over $F$ and let $B$ be an $n \times p$ matrix over $F$.
+the \emph{matrix product} $AB$ is the $m \times p$ matrix $C$ whose $i,j$ entry is
+\begin{equation*}
+c_{ij} = \sum_{r = 1}^n a_{ir} b_{rj}.
+\end{equation*}
+\end{definition}
+
+\begin{definition}
+Let $A$ be an $n \times n$ matrix over $F$.
+An $n \times n$ matrix $B$ is called the \emph{inverse} of $A$ if
+\begin{equation*}
+AB = BA = I.
+\end{equation*}
+If $A$ is invertible then its inverse will be denoted by $A^{-1}$.
+\end{definition}
+
+
+\section{Vector Spaces}
+
+\begin{definition} \label{definition:VectorSpace}
+A \emph{vector space} consists of the following,
+\begin{enumerate}
+\item a field $F$ of scalars
+\item a set $V$ of objects, called vectors
+\item an operation called vector addition, which associates with each pair of vectors $\vecnot{v}, \vecnot{w} \in V$ a vector $\vecnot{v} + \vecnot{w} \in V$ such that
+\begin{enumerate}
+\item addition is commutative: $\vecnot{v} + \vecnot{w} = \vecnot{w} + \vecnot{v}$
+\item addition is associative: $\vecnot{u} + (\vecnot{v} + \vecnot{w}) = (\vecnot{u} + \vecnot{v}) + \vecnot{w}$
+\item there is a unique vector $\vecnot{0} \in V$ such that $\vecnot{v} + \vecnot{0} = \vecnot{v}$, $\forall \vecnot{v} \in V$
+\item to each $\vecnot{v} \in V$ there is a unique vector $- \vecnot{v} \in V$ such that $\vecnot{v} + (- \vecnot{v}) = \vecnot{0}$
+\end{enumerate}
+\item an operation called scalar multiplication, which associates with each $s \in F$ and $\vecnot{v} \in V$ a vector $s \vecnot{v} \in V$ such that
+\begin{enumerate}
+\item $1 \vecnot{v} = \vecnot{v}$, $\forall \vecnot{v} \in V$
+\item $(s_1 s_2) \vecnot{v} = s_1 ( s_2 \vecnot{v} )$
+\item $s ( \vecnot{v} + \vecnot{w} ) = s \vecnot{v} + s \vecnot{w}$
+\item $(s_1 + s_2) \vecnot{v} = s_1 \vecnot{v} + s_2 \vecnot{w}$.
+\end{enumerate}
+\end{enumerate}
+\end{definition}
+
+\begin{example}
+Let $F$ be a field, and let $V$ be the set of all $n$-tuples $\vecnot{v} = (v_1, \ldots, v_n)$ of scalar $v_i \in F$.
+If $\vecnot{w} = (w_1, \ldots, w_n)$ with $w_i \in F$, the sum of $\vecnot{v}$ and $\vecnot{w}$ is defined by
+\begin{equation*}
+\vecnot{v} + \vecnot{w} = (v_1 + w_1, \ldots, v_n + w_n).
+\end{equation*}
+The product of a scalar $s \in F$ and vector $\vecnot{v}$ is defined by
+\begin{equation*}
+s \vecnot{v} = (s v_1, \ldots, s v_n).
+\end{equation*}
+The set of $n$-tuples, denoted by $F^n$, together with the vector additon and scalar product defined above forms a vector space.
+\end{example}
+
+\begin{example}
+Let $X$ be a non-empty set and let $F$ be a field.
+Consider the set $V$ of all functions from $X$ into $F$.
+The sum of two vectors $f,g \in V$ is the function from $X$ into $F$ defined by
+\begin{equation*}
+(f + g)(x) = f(x) + g(x) \quad \forall x \in X.
+\end{equation*}
+The product of scalar $s \in F$ and the function $f \in V$ is the function $sf$ defined by
+\begin{equation*}
+(sf)(x) = s f(x) \; \forall x \in X.
+\end{equation*}
+\end{example}
+
+\begin{definition}
+A vector $\vecnot{w} \in V$ is said to be a \emph{linear combination} of the vectors $\vecnot{v}_1, \ldots, \vecnot{v}_n \in V$ provided that there exist scalars $s_1, \ldots, s_n \in F$ such that
+\begin{equation*}
+\vecnot{w} = \sum_{i=1}^n s_i \vecnot{v}_i.
+\end{equation*}
+\end{definition}
+
+
+\subsection{Subspaces}
+
+\begin{definition}
+Let $V$ be a vector space over $F$.
+A \emph{subspace} of $V$ is a subset $W \subset V$ which is itself a vector space over $F$.
+\end{definition}
+
+A non-empty subset $W \subset V$ is a subspace of $V$ if and only if for every pair of vector $\vecnot{w}_1, \vecnot{w}_2 \in W$ and every scalar $s \in F$ the vector $s \vecnot{w}_1 + \vecnot{w}_2$ is again in $W$.
+If $V$ is a vector space then the intersection of any collection of subspaces of $V$ is a subspace of $V$.
+
+\begin{example}
+Let $A$ be an $m \times n$ matrix over $F$.
+The set of all $n \times 1$ column vectors $V$ such that
+\begin{equation*}
+\vecnot{v} \in V \implies A \vecnot{v} = \vecnot{0}
+\end{equation*}
+is a subspace of $F^{n \times 1}$.
+\end{example}
+
+\begin{definition}
+Let $U$ be a set of vectors in a vector space $V$.
+The \emph{subspace spanned} by $U$ is defined to be the intersection $W$ of all subspaces of $V$ which contain $U$.
+\end{definition}
+
+The subspace spanned by a non-empty subset $U \subset V$, where $V$ is a vector space, is the set of all linear combinations of vectors in $U$.
+
+
+\subsection{Bases and Dimension}
+\label{section:BasesAndDimension}
+
+The dimension of a vector space can be defined using the concept of a basis for the space.
+
+\begin{definition}
+Let $V$ be a vector space over $F$.
+A subset $U \subset V$ is \emph{linearly dependent} if there exist distinct vectors $\vecnot{u}_1, \ldots, \vecnot{u}_n \in U$ and scalars $s_1, \ldots, s_n \in F$, not all of which are $0$, such that
+\begin{equation*}
+\sum_{i=1}^n s_i \vecnot{u}_i = 0.
+\end{equation*}
+A set which is not linearly dependent is called \emph{linearly independent}.
+\end{definition}
+
+A few important consequences follow immediately from this definition.
+Any subset of a linearly independent set is also linearly independent.
+Any set which contains the $\vecnot{0}$ vector is linearly dependent.
+A set $U \subset V$ is linearly independent if and only if each finite subset of $U$ is linearly independent.
+
+\begin{definition}
+Let $V$ be a vector space over $F$.
+Let $\mathcal{B} = \left\{ \vecnot{v}_{\alpha} | \alpha \in A \right\}$ be a subset of linearly independent vectors from $V$, such that every $\vecnot{v} \in V$ has a decomposition as a finite linear combination of vectors from $\mathcal{B}$.
+Then, the set $\mathcal{B}$ is a \emph{basis} for $V$.
+The space $V$ is \emph{finite-dimensional} if it has a finite basis.
+\end{definition}
+
+\begin{theorem}
+Every vector space has a basis.
+\end{theorem}
+\begin{proof}
+Let $X$ be the set of linearly independent subsets of $V$.
+Furthermore, for $x, y \in X$ consider the strict partial order defined by proper inclusion.
+By the maximum principle, if $x$ is an element of $X$, then there exists a maximal simply ordered subset $Z$ of $X$ containing $x$.
+This element is a basis for $V$.
+\end{proof}
+
+\begin{example}
+Let $F$ be a field and let $U \subset F^n$ be the subset consisting of the vectors $\vecnot{e}_1, \ldots, \vecnot{e}_n$ defined by
+\begin{equation*}
+\begin{array}{ccc}
+\vecnot{e}_1 & = & (1, 0, \ldots, 0) \\
+\vecnot{e}_2 & = & (0, 1, \ldots, 0) \\
+\vdots & = & \vdots \\
+\vecnot{e}_n & = & (0, 0, \ldots, 1).
+\end{array}
+\end{equation*}
+For any $\vecnot{v} = (v_1, \ldots, v_n) \in F^n$, we have
+\begin{equation} \label{equation:StandartBasisSpan}
+\vecnot{v} = \sum_{i=1}^n v_i \vecnot{e}_i.
+\end{equation}
+Thus, the collection $U = \left\{ \vecnot{e}_1, \ldots, \vecnot{e}_n \right\}$ spans $F^n$.
+Since $\vecnot{v} = \vecnot{0}$ in~\eqref{equation:StandartBasisSpan} if and only if $v_1 = \cdots = v_n = 0$, $U$ is linearly independent.
+Accordingly, the set $U$ is a basis for $F^{n \times 1}$.
+This basis is termed the \emph{standard basis} of $F^n$.
+\end{example}
+
+\begin{example}
+Let $A$ be an invertible matrix over $F$.
+The columns of $A$, denoted by $A_1, \ldots, A_n$, form a basis for the space of column vectors $F^{n \times 1}$.
+This can be seen as follows.
+If $\vecnot{v} = (v_1, \ldots, v_n)^T$ is a column vector, then
+\begin{equation*}
+A \vecnot{v} = \sum_{i=1}^n v_i A_i.
+\end{equation*}
+Since $A$ is invertible,
+\begin{equation*}
+A \vecnot{v} = \vecnot{0} \implies I \vecnot{v} = A^{-1} \vecnot{0} \implies \vecnot{v} = \vecnot{0}.
+\end{equation*}
+That is, $\{ A_1, \ldots, A_n \}$ is a linearly independent set.
+For any column vector $\vecnot{w} \in F^n$, let $\vecnot{v} = A^{-1} \vecnot{w}$.
+It follows that $\vecnot{w} = A \vecnot{v}$ and, as a consequence, $\{ A_1, \ldots, A_n \}$ is a basis for $F^n$.
+\end{example}
+
+\begin{theorem}
+Let $V$ be a vector space which is spanned by a finite set of vectors $W = \left\{ \vecnot{w}_1, \ldots, \vecnot{w}_n \right\}$.
+Then any linearly independent set of vectors in $V$ is finite and contains no more than $n$ elements.
+\end{theorem}
+\begin{proof}
+Assume that $U = \left\{ \vecnot{u}_1, \ldots, \vecnot{u}_m \right\} \subset V$ with $m > n$.
+Since $W$ spans $V$, there exists scalars $a_{ij}$ such that
+\begin{equation*}
+\vecnot{u}_j = \sum_{i=1}^n a_{ij} \vecnot{w}_i.
+\end{equation*}
+For any $m$ scalars $s_1, \ldots, s_m$ we have
+\begin{equation*}
+\sum_{j=1}^m s_j \vecnot{u}_j
+= \sum_{j=1}^m s_j \sum_{i=1}^n a_{ij} \vecnot{w}_i
+= \sum_{j=1}^m \sum_{i=1}^n ( a_{ij} s_j ) \vecnot{w}_i
+= \sum_{i=1}^n \left( \sum_{j=1}^m a_{ij} s_j \right) \vecnot{w}_i . 
+\end{equation*}
+Because $m > n$ there exist scalars $s_1, \ldots, s_n$, not all $0$, such that
+\begin{equation*}
+\sum_{j=1}^m a_{ij} s_j = 0, \quad 1 \leq i \leq n. 
+\end{equation*}
+For these scalars, $\sum_{j=1}^m s_j \vecnot{u}_j = 0$.
+That is, the set $U$ is linearly dependent.
+\end{proof}
+
+If $V$ is a finite-dimensional vector space, then any two bases of $V$ have the same number of elements.
+This allows us to define the dimension of a finite-dimensional vector space.
+
+\begin{definition}
+The \emph{dimension} of a finite-dimensional vector space is defined as the number of elements in a basis for $V$.
+We denote the dimension of a finite-dimensional vector space $V$ by $\dim(V)$.
+\end{definition}
+
+The zero subspace of a vector space $V$ is the subspace spanned by the vector $\vecnot{0}$.
+Since the set $\left\{ \vecnot{0} \right\}$ is linearly dependent and not a basis, we assign a dimension $0$ to the zero subspace.
+Alternatively, it can be argue that the empty set $\emptyset$ spans $\left\{ \vecnot{0} \right\}$ because the intersection of all the subspaces containing the empty set is $\left\{ 0 \right\}$.
+Though this is only a minor point.
+
+\begin{theorem}
+Let $A$ be an $n \times n$ matrix over $F$ and suppose that the columns of $A$, denoted by $A_1, \ldots, A_n$, form a linearly independent set of vectors in $F^{n \times 1}$.
+Then $A$ is invertible.
+\end{theorem}
+\begin{proof}
+Suppose that $W$ is the subspace of $F^{n \times 1}$ spanned by $A_1, \ldots, A_n$.
+Since $A_1, \ldots, A_n$ are linearly independent, $\dim(W) = n = \dim(F^{n \times 1})$.
+It follows that $W = V$ and, as a consequence, there exist scalars $b_{ij} \in F$ such that
+\begin{equation*}
+\vecnot{e}_j = \sum_{i=1}^n b_{ij} A_i, \quad 1 \leq j \leq n
+\end{equation*}
+where $\left\{ \vecnot{e}_1, \ldots, \vecnot{e}_n \right\}$ is the standard basis for $F^{n \times 1}$.
+Then, for the matrix $B$ with entries $b_{ij}$, we have
+\begin{equation*}
+AB = I.
+\end{equation*}
+Note also that if the rows of $A$ form a linearly independent set of vectors in $F^{1 \times n}$ then $A$ is invertible.
+\end{proof}
+
+
+\subsection{Coordinate System}
+
+Let $\left\{ \vecnot{v}_1, \ldots, \vecnot{v}_n \right\}$ be a basis for the $n$-dimensional vector space $V$.
+Every vector $\vecnot{w} \in V$ can be expressed uniquely as
+\begin{equation*}
+\vecnot{w} = \sum_{i=1}^n s_i \vecnot{v}_i.
+\end{equation*}
+Recall that a set is an unordered collection of objects.
+Yet it is possible to order the elements of $\left\{ \vecnot{v}_1, \ldots, \vecnot{v}_n \right\}$.
+One of the useful features of an ordered basis is that it enables the introduction of a coordinate system in $V$.
+
+\begin{definition}
+If $V$ is a finite-dimensional vector space, an \emph{ordered basis} for $V$ is a finite sequence of vectors which is linearly independent and spans $V$.
+\end{definition}
+
+In particular, if the sequence $\vecnot{v}_1, \ldots, \vecnot{v}_n$ is an ordered basis for $V$, then the set $\left\{ \vecnot{v}_1, \ldots, \vecnot{v}_n \right\}$ is a basis for $V$.
+The ordered basis $\mathcal{B}$ is the set $\left\{ \vecnot{v}_1, \ldots, \vecnot{v}_n \right\}$, together with the specific ordering of the vectors.
+Based on this ordered basis, a vector $\vecnot{w} \in V$ can be unambiguously represented as an $n$-tuple,
+\begin{equation*}
+\vecnot{w} = (s_1, \ldots, s_n) = \sum_{i=1}^n s_i \vecnot{v}_i.
+\end{equation*}
+Equivalently, vector $\vecnot{w}$ can be described using the \emph{coordinate matrix of $\vecnot{w}$ relative to the ordered basis $\mathcal{B}$}:
+\begin{equation*}
+\vecnot{w} = \left[ \begin{array}{c} s_1 \\ \vdots \\ s_n \end{array} \right].
+\end{equation*}
+The dependence of this coordinate matrix on the basis $\mathcal{B}$ can be specified explicitly using the notation $\left[ \vecnot{w} \right]_{\mathcal{B}}$.
+This will be particularly important when multiple coordinates systems are involved.
+
+\begin{example}
+The canonical example of an ordered basis is the standard basis for $F^n$ introduced in Section~\ref{section:BasesAndDimension}.
+Note that the standard basis contains a natural ordering: $\vecnot{e}_1, \ldots, \vecnot{e}_n$.
+Vectors in $F^n$ can therefore be unambiguously expressed as $n$-tuples.
+\end{example}
+
+Let $V$ be a finite-dimensional vector space and assume that
+\begin{align*}
+\mathcal{A} &= \vecnot{v}_1, \ldots, \vecnot{v}_n \\
+\mathcal{B} &= \vecnot{w}_1, \ldots, \vecnot{w}_n
+\end{align*}
+are two ordered bases for $V$.
+There are unique scalars $p_{ij}$ such that
+\begin{equation*}
+\vecnot{w}_j = \sum_{i=1}^n p_{ij} \vecnot{v}_i \quad 1 \leq j \leq n.
+\end{equation*}
+Let $\vecnot{u} \in \mathcal{B}$ and
+\begin{equation*}
+\vecnot{u} = \left[ \begin{array}{c} t_1 \\ \vdots \\ t_n \end{array} \right]_{\mathcal{B}}.
+\end{equation*}
+Then, we can write
+\begin{equation*}
+\vecnot{u} = \sum_{j=1}^n t_j \vecnot{w}_j
+= \sum_{j=1}^n t_j \sum_{i=1}^n p_{ij} \vecnot{v}_i
+= \sum_{j=1}^n \sum_{i=1}^n ( p_{ij} t_j ) \vecnot{v}_i
+= \sum_{i=1}^n \left( \sum_{j=1}^n p_{ij} t_j \right) \vecnot{v}_i.
+\end{equation*}
+Since the coordinates $s_1, \ldots, s_n$ of $\vecnot{u}$ in the ordered basis $\mathcal{A}$ are uniquely determined, it follows that
+\begin{equation*}
+s_i = \sum_{j=1}^n p_{ij} t_j \quad 1 \leq i \leq n.
+\end{equation*}
+Let $P$ be the $n \times n$ matrix with entries $p_{ij}$, then $P$ is invertible and
+\begin{align*}
+\left[ \vecnot{u} \right]_{\mathcal{A}} &= P \left[ \vecnot{u} \right]_{\mathcal{B}} \\
+\left[ \vecnot{u} \right]_{\mathcal{B}} &= P^{-1} \left[ \vecnot{u} \right]_{\mathcal{A}}
+\end{align*}
+for every $\vecnot{u} \in V$.
+Furthermore, the columns of $P$ are given by
+\begin{equation*}
+P_j = \left[ \vecnot{w}_j \right]_{\mathcal{A}} \quad 1 \leq j \leq n.
+\end{equation*}
+
+\begin{problem} \label{problem:OrderBasisFromMatrix}
+Suppose that $\mathcal{A} = \vecnot{v}_1, \ldots, \vecnot{v}_n$ is an ordered basis for $V$.
+Let $P$ be an $n \times n$ invertible matrix.
+Show that there exists an ordered basis $\mathcal{B} = \vecnot{w}_1, \ldots, \vecnot{w}_n$ for $V$ such that
+\begin{align*}
+\left[ \vecnot{u} \right]_{\mathcal{A}} &= P \left[ \vecnot{u} \right]_{\mathcal{B}} \\
+\left[ \vecnot{u} \right]_{\mathcal{B}} &= P^{-1} \left[ \vecnot{u} \right]_{\mathcal{A}}
+\end{align*}
+for every $\vecnot{u} \in V$.
+\end{problem}
+\textbf{S~\ref{problem:OrderBasisFromMatrix}}.
+Consider the ordered basis $\mathcal{A} = \vecnot{v}_1, \ldots, \vecnot{v}_n$.
+If $\mathcal{B} = \vecnot{w}_1, \ldots, \vecnot{w}_n$ is an ordered basis for $V$ such that $\left[ \vecnot{u} \right]_{\mathcal{A}} = P \left[ \vecnot{u} \right]_{\mathcal{B}}$ then
+\begin{equation*}
+\vecnot{w}_j = \sum_{i = 1}^n p_{ij} \vecnot{v}_i.
+\end{equation*}
+We need only show that the vectors $\vecnot{w}_1, \ldots, \vecnot{w}_n$ defined by these equations form a basis for $V$.
+Let $Q = P^{-1}$, then
+\begin{equation*}
+\begin{split}
+\sum_{j = 1}^n q_{jk} \vecnot{w}_j
+&= \sum_{j = 1}^n q_{jk} \sum_{i = 1}^n p_{ij} \vecnot{v}_i
+= \sum_{j = 1}^n \sum_{i = 1}^n p_{ij} q_{jk} \vecnot{v}_i \\
+&= \sum_{i = 1}^n \left( \sum_{j = 1}^n p_{ij} q_{jk} \right) \vecnot{v}_i
+= \vecnot{v}_k .
+\end{split}
+\end{equation*}
+The subspace spanned by the set $\mathcal{B} = \vecnot{w}_1, \ldots, \vecnot{w}_n$ containes $\mathcal{A}$.
+Thus $\mathcal{V}$ is a basis for $V$.
+By definition, it clear that $\left[ \vecnot{u} \right]_{\mathcal{A}} = P \left[ \vecnot{u} \right]_{\mathcal{B}}$ and $\left[ \vecnot{u} \right]_{\mathcal{B}} = P^{-1} \left[ \vecnot{u} \right]_{\mathcal{A}}$.
+
+
+
+\section{Norms}
+Let $V$ be a vector space over the real numbers or the complex numbers.
+
+A \emph{norm} on vector space $V$ is a real-valued function $\left\| \cdot \right\| : V \rightarrow \RealNumbers$ that satisfies the following properties.
+\begin{enumerate}
+\item $\left\| \vecnot{v} \right\| \geq 0 \quad \forall \vecnot{v} \in V$;
+equality holds if and only if $\vecnot{v} = \vecnot{0}$
+\item $\left\| s \vecnot{v} \right\| = |s| \left\| \vecnot{v} \right\| \quad \forall \vecnot{v} \in V, s \in F$
+\item $\left\| \vecnot{v} + \vecnot{w} \right\| \leq
+\left\| \vecnot{v} \right\| + \left\| \vecnot{w} \right\| \quad \forall \vecnot{v}, \vecnot{w} \in V$.
+\end{enumerate}
+
+The concept of a norm is closely related to the concept of a metric.
+For instance, a metric can be defined in terms of a norm.
+Let $\left\| \vecnot{v} \right\|$ be a norm on vector space $V$, then
+\begin{equation*}
+d \left( \vecnot{v}, \vecnot{w} \right)
+= \left\| \vecnot{v} - \vecnot{w} \right\|
+\end{equation*}
+is a metric.
+
+\begin{example}
+Consider vectors in $\RealNumbers^n$ with the euclidean metric
+\begin{equation*}
+d \left( \vecnot{v}, \vecnot{w} \right)
+= \sqrt{ (v_1 - w_1)^2 + \cdots + (v_n - w_n)^2 }.
+\end{equation*}
+Recall that the standard bounded metric introduced in Problem~\ref{problem:StandardBoundedMetric} is given by
+\begin{equation*}
+\bar{d} \left( \vecnot{v}, \vecnot{w} \right)
+= \min \left\{ d \left( \vecnot{v}, \vecnot{w} \right), 1 \right\}.
+\end{equation*}
+Define the function $f : \RealNumbers^n \rightarrow \RealNumbers$ by
+\begin{equation*}
+f \left( \vecnot{v} \right) = \bar{d} \left( \vecnot{v}, \vecnot{0} \right).
+\end{equation*}
+Is the function $f$ a norm?
+
+By the properties of a metric, we have
+\begin{enumerate}
+\item $\bar{d} \left( \vecnot{v}, \vecnot{0} \right) \geq 0 \quad \forall \vecnot{v} \in V$; equality holds if and only if $\vecnot{v} = \vecnot{0}$
+\item $\bar{d} \left( \vecnot{v}, \vecnot{0} \right) + \bar{d} \left( \vecnot{w}, \vecnot{0} \right) = \bar{d} \left( \vecnot{v}, \vecnot{0} \right) + \bar{d} \left( \vecnot{0}, \vecnot{w} \right) \geq \bar{d} \left( \vecnot{v}, \vecnot{w} \right) \quad \forall \vecnot{v}, \vecnot{w} \in V$.
+\end{enumerate}
+However, $\bar{d} \left( s \vecnot{v}, \vecnot{0} \right)$ is not necessarily equal to $s \bar{d} \left( \vecnot{v}, \vecnot{0} \right)$.
+For instance,
+$\bar{d} \left( 2 \vecnot{e}_1, \vecnot{0} \right) = 1 < 2 \bar{d} \left( \vecnot{e}_1, \vecnot{0} \right)$.
+Thus, the function $f : \RealNumbers^n \rightarrow \RealNumbers$ defined by
+\begin{equation*}
+f \left( \vecnot{v} \right) = \bar{d} \left( \vecnot{v}, \vecnot{0} \right).
+\end{equation*}
+is not a norm.
+\end{example}
+
+\begin{example}
+The following functions are examples of norms for $F^n$,
+\begin{enumerate}
+\item the $l_1$ norm: $\left\| \vecnot{v} \right\|_1 = \sum_{i=1}^n |x_i|$
+\item the $l_p$ norm: $\left\| \vecnot{v} \right\|_p = \left( \sum_{i=1}^n |x_i|^p \right)^{\frac{1}{p}}, \quad p \in (1,\infty)$
+\item the $l_{\infty}$ norm: $\left\| \vecnot{v} \right\|_{\infty} = \max_{1,\ldots, n} \{ |x_i| \}$.
+\end{enumerate}
+\end{example}
+
+\begin{example}
+Similarly, norms can be defined for the vector space of functions from $[a, b]$ to $F$,
+\begin{enumerate}
+\item the $L_1$ norm: $\left\| f(t) \right\|_1 = \int_a^b |f(t)| dt$
+\item the $L_p$ norm: $\left\| f(t) \right\|_p = \left( \int_a^b |f(t)|^p dt \right)^{\frac{1}{p}}, \quad p \in (1,\infty)$
+\item the $L_{\infty}$ norm: $\left\| f(t) \right\|_{\infty} = \esssup_{[a,b]} \{ | f(t) | \}$.
+\end{enumerate}
+\end{example}
+
+\begin{definition}
+A vector $\vecnot{v} \in V$ is said to be \emph{normalized} if $\left\| \vecnot{v} \right\| = 1$.
+Any vector can be normalized, except the zero vector:
+\begin{equation}
+\vecnot{u} = \frac{\vecnot{v}}{\left\| \vecnot{v} \right\|}
+\end{equation}
+has norm $\left\| \vecnot{u} \right\| = 1$.
+A normalized vector is also referred to as a \emph{unit vector}.
+\end{definition}
+
+
+\section{Inner Products}
+
+\begin{definition} \label{definition:InnerProduct}
+Let $F$ be the field of real numbers or the field of complex numbers, and assume $V$ is a vector space over $F$.
+An \emph{inner product} on $V$ is a function which assigns to each ordered pair of vectors $\vecnot{v}, \vecnot{w} \in V$ a scalar $\left\langle \vecnot{v} | \vecnot{w} \right\rangle \in F$ in such a way that for all $\vecnot{u}, \vecnot{v}, \vecnot{w} \in V$ and any scalar $s \in F$
+\begin{enumerate}
+\item $\left\langle \vecnot{u} + \vecnot{v} | \vecnot{w} \right\rangle
+= \left\langle \vecnot{u} | \vecnot{w} \right\rangle
++ \left\langle \vecnot{v} | \vecnot{w} \right\rangle$
+\item $\left\langle s \vecnot{v} | \vecnot{w} \right\rangle
+= s \left\langle \vecnot{v} | \vecnot{w} \right\rangle$
+\item $\left\langle \vecnot{v} | \vecnot{w} \right\rangle
+= \overline{ \left\langle \vecnot{w} | \vecnot{v} \right\rangle }$, where the overbar denotes complex conjugation;
+\item $\left\langle \vecnot{v} | \vecnot{v} \right\rangle > 0$ if $\vecnot{v} \neq \vecnot{0}$.
+\end{enumerate}
+\end{definition}
+
+Note that the conditions of Definition~\ref{definition:InnerProduct} imply that
+\begin{equation*}
+\left\langle \vecnot{u} | s \vecnot{v} + \vecnot{w} \right\rangle
+= \overline{s} \left\langle \vecnot{u} | \vecnot{v} \right\rangle
++ \left\langle \vecnot{u} | \vecnot{w} \right\rangle .
+\end{equation*}
+
+\begin{definition}
+A real or complex vector space equipped with an inner product is called an \emph{inner-product space}.
+\end{definition}
+
+\begin{example} \label{example:StandardInnerProduct}
+Consider the inner product on $F^n$ defined by
+\begin{equation*}
+\left\langle \vecnot{v} | \vecnot{w} \right\rangle
+= \left\langle (v_1, \ldots, v_n) | (w_1, \ldots, w_n) \right\rangle
+= \sum_{j=1}^n v_j \overline{w}_j.
+\end{equation*}
+This inner product is called the \emph{standard inner product}.
+When $F = \RealNumbers$, the standard inner product can also be written as
+\begin{equation*}
+\left\langle \vecnot{v} | \vecnot{w} \right\rangle
+= \sum_{j=1}^n v_j w_j.
+\end{equation*}
+In this context it is often called the dot product, denoted by $\vecnot{v} \cdot \vecnot{w}$.
+\end{example}
+
+\begin{problem} \label{problem:InnerProductForm}
+For $\vecnot{v} = (v_1, v_2)$ and $\vecnot{w} = (w_1, w_2)$  in $\RealNumbers^2$, show that
+\begin{equation*}
+\left\langle \vecnot{v} | \vecnot{w} \right\rangle
+= v_1 w_1 - v_2 w_1 - v_1 w_2 + 4 v_2 w_2
+\end{equation*}
+is an inner product.
+\end{problem}
+\textbf{S~\ref{problem:InnerProductForm}}.
+For all $\vecnot{u}, \vecnot{v}, \vecnot{w} \in V$ and all scalars $s$
+\begin{equation*}
+\begin{split}
+\left\langle \vecnot{u} + \vecnot{v} | \vecnot{w} \right\rangle
+&= (u_1 + v_1) w_1 - (u_2 + v_2) w_1 - (u_1 + v_1) w_2 + 4 (u_2 + v_2) w_2 \\
+&= u_1 w_1 - u_2 w_1 - u_1 w_2 + 4 u_2 w_2
++ v_1 w_1 - v_2 w_1 - v_1 w_2 + 4 v_2 w_2 \\
+&= \left\langle \vecnot{u} | \vecnot{w} \right\rangle
++ \left\langle \vecnot{v} | \vecnot{w} \right\rangle.
+\end{split}
+\end{equation*}
+Also, we have
+\begin{equation*}
+\left\langle s \vecnot{v} | \vecnot{w} \right\rangle
+= s v_1 w_1 - s v_2 w_1 - s v_1 w_2 + 4 s v_2 w_2
+= s \left\langle \vecnot{v} | \vecnot{w} \right\rangle.
+\end{equation*}
+Since $V = \RealNumbers^2$, we have $\left\langle \vecnot{v} | \vecnot{w} \right\rangle = \overline{ \left\langle \vecnot{w} | \vecnot{v} \right\rangle }$.
+Furthermore,
+\begin{equation*}
+\left\langle \vecnot{v} | \vecnot{v} \right\rangle
+= v_1^2 - 2 v_1 v_2 + 4 v_2^2
+= ( v_1 - v_2 )^2 + 3 v_2^2
+> 0
+\quad \text{if } \vecnot{v} \neq \vecnot{0}.
+\end{equation*}
+That is, $\left\langle \vecnot{v} | \vecnot{v} \right\rangle$ is an inner product.
+
+
+\begin{example}
+Let $V$ be the vector space of all continuous complex-valued functions on the unit interval $[0,1]$.
+Then
+\begin{equation*}
+\left\langle f | g \right\rangle
+= \int_0^1 f(t) \overline{g(t)} dt
+\end{equation*}
+is an inner product.
+\end{example}
+
+\begin{example}
+Let $V$ and $W$ be two vector spaces over $F$ and suppose that $\langle \cdot | \cdot \rangle$ is an inner product on $W$.
+If $T$ is a non-singular linear transformation from $V$ into $W$, then the equation
+\begin{equation*}
+p_T \left( \vecnot{v}_1, \vecnot{v}_2 \right)
+= \left\langle T \vecnot{v}_1 | T \vecnot{v}_2 \right\rangle
+\end{equation*}
+defines an inner product $p_T$ on $V$.
+\end{example}
+
+\begin{theorem}
+Let $V$ be a finite-dimensional space, and suppose that
+\begin{equation*}
+\mathcal{B} = \vecnot{w}_1, \ldots, \vecnot{w}_n
+\end{equation*}
+is an ordered basis for $V$.
+Any inner product on $V$ is completely determined by the values
+\begin{equation*}
+h_{ji} = \left\langle \vecnot{w}_i | \vecnot{w}_j \right\rangle
+\end{equation*}
+it assumes on pairs of vectors in $\mathcal{B}$.
+\end{theorem}
+\begin{proof}
+If $\vecnot{u} = \sum_{i} s_i \vecnot{w}_i$ and $\vecnot{v} = \sum_{j} t_j \vecnot{w}_j$, then
+\begin{equation*}
+\begin{split}
+\left\langle \vecnot{u} | \vecnot{v} \right\rangle
+&= \left\langle \sum_{i} s_i \vecnot{w}_i \Big| \vecnot{v} \right\rangle
+= \sum_{i} s_i \left\langle \vecnot{w}_i | \vecnot{v} \right\rangle \\
+&= \sum_{i} s_i \left\langle \vecnot{w}_i \Big| \sum_{j} t_j \vecnot{w}_j \right\rangle
+= \sum_{i} \sum_{j} s_i \overline{t}_j \left\langle \vecnot{w}_i | \vecnot{w}_j \right\rangle \\
+&= \sum_{i} \sum_{j} \overline{t}_j h_{ji} s_i
+= \left[ \vecnot{v} \right]_{\mathcal{B}}^H H \left[ \vecnot{u} \right]_{\mathcal{B}}
+\end{split}
+\end{equation*}
+where $\left[ \vecnot{u} \right]_{\mathcal{B}}$ and $\left[ \vecnot{v} \right]_{\mathcal{B}}$ are the coordinate matrices of $\vecnot{u}$, $\vecnot{v}$ in the ordered basis $\mathcal{B}$.
+The matrix $H$ is called the \emph{matrix of the inner product in the ordered basis $\mathcal{B}$}.
+\end{proof}
+
+It is easily verified that $H$ is a hermitian matrix, i.e., $H = H^H$.
+Furthermore, $H$ must satisfy the additional condition
+\begin{equation} \label{equation:PositiveDefinite}
+\vecnot{w}^H H \vecnot{w} > 0, \quad \forall \vecnot{w} \neq \vecnot{0}.
+\end{equation}
+In particualr, $H$ must be invertible.
+
+Conversely if $H$ is an $n \times n$ hermitian matrix over $F$ which satisfies~\eqref{equation:PositiveDefinite}, then $H$ is the matrix in the ordered basis $\mathcal{B}$ of an inner product on $V$.
+This inner product is given by
+\begin{equation*}
+\left\langle \vecnot{u} | \vecnot{v} \right\rangle
+= \left[ \vecnot{v} \right]_{\mathcal{B}}^H H \left[ \vecnot{u} \right]_{\mathcal{B}}.
+\end{equation*}
+
+\begin{problem}
+Let $V$ be a vector space over $F$.
+Show that the sum of two inner products on $V$ is an inner product on $V$.
+Show that a positive multiple of an inner product is also an inner product.
+\end{problem}
+
+\begin{example}
+Let $X$ and $Y$ be random variables taking values in $\RealNumbers$.
+Consider the inner product defined by
+\begin{equation*}
+\left\langle X | Y \right\rangle = \Expect \left[ XY \right] .
+\end{equation*}
+Note that in the vector space of random variables, $X = Y$ if $\left\| X - Y \right\| = 0$.
+That is, if $X = Y$ almost surely then $X$ and $Y$ are different representation of the same vector.
+\end{example}
+
+
+\subsection{Induced Norms}
+
+A finite-dimensional real inner-product space is often referred to as a \emph{Euclidean space}.
+A complex inner-product space is sometimes called a \emph{unitary space}.
+
+\begin{definition}
+Let $V$ be an inner-product space with inner product $\langle \cdot | \cdot \rangle$.
+This inner product can be used to define a norm, called the \emph{induced norm},
+\begin{equation*}
+\left\| \vecnot{v} \right\| = \left\langle \vecnot{v} | \vecnot{v} \right\rangle^{\frac{1}{2}}
+\end{equation*}
+for every $\vecnot{v} \in V$.
+\end{definition}
+
+\begin{theorem}
+If $V$ is an inner-product space and $\| \cdot \|$ is its associated induced norm, then for any $\vecnot{v}, \vecnot{w} \in V$ and any scalar $s$
+\begin{enumerate}
+\item $\left\| s \vecnot{v} \right\| = |s| \left\| \vecnot{v} \right\|$
+\item $\left\| \vecnot{v} \right\| > 0$ for $\vecnot{v} \neq \vecnot{0}$
+\item $\left| \left\langle \vecnot{v} | \vecnot{w} \right\rangle \right| \leq \left\| \vecnot{v} \right\| \left\| \vecnot{w} \right\|$
+\item $\left\| \vecnot{v} + \vecnot{w} \right\| \leq \left\| \vecnot{v} \right\| + \left\| \vecnot{w} \right\|$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+The first two items follow immediately from the various definitions involved.
+When $\vecnot{v} = \vecnot{0}$, then clearly $\left| \left\langle \vecnot{v} | \vecnot{w} \right\rangle \right| \leq \left\| \vecnot{v} \right\| \left\| \vecnot{w} \right\|$.
+Assume $\vecnot{v} \neq \vecnot{0}$ and let
+\begin{equation*}
+\vecnot{u} = \vecnot{w} - \frac{ \left\langle \vecnot{w} | \vecnot{v} \right\rangle}{ \left\| \vecnot{v} \right\|^2 } \vecnot{v}.
+\end{equation*}
+Then $\left\langle \vecnot{u} | \vecnot{v} \right\rangle = 0$ and
+\begin{equation*}
+\begin{split}
+0 &\leq \left\| \vecnot{u} \right\|^2
+= \left\langle \vecnot{w} - \frac{ \left\langle \vecnot{w} | \vecnot{v} \right\rangle}{ \left\| \vecnot{v} \right\|^2 } \vecnot{v} \Big|
+\vecnot{w} - \frac{ \left\langle \vecnot{w} | \vecnot{v} \right\rangle}{ \left\| \vecnot{v} \right\|^2 } \vecnot{v} \right\rangle \\
+&= \left\langle \vecnot{w} | \vecnot{w} \right\rangle
+- \frac{ \left\langle \vecnot{w} | \vecnot{v} \right\rangle
+\left\langle \vecnot{v} | \vecnot{w} \right\rangle }
+{ \left\| \vecnot{v} \right\|^2 }
+= \left\| \vecnot{w} \right\|^2
+- \frac{ \left| \left\langle \vecnot{v} | \vecnot{w} \right\rangle \right|^2 }
+{ \left\| \vecnot{v} \right\|^2 } .
+\end{split}
+\end{equation*}
+Hence
+$\left| \left\langle \vecnot{v} | \vecnot{w} \right\rangle \right|^2 \leq \left\| \vecnot{v} \right\|^2 \left\| \vecnot{w} \right\|^2$.
+Using this result, we get
+\begin{equation*}
+\begin{split}
+\left\| \vecnot{v} + \vecnot{w} \right\|^2
+&= \left\| \vecnot{v} \right\|^2 + \left\langle \vecnot{v} | \vecnot{w} \right\rangle + \left\langle \vecnot{w} | \vecnot{v} \right\rangle + \left\| \vecnot{w} \right\|^2 \\
+&= \left\| \vecnot{v} \right\|^2 + 2 \Real \left\langle \vecnot{v} | \vecnot{w} \right\rangle + \left\| \vecnot{w} \right\|^2 \\
+&\leq \left\| \vecnot{v} \right\|^2 + 2 \left\| \vecnot{v} \right\| \left\| \vecnot{w} \right\| + \left\| \vecnot{w} \right\|^2 .
+\end{split}
+\end{equation*}
+Thus, $\left\| \vecnot{v} + \vecnot{w} \right\| \leq \left\| \vecnot{v} \right\| + \left\| \vecnot{w} \right\|$.
+\end{proof}
+
+The third inequality, $\left| \left\langle \vecnot{v} | \vecnot{w} \right\rangle \right| \leq \left\| \vecnot{v} \right\| \left\| \vecnot{w} \right\|$, is called the \emph{Cauchy-Schwarz inequality}.
+Its proof shows that if $\vecnot{v}$ is non-zero, then $\left| \left\langle \vecnot{v} | \vecnot{w} \right\rangle \right| < \left\| \vecnot{v} \right\| \left\| \vecnot{w} \right\|$ unless
+\begin{equation*}
+\vecnot{w} = \frac{ \left\langle \vecnot{w} | \vecnot{v} \right\rangle }
+{ \left\| \vecnot{v} \right\| } \vecnot{v} .
+\end{equation*}
+That is, equality holds if and only if $\vecnot{v}$ and $\vecnot{w}$ are linearly dependent.
+
+\begin{theorem}
+Consider the vector space $\RealNumbers^n$ with the standard inner product of Example~\ref{example:StandardInnerProduct}.
+The function $f: V \rightarrow F$ defined by $f \left( \vecnot{w} \right) = \left\langle \vecnot{w} | \vecnot{v} \right\rangle$ is continuous.
+\end{theorem}
+\begin{proof}
+Let $\vecnot{w}_1, \vecnot{w}_2, \ldots$ be a sequence in $V$ converging to $\vecnot{w}$.
+Then,
+\begin{equation*}
+\left| \left\langle \vecnot{w}_n | \vecnot{v} \right\rangle
+- \left\langle \vecnot{w} | \vecnot{v} \right\rangle \right|
+= \left| \left\langle \vecnot{w}_n - \vecnot{w} | \vecnot{v} \right\rangle \right|
+\leq \left\| \vecnot{w}_n - \vecnot{w} \right\| \left\| \vecnot{v} \right\|.
+\end{equation*}
+Since $\left\| \vecnot{w}_n - \vecnot{w} \right\| \rightarrow 0$, the convergence of $\left\langle \vecnot{w}_n, \vecnot{v} \right\rangle$ is established.
+\end{proof}
+
+
+\section{Orthogonal Projections}
+
+\begin{definition}
+Let $\vecnot{v}$ and $\vecnot{w}$ be vectors in an inner-product space $V$.
+Then $\vecnot{v}$ is \emph{orthogonal} to $\vecnot{w}$ if $\left\langle \vecnot{v} | \vecnot{w} \right\rangle = 0$.
+Note that this also implies that $\vecnot{w}$ is orthogonal to $\vecnot{v}$, so we can simply say that $\vecnot{v}$ and $\vecnot{w}$ are orthogonal.
+A collection $W$ of vectors in $V$ is an \emph{orthogonal set} if all pairs of distinct vectors in $W$ are orthogonal.
+An \emph{orthonormal set} $U$ is a collection of vectors in $V$ such that $U$ is an orthogonal set and $\left\| \vecnot{u} \right\| = 1$ for every $\vecnot{u} \in U$.
+\end{definition}
+
+\begin{example}
+The standard basis of $\RealNumbers^n$ is an orthonormal set with respect to the standard inner product.
+\end{example}
+
+\begin{example}
+Let $V$ be the space of continuous complex-valued functions on the interval $0 \leq x \leq 1$ with the inner product
+\begin{equation*}
+\left\langle f | g \right\rangle = \int_0^1 f(x) \overline{g(x)} dx.
+\end{equation*}
+Let $f_n(x) = \sqrt{2} \cos 2 \pi n x$ and $g_n (x) = \sqrt{2} \sin 2 \pi n x$.
+Then $\{ 1, f_1, g_1, f_2, g_2, \ldots \}$ is an infinite orthonormal set.
+\end{example}
+
+\begin{theorem}
+An orthogonal set of non-zero vectors is linearly independent.
+\end{theorem}
+\begin{proof}
+Let $W$ be an orthogonal set of non-zero vectors in a given inner-product space $V$.
+Suppose $\vecnot{w}_1, \ldots, \vecnot{w}_n$ are distinct vectors in $W$ and consider
+\begin{equation*}
+\vecnot{v} = s_1 \vecnot{w}_1 + \cdots + s_n \vecnot{w}_n.
+\end{equation*}
+The inner product $\left\langle \vecnot{v} | \vecnot{w}_i \right\rangle$ is given by
+\begin{equation*}
+\begin{split}
+\left\langle \vecnot{v} | \vecnot{w}_i \right\rangle
+&= \left\langle \sum_j s_j \vecnot{w}_j | \vecnot{w}_i \right\rangle
+= \sum_j s_j \left\langle \vecnot{w}_j | \vecnot{w}_i \right\rangle
+= s_i \left\langle \vecnot{w}_i | \vecnot{w}_i \right\rangle .
+\end{split}
+\end{equation*}
+Since $\left\langle \vecnot{w}_i | \vecnot{w}_i \right\rangle \neq 0$, it follows that
+\begin{equation*}
+s_i = \frac{ \left\langle \vecnot{v} | \vecnot{w}_i \right\rangle }
+{ \left\| \vecnot{w}_i \right\|^2 }
+\quad 1 \leq i \leq n.
+\end{equation*}
+In particular, if $\vecnot{v} = 0$ then $s_j = 0$ for $1 \leq j \leq n$ and the vectors in $W$ are linearly independent.
+\end{proof}
+
+\begin{corollary}
+If $\vecnot{v} \in V$ is a linear combination of an orthogonal sequence of distinct, non-zero vectors $\vecnot{w}_1, \ldots, \vecnot{w}_n$, then $\vecnot{v}$ is the particular linear combination
+\begin{equation*}
+\vecnot{v} = \sum_{i = 1}^n \frac{ \left\langle \vecnot{v} | \vecnot{w}_i \right\rangle } { \left\| \vecnot{w}_i \right\|^2 } \vecnot{w}_i.
+\end{equation*}
+\end{corollary}
+
+\begin{theorem}
+Let $V$ be an inner-product space and assume $\vecnot{v}_1, \ldots, \vecnot{v}_n$ are linearly independent vectors in $V$.
+Then it is possible to construct an orthogonal sequence of vectors $\vecnot{w}_1, \ldots, \vecnot{w}_n \in V$ such that for each $k = 1, \ldots, n$ the set
+\begin{equation*}
+\left\{ \vecnot{w}_1, \ldots, \vecnot{w}_k \right\}
+\end{equation*}
+is a basis for the subspace spanned by $\vecnot{v}_1, \ldots, \vecnot{v}_k$.
+\end{theorem}
+\begin{proof}
+First let $\vecnot{w}_1 = \vecnot{v}_1$.
+Define the remaining vectors inductively as follows.
+Suppose the vectors
+\begin{equation*}
+\vecnot{w}_1, \ldots, \vecnot{w}_m \quad (1 \leq m < n)
+\end{equation*}
+have been chosen so that for every $k$
+\begin{equation*}
+\left\{ \vecnot{w}_1, \ldots, \vecnot{w}_k \right\} \quad 1 \leq k \leq m
+\end{equation*}
+is an orthogonal basis for the subspace spanned by $\vecnot{v}_1, \ldots, \vecnot{v}_k$.
+Let
+\begin{equation*}
+\vecnot{w}_{m+1} = \vecnot{v}_{m+1} - \sum_{i=1}^m \frac{ \left\langle \vecnot{v}_{m+1} | \vecnot{w}_i \right\rangle } { \left\| \vecnot{w}_i \right\|^2 } \vecnot{w}_i.
+\end{equation*}
+Then $\vecnot{w}_{m+1} \neq 0$, for otherwise $\vecnot{v}_{m+1}$ is a linear combination of $\vecnot{w}_1, \ldots, \vecnot{w}_m$ and hence a linear combination of $\vecnot{v}_1, \ldots, \vecnot{v}_m$.
+Furthermore, for $j \in 1, \ldots, m$
+\begin{equation*}
+\begin{split}
+\left\langle \vecnot{w}_{m+1} | \vecnot{w}_j \right\rangle
+&= \left\langle \vecnot{v}_{m+1} | \vecnot{w}_j \right\rangle
+- \sum_{i=1}^m \frac{ \left\langle \vecnot{v}_{m+1} | \vecnot{w}_i \right\rangle } { \left\| \vecnot{w}_i \right\|^2 }
+\left\langle \vecnot{w}_i | \vecnot{w}_j \right\rangle \\
+&= \left\langle \vecnot{v}_{m+1} | \vecnot{w}_j \right\rangle
+- \frac{ \left\langle \vecnot{v}_{m+1} | \vecnot{w}_j \right\rangle } { \left\| \vecnot{w}_j \right\|^2 }
+\left\langle \vecnot{w}_j | \vecnot{w}_j \right\rangle \\
+&= 0.
+\end{split}
+\end{equation*}
+Clearly, $\{ \vecnot{w}_1, \ldots, \vecnot{w}_{m+1} \}$ is an orthogonal set consisting of $m+1$ non-zero vectors in the subspace spanned by $\vecnot{v}_1, \ldots, \vecnot{v}_{m+1}$.
+Since the dimension of the latter subspace is $m+1$, this set is a basis for the subspace.
+\end{proof}
+
+The inductive construction of the vectors $\vecnot{w}_1, \ldots, \vecnot{w}_n$ is known as the \emph{Gram-Schmidt orthogonalization process}.
+
+\begin{corollary}
+Every finite-dimensional inner-product space has a basis of orthonormal vectors.
+\end{corollary}
+\begin{proof}
+Let $V$ be a finite-dimensional inner-product space.
+Suppose that $\vecnot{v}_1, \ldots, \vecnot{v}_n$ is a basis for $V$.
+Apply the Gram-Schmidt process to obtain a basis of orthogonal vectors $\vecnot{w}_1, \ldots, \vecnot{w}_n$.
+Then, a basis of orthonormal vectors is given by
+\begin{equation*}
+\vecnot{u}_1 = \frac{ \vecnot{w}_1 }{ \left\| \vecnot{w}_1 \right\| }, \ldots,
+\vecnot{u}_n = \frac{ \vecnot{w}_n }{ \left\| \vecnot{w}_n \right\| }.
+\end{equation*}
+\end{proof}
+
+\begin{example}
+Consider the vectors
+\begin{align*}
+\vecnot{v}_1 &= (2,2,1) \\
+\vecnot{v}_2 &= (3,6,0) \\
+\vecnot{v}_3 &= (6,3,9)
+\end{align*}
+in $\RealNumbers^3$ equipped with the standard inner product.
+Apply the Gram-Schmidt process to $\vecnot{v}_1, \vecnot{v}_2, \vecnot{v}_3$ to obtain an orthogonal basis.
+
+Applying the Gram-Schmidt process to $\vecnot{v}_1, \vecnot{v}_2, \vecnot{v}_3$, we get
+\begin{align*}
+\vecnot{w}_1 &= (2,2,1) \\
+\vecnot{w}_2 &= (3,6,0)
+- \frac{ \left\langle (3,6,0) | (2,2,1) \right\rangle }{ 9 } (2,2,1) \\
+&= (3,6,0) - 2 (2,2,1) = (-1,2,-2) \\
+\vecnot{w}_3 &= (6,3,9)
+- \frac{ \left\langle (6,3,9) | (2,2,1) \right\rangle }{ 9 } (2,2,1)
+- \frac{ \left\langle (6,3,9) | (-1,2,-2) \right\rangle }{ 9 } (-1,2,-2) \\
+&= (6,3,9) - 3 (2,2,1) + 2 (-1,2,-2) = (-2,1,2) .
+\end{align*}
+It is easily verified that $\vecnot{w}_1, \vecnot{w}_2, \vecnot{w}_3$ is an orthogonal set of vectors.
+\end{example}
+
+
+\subsection{Orthogonal Subspace}
+
+In essence, the Gram-Schmidt process is a sequence of orthogonal projections.
+Orthogonal projections are very useful in many context.
+
+Suppose $W$ is a subspace of an inner-product space $V$, and let $\vecnot{v}$ be an arbitrary vector in $V$.
+Consider the problem of finding a vector $\vecnot{w} \in W$ such that $\left\| \vecnot{v} - \vecnot{w} \right\|$ is minimized.
+The vector $\vecnot{w} \in W$ is a \emph{best approximation} to $\vecnot{v} \in V$ if
+\begin{equation*}
+\left\| \vecnot{v} - \vecnot{w} \right\| \leq \left\| \vecnot{v} - \vecnot{w}' \right\|
+\end{equation*}
+for every vector $\vecnot{w}' \in W$.
+
+\begin{theorem} \label{theorem:OrthogonalProjection}
+Suppose $W$ is a subspace of an inner-product space $V$, and let $\vecnot{v}$ be a vector in $V$.
+\begin{enumerate}
+\item The vector $\vecnot{w} \in W$ is a best approximation of $\vecnot{v} \in V$ by vectors in $W$ if and only if $\vecnot{v} - \vecnot{w}$ is orthogonal to every vector in $W$.
+\item If a best approximation to $\vecnot{v} \in V$ by vectors in $W$ exists, it is unique.
+\item If $W$ is finite-dimensional and $\vecnot{w}_1, \ldots, \vecnot{w}_n$ is an orthogonal basis for $W$, then
+\begin{equation*}
+\vecnot{w} = \sum_{i=1}^n \frac{ \left\langle \vecnot{v} | \vecnot{w}_i \right\rangle }{ \left\| \vecnot{w}_i \right\|^2 } \vecnot{w}_i
+\end{equation*}
+is the best approximation to $\vecnot{v}$ by vectors in $W$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+Let $\vecnot{w} \in W$ and suppose $\vecnot{v} - \vecnot{w}$ is orthogonal to every vector in $W$.
+Let $\vecnot{w}' \in W$ such that $\vecnot{w}' \neq \vecnot{w}$.
+Then $\vecnot{v} - \vecnot{w}' = \left( \vecnot{v} - \vecnot{w} \right) + \left( \vecnot{w} - \vecnot{w}' \right)$ and
+\begin{equation} \label{equation:OrthogonalVector}
+\begin{split}
+\left\| \vecnot{v} - \vecnot{w}' \right\|^2
+&= \left\| \vecnot{v} - \vecnot{w} \right\|^2
++ 2 \Real \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle
++ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 \\
+&= \left\| \vecnot{v} - \vecnot{w} \right\|^2
++ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 \\
+&\geq \left\| \vecnot{v} - \vecnot{w} \right\|^2.
+\end{split}
+\end{equation}
+Conversely, suppose that $\left\| \vecnot{v} - \vecnot{w}' \right\| \geq \left\| \vecnot{v} - \vecnot{w} \right\|$ for every $\vecnot{w}' \in W$.
+From \eqref{equation:OrthogonalVector}, we get
+\begin{equation*}
+2 \Real \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle
++ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 \geq 0
+\end{equation*}
+for all $\vecnot{w}' \in W$.
+Note that every vector in $W$ can be expressed as $\vecnot{w} - \vecnot{w}'$ where $\vecnot{w}' \in W$, it follows that
+\begin{equation} \label{equation:InequalityOrthogonalVectors}
+2 \Real \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w}'' \right\rangle
++ \left\| \vecnot{w}'' \right\|^2 \geq 0
+\end{equation}
+for every $\vecnot{w}'' \in W$.
+If $\vecnot{w}'$ is in $W$ and $\vecnot{w}' \neq \vecnot{w}$ then we may take
+\begin{equation*}
+\vecnot{w}'' = - \frac{ \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 } \left( \vecnot{w} - \vecnot{w}' \right).
+\end{equation*}
+Inequality~\eqref{equation:InequalityOrthogonalVectors} then reduces to the statement
+\begin{equation*}
+- 2 \frac{ \left| \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle \right|^2 }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 }
++ \frac{ \left| \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle \right|^2 }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 }
+\geq 0.
+\end{equation*}
+This inequality holds if and only if $\left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle = 0$.
+Therefore, $\vecnot{v} - \vecnot{w}$ is orthogonal to every vector in $W$.
+Hence the vector $\vecnot{w} \in W$ is a best approximation of $\vecnot{v} \in V$ by vectors in $W$ if and only if $\vecnot{v} - \vecnot{w}$ is orthogonal to every vector in $W$.
+
+Suppose $\vecnot{w}, \vecnot{w}' \in W$ are best approximations of $\vecnot{v}$ by vectors in $W$.
+Then $\left\| \vecnot{v} - \vecnot{w} \right\| = \left\| \vecnot{v} - \vecnot{w}' \right\|$ and \eqref{equation:OrthogonalVector} implies that $\left\| \vecnot{w} - \vecnot{w}' \right\| = 0$.
+That is, if a best approximation exists then it is unique.
+
+Assume that $W$ is finite-dimensional and let $\vecnot{w}_1, \ldots, \vecnot{w}_n$ be an orthonormal basis for $W$.
+Furthermore, let
+\begin{equation*}
+\vecnot{w} = \sum_{i=1}^n \frac{ \left\langle \vecnot{v} | \vecnot{w}_i \right\rangle }{ \left\| \vecnot{w}_i \right\|^2 } \vecnot{w}_i .
+\end{equation*}
+Then $\vecnot{v} -\vecnot{w}$ is orthogonal to $\vecnot{w}_j$ for $j = 1, \ldots, n$, i.e.,
+\begin{equation*}
+\begin{split}
+\left\langle \vecnot{v} - \vecnot{w} | \vecnot{w}_j \right\rangle
+&= \left\langle \vecnot{v} | \vecnot{w}_j \right\rangle
+- \left\langle \sum_{i=1}^n \frac{ \left\langle \vecnot{v} | \vecnot{w}_i \right\rangle }{ \left\| \vecnot{w}_i \right\|^2 } \vecnot{w}_i \Big| \vecnot{w}_j \right\rangle \\
+&= \left\langle \vecnot{v} | \vecnot{w}_j \right\rangle
+- \frac{ \left\langle \vecnot{v} | \vecnot{w}_j \right\rangle }{ \left\| \vecnot{w}_i \right\|^2 } \left\langle \vecnot{w}_j | \vecnot{w}_j \right\rangle
+= 0.
+\end{split}
+\end{equation*}
+That is, $\vecnot{v} - \vecnot{w}$ is orthogonal to every vector in $W$ and therefore $\vecnot{w}$ is the best appoximation to $\vecnot{v}$ by vectors in $W$.
+\end{proof}
+
+\begin{definition}
+Let $V$ be an inner-product space and $W$ be any set of vectors in $V$.
+The \emph{orthogonal complement} of $W$ denoted by $W^{\bot}$ is the set of all vectors in $V$ which are orthogonal to every vector in $W$.
+\end{definition}
+
+\begin{problem} \label{problem:WbotSubspace}
+Let $W$ be any subset of vector space $V$.
+Show that $W^{\bot}$ is a subspace of $V$.
+\end{problem}
+\noindent
+\textbf{S~\ref{problem:WbotSubspace}}.
+Let $\vecnot{m}_1, \vecnot{m}_2 \in W^{\bot}$ and $s \in F$.
+For any vector $\vecnot{w} \in W$, we have
+\begin{equation*}
+\left\langle \vecnot{m}_1 | \vecnot{w} \right\rangle
+= \left\langle \vecnot{m}_2 | \vecnot{w} \right\rangle
+= 0.
+\end{equation*}
+This implies
+\begin{equation*}
+\left\langle s \vecnot{m}_1 + \vecnot{m}_2 | \vecnot{w} \right\rangle
+= s \left\langle \vecnot{m}_1 | \vecnot{w} \right\rangle
++ \left\langle \vecnot{m}_2 | \vecnot{w} \right\rangle
+= 0.
+\end{equation*}
+That is, $s \vecnot{m}_1 + \vecnot{m}_2 \in W^{\bot}$.
+Hence, $W^{\bot}$ is a subspace of $V$.
+
+\begin{definition}
+Whenever the vector $\vecnot{w}$ in Theorem~\ref{theorem:OrthogonalProjection} exists, it is called the \emph{orthogonal projection of $\vecnot{v}$ on $W$}.
+If every vector in $V$ has an orthogonal projection on $W$, the mapping that assigns to each vector in $V$ its orthogonal projection on $W$ is called the \emph{orthogonal projection of $V$ on $W$}.
+\end{definition}
+
+\begin{problem}
+Let $W$ be the subspace of $\RealNumbers^2$ spanned by the vector $(1,2)$.
+Using the standard inner product, let $E$ be the orthogonal projection of $\RealNumbers^2$ onto $W$.
+Find
+\begin{enumerate}
+\item a formula for $E(x_1, x_2)$
+\item the matrix of $E$ in the standard ordered basis, i.e., $E(x_1, x_2) = E \vecnot{x}$
+\item $W^{\bot}$
+\item an orthonormal basis in which $E$ is represented by the matrix
+\begin{equation*}
+E = \left[ \begin{array}{cc} 1 & 0 \\ 0 & 0 \end{array} \right].
+\end{equation*}
+\end{enumerate}
+\end{problem}
+
+\begin{corollary}
+Let $V$ be an inner-product space, $W$ be a finite-dimensional subspace, and $E$ be the orthogonal projection of $V$ on $W$.
+Then the mapping
+\begin{equation*}
+\vecnot{v} \mapsto \vecnot{v} - E \vecnot{v}
+\end{equation*}
+is the orthogonal projection of $V$ on $W^{\bot}$.
+\end{corollary}
+\begin{proof}
+Let $\vecnot{v}$ be any vector in $V$.
+Then, $\vecnot{v} - E\vecnot{v}$ is in $W^{\bot}$, and for any $\vecnot{u}$ in $W^{\bot}$, $\vecnot{v} - \vecnot{u} = E \vecnot{v} + \left( \vecnot{v} - E \vecnot{v} - \vecnot{u} \right)$.
+Since $E \vecnot{v} \in W$ and $\vecnot{v} - E \vecnot{v} - \vecnot{u} \in W^{\bot}$, it follows that
+\begin{equation*}
+\begin{split}
+\left\| \vecnot{v} - \vecnot{u} \right\|^2 &= \left\| E \vecnot{v} \right\|^2 + \left\| \vecnot{v} - E \vecnot{v} - \vecnot{u} \right\|^2 \\
+&\geq \left\| \vecnot{v} - \left( \vecnot{v} - E \vecnot{v} \right) \right\|^2
+\end{split}
+\end{equation*}
+with strict inequality when $\vecnot{u} \neq \vecnot{v} - E \vecnot{v}$.
+Thus, $\vecnot{v} - E \vecnot{v}$ is the best approximation to $\vecnot{v}$ by vectors in $W^{\bot}$.
+\end{proof}
+
+\begin{theorem} \label{theorem:OrthogonalSubspaceDirectSum}
+Suppose $V$ is an inner-product space.
+Let $W$ be a finite-dimensional subspace of $V$ and let $E$ denote the orthogonal projection of $V$ on $W$.
+Then $E$ is an idempotent linear transformation of $V$ onto $W$, $W^{\bot}$ is the nullspace of $E$, and
+\begin{equation*}
+V = W \oplus W^{\bot}.
+\end{equation*}
+\end{theorem}
+\begin{proof}
+Let $\vecnot{v}$ be any vector in $V$.
+Then $E \vecnot{v}$ is the best approximation of $\vecnot{v}$ by vectors in $W$.
+If $\vecnot{v} \in W$ then $E \vecnot{v} = \vecnot{v}$.
+It follows that $E \left( E \vecnot{v} \right) = E \vecnot{v}$ for any $\vecnot{v} \in V$ since $E \vecnot{v} \in W$.
+That is, $E^2 = E$ and $E$ is idempotent.
+
+To show that $E$ is a linear transformation, consider vectors $\vecnot{v}_1, \vecnot{v}_2 \in V$ and scalar $s \in F$.
+Then $\vecnot{v}_1 - E \vecnot{v}_1$ and $\vecnot{v}_2 - E \vecnot{v}_2$ are each orthogonal to every vector in $W$.
+The vector
+\begin{equation*}
+s \left( \vecnot{v}_1 - E \vecnot{v}_1 \right) + \left( \vecnot{v}_2 - E \vecnot{v}_2 \right) = \left( s \vecnot{v}_1 + \vecnot{v}_2 \right) - \left( s E \vecnot{v}_1 + E \vecnot{v}_2 \right)
+\end{equation*}
+is therefore also orthogonal to every vector in $W$.
+Since $s E \vecnot{v}_1 + E \vecnot{v}_2$ is a vector in $W$, it follows from Theorem~\ref{theorem:OrthogonalProjection} that
+\begin{equation*}
+E \left( s \vecnot{v}_1 + \vecnot{v}_2 \right) = s E \vecnot{v}_1 + E \vecnot{v}_2.
+\end{equation*}
+That is, $E$ is a linear transformation.
+
+Again, let $\vecnot{v} \in V$.
+Then $E \vecnot{v}$ is the unique vector in $W$ such that $\vecnot{v} - E \vecnot{v}$ is in $W^{\bot}$.
+In particular, $E \vecnot{v} = \vecnot{0}$ when $\vecnot{v} \in W^{\bot}$.
+Conversely, if $E \vecnot{v} = \vecnot{0}$ then $\vecnot{v} \in W^{\bot}$.
+Thus $W^{\bot}$ is the nullspace of $E$.
+The equation
+\begin{equation*}
+\vecnot{v} = E \vecnot{v} + \vecnot{v} - E \vecnot{v}
+\end{equation*}
+shows that $V = W + W^{\bot}$.
+Furthermore, $W \cap W^{\bot} = \left\{ \vecnot{0} \right\}$.
+Hence $V$ is the direct sum of $W$ and $W^{\bot}$.
+\end{proof}
+
+\begin{corollary}
+Let $W$ be a finite-dimensional subspace of an inner-product space $V$, and let $E$ be the orthogonal projection of $V$ on $W$.
+Then $I - E$ is the orthogonal projection of $V$ on $W^{\bot}$.
+It is an idempotent linear transformation of $V$ onto $W^{\bot}$ with nullspace $W$.
+\end{corollary}
+
+Theorem~\ref{theorem:OrthogonalSubspaceDirectSum} also implies the following result, known as Bessel's inequality.
+
+\begin{corollary}
+Let $\vecnot{v}_1, \ldots, \vecnot{v}_n$ be an orthogonal set of distinct, non-zero vectors in an inner-product space $V$.
+If $\vecnot{v} \in V$ then
+\begin{equation*}
+\sum_{i=1}^n \frac{ \left| \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle \right|^2 }{ \left\| \vecnot{v}_i \right\|^2 }
+\leq \left\| \vecnot{v} \right\|^2.
+\end{equation*}
+Moreover, equality holds if and only if
+\begin{equation*}
+\vecnot{v} = \sum_{i=1}^n \frac{ \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle }{ \left\| \vecnot{v}_i \right\|^2 } \vecnot{v}_i.
+\end{equation*}
+\end{corollary}
+\begin{proof}
+Define
+\begin{equation*}
+\vecnot{w} = \sum_{i=1}^n \frac{ \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle }{ \left\| \vecnot{v}_i \right\|^2 } \vecnot{v}_i.
+\end{equation*}
+Then $\vecnot{v} = \vecnot{w} + \vecnot{u}$, where $\left\langle \vecnot{w} | \vecnot{u} \right\rangle = 0$ and $\left\| \vecnot{v} \right\|^2 = \left\| \vecnot{w} \right\|^2 + \left\| \vecnot{u} \right\|^2$.
+Noting that
+\begin{equation*}
+\left\| \vecnot{w} \right\|^2
+= \sum_{i=1}^n \frac{ \left| \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle \right|^2 }{ \left\| \vecnot{v}_i \right\|^2 },
+\end{equation*}
+we obtain the desired result.
+\end{proof}
+
+If $\vecnot{v}_1, \ldots, \vecnot{v}_n$ is an orthonormal set, Bessel's inequality states that
+\begin{equation*}
+\sum_{i=1}^n \left| \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle \right|^2 \leq \left\| \vecnot{v} \right\|^2.
+\end{equation*}
+It follows that the vector $\vecnot{v}$ is in the subspace spanned by $\vecnot{v}_1, \ldots, \vecnot{v}_n$ if an only if
+\begin{equation*}
+\vecnot{v} = \sum_{i=1}^n \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle \vecnot{v}_i.
+\end{equation*}
+
+
+\section{Banach and Hilbert Spaces}
+
+\begin{definition}
+A complete normed vector space is called a \emph{Banach space}.
+A complete inner-product space is called a \emph{Hilbert space}.
+\end{definition}
+
+\begin{definition}
+Recall that a subset $\left\{ \vecnot{v}_{\alpha} | \alpha \in A \right\}$ of a Hilbert space $V$ is said to be orthonormal if $\left\| \vecnot{v}_{\alpha} \right\| = 1$ for every $\alpha \in A$ and $\left\langle \vecnot{v}_{\alpha} | \vecnot{v}_{\beta} \right\rangle = 0$ for all $\alpha \neq \beta$.
+If the subspace spanned by the family $\left\{ \vecnot{v}_{\alpha} | \alpha \in A \right\}$ is dense in $V$, we call this set an \emph{orthonormal basis}.
+\end{definition}
+
+Note that, according to this definition, an orthonormal basis for a Hilbert space $V$ is not necessarily a basis for $V$.
+However, it can be shown that any orthogonal basis is a subset of a basis.
+In practice it is the orthonormal basis, not the basis itself, which is of most use.
+None of these issues arise in finite-dimensional spaces, where an orthogonal basis is always a basis.
+
+Let $\mathcal{B} = \left\{ \vecnot{v}_{\alpha} | \alpha \in A \right\}$ be an orthonormal basis for Hilbert space $V$.
+Each element $\vecnot{v} \in V$ has the form
+\begin{equation*}
+\vecnot{v} = \sum_{\alpha \in A} s_{\alpha} \vecnot{v}_{\alpha},
+\end{equation*}
+where the sum converges in the (2)-norm.
+The \emph{Parseval identity}
+\begin{equation*}
+\left\| \vecnot{v} \right\|^2 = \sum_{\alpha \in A} | s_{\alpha} |^2
+\end{equation*}
+is obtained by computig $\left\langle \vecnot{v} | \vecnot{v} \right\rangle$.
+
+\begin{theorem}
+Every orthogonal set in a Hilbert space $V$ can be enlarged to an orthonormal basis for $V$.
+\end{theorem}
+\begin{proof}
+Let $X$ be the set of orthonormal subsets of $V$.
+Furthermore, for $x, y \in X$ consider the strict partial order defined by proper inclusion.
+If $x = \left\{ \vecnot{v}_{\alpha} | \alpha \in A_0 \right\}$ is an element of $X$, then by the maximum principle there exists a maximal simply ordered subset $Z$ of $X$ containing $x$.
+This shows the existence of a maximal orthonormal set $\left\{ \vecnot{v}_{\alpha} | \alpha \in A \right\}$, where $A_0 \subset A$.
+
+Let $W$ be the closed subspace of $V$ generated by $\left\{ \vecnot{v}_{\alpha} | \alpha \in A \right\}$.
+If $W \neq V$, there is a unit vector $\vecnot{u} \in W^{\bot}$, contradicting the maximality of the system $\left\{ \vecnot{v}_{\alpha} | \alpha \in A \right\}$.
+Thus, $W = V$ and we have an orthonormal basis.
+\end{proof}

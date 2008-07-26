@@ -1,0 +1,456 @@
+\chapter{Set Theory and Logic}
+
+In mathematics, a \emph{proof} is a demonstration that, assuming certain \emph{axioms}, some statement is necessarily true.
+That is, a proof is a logical argument, not an empirical one.
+One must demonstrate that a proposition is true in all cases before it is considered a theorem of mathematics.
+An unproven proposition for which there is some sort of empirical evidence is known as a \emph{conjecture}.
+Mathematical logic is the framework upon which rigorous proofs are built.
+It is the study of the principles and criteria of valid inference and demonstrations.
+
+Logicians have analyzed set theory in great details, formulating a collection of axioms that affords a broad enough and strong enough foundation to mathematical reasoning.
+The standard form of axiomatic set theory is the Zermelo-Fraenkel set theory, together with the axiom of choice.
+Each of the axioms included in this theory expresses a property of sets that is widely accepted by mathematicians.
+It is unfortunately true that careless use of set theory can lead to contradictions.
+Avoiding such contradictions was one of the original motivations for the axiomatization of set theory.
+
+A rigorous analysis of set theory belongs to the foundations of mathematics and mathematical logic.
+The study of these topics is, in itself, a formidable task.
+For our purposes, it will suffice to approach basic logical concepts informally.
+That is, we adopt a naive point of view regarding set theory and assume that the meaning of a set as a collection of objects is intuitively clear.
+While informal logic is not itself rigorous, it provides the underpinning for rigorous proofs.
+The rules we follow in dealing with sets are derived from established axioms.
+At some point of your academic career, you may wish to study set theory and logic in greater detail.
+Our main purpose here is to learn how to state mathematical results clearly and how to prove them.
+
+
+\section{Statements}
+
+A proof in mathematics demonstrates the truth of certain \emph{statements}.
+It is therefore natural to begin with a brief discussion of statements.
+A statement, or \emph{proposition}, is the content of an assertion.
+It is either true or false, but cannot be both true and false at the same time.
+For example, the expression ``There are no classes at Texas A\&M University today'' is a statement since it is either true or false.
+The expression ``Do not cheat and do not tolerate those who do'' is not a statement.
+Note that an expression being a statement does not depend on whether we personally can verify its validity.
+The expression ``The base of the natural logarithm, denoted $e$, is an irrational number'' is a statement that most of us cannot prove.
+
+Statements on their own are fairly uninteresting.
+What brings value to logic is the fact that there are a number of ways to form new statements from old ones.
+In this section, we present five ways to form new statements from old ones.
+They correspond to the English expressions: and; or; not; if, then; if and only if.
+In the discussion below, $P$ and $Q$ represent two abstract statements.
+
+A logical \emph{conjunction} is an operation on two logical propositions that produces a value of true if both statements are true, and is false otherwise.
+The \emph{conjunction} of $P$ and $Q$, denoted by $P \wedge Q$, is precisely defined by
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+$P$ & $Q$ & $P \wedge Q$ \\
+\hline
+T & T & T \\
+T & F & F \\
+F & T & F \\
+F & F & F \\
+\hline
+\end{tabular}
+\end{center}
+
+Similarly, a logical \emph{disjunction} is an operator on two logical propositions that is true if either statements is true or both are true, and is false otherwise.
+The disjunction of $P$ and $Q$, denoted $P \vee Q$, is defined by
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+$P$ & $Q$ & $P \vee Q$ \\
+\hline
+T & T & T \\
+T & F & T \\
+F & T & T \\
+F & F & F \\
+\hline
+\end{tabular}
+\end{center}
+
+In mathematics, a \emph{negation} is an operator on the logical value of a proposition that sends true to false and false to true.
+The negation of $P$, denoted $\neg P$, is given by
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+$P$ & $\neg P$ \\
+\hline
+T & F \\
+F & T \\
+\hline
+\end{tabular}
+\end{center}
+
+The next method of combining mathematical statements is slightly more subtle than the preceding ones.
+It is connected to the notion of logical implication.
+The \emph{conditional} from $P$ to $Q$, denoted $P \rightarrow Q$, is mathematically true if it is not the case that $P$ is true and $Q$ is false.
+The precise definition of $P \rightarrow Q$ is given in the truth table
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+$P$ & $Q$ & $P \rightarrow Q$ \\
+\hline
+T & T & T \\
+T & F & F \\
+F & T & T \\
+F & F & T \\
+\hline
+\end{tabular}
+\end{center}
+Although it may seem strange at first glance, this truth table is universally accepted by mathematicians.
+It is important to get used to it.
+Logicians draw a firm distinction between the \emph{conditional connective} and the \emph{implication relation}.
+These logicians use the phrase ``if $P$ then $Q$'' for the conditional connective and the phrase ``$P$ implies $Q$'' for the implication relation.
+They explain the difference between these two forms by saying that the conditional is the contemplated relation, while the implication is the asserted relation.
+We will discuss this distinction in the Section~\ref{section:Relations}, where we formally study relations between statements.
+The importance and soundness of the conditional form $P \rightarrow Q$ will become clearer then.
+
+Finally, the logical \emph{biconditional} is an operator connecting two logical propositions that is true if the statements are both true or both false, and it is false otherwise.
+The \emph{biconditional} from $P$ to $Q$, denoted $P \leftrightarrow Q$, is precisely defined by
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+$P$ & $Q$ & $P \leftrightarrow Q$ \\
+\hline
+T & T & T \\
+T & F & F \\
+F & T & F \\
+F & F & T \\
+\hline
+\end{tabular}
+\end{center}
+We read $P \leftrightarrow Q$ as ``$P$ if and only if $Q$.''
+The phrase ``if and only if'' is often abbreviated as ``iff.''
+
+Using the five basic operations defined above, it is possible to form more complicated compound statements.
+We sometime need parentheses to avoid ambiguity in writing compound statements.
+We use the convention that $\neg$ takes precedence over the other four operations, but none of these operations takes precedence over the others.
+For example, let $P$, $Q$ and $R$ be three propositions.
+We wish to make a truth table for the following statement,
+\begin{equation} \label{equation:LogicStatement}
+(P \rightarrow R) \wedge (Q \vee \neg R) .
+\end{equation}
+We can form the true table for this statement, using simple steps, as follows
+\begin{center}
+\begin{tabular}{|c|c|c|ccccccc|}
+\hline
+$P$ & $Q$ & $R$
+& $(P$ & $\rightarrow$ & $R)$ & $\wedge$ & $(Q$ & $\vee$ & $\neg R)$ \\
+\hline
+T & T & T & T & T & T & T & T & T & F \\
+T & T & F & T & F & F & F & T & T & T \\
+T & F & T & T & T & T & F & F & F & F \\
+T & F & F & T & F & F & F & F & T & T \\
+F & T & T & F & T & T & T & T & T & F \\
+F & T & F & F & T & F & T & T & T & T \\
+F & F & T & F & T & T & F & F & F & F \\
+F & F & F & F & T & F & T & F & T & T \\
+& & & 1 & 5 & 2 & 7 & 3 & 6 & 4 \\
+\hline
+\end{tabular}
+\end{center}
+%\end{example}
+
+We conclude this section with a brief mention of two important concepts.
+A \emph{tautology} is a statement that is true in every valuation of its propositional variables, independent of the truth values assigned to these variables.
+The proverbial tautology is $P \vee \neg P$,
+\begin{center}
+\begin{tabular}{|c|ccc|}
+\hline
+$P$ & $P$ & $\vee$ & $\neg P$ \\
+\hline
+T & T & T & F \\
+F & F & T & T \\
+& 1 & 3 & 2 \\
+\hline
+\end{tabular}
+\end{center}
+For instance, the statement ``The Aggies won their last football game or the Aggies did not win their last football game'' is true regardless of whether the Aggies actually defeated their latest opponent.
+
+The negation of a tautology is a \emph{contradiction}, a statement that is necessarily false regardless of the truth values of its propositional variables.
+The statement $P \wedge \neg P$ is a contradiction, and its truth table is
+\begin{center}
+\begin{tabular}{|c|ccc|}
+\hline
+$P$ & $P$ & $\wedge$ & $\neg P$ \\
+\hline
+T & T & F & F \\
+F & F & F & T \\
+& 1 & 3 & 2 \\
+\hline
+\end{tabular} .
+\end{center}
+
+Of course, most statement we encounter are neither tautologies nor contradictions.
+For example, \eqref{equation:LogicStatement} is not necessarily either true or false.
+Its truth value depends on the values of $P$, $Q$ and $R$.
+Try to see whether the statement
+\begin{equation*}
+((P \wedge Q) \rightarrow R) \rightarrow (P \rightarrow (Q \rightarrow R))
+\end{equation*}
+is a tautology, a contradiction, or neither.
+
+
+\section{Relations between Statements}
+\label{section:Relations}
+
+Strictly speaking, relations between statements are not formal statements themselves.
+They are \emph{meta-statements} about some propositions.
+We study two types of relations between statements, \emph{implication} and \emph{equivalence}.
+An example of an implication meta-statement is the observation that ``if the statement `Robert graduated from Texas A\&M University' is true, then it implies that the statement `Robert is an Aggie' is also true.''
+Another example of a meta-statement is ``the statement `Fred is an Aggie and Fred is honest' being true is equivalent to the statement `Fred is honest and Fred is an Aggie' being true.''
+These two examples illustrate how meta-statements describe the relationship between statements.
+It is also instructive to note that implications and equivalences are the meta-statements analogs of conditionals and biconditionals.
+
+The logical implication can be intuitively described as $P$ implies $Q$ if necessarily $Q$ is true whenever $P$ is true.
+That is, $Q$ cannot be false if $P$ is true.
+Necessity is the key aspect of this sentence, the fact that $P$ and $Q$ both happen to be true cannot be coincidental.
+To have $P$ implies $Q$, we need the conditional $P \rightarrow Q$ to be true under all possible circumstances.
+
+The notion of implication can be rigorously defined as follows, $P$ implies $Q$ if the statement $P \rightarrow Q$ is a tautology.
+We abbreviate $P$ implies $Q$ by writing $P \Rightarrow Q$.
+It is important to understand the difference between ``$P \rightarrow Q$'' and ``$P \Rightarrow Q$.''
+The former, $P \rightarrow Q$, is a compound statement that may or may not be true.
+On the other hand, $P \Rightarrow Q$ is a relation stating that the compound statement $P \rightarrow Q$ is true under all instances of $P$ and $Q$.
+
+While the distinction between implication and conditional may seem extraneous, we will soon see that meta-statements become extremely useful in building valid arguments.
+In particular, the following implications are used extensively in constructing proofs.
+\begin{fact}
+Let $P$, $Q$, $R$ and $S$ be statements.
+\begin{enumerate}
+\item $(P \rightarrow Q) \wedge P \Rightarrow Q$.
+\item $(P \rightarrow Q) \wedge \neg Q \Rightarrow \neg P$.
+\item $P \wedge Q \Rightarrow P$.
+\item $(P \vee Q) \wedge \neg P \Rightarrow Q$.
+\item $P \leftrightarrow Q \Rightarrow P \rightarrow Q$.
+\item $(P \rightarrow Q) \wedge (Q \rightarrow P) \Rightarrow P \rightarrow Q$.
+\item $(P \rightarrow Q) \wedge (Q \rightarrow R) \Rightarrow P \rightarrow R$
+\item $(P \rightarrow Q) \wedge (R \rightarrow S) \wedge (P \vee R) \Rightarrow Q \vee S$.
+\end{enumerate}
+\end{fact}
+
+As an illustrative example, we show that $(P \rightarrow Q) \wedge (Q \rightarrow R)$ implies $P \rightarrow R$.
+To demonstrate this assertion, we need to show that
+\begin{equation} \label{equation:HypotheticalSyllogism}
+((P \rightarrow Q) \wedge (Q \rightarrow R)) \rightarrow (P \rightarrow R)
+\end{equation}
+is a tautology.
+This is accomplished in the truth table below
+\begin{center}
+\begin{tabular}{|c|c|c|ccccccccccc|}
+\hline
+$P$ & $Q$ & $R$
+& $((P$ & $\rightarrow$ & $Q)$ & $\wedge$ & $(Q$ & $\rightarrow$ & $R))$ & $\rightarrow$ & $(P$ & $\rightarrow$ & $R)$ \\
+\hline
+T & T & T & T & T & T & T & T & T & T & T & T & T & T \\
+T & T & F & T & T & T & F & T & F & F & T & T & F & F \\
+T & F & T & T & F & F & F & F & T & T & T & T & T & T \\
+T & F & F & T & F & F & F & F & T & F & T & T & F & F \\
+F & T & T & F & T & T & T & T & T & T & T & F & T & T \\
+F & T & F & F & T & T & F & T & F & F & T & F & T & F \\
+F & F & T & F & T & F & T & F & T & T & T & F & T & T \\
+F & F & F & F & T & F & T & F & T & F & T & F & T & F \\
+& & & 1 & 7 & 2 & 10 & 3 & 8 & 4 & 11 & 5 & 9 & 6 \\
+\hline
+\end{tabular} .
+\end{center}
+Column~11 has the truth values for statement \eqref{equation:HypotheticalSyllogism}.
+Since \eqref{equation:HypotheticalSyllogism} is true under all circumstances, it is a tautology and the implication holds.
+Showing that the other relations are valid is left to the reader as an exercise.
+
+Logical implications are not always reversible.
+For instance, although $(P \rightarrow Q) \wedge (Q \rightarrow P)$ implies $P \rightarrow Q$, the converse is not true.
+It can easily be shown from columns~9~\&~10 above that
+\begin{equation*}
+(P \rightarrow R) \rightarrow ((P \rightarrow Q) \wedge (Q \rightarrow R))
+\end{equation*}
+is not a tautology.
+That is, $P \rightarrow R$ certainly does not imply $(P \rightarrow Q) \wedge (Q \rightarrow R)$.
+
+A logical implication that is reversible is called an equivalence.
+More precisely, $P$ is equivalent to $Q$ if the statement $P \leftrightarrow Q$ is a tautology.
+We denote the sentence ``$P$ is equivalent to $Q$'' by simply writing ``$P \Leftrightarrow Q$.''
+It is easily seen that $P \Leftrightarrow Q$ holds if and only if $P \Rightarrow Q$ and $Q \Rightarrow P$ are both true.
+Being able to recognize that two statements are equivalent will become handy.
+It is sometime possible to demonstrate a result by finding an alternative, equivalent form of the statement that is easier to prove than the original form.
+A list of important equivalences appears below.
+
+\begin{fact}
+Let $P$, $Q$ and $R$ be statements.
+\begin{enumerate}
+\item $\neg (\neg P) \Leftrightarrow P$.
+\item $P \vee Q \Leftrightarrow Q \vee P$.
+\item $P \wedge Q \Leftrightarrow Q \wedge P$.
+\item $(P \vee Q) \vee R \Leftrightarrow P \vee (Q \vee R)$.
+\item $(P \wedge Q) \wedge R \Leftrightarrow P \wedge (Q \wedge R)$.
+\item $P \wedge (Q \vee R) \Leftrightarrow (P \wedge Q) \vee (P \wedge R)$.
+\item $P \vee (Q \wedge R) \Leftrightarrow (P \vee Q) \wedge (P \vee R)$.
+\item $P \rightarrow Q \Leftrightarrow \neg P \vee Q$.
+\item $P \rightarrow Q \Leftrightarrow \neg Q \rightarrow \neg P$ (Contrapositive).
+\item $P \leftrightarrow Q \Leftrightarrow (P \rightarrow Q) \wedge (Q \rightarrow P)$.
+\item $\neg (P \wedge Q) \Leftrightarrow \neg P \vee \neg Q$ (De Morgan's Law).
+\item $\neg (P \vee Q) \Leftrightarrow \neg P \wedge \neg Q$ (De Morgan's Law).
+\end{enumerate}
+\end{fact}
+
+The first equivalence in this list, $\neg (\neg P) \Leftrightarrow P$, may appear trivial.
+However, from the point of view of constructing mathematical proofs, this equivalence is frequently employed.
+Indeed, one method to prove that statement $P$ is true is to hypothesize that $\neg P$ is true and then derive a contradiction.
+It then follows that $\neg P$ is false, which implies that $P$ is true.
+This popular technique is called \emph{proof by contradiction}.
+It is illustrated below through a classic example.
+
+The equivalence $P \leftarrow Q \Leftrightarrow \neg Q \leftarrow \neg P$ is also frequently used in constructing mathematical proofs.
+Given a conditional statement of the form $P \rightarrow Q$, we call $\neg Q \rightarrow \neg P$ the \emph{contrapositive} of the original statement.
+
+
+\subsection{Fallacious Arguments}
+
+A \emph{fallacy} is a component of an argument that is demonstrably flawed in its logic or form, thus rendering the argument invalid.
+Recognizing fallacies in mathematical proofs may be difficult since arguments are often structured using convoluted patterns that obscure the logical connections between assertions.
+We give below examples for three types of fallacies that are often found in attempted mathematical proofs.
+
+\paragraph{Affirming the Consequent:}
+If the Indian cricket team wins a test match, then all the players will drink tea together.
+All the players drank tea together.
+Therefore the Indian cricket team won a test match.
+
+\paragraph{Denying the Antecedent:}
+If Diego Maradona drinks coffee, then he will be fidgety.
+Diego Maradona did not drink coffee.
+Therefore, he is not fidgety.
+
+\paragraph{Unwarranted Assumptions:}
+If Yao Ming gets close to the basket, then he scores a lot of points.
+Therefore, Yao Ming scores a lot of points.
+
+
+\subsection{Quantifiers}
+
+Quantifiers are of paramount importance in rigorous proofs.
+They are employed to make statements about collections of elements.
+Universal quantification is used to formalize the notion that a statement is true for all possible values of a collection.
+The \emph{universal quantifier} is typically denoted by $\forall$ and it is informally read ``for all.''
+Let $U$ be a specific collection of elements, and let $P(x)$ be a statement that applies to $x$.
+Then the statement $\forall x \in U, P(x)$ is true if $P(x)$ is true for all values of $x$ in $U$.
+The other type of quantifier often encountered in mathematical proofs is the \emph{existential quantifier}, denoted $\exists$.
+The statement $\exists x \in U, P(x)$ is true if $P(x)$ is true for at least one value of $x$ in $U$.
+
+In mathematics, a \emph{free variable} is a notation for a place or places in an expression into which some definite substitution may take place, or with respect to which some operation (e.g. quantification) may take place. 
+A \emph{bound variable} is a variable for which we have no ability to choose the value.
+
+
+\section{Strategies for Proofs}
+
+The relation between intuition and formal rigor is not a trivial matter.
+Intuition tells us what is important, what might be true, and what mathematical tools may be used to prove it.
+Rigorous proofs are used to verify that a given statement that appears intuitively true is indeed true.
+Ultimately, a mathematical proof is a convincing argument that starts from some premises, and logically deduces the desired conclusion.
+Most proofs do not mention the logical rules of inference used in the derivation.
+Rather, they focus on the mathematical justification of each step, leaving to the reader the task of filling the logical gaps.
+The mathematics is the major issue.
+Yet, it is essential that you understand the underlying logic behind the derivation as to not get confused while reading or writing a proof.
+
+True statements in mathematics have different names.
+They can be called theorems, propositions, lemmas, corollaries and exercises.
+A \emph{theorem} is a statement that can be proved on the basis of explicitly stated or previously agreed assumptions.
+A \emph{proposition} is a statement not associated with any particular theorem; this term sometimes connotes a statement with a simple proof.
+A \emph{lemma} is a proven proposition which is used as a stepping stone to a larger result rather than an independent statement in itself.
+A \emph{corollary} is a mathematical statement which follows easily from a previously proven statement, typically a mathematical theorem. 
+The distinction between these names and their definitions is somewhat arbitrary.
+Ultimately, they are all synonymous to a true statement.
+
+A proof should be written in grammatically correct English.
+Complete sentences should be used, with full punctuation.
+In particular, every sentence should end with a period, even if the sentence ends in a displayed equation.
+Mathematical formulas and symbols are parts of sentences, and are treated no differently than words.
+One way to learn to construct proofs is to read a lot of well written proofs, to write progressively more difficult proofs, and to get detailed feedback on the proofs you write.
+
+
+\paragraph{Direct Proof:}
+
+The simplest form of proof for an implication $P \rightarrow Q$ is the \emph{direct proof}.
+First assume that $P$ is true.
+Produce a series of steps, each one following from the previous ones, that eventually leads to conclusion $Q$.
+It warrants the name "direct proof" only to distinguish it from other, more intricate, methods of proof.
+
+\paragraph{Proof by Contrapositive:}
+A proof by contrapositive takes advantage of the mathematical equivalence $P \rightarrow Q \Leftrightarrow \neg Q \rightarrow \neg P$.
+That is, a proof by contrapositive begins by assuming that $\neg Q$ is true.
+A series of implications then leads to the conclusion that $\neg P$ must also be true.
+It follows that if $P$ is true then $\neg Q$ is false, which implies that $Q$ must be true.
+
+\paragraph{Proof by Contradiction:}
+A proof by contradiction is based on the mathematical equivalence $\neg (P \rightarrow Q) \Leftrightarrow P \wedge \neg Q$.
+In a proof by contradiction, it is shown that if some statement were false, a logical contradiction occurs, hence the statement must be true.
+
+\begin{example} \label{example:SquareRoot2}
+We wish to show that $\sqrt{2}$ is an irrational number.
+
+First, assume that $\sqrt{2}$ is a rational number.
+This assumption implies that there exist integers $p$ and $q$ with $q \neq 0$ such that $p/q = \sqrt{2}$.
+In fact, we can further assume that the fraction $p/q$ is irreducible.
+That is, $p$ and $q$ are coprime integers (they have no common factor greater than 1).
+From $p/q = \sqrt{2}$, it follows that $p = \sqrt{2} q$, and so $p^2 = 2 q^2$.
+Thus $p^2$ is an even number, which implies that $p$ itself is even (only even numbers have even squares).
+Because $p$ is even, there exists an integer $r$ satisfying $p = 2r$.
+We then obtain the equation $(2r)^2 = 2q^2$, which is equivalent to $2r^2 = q^2$ after simplification.
+Because $2r^2$ is even, it follows that $q^2$ is even, which means that $q$ is also even.
+We conclude that $p$ and $q$ are both even.
+This contradicts the fact that $p/q$ is irreducible.
+Hence, the initial assumption that $\sqrt{2}$ is a rational number must be false.
+That is to say, $\sqrt{2}$ is irrational.
+\end{example}
+
+\begin{example}
+Consider the following statement, which is related to Example~\ref{example:SquareRoot2}.
+``If $\sqrt{2}$ is rational, then it can be expressed as an irreducible fraction.''
+The contrapositive of this statement is ``If $\sqrt{2}$ cannot be expressed as an irreducible fraction, then it is not rational.''
+Above, we proved that $\sqrt{2}$ cannot be expressed as an irreducible fraction and therefore $\sqrt{2}$ is not a rational number.
+\end{example}
+
+
+\newpage
+\section{Other Stuff}
+
+
+ECEN 601 is a transition course that intends to bridges the computational concepts typical of an undergraduate curriculum in electrical and computer engineering and the rigorous mathematical arguments used in theoretical research.
+Its purpose is to make advance mathematics accessible to students in electrical and computer engineering, and to provide them with a solid basis upon which to build their graduate work.
+
+The course is divided into three parts:
+
+Both engineering intuition and facility with writing proofs can be developed with practice.
+
+Proofs are used to validate intuitive ideas about engineering systems.
+
+Like music and art, theoretical engineering is learned by doing, not just by reading texts and listening to lectures.
+
+Doing the exercises is the best way to get a feel for the material, test your understanding and see what needs further study.
+It is important that you try to do the exercises by yourself prior to discussing with other students or your instructor.
+Once solved, problems often appear much easier than they really are.
+Testing your knowledge during exams is a dangerous proposition.
+
+In this book we decided to take a good thing and make it better, adding the symbol $\triangle$ to the end of a definition, the symbol $\diamond$ for the end of an example.
+
+Physical sloppiness is often a sign of either laziness or disrespect, and sloppiness in writing style is often a mask for sloppy thinking.
+
+
+Functional knowledge,
+but can you prove it?
+
+A statement is something that can be verified, it has to be either true or false.
+We will be making two assumptions when dealing with statements: every statement is either true or false, and no statement is both true and false.
+One of the consequences of this law is that if a statement is not false, then it must be true.
+Hence, to prove that something is true, it would suffice to show that it is not false.
+
+"Write a computer program."
+"Eat a pineapple"
+
+What makes statement valuable for our purposes is that there are a number of ways of forming new statements from old ones.
+
+In literary writing, some measure of ambiguity is often acceptable, and sometime valuable.
+In mathematics, by contrast, precision is key; ambiguity is to be avoided at all cost.
+When using a mathematical term, always stick to the precise mathematical definition, regardless of any other colloquial usage.
+

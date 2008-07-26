@@ -1,0 +1,950 @@
+\chapter{Linear Transformations and Operators}
+
+\section{Linear Transformations}
+
+\begin{definition}
+Let $V$ and $W$ be vector spaces over a field $F$.
+A \emph{linear transformation from $V$ to $W$} is a functiton $T$ from $V$ into $W$ such that
+\begin{equation*}
+T \left( s \vecnot{v}_1 + \vecnot{v}_2 \right)
+= s T \vecnot{v}_1 + T \vecnot{v}_2
+\end{equation*}
+for all $\vecnot{v}_1$ and $\vecnot{v}_2$ in $V$ and all scalars $s$ in $F$.
+\end{definition}
+
+\begin{example}
+Let $A$ be a fixed $m \times n$ matrix over $F$.
+The function $T$ defined by $T \left( \vecnot{v} \right) = A \vecnot{v}$ is a linear transformation from $F^{n \times 1}$ into $F^{m \times 1}$.
+\end{example}
+
+\begin{example}
+Let $P \in F^{m \times m}$ and $Q \in F^{n \times n}$ be fixed matrices.
+Define the function $T$ from $F^{m \times n}$ into itself by $T(A) = P A Q$.
+Then $T$ is a linear transformation from $F^{m \times n}$ into $F^{m \times n}$.
+In particular,
+\begin{equation*}
+\begin{split}
+T \left( s A + B \right)
+&= P \left( s A + B \right) Q \\
+&= s P A Q + P B Q \\
+&= s T \left( A \right) + T \left( B \right) .
+\end{split}
+\end{equation*}
+\end{example}
+
+\begin{example}
+Let $V$ be the space of continuous functions from $\RealNumbers$ to $\RealNumbers$, and definte $T$ by
+\begin{equation*}
+(Tf)(x) = \int_{0}^x f(t) dt .
+\end{equation*}
+Then $T$ is a linear transformation from $V$ into $V$.
+The function $Tf$ is continuous and differentiable.
+\end{example}
+
+It is important to note that if $T$ is a linear transformation from $V$ to $W$, then $T \left( \vecnot{0} \right) = \vecnot{0}$.
+This is essential since
+\begin{equation*}
+T \left( \vecnot{0} \right)
+= T \left( \vecnot{0} + \vecnot{0} \right)
+= T \left( \vecnot{0} \right) + T \left( \vecnot{0} \right) .
+\end{equation*}
+
+\begin{theorem} \label{theorem:UniqueLinearTransformation}
+Let $V$ be a finite-dimensional vector space and let $\vecnot{v}_1, \ldots, \vecnot{v}_n$ be an order basis for $V$.
+Let $W$ be a vector space let $\vecnot{w}_1, \ldots, \vecnot{w}_n$ be arbitrary vectors in $W$.
+There exists a unique linear transformation $T$ from $V$ into $W$ such that
+\begin{equation*}
+T \vecnot{v}_j = \vecnot{w}_j, \quad j= 1, \ldots, n.
+\end{equation*}
+\end{theorem}
+\begin{proof}
+To prove that there exists a linear transformation $T$ with $T \vecnot{v}_j = \vecnot{w}_j$, we proceed as follows.
+Since $\vecnot{v}_1, \ldots, \vecnot{v}_n$ is a basis for $V$, given $\vecnot{v} \in V$ there is a unique $n$-tuple $(t_1, \ldots, t_n)$ such that
+\begin{equation*}
+\vecnot{v} = \sum_{j=1}^n t_j \vecnot{v}_j .
+\end{equation*}
+For this vector $\vecnot{v}$, define the transformation
+\begin{equation*}
+T \vecnot{v} = \sum_{j=1}^n t_j \vecnot{w}_j .
+\end{equation*}
+Note that $T$ is a well-defined rule for associating with each vector $\vecnot{v} \in V$ a vector $T\vecnot{v} \in W$.
+From this definition, it is clear that $T \vecnot{v}_j = \vecnot{w}_j$ for $j = 1, \ldots, n$.
+Let $u \in V$ with
+\begin{equation*}
+\vecnot{u} = \sum_{j=1}^n s_j \vecnot{v}_j
+\end{equation*}
+and let $r \in F$.
+Then, we have
+\begin{equation*}
+r \vecnot{u} + \vecnot{v} = \sum_{j=1}^n (r s_j + t_j) \vecnot{v}_j
+\end{equation*}
+and so by definition
+\begin{equation*}
+T \left( r \vecnot{u} + \vecnot{v} \right)
+= \sum_{j=1}^n (r s_j + t_j) \vecnot{w}_j .
+\end{equation*}
+Also,
+\begin{equation*}
+\begin{split}
+r T \left( \vecnot{u} \right) + T \left( \vecnot{v} \right)
+&= r \sum_{j=1}^n s_j \vecnot{w}_j
++ \sum_{j=1}^n t_j \vecnot{w}_j \\
+&= \sum_{j=1}^n (r s_j + t_j) \vecnot{w}_j
+= T \left( r \vecnot{u} + \vecnot{v} \right) .
+\end{split}
+\end{equation*}
+That is, $T$ is a linear transformation.
+
+If $U$ is a linear tranformation from $V$ into $W$ such that $U \vecnot{v}_j = \vecnot{w}_j$ for $j = 1, \ldots, n$, then the vector $\vecnot{v} = \sum_{j=1}^n t_j \vecnot{v}_j$ we have
+\begin{equation*}
+\begin{split}
+U \vecnot{v} &= U \left( \sum_{j=1}^n t_j \vecnot{v}_j \right) \\
+&= \sum_{j=1}^n t_j U \left( \vecnot{v}_j \right) \\
+&= \sum_{j=1}^n t_j \vecnot{w}_j
+= T \vecnot{v} .
+\end{split}
+\end{equation*}
+That is, $U = T$ and the linear transformation $T$ with $T \vecnot{v}_j = \vecnot{w}_j$ for $j = 1, \ldots, n$ is unique.
+\end{proof}
+
+If $T$ is a linear transformation from $V$ into $W$, the range of $T$ is the set of all vectors $\vecnot{w} \in W$ such that $\vecnot{w} = T \vecnot{v}$ for some $\vecnot{v} \in V$.
+We denote the range of $T$ by $R_T$.
+The set $R_T$ is a subspace of $W$.
+Let $\vecnot{w}_1, \vecnot{w}_2 \in R_T$ and let $s$ be a scalar.
+By definition, there exist vectors $\vecnot{v}_1$ and $\vecnot{v}_2$ in $V$ such that $T \vecnot{v}_1 = \vecnot{w}_1$ and $T \vecnot{v}_2 = \vecnot{w}_2$.
+Since $T$ is a linear transformation, we have
+\begin{equation*}
+T \left( s \vecnot{v}_1 + \vecnot{v}_2 \right) = s T \vecnot{v}_1 + T \vecnot{v}_2 = s \vecnot{w}_1 + \vecnot{w}_2 ,
+\end{equation*}
+which shows that $s \vecnot{w}_1 + \vecnot{w}_2$ is also in $R_T$.
+
+Another interesting subspace associated with the linear transformation $T$ is the set $N_T$ consisting of the vectors $\vecnot{v} \in V$ such that $T \vecnot{v} = \vecnot{0}$.
+It can easily be verified that $N_T$ is a subspace of $V$.
+\begin{equation*}
+T \left( \vecnot{0} \right) = \vecnot{0} \implies \vecnot{0} \in N_T.
+\end{equation*}
+Futhermore, if $T \vecnot{v}_1 = T \vecnot{v}_2 = 0$ then
+\begin{equation*}
+T \left( s \vecnot{v}_1 + \vecnot{v}_2 \right) = s T \left( \vecnot{v}_1 \right) + \left( \vecnot{v}_2 \right) = s \vecnot{0} + \vecnot{0} = \vecnot{0} ,
+\end{equation*}
+so that $s \vecnot{v}_1 + \vecnot{v}_2 \in N_T$.
+
+\begin{definition}
+Let $V$ and $W$ be vector spaces over a field $F$ and let $T$ be a linear transformation from $V$ into $W$.
+The \emph{nullspace} of $T$, denoted $N_T$, is the set of all vectors $\vecnot{v} \in V$ such that $T \vecnot{v} = \vecnot{0}$.
+The \emph{range} of $T$, denoted $R_T$, is the set of all vectors $\vecnot{w} \in W$ such that $\vecnot{w} = T \vecnot{v}$ for some $\vecnot{v} \in V$.
+
+If $V$ is finite-dimensional, the \emph{rank} of $T$ is the dimension of the range of $T$ and the \emph{nullity} of $T$ is the dimension of the nullspace of $T$.
+\end{definition}
+
+\begin{theorem}
+Let $V$ and $W$ be vector spaces over the field $F$ and let $T$ be a linear transformation from $V$ into $W$.
+If $V$ is finite-dimensional, then
+\begin{equation*}
+\Rank (T) + \Nullity (T) = \dim (V)
+\end{equation*}
+\end{theorem}
+\begin{proof}
+Let $\vecnot{v}_1, \ldots, \vecnot{v}_k$ be a basis for $N_T$, the nullspace of $T$.
+There are vectors $\vecnot{v}_{k+1}, \ldots, \vecnot{v}_n \in V$ such that $\vecnot{v}_1, \ldots, \vecnot{v}_n$ is a basis for $V$.
+We want to show that $T \vecnot{v}_{k+1}, \ldots, T \vecnot{v}_n$ is a basis for the range of $T$.
+The vectors $T \vecnot{v}_1, \ldots, T \vecnot{v}_n$ certainly span $R_T$ and, since $T \vecnot{v}_j = \vecnot{0}$ for $j = 1, \ldots, k$, it follows that $T \vecnot{v}_{k+1}, \ldots, \vecnot{v}_n$ span $R_T$.
+Suppose that there exist scalars $s_{k+1}, \ldots, s_n$ such that
+\begin{equation*}
+\sum_{j=k+1}^n s_j T \vecnot{v}_j = \vecnot{0}.
+\end{equation*}
+This imlies that
+\begin{equation*}
+T \left( \sum_{j=k+1}^n s_j \vecnot{v}_j \right) = \vecnot{0}.
+\end{equation*}
+and accordingly the vector $\vecnot{v} = \sum_{j=k+1}^n s_j \vecnot{v}_j$ is in the nullspace of $T$.
+Since $\vecnot{v}_1, \ldots, \vecnot{v}_k$ form a basis for $N_T$, there must be a linear combination such that
+\begin{equation*}
+\vecnot{v} = \sum_{j=1}^k t_j \vecnot{v}_j .
+\end{equation*}
+But then,
+\begin{equation*}
+\sum_{j=1}^k t_j \vecnot{v}_j - \sum_{j=k+1}^n s_j \vecnot{v}_j = \vecnot{0}.
+\end{equation*}
+Since the vectors $\vecnot{v}_1, \ldots, \vecnot{v}_n$ are linearly independent, this implies that
+\begin{equation*}
+t_1 = \cdots = t_k = s_{k+1} = \hdots s_n = 0.
+\end{equation*}
+That is, the set $T \vecnot{v}_{k+1}, \ldots, T \vecnot{v}_n$ is linearly independent in $W$ and therefore forms a basis for $N_T$.
+In turn, this implies that $n = \Rank(T) + \Nullity(T)$.
+\end{proof}
+
+\begin{fact}
+If $A$ is an $m \times n$ matrix with entries in the field $F$, then
+\begin{equation*}
+\mathrm{row~rank} (A) = \mathrm{column~rank} (A).
+\end{equation*}
+\end{fact}
+
+
+\subsection{The Algebra of Linear Transformations}
+
+\begin{theorem}
+Let $V$ and $W$ be vector spaces over the field $F$.
+Let $T$ and $U$ be two linear transformations form $V$ into $W$.
+The function $(T+U)$ defined pointwise by
+\begin{equation*}
+(T + U) \left( \vecnot{v} \right) = T \vecnot{v} + U \vecnot{v}
+\end{equation*}
+is a linear transformation from $V$ into $W$.
+Furthermore, if $s \in F$, the function $(sT)$ defined by
+\begin{equation*}
+(sT) \left( \vecnot{v} \right) = s \left( T \vecnot{v} \right)
+\end{equation*}
+is also a linear transformation from $V$ into $W$.
+The set of all linear transformation from $V$ into $W$, together with the addition and scalar multiplication defined above, is a vector space over the field $F$.
+\end{theorem}
+\begin{proof}
+Suppose that $T$ and $U$ are linear transformation from $V$ into $W$.
+For $(T + U)$ defined above, we have
+\begin{equation*}
+\begin{split}
+(T+U) \left( s \vecnot{v} + \vecnot{w} \right)
+&= T \left( s \vecnot{v} + \vecnot{w} \right)
++ U \left( s \vecnot{v} + \vecnot{w} \right) \\
+&= s \left( T \vecnot{v} \right) + T \vecnot{w}
++ s \left( U \vecnot{v} \right) + U \vecnot{w} \\
+&= s \left( T \vecnot{v} + U \vecnot{v} \right)
++ \left( T \vecnot{w} + U \vecnot{w} \right) \\
+&= s ( T + U ) \vecnot{v} + ( T + U ) \vecnot{w} ,
+\end{split}
+\end{equation*}
+which shows that $(T+U)$ is a linear transformation.
+Similarly, we have
+\begin{equation*}
+\begin{split}
+(r T) \left( s \vecnot{v} + \vecnot{w} \right)
+&= r \left( T \left( s \vecnot{v} + \vecnot{w} \right) \right) \\
+&= r \left( s \left( T \vecnot{v} \right) + \left( T \vecnot{w} \right) \right) \\
+&= r s \left( T \vecnot{v} \right) + r \left( T \vecnot{w} \right) \\
+&= s \left( r \left( T \vecnot{v} \right) \right) + r T \left( \vecnot{w} \right) \\
+&= s \left( \left( r T \right) \vecnot{v} \right) + \left( r T \right) \vecnot{w}
+\end{split}
+\end{equation*}
+which shows that $(rT)$ is a linear transformation.
+
+To verify that the set of linear transformations from $V$ into $W$ together with the operations defined above is a vector space, one must directly check the conditions of Defintion~\ref{definition:VectorSpace}.
+These are straightforward to verify, and we leave this exercise to the reader.
+\end{proof}
+
+We denote the space of linear transformations from $V$ into $W$ by $L(V,W)$.
+Note that $L(V,W)$ is defined only when $V$ and $W$ are vector spaces over the same field.
+
+\begin{fact}
+Let $V$ be an $n$-dimensional vector spaces over the field $F$, and let $W$ be an $m$-dimensional vector space over $F$.
+Then the space $L(V,W)$ is finite-dimensional and has dimension $mn$.
+\end{fact}
+
+\begin{theorem}
+Let $V$, $W$, and $Z$ be vector spaces over a field $F$.
+Let $T \in L(V,W)$ and $U \in L(W,Z)$.
+Then the composed function $UT$ defined by $(UT) \left( \vecnot{v} \right) = U \left( T \left( \vecnot{v} \right) \right)$ is a linear transformation from $V$ into $Z$.
+\end{theorem}
+\begin{proof}
+Let $\vecnot{v}_1, \vecnot{v}_2 \in V$ and $s \in F$.
+Then, we have
+\begin{equation*}
+\begin{split}
+(UT) \left( s \vecnot{v}_1 + \vecnot{v}_2 \right)
+&= U \left( T \left( s \vecnot{v}_1 + \vecnot{v}_2 \right) \right) \\
+&= U \left( s T \vecnot{v}_1 + T \vecnot{v}_2 \right) \\
+&= s U \left( T \vecnot{v}_1 \right) + U \left( T \vecnot{v}_2 \right) \\
+&= s (UT) \left( \vecnot{v}_1 \right) + (UT) \left( \vecnot{v}_2 \right) ,
+\end{split}
+\end{equation*}
+as desired.
+\end{proof}
+
+\begin{definition}
+If $V$ is a vector space over the field $F$, a \emph{linear operator on $V$} is a linear transformation from $V$ into $V$.
+\end{definition}
+
+The function $T$ from $V$ into $W$ is called \emph{invertible} if there exists a function $U$ from $W$ to $V$ such that $UT$ is the identity function on $V$ and $TU$ is the identity function on $W$.
+If $T$ is invertible, the function $U$ is unique and is denoted by $T^{-1}$.
+Furthermore, $T$ is invertible if and only if
+\begin{enumerate}
+\item $T$ is one-to-one: $T \vecnot{v}_1 = T \vecnot{v}_2 \implies \vecnot{v}_1 = \vecnot{v}_2$
+\item $T$ is onto: the range of $T$ is $W$.
+\end{enumerate}
+
+\begin{theorem}
+Let $V$ and $W$ be vector spaces over the field $F$ and let $T$ be a linear transformation from $V$ into $W$.
+If $T$ is invertible, then the inverse function $T^{-1}$ is a linear transformation from $W$ onto $V$.
+\end{theorem}
+\begin{proof}
+Let $\vecnot{w}_1$ and $\vecnot{w}_2$ be vectors in $W$ and let $s \in F$.
+Define $\vecnot{v}_j = T^{-1} \vecnot{w}_j$, for $j =1,2$.
+Since $T$ is a linear transformation, we have
+\begin{equation*}
+T \left( s \vecnot{v}_1 + \vecnot{v}_2 \right)
+= s T \left( \vecnot{v}_1 \right) + T \left( \vecnot{v}_2 \right)
+= s \vecnot{w}_1 + \vecnot{w}_2.
+\end{equation*}
+That is, $s \vecnot{v}_1 + \vecnot{v}_2$ is the unique vector in $V$ that maps to $s \vecnot{w}_1 + \vecnot{w}_2$ under $T$.
+It follows that
+\begin{equation*}
+T^{-1} \left( s \vecnot{w}_1 + \vecnot{w}_2 \right)
+= s \vecnot{v}_1 + \vecnot{v}_2
+= s \left( T^{-1} \vecnot{w}_1 \right) + T^{-1} \vecnot{w}_2
+\end{equation*}
+and $T^{-1}$ is a linear transformation.
+\end{proof}
+
+
+\section{Linear Functionals}
+
+\begin{definition}
+Let $V$ be a vector space over a field $F$.
+A linear transformation $f$ from $V$ into the scalar field $F$ is called a \emph{linear functional} on $V$.
+\end{definition}
+That is, $f$ is a function from $V$ into $F$ such that
+\begin{equation*}
+f \left( s \vecnot{v}_1 + \vecnot{v}_2 \right)
+= s f \left( \vecnot{v}_1 \right) + f \left( \vecnot{v}_2 \right)
+\end{equation*}
+for all $\vecnot{v}_1, \vecnot{v}_2 \in V$ and $s \in F$.
+
+\begin{example}
+Let $F$ be a field and let $s_1, \ldots, s_n$ be scalars in $F$.
+Then the function $f$ on $F^n$ defined by
+\begin{equation*}
+f(v_1, \ldots, v_n) = s_1 v_1 + \cdots, s_n v_n
+\end{equation*}
+is a linear functional.
+It is the linear functional which is represented by the matrix
+\begin{equation*}
+\left[ \begin{array}{cccc} s_1 & s_2 & \cdots & s_n \end{array} \right]
+\end{equation*}
+relative to the standard ordered basis for $F^n$.
+Every linear functional on $F^n$ is of this form, for some scalars $s_1, \ldots, s_n$.
+\end{example}
+
+\begin{definition}
+Let $n$ be a positive integer and $F$ a field.
+If $A$ is an $n \times n$ matrix with entries in $F$, the \emph{trace} of $A$ is the scalar
+\begin{equation*}
+\Trace(A) = A_{11} + A_{22} + \cdots + A_{nn}.
+\end{equation*}
+\end{definition}
+
+\begin{example}
+The trace function is a linear functional on the matrix space $F^{n \times n}$ since
+\begin{equation*}
+\begin{split}
+\Trace ( sA + B) &= \sum_{i=1}^n (s A_{ii} + B_{ii}) \\
+&= s \sum_{i=1}^n A_{ii} + \sum_{i=1}^n  B_{ii} \\
+&= s \Trace(A) + \Trace(B) .
+\end{split}
+\end{equation*}
+\end{example}
+
+\begin{example}
+Let $[a, b]$ be a closed interval on the real line and let $C([a,b])$ be the space of continuous real-valued functions on $[a,b]$.
+Then
+\begin{equation*}
+L(g) = \int_a^b g(t) dt
+\end{equation*}
+defines a linear functional $L$ on $C([a,b])$.
+\end{example}
+
+\begin{definition}
+Let $V$ be a vector space.
+The collection of all linear functionals on $V$, denoted $L(V,F)$, forms a vecctor space.
+We also denote this space by $V^*$ and call it the \emph{dual space} of $V$.
+\end{definition}
+It can be shown that
+\begin{equation*}
+\dim V^* = \dim V.
+\end{equation*}
+If $\vecnot{v} \in V$, then we can define a functional $f_{\vecnot{v}}$ by
+\begin{equation*}
+f_{\vecnot{v}} \left( \vecnot{w} \right) = \left\langle \vecnot{w} | \vecnot{v} \right\rangle.
+\end{equation*}
+That is, inner products are functionals.
+Conversely, if $V$ is a Hilbert space, then any continuous linear functional can be expressed as an inner product.
+This result is known as the Riesz representation theorem.
+
+\begin{theorem}
+Let $V$ be a finite-dimensional vector space over the field $F$, and let $\mathcal{B} = \vecnot{v}_1, \ldots, \vecnot{v}_n$ be a basis for $V$.
+There is a unique dual basis $\mathcal{B}^* = f_1, \ldots, f_n$ for $V^*$ such that $f_j \left( \vecnot{v}_i \right) = \delta_{ij}$.
+For each linear functional on $V$, we have
+\begin{equation*}
+f = \sum_{i=1}^n f \left( \vecnot{v}_i \right) f_i
+\end{equation*}
+and for each vector $\vecnot{v}$ in $V$, we have
+\begin{equation*}
+\vecnot{v} = \sum_{i=1}^n f_i \left( \vecnot{v} \right) \vecnot{v}_i .
+\end{equation*}
+\end{theorem}
+\begin{proof}
+Let $\mathcal{B} = \vecnot{v}_1, \ldots, \vecnot{v}_n$ be a basis for $V$.
+According to Theorem~\ref{theorem:UniqueLinearTransformation}, there is a unique linear functional $f_i$ on $V$ such that
+\begin{equation*}
+f_i \left( \vecnot{v}_j \right) = \delta_{ij} .
+\end{equation*}
+Thus, we obtain from $\mathcal{B}$ a set of $n$ distinct linear functionals $f_1, \ldots, f_n$ on $V$.
+These functionals are linearly independent;
+suppose that
+\begin{equation*}
+f = \sum_{i=1}^n s_i f_i ,
+\end{equation*}
+then
+\begin{equation*}
+f \left( \vecnot{v}_j \right) = \sum_{i=1}^n s_i f_i \left( \vecnot{v}_j \right)
+= \sum_{i=1}^n s_i \delta_{ij} = s_j .
+\end{equation*}
+In particular, if $f$ is the zero functional, $f \left( \vecnot{v}_j \right) = 0$ for $j = 1, \ldots, n$ and hence the scalars $\{ s_j \}$ must all equal $0$.
+It follows that the functionals $f_1, \ldots, f_n$ are linearly independent.
+Since $\dim V^* = n$, we conclude that $\mathcal{B}^* = f_1, \ldots, f_n$ forms a basis for $V^*$, the \emph{dual basis} of $\mathcal{B}$.
+
+Next, we want to show that there is a unique basis which is dual to $\mathcal{B}$.
+If $f$ is a linear functional on $V$, then $f$ is some linear combination of $f_1, \ldots, f_n$ with
+\begin{equation*}
+f = \sum_{i=1}^n s_i f_i .
+\end{equation*}
+Furthermore, by construction, we must have $s_j = f \left( \vecnot{v}_j \right)$ for $j = 1, \ldots, n$.
+Similarly, if
+\begin{equation*}
+\vecnot{v} = \sum_{i=1}^n t_i \vecnot{v}_i .
+\end{equation*}
+is a vector in $V$, then
+\begin{equation*}
+f_j \left( \vecnot{v} \right) = \sum_{i=1}^n t_i f_j \left( \vecnot{v}_i \right)
+= \sum_{i=1}^n t_i \delta_{ij} = t_j .
+\end{equation*}
+That is, the unique expression for $\vecnot{v}$ as a linear combination of $\vecnot{v}_1, \ldots, \vecnot{v}_n$ is
+\begin{equation*}
+\vecnot{v} = \sum_{i=1}^n f_i \left( \vecnot{v} \right) \vecnot{v}_i .
+\end{equation*}
+\end{proof}
+
+
+\section{Operator Norms}
+
+\begin{definition}
+Let $V$ and $W$ be two normed vector spaces and let $T : V \rightarrow W$ be a linear transformation.
+The \emph{operator norm} of $T$ is given by
+\begin{equation*}
+\left\| T \right\|
+= \sup_{ \vecnot{v} \in V - \left\{ \vecnot{0} \right\} }
+\frac{ \left\| T \vecnot{v} \right\| }{ \left\| \vecnot{v} \right\| }
+= \sup_{\vecnot{v} \in V, \left\| \vecnot{v} \right\| = 1 }
+\left\| T \vecnot{v} \right\| .
+\end{equation*}
+\end{definition}
+
+The operator norm satisfies the submultiplicative property since
+\begin{equation*}
+\left\| U T \vecnot{v} \right\| \leq \left\| U \right\| \left\| T \vecnot{v} \right\| \leq \left\| U \right\| \left\| T \right\| \left\| \vecnot{v} \right\| .
+\end{equation*}
+
+
+\subsection{Bounded Transformations}
+
+\begin{definition}
+If the norm of a linear transformation is finite, then the transformation is said to be \emph{bounded}.
+\end{definition}
+
+\begin{theorem}
+A linear transformation $T : V \rightarrow W$ is bounded if and only if it is continuous.
+\end{theorem}
+\begin{proof}
+Suppose that $T$ is bounded; that is, there exists $M$ such that  $\left\| T \vecnot{v} \right\| \leq M \left\| \vecnot{v} \right\|$ for all $\vecnot{v} \in V$.
+Let $\vecnot{v}_1, \vecnot{v}_2, \ldots$ be a convergent sequence in $V$, then
+\begin{equation*}
+\left\| T \vecnot{v}_i - T \vecnot{v}_j \right\|
+= \left\| T \left( \vecnot{v}_i - \vecnot{v}_j \right) \right\|
+= M \left\| \vecnot{v}_i - \vecnot{v}_j \right\| .
+\end{equation*}
+This implies that $T \vecnot{v}_1, T \vecnot{v}_2, \ldots$ is a convergent sequence in $W$, and $T$ is continuous.
+
+Conversely, assume $T$ is continuous.
+Then there is a $\delta > 0$ such that $\left\| T \vecnot{v} \right\| < 1$ for $\left\| \vecnot{v} \right\| < \delta$.
+Since the norm of $\frac{ \delta \vecnot{v} }{ \left\| \vecnot{v} \right\| }$ is equal to $\delta$, we get
+\begin{equation*}
+\left\| T \vecnot{v} \right\|
+= \left\| T \frac{ \delta \vecnot{v} }{ \left\| \vecnot{v} \right\| } \right\|
+\frac{ \left\| \vecnot{v} \right\| }{ \delta }
+< \frac{ \left\| \vecnot{v} \right\| }{ \delta } .
+\end{equation*}
+The value $M = \frac{1}{\delta}$ serves as a bound for $T$.
+\end{proof}
+
+Then, by showing that linear transformation over finite-dimensional spaces are continuous, one concludes that they are also bounded.
+This is accomplished in the following theorem.
+
+\begin{theorem}
+Let $V$ and $W$ be normed vector spaces and let $T : V \rightarrow W$ be a linear transformation.
+If $V$ is finite dimensional, then $T$ is continuous and bounded.
+\end{theorem}
+
+\begin{lemma}
+Let $V$ be a finite-dimensional normed vector space, and let
+\begin{equation*}
+\mathcal{B} = \vecnot{v}_1, \ldots, \vecnot{v}_n
+\end{equation*}
+be a basis for $V$.
+Then, for $\vecnot{v} \in V$, each coefficient $s_i$ in the expansion
+\begin{equation*}
+\vecnot{v} = s_1 \vecnot{v}_1 + \cdots + s_n \vecnot{v}_n
+\end{equation*}
+is a continuous linear function of $\vecnot{v}$.
+Being continuous, it is also bounded, so there exists a constant $M$ such that $|s_i| \leq M \left\| \vecnot{v} \right\|$.
+\end{lemma}
+\begin{proof}
+The linearity property is straightforward, its proof is omitted.
+It will suffice to show that there is an $m > 0$ such that
+\begin{equation} \label{equation:ContinuityFiniteDim}
+m \left( |s_1| + \cdots + |s_n| \right) \leq \left\| \vecnot{v} \right\| ,
+\end{equation}
+since \eqref{equation:ContinuityFiniteDim} implies that $|s_i| \leq m^{-1} \left\| \vecnot{v} \right\|$.
+We first show that this holds for coefficients $\left\{ s_1, \ldots, s_n \right\}$ satisfying the condition $|s_1| + \cdots + |s_n| = 1$.
+Let
+\begin{equation*}
+S = \left\{ (s_1, \ldots, s_n) \Big| \sum_{i=1}^n |s_i| = 1 \right\}.
+\end{equation*}
+This set is closed and bounded; it is therefore compact.
+Define the function $f : S \rightarrow \RealNumbers$ by
+\begin{equation*}
+f(s_1, \ldots, s_n) = \left\| s_1 \vecnot{v}_1 + \cdots + s_n \vecnot{v}_n \right\| .
+\end{equation*}
+It can be shown that $f$ is continuous, and it is clear that $f > 0$ over $S$.
+Let
+\begin{equation*}
+m = \min_{(s_1, \ldots, s_n) \in S} f(s_1, \ldots, s_n) .
+\end{equation*}
+Since $f$ is continous and $S$ is compact, this minimum exists and is attained by some point $(s_1', \ldots, s_n') \in S$.
+Note that $m > 0$ for otherwise $\vecnot{v}_1, \ldots, \vecnot{v}_n$ are linearly dependent, contradicting the fact that $\mathcal{B}$ is a basis.
+Thus $m$ so defined statisfies \eqref{equation:ContinuityFiniteDim}.
+
+For general sets of coefficients $\{ s_i \}$, let $c = |s_1| + \cdots + |s_n|$.
+If $c = 0$, the result is trivial.
+If $c > 0$, then write
+\begin{equation*}
+\begin{split}
+\left\| s_1 \vecnot{v}_1 + \cdots + s_n \vecnot{v}_n \right\|
+&= c \left\| \frac{s_1}{c} \vecnot{v}_1 + \cdots + \frac{s_n}{c} \vecnot{v}_n \right\| \\
+&= c f \left( \frac{s_1}{c}, \ldots, \frac{s_n}{c} \right) \\
+&\geq c m = m \left( |s_1| + \cdots + |s_n| \right) .
+\end{split}
+\end{equation*}
+This is the desired result.
+\end{proof}
+
+We are now ready to prove the theorem.
+\begin{proof}
+Let $\mathcal{B} = \vecnot{v}_1, \ldots, \vecnot{v}_n$ be a basis for $V$.
+Let $\vecnot{v} \in V$ be expressed in terms of this basis as
+\begin{equation*}
+\vecnot{v} = s_1 \vecnot{v}_1 + \cdots + s_n \vecnot{v}_n .
+\end{equation*}
+Let $C = \max_{1 \leq i \leq n} \left\| T \vecnot{v}_i \right\|$.
+Then,
+\begin{equation*}
+\begin{split}
+\left\| T \vecnot{v} \right\| &= \left\| T \left( s_1 \vecnot{v}_1 + \cdots + s_n \vecnot{v}_n \right) \right\| \\
+& \leq |s_1| \left\| T \vecnot{v}_1 \right\| + \cdots + |s_n| \left\| T \vecnot{v}_n \right\| \\
+&\leq C \left( |s_1| + \cdots + |s_n| \right) .
+\end{split}
+\end{equation*}
+By the previous lemma, this implies that there exists an $M$ such that $|s_1| + \cdots + |s_n| \leq M \left\| \vecnot{v} \right\|$, so that
+\begin{equation*}
+\left\| T \vecnot{v} \right\| \leq C M \left\| \vecnot{v} \right\| .
+\end{equation*}
+\end{proof}
+
+
+
+\subsection{The Neumann Expansion}
+
+\begin{theorem}
+Suppose $\| \cdot \|$ is a norm satisfying the submultiplicative property and $T : V \rightarrow V$ is a linear operator whith $\left\| T \right\| < 1$.
+Then $\left( I - T \right)^{-1}$ exists, and
+\begin{equation*}
+\left( I - T \right)^{-1} = \sum_{i = 0}^{\infty} T^i .
+\end{equation*}
+\end{theorem}
+\begin{proof}
+Let $\| T \| < 1$.
+If $I - T$ is singular, then there exists a vector $\vecnot{v}$ such that
+\begin{equation*}
+\left( I - T \right) \vecnot{v} = \vecnot{0} .
+\end{equation*}
+But this implies that $\left\| \vecnot{v} \right\| = \left\| T \vecnot{v} \right\| \leq \left\| T \right\| \left\| \vecnot{v} \right\|$, and $\left\| T \right\|$.
+This is a contradition.
+
+For finite sums, it is clear that
+\begin{equation*}
+(I - T) \left( I + T + T^2 + \cdots + T^{k-1} \right) = I - T^k .
+\end{equation*}
+With $\left\| T \right\| < 1$, we have $\lim_{k \rightarrow \infty} T^k = 0$ since
+\begin{equation*}
+\left\| T^k \right\| \leq \left\| T \right\|^k \rightarrow 0
+\end{equation*}
+as $k \rightarrow \infty$.
+This implies that
+\begin{equation*}
+(I - T) \left( \sum_{i=0}^{\infty} T^i \right) = I .
+\end{equation*}
+Hence, $\sum_{i=0}^{\infty} T^i$ must be the inverse of $I -T$.
+\end{proof}
+
+
+\subsection{Matrix Norms}
+
+\begin{equation*}
+\left\| A \right\|_{\infty} = \max_{\left\| \vecnot{v} \right\|_{\infty} = 1} \left\| A \vecnot{v} \right\|_{\infty} = \max_{i} \sum_{j} |a_{ij}|
+\end{equation*}
+
+\begin{equation*}
+\left\| A \right\|_{1} = \max_{\left\| \vecnot{v} \right\|_{1} = 1} \left\| A \vecnot{v} \right\|_{1} = \max_{j} \sum_{i} |a_{ij}|
+\end{equation*}
+
+The 2-norm of a matrix can be found by solving
+\begin{equation*}
+\max_{\vecnot{v}^H \vecnot{v} = 1} \left\| A \vecnot{v} \right\|_{2}^{2}
+= \vecnot{v}^H A^H A \vecnot{v} .
+\end{equation*}
+Using the Lagrange multiplier technique, one seeks to minimize
+\begin{equation*}
+J = \vecnot{v}^H A^H A \vecnot{v} - \lambda \vecnot{v}^H \vecnot{v} .
+\end{equation*}
+Taking the gradient with respect to $\vecnot{v}$ and equating the result to zero, we get
+\begin{equation*}
+A^H A \vecnot{v} = \lambda \vecnot{v} .
+\end{equation*}
+The corresponding $\vecnot{v}$ must be an eigenvector of the matrix $A^H A$.
+Left multiplying this equation by $\vecnot{v}^H$ and using the fact that $\vecnot{v}^H \vecnot{v} = 1$, we obtain
+\begin{equation*}
+\vecnot{v}^H A^H A \vecnot{v} = \lambda \vecnot{v}^H \vecnot{v} = \lambda .
+\end{equation*}
+Since we are maximizing the left hand side of this equation, $\lambda$ must be the largest eigenvalue of $A^H A$.
+For an $n \times n$ matrix $B$ with eigenvalues $\lambda_1, \ldots, \lambda_n$, the \emph{spectral radius} $\rho (B)$ is defined by
+\begin{equation*}
+\rho (B) = \max_{i} | \lambda_i | .
+\end{equation*}
+The spectral radius of $B$ is the smallest radius of a circle centered at the origin that contains all the eigenvalues of $B$.
+It follows that
+\begin{equation*}
+\| A \|_2 = \sqrt{ \rho (A^H A) } .
+\end{equation*}
+When $A$ is Hermitian, $\| A \|_2 = \rho(A)$.
+The 2-norm is also called the \emph{spectral norm}.
+
+The \emph{Frobenius norm} is given by
+\begin{equation*}
+\left\| A \right\|_F = \left( \sum_{i=1}^n \sum_{j=1}^n |a_{ij}|^2 \right)^{\frac{1}{2}} .
+\end{equation*}
+This norm is also called the \emph{Euclidean norm}.
+Note that $\left\| A \right\|_F^2 = \Trace (A^H A)$.
+
+
+\section{Linear Functionals and Adjoints}
+
+Let $V$ be an inner-product space, and let $\vecnot{w}$ be some fixed vector in $V$.
+Define the function $f_{\vecnot{v}}$ from $V$ into $F$ by
+\begin{equation*}
+f_{\vecnot{v}} \left( \vecnot{w} \right)
+= \left\langle \vecnot{w} | \vecnot{v} \right\rangle .
+\end{equation*}
+Clearly, $f_{\vecnot{v}}$ is a linear functional on $V$.
+If $V$ is a finite-dimensional vector space, then every linear functional on $V$ arises in this way from some vector $\vecnot{v}$.
+
+\begin{theorem} \label{theorem:FunctionalInnerProduct}
+Let $V$ be a finite-dimensional inner-product space, and $f$ a linear functional on $V$.
+Then there exists a unique vector $\vecnot{v} \in V$ such that $f \left( \vecnot{w} \right) = \left\langle \vecnot{w} | \vecnot{v} \right\rangle$ for all $\vecnot{w} \in V$.
+\end{theorem}
+\begin{proof}
+Let $\vecnot{v}_1, \ldots, \vecnot{v}_n$ be an orthonormal basis for $V$.
+Put
+\begin{equation*}
+\vecnot{v} = \sum_{i=1}^n \overline{f \left( \vecnot{v}_i \right)} \vecnot{v}_i
+\end{equation*}
+and let $f_{\vecnot{v}}$ be the linear functional defined by
+\begin{equation*}
+f_{\vecnot{v}} \left( \vecnot{w} \right) = \left\langle \vecnot{w} | \vecnot{v} \right\rangle .
+\end{equation*}
+Then
+\begin{equation*}
+f_{\vecnot{v}} \left( \vecnot{v}_j \right) = \left\langle \vecnot{v}_j \Big| 
+\sum_{i=1}^n \overline{f \left( \vecnot{v}_i \right)} \vecnot{v}_i \right\rangle
+= f \left( \vecnot{v}_j \right) .
+\end{equation*}
+Since this is true for each $\vecnot{v}_i$, it follows that $f = f_{\vecnot{v}}$.
+Now suppose that $\vecnot{v}' \in V$ such that $\left\langle \vecnot{w} | \vecnot{v} \right\rangle = \left\langle \vecnot{w} | \vecnot{v}' \right\rangle$ for all $\vecnot{w} \in W$.
+Then $\left\langle \vecnot{v} - \vecnot{v}' | \vecnot{v} - \vecnot{v}' \right\rangle = 0$ and $\vecnot{v} = \vecnot{v}'$.
+That is, the vector $\vecnot{v}$ is unique.
+\end{proof}
+
+We take a close look at the proof of this theorem.
+If we choose an orthonormal basis $\mathcal{B} = \vecnot{v}_1, \ldots, \vecnot{v}_n$ for $V$, the inner product of $\vecnot{w} = t_1 \vecnot{v}_1 + \cdots + t_n \vecnot{v}_n$ and $\vecnot{v} = s_1 \vecnot{v}_1 + \cdots + s_n \vecnot{v}_n$ will be
+\begin{equation*}
+\left\langle \vecnot{w} | \vecnot{v} \right\rangle = t_1 \bar{s}_1 + \cdots + t_n \bar{s}_n .
+\end{equation*}
+If $f$ is a linear functional on $V$, then $f$ has the form
+\begin{equation*}
+f \left(\vecnot{w}\right) = c_1 t_1 + \cdots + c_n t_n
+\end{equation*}
+for some fixed scalars $c_1, \ldots, c_n$ determined by the basis.
+Clearly, $f \left( \vecnot{v}_j \right) = c_j$, which implies that $\bar{s}_j = f \left( \vecnot{v}_j \right)$.
+That is, the vector $\vecnot{v}$ such that $f \left( \vecnot{w} \right) = \left\langle \vecnot{w} | \vecnot{v} \right\rangle$ is
+\begin{equation*}
+\vecnot{v} = \overline{ f \left( \vecnot{v}_1 \right) } \vecnot{v}_1 + \cdots + \overline{ f \left( \vecnot{v}_n \right) } \vecnot{v}_n .
+\end{equation*}
+
+Note that the vector $\vecnot{v}$ lies in the orthogonal complement of the nullspace of $f$.
+Let $W$ be the nullspace of $f$, then $V = W + W^{\bot}$, and $f$ is completely determined by its value on $W^{\bot}$.
+In fact, if $P$ is the orthogonal projection of $V$ on $W^{\bot}$, then
+\begin{equation*}
+f \left( \vecnot{u} \right) = f \left( P \vecnot{u} \right)
+\end{equation*}
+for all $\vecnot{u} \in V$.
+Suppose that $f \neq 0$, then $f$ is of rank one and $dim \left( W^{\bot} \right) = 1$.
+If $\vecnot{v}$ is any non-zero vector in $W^{\bot}$, it follows that
+\begin{equation*}
+P \vecnot{u} = \frac{ \left\langle \vecnot{u} | \vecnot{v} \right\rangle }{ \left\| \vecnot{v} \right\|^2 } \vecnot{v}
+\end{equation*}
+for all $\vecnot{u} \in V$.
+Thus,
+\begin{equation*}
+f \left( \vecnot{u} \right) = \left\langle \vecnot{u} | \vecnot{v} \right\rangle
+\frac{f \left( \vecnot{v} \right) }{ \left\| \vecnot{v} \right\|^2 }
+\end{equation*}
+for all $\vecnot{u} \in V$.
+
+\begin{theorem}
+For a linear transformation $T$ on a finite-dimensional inner-product space $V$, there exists a unique linear transformation  $T^*$ on $V$ such that
+\begin{equation*}
+\left\langle T \vecnot{w} | \vecnot{v} \right\rangle
+= \left\langle \vecnot{w} | T^* \vecnot{v} \right\rangle
+\end{equation*}
+for all vectors $\vecnot{v}, \vecnot{w} \in V$.
+\end{theorem}
+\begin{proof}
+Let $\vecnot{v}$ be any vector in $V$.
+Then $\vecnot{w} \rightarrow \left\langle T \vecnot{w} | \vecnot{v} \right\rangle$ is a linear functional on $V$.
+It follows from Theorem~\ref{theorem:FunctionalInnerProduct} that there exists a unique vector $\vecnot{w}' \in V$ such that $\left\langle T \vecnot{w} | \vecnot{v} \right\rangle = \left\langle \vecnot{w} | \vecnot{w}' \right\rangle$ for every $\vecnot{w} \in V$.
+Let $T^*$ denote the mapping $\vecnot{v} \rightarrow \vecnot{w}'$:
+\begin{equation*}
+\vecnot{w}' = T^* \vecnot{v} .
+\end{equation*}
+Next, we must verify that $T^*$ is a linear transformation.
+Let $\vecnot{v}_1, \vecnot{v}_2$ be in $V$ and $s$ be a scalar.
+For any $\vecnot{w} \in V$,
+\begin{equation*}
+\begin{split}
+\left\langle \vecnot{w} | T^* \left( s \vecnot{v}_1 + \vecnot{v}_2 \right) \right\rangle
+&= \left\langle T \vecnot{w} | \left( s \vecnot{v}_1 + \vecnot{v}_2 \right) \right\rangle \\
+&= \bar{s} \left\langle T \vecnot{w} | \vecnot{v}_1 \right\rangle
++ \left\langle T \vecnot{w} | \vecnot{v}_2 \right\rangle \\
+&= \bar{s} \left\langle \vecnot{w} | T^* \vecnot{v}_1 \right\rangle
++ \left\langle \vecnot{w} | T^* \vecnot{v}_2 \right\rangle \\
+&= \left\langle \vecnot{w} | s T^* \vecnot{v}_1 \right\rangle
++ \left\langle \vecnot{w} | T^* \vecnot{v}_2 \right\rangle \\
+&= \left\langle \vecnot{w} | s T^* \vecnot{v}_1 + T^* \vecnot{v}_2 \right\rangle .
+\end{split}
+\end{equation*}
+Thus, $T^* \left( s \vecnot{v}_1 + \vecnot{v}_2 \right) = s T^* \vecnot{v}_1 + T^* \vecnot{v}_2$ and $T^*$ is linear.
+
+The uniqueness of $T^*$ is clear, since $T^* \vecnot{v}$ is determined as the vector $\vecnot{w}'$ such that $\left\langle T \vecnot{w} | \vecnot{v} \right\rangle$ for every $\vecnot{w} \in V$.
+\end{proof}
+
+\begin{theorem}
+Let $V$ be a finite-dimensional inner-product space and let
+\begin{equation*}
+\mathcal{B} = \vecnot{v}_1, \ldots, \vecnot{v}_n
+\end{equation*}
+be an orthonormal basis for $V$.
+Let $T$ be a linear operator on $V$ and let $A$ be the matrix of $T$ in the order basis $\mathcal{B}$.
+Then $A_{kj} = \left\langle T \vecnot{v}_j | \vecnot{v}_k \right\rangle$.
+\end{theorem}
+\begin{proof}
+Since $\mathcal{B}$ is an orthonormal basis, we have
+\begin{equation*}
+\vecnot{v} = \sum_{k=1}^n \left\langle \vecnot{v} | \vecnot{v}_k \right\rangle \vecnot{v}_k .
+\end{equation*}
+The matrix $A$ is defined by
+\begin{equation*}
+T \vecnot{v}_j = \sum_{k=1}^n A_{kj} \vecnot{v}_k
+\end{equation*}
+and since
+\begin{equation*}
+T \vecnot{v}_j = \sum_{k=1}^n \left\langle T \vecnot{v}_j | \vecnot{v}_k \right\rangle \vecnot{v}_k ,
+\end{equation*}
+we conclude that $A_{kj} = \left\langle T \vecnot{v}_j | \vecnot{v}_k \right\rangle$.
+\end{proof}
+
+\begin{corollary}
+Let $V$ be a finite-dimensional inner-product space, and let $T$ be a linear operator on $V$.
+In any orthonormal basis for $V$, the matrix for $T^*$ is the conjugate transpose of the matrix of $T$.
+\end{corollary}
+\begin{proof}
+Let $\mathcal{B} = \vecnot{v}_1, \ldots, \vecnot{v}_n$ be an orthonormal basis for $V$, let $A = [T]_{\mathcal{B}}$ and $B = [T^*]_{\mathcal{B}}$.
+According to the previous theorem,
+\begin{align*}
+A_{kj} &= \left\langle T \vecnot{v}_j | \vecnot{v}_k \right\rangle \\
+B_{kj} &= \left\langle T^* \vecnot{v}_j | \vecnot{v}_k \right\rangle
+\end{align*}
+By the definition of $T^*$, we then have
+\begin{equation*}
+B_{kj} = \left\langle T^* \vecnot{v}_j | \vecnot{v}_k \right\rangle
+= \overline{\left\langle \vecnot{v}_k | T^* \vecnot{v}_j \right\rangle}
+= \overline{\left\langle T \vecnot{v}_k | \vecnot{v}_j \right\rangle}
+= \overline{A_{jk}} .
+\end{equation*}
+\end{proof}
+
+We note here that every linear operator on a finite-dimensional inner-product space $V$ has an adjoint on $V$.
+However, in the infinite-dimensional case this is not necessarily true.
+In any case, there exists at most one such operator $T^*$.
+
+
+\section{Fundamental Subspaces}
+
+There are four fundamental subspaces of a linear transformation $T : V \rightarrow W$.
+We have already encountered two such spaces: The range of $T$ and the nullspace of $T$.
+Recall that the range of a linear transformation $T$ is the set of all vectors $\vecnot{w} \in W$ such that $\vecnot{w} = T \vecnot{v}$ for some $\vecnot{v} \in V$.
+The nullspace of $T$ consists of all vectors $\vecnot{v} \in V$ sucht that $T \vecnot{v} = \vecnot{0}$.
+
+The other two fundamental subspaces of $T$ are the \emph{range of the adjoint $T^*$}, denoted $R_{T^*}$ and the \emph{nullspace of the adjoint $T^*$}, denoted $N_{T^*}$.
+The various subspaces of the transformation $T : V \rightarrow W$ can be summarized as follows,
+\begin{align*}
+R_T &\subset W \\
+N_T &\subset V \\
+R_{T^*} &\subset V \\
+N_{T^*} &\subset W .
+\end{align*}
+
+\begin{theorem}
+Let $T : V \rightarrow W$ be a bounded linear transformation between two Hilbert spaces $V$ and $W$, and let $R_T$ and $R_{T^*}$ be closed.
+Then,
+\begin{enumerate}
+\item the range $R_T$ is the orthogonal complement of $N_{T^*}$, i.e., $\left[ R_T \right]^{\bot} = N_{T^*}$;
+\item the nullspace $N_T$ is the orthogonal complement of $R_{T^*}$, i.e., $\left[ R_{T^*} \right]^{\bot} = N_T$ .
+\end{enumerate}
+Complementing this equalities, we get
+\begin{align*}
+R_T &= \left[ N_{T^*} \right]^{\bot} \\
+R_{T^*} &= \left[ N_T \right]^{\bot} .
+\end{align*}
+\end{theorem}
+\begin{proof}
+Let $\vecnot{w} \in R_T$, then there exists $\vecnot{v} \in V$ such that $T \vecnot{v} = \vecnot{w}$.
+Assume that $\vecnot{n} \in N_{T^*}$, then
+\begin{equation*}
+\left\langle \vecnot{w} | \vecnot{n} \right\rangle
+= \left\langle T \vecnot{v} | \vecnot{n} \right\rangle
+= \left\langle \vecnot{v} | T^* \vecnot{n} \right\rangle
+= 0 .
+\end{equation*}
+That is, $\vecnot{w}$ and $\vecnot{v}$ are orthogonal vectors.
+It follows that $N_{T^*} \subset \left[ R_T \right]^{\bot}$.
+Now, let $\vecnot{w} \in \left[ R_T \right]^{\bot}$.
+Then, for every $\vecnot{v} \in V$, we have
+\begin{equation*}
+\left\langle T \vecnot{v} | \vecnot{w} \right\rangle = 0.
+\end{equation*}
+This implies that $\left\langle \vecnot{v} | T^* \vecnot{w} \right\rangle = 0$, by the definition of the adjoint.
+Since this is true for every $\vecnot{v} \in V$, we get $T^* \vecnot{w} = \vecnot{0}$, so $\vecnot{w} \in N_{T^*}$.
+Then $\left[ R_T \right]^{\bot} \subset N_{T^*}$, which combined with our previous result yields $\left[ R_T \right]^{\bot} = N_{T^*}$.
+One can show that $\left[ R_{T^*} \right]^* = N_T$ using a similar argument.
+\end{proof}
+
+
+\section{Pseudoinverses}
+
+\begin{theorem}
+Let $T$ be a bounded linear transformation from $V$ to $W$.
+The equation $T\vecnot{v} = \vecnot{w}$ has a solution if and only if $\left\langle \vecnot{w} | \vecnot{u} \right\rangle = 0$ for every vector $\vecnot{u} \in N_{T^*}$, i.e.,
+\begin{equation*}
+\vecnot{w} \in R_T \Leftrightarrow \vecnot{w} \perp N_{T^*} .
+\end{equation*}
+In matrix notation, $A \vecnot{v} = \vecnot{w}$ has a solution if and only if $\vecnot{u}^H \vecnot{w} = 0$ for every vector $\vecnot{u}$ such that $A^H \vecnot{u} = \vecnot{0}$.
+\end{theorem}
+\begin{proof}
+Assume that $T \vecnot{v} = \vecnot{w}$, and let $\vecnot{u} \in N_{T^*}$.
+Then
+\begin{equation*}
+\left\langle \vecnot{w} | \vecnot{u} \right\rangle
+= \left\langle T \vecnot{v} | \vecnot{u} \right\rangle
+= \left\langle \vecnot{v} | T^* \vecnot{u} \right\rangle
+= \left\langle \vecnot{v} | \vecnot{0} \right\rangle
+= 0 .
+\end{equation*}
+
+To prove the reverse implication, suppose that $\left\langle \vecnot{w} | \vecnot{u} \right\rangle = 0$ when $\vecnot{u} \in N_{T^*}$ but $T \vecnot{v} = \vecnot{w}$ has no solution.
+Since $\vecnot{w} \notin R_T$, then
+\begin{equation*}
+\vecnot{w}_o = \vecnot{w} - P_{R_T} \vecnot{w} = \vecnot{w} - \vecnot{w}_r
+\neq \vecnot{0}.
+\end{equation*}
+This implies that $\left\langle T \vecnot{v} | \vecnot{w}_o \right\rangle = 0$ for all $\vecnot{v} \in V$, which implies that $\vecnot{w}_o \in N_{T^*}$.
+Consider
+\begin{equation*}
+\left\langle \vecnot{w} | \vecnot{w}_o \right\rangle
+= \left\langle \vecnot{w}_r + \vecnot{w}_o  | \vecnot{w}_o \right\rangle
+= \left\langle \vecnot{w}_o | \vecnot{w}_o \right\rangle
+> 0,
+\end{equation*}
+which contradict the assumption that $\left\langle \vecnot{w} | \vecnot{u} \right\rangle = 0$ when $\vecnot{u} \in N_{T^*}$.
+We must conclude that $T \vecnot{v} = \vecnot{w}$ has a solution.
+\end{proof}
+
+\begin{fact}
+The solution to $T \vecnot{v} = \vecnot{w}$ (if it exists) is unique if and only if the only solution to $T \vecnot{v} = \vecnot{0}$ is $\vecnot{v} = \vecnot{0}$.
+That is, if $N_T = \left\{ \vecnot{0} \right\}$.
+\end{fact}
+
+\subsection{Least Squares}
+
+Let $T : V \rightarrow W$ be a bounded linear transformation.
+If the equation $T \vecnot{v} = \vecnot{w}$ has no solution, then we can find a vecnot $\vecnot{v}$ that minimizes
+\begin{equation*}
+\left\| T \vecnot{v} - \vecnot{w} \right\|^2.
+\end{equation*}
+
+\begin{theorem}
+The vector $\vecnot{v} \in V$ minimizes $\left\| T \vecnot{v} - \vecnot{w} \right\|$ if and only if
+\begin{equation*}
+T^* T \vecnot{v} = T^* \vecnot{w} .
+\end{equation*}
+\end{theorem}
+\begin{proof}
+Minimizing $\left\| \vecnot{w} - T \vecnot{v} \right\|$ is equivalent to minimizing $\left\| \vecnot{w} - \hat{\vecnot{w}} \right\|$, where $\hat{\vecnot{w}} \in R_T$.
+By the projection theorem, we must have
+\begin{equation*}
+\vecnot{w} - \hat{\vecnot{w}} \in \left[ R_T \right]^{\bot} .
+\end{equation*}
+But this is equivalent to
+\begin{equation*}
+\vecnot{w} - \hat{\vecnot{w}} \in N_{T^*} .
+\end{equation*}
+That is, $T^* \left( \vecnot{w} - \hat{\vecnot{w}} \right) = \vecnot{0}$, or equivalently $T^* \vecnot{w} = T^* \hat{\vecnot{w}}$.
+Converly, if $T^*T \vecnot{v} = T^* \vecnot{w}$, then
+\begin{equation*}
+T^* \left( T \vecnot{v} - \vecnot{w} \right) = \vecnot{0},
+\end{equation*}
+so that $T \vecnot{v} - \vecnot{w} \in N_{T^*}$.
+Hence, the error is orthogonal to the subspace $R_T$ and has minimal length by the projection theorem.
+\end{proof}
+
+\begin{corollary}
+If $A$ is a matrix such that $A^* A$ is invertible, then the least-squares solution is
+\begin{equation*}
+\vecnot{v} = \left( A^* A \right)^{-1} A^* \vecnot{w},
+\end{equation*}
+as obtained before.
+\end{corollary}
+
+The matrix $\left( A^H A \right)^{-1} A^H$ is an example of a pseudoinverse, sometimes called a Moore-Pensose pseudoinverse.
+
+\begin{definition}
+Let $T : V \rightarrow W$ be a bounded linear transformation, where $V$ and $W$ are Hilbert spaces, and $R_T$ is closed.
+For some $\vecnot{w} \in W$, let $\hat{\vecnot{w}}$ be the vector of minimum norm $\left\| \hat{\vecnot{v}} \right\|$ that minimizes $\left\| T \vecnot{v} - \vecnot{w} \right\|$.
+The pseudoinverse $T^{\dagger}$ is the transformation mapping $\vecnot{w}$ to the minimizing $\vecnot{v}$ for each $\vecnot{w} \in W$.
+\end{definition}

@@ -1,0 +1,168 @@
+\chapter{Singular Value Decomposition}
+
+
+\section{Hermitian Matrices}
+
+\begin{lemma}[Schur's lemma]
+For any square matrix $A$, there exists a unitary matrix $U$ such that
+\begin{equation*}
+U^H A U = T
+\end{equation*}
+where $T$ is upper triangular.
+That is, every square matrix is similar to an upper-triangular matrix.
+\end{lemma}
+
+\begin{proof}
+We proof this lemma by induction.
+Suppose that the result holds for $k \leq n-1$ and let $A \in \ComplexNumbers^{n \times n}$.
+There exists an eigenvector $\vecnot{u}$ of $A$ such that $\left\| \vecnot{u} \right\|_2 = 1$.
+Using the Gram-Schmidt procedure, it is possible to construct an orthonormal basis $\mathcal{B} = \vecnot{x}_1, \ldots, \vecnot{x}_n$ for $\ComplexNumbers^n$, with $\vecnot{x}_1 = \vecnot{u}_1$.
+Define the matrix $U_n$ by
+\begin{equation*}
+U_n = \left[ \begin{array}{ccc} \vecnot{x}_1 & \cdots & \vecnot{x}_n \end{array} \right] .
+\end{equation*}
+Since $\mathcal{B}$ is a basis for $\ComplexNumbers^n$, every column of the matrix $AU_n$ can be expressed as a linear combination of vectors in $\mathcal{B}$, say,
+\begin{equation*}
+A \vecnot{x}_i = \sum_{j=1}^n s_{j,i} \vecnot{x}_j
+\quad i = 1, \ldots, n .
+\end{equation*}
+Note that $A \vecnot{x}_1 = \lambda_1 \vecnot{x}_1$ for some $\lambda_1$ since $\vecnot{x}_1 = \vecnot{u}$, an eigenvector of $A$.
+We can then write
+\begin{equation*}
+A U_n = \left[ \begin{array}{ccc} A \vecnot{x}_1 & \cdots & A \vecnot{x}_n \end{array} \right]
+= U_n \left[ \begin{array}{cccc} \lambda_1 & s_{1,2} & \ldots & s_{1,n} \\
+0 & s_{2,2} & \cdots & s_{2,n} \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & s_{n,2} & \cdots & s_{n,n} \end{array} \right]
+= U_n \left[ \begin{array}{cc} \lambda_1 & \vecnot{s}^T \\
+\vecnot{0} & A_{n-1} \end{array} \right] ,
+\end{equation*}
+where we have used the convenient notation
+\begin{equation*}
+A_{n-1} = \left[ \begin{array}{ccc} s_{2,2} & \cdots & \vecnot{s}_{2,n} \\
+\vdots & \ddots & \vdots \\
+s_{n,2} & \cdots & s_{n,n} \end{array} \right]
+\end{equation*}
+and $\vecnot{s}^T = (s_{1,2}, \ldots, s_{1,n})$.
+By the inductive hypothesis, we can write $A_{n-1} = U_{n-1} T_{n-1} U_{n-1}^H$ where $T_{n-1}$ is upper triangular and $U_{n-1}$ is unitary.
+It follows that
+\begin{equation*}
+\begin{split}
+A U_n &= U_n \left[ \begin{array}{cc} \lambda_1 & \vecnot{s}^T \\
+\vecnot{0} & A_{n-1} \end{array} \right]
+= U_n \left[ \begin{array}{cc} \lambda_1 & \vecnot{s}^T \\
+\vecnot{0} & U_{n-1} T_{n-1} U_{n-1}^H \end{array} \right] \\
+&= U_n \left[ \begin{array}{cc} 1 & \vecnot{0}^T \\
+\vecnot{0} & U_{n-1} \end{array} \right]
+\left[ \begin{array}{cc} \lambda_1 & \vecnot{s}^T U_{n-1} \\
+\vecnot{0} & T_{n-1} \end{array} \right]
+\left[ \begin{array}{cc} 1 & \vecnot{0}^T \\
+\vecnot{0} & U_{n-1}^H \end{array} \right] .
+\end{split}
+\end{equation*}
+Let $U$ be the matrix given by
+\begin{equation*}
+U = U_n \left[ \begin{array}{cc} 1 & \vecnot{0}^T \\
+\vecnot{0} & U_{n-1} \end{array} \right] ,
+\end{equation*}
+and note that $U$ is unitary.
+It follows that
+\begin{equation*}
+U^H A U = 
+\left[ \begin{array}{cc} \lambda_1 & \vecnot{s}^T U_{n-1} \\
+\vecnot{0} & T_{n-1} \end{array} \right] .
+\end{equation*}
+That is, $U$ is a unitary matrix such that $U^H A U$ is upper-triangular.
+\end{proof}
+
+We use this lemma to prove the following theorem.
+
+\begin{theorem} \label{theorem:HermitanDiagonalizable}
+Every Hermitian $n \times n$ matrix $A$ can be diagonalized by a unitary matrix,
+\begin{equation*}
+U^H A U = \Lambda,
+\end{equation*}
+where $U$ is unitary and $\Lambda$ is a diagonal matrix.
+\end{theorem}
+
+\begin{proof}
+Note that $A^H = A$ and $T = U^H A U$.
+Consider the matrix $T^H$ given by
+\begin{equation*}
+T^H = (U^H A U)^H = U^H A^H U = U^H A U = T.
+\end{equation*}
+That is, $T$ is also Hermitian.
+Since $T$ is upper triangular, this implies that $T$ is a diagonal matrix.
+We must conclude that every Hermitian matrix is diagonalized by a unitary matrix.
+\end{proof}
+
+
+\section{Singular Value Decomposition}
+
+The singular value decomposition (SVD) provides a factorization for all matrices.
+In general, a matrix $A$ can be factored into a product of unitary matrices and a diagonal matrix, as explained below.
+
+\begin{theorem}
+Let $A$ be a matrix in $\ComplexNumbers^{m \times n}$.
+Then $A$ can be factored as
+\begin{equation*}
+A = U \Sigma V^H
+\end{equation*}
+where $U \in \ComplexNumbers^{m \times m}$ is unitary, $V \in \ComplexNumbers^{n \times n}$ is unitary, and $\Sigma \in \RealNumbers^{m \times n}$ has the form
+\begin{equation*}
+\Sigma = \Diag ( \sigma_1, \sigma_2, \ldots, \sigma_p ),
+\end{equation*}
+where $p = \min (m,n)$.
+\end{theorem}
+
+The diagonal elements of $\Sigma$ are called the \emph{singular values} of $A$ and are typically ordered so that
+\begin{equation*}
+\sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_p \geq 0.
+\end{equation*}
+
+\begin{proof}
+Let
+\begin{equation*}
+A^H A V = V \Diag ( \lambda_1, \lambda_2, \ldots, \lambda_n )
+\end{equation*}
+be the spectral decomposition of $A^H A$, where the columns of $V$ are eigenvectors
+\begin{equation*}
+V = \left[ \begin{array}{cccc} \vecnot{v}_1 & \vecnot{v}_2 & \cdots & \vecnot{v}_n \end{array} \right], 
+\end{equation*}
+with $\lambda_1, \lambda_2, \cdots, \lambda_r > 0$ and $\lambda_{r+1} = \cdots = \lambda_{n} = 0$, where $r \leq p$.
+For $i \leq r$, let
+\begin{equation*}
+\vecnot{u}_i = \frac{A \vecnot{v}_i}{\sqrt{\lambda_i}},
+\end{equation*}
+and observe that
+\begin{equation*}
+\left\langle \vecnot{u}_i | \vecnot{u}_j \right\rangle = \delta_{i-j} .
+\end{equation*}
+Also note that $\{ \vecnot{u}_i \}$ are eigenvectors of $A A^H$ since
+\begin{equation*}
+A A^H \vecnot{u}_i
+= A A^H A \frac{\vecnot{v}_i}{\sqrt{\lambda_i}}
+= \sqrt{\lambda_i} A \vecnot{v}_i
+= \lambda_i \vecnot{u}_i .
+\end{equation*}
+The set $\left\{ \vecnot{u}_i: i = 1, \ldots, r \right\}$ can be extended using the Gram-Schmidt procedure to form an orthonormal basis for $\ComplexNumbers^m$.
+Let
+\begin{equation*}
+U = \left[ \begin{array}{ccc} \vecnot{u}_1 & \cdots & \vecnot{u}_m \end{array} \right] .
+\end{equation*}
+For the zero eigenvalues, the eigenvectors must come from the nullspace of $A A^H$ since the eigenvectors with zero eigenvalues are, by construction, orthogonal to the eigenvectors with nonzero eigenvalues that are in the range of $A A^H$.
+
+For $\vecnot{u}_i$ where $i \leq r$, we get
+\begin{equation*}
+\vecnot{u}_i^H A V 
+= \frac{1}{\sqrt{\lambda_i}} \vecnot{v}_i^H A^H A V
+= \sqrt{\lambda} \vecnot{e}_i^H .
+\end{equation*}
+On the other hand, if $i > r$ then $\vecnot{u}_i^H A V = \vecnot{0}$.
+Hence,
+\begin{equation*}
+U^H A V = \Diag \left( \sqrt{\lambda_1}, \ldots, \sqrt{\lambda_n} \right)
+= \Sigma ,
+\end{equation*}
+as desired.
+\end{proof}

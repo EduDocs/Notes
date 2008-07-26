@@ -1,0 +1,512 @@
+\chapter{Representations and Approximations}
+
+\section{Approximations in Hilbert Spaces}
+
+Suppose $V$ is a normed space and let $\vecnot{w}_1, \ldots, \vecnot{w}_n \in V$ be a sequence of linearly independent vectors.
+Denote the span of $\vecnot{w}_1, \ldots, \vecnot{w}_n$ by $W$.
+Consider the problem of finding a vector $\hat{\vecnot{v}} \in W$ such that $\left\| \vecnot{v} - \hat{\vecnot{v}} \right\|$ is minimized.
+Recall that the vector
+\begin{equation*}
+\hat{\vecnot{v}} = s_1 \vecnot{w}_1 + \cdots + s_n \vecnot{w}_n
+\end{equation*}
+is said to be a \emph{best approximation} to $\vecnot{v} \in V$ by vectors in $W$.
+We can write
+\begin{equation*}
+\begin{split}
+\vecnot{v} &= \hat{\vecnot{v}} + \vecnot{e} \\
+&= s_1 \vecnot{w}_1 + \cdots + s_n \vecnot{w}_n + \vecnot{e},
+\end{split}
+\end{equation*}
+where $\vecnot{e}$ is the approximation error.
+
+This problem is, in general, very difficult.
+However, if the norm $\| \cdot \|$ corresponds to the induced norm of an inner product, the problem greatly simplifies as it becomes possible to use the properties of the projection theorem.
+For instance, if $\vecnot{w}_1, \ldots, \vecnot{w}_n$ is an orthogonal set then
+\begin{equation} \label{equation:OrthogonalProjectionOrthogonalVectors}
+\hat{\vecnot{v}} = \sum_{i=1}^n \frac{ \left\langle \vecnot{v} | \vecnot{w}_i \right\rangle }{ \left\| \vecnot{w}_i \right\|^2 } \vecnot{w}_i.
+\end{equation}
+Consider the situation where the sequence $\vecnot{w}_1, \ldots, \vecnot{w}_n$ is linearly independent, but not orthogonal.
+In this case, it is not possible to apply \eqref{equation:OrthogonalProjectionOrthogonalVectors} directly.
+It is nevertheless possible to obtain a similar expression for $\hat{\vecnot{v}}$.
+Theorem~\ref{theorem:OrthogonalProjection} asserts that $\hat{\vecnot{v}} \in W$ is a best approximation of $\vecnot{v} \in V$ by vectors in $W$ if and only if $\vecnot{v} - \hat{\vecnot{v}}$ is orthogonal to every vector in $W$.
+This implies that
+\begin{equation*}
+\left\langle \vecnot{v} - \hat{\vecnot{v}} | \vecnot{w}_j \right\rangle
+= \left\langle \vecnot{v} - \sum_{i=1}^n s_i \vecnot{w}_i \Big| \vecnot{w}_j \right\rangle
+= 0
+\end{equation*}
+or, equivalently,
+\begin{equation*}
+\sum_{i=1}^n s_i \left\langle \vecnot{w}_i | \vecnot{w}_j \right\rangle
+= \left\langle \vecnot{v} | \vecnot{w}_j \right\rangle
+\end{equation*}
+for $j = 1, \ldots, n$.
+These conditions yield a system of $n$ linear equations in $n$ unknowns, which can be written in the matrix form
+\begin{equation*}
+\left[ \begin{array}{cccc}
+\left\langle \vecnot{w}_1 | \vecnot{w}_1 \right\rangle
+& \left\langle \vecnot{w}_2 | \vecnot{w}_1 \right\rangle & \cdots
+& \left\langle \vecnot{w}_n | \vecnot{w}_1 \right\rangle \\
+\left\langle \vecnot{w}_1 | \vecnot{w}_2 \right\rangle
+& \left\langle \vecnot{w}_2 | \vecnot{w}_2 \right\rangle & \cdots
+& \left\langle \vecnot{w}_n | \vecnot{w}_2 \right\rangle \\
+\vdots & \vdots & \ddots & \vdots \\
+\left\langle \vecnot{w}_1 | \vecnot{w}_n \right\rangle
+& \left\langle \vecnot{w}_2 | \vecnot{w}_n \right\rangle & \cdots
+& \left\langle \vecnot{w}_n | \vecnot{w}_n \right\rangle
+\end{array} \right]
+\left[ \begin{array}{c}
+s_1 \\ s_2 \\ \vdots \\ s_n \end{array} \right]
+= \left[ \begin{array}{c}
+\left\langle \vecnot{v} | \vecnot{w}_1 \right\rangle \\
+\left\langle \vecnot{v} | \vecnot{w}_2 \right\rangle \\ \vdots \\
+\left\langle \vecnot{v} | \vecnot{w}_n \right\rangle \end{array} \right] .
+\end{equation*}
+We can rewrite this matrix equation as
+\begin{equation*}
+G \vecnot{s} = \vecnot{t}
+\end{equation*}
+where
+\begin{equation*}
+\vecnot{t}^T = 
+\left(
+\left\langle \vecnot{v} | \vecnot{w}_1 \right\rangle,
+\left\langle \vecnot{v} | \vecnot{w}_2 \right\rangle, \ldots,
+\left\langle \vecnot{v} | \vecnot{w}_n \right\rangle \right)
+\end{equation*}
+is the \emph{cross-correlation vector}, and
+\begin{equation*}
+\vecnot{s}^T = 
+\left( s_1, s_2, \ldots, s_n \right)
+\end{equation*}
+is the vector of coefficients.
+Equations of this form are collectively known as the \emph{normal equations}.
+
+\begin{definition}
+The $n \times n$ matrix
+\begin{equation} \label{equation:GrammianMatrix}
+G = \left[ \begin{array}{cccc}
+\left\langle \vecnot{w}_1 | \vecnot{w}_1 \right\rangle
+& \left\langle \vecnot{w}_2 | \vecnot{w}_1 \right\rangle & \cdots
+& \left\langle \vecnot{w}_n | \vecnot{w}_1 \right\rangle \\
+\left\langle \vecnot{w}_1 | \vecnot{w}_2 \right\rangle
+& \left\langle \vecnot{w}_2 | \vecnot{w}_2 \right\rangle & \cdots
+& \left\langle \vecnot{w}_n | \vecnot{w}_2 \right\rangle \\
+\vdots & \vdots & \ddots & \vdots \\
+\left\langle \vecnot{w}_1 | \vecnot{w}_n \right\rangle
+& \left\langle \vecnot{w}_2 | \vecnot{w}_n \right\rangle & \cdots
+& \left\langle \vecnot{w}_n | \vecnot{w}_n \right\rangle
+\end{array} \right]
+\end{equation}
+is called the \emph{Grammian} matrix.
+Since $G_{ji} = \left\langle \vecnot{w}_i | \vecnot{w}_j \right\rangle$, it follows that the Grammian is a Hermitian symmetric matrix, i.e., $G^H = G$.
+\end{definition}
+
+\begin{definition}
+A matrix $M$ is \emph{positive-semidefinite} if $\vecnot{v}^H M \vecnot{v} \geq 0$ for all $\vecnot{v} \in F^n$.
+A matrix $M$ is \emph{positive-definite} if $\vecnot{v}^H M \vecnot{v} > 0$ for all $\vecnot{v} \in F^n - \left\{ \vecnot{0} \right\}$.
+\end{definition}
+
+An important aspect of positive-definite matrices is that they are always invertible.
+
+\begin{theorem}
+A Grammian matrix $G$ is always positive-semidefinite.
+Furthermore, it is positive-definite if and only if the sequence of vectors $\vecnot{w}_1, \ldots, \vecnot{w}_n$ is linearly independent.
+\end{theorem}
+\begin{proof}
+Let $\vecnot{v} = \left( v_1, \ldots, v_n \right)^T \in F^n$.
+Then,
+\begin{equation} \label{equation:PositiveSemiDefiniteProof}
+\begin{split}
+\vecnot{v}^H G \vecnot{v} &=
+\sum_{i=1}^n \sum_{j=1}^n \bar{v}_j G_{ji} v_i
+= \sum_{i=1}^n \sum_{j=1}^n \bar{v}_j \left\langle \vecnot{w}_i | \vecnot{w}_j \right\rangle v_i \\
+&= \sum_{i=1}^n \sum_{j=1}^n \left\langle v_i \vecnot{w}_i | v_j \vecnot{w}_j \right\rangle
+= \left\langle \sum_{i=1}^n v_i \vecnot{w}_i \Big| \sum_{j=1}^n v_j \vecnot{w}_j \right\rangle \\
+&= \left\| \sum_{i=1}^n v_i \vecnot{w}_i \right\|^2
+\geq 0.
+\end{split}
+\end{equation}
+That is, $\vecnot{v}^H G \vecnot{v} \geq 0$ for all $\vecnot{v} \in F^n$.
+
+Suppose that $G$ is not positive-definite.
+Then, there exists $\vecnot{v} \in F^n - \left\{ \vecnot{0} \right\}$ such that $\vecnot{v}^H G \vecnot{v} = 0$.
+By \eqref{equation:PositiveSemiDefiniteProof}, this implies that
+\begin{equation*}
+\sum_{i=1}^n v_i \vecnot{w}_i = 0
+\end{equation*}
+and hence the sequence of vectors $\vecnot{w}_1, \ldots, \vecnot{w}_n$ is not linearly independent.
+
+Conversely, if $G$ is positive-definite then $\vecnot{v}^H G \vecnot{v} > 0$ and
+\begin{equation*}
+\sum_{i=1}^n v_i \vecnot{w}_i > 0
+\end{equation*}
+for all $\vecnot{v} \in F^n - \left\{ \vecnot{0} \right\}$.
+That is, the sequence of vectors $\vecnot{w}_1, \ldots, \vecnot{w}_n$ is linearly independent.
+\end{proof}
+
+
+\subsection{Orthogonality Principle}
+
+\begin{theorem}
+Let $\vecnot{w}_1, \ldots, \vecnot{w}_n$ be vectors in an inner-product space $V$ and denote the span of $\vecnot{w}_1, \ldots, \vecnot{w}_n$ by $W$.
+For any vector $\vecnot{v} \in V$, the norm of the error vector $\vecnot{e}$ given by
+\begin{equation} \label{equation:OrthogonalProjectionError}
+\vecnot{e} = \vecnot{v} - \sum_{i=1}^n s_i \vecnot{w}_i
+\end{equation}
+is minimized when the error vector $\vecnot{e}$ is orthogonal to every vector in $W$.
+If $\hat{\vecnot{v}}$ denotes the \emph{least-squares} approximation to $\vecnot{v}$ then
+\begin{equation*}
+\left\langle \vecnot{v} - \hat{\vecnot{v}} | \vecnot{w}_j \right\rangle = 0
+\end{equation*}
+for $j = 1, \ldots, n$.
+\end{theorem}
+\begin{proof}
+Minimizing $\left\| \vecnot{e} \right\|^2$, where $\vecnot{e}$ is given by \eqref{equation:OrthogonalProjectionError} requires minimizing
+\begin{equation*}
+\begin{split}
+J \left( \vecnot{s} \right)
+&= \left\langle \vecnot{v} - \sum_{i=1}^n s_i \vecnot{w}_i \Big|
+\vecnot{v} - \sum_{j=1}^n s_j \vecnot{w}_j \right\rangle \\
+&= \left\langle \vecnot{v} | \vecnot{v} \right\rangle
+- \sum_{i=1}^n \left\langle s_i \vecnot{w}_i | \vecnot{v} \right\rangle
+- \sum_{j=1}^n \left\langle \vecnot{v} | s_j \vecnot{w}_j \right\rangle
++ \sum_{i=1}^n \sum_{j=1}^n \left\langle s_i \vecnot{w}_i | s_j \vecnot{w}_j \right\rangle \\
+&= \left\langle \vecnot{v} | \vecnot{v} \right\rangle
+- \sum_{i=1}^n s_i \left\langle \vecnot{w}_i | \vecnot{v} \right\rangle
+- \sum_{j=1}^n \bar{s}_j \left\langle \vecnot{v} | \vecnot{w}_j \right\rangle
++ \sum_{i=1}^n \sum_{j=1}^n s_i \bar{s}_j \left\langle \vecnot{w}_i | \vecnot{w}_j \right\rangle .
+\end{split}
+\end{equation*}
+Taking the gradient of $J \left( \vecnot{s} \right)$, we get
+\begin{equation*}
+\begin{split}
+\nabla J \left( \vecnot{s} \right)
+&= - \left[ \begin{array}{c}
+\left\langle \vecnot{v} | \vecnot{w}_1 \right\rangle \\
+\left\langle \vecnot{v} | \vecnot{w}_2 \right\rangle \\
+\vdots \\
+\left\langle \vecnot{v} | \vecnot{w}_n \right\rangle
+\end{array} \right]
++ \left[ \begin{array}{cccc}
+\left\langle \vecnot{w}_1 | \vecnot{w}_1 \right\rangle &
+\left\langle \vecnot{w}_2 | \vecnot{w}_1 \right\rangle & \hdots &
+\left\langle \vecnot{w}_n | \vecnot{w}_1 \right\rangle \\
+\left\langle \vecnot{w}_1 | \vecnot{w}_2 \right\rangle &
+\left\langle \vecnot{w}_2 | \vecnot{w}_2 \right\rangle & \hdots &
+\left\langle \vecnot{w}_n | \vecnot{w}_2 \right\rangle \\
+\vdots & \vdots & \ddots & \vdots \\
+\left\langle \vecnot{w}_1 | \vecnot{w}_n \right\rangle &
+\left\langle \vecnot{w}_2 | \vecnot{w}_n \right\rangle & \hdots &
+\left\langle \vecnot{w}_n | \vecnot{w}_n \right\rangle \\
+\end{array} \right]
+\left[ \begin{array}{c} s_1 \\ s_2 \\ \vdots \\ s_n
+\end{array} \right] \\
+&= \vecnot{0} .
+\end{split}
+\end{equation*}
+In matrix form, this yields the familiar equation
+\begin{equation*}
+G \vecnot{s} = \vecnot{t}.
+\end{equation*}
+To ensure that this extremum is in fact a minimum, we compute the Hessian matrix
+\begin{equation*}
+\nabla^2 J \left( \vecnot{s} \right) = G .
+\end{equation*}
+Since $G$ is a positive-semidefinite matrix, the extremum is indeed a minimum.
+
+This implies that $\left\| \vecnot{e} \right\|^2$ is minimized if and only if $G \vecnot{s} = \vecnot{t}$.
+That is, $\left\| \vecnot{e} \right\|^2$ is minimized if and only if $\vecnot{v} - \hat{\vecnot{v}}$ is orthogonal to every vector in $W$.
+\end{proof}
+
+Note that it is also possible to prove this theorem using the Cauchy-Schwarz inequality or the projection theorem.
+
+
+\section{Matrix Representations}
+
+For finite-dimensional vector spaces, powerful matrix representations can be derived for least-squares problems.
+Suppose that the approximation vector is given by
+\begin{equation*}
+\hat{\vecnot{v}} = \sum_{i=1}^n s_i \vecnot{w}_i
+= \left[ \vecnot{w}_1 \cdots \vecnot{w}_n \right]
+\left[ \begin{array}{c} s_1 \\ \vdots \\ s_n \end{array} \right] .
+\end{equation*}
+In matrix form, we have
+\begin{equation*}
+\hat{\vecnot{v}} = A \vecnot{s},
+\end{equation*}
+where $A = \left[ \vecnot{w}_1 \cdots \vecnot{w}_n \right]$.
+The optimization problem can then be reformulated as follows.
+Determine $\vecnot{s} \in F^n$ such that
+\begin{equation*}
+\left\| \vecnot{e} \right\|^2
+= \left\| \vecnot{v} - \hat{\vecnot{v}} \right\|^2
+= \left\| \vecnot{v} - A \vecnot{s} \right\|^2
+\end{equation*}
+is minimized.
+Note that this occurs when the error vector is orthogonal to every vector in $W$, i.e.,
+\begin{equation*}
+\left\langle \vecnot{e} | \vecnot{w}_j \right\rangle
+= \left\langle \vecnot{v} - \hat{\vecnot{v}} | \vecnot{w}_j \right\rangle
+= \left\langle \vecnot{v} - A \vecnot{s} | \vecnot{w}_j \right\rangle
+= 0
+\end{equation*}
+for $j = 1, \ldots, n$.
+
+
+\subsection{Standard Inner Products}
+
+When $\| \cdot \|$ is the norm induced by the standard inner product, these conditions can be expressed as
+\begin{equation*}
+\left[ \begin{array}{c} \vecnot{w}_1^H \\ \vdots \\ \vecnot{w}_n^H \end{array} \right] \left( \vecnot{v} - A \vecnot{s} \right) = \vecnot{0} .
+\end{equation*}
+Using the definition of $A$, we obtain
+\begin{equation*}
+A^H A \vecnot{s} = A^H \vecnot{v} .
+\end{equation*}
+The matrix $A^H A$ is the Grammian $G$ defined in \eqref{equation:GrammianMatrix}.
+The vector $A^H \vecnot{v}$ is the cross correlation vector $\vecnot{t}$.
+
+When the vectors $\vecnot{w}_1, \ldots, \vecnot{w}_n$ are linearly independent, the Grammian matrix is positive definite and hence invertible.
+The optimal solution for the least-squares problem is therefore given by
+\begin{equation*}
+\vecnot{s} = \left( A^H A \right)^{-1} A^H \vecnot{v} = G^{-1} \vecnot{t} .
+\end{equation*}
+The matrix $\left( A^H A \right)^{-1} A^H$ is often called the \emph{pseudoinverse}.
+
+The best approximation to $\vecnot{v} \in V$ by vectors in $W$ is equal to
+\begin{equation*}
+\hat{\vecnot{v}} = A \vecnot{s} = A \left( A^H A \right)^{-1} A^H \vecnot{v} .
+\end{equation*}
+The matrix $P = A \left( A^H A \right)^{-1} A^H$ is a \emph{projection matrix}.
+The matrix $P$ projects onto the range of $A$; that is, it projects onto the subspace spanned by the columns of $A$.
+
+
+\subsection{Generalized Inner Products}
+
+We can also consider the case of a general inner product.
+Recall that an inner product on $V$ is completely determined by the values
+\begin{equation*}
+h_{ji} = \left\langle \vecnot{e}_i | \vecnot{e}_j \right\rangle ,
+\end{equation*}
+and that this inner product can be expressed as
+\begin{equation*}
+\left\langle \vecnot{v} | \vecnot{w} \right\rangle
+= \vecnot{w}^H H \vecnot{v}.
+\end{equation*}
+Minimizing $\left\| \vecnot{e} \right\|^2 = \left\| \vecnot{v} - A \vecnot{s} \right\|^2$ and using the orthogonality principle lead to the matrix equation
+\begin{equation*}
+A^H H A \vecnot{s} = A^H H \vecnot{v}.
+\end{equation*}
+When the vectors $\vecnot{w}_1, \ldots, \vecnot{w}_n$ are linearly independent, the optimal solution is given by
+\begin{equation*}
+\vecnot{s} = \left( A^H H A \right)^{-1} A^H H \vecnot{v}.
+\end{equation*}
+
+
+\subsection{Minimum Error}
+
+Let $\hat{\vecnot{v}} \in W$ be the best approximation of $\vecnot{v}$ by vectors in $W$.
+Again, we can write
+\begin{equation*}
+\vecnot{v} = \hat{\vecnot{v}} + \vecnot{e}
+\end{equation*}
+where $\vecnot{e} \in W^{\bot}$ is the minimum achievable error.
+The squared norm of the minimium error is given implicitely by
+\begin{equation*}
+\left\| \vecnot{v} \right\|^2
+= \left\| \hat{\vecnot{v}} + \vecnot{e} \right\|^2
+= \left\langle \hat{\vecnot{v}} + \vecnot{e} | \hat{\vecnot{v}} + \vecnot{e} \right\rangle
+= \left\langle \hat{\vecnot{v}} | \hat{\vecnot{v}} \right\rangle
++ \left\langle \vecnot{e} | \vecnot{e} \right\rangle
+= \left\| \hat{\vecnot{v}} \right\|^2 + \left\| \vecnot{e} \right\|^2 .
+\end{equation*}
+We can then find an explicit expression for the approximation error,
+\begin{equation*}
+\begin{split}
+\left\| \vecnot{e} \right\|^2
+&= \left\| \vecnot{v} \right\|^2
+- \left\| \hat{\vecnot{v}} \right\|^2
+= \vecnot{v}^H H \vecnot{v} - \hat{\vecnot{v}}^H H \hat{\vecnot{v}} \\
+&= \vecnot{v}^H H \vecnot{v} - \vecnot{s}^H A^H H A \vecnot{s} \\
+&= \vecnot{v}^H H \vecnot{v}
+- \vecnot{v}^H H A \left( A^H H A \right)^{-1} A^H H \vecnot{v} \\
+&= \vecnot{v}^H
+\left( H -  H A \left( A^H H A \right)^{-1} A^H H \right)
+\vecnot{v}.
+\end{split}
+\end{equation*}
+
+
+\section{Applications and Examples}
+
+\subsection{Linear Regression}
+
+Let $(x_1, y_1), \ldots, (x_n, y_n)$ be a collection of points in $\RealNumbers^2$.
+A \emph{linear regression} problem consists in finding scalars $a$ and $b$ sucht that
+\begin{equation*}
+y_i \approx a x_i + b
+\end{equation*}
+for $i = 1, \ldots, n$.
+Definite the error component $e_i$ by $e_i = y_i - a x_i - b$, then
+\begin{equation*}
+\left[ \begin{array}{c} y_1 \\ \vdots \\ y_n \end{array} \right]
+= a \left[ \begin{array}{c} x_1 \\ \vdots \\ x_n \end{array} \right]
++ b \left[ \begin{array}{c} 1 \\ \vdots \\ 1 \end{array} \right]
++ \left[ \begin{array}{c} e_1 \\ \vdots \\ e_n \end{array} \right]
+= \left[ \begin{array}{cc} x_1 & 1 \\
+\vdots & \vdots \\ x_n & 1 \end{array} \right]
+\left[ \begin{array}{c} a \\ b \end{array} \right]
++ \left[ \begin{array}{c} e_1 \\ \vdots \\ e_n \end{array} \right] .
+\end{equation*}
+In vector form, we can rewrite this equation as
+\begin{equation*}
+\vecnot{y} = A \vecnot{s} + \vecnot{e},
+\end{equation*}
+where $\vecnot{y} = \left( y_1, \ldots, y_n \right)^T$, $\vecnot{s} = (a, b)^T$, $\vecnot{e} = \left( e_1, \ldots, e_n \right)^T$, and
+\begin{equation*}
+A = \left[ \begin{array}{cc} x_1 & 1 \\
+\vdots & \vdots \\ x_n & 1 \end{array} \right] .
+\end{equation*}
+This equation has a form analog to the matrix representation of a least-squares problems.
+Consider the goal of minimizing $\left\| \vecnot{e} \right\|^2$.
+The line that minimizes the sums of the squares of the \emph{vertical} distances between the data abscissas and the line is then given by
+\begin{equation*}
+\vecnot{s} = \left( A^H A \right)^{-1} A^H \vecnot{y} .
+\end{equation*}
+
+
+\subsection{Minimum Mean-Squared Estimation}
+
+Let $Z_1, \ldots, Z_n$ be a set of zero-mean random variables.
+The goal of the minimum mean-squared estimation problem is to find coefficients $s_1, \ldots, s_n$ such that the squared of the error term in
+\begin{equation*}
+X = s_1 Z_1 + \cdots + s_n Z_n + e
+\end{equation*}
+is minimized.
+Using the inner product defined by
+\begin{equation} \label{equation:ExpectationInnerProduct}
+\left\langle X | Y \right\rangle = \Expect \left[ X \overline{Y} \right],
+\end{equation}
+we can compute the minimum mean-squared estimate of $\vecnot{s}$ as
+\begin{equation*}
+G \vecnot{s} = \vecnot{t},
+\end{equation*}
+where
+\begin{equation*}
+G = \left[ \begin{array}{cccc}
+\Expect \left[ Z_1 \overline{Z}_1 \right]
+& \Expect \left[ Z_2 \overline{Z}_1 \right] & \cdots
+& \Expect \left[ Z_n \overline{Z}_1 \right] \\
+\Expect \left[ Z_1 \overline{Z}_2 \right]
+& \Expect \left[ Z_2 \overline{Z}_2 \right] & \cdots
+& \Expect \left[ Z_n \overline{Z}_2 \right] \\
+\vdots & \vdots & \ddots & \vdots \\
+\Expect \left[ Z_1 \overline{Z}_n \right]
+& \Expect \left[ Z_2 \overline{Z}_n \right] & \cdots
+& \Expect \left[ Z_n \overline{Z}_n \right] \\
+\end{array} \right]
+\end{equation*}
+and
+\begin{equation*}
+\vecnot{t} = \left[ \begin{array}{c}
+\Expect \left[ X \overline{Z}_1 \right] \\
+\Expect \left[ X \overline{Z}_2 \right] \\ \vdots \\
+\Expect \left[ X \overline{Z}_n \right] \end{array} \right] .
+\end{equation*}
+Provided that the matrix $G$ is invertible, the minimum mean-squared error is given by
+\begin{equation*}
+\left\| e \right\|^2 = E \left[ X \overline{X} \right]
+- \vecnot{t}^H G^{-1} \vecnot{t} .
+\end{equation*}
+
+
+\subsection{Wiener Filter}
+
+Suppose that the sequence of data $\left\{ y[t] \right\}$ is wide-sense stationary, and consider the FIR filter
+\begin{equation*}
+\begin{split}
+z[t] &= \sum_{k=0}^{K-1} f[k] y[t - k] \\
+&= \left[ \begin{array}{ccc} y[t] & \hdots & y[t-K+1] \end{array} \right]
+\left[ \begin{array}{c} f[0] \\ \vdots \\ f[K-1] \end{array} \right]
+= \left( \vecnot{y}[t] \right)^T \vecnot{f} .
+\end{split}
+\end{equation*}
+The goal is to design this filter in such a way that its output is as close as possible to a desired sequence $\left\{ x[t] \right\}$.
+In particular, we want to minimize the mean-squared error
+\begin{equation*}
+\left\| e[t] \right\|^2 = \Expect \left[ e[t] \bar{e}[t] \right],
+\end{equation*}
+where $e[t]$ is defined by
+\begin{equation*}
+e[t] = x[t] - z[t].
+\end{equation*}
+By the orthogonality principle, the mean-squared error is minimized when the error is orthogonal to the data; that is, for $j = 0, 1, \ldots, K-1$, we have
+\begin{equation*}
+\left\langle x[t] - \sum_{k=0}^{K-1} f[k] y[t - k] \Big| y[t - j] \right\rangle = 0,
+\end{equation*}
+or, equivalently, we can write
+\begin{equation*}
+\left\langle x[t] | y[t - j] \right\rangle
+= \sum_{k=0}^{K-1} f[k] \left\langle y[t - k] | y[t - j] \right\rangle .
+\end{equation*}
+Using \eqref{equation:ExpectationInnerProduct}, we obtain
+\begin{equation} \label{equation:WienerHopfConditions}
+\Expect \left[ x[t] \bar{y}[t - j] \right]
+= \sum_{k=0}^{K-1} f[k] \Expect \left[ y[t - k] \bar{y}[t - j] \right] .
+\end{equation}
+where $j = 1, \ldots, K-1$.
+
+For this specific case where the normal equations are defined in terms of the expectation operator, these equations are called the \emph{Wiener-Hopf} equations.
+The Grammian of the Wiener-Hopf equations can be expressed in a more familiar form using the autocorrelation matrix.
+Recall that $\{ y[t] \}$ is a wide-sense stationary process.
+As such, we have
+\begin{equation*}
+R_{yy} (j-k) = R_{yy} (j, k) = \Expect \left[ y[t-k] \bar{y}[t-j] \right]
+= \left\langle y[t-k] | y[t-j] \right\rangle .
+\end{equation*}
+Also define
+\begin{equation*}
+R_{xy}(j) = \Expect \left[ x[t] \bar{y}[t-j] \right]
+= \left\langle x[t] | y[t-j] \right\rangle .
+\end{equation*}
+Using this notation, we can rewrite \eqref{equation:WienerHopfConditions} as
+\begin{equation*}
+\vecnot{R_{xy}} = \left[ \begin{array}{c}
+R_{xy} (0) \\ R_{xy} (1) \\ \vdots \\ R_{xy} (K-1) \end{array} \right]
+= R_{yy}
+\left[ \begin{array}{c}
+f [0] \\
+f [1] \\ \vdots \\
+f [K-1] \end{array} \right]
+\end{equation*}
+where the $K \times K$ autocorrelation matrix is given by
+\begin{equation*}
+R_{yy} = \left[ \begin{array}{cccc}
+R_{yy} [0] & \bar{R}_{yy}[1] & \cdots & \bar{R}_{yy}[K-1] \\
+R_{yy} [1] & R_{yy}[0] & \cdots & \bar{R}_{yy}[K-2] \\
+\vdots & \vdots & \ddots & \vdots \\
+R_{yy} [K-1] & R_{yy}[K-2] & \cdots & R_{yy}[0]
+\end{array} \right] .
+\end{equation*}
+Note that the matrix $R_{yy}$ is Toeplitz, i.e., all the elements on a diagonal are equal.
+Assuming that $R_{yy}$ is invertible, the optimal filter taps are then given by
+\begin{equation*}
+\vecnot{f} = R_{yy}^{-1} \vecnot{t}.
+\end{equation*}
+
+The minimum mean-squared error is determined as follows,
+\begin{equation*}
+\begin{split}
+\| e \|^2 &= \| x \|^2 - \| z \|^2 \\
+&= \Expect [x \bar{x}] - \Expect \left[ \vecnot{f}^H \overline{\vecnot{y}} \vecnot{y}^T \vecnot{f} \right] \\
+&= \Expect [x \bar{x}] - \vecnot{f}^H R_{yy} \vecnot{f}
+= \Expect [x \bar{x}] - \vecnot{R_{xy}}^H \vecnot{f} .
+\end{split}
+\end{equation*}
+
+
+
+
+
+

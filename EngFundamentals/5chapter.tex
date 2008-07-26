@@ -1,0 +1,69 @@
+\chapter{Matrix Properties and Factorizations}
+
+A useful analogy between matrices and complex numbers is as follows.
+\begin{itemize}
+\item \emph{Hermitian matrices} satisfying $A^H = A$ are analogous to real numbers, whose complex conjugates are equal to themselves.
+\item \emph{Unitary matrices} satisfying $U^H U = I$ are analogous to complex numbers on the unit circle, satisfying $\bar{z}z = 1$.
+\item \emph{Orthogonal matrices} satisfying $Q^TQ = I$ are analogous to the real numbers $z = \pm 1$, such that $z^2 = 1$.
+\end{itemize}
+
+The transformation
+\begin{equation*}
+z = \frac{1 + jr}{1 - jr}
+\end{equation*}
+maps real number $r$ into the unit circle $|z| = 1$.
+Analogously, by \emph{Cayley's formula},
+\begin{equation*}
+U = (I + jR) (I - jR)^{-1},
+\end{equation*}
+a Hermitian matrix $R$ is mapped to a unitary matrix.
+
+
+\section{Matrix Factorization}
+
+\subsubsection{LU decomposition}
+
+A square matrix $A \in F^{n \times n}$ can be factored as $A = LU$, where $L$ is a lower-triangular matrix with ones on the main diagonal and $U$ is an upper-triangular matrix.
+
+\begin{gather*}
+\left[ \begin{array}{ccc} 1 & 1 & 1 \\ 1 & 2 & 4 \\ 1 & 3 & 9 \end{array} \right] \\
+\left[ \begin{array}{ccc} 1 & 0 & 0 \\ -1 & 1 & 0 \\ -1 & 0 & 1 \end{array} \right]
+\left[ \begin{array}{ccc} 1 & 1 & 1 \\ 1 & 2 & 4 \\ 1 & 3 & 9 \end{array} \right]
+= \left[ \begin{array}{ccc} 1 & 1 & 1 \\ 0 & 1 & 3 \\ 0 & 2 & 8 \end{array} \right] \\
+\left[ \begin{array}{ccc} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & -2 & 1 \end{array} \right]
+\left[ \begin{array}{ccc} 1 & 0 & 0 \\ -1 & 1 & 0 \\ -1 & 0 & 1 \end{array} \right]
+\left[ \begin{array}{ccc} 1 & 1 & 1 \\ 1 & 2 & 4 \\ 1 & 3 & 9 \end{array} \right]
+= \left[ \begin{array}{ccc} 1 & 1 & 1 \\ 0 & 1 & 3 \\ 0 & 0 & 2 \end{array} \right]
+\end{gather*}
+
+\begin{gather*}
+\left[ \begin{array}{ccc} 1 & 0 & 0 \\ -1 & 1 & 0 \\ -1 & 0 & 1 \end{array} \right]
+\left[ \begin{array}{ccc} 1 & 1 & 1 \\ 1 & 2 & 4 \\ 1 & 3 & 9 \end{array} \right]
+= \left[ \begin{array}{ccc} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 2 & 1 \end{array} \right]
+\left[ \begin{array}{ccc} 1 & 1 & 1 \\ 0 & 1 & 3 \\ 0 & 0 & 2 \end{array} \right] \\
+\left[ \begin{array}{ccc} 1 & 1 & 1 \\ 1 & 2 & 4 \\ 1 & 3 & 9 \end{array} \right]
+= \left[ \begin{array}{ccc} 1 & 0 & 0 \\ 1 & 1 & 0 \\ 1 & 0 & 1 \end{array} \right]
+\left[ \begin{array}{ccc} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 2 & 1 \end{array} \right]
+\left[ \begin{array}{ccc} 1 & 1 & 1 \\ 0 & 1 & 3 \\ 0 & 0 & 2 \end{array} \right] \\
+\left[ \begin{array}{ccc} 1 & 1 & 1 \\ 1 & 2 & 4 \\ 1 & 3 & 9 \end{array} \right]
+= \left[ \begin{array}{ccc} 1 & 0 & 0 \\ 1 & 1 & 0 \\ 1 & 2 & 1 \end{array} \right]
+\left[ \begin{array}{ccc} 1 & 1 & 1 \\ 0 & 1 & 3 \\ 0 & 0 & 2 \end{array} \right] \\
+\end{gather*}
+
+
+\subsubsection{Cholesky decomposition}
+
+A Hermitian positive-definite matrix $A \in F^{n \times n}$ can be factored as
+\begin{equation*}
+A = LL^H,
+\end{equation*}
+where $L$ is lower triangular.
+
+\subsubsection{QR decomposition}
+
+A matrix $A \in F^{m \times n}$ can be factored as
+\begin{equation*}
+A = Q R,
+\end{equation*}
+where $Q$ is a unitary matrix, $QQ^H = I$, and $R$ is an upper-triangular matrix.
+
