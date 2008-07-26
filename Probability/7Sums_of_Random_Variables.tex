@@ -1,0 +1,572 @@
+\chapter{Sum of Independent Random Variables}
+
+Sums of independent random variables play an important role in solving engineering problems.
+We therefore turn to the question of determining the distribution of a sum of independent random variables in terms of the distribution of the individual constituents.
+
+\section{Convolution}
+
+If $X$ and $Y$ are independent random variables, the distribution of their sum $Z = X + Y$ can be obtained by using the \emph{convolution} operator.
+
+\subsection{The Discrete Case}
+
+Suppose that $X$ and $Y$ are two discrete random variables with PMFs $p_X(x)$ and $p_Y(y)$, respectively.
+We wish to determine the distribution function $p_Z (z)$ of $Z$.
+To do this, it suffices to determine the probability that $Z$ takes on the value $z$, where $z$ is an arbitrary integer.
+\begin{equation*}
+\begin{split}
+p_Z (z) &= \Pr (Z = z) = \Pr (X + Y = z) \\
+&= \sum_{ \{ (x,y) | x + y = z \} } \Pr (X = x, Y = y) \\
+&= \sum_{ x \in \mathbb{Z} } \Pr (X = x, Y = z-x) \\
+&= \sum_{ x \in \mathbb{Z} } p_X (x) p_Y(z-x)
+\end{split}
+\end{equation*}
+This leads to the following definition.
+
+\begin{definition} \label{definition:DiscreteConvolution}
+Let $X$ and $Y$ be two independent, integer-valued random variables, with PMFs $p_X(x)$ and $p_Y(y)$.
+The \emph{convolution} of $p_X(x)$ and $p_Y(y)$ is the distribution function $p_Z = p_X * p_Y$ given by
+\begin{equation*}
+p_Z(z) = \sum_{k = - \infty}^{\infty} p_X(k) p_Y(z-k) .
+\end{equation*}
+The function $p_Z(z)$ is the PMF of the random variable $Z = X + Y$.
+\end{definition}
+
+It is easy to see that the convolution operation is commutative, and it is straightforward to show that it is associative.
+Now consider the random variables
+\begin{equation*}
+S_n = \sum_{k=1}^n X_k \quad n \geq 1
+\end{equation*}
+where $X_1, X_2, \ldots$ are independent random variables with common distribution $p_X$ defined on the integers.
+The PMF of $S_1$ is simply $p_X$.
+The PMF of $S_n$ can be obtained recursively using the equation
+\begin{equation*}
+S_n = S_{n-1} + X_n .
+\end{equation*}
+
+\begin{example}[Binomial Random Variables]
+Suppose that $S_n$ is a sum of $n$ independent and identically distributed Bernoulli random variables with parameter $p \in (0,1)$.
+The PMF of $S_1$ is equal to
+\begin{equation*}
+p_{S_1} (\ell) = \begin{cases}
+1 - p, & \text{if }\ell = 0 \\p, & \text{if }\ell = 1 .
+\end{cases}
+\end{equation*}
+Assume that the PMF of $S_n$ is given by
+\begin{equation*}
+p_{S_n} (k)
+= \binom{n}{k} p^k (1-p)^{n-k} ,
+\quad k = 0, 1, \ldots n.
+\end{equation*}
+Then, the PMF of $S_{n+1}$ can be computed using the convolution sum
+\begin{equation*}
+\begin{split}
+p_{S_{n+1}} (\ell) &= \sum_{k = - \infty}^{\infty} p_{S_n}(k) p_X(\ell-k) \\
+&= p_{S_n}(\ell) (1-p) + p_{S_n}(\ell-1) p \\
+&= \binom{n}{\ell} p^{\ell} (1-p)^{n+1-\ell} + \binom{n}{\ell-1} p^{\ell} (1-p)^{n+1-\ell} \\
+&= \binom{n+1}{\ell} p^{\ell} (1-p)^{n+1-\ell}
+\end{split}
+\end{equation*}
+where $\ell = 0, 1, \ldots, n+1$.
+Thus, by the principle of mathematical induction, we conclude that the sum of $n$ independent Bernoulli random variables with parameter $p$ is a vinomial random variable with parameters $n$ and $p$.
+\end{example}
+
+The convolution of two binomial distributions, one with parameter $m$ and $p$ and the other with parameters $n$ and $p$, is a binomial random distribution with parameters $(m+n)$ and $p$.
+This fact follows easily from the previous example.
+The convolution of $k$ geometric distributions with common parameter $p$ is a negrative binomial distribution with parameters $p$ and $k$.
+This can be seen by considering the experiment which consists of tossing a coin until the $k$th head appears.
+
+
+\subsection{The Continuous Case}
+
+The convolution operator can also be defined for PDFs.
+This corresponds to the situation where $Z = X+Y$ with $X$ and $Y$ being continuous random variable.
+
+\begin{definition} \label{definition:ContinuousConvolution}
+Let $X$ and $Y$ be two indpendent continuous random variables with PDFs $f_X$ and $f_Y$, respectively.
+The \emph{convolution} $f_X * f_Y$ of $f_X$ and $f_Y$ is the function defined by
+\begin{equation*}
+\begin{split}
+(f_X * f_Y) (z) &= \int_{-\infty}^{\infty} f_X(z - \xi) f_Y(\xi) d\xi \\
+&= \int_{-\infty}^{\infty} f_Y(z - \xi) f_X(\xi) d\xi .
+\end{split}
+\end{equation*}
+\end{definition}
+
+This definition is analogous to Definition~\ref{definition:DiscreteConvolution} for the convolution of two PMFs.
+It should not be surprising that if $X$ and $Y$ are independent continuous random variables, then the density of their sum is the convolution of the individual densities.
+
+\begin{theorem}
+Suppose $X$ and $Y$ are two independent random variables with PDFs $f_X(x)$ and $f_Y(y)$.
+Then the sum $Z = X + Y$ is also a continuous random variable.
+Its density is the function $f_Z(z)$, where $f_Z$ is the convolution of $f_X$ and $f_Y$.
+\end{theorem}
+\begin{proof}
+Consider the CDF of $Z$,
+\begin{equation*}
+\begin{split}
+\Pr (Z \leq z) &= \Pr (X + Y \leq z) \\
+&= \int_{-\infty}^{\infty} \Pr (X + Y \leq z | X = \xi) f_X(\xi) d\xi \\
+&= \int_{-\infty}^{\infty} \Pr (Y \leq z - \xi) f_X(\xi) d\xi .
+\end{split}
+\end{equation*}
+The last equality above follows from the independence of $X$ and $Y$.
+Taking the derivative of $F_Z (z)$ with respect to $z$, we get
+\begin{equation*}
+\begin{split}
+\frac{d}{dz} F_Z (z) &= \frac{d}{dz} \Pr (Z \leq z) \\
+&= \int_{-\infty}^{\infty} \frac{d}{dz} \Pr (Y \leq z - \xi) f_X(\xi) d\xi \\
+&= \int_{-\infty}^{\infty} f_Y (z - \xi) f_X(\xi) d\xi .
+\end{split}
+\end{equation*}
+\end{proof}
+
+
+\begin{example}[Sum of Two Uniform Random Variables]
+Suppose that two numbers are independently selected from the interval $[0,1]$ with uniform probability.
+We wish to compute the PDF of their sum?
+Let $X$ and $Y$ be random variables describing the two choices, and let $Z = X + Y$ represent the sum.
+Then the PDFs of $X$ and $Y$ are
+\begin{equation*}
+f_X(\xi) = f_Y(\xi)
+= \begin{cases} 1 & 0 \leq \xi \leq 1 \\
+0 & \text{otherwise} . \end{cases}
+\end{equation*}
+The PDF for the sum is given by
+\begin{equation*}
+f_Z(z) = \int_{-\infty}^{+\infty} f_X(z - \xi) f_Y(\xi) d\xi .
+\end{equation*}
+Since $f_Y(y) = 1$ when $0 \leq y \leq 1$ and zero otherwise, the integral becomes
+\begin{equation*}
+f_Z(z) = \int_0^1 f_X(z - \xi) d\xi .
+\end{equation*}
+Now the integrand is zero unless $0 \leq z - \xi \leq 1$ (i.e., unless $z - 1 \leq \xi \leq z$).
+So if $0 \leq z \leq 1$, we have
+\begin{equation*}
+f_Z(z) = \int_0^z d\xi = z,
+\end{equation*}
+while if $1 < z \leq 2$, we have
+\begin{equation*}
+f_Z(z) = \int_{z - 1}^1 d\xi = 2 - z .
+\end{equation*}
+If $z < 0$ or $z > 2$ we have $f_Z(z) = 0$.
+Hence,
+\begin{equation*}
+f_Z(z) = \begin{cases} z & 0 \leq z \leq 1, \\
+2-z & 1 < z \leq 2, \\
+0, & \text{otherwise} . \end{cases}
+\end{equation*}
+\end{example}
+
+\begin{example}[Sum of Two Exponential Random Variables]
+Suppose two numbers are independently selected at random from the interval $[0,\infty)$ according to an exponential distribution with parameter $\lambda$. 
+We wish to find the PDF of their sum.
+
+Let $X$ and $Y$ represent these two numbers, and denote their sum by $Z = X + Y$.
+Then, $X$ and $Y$ have PDFs
+\begin{equation*}
+f_X (\xi) = f_Y (\xi) = \begin{cases} \lambda e^{-\lambda \xi} & \xi \geq 0 \\
+0 & \text{otherwise} . \end{cases}
+\end{equation*}
+If $z > 0$, we have
+\begin{equation*}
+\begin{split}
+f_Z (z) &= \int_{-\infty}^{\infty} f_X(z - \xi) f_Y(\xi) d\xi \\
+&= \int_0^z \lambda e^{-\lambda(z - \xi)} \lambda e^{-\lambda \xi} d\xi \\
+&= \int_0^z \lambda^2 e^{-\lambda z} dxi \\
+&= \lambda^2 z e^{-\lambda z}.
+\end{split}
+\end{equation*}
+On the other hand, if $z < 0$ then $f_Z(z) = 0$.
+Hence, the PDF of $Z$ is given by
+\begin{equation*}
+f_Z (z) = \begin{cases} \lambda^2 z e^{-\lambda z} & z \geq 0 \\
+0 & \text{otherwise} . \end{cases}
+\end{equation*}
+\end{example}
+
+\begin{example}[Sum of Two Gaussian Random Variables]
+It is an interesting and important fact that the convolution of two Gaussian densities with means $\mu_1$~and~$\mu_2$ and variances $\sigma_1$~and~$\sigma_2$ is again a Gaussian density, with mean $\mu_1 + \mu_2$ and variance $\sigma_1^2 + \sigma_2^2$.
+We will show this in the special case that both random variables are standard normal.
+The general case can be done in the same way, but the calculation is more involved.
+
+Suppose $X$ and $Y$ are two independent Gaussian random variables, each with density
+\begin{equation*}
+f_X(\xi) = f_Y(\xi) = \frac 1{\sqrt{2\pi}} e^{-\xi^2/2} .
+\end{equation*}
+Then, the PDF of $Z = X + Y$ is equal to
+\begin{equation*}
+\begin{split}
+f_Z(z) &= f_X * f_Y(z) \\
+&= \frac{1}{2\pi}
+\int_{-\infty}^{\infty} e^{-(z - \xi)^2/2} e^{-\xi^2/2} d\xi \\
+&= \frac{1}{2\pi} e^{-z^2/4} \int_{-\infty}^{\infty} e^{-(\xi - z/2)^2} d\xi \\
+&= \frac{1}{2\pi} e^{-z^2/4} \sqrt{\pi}
+\left[ \int_{-\infty}^{\infty} \frac{1}{\sqrt{\pi}}
+e^{-(\xi-z/2)^2} d\xi \right] .
+\end{split}
+\end{equation*}
+The expression in the brackets equals one, since it is the integral of a Gaussian PDF with $\mu = z/2$ and $\sigma^2 = 1/2$.
+Thus, we obtain
+\begin{equation*}
+f_Z(z) = \frac 1{\sqrt{4\pi}} e^{-z^2/4} .
+\end{equation*}
+\end{example}
+
+
+\section{Moment Generating Functions}
+
+The \emph{moment generating function} of a random variable $X$ is defined by
+\begin{equation*}
+M_X (s) = \mathrm{E} \left[ e^{s X} \right] .
+\end{equation*}
+This function gets its name from the following property.
+If the moment generating function exists in an interval around $s = 0$, then the $n$th momemnt of $X$ is given by
+\begin{equation*}
+\begin{split}
+\frac{d^n}{ds^n} M_X (s) \Big|_{s=0}
+&= \frac{d^n}{ds^n} \mathrm{E} \left[ e^{s X} \right] \Big|_{s=0}
+= \mathrm{E} \left[ \frac{d^n}{ds^n} e^{s X} \right] \bigg|_{s=0} \\
+&= \mathrm{E} \left[ X^n e^{s X} \right] \Big|_{s=0}
+= \mathrm{E} [X^n] .
+\end{split}
+\end{equation*}
+In words, if we differentiate the function $M_X(s)$ a total of $n$ times and then set it to zero, we obain the $n$th moment of $X$.
+In particular, we have $M_X'(0) = \mathrm{E} [X]$ and $M_X''(0) = \mathrm{E} [X^2]$.
+
+\begin{example}[Discrete Uniform Random Variable]
+Suppose $X$ is a discrete uniform random variable taking value in $X(\Omega) = \{ 1, 2, \ldots, n \}$.
+Then, $p_X(k) = 1/n$ for $1 \leq k \leq n$ and
+\begin{equation*}
+\begin{split}
+M_X(s) &= \sum_{k = 1}^n \frac{1}{n} e^{sk}
+= \frac{1}{n} \sum_{k = 1}^n e^{sk} \\
+&= \frac {e^s (e^{ns} - 1)} {n (e^s - 1)} .
+\end{split}
+\end{equation*}
+Using this expression, we can easily get the first two moments of $X$,
+\begin{align*}
+\mu_1 &= \frac{d}{ds} M_X (s) \Big|_{s = 0}
+= \frac{1}{n} \sum_{k = 1}^n k e^{sk} \Big|_{s = 0} = \frac{n + 1}{2} \\
+\mu_2 &= \frac{d^2}{ds^2} M_X (s) \Big|_{s=0}
+= \frac{1}{n} \sum_{k=1}^n k^2 e^{sk} \Big|_{s = 0}
+= \frac {(n + 1)(2n + 1)}{6} .
+\end{align*}
+The mean of $X$ is $(n+1)/2$ and its variance is $\sigma^2 = \mu_2 - \mu_1^2 = (n^2 - 1)/12$.
+\end{example}
+
+\begin{example}[Binomial Random Variable]
+This time, let $X$ be a binomial random variable with parameters $n$ and $p$.
+Recall that the PMF of $X$ is given by
+\begin{equation*}
+p_X(k) = \binom{n}{k} p^k (1 - p)^k,
+\end{equation*}
+where $k = 0, 1, \ldots, n$.
+The moment genrating function of $X$ becomes
+\begin{equation*}
+\begin{split}
+M_X(s) &= \sum_{k = 0}^n e^{sk} \binom{n}{k} p^k (1-p)^{n - k} \\
+&= \sum_{k = 0}^n \binom{n}{k} (pe^s)^k q^{n - k} \\
+&= (pe^s + q)^n .
+\end{split}
+\end{equation*}
+where we use the notation $q = 1 - p$.
+Note that
+\begin{align*}
+\mu_1 &= \frac{d}{ds} M_X (s) \Big|_{s = 0} = np \\
+\mu_2 &= \frac{d^2}{ds^2} M_X (s) \Big|_{s = 0}
+= n(n-1)p^2 + np .
+\end{align*}
+So that the mean of $X$ is $np$ and its variance becomes $\sigma^2 = \mu_2 - \mu_1^2 = np(1 - p)$, as expected.
+\end{example}
+
+\begin{example}[Poisson Randoom Variable]
+Suppose that $X$ has a Poisson distribution with parameter $\lambda > 0$.
+The function $M_X(s)$ can be computed as follows.
+\begin{equation*}
+\begin{split}
+M_X(s) &= \sum_{k = 0}^\infty e^{sk} \frac{e^{-\lambda}\lambda^k}{k!}
+= e^{-\lambda} \sum_{k = 0}^\infty \frac{(\lambda e^s)^k}{k!} \\
+&= e^{-\lambda} e^{\lambda e^s} = e^{\lambda(e^s - 1)} .
+\end{split}
+\end{equation*}
+The first two moments are given by
+\begin{align*}
+\mu_1 &= e^{\lambda(e^s - 1)} \lambda e^s \Big|_{s = 0} = \lambda \\
+\mu_2 &= e^{\lambda(e^s - 1)} \left( \lambda^2 e^{2s} + \lambda e^s \right)
+\Big|_{s = 0} = \lambda^2 + \lambda .
+\end{align*} 
+This provides a simple way to compute the mean and the variance of $X$, which are both equal to $\lambda$.
+\end{example}
+
+
+\subsection{Ordinary Generating Functions}
+
+In the special yet important case where $X(\Omega)$ is a subset of the non-negative integers, it is sometimes useful to use the \emph{ordinary generating function}.
+This function is defined by
+\begin{equation*}
+G_X(z) = \sum_{k=0}^{\infty} z^k p_X (k) .
+\end{equation*}
+Note that $M_X (s) = G_X (e^s)$ and $G_X(z) = M_X (\log z)$.
+The probability $\Pr (X = k)$ can be recovered from $G_X (z)$ using Taylor's formula,
+\begin{equation*}
+p_X(k) = \frac{G_X^{(k)} (0)}{k!}
+\end{equation*}
+where $G_X^{(k)}$ is the $k$th derivative of $G_X$.
+
+
+\subsection{Sums of Independent Random Variables}
+
+Let $X$ and $Y$ be independent random variables.
+Consider the random variable $Z = X + Y$.
+The moment generating function of $Z$ is given by
+\begin{equation*}
+\begin{split}
+M_Z (s) &= \mathrm{E} \left[ e^{sZ} \right]
+= \mathrm{E} \left[ e^{s(X + Y)} \right] \\
+&= \mathrm{E} \left[ e^{sX} e^{sY} \right]
+= \mathrm{E} \left[ e^{sX} \right] \mathrm{E} \left[ e^{sY} \right] \\
+&= M_X(s) M_Y(s) .
+\end{split}
+\end{equation*}
+
+\begin{example}[Sum of Independent Poisson Random Variables]
+Let $X$ and $Y$ be independent Poisson random varibles with parameters $\lambda$ and $\mu$, respectively.
+Let $Z = X + Y$.
+We wish to show that $Z$ is a Poisson random variable.
+
+The moment generating functions of $X$ and $Y$ are
+\begin{align*}
+M_X (t) &= e^{\lambda ( e^t -1)} \\
+M_Y (t) &= e^{\mu ( e^t -1)} .
+\end{align*}
+The moment generating function of $Z$ is then equal to
+\begin{equation*}
+M_Z (t) = M_X (t) M_Y (t) = e^{(\lambda + \mu) (e^t - a)} .
+\end{equation*}
+This implies that $Z$ is a Poisson random variable with parameter $\lambda + \mu$.
+\end{example}
+
+
+\section{Important Inequalities}
+
+There are situations for which computing the exact value of a probability is impossible or impractical.
+For these situations, it may be acceptable to use bounds for the value of an elusive probability.
+
+
+\subsection{The Chebyshev Inequality}
+
+The \emph{Chebyshev inequality} provides a means to compute such bounds.
+Suppose that $g$ is a nonnegative function and let $S$ be a measurable set.
+We denote the infimum of $g$ over $S$ by
+\begin{equation*}
+i_S = \inf_{ x \in S } g (x) .
+\end{equation*}
+The Chebyshev inequality states that
+\begin{equation*}
+i_S \Prob (X \in S)
+\leq \Expect \left[ g(X) \right] .
+\end{equation*}
+The definition of $i_S$ and the fact that $g$ is nonnegative imply that
+\begin{equation*}
+i_S \SetIn_S (x) \leq g(x) \SetIn_S (x) \leq g(x)
+\end{equation*}
+for any value of $x$.
+Taking the expectactions of these functions with respect to $X$, we get
+\begin{equation*}
+\Expect \left[ i_S \SetIn_S (X) \right]
+= i_S \Prob (X \in S) \leq \Expect [g (X)] .
+\end{equation*}
+
+
+\subsection{The Markov Inequality}
+
+Let $g(x) = x^2$ and $S = \{ x | |x| \geq a \}$ where $a$ is a positive constant.
+We wish to find a bound on the probability that $|X|$ exceeds $a$.
+Using the Chebyshev inequality we have $i_S = \inf_{x \in S} x^2 = a^2$ and, consequently,
+\begin{equation*}
+a^2 \Prob (X \in S) \leq \Expect [X^2] .
+\end{equation*}
+Since $a$ is a positive real number, we can rewrite this equation as
+\begin{equation*}
+\Prob (X \in S) \leq \frac{\Expect [X^2]}{a^2} .
+\end{equation*}
+
+\begin{example}
+Supose that $0 < b \leq a^2$.
+Also, assume that $S = \{ x | |x| \geq a^2 \}$.
+Let $X$ be a discrete random variable with PMF
+\begin{equation*}
+p_X (x) = \left\{ \begin{array}{ll} 1 - \frac{b^2}{a^2}, & x = 0 \\
+\frac{b^2}{a^2}, & x = a \\
+0, & \text{otherwise.} \end{array} \right.
+\end{equation*}
+Then, $\Expect \left[ X^2 \right] = b^2$ and $\Prob (X \in S) = b^2 / a^2$.
+That is, the Chebyshev inequality is tight.
+\end{example}
+
+\newpage
+
+\begin{example}[The Cantelli Inequality]
+Suppose that $X$ is random variable with mean $m$ and variance $\sigma^2$.
+We wish to show that
+\begin{equation*}
+\Pr ( X - m \geq \alpha ) \leq \frac{\sigma^2}{\sigma^2 + \alpha^2},
+\end{equation*}
+where $\alpha \geq 0$.
+\end{example}
+
+
+\subsection{Jensen's Inequality}
+
+Suppose that $g$ is a convex function, that is
+\begin{equation*}
+p g(x) + (1-p) g(y) \geq g(px + (1-p)y)
+\end{equation*}
+for all $p \in (0,1)$ and all real numbers $x$ and $y$.
+Then, we get
+\begin{equation*}
+\Expect [g(X)] \geq g \left( \Expect [X] \right) ,
+\end{equation*}
+provided both expectation exist.
+
+\subsection{The Moment Generating Function}
+
+
+\begin{example}
+Let $X$ be a Poisson random bariable with parameter $\lambda$.
+The moment generating function of $X$ is given by
+\begin{equation*}
+M(t) = \sum_{k=0}^{\infty} e^{tk} \frac{ \lambda^k e^{-\lambda}}{k!} .
+= e^{-\lambda} \sum_{k=0}^{\infty} \frac{\left( \lambda e^t \right)^k}{k!} .
+= e^{\lambda(e^t -1)} .
+\end{equation*}
+
+\end{example}
+The \emph{moment generating function} of a random variable $X$ is defined by
+\begin{equation*}
+M_X (t) = \Expect \left[ e^{t X} \right]
+= \int_{-\infty}^{\infty} f_X (x) e^{t x} dx
+\end{equation*}
+where $t \in \RealNumbers$.
+
+
+
+\begin{example}
+Let $X$ be an exponential random variable with parameter $\lambda > 0$.
+The moment-generating function of $x$ is given by
+\begin{equation*}
+M_X (t) = \int_0^{\infty} \lambda e^{-\lambda x} e^{tx} dx
+= \int_0^{\infty} \lambda e^{-(\lambda-t) x} dx
+= \frac{\lambda}{\lambda - t}
+\end{equation*}
+\end{example}
+
+The \emph{probability generating function} of a nonnegative integer-valued random variable $X$ is defined by
+\begin{equation*}
+G_X (z) = \Expect \left[ z^X \right]
+= \sum_{k=0}^{\infty} p_X(k) z^k .
+\end{equation*}
+
+\begin{equation*}
+\begin{split}
+G_X (z) &= \sum_{k=0}^{\infty} \frac{\lambda^k}{k!} e^{-\lambda} z^k \\
+&= e^{-\lambda} \sum_{k=0}^{\infty} \frac{(\lambda z)^k}{k!} \\
+&= e^{-\lambda} e^{\lambda z} \\
+&= e^{\lambda (z-1)}
+\end{split}
+\end{equation*}
+
+
+
+\newpage
+
+\begin{example}
+Let $M_X(s)$ be the transform associated with a random variable $X$.
+Consider a new random variable $Y = aX + b$.
+Then,
+\begin{equation*}
+M_Y(s) = \Expect \left[ e^{s(aX + b)} \right]
+= e^{sb} \Expect \left[ e^{saX} \right]
+= e^{sb} M_X (sa)
+\end{equation*}
+\end{example}
+
+\begin{example}
+Let $X$ be a normal random variable with mean $m$ and variance $\sigma^2$.
+
+\begin{equation*}
+f_(y) = \frac{1}{\sqrt{2 \pi}} e^{- y^2 /2}.
+\end{equation*}
+The transform is
+\begin{equation*}
+\begin{split}
+M_Y (s)
+&= \int_{- \infty}^{\infty} \frac{1}{\sqrt{2 \pi}} e^{- y^2 / 2} e^{sy} dy \\
+&= \frac{1}{\sqrt{2 \pi}}
+\int_{- \infty}^{\infty} \frac{1}{\sqrt{2 \pi}} e^{- \frac{y^2}{2} + sy} dy \\
+&= e^{s^2/2} \frac{1}{\sqrt{2 \pi}}
+\int_{- \infty}^{\infty} \frac{1}{\sqrt{2 \pi}} e^{- \frac{y^2}{2} + sy - s^2/2} dy \\
+&= e^{s^2/2} \frac{1}{\sqrt{2 \pi}}
+\int_{- \infty}^{\infty} \frac{1}{\sqrt{2 \pi}} e^{- \frac{(y - s)^2}{2}} dy \\
+&= e^{s^2}{2} .
+\end{split}
+\end{equation*}
+
+\begin{equation*}
+X = \sigma Y + m
+\end{equation*}
+Then
+\begin{equation*}
+M_X (s) = e^{sm} M_Y (s \sigma) = e^{(\sigma^2 s^2 / 2) + m s}.
+\end{equation*}
+\end{example}
+
+\subsection{Moment Generating Function}
+
+
+
+
+
+\begin{example}
+The sum of independent normal random variables is
+\begin{align*}
+M_X (s) &= e^{\frac{\sigma_x^2 s^2}{2} + m_x s} \\
+M_Y (s) &= e^{\frac{\sigma_y^2 s^2}{2} + m_y s}
+\end{align*}
+$Z = X + Y$.
+\begin{equation*}
+M_Z (s) = e^{\frac{(\sigma_x^2 + \sigma_y^2) s^2}{2} + (m_x + m_y) s} .
+\end{equation*}
+Thus, the sum of two independent Gaussian random variables is also Gaussian.
+\end{example}
+
+
+\begin{theorem}[The Weak Law of Large Numbers]
+Let $X_1, X_2, \ldots$ be independent identically distributed random variables with mean $m$.
+For every $\epsilon > 0$, we have
+\begin{equation*}
+\Prob \left( |S_n - m| \geq \epsilon \right)
+= \Prob \left( \left| \frac{X_1 + \cdots + X_n}{n} - m \right| \geq \epsilon \right) \rightarrow 0.
+\end{equation*}
+\end{theorem}
+\begin{proof}
+\begin{equation*}
+S_n = \frac{X_1 + \cdots X_n}{n} .
+\end{equation*}
+We have
+\begin{equation*}
+\Expect [S_n] = 
+\frac{\Expect [X_1] + \cdots \Expect [X_n]}{n} = m .
+\end{equation*}
+Using independence, we also have
+\begin{equation*}
+\Var (S_n) = \frac{ \Var( X_1 + \cdots + X_n )}{n^2}
+= \frac{ \Var( X_1 ) + \cdots + \Var(X_n )}{n^2}
+= \sigma^2 / n
+\end{equation*}
+We apply the Chebyshev inequality and obtain
+\begin{equation*}
+\Prob (|M_n - m| \geq \epsilon) \leq \frac{ \sigma^2}{n \epsilon^2} .
+\end{equation*}
+for any $\epsilon > 0$.
+\end{proof}

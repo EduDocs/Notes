@@ -1,0 +1,80 @@
+\documentclass[12pt,openany]{book}
+
+%\usepackage{times}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphics,epsfig}
+
+\topmargin          0in
+\headheight         0.25in
+\headsep            0.25in
+\oddsidemargin      0.5in
+\evensidemargin     0.5in
+\textheight         8.5in
+\textwidth          5.5in
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+\newtheorem{fact}{Fact}
+\newtheorem{lemma}{Lemma}
+\newtheorem{example}{Example}
+\newtheorem{problem}{P}
+\newtheorem{solution}{S}
+
+\newcommand{\Interior}[1]{\ensuremath{{#1}^{\circ}}}
+\newcommand{\Closure}[1]{\ensuremath{\overline{#1}}}
+\newcommand{\Complement}[1]{\ensuremath{{#1}^{c}}}
+
+\newcommand{\SetIn}{\ensuremath{\mathrm{1\!1}}}
+\newcommand{\Range}{\ensuremath{\mathrm{Ra}}}
+\newcommand{\Expect}{\ensuremath{\mathrm{E}}}
+\newcommand{\Var}{\ensuremath{\mathrm{Var}}}
+\newcommand{\Prob}{\Pr}
+\newcommand{\vecnot}{\underline}
+\newcommand{\RealNumbers}{\mathbb{R}}
+\newcommand{\RationalNumbers}{\mathbb{Q}}
+\newcommand{\ComplexNumbers}{\mathbb{C}}
+\newcommand{\Integers}{\mathbb{Z}}
+\newcommand{\NaturalNumbers}{\mathbb{N}}
+\newcommand{\Real}{\mathrm{Re}}
+\newcommand{\Span}{\mathrm{span}}
+\newcommand{\Rank}{\mathrm{rank}}
+\newcommand{\Nullity}{\mathrm{nullity}}
+\newcommand{\Trace}{\mathrm{tr}}
+\newcommand{\Diag}{\mathrm{diag}}
+\DeclareMathOperator{\esssup}{esssup}
+
+%% Definitions
+%%
+\renewcommand{\baselinestretch}{1.25}
+
+
+\begin{document}
+
+\frontmatter
+
+\chapter*{Copyright}
+Copyright \copyright\ 2006 \\
+Jean-Francois Chamberland
+
+Permission is granted to copy, distribute and/or modify this document under the terms of the \emph{GNU Free Documentation License}, Version 1.2 or any later version published by the \emph{Free Software Foundation}; with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
+%A copy of the license is included in the section entitled ``GNU Free Documentation License''.
+
+\tableofcontents
+
+\mainmatter
+
+\include{0Preface}
+\include{1Mathematical_Review}
+\include{2Concepts_of_Probability_Theory}
+\include{3Conditional_Probability}
+\include{4Notions_of_Combinatorics}
+\include{5Discrete_Random_Variables}
+\include{6Continuous_Random_Variables}
+\include{7Sums_of_Random_variables}
+
+\appendix
+
+%\include{fdl}
+\end{document}

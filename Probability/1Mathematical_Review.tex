@@ -1,0 +1,170 @@
+\chapter{Mathematical Review}
+
+The review of set theory contained herein adopts a naive point of view.
+We assume that the meaning of a set as a collection of objects is intuitively clear.
+A rigorous analysis of this concept belongs to the foundations of mathematics and mathematical logic.
+Although we shall not initiate a study of these fields, the rules we follow in dealing with sets are derived from them.
+A \emph{set} is a collection of objects, which are the \emph{elements} of the set.
+
+\begin{center}
+\includegraphics[height=3.825cm]{Figures/1Chapter/basicset}
+\end{center}
+
+If an element $x$ belongs to a set $S$, we express this fact by writing $x \in S$.
+If $x$ does not belong to $S$, we write $x \notin S$.
+We use the equality symbol to denote \emph{logical identity}.
+For instance, $x = y$ means that $x$ and $y$ are symbols denoting the same object.
+Similarly, the equation $S = T$ states that $S$ and $T$ are two symbols for the same set.
+In particular, the sets $S$ and $T$ contain precisely the same elements.
+If $x$ and $y$ are different objects then we write $x \neq y$.
+Also, we can express the fact that $S$ and $T$ are different sets by writing $S \neq T$.
+
+A set $S$ is a \emph{subset} of $T$ if every element of $S$ is also contained in $T$.
+We express this relation by writing $S \subset T$.
+Note that this definition does not require $S$ to be different from $T$.
+In fact, $S = T$ if and only if $S \subset T$ and $T \subset S$.
+If $S \subset T$ and $S$ is different from $T$, then $S$ is a \emph{proper subset} of $T$ and we write $S \subsetneq T$.
+
+There are many ways to specify a set.
+If the set contains only a few elements, one can simply list the objects in the set;
+\begin{equation*}
+S = \{ x_1, x_2, x_3 \} .
+\end{equation*}
+The content of a set can also be enumerated whenever $S$ has a countable number of elements,
+\begin{equation*}
+S = \{ x_1, x_2, \ldots \} .
+\end{equation*}
+Usually, the way to specify a set is to take some collection $S$ of objects and some property that elements of $S$ may or may not possess, and to form the set consisting of all elements of $S$ having that property.
+For example, starting with the integers $\Integers$, we can form the subset of $S$ consisting of all even numbers
+\begin{equation*}
+S = \{ x \in \Integers | x \text{ is an even number} \}.
+\end{equation*}
+More generally, we denote the set of all elements that have a certain property $P$ by
+\begin{equation*}
+S = \{ x | x \text{ satisfies } P \} .
+\end{equation*}
+The braces are to be read as the words ``the set of'' whereas the symbol $|$ stands for the words ``such that.''
+
+It is convenient to introduce two special sets.
+The \emph{empty set}, denoted by $\emptyset$, is a set that contains no elements.
+The \emph{universal set} is the collection of all objects of interest in a particular context, and it is denoted by $\Omega$.
+Once a universal set $\Omega$ is specified, we need only consider sets that are subsets of $\Omega$.
+In the context of probability, $\Omega$ is often called the \emph{sample space}.
+
+The \emph{complement} of a set $S$, with respect to the universal set $\Omega$, is the collection of all objects in $\Omega$ that do not belong to $S$,
+$S^c = \{ x \in \Omega | x \notin S \}$.
+We note that $\Omega^c = \emptyset$.
+
+
+\section{Elementary Set Operations}
+
+Probability theory makes extensive use of elementary set operations.
+Below, we review the ideas of set theory, and establish the basic terminology and notation.
+Consider two sets, $S$ and $T$.
+
+\begin{center}
+\includegraphics[height=3.03cm]{Figures/1Chapter/sets}
+\end{center}
+
+The \emph{union} of sets $S$ and $T$ is the collection of all elements that belong to $S$ or $T$ (or both), and it is denoted by $S \cup T$.
+Formally, we define the union of these two sets by
+\begin{equation*}
+S \cup T = \{ x | x \in S \text{ or } x \in T \} .
+\end{equation*}
+
+\begin{center}
+\includegraphics[height=3.03cm]{Figures/1Chapter/union}
+\end{center}
+
+The \emph{intersection} of sets $S$ and $T$ is the collection of all elements that belong to $S$ and $T$.
+It is denoted by $S \cap T$, and it can be expressed mathematically as
+\begin{equation*}
+S \cap T = \{ x | x \in S \text{ and } x \in T \} .
+\end{equation*}
+
+\begin{center}
+\includegraphics[height=3.03cm]{Figures/1Chapter/intersection}
+\end{center}
+
+When $S$ and $T$ have no elements in common, we write $S \cap T = \emptyset$.
+We also express this fact by saying that $S$ and $T$ are \emph{disjoint}.
+More generally, a collection of sets is said to be disjoint if no two sets have a common element.
+A collection of sets is said to form a \emph{partition} of $S$ if the sets in the collection are disjoint and their union is $S$.
+
+\begin{center}
+\includegraphics[height=4.23cm]{Figures/1Chapter/setpartition}
+\end{center}
+
+The \emph{difference} of two sets, denoted by $S - T$, is defined as the set consisting of those elements of $S$ that are not in $T$,
+\begin{equation*}
+S - T = \{ x | x \in S \text{ and } x \notin T \} .
+\end{equation*}
+This set is sometimes called the complement of $T$ relative to $S$, or the complement of $T$ in $S$.
+
+\begin{center}
+\includegraphics[height=3.03cm]{Figures/1Chapter/difference}
+\end{center}
+
+We have already looked at the definition of the union and the intersection of two sets.
+We can also form the union or the intersection of arbitrarily many sets.
+This is defined in the obvious way,
+\begin{align*}
+\bigcup_{\alpha \in I} S_{\alpha}
+&= \{ x | x \in S_{\alpha} \text{ for some } \alpha \in I \} \\
+\bigcap_{\alpha \in I} S_{\alpha}
+&= \{ x | x \in S_{\alpha} \text{ for all } \alpha \in I \} .
+\end{align*}
+The index set $I$ can be finite or even infinite.
+
+
+\section{Rules of Set Theory}
+
+Given a collection of sets, it is possible to form new ones by applying elementary set operations to them.
+As in algebra, one uses parentheses to indicate precedence.
+For instance, $R \cup (S \cap T)$ denotes the union of two sets $R$ and $S \cap T$, while $(R \cup S) \cap T$ represents the intersection of two sets $R \cup S$ and $T$.
+The sets thus formed are quite different.
+
+\begin{center}
+\includegraphics[height=4.53cm]{Figures/1Chapter/triple}
+\end{center}
+
+Sometimes different combinations of operations lead to the same set.
+For instance, we have the two distributive laws
+\begin{align*}
+R \cap (S \cup T) &= (R \cap S) \cup (R \cap T) \\
+R \cup (S \cap T) &= (R \cup S) \cap (R \cup T).
+\end{align*}
+Two particularly useful equivalent combinations of operations are given by \emph{De~Morgan's laws}, which state that
+\begin{align*}
+R - (S \cup T) &= (R - S) \cap (R - T) \\
+R - (S \cap T) &= (R - S) \cup (R - T).
+\end{align*}
+These two laws can be generalized to
+\begin{align*}
+\left( \bigcup_{\alpha \in I} S_{\alpha} \right)^c
+&= \bigcap_{\alpha \in I} S_{\alpha}^c \\
+\left( \bigcap_{\alpha \in I} S_{\alpha} \right)^c
+&= \bigcup_{\alpha \in I} S_{\alpha}^c
+\end{align*}
+when multiple sets are involved.
+To establish the first equality, suppose that $x$ belongs to $\left( \bigcup_{\alpha \in I} S_{\alpha} \right)^c$.
+Then $x$ is not contained in $\bigcup_{\alpha \in I} S_{\alpha}$.
+That is, $x$ is not an element of $S_{\alpha}$ for any $\alpha \in I$.
+This implies that $x$ belongs to $S_{\alpha}^c$ for all $\alpha \in I$, and therefore $x \in \bigcap_{\alpha \in I} S_{\alpha}^c$.
+We have shown that $\left( \bigcup_{\alpha \in I} S_{\alpha} \right)^c \subset \bigcap_{\alpha \in I} S_{\alpha}^c$.
+The converse inclusion is obtained by reversing the above argument.
+The second law can be obtained in a similar fashion.
+
+
+\section{Cartesian Products}
+
+There is yet another way to create new sets form existing ones.
+It involves the notion of an \emph{ordered pair} of objects.
+Given sets $S$ and $T$, the \emph{cartesian product} $S \times T$ is the set of all ordered pairs $(x, y)$ for which $x$ is an element of $S$ and $y$ is an element of $T$,
+\begin{equation*}
+S \times T = \{ (x, y) | x \in S \text{ and } y \in T \} .
+\end{equation*}
+
+\begin{center}
+\includegraphics[height=3.06cm]{Figures/1Chapter/cartesianproduct}
+\end{center}
