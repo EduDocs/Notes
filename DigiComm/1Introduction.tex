@@ -1,6 +1,6 @@
 \chapter{Digital Communications}
 
-The expression \emph{digital communications} broadly refers to the transmission of information using digital messages, or a bit stream.
+The expression \emph{digital communications} broadly refers to the transmission of information using digital messages or bit streams.
 There are notable advantages to transmitting data  using discrete messages.
 It allows for enhanced signal processing and quality control.
 In particular, errors caused by noise and interference can be detected and corrected.
@@ -13,13 +13,13 @@ These advantages, and many more, explain the widespread adoption and constantly 
 A typical digital communication system can be represented by the functional block diagram depicted in Fig~\ref{figure:BlockDiagram}.
 It is composed of five basic components.
 The input block contains the source, which produces data (such as voice, emails, or images), and it also includes all the operations that are required to convert the original information into a format suitable for transmission.
-The transmitter takes bits from the input block and sends them over a channel using electro-magnetic signals, or some alternate means.
+The transmitter takes bits from the input block and sends them over a channel using electromagnetic signals, or some alternate means.
 Communication channels come in many flavors.
-For instance, a transmission can take place over an ethernet cable, a coaxial cable, or free-space (wireless communications).
+For instance, a transmission can take place over an ethernet cable, a coaxial cable, or free space (wireless communications).
 There are also more esoteric channels like a hard drive platter, a compact disc, or a memory stick.
 The role of the receiver is to recover the sent message from a collection of measurements.
-It may need to extract the signal from noise and, possibly, correct errors that may have occurred during transmission.
-Finally, the output block takes the received information and puts it back in a format that is appropriate for the end-user.
+This unit may need to extract the signal from noise and, possibly, correct errors that may have occurred during transmission.
+Finally, the output block takes the received information and puts it back in a format that is appropriate for the end-users.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -44,6 +44,13 @@ Our treatment of digital communications will follow this general approach.
 
 \subsection{The Input-Output Blocks}
 
+The role of the input block is to take information in its natural form and to convert it into a digital format.
+Depending on the nature of the source, two operations may be necessary to digitalize a message.
+\emph{Sampling} is a signal processing technique that reduces a continuous-time signal to a discrete-time signal.
+The conversion of a sound wave into a sequence of samples is a common example of sampling.
+The second action that may be required is \emph{quantization}, which maps a continuous-space signal into a discrete set of possible values.
+The combination of these two operations will transform a continuous signal into a digital message.
+
 \begin{figure}[htbp]
 \begin{center}
 \begin{psfrags}
@@ -58,6 +65,14 @@ Our treatment of digital communications will follow this general approach.
 \label{figure:BlockInput}
 \end{figure}
 
+The optional step of \emph{data compression}, or source coding, is often used at the input to reduce the size of the message to be transmitted.
+This, in turn, brings down the consumption of expensive resources such as power, spectral bandwidth and hard disk space.
+On the downside, compressed data must be decompressed before being accessed.
+This entails using extra processing on the receiver side.
+Furthermore, some compression schemes alter the integrity of the data.
+These schemes usually feature better compression ratios at the expense of introducing small errors in the data.
+The MPEG standards, including the MP3 audio layer, provide examples of lossy compression schemes.
+
 \begin{figure}[htbp]
 \begin{center}
 \begin{psfrags}
@@ -71,8 +86,25 @@ Our treatment of digital communications will follow this general approach.
 \label{figure:BlockOutput}
 \end{figure}
 
+At the output of the system, the data must be transformed back into a format that is acceptable to the end-user.
+The received message must be decompressed.
+Note that for the destination to be able to recover the original data, it must understand the encoding scheme used by the sender.
+In other words, the decoding method must be known at the receiver.
+If the original signal is a continuous-time waveform, then an interpolator can be used to reconstruct the the waveform from its sample values.
+The quantization block present at the input does not have a counterpart at the output.
+This deficiency can be explained through the fact that quantization cannot be undone.
+Information is lost whenever a continuous-space signal is discretized.
+The level of \emph{distortion} associated with quantization can, however, be controlled by selecting an appropriate quantizer.
+
 
 \subsection{The Transmitter-Receiver Pair}
+
+A channel code is used at the transmitter to shield data sent over the channel against errors due to noise and interference.
+This level of protection is achieved by adding redundancy to the information bits in a structured manner.
+Audio CDs make use of a \emph{Reed-Solomon code} to protect the music from scratches and dust, whereas a low-latency \emph{convolutional code} is employed in cellphones to carry voice signals.
+The second task of the transmission unit is to modulate the digital bit-stream onto an analog carrier prior to transmission.
+The possible waveforms emitted by the transmitter are chosen from a finite number of symbols.
+The transmitter must produce a signal that remains confined to its assigned spectral bandwidth.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -83,9 +115,18 @@ Our treatment of digital communications will follow this general approach.
 \epsfig{file=Figures/transmitter,width=7.7625cm}
 \end{psfrags}
 \end{center}
-\caption{Components of a tranmtter.}
+\caption{Components of a transmitter.}
 \label{figure:BlockTransmitter}
 \end{figure}
+
+The message then propagates through the communication channel.
+This is the physical medium that bridges the gap between the transmitter and the receiver.
+In most applications, the channel acts as to transfer the data to a different place.
+However, in hard disk drives and CDs, the information may be stored locally simply to be accessible at a later time.
+Most communication channels cause signal degradation.
+The message  may be subject to attenuation, interference and noise corruption.
+The communication channel may be unreliable; and its environment, hard to characterize.
+Recovering the original data from a set of measurements available at the receiver is one of the many challenges of digital communication systems.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -100,8 +141,22 @@ Our treatment of digital communications will follow this general approach.
 \label{figure:BlockReceiver}
 \end{figure}
 
+The receiver is tasked with extracting the original symbols from noisy measurements.
+The first step consists in producing estimates as to which symbols were sent by the transmitter over the channel.
+This procedure is termed \emph{demodulation}.
+These symbols estimates are then translated back into information bits by the decoder.
+Redundancy is removed from the data, and the original format of the information bits is restored.
+If the channel conditions are harsh and the local measurement too noisy, then this process fails and the corresponding data is lost.
+Scratching a CD repetitively will illustrate this point well.
+After substantial disc abuse, a player is not longer able to recreate the music.
+
 
 \section{Common Channels}
+
+Various communication channels can provide a connection between a transmitter and a receiver.
+Common wireline channels include coaxial cables, ethernet cables, and twisted-pair wires.
+Optical fiber offers a high-capacity solution for heavy applications.
+Finally, wireless electromagnetic channels are popular for their convenience and broadcast capabilities.
 
 
 \section{Sample Applications}
