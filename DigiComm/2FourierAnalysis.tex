@@ -1,4 +1,5 @@
 \chapter{Fourier Analysis and Sampling}
+\label{chapter:FourierAnalysisSampling}
 
 \emph{Fourier analysis} refers to a collection of tools that can be applied to express a function in terms of sinusoidal components, called basis elements, of different frequencies.
 The result of the decomposition is the amplitude and the phase to be imparted to each basis element in the reconstruction.
@@ -255,7 +256,13 @@ Whereas if the index set is discrete, then the random process is a \emph{discret
 The viewpoint where a stochastic process is regarded as a collection of random variables tend to prevail in the study of digital communications.
 \begin{figure}[htbp]
 \begin{center}
+\begin{psfrags}
+\psfrag{A}[c]{Amplitude}
+\psfrag{t}[c]{Time}
+\psfrag{t0}[c]{$t_0$}
+\psfrag{t1}[c]{$t_1$}
 \epsfig{file=Figures/process,width=7cm}
+\end{psfrags}
 \caption{Two distinct views of a random process.}
 \label{figure:RandomProcess}
 \end{center}
@@ -291,7 +298,12 @@ When a stochastic process fulfills these conditions, it is called \emph{ergodic}
 
 \begin{figure}[htbp]
 \begin{center}
+\begin{psfrags}
+\psfrag{A}[c]{Amplitude}
+\psfrag{t}[c]{Time}
+\psfrag{t0}[c]{$t_0$}
 \epsfig{file=Figures/ergodic,width=8cm}
+\end{psfrags}
 \caption{For ergodic processes, the time average of a function along a trajectory is equal to the ensemble average.}
 \label{figure:ErgodicProcess}
 \end{center}
