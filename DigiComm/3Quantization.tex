@@ -146,9 +146,9 @@ This can be achieved, for instance, by imposing a rule on the respective positio
 Restricting the search space to uniform quantizers is one possible way to ensure that an optimal quantizater can be found.
 
 A \emph{uniform quantizer} is a function where the locations of successive outputs are situated at a fixed interval, $q_i - q_{i-1} = \Delta$ for all the possible values.
-It is one of the simplest quantizer designs.
-The quantization scheme considered in Figure~\ref{figure:Quantizer} is in fact a uniform quantizer.
-The distance between two quantization points is the same for all neighbors.
+That is, the distance between two quantization points is the same for all neighbors.
+This scheme is one of the simplest quantizer designs.
+The quantization function considered in Figure~\ref{figure:Quantizer} is in fact a uniform quantizer.
 If the objective function of the optimization process is the mean squared error, then optimal locations for the quantization points can be found in a straightforward manner.
 First, note that we can write the postion of the quantization points as
 \begin{equation*}
@@ -182,7 +182,7 @@ The objective function then becomes
 The resulting optimization process now has two degrees of freedom, namely $q_1$ and $\Delta$.
 For a suitable probability density function $f_x(\cdot)$, an optimal solution can be obtained explicitly using standard optimization methods.
 
-\begin{example}
+\begin{example} \label{example:OptimalUniformQuantizer}
 We revisit Example~\ref{example:UniformQuantizer} in the context of uniform quantizers.
 Again, suppose that the values of the discrete-time input process are uniformly distributed over $[0, 16]$.
 We wish to find the optimal eight-level uniform quantizer associated with this input distribution.
@@ -216,7 +216,65 @@ A second derivative test ensures that this corresponds to a local minimum.
 Since this point is the only stationary point of the function $\text{MSE}~(q_1, \Delta)$ within our search space, we gather that the quantization scheme of Example~\ref{example:UniformQuantizer} coincide with the optimal uniform quantizer.
 \end{example}
 
+Although the search space for uniform quantizers is much smaller than the set of all possilbe quatizers, finding an optimal uniform quantizer remains a strenuous task in general.
+The resulting minimazation problem need not have a closed-form solution, in contrast to Example~\ref{example:OptimalUniformQuantizer}.
+This task is often accomplished by discretizing the search space and applying numerical techniques to identify the best candidate.
 
+
+\section{Non-Uniform Quantizers}
+
+
+Suppose that the quantization points $\{ q_i \}$ are fixed.
+The optimal quantizer given these points is the function $Q^* : \mathbb{R} \mapsto \mathcal{Q}$ that minimizes the MSE,
+\begin{equation*}
+\begin{split}
+\min_Q \mathrm{E} [ d(x, x_{\mathrm{q}}) ]
+&= \min_Q \int_{-\infty}^{\infty} (\xi - Q(\xi))^2 f_x(\xi) d\xi \\
+&= \int_{-\infty}^{\infty} \min_{Q(\xi)} (\xi - Q(\xi))^2 f_x(\xi) d\xi .
+\end{split}
+\end{equation*}
+It should then be clear that the value of the function $Q^*(\cdot)$ evaluated at $x$ is the point $q_i$ that is closest to $x$,
+\begin{equation*}
+Q^*(x) = \arg \min_{\{ q_i \}} (x - q_i)^2 .
+\end{equation*}
+In particular, an optimal $\ell$-level scalar quantizer always has $\ell$ decision regions, each being an interval around a quantization point.
+
+Alternatively, we can assume that the decision intervals are given.
+Let the boundaries of these intervals be denoted by $b_1, b_2, \ldots, b_{\ell-1}$.
+Then, the corresponding MSE is given by
+\begin{equation*}
+\int_{-\infty}^{b_1} (\xi - q_1)^2 f_x(\xi) d\xi
++ \sum_{i=2}^{{\ell}-1}
+\int_{b_{i-1}}^{b_i} (\xi - q_i)^2 f_x(\xi) d\xi
++ \int_{b_{\ell-1}}^{\infty} (\xi - q_{\ell})^2 f_x(\xi) d\xi .
+\end{equation*}
+The value of the MSE can be minimize by selecting the quantization points $\{ q_i \}$ appropriately.
+Note that each quantization point can be optimized individually, as the integral has a nice additive structure.
+Solving one instance of the decouple problem, we get
+\begin{equation*}
+q_i^* = \min_{q_i} \int_{b_{i-1}}^{b_i} (\xi - q_i)^2 f_x(\xi) d\xi .
+\end{equation*}
+To obtain the solution, we differentiate the objective function with respect to $q_i$ and set the derivative equal to zero;
+\begin{equation*}
+\frac{\partial}{\partial q_i} \int_{b_{i-1}}^{b_i} (\xi - q_i)^2 f_x(\xi) d\xi
+\int_{b_{i-1}}^{b_i} 2 (\xi - q_i) f_x(\xi) d\xi = 0 .
+\end{equation*}
+This implies that
+\begin{equation*}
+q_i^* = \mathrm{E} [ x | b_{i-1} < x \leq b_i ] .
+\end{equation*}
+In other words, once the decision intervals are picked, the optimal quantization point $q_i^*$ is equal to the conditional expectation of $x$ given that $x$ falls inside interval~$i$.
+
+
+\begin{equation} \label{equation:QuantizerMSE}
+\begin{split}
+\text{MSE} &= \int_{-\infty}^{\frac{q_1 + q_2}{2}} (\xi - q_1)^2 f_x(\xi) d\xi
++ \sum_{i=2}^{{\ell}-1}
+\int_{\frac{q_{i-1} + q_i}{2}}^{\frac{q_i + q_{i+1}}{2}}
+(\xi - q_i)^2 f_x(\xi) d\xi \\
+&+ \int_{\frac{q_{\ell-1} + q_{\ell}}{2}}^{\infty} (\xi - q_{\ell})^2 f_x(\xi) d\xi .
+\end{split}
+\end{equation}
 
 
 
@@ -225,7 +283,7 @@ Since this point is the only stationary point of the function $\text{MSE}~(q_1, 
 A quantizer can work either on single-source outputs or on blocks of source outputs.
 Although more complex, the latter approach typically yields better performance.
 
-\section{Lloyd-Max Algorithm}
+\subsection{Lloyd-Max Algorithm}
 
 
 \section{Analysis-Synthesis Coders}
