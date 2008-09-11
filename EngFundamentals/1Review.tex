@@ -214,7 +214,7 @@ d_Y \left( f(x_1), f(x_2) \right) < \epsilon.
 \end{equation*}
 \end{theorem}
 \begin{proof}
-Suppose that $f$ is contiunuous.
+Suppose that $f$ is continuous.
 Given $x_1$ and $\epsilon > 0$, consider the set
 \begin{equation*}
 O_x = f^{-1} \left( B_{d_Y} (f(x_1), \epsilon) \right)
@@ -223,11 +223,11 @@ which is open in $X$ and contains the point $x_1$.
 Since $O_x$ is open and $x_1 \in O_x$, there exists a $\delta$-ball $B_{d_X} (x_1, \delta)$ centered at $x_1$ such that $B_{d_X} (x_1, \delta) \subset O_x$.
 For any $x_2 \in B_{d_X} (x_1, \delta)$, it follows that $f(x_2) \in B_{d_Y} (f(x_1), \epsilon)$ as desired.
 
-Conversely, suppose that the $\epsilon$-$\delta$ condition is satified.
+Conversely, suppose that the $\epsilon$-$\delta$ condition is satisfied.
 Let $O_y$ be an open set in $Y$.
 For any $x \in f^{-1} (O_y)$, $f(x) \in O_y$ and therefore there exists an $\epsilon$-ball $B_{d_Y} (f(x), \epsilon)$ centered at $f(x)$ contained in $O_y$.
 By the $\epsilon$-$\delta$ condition for continuity, there exits a $\delta$-ball $B_{d_X} (x, \delta)$ centered at $x$ such that $f \left( B_{d_X} (x,\delta) \right) \subset B_{d_Y} \left( f(x), \epsilon \right)$.
-The set $B_{d_X} (x, \delta)$ is a neighborhood of $x$ contained in $f^{-1} (O_y)$, which imples that $f^{-1} (O_y)$ is open.
+The set $B_{d_X} (x, \delta)$ is a neighborhood of $x$ contained in $f^{-1} (O_y)$, which implies that $f^{-1} (O_y)$ is open.
 \end{proof}
 
 Consider the convergent sequence definition of continuity, and note that a \emph{sequence} of points of a set $X$ can be seen as a function from the positive integers to $X$.
@@ -257,7 +257,7 @@ Let $f: X \rightarrow Y$ where $X$ is a metrizable space.
 The function $f$ is continuous if and only if for every convergent sequence $x_n \rightarrow x$ in $X$, the sequence $f(x_n)$ converges to $f(x)$.
 \end{theorem}
 \begin{proof}
-Suppose that $f$ is continous.
+Suppose that $f$ is continuous.
 Let $O$ be a neighborhood of $f(x)$.
 Then $f^{-1}(O)$ is a neighborhood of $x$, and so there exists an integer $N$ such that $x_n \in f^{-1}(O)$ for $n \geq N$.
 Thus, $f(x_n) \in O$ for all $n \geq N$ and $f(x_n) \rightarrow f(x)$.
@@ -278,13 +278,13 @@ From Definition~\ref{definition:SequenceConvergence}, we know that a sequence $x
 
 \begin{definition}
 Consider a sequence $x_1, x_2, \ldots$ in a metrizable space $X$.
-This sequence satifies the \emph{Cauchy criterion} if for any natural number $n$ there exists a natural number $M$ (depending on $n$) such that for all $j \geq M$ and $k \geq M$,
+This sequence satisfies the \emph{Cauchy criterion} if for any natural number $n$ there exists a natural number $M$ (depending on $n$) such that for all $j \geq M$ and $k \geq M$,
 \begin{equation*}
 d \left( x_j, x_k \right) \leq \frac{1}{n}.
 \end{equation*}
 \end{definition}
 
-A sequence that satifies the Cauchy criterion is called a \emph{Cauchy sequence}.
+A sequence that satisfies the Cauchy criterion is called a \emph{Cauchy sequence}.
 
 \begin{problem}
 Consider a sequence $x_1, x_2, \ldots$ in a metrizable space $X$.

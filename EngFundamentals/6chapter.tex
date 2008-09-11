@@ -13,7 +13,7 @@ If $A$ is an $n \times n$ matrix over the field $F$, a \emph{characteristic valu
 \end{definition}
 
 Let $A$ be a matrix over the field of real or complex numbers.
-A nonzero vector $\vecnot{v}$ is called a \emph{right eighenvector} for the eigenvalue $\lambda$ if $A \vecnot{v} = \lambda \vecnot{v}$.
+A nonzero vector $\vecnot{v}$ is called a \emph{right eigenvector} for the eigenvalue $\lambda$ if $A \vecnot{v} = \lambda \vecnot{v}$.
 It is called a \emph{left eigenvector} if $\vecnot{v}^H A = \lambda \vecnot{v}^H$.
 
 The polynomial $\chi_A (\lambda) = \det (\lambda I - A)$ is called the \emph{characteristic polynomial} of $A$.
@@ -85,7 +85,7 @@ Similarly, a matrix $A$ is diagonalizable if there exists an invertible matrix $
 A = S \Lambda S^{-1}
 \end{equation*}
 where $\Lambda$ is a diagonal matrix.
-We proceed to show that if an $n \times n$ matrix has $n$ linearly independent eigenvecotrs, then it is diagonalizable.
+We proceed to show that if an $n \times n$ matrix has $n$ linearly independent eigenvectors, then it is diagonalizable.
 
 Suppose that the $n \times n$ matrix $A$ has $n$ linearly independent eigenvectors, which we denote by $\vecnot{v}_1, \ldots, \vecnot{v}_n$.
 Let the eigenvalue of $\vecnot{v}_i$ be denoted by $\lambda_i$ so that
@@ -134,7 +134,7 @@ A &= S \Lambda S^{-1} \\
 That is, the matrix $A$ is diagonalizable.
 
 The type of the transformation from $A$ to $\Lambda$ arises in a variety of contexts.
-If there exists an inveritble matrix $T$ such that
+If there exists an invertible matrix $T$ such that
 \begin{equation*}
 A = T B T^{-1},
 \end{equation*}
@@ -193,7 +193,7 @@ p( A ) \vecnot{v} = \sum_{k=0}^l p_k A^k \vecnot{v}
 That is $p(A) \vecnot{v} = p( \lambda ) \vecnot{v}$.
 \end{proof}
 
-A matrix $A$ is singular if and only if $0$ is an eighenvalue of $A$.
+A matrix $A$ is singular if and only if $0$ is an eigenvalue of $A$.
 
 \section{The Jordan Form}
 
@@ -223,7 +223,7 @@ Since $S$ is nonsingular, there are exactly $n$ linearly independent eigenvector
 \end{proof}
 
 \begin{fact}
-An $m \times m$ matrix $A$ with $k \leq m$ linearly independent eigenvectors can be writte as
+An $m \times m$ matrix $A$ with $k \leq m$ linearly independent eigenvectors can be written as
 \begin{equation*}
 A = T J T^{-1} ,
 \end{equation*}
@@ -244,7 +244,7 @@ J = \left[ \begin{array}{ccccc}
 0 & 0 & 0 & \cdots & \lambda_i
 \end{array} \right] .
 \end{equation*}
-When $J_i$ is an $l \times l$ matrix, then the eigen value $\lambda_i$ is repeated $l$ times along the diagonal, and $1$ appears $l - 1$ times above the diagonal.
+When $J_i$ is an $l \times l$ matrix, then the eigenvalue $\lambda_i$ is repeated $l$ times along the diagonal, and $1$ appears $l - 1$ times above the diagonal.
 Two matrices are similar if they have identical Jordan form.
 \end{fact}
 
