@@ -206,7 +206,7 @@ That is, $f^{-1} (O)$ is open.
 \begin{theorem}
 Suppose $X$ and $Y$ are two metrizable spaces with metrics $d_X$ and $d_Y$.
 Consider a function $f : X \rightarrow Y$.
-The function $f$ is continuous if and only if given $x \in X$ and $\epsilon > 0$ there exists $\delta > 0$ such that
+The function $f$ is continuous if and only if for any $x_1 \in X$ and $\epsilon > 0$, there exists a $\delta > 0$ such that
 \begin{equation*}
 d_X(x_1, x_2) < \delta
 \quad \text{implies} \quad
@@ -215,19 +215,19 @@ d_Y \left( f(x_1), f(x_2) \right) < \epsilon.
 \end{theorem}
 \begin{proof}
 Suppose that $f$ is continuous.
-Given $x_1$ and $\epsilon > 0$, consider the set
+For any $x_1 \in X$ and $\epsilon > 0$, let $O_y =  B_{d_Y} (f(x_1), \epsilon)$ and consider the set
 \begin{equation*}
-O_x = f^{-1} \left( B_{d_Y} (f(x_1), \epsilon) \right)
+O_x = f^{-1} \left( O_y \right)
 \end{equation*}
 which is open in $X$ and contains the point $x_1$.
 Since $O_x$ is open and $x_1 \in O_x$, there exists a $\delta$-ball $B_{d_X} (x_1, \delta)$ centered at $x_1$ such that $B_{d_X} (x_1, \delta) \subset O_x$.
-For any $x_2 \in B_{d_X} (x_1, \delta)$, it follows that $f(x_2) \in B_{d_Y} (f(x_1), \epsilon)$ as desired.
+We also see that $f(x_2) \in O_y$ for any $x_2 \in B_{d_X} (x_1, \delta)$ because $A \subseteq O_x$ implies $f(A) \subseteq O_y$.
+It follows that $d_Y \left( f(x_1), f(x_2) \right) < \epsilon$ for all $x_2 \in B_{d_X} (x_1, \delta)$.
 
-Conversely, suppose that the $\epsilon$-$\delta$ condition is satisfied.
-Let $O_y$ be an open set in $Y$.
-For any $x \in f^{-1} (O_y)$, $f(x) \in O_y$ and therefore there exists an $\epsilon$-ball $B_{d_Y} (f(x), \epsilon)$ centered at $f(x)$ contained in $O_y$.
+Conversely, let $O_y$ be an open set in $Y$ and suppose that the $\epsilon$-$\delta$ condition is satisfied.
+For any $x \in f^{-1} (O_y)$, $f(x) \in O_y$ and there exists an $\epsilon$-ball $B_{d_Y} (f(x), \epsilon)$ centered at $f(x)$ contained in $O_y$.
 By the $\epsilon$-$\delta$ condition for continuity, there exits a $\delta$-ball $B_{d_X} (x, \delta)$ centered at $x$ such that $f \left( B_{d_X} (x,\delta) \right) \subset B_{d_Y} \left( f(x), \epsilon \right)$.
-The set $B_{d_X} (x, \delta)$ is a neighborhood of $x$ contained in $f^{-1} (O_y)$, which implies that $f^{-1} (O_y)$ is open.
+Therefore, every $x in f^{-1}(O_y)$ has a neighborhood in the same set, and that implies $f^{-1} (O_y)$ is open.
 \end{proof}
 
 Consider the convergent sequence definition of continuity, and note that a \emph{sequence} of points of a set $X$ can be seen as a function from the positive integers to $X$.
