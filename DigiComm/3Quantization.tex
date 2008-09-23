@@ -266,7 +266,7 @@ q_i^* = \min_{q_i} \int_{b_{i-1}}^{b_i} (\xi - q_i)^2 f_x(\xi) d\xi .
 To obtain the solution, we differentiate the objective function with respect to $q_i$ and set the derivative equal to zero;
 \begin{equation*}
 \frac{d}{d q_i} \int_{b_{i-1}}^{b_i} (\xi - q_i)^2 f_x(\xi) d\xi
-= \int_{b_{i-1}}^{b_i} 2 (\xi - q_i) f_x(\xi) d\xi = 0 .
+= - \int_{b_{i-1}}^{b_i} 2 (\xi - q_i) f_x(\xi) d\xi = 0 .
 \end{equation*}
 This implies that
 \begin{equation*}
@@ -420,7 +420,7 @@ In practice, many quantization algorithms are tailored to a specific application
 These quantizers are called \emph{analysis-synthesis} coders, and their design is typically fairly intricate.
 They require advanced models and are often evaluated according to complex performance metrics.
 These criteria are rooted in human perception rather than conventional mathematics.
-When developed properly, model-based quantization schemes achieve better compression ratios than the \emph{waveform coders} presented until now.
+When developed properly, model-based quantization schemes achieve better compression ratios than the \emph{waveform coders} presented hitherto.
 A serious treatment of analysis-synthesis algorithms is beyond the scope of this document.
 Nevertheless, we mention two popular schemes below for illustrative purposes.
 
