@@ -21,17 +21,37 @@ Suppose that $x(t)$ is a continuous signal that is square integrable,
 \| x(t) \|^2 = \int_t | x(t) |^2 dt < \infty .
 \end{equation}
 Then, we can express $x(t)$ using its frequency domain representation.
-The Fourier transform of $x(t)$, which we denote by $X(f)$ or $\mathcal{F} [x(t)]$, is defined by
+The Fourier transform of $x(t)$, which we denote by $\mathbb{X}(f)$ or $\mathcal{F} [x(t)]$, is defined by
 \begin{equation} \label{equation:FourierTransform}
-X(f) = \mathcal{F} [x(t)]
+\mathbb{X}(f) = \mathcal{F} [x(t)]
 = \int_t x(t) e^{-j 2 \pi f t} dt .
 \end{equation}
 The original function can then be expressed in terms of its decomposition,
 \begin{equation} \label{equation:InverseFourierTransform}
-x(t) = \int_f X(f) e^{j 2 \pi f t} df .
+x(t) = \int_f \mathbb{X}(f) e^{j 2 \pi f t} df .
 \end{equation}
-We sometimes represent the inverse Fourier transform of $X(f)$ by $\mathcal{F}^{-1} [X(f)]$.
+We sometimes represent the inverse Fourier transform of $\mathbb{X}(f)$ by $\mathcal{F}^{-1} [\mathbb{X}(f)]$.
 It is interesting to note the duality between the Fourier transform and its inverse.
+
+\begin{example}[Rectangular Pulse]
+The rectangular pulse $\Pi (t)$ defined by
+\begin{equation*}
+\Pi (t) = \begin{cases} 1, & |t| < 0.5 \\
+0, & \text{otherwise} \end{cases}
+\end{equation*}
+can be used to filter various signals.
+Note that $\| \Pi (t) \|^2 = 1 < \infty$.
+Its Fourier transform can be computed as follows,
+\begin{equation*}
+\begin{split}
+\mathcal{F} \left[ \Pi(t) \right]
+&= \int_t \Pi (t) e^{- j 2 \pi f t} dt
+= \int_{-1/2}^{1/2} e^{- j 2 \pi f t} dt \\
+&= \frac{1}{\pi f} \left( \frac{e^{j \pi f} - e^{- j \pi f}}{2j} \right)
+= \frac{ \sin \pi f }{\pi f} = \mathrm{sinc}(f) .
+\end{split}
+\end{equation*}
+\end{example}
 
 When condition~\eqref{equation:L2Condition} is not satisfied, it may be hazardous to use Fourier analysis and frequency domain representations.
 Strictly speaking, the Fourier transform of a function may not exist if it behaves wildly.
@@ -44,7 +64,7 @@ The downside of this approach is that the reader is left with the burden of deci
 Starting with signal $x(t)$, we can write
 \begin{equation} \label{equation:NestedFourierRepresentation}
 \begin{split}
-x(t) &= \int_f X(f) e^{j 2 \pi f t} df \\
+x(t) &= \int_f \mathbb{X}(f) e^{j 2 \pi f t} df \\
 &= \int_f \left[ \int_\tau x(\tau) e^{-j 2 \pi f \tau} d\tau \right] e^{j 2 \pi f t} df \\
 &= \int_\tau \left[ \int_f e^{j 2 \pi f (t - \tau)} df \right] x(\tau) d\tau ,
 \end{split}
@@ -58,42 +78,23 @@ Looking at \eqref{equation:NestedFourierRepresentation}, we gather that
 \begin{equation*}
 \delta (t) = \int_f e^{j 2 \pi f t} df
 \end{equation*}
-and hence the (cavalier) Fourier transform of the $\delta$-function is $\Delta(f) = 1$.
-
-\begin{example}[Rectangular Pulse]
-The rectangular pulse $\Pi (t)$ defined by
-\begin{equation*}
-\Pi (t) = \begin{cases} 1, & |t| < 0.5 \\
-0, & \text{otherwise} \end{cases}
-\end{equation*}
-can be used to filter various signals.
-Its Fourier transform can be computed as follows,
-\begin{equation*}
-\begin{split}
-\mathcal{F} \left[ \Pi(t) \right]
-&= \int_t \Pi (t) e^{- j 2 \pi f t} dt
-= \int_{-1/2}^{1/2} e^{- j 2 \pi f t} dt \\
-&= \frac{1}{\pi f} \left( \frac{e^{j \pi f} - e^{- j \pi f}}{2j} \right)
-= \frac{ \sin \pi f }{\pi f} = \mathrm{sinc}(f) .
-\end{split}
-\end{equation*}
-\end{example}
+and hence the (cavalier) Fourier transform of the $\delta$-function is $\mathcal{F} [ \delta(t) ] = 1$.
 
 
 \subsection{Periodic Signals}
 
 We can develop a (cavalier) Fourier transform representation for periodic signals as well, thereby providing a unified treatment of periodic and aperiodic signals. 
 Indeed, we can construct the Fourier transform of a periodic signal directly from its Fourier series representation.
-Let $x(t)$ be a signal with Fourier transform $X(f) = \delta(f - f_0)$.
+Let $x(t)$ be a signal with Fourier transform $\mathbb{X}(f) = \delta (f - f_0)$.
 To recover the signal $x(t)$, we can apply the inverse Fourier transform
 \begin{equation*}
 x(t) = \mathcal{F}^{-1} [ \delta (f - f_0) ]
-=\int_f \delta(f - f_0) e^{j 2 \pi ft} df
+=\int_f \delta (f - f_0) e^{j 2 \pi ft} df
 = e^{j 2 \pi f_0 t}.
 \end{equation*}
-More generally, if $X(f)$ is a linear combination of impulses equally spaced in frequency
+More generally, if $\mathbb{X}(f)$ is a linear combination of impulses equally spaced in frequency
 \begin{equation} \label{equation:PeriodicFrequency}
-X(f) = \sum_{n = -\infty}^{\infty} c_n \delta (f - n f_0) ,
+\mathbb{X}(f) = \sum_{n = -\infty}^{\infty} c_n \delta (f - n f_0) ,
 \end{equation}
 then its inverse Fourier transform becomes
 \begin{equation} \label{equation:PeriodicTime}
@@ -110,12 +111,12 @@ This is a special case of a periodic function, with period $T_0$.
 We can therefore apply a methodology similar to the one derived above to compute its Fourier transform.
 The Fourier series coefficients for the impulse train are given by
 \begin{equation*}
-c_n = \frac{1}{T_0} \int_{-T_0/2}^{T_0/2} x(t) e^{- j 2 \pi n t} dt
+c_n = \frac{1}{T_0} \int_{-T_0/2}^{T_0/2} x(t) e^{- j 2 \pi \frac{n}{T_0} t} dt
 = \frac{1}{T_0} .
 \end{equation*}
 Using \eqref{equation:PeriodicFrequency}, we get
 \begin{equation} \label{equation:ImpulseTrainFrequency}
-X(f) = \frac{1}{T_0} \sum_{n = -\infty}^{\infty} \delta \left( f - \frac{n}{T_0} \right) .
+\mathbb{X}(f) = \frac{1}{T_0} \sum_{n = -\infty}^{\infty} \delta \left( f - \frac{n}{T_0} \right) .
 \end{equation}
 An impulse train in the time domain can be regarded as an impulse train in the frequency domain.
 A second representation for $x(t)$ is given by \eqref{equation:PeriodicTime},
@@ -139,12 +140,12 @@ Using this notation, we can write the energy content of $x(t)$ as $R_x(0)$.
 \begin{definition}
 The \emph{energy spectral density} of $x(t)$, denoted by $\mathcal{G}_x (f)$, is the Fourier transform of its time autocorrelation function,
 \begin{equation*}
-\mathcal{G}_x (f) = \mathcal{F} [ R_x (\tau) ] = | X(f) |^2.
+\mathcal{G}_x(f) = \mathcal{F} [ R_x (\tau) ] = | \mathbb{X}(f) |^2.
 \end{equation*}
 \end{definition}
 
 Intuitively, the energy spectral density captures the frequency content of a signal and helps identify how its energy is distributed across frequencies.
-The \emph{bandwidth} of deterministic signal $x(t)$ is the smallest value of $W$ such that $\mathcal{G}_x (f) = 0$ for all $|f| > W$.
+The \emph{spectral bandwidth} of deterministic signal $x(t)$ is the smallest value of $W$ such that $\mathcal{G}_x(f) = 0$ for all $|f| > W$.
 Note that if $x(t)$ has bandwidth $W$, then the Fourier transform of $x(t)$ is identically zero for all $|f| > W$.
 
 
@@ -157,21 +158,21 @@ Suppose that the input to the filter is $x(t)$, then the output of the filter is
 y(t) = x(t) \star h(t),
 \end{equation*}
 where $h(t)$ is the impulse response of the linear filter and $\star$ denotes the convolution operator.
-If we use $H(f)$ to represent the Fourier transform of impulse response $h(t)$, then the output signal in the frequency domain becomes
+If we use $\mathbb{H}(f)$ to represent the Fourier transform of impulse response $h(t)$, then the output signal in the frequency domain becomes
 \begin{equation*}
-Y(f) = X(f) H(f) .
+\mathbb{Y}(f) = \mathbb{X}(f) \mathbb{H}(f) .
 \end{equation*}
 That is, convolution in the time domain becomes multiplication in the frequency domain, a much simpler operation.
-The output signal can then be recovered by taking the inverse Fourier transform of $Y(f)$,
+The output signal can then be recovered by taking the inverse Fourier transform of $\mathbb{Y}(f)$,
 \begin{equation*}
-y(t) = \mathcal{F}^{-1} [ Y(f) ] = \mathcal{F}^{-1} [ X(f) H(f) ] .
+y(t) = \mathcal{F}^{-1} [ \mathbb{Y}(f) ] = \mathcal{F}^{-1} [ \mathbb{X}(f) \mathbb{H}(f) ] .
 \end{equation*}
 \section{Sampling Deterministic Signals}
 
 The sampling theorem is one of the most important results in communications.
 Many digital communication systems rely on the validity of this theorem and on the design insights it provides for proper operation.
 The basic idea behind the sampling theorem can be summarized in a few words.
-If the continuous signal $x(t)$ is bandlimited to $W$, then this signal can be reconstructed from its samples so long as they are taken at intervals $T_0 \leq \frac{1}{2W}$.
+If the continuous signal $x(t)$ is bandlimited to $W$, then this signal can be reconstructed from its samples so long as they are taken at periodic intervals of $T_0 \leq \frac{1}{2W}$.
 A formal version of the sampling theorem appears below.
 
 \begin{theorem}[Sampling Theorem] \label{theorem:SamplingTheorem}
@@ -192,27 +193,27 @@ x_s(t) = x(t) \sum_{n=-\infty}^{\infty} \delta(t-nT_0)
 Looking at the sampled signal in the frequency domain, we get
 \begin{equation*}
 \begin{split}
-X_s(f) &= X(f) \star \mathcal{F} \left[ \sum_{n=-\infty}^{\infty} \delta(t-nT_0) \right] \\
-&= X(f) \star \frac{1}{T_0} \sum_{n=-\infty}^{\infty} \delta \left( f-\frac{n}{T_0} \right) \\
-&= \frac{1}{T_0} \sum_{n=-\infty}^{\infty} X \left( f - \frac{n}{T_0} \right) ,
+\mathbb{X}_s(f) &= \mathbb{X}(f) \star \mathcal{F} \left[ \sum_{n=-\infty}^{\infty} \delta(t-nT_0) \right] \\
+&= \mathbb{X}(f) \star \frac{1}{T_0} \sum_{n=-\infty}^{\infty} \delta \left( f-\frac{n}{T_0} \right) \\
+&= \frac{1}{T_0} \sum_{n=-\infty}^{\infty} \mathbb{X} \left( f - \frac{n}{T_0} \right) ,
 \end{split}
 \end{equation*}
 where we have used \eqref{equation:ImpulseTrainFrequency} to express the Fourier transform of an impulse train.
 
 Passing the sampled signal through an ideal lowpass filter defined by
 \begin{equation*}
-H(f) = T_0 \Pi \left( \frac{f}{2W} \right)
+\mathbb{H}(f) = T_0 \Pi \left( \frac{f}{2W} \right)
 = \begin{cases} T_0, & |f| < W \\
 0, & |f| > W \end{cases}
 \end{equation*}
 we obtain the output
 \begin{equation*}
-X_s(f) H(f)
-= \frac{1}{T_0} \left[ \sum_{n=-\infty}^{\infty} X \left( f - \frac{n}{T_0} \right) \right]
+\mathbb{X}_s(f) \mathbb{H}(f)
+= \frac{1}{T_0} \left[ \sum_{n=-\infty}^{\infty} \mathbb{X} \left( f - \frac{n}{T_0} \right) \right]
 T_0 \Pi \left( \frac{f}{2W} \right)
-= X(f) .
+= \mathbb{X}(f) .
 \end{equation*}
-The output of the ideal lowpass filter $H(f)$ is the original signal $x(t)$, and perfect reconstruction is achieved.
+The output of the ideal lowpass filter $\mathbb{H}(f)$ is the original signal $x(t)$, and perfect reconstruction is achieved.
 The sampling rate corresponding to $T_0 = \frac{1}{2W}$ is the minimum sampling rate at which no aliasing occurs.
 It is called the \emph{Nyquist rate}.
 \end{proof}
@@ -248,7 +249,7 @@ As a consequence, they must run at much higher frame rates than normal cameras.
 \section{Stochastic Signals}
 \label{section:StocahsticSignalsFAS}
 
-A \emph{stochastic process} (or \emph{random process}) is an extension of the concept of \emph{random variable} to the situation where the future values of a signal are not know beforehand.
+A \emph{stochastic process} (or \emph{random process}) is an extension of the concept of \emph{random variable} to the situation where the future values of a signal are not known beforehand.
 Mathematically, a stochastic process can be viewed in two different ways.
 First, the process can be thought of as an instantiation of a random experiment where the outcome is selected from a collection of time functions.
 Alternatively, a stochastic process can be viewed as a collection of random variables indexed by time.
@@ -285,7 +286,7 @@ is independent of time, and its \emph{autocorrelation function} defined by
 R_x(t_1, t_2) = \mathrm{E} [x(t_1) x^*(t_2)]
 \end{equation*}
 only depends on the difference between $t_1$ and $t_2$.
-With a slight abuse of notation, we can denote the mean and autocorrelation of a stationary process by $m_x$ and $R_x(\tau)$, respectively.
+With a slight abuse of notation, we can denote the mean and autocorrelation of a stationary process by $m_x$ and $R_x(\tau)$ where $\tau = t_1 - t_2$.
 \end{definition}
 
 \begin{definition}[Ergodicity]
@@ -333,22 +334,22 @@ x_T(t) = \begin{cases} x(t), & |t| < \frac{T}{2} \\
 \end{equation*}
 The power spectral density of $x(t)$ represents the amount of power per hertz of bandwidth present in the signal at various frequencies, and it is defined by
 \begin{equation*}
-S_x(f) = \lim_{T \rightarrow \infty} \frac{1}{T} \mathrm{E} \left[ |X_T(f)|^2 \right] .
+\mathcal{S}_x(f) = \lim_{T \rightarrow \infty} \frac{1}{T} \mathrm{E} \left[ |\mathbb{X}_T(f)|^2 \right] .
 \end{equation*}
 Note how the truncated signal is used to overcome the difficulty of dealing with infinite-energy signals.
 This is a common trick.
 As we will soon see, the power spectral density plays an instrumental role in the sampling theorem for random signals.
-First, we provide a means to compute $S_x(f)$ from its statistical attributes.
+First, we provide a means to compute $\mathcal{S}_x(f)$ from its statistical attributes.
 
 \begin{theorem}[Wiener-Khinchin]
-The power spectral density $S_x (f)$ of a wide-sense stationary random process $x(t)$ is equal to the Fourier transform of its autocorrelation function, $S_x (f) = \mathcal{F} [R_x (\tau)]$.
+The power spectral density $\mathcal{S}_x (f)$ of a wide-sense stationary random process $x(t)$ is equal to the Fourier transform of its autocorrelation function, $\mathcal{S}_x (f) = \mathcal{F} [R_x (\tau)]$.
 \end{theorem}
 \begin{proof}
 For a wide-sense stationary process, we have
 \begin{equation*}
 \begin{split}
-S_X(f) &= \lim_{T \rightarrow \infty} \frac{1}{T} \mathrm{E} \left[ |X_T(f)|^2 \right]
-= \lim_{T \rightarrow \infty} \frac{1}{T} \mathrm{E} \left[ X_T(f) X_T^*(f) \right] \\
+\mathcal{S}_x(f) &= \lim_{T \rightarrow \infty} \frac{1}{T} \mathrm{E} \left[ |\mathbb{X}_T(f)|^2 \right]
+= \lim_{T \rightarrow \infty} \frac{1}{T} \mathrm{E} \left[ \mathbb{X}_T(f) \mathbb{X}_T^*(f) \right] \\
 &= \lim_{T \rightarrow \infty} \frac{1}{T} \mathrm{E} \left[
 \int_{-\frac{T}{2}}^{\frac{T}{2}} x(t_1) e^{-j2 \pi f t_1} dt_1
 \int_{-\frac{T}{2}}^{\frac{T}{2}} x^*(t_2) e^{j2 \pi f t_2} dt_2 \right] \\
@@ -420,12 +421,12 @@ We observe that the autocorrelation of the process $y(t)$ only depends on the di
 \end{proof}
 
 Obtaining an expression for the autocorrelation function corresponding to the output of a linear time-invariant filter allows us to characterize the power spectral density of the output process.
-In the frequency domain, we get $m_y = m_x H(0)$ and
+In terms of the frequency representation, we get $m_y = m_x H(0)$ and
 \begin{equation*}
 \begin{split}
 \mathcal{S}_y (f) &= \mathcal{F} [ R_y (\tau) ] \\
 &= \mathcal{F} \left[ R_x (\tau) \star h(\tau) \star h^*(-\tau) \right] \\
-&= \mathcal{S}_X(f) |H(f)|^2 .
+&= \mathcal{S}_X(f) |\mathbb{H}(f)|^2 .
 \end{split}
 \end{equation*}
 Not too surprisingly, a linear time-invariant filter can be employed to constrain the bandwidth of a stochastic process.
@@ -445,7 +446,7 @@ Let $\hat{x}(t)$ be the estimate for $x(t)$ built from the sampled values $\{ x(
 \hat{x}(t) = \sum_{n=-\infty}^{\infty} x(nT_0) \mathrm{sinc} (2 W (t - nT_0))
 \end{equation*}
 where $T_0 = \frac{1}{2W}$ denotes the sampling interval.
-The mean-squared error between the original random process and its estimate vanishes,
+Then the mean-squared error between the original random process and its estimate vanishes,
 \begin{equation} \label{equation:SamplingMSE}
 \| x(t) - \hat{x}(t) \|^2
 = \mathrm{E} \left[ \left| x(t) - \sum_{n=-\infty}^{\infty}
@@ -491,24 +492,24 @@ Theorem~\ref{theorem:SamplingRandomSignals} is significant in that it asserts th
 \section{Bandpass Signals and Processes}
 
 One possible application of sampling is to take a continuous-time signal and to transform it into a discrete-time signal.
-For instance, this operation gives the information coming out of a source a format more suitable for digital communications.
+For instance, this operation gives the information coming out of a source, a format more suitable for digital communications.
 This prime application of sampling served as the original motivation for our study of the subject.
-A second possible application of sampling is the processing of received waveforms at the output of a communication channels.
+A second possible application of sampling is the processing of received waveforms at the output of communication channels.
 In digital communications, the data often assumes the form of an analog carrier signal modulated by a digital bit stream.
 Mathematically, this situation is captured by the equation
 \begin{equation*}
 y(t) = x(t) \cos (2 \pi f_0 t) .
 \end{equation*}
 The signal $y(t)$ is a special form of a \emph{bandpass signal}.
-Its Fourier transform $Y(f)$ is non-zero only for frequencies contained in a small neighborhood of carrier frequency $f_0$.
-That is, $Y(f) = 0$ for all frequencies such that $|f - f_0| \geq W$.
+Its Fourier transform $\mathbb{Y}(f)$ is non-zero only for frequencies contained in a small neighborhood of carrier frequency $f_0$.
+That is, $\mathbb{Y}(f) = 0$ for all frequencies such that $|f - f_0| \geq W$.
 To apply the sampling tools derived above to the information bearing signal $x(t)$, we need to shift the corresponding spectrum to the origin.
 
 The Fourier transform of $y(t)$ is given by
 \begin{equation*}
-Y(f) = \frac{1}{2} X(f+f_0) + \frac{1}{2} X(f - f_0) .
+\mathbb{Y}(f) = \frac{1}{2} \mathbb{X}(f+f_0) + \frac{1}{2} \mathbb{X}(f - f_0) .
 \end{equation*}
-Our strategy is to first eliminate $\frac{1}{2} X(f + f_0)$ from $Y(f)$, and then to scale and shift $\frac{1}{2} X(f + f_0)$ back to the origin.
+Our strategy is to first eliminate $\frac{1}{2} \mathbb{X}(f + f_0)$ from $\mathbb{Y}(f)$, and then to scale and shift $\frac{1}{2} \mathbb{X}(f + f_0)$ back to the origin.
 Define the \emph{step function} $u(t)$ by
 \begin{equation*}
 u (t) = \begin{cases} 1, & t > 0 \\
@@ -529,7 +530,7 @@ Using the duality property of the Fourier transform, we get
 \begin{equation*}
 \mathcal{F}^{-1} [u(f)] = \frac{1}{2} \delta(t) + \frac{j}{2 \pi t} .
 \end{equation*}
-And, by construction, we obtain $X(f - f_0) = 2 u(f) Y(f)$.
+And, by construction, we obtain $\mathbb{X}(f - f_0) = 2 u(f) \mathbb{Y}(f)$.
 We can therefore recover the original lowpass signal $x(t)$ as follows,
 \begin{equation*}
 x(t)

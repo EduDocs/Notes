@@ -86,10 +86,10 @@ We can therefore compute the mean squared error as follows,
 &= \mathrm{E} \left[ (x - Q(x))^2 \right]
 = \int_0^{16} \frac{(\xi - Q(\xi))^2}{16} d\xi \\
 &= \sum_{i=1}^8 \int_{2i-2}^{2i} \frac{(\xi - (2i - 1))^2}{16} d\xi \\
-&= \frac{1}{2} \int_{0}^{2} (\xi + 1)^2 d\xi = \frac{1}{3} .
+&= \frac{1}{2} \int_{0}^{2} (\xi - 1)^2 d\xi = \frac{1}{3} .
 \end{split}
 \end{equation*}
-That is, the mean square error associated with this input distribution and quantization scheme is $\| e_{\mathrm{q}} \|^2 = \frac{1}{3}$.
+That is, the mean squared error associated with this input distribution and quantization scheme is $\| e_{\mathrm{q}} \|^2 = \frac{1}{3}$.
 \end{example}
 
 One of the criticisms about the MSE of \eqref{equation:QuantizationMSE} is that it has a tendency to assign a larger distortion value to signal input with sizable second moments.
@@ -161,7 +161,7 @@ As usual, the MSE is given by
 \mathrm{E} [ d(x, x_{\mathrm{q}}) ]
 = \int_{-\infty}^{\infty} (\xi - Q(\xi))^2 f_x(\xi) d\xi .
 \end{equation*}
-We emphasize  that the performance of the quantizer is optimize by minimizing the value of the integrant at each point.
+We emphasize  that the performance of the quantizer is optimized by minimizing the value of the integrand at each point.
 We deduce that the decision regions corresponding to $q_1, q_2, \ldots, q_{\ell}$ must be equal to
 \begin{equation*}
 \left( - \infty, q_1 + \frac{\Delta}{2} \right],
@@ -214,7 +214,7 @@ Taking first derivatives with respect to $q_1$ and $\Delta$, we obtain
 \end{align*}
 Setting these derivatives equal to zero, we get $q_1 = 1$ and $\Delta = 2$.
 A second derivative test ensures that this corresponds to a local minimum.
-Since this point is the only stationary point of the function $\text{MSE}~(q_1, \Delta)$ within our search space, we gather that the quantization scheme of Example~\ref{example:UniformQuantizer} coincide with the optimal uniform quantizer.
+Since this point is the only inflection point of the function $\text{MSE}~(q_1, \Delta)$ within our search space, we gather that the quantization scheme of Example~\ref{example:UniformQuantizer} coincide with the optimal uniform quantizer.
 \end{example}
 
 Although the search space for uniform quantizers is much smaller than the set of all possible quantizers, finding an optimal uniform quantizer remains a strenuous task in most situations.
@@ -248,7 +248,7 @@ Q^*(x) = \arg \min_{\{ q_i \}} (x - q_i)^2 .
 \end{equation*}
 In particular, an optimal $\ell$-level scalar quantizer always has $\ell$ decision regions, each being an interval containing its quantization point.
 
-Alternatively, we can assume that the decision intervals are given.
+Also, we can assume that the decision intervals are given.
 Let the boundaries of these intervals be denoted by $b_1, b_2, \ldots, b_{\ell-1}$.
 Then, the corresponding MSE is given by
 \begin{equation} \label{equation:BoundaryQuantizationMSE}
@@ -259,7 +259,7 @@ Then, the corresponding MSE is given by
 \end{equation}
 The value of the MSE can be minimized by selecting the quantization points $\{ q_i \}$ appropriately.
 Note that each quantization point can be optimized individually, as the integrals in \eqref{equation:BoundaryQuantizationMSE} have a nice additive structure.
-Solving one instance of the decouple problem, we get
+Solving one instance of the decoupled problem, we get
 \begin{equation*}
 q_i^* = \min_{q_i} \int_{b_{i-1}}^{b_i} (\xi - q_i)^2 f_x(\xi) d\xi .
 \end{equation*}
@@ -320,7 +320,7 @@ A quantizer can work either on single-source outputs or on blocks of source outp
 So far, we have studied the former approach by focusing on scalar quantizers.
 Although more involved, the second method where multiple outputs are aggregated prior to being quantized typically yields better results.
 This latter approach, called \emph{vector quantization}, is especially powerful for sources producing signals that are strongly correlated over time.
-We do not explore the details of vector quantization in this document, however we motivate it purpose through a simple example.
+We do not explore the details of vector quantization in this document, however we motivate its purpose through a simple example.
 
 \begin{example} \label{example:VectorQuantization}
 Assume that a source produces two correlated symbols, denoted $x$ and $y$.
@@ -416,7 +416,7 @@ On the downside, the mathematical treatment of a quantization problem becomes mo
 \section{Analysis-Synthesis Algorithms}
 
 All the quantizers described up to this point are generic schemes designed to work well with abstract sources.
-In practice, many quantization algorithms are tailored to a specific applications.
+In practice, many quantization algorithms are tailored to specific applications.
 These quantizers are called \emph{analysis-synthesis} coders, and their design is typically fairly intricate.
 They require advanced models and are often evaluated according to complex performance metrics.
 These criteria are rooted in human perception rather than conventional mathematics.

@@ -218,4 +218,101 @@ The third code, $c_3(\cdot)$ is uniquely decodable, but not instantaneous.
 While $c_4(\cdot)$ is a prefix code where every symbol can be decoded immediately after reception.
 \end{example}
 
+The measure of a good prefix code is the expected length of its encoded symbols.
+Suppose that a discrete memoryless source $(\mathcal{X}, p_X)$ is given along with a code $c$.
+We denote the length of codeword $c(x)$ by $l_c(x)$.
+The expected number of bits produced by the source at each time instant is then given by
+\begin{equation} \label{equation:CodeRateCompression}
+\mathrm{E} [ l_c (X) ] = \sum_{x \in \mathcal{X}} p_X(x) l_c(x) .
+\end{equation}
+We emphasize that the expected length is a function of both the statistics of the source and the compression code.
+Under the assumption that the source outcomes are independent and identically distributed through time, $\mathrm{E} [ l_c (X)]$ also represent the average data rate produced by the source.
+
+When building a compression code, it is evident from \eqref{equation:CodeRateCompression} that assigning short codewords is better than long codewords.
+Yet, it is intuitively clear that we cannot describe every symbol using a small number of bits, for otherwise the prefix condition will be violated.
+The collection of possible length assignments is described by the following inequality.
+
+\begin{theorem}[Kraft Inequality]
+For any instantaneous binary code $c$, the codeword lengths must satisfy the inequality
+\begin{equation} \label{equation:KraftInequality}
+\sum_{x \in \mathcal{X}} 2^{-l_c(x)} \leq 1.
+\end{equation}
+Conversely, if we first assign the codeword lengths such that \eqref{equation:KraftInequality} is satisfied, then there exists an instantaneous code with these codeword lengths.
+\end{theorem}
+
+This result can be obtained using a binary tree construction where the branches of the tree represent the bits of the codeword~\cite{CoverThomas}.
+The prefix condition implies that every codeword is a leaf, insuring that no codeword is an descendant of any other codeword.
+
+\begin{example}[Code on a Tree]
+Suppose that we wish to construct a prefix code for $\mathcal{X} = \{ x_1, \ldots, x_5 \}$, with code lengths
+\begin{xalignat*}{3}
+l_c(x_1) &= l_c(x_2) = 2 & l_c(x_3) &= l_c(x_4) = 3 & l_c(x_5) &= 2.
+\end{xalignat*}
+
+First, we check the Kraft inequality to make sure that such an assignment is feasible,
+\begin{equation*}
+\sum_{i = 1}^5 2^{-l_c(x_1)}
+= \frac{1}{4} + \frac{1}{4} + \frac{1}{8} + \frac{1}{8} + \frac{1}{4} = 1 .
+\end{equation*}
+The inequality is fulfilled, we can therefore use a binary tree construction to design the desired instantaneous code.
+The process is illustrated in Figure~\ref{figure:BinaryTreeCode}, and the resulting code is
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+Source Symbol & Codeword & Source Symbol & Codeword \\
+\hline
+$x_1$ & 00 & $x_4$ & 101 \\
+$x_2$ & 01 & $x_5$ & 11 \\
+$x_3$ & 100 & & \\
+\hline
+\end{tabular} .
+\end{center}
+Since the Kraft inequality is met with equality, we know that it is impossible to get a better code by shortening one of the codewords.
+\begin{figure}[htbp]
+\begin{center}
+\begin{psfrags}
+\psfrag{0}[c]{$0$}
+\psfrag{1}[c]{$1$}
+\psfrag{00}[l]{$00$}
+\psfrag{01}[l]{$01$}
+\psfrag{100}[l]{$100$}
+\psfrag{101}[l]{$101$}
+\psfrag{11}[l]{$11$}
+\epsfig{file=Figures/binarytreecode,width=7cm}
+\end{psfrags}
+\caption{Construction of a prefix code with a binary tree.}
+\label{figure:BinaryTreeCode}
+\end{center}
+\end{figure}
+\end{example}
+
+Now that we know how to build instantaneous, we consider the problem of finding a prefix code with the smallest possible expected length.
+
+\newpage
+
+\begin{theorem}[Source-Coding Theorem]
+Consider a discrete memoryless source $(\mathcal{X}, p_X(\cdot)$ and let $X$ be a random variable distributed according to $p_X (\cdot)$.
+This source can be endoded with arbitrarily small error probability at any rate $R > H(X)$.
+Conversely, if $R < H(X)$, the error will be non zero.
+\end{theorem}
+
+
+\section{Huffman Code}
+
+\emph{Huffman coding} is a variable-length encoding algorithm used for lossless data compression.
+The underlying strategy in this scheme is to assign short strings of bits to likely symbols, and longer ones to less probable source outputs.
+The encoding is specifically crafted so that the code table forms a prefix code.
+Huffman coding is the most efficient compression mapping for individual source simbols.
+The expected length of the compressed data under this algorithm will be no greater than the expected message length of any other proper encoding scheme that operates on individual source symbols.
+
+
+
+Although Huffman coding is optimal for a symbol-by-symbol encoding with a known input probability mass function, it can be outperformed when these two conditions are not known.
+For instance, if the input distribution $p_x(\cdot)$ is not known, then it must be infered from the available data prior to applying Huffman coding.
+Small errors in the estimated probability mass function can then lead to inefficiency, which in turn renders Huffman coding suboptimal.
+More importantly, a more efficient way to encode data is to consider blocks of source symbols and to encode them jointly.
+Although more complicated, this process leads to better performance and typically leads to expected message lengths that are lower than that of a typical symbol-by-symbol Huffman code.
+
+
+\section{Lempel-Ziv Algorithm}
 
