@@ -7,7 +7,7 @@ This decomposition is termed the \emph{frequency domain representation} of the o
 
 Fourier analysis is extremely useful in engineering, with a myriad of applications.
 Part of its appeal lies in the fact that basis elements are eigenfunctions of linear time-invariant systems.
-This properties is instrumental in solving many challenging problems, and makes Fourier analysis a powerful tool for the design of communication systems.
+This property is instrumental in solving many challenging problems, and makes Fourier analysis a powerful tool for the design of communication systems.
 
 
 \section{The Fourier Transform}
@@ -277,23 +277,23 @@ In general, it is difficult to provide a complete mathematical description for a
 For now, we restrict our attention to \emph{stationary} and \emph{ergodic} random processes.
 
 \begin{definition}[Stationarity]
-A random process $x(t)$ is wide-sense stationary if its \emph{mean}
+A random process $X(t)$ is wide-sense stationary if its \emph{mean}
 \begin{equation*}
-m_x(t) = \mathrm{E} [x(t)]
+m_X(t) = \mathrm{E} [X(t)]
 \end{equation*}
 is independent of time, and its \emph{autocorrelation function} defined by
 \begin{equation*}
-R_x(t_1, t_2) = \mathrm{E} [x(t_1) x^*(t_2)]
+R_X(t_1, t_2) = \mathrm{E} [X(t_1) X^*(t_2)]
 \end{equation*}
 only depends on the difference between $t_1$ and $t_2$.
-With a slight abuse of notation, we can denote the mean and autocorrelation of a stationary process by $m_x$ and $R_x(\tau)$ where $\tau = t_1 - t_2$.
+With a slight abuse of notation, we can denote the mean and autocorrelation of a stationary process by $m_X$ and $R_X(\tau)$ where $\tau = t_1 - t_2$.
 \end{definition}
 
 \begin{definition}[Ergodicity]
 The \emph{ergodic theorems} assert that, under certain conditions, the time average of a function along all the possible trajectories of a random process exists and is equal to its ensemble average,
 \begin{equation*}
-\lim_{T \rightarrow \infty} \frac{1}{T} \int_{- \frac{T}{2}}^{\frac{T}{2}} g(x(t)) dt
-= \mathrm{E}[g(x(t))] .
+\lim_{T \rightarrow \infty} \frac{1}{T} \int_{- \frac{T}{2}}^{\frac{T}{2}} g(X(t)) dt
+= \mathrm{E}[g(X(t))] .
 \end{equation*}
 When a stochastic process fulfills these conditions, it is called \emph{ergodic}.
 \end{definition}
@@ -324,45 +324,45 @@ The \emph{power spectral density} of a stochastic signal is an extension to the 
 The definition of the power spectral density is somewhat more intricate due to the more complex nature of random signals.
 In particular, it must account for uncertainty in the process.
 
-Let $x(t)$ be a wide-sense stationary and ergodic random process.
+Let $X(t)$ be a wide-sense stationary and ergodic random process.
 The Fourier transform of a specific realization of $x(t)$ may not exist, as it need not fulfill condition \eqref{equation:L2Condition}.
 However, a truncated version of $x(t)$ always possesses a Fourier transform.
-Let $x_T(t)$ be the truncated version of $x(t)$ given by
+Let $X_T(t)$ be the truncated version of $X(t)$ given by
 \begin{equation*}
-x_T(t) = \begin{cases} x(t), & |t| < \frac{T}{2} \\
+X_T(t) = \begin{cases} X(t), & |t| < \frac{T}{2} \\
 0, & \text{otherwise} . \end{cases}
 \end{equation*}
-The power spectral density of $x(t)$ represents the amount of power per hertz of bandwidth present in the signal at various frequencies, and it is defined by
+The power spectral density of $X(t)$ represents the amount of power per hertz of bandwidth present in the signal at various frequencies, and it is defined by
 \begin{equation*}
-\mathcal{S}_x(f) = \lim_{T \rightarrow \infty} \frac{1}{T} \mathrm{E} \left[ |\mathbb{X}_T(f)|^2 \right] .
+\mathcal{S}_X(f) = \lim_{T \rightarrow \infty} \frac{1}{T} \mathrm{E} \left[ |\mathbb{X}_T(f)|^2 \right] .
 \end{equation*}
 Note how the truncated signal is used to overcome the difficulty of dealing with infinite-energy signals.
 This is a common trick.
 As we will soon see, the power spectral density plays an instrumental role in the sampling theorem for random signals.
-First, we provide a means to compute $\mathcal{S}_x(f)$ from its statistical attributes.
+First, we provide a means to compute $\mathcal{S}_X(f)$ from its statistical attributes.
 
 \begin{theorem}[Wiener-Khinchin]
-The power spectral density $\mathcal{S}_x (f)$ of a wide-sense stationary random process $x(t)$ is equal to the Fourier transform of its autocorrelation function, $\mathcal{S}_x (f) = \mathcal{F} [R_x (\tau)]$.
+The power spectral density $\mathcal{S}_X (f)$ of a wide-sense stationary random process $X(t)$ is equal to the Fourier transform of its autocorrelation function, $\mathcal{S}_X (f) = \mathcal{F} [R_X (\tau)]$.
 \end{theorem}
 \begin{proof}
 For a wide-sense stationary process, we have
 \begin{equation*}
 \begin{split}
-\mathcal{S}_x(f) &= \lim_{T \rightarrow \infty} \frac{1}{T} \mathrm{E} \left[ |\mathbb{X}_T(f)|^2 \right]
+\mathcal{S}_X(f) &= \lim_{T \rightarrow \infty} \frac{1}{T} \mathrm{E} \left[ |\mathbb{X}_T(f)|^2 \right]
 = \lim_{T \rightarrow \infty} \frac{1}{T} \mathrm{E} \left[ \mathbb{X}_T(f) \mathbb{X}_T^*(f) \right] \\
 &= \lim_{T \rightarrow \infty} \frac{1}{T} \mathrm{E} \left[
-\int_{-\frac{T}{2}}^{\frac{T}{2}} x(t_1) e^{-j2 \pi f t_1} dt_1
-\int_{-\frac{T}{2}}^{\frac{T}{2}} x^*(t_2) e^{j2 \pi f t_2} dt_2 \right] \\
+\int_{-\frac{T}{2}}^{\frac{T}{2}} X(t_1) e^{-j2 \pi f t_1} dt_1
+\int_{-\frac{T}{2}}^{\frac{T}{2}} X^*(t_2) e^{j2 \pi f t_2} dt_2 \right] \\
 &= \lim_{T \rightarrow \infty} \frac{1}{T}
 \int_{-\frac{T}{2}}^{\frac{T}{2}} \int_{-\frac{T}{2}}^{\frac{T}{2}}
-\mathrm{E} \left[ x(t_1) x^*(t_2) \right]
+\mathrm{E} \left[ X(t_1) X^*(t_2) \right]
 e^{-j2 \pi f (t_1-t_2)} dt_1 dt_2 \\
-&= \int_{\tau} R_x (\tau) e^{-j2 \pi f\tau} d\tau
-= \mathcal{F} [ R_x (\tau) ] .
+&= \int_{\tau} R_X (\tau) e^{-j2 \pi f\tau} d\tau
+= \mathcal{F} [ R_X (\tau) ] .
 \end{split}
 \end{equation*}
-The fourth equality is obtained by interchanging the expectation and the integrals, while the sixth equality follows from a change of variables and the fact that $x(t)$ is wide-sense stationary.
-To guarantee that the former operation is legitimate, $\tau R_x(\tau)$ must remain finite for all $\tau$.
+The fourth equality is obtained by interchanging the expectation and the integrals, while the sixth equality follows from a change of variables and the fact that $X(t)$ is wide-sense stationary.
+To guarantee that the former operation is legitimate, $\tau R_X(\tau)$ must remain finite for all $\tau$.
 \end{proof}
 
 
@@ -372,60 +372,60 @@ We discussed in Section~\ref{subsection:LinearTimeInvariantFilters} how the Four
 In this section, we consider the operation of such filters in the context of random processes.
 
 \begin{theorem}
-If a wide-sense stationary process $x(t)$ with mean $m_x$ and autocorrelation function $R_x(\tau)$ is passed through a linear time-invariant filter with impulse response $h(t)$, then output process has mean
+If a wide-sense stationary process $X(t)$ with mean $m_X$ and autocorrelation function $R_X(\tau)$ is passed through a linear time-invariant filter with impulse response $h(t)$, then the output process $Y(t)$ has mean
 \begin{equation*}
-m_y = m_x \int_{-\infty}^{\infty} h(t) dt
+m_Y = m_X \int_{-\infty}^{\infty} h(t) dt
 \end{equation*}
 and its autocorrelation is equal to
 \begin{equation*}
-R_y (\tau) = R_x(\tau) \star h(\tau) \star h^*(-\tau) .
+R_Y (\tau) = R_X(\tau) \star h(\tau) \star h^*(-\tau) .
 \end{equation*}
 \end{theorem}
 \begin{proof}
-The output process at time~$t$ is given by $y(t) = \int_{-\infty}^{\infty} x(t - \xi) h(\xi) d\xi$.
-We can therefore obtain the expectation of $y(t)$ as follows,
+The output process at time~$t$ is given by $Y(t) = \int_{-\infty}^{\infty} X(t - \xi) h(\xi) d\xi$.
+We can therefore obtain the expectation of $Y(t)$ as follows,
 \begin{equation*}
 \begin{split}
-m_y (t) &= \mathrm{E} \left[ \int_{-\infty}^{\infty} x(t - \xi) h(\xi) d\xi \right] \\
-&= \int_{-\infty}^{\infty} \mathrm{E} \left[ x(t - \xi) \right] h(\xi) d\xi \\
-&= m_x \int_{-\infty}^{\infty} h(\xi) d\xi.
+m_Y (t) &= \mathrm{E} \left[ \int_{-\infty}^{\infty} X(t - \xi) h(\xi) d\xi \right] \\
+&= \int_{-\infty}^{\infty} \mathrm{E} \left[ X(t - \xi) \right] h(\xi) d\xi \\
+&= m_X \int_{-\infty}^{\infty} h(\xi) d\xi.
 \end{split}
 \end{equation*}
-We emphasize that $m_y$ is independent of time.
+We emphasize that $m_Y$ is independent of time.
 
-To derive the autocorrelation function for $y(t)$, we first compute the cross-correlation between $x(t)$ and $y(t)$,
+To derive the autocorrelation function for $Y(t)$, we first compute the cross-correlation between $X(t)$ and $Y(t)$,
 \begin{equation} \label{equation:CrossCorrelationLTI}
 \begin{split}
-\mathrm{E} [x(t_1) y^*(t_2) ]
-&= \mathrm{E} \left[ x(t_1) \int_{-\infty}^{\infty} x^*(\xi) h^*(t_2 - \xi) d\xi \right] \\
-&= \int_{-\infty}^{\infty} \mathrm{E} \left[ x(t_1) x^*(\xi) \right] h^*(t_2 - \xi) d\xi \\
-&= \int_{-\infty}^{\infty} R_x(t_1 - \xi) h^*(t_2 - \xi) d\xi \\
-&= \int_{-\infty}^{\infty} R_x(\tau - \xi) h^*(- \xi) d\xi \\
-&= R_x(\tau) \star h^*(-\tau) .
+\mathrm{E} [X(t_1) Y^*(t_2) ]
+&= \mathrm{E} \left[ X(t_1) \int_{-\infty}^{\infty} X^*(\xi) h^*(t_2 - \xi) d\xi \right] \\
+&= \int_{-\infty}^{\infty} \mathrm{E} \left[ X(t_1) X^*(\xi) \right] h^*(t_2 - \xi) d\xi \\
+&= \int_{-\infty}^{\infty} R_X(t_1 - \xi) h^*(t_2 - \xi) d\xi \\
+&= \int_{-\infty}^{\infty} R_X(\tau - \xi) h^*(- \xi) d\xi \\
+&= R_X(\tau) \star h^*(-\tau) .
 \end{split}
 \end{equation}
-This clearly shows that the cross-correlation between $x(t)$ and $y(t)$ depends only on $\tau$; we can therefore write it as $R_{xy}(\tau)$.
-We are now ready to compute the autocorrelation function for $y(t)$.
+This clearly shows that the cross-correlation between $X(t)$ and $Y(t)$ depends only on $\tau$; we can therefore write it as $R_{XY}(\tau)$.
+We are now ready to compute the autocorrelation function for $Y(t)$.
 \begin{equation} \label{equation:AutoCorrelationLTI}
 \begin{split}
-\mathrm{E} [y(t_1) y^*(t_2) ]
-&= \mathrm{E} \left[ \int_{-\infty}^{\infty} x(\xi) h(t_1 - \xi) d\xi y^*(t_2) \right] \\
-&= \int_{-\infty}^{\infty} \mathrm{E} \left[ x(\xi) y^*(t_2) \right] h(t_1 - \xi) d\xi \\
-&= \int_{-\infty}^{\infty} R_{xy}(\xi - t_2) h(t_1 - \xi) d\xi \\
-&= \int_{-\infty}^{\infty} R_{xy}(\xi) h(\tau - \xi) d\xi \\
-&= R_{xy}(\tau) \star h(\tau) .
+\mathrm{E} [Y(t_1) Y^*(t_2) ]
+&= \mathrm{E} \left[ \int_{-\infty}^{\infty} X(\xi) h(t_1 - \xi) d\xi Y^*(t_2) \right] \\
+&= \int_{-\infty}^{\infty} \mathrm{E} \left[ X(\xi) Y^*(t_2) \right] h(t_1 - \xi) d\xi \\
+&= \int_{-\infty}^{\infty} R_{XY}(\xi - t_2) h(t_1 - \xi) d\xi \\
+&= \int_{-\infty}^{\infty} R_{XY}(\xi) h(\tau - \xi) d\xi \\
+&= R_{XY}(\tau) \star h(\tau) .
 \end{split}
 \end{equation}
-Substituting $R_{xy} (\tau)$ by the equivalent expression $R_x(\tau) \star h^*(-\tau)$ from \eqref{equation:CrossCorrelationLTI}, we get the desired result.
-We observe that the autocorrelation of the process $y(t)$ only depends on the difference between $t_1$ and $t_2$, and hence $y(t)$ is also wide-sense stationary.
+Substituting $R_{XY} (\tau)$ by the equivalent expression $R_X(\tau) \star h^*(-\tau)$ from \eqref{equation:CrossCorrelationLTI}, we get the desired result.
+We observe that the autocorrelation of the process $Y(t)$ only depends on the difference between $t_1$ and $t_2$, and hence $Y(t)$ is also wide-sense stationary.
 \end{proof}
 
 Obtaining an expression for the autocorrelation function corresponding to the output of a linear time-invariant filter allows us to characterize the power spectral density of the output process.
-In terms of the frequency representation, we get $m_y = m_x H(0)$ and
+In terms of the frequency representation, we get $m_Y = m_X \mathbb{H}(0)$ and
 \begin{equation*}
 \begin{split}
-\mathcal{S}_y (f) &= \mathcal{F} [ R_y (\tau) ] \\
-&= \mathcal{F} \left[ R_x (\tau) \star h(\tau) \star h^*(-\tau) \right] \\
+\mathcal{S}_Y (f) &= \mathcal{F} [ R_Y (\tau) ] \\
+&= \mathcal{F} \left[ R_X (\tau) \star h(\tau) \star h^*(-\tau) \right] \\
 &= \mathcal{S}_X(f) |\mathbb{H}(f)|^2 .
 \end{split}
 \end{equation*}
@@ -440,50 +440,50 @@ At this point, one may wonder whether it is possible to extend the sampling theo
 This question is answered below.
 
 \begin{theorem} \label{theorem:SamplingRandomSignals}
-Suppose that $x(t)$ is a wide-sense stationary bandlimited process with bandwidth $W$ and power spectral density $\mathcal{S}_x (f)$.
-Let $\hat{x}(t)$ be the estimate for $x(t)$ built from the sampled values $\{ x(nT_0) : n = 0, \pm 1, \pm 2, \ldots \}$; that is,
+Suppose that $X(t)$ is a wide-sense stationary bandlimited process with bandwidth $W$ and power spectral density $\mathcal{S}_X (f)$.
+Let $\hat{X}(t)$ be the estimate for $X(t)$ built from the sampled values $\{ X(nT_0) : n = 0, \pm 1, \pm 2, \ldots \}$; that is,
 \begin{equation*}
-\hat{x}(t) = \sum_{n=-\infty}^{\infty} x(nT_0) \mathrm{sinc} (2 W (t - nT_0))
+\hat{X}(t) = \sum_{n=-\infty}^{\infty} X(nT_0) \mathrm{sinc} (2 W (t - nT_0))
 \end{equation*}
 where $T_0 = \frac{1}{2W}$ denotes the sampling interval.
 Then the mean-squared error between the original random process and its estimate vanishes,
 \begin{equation} \label{equation:SamplingMSE}
-\| x(t) - \hat{x}(t) \|^2
-= \mathrm{E} \left[ \left| x(t) - \sum_{n=-\infty}^{\infty}
-x(nT_0) \mathrm{sinc} (2 W (t - nT_0)) \right|^2 \right] = 0 .
+\left\| X(t) - \hat{X}(t) \right\|^2
+= \mathrm{E} \left[ \left| X(t) - \sum_{n=-\infty}^{\infty}
+X(nT_0) \mathrm{sinc} (2 W (t - nT_0)) \right|^2 \right] = 0 .
 \end{equation}
-The expectation in \eqref{equation:SamplingMSE} is over all possible realizations of $x(t)$.
+The expectation in \eqref{equation:SamplingMSE} is over all possible realizations of $X(t)$.
 \end{theorem}
 \begin{proof}
 To establish this result, we expand the mean-squared error of \eqref{equation:SamplingMSE},
 \begin{equation*}
 \begin{split}
-&\| x(t) - \hat{x}(t) \|^2
-= \mathrm{E} \left[ \left| x(t) - \sum_{n=-\infty}^{\infty} x(nT_0)
+&\left\| X(t) - \hat{X}(t) \right\|^2
+= \mathrm{E} \left[ \left| X(t) - \sum_{n=-\infty}^{\infty} X(nT_0)
 \mathrm{sinc}(2 W (t - nT_0)) \right|^2 \right] \\
-&= R_x(0) - \sum_{n=-\infty}^{\infty} [ R_x(t-nT_0) + R_x^*(t-nT_0) ]
+&= R_X(0) - \sum_{n=-\infty}^{\infty} [ R_X(t-nT_0) + R_X^*(t-nT_0) ]
 \mathrm{sinc}(2 W (t - nT_0)) \\
-&+ \sum_{n=-\infty}^{\infty} \sum_{m=-\infty}^{\infty} R_x((m-n)T_0)
+&+ \sum_{n=-\infty}^{\infty} \sum_{m=-\infty}^{\infty} R_X((m-n)T_0)
 \mathrm{sinc}(2 W (t - mT_0)) \mathrm{sinc}(2 W (t - nT_0)) .
 \end{split}
 \end{equation*}
 The double summation above can be rewritten as
 \begin{equation*}
 \begin{split}
-&\sum_{n=-\infty}^{\infty} \sum_{p=-\infty}^{\infty} R_x(pT_0)
+&\sum_{n=-\infty}^{\infty} \sum_{p=-\infty}^{\infty} R_X(pT_0)
 \mathrm{sinc}(2 W (t - pT_0 - nT_0)) \mathrm{sinc}(2 W (t - nT_0)) \\
-&\sum_{n=-\infty}^{\infty} \left( \sum_{p=-\infty}^{\infty} R_x(pT_0)
+&\sum_{n=-\infty}^{\infty} \left( \sum_{p=-\infty}^{\infty} R_X(pT_0)
 \mathrm{sinc}(2 W (t - pT_0 - nT_0)) \right) \mathrm{sinc}(2 W (t - nT_0)) \\
-&= \sum_{n=-\infty}^{\infty} R_x(t - nT_0) \mathrm{sinc}(2 W (t - nT_0)) ,
+&= \sum_{n=-\infty}^{\infty} R_X(t - nT_0) \mathrm{sinc}(2 W (t - nT_0)) ,
 \end{split}
 \end{equation*}
 where the last equality follows from the sampling theorem for deterministic signals (Theorem~\ref{theorem:SamplingTheorem}).
 Putting these results together, we get
 \begin{equation*}
-\| x(t) - \hat{x}(t) \|^2
-= R_x(0) - \sum_{n=-\infty}^{\infty} R_x^*(t-nT_0) \mathrm{sinc}(2 W (t - nT_0)) .
+\left\| X(t) - \hat{X}(t) \right\|^2
+= R_X(0) - \sum_{n=-\infty}^{\infty} R_X^*(t-nT_0) \mathrm{sinc}(2 W (t - nT_0)) .
 \end{equation*}
-Applying Theorem~\ref{theorem:SamplingTheorem} one more time and noticing that $R_x(0) = R_x^*(0)$, we obtain $\| x(t) - \hat{x}(t) \|^2 = 0$, as desired.
+Applying Theorem~\ref{theorem:SamplingTheorem} one more time and noticing that $R_X(0) = R_X^*(0)$, we obtain $\| X(t) - \hat{X}(t) \|^2 = 0$, as desired.
 \end{proof}
 
 Theorem~\ref{theorem:SamplingRandomSignals} is significant in that it asserts that the design insights gained from analyzing deterministic signals hold for random signals as well.
