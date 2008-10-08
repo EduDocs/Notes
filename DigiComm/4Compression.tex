@@ -66,7 +66,7 @@ The source alphabet in this case is $\mathcal{X} = \{1, 2, \ldots \}$, the posit
 \begin{equation*}
 p_X (x) = \frac{1}{2^x}, \quad x = 1, 2, \ldots
 \end{equation*}
-Thus, the distribution of the source output at time~$t$ is a geometric random variable with parameter~$\frac{1}{2}$.
+Thus, the distribution of the source output at time~$t$ is a geometric random variable with parameter~$1/2$.
 \end{example}
 
 It is straightforward to show that all discrete memoryless sources are both stationary and ergodic.
@@ -205,6 +205,7 @@ This property guarantees that received symbols can be decoded immediately after 
 Suppose that a source produces three possible symbols, $\mathcal{X} = \{ x_1, x_2, x_3 \}$.
 We consider four encoding functions ($c_1, c_2, c_3, c_4$), each with different properties.
 The encoding schemes are defined as follows.
+
 \begin{center}
 \begin{tabular}{|c|c|c|c|c|}
 \hline
@@ -218,6 +219,7 @@ $x_3$ & 0 & 01 & 11 & 11 \\
 \hline
 \end{tabular}
 \end{center}
+
 The first scheme is not injective as it maps different source symbols to the same codeword, $c_1(x_1) = c_1(x_3)$.
 Thus, individual codewords cannot be decoded with certainty.
 The second code is one-to-one; however, it is not uniquely decodable.
@@ -257,6 +259,25 @@ Conversely, if we first assign the codeword lengths such that \eqref{equation:Kr
 \begin{proof}
 We wish to give necessary and sufficient conditions about the existence of a prefix-free code with a specific length assignment.
 We employ simple combinatorial arguments to a binary tree structure to establish this result.
+\begin{figure}[htbp]
+\begin{center}
+\begin{psfrags}
+\psfrag{0}[c]{$0$}
+\psfrag{1}[c]{$1$}
+\psfrag{C0}[l]{$000$}
+\psfrag{C1}[l]{$001$}
+\psfrag{C2}[l]{$010$}
+\psfrag{C3}[l]{$011$}
+\psfrag{C4}[l]{$100$}
+\psfrag{C5}[l]{$101$}
+\psfrag{C6}[l]{$110$}
+\psfrag{C7}[l]{$111$}
+\epsfig{file=Figures/binarytree,width=7cm}
+\end{psfrags}
+\caption{This figure shows a binary tree with depth $L_c = 3$ and eight leaves.  The branches from every node correspond to zero or one.}
+\label{figure:BinaryTree}
+\end{center}
+\end{figure}
 Let $L_c = \max_{x \in \mathcal{X}} \ell_c (x)$ be the length of the longest codeword.
 Code $c: \mathcal{X} \mapsto \mathcal{C}$ can be defined using a binary tree of depth $L_c$, where branches from every node correspond either to zero or one.
 Each codeword consists of a unique path from the root to a leaf at depth $\ell_c(x)$, following its binary string expansion.
@@ -304,6 +325,7 @@ First, we check the Kraft inequality to make sure that such an assignment is fea
 \end{equation*}
 The inequality is fulfilled, we can therefore use a binary tree construction to design the desired instantaneous code.
 The process is illustrated in Figure~\ref{figure:BinaryTreeCode}, and the resulting code is shown below.
+
 \begin{center}
 \begin{tabular}{|c|c|c|c|}
 \hline
@@ -315,6 +337,7 @@ $x_3$ & 100 & & \\
 \hline
 \end{tabular}
 \end{center}
+
 Since the Kraft inequality is met with equality, we know that it is impossible to get a better code by shortening one of the codewords.
 \begin{figure}[htbp]
 \begin{center}
@@ -338,90 +361,224 @@ Since the Kraft inequality is met with equality, we know that it is impossible t
 \subsection{Entropy Bounds on Prefix-Free Codes}
 
 Now that we know how to build instantaneous, we consider the problem of finding good prefix-free codes.
-Recall from \eqref{equation:CodeRateCompression} that our objective is to find a code that with the smallest possible expected length.
-The codeword length assignment is subject to the Kraft inequality.
-Putting these two observations together, we can formulate this optimization problem as follows
+Recall from \eqref{equation:CodeRateCompression} that our objective is to find a prefix-free code with the smallest possible expected length.
+As seen earlier, this codeword length assignment is subject to the Kraft inequality.
+Putting these two requirements together, we can formulate the optimization problem as follows,
 \begin{equation*}
 \min_{\ell(x)} \sum_{x \in \mathcal{X}} p_X(x) \ell(x)
+\quad \text{subject to} \quad
+\sum_{x \in \mathcal{X}} 2^{- \ell(x)} \leq 1 .
 \end{equation*}
-subject to
-\begin{equation*}
-\sum_{x \mathcal{X}} 2^{- \ell(x)} \leq 1 .
-\end{equation*}
-Note that, for a code to exist, the function $\ell(x)$ must map symbols to positive integers.
-It turns out that this problem is mathematically difficult.
+We note that, for a code to exist, the function $\ell(x)$ must take values in the positive integers.
+It turns out that this problem is difficult to solve.
 
 To gain insight into the problem, we relax the integer constrain on $\ell(x)$.
-This added flexibility will provide a lower bound on $\mathrm{E} [\ell(x)]$; having more choices can only lead to better results.
+This added flexibility will provide a lower bound on $\mathrm{E} [\ell(X)]$; having more choices can only lead to better results.
 We use the method of Lagrange multipliers to solve the latter version of the problem.
 The objective function, with Lagrange multiplier $\lambda$, becomes
 \begin{equation*}
 \sum_{x \in \mathcal{X}} p_X(x) \ell(x)
-+ \lambda \left( \sum_{x \mathcal{X}} 2^{- \ell(x)} - 1 \right) .
++ \lambda \left( \sum_{x \in \mathcal{X}} 2^{- \ell(x)} - 1 \right) .
 \end{equation*}
 Note that this function is twice differentiable in $\ell(x)$.
-Taking the derivative with respect to $\ell(x)$ and setting it to zero, we get
+Taking a partial derivative with respect to $\ell(x)$ and setting it to zero, we get
 \begin{equation*}
 p_X(x) - \lambda \ln(2) 2^{- \ell(x)}  = 0 .
 \end{equation*}
-Thus, $2^{- \ell^*(x)} = p_X(x) / (\lambda \ln (2))$.
-Taking the partial derivative with respect to $\lambda$ yields $\sum_{x \mathcal{X}} 2^{- \ell^*(x)} = 1$, which in turn implies $\lambda = 1 / \ln (2)$.
-Putting these results together, we get that the optimal values are
+The optimal value for $\ell(x)$, which we denote by $\ell^*(x)$, must therefore satisfy $2^{- \ell^*(x)} = p_X(x) / (\lambda \ln (2))$.
+Computing the derivative with respect to $\lambda$ yields
+\begin{equation*}
+\sum_{x \in \mathcal{X}} 2^{- \ell^*(x)} = 1 ,
+\end{equation*}
+which in turn implies $\lambda = 1 / \ln (2)$.
+Putting these results together, we gather that the optimal values for $\{ \ell(x) : x \in \mathcal{X} \}$ are given by
 \begin{equation*}
 \ell^*(x) = - \log_2 (p_X(x))
 \end{equation*}
-and, by construction, we get
+for $x \in \mathcal{X}$.
+Thus, by construction, we obtain
 \begin{equation*}
-\mathrm{E} [\ell_c(x)] \geq - \sum_{x \in \mathcal{X}} p_X(x) \log_2 (p_X(x))
+\mathrm{E} [\ell_c(X)] \geq - \sum_{x \in \mathcal{X}} p_X(x) \log_2 (p_X(x))
 = H[X]
 \end{equation*}
 for any prefix-code~$c$.
-We have just shown that the entropy is a lower bound on the expected length of a prefix-free code.
+In other words, the entropy is a lower bound on the expected length of any prefix-free code.
 
-It is equally easy to obtain an upper bound.
+It is equally easy to obtain an upper bound on the expected length of an optimal prefix-free code.
 Observe that $\lceil - \log_2 (p_X(x)) \rceil$ is an integer, with
 \begin{equation*}
 - \log_2 (p_X(x))
 \leq \lceil - \log_2 (p_X(x)) \rceil
 \leq - \log_2 (p_X(x)) + 1 .
 \end{equation*}
-The Kraft inequality asserts that we can build a code $c : \mathcal{X} \mapsto \mathcal{C}$ such that $\ell_c(x) = \lceil - \log_2 (p_X(x)) \rceil$, because
+The Kraft inequality asserts that we can build a code $c : \mathcal{X} \mapsto \mathcal{C}$ such that $\ell_c(x) = \lceil - \log_2 (p_X(x)) \rceil$, as
 \begin{equation*}
-\sum_{x \in \mathcal{X}} 2^{\ell_c(x)}
-\leq \sum_{x \in \mathcal{X}} 2^{\ell^*(x)} = 1 .
+\sum_{x \in \mathcal{X}} 2^{- \ell_c(x)}
+\leq \sum_{x \in \mathcal{X}} 2^{- \ell^*(x)} = 1 .
 \end{equation*}
-Thus, we gather that there exists a code~$c$ such that
+As such, there exists a code~$c$ such that
 \begin{equation*}
-\mathrm{E} [\ell_c(x)] \leq H[X] + 1 .
+\mathrm{E} [\ell_c(X)] \leq H[X] + 1 .
 \end{equation*}
-We formalize these results in the form of a theorem.
+We collect and formalize these important results in the form of a theorem.
 
 \begin{theorem} \label{theorem:EntropyBoundsPrefixCodes}
 Consider a discrete memoryless source $(\mathcal{X}, p_X(\cdot))$ over a finite alphabet.
 If symbols are encoded individually using an optimal prefix-free code $c : \mathcal{X} \mapsto \mathcal{C}$, then the expected length of the codewords satisfies
 \begin{equation*}
-H[X] \leq \mathrm{E} [\ell_c(x)] \leq H[X] + 1 .
+H[X] \leq \mathrm{E} [\ell_c(X)] \leq H[X] + 1 .
 \end{equation*}
 \end{theorem}
 
 
-\subsection{Huffman Code}
+\subsection{Huffman Codes}
 
-Theorem~\ref{theorem:EntropyBoundsPrefixCodes} discusses properties of an optimal prefix-code.
-However, it does not provide an algorithmic methodology to construct such a code.
-This is addressed by \emph{Huffman coding}, a variable-length encoding algorithm used for lossless data compression.
+Theorem~\ref{theorem:EntropyBoundsPrefixCodes} identifies properties of an optimal prefix-code.
+However, it does not provide an algorithmic methodology to design such a code.
+This is addressed by the \emph{Huffman encoding algorithm}, a technique that produces an efficient variable-length code for lossless data compression.
 Not too surprisingly, the underlying strategy in this scheme is to assign short strings of bits to likely symbols, and necessarily longer ones to less probable source outputs.
 The encoding is specifically crafted so that the code table forms a prefix-free code.
-Huffman coding is the most efficient compression mapping for individual source symbols.
+Huffman codes are the most efficient compression mapping for individual source symbols.
 The expected length of the compressed data achieved with this technique will be no greater than the expected message length of any other prefix-free code that operates on individual source symbols.
+
+The insight behind Huffman coding is based on three properties of optimal prefix-codes.
+Suppose that we wish to encode outputs from discrete memoryless source $(\mathcal{X}, p_X)$, and let $c^* : \mathcal{X} \mapsto \mathcal{C}$ be an optimal prefix-code for this source.
+If $p_X(x_1) > p_X(x_2)$, then $\ell_{c^*}(x_1) \leq \ell_{c^*}(x_2)$.
+For any of the longest codewords, its sibling (the bit string that differs only in the last digit) must also be codeword; otherwise, the original codeword can be shortened by removing the last bit.
+Finally, the code tree associated with an optimal code must be full.
+A bianry tree is \emph{full} if every node has either zero or two children.
+Again, if this codition fails, then some codewords in the codebook can be shortened.
+
+The Huffman algorithm creates a code by building a binary tree.
+The algorithm proceeds as follows.
+First, every source symbol $x$ is assigned to an individual node.
+Then, the simple recusion outlined below is applied.
+\begin{enumerate}
+\item Sort the nodes in decreasing order of probabilities.
+\item Merge the two least probable nodes into a single one, whose probability equals the sum of its constituents.
+\item Arbitrarily assign zero or one to the branches emerging from this new node.
+\item Repeat the previous three steps with the new collection of nodes and their corresponding probabilities until only one node remains.
+\end{enumerate}
+The Huffman encoding algorithm is best grasped through simple examples.
+
+\begin{example}
+Suppose that a discrete memoryless source $(\mathcal{X}, p_X)$ with alphabet $\mathcal{X} = \{ x_1, x_2, x_3 \}$ has probability mass function
+\begin{equation*}
+p_X(x) = \begin{cases} \frac{2}{3}, & x = x_1 \\
+\frac{1}{6}, & x \in \{ x_2, x_3 \} . \end{cases}
+\end{equation*}
+We wish to obtain an optimal prefix-code for this source, and thus we apply the Huffman algorithm.
+For the given source, code design proceeds as follows.
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+Stage 3 & Stage 2 & Stage 1 & Symbol & Codeword \\
+\hline
+$\Pr \{ x_1, x_2, x_3 \} = 1$ & $\Pr \{ x_1 \} = \frac{2}{3}$
+& $p_X (x_1) = \frac{2}{3}$ & $x_1$ & 0 \\
+& $\Pr \{ x_2, x_3 \} = \frac{1}{3}$ & $p_X (x_2) = \frac{1}{6}$ & $x_2$ & 10 \\
+& & $p_X (x_3) = \frac{1}{6}$ & $x_3$ & 11 \\
+\hline
+\end{tabular}
+\end{center}
+
+From this successive re-ordering of probabilities, we use a binary tree to build the actual code.
+This is illustrated in Figure~\ref{figure:Huffman1}.
+\begin{figure}[htbp]
+\begin{center}
+\begin{psfrags}
+\psfrag{C1}[l]{$0$}
+\psfrag{C2}[l]{$10$}
+\psfrag{C3}[l]{$11$}
+\psfrag{x1}[c]{$x_1$}
+\psfrag{x2}[c]{$x_2$}
+\psfrag{x3}[c]{$x_3$}
+\psfrag{x23}[c]{$\{ x_2, x_3 \}$}
+\psfrag{x123}[c]{$\{ x_1, x_2, x_3 \}$}
+\epsfig{file=Figures/huffman1,width=4in}
+\end{psfrags}
+\caption{A graphical representation for the construction of a simple Huffman code. The source alphabet in this case is $\mathcal{X} = \{x_1, x_2, x_3 \}$ and the probabilities of individual symbols are $\{ 2/3, 1/6, 1/6 \}$, respectively.}
+\label{figure:Huffman1}
+\end{center}
+\end{figure}
+\end{example}
+
+\begin{example}
+A source $(\mathcal{Y}, p_Y)$ generates four different symbols $\{ y_1, y_2, y_3, y_4 \}$ with probabilities $\{ 0.35, 0.25, 0.2, 0.2 \}$.
+A binary tree is generated from right to left, by merging the two less probable symbols at every step.
+Once this is complete, the code can then be form by assigning different bits to every pair of branches emerging from a node.
+The table below shows the different stages of the iterative procedure where probabilities are first sorted in decreasing order, then the two least probable nodes are merged into a single one.
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+Stage 4 & Stage 3 & Stage 2 & Stage 1 & Symbol \\
+\hline
+$0.6 + 0.4 = 1$ & $0.35 + 0.25 = 0.6$ & $0.2 + 0.2 = 0.4$ & $p_X (x_1) = 0.35$ & $x_1$ \\
+& $0.4$ & $0.35$ & $p_X (x_2) = 0.25$ & $x_2$ \\
+& & $0.25$ & $p_X (x_3) = 0.2$ & $x_3$ \\
+& & & $p_X (x_4) = 0.2$ & $x_4$ \\
+\hline
+\end{tabular}
+\end{center}
+
+The ensuing Huffman code is obtained by moving from left to right in the corresponding binary tree.
+The binary tree and the resulting Huffman code are shown in Figure~\ref{figure:Huffman2}.
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{psfrags}
+\psfrag{C1}[l]{$00$}
+\psfrag{C2}[l]{$01$}
+\psfrag{C3}[l]{$10$}
+\psfrag{C4}[l]{$11$}
+\psfrag{x1}[c]{$x_1$}
+\psfrag{x2}[c]{$x_2$}
+\psfrag{x3}[c]{$x_3$}
+\psfrag{x4}[c]{$x_4$}
+\epsfig{file=Figures/huffman2,width=4in}
+\end{psfrags}
+\caption{This figure depcits a Huffman code construction for an alphabet of size four.}
+\label{figure:Huffman2}
+\end{center}
+\end{figure}
+
+\end{example}
+
 
 
 
 Although Huffman coding is optimal for a symbol-by-symbol encoding with a known input probability mass function, it can be outperformed when these two conditions are not known.
 For instance, if the input distribution $p_x(\cdot)$ is not known, then it must be inferred from the available data prior to applying Huffman coding.
 Small errors in the estimated probability mass function can then lead to inefficiency, which in turn renders Huffman coding suboptimal.
-More importantly, a more efficient way to encode data is to consider blocks of source symbols and to encode them jointly.
+We will soon see an encoding algorithm that does not require the input distribution $p_x(\cdot)$.
+However, before we can present this alorithm, we need to consider the join encoding of source symbols.
+
+
+\section{Joint Encoding of Source Symbols}
+
+A more efficient way to encode data is to consider blocks of source symbols and to encode them jointly.
 Although more complicated, this process leads to better performance and typically leads to expected message lengths that are lower than that of a typical symbol-by-symbol Huffman code.
+
+Consider a sequence $X_1, X_2, \ldots$ of symbols at the output of a discrete memoryless source.
+Instead of using a code that operates on individual symbols, we can design a code that takes as input a string of $n$ symbols, $c: \mathcal{X}^n \mapsto \mathcal{C}$.
+Since the outputs of a discrete memoryless source are indpendent and identically distributed random variables, we know from the additive property of the entropy that
+\begin{equation*}
+H[X_1, \ldots, X_n ] = n H [X] .
+\end{equation*}
+Then, by applying Theorem~\ref{theorem:EntropyBoundsPrefixCodes}, we get that an optimal perfix code that operates on $\mathcal{X}^n$ yields
+\begin{equation*}
+n H[X] \leq \mathrm{E} [ \ell_c (X_1, \ldots, X_n) ] \leq n H[X] + 1.
+\end{equation*}
+Then, the expected length of the message per source output becomes
+\begin{equation*}
+H[X] \leq \frac{ \mathrm{E} [ \ell_c (X_1, \ldots, X_n) ] }{n} \leq H[X] + \frac{1}{n} .
+\end{equation*}
+That is, the expected message length per source output can be made arbitrarily close to $H[X]$ by jointly encoding strings of symbols.
+
+
+Although we won't see this here.  It's even better for dependen symbosl.
 
 
 \section{Fixed-Length Compression Codes}
@@ -434,4 +591,59 @@ Data compression in fixed-length coding methods is only possible for large block
 
 \section{Lempel-Ziv Algorithm}
 
-The entropy is equal to the minimum number of bits per source symbol required to map the source output into binary digits in such a way that the source symbols may be reconstructed from the encoded sequence.
+Huffman coding has some important drawbacks.
+The source statistics have to be known in advance to design a Huffman code.
+If one only has access to the source outputs, the coding procedure requires two passes through the data, one to estimate the statitics of the source, and a second one for encoding.
+The Huffman encoding algorithm is designed primarily for source blocks of length 1.
+To take advantage of the source memory, and to get better rates, one has to consider longer block lengths.
+Yet, complexity increases rapidly with block length for the Huffman algorithm. 
+To provide a partial answer to these drawbacks, we study an example of a universal source-coding algorithm, namely the Lempel-Ziv algorithm.
+
+The basic idea behind the \emph{Lempel-Ziv algorithm} is to parse the input sequence into non-overlapping strings of different lengths while constructing a list of the strings seen thus far.
+The encoding algorithm works as follows.
+First, initialize the list to contain all strings of length one.
+Then, apply the follwoing iterative procedure.
+\begin{enumerate}
+\item Search for the longest binary string $w$ which has appeared in the dictionary table.
+\item Encode this binary string by its index in the dictionary.
+\item Add $w$ followed by the first digit of the next block to the dictionary.
+\end{enumerate}
+Practical aspects of this algorithm include the size of the dictionary
+
+Decompression works in the reverse fashion.
+Starting from the dictionary table and the encoded bits, one can resolve the input without ambiguity.
+
+\begin{example}
+Suppose that we are to use a Lemple-Ziv algorithm with dictionary size $2^3 = 8$.
+The source sequence is sequentially parsed into strings that have not appeared so far.
+For example, 
+\begin{equation*}
+1011010100010 \ldots \rightarrow 1, 0, 11, 01, 010, 00, 10, \ldots
+\end{equation*}
+The dictionary table at this point has seven elements.
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+Index & Binary String & Index & Binary String \\
+\hline
+000 & 1 & 100 & 010 \\
+001 & 0 & 101 & 00 \\
+010 & 11 & 110 & 10 \\
+011 & 01 & 111 & \\
+\hline
+\end{tabular}
+\end{center}
+
+Each phrase (the bit string contained between two commas) is coded by giving the location of its prefix in the dictionary table, and the value of the additional bit;
+\begin{equation*}
+\begin{split}
+& 1, 0, 11, 01, 010, 00, 10, \ldots \\
+& \rightarrow (000, 1)(000, 0)(001, 1)(010, 1)(100, 0)(010, 0)(001, 0) \ldots
+\end{split}
+\end{equation*}
+where the first number of each pair gives the index of the prefix in the table and the second number gives the last bit of the new phrase. 
+The Lempel-Ziv coding algorithm asymptotically achieves the entropy rate for an unknown ergodic source.
+\end{example}
+
+This type of \emph{universal data compression} is the basis for file compression algorithms (e.g., winzip, gzip).
