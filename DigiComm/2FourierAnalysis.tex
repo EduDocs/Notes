@@ -13,6 +13,7 @@ This is not intended to be a comprehensive treatment of harmonic analysis.
 
 
 \section{Fourier Series}
+\label{section:FourierSeries}
 
 Fourier series can be employed to express, as weighted sums of sinusoidal components, either periodic functions or functions that are time-limited.
 Suppose that $s(t)$ is a function that is nonzero only for $-T/2 \leq t \leq T/2$, and is square integrable
@@ -227,41 +228,59 @@ A formal version of the sampling theorem appears below.
 Suppose that $x(t)$ is a bandwidth-limited signal with bandwidth $W$.
 If $x(t)$ is sampled at times $\{ nT : n \in \mathbb{Z} \}$ where $T \leq \frac{1}{2W}$, then it is possible to reconstruct the original signal $x(t)$ from its sampled points $\{ x(nT) : n \in \mathbb{Z} \}$.
 Indeed, if $T \leq \frac{1}{2W}$ then
-\begin{equation*}
+\begin{equation} \label{equation:SamplingReconstructionFormula}
 x(t) = \sum_{n = -\infty}^{\infty}
 x(nT) \mathrm{sinc} \left( \frac{t}{T}-n \right) .
-\end{equation*}
+\end{equation}
 \end{theorem}
 \begin{proof}
-Let $x_{s}(t)$ denote the result of sampling $x(t)$ by impulses at times $\{ nT : n \in \mathbb{Z} \}$,
+The signal $x(t)$ is bandwidth-limited with bandwidth $W$.
+It follows that $x(t)$ is the inverse Fourier transform of a function $\hat{x}(f)$, where $\hat{x}(f) = 0$ for all frequencies such that $|f| > W$.
+For convenience, we define $F = \frac{1}{T}$ and we emphasize that $W \geq \frac{1}{2T} = \frac{F}{2}$.
+Thus, $\hat{x}(f) = 0$ whenever $|f| > \frac{F}{2}$.
+We can use the theory of Fourier series introduced in Section~\ref{section:FourierSeries} to express $\hat{x}(f)$ as
 \begin{equation*}
-x_s(t) = x(t) \sum_{n=-\infty}^{\infty} \delta(t-nT)
-= \sum_{n=-\infty}^{\infty} x(nT) \delta(t-nT).
+\hat{x}(f) = \sum_{k=-\infty}^{\infty} \hat{s}_k e^{j 2 \pi \frac{k}{F} f}
+\mathrm{rect} \left( \frac{f}{F} \right)
 \end{equation*}
-Looking at the sampled signal in the frequency domain, we get
+where the coefficients $\hat{s}_k$ are equal to
+\begin{equation*}
+\hat{s}_k
+= \frac{1}{F} \int_{-\frac{F}{2}}^{\frac{F}{2}}
+\hat{x}(f) e^{- j 2 \pi \frac{k}{F} f} df .
+\end{equation*}
+Special care must be taken when reading these results;
+we are applying Fourier series analysis to a function in the frequency domain.
+
+We can write $x(t)$ in terms of basis elements,
 \begin{equation*}
 \begin{split}
-\hat{x}_s(f) &= \hat{x}(f) \star \mathcal{F} \left[ \sum_{n=-\infty}^{\infty} \delta(t-nT) \right] \\
-&= \hat{x}(f) \star \frac{1}{T} \sum_{n=-\infty}^{\infty} \delta \left( f-\frac{n}{T} \right) \\
-&= \frac{1}{T} \sum_{n=-\infty}^{\infty} \hat{x} \left( f - \frac{n}{T} \right) ,
+x(t) &= \mathcal{F}^{-1} \left[ \hat{x}(f) \right]
+= \mathcal{F}^{-1} \left[ \sum_{k=-\infty}^{\infty} \hat{s}_k e^{j 2 \pi \frac{k}{F} f}
+\mathrm{rect} \left( \frac{f}{F} \right) \right] \\
+&= \sum_{k=-\infty}^{\infty} \hat{s}_k \mathcal{F}^{-1} \left[ e^{j 2 \pi \frac{k}{F} f}
+\mathrm{rect} \left( \frac{f}{F} \right) \right] \\
+%&= \sum_{k=-\infty}^{\infty} \hat{s}_k
+%\int_{-\frac{F}{2}}^{\frac{F}{2}} e^{j 2 \pi \frac{k}{F} f} e^{j 2 \pi f t} df \\
+%&= \sum_{k=-\infty}^{\infty} \hat{s}_k
+%\int_{-\frac{F}{2}}^{\frac{F}{2}} e^{j 2 \pi \left( t + \frac{k}{F} \right) f} df \\
+%&= \sum_{k=-\infty}^{\infty} \hat{s}_k
+%\frac{e^{j \pi \left( t + \frac{k}{F} \right) F} - e^{-j \pi \left( t + \frac{k}{F} \right) F}}{j 2 \pi \left( t + \frac{k}{F} \right)} \\
+%&= \sum_{k=-\infty}^{\infty} \hat{s}_k
+%\frac{\sin \left( \pi \left( t + \frac{k}{F} \right) F \right)}{\pi \left( t + \frac{k}{F} \right)} \\
+&= \sum_{k=-\infty}^{\infty} \hat{s}_k F \mathrm{sinc} \left( F t + k \right) \\
+&= \sum_{k=-\infty}^{\infty} \frac{\hat{s}_k}{T} \mathrm{sinc} \left( \frac{t}{T} + k \right) .
 \end{split}
 \end{equation*}
-where we have used \eqref{equation:ImpulseTrainFrequency} to express the Fourier transform of an impulse train.
-
-Passing the sampled signal through an ideal lowpass filter defined by
+We can obtain the values of $\hat{s}_k$ explicitly by exploiting the properties of the $\mathrm{sinc} (\cdot)$ function, with
 \begin{equation*}
-\hat{h}(f) = T \mathrm{rect} \left( \frac{f}{2W} \right)
-= \begin{cases} T, & |f| < W \\
-0, & |f| > W \end{cases}
+x(nT)
+= \sum_{k=-\infty}^{\infty}
+\frac{\hat{s}_k}{T} \mathrm{sinc} \left( \frac{nT}{T} + k \right)
+= \sum_{k=-\infty}^{\infty}
+\frac{\hat{s}_k}{T} \mathrm{sinc} ( n + k ) = \frac{\hat{s}_{-n}}{T} .
 \end{equation*}
-we obtain the output
-\begin{equation*}
-\hat{x}_s(f) \hat{h}(f)
-= \frac{1}{T} \left[ \sum_{n=-\infty}^{\infty} \hat{x} \left( f - \frac{n}{T} \right) \right]
-T \mathrm{rect} \left( \frac{f}{2W} \right)
-= \hat{x}(f) .
-\end{equation*}
-The output of the ideal lowpass filter $\hat{h}(f)$ is the original signal $x(t)$, and perfect reconstruction is achieved.
+Thus, we have $s_{k} = T x(-kT)$ and formula \eqref{equation:SamplingReconstructionFormula} follows.
 The sampling rate corresponding to $T = \frac{1}{2W}$ is the minimum sampling rate at which no aliasing occurs.
 It is called the \emph{Nyquist rate}.
 \end{proof}
