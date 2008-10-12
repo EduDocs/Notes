@@ -103,8 +103,8 @@ Since $G_{ji} = \left\langle \vecnot{w}_i | \vecnot{w}_j \right\rangle$, it foll
 \end{definition}
 
 \begin{definition}
-A matrix $M$ is \emph{positive-semidefinite} if $\vecnot{v}^H M \vecnot{v} \geq 0$ for all $\vecnot{v} \in F^n$.
-A matrix $M$ is \emph{positive-definite} if $\vecnot{v}^H M \vecnot{v} > 0$ for all $\vecnot{v} \in F^n - \left\{ \vecnot{0} \right\}$.
+A matrix $M\in F^{n \times n}$ is \emph{positive-semidefinite} if $\vecnot{v}^H M \vecnot{v} \geq 0$ for all $\vecnot{v} \in F^n$.
+A matrix $M\in F^{n \times n}$ is \emph{positive-definite} if $\vecnot{v}^H M \vecnot{v} > 0$ for all $\vecnot{v} \in F^n - \left\{ \vecnot{0} \right\}$.
 \end{definition}
 
 An important aspect of positive-definite matrices is that they are always invertible.
@@ -139,10 +139,10 @@ and hence the sequence of vectors $\vecnot{w}_1, \ldots, \vecnot{w}_n$ is not li
 
 Conversely, if $G$ is positive-definite then $\vecnot{v}^H G \vecnot{v} > 0$ and
 \begin{equation*}
-\sum_{i=1}^n v_i \vecnot{w}_i > 0
+\left\| \sum_{i=1}^n v_i \vecnot{w}_i \right\| > 0
 \end{equation*}
 for all $\vecnot{v} \in F^n - \left\{ \vecnot{0} \right\}$.
-That is, the sequence of vectors $\vecnot{w}_1, \ldots, \vecnot{w}_n$ is linearly independent.
+Therefore, the sequence of vectors $\vecnot{w}_1, \ldots, \vecnot{w}_n$ is linearly independent.
 \end{proof}
 
 
