@@ -163,7 +163,9 @@ Let $V$ be a vector space over $F$.
 A \emph{subspace} of $V$ is a subset $W \subset V$ which is itself a vector space over $F$.
 \end{definition}
 
+\begin{fact}
 A non-empty subset $W \subset V$ is a subspace of $V$ if and only if for every pair of vector $\vecnot{w}_1, \vecnot{w}_2 \in W$ and every scalar $s \in F$ the vector $s \vecnot{w}_1 + \vecnot{w}_2$ is again in $W$.
+\end{fact}
 If $V$ is a vector space then the intersection of any collection of subspaces of $V$ is a subspace of $V$.
 
 \begin{example}
@@ -313,6 +315,20 @@ AB = I.
 Note also that if the rows of $A$ form a linearly independent set of vectors in $F^{1 \times n}$ then $A$ is invertible.
 \end{proof}
 
+\begin{definition}
+Let $V$ and $W$ be vector spaces over a field $F$.
+A \emph{linear transformation from $V$ to $W$} is a function $T$ from $V$ into $W$ such that
+\begin{equation*}
+T \left( s \vecnot{v}_1 + \vecnot{v}_2 \right)
+= s T \vecnot{v}_1 + T \vecnot{v}_2
+\end{equation*}
+for all $\vecnot{v}_1$ and $\vecnot{v}_2$ in $V$ and all scalars $s$ in $F$.
+\end{definition}
+
+\begin{example}
+Let $A$ be a fixed $m \times n$ matrix over $F$.
+The function $T$ defined by $T \left( \vecnot{v} \right) = A \vecnot{v}$ is a linear transformation from $F^{n \times 1}$ into $F^{m \times 1}$.
+\end{example}
 
 \subsection{Coordinate System}
 
@@ -847,6 +863,7 @@ Since the dimension of the latter subspace is $m+1$, this set is a basis for the
 The inductive construction of the vectors $\vecnot{w}_1, \ldots, \vecnot{w}_n$ is known as the \emph{Gram-Schmidt orthogonalization process}.
 
 \begin{corollary}
+\label{cor:orthonormal_basis}
 Every finite-dimensional inner-product space has a basis of orthonormal vectors.
 \end{corollary}
 \begin{proof}
@@ -977,12 +994,15 @@ That is, $\vecnot{v} - \vecnot{w}$ is orthogonal to every vector in $W$ and ther
 
 \begin{definition}
 Let $V$ be an inner-product space and $W$ be any set of vectors in $V$.
-The \emph{orthogonal complement} of $W$ denoted by $W^{\bot}$ is the set of all vectors in $V$ which are orthogonal to every vector in $W$.
+The \emph{orthogonal complement} of $W$ denoted by $W^{\bot}$ is the set of all vectors in $V$ that are orthogonal to every vector in $W$ or
+\begin{equation*}
+W^{\bot} = \left\{ \vecnot{v} \in V \big| \langle \vecnot{v} | \vecnot{w} \rangle = 0 \; \forall \; \vecnot{w}\in W \right\}. 
+\end{equation*}
 \end{definition}
 
 \begin{problem} \label{problem:WbotSubspace}
 Let $W$ be any subset of vector space $V$.
-Show that $W^{\bot}$ is a subspace of $V$.
+Show that $W^{\bot}$ is a subspace of $V$ and that any vector in the subspace spanned by $W$ is orthogonal to any vector in $W^{\bot}$.
 \end{problem}
 \noindent
 \textbf{S~\ref{problem:WbotSubspace}}.
@@ -1003,9 +1023,19 @@ This implies
 That is, $s \vecnot{m}_1 + \vecnot{m}_2 \in W^{\bot}$.
 Hence, $W^{\bot}$ is a subspace of $V$.
 
+Notice also that any vector $\vecnot{w}$ in the subspace spanned by $W$ can be written as $\vecnot{w} = \sum_{i} s_i \vecnot{w}_i$ with $\vecnot{w}_i \in W$ and $s_i \in F$.
+Therefore, the inner product of $\vecnot{w}$ with any $\vecnot{w}' \in W^{\bot}$ is given by
+\begin{align*}
+\left\langle \vecnot{w} | \vecnot{w}' \right\rangle
+&= \left\langle \sum_{i} s_i \vecnot{w}_i \Big| \vecnot{w}' \right\rangle \\
+&= \sum_{i} s_i \left\langle \vecnot{w}_i | \vecnot{w}' \right\rangle \\
+&= 0.
+\end{align*}
+It follows that the subspace spanned by $W$ is orthogonal to the subspace $W^{\bot}$.
+
 \begin{definition}
 Whenever the vector $\vecnot{w}$ in Theorem~\ref{theorem:OrthogonalProjection} exists, it is called the \emph{orthogonal projection of $\vecnot{v}$ on $W$}.
-If every vector in $V$ has an orthogonal projection on $W$, the mapping that assigns to each vector in $V$ its orthogonal projection on $W$ is called the \emph{orthogonal projection of $V$ on $W$}.
+If every vector in $V$ has an orthogonal projection on $W$, the mapping $E: V \rightarrow W$ that assigns to each vector in $V$ its orthogonal projection on $W$ is called the \emph{orthogonal projection of $V$ onto $W$}.
 \end{definition}
 
 \begin{problem}
@@ -1045,10 +1075,14 @@ with strict inequality when $\vecnot{u} \neq \vecnot{v} - E \vecnot{v}$.
 Thus, $\vecnot{v} - E \vecnot{v}$ is the best approximation to $\vecnot{v}$ by vectors in $W^{\bot}$.
 \end{proof}
 
+\begin{definition}
+A function $F: X \rightarrow Y$ with $Y \subseteq X$ is \emph{idempotent} if $F(F(x))=F(x)$.  When $F$ is a linear transformation, this reduces to $F^2 = F \cdot F = F$.
+\end{definition}
+
 \begin{theorem} \label{theorem:OrthogonalSubspaceDirectSum}
 Suppose $V$ is an inner-product space.
 Let $W$ be a finite-dimensional subspace of $V$ and let $E$ denote the orthogonal projection of $V$ on $W$.
-Then $E$ is an idempotent linear transformation of $V$ onto $W$, $W^{\bot}$ is the nullspace of $E$, and
+Then $E$ is an idempotent linear transformation of $V$ onto $W$, $E \vecnot{w}' = \vecnot{0}\,$ iff $\vecnot{w}' \in W^{\bot}$, and
 \begin{equation*}
 V = W \oplus W^{\bot}.
 \end{equation*}
@@ -1060,6 +1094,18 @@ If $\vecnot{v} \in W$ then $E \vecnot{v} = \vecnot{v}$.
 It follows that $E \left( E \vecnot{v} \right) = E \vecnot{v}$ for any $\vecnot{v} \in V$ since $E \vecnot{v} \in W$.
 That is, $E^2 = E$ and $E$ is idempotent.
 
+To show that $E$ is a linear transformation, let $\{ \vecnot{w}_1 , \vecnot{w}_2 , \ldots , \vecnot{w}_n \}$ be an orthonormal basis for $W$ (whose existence follows from Corollary~\ref{cor:orthonormal_basis}).
+Using part 3 of Theorem~\ref{theorem:OrthogonalProjection}, we find that
+\begin{align*}
+E \left( s_1 \vecnot{v}_1 + \vecnot{v}_2 \right)
+& = \sum_{i=1}^n \langle  s_1 \vecnot{v}_1 + \vecnot{v}_2 | \vecnot{w}_i \rangle \vecnot{w}_i \\
+& = s_1 \sum_{i=1}^n \langle  \vecnot{v}_1 | \vecnot{w}_i \rangle \vecnot{w}_i + \sum_{i=1}^n \langle  \vecnot{v}_2 | \vecnot{w}_i \rangle \vecnot{w}_i \\
+& = s_1 E \vecnot{v}_1 + E \vecnot{v}_2.
+\end{align*}
+Therefore, $E$ is a linear transformation.
+It also follows that $E \vecnot{w}' = \vecnot{0}$ iff $\vecnot{w}' \in W^{\bot}$ because $W^{\bot}$ can be defined by the fact that $\langle \vecnot{w}' | \vecnot{w}_i \rangle = 0$ for $i=1,2,\ldots,n$.
+
+\iffalse
 To show that $E$ is a linear transformation, consider vectors $\vecnot{v}_1, \vecnot{v}_2 \in V$ and scalar $s \in F$.
 Then $\vecnot{v}_1 - E \vecnot{v}_1$ and $\vecnot{v}_2 - E \vecnot{v}_2$ are each orthogonal to every vector in $W$.
 The vector
@@ -1085,6 +1131,13 @@ The equation
 shows that $V = W + W^{\bot}$.
 Furthermore, $W \cap W^{\bot} = \left\{ \vecnot{0} \right\}$.
 Hence $V$ is the direct sum of $W$ and $W^{\bot}$.
+\fi
+
+Again, let $\vecnot{v} \in V$ and recall that (by Theorem~\ref{theorem:OrthogonalProjection}) $E \vecnot{v}$ is the unique vector in $W$ such that $\vecnot{v} - E \vecnot{v}$ is in $W^{\bot}$.
+Therefore, the equation $\vecnot{v} = E \vecnot{v} + \left( \vecnot{v} - E \vecnot{v} \right)$ gives a unique decomposition of $\vecnot{v}$ into $E \vecnot{v} \in W$ and $\vecnot{v} - E \vecnot{v} \in W^{\bot}$.
+This unique decomposition implies that $V$ is the direct sum of $W$ and $W^{\bot}$.
+Of course, from the definition of $W^{\bot}$ it follows that
+\[W \cap W^{\bot} = \left\{ \vecnot{u} \in W | \langle \vecnot{u} | \vecnot{w} \rangle =0 \; \forall \; \vecnot{w}\in W \right\}  \subseteq \left\{ \vecnot{u} \in W | \langle \vecnot{u} | \vecnot{u} \rangle =0 \right\}  = \{ \vecnot{0} \} .\]
 \end{proof}
 
 \begin{corollary}
