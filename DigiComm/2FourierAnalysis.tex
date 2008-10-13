@@ -240,12 +240,12 @@ For convenience, we define $F = \frac{1}{T}$ and we emphasize that $W \geq \frac
 Thus, $\hat{x}(f) = 0$ whenever $|f| > \frac{F}{2}$.
 We can use the theory of Fourier series introduced in Section~\ref{section:FourierSeries} to express $\hat{x}(f)$ as
 \begin{equation*}
-\hat{x}(f) = \sum_{k=-\infty}^{\infty} \hat{s}_k e^{j 2 \pi \frac{k}{F} f}
+\hat{x}(f) = \sum_{k=-\infty}^{\infty} s_k e^{j 2 \pi \frac{k}{F} f}
 \mathrm{rect} \left( \frac{f}{F} \right)
 \end{equation*}
-where the coefficients $\hat{s}_k$ are equal to
+where the coefficients $s_k$ are equal to
 \begin{equation*}
-\hat{s}_k
+s_k
 = \frac{1}{F} \int_{-\frac{F}{2}}^{\frac{F}{2}}
 \hat{x}(f) e^{- j 2 \pi \frac{k}{F} f} df .
 \end{equation*}
@@ -256,29 +256,29 @@ We can write $x(t)$ in terms of basis elements,
 \begin{equation*}
 \begin{split}
 x(t) &= \mathcal{F}^{-1} \left[ \hat{x}(f) \right]
-= \mathcal{F}^{-1} \left[ \sum_{k=-\infty}^{\infty} \hat{s}_k e^{j 2 \pi \frac{k}{F} f}
+= \mathcal{F}^{-1} \left[ \sum_{k=-\infty}^{\infty} s_k e^{j 2 \pi \frac{k}{F} f}
 \mathrm{rect} \left( \frac{f}{F} \right) \right] \\
-&= \sum_{k=-\infty}^{\infty} \hat{s}_k \mathcal{F}^{-1} \left[ e^{j 2 \pi \frac{k}{F} f}
+&= \sum_{k=-\infty}^{\infty} s_k \mathcal{F}^{-1} \left[ e^{j 2 \pi \frac{k}{F} f}
 \mathrm{rect} \left( \frac{f}{F} \right) \right] \\
-%&= \sum_{k=-\infty}^{\infty} \hat{s}_k
+%&= \sum_{k=-\infty}^{\infty} s_k
 %\int_{-\frac{F}{2}}^{\frac{F}{2}} e^{j 2 \pi \frac{k}{F} f} e^{j 2 \pi f t} df \\
-%&= \sum_{k=-\infty}^{\infty} \hat{s}_k
+%&= \sum_{k=-\infty}^{\infty} s_k
 %\int_{-\frac{F}{2}}^{\frac{F}{2}} e^{j 2 \pi \left( t + \frac{k}{F} \right) f} df \\
-%&= \sum_{k=-\infty}^{\infty} \hat{s}_k
+%&= \sum_{k=-\infty}^{\infty} s_k
 %\frac{e^{j \pi \left( t + \frac{k}{F} \right) F} - e^{-j \pi \left( t + \frac{k}{F} \right) F}}{j 2 \pi \left( t + \frac{k}{F} \right)} \\
-%&= \sum_{k=-\infty}^{\infty} \hat{s}_k
+%&= \sum_{k=-\infty}^{\infty} s_k
 %\frac{\sin \left( \pi \left( t + \frac{k}{F} \right) F \right)}{\pi \left( t + \frac{k}{F} \right)} \\
-&= \sum_{k=-\infty}^{\infty} \hat{s}_k F \mathrm{sinc} \left( F t + k \right) \\
-&= \sum_{k=-\infty}^{\infty} \frac{\hat{s}_k}{T} \mathrm{sinc} \left( \frac{t}{T} + k \right) .
+&= \sum_{k=-\infty}^{\infty} s_k F \mathrm{sinc} \left( F t + k \right) \\
+&= \sum_{k=-\infty}^{\infty} \frac{s_k}{T} \mathrm{sinc} \left( \frac{t}{T} + k \right) .
 \end{split}
 \end{equation*}
-We can obtain the values of $\hat{s}_k$ explicitly by exploiting the properties of the $\mathrm{sinc} (\cdot)$ function, with
+We can obtain the values of $s_k$ explicitly by exploiting the properties of the $\mathrm{sinc} (\cdot)$ function, with
 \begin{equation*}
 x(nT)
 = \sum_{k=-\infty}^{\infty}
-\frac{\hat{s}_k}{T} \mathrm{sinc} \left( \frac{nT}{T} + k \right)
+\frac{s_k}{T} \mathrm{sinc} \left( \frac{nT}{T} + k \right)
 = \sum_{k=-\infty}^{\infty}
-\frac{\hat{s}_k}{T} \mathrm{sinc} ( n + k ) = \frac{\hat{s}_{-n}}{T} .
+\frac{s_k}{T} \mathrm{sinc} ( n + k ) = \frac{s_{-n}}{T} .
 \end{equation*}
 Thus, we have $s_{k} = T x(-kT)$ and formula \eqref{equation:SamplingReconstructionFormula} follows.
 The sampling rate corresponding to $T = \frac{1}{2W}$ is the minimum sampling rate at which no aliasing occurs.

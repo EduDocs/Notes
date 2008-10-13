@@ -1,9 +1,9 @@
 \chapter{Digital Communications}
 
-The expression \emph{digital communications} broadly refers to the transmission of information using digital messages or bit streams.
+The term \emph{digital communications} broadly refers to the transmission of information using digital messages or bit streams.
 There are notable advantages to transmitting data  using discrete messages.
 It allows for enhanced signal processing and quality control.
-In particular, errors caused by noise and interference can be detected and corrected.
+In particular, errors caused by noise and interference can be detected and corrected systematically.
 Digital communications also make the networking of heterogeneous systems possible, with the Internet being the most obvious such example.
 These advantages, and many more, explain the widespread adoption and constantly increasing popularity of digital communication systems.
 
@@ -12,14 +12,14 @@ These advantages, and many more, explain the widespread adoption and constantly 
 
 A typical digital communication system can be represented by the functional block diagram depicted in Fig~\ref{figure:BlockDiagram}.
 It is composed of five basic components.
-The input block contains the source, which produces data (such as voice, emails, or images), and it also includes all the operations that are required to convert the original information into a format suitable for transmission.
+The input block contains the source, which produces data (such as voice, emails, or images), and it also includes all the operations that are required to convert the original signal waveform into a format suitable for transmission.
 The transmitter takes bits from the input block and sends them over a channel using electromagnetic signals, or some alternate means.
 Communication channels come in many flavors.
 For instance, a transmission can take place over an ethernet cable, a coaxial cable, or free space (wireless communications).
 There are also more esoteric channels like a hard drive platter, a compact disc, or a memory stick.
 The role of the receiver is to recover the sent message from a collection of measurements.
 This unit may need to extract the signal from noise and, possibly, correct errors that may have occurred during transmission.
-Finally, the output block takes the received information and puts it back in a format that is appropriate for the end-users.
+Finally, the output block takes the received information and puts it back into a format that is appropriate for the end-users.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -29,27 +29,28 @@ Finally, the output block takes the received information and puts it back in a f
 \psfrag{T}[c]{Transmitter}
 \psfrag{R}[c]{Receiver}
 \psfrag{C}[c]{Channel}
-\epsfig{file=Figures/diagram,width=10.575cm}
+\epsfig{file=Figures/diagram,width=98.7mm}
 \end{psfrags}
 \end{center}
-\caption{Block diagram of a digital communication system.}
+\caption{A digital communication system contains five basic components.
+These building blocks appear in this diagram.}
 \label{figure:BlockDiagram}
 \end{figure}
 
-Fig.~\ref{figure:BlockDiagram} also allude to the natural symmetry present in digital communication systems.
-Operations that take place on the transmitter side must often be undone on the receiver side.
+Fig.~\ref{figure:BlockDiagram} also alludes to the natural symmetry present in digital communication systems.
+Operations that take place on the transmitter side must often be undone at the destination.
 As such, complementary steps are frequently studied in pairs.
-Our treatment of digital communications will follow this general approach.
+Our treatment of digital communications follows this general approach.
 
 
 \subsection{The Input-Output Blocks}
 
 The role of the input block is to take information in its natural form and to convert it into a digital format.
-Depending on the nature of the source, two operations may be necessary to digitalize a message.
-\emph{Sampling} is a signal processing technique that reduces a continuous-time signal to a discrete-time signal.
-The conversion of a sound wave into a sequence of samples is a common example of sampling.
-The second action that may be required is \emph{quantization}, which maps a continuous-space signal into a discrete set of possible values.
-The combination of these two operations will transform a continuous signal into a digital message.
+Depending on the nature of the source, two operations may be necessary to digitalize the information waveform.
+\emph{Sampling} is a signal processing technique that reduces a continuous-time function to a discrete-time signal.
+The conversion of a sound wave into a sequence of samples is a common application of sampling.
+The second action that may be needed is \emph{quantization}, which maps a continuous-space signal into a discrete set of possible values.
+The combination of these two operations will transform an analog signal into a digital message.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -58,19 +59,20 @@ The combination of these two operations will transform a continuous signal into 
 \psfrag{S}[c]{Sampling}
 \psfrag{Q}[c]{Quantization}
 \psfrag{E}[c]{Compression}
-\epsfig{file=Figures/input,width=12.075cm}
+\epsfig{file=Figures/input,width=112.7mm}
 \end{psfrags}
 \end{center}
-\caption{Components of the input block.}
+\caption{The input block can be further divided into three operations: sampling, quantization and data compression.
+The first two operations are necessary to transform an analog waveform into a digital signal; whereas the last block is optional and provides a means to reduce the size of a digitalized message.}
 \label{figure:BlockInput}
 \end{figure}
 
-The optional step of \emph{data compression}, or source coding, is often used at the input to reduce the size of the message to be transmitted.
+The optional step of \emph{data compression}, or source coding, is often employed at the origin to reduce the size of the message to be transmitted.
 This, in turn, brings down the consumption of expensive resources such as power, spectral bandwidth and hard disk space.
-On the downside, compressed data must be decompressed before being accessed.
-This entails using extra processing on the receiver side.
-Furthermore, some compression schemes alter the integrity of the data.
-These schemes usually feature better compression ratios at the expense of introducing small errors in the data.
+On the downside, data processing entails additional computations and delay, and the compressed data must be expanded before being accessed.
+This involves using extra processing on the receiver side as well.
+Some compression schemes affect the integrity of the data.
+These schemes usually feature better compression ratios at the expense of introducing small variations in the data.
 The MPEG standards, including the MP3 audio layer, provide examples of lossy compression schemes.
 
 \begin{figure}[htbp]
@@ -79,29 +81,34 @@ The MPEG standards, including the MP3 audio layer, provide examples of lossy com
 \psfrag{O}[c]{Output}
 \psfrag{I}[c]{Interpolation}
 \psfrag{D}[c]{Decompression}
-\epsfig{file=Figures/output,width=12.075cm}
+\epsfig{file=Figures/output,width=112.7mm}
 \end{psfrags}
 \end{center}
-\caption{Components of the output block.}
+\caption{The operations executed at the transmitter must typically be undone at the destination.
+While passed through the output block, the received data is first decompressed and put in a format that suitable for signal processing.
+Furthermore, an analog signal must be reconstructed from the sampled data point.
+An exception to this rule is quantization; once performed, a small part of the original information is lost.
+Quantization cannot be undone, yet the amount of distortion introduced through this process can easily be controlled.}
 \label{figure:BlockOutput}
 \end{figure}
 
 At the output of the system, the data must be transformed back into a format that is acceptable to the end-user.
 The received message must be decompressed.
-Note that for the destination to be able to recover the original data, it must understand the encoding scheme used by the sender.
+Note that for the destination to be able to recover the original data, it must understand the encoding scheme utilized by the sender.
 In other words, the decoding method must be known at the receiver.
 If the original signal is a continuous-time waveform, then an interpolator can be used to reconstruct the waveform from its sample values.
 The quantization block present at the input does not have a counterpart at the output.
 This deficiency can be explained through the fact that quantization cannot be undone.
 Information is lost whenever a continuous-space signal is discretized.
 The level of \emph{distortion} associated with quantization can, however, be controlled by selecting an appropriate quantizer.
+In most cases, the impact of quantization is minimal.
 
 
 \subsection{The Transmitter-Receiver Pair}
 
 A channel code is used at the transmitter to shield data sent over the channel against errors due to noise and interference.
 This level of protection is achieved by adding redundancy to the information bits in a structured manner.
-Audio CDs make use of a \emph{Reed-Solomon code} to protect the music from scratches and dust, whereas a low-latency \emph{convolutional code} is employed in cellphones to carry voice signals.
+Audio compact discs make use of a \emph{Reed-Solomon code} to protect digital music from scratches and dust, whereas a low-latency \emph{convolutional code} is employed in cellphones to carry voice signals.
 The second task of the transmission unit is to modulate the digital bit-stream onto an analog carrier prior to transmission.
 The possible waveforms emitted by the transmitter are chosen from a finite number of symbols.
 The transmitter must produce a signal that remains confined to its assigned spectral bandwidth.
@@ -112,17 +119,18 @@ The transmitter must produce a signal that remains confined to its assigned spec
 \psfrag{T}[c]{Transmitter}
 \psfrag{E}[c]{Encoder}
 \psfrag{M}[c]{Modulation}
-\epsfig{file=Figures/transmitter,width=7.7625cm}
+\epsfig{file=Figures/transmitter,width=72.45mm}
 \end{psfrags}
 \end{center}
-\caption{Components of a transmitter.}
+\caption{At the transmitter, redundancy is added to the digital message to protect information bits against noise and interference.
+Once this is completed, the bit stream is modulated onto an analog carrier and transmitted to the destination.}
 \label{figure:BlockTransmitter}
 \end{figure}
 
 The message then propagates through the communication channel.
 This is the physical medium that bridges the gap between the transmitter and the receiver.
 In most applications, the channel acts as to transfer the data to a different place.
-However, in hard disk drives and CDs, the information may be stored locally simply to be accessible at a later time.
+However, in hard disk drives and compact discs, the information may be stored locally simply to be accessible at a later time.
 Most communication channels cause signal degradation.
 The message  may be subject to attenuation, interference and noise corruption.
 The communication channel may be unreliable; and its environment, hard to characterize.
@@ -134,46 +142,46 @@ Recovering the original data from a set of measurements available at the receive
 \psfrag{R}[c]{Receiver}
 \psfrag{M}[c]{Demodulation}
 \psfrag{D}[c]{Decoder}
-\epsfig{file=Figures/receiver,width=7.7625cm}
+\epsfig{file=Figures/receiver,width=72.45mm}
 \end{psfrags}
 \end{center}
-\caption{Components of a receiver.}
+\caption{On the receiver side, the sent symbols are extracted from the received signal.
+Error-correction techniques are then applied to insure the integrity of the acquired data.
+Finally, the digital message is restored to its original format.}
 \label{figure:BlockReceiver}
 \end{figure}
 
 The receiver is tasked with extracting the original symbols from noisy measurements.
 The first step consists of estimating which symbols were sent by the transmitter over the channel.
 This procedure is termed \emph{demodulation}.
-These symbols estimates are then translated back into information bits by the decoder.
+These symbol estimates are then translated back into information bits by the decoder.
 Redundancy is removed from the data, and the original format of the information bits is restored.
 If the channel conditions are harsh and the local measurement too noisy, then this process fails and the corresponding data is lost.
-Scratching a CD repetitively will illustrate this point well.
+Scratching a compact disc repetitively will illustrate this point well.
 After substantial disc abuse, a player is no longer able to reconstruct the music.
 
 
-\section{Common Channels}
+\section{Common Channels and Applications}
 
-Various communication channels can provide a connection between a transmitter and a receiver.
+Various communication channels can provide a connection between a transmitter and its destination.
 Common wireline channels include coaxial cables, ethernet cables, and twisted-pair wires.
 Optical fiber offers a high-capacity solution for heavy applications.
+Compact discs and DVDs are also based on optics and they can be employed to store information on discs.
 Finally, wireless electromagnetic channels are popular for their convenience and broadcast capabilities.
 
-
-\section{Sample Applications}
-
 Digital communication occupies a central role in almost every aspect of contemporary life.
-Most businesses rely on networked computers and to Internet for day-to-day operations, and digital technologies play a central role in the entertainment industry today.
+Most businesses rely directly or indirectly on networked computers and the Internet for day-to-day operations, and digital technologies have become a staple of the entertainment industry.
 Below, we provide a few examples of digital communication systems that you may be familiar with.
 
 \paragraph{Cable Modem:}
 A cable modem enables point-to-point communication over the cable television infrastructure.
 They are primarily employed to deliver broadband Internet access, taking advantage of unused bandwidth on a cable television network.
-With the advent of Voice over IP telephony, cable modems can also be used to provide telephone service.
+With the advent of voice over Internet protocol (VoIP) telephony, cable modems can also be used to provide telephone service.
 
 \paragraph{Wi-Fi Technology:}
 Wi-Fi is a global set of standards that allows wireless inter-networking.
-In particular, it includes the IEEE 802.11 protocol suite (e.g., 802.11b, 802.11g, and 802.11n).
-Wireless access points, also called \emph{hotspots}, often provide users with access the Internet.
+In particular, it includes the IEEE 802.11 protocol suite (e.g., 802.11b, 802.11g and 802.11n).
+Wireless access points, also called \emph{hotspots}, often provide users access to the Internet.
 Wi-Fi products can be used as an enabling technology for \emph{mesh networks}, which offer connectivity to large urban communities.
 
 \paragraph{Bluetooth:}
