@@ -114,7 +114,7 @@ Starting with signal $x(t)$, we can write
 \begin{split}
 x(t) &= \int_{\mathbb{R}} \hat{x}(f) e^{2 \pi i f t} df
 = \int_{\mathbb{R}} \left[ \int_{\mathbb{R}} x(\tau) e^{-2 \pi i f \tau} d\tau \right] e^{2 \pi i f t} df \\
-&= \int_\tau \left[ \int_{\mathbb{R}} e^{2 \pi i f (t - \tau)} df \right] x(\tau) d\tau ,
+&= \int_{\mathbb{R}} \left[ \int_{\mathbb{R}} e^{2 \pi i f (t - \tau)} df \right] x(\tau) d\tau ,
 \end{split}
 \end{equation}
 where the second equality follows from \eqref{equation:FourierTransform} and the third equality is obtained by changing the order of integration.
@@ -206,9 +206,9 @@ A signal $x(t)$ is \emph{bandwidth-limited} to $W$ if it can be obtained as the 
 The importance of the Fourier transform comes, partly, from its ability to capture the effects of linear time-invariant filters on deterministic signals.
 Suppose that the input to a linear time-invariant filter is $x(t)$, then its output is given by
 \begin{equation*}
-y(t) = x(t) \star h(t),
+y(t) = x(t) \ast h(t),
 \end{equation*}
-where $h(t)$ is the impulse response of the linear filter and $\star$ denotes the convolution operator.
+where $h(t)$ is the impulse response of the linear filter and $\ast$ denotes the convolution operator.
 If we use $\hat{h}(f)$ to represent the Fourier transform of impulse response $h(t)$, then the output signal in the frequency domain becomes
 \begin{equation*}
 \hat{y}(f) = \hat{x}(f) \hat{h}(f) .
@@ -298,8 +298,8 @@ x_{\mathrm{s}}(t) = x(t) \sum_{n=-\infty}^{\infty} \delta(t-nT)
 \end{equation*}
 Looking at the sampled signal in the frequency domain, we get
 \begin{equation*}\begin{split}
-\hat{x}_{\mathrm{s}}(f) &= \hat{x}(f) \star \mathcal{F} \left[ \sum_{n=-\infty}^{\infty} \delta(t-nT) \right] \\
-&= \hat{x}(f) \star \frac{1}{T} \sum_{n=-\infty}^{\infty} \delta \left( f-\frac{n}{T} \right) \\
+\hat{x}_{\mathrm{s}}(f) &= \hat{x}(f) \ast \mathcal{F} \left[ \sum_{n=-\infty}^{\infty} \delta(t-nT) \right] \\
+&= \hat{x}(f) \ast \frac{1}{T} \sum_{n=-\infty}^{\infty} \delta \left( f-\frac{n}{T} \right) \\
 &= \frac{1}{T} \sum_{n=-\infty}^{\infty} \hat{x} \left( f - \frac{n}{T} \right) ,\end{split}\end{equation*}
 where we have used \eqref{equation:ImpulseTrainFrequency} to express the Fourier transform of an impulse train.
 When the sampling rate is fast enough, the translated copies of $\hat{x}(f)$ contained in the transform $\hat{x}_{\mathrm{s}}(f)$ do not overlap, and the original signal can be recovered using an ideal lowpass filter.
@@ -474,7 +474,7 @@ m_Y = m_X \int_{\mathbb{R}} h(t) dt
 \end{equation*}
 and its autocorrelation is equal to
 \begin{equation*}
-R_Y (\tau) = R_X(\tau) \star h(\tau) \star h^*(-\tau) .
+R_Y (\tau) = R_X(\tau) \ast h(\tau) \ast h^*(-\tau) .
 \end{equation*}
 \end{theorem}
 \begin{proof}
@@ -497,7 +497,7 @@ To derive the autocorrelation function for $Y(t)$, we first compute the cross-co
 &= \int_{\mathbb{R}} \mathrm{E} \left[ X(t_1) X^*(\xi) \right] h^*(t_2 - \xi) d\xi \\
 &= \int_{\mathbb{R}} R_X(t_1 - \xi) h^*(t_2 - \xi) d\xi \\
 %&= \int_{\mathbb{R}} R_X(\tau - \xi) h^*(- \xi) d\xi \\
-&= R_X(\tau) \star h^*(-\tau) .
+&= R_X(\tau) \ast h^*(-\tau) .
 \end{split}
 \end{equation}
 This shows that the cross-correlation between $X(t)$ and $Y(t)$ depends only on $\tau$; we can therefore express it as $R_{XY}(\tau)$.
@@ -509,10 +509,10 @@ We are now ready to compute the autocorrelation function for $Y(t)$.
 &= \int_{\mathbb{R}} \mathrm{E} \left[ X(\xi) Y^*(t_2) \right] h(t_1 - \xi) d\xi \\
 &= \int_{\mathbb{R}} R_{XY}(\xi - t_2) h(t_1 - \xi) d\xi \\
 %&= \int_{\mathbb{R}} R_{XY}(\xi) h(\tau - \xi) d\xi \\
-&= R_{XY}(\tau) \star h(\tau) .
+&= R_{XY}(\tau) \ast h(\tau) .
 \end{split}
 \end{equation}
-Substituting $R_{XY} (\tau)$ by the equivalent expression $R_X(\tau) \star h^*(-\tau)$ from \eqref{equation:CrossCorrelationLTI}, we get the desired result.
+Substituting $R_{XY} (\tau)$ by the equivalent expression $R_X(\tau) \ast h^*(-\tau)$ from \eqref{equation:CrossCorrelationLTI}, we get the desired result.
 We observe that the autocorrelation of the process $Y(t)$ only depends on the difference between $t_1$ and $t_2$, and hence $Y(t)$ is also wide-sense stationary.
 \end{proof}
 
@@ -521,8 +521,8 @@ In terms of the frequency representation, we get $m_Y = m_X \hat{h}(0)$ and
 \begin{equation*}
 \begin{split}
 \mathcal{S}_Y (f) &= \mathcal{F} [ R_Y (\tau) ] \\
-&= \mathcal{F} \left[ R_X (\tau) \star h(\tau) \star h^*(-\tau) \right] \\
-&= \mathcal{S}_X(f) \left| \hat{h}(f) \right|^2 .
+&= \mathcal{F} \left[ R_X (\tau) \ast h(\tau) \ast h^*(-\tau) \right] \\
+&= \mathcal{S}_X(f) | \hat{h}(f) |^2 .
 \end{split}
 \end{equation*}
 A linear time-invariant filter can be employed to shape the spectrum of a stochastic process, and to constrain its bandwidth.
@@ -594,18 +594,18 @@ A second possible application of sampling is the processing of received waveform
 In digital communications, the data often assumes the form of an analog carrier signal modulated by a digital bit stream.
 Mathematically, this situation is captured by the equation
 \begin{equation*}
-y(t) = x(t) \cos (2 \pi f_0 t) .
+y(t) = x(t) \cos (2 \pi f_{\mathrm{c}} t) .
 \end{equation*}
 The signal $y(t)$ is a special form of a \emph{bandpass signal}.
-Its Fourier transform $\hat{y}(f)$ is non-zero only for frequencies contained in a small neighborhood of carrier frequency $f_0$.
-That is, $\hat{y}(f) = 0$ for all frequencies such that $|f - f_0| \geq W$.
+Its Fourier transform $\hat{y}(f)$ is non-zero only for frequencies contained in a small neighborhood of carrier frequency $f_{\mathrm{c}}$.
+That is, $\hat{y}(f) = 0$ for all frequencies such that $|f - f_{\mathrm{c}}| \geq W$.
 To apply the sampling tools derived above to the information bearing signal $x(t)$, we need to shift the corresponding spectrum to the origin.
 
 The Fourier transform of $y(t)$ is given by
 \begin{equation*}
-\hat{y}(f) = \frac{1}{2} \hat{x}(f+f_0) + \frac{1}{2} \hat{x}(f - f_0) .
+\hat{y}(f) = \frac{1}{2} \hat{x}(f+f_{\mathrm{c}}) + \frac{1}{2} \hat{x}(f - f_{\mathrm{c}}) .
 \end{equation*}
-Our strategy is to first eliminate $\frac{1}{2} \hat{x}(f + f_0)$ from $\hat{y}(f)$, and then to scale and shift $\frac{1}{2} \hat{x}(f + f_0)$ back to the origin.
+Our strategy is to first eliminate $\frac{1}{2} \hat{x}(f + f_{\mathrm{c}})$ from $\hat{y}(f)$, and then to scale and shift $\frac{1}{2} \hat{x}(f + f_{\mathrm{c}})$ back to the origin.
 Define the \emph{step function} by
 \begin{equation*}
 \mathrm{step} (t) = \frac{1}{2} + \frac{1}{2} \mathrm{sign}(t). 
@@ -625,17 +625,17 @@ Using the duality property of the Fourier transform, we get
 \begin{equation*}
 \mathcal{F}^{-1} [\mathrm{step}(f)] = \frac{1}{2} \delta(t) + \frac{i}{2 \pi t} .
 \end{equation*}
-And, by construction, we obtain $\hat{x}(f - f_0) = 2 \mathrm{step}(f) \hat{y}(f)$.
+And, by construction, we obtain $\hat{x}(f - f_{\mathrm{c}}) = 2 \mathrm{step}(f) \hat{y}(f)$.
 We can therefore recover the original lowpass signal $x(t)$ using the frequency-shift property of the Fourier transform,
 \begin{equation*}
 x(t)
-= \left[ y(t) \star \left( \delta (t) + \frac{i}{\pi t} \right) \right]
-e^{- 2 \pi i f_0 t}
-= \left[ y(t) + i \left( y(t) \star \frac{1}{\pi t} \right) \right] e^{- 2 \pi i f_0 t} .
+= \left[ y(t) \ast \left( \delta (t) + \frac{i}{\pi t} \right) \right]
+e^{- 2 \pi i f_{\mathrm{c}} t}
+= \left[ y(t) + i \left( y(t) \ast \frac{1}{\pi t} \right) \right] e^{- 2 \pi i f_{\mathrm{c}} t} .
 \end{equation*}
 The second component of this signal,
 \begin{equation*}
-y(t) \star \frac{1}{\pi t} ,
+y(t) \ast \frac{1}{\pi t} ,
 \end{equation*}
 is called the \emph{Hilbert transform} of $y(t)$.
 Once $x(t)$ is brought back to baseband, the standard sampling theorem applies and a discrete-time version of the signal can be produced.

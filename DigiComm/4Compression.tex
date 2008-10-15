@@ -26,7 +26,7 @@ To describe this specific meaning, we need to develop a rigorous mathematical mo
 As mentioned above, a digital source produces a sequence of symbols drawn from a countable alphabet.
 It can accordingly be modeled as a discrete-time random process.
 Because of their indeterminate nature, random signals and stochastic processes can be quite hard to characterize.
-In Section~\ref{section:StocahsticSignalsFAS}, we discussed two desirable attributes of random signals, namely stationary and ergodicity.
+In early sections of this document, we discussed two desirable attributes of random signals, namely stationary and ergodicity.
 Yet, we purposely avoided giving an explicit definition for a random process.
 A detailed treatment of the subject requires advanced concepts from probability theory, a topic that interested readers may wish to pursue on their own.
 For the sake of simplicity, we focus on elementary information sources in this document.
@@ -232,13 +232,13 @@ While $c_4(\cdot)$ is a prefix code where every symbol can be decoded immediatel
 
 The measure of a good prefix code is the expected length of its encoded symbols.
 Suppose that a discrete memoryless source $(\mathcal{X}, p_X)$ is given along with a code $c$.
-We denote the length in bits of codeword $c(x)$ by $l_c(x)$.
+We denote the length in bits of codeword $c(x)$ by $\ell_c(x)$.
 The expected number of bits produced by the source at each time instant is given by
 \begin{equation} \label{equation:CodeRateCompression}
-\mathrm{E} [ l_c (X) ] = \sum_{x \in \mathcal{X}} p_X(x) l_c(x) .
+\mathrm{E} [ \ell_c (X) ] = \sum_{x \in \mathcal{X}} p_X(x) \ell_c(x) .
 \end{equation}
 We emphasize that the expected length is a function of both the statistics of the source and the structure of compression code employed.
-Under the assumption that the source outcomes are independent and identically distributed over time, $\mathrm{E} [ l_c (X)]$ also represents the average data rate produced by the source.
+Under the assumption that the source outcomes are independent and identically distributed over time, $\mathrm{E} [ \ell_c (X)]$ also represents the average data rate produced by the source.
 
 
 \subsection{Kraft Inequality}
@@ -251,9 +251,9 @@ The collection of possible length assignments for a prefix-free code is characte
 Let $\mathcal{X}$ be a finite alphabet.
 Any binary prefix-free code $c : \mathcal{X} \mapsto \mathcal{C}$ satisfies the inequality
 \begin{equation} \label{equation:KraftInequality}
-\sum_{x \in \mathcal{X}} 2^{-l_c(x)} \leq 1.
+\sum_{x \in \mathcal{X}} 2^{-\ell_c(x)} \leq 1.
 \end{equation}
-where $l_c(x)$ is the bit length of codeword $c(x)$.
+where $\ell_c(x)$ is the bit length of codeword $c(x)$.
 Conversely, if we first assign the codeword lengths such that \eqref{equation:KraftInequality} is satisfied, then there exists an instantaneous code with these codeword lengths.
 \end{theorem}
 \begin{proof}
@@ -316,11 +316,11 @@ Then, following the binary structure of the graph, the binary string of the code
 \begin{example}[Code on a Tree]
 Suppose that we intend to construct a prefix code for $\mathcal{X} = \{ x_1, \ldots, x_5 \}$, with code lengths
 \begin{xalignat*}{3}
-l_c(x_1) &= l_c(x_2) = 2 & l_c(x_3) &= l_c(x_4) = 3 & l_c(x_5) &= 2.
+\ell_c(x_1) &= \ell_c(x_2) = 2 & \ell_c(x_3) &= \ell_c(x_4) = 3 & \ell_c(x_5) &= 2.
 \end{xalignat*}
 First, we check the Kraft inequality to make sure that such an assignment is feasible,
 \begin{equation*}
-\sum_{i = 1}^5 2^{-l_c(x_1)}
+\sum_{i = 1}^5 2^{-\ell_c(x_1)}
 = \frac{1}{4} + \frac{1}{4} + \frac{1}{8} + \frac{1}{8} + \frac{1}{4} = 1 .
 \end{equation*}
 The inequality is fulfilled, we can therefore use a binary tree construction to design the desired instantaneous code.
@@ -385,15 +385,15 @@ Taking a partial derivative with respect to $\ell(x)$ and setting it to zero, we
 \begin{equation*}
 p_X(x) - \lambda \ln(2) 2^{- \ell(x)}  = 0 .
 \end{equation*}
-The optimal value for $\ell(x)$, which we denote by $\ell^*(x)$, must therefore satisfy $2^{- \ell^*(x)} = p_X(x) / (\lambda \ln (2))$.
+The optimal value for $\ell(x)$, which we denote by $\ell^{\star}(x)$, must therefore satisfy $2^{- \ell^{\star}(x)} = p_X(x) / (\lambda \ln (2))$.
 Computing the derivative with respect to $\lambda$ yields
 \begin{equation*}
-\sum_{x \in \mathcal{X}} 2^{- \ell^*(x)} = 1 ,
+\sum_{x \in \mathcal{X}} 2^{- \ell^{\star}(x)} = 1 ,
 \end{equation*}
 which in turn implies $\lambda = 1 / \ln (2)$.
 Putting these results together, we gather that the optimal values for $\{ \ell(x) : x \in \mathcal{X} \}$ are given by
 \begin{equation*}
-\ell^*(x) = - \log_2 (p_X(x))
+\ell^{\star}(x) = - \log_2 (p_X(x))
 \end{equation*}
 for $x \in \mathcal{X}$.
 Thus, by construction, we obtain
@@ -414,7 +414,7 @@ Observe that $\lceil - \log_2 (p_X(x)) \rceil$ is an integer, with
 The Kraft inequality asserts that we can build a code $c : \mathcal{X} \mapsto \mathcal{C}$ such that $\ell_c(x) = \lceil - \log_2 (p_X(x)) \rceil$, as
 \begin{equation*}
 \sum_{x \in \mathcal{X}} 2^{- \ell_c(x)}
-\leq \sum_{x \in \mathcal{X}} 2^{- \ell^*(x)} = 1 .
+\leq \sum_{x \in \mathcal{X}} 2^{- \ell^{\star}(x)} = 1 .
 \end{equation*}
 As such, there exists a code~$c$ such that
 \begin{equation*}
@@ -442,8 +442,8 @@ Huffman codes are the most efficient compression mapping for individual source s
 The expected length of the compressed data achieved with this technique will be no greater than the expected message length of any other prefix-free code that operates on individual source symbols.
 
 The insight behind Huffman coding is based on three properties of optimal prefix-codes.
-Suppose that we wish to encode outputs from discrete memoryless source $(\mathcal{X}, p_X)$, and let $c^* : \mathcal{X} \mapsto \mathcal{C}$ be an optimal prefix-code for this source.
-If $p_X(x_1) > p_X(x_2)$, then $\ell_{c^*}(x_1) \leq \ell_{c^*}(x_2)$.
+Suppose that we wish to encode outputs from discrete memoryless source $(\mathcal{X}, p_X)$, and let $c^{\star} : \mathcal{X} \mapsto \mathcal{C}$ be an optimal prefix-code for this source.
+If $p_X(x_1) > p_X(x_2)$, then $\ell_{c^{\star}}(x_1) \leq \ell_{c^{\star}}(x_2)$.
 For any of the longest codewords, its sibling (the bit string that differs only in the last digit) must also be codeword; otherwise, the original codeword can be shortened by removing the last bit.
 Finally, the code tree associated with an optimal code must be full.
 A bianry tree is \emph{full} if every node has either zero or two children.

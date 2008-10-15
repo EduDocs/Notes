@@ -1,23 +1,26 @@
 \chapter{Quantization}
 
 As mentioned in the introduction, two operations are necessary to transform an analog waveform into a digital signal.
-The first action, discussed in Chapter~\ref{chapter:FourierAnalysisSampling}, is called sampling.
-It consists of converting a continuous-time input into a discrete-time signal.
-The second operation is the process of approximating continuous-space samples by a discrete set of possible symbols.
-This process termed \emph{quantization} is equally essential in order to transmit an analog signal over digital media.
+The first action, sampling, consists of converting a continuous-time input into a discrete-time function.
+The second operation is the process of approximating continuous-space sample values by a discrete set of possible points.
+This process, termed \emph{quantization}, is equally essential to transmit an analog signal over digital media.
 Quantization invariably induces a loss in signal quality.
-The \emph{distortion} between the original and quantized signals is usually unwanted, and cannot be reversed.
+The \emph{distortion} between the original and quantized functions is usually unwanted, and it cannot be reversed.
 Yet, for a specific application, the level of signal degradation can be controlled.
+
+In this chapter, we focus primarily on the quantization of real numbers.
+Still, the techniques exposed herein can easily be extended to complex numbers by quantizing the real and imaginary parts of a complex number separately.
+In a more abstract sense, the quantization of a complex number is equivalent to vector quantization for a pair of real numbers.
 
 
 \section{Scalar Quantizers}
 
 Generic quantizers operate on large classes of signals and are very robust.
 In scalar quantization, each source value is processed individually, with the quantizer output taking one of finitely many possibilities.
-The number of quantization levels tends to be a base-two exponent because the output of the quantizer is often represented using binary symbols.
-Mathematically, a quantizer can be expressed as a function.
-Suppose that the input to the quantizer is a real number, and its output is a value that belongs to the set $\mathcal{Q}$.
-Then we can describe the quantizer as a function $Q : \mathbb{R} \mapsto \mathcal{Q}$ with output
+The number of quantization levels tends to be a base-two exponent as the outputs of a quantizer are often represented using binary strings.
+Mathematically, a quantizer can be expressed as a function taking value in a finite set.
+Suppose that the input to the quantizer is a real number, and its output is a value that belongs to set $\mathcal{Q}$.
+Then, we can describe the quantizer as a function $Q : \mathbb{R} \mapsto \mathcal{Q}$ with output
 \begin{equation*}
 x_{\mathrm{q}} = Q(x) .
 \end{equation*}
@@ -39,72 +42,119 @@ Figure~\ref{figure:Quantizer} shows the functional representation of a four-leve
 \psfrag{i}[c]{Input}
 \epsfig{file=Figures/quantizer,width=6cm}
 \end{psfrags}
-\caption{A functional representation of a quantizer.}
+\caption{This is a functional representation of a quantizer where the input is converted to one of four possible values.}
 \label{figure:Quantizer}
 \end{center}
 \end{figure}
-
 The output of the quantizer in this example is determined according to a nearest neighbor rule.
-Note that this function is not injective (one-to-one) and, as such, has no inverse.
+We note that this quantization function is not injective (one-to-one) and, as such, does not have an inverse.
 \end{example}
 
 
 \section{Distortion Measures}
 
 To compare different quantizers, a performance metric must be established.
-A common distortion criterion with nice properties is the square of the error
+A common distortion criterion with desirable properties is the square of the error
 \begin{equation} \label{equation:QuantizationErrorSquared}
-d(x, x_{\mathrm{q}}) = (x - Q(x))^2 = e_{\mathrm{q}}^2 ,
+d(x, x_{\mathrm{q}}) = (x - Q(x))^2 ,
 \end{equation}
-where $e_{\mathrm{q}} = x - x_{\mathrm{q}}$ is the \emph{quantization error}.
-The criterion in \eqref{equation:QuantizationErrorSquared} specifies how close the output $x_{\mathrm{q}}$ is to $x$ for a specific realization of $x$.
-Since the quantizer is designed to operate on an information signal, a more relevant assessment of performance weighs in the accuracy of the quantizer over all possible realizations of the input.
-An appropriate distortion measure for the quantization of a random signal is provided by the \emph{mean squared error (MSE)},
+where $x - x_{\mathrm{q}}$ is called the \emph{quantization error}.
+The criterion in \eqref{equation:QuantizationErrorSquared} specifies how close the output $x_{\mathrm{q}}$ is to the input for a specific value of $x$.
+
+When a quantizer is employed to discretize the value of a sampled waveform, it is appropriate to evaluate the performance of the quantizer in terms of the difference between the original function and the reconstructed version rather than the distortion between the sample values themselves.
+Suppose that $x(t)$ is a bandwidth-limited process with bandwidth $W$.
+We know that this process can be accurately recovered from the sampled values $\{ x(nT) : n \in \mathbb{Z} \}$ using the formula
+\begin{equation*}
+x(t) = \sum_{n = -\infty}^{\infty} x(nT) \mathrm{sinc} \left( \frac{t}{T} - n \right)
+\end{equation*}
+where $T \leq \frac{1}{2W}$.
+Assume that the sampled values are quantized before reconstruction, with
+\begin{equation*}
+x_{\mathrm{q}} (nT) = Q ( x(nT) ) .
+\end{equation*}
+A legitimate question is whether $x_{\mathrm{q}}(t)$, the approximation to $x(t)$ using the quantized data
+\begin{equation*}
+x_{\mathrm{q}}(t) = \sum_{n = -\infty}^{\infty} x_{\mathrm{q}}(nT) \mathrm{sinc} \left( \frac{t}{T} - n \right) ,
+\end{equation*}
+is anywhere close to $x(t)$.
+Consider the performance criterion
+\begin{equation*}
+\int_{\mathbb{R}} ( x(t) - x_{\mathrm{q}} (t) )^2 dt ,
+\end{equation*}
+which quantifies the total distortion between the original and reconstructed signals.
+Using Parseval's identity, we get
+\begin{equation*}
+\begin{split}
+&\int_{\mathbb{R}} ( x(t) - x_{\mathrm{q}} (t) )^2 dt
+= \int_{\mathbb{R}} ( \hat{x} (f) - \hat{x}_{\mathrm{q}} (f) )^2 df \\
+&= \int_{\mathbb{R}} \left( \sum_{n = -\infty}^{\infty}
+\frac{\left( x(nT) - x_{\mathrm{q}}(nT) \right)}{2W} e^{2 \pi i \frac{n}{2 W} f}
+\mathrm{rect} \left( \frac{f}{2W} \right) \right)^2 df \\
+&= \sum_{n = -\infty}^{\infty}
+( x(nT) - x_{\mathrm{q}}(nT) )^2 .
+\end{split}
+\end{equation*}
+Above, we have used the fact that the basis elements
+\begin{equation*}
+\left\{ e^{2 \pi i \frac{n}{2 W} f} \mathrm{rect} \left( \frac{f}{2W} \right) : n \in \mathbb{Z} \right\}
+\end{equation*}
+are orthogonal.
+By minimizing the quantization error for individual samples, it turns out that we are also minimizing the overall squared error between the original and reconstructed waveforms $x(t)$ and $x_{\mathrm{q}}(t)$.
+
+
+\subsection{Mean Squared Error}
+
+Since the quantizer is designed to operate on an information signal, a more relevant assessment of performance weighs in the accuracy of the quantizer over all possible realizations of the random input.
+An appropriate distortion measure for the quantization of a stochastic signal is provided by the \emph{mean squared error (MSE)},
 \begin{equation} \label{equation:QuantizationMSE}
 \mathrm{E} [ d(X, X_{\mathrm{q}}) ]
-= \mathrm{E} \left[ (X - Q(X))^2 \right] = \| E_{\mathrm{q}} \|^2 .
+= \mathrm{E} \left[ (X - Q(X))^2 \right] .
 \end{equation}
 Note that this performance metric depends on the distribution of the input signal, and hence is tied to a specific application.
 A quantizer can be said to work well in a particular context.
-However, describing the performance of a quantization scheme without specifying the properties of its input signal is meaningless.
+However, describing the performance of a quantization scheme without specifying the distribution of its input signal is meaningless.
 
 \begin{example} \label{example:UniformQuantizer}
 Suppose that the values of a discrete-time information signal are uniformly distributed over $[0,16]$.
-Furthermore, assume that the quantizer implements a nearest neighbor rule with quantization levels equal to $q_i = 2i - 1$ for $i = 1, 2, \ldots, 8$.
+Furthermore, assume that the quantizer implements a nearest neighbor rule with quantization levels equal to $q_m = 2m - 1$ for $m = 1, 2, \ldots, 8$.
 We wish to find the mean squared error of this quantization scheme.
 
-Being uniformly distributed, the probability density function of the input signal is
+Being uniformly distributed, the probability density function of the input is
 \begin{equation*}
-f_X (\xi) = \frac{1}{16}
+f_X (x) = \frac{1}{16}
 \end{equation*}
-for $\xi \in [0, 16]$, and zero otherwise.
-The decision regions corresponding to the various quantization points are then given by $[0, 2], (2, 4], \ldots, (14, 16]$.
+for $x \in [0, 16]$, and zero otherwise.
+The decision regions corresponding to the various quantization points are given by $[0, 2], (2, 4], \ldots, (14, 16]$.
 We can therefore compute the mean squared error as follows,
 \begin{equation*}
 \begin{split}
 \mathrm{E} [ d(X, X_{\mathrm{q}}) ]
 &= \mathrm{E} \left[ (X - Q(X))^2 \right]
-= \int_0^{16} \frac{(\xi - Q(\xi))^2}{16} d\xi \\
-&= \sum_{i=1}^8 \int_{2i-2}^{2i} \frac{(\xi - (2i - 1))^2}{16} d\xi \\
-&= \frac{1}{2} \int_{0}^{2} (\xi - 1)^2 d\xi = \frac{1}{3} .
+= \int_0^{16} \frac{(x - Q(x))^2}{16} dx \\
+&= \sum_{m=1}^8 \int_{2m-2}^{2m} \frac{(x - (2m - 1))^2}{16} dx \\
+&= \frac{1}{2} \int_{0}^{2} (x - 1)^2 dx = \frac{1}{3} .
 \end{split}
 \end{equation*}
-That is, the mean squared error associated with this input distribution and quantization scheme is $\| e_{\mathrm{q}} \|^2 = \frac{1}{3}$.
+That is, the mean squared error associated with this input distribution and quantization scheme is $\mathrm{E} \left[ (X - Q(X))^2 \right] = \frac{1}{3}$.
 \end{example}
+
+
+
+\subsection{Signal to Quantization-Noise Ratio}
 
 One of the criticisms about the MSE of \eqref{equation:QuantizationMSE} is that it has a tendency to assign a larger distortion value to signal input with sizable second moments.
 Indeed, an information process likely to feature large amplitudes is bound to yield outputs with a large mean squared error.
-On the other hand, under this absolute metric, most quantizers may appear to work well for minute signals as their mean square errors are destined to remain small.
+On the other hand, under this absolute metric, most quantizers may appear to work well for minute signals as their mean squared errors are destined to remain small.
 An alternative and closely related criterion that takes into consideration the power of the original signal is the \emph{signal-to-quantization-noise ratio (SQNR)},
 \begin{equation} \label{equation:SQNR}
-\text{SQNR} = \frac{\| X \|^2}{\| e_{\mathrm{q}} \|^2}
+\text{SQNR}
 = \frac{\mathrm{E} \left[ X^2 \right]}{\mathrm{E} \left[ (X - Q(X))^2 \right]} .
 \end{equation}
-Because of the implicit normalization associated with \eqref{equation:SQNR}, this latter performance measure is more suitable to compare quantizer performance for different input processes.
+Because of the implicit normalization associated with \eqref{equation:SQNR}, this latter measure is more suitable to compare quantizer performance for different input processes.
 
 \begin{example}
-This time, assume that the values of a discrete-time information signal are uniformly distributed over $[0,2]$.
-To avoid confusion, we denote the input signal in the present problem using $Y$.
+Assume that the values of a discrete-time information signal are uniformly distributed over $[0,2]$.
+We denote the input signal in the present problem using $Y$.
 We wish to obtain the mean squared error associated with the quantizer of Example~\ref{example:UniformQuantizer}, applied to the signal at hand.
 Also, we wish to compare the SQNR of the quantization scheme of Example~\ref{example:UniformQuantizer} with the SQNR of the scenario described in this example.
 
@@ -112,21 +162,21 @@ To derive the mean squared error, we follow the same steps as before
 \begin{equation*}
 \begin{split}
 \mathrm{E} [ d(Y, Y_{\mathrm{q}}) ]
-&= \int_0^{2} \frac{(\zeta - Q(\zeta))^2}{2} d\zeta \\
-&= \frac{1}{2} \int_{0}^{2} (\zeta - 1)^2 d\zeta = \frac{1}{3} .
+&= \int_0^{2} \frac{(y - Q(y))^2}{2} dy \\
+&= \frac{1}{2} \int_{0}^{2} (y - 1)^2 dy = \frac{1}{3} .
 \end{split}
 \end{equation*}
 We notice that the MSE is the same as the one derived in Example~\ref{example:UniformQuantizer}.
 Nevertheless, the quantization scheme seems more suited to the signal described in the previous example.
 The SQNR of the current scheme is given by
 \begin{equation*}
-\text{SQNR} = \frac{\| Y \|^2}{\mathrm{E} [ d(Y, Y_{\mathrm{q}}) ]}
-= 3 \| Y \|^2 = 4.
+\text{SQNR} = \frac{\mathrm{E}[Y^2]}{\mathrm{E} [ d(Y, Y_{\mathrm{q}}) ]}
+= 3 \mathrm{E}[Y^2] = 4.
 \end{equation*}
 This can be compared with the SQNR of the problem featured in Example~\ref{example:UniformQuantizer}, which is given by
 \begin{equation} \label{equation:UniformQuantizerSQNR}
-\text{SQNR} = \frac{\| X \|^2}{\mathrm{E} [ d(X, X_{\mathrm{q}}) ]}
-= 3 \| X \|^2 = 256.
+\text{SQNR} = \frac{\mathrm{E}[X^2]}{\mathrm{E} [ d(X, X_{\mathrm{q}}) ]}
+= 3 \mathrm{E}[X^2] = 256.
 \end{equation}
 Obviously, the SQNR is much better in the case of Example~\ref{example:UniformQuantizer}.
 Can you think of an eight-level quantization scheme that would perform better for the current problem, perhaps rivaling the SQNR of \eqref{equation:UniformQuantizerSQNR}?
@@ -142,45 +192,45 @@ For a fixed input process, a quantization scheme that minimizes the MSE will inv
 
 Finding an optimal quantizer is not an easy task.
 An eight-level quantizer has eight degrees of freedom, and the overall performance of the quantizer is jointly determined by the positions of the quantization points.
-A means to reduce the difficulty of identifying an optimal quantization scheme is to constraint the possible candidates.
+A means to reduce the difficulty of identifying an optimal quantization scheme is to constrain the possible candidates.
 This can be achieved, for instance, by imposing a rule on the respective position of the quantization points.
 Restricting the search space to uniform quantizers is one possible way to ensure that an optimal quantizer can be found.
 
-A \emph{uniform quantizer} is a function where the locations of successive outputs are situated at a fixed interval, $q_i - q_{i-1} = \Delta$ for all the possible values.
+A \emph{uniform quantizer} is a function where the locations of successive outputs are situated at a fixed interval, $q_m - q_{m-1} = \Delta$ for all the possible values.
 That is, the distance between two quantization points is the same for all neighbors.
 This scheme is one of the simplest quantizer designs.
 The quantization function considered in Figure~\ref{figure:Quantizer} is in fact a uniform quantizer.
 If the objective function of the optimization process is the mean squared error, then optimal locations for the quantization points can be found in a straightforward manner.
 First, note that we can write the position of the quantization points as
 \begin{equation*}
-q_i = q_1 + (i-1) \Delta
+q_m = q_1 + (m-1) \Delta
 \end{equation*}
-for $i = 1, 2, \ldots, \ell$ where $\ell$ is the number quantization levels.
+for $m = 1, 2, \ldots, M$ where $M$ is the number quantization levels.
 As usual, the MSE is given by
 \begin{equation*}
 \mathrm{E} [ d(X, X_{\mathrm{q}}) ]
-= \int_{-\infty}^{\infty} (\xi - Q(\xi))^2 f_X(\xi) d\xi .
+= \int_{\mathbb{R}} (x - Q(x))^2 f_X(x) dx .
 \end{equation*}
 We emphasize  that the performance of the quantizer is optimized by minimizing the value of the integrand at each point.
-We deduce that the decision regions corresponding to $q_1, q_2, \ldots, q_{\ell}$ must be equal to
+We deduce that the decision regions corresponding to $q_1, q_2, \ldots, q_M$ must be equal to
 \begin{equation*}
 \left( - \infty, q_1 + \frac{\Delta}{2} \right],
 \left( q_2 - \frac{\Delta}{2}, q_2 + \frac{\Delta}{2} \right],
 \ldots,
-\left( q_{\ell} - \frac{\Delta}{2}, \infty \right) ,
+\left( q_M - \frac{\Delta}{2}, \infty \right) ,
 \end{equation*}
 respectively.
 The objective function then becomes
 \begin{equation} \label{equation:UniformQuantizerMSE}
 \begin{split}
-\text{MSE} &= \int_{-\infty}^{q_1 + \frac{\Delta}{2}} (\xi - q_1)^2 f_X(\xi) d\xi
-+ \sum_{i=2}^{{\ell}-1}
-\int_{q_i - \frac{\Delta}{2}}^{q_i + \frac{\Delta}{2}}
-(\xi - q_i)^2 f_X(\xi) d\xi \\
-&+ \int_{q_{\ell} - \frac{\Delta}{2}}^{\infty} (\xi - q_{\ell})^2 f_X(\xi) d\xi .
+\text{MSE} &= \int_{-\infty}^{q_1 + \frac{\Delta}{2}} (x - q_1)^2 f_X(x) dx
++ \sum_{m=2}^{M-1}
+\int_{q_m - \frac{\Delta}{2}}^{q_m + \frac{\Delta}{2}}
+(x - q_m)^2 f_X(x) dx \\
+&+ \int_{q_M - \frac{\Delta}{2}}^{\infty} (x - q_M)^2 f_X(x) dx .
 \end{split}
 \end{equation}
-The resulting optimization process now has two degrees of freedom, namely $q_1$ and $\Delta$.
+The resulting optimization process has two degrees of freedom, namely $q_1$ and $\Delta$.
 For a suitable probability density function $f_X(\cdot)$, an optimal solution can be obtained explicitly using standard optimization methods.
 
 \begin{example} \label{example:OptimalUniformQuantizer}
@@ -190,15 +240,15 @@ We wish to find the optimal eight-level uniform quantizer associated with this i
 
 For simplicity, we assume that the quantization points $\{ q_1, q_2, \ldots, q_8 \}$ are contained in the interval $[0, 16]$.
 This implies that $q_1 > 0$ and $q_8 < 16$.
-The mean squared error as a function of $q_1$ and $\Delta$ is given by \eqref{equation:UniformQuantizerMSE}, which becomes
+The mean squared error as a function of $q_1$ and $\Delta$ is given by \eqref{equation:UniformQuantizerMSE}, which we can rewrite as
 \begin{equation*}
 \begin{split}
 \text{MSE}~(q_1, \Delta)
-%&= \int_{0}^{q_1 + \frac{\Delta}{2}} \frac{(\xi - q_1)^2}{16} d\xi
-%+ \sum_{i=2}^{7}
-%\int_{q_i - \frac{\Delta}{2}}^{q_i + \frac{\Delta}{2}}
-%\frac{(\xi - q_i)^2}{16} d\xi
-%+ \int_{q_8 - \frac{\Delta}{2}}^{16} \frac{(\xi - q_8)^2}{16} d\xi \\
+%&= \int_{0}^{q_1 + \frac{\Delta}{2}} \frac{(x - q_1)^2}{16} dx
+%+ \sum_{m=2}^{7}
+%\int_{q_m - \frac{\Delta}{2}}^{q_m + \frac{\Delta}{2}}
+%\frac{(x - q_m)^2}{16} dx
+%+ \int_{q_8 - \frac{\Delta}{2}}^{16} \frac{(x - q_8)^2}{16} dx \\
 &= \int_{-q_1}^{\frac{\Delta}{2}} \frac{\xi^2}{16} d\xi
 + 6 \int_{- \frac{\Delta}{2}}^{\frac{\Delta}{2}} \frac{\xi^2}{16} d\xi
 + \int_{- \frac{\Delta}{2}}^{16 - q_8} \frac{\xi^2}{16} d\xi \\
@@ -225,89 +275,91 @@ This task is often accomplished by discretizing the search space and applying nu
 \section{Non-Uniform Quantizers}
 \label{section:NonUniformQuantizers}
 
-For a \emph{non-uniform quantizer}, the restriction that neighboring quantization points should be equidistant from one another is removed.
+For a \emph{non-uniform quantizer}, the restriction that neighboring quantization points should be equidistant is relaxed.
 As such, these points can be located anywhere on the real line, and the decision region corresponding to each quantization point need not have a simple structure.
 The collection of non-uniform quantizers is much larger then the set of uniform quantizers described in Section~\ref{section:UniformQuantizers}.
 This greater flexibility in choosing a quantizer often results in better overall performance.
 However, it also comes with added complexity in designing the quantization scheme.
 In this section, we explore some properties of an optimal quantizer for the mean squared error criterion and we present an algorithm that can be employed to obtain a non-uniform quantizer.
 
-First, suppose that the quantization points $\{ q_i \}$ are fixed.
-An optimal quantizer for these points is a function $Q^* : \mathbb{R} \mapsto \mathcal{Q}$ that minimizes the corresponding MSE,
+First, suppose that the quantization points $\{ q_m : m = 1, \ldots, M \}$ are fixed.
+An optimal quantizer for these points is a function $Q^{\star} : \mathbb{R} \mapsto \mathcal{Q}$ that minimizes the corresponding MSE,
 \begin{equation*}
 \begin{split}
 \min_Q \mathrm{E} [ d(X, X_{\mathrm{q}}) ]
-&= \min_Q \int_{-\infty}^{\infty} (\xi - Q(\xi))^2 f_X(\xi) d\xi \\
-&= \int_{-\infty}^{\infty} \min_{Q(\xi)} (\xi - Q(\xi))^2 f_X(\xi) d\xi .
+&= \min_Q \int_{\mathbb{R}} (x - Q(x))^2 f_X(x) dx \\
+&= \int_{\mathbb{R}} \min_{Q(x)} (x - Q(x))^2 f_X(x) dx .
 \end{split}
 \end{equation*}
 The last equality follows from the fact that a quantization point can be selected independently for every possible input value.
-It should then be clear that the value of the function $Q^*(\cdot)$ evaluated at $x$ is the point $q_i$ that is closest to $x$,
+It should then be clear that the value of the function $Q^{\star}(\cdot)$ evaluated at $x$ is the point $q_m$ that is closest to $x$,
 \begin{equation*}
-Q^*(x) = \arg \min_{\{ q_i \}} (x - q_i)^2 .
+Q^{\star}(x) = \arg \min_{\{ q_m \}} (x - q_m)^2 .
 \end{equation*}
-In particular, an optimal $\ell$-level scalar quantizer always has $\ell$ decision regions, each being an interval containing its quantization point.
+In particular, an optimal $M$-level scalar quantizer always has $M$ decision regions, each being an interval containing its quantization point.
 
 Also, we can assume that the decision intervals are given.
-Let the boundaries of these intervals be denoted by $b_1, b_2, \ldots, b_{\ell-1}$.
+Let the boundaries of these intervals be denoted by $b_1, b_2, \ldots, b_{M-1}$.
 Then, the corresponding MSE is given by
 \begin{equation} \label{equation:BoundaryQuantizationMSE}
-\int_{-\infty}^{b_1} (\xi - q_1)^2 f_X(\xi) d\xi
-+ \sum_{i=2}^{{\ell}-1}
-\int_{b_{i-1}}^{b_i} (\xi - q_i)^2 f_X(\xi) d\xi
-+ \int_{b_{\ell-1}}^{\infty} (\xi - q_{\ell})^2 f_X(\xi) d\xi .
+\begin{split}
+&\int_{-\infty}^{b_1} (x - q_1)^2 f_X(x) dx
++ \sum_{m=2}^{M-1}
+\int_{b_{m-1}}^{b_m} (x - q_m)^2 f_X(x) dx \\
+&+ \int_{b_{M-1}}^{\infty} (x - q_M)^2 f_X(x) dx .
+\end{split}
 \end{equation}
-The value of the MSE can be minimized by selecting the quantization points $\{ q_i \}$ appropriately.
+The value of the MSE can be minimized by selecting the quantization points $\{ q_m : m = 1, \ldots, M \}$ appropriately.
 Note that each quantization point can be optimized individually, as the integrals in \eqref{equation:BoundaryQuantizationMSE} have a nice additive structure.
 Solving one instance of the decoupled problem, we get
 \begin{equation*}
-q_i^* = \min_{q_i} \int_{b_{i-1}}^{b_i} (\xi - q_i)^2 f_X(\xi) d\xi .
+q_m^{\star} = \min_{q_m} \int_{b_{m-1}}^{b_m} (x - q_m)^2 f_X(x) dx .
 \end{equation*}
-To obtain the solution, we differentiate the objective function with respect to $q_i$ and set the derivative equal to zero;
+To obtain the solution, we differentiate the objective function with respect to $q_m$ and set the derivative equal to zero;
 \begin{equation*}
-\frac{d}{d q_i} \int_{b_{i-1}}^{b_i} (\xi - q_i)^2 f_X(\xi) d\xi
-= - \int_{b_{i-1}}^{b_i} 2 (\xi - q_i) f_X(\xi) d\xi = 0 .
+\frac{d}{d q_m} \int_{b_{m-1}}^{b_m} (x - q_m)^2 f_X(x) dx
+= - \int_{b_{m-1}}^{b_m} 2 (x - q_m) f_X(x) dx = 0 .
 \end{equation*}
 This implies that
 \begin{equation*}
-q_i^* = \mathrm{E} [ X | b_{i-1} < X \leq b_i ] .
+q_m^{\star} = \mathrm{E} [ X | b_{m-1} < X \leq b_m ] .
 \end{equation*}
-Once the decision intervals are picked, the optimal quantization point $q_i^*$ is equal to the expectation of $X$ conditioned on $X$ falling inside interval~$i$.
+Once the decision intervals are picked, the optimal quantization point $q_m^{\star}$ is equal to the expectation of $X$ conditioned on $X$ falling inside interval~$m$.
 
-Putting these two observations together, we can summarized the properties of an optimal $\ell$-level quantizer as follows.
-Suppose that $Q^* : \mathbb{R} \mapsto \mathcal{Q}$ is an optimal quantizer with respect to the mean square error criterion (or the signal-to-quantization-noise ratio).
-Then, the decision regions corresponding to the quantization points $\{ q_i \}$ form a partition of the real line where each decision set is an interval.
-Given the positions of the various quantization points $\{ q_i \}$, the boundaries of the decision intervals are given by
+Putting these two observations together, we can summarized the properties of an optimal $M$-level quantizer as follows.
+Suppose that $Q^{\star} : \mathbb{R} \mapsto \mathcal{Q}$ is an optimal quantizer with respect to the mean squared error criterion (or the signal-to-quantization-noise ratio).
+Then, the decision regions corresponding to the quantization points $\{ q_m : m = 1, \ldots, M \}$ form a partition of the real line where each decision set is an interval.
+Given the positions of the various quantization points $\{ q_m : m = 1, \ldots, M \}$, the boundaries of the decision intervals are given by
 \begin{equation*}
-b_i = \frac{q_i + q_{i+1}}{2}
+b_m = \frac{q_m + q_{m+1}}{2}
 \end{equation*}
-where $i = 1, 2, \ldots, \ell-1$.
-Furthermore, the quantization point corresponding to decision interval $(b_{i-1}, b_i]$ is equal to the expectation of $X$ conditioned on $b_{i-1} < X \leq b_i$.
+where $m = 1, 2, \ldots, M-1$.
+Furthermore, the quantization point corresponding to decision interval $(b_{m-1}, b_m]$ is equal to the expectation of $X$ conditioned on $b_{m-1} < X \leq b_m$.
 These properties are collectively known as the \emph{Lloyd-Max} conditions.
 
 
 \subsection{Lloyd-Max Algorithm}
 
-The Lloyd-Max conditions enumerated above form a set of rules that are necessarily fulfilled by optimal quantizers.
+The Lloyd-Max conditions enumerated above define a set of rules that are necessarily fulfilled by optimal quantizers.
 Yet, they do not provide an explicit means to compute the exact positions of the quantization points in an optimal quantizer.
 Furthermore, it may not be possible to find these points analytically.
 
 A method that is frequently used to find a non-uniform scalar quantizer is the \emph{Lloyd-Max algorithm}.
-This algorithm starts with an initial assignment for the quantization points which, in this case, we label $q_1^{(0)}, q_2^{(0)}, \ldots, q_{\ell}^{(0)}$.
+This algorithm starts with an initial assignment for the quantization points which, in this case, we label $q_1^{(0)}, q_2^{(0)}, \ldots, q_M^{(0)}$.
 The ensuring procedure is to alternate iteratively between the following two steps.
 \begin{enumerate}
 \item Compute the boundaries of the decision intervals according to
 \begin{equation*}
-b_i^{(t)} = \frac{q_i^{(t)} + q_{i+1}^{(t)}}{2} , \quad 
-i = 1, 2, \ldots, \ell - 1 .
+b_m^{(t)} = \frac{q_m^{(t)} + q_{m+1}^{(t)}}{2} , \quad 
+m = 1, 2, \ldots, M - 1 .
 \end{equation*}
 \item Find the updated values of the quantization points,
 \begin{equation*}
-q_i^{(t+1)} = \mathrm{E} [X | b_{i-1} < X \leq b_i ] , \quad
-i = 1, 2, \ldots, \ell .
+q_m^{(t+1)} = \mathrm{E} [X | b_{m-1} < X \leq b_m ] , \quad
+m = 1, 2, \ldots, M .
 \end{equation*}
 \end{enumerate}
-We adopt the simplifying notation $b_0 = - \infty$ and $b_{\ell} = \infty$ to express the conditional expectation in a consistent manner.
+We adopt the simplifying notation $b_0 = - \infty$ and $b_M = \infty$ to express the conditional expectation in a consistent manner.
 The MSE of the quantization scheme decreases at every step, thereby becoming smaller than the MSE of all the previous assignments.
 This insures that performance improves with every iteration.
 The algorithm terminates when a satisfactory level of performance has been achieved, or when the quantization points have converged to their final values.
@@ -328,15 +380,15 @@ We are tasked with designing a vector quantizer for this source with a total of 
 The joint probability distribution function associated with this source is known to be
 \begin{equation} \label{equation:QuantizationJointPDF}
 \begin{split}
-f_{X,Y} (\xi, \zeta) &= \frac{1}{4} g ( \xi + 1.5, \zeta + 1.5 )
-+ \frac{1}{4} g ( \xi + 0.5, \zeta + 0.5 ) \\
-&+ \frac{1}{4} g ( \xi - 0.5, \zeta - 0.5 )
-+ \frac{1}{4} g ( \xi - 1.5, \zeta - 1.5 ) ,
+f_{X,Y} (x, y) &= \frac{1}{4} g ( x + 1.5, y + 1.5 )
++ \frac{1}{4} g ( x + 0.5, y + 0.5 ) \\
+&+ \frac{1}{4} g ( x - 0.5, y - 0.5 )
++ \frac{1}{4} g ( x - 1.5, y - 1.5 ) ,
 \end{split}
 \end{equation}
 where the function $g(\cdot, \cdot)$ is given by
 \begin{equation*}
-g(\xi, \zeta) = \begin{cases} 1, &  |\xi|, |\zeta| < 0.5 \\
+g(x, y) = \begin{cases} 1, &  |x|, |y| < 0.5 \\
 0, & \text{otherwise}. \end{cases}
 \end{equation*}
 For illustrative purposes, $f_{X,Y} (\cdot, \cdot)$ is shown in Figure~\ref{figure:VectorQuantization}.
@@ -358,8 +410,8 @@ The MSE associated with our vector quantizer can therefore be computed as
 \begin{split}
 &\mathrm{E} \left[ \| (X,Y) - Q(X,Y) \|^2 \right] \\
 &= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty}
-\| (\xi, \zeta) - Q(\xi, \zeta) \|^2 f_{X,Y}(\xi,\zeta) d\xi d\zeta \\
-&= 4 \int_{-0.5}^{0.5} \int_{-0.5}^{0.5} \frac{\xi^2 + \zeta^2}{4} d\xi d\zeta
+\| (x, y) - Q(x, y) \|^2 f_{X,Y}(x,y) dx dy \\
+&= 4 \int_{-0.5}^{0.5} \int_{-0.5}^{0.5} \frac{x^2 + y^2}{4} dx dy
 = \frac{1}{6} .
 \end{split}
 \end{equation*}
@@ -375,14 +427,14 @@ f_X (\varphi) = f_Y (\varphi)
 0, & \text{otherwise} . \end{cases}
 \end{equation*}
 The optimal scalar quantization scheme in this case is to put one point at $-1$ and the other at $1$.
-Once combined, the two scalar quantizers are equivalent to having points at $\tilde{q}_1 = (1,1)$, $\tilde{q}_2 = (-1,1)$, $\tilde{q}_3 = (-1,-1)$, and $\tilde{q}_4 = (1,-1)$ in the plane.
+Once combined, the two scalar quantizers are equivalent to having points at $r_1 = (1,1)$, $r_2 = (-1,1)$, $r_3 = (-1,-1)$, and $r_4 = (1,-1)$ in the plane.
 The resulting MSE per pair of symbols becomes
 \begin{equation*}
 \begin{split}
-&\mathrm{E} \left[ \left\| (X,Y) - \tilde{Q}(X,Y) \right\|^2 \right] \\
+&\mathrm{E} \left[ \left\| (X,Y) - R(X,Y) \right\|^2 \right] \\
 &= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty}
-\left\| (\xi, \zeta) - \tilde{Q}(\xi, \zeta) \right\|^2 f_{X,Y}(\xi,\zeta) d\xi d\zeta \\
-&= 4 \int_0^1 \int_0^1 \frac{\xi^2 + \zeta^2}{4} d\xi d\zeta
+\left\| (x, y) - R(x, y) \right\|^2 f_{X,Y}(x,y) dx dy \\
+&= 4 \int_0^1 \int_0^1 \frac{x^2 + y^2}{4} dx dy
 = \frac{2}{3} .
 \end{split}
 \end{equation*}
@@ -394,15 +446,15 @@ Comparing with our previous result, we notice that the MSE is much larger when u
 \psfrag{q2}[l]{$q_2$}
 \psfrag{q3}[l]{$q_3$}
 \psfrag{q4}[l]{$q_4$}
-\psfrag{s1}[l]{$\tilde{q}_1$}
-\psfrag{s2}[l]{$\tilde{q}_2$}
-\psfrag{s3}[l]{$\tilde{q}_3$}
-\psfrag{s4}[l]{$\tilde{q}_4$}
+\psfrag{s1}[l]{$r_1$}
+\psfrag{s2}[l]{$r_2$}
+\psfrag{s3}[l]{$r_3$}
+\psfrag{s4}[l]{$r_4$}
 \psfrag{x}[c]{$x$}
 \psfrag{y}[c]{$y$}
 \epsfig{file=Figures/vectorquantizer,width=6cm}
 \end{psfrags}
-\caption{A visual graphical comparison of vector and scalar quantization schemes applied to the two-dimensional problem of Example~\ref{example:VectorQuantization}.}
+\caption{A graphical comparison of vector and scalar quantization schemes applied to the two-dimensional problem of Example~\ref{example:VectorQuantization}.}
 \label{figure:VectorQuantizer}
 \end{center}
 \end{figure}
@@ -410,7 +462,7 @@ Comparing with our previous result, we notice that the MSE is much larger when u
 
 Although this example may not be the most realistic scenario, it provides a good illustration of the potential benefits associated with using vector quantizers.
 The improved performance comes from the greater flexibility in positioning the various quantization points in a high-dimensional setting together with the ability to exploit correlation among consecutive source symbols.
-On the downside, the mathematical treatment of a quantization problem becomes more intricate in a higher-dimensional space.
+On the downside, the mathematical treatment of a quantization problem becomes more intricate in higher-dimensional spaces.
 
 
 \section{Analysis-Synthesis Algorithms}
