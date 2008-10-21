@@ -11,7 +11,7 @@
 \textheight         8.5in
 \textwidth          5.5in
 
-\newtheorem{theorem}{Theorem}
+\newtheorem{theorem}{Theorem}[section]
 \newtheorem{proposition}{Proposition}
 \newtheorem{definition}{Definition}
 \newtheorem{example}{Example}
@@ -34,9 +34,21 @@
 
 \frontmatter
 
+\author{
+\textbf{Committers:} \\
+Jean-Francois Chamberland \\
+Krishna Narayanan \\
+Henry Pfister}
+
+\title{A First Course in Digital Communications}
+
+\date{Fall 2008}
+
+\maketitle
+
 \chapter*{Copyright}
-Copyright \copyright\ \\
-FRED
+Copyright \copyright 2008 \\
+Free Research and Education Documents
 
 Permission is granted to copy, distribute and/or modify this document under the terms of the \emph{GNU Free Documentation License}, Version 1.2 or any later version published by the \emph{Free Software Foundation}; with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
 A copy of the license is included in the section entitled ``GNU Free Documentation License''.
@@ -54,7 +66,9 @@ A copy of the license is included in the section entitled ``GNU Free Documentati
 %\include{5ChannelCoding}
 \include{6Modulation}
 
-%\appendix
+\appendix
+
+\include{A0VectorSpaces}
 
 %\include{fdl}
 \end{document}

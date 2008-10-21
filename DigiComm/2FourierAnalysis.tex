@@ -229,7 +229,7 @@ If a signal $x(t)$ is bandwidth-limited to $W$, then this signal can be reconstr
 A formal version of the sampling theorem appears below.
 
 \begin{theorem}[Sampling Theorem] \label{theorem:SamplingTheorem}
-Suppose that $x(t)$ is a bandwidth-limited signal with bandwidth $W$.
+Let signal $x(t)$ be a bandwidth-limited function with bandwidth $W$.
 If $x(t)$ is sampled at times $\{ nT : n \in \mathbb{Z} \}$ where $T \leq \frac{1}{2W}$, then it is possible to reconstruct the original signal $x(t)$ from its sampled points $\{ x(nT) : n \in \mathbb{Z} \}$.
 Specifically, if $T \leq \frac{1}{2W}$ then
 \begin{equation} \label{equation:SamplingReconstructionFormula}
@@ -537,12 +537,12 @@ This question is answered in the affirmative below.
 
 \begin{theorem} \label{theorem:SamplingRandomSignals}
 Suppose that $X(t)$ is a wide-sense stationary bandwidth-limited process with bandwidth $W$ and power spectral density $\mathcal{S}_X (f)$.
-Let $\tilde{X}(t)$ be the estimate for $X(t)$ built from the sampled values $\{ X(nT) : n \in \mathbb{Z} \}$; that is,
+Let $\tilde{X}(t)$ be an approximation for $X(t)$ built from the sampled values $\{ X(nT) : n \in \mathbb{Z} \}$,
 \begin{equation*}
-\tilde{X}(t) = \sum_{n=-\infty}^{\infty} X(nT) \mathrm{sinc} (2 W (t - nT))
+\tilde{X}(t) = \sum_{n=-\infty}^{\infty} X(nT) \mathrm{sinc} (2 W (t - nT)) ,
 \end{equation*}
 where $T = \frac{1}{2W}$ denotes the sampling interval.
-Then the mean-squared error between the original random process and its estimate vanishes,
+Then the mean-squared error between the original random process and the reconstructed version vanishes,
 \begin{equation} \label{equation:SamplingMSE}
 \left\| X(t) - \tilde{X}(t) \right\|^2
 = \mathrm{E} \left[ \left| X(t) - \sum_{n=-\infty}^{\infty}
@@ -566,10 +566,10 @@ To establish this result, we expand the mean-squared error of \eqref{equation:Sa
 The double summation above can be rewritten as
 \begin{equation*}
 \begin{split}
-&\sum_{n=-\infty}^{\infty} \sum_{p=-\infty}^{\infty} R_X(pT)
-\mathrm{sinc}(2 W (t - pT - nT)) \mathrm{sinc}(2 W (t - nT)) \\
-&\sum_{n=-\infty}^{\infty} \left( \sum_{p=-\infty}^{\infty} R_X(pT)
-\mathrm{sinc}(2 W (t - pT - nT)) \right) \mathrm{sinc}(2 W (t - nT)) \\
+&\sum_{n=-\infty}^{\infty} \sum_{k=-\infty}^{\infty} R_X(kT)
+\mathrm{sinc}(2 W (t - kT - nT)) \mathrm{sinc}(2 W (t - nT)) \\
+&\sum_{n=-\infty}^{\infty} \left( \sum_{k=-\infty}^{\infty} R_X(kT)
+\mathrm{sinc}(2 W (t - kT - nT)) \right) \mathrm{sinc}(2 W (t - nT)) \\
 &= \sum_{n=-\infty}^{\infty} R_X(t - nT) \mathrm{sinc}(2 W (t - nT)) ,
 \end{split}
 \end{equation*}
