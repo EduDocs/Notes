@@ -17,7 +17,8 @@ Suppose that these two operations satisfy
 \item to each $s \in F - 0$ there exists a unique element $s^{-1} \in F$ such that $s s^{-1} = 1$
 \item multiplication distributes over addition: $r (s + t) = rs + rt \; \forall r, s, t \in F$.
 \end{enumerate}
-Then, the set $F$ together with these two operations is a \emph{field}.
+Then, the set $F$ together with these two operations is a \textbf{field}.
+\index{field}
 
 \begin{example}
 The real numbers with the usual operations of addition and multiplication form a field.
@@ -82,7 +83,7 @@ and $\vecnot{x}$, $\vecnot{y}$ denote
 
 \begin{definition}
 Let $A$ be an $m \times n$ matrix over $F$ and let $B$ be an $n \times p$ matrix over $F$.
-the \emph{matrix product} $AB$ is the $m \times p$ matrix $C$ whose $i,j$ entry is
+the \defn{matrix}{matrix product} $AB$ is the $m \times p$ matrix $C$ whose $i,j$ entry is
 \begin{equation*}
 c_{ij} = \sum_{r = 1}^n a_{ir} b_{rj}.
 \end{equation*}
@@ -90,7 +91,7 @@ c_{ij} = \sum_{r = 1}^n a_{ir} b_{rj}.
 
 \begin{definition}
 Let $A$ be an $n \times n$ matrix over $F$.
-An $n \times n$ matrix $B$ is called the \emph{inverse} of $A$ if
+An $n \times n$ matrix $B$ is called the \defn{matrix}{inverse} of $A$ if
 \begin{equation*}
 AB = BA = I.
 \end{equation*}
@@ -100,8 +101,9 @@ If $A$ is invertible then its inverse will be denoted by $A^{-1}$.
 
 \section{Vector Spaces}
 
+\index{vector space}
 \begin{definition} \label{definition:VectorSpace}
-A \emph{vector space} consists of the following,
+A \textbf{vector space} consists of the following,
 \begin{enumerate}
 \item a field $F$ of scalars
 \item a set $V$ of objects, called vectors
@@ -149,7 +151,7 @@ The product of scalar $s \in F$ and the function $f \in V$ is the function $sf$ 
 \end{example}
 
 \begin{definition}
-A vector $\vecnot{w} \in V$ is said to be a \emph{linear combination} of the vectors $\vecnot{v}_1, \ldots, \vecnot{v}_n \in V$ provided that there exist scalars $s_1, \ldots, s_n \in F$ such that
+A vector $\vecnot{w} \in V$ is said to be a \defn{vector space}{linear combination} of the vectors $\vecnot{v}_1, \ldots, \vecnot{v}_n \in V$ provided that there exist scalars $s_1, \ldots, s_n \in F$ such that
 \begin{equation*}
 \vecnot{w} = \sum_{i=1}^n s_i \vecnot{v}_i.
 \end{equation*}
@@ -160,7 +162,7 @@ A vector $\vecnot{w} \in V$ is said to be a \emph{linear combination} of the vec
 
 \begin{definition}
 Let $V$ be a vector space over $F$.
-A \emph{subspace} of $V$ is a subset $W \subset V$ which is itself a vector space over $F$.
+A \defn{vector space}{subspace} of $V$ is a subset $W \subset V$ which is itself a vector space over $F$.
 \end{definition}
 
 \begin{fact}
@@ -179,7 +181,7 @@ is a subspace of $F^{n \times 1}$.
 
 \begin{definition}
 Let $U$ be a set of vectors in a vector space $V$.
-The \emph{subspace spanned} by $U$ is defined to be the intersection $W$ of all subspaces of $V$ which contain $U$.
+The \defn{vector space}{subspace spanned} by $U$ is defined to be the intersection $W$ of all subspaces of $V$ which contain $U$.
 \end{definition}
 
 The subspace spanned by a non-empty subset $U \subset V$, where $V$ is a vector space, is the set of all linear combinations of vectors in $U$.
@@ -192,11 +194,11 @@ The dimension of a vector space can be defined using the concept of a basis for 
 
 \begin{definition}
 Let $V$ be a vector space over $F$.
-A subset $U \subset V$ is \emph{linearly dependent} if there exist distinct vectors $\vecnot{u}_1, \ldots, \vecnot{u}_n \in U$ and scalars $s_1, \ldots, s_n \in F$, not all of which are $0$, such that
+A subset $U \subset V$ is \defn{vector space}{linearly dependent} if there exist distinct vectors $\vecnot{u}_1, \ldots, \vecnot{u}_n \in U$ and scalars $s_1, \ldots, s_n \in F$, not all of which are $0$, such that
 \begin{equation*}
 \sum_{i=1}^n s_i \vecnot{u}_i = 0.
 \end{equation*}
-A set which is not linearly dependent is called \emph{linearly independent}.
+A set which is not linearly dependent is called \defn{vector space}{linearly independent}.
 \end{definition}
 
 A few important consequences follow immediately from this definition.
@@ -207,8 +209,8 @@ A set $U \subset V$ is linearly independent if and only if each finite subset of
 \begin{definition}
 Let $V$ be a vector space over $F$.
 Let $\mathcal{B} = \left\{ \vecnot{v}_{\alpha} | \alpha \in A \right\}$ be a subset of linearly independent vectors from $V$, such that every $\vecnot{v} \in V$ has a decomposition as a finite linear combination of vectors from $\mathcal{B}$.
-Then, the set $\mathcal{B}$ is a \emph{basis} for $V$.
-The space $V$ is \emph{finite-dimensional} if it has a finite basis.
+Then, the set $\mathcal{B}$ is a \defn{vector space}{(Hamel) basis} for $V$.
+The space $V$ is \defn{vector space}{finite-dimensional} if it has a finite basis.
 \end{definition}
 
 \begin{theorem}
@@ -238,7 +240,7 @@ For any $\vecnot{v} = (v_1, \ldots, v_n) \in F^n$, we have
 Thus, the collection $U = \left\{ \vecnot{e}_1, \ldots, \vecnot{e}_n \right\}$ spans $F^n$.
 Since $\vecnot{v} = \vecnot{0}$ in~\eqref{equation:StandartBasisSpan} if and only if $v_1 = \cdots = v_n = 0$, $U$ is linearly independent.
 Accordingly, the set $U$ is a basis for $F^{n \times 1}$.
-This basis is termed the \emph{standard basis} of $F^n$.
+This basis is termed the \defn{vector space}{standard basis} of $F^n$.
 \end{example}
 
 \begin{example}
@@ -287,7 +289,7 @@ If $V$ is a finite-dimensional vector space, then any two bases of $V$ have the 
 This allows us to define the dimension of a finite-dimensional vector space.
 
 \begin{definition}
-The \emph{dimension} of a finite-dimensional vector space is defined as the number of elements in a basis for $V$.
+The \defn{vector space}{dimension} of a finite-dimensional vector space is defined as the number of elements in a basis for $V$.
 We denote the dimension of a finite-dimensional vector space $V$ by $\dim(V)$.
 \end{definition}
 
@@ -317,13 +319,19 @@ Note also that if the rows of $A$ form a linearly independent set of vectors in 
 
 \begin{definition}
 Let $V$ and $W$ be vector spaces over a field $F$.
-A \emph{linear transformation from $V$ to $W$} is a function $T$ from $V$ into $W$ such that
+A \defn{vector space}{linear transformation} from $V$ to $W$ is a function $T$ from $V$ into $W$ such that
 \begin{equation*}
 T \left( s \vecnot{v}_1 + \vecnot{v}_2 \right)
 = s T \vecnot{v}_1 + T \vecnot{v}_2
 \end{equation*}
 for all $\vecnot{v}_1$ and $\vecnot{v}_2$ in $V$ and all scalars $s$ in $F$.
 \end{definition}
+
+A \defn{vector space}{homomorphism} is a mapping between algebraic structures which preserves all relevant structure.
+An \defn{vector space}{isomorphism} is a homomorphism which is also invertible.
+For vector spaces, the relevant structure is given by vector addition and scalar multiplication.
+Since a linear transformation preserves both of these operation, it is also a \emph{vector space homomorphism}.
+Likewise, an invertible linear transformation is a \emph{vector space isomorphism}.
 
 \begin{example}
 Let $A$ be a fixed $m \times n$ matrix over $F$.
@@ -342,7 +350,7 @@ Yet it is possible to order the elements of $\left\{ \vecnot{v}_1, \ldots, \vecn
 One of the useful features of an ordered basis is that it enables the introduction of a coordinate system in $V$.
 
 \begin{definition}
-If $V$ is a finite-dimensional vector space, an \emph{ordered basis} for $V$ is a finite sequence of vectors which is linearly independent and spans $V$.
+If $V$ is a finite-dimensional vector space, an \defn{vector space}{ordered basis} for $V$ is a finite sequence of vectors which is linearly independent and spans $V$.
 \end{definition}
 
 In particular, if the sequence $\vecnot{v}_1, \ldots, \vecnot{v}_n$ is an ordered basis for $V$, then the set $\left\{ \vecnot{v}_1, \ldots, \vecnot{v}_n \right\}$ is a basis for $V$.
@@ -436,7 +444,7 @@ By definition, it clear that $\left[ \vecnot{u} \right]_{\mathcal{A}} = P \left[
 \section{Norms}
 Let $V$ be a vector space over the real numbers or the complex numbers.
 
-A \emph{norm} on vector space $V$ is a real-valued function $\left\| \cdot \right\| : V \rightarrow \RealNumbers$ that satisfies the following properties.
+A \defn{vector space}{norm} on vector space $V$ is a real-valued function $\left\| \cdot \right\| : V \rightarrow \RealNumbers$ that satisfies the following properties.
 \begin{enumerate}
 \item $\left\| \vecnot{v} \right\| \geq 0 \quad \forall \vecnot{v} \in V$;
 equality holds if and only if $\vecnot{v} = \vecnot{0}$
@@ -505,13 +513,13 @@ Similarly, norms can be defined for the vector space of functions from $[a, b]$ 
 \end{example}
 
 \begin{definition}
-A vector $\vecnot{v} \in V$ is said to be \emph{normalized} if $\left\| \vecnot{v} \right\| = 1$.
+A vector $\vecnot{v} \in V$ is said to be \defn{vector space}{normalized} if $\left\| \vecnot{v} \right\| = 1$.
 Any vector can be normalized, except the zero vector:
 \begin{equation}
 \vecnot{u} = \frac{\vecnot{v}}{\left\| \vecnot{v} \right\|}
 \end{equation}
 has norm $\left\| \vecnot{u} \right\| = 1$.
-A normalized vector is also referred to as a \emph{unit vector}.
+A normalized vector is also referred to as a \defn{vector space}{unit vector}.
 \end{definition}
 
 
@@ -519,7 +527,7 @@ A normalized vector is also referred to as a \emph{unit vector}.
 
 \begin{definition} \label{definition:InnerProduct}
 Let $F$ be the field of real numbers or the field of complex numbers, and assume $V$ is a vector space over $F$.
-An \emph{inner product} on $V$ is a function which assigns to each ordered pair of vectors $\vecnot{v}, \vecnot{w} \in V$ a scalar $\left\langle \vecnot{v} | \vecnot{w} \right\rangle \in F$ in such a way that for all $\vecnot{u}, \vecnot{v}, \vecnot{w} \in V$ and any scalar $s \in F$
+An \defn{inner-product space}{inner product} on $V$ is a function which assigns to each ordered pair of vectors $\vecnot{v}, \vecnot{w} \in V$ a scalar $\left\langle \vecnot{v} | \vecnot{w} \right\rangle \in F$ in such a way that for all $\vecnot{u}, \vecnot{v}, \vecnot{w} \in V$ and any scalar $s \in F$
 \begin{enumerate}
 \item $\left\langle \vecnot{u} + \vecnot{v} | \vecnot{w} \right\rangle
 = \left\langle \vecnot{u} | \vecnot{w} \right\rangle
@@ -539,8 +547,9 @@ Note that the conditions of Definition~\ref{definition:InnerProduct} imply that
 + \left\langle \vecnot{u} | \vecnot{w} \right\rangle .
 \end{equation*}
 
+\index{inner-product space}
 \begin{definition}
-A real or complex vector space equipped with an inner product is called an \emph{inner-product space}.
+A real or complex vector space equipped with an inner product is called an \textbf{inner-product space}.
 \end{definition}
 
 \begin{example} \label{example:StandardInnerProduct}
@@ -550,7 +559,7 @@ Consider the inner product on $F^n$ defined by
 = \left\langle (v_1, \ldots, v_n) | (w_1, \ldots, w_n) \right\rangle
 = \sum_{j=1}^n v_j \overline{w}_j.
 \end{equation*}
-This inner product is called the \emph{standard inner product}.
+This inner product is called the \defn{inner-product space}{standard inner product}.
 When $F = \RealNumbers$, the standard inner product can also be written as
 \begin{equation*}
 \left\langle \vecnot{v} | \vecnot{w} \right\rangle
@@ -679,12 +688,12 @@ That is, if $X = Y$ almost surely then $X$ and $Y$ are different representation 
 
 \subsection{Induced Norms}
 
-A finite-dimensional real inner-product space is often referred to as a \emph{Euclidean space}.
-A complex inner-product space is sometimes called a \emph{unitary space}.
+A finite-dimensional real inner-product space is often referred to as a \defn{inner-product space}{Euclidean space}.
+A complex inner-product space is sometimes called a \defn{inner-product space}{unitary space}.
 
 \begin{definition}
 Let $V$ be an inner-product space with inner product $\langle \cdot | \cdot \rangle$.
-This inner product can be used to define a norm, called the \emph{induced norm},
+This inner product can be used to define a norm, called the \defn{inner-product space}{induced norm},
 \begin{equation*}
 \left\| \vecnot{v} \right\| = \left\langle \vecnot{v} | \vecnot{v} \right\rangle^{\frac{1}{2}}
 \end{equation*}
@@ -736,7 +745,7 @@ Using this result, we get
 Thus, $\left\| \vecnot{v} + \vecnot{w} \right\| \leq \left\| \vecnot{v} \right\| + \left\| \vecnot{w} \right\|$.
 \end{proof}
 
-The third inequality, $\left| \left\langle \vecnot{v} | \vecnot{w} \right\rangle \right| \leq \left\| \vecnot{v} \right\| \left\| \vecnot{w} \right\|$, is called the \emph{Cauchy-Schwarz inequality}.
+The third inequality, $\left| \left\langle \vecnot{v} | \vecnot{w} \right\rangle \right| \leq \left\| \vecnot{v} \right\| \left\| \vecnot{w} \right\|$, is called the \defn{inner-product space}{Cauchy-Schwarz inequality}.
 Its proof shows that if $\vecnot{v}$ is non-zero, then $\left| \left\langle \vecnot{v} | \vecnot{w} \right\rangle \right| < \left\| \vecnot{v} \right\| \left\| \vecnot{w} \right\|$ unless
 \begin{equation*}
 \vecnot{w} = \frac{ \left\langle \vecnot{w} | \vecnot{v} \right\rangle }
@@ -761,14 +770,14 @@ Since $\left\| \vecnot{w}_n - \vecnot{w} \right\| \rightarrow 0$, the convergenc
 \end{proof}
 
 
-\section{Orthogonal Projections}
+\section{Orthogonality}
 
 \begin{definition}
 Let $\vecnot{v}$ and $\vecnot{w}$ be vectors in an inner-product space $V$.
-Then $\vecnot{v}$ is \emph{orthogonal} to $\vecnot{w}$ if $\left\langle \vecnot{v} | \vecnot{w} \right\rangle = 0$.
+Then $\vecnot{v}$ is \defn{inner-product space}{orthogonal} to $\vecnot{w}$ if $\left\langle \vecnot{v} | \vecnot{w} \right\rangle = 0$.
 Note that this also implies that $\vecnot{w}$ is orthogonal to $\vecnot{v}$, so we can simply say that $\vecnot{v}$ and $\vecnot{w}$ are orthogonal.
-A collection $W$ of vectors in $V$ is an \emph{orthogonal set} if all pairs of distinct vectors in $W$ are orthogonal.
-An \emph{orthonormal set} $U$ is a collection of vectors in $V$ such that $U$ is an orthogonal set and $\left\| \vecnot{u} \right\| = 1$ for every $\vecnot{u} \in U$.
+A collection $W$ of vectors in $V$ is an \defn{inner-product space}{orthogonal set} if all pairs of distinct vectors in $W$ are orthogonal.
+An \defn{inner-product space}{orthonormal set} $U$ is a collection of vectors in $V$ such that $U$ is an orthogonal set and $\left\| \vecnot{u} \right\| = 1$ for every $\vecnot{u} \in U$.
 \end{definition}
 
 \begin{example}
@@ -860,7 +869,7 @@ Clearly, $\{ \vecnot{w}_1, \ldots, \vecnot{w}_{m+1} \}$ is an orthogonal set con
 Since the dimension of the latter subspace is $m+1$, this set is a basis for the subspace.
 \end{proof}
 
-The inductive construction of the vectors $\vecnot{w}_1, \ldots, \vecnot{w}_n$ is known as the \emph{Gram-Schmidt orthogonalization process}.
+The inductive construction of the vectors $\vecnot{w}_1, \ldots, \vecnot{w}_n$ is known as the \defn{inner-product spaxe}{Gram-Schmidt orthogonalization} process.
 
 \begin{corollary}
 \label{cor:orthonormal_basis}
@@ -909,7 +918,7 @@ Orthogonal projections are very useful in many context.
 
 Suppose $W$ is a subspace of an inner-product space $V$, and let $\vecnot{v}$ be an arbitrary vector in $V$.
 Consider the problem of finding a vector $\vecnot{w} \in W$ such that $\left\| \vecnot{v} - \vecnot{w} \right\|$ is minimized.
-The vector $\vecnot{w} \in W$ is a \emph{best approximation} to $\vecnot{v} \in V$ if
+The vector $\vecnot{w} \in W$ is a \defn{inner-product space}{best approximation} to $\vecnot{v} \in V$ if
 \begin{equation*}
 \left\| \vecnot{v} - \vecnot{w} \right\| \leq \left\| \vecnot{v} - \vecnot{w}' \right\|
 \end{equation*}
@@ -994,7 +1003,7 @@ That is, $\vecnot{v} - \vecnot{w}$ is orthogonal to every vector in $W$ and ther
 
 \begin{definition}
 Let $V$ be an inner-product space and $W$ be any set of vectors in $V$.
-The \emph{orthogonal complement} of $W$ denoted by $W^{\bot}$ is the set of all vectors in $V$ that are orthogonal to every vector in $W$ or
+The \defn{inner-product space}{orthogonal complement} of $W$ denoted by $W^{\bot}$ is the set of all vectors in $V$ that are orthogonal to every vector in $W$ or
 \begin{equation*}
 W^{\bot} = \left\{ \vecnot{v} \in V \big| \langle \vecnot{v} | \vecnot{w} \rangle = 0 \; \forall \; \vecnot{w}\in W \right\}. 
 \end{equation*}
@@ -1076,7 +1085,7 @@ Thus, $\vecnot{v} - E \vecnot{v}$ is the best approximation to $\vecnot{v}$ by v
 \end{proof}
 
 \begin{definition}
-A function $F: X \rightarrow Y$ with $Y \subseteq X$ is \emph{idempotent} if $F(F(x))=F(x)$.  When $F$ is a linear transformation, this reduces to $F^2 = F \cdot F = F$.
+A function $F: X \rightarrow Y$ with $Y \subseteq X$ is \defn{vector space}{idempotent} if $F(F(x))=F(x)$.  When $F$ is a linear transformation, this reduces to $F^2 = F \cdot F = F$.
 \end{definition}
 
 \begin{theorem} \label{theorem:OrthogonalSubspaceDirectSum}
@@ -1187,13 +1196,13 @@ It follows that the vector $\vecnot{v}$ is in the subspace spanned by $\vecnot{v
 \section{Banach and Hilbert Spaces}
 
 \begin{definition}
-A complete normed vector space is called a \emph{Banach space}.
-A complete inner-product space is called a \emph{Hilbert space}.
+A complete normed vector space is called a \defn{vector space}{Banach space}.
+A complete inner-product space is called a \defn{inner-product space}{Hilbert space}.
 \end{definition}
 
 \begin{definition}
 Recall that a subset $\left\{ \vecnot{v}_{\alpha} | \alpha \in A \right\}$ of a Hilbert space $V$ is said to be orthonormal if $\left\| \vecnot{v}_{\alpha} \right\| = 1$ for every $\alpha \in A$ and $\left\langle \vecnot{v}_{\alpha} | \vecnot{v}_{\beta} \right\rangle = 0$ for all $\alpha \neq \beta$.
-If the subspace spanned by the family $\left\{ \vecnot{v}_{\alpha} | \alpha \in A \right\}$ is dense in $V$, we call this set an \emph{orthonormal basis}.
+If the subspace spanned by the family $\left\{ \vecnot{v}_{\alpha} | \alpha \in A \right\}$ is dense in $V$, we call this set an \defn{inner-product space}{orthonormal basis}.
 \end{definition}
 
 Note that, according to this definition, an orthonormal basis for a Hilbert space $V$ is not necessarily a basis for $V$.
@@ -1207,7 +1216,7 @@ Each element $\vecnot{v} \in V$ has the form
 \vecnot{v} = \sum_{\alpha \in A} s_{\alpha} \vecnot{v}_{\alpha},
 \end{equation*}
 where the sum converges in the (2)-norm.
-The \emph{Parseval identity}
+The \defn{inner-product space}{Parseval identity}
 \begin{equation*}
 \left\| \vecnot{v} \right\|^2 = \sum_{\alpha \in A} | s_{\alpha} |^2
 \end{equation*}

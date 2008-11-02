@@ -1,9 +1,19 @@
-\chapter{Set Theory and Logic}
+\chapter{Logic and Set Theory}
 
-In mathematics, a \emph{proof} is a demonstration that, assuming certain \emph{axioms}, some statement is necessarily true.
+
+\begin{quote}
+To criticize mathematics for its abstraction is to miss the point entirely.
+Abstraction is what makes mathematics work.
+If you concentrate too closely on too limited an application of a mathematical idea, you rob the mathematician of his most important tools: analogy, generality, and simplicity.
+\flushright{\textit{-- Ian Stewart} \\ Does God play dice? The mathematics of chaos}
+\end{quote}
+
+\index{logic}
+
+In mathematics, a \defn{logic}{proof} is a demonstration that, assuming certain axioms, some statement is necessarily true.
 That is, a proof is a logical argument, not an empirical one.
 One must demonstrate that a proposition is true in all cases before it is considered a theorem of mathematics.
-An unproven proposition for which there is some sort of empirical evidence is known as a \emph{conjecture}.
+An unproven proposition for which there is some sort of empirical evidence is known as a \defn{logic}{conjecture}.
 Mathematical logic is the framework upon which rigorous proofs are built.
 It is the study of the principles and criteria of valid inference and demonstrations.
 
@@ -25,9 +35,9 @@ Our main purpose here is to learn how to state mathematical results clearly and 
 
 \section{Statements}
 
-A proof in mathematics demonstrates the truth of certain \emph{statements}.
+A proof in mathematics demonstrates the truth of certain \textbf{statement}.
 It is therefore natural to begin with a brief discussion of statements.
-A statement, or \emph{proposition}, is the content of an assertion.
+A statement, or \textbf{proposition}, is te content of an assertion.
 It is either true or false, but cannot be both true and false at the same time.
 For example, the expression ``There are no classes at Texas A\&M University today'' is a statement since it is either true or false.
 The expression ``Do not cheat and do not tolerate those who do'' is not a statement.
@@ -40,8 +50,8 @@ In this section, we present five ways to form new statements from old ones.
 They correspond to the English expressions: and; or; not; if, then; if and only if.
 In the discussion below, $P$ and $Q$ represent two abstract statements.
 
-A logical \emph{conjunction} is an operation on two logical propositions that produces a value of true if both statements are true, and is false otherwise.
-The \emph{conjunction} of $P$ and $Q$, denoted by $P \wedge Q$, is precisely defined by
+A logical \defn{logic}{conjunction} is an operation on two logical propositions that produces a value of true if both statements are true, and is false otherwise.
+The conjunction of $P$ and $Q$, denoted by $P \wedge Q$, is precisely defined by
 \begin{center}
 \begin{tabular}{|c|c|c|}
 \hline
@@ -55,7 +65,7 @@ F & F & F \\
 \end{tabular}
 \end{center}
 
-Similarly, a logical \emph{disjunction} is an operator on two logical propositions that is true if either statements is true or both are true, and is false otherwise.
+Similarly, a logical \defn{logic}{disjunction} is an operator on two logical propositions that is true if either statements is true or both are true, and is false otherwise.
 The disjunction of $P$ and $Q$, denoted $P \vee Q$, is defined by
 \begin{center}
 \begin{tabular}{|c|c|c|}
@@ -70,7 +80,7 @@ F & F & F \\
 \end{tabular}
 \end{center}
 
-In mathematics, a \emph{negation} is an operator on the logical value of a proposition that sends true to false and false to true.
+In mathematics, a \defn{logic}{negation} is an operator on the logical value of a proposition that sends true to false and false to true.
 The negation of $P$, denoted $\neg P$, is given by
 \begin{center}
 \begin{tabular}{|c|c|}
@@ -85,7 +95,7 @@ F & T \\
 
 The next method of combining mathematical statements is slightly more subtle than the preceding ones.
 It is connected to the notion of logical implication.
-The \emph{conditional} from $P$ to $Q$, denoted $P \rightarrow Q$, is mathematically true if it is not the case that $P$ is true and $Q$ is false.
+The \defn{logic}{conditional} from $P$ to $Q$, denoted $P \rightarrow Q$, is mathematically true if it is not the case that $P$ is true and $Q$ is false.
 The precise definition of $P \rightarrow Q$ is given in the truth table
 \begin{center}
 \begin{tabular}{|c|c|c|}
@@ -101,14 +111,14 @@ F & F & T \\
 \end{center}
 Although it may seem strange at first glance, this truth table is universally accepted by mathematicians.
 It is important to get used to it.
-Logicians draw a firm distinction between the \emph{conditional connective} and the \emph{implication relation}.
+Logicians draw a firm distinction between the \defn{logic}{conditional connective} and the \defn{logic}{implication relation}.
 These logicians use the phrase ``if $P$ then $Q$'' for the conditional connective and the phrase ``$P$ implies $Q$'' for the implication relation.
 They explain the difference between these two forms by saying that the conditional is the contemplated relation, while the implication is the asserted relation.
 We will discuss this distinction in the Section~\ref{section:Relations}, where we formally study relations between statements.
 The importance and soundness of the conditional form $P \rightarrow Q$ will become clearer then.
 
-Finally, the logical \emph{biconditional} is an operator connecting two logical propositions that is true if the statements are both true or both false, and it is false otherwise.
-The \emph{biconditional} from $P$ to $Q$, denoted $P \leftrightarrow Q$, is precisely defined by
+The logical \defn{logic}{biconditional} is an operator connecting two logical propositions that is true if the statements are both true or both false, and it is false otherwise.
+The biconditional from $P$ to $Q$, denoted $P \leftrightarrow Q$, is precisely defined by
 \begin{center}
 \begin{tabular}{|c|c|c|}
 \hline
@@ -122,7 +132,7 @@ F & F & T \\
 \end{tabular}
 \end{center}
 We read $P \leftrightarrow Q$ as ``$P$ if and only if $Q$.''
-The phrase ``if and only if'' is often abbreviated as ``iff.''
+The phrase ``if and only if'' is often abbreviated as ``iff''.
 
 Using the five basic operations defined above, it is possible to form more complicated compound statements.
 We sometime need parentheses to avoid ambiguity in writing compound statements.
@@ -154,7 +164,7 @@ F & F & F & F & T & F & T & F & T & T \\
 %\end{example}
 
 We conclude this section with a brief mention of two important concepts.
-A \emph{tautology} is a statement that is true in every valuation of its propositional variables, independent of the truth values assigned to these variables.
+A \defn{logic}{tautology} is a statement that is true in every valuation of its propositional variables, independent of the truth values assigned to these variables.
 The proverbial tautology is $P \vee \neg P$,
 \begin{center}
 \begin{tabular}{|c|ccc|}
@@ -169,7 +179,7 @@ F & F & T & T \\
 \end{center}
 For instance, the statement ``The Aggies won their last football game or the Aggies did not win their last football game'' is true regardless of whether the Aggies actually defeated their latest opponent.
 
-The negation of a tautology is a \emph{contradiction}, a statement that is necessarily false regardless of the truth values of its propositional variables.
+The negation of a tautology is a \defn{logic}{contradiction}, a statement that is necessarily false regardless of the truth values of its propositional variables.
 The statement $P \wedge \neg P$ is a contradiction, and its truth table is
 \begin{center}
 \begin{tabular}{|c|ccc|}
@@ -204,7 +214,7 @@ Another example of a meta-statement is ``the statement `Fred is an Aggie and Fre
 These two examples illustrate how meta-statements describe the relationship between statements.
 It is also instructive to note that implications and equivalences are the meta-statements analogs of conditionals and biconditionals.
 
-The logical implication can be intuitively described as $P$ implies $Q$ if necessarily $Q$ is true whenever $P$ is true.
+A \defn{logic}{logical implication} can be intuitively described as $P$ implies $Q$ if $Q$ must be true whenever $P$ is true.
 That is, $Q$ cannot be false if $P$ is true.
 Necessity is the key aspect of this sentence, the fact that $P$ and $Q$ both happen to be true cannot be coincidental.
 To have $P$ implies $Q$, we need the conditional $P \rightarrow Q$ to be true under all possible circumstances.
@@ -260,8 +270,10 @@ Column~11 has the truth values for statement \eqref{equation:HypotheticalSyllogi
 Since \eqref{equation:HypotheticalSyllogism} is true under all circumstances, it is a tautology and the implication holds.
 Showing that the other relations are valid is left to the reader as an exercise.
 
-Logical implications are not always reversible.
-For instance, although $(P \rightarrow Q) \wedge (Q \rightarrow P)$ implies $P \rightarrow Q$, the converse is not true.
+Reversing the arrow in a conditional statement gives the \defn{logic}{converse} of that statement.
+For example, the statement $Q \rightarrow P$ is the converse of $P \rightarrow Q$.
+This reversal may not preserve the truth of the statement though and therefore logical implications are not always reversible.
+For instance, although $(P \rightarrow Q) \wedge (Q \rightarrow R)$ implies $P \rightarrow R$, the converse is not always true.
 It can easily be shown from columns~9~\&~10 above that
 \begin{equation*}
 (P \rightarrow R) \rightarrow ((P \rightarrow Q) \wedge (Q \rightarrow R))
@@ -269,7 +281,7 @@ It can easily be shown from columns~9~\&~10 above that
 is not a tautology.
 That is, $P \rightarrow R$ certainly does not imply $(P \rightarrow Q) \wedge (Q \rightarrow R)$.
 
-A logical implication that is reversible is called an equivalence.
+A logical implication that is reversible is called a \defn{logic}{logical equivalence}.
 More precisely, $P$ is equivalent to $Q$ if the statement $P \leftrightarrow Q$ is a tautology.
 We denote the sentence ``$P$ is equivalent to $Q$'' by simply writing ``$P \Leftrightarrow Q$.''
 It is easily seen that $P \Leftrightarrow Q$ holds if and only if $P \Rightarrow Q$ and $Q \Rightarrow P$ are both true.
@@ -299,16 +311,14 @@ The first equivalence in this list, $\neg (\neg P) \Leftrightarrow P$, may appea
 However, from the point of view of constructing mathematical proofs, this equivalence is frequently employed.
 Indeed, one method to prove that statement $P$ is true is to hypothesize that $\neg P$ is true and then derive a contradiction.
 It then follows that $\neg P$ is false, which implies that $P$ is true.
-This popular technique is called \emph{proof by contradiction}.
+This popular technique is called \defn{logic}{proof by contradiction}.
 It is illustrated below through a classic example.
 
-The equivalence $P \leftarrow Q \Leftrightarrow \neg Q \leftarrow \neg P$ is also frequently used in constructing mathematical proofs.
-Given a conditional statement of the form $P \rightarrow Q$, we call $\neg Q \rightarrow \neg P$ the \emph{contrapositive} of the original statement.
-
-
+Given a conditional statement of the form $P \rightarrow Q$, we call $\neg Q \rightarrow \neg P$ the \defn{logic}{contrapositive} of the original statement.
+The equivalence $P \rightarrow Q \Leftrightarrow \neg Q \rightarrow \neg P$ is also frequently used in constructing mathematical proofs.
 \subsection{Fallacious Arguments}
 
-A \emph{fallacy} is a component of an argument that is demonstrably flawed in its logic or form, thus rendering the argument invalid.
+A \defn{logic}{fallacy} is a component of an argument that is demonstrably flawed in its logic or form, thus rendering the argument invalid.
 Recognizing fallacies in mathematical proofs may be difficult since arguments are often structured using convoluted patterns that obscure the logical connections between assertions.
 We give below examples for three types of fallacies that are often found in attempted mathematical proofs.
 
@@ -332,14 +342,14 @@ Therefore, Yao Ming scores a lot of points.
 Quantifiers are of paramount importance in rigorous proofs.
 They are employed to make statements about collections of elements.
 Universal quantification is used to formalize the notion that a statement is true for all possible values of a collection.
-The \emph{universal quantifier} is typically denoted by $\forall$ and it is informally read ``for all.''
+The \defn{logic}{universal quantifier} is typically denoted by $\forall$ and it is informally read ``for all.''
 Let $U$ be a specific collection of elements, and let $P(x)$ be a statement that applies to $x$.
 Then the statement $\forall x \in U, P(x)$ is true if $P(x)$ is true for all values of $x$ in $U$.
-The other type of quantifier often encountered in mathematical proofs is the \emph{existential quantifier}, denoted $\exists$.
+The other type of quantifier often encountered in mathematical proofs is the \defn{logic}{existential quantifier}, denoted $\exists$.
 The statement $\exists x \in U, P(x)$ is true if $P(x)$ is true for at least one value of $x$ in $U$.
 
-In mathematics, a \emph{free variable} is a notation for a place or places in an expression into which some definite substitution may take place, or with respect to which some operation (e.g. quantification) may take place. 
-A \emph{bound variable} is a variable for which we have no ability to choose the value.
+In mathematics, a \textbf{free variable} is a notation for a place or places in an expression into which some definite substitution may take place, or with respect to which some operation (e.g. quantification) may take place. 
+A \textbf{bound variable} is a variable for which we have no ability to choose the value.
 
 
 \section{Strategies for Proofs}
@@ -355,10 +365,10 @@ Yet, it is essential that you understand the underlying logic behind the derivat
 
 True statements in mathematics have different names.
 They can be called theorems, propositions, lemmas, corollaries and exercises.
-A \emph{theorem} is a statement that can be proved on the basis of explicitly stated or previously agreed assumptions.
-A \emph{proposition} is a statement not associated with any particular theorem; this term sometimes connotes a statement with a simple proof.
-A \emph{lemma} is a proven proposition which is used as a stepping stone to a larger result rather than an independent statement in itself.
-A \emph{corollary} is a mathematical statement which follows easily from a previously proven statement, typically a mathematical theorem. 
+A \defn{logic}{theorem} is a statement that can be proved on the basis of explicitly stated or previously agreed assumptions.
+A \defn{logic}{proposition} is a statement not associated with any particular theorem; this term sometimes connotes a statement with a simple proof.
+A \defn{logic}{lemma} is a proven proposition which is used as a stepping stone to a larger result rather than an independent statement in itself.
+A \defn{logic}{corollary} is a mathematical statement which follows easily from a previously proven statement, typically a mathematical theorem. 
 The distinction between these names and their definitions is somewhat arbitrary.
 Ultimately, they are all synonymous to a true statement.
 
@@ -371,20 +381,22 @@ One way to learn to construct proofs is to read a lot of well written proofs, to
 
 \paragraph{Direct Proof:}
 
-The simplest form of proof for an implication $P \rightarrow Q$ is the \emph{direct proof}.
+The simplest form of proof for an implication $P \rightarrow Q$ is the \textbf{direct proof}.
 First assume that $P$ is true.
 Produce a series of steps, each one following from the previous ones, that eventually leads to conclusion $Q$.
 It warrants the name "direct proof" only to distinguish it from other, more intricate, methods of proof.
 
 \paragraph{Proof by Contrapositive:}
 A proof by contrapositive takes advantage of the mathematical equivalence $P \rightarrow Q \Leftrightarrow \neg Q \rightarrow \neg P$.
-That is, a proof by contrapositive begins by assuming that $\neg Q$ is true.
-A series of implications then leads to the conclusion that $\neg P$ must also be true.
-It follows that if $P$ is true then $\neg Q$ is false, which implies that $Q$ must be true.
+That is, a proof by contrapositive begins by assuming that $Q$ is false (i.e., $\neg Q$ is true).
+Then produces a series of direct implications then leads to the conclusion that $P$ is false (i.e., $\neg P$ is true).
+It follows that $Q$ cannot be false when $P$ is true, so $P \rightarrow Q$.
 
 \paragraph{Proof by Contradiction:}
 A proof by contradiction is based on the mathematical equivalence $\neg (P \rightarrow Q) \Leftrightarrow P \wedge \neg Q$.
-In a proof by contradiction, it is shown that if some statement were false, a logical contradiction occurs, hence the statement must be true.
+In a proof by contradiction, one starts by assuming that both $P$ and $\neg Q$ are true.
+Then, a series of direct implications are given that lead to a logical contradiction.
+Hence, $P \wedge \neg Q$ cannot be true and $P \rightarrow Q$.
 
 \begin{example} \label{example:SquareRoot2}
 We wish to show that $\sqrt{2}$ is an irrational number.
@@ -411,46 +423,210 @@ The contrapositive of this statement is ``If $\sqrt{2}$ cannot be expressed as a
 Above, we proved that $\sqrt{2}$ cannot be expressed as an irreducible fraction and therefore $\sqrt{2}$ is not a rational number.
 \end{example}
 
+\section{Set Theory}
 
-\newpage
-\section{Other Stuff}
+Set theory is generally considered to be the foundation of all modern mathematics.
+This means that most mathematical objects (numbers, relations, functions, etc.) are defined in terms of sets.
+Unfortunately for engineers, set theory is not quite as simple as it seems.
+It turns out that simple approaches to set theory include paradoxes (e.g., statements which are both true and false).
+These paradoxes can be resolved by putting set theory in a firm axiomatic framework, but that exercise is rather unproductive for engineers.
+Instead, we adopt what is called \defn{set theory}{naive set theory} which rigorously defines the operations of set theory without worrying about possible contradictions.
+This approach is quite sufficient for most of mathematics and also acts as a stepping-stone to more formal treatments.
 
+A \defn{set theory}{set} is any collection of objects, mathematical or otherwise.
+For example, we can think of the set of all books published in 2007.
+The objects in a set are referred to as \defn{set theory}{elements} or members of the set.
+The logical statement ``$a$ is a member of the set $A$'' is written
+\[ a \in A. \]
+Likewise, its logical negation ``$a$ is not a member of the set $A$'' is written $a \notin A$.
+Therefore, exactly one of these two statements is true.
 
-ECEN 601 is a transition course that intends to bridges the computational concepts typical of an undergraduate curriculum in electrical and computer engineering and the rigorous mathematical arguments used in theoretical research.
-Its purpose is to make advance mathematics accessible to students in electrical and computer engineering, and to provide them with a solid basis upon which to build their graduate work.
+One may present a set by listing its elements.
+For example, $A= \{ a,e,i,o,u \}$ is the set of standard English vowels.
+It is important to note that the order elements are presented is irrelevant and the set $\{ i,o,u,a,e \}$ is the same as $A$.
+Likewise, repeated elements have no effect and the set $\{ a,e,i,o,u,e,o \}$ is the same as $A$.
+A \defn{set theory}{singleton} set is a set containing exactly one element such as $\{a\}$.
 
-The course is divided into three parts:
+There are a number of standard sets worth mentioning: the integers $\mathbb{Z}$, the real numbers $\mathbb{R}$, and the complex numbers $\mathbb{C}$.
+It is possible to construct these sets in a rigorous manner, but instead we will assume their meaning is intuitively clear.
+New sets can be defined in terms of old sets using \defn{set theory}{set-builder notation}.
+Let $P(x)$ be a logical statement about objects $x$ in the set $X$, then the ``set of elements in $X$ such that $P(x)$ is true'' is denoted by
+\[ \{ x\in X | P(x) \}. \]
+For example, the set of even integers is given by
+\[ \{ x\in \mathbb{Z} | \textrm{``}x\textrm{ is even''} \} = \{ \ldots,-4,-2,0,2,4,\ldots \}. \]
+If no element $x\in X$ satisfies the condition, then the result is the \defn{set theory}{empty set} which is denoted $\emptyset$.
+Using set-builder notation, we can also define the natural numbers $\mathbb{N}$ and the rational numbers $\mathbb{Q}$ with
+\begin{align*}
+\mathbb{N} & = \{ n\in \mathbb{Z} | n\geq 1 \} \\
+\mathbb{Q} & = \{ q\in \mathbb{R} | q=a/b, a\in \mathbb{Z}, b\in \mathbb{N} \}.
+\end{align*}
+The following standard notation is used for interval subsets of the real numbers:
+\begin{align*}
+\textrm{Open interval:} \; &  (a,b) \triangleq \{ x\in \mathbb{R} | a<x<b \} \\
+\textrm{Closed interval:} \; & [a,b] \;\;\!\! \triangleq \{ x\in \mathbb{R} | a \leq x \leq b \} \\
+\textrm{Half-open intervals:} \; & (a,b] \;\! \triangleq \{ x\in \mathbb{R} | a < x \leq b \} \\
+& [a,b) \;\! \triangleq \{ x\in \mathbb{R} | a \leq x < b \}
+\end{align*}
 
-Both engineering intuition and facility with writing proofs can be developed with practice.
+There are also some standard relations defined between any two sets $A,B$.
+\begin{definition}
+We say that $A$ \textbf{equals} $B$ (denoted $A=B$) if $x\in A$ implies $x\in B$ and $x\in B$ implies $x\in A$.
+This means that
+\[ A=B \Leftrightarrow (x\in A)\leftrightarrow (x\in B). \]
+\end{definition}
 
-Proofs are used to validate intuitive ideas about engineering systems.
+\begin{definition}
+We say that $A$ is a \defn{set theory}{subset} of $B$ (denoted $A\subseteq B$) if $x\in A$ implies $x\in B$.
+This means that
+\[ A\subseteq B  \Leftrightarrow (x\in A)\rightarrow (x\in B). \]
+It is a \textbf{proper subset} (denoted $A\subset B$) if $A\subseteq B$ and $A\neq B$.
+\end{definition}
 
-Like music and art, theoretical engineering is learned by doing, not just by reading texts and listening to lectures.
+There are also a number of operations between sets.
+Let $A,B$ be any two sets.
+\begin{definition}
+The \defn{set theory}{union} of $A$ and $B$ (denoted $A\cup B$) is the set of elements in either $A$ or $B$.
+This means that $A \cup B = \{ x\in A \textrm{ or } x\in B \}$ is also defined by
+\[ x\in A\cup B \Leftrightarrow (x\in A)\vee (x\in B). \]
+\end{definition}
 
-Doing the exercises is the best way to get a feel for the material, test your understanding and see what needs further study.
-It is important that you try to do the exercises by yourself prior to discussing with other students or your instructor.
-Once solved, problems often appear much easier than they really are.
-Testing your knowledge during exams is a dangerous proposition.
+\begin{definition}
+The \defn{set theory}{intersection} of $A$ and $B$ (denoted $A\cap B$) is the set of elements in both $A$ and $B$.
+This means that $A\cap B = \{x\in A | x\in B \}$ is also defined by
+\[ x\in A\cap B \Leftrightarrow (x\in A)\wedge (x\in B). \]
+Two sets are said to be \defn{set theory}{disjoint} if $A\cap B = \emptyset$.
+\end{definition}
 
-In this book we decided to take a good thing and make it better, adding the symbol $\triangle$ to the end of a definition, the symbol $\diamond$ for the end of an example.
+\begin{definition}
+The \defn{set theory}{set difference} between $A$ and $B$ (denoted $A-B$ or $A \setminus B$) is the set of elements in $A$ but not in $B$
+This means that
+\[ x\in A-B \Leftrightarrow (x\in A)\wedge (x\notin B). \]
+If there is some implied universal set $U$, then the \defn{set theory}{complement} (denoted $A^c$) is defined by $A^c = U-A$
+\end{definition}
 
-Physical sloppiness is often a sign of either laziness or disrespect, and sloppiness in writing style is often a mask for sloppy thinking.
+One can apply De Morgan's Law in set theory to see that
+\begin{align*}
+(A \cup B)^c & = A^c \cap B^c \\
+(A \cap B)^c & = A^c \cup B^c,
+\end{align*}
+to interchange union (or intersection) with set difference.
 
+\begin{example}[\defn{set theory}{Russell's Paradox}]
+Let $R$ be the set of all sets that do not contain themselves or $R = \{S|S\notin S\}$.
+The paradox arises from the fact that the definition implies the logical contradiction $R\in R \Leftrightarrow R\notin R$.
+\end{example}
 
-Functional knowledge,
-but can you prove it?
+Another way to build sets is by grouping elements into pairs, triples, and vectors.
+\begin{definition}
+The \defn{set theory}{Cartesian Product} (denoted $A\times B$) of two sets is the set of ordered pairs $\{(a,b) | a\in A, b\in B\}$.
+For $n$-tuples taken from the same set, the notation $A^n$ denotes the $n$-fold product $A\times A \times \cdots \times A$.
+\end{definition}
+\begin{example}
+If $A  = \{ a,b \}$, then the set of all 3-tuples from $A$ is given by 
+\begin{equation*}
+A^3 = \{ (a,a,a),(a,a,b),(a,b,a),(a,b,b),(b,a,a),(b,a,b),(b,b,a),(b,b,b) \}.
+\end{equation*}
+\end{example}
+The countably infinite product of $X$ is associated with infinite sequences on $X$ and is denoted either by $X^\infty$ or $X^\omega$.
 
-A statement is something that can be verified, it has to be either true or false.
-We will be making two assumptions when dealing with statements: every statement is either true or false, and no statement is both true and false.
-One of the consequences of this law is that if a statement is not false, then it must be true.
-Hence, to prove that something is true, it would suffice to show that it is not false.
+One can also formalize relationships between elements of a set.
+A \textbf{relation} $\sim$ between elements of the set $A$ is defined by the pairs $(x,y)\in A\times A$ for which the relation holds.
+Specifically, the relation is defined by the subset of ordered pairs $E\subseteq A\times A$ where the relation $a\sim b$ holds; so $x\sim y$ iff $(x,y)\in E$.
+A relation on $A$ is said to be:
+\begin{enumerate}
+\item Reflexive if $x\sim x$ holds for all $x\in A$
+\item Symmetric if $x\sim y$ implies $y\sim x$ for all $x,y\in A$
+\item Transitive if $x\sim y$ and $y\sim z$ implies $x\sim z$ for all $x,y,x\in A$
+\end{enumerate}
 
-"Write a computer program."
-"Eat a pineapple"
+A relation is called an \defn{set theory}{equivalence relation} if it is reflexive, symmetric, and transitive.
+For example, let $A$ be a set of people and $P(x,y)$ be the statement ``$x$ has the same birthday as $y$''.
+Then, we can define $\sim$ such that $a\sim b$ holds iff $P(x,y)$ is true.
+In this case, the set $E$ is given by $E = \{ (x,y)\in A\times A | P(x,y) \}$.
+One can verify that it is an equivalence relation by checking that it is reflexive, symmetric, and transitive.
 
-What makes statement valuable for our purposes is that there are a number of ways of forming new statements from old ones.
+One important characteristic of an equivalence relation is that it partitions the entire set $A$ into disjoint \defn{set theory}{equivalence classes}.
+In fact, there is a natural equivalence relation defined by any disjoint partition of a set.
+For example, let $A_{i,j}$ be the set of people in $A$ whose birthday was on the $j$-th day of the $i$-th month.
+It follows that $x\sim y$ iff there exists a single $i,j$ such that $x,y\in A_{i,j}$.
+In this case, the equivalence classes can be associated with the days of the year.
 
-In literary writing, some measure of ambiguity is often acceptable, and sometime valuable.
-In mathematics, by contrast, precision is key; ambiguity is to be avoided at all cost.
-When using a mathematical term, always stick to the precise mathematical definition, regardless of any other colloquial usage.
+\section{Functions}
+
+In elementary mathematics, functions are typically described in terms of graphs and formulas.
+The drawback of this approach is that one tends to picture only ``nice'' functions.
+In fact, Cauchy himself published in 1821 an incorrect proof of the false assertion that ``a sequence of continuous functions that converges everywhere has a continuous limit function''.
+Nowadays, every teacher warns his students that one must be careful because the world is filled with not so ``nice'' functions.
+
+\index{functions}
+The modern approach to defining functions is based on set theory.
+A \textbf{function} $f: X\rightarrow Y$ is a rule that assigns a single value $f(x)\in Y$ to each element $x\in X$.
+The notation $f: X \rightarrow Y$ is used to emphasize the role of the \defn{functions}{domain} $X$ and the \defn{functions}{codomain} $Y$.
+The \emph{range} of $f$ is the subset of $Y$ which is actually achieved by $f$ or  $\{f(x) \in Y | x\in X \}$.
+Since the term codomain is somewhat uncommon, people often use the term range instead of codomain either intentionally (for simplicity) or unintentionally (due to confusion).
+\begin{definition}
+Formally, a \textbf{function} $f: X \rightarrow Y$ from $X$ to $Y$ is defined by a subset $F \subset X \times Y$ such that $A_x = \{ y\in Y | (x,y)\in F \}$ has exactly one element for each $x\in X$.
+The \textbf{value} of $f$ at $x\in X$, denoted $f(x)$, the unique element of $Y$ contained in $A_x$.
+\end{definition}
+
+Two functions are said to be equal if they have the same domain, codomain, and value for all elements of the domain.
+A function $f$ is called:
+\begin{enumerate}
+\item \defn{functions}{one-to-one} or \defn{functions}{injective} if $f(x)=f(x')$ implies that $x=x'$
+\item \defn{functions}{onto} or \defn{functions}{surjective} if its range $\{ f(x) | x\in X\}$ equals $Y$
+\item a \defn{functions}{one-to-one correspondence} or \defn{functions}{bijective} if it is both one-to-one and onto
+\end{enumerate}
+A bijective function $f: X\rightarrow Y$ has a unique \defn{functions}{inverse function} $f^{-1} : Y\rightarrow X$ such that $f^{-1}(f(x)) = x$ for all $x\in X$ and $f(f^{-1}(y)) = y$ for all $y\in Y$.
+In fact, any one-to-one function $f: X\rightarrow Y$ can be transformed into bijective function $g: X \rightarrow R$ with $g(x)=f(x)$ by shrinking its codomain $Y$ down to its range $R$.
+
+Functions can also be applied to sets in a natural way.
+For a function $f: X\rightarrow Y$ and subset $A\subseteq X$, the \defn{functions}{image} of $A$ under $f$ is
+\[ f(A) \triangleq \{ y\in Y | \exists x\in A \textrm{ s.t. } f(x)=y\} = \{f(x) | x\in A\}. \]
+Using this definition, we see that the range of $f$ is simply $f(X)$.
+One benefit of allowing functions to have set-valued images is that a set-valued inverse function always exists.
+The \defn{functions}{inverse image} or \defn{functions}{preimage} of a subset $B\subseteq Y$ is
+\[ f^{-1}(B) \triangleq \{ x\in X | f(x)\in B\}. \]
+For a one-to-one function $f$, the inverse image of any singleton set $\{ f(x) \}$ is the singleton set $\{ x \}$.
+It is worth noting that the notation $f^{-1}(B)$ for the preimage of $B$ can be somewhat misleading because, in some cases, $f^{-1}(f(A)) \neq A$.
+In general, one has instead that $f(f^{-1}(B)) \subseteq B$ and $f^{-1}(f(A)) \supseteq A$.
+
+\begin{example}
+Let the function $f: \mathbb{R} \rightarrow \mathbb{R}$ be defined by $f(x)=x^2$. Let $A=[1,2]$ and $B = f(A) = [1,4]$.  Then,
+\[ f^{-1}(B) = f^{-1}([1,4]) = [-2,-1] \cup [1,2] \supseteq A. \]
+\end{example}
+\begin{example}
+Let the function $f: \mathbb{R} \rightarrow \mathbb{R}$ be defined by $f(x)=x^2+1$. Let $B=[0,2]$ and $A = f^{-1}(B) = [-1,1]$.  Then,
+\[ f(A) = f([-1,1]) = [1,2] \subseteq B. \]
+\end{example}
+
+\begin{problem}
+\label{problem:SetFunctionInverse}
+Let $f:X\rightarrow Y$, $A\subseteq X$, and $B\subseteq Y$.
+Using the rules
+\begin{align*}
+(a) & \; x \in A \Rightarrow f(x) \in f(A) &
+(b) & \; y \in f(A) \Rightarrow \exists x\in A \textrm{ s.t. } f(x)=y \\
+(c) & \; x\in f^{-1}(B) \Rightarrow f(x) \in B &
+(d) & \; f(x) \in B \Rightarrow x\in f^{-1}(B),
+\end{align*}
+show that $f^{-1}(f(A)) \supseteq A$ and $f(f^{-1}(B)) \subseteq B$.
+\end{problem}
+\noindent \textbf{S~\ref{problem:SetFunctionInverse}.}
+The first result follows from
+\[ x\in A \; \stackrel{(a)}{\Rightarrow} \; f(x)\in f(A) \; \stackrel{(d)}{\Rightarrow} \; x\in f^{-1}(f(A)), \]
+and the definition of subset.
+The second result follows from
+\[ y\in f(f^{-1}(B)) \stackrel{(b)}{\Rightarrow} \exists x\in f^{-1}(B) \textrm{ s.t. } f(x)=y \, \stackrel{(c)}{\Rightarrow} y\in B, \]
+and the definition of subset.
+
+\begin{problem}
+Let $f: X\rightarrow Y$, $A_i \subseteq X$ for all $i\in I$, and $B_i \subseteq Y$ for all $i\in I$.
+Show that the following expressions hold:
+\begin{align*}
+(1) & \;\;\;\:\, f \left( \bigcup_{i\in I} A_i \right) = \bigcup_{i\in I} f \left( A_i \right) &
+(2) & \;\;\;\:\, f \left( \bigcap_{i\in I} A_i \right) \subseteq \bigcap_{i\in I} f \left( A_i \right) \\
+(3) & \; f^{-1} \left( \bigcup_{i\in I} B_i \right) = \bigcup_{i\in I} f^{-1} \left( B_i \right) &
+(4) & \; f^{-1} \left( \bigcap_{i\in I} B_i \right) = \bigcap_{i\in I} f^{-1} \left( B_i \right). 
+\end{align*}
+\end{problem}
 
