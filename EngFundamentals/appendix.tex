@@ -1,0 +1,126 @@
+\chapter{Optional Topics}
+
+\section{Dealing with Infinity*}
+
+\subsection{The Axiom of Choice}
+
+The \defn{set theory}{axiom of choice}, formulated by Zermelo in 1904, is innocent-looking.
+However, one can prove theorems with its aid that some mathematicians were originally reluctant to accept in the past.
+
+\begin{definition}[The Axiom of Choice]
+Given a collection $\mathcal{X}$ of disjoint nonempty sets, there exists a set $C$ having exactly one element in common with each element of $\mathcal{X}$.
+That is, for each $X \in \mathcal{X}$ the set $C \cap X$ contains a single element.
+\end{definition}
+
+Most mathematicians today accept the axiom of choice as part of the set theory on which they base their mathematics.
+A straightforward consequence of the axiom of choice is the existence of a choice function.
+
+\begin{lemma}[Existence of a Choice Function]
+Given a collection $\mathcal{Y}$ of non-empty sets, there exists a function
+\begin{equation*}
+c: \mathcal{Y}  \rightarrow \bigcup_{Y \in \mathcal{Y}} Y
+\end{equation*}
+satisfying $c(Y) \in Y$ for every $Y \in \mathcal{Y}$.
+\end{lemma}
+\begin{proof}
+The difference between the axiom of choice and the lemma is that in the latter statement the sets of the collection $\mathcal{Y}$ need not be disjoint.
+Given an element $Y \in \mathcal{Y}$, define the set $Y'$ by
+\begin{equation*}
+Y' = \left\{ \left( Y, y \right) | y \in Y \right\}.
+\end{equation*}
+That is, $Y'$ is the collection of all ordered pairs where the first coordinate of the ordered pair is the set $Y$, and the second coordinate is an element of $Y$.
+Because $Y$ contains at least one element, the set $Y'$ is nonempty.
+Furthermore, $Y'$ is a subset of the cartesian product
+\begin{equation*}
+\mathcal{Y} \times \bigcup_{Y \in \mathcal{Y}} Y.
+\end{equation*}
+If $Y_1$ and $Y_2$ are two different sets in $\mathcal{Y}$, then the sets $Y_1'$ and $Y_2'$ are disjoint; specifically, the elements of $Y_1'$ and $Y_2'$ differ at least in their first coordinates.
+
+Consider the collection
+\begin{equation*}
+\mathcal{Z} = \left\{ Y' | Y \in \mathcal{Y} \right\}.
+\end{equation*}
+This is a collection of disjoint nonempty subsets of
+\begin{equation*}
+\mathcal{Y} \times \bigcup_{Y \in \mathcal{Y}} Y.
+\end{equation*}
+By the axiom of choice, there exists a set $Z$ having exactly one element in common with each element of $\mathcal{Z}$.
+Define the function
+\begin{equation*}
+c: \mathcal{Z} \rightarrow
+\mathcal{Y} \times \bigcup_{Y \in \mathcal{Y}} Y
+\end{equation*}
+by $c \left( Y' \right) = Y' \cap Z$.
+This function $c$ implicitly provides the rule for a function from $\mathcal{Y}$ to the set $\bigcup_{Y \in \mathcal{Y}} Y$ such that $y$ belongs to $Y$ whenever $\left( Y, y \right) \in Z$.
+This rule is the desired choice function.
+\end{proof}
+
+
+\subsection{Well-Ordered Sets}
+
+A \defn{set theory}{simple order $<$} on a set $X$ is a relation such that, for all $x, y, z \in X$,
+\begin{enumerate}
+\item if $x \neq y$ then either $x < y$ or $y < x$
+\item if $x < y$ then $x \neq y$
+\item if $x < y$ and $y < z$ then $x < z$.
+\end{enumerate}
+
+\begin{definition}
+A set $X$ with an order relation $<$ is said to be \defn{set theory}{well-ordered} if every nonempty subset of $X$ has a smallest element.
+\end{definition}
+
+The set of natural numbers, for example, is well-ordered.
+On the other hand, the set of integers is not well-ordered.
+
+\begin{fact}[Well-ordering theorem]
+If $X$ is a set, there exists an order relation on $X$ that is a well-ordering.
+\end{fact}
+
+This theorem was proved by Zermelo using the axiom of choice.
+It startled the mathematical community in 1904 and spurred much controversy about the axiom of choice.
+It is given here without a proof.
+
+\begin{corollary}
+There exists an uncountable well-ordered set.
+\end{corollary}
+
+\begin{definition}
+Let $X$ be an ordered set.
+Given $x \in X$, the set
+\begin{equation*}
+Y_x = \left\{ y \in Y | y < x \right\}
+\end{equation*}
+is called the \textbf{section} of $X$ by $x$.
+\end{definition}
+
+\begin{corollary}
+There exists an uncountable well-ordered set, every section of which is countable.
+\end{corollary}
+
+The well-ordering principle is a necessary tool in proofs by induction when the set over which the induction process is applied is not a segment of the natural numbers; this is the so-called transfinite induction.
+
+
+\subsection{The Maximum Principle}
+
+A \defn{set theory}{strict partial order} $\prec$ on a set $X$ is a relation such that for all $x, y, z \in X$
+\begin{enumerate}
+\item if $x \prec y$ then $x \neq y$
+\item if $x \prec y$ and $y \prec z$ then $x \prec z$.
+\end{enumerate}
+
+A strict partial order is similar to a simple order, except that it need not be true that for every distinct $x, y \in X$, either $x \prec y$ or $y \prec x$.
+
+\begin{fact}[The maximum principle]
+Let $X$ be a set and suppose that $\prec$ is a strict partial order on $X$.
+If $Y$ is a subset of $X$ that is simply ordered by $\prec$, then there exists a maximal simply ordered subset $Z$ of $X$ containing $Y$.
+\end{fact}
+
+The maximum principle is given here without a proof.
+It is interesting to note that the well-ordering theorem and the maximum principle are equivalent; either of them implies the other.
+Furthermore, each of them is equivalent to the axiom of choice.
+
+Let $\prec$ be a strict partial order on $X$.
+For $x, y \in X$, the relation $x \preceq y$ holds if $x \prec y$ or $x = y$.
+The relation $\preceq$ so defined is called a \defn{set theory}{partial order} on $X$.
+For example, the inclusion relation $\subset$ on a collection of sets is a partial order, whereas proper inclusion is a strict partial order.
+
