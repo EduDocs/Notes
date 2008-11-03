@@ -2,12 +2,12 @@
 
 \section{Metric Spaces}
 
-\index{metric spaces}
+\index{metric space}
 A \textbf{metric space} is a set that has a well-defined ``distance'' between any two elements of the set.
 Mathematically, the notion of a metric space abstracts a few basic properties of Euclidean space.
 Formally, a metric space $(X,d)$ is a set $X$ and a function $d$ that is a metric on $X$.
 \begin{definition}
-A \defn{metric spaces}{metric} on a set $X$ is a function
+A \defn{metric space}{metric} on a set $X$ is a function
 \begin{equation*}
 d: X \times X \rightarrow \RealNumbers
 \end{equation*}
@@ -20,7 +20,7 @@ that satisfies the following properties,
 \end{definition}
 
 \begin{example}
-Given $\vecnot{x} = (x_1, \ldots, x_n), \vecnot{y} = (y_1, \ldots, y_n) \in \RealNumbers^n$, the \defn{metric spaces}{euclidean metric} $d$ on $\RealNumbers^n$ is defined by the equation
+Given $\vecnot{x} = (x_1, \ldots, x_n), \vecnot{y} = (y_1, \ldots, y_n) \in \RealNumbers^n$, the \defn{metric space}{euclidean metric} $d$ on $\RealNumbers^n$ is defined by the equation
 \begin{equation*}
 d \left( \vecnot{x}, \vecnot{y} \right)
 = \sqrt{ (x_1 - y_1)^2 + \cdots + (x_n - y_n)^2 }.
@@ -48,9 +48,9 @@ Show that $\bar{d}$ is also a metric.
 \end{problem}
 
 Let $(X,d)$ be a metric space.
-Then, elements of $X$ are called \defn{metric spaces}{points} and the number $d(x,y)$ is called the \defn{metric spaces}{distance} between $x$ and $y$.
+Then, elements of $X$ are called \defn{metric space}{points} and the number $d(x,y)$ is called the \defn{metric space}{distance} between $x$ and $y$.
 Let $\epsilon > 0$ and consider the set $B_d(x,\epsilon) = \left\{ y \in X | d(x,y) < \epsilon \right\}$.
-This set is called the \defn{metric spaces}{$d$-open ball} of radius $\epsilon$ centered at $x$.
+This set is called the \defn{metric space}{$d$-open ball} of radius $\epsilon$ centered at $x$.
 
 \begin{problem}
 Suppose $a \in B_d(x, \epsilon)$ with $\epsilon > 0$.
@@ -61,17 +61,17 @@ One of the main benefits of having a metric is that it provides some notion of `
 This alows one to discusss limits, convergence, open sets, and closed sets.
 
 \begin{definition}
-A \defn{metric spaces}{sequence} of elements from a set $X$ is an infinite list $x_1,x_2,\ldots$ where $x_i \in X$ for all $i\in \mathbb{N}$.
+A \defn{metric space}{sequence} of elements from a set $X$ is an infinite list $x_1,x_2,\ldots$ where $x_i \in X$ for all $i\in \mathbb{N}$.
 Formally, a sequence is equivalent to a function $f: \mathbb{N} \rightarrow X$ where $x_i = f(i)$ for all $i\in \mathbb{N}$.
 \end{definition}
 
 \begin{definition}
 Consider a sequence $x_1, x_2, \ldots$ of points in a metric space $(X,d)$.
-This sequence \defn{metric spaces}{$d$-converges} to $x\in X$ if, for any $\epsilon >0$, there is natural number $N$ such that $d(x,x_n) < \epsilon$ for all $n>N$.
+This sequence \defn{metric space}{$d$-converges} to $x\in X$ if, for any $\epsilon >0$, there is natural number $N$ such that $d(x,x_n) < \epsilon$ for all $n>N$.
 \end{definition}
 
 \begin{definition}
-A sequence $x_1,x_2,\ldots$ in $(X,d)$ is a \defn{metric spaces}{Cauchy sequence} if, for any $\epsilon >0$, there is a natural number $N$ (depending on $\epsilon$) such that, for all $m,n > N$,
+A sequence $x_1,x_2,\ldots$ in $(X,d)$ is a \defn{metric space}{Cauchy sequence} if, for any $\epsilon >0$, there is a natural number $N$ (depending on $\epsilon$) such that, for all $m,n > N$,
 \begin{equation*}
 d \left( x_m, x_n \right) < \epsilon.
 \end{equation*}
@@ -89,7 +89,7 @@ Therefore, $x_1,x_2,\ldots$ is a Cauchy sequence.
 
 \begin{definition}
 Let $W$ be a subset of a metric space $(X,d)$.
-The set $W$ is called \defn{metric spaces}{$d$-open} if, for every $w\in W$, there is an $\epsilon>0$ such that $B_d (w,\epsilon) \subseteq W$.
+The set $W$ is called \defn{metric space}{$d$-open} if, for every $w\in W$, there is an $\epsilon>0$ such that $B_d (w,\epsilon) \subseteq W$.
 \end{definition}
 
 \begin{theorem}
@@ -123,7 +123,7 @@ Using the definition of $d$-closed, one can apply De Morgan's Laws to Theorem \r
 
 \begin{definition}
 Suppose $f: X \rightarrow Y$ is a function from the metric space $(X,d_X)$ to the metric space $(Y,d_Y)$.
-Then, $f$ is \defn{metric spaces}{$d$-continuous} at $x_0$ if, for any $\epsilon> 0$, there is a $\delta >0$ such that 
+Then, $f$ is \defn{metric space}{$d$-continuous} at $x_0$ if, for any $\epsilon> 0$, there is a $\delta >0$ such that 
 \[ d_Y \left( f(x_0),f(x) \right) < \epsilon\]
 for all $x\in X$ such that $d_X(x_0,x)< \delta$.
 \end{definition}
@@ -403,4 +403,34 @@ The elements $r \in \RealNumbers$, which are equivalence classes of Cauchy seque
 Let $X$ be a metrizable space.
 The space $X$ is said to be \defn{topology}{complete} if every Cauchy sequence in $X$ converges to a limit $x \in X$.
 \end{definition}
+
+\begin{definition}
+Let $A$ be a closed subset of complete metric space $(X,d)$ and $f: X \rightarrow X$ be a function.
+The function $f$ is a \defn{metric space}{contraction} on $A$ if $d \left( f(x),f(y) \right) \leq \gamma  d(x,y)$ for all $x,y\in X$ and some $\gamma \in [0,1)$.
+\end{definition}
+
+\begin{theorem}[Contraction Mapping Theorem]
+Let $(X,d)$ be a metric space and $f$ be contraction on $A \subseteq X$.
+Then, $f$ has a unique fixed point $x^*$ on $A$ such that $f(x^*) = x^*$.
+Moreover, the sequence $x_{n+1} = f(x_n)$ converges to $x^*$ if $x_1 \in A$ and $f(x_1) \in A$.
+\end{theorem}
+\begin{proof}
+Suppose $f$ has two fixed points $y,z\in A$.
+Then, $d(y,z) = d \left(f(y),f(z) \right) \leq \gamma  d(y,z)$ and $d(y,z) = 0$ because $\gamma \in [0,1)$.
+This shows that $y=z$ and any two fixed points in $A$ must be identical.
+
+Using induction, it is easy to see that $d(x_n,x_{n+1}) \leq \gamma^{n-1} d(x_1,x_2)$.
+From this, we can bound the distance between $x_m$ and $x_n$ (for $m<n$) with
+\begin{align*}
+d(x_m,x_n)
+& \leq d(x_m,x_{m+1}) + d(x_{m+1},x_n) \\
+& \leq \sum_{i=m}^{n-1} d(x_i,x_{i+1}) \\
+& \leq \sum_{i=m}^{n-1} \gamma^{i-1} d(x_1,x_2) \\
+& \leq \sum_{i=m}^\infty \gamma^{i-1} d(x_1,x_2) \\
+& \leq \frac{\gamma^{m-1}}{1-\gamma} d(x_1,x_2).
+\end{align*}
+The sequence $x_n$ is Cauchy because $d(x_m,x_n)$ can be made arbitrarily small (for all $n>m$) by increasing $m$.
+Since $(X,d)$ is complete, it must converge to a fixed point and $x^*$ is the unique fixed point in $A$.
+\end{proof}
+
 

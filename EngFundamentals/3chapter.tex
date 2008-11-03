@@ -1,5 +1,242 @@
 \chapter{Representations and Approximations}
 
+\section{Best Approximation}
+
+In essence, the Gram-Schmidt process is a sequence of orthogonal projections.
+Orthogonal projections are very useful in many context.
+
+Suppose $W$ is a subspace of an inner-product space $V$, and let $\vecnot{v}$ be an arbitrary vector in $V$.
+Consider the problem of finding a vector $\vecnot{w} \in W$ such that $\left\| \vecnot{v} - \vecnot{w} \right\|$ is minimized.
+The vector $\vecnot{w} \in W$ is a \defn{inner-product space}{best approximation} to $\vecnot{v} \in V$ if
+\begin{equation*}
+\left\| \vecnot{v} - \vecnot{w} \right\| \leq \left\| \vecnot{v} - \vecnot{w}' \right\|
+\end{equation*}
+for every vector $\vecnot{w}' \in W$.
+
+\begin{theorem} \label{theorem:OrthogonalProjection}
+Suppose $W$ is a subspace of an inner-product space $V$, and let $\vecnot{v}$ be a vector in $V$.
+\begin{enumerate}
+\item The vector $\vecnot{w} \in W$ is a best approximation of $\vecnot{v} \in V$ by vectors in $W$ if and only if $\vecnot{v} - \vecnot{w}$ is orthogonal to every vector in $W$.
+\item If a best approximation to $\vecnot{v} \in V$ by vectors in $W$ exists, it is unique.
+\item If $W$ is finite-dimensional and $\vecnot{w}_1, \ldots, \vecnot{w}_n$ is an orthogonal basis for $W$, then
+\begin{equation*}
+\vecnot{w} = \sum_{i=1}^n \frac{ \left\langle \vecnot{v} | \vecnot{w}_i \right\rangle }{ \left\| \vecnot{w}_i \right\|^2 } \vecnot{w}_i
+\end{equation*}
+is the best approximation to $\vecnot{v}$ by vectors in $W$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+Let $\vecnot{w} \in W$ and suppose $\vecnot{v} - \vecnot{w}$ is orthogonal to every vector in $W$.
+Let $\vecnot{w}' \in W$ such that $\vecnot{w}' \neq \vecnot{w}$.
+Then $\vecnot{v} - \vecnot{w}' = \left( \vecnot{v} - \vecnot{w} \right) + \left( \vecnot{w} - \vecnot{w}' \right)$ and
+\begin{equation} \label{equation:OrthogonalVector}
+\begin{split}
+\left\| \vecnot{v} - \vecnot{w}' \right\|^2
+&= \left\| \vecnot{v} - \vecnot{w} \right\|^2
++ 2 \Real \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle
++ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 \\
+&= \left\| \vecnot{v} - \vecnot{w} \right\|^2
++ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 \\
+&\geq \left\| \vecnot{v} - \vecnot{w} \right\|^2.
+\end{split}
+\end{equation}
+Conversely, suppose that $\left\| \vecnot{v} - \vecnot{w}' \right\| \geq \left\| \vecnot{v} - \vecnot{w} \right\|$ for every $\vecnot{w}' \in W$.
+From \eqref{equation:OrthogonalVector}, we get
+\begin{equation*}
+2 \Real \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle
++ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 \geq 0
+\end{equation*}
+for all $\vecnot{w}' \in W$.
+Note that every vector in $W$ can be expressed as $\vecnot{w} - \vecnot{w}'$ where $\vecnot{w}' \in W$, it follows that
+\begin{equation} \label{equation:InequalityOrthogonalVectors}
+2 \Real \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w}'' \right\rangle
++ \left\| \vecnot{w}'' \right\|^2 \geq 0
+\end{equation}
+for every $\vecnot{w}'' \in W$.
+If $\vecnot{w}'$ is in $W$ and $\vecnot{w}' \neq \vecnot{w}$ then we may take
+\begin{equation*}
+\vecnot{w}'' = - \frac{ \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 } \left( \vecnot{w} - \vecnot{w}' \right).
+\end{equation*}
+Inequality~\eqref{equation:InequalityOrthogonalVectors} then reduces to the statement
+\begin{equation*}
+- 2 \frac{ \left| \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle \right|^2 }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 }
++ \frac{ \left| \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle \right|^2 }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 }
+\geq 0.
+\end{equation*}
+This inequality holds if and only if $\left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle = 0$.
+Therefore, $\vecnot{v} - \vecnot{w}$ is orthogonal to every vector in $W$.
+Hence the vector $\vecnot{w} \in W$ is a best approximation of $\vecnot{v} \in V$ by vectors in $W$ if and only if $\vecnot{v} - \vecnot{w}$ is orthogonal to every vector in $W$.
+
+Suppose $\vecnot{w}, \vecnot{w}' \in W$ are best approximations of $\vecnot{v}$ by vectors in $W$.
+Then $\left\| \vecnot{v} - \vecnot{w} \right\| = \left\| \vecnot{v} - \vecnot{w}' \right\|$ and \eqref{equation:OrthogonalVector} implies that $\left\| \vecnot{w} - \vecnot{w}' \right\| = 0$.
+That is, if a best approximation exists then it is unique.
+
+Assume that $W$ is finite-dimensional and let $\vecnot{w}_1, \ldots, \vecnot{w}_n$ be an orthonormal basis for $W$.
+Furthermore, let
+\begin{equation*}
+\vecnot{w} = \sum_{i=1}^n \frac{ \left\langle \vecnot{v} | \vecnot{w}_i \right\rangle }{ \left\| \vecnot{w}_i \right\|^2 } \vecnot{w}_i .
+\end{equation*}
+Then $\vecnot{v} -\vecnot{w}$ is orthogonal to $\vecnot{w}_j$ for $j = 1, \ldots, n$, i.e.,
+\begin{equation*}
+\begin{split}
+\left\langle \vecnot{v} - \vecnot{w} | \vecnot{w}_j \right\rangle
+&= \left\langle \vecnot{v} | \vecnot{w}_j \right\rangle
+- \left\langle \sum_{i=1}^n \frac{ \left\langle \vecnot{v} | \vecnot{w}_i \right\rangle }{ \left\| \vecnot{w}_i \right\|^2 } \vecnot{w}_i \Big| \vecnot{w}_j \right\rangle \\
+&= \left\langle \vecnot{v} | \vecnot{w}_j \right\rangle
+- \frac{ \left\langle \vecnot{v} | \vecnot{w}_j \right\rangle }{ \left\| \vecnot{w}_i \right\|^2 } \left\langle \vecnot{w}_j | \vecnot{w}_j \right\rangle
+= 0.
+\end{split}
+\end{equation*}
+That is, $\vecnot{v} - \vecnot{w}$ is orthogonal to every vector in $W$ and therefore $\vecnot{w}$ is the best approximation to $\vecnot{v}$ by vectors in $W$.
+\end{proof}
+
+\begin{definition}
+Whenever the vector $\vecnot{w}$ in Theorem~\ref{theorem:OrthogonalProjection} exists, it is called the \emph{orthogonal projection of $\vecnot{v}$ on $W$}.
+If every vector in $V$ has an orthogonal projection on $W$, the mapping $E: V \rightarrow W$ that assigns to each vector in $V$ its orthogonal projection on $W$ is called the \emph{orthogonal projection of $V$ onto $W$}.
+\end{definition}
+
+\begin{problem}
+Let $W$ be the subspace of $\RealNumbers^2$ spanned by the vector $(1,2)$.
+Using the standard inner product, let $E$ be the orthogonal projection of $\RealNumbers^2$ onto $W$.
+Find
+\begin{enumerate}
+\item a formula for $E(x_1, x_2)$
+\item the matrix of $E$ in the standard ordered basis, i.e., $E(x_1, x_2) = E \vecnot{x}$
+\item $W^{\bot}$
+\item an orthonormal basis in which $E$ is represented by the matrix
+\begin{equation*}
+E = \left[ \begin{array}{cc} 1 & 0 \\ 0 & 0 \end{array} \right].
+\end{equation*}
+\end{enumerate}
+\end{problem}
+
+\begin{corollary}
+Let $V$ be an inner-product space, $W$ be a finite-dimensional subspace, and $E$ be the orthogonal projection of $V$ on $W$.
+Then the mapping
+\begin{equation*}
+\vecnot{v} \mapsto \vecnot{v} - E \vecnot{v}
+\end{equation*}
+is the orthogonal projection of $V$ on $W^{\bot}$.
+\end{corollary}
+\begin{proof}
+Let $\vecnot{v}$ be any vector in $V$.
+Then, $\vecnot{v} - E\vecnot{v}$ is in $W^{\bot}$, and for any $\vecnot{u}$ in $W^{\bot}$, $\vecnot{v} - \vecnot{u} = E \vecnot{v} + \left( \vecnot{v} - E \vecnot{v} - \vecnot{u} \right)$.
+Since $E \vecnot{v} \in W$ and $\vecnot{v} - E \vecnot{v} - \vecnot{u} \in W^{\bot}$, it follows that
+\begin{equation*}
+\begin{split}
+\left\| \vecnot{v} - \vecnot{u} \right\|^2 &= \left\| E \vecnot{v} \right\|^2 + \left\| \vecnot{v} - E \vecnot{v} - \vecnot{u} \right\|^2 \\
+&\geq \left\| \vecnot{v} - \left( \vecnot{v} - E \vecnot{v} \right) \right\|^2
+\end{split}
+\end{equation*}
+with strict inequality when $\vecnot{u} \neq \vecnot{v} - E \vecnot{v}$.
+Thus, $\vecnot{v} - E \vecnot{v}$ is the best approximation to $\vecnot{v}$ by vectors in $W^{\bot}$.
+\end{proof}
+
+\begin{theorem} \label{theorem:OrthogonalSubspaceDirectSum}
+Suppose $V$ is an inner-product space.
+Let $W$ be a finite-dimensional subspace of $V$ and let $E$ denote the orthogonal projection of $V$ on $W$.
+Then $E$ is an idempotent linear transformation of $V$ onto $W$, $E \vecnot{w}' = \vecnot{0}\,$ iff $\vecnot{w}' \in W^{\bot}$, and
+\begin{equation*}
+V = W \oplus W^{\bot}.
+\end{equation*}
+\end{theorem}
+\begin{proof}
+Let $\vecnot{v}$ be any vector in $V$.
+Then $E \vecnot{v}$ is the best approximation of $\vecnot{v}$ by vectors in $W$.
+If $\vecnot{v} \in W$ then $E \vecnot{v} = \vecnot{v}$.
+It follows that $E \left( E \vecnot{v} \right) = E \vecnot{v}$ for any $\vecnot{v} \in V$ since $E \vecnot{v} \in W$.
+That is, $E^2 = E$ and $E$ is idempotent.
+
+To show that $E$ is a linear transformation, let $\{ \vecnot{w}_1 , \vecnot{w}_2 , \ldots , \vecnot{w}_n \}$ be an orthonormal basis for $W$ (whose existence follows from Corollary~\ref{cor:orthonormal_basis}).
+Using part 3 of Theorem~\ref{theorem:OrthogonalProjection}, we find that
+\begin{align*}
+E \left( s_1 \vecnot{v}_1 + \vecnot{v}_2 \right)
+& = \sum_{i=1}^n \langle  s_1 \vecnot{v}_1 + \vecnot{v}_2 | \vecnot{w}_i \rangle \vecnot{w}_i \\
+& = s_1 \sum_{i=1}^n \langle  \vecnot{v}_1 | \vecnot{w}_i \rangle \vecnot{w}_i + \sum_{i=1}^n \langle  \vecnot{v}_2 | \vecnot{w}_i \rangle \vecnot{w}_i \\
+& = s_1 E \vecnot{v}_1 + E \vecnot{v}_2.
+\end{align*}
+Therefore, $E$ is a linear transformation.
+It also follows that $E \vecnot{w}' = \vecnot{0}$ iff $\vecnot{w}' \in W^{\bot}$ because $W^{\bot}$ can be defined by the fact that $\langle \vecnot{w}' | \vecnot{w}_i \rangle = 0$ for $i=1,2,\ldots,n$.
+
+\iffalse
+To show that $E$ is a linear transformation, consider vectors $\vecnot{v}_1, \vecnot{v}_2 \in V$ and scalar $s \in F$.
+Then $\vecnot{v}_1 - E \vecnot{v}_1$ and $\vecnot{v}_2 - E \vecnot{v}_2$ are each orthogonal to every vector in $W$.
+The vector
+\begin{equation*}
+s \left( \vecnot{v}_1 - E \vecnot{v}_1 \right) + \left( \vecnot{v}_2 - E \vecnot{v}_2 \right) = \left( s \vecnot{v}_1 + \vecnot{v}_2 \right) - \left( s E \vecnot{v}_1 + E \vecnot{v}_2 \right)
+\end{equation*}
+is therefore also orthogonal to every vector in $W$.
+Since $s E \vecnot{v}_1 + E \vecnot{v}_2$ is a vector in $W$, it follows from Theorem~\ref{theorem:OrthogonalProjection} that
+\begin{equation*}
+E \left( s \vecnot{v}_1 + \vecnot{v}_2 \right) = s E \vecnot{v}_1 + E \vecnot{v}_2.
+\end{equation*}
+That is, $E$ is a linear transformation.
+
+Again, let $\vecnot{v} \in V$.
+Then $E \vecnot{v}$ is the unique vector in $W$ such that $\vecnot{v} - E \vecnot{v}$ is in $W^{\bot}$.
+In particular, $E \vecnot{v} = \vecnot{0}$ when $\vecnot{v} \in W^{\bot}$.
+Conversely, if $E \vecnot{v} = \vecnot{0}$ then $\vecnot{v} \in W^{\bot}$.
+Thus $W^{\bot}$ is the nullspace of $E$.
+The equation
+\begin{equation*}
+\vecnot{v} = E \vecnot{v} + \vecnot{v} - E \vecnot{v}
+\end{equation*}
+shows that $V = W + W^{\bot}$.
+Furthermore, $W \cap W^{\bot} = \left\{ \vecnot{0} \right\}$.
+Hence $V$ is the direct sum of $W$ and $W^{\bot}$.
+\fi
+
+Again, let $\vecnot{v} \in V$ and recall that (by Theorem~\ref{theorem:OrthogonalProjection}) $E \vecnot{v}$ is the unique vector in $W$ such that $\vecnot{v} - E \vecnot{v}$ is in $W^{\bot}$.
+Therefore, the equation $\vecnot{v} = E \vecnot{v} + \left( \vecnot{v} - E \vecnot{v} \right)$ gives a unique decomposition of $\vecnot{v}$ into $E \vecnot{v} \in W$ and $\vecnot{v} - E \vecnot{v} \in W^{\bot}$.
+This unique decomposition implies that $V$ is the direct sum of $W$ and $W^{\bot}$.
+Of course, from the definition of $W^{\bot}$ it follows that
+\[W \cap W^{\bot} = \left\{ \vecnot{u} \in W | \langle \vecnot{u} | \vecnot{w} \rangle =0 \; \forall \; \vecnot{w}\in W \right\}  \subseteq \left\{ \vecnot{u} \in W | \langle \vecnot{u} | \vecnot{u} \rangle =0 \right\}  = \{ \vecnot{0} \} .\]
+\end{proof}
+
+\begin{corollary}
+Let $W$ be a finite-dimensional subspace of an inner-product space $V$, and let $E$ be the orthogonal projection of $V$ on $W$.
+Then $I - E$ is the orthogonal projection of $V$ on $W^{\bot}$.
+It is an idempotent linear transformation of $V$ onto $W^{\bot}$ with nullspace $W$.
+\end{corollary}
+
+Theorem~\ref{theorem:OrthogonalSubspaceDirectSum} also implies the following result, known as Bessel's inequality.
+
+\begin{corollary}
+Let $\vecnot{v}_1, \ldots, \vecnot{v}_n$ be an orthogonal set of distinct, non-zero vectors in an inner-product space $V$.
+If $\vecnot{v} \in V$ then
+\begin{equation*}
+\sum_{i=1}^n \frac{ \left| \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle \right|^2 }{ \left\| \vecnot{v}_i \right\|^2 }
+\leq \left\| \vecnot{v} \right\|^2.
+\end{equation*}
+Moreover, equality holds if and only if
+\begin{equation*}
+\vecnot{v} = \sum_{i=1}^n \frac{ \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle }{ \left\| \vecnot{v}_i \right\|^2 } \vecnot{v}_i.
+\end{equation*}
+\end{corollary}
+\begin{proof}
+Define
+\begin{equation*}
+\vecnot{w} = \sum_{i=1}^n \frac{ \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle }{ \left\| \vecnot{v}_i \right\|^2 } \vecnot{v}_i.
+\end{equation*}
+Then $\vecnot{v} = \vecnot{w} + \vecnot{u}$, where $\left\langle \vecnot{w} | \vecnot{u} \right\rangle = 0$ and $\left\| \vecnot{v} \right\|^2 = \left\| \vecnot{w} \right\|^2 + \left\| \vecnot{u} \right\|^2$.
+Noting that
+\begin{equation*}
+\left\| \vecnot{w} \right\|^2
+= \sum_{i=1}^n \frac{ \left| \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle \right|^2 }{ \left\| \vecnot{v}_i \right\|^2 },
+\end{equation*}
+we obtain the desired result.
+\end{proof}
+
+If $\vecnot{v}_1, \ldots, \vecnot{v}_n$ is an orthonormal set, Bessel's inequality states that
+\begin{equation*}
+\sum_{i=1}^n \left| \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle \right|^2 \leq \left\| \vecnot{v} \right\|^2.
+\end{equation*}
+It follows that the vector $\vecnot{v}$ is in the subspace spanned by $\vecnot{v}_1, \ldots, \vecnot{v}_n$ if an only if
+\begin{equation*}
+\vecnot{v} = \sum_{i=1}^n \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle \vecnot{v}_i.
+\end{equation*}
+
+
 \section{Approximations in Hilbert Spaces}
 
 Suppose $V$ is a normed space and let $\vecnot{w}_1, \ldots, \vecnot{w}_n \in V$ be a sequence of linearly independent vectors.
