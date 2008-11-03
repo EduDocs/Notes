@@ -6,10 +6,10 @@ The shapes of the waveforms employed to create the transmitted signal are critic
 In many implementations, a high-frequency sinusoid is used, in addition to baseband pulse waveforms, as carrier to center the baseband signal at its intended frequency.
 We initiate our study of modulation and demodulation with baseband signals; advanced considerations associated with carrier sinusoids and bandpass processes will be explored later.
 
-Let $\{ s_k \in \{ 0, 1 \}^b \}$ be a sequence of binary symbols to be transmitted to a destination, and let $f : \{ 0, 1 \}^b \mapsto \mathbb{R}$ be an invertible function that takes a string of $b$ bits as input, and yields a real number as output, with $u_k = f(s_k)$.
+Let $\{ s_k \in \{ 0, 1 \}^b \}$ be a sequence of binary symbols to be transmitted to a destination, and let $f : \{ 0, 1 \}^b \mapsto \mathbb{R}$ be an invertible function that takes a string of $b$ bits as input, and gives a real number as output, with $u_k = f(s_k)$.
 Suppose further that several distinct waveforms are available at the transmitter, which we denote by $\{ \phi_k (t) \}$.
 We study communication systems that modulate binary symbols in two steps.
-First, the collection of binary data $\{ s_k \}$ is converted into a string of real numbers $\{ u_k \}$ using the function $f(\cdot)$.
+First, a collection of binary data $\{ s_k \}$ is converted into a string of real numbers $\{ u_k \}$ using function $f(\cdot)$.
 Next, these real numbers are used to form a transmission signal by creating a weighted linear combination of the basis functions,
 \begin{equation*}
 u(t) = \sum_k u_k \phi_k(t) .
@@ -35,7 +35,7 @@ Consider the collection of waveform given by
 \begin{equation*}
 \phi_m(t) = \frac{1}{\sqrt{T}} e^{2 \pi i \frac{m}{T} t} \mathrm{rect} \left( \frac{t}{T} \right) .
 \end{equation*}
-for $m = 1, \ldots, D$.
+for $m = 1, \ldots, M$.
 We wish to show that these waveforms are orthonormal.
 
 To prove that they are orthogonal, we consider the inner product of $\phi_m(t)$ and $\phi_n(t)$ when $m \neq n$,
@@ -61,13 +61,13 @@ e^{2 \pi i \frac{m}{T} t} e^{- 2 \pi i \frac{m}{T} t} dt \\
 = 1 .
 \end{split}
 \end{equation*}
-That is, the collection of waveforms $\{ \phi_1 (t), \ldots, \phi_D (t) \}$ forms an orthonormal set.
-These basis elements are scaled versions of functions called \emph{$T$-spaced truncated sinusoids}.
+Thus, the collection of waveforms $\{ \phi_1 (t), \ldots, \phi_M (t) \}$ forms an orthonormal set.
+These basis elements are scaled versions of the \emph{$T$-spaced truncated sinusoids}.
 \end{example}
 
-The $T$-spaced truncated sinusoids of Example~\ref{example:TSpacedTruncatedSinusoids} provide a simple illustration of a collection of basis waveforms that can be employed to create a signal.
-Next, we show explicitly how orthonormal waveforms are used in the modulation and demodulation of data symbols.
-Suppose that a signal is formed by taking a linear combination of the waveforms, weighted by the real numbers $\{ u_k \}$, with
+The $T$-spaced truncated sinusoids of Example~\ref{example:TSpacedTruncatedSinusoids} form a collection of basis waveforms that can be employed to create a signal.
+To further illustrate this point, we show explicitly how orthonormal waveforms are used in the modulation and demodulation of data symbols.
+Suppose that a signal is formed by taking a linear combination of the waveforms $\{ \phi_k(t) \}$, weighted by the real numbers $\{ u_k \}$, with
 \begin{equation*}
 u(t) = \sum_{k} u_k \phi_k(t) .
 \end{equation*}
@@ -77,8 +77,8 @@ In particular, we have
 \begin{split}
 \left\langle u(t), \phi_n(t) \right\rangle
 &= \int_{\mathbb{R}}
-\left( \sum_{m=1}^N u_m \phi_m(t) \right) \phi_n^*(t) dt \\
-&= \sum_{m=1}^N u_m \int_{\mathbb{R}}
+\left( \sum_{m=1}^M u_m \phi_m(t) \right) \phi_n^*(t) dt \\
+&= \sum_{m=1}^M u_m \int_{\mathbb{R}}
 \phi_m(t) \phi_n^*(t) dt
 = u_n .
 \end{split}
@@ -111,37 +111,41 @@ Not only can waveforms interfere with one another in signal space, they can also
 Suppose that a different symbol is sent every $T$ seconds using time shifts of a basic pulse waveform $p(t)$.
 The transmitted signal, accounting for the different values of $\{ u_k \}$, is equal to
 \begin{equation*}
-u(t) = \sum_{k} u_k p (t - kT) .
+u(t) = \sum_{n} u_n p (t - nT) .
 \end{equation*}
-Note that in this case, $\phi_k (t) = p (t - kT)$ and the available waveforms are simply translated versions of one another.
+Note that in this case, the available waveforms are simply translated versions of one another.
+Ideally, we would like the collection $\{ p(t - kT) \}$ to be orthonormal.
+This would greatly simplify system implementation and decision making at the receiver.
+However, we cannot use standard techniques such as the Gram-Schmidt procedure to construct a set of orthogonal waveforms, because the elements of $\{ p(t - kT) \}$ are constrained to be translated version of one another.
+Getting an orthonormal set requires more work.
 
-As before, each symbol $u_k$ is identified at the destination by passing the received signal through a linear time-invariant filter, which is mathematically equivalent to performing an inner-product integral.
-Since the waveforms $\phi_k (t)$ are shifted vesions of a same function, it is natural to expect the various filters to implement projections onto shifted versions of a single element $q(t)$.
+As before, each symbol $u_n$ is identified at the destination by passing the received signal through a linear time-invariant filter, which is mathematically equivalent to performing an inner-product integral.
+Since the waveforms $\{ p(t-kT) \}$ are shifted vesions of a same function, it is natural to expect the various filters to implement projections onto shifted versions of a single element $q(t)$.
 A uniform treatment of the demodulation operation can therefore be conducted by looking a the inner product between $u(t)$ and $q(t-\tau)$.
 Let
 \begin{equation} \label{equation:InnerProductReceiver}
 \begin{split}
 r(\tau) &= \langle u(t), q(t-\tau) \rangle
 = \int_{\mathbb{R}} u(t) q^*(t-\tau) dt \\
-&= \sum_{k} u_k \int_{\mathbb{R}} p(t - kT) q^*(t-\tau) dt \\
-&= \sum_{k} u_k g(\tau - kT) .
+&= \sum_{l} u_l \int_{\mathbb{R}} p(t - lT) q^*(t-\tau) dt \\
+&= \sum_{l} u_l g(\tau - lT) .
 \end{split}
 \end{equation}
 where $g(\tau) = \langle p(t), q(t-\tau) \rangle$.
-By convention, element $u_n$ is acquired by looking at $r(nT)$.
+By convention, $q(t)$ is defined such that element $u_n$ is acquired by looking at $r(nT)$.
 Rewritting \eqref{equation:InnerProductReceiver}, we get
 \begin{equation*}
 r(nT) = u_n g(0) + \sum_{k \neq n} u_k g((n - k)T) .
 \end{equation*}
 The first term in this expansion contains the desired symbols.
-The remaining sum is called \emph{intersymbol interference (ISI)}; it the contains the contributions from all the other time-shifted waveforms.
-To retrieve the information sequence unambiguously, we wish to have $r(nT) = u_n$ for any possible values of the sequence $\{ u_k \}$.
+The remaining sum is called \emph{intersymbol interference (ISI)}; it contains the contributions from all the other time-shifted waveforms.
+To retrieve the information sequence unambiguously, we wish to have $r(nT) = u_n$, irrespective of the values in the sequence $\{ u_k \}$.
 This will be achieved provided that
 \begin{equation} \label{equation:NoInterSymbolInterferenceSpecification}
 g(nT) = \begin{cases} 1, & k = n \\
 0, & \text{otherwise} . \end{cases}
 \end{equation}
-To understand how this condition impacts our choice of a functions $(p(t), q(t))$, we use the frequency representation of $g(\tau)$.
+To understand how this condition impacts our choice of a functions $p(t)$ and $q(t)$, we use the frequency representation of $g(\tau)$.
 Looking at the inverse Fourier transform of $\hat{g}(f)$, we get
 \begin{equation*}
 \begin{split}
@@ -166,11 +170,12 @@ e^{2 \pi i n T f} df \\
 \end{equation}
 where we have defined
 \begin{equation*}
-\hat{z}(f) = F \sum_{m = -\infty}^{\infty} \hat{g} \left( f - \frac{m}{T} \right) .
+\hat{z}(f) = F \sum_{m = -\infty}^{\infty} \hat{g} \left( f - \frac{m}{T} \right)
+\mathrm{rect} \left( \frac{f}{F} \right) .
 \end{equation*}
 Notice the similarity between \eqref{equation:SamplePointsNoISI} and the Fourier series representation of a time-limited function.
 Specifically, $\{ g(nT) : n \in \mathbb{Z} \}$ can be viewed as the Fourier series coefficients of the frequency-limited function $\hat{z}(f)$.
-Under condition \eqref{equation:NoInterSymbolInterferenceSpecification}, and using the reconstruction formula, we get
+Under condition \eqref{equation:NoInterSymbolInterferenceSpecification}, and using the reconstruction formula for Fourier series, we get
 \begin{equation} \label{equation:NoInterSymbolInterference}
 \hat{z}(f) = \sum_{n = -\infty}^{\infty} g(nT) e^{2 \pi i \frac{n}{F} f}
 \mathrm{rect} \left( \frac{f}{F} \right)
@@ -181,16 +186,17 @@ Thus, the system exhibits no intersymbol interference if and only if \eqref{equa
 
 Equivalently, condition~\eqref{equation:NoInterSymbolInterferenceSpecification} is satisfied whenever
 \begin{equation} \label{equation:NyquistNoISI}
-\sum_{m = -\infty}^{\infty} \hat{g} \left( f + \frac{m}{T} \right)
-= T .
+\sum_{m = -\infty}^{\infty} \hat{g} \left( f - \frac{m}{T} \right) \mathrm{rect} (fT)
+= T \mathrm{rect} (fT) .
 \end{equation}
-We formalize our key finding, known as the \emph{Nyquist pulse-shaping criterion}, in the theorem below.
+We formalize this key result, known as the \emph{Nyquist pulse-shaping criterion}, in the theorem below.
 
 \begin{theorem}[Nyquist] \label{theorem:NyquistPulseCriterion}
 Let $g(\tau)$ and $\hat{g}(f)$ be square integrable functions that are Fourier transforms of each other.
 Furthermore, assume that the function
 \begin{equation*}
 \hat{z} (f) = F \sum_{m=-\infty}^{\infty} \hat{g} \left( f - \frac{m}{T} \right)
+\mathrm{rect} (fT)
 \end{equation*}
 has finite power.
 Then, a necessary and sufficient condition for
@@ -200,12 +206,13 @@ g(nT) = \begin{cases} 1, & n = 0 \\
 \end{equation*}
 is that $\hat{z} (f)$ satisfies
 \begin{equation*}
-\hat{z}(f) = \frac{1}{T} \sum_{m=-\infty}^{\infty} \hat{g} \left( f - \frac{m}{T} \right) = 1 .
+\hat{z}(f) = \frac{1}{T} \sum_{m=-\infty}^{\infty} \hat{g} \left( f - \frac{m}{T} \right)
+\mathrm{rect} (fT) = \mathrm{rect} (fT) .
 \end{equation*}
 \end{theorem}
 
 \begin{example}
-The simplest possible choice of waveforms for $p(t)$ and $q(t)$ is
+One of the simplest possible choices for waveforms $p(t)$ and $q(t)$ is
 \begin{equation*}
 p(t) = q(t) = \frac{1}{\sqrt{T}} \mathrm{rect} \left( \frac{t}{T} \right) .
 \end{equation*}
@@ -214,9 +221,9 @@ In this case, we get
 \begin{split}
 g(\tau) &= \langle p(t), q(t-\tau) \rangle
 = \frac{1}{T} \int_{\mathbb{R}} \mathrm{rect} \left( \frac{t}{T} \right)
-\cdot \mathrm{rect} \left( \frac{t - \tau}{T} \right) dt \\
+\mathrm{rect} \left( \frac{t - \tau}{T} \right) dt \\
 &= \frac{1}{T} \int_{\mathbb{R}} \mathrm{rect} \left( \frac{t}{T} \right)
-\cdot \mathrm{rect} \left( \frac{\tau - t}{T} \right) dt
+\mathrm{rect} \left( \frac{\tau - t}{T} \right) dt
 = \frac{1}{T} \mathrm{rect} \left( \frac{t}{T} \right)
 \ast \mathrm{rect}\left( \frac{t}{T} \right) .
 \end{split}
@@ -238,9 +245,9 @@ First, we find an expression for $g(\tau)$,
 \begin{split}
 g(\tau) &= \langle p(t), q(t-\tau) \rangle
 = \frac{1}{T} \int_{\mathbb{R}} \mathrm{sinc} \left( \frac{t}{T} \right)
-\cdot \mathrm{sinc} \left( \frac{t - \tau}{T} \right) dt \\
+\mathrm{sinc} \left( \frac{t - \tau}{T} \right) dt \\
 &= \frac{1}{T} \int_{\mathbb{R}} \mathrm{sinc} \left( \frac{t}{T} \right)
-\cdot \mathrm{sinc} \left( \frac{\tau - t}{T} \right) dt
+\mathrm{sinc} \left( \frac{\tau - t}{T} \right) dt
 = \frac{1}{T} \mathrm{sinc} \left( \frac{t}{T} \right)
 \ast \mathrm{sinc} \left( \frac{t}{T} \right) .
 \end{split}
@@ -251,20 +258,36 @@ In the frequency domain, we have
 \hat{g}(f) &= \mathcal{F} \left[ g(\tau) \right]
 = \frac{1}{T} \mathcal{F} \left[ \mathrm{sinc} \left( \frac{t}{T} \right) \right]
 \mathcal{F} \left[ \mathrm{sinc} \left( \frac{t}{T} \right) \right] \\
-&= T \mathrm{rect} (T f) \cdot \mathrm{rect} (T f)
+&= T \mathrm{rect} (T f) \mathrm{rect} (T f)
 = T \mathrm{rect} (T f) .
 \end{split}
 \end{equation*}
 We can therefore compute the function $\hat{z}(f)$ as
 \begin{equation*}
-\hat{z} (f) = \frac{1}{T} \sum_{m = -\infty}^{\infty} \hat{g}(f-m)
-= \sum_{m = - \infty}^{\infty} \mathrm{rect} (T(f-m))
-= 1 .
+\begin{split}
+\hat{z} (f) &= \frac{1}{T} \sum_{m = -\infty}^{\infty}
+\hat{g} \left( f - \frac{m}{T} \right) \mathrm{rect} (fT) \\
+&= \sum_{m = - \infty}^{\infty} \mathrm{rect} (Tf - m) \mathrm{rect}(Tf)
+= \mathrm{rect}(TF) .
+\end{split}
 \end{equation*}
 That is, the conditions of Theorem~\ref{theorem:NyquistPulseCriterion} hold and, consequently, $g(0) = 1$ and $g(n) = 0$ for any non-zero integer.
-One of the positive attributes of the $\mathrm{sinc} (\cdot)$ waveform is that it is badewidth-limited.
+One of the positive attributes of the $\mathrm{sinc} (\cdot)$ waveform is that it is bandwidth-limited.
 However, this pulse is not time-limited and it is therefore impractical, as using $\mathrm{sinc} (\cdot)$ waveforms would entail infinite delay at the destination.
 \end{example}
+
+Although, there are many choices for $\hat{g}(f)$ that satisfy Theorem~\ref{theorem:NyquistPulseCriterion}, we are primarily interested in waveforms that are approximately both bandwidth-limited and time-limited.
+The \emph{Nyquist bandwidth} associated with a signal
+\begin{equation*}
+u(t) = \sum_k u_k p(t -kT)
+\end{equation*}
+is defined by $\frac{1}{2T}$; it represents the smallest possible bandwidth for which it is possible to prevent intersymbol interference.
+The spectral bandwidth of $\hat{g}(f)$ is the smallest possible value of $W$ such that $\hat{g}(f) = 0$ for $|f| > W$.
+
+
+
+spectral bandwidth
+
 
 \newpage
 

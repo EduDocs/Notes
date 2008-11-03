@@ -92,12 +92,12 @@ This lower bound is tight and can be approached using various schemes, as we wil
 
 \begin{definition}[Entropy]
 Let $X$ be a discrete random variable drawn from alphabet $\mathcal{X}$ according to probability mass function $p_X(\cdot)$.
-The entropy of $X$, denoted $H[X]$, is given by
+The entropy of $X$, denoted $\mathrm{H}[X]$, is given by
 \begin{equation} \label{equation:Entropy}
-H[X] = - \sum_{x \in \mathcal{X}} p_X (x) \log_2 ( p_X(x) ) .
+\mathrm{H}[X] = - \sum_{x \in \mathcal{X}} p_X (x) \log_2 ( p_X(x) ) .
 \end{equation}
 Under this definition, entropy is described in bits.
-When writing $H[X]$, we use the convention
+When writing $\mathrm{H}[X]$, we use the convention
 \begin{equation*}
 0 \cdot \log_2 \left( \frac{1}{0} \right)
 = \lim_{\epsilon \rightarrow 0} \epsilon \log_2 \left( \frac{1}{\epsilon} \right)
@@ -105,12 +105,12 @@ When writing $H[X]$, we use the convention
 \end{equation*}
 Alternatively, the entropy of $X$ can be interpreted as the expectation of a logarithmic function,
 \begin{equation*}
-H[X] = \mathrm{E} \left[ \log_2 \left( \frac{1}{p_X(X)} \right) \right] .
+\mathrm{H}[X] = \mathrm{E} \left[ \log_2 \left( \frac{1}{p_X(X)} \right) \right] .
 \end{equation*}
 \end{definition}
 
 The entropy as described in \eqref{equation:Entropy} has interesting properties.
-The value $H[X]$ does not depend on the actual symbols themselves, it only depends on the probability mass function of the possible outcomes.
+The value $\mathrm{H}[X]$ does not depend on the actual symbols themselves, it only depends on the probability mass function of the possible outcomes.
 For instance, in Example~\ref{example:EntropyFairCoin}, the entropy of $X$ remains the same whether we represent the flipping of a coin by a single bit or through a string of letters, heads or tails.
 More generally, the way we choose to designate the possible outcomes of a random experiment has no bearing over the entropy of the corresponding source, only the respective probabilities of the possible symbols matter.
 
@@ -124,7 +124,7 @@ p, & x = 1 \end{cases}
 with zero denoting tails and one for heads.
 We can compute the entropy of $X$ as follows,
 \begin{equation*}
-H[X] = - (1-p) \log_2 (1-p)
+\mathrm{H}[X] = - (1-p) \log_2 (1-p)
 - p \log_2 (p) .
 \end{equation*}
 If the coin is fair, $p = \frac{1}{2}$, then the entropy of $X$ becomes one  bit.
@@ -145,7 +145,7 @@ p_X(x) = p_X((u, v)) = p_{U} (u) p_{V} (v)
 and the entropy of $X$ can be computed as
 \begin{equation*}
 \begin{split}
-H[X] &= - \sum_{ x \in \mathcal{X} } p_X(x) \log_2 ( p_X(x) ) \\
+\mathrm{H}[X] &= - \sum_{ x \in \mathcal{X} } p_X(x) \log_2 ( p_X(x) ) \\
 &= - \sum_{(u, v) \in \mathcal{U} \times \mathcal{V}}
 p_X((u, v)) \log_2 ( p_X((u, v)) ) \\
 &= - \sum_{u \in \mathcal{U}} \sum_{v \in \mathcal{V}}
@@ -154,14 +154,14 @@ p_{U} (u) p_{V} (v) \log_2 ( p_{U} (u) p_{V} (v) ) \\
 p_{U} (u) \log_2 ( p_{U} (u) )
 - \sum_{v \in \mathcal{V}}
 p_{V} (v) \log_2 ( p_{V} (v) ) \\
-&= H[U] + H[V] .
+&= \mathrm{H}[U] + \mathrm{H}[V] .
 \end{split}
 \end{equation*}
 This corresponds to our intuitive understanding; the amount of information contained in two unrelated events should be the sum of the information pertaining to each individual event.
 
-It is important to recognize that $H[X]$ is computed based on the probability mass function $p_X(\cdot)$, it is not a function of the random variable $X$ itself.
-As such, $H[X]$ is a deterministic quantity and does not depend on the actual realization of $X$.
-Furthermore, we note that $H[X]$ is continuous in the weights of the distribution $p_X(\cdot)$.
+It is important to recognize that $\mathrm{H}[X]$ is computed based on the probability mass function $p_X(\cdot)$, it is not a function of the random variable $X$ itself.
+As such, $\mathrm{H}[X]$ is a deterministic quantity and does not depend on the actual realization of $X$.
+Furthermore, we note that $\mathrm{H}[X]$ is continuous in the weights of the distribution $p_X(\cdot)$.
 A small change in the distribution of $X$ only results in a small variation in its entropy.
 It is therefore possible to construct accurate entropy estimates based on empirical measurements of the source outputs.
 
@@ -403,7 +403,7 @@ for $x \in \mathcal{X}$.
 Thus, by construction, we obtain
 \begin{equation*}
 \mathrm{E} [\ell_c(X)] \geq - \sum_{x \in \mathcal{X}} p_X(x) \log_2 (p_X(x))
-= H[X]
+= \mathrm{H}[X]
 \end{equation*}
 for any prefix-code~$c$.
 In other words, the entropy is a lower bound on the expected length of any prefix-free code.
@@ -422,7 +422,7 @@ The Kraft inequality asserts that we can build a code $c : \mathcal{X} \mapsto \
 \end{equation*}
 As such, there exists a code~$c$ such that
 \begin{equation*}
-\mathrm{E} [\ell_c(X)] \leq H[X] + 1 .
+\mathrm{E} [\ell_c(X)] \leq \mathrm{H}[X] + 1 .
 \end{equation*}
 We collect and formalize these important results in the form of a theorem.
 
@@ -430,7 +430,7 @@ We collect and formalize these important results in the form of a theorem.
 Consider a discrete memoryless source $(\mathcal{X}, p_X(\cdot))$ over a finite alphabet.
 If symbols are encoded individually using an optimal prefix-free code $c : \mathcal{X} \mapsto \mathcal{C}$, then the expected length of the codewords satisfies
 \begin{equation*}
-H[X] \leq \mathrm{E} [\ell_c(X)] \leq H[X] + 1 .
+\mathrm{H}[X] \leq \mathrm{E} [\ell_c(X)] \leq \mathrm{H}[X] + 1 .
 \end{equation*}
 \end{theorem}
 
@@ -450,13 +450,13 @@ Suppose that we wish to encode outputs from discrete memoryless source $(\mathca
 If $p_X(x_1) > p_X(x_2)$, then $\ell_{c^{\star}}(x_1) \leq \ell_{c^{\star}}(x_2)$.
 For any of the longest codewords, its sibling (the bit string that differs only in the last digit) must also be codeword; otherwise, the original codeword can be shortened by removing the last bit.
 Finally, the code tree associated with an optimal code must be full.
-A bianry tree is \emph{full} if every node has either zero or two children.
-Again, if this codition fails, then some codewords in the codebook can be shortened.
+A binary tree is \emph{full} if every node has either zero or two children.
+Again, if this condition fails, then some codewords in the codebook can be shortened.
 
 The Huffman algorithm creates a code by building a binary tree.
 The algorithm proceeds as follows.
 First, every source symbol $x$ is assigned to an individual node.
-Then, the simple recusion outlined below is applied.
+Then, the simple recursion outlined below is applied.
 \begin{enumerate}
 \item Sort the nodes in decreasing order of probabilities.
 \item Merge the two least probable nodes into a single one, whose probability equals the sum of its constituents.
@@ -550,14 +550,11 @@ The binary tree and the resulting Huffman code are shown in Figure~\ref{figure:H
 
 \end{example}
 
-
-
-
 Although Huffman coding is optimal for a symbol-by-symbol encoding with a known input probability mass function, it can be outperformed when these two conditions are not known.
-For instance, if the input distribution $p_x(\cdot)$ is not known, then it must be inferred from the available data prior to applying Huffman coding.
+For instance, if the input distribution $p_X(\cdot)$ is not known, then it must be inferred from the available data prior to applying Huffman coding.
 Small errors in the estimated probability mass function can then lead to inefficiency, which in turn renders Huffman coding suboptimal.
-We will soon see an encoding algorithm that does not require the input distribution $p_x(\cdot)$.
-However, before we can present this alorithm, we need to consider the join encoding of source symbols.
+We will soon see an encoding algorithm that does not require the input distribution $p_X(\cdot)$.
+However, before we can present this algorithm, we need to consider the join encoding of source symbols.
 
 
 \section{Joint Encoding of Source Symbols}
@@ -569,26 +566,26 @@ Although more complicated, this process leads to better performance and typicall
 
 Consider a sequence $X_1, X_2, \ldots$ of symbols at the output of a discrete memoryless source.
 Instead of using a code that operates on individual symbols, we can design a more elaborate code that takes as input a group of $n$ symbols, $c: \mathcal{X}^n \mapsto \mathcal{C}$.
-Since the outputs of a discrete memoryless source are indpendent and identically distributed random variables, we know from the additive property of the entropy that
+Since the outputs of a discrete memoryless source are independent and identically distributed random variables, we know from the additive property of the entropy that
 \begin{equation*}
-H[X_1, \ldots, X_n ] = n H [X] .
+\mathrm{H}[X_1, \ldots, X_n ] = n \mathrm{H} [X] .
 \end{equation*}
-Then, by applying Theorem~\ref{theorem:EntropyBoundsPrefixCodes}, we get that an optimal perfix code, which operates on $\mathcal{X}^n$, yields
+Then, by applying Theorem~\ref{theorem:EntropyBoundsPrefixCodes}, we get that an optimal prefix code, which operates on $\mathcal{X}^n$, yields
 \begin{equation*}
-n H[X] \leq \mathrm{E} [ \ell_c (X_1, \ldots, X_n) ] \leq n H[X] + 1.
+n \mathrm{H}[X] \leq \mathrm{E} [ \ell_c (X_1, \ldots, X_n) ] \leq n \mathrm{H}[X] + 1.
 \end{equation*}
 Then, the expected message length per source output becomes
 \begin{equation*}
-H[X] \leq \frac{ \mathrm{E} [ \ell_c (X_1, \ldots, X_n) ] }{n} \leq H[X] + \frac{1}{n} .
+\mathrm{H}[X] \leq \frac{ \mathrm{E} [ \ell_c (X_1, \ldots, X_n) ] }{n} \leq \mathrm{H}[X] + \frac{1}{n} .
 \end{equation*}
-Thus, the expected number of bits per symbol produced by a source can be made arbitrarily close to $H[X]$ by jointly encoding strings of symbols.
+Thus, the expected number of bits per symbol produced by a source can be made arbitrarily close to $\mathrm{H}[X]$ by jointly encoding strings of symbols.
 
 \begin{example} \label{example:JointSourceCoding}
 Let $(\mathcal{X}, p_X)$ be a binary discrete memoryless source, as described in Example~\ref{example:BinarySource}.
 Furthermore, assume that Bernoulli parameter $p$ is equal to $\frac{1}{4}$.
 Then, the entropy of the source can be calculated as
 \begin{equation*}
-H[X] = - \frac{3}{4} \log_2 \left( \frac{3}{4} \right)
+\mathrm{H}[X] = - \frac{3}{4} \log_2 \left( \frac{3}{4} \right)
 - \frac{1}{4} \log_2 \left( \frac{1}{4} \right)
 \approx 0.811 .
 \end{equation*}
@@ -632,17 +629,127 @@ This is especially important considering the fact that symbol-by-symbol encoding
 
 \section{Fixed-Length Compression Codes}
 
-Such codes are easy to encode and decode, yielding unambiguous messages.
-The minimum number of binary strings in lossless fixed-length encoding is $\left\lceil \log_2 ( | \mathcal{X} | ) \right\rceil$, where $| \mathcal{X} |$ is the size of the source alphabet and $\lceil \cdot \rceil$ is the ceiling function, which returns the smallest integer greater than or equal to its argument.
-This type of codes cannot be used to compress data by assigning short descriptions to most frequent symbols and longer descriptions to the less likely ones.
+In the previous section, the joint encoding of multiple source symbols was shown to perform well, with the average number of bits per symbol produced by a source approaching $\mathrm{H}[X]$.
+Below, we explore how the joint encoding of symbols together with fixed-length codes can be used to produce good compression ratios.
+Fixed-length compression codes have several advantages.
+They are simple to encode and easy to decode, yielding unambiguous messages.
+Furthermore, all fixed-length codes are prefix-free, and encoded symbols can therefore be recovered instantaneously.
+However, fixed-length codes cannot be used to compress data by assigning short descriptions to most frequent symbols and longer descriptions to the less likely ones.
 Data compression in fixed-length coding methods is only possible for large blocks of data, and any compression beyond the logarithm of the total number of possibilities comes with a finite, though perhaps small, probability of decoding failure.
+
+The minimum number of binary strings in lossless fixed-length symbol-by-symbol encoding is $\left\lceil \log_2 ( | \mathcal{X} | ) \right\rceil$, where $| \mathcal{X} |$ is the size of the source alphabet and $\lceil \cdot \rceil$ is the ceiling function, which returns the smallest integer greater than or equal to its argument.
+More generally, the minimum number of binary strings necessary to encode a group of $n$ symbols is $\left\lceil n \log_2 ( | \mathcal{X} | ) \right\rceil$.
+This strategy alone, encoding multiple source symbols at a time, is not powerful enough to compress data using fixed-length codes.
+To design effective fixed-length codes, two components are necessary.
+First, we need to relax the assumption that the data compression scheme should be lossless, rather we allow a small probability of encoding failure.
+In particular, we assume that the probability of encoding failure, where data cannot be decoded properly, is $\delta > 0$, where $\delta$ is implicitly very small.
+The second ingredient to fixed-length compression is the \emph{asymptotic equipartition property}, which we review next.
+
+
+\subsection{Asymptotic Equipartition Property}
+
+The AEP is a general property of the output samples of discrete memoryless sources.
+This property implies that, given a very long sequence of $n$ source symbols, the probability that $(X_1, \ldots, X_n)$ belongs to a set of typical sample strings is almost one.
+It takes a few steps to make this statement precise.
+
+\begin{theorem} \label{theorem:WeakLawEntropy}
+Let $(\mathcal{X}, p_X)$ be a discrete memoryless source, which produces a sequence of symbols $X_1, X_2, \ldots $
+Furthermore, assume that the output alphabet $\mathcal{X}$ is finite.
+The asymptotic equipartition probability asserts that
+\begin{equation*}
+\lim_{n \rightarrow \infty} - \frac{1}{n} \log_2 \left( p_{X^n} (X_1, \ldots X_n) \right)
+= \mathrm{H} [X] .
+\end{equation*}
+\end{theorem}
+\begin{proof}
+We can proof this theorem through an application of the weak law of large numbers.
+First, we observe that
+\begin{equation*}
+\begin{split}
+\log_2 \left( p_{X^n} (X_1, \ldots X_n) \right)
+&= \log_2 \left( \prod_{k=1}^n p_{X} (X_k) \right) \\
+&= \sum_{k=1}^n \log_2 p_{X} (X_k) .
+\end{split}
+\end{equation*}
+That is, $\log_2 \left( p_{X^n} (X_1, \ldots X_n) \right)$ is a sum of independent and identically distributed random variables, with bounded second moment.
+It follows, by the law of large numbers, that
+\begin{equation*}
+- \frac{1}{n} \log_2 \left( p_{X^n} (X_1, \ldots X_n) \right)
+\end{equation*}
+converges in probability to $\mathrm{E} \left[ - \log_2 (p_X(X)) \right] = \mathrm{H}[X]$.
+In particular, we have
+\begin{equation*}
+\Pr \left(
+\left| \frac{- \log_2 \left( p_{X^n} (X_1, \ldots X_n) \right)}{n} - \mathrm{H}[X] \right|
+\geq \epsilon \right)
+\leq \frac{ \sigma^2}{n \epsilon^2}
+\end{equation*}
+where $\sigma^2$ is the variance of random variable $- \log_2 (p_X(X))$.
+\end{proof}
+
+Drawing intuition from the proof of Theorem~\ref{theorem:WeakLawEntropy}, we define the \emph{typical set} $T_{\epsilon}^{(n)}$ as
+\begin{equation*}
+T_{\epsilon}^{(n)}
+= \left\{ \mathbf{x} \in \mathcal{X}^n :
+\left| \frac{- \log_2 \left( p_{X^n} (\mathbf{x}) \right)}{n} - \mathrm{H}[X] \right|
+< \epsilon \right\} .
+\end{equation*}
+The probability that the first $n$ source symbols belongs to the typical set $T_{\epsilon}^{(n)}$ is bounded below by
+\begin{equation} \label{equation:ProbabilityTypicalSet}
+\Pr \left( (X_1, \ldots, X_n) \in T_{\epsilon}^{(n)} \right) \geq 1 - \frac{\sigma^2}{n \epsilon^2} .
+\end{equation}
+Thus, as $n$ increases, the probability that the source produces a typical sequence approaches one.
+We note that an equivalent definition of typical set is
+\begin{equation*}
+T_{\epsilon}^{(n)}
+= \left\{ \mathbf{x} \in \mathcal{X}^n :
+2^{- n (\mathrm{H}[X] + \epsilon)} < p_{X^n} (\mathbf{x})
+< 2^{- n (\mathrm{H}[X] - \epsilon)} \right\} .
+\end{equation*}
+Using the second definition of $T_{\epsilon}^{(n)}$, we can bound the number of elements contained in a typical set.
+First, recall that the sum of the probability of disjoint events cannot exceed one.
+As a consequence, the number of elements in $T_{\epsilon}^{(n)}$ is bounded by
+\begin{equation*}
+\left| T_{\epsilon}^{(n)} \right| < 2^{n (\mathrm{H}[X] + \epsilon)} .
+\end{equation*}
+Similarly, using \eqref{equation:ProbabilityTypicalSet} and the second definition of $T_{\epsilon}^{(n)}$, we get
+\begin{equation*}
+\left| T_{\epsilon}^{(n)} \right| > \left( 1 - \frac{\sigma^2}{n \epsilon^2} \right)
+2^{n (\mathrm{H}[X] - \epsilon)} .
+\end{equation*}
+We collect these results in the following theorem.
+
+\begin{theorem}[Asymptotic Equipartition Property] \label{theorem:AEP}
+Let $(\mathcal{X}, p_X)$ be a discrete memoryless source with finite alphabet $\mathcal{X}$ and output sequence $X_1, X_2, \ldots$, each with entropy $\mathrm{H}[X]$.
+For any $\delta > 0$ and all $n$ sufficiently large, we have
+\begin{equation*}
+\Pr \left( (X_1, \ldots, X_n) \in T_{\epsilon}^{(n)} \right) \geq 1 - \delta
+\end{equation*}
+and the size of the typical set $T_{\epsilon}^{(n)}$ is bounded by
+\begin{equation*}
+(1 - \delta) 2^{n (\mathrm{H}[X] - \epsilon)} <
+\left| T_{\epsilon}^{(n)} \right| < 2^{n (\mathrm{H}[X] + \epsilon)} .
+\end{equation*}
+\end{theorem}
+
+The intuition behind the asymptotic equipartition property is that a compression scheme can focus on encoding only the symbol strings that belong to $T_{\epsilon}^{(n)}$.
+Under such a strategy, at most $\lceil n (\mathrm{H}[X] + \epsilon) \rceil$ codewords are needed.
+Although not lossless, this fixed-length coding scheme results in a decoding failure with a probability no greater than $\delta$.
+
+\begin{theorem}[Source Coding Theorem]
+Let $(\mathcal{X}, p_X)$ be a discrete memoryless source with finite alphabet $\mathcal{X}$ and entropy $\mathrm{H}[X]$.
+For any $\delta > 0$, $\epsilon > 0$ and $n$ sufficiently large, there exists a fixed-length compression scheme such that the probability of failure is less than $\delta$ and the expected number of bits per symbol is
+\begin{equation*}
+\frac{\mathrm{E} [\ell_c(X_1, \ldots, X_n)]}{n} \leq \mathrm{H}[X] + \epsilon + \frac{1}{n} .
+\end{equation*}
+\end{theorem}
 
 
 \section{Universal Source-Coding Algorithms}
 
 Huffman coding has some important drawbacks.
 The source statistics have to be known in advance to design a Huffman code.
-If one only has access to the source outputs, the coding procedure requires two passes through the data, one to estimate the statitics of the source, and a second one for encoding.
+If one only has access to the source outputs, the coding procedure requires two passes through the data, one to estimate the statistics of the source, and a second one for encoding.
 The Huffman encoding algorithm is designed primarily for source blocks of length 1.
 To take advantage of the source memory, and to get better rates, one has to consider longer block lengths.
 Yet, complexity increases rapidly with block length for the Huffman algorithm. 
@@ -651,7 +758,7 @@ To provide a partial answer to these drawbacks, we study an example of a univers
 The basic idea behind the \emph{Lempel-Ziv algorithm} is to parse the input sequence into non-overlapping strings of different lengths while constructing a list of the strings seen thus far.
 The encoding algorithm works as follows.
 First, initialize the list to contain all strings of length one.
-Then, apply the follwoing iterative procedure.
+Then, apply the following iterative procedure.
 \begin{enumerate}
 \item Search for the longest binary string $w$ which has appeared in the dictionary table.
 \item Encode this binary string by its index in the dictionary.
