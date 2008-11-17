@@ -2,8 +2,8 @@
 
 \section{Best Approximation}
 
+Orthogonal projections are very useful in many contexts.
 In essence, the Gram-Schmidt process is a sequence of orthogonal projections.
-Orthogonal projections are very useful in many context.
 
 Suppose $W$ is a subspace of an inner-product space $V$, and let $\vecnot{v}$ be an arbitrary vector in $V$.
 Consider the problem of finding a vector $\vecnot{w} \in W$ such that $\left\| \vecnot{v} - \vecnot{w} \right\|$ is minimized.
@@ -91,8 +91,8 @@ That is, $\vecnot{v} - \vecnot{w}$ is orthogonal to every vector in $W$ and ther
 \end{proof}
 
 \begin{definition}
-Whenever the vector $\vecnot{w}$ in Theorem~\ref{theorem:OrthogonalProjection} exists, it is called the \emph{orthogonal projection of $\vecnot{v}$ on $W$}.
-If every vector in $V$ has an orthogonal projection on $W$, the mapping $E: V \rightarrow W$ that assigns to each vector in $V$ its orthogonal projection on $W$ is called the \emph{orthogonal projection of $V$ onto $W$}.
+Whenever the vector $\vecnot{w}$ in Theorem~\ref{theorem:OrthogonalProjection} exists, it is equal to the \emph{orthogonal projection of $\vecnot{v}$ onto $W$}.
+If every vector in $V$ has an orthogonal projection onto $W$, then we can define a mapping $E: V \rightarrow W$ that assigns to each vector in $V$ its orthogonal projection onto $W$ is called the \emph{orthogonal projection of $V$ onto $W$}.
 \end{definition}
 
 \begin{problem}
@@ -238,6 +238,7 @@ It follows that the vector $\vecnot{v}$ is in the subspace spanned by $\vecnot{v
 
 
 \section{Approximations in Hilbert Spaces}
+\index{Hilbert space}
 
 Suppose $V$ is a normed space and let $\vecnot{w}_1, \ldots, \vecnot{w}_n \in V$ be a sequence of linearly independent vectors.
 Denote the span of $\vecnot{w}_1, \ldots, \vecnot{w}_n$ by $W$.
@@ -246,7 +247,7 @@ Recall that the vector
 \begin{equation*}
 \hat{\vecnot{v}} = s_1 \vecnot{w}_1 + \cdots + s_n \vecnot{w}_n
 \end{equation*}
-is said to be a \emph{best approximation} to $\vecnot{v} \in V$ by vectors in $W$.
+is said to be a \defn{Hilbert space}{best approximation} to $\vecnot{v} \in V$ by vectors in $W$.
 We can write
 \begin{equation*}
 \begin{split}
@@ -311,13 +312,13 @@ where
 \left\langle \vecnot{v} | \vecnot{w}_2 \right\rangle, \ldots,
 \left\langle \vecnot{v} | \vecnot{w}_n \right\rangle \right)
 \end{equation*}
-is the \emph{cross-correlation vector}, and
+is the \textbf{cross-correlation vector}, and
 \begin{equation*}
 \vecnot{s}^T = 
 \left( s_1, s_2, \ldots, s_n \right)
 \end{equation*}
 is the vector of coefficients.
-Equations of this form are collectively known as the \emph{normal equations}.
+Equations of this form are collectively known as the \defn{inner-product space}{normal equations}.
 
 \begin{definition}
 The $n \times n$ matrix
@@ -335,13 +336,13 @@ G = \left[ \begin{array}{cccc}
 & \left\langle \vecnot{w}_n | \vecnot{w}_n \right\rangle
 \end{array} \right]
 \end{equation}
-is called the \emph{Grammian} matrix.
+is called the \defn{matrix}{Grammian} matrix.
 Since $G_{ji} = \left\langle \vecnot{w}_i | \vecnot{w}_j \right\rangle$, it follows that the Grammian is a Hermitian symmetric matrix, i.e., $G^H = G$.
 \end{definition}
 
 \begin{definition}
-A matrix $M\in F^{n \times n}$ is \emph{positive-semidefinite} if $\vecnot{v}^H M \vecnot{v} \geq 0$ for all $\vecnot{v} \in F^n$.
-A matrix $M\in F^{n \times n}$ is \emph{positive-definite} if $\vecnot{v}^H M \vecnot{v} > 0$ for all $\vecnot{v} \in F^n - \left\{ \vecnot{0} \right\}$.
+A matrix $M\in F^{n \times n}$ is \defn{matrix}{positive-semidefinite} if $\vecnot{v}^H M \vecnot{v} \geq 0$ for all $\vecnot{v} \in F^n$.
+A matrix $M\in F^{n \times n}$ is \defn{matrix}{positive-definite} if $\vecnot{v}^H M \vecnot{v} > 0$ for all $\vecnot{v} \in F^n - \left\{ \vecnot{0} \right\}$.
 \end{definition}
 
 An important aspect of positive-definite matrices is that they are always invertible.
@@ -392,7 +393,7 @@ For any vector $\vecnot{v} \in V$, the norm of the error vector $\vecnot{e}$ giv
 \vecnot{e} = \vecnot{v} - \sum_{i=1}^n s_i \vecnot{w}_i
 \end{equation}
 is minimized when the error vector $\vecnot{e}$ is orthogonal to every vector in $W$.
-If $\hat{\vecnot{v}}$ denotes the \emph{least-squares} approximation to $\vecnot{v}$ then
+If $\hat{\vecnot{v}}$ denotes the \defn{inner-product space}{least-squares} approximation to $\vecnot{v}$ then
 \begin{equation*}
 \left\langle \vecnot{v} - \hat{\vecnot{v}} | \vecnot{w}_j \right\rangle = 0
 \end{equation*}
@@ -509,13 +510,13 @@ The optimal solution for the least-squares problem is therefore given by
 \begin{equation*}
 \vecnot{s} = \left( A^H A \right)^{-1} A^H \vecnot{v} = G^{-1} \vecnot{t} .
 \end{equation*}
-The matrix $\left( A^H A \right)^{-1} A^H$ is often called the \emph{pseudoinverse}.
+The matrix $\left( A^H A \right)^{-1} A^H$ is often called the \defn{matrix}{pseudoinverse}.
 
 The best approximation to $\vecnot{v} \in V$ by vectors in $W$ is equal to
 \begin{equation*}
 \hat{\vecnot{v}} = A \vecnot{s} = A \left( A^H A \right)^{-1} A^H \vecnot{v} .
 \end{equation*}
-The matrix $P = A \left( A^H A \right)^{-1} A^H$ is a \emph{projection matrix}.
+The matrix $P = A \left( A^H A \right)^{-1} A^H$ is a \defn{matrix}{projection matrix}.
 The matrix $P$ projects onto the range of $A$; that is, it projects onto the subspace spanned by the columns of $A$.
 
 
@@ -576,11 +577,12 @@ We can then find an explicit expression for the approximation error,
 
 
 \section{Applications and Examples}
+\index{applications}
 
 \subsection{Linear Regression}
 
 Let $(x_1, y_1), \ldots, (x_n, y_n)$ be a collection of points in $\RealNumbers^2$.
-A \emph{linear regression} problem consists in finding scalars $a$ and $b$ such that
+A \defn{applications}{linear regression} problem consists in finding scalars $a$ and $b$ such that
 \begin{equation*}
 y_i \approx a x_i + b
 \end{equation*}
@@ -694,7 +696,7 @@ Using \eqref{equation:ExpectationInnerProduct}, we obtain
 \end{equation}
 where $j = 1, \ldots, K-1$.
 
-For this specific case where the normal equations are defined in terms of the expectation operator, these equations are called the \emph{Wiener-Hopf} equations.
+For this specific case where the normal equations are defined in terms of the expectation operator, these equations are called the \defn{applicatons}{Wiener-Hopf} equations.
 The Grammian of the Wiener-Hopf equations can be expressed in a more familiar form using the autocorrelation matrix.
 Recall that $\{ y[t] \}$ is a wide-sense stationary process.
 As such, we have

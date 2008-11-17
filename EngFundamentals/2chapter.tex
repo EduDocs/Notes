@@ -208,19 +208,19 @@ A set $U \subset V$ is linearly independent if and only if each finite subset of
 
 \begin{definition}
 Let $V$ be a vector space over $F$.
-Let $\mathcal{B} = \left\{ \vecnot{v}_{\alpha} | \alpha \in A \right\}$ be a subset of linearly independent vectors from $V$, such that every $\vecnot{v} \in V$ has a decomposition as a finite linear combination of vectors from $\mathcal{B}$.
-Then, the set $\mathcal{B}$ is a \defn{vector space}{(Hamel) basis} for $V$.
+Let $\mathcal{B} = \left\{ \vecnot{v}_{\alpha} | \alpha \in A \right\}$ be a subset of linearly independent vectors from $V$, such that every $\vecnot{v} \in V$ has a unique decomposition as a finite linear combination of vectors from $\mathcal{B}$.
+Then, the set $\mathcal{B}$ is a \defn{vector space}{Hamel basis} for $V$.
 The space $V$ is \defn{vector space}{finite-dimensional} if it has a finite basis.
 \end{definition}
 
 \begin{theorem}
-Every vector space has a basis.
+Every vector space has a Hamel basis.
 \end{theorem}
 \begin{proof}
 Let $X$ be the set of linearly independent subsets of $V$.
 Furthermore, for $x, y \in X$ consider the strict partial order defined by proper inclusion.
 By the maximum principle, if $x$ is an element of $X$, then there exists a maximal simply ordered subset $Z$ of $X$ containing $x$.
-This element is a basis for $V$.
+This element is a Hamel basis for $V$.
 \end{proof}
 
 \begin{example}
@@ -289,7 +289,7 @@ If $V$ is a finite-dimensional vector space, then any two bases of $V$ have the 
 This allows us to define the dimension of a finite-dimensional vector space.
 
 \begin{definition}
-The \defn{vector space}{dimension} of a finite-dimensional vector space is defined as the number of elements in a basis for $V$.
+The \defn{vector space}{dimension} of a finite-dimensional vector space is defined as the number of elements in any basis for $V$.
 We denote the dimension of a finite-dimensional vector space $V$ by $\dim(V)$.
 \end{definition}
 
@@ -672,14 +672,14 @@ where $\left[ \vecnot{u} \right]_{\mathcal{B}}$ and $\left[ \vecnot{v} \right]_{
 The matrix $H$ is called the \emph{matrix of the inner product in the ordered basis $\mathcal{B}$}.
 \end{proof}
 
-It is easily verified that $H$ is a hermitian matrix, i.e., $H = H^H$.
+It is easily verified that $H$ is a Hermitian matrix, i.e., $H = H^H$.
 Furthermore, $H$ must satisfy the additional condition
 \begin{equation} \label{equation:PositiveDefinite}
 \vecnot{w}^H H \vecnot{w} > 0, \quad \forall \vecnot{w} \neq \vecnot{0}.
 \end{equation}
 In particular, $H$ must be invertible.
 
-Conversely if $H$ is an $n \times n$ hermitian matrix over $F$ which satisfies~\eqref{equation:PositiveDefinite}, then $H$ is the matrix in the ordered basis $\mathcal{B}$ of an inner product on $V$.
+Conversely if $H$ is an $n \times n$ Hermitian matrix over $F$ which satisfies~\eqref{equation:PositiveDefinite}, then $H$ is the matrix in the ordered basis $\mathcal{B}$ of an inner product on $V$.
 This inner product is given by
 \begin{equation*}
 \left\langle \vecnot{u} | \vecnot{v} \right\rangle
@@ -986,10 +986,10 @@ Recall that a subset $\left\{ \vecnot{v}_{\alpha} | \alpha \in A \right\}$ of a 
 If the subspace spanned by the family $\left\{ \vecnot{v}_{\alpha} | \alpha \in A \right\}$ is dense in $V$, we call this set an \defn{inner-product space}{orthonormal basis}.
 \end{definition}
 
-Note that, according to this definition, an orthonormal basis for a Hilbert space $V$ is not necessarily a basis for $V$.
-However, it can be shown that any orthogonal basis is a subset of a basis.
-In practice it is the orthonormal basis, not the basis itself, which is of most use.
-None of these issues arise in finite-dimensional spaces, where an orthogonal basis is always a basis.
+Note that, according to this definition, an orthonormal basis for a Hilbert space $V$ is not necessarily a Hamel basis for $V$.
+However, it can be shown that any orthogonal basis is a subset of a Hamel basis.
+In practice it is the orthonormal basis, not the Hamel basis itself, which is of most use.
+None of these issues arise in finite-dimensional spaces, where an orthogonal basis is always a Hamel basis.
 
 Let $\mathcal{B} = \left\{ \vecnot{v}_{\alpha} | \alpha \in A \right\}$ be an orthonormal basis for Hilbert space $V$.
 Each element $\vecnot{v} \in V$ has the form
@@ -1075,6 +1075,35 @@ Otherwise it is called \defn{linear transformation}{non-singular}.
 \subsection{Properties}
 
 \begin{theorem} \label{theorem:UniqueLinearTransformation}
+Let $V,W$ be vector spaces over $F$ and $\mathcal{B} = \{ \vecnot{v}_{\alpha} | \alpha \in A \}$ be a Hamel basis for $V$.
+For each mapping $G: \mathcal{B} \rightarrow W$, there is a unique linear transformation $T: V \rightarrow W$ such that $T \vecnot{v}_{\alpha} = G \left( \vecnot{v}_{\alpha} \right)$.
+\end{theorem}
+\begin{proof}
+Since $\mathcal{B}$ is a Hamel basis for $V$, every vector $\vecnot{v} \in V$ has a unique expansion
+\begin{equation*}
+\vecnot{v} = \sum_{\alpha \in A} s_{\alpha} \vecnot{v}_{\alpha},
+\end{equation*}
+where $s_{\alpha} \neq 0$ for only a finite subset of $A$.
+Using this expansion and the mapping $G$ for basis vectors, we define the mapping $T$, for each $\vecnot{v}$, as
+\begin{equation*}
+T \vecnot{v} = \sum_{\alpha \in A} s_{\alpha} G \left( \vecnot{v}_{\alpha} \right).
+\end{equation*}
+Using the unique decomposition of vectors, it is easy to verify that this mapping is linear.
+
+To show that it is unique, we assume that there is another linear mapping $U : V \rightarrow W$ such that $U \vecnot{v}_{\alpha} = G \left( \vecnot{v}_{\alpha} \right)$.
+In this case, the linearity guarantees that
+\begin{equation*}
+U \vecnot{v} = U \left( \sum_{\alpha \in A} s_{\alpha} \vecnot{v}_{\alpha} \right)
+=  \sum_{\alpha \in A} s_{\alpha} U \left( \vecnot{v}_{\alpha} \right) 
+=  \sum_{\alpha \in A} s_{\alpha} G \left( \vecnot{v}_{\alpha} \right).
+\end{equation*}
+This implies that $U \vecnot{v} = T \vecnot{v}$ for all $\vecnot{v} \in V$ and therefore that $U = T$.
+\end{proof}
+
+This theorem illuminates a very important structural element of linear transformations: they are uniquely defined by where they map basis vectors of their domain.
+
+\iffalse
+\begin{theorem} \label{theorem:UniqueLinearTransformation}
 Let $V$ be a finite-dimensional vector space and let $\vecnot{v}_1, \ldots, \vecnot{v}_n$ be an ordered basis for $V$.
 Let $W$ be a vector space let $\vecnot{w}_1, \ldots, \vecnot{w}_n$ be arbitrary vectors in $W$.
 There exists a unique linear transformation $T$ from $V$ into $W$ such that
@@ -1131,6 +1160,7 @@ U \vecnot{v} &= U \left( \sum_{j=1}^n t_j \vecnot{v}_j \right) \\
 \end{equation*}
 That is, $U = T$ and the linear transformation $T$ with $T \vecnot{v}_j = \vecnot{w}_j$ for $j = 1, \ldots, n$ is unique.
 \end{proof}
+\fi
 
 \begin{definition}
 If $T$ is a linear transformation from $V$ into $W$, the \defn{linear transformation}{range} of $T$ is the set of all vectors $\vecnot{w} \in W$ such that $\vecnot{w} = T \vecnot{v}$ for some $\vecnot{v} \in V$.
@@ -1243,14 +1273,24 @@ Furthermore, $T$ is invertible if and only if
 \end{definition}
 
 \begin{example}
-Consider the vector space $V$ of semi-infinite real sequences $\mathbb{R}^\omega$ with the standard basis $\{\vecnot{e}_1,\vecnot{e}_2,\ldots\}$.
+Consider the vector space $V$ of semi-infinite real sequences $\mathbb{R}^\omega$ where $\vecnot{v} = (v_1,v_2,v_3,\ldots)\in V$ with $v_n \in \mathbb{R}$ for $n\in \mathbb{N}$.
+Let $L: V \rightarrow V$ be the left-shift linear transformation defined by
+\[L \vecnot{v} = (v_2,v_3,v_4,\ldots) \]
+and $R: V \rightarrow V$ be the right-shift linear transformation defined by
+\[R \vecnot{v} = (0,v_1,v_2,\ldots). \]
+Notice that $L$ is onto but not one-to-one and $R$ is one-to-one but not onto.
+Therefore, neither transformation is invertible.
+\end{example}
+
+\begin{example}
+Consider the normed vector space $V$ of semi-infinite real sequences $\mathbb{R}^\omega$ with the standard Schauder basis $\{\vecnot{e}_1,\vecnot{e}_2,\ldots\}$.
 Let $T: V \rightarrow V$ be the linear transformation that satisfies $T \vecnot{e}_i = i^{-1} \vecnot{e}_i$ for $i=1,2,\ldots$.
 Let the linear transformation $U: V \rightarrow V$ satisfy $U \vecnot{e}_i = i \vecnot{e}_i$ for $i=1,2,\ldots$.
 It is easy to verify that $U = T^{-1}$ and $UT = TU = I$.
 \end{example}
 This example should actually bother you somewhat.
-Since $T$ maps vector reduces components arbitrarily, its inverse must enlarge them arbitrarily.
-Clearly, this is not a desirable propertyi.
+Since $T$ reduces vector components arbitrarily, its inverse must enlarge them arbitrarily.
+Clearly, this is not a desirable property.
 Later, we will introduce a norm for linear transforms which quantifies this problem.
 
 \begin{theorem}

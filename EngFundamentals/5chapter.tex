@@ -1,4 +1,314 @@
-\chapter{Matrix Properties and Factorizations}
+\chapter{Matrix Factorization and Analysis}
+\index{matrix factorization}
+
+Matrix factorizations are an important part of the practice and analysis of signal processing.
+They are at the heart of many signal-processing algorithms. 
+Their applications include solving linear equations (LU), decorrelating random variables (LDLT,Cholesky), orthogonalizing sets of vectors (QR), and finding low-rank matrix approximations (SVD).
+Their usefulness is often two-fold: they allow efficient computation of important quantities and they are (often) designed to minimize round-off error due to finite-precision calculation.
+An algorithm is called \emph{numerically stable}, for a particular set of inputs, if the error in the final solution is proportional to the round-off error in the elementary field operations.
+
+\section{Triangular Systems}
+
+A square matrix $L \in F^{n \times n}$ is called \defn{matrix factorization}{lower triangular} (or \defn{matrix factorization}{upper triangular}) if all elements above (or below) the main diagonal are zero.
+Likewise, a triangular matrix (lower or upper) is a \defn{matrix factorization}{unit triangular} if it has all ones on the main diagonal.
+A system of linear equations is called \emph{triangular} if it can be represented by the matrix equation $A \vecnot{x} = \vecnot{b}$ where $A$ is either upper or lower triangular.
+
+\subsection{Solution by Substitution}
+
+Let $L \in F^{n \times n}$ be a lower triangular matrix with entries $l_{ij} = [ L ]_{ij}$.
+The matrix equation $L \vecnot{y} = \vecnot{b}$ can be solved efficiently using \defn{matrix factorization}{forward substitution}, which is defined by the recursion
+\begin{equation*}
+y_j = \frac{1}{l_{jj}} \left( b_j - \sum_{i=1}^{j-1} l_{ji} y_i \right), \;\;\; j=1,2,\ldots,n.
+\end{equation*}
+
+\begin{example}
+Consider the system
+\begin{equation*}
+\left[ \begin{array}{ccc} 1 & 0 & 0 \\ 1 & 1 & 0 \\ 1 & 2 & 1 \end{array} \right]
+\left[ \begin{array}{c} y_1 \\ y_2 \\ y_3 \end{array} \right]
+ = \left[ \begin{array}{c} 1 \\ 2 \\ 9 \end{array} \right].
+\end{equation*}
+Applying the above recursion gives
+\begin{align*}
+y_1 & = \frac{1}{1}  = 1 \\
+y_2 & = \frac{1}{1} (2 - 1\cdot 1)  = 2 \\
+y_3 & = \frac{1}{1} (9 - 1\cdot 1 - 2\cdot 1) = 6.
+\end{align*}
+\end{example}
+
+Let $U \in F^{n \times n}$ be an upper triangular matrix with entries $u_{ij} = [ U ]_{ij}$.
+The matrix equation $U \vecnot{x} = \vecnot{y}$ can be solved efficiently using \defn{matrix factorization}{backward substitution}, which is defined by the recursion
+\begin{equation*}
+x_j = \frac{1}{u_{jj}} \left( y_j - \sum_{i=j+1}^{n} u_{ji} x_i \right), \;\;\; j=n,n-1,\ldots,1.
+\end{equation*}
+
+\begin{example}
+Consider the system
+\begin{equation*}
+\left[ \begin{array}{ccc} 1 & 1 & 1 \\ 0 & 1 & 3 \\ 0 & 0 & 2 \end{array} \right]
+\left[ \begin{array}{c} x_1 \\ x_2 \\ x_3 \end{array} \right]
+ = \left[ \begin{array}{c} 1 \\ 1 \\ 6 \end{array} \right].
+\end{equation*}
+Applying the above recursion gives
+\begin{align*}
+x_3 & = \frac{6}{2} = 3 \\
+x_2 & = \frac{1}{1} (1 - 3\cdot 3) = -8 \\
+x_1 & = \frac{1}{1} (1 - 1\cdot 6 - 1\cdot (-8) ) = 3. 
+\end{align*}
+\end{example}
+The computational complexity of each substitution is roughly $\frac{1}{2} n^2$ operations.
+
+\begin{problem}
+Show that set of upper triangular matrices is a subalgebra of the set of all matrices.
+Since it is clearly a subspace, only two properties must be verified:
+\begin{enumerate}
+\item that the product of two upper triangular matrices is upper triangular
+\item that the inverse of an upper triangular matrix is upper triangular
+\end{enumerate}
+\end{problem}
+
+\subsection{The Determinant}
+
+The determinant $\det (A)$ of a square matrix $A \in F^{n \times n}$ is a scalar which captures a number of important properties of that matrix.
+For example, $A$ is invertible iff $\det(A) \neq 0$ and the determinant satisfies $\det(AB) = \det(A) \det(B)$ for square matrices $A,B$.
+Mathematically, it is the unique function mapping matrices to scalars that is (i) linear in each column, (ii) negated by column transposition, and (iii) satisfies $\det(I) = 1$.
+
+The determinant of a square matrix can be defined recursively using the fact that $\det \left( [ a ] \right) = a$.
+Let $A \in F^{n \times n}$ be an arbitrary square matrix with entries $a_{ij} = [ A ]_{ij}$.
+The $(i,j)$-minor of $A$ is the determinant of the $(n-1)\times(n-1)$ matrix formed by deleting the $i$-th row and $j$-th column of $A$.
+\begin{fact}[Laplace's Formula]
+The determinant of $A$ is given by
+\begin{equation*}
+\det(A) = \sum_{j=1}^n a_{ij} (-1)^{i+j} M_{ij} = \sum_{i=1}^n a_{ij} (-1)^{i+j} M_{ij},
+\end{equation*}
+where $M_{ij}$ is the $(i,j)$-minor of $A$.
+\end{fact}
+
+\begin{theorem}
+\label{thm:triangular_determinant}
+The determinant of a triangular matrix is the product of its diagonal elements.
+\end{theorem}
+\begin{proof}
+For upper (lower) triangular matrices, this can be shown by expanding the determinant along the first column (row) to compute each minor.
+\end{proof}
+
+\section{LU Decomposition}
+
+\subsection{Introduction}
+
+\defn{matrix factorization}{LU decomposition} is a generalization of Gaussian elimination which allows one to efficiently solve a system of linear equations $A \vecnot{x} = \vecnot{b}$ multiple times with different right-hand sides.
+In its basic form, it is numerically stable only if the matrix is positive definite or diagonally dominant.
+A slight modification, known as \emph{partial pivoting}, makes it stable for a very large class of matrices.
+
+Any square matrix $A \in F^{n \times n}$ can be factored as $A = LU$, where $L$ is a unit lower-triangular matrix and $U$ is an upper-triangular matrix.
+The following example uses elementary row operations to cancel, in each column, all elements below the main diagonal.
+These elementary row operations are represented using left multiplication by a unit lower-triangular matrix.
+\begin{align*}
+\left[ \begin{array}{ccc} 1 & 1 & 1 \\ 1 & 2 & 4 \\ 1 & 3 & 9 \end{array} \right] 
+= & \left[ \begin{array}{ccc} 1 & 1 & 1 \\ 1 & 2 & 4 \\ 1 & 3 & 9 \end{array} \right] \\
+\left[ \begin{array}{ccc} 1 & 0 & 0 \\ -1 & 1 & 0 \\ -1 & 0 & 1 \end{array} \right]
+\left[ \begin{array}{ccc} 1 & 1 & 1 \\ 1 & 2 & 4 \\ 1 & 3 & 9 \end{array} \right]
+= & \left[ \begin{array}{ccc} 1 & 1 & 1 \\ 0 & 1 & 3 \\ 0 & 2 & 8 \end{array} \right] \\
+\left[ \begin{array}{ccc} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & -2 & 1 \end{array} \right]
+\left[ \begin{array}{ccc} 1 & 0 & 0 \\ -1 & 1 & 0 \\ -1 & 0 & 1 \end{array} \right]
+\left[ \begin{array}{ccc} 1 & 1 & 1 \\ 1 & 2 & 4 \\ 1 & 3 & 9 \end{array} \right]
+= & \left[ \begin{array}{ccc} 1 & 1 & 1 \\ 0 & 1 & 3 \\ 0 & 0 & 2 \end{array} \right]
+\end{align*}
+This allows one to write
+\begin{align*}
+\left[ \begin{array}{ccc} 1 & 1 & 1 \\ 1 & 2 & 4 \\ 1 & 3 & 9 \end{array} \right]
+& = \left[ \begin{array}{ccc} 1 & 0 & 0 \\ -1 & 1 & 0 \\ -1 & 0 & 1 \end{array} \right]^{-1}
+\left[ \begin{array}{ccc} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & -2 & 1 \end{array} \right]^{-1}
+\left[ \begin{array}{ccc} 1 & 1 & 1 \\ 0 & 1 & 3 \\ 0 & 0 & 2 \end{array} \right] \\
+\left[ \begin{array}{ccc} 1 & 1 & 1 \\ 1 & 2 & 4 \\ 1 & 3 & 9 \end{array} \right]
+& = \left[ \begin{array}{ccc} 1 & 0 & 0 \\ 1 & 1 & 0 \\ 1 & 0 & 1 \end{array} \right]
+\left[ \begin{array}{ccc} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 2 & 1 \end{array} \right]
+\left[ \begin{array}{ccc} 1 & 1 & 1 \\ 0 & 1 & 3 \\ 0 & 0 & 2 \end{array} \right] \\
+\left[ \begin{array}{ccc} 1 & 1 & 1 \\ 1 & 2 & 4 \\ 1 & 3 & 9 \end{array} \right]
+& = \left[ \begin{array}{ccc} 1 & 0 & 0 \\ 1 & 1 & 0 \\ 1 & 2 & 1 \end{array} \right]
+\left[ \begin{array}{ccc} 1 & 1 & 1 \\ 0 & 1 & 3 \\ 0 & 0 & 2 \end{array} \right] \\
+\end{align*}
+
+LU decomposition can also be used to efficiently compute the determinant of $A$.
+Since $\det(A) = \det(LU) = \det(L) \det(U)$, the problem is reduced to computing the determinant of triangular matrices.
+Using Theorem \ref{thm:triangular_determinant}, it is easy to see that $\det(L) = 1$ and $\det(U) = \prod_{i=1}^n u_{ii}$.
+
+\subsection{Formal Approach}
+
+To describe LU decomposition formally, we first need to describe the individual operations that are used to zero out matrix elements.
+\begin{definition}
+Let $A \in F^{n\times n}$ be an arbitrary matrix, $\alpha \in F$ be a scalar, and $i,j\in \{1,2,\ldots,n\}$.
+Then, adding $\alpha$ times the $j$-th row to the $i$-th row an \textbf{elementary row-addition operation}.
+Moreover, $I + \alpha E_{ij}$, where $E_{ij} \triangleq \vecnot{e}_i \vecnot{e}_j^T$ and $\vecnot{e}_k$ is the $k$-th standard basis vector, is the \textbf{elementary row-addition matrix} which effects this operation via left multiplication.
+\end{definition}
+
+\begin{example}
+For example, elementary row operations are used to cancel the $(2,1)$ matrix entry in
+\begin{equation*}
+(I - E_{2,1}) A
+= \left[ \begin{array}{ccc} 1 & 0 & 0 \\ -1 & 1 & 0 \\ 0 & 0 & 1 \end{array} \right]
+\left[ \begin{array}{ccc} 1 & 1 & 1 \\ 1 & 2 & 4 \\ 1 & 3 & 9 \end{array} \right]
+= \left[ \begin{array}{ccc} 1 & 1 & 1 \\ 0 & 1 & 3 \\ 1 & 3 & 9 \end{array} \right].
+\end{equation*}
+\end{example}
+
+\begin{lemma}
+\label{lem:elem_row_mat}
+The following identities capture the important properties of elementary row-operation matrices:
+\begin{align*}
+(i) & \;\; E_{ij} E_{kl} = \delta_{j,k} E_{il} \\
+(ii) & \;\; (I + \alpha E_{ij}) (I + \beta E_{kl}) = I + \alpha E_{ij} + \beta E_{kl} \;\; \textrm{ if } j \neq k \\
+(iii) & \;\; (I+ \alpha E_{ij})^{-1} = (I-\alpha E_{ij}) \;\; \textrm{ if } i \neq j. 
+\end{align*}
+\end{lemma}
+\begin{proof}
+This proof is left as an exercise.
+\end{proof}
+
+Now, consider the process for computing the LU decomposition of $A$.
+To initialize the process, we let $A^{(1)} = A$.
+In each round, we let
+\[ L_j^{-1} = \prod_{i=j+1}^n \left( I - \frac{a^{(j)}_{i,j}}{a^{(j)}_{j,j}} E_{i,j} \right) \]
+be the product of elementary row operation matrices which cancel the subdiagonal elements of the $j$-th column.
+The process proceeds by defining $A^{(j+1)} = L_j^{-1} A^{(j)}$ so that $A^{(j+1)}$ has all zeros below the diagonal in the first $j$ columns.
+After $n-1$ rounds, the process terminates with
+\[ U = A^{(n)} = L_{n-1}^{-1} L_{n-2}^{-1} \cdots L_1^{-1} A \]
+where $L = L_1 L_2 \cdots L_{n-1}$ is unit lower triangular.
+
+\begin{lemma}
+From the structure of elementary row operation matrices, we see
+\[ \prod_{j=1}^{n-1} \prod_{i=j+1}^n \left( I + \alpha_{ij}  E_{i,j} \right)
+= I + \sum_{j=1}^{n-1} \sum_{i=j+1}^n \alpha_{ij} E_{i,j}. \]
+\end{lemma}
+\begin{proof}
+First, we notice that
+\[ \prod_{i=j+1}^n \left( I + \alpha_{ij}  E_{i,j} \right) = I + \sum_{i=j+1}^n \alpha_{ij} E_{i,j} \]
+for $j=1,2,\ldots,n-1$.
+Expanding the product shows that any term with two $E$ matrices must contain a product $E_{i,j} E_{l,j}$ with $l>i>j$.
+By Lemma \ref{lem:elem_row_mat}i, we see that this term must be zero because $j\neq l$.
+
+Now, we can prove the main result via induction.
+First, we assume that
+\[ \prod_{j=1}^{k} \prod_{i=j+1}^n \left( I + \alpha_{ij}  E_{i,j} \right)
+= I + \sum_{j=1}^{k} \sum_{i=j+1}^n \alpha_{ij} E_{i,j}. \]
+Next, we find that if $k \leq n-2$, then
+\begin{align*}
+\prod_{j=1}^{k+1} \prod_{i=j+1}^n \left( I + \alpha_{ij}  E_{i,j} \right)
+& = \left( \prod_{j=1}^{k} \prod_{i=j+1}^n \left( I + \alpha_{ij}  E_{i,j} \right) \right) \left( \prod_{l=k+2}^n \left( I + \alpha_{l,k+1}  E_{l,k+1} \right) \right) \\
+& = \left( I + \sum_{j=1}^{k} \sum_{i=j+1}^n \alpha_{ij} E_{i,j} \right) \left( I + \sum_{l=k+2}^n \alpha_{l,k+1}  E_{l,k+1} \right) \\
+& = I +  \sum_{j=1}^{k+1} \sum_{i=j+1}^n \alpha_{ij} E_{i,j} + \sum_{j=1}^{k} \sum_{i=j+1}^n \sum_{l=k+2}^n \alpha_{ij} \alpha_{l,k+1} E_{i,j} E_{l,k+1} \\
+& = I +  \sum_{j=1}^{k+1} \sum_{i=j+1}^n \alpha_{ij} E_{i,j} + \sum_{j=1}^{k} \sum_{i=j+1}^n \sum_{l=k+2}^n \alpha_{ij} \alpha_{l,k+1} E_{i,k+1} \delta_{j,l} \\
+& = I +  \sum_{j=1}^{k+1} \sum_{i=j+1}^n \alpha_{ij} E_{i,j}.
+\end{align*}
+Finally, we point out that the base case $k=1$ is given by the initial observation.
+\end{proof}
+
+\begin{theorem}
+This process generates one column of $L$ per round because
+\begin{equation*}
+[ L ]_{ij} =
+\begin{cases}
+\frac{a^{(j)}_{i,j}}{a^{(j)}_{j,j}} \textrm{  if  } 1 \leq i < j \\
+1 \textrm{  if  } i=j \\
+0 \textrm{  otherwise}.
+\end{cases}
+\end{equation*}
+\end{theorem}
+\begin{proof}
+First, we note that
+\begin{align*}
+L & =  L_1 L_2 \cdots L_{n-1} \\
+& = \prod_{j=1}^{n-1} \left(  \prod_{i=j+1}^n \left( I - \frac{a^{(j)}_{i,j}}{a^{(j)}_{j,j}} E_{i,j} \right) \right)^{-1} \\
+& \stackrel{(a)}{=} \prod_{i=1}^{n-1} \prod_{i=j+1}^n \left( I - \frac{a^{(j)}_{i,j}}{a^{(j)}_{j,j}} E_{i,j} \right)^{-1} \\
+& \stackrel{(b)}{=} \prod_{i=1}^{n-1} \prod_{i=j+1}^n \left( I + \frac{a^{(j)}_{i,j}}{a^{(j)}_{j,j}} E_{i,j} \right) \\
+& = I + \sum_{i=1}^{n-1} \sum_{i=j+1}^n \frac{a^{(j)}_{i,j}}{a^{(j)}_{j,j}} E_{i,j},
+\end{align*}
+where $(a)$ follows from Lemma \ref{lem:elem_row_mat}ii (i.e., all matrices in the inside product commute) and $(b)$ follows from Lemma \ref{lem:elem_row_mat}iii.
+Picking off the $(i,j)$ entry of $L$ (e.g., with $\vecnot{e}_i^T L \vecnot{e}_j$) gives the stated result.
+\end{proof}
+Finally, we note that the LU decomposition can be computed in roughly $\frac{2}{3}n^3$ field operations.
+
+\subsection{Partial Pivoting}
+
+Sometimes the \emph{pivot element} $a^{(j)}_{j,j}$ can be very small or zero.
+In this case, the algorithm will either fail (e.g., divide by zero) or return a very unreliable result.
+The algorithm can be easily modified to avoid this problem by swapping rows of $A^{(j)}$ to increase the magnitude of the pivot element before each cancellation phase.
+This results in a decomposition of the form $P A = L U$, where $P$ is a permutation matrix.
+
+In this section, we will describe LU decomposition with partial pivoting using the notation from the previous section.
+The main difference is that, in each round, we will define $A^{(j+1)} = M_j^{-1} P_j A^{(j)}$ where $P_j$ is a permutation matrix.
+In particular, left multiplication by $P_j$ swaps row $j$ with row $p_j$, where
+\[ p_j = \arg \max_{i=j,j+1,\ldots,n} | a^{(j)}_{i,j} |. \]
+The matrix $M_j^{-1}$ is now chosen to cancel the subdiagonal elements in $j$-th column of $P_j A^{(j)}$.
+After $n-1$ rounds, the resulting decomposition has the form
+\[ A^{(n)} = M_{n-1}^{-1} P_{n-1} M_{n-2}^{-1} P_{n-2} \cdots M_1^{-1} P_1 A = U. \]
+
+To show this can also be written in the desired form, we need to understand some properties of the permutations.
+First, we point that swapping two rows is a transposition and therefore $P_j^2 = I$.
+Next, we will show that the permutations can be moved to the right.
+\begin{lemma}
+Let $M = I + \sum_{j=1}^k \sum_{i=j+1}^n \alpha_{ij} E_{ij}$ and $Q$ be a permutation matrix which swaps row $l \geq k+1$ and row $m>l$.
+Then, $Q M = \widetilde{M} Q$ where
+\[ \widetilde{M} = I + \sum_{j=1}^k \sum_{i=j+1}^n \alpha_{ij} Q E_{ij}. \]
+Therefore, we can write
+\[ A^{(n)} = \underbrace{\widetilde{M}_{n-1}^{-1} \widetilde{M}_{n-2}^{-1} \cdots \widetilde{M}_1^{-1}}_{L^{-1}} \underbrace{P_{n-1} \cdots P_2 P_1}_P A = U \]
+and $ P A = L U$.
+\end{lemma}
+\begin{proof}
+The proof is left as an exercise.
+\end{proof}
+
+\section{LDLT and Cholesky Decomposition}
+
+If the matrix $A \in \mathbb{C}^{n \times n}$ is Hermitian, then the LU decomposition allows the factorization $A = L D L^H$, where $L$ is unit lower triangular and $D$ is diagonal.
+Since this factorization is typically applied to real matrices, it is referred to as \defn{matrix factorization}{LDLT decomposition}.
+If $A$ is also positive definite, then the diagonal elements of $D$ are positive and we can write $A = \left(L D^{1/2} \right) \left(L D^{1/2}\right)^H$.
+The form $A = \widetilde{L} \widetilde{L}^H$, where $\widetilde{L}$ is lower triangular, is known as \defn{matrix factorization}{Cholesky factorization}.
+
+\iffalse
+To show such a decomposition exists, we note that standard LU decomposition gives an $L$ such that $L^{-1} A$ is upper triangular.
+The same proof, using elementary column operations applied on the right, shows that $A L^{-H}$ is lower triangular.
+But, $\left( A L^{-H} \right)^H = L^{-1} A^H = L^{-1} A$.
+\fi
+ 
+To see this, we will describe the LDLT decomposition using the notation from LU decomposition starting from $A^{(1)} = A$.
+In the $j$-th round, define $L_j^{-1}$ to be the product of elementary row-operation matrices which cancel the subdiagonal elements of the $j$-th column $A^{(j)}$.
+Then, define $A^{(j+1)} = L_j^{-1} A^{(j)} L_j^{-H}$ and notice that $A^{(j+1)}$ is Hermitian because $A^{(j)}$ is Hermitian.
+Next, notice that $A^{(j+1)}$ has zeros below the diagonal in the first $j$ columns and zeros to the right of diagonal in the first $j$ rows.
+This follows from the fact that the first $j$ rows of $A^{(j)}$ are not affected by applying $L_j^{-1}$ on left.
+Therefore, applying $L_j^{-H}$ on the right also cancels the elements to the right of the diagonal in the $j$-th row.
+After $n-1$ rounds, we find that $D = A^{(n)}$ is a diagonal matrix.
+
+There are a number of redundancies in the computation described above.
+First off, the $L$ matrix computed by LU decomposition is identical the to the $L$ matrix computed by LDLT decomposition.
+Therefore, one can save operations by defining $A^{(j+1)} = L_j^{-1} A^{(j)}$.
+Moreover, the elements to the right of the diagonal in $A^{(j)}$ do not affect the computation at all.
+So, one can roughly half the number of additions and multiplies by only updating the lower triangular part of $A^{(j)}$.
+The resulting computational complexity is roughly $\frac{1}{3}n^3$ field operations.
+
+\subsection{Cholesky Decomposition}
+
+For a positive-definite matrix $A$, we can first apply the LDLT decomposition and then define $\widetilde{L} = L D^{1/2}$.
+This gives the Cholesky decomposition $\widetilde{L} \widetilde{L}^H = L D L^H = A$.
+
+The Cholesky decomposition is typically used to compute whitening filters for random variables.
+For example, one can apply it to the correlation matrix $R = E [ \vecnot{X} \vecnot{X}^H ]$ of a random vector $\vecnot{X}$.
+Then, one can define $\vecnot{Y} = \widetilde{L}^{-1} \vecnot{X}$ and see that
+\[ E [ \vecnot{Y} \vecnot{Y}^H ] =  E [ \widetilde{L}^{-1} \vecnot{X} \vecnot{X}^H \widetilde{L}^{-H}] = \widetilde{L}^{-1} R \widetilde{L}^{-H} = I. \]
+From this, one sees that $\vecnot{Y}$ is a vector of uncorrelated (or white) random variables.
+
+\subsection{QR decomposition}
+
+A complex matrix $Q \in \mathbb{C}^{n \times n}$ is called \defn{matrix factorization}{unitary} if $Q^H Q = Q Q^H = I$.
+If all elements of the matrix are real, then it is called \defn{matrix factorization}{orthogonal} and $Q^T Q = Q Q^T = I$.
+
+A matrix $A \in F^{m \times n}$ can be factored as
+\begin{equation*}
+A = Q R,
+\end{equation*}
+where $Q$ is a unitary matrix, $QQ^H = I$, and $R$ is an upper-triangular matrix.
+
+\section{Hermitian Matrices and Complex Numbers}
 
 A useful analogy between matrices and complex numbers is as follows.
 \begin{itemize}
@@ -19,51 +329,4 @@ U = (I + jR) (I - jR)^{-1},
 a Hermitian matrix $R$ is mapped to a unitary matrix.
 
 
-\section{Matrix Factorization}
-
-\subsubsection{LU decomposition}
-
-A square matrix $A \in F^{n \times n}$ can be factored as $A = LU$, where $L$ is a lower-triangular matrix with ones on the main diagonal and $U$ is an upper-triangular matrix.
-
-\begin{gather*}
-\left[ \begin{array}{ccc} 1 & 1 & 1 \\ 1 & 2 & 4 \\ 1 & 3 & 9 \end{array} \right] \\
-\left[ \begin{array}{ccc} 1 & 0 & 0 \\ -1 & 1 & 0 \\ -1 & 0 & 1 \end{array} \right]
-\left[ \begin{array}{ccc} 1 & 1 & 1 \\ 1 & 2 & 4 \\ 1 & 3 & 9 \end{array} \right]
-= \left[ \begin{array}{ccc} 1 & 1 & 1 \\ 0 & 1 & 3 \\ 0 & 2 & 8 \end{array} \right] \\
-\left[ \begin{array}{ccc} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & -2 & 1 \end{array} \right]
-\left[ \begin{array}{ccc} 1 & 0 & 0 \\ -1 & 1 & 0 \\ -1 & 0 & 1 \end{array} \right]
-\left[ \begin{array}{ccc} 1 & 1 & 1 \\ 1 & 2 & 4 \\ 1 & 3 & 9 \end{array} \right]
-= \left[ \begin{array}{ccc} 1 & 1 & 1 \\ 0 & 1 & 3 \\ 0 & 0 & 2 \end{array} \right]
-\end{gather*}
-
-\begin{gather*}
-\left[ \begin{array}{ccc} 1 & 0 & 0 \\ -1 & 1 & 0 \\ -1 & 0 & 1 \end{array} \right]
-\left[ \begin{array}{ccc} 1 & 1 & 1 \\ 1 & 2 & 4 \\ 1 & 3 & 9 \end{array} \right]
-= \left[ \begin{array}{ccc} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 2 & 1 \end{array} \right]
-\left[ \begin{array}{ccc} 1 & 1 & 1 \\ 0 & 1 & 3 \\ 0 & 0 & 2 \end{array} \right] \\
-\left[ \begin{array}{ccc} 1 & 1 & 1 \\ 1 & 2 & 4 \\ 1 & 3 & 9 \end{array} \right]
-= \left[ \begin{array}{ccc} 1 & 0 & 0 \\ 1 & 1 & 0 \\ 1 & 0 & 1 \end{array} \right]
-\left[ \begin{array}{ccc} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 2 & 1 \end{array} \right]
-\left[ \begin{array}{ccc} 1 & 1 & 1 \\ 0 & 1 & 3 \\ 0 & 0 & 2 \end{array} \right] \\
-\left[ \begin{array}{ccc} 1 & 1 & 1 \\ 1 & 2 & 4 \\ 1 & 3 & 9 \end{array} \right]
-= \left[ \begin{array}{ccc} 1 & 0 & 0 \\ 1 & 1 & 0 \\ 1 & 2 & 1 \end{array} \right]
-\left[ \begin{array}{ccc} 1 & 1 & 1 \\ 0 & 1 & 3 \\ 0 & 0 & 2 \end{array} \right] \\
-\end{gather*}
-
-
-\subsubsection{Cholesky decomposition}
-
-A Hermitian positive-definite matrix $A \in F^{n \times n}$ can be factored as
-\begin{equation*}
-A = LL^H,
-\end{equation*}
-where $L$ is lower triangular.
-
-\subsubsection{QR decomposition}
-
-A matrix $A \in F^{m \times n}$ can be factored as
-\begin{equation*}
-A = Q R,
-\end{equation*}
-where $Q$ is a unitary matrix, $QQ^H = I$, and $R$ is an upper-triangular matrix.
 
