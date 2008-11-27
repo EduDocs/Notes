@@ -302,11 +302,23 @@ From this, one sees that $\vecnot{Y}$ is a vector of uncorrelated (or white) ran
 A complex matrix $Q \in \mathbb{C}^{n \times n}$ is called \defn{matrix factorization}{unitary} if $Q^H Q = Q Q^H = I$.
 If all elements of the matrix are real, then it is called \defn{matrix factorization}{orthogonal} and $Q^T Q = Q Q^T = I$.
 
-A matrix $A \in F^{m \times n}$ can be factored as
+\begin{theorem}
+Any matrix $A \in \mathbb{C}^{m \times n}$ can be factored as
 \begin{equation*}
 A = Q R,
 \end{equation*}
-where $Q$ is a unitary matrix, $QQ^H = I$, and $R$ is an upper-triangular matrix.
+where $Q$ is an $m\times m$ unitary matrix, $QQ^H = I$, and $R$ is an $m\times n$ upper-triangular matrix.
+\end{theorem}
+\begin{proof}
+To show this decomposition, we start by applying Gram-Schmidt Orthogonalization to the columns $\vecnot{a}_1,\ldots,\vecnot{a}_n$ of $A$.
+This results in orthonormal vectors $\{ \vecnot{q}_1,\ldots,\vecnot{q}_l \}$, where $l=\min(m,n)$, such that
+\[ \vecnot{a}_j = \sum_{i=1}^{\min(j,l)} r_{i,j} \vecnot{q}_i \;\; \textrm{ for } j=1,2,\ldots,n. \]
+This gives an $m\times l$ matrix $Q=[ \vecnot{q}_1 \; \ldots \; \vecnot{q}_l ]$ and an $l \times n$ upper-triangular matrix $R$, with entries $[ R ]_{i,j} = r_{i,j}$, such that $A = QR$.
+If $m \leq n$, then $l=m$, $Q$ is unitary, and the decomposition is complete.
+Otherwise, we must extend the orthonormal set $\{ \vecnot{q}_1,\ldots,\vecnot{q}_l \}$ to an orthonormal basis $\{ \vecnot{q}_1,\ldots,\vecnot{q}_m \}$ of $\mathbb{C}^m$.
+This gives an $m\times m$ unitary matrix $Q' = [ \vecnot{q}_1 \; \ldots \; \vecnot{q}_m ]$.
+Adding $m-n$ rows of zeros to the previous $R$ matrix gives an $m\times n$ matrix $R'$ such that $A = Q' R'$.
+\end{proof}
 
 \section{Hermitian Matrices and Complex Numbers}
 

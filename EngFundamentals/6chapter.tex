@@ -1,6 +1,7 @@
 \chapter{Canonical Forms}
 
-\section{Characteristic Values}
+\section{Eigenvalues and Eigenvectors}
+\index{eigenvalues}
 
 \begin{definition}
 Let $V$ be a vector space over the field $F$ and let $T$ be a linear operator on $V$.
@@ -17,39 +18,45 @@ A nonzero vector $\vecnot{v}$ is called a \emph{right eigenvector} for the eigen
 It is called a \emph{left eigenvector} if $\vecnot{v}^H A = \lambda \vecnot{v}^H$.
 
 The polynomial $\chi_A (\lambda) = \det (\lambda I - A)$ is called the \emph{characteristic polynomial} of $A$.
-The equation $\det (\lambda I - A) = 0$ is called the characteristic equation of $A$.
-The set of roots of the characteristic polynomial $\chi_A (\lambda)$ is called the \emph{spectrum} of $A$, and is denoted $\lambda(A)$.
+The equation $\det (A - \lambda I) = 0$ is called the characteristic equation of $A$.
+The set of roots of the characteristic polynomial $\chi_A (\lambda)$ is called the \emph{spectrum} of $A$, and is denoted $\sigma(A)$.
 
 \begin{fact}
-Let $T$ be a linear operator on a finite-dimensional vector space $V$, and let $\lambda$ be a scalar.
+Let $A$ be the matrix representation of a linear operator on a finite-dimensional vector space $V$, and let $\lambda$ be a scalar.
 The following are equivalent,
 \begin{enumerate}
-\item $\lambda$ is a characteristic value of $T$
-\item the operator $(T - \lambda I)$ is singular
-\item $\det (T - \lambda I) = 0$.
+\item $\lambda$ is a characteristic value of $A$
+\item the operator $(A - \lambda I)$ is singular
+\item $\det (A - \lambda I) = 0$.
 \end{enumerate}
 \end{fact}
 
 The latter criterion is important.
-It states that an eigenvalue must be a root of the characteristic polynomial $\det( T - sI )$.
+It implies that every eigenvalue $\lambda$ is a root of the characteristic polynomial $\det( A - \lambda I )$.
+\begin{definition}
+Let $\lambda$ be an eigenvalue of the matrix $A$.
+The \defn{eigenvalues}{eigenspace} associated with $\lambda$ is the set $E_\lambda = \{ \vecnot{v} \in V | A \vecnot{v} = \lambda \vecnot{v} \}$.
+The \defn{eigenvalues}{algebraic multiplicity} of $\lambda$ is the multiplicity of the zero $t=\lambda$ in the characteristic polynomial $\chi_A (t)$.
+The \defn{eigenvalues}{geometric multiplicity} of an eigenvalue $\lambda$ is equal to dimension of the eigenspace $E_\lambda$ or $\textrm{nullity}(A - t I)$.
+\end{definition}
 
 \begin{theorem}
 If the eigenvalues of an $n \times n$ matrix are all distinct, then the eigenvectors of $A$ are linearly independent.
 \end{theorem}
 \begin{proof}
-Suppose that the eigenvectors are linearly dependent.
-Then there exist scalars $c_1, c_2, \ldots, c_n$, not all zeros, such that
+We will prove the slightly stronger statement: if $\lambda_1 , \lambda_2 , \ldots, \lambda_k $ are distinct eigenvalues with eigenvectors $\vecnot{v}_1 , \vecnot{v}_2 , \ldots, \vecnot{v}_k$, then the eigenvectors are linearly independent.
+The proof is by contradiction, so we suppose that the eigenvalues are distinct but $\vecnot{v}_1 , \vecnot{v}_2 , \ldots, \vecnot{v}_k$ are linearly dependent.
+Then there exist scalars $c_1, c_2, \ldots, c_k$, not all zeros, such that
 \begin{equation*}
-\sum_{i=1}^n c_i \vecnot{v}_i = \vecnot{0}
+\sum_{i=1}^k c_i \vecnot{v}_i = \vecnot{0}
 \end{equation*}
-where $\vecnot{v}_1, \ldots, \vecnot{v}_n$ denote the $n$ linearly dependent eigenvectors.
-Let $m \geq 1$ be the smallest number of vectors such that
+where $\vecnot{v}_1, \ldots, \vecnot{v}_k$ denote the $k$ linearly dependent eigenvectors.
+Let $1 \leq m \leq k$ be the size of the smallest subset of vectors such that
 \begin{equation} \label{equation:eigenvectors1}
 \sum_{j=1}^m c_{i_j} \vecnot{v}_{i_j} = \vecnot{0}
 \end{equation}
-and $c_{i_j} \neq 0$ for $j = 1, \ldots, m$.
-Because the eigenvectors are linearly dependent, we must have $1 \geq m \geq n$.
-Furthermore, by the properties of $A$, we obtain
+with non-zero coefficients $c_{i_j}$ for $j = 1, \ldots, m$.
+Using the properties of $A$, we obtain
 \begin{equation} \label{equation:eigenvectors2}
 A \sum_{j=1}^m c_{i_j} \vecnot{v}_{i_j}
 = \sum_{j=1}^m c_{i_j} A \vecnot{v}_{i_j}
@@ -59,11 +66,17 @@ A \sum_{j=1}^m c_{i_j} \vecnot{v}_{i_j}
 We now take $\lambda_{i_1}$ times \eqref{equation:eigenvectors1}, and subtract it from the last equation to get
 \begin{equation*}
 \sum_{j=2}^m c_{i_j} (\lambda_{i_j} - \lambda_{i_1})
-\vecnot{v}_{i_j} = \vecnot{0} .
+= \sum_{j=2}^m c_{i_j}' \vecnot{v}_{i_j}
+ = \vecnot{0} .
 \end{equation*}
-That is, there exists a linearly dependent sum of vectors with less than $m$ elements.
-This contradict our previous minimality assumption.
+Since the eigenvalues are all distinct, we see that each $c_{i_j}'$ is non-zero.
+Therefore, there exists a linearly dependent sum of vectors with exactly $m-1$ elements.
+This contradicts our previous minimality assumption.
 Hence, we must conclude that the set of eigenvectors is linearly independent.
+
+It is worth noting that we fail to get a contradiction only if all eigenvalues are the same.
+If they are all the same, then all the $c_{i_j}'$ coefficients are zero and there is no linear combination.
+While it may seem a little strange this problem occurs only when all eigenvalues are equal, it is not too hard to see that a minimal set of linearly dependent eigenvalues will always have this property.
 \end{proof}
 
 \begin{definition}
@@ -100,7 +113,7 @@ A \left[ \begin{array}{ccc} \vecnot{v}_1 & \cdots & \vecnot{v}_n \end{array} \ri
 &= \left[ \begin{array}{ccc} \lambda_1 \vecnot{v}_1 & \cdots & \lambda_n \vecnot{v}_n \end{array} \right] .
 \end{split}
 \end{equation*}
-We can rewrite the last matrix on the write as
+We can rewrite the last matrix on the right as
 \begin{equation*}
 \left[ \begin{array}{ccc} \lambda_1 \vecnot{v}_1 & \cdots & \lambda_n \vecnot{v}_n \end{array} \right]
 = \left[ \begin{array}{ccc} \vecnot{v}_1 & \cdots & \vecnot{v}_n \end{array} \right]
@@ -142,7 +155,37 @@ then matrices $A$ and $B$ are said to be \emph{similar}.
 If $A$ and $B$ are similar, then they have the same eigenvalues.
 Similar matrices can be considered representations of the same linear operator using different bases.
 
-\subsubsection{Matrix Exponential}
+\section{Applications of Eigenvalues}
+
+\subsection{Differential Equations}
+\label{sec:Differential_Equations}
+
+It is well known that the solution of the 1st-order linear differential equation
+\[ \frac{d}{dt} x(t) = a x(t) \]
+is given by
+\[ x(t) = e^{at} x(0) + C. \]
+
+It turns out that this formula can be extended to coupled equations.
+Let $A$ be a diagonalizable matrix and consider the 1st order linear differential equation
+\[ \frac{d}{dt} \vecnot{x}(t) = A \vecnot{x}(t). \]
+Using the decomposition $A = S \Lambda S^{-1}$ and the substitution $\vecnot{x}(t) = S \vecnot{y}(t)$, we find that
+\begin{align*}
+\frac{d}{dt} \vecnot{x}(t)
+& = \frac{d}{dt} S \vecnot{y}(t) \\
+& = S \frac{d}{dt} \vecnot{y}(t) \\
+& = A S \vecnot{y}(t).
+\end{align*}
+This implies that
+\[ \frac{d}{dt} \vecnot{y}(t) = S^{-1} A S \vecnot{y}(t) = \Lambda \vecnot{y}(t). \]
+Solving each individual equation gives
+\[ y_j (t) = e^{\lambda_j t} y_j (0) + c_j \]
+and we can group them together in matrix form as
+\[ \vecnot{y}(t) = e^{\Lambda t} \vecnot{y}(0) + \vecnot{c}. \]
+In terms of $\vecnot{x}(t)$, this gives
+\[ \vecnot{x}(t) = S e^{\Lambda t} S^{-1} \vecnot{x}(0) + \vecnot{c}'. \]
+In the next section, we will see this is equal to $ \vecnot{x}(t) = e^{A t} \vecnot{x}(0) + \vecnot{c}'$.
+
+\subsection{Functions of a Matrix}
 
 The diagonal form of a diagonalizable matrix can be used in a number of applications.
 One such application is the computation of matrix exponentials.
@@ -198,7 +241,8 @@ A matrix $A$ is singular if and only if $0$ is an eigenvalue of $A$.
 \section{The Jordan Form}
 
 Not all matrices are diagonalizable.
-In particular if $A$ has repeated eigenvalues then it is not always possible to diagonalize it.
+In particular, if $A$ has an eigenvalue whose algebraic multiplicity is larger than its geometric multiplicity, then that eigenvalue is called \defn{eigenvalues}{defective}.
+A matrix with a defective eigenvalue is not diagonalizable.
 
 \begin{theorem}
 Let $A$ be an $n \times n$ matrix.
@@ -222,31 +266,172 @@ That is, the $i$th column of $S$ is an eigenvector of $A$ associated with the $i
 Since $S$ is nonsingular, there are exactly $n$ linearly independent eigenvectors.
 \end{proof}
 
-\begin{fact}
-An $m \times m$ matrix $A$ with $k \leq m$ linearly independent eigenvectors can be written as
+\begin{definition}
+The \defn{eigenvalues}{Jordan normal form} of any matrix $A\in \mathbb{C}^{n \times n}$ with $l \leq n$ linearly independent eigenvectors can be written as
 \begin{equation*}
 A = T J T^{-1} ,
 \end{equation*}
-where $J$ is a block-diagonal matrix,
+where $T$ is an invertible matrix and $J$ is the block-diagonal matrix
 \begin{equation*}
 J = \left[ \begin{array}{ccc}
-J_1 & \cdots & 0 \\
+J_{m_1}(\lambda_1) & \cdots & 0 \\
 \vdots & \ddots & \vdots \\
-0 & \cdots & J_n
+0 & \cdots & J_{m_l}(\lambda_l)
 \end{array} \right] .
 \end{equation*}
-The blocks $J_i$ are called Jordan blocks, and they have the form
+The $J_m (\lambda)$ are $m\times m$ matrices called Jordan blocks, and they have the form
 \begin{equation*}
-J = \left[ \begin{array}{ccccc}
-\lambda_i & 1 & 0 &\cdots & 0 \\
-0 & \lambda_i & 1 & \cdots & 0 \\
+J_m (\lambda) = \left[ \begin{array}{ccccc}
+\lambda & 1 & 0 &\cdots & 0 \\
+0 & \lambda & 1 & \cdots & 0 \\
 \vdots & \vdots & \vdots & \ddots & \vdots \\
-0 & 0 & 0 & \cdots & \lambda_i
+0 & 0 & 0 & \cdots & \lambda
 \end{array} \right] .
 \end{equation*}
-When $J_i$ is an $l \times l$ matrix, then the eigenvalue $\lambda_i$ is repeated $l$ times along the diagonal, and $1$ appears $l - 1$ times above the diagonal.
-Two matrices are similar if they have identical Jordan form.
-\end{fact}
+It is important to note that the eigenvalues $\lambda_1, \ldots, \lambda_l$ are not necessarily distinct (i.e., multiple Jordan blocks may have the same eigenvalue).
+The Jordan matrix $J$ associated with any matrix $A$ is unique up to the order of the Jordan blocks.
+Moreover, two matrices are similar iff they are both similar to the same Jordan matrix $J$.
+\end{definition}
+
+%Another important property of Jordan normal matrices is that
+%\[ (A - \lambda I)^j = (T J T^{-1} - \lambda I)^j = T (J- \lambda I)^j T^{-1}. \]
+
+Since every matrix is similar to a Jordan block matrix, one can gain some insight by studying Jordan blocks.
+In fact, Jordan blocks exemplify the way that matrices can be degenerate.
+For example, $J_m (\lambda)$ has the single eigenvector $\vecnot{e}_1$ (i.e., the standard basis vector) and satisfies
+\[ J_m (0) \vecnot{e}_{j+1} = \vecnot{e}_j \; \textrm{ for } \; j=1,2,\ldots,m-1. \]
+So, the reason this matrix has only one eigenvector is that left-multiplication by this matrix shifts all elements in a vector up element.
+
+Computing the Jordan normal form of a matrix can be broken into two parts.
+First, one can identify, for each distinct eigenvalue $\lambda$, the \defn{eigenvalues}{generalized eigenspace}
+\[ G_\lambda = \left\{ \vecnot{v} \in \mathbb{C}^n \big| (A-\lambda I)^n \vecnot{v} = \vecnot{0} \right\}. \]
+Let $\lambda_1 , \ldots , \lambda_k$ be the distinct eigenvalues of $A$ ordered by decreasing magnitude.
+Let $d_j$ be the dimension of $G_{\lambda_j}$, which is equal to the sum of the sizes of the Jordan blocks associated with $\lambda$, then $\sum_{j=1}^k d_j = n$.
+Let $T$ be a matrix whose first $d_1$ columns for a basis for $G_{\lambda_1}$, next $d_2$ columns form a basis for $G_{\lambda_2}$, and so on.
+In this case, the matrix $T^{-1} A T$ is block diagonal and the $j$-th block $B_j$ is associated with the eigenvalue $\lambda_j$.
+
+To put $A$ in Jordan normal form, we now need to transform each block matrix $B$ into Jordan normal form.
+One can do this by identifying the subspace $V_j$ that is not mapped to $\vecnot{0}$ by $(B-\lambda I)^{j-1}$ (i.e., $\mathcal{N}\left((B- \lambda I)^{j-1} \right)^\bot$).
+This gives the sequence $V_1,\ldots,V_J$ of non-empty subspaces (e.g., $V_j$ is empty for $j>J$).
+Now, we can form a sequence of bases $W_J, W_{J-1},\ldots, W_1$ recursively starting from $W_J$ with
+\[ W_{j} = W_{j+1} \cup \{ (B - \lambda I) \vecnot{w} | \vecnot{w} \in W_{j+1} \} \cup \textrm{basis}(V_{j} - V_{j-1}), \]
+where $\textrm{basis}(V_{j} - V_{j-1})$ is some set basis vectors that extends $V_{j-1}$ to $V_j$.
+Each vector in $W_j$ gives rise to a length $j$ \defn{eigenvalues}{Jordan chain} of vectors $\vecnot{v}_{i-1} = (B- \lambda I) \vecnot{v}_i \in W_{i-1}$ starting from any $\vecnot{v}_j \in W_j$.
+Each vector $\vecnot{v}_j$ defined in this way is called a \defn{eigenvalues}{generalized eigenvector} of order $j$.
+By correctly ordering the basis $W_1$ as columns of $T$, one finds that $T^{-1} B T$ is a Jordan matrix.
+
+\begin{example}
+Consider the matrix
+\begin{equation*}
+\left[ \begin{array}{cccc} 4 & 0 & 1 & 0 \\ 2 & 2 & 3 & 0 \\ -1 & 0 & 2 & 0 \\ 4 & 0 & 1 & 2 \end{array} \right].
+\end{equation*}
+First, we find the characteristic polynomial
+\[ \chi_A (t) = \det (t I - A) = t^4 - 10 t^3 + 37 t^2 -60 t + 36 = (t-2)^2 (t-3)^2. \]
+Next, we find the eigenvectors associated with the eigenvalues $\lambda_1 = 3$ and $\lambda_2 = 2$.
+This is done by finding a basis $\vecnot{v}^{(i)}_1, \vecnot{v}^{(i)}_2, \ldots$ for the nullspace of $A - \lambda_i I$ and gives
+\begin{align*}
+\vecnot{v}_1^{(1)} & = [ 1 \; -1 \; -1 \; 3 ]^T \\
+\vecnot{v}_1^{(2)} & = [ 0 \; 1 \; 0 \; 0 ]^T \\
+\vecnot{v}_2^{(2)} & = [ 0 \; 0 \; 0 \; 1 ]^T.
+\end{align*}
+Since the eigenvalue $\lambda_1$ has algebraic multiplicity 2 and geometric multiplicity 1, we still need to find another generalized eigenvector associated with this eigenspace.
+In particular, we need a vector $\vecnot{w}$ which satisfies $(A - \lambda_1 I) \vecnot{w} = \vecnot{v}^{(1)}_1$.
+This gives
+\begin{equation*}
+\left[ \begin{array}{cccc} 1 & 0 & 1 & 0 \\ 2 & -1 & 3 & 0 \\ -1 & 0 & -1 & 0 \\ 4 & 0 & 1 & -1 \end{array} \right]
+\left[ \begin{array}{c} w_1 \\ w_2 \\ w_3 \\ w_4 \end{array} \right]
+= \left[ \begin{array}{c} 1 \\ -1 \\ -1 \\ 3 \end{array} \right].
+\end{equation*}
+Using the pseudoinverse of $(A-\lambda_1 I)$, one finds that $\vecnot{w} = \left[ \frac{11}{12} \; \frac{37}{12} \; \frac{1}{12} \; \frac{9}{12} \right]$.
+Using this, we construct the Jordan normal form by noting that
+\begin{align*}
+\left[ \begin{array}{cccc} 4 & 0 & 1 & 0 \\ 2 & 2 & 3 & 0 \\ -1 & 0 & 2 & 0 \\ 4 & 0 & 1 & 2 \end{array} \right]
+\left[ \begin{array}{cccc} \vecnot{v}_1^{(1)} & \vecnot{w} & \vecnot{v}_1^{(2)} & \vecnot{v}_2^{(2)} \end{array} \right]
+& = \left[ \begin{array}{cccc} 3 \vecnot{v}_1^{(1)} & \vecnot{v}_1^{(1)}+3 \vecnot{w} & 2 \vecnot{v}_1^{(2)} & 2 \vecnot{v}_2^{(2)} \end{array} \right] \\
+& = \left[ \begin{array}{cccc} \vecnot{v}_1^{(1)} & \vecnot{w} & \vecnot{v}_1^{(2)} & \vecnot{v}_2^{(2)} \end{array} \right]
+\left[ \begin{array}{cccc} 3 & 1 & 0 & 0 \\ 0 & 3 & 0 & 0 \\ 0 & 0 & 2 & 0 \\ 0 & 0 & 0 & 2 \end{array} \right].
+\end{align*}
+This implies that $A = T J T^{-1}$ with
+\begin{equation*}
+T = \left[ \begin{array}{cccc} \vecnot{v}_1^{(1)} & \vecnot{w} & \vecnot{v}_1^{(2)} & \vecnot{v}_2^{(2)} \end{array} \right]
+ = \left[ \begin{array}{cccc} 1 & \frac{11}{12} & 0 & 0 \\ -1 & \frac{37}{12} & 1 & 0 \\ -1 & \frac{1}{12} & 0 & 0 \\ 3 & \frac{9}{12} & 0 & 1 \end{array} \right].
+\end{equation*}
+\end{example}
+
+\section{Applications of Jordan Normal Form}
+
+Jordan normal form often allows one to extend to all matrices results that are easy to prove for diagonalizable matrices.
+
+\subsection{Convergent Matrices}
+
+\begin{definition}
+An $n\times n$  matrix $A$ is \defn{matrix}{convergent} if $\| A^k \| \rightarrow 0$ for any norm.
+\end{definition}
+Of course, this is equivalent to the statement ``$A^k$ converges to the all zero matrix".
+Since all finite-dimensional vector norms are equivalent, it also follows that this condition does not depend on the norm chosen.
+
+Recall that the spectral radius $\rho(A)$ of a matrix $A$ is the magnitude of the largest eigenvalue.
+If $A$ is diagonalizable, then $A^k = T \Lambda^k T^{-1}$ and it is easy to see that
+\[ \| A^k \| \leq \| T \| \| \Lambda^k \| \| T^{-1} \|. \]
+Since all finite-dimensional vector norms are equivalent, we know that $ \| \Lambda^k \| \leq M \| \Lambda^k \|_1 = M \rho(A)^k $.
+Therefore, $A$ is convergent if $\rho(A)<1$.
+If $\rho(A)\geq 1$, then it is easy to show that $\| \Lambda^k \| > 0$ and therefore that $\| A^k \| > 0$.
+For general matrices, we can instead use the Jordan normal form and the following lemma.
+
+\begin{lemma}
+The Jordan block $J_m (\lambda)$ is convergent iff $| \lambda | <1$.
+\end{lemma}
+\begin{proof}
+This follows from the fact that $J_m (\lambda) = \lambda I + N$, where $[ N ]_{i,j} = \delta_{i+1,j}$.
+Using the Binomial formula, we write
+\begin{align*}
+\| (\lambda I + N)^k \|
+& = \left\| \sum_{i=0}^k \binom{k}{i} N^{i} \lambda^{k-i} \right\| \\
+& \leq \sum_{i=0}^{m-1} \binom{k}{i} | \lambda |^{k-i},
+\end{align*}
+where the second step follows from the fact that $\| N^i \|$ is $1$ for $i=1,\ldots,m-1$ and zero for $i\geq m$.
+Notice that $| \binom{k}{i} \lambda^{k-i} | \leq k^{m-1} | \lambda |^{k-m+1} $ for $0 \leq i \leq m-1$.
+Since $k^{m-1} | \lambda |^{k-m+1} \rightarrow 0$ as $k\rightarrow \infty$ iff $| \lambda | <1$, we see that each term in the sum converges to zero under the same condition.
+On the other hand, if $ |\lambda | \geq 1$, then $| \left[ (\lambda I + N)^k \right]_{1,1} | \geq 1$ for all $k\geq 0$.
+\end{proof}
+
+\begin{theorem}
+A matrix $A \in \mathbb{C}^{n\times n}$ is convergent iff $\rho(A)<1$.
+\end{theorem}
+
+\begin{proof}
+Using the Jordan normal form, we can write $A = T J T^{-1}$, where $J$ is a block diagonal with $k$ Jordan blocks $J_1,\ldots,J_k$.
+Since $J$ is block diagonal, we also have that $\| J^k \| \leq \sum_{i=1}^k \| J_i^k \|$.
+If $\rho(A)<1$, then the eigenvalue $\lambda$ associated with each Jordan block satisfies $\| \lambda \| < 1$.
+In this case, the lemma shows that $\| J_i^k \| \rightarrow 0$ which implies that $\| J^k \| \rightarrow 0$.
+Therefore, $\| A^k \| \rightarrow 0$ and $A$ is convergent.
+On the other hand, if $\rho(A) \geq 1$, then there is a Jordan block $J_i$ with $| \lambda | \geq 1$ and $| [ J_i^k ]_{1,1} | \geq 1$ for all $k\geq 0$.
+\end{proof}
+
+In many cases, the structure of a large power of a matrix also has nice properties.
+
+\begin{definition}
+A matrix $A$ has a \textbf{unique eigenvalue of maximum modulus} if the Jordan block associated with that eigenvalue is $1\times 1$ and all other Jordan blocks are associated with eigenvalues of smaller magnitude.
+\end{definition}
+
+The following theorem shows that a normalized matrix of this type converges to limit.
+
+\begin{theorem}
+If $A$ has a unique eigenvalue $\lambda_1$ of maximum modulus, then
+\[ \lim_{k\rightarrow \infty} \frac{1}{\lambda_1^k} A^k = \vecnot{u} \vecnot{v}^H, \]
+where $A \vecnot{u} = \lambda_1 \vecnot{u}$, $\vecnot{v}^H A = \lambda_1 \vecnot{v}^H$, and $\vecnot{v}^H \vecnot{u} = 1$.
+\end{theorem}
+\begin{proof}
+Let $B = \frac{1}{\lambda_1} A$ so that maximum modulus eigenvalue is now $1$.
+Next, choose the Jordan normal form $B = T J T^{-1}$ so that the Jordan block associated with the eigenvalue $1$ is in the top left corner of $J$.
+In this case, it follows from the lemma that $J^n$ converges to $\vecnot{e}_1 \vecnot{e}_1^H$ as $n\rightarrow \infty$.
+This implies that $B^n = T J^n T^{-1}$ converges to $T \vecnot{e}_1 \vecnot{e}_1^H T^{-1} = \vecnot{u} \vecnot{v}^H$ where $\vecnot{u}$ is the first column of $T$ and $\vecnot{v}^H$ is the first row of $T^{-1}$.
+
+By construction, the first column of $T$ is the right eigenvector $\vecnot{u}$ and satisfies $A \vecnot{u} = \lambda_1 \vecnot{u}$.
+Likewise, the first row of $T^{-1}$ is the left eigenvector $\vecnot{v}^H$ associated with the eigenvalue $1$ because $B^H = T^{-H} J^H T^H$ and the first column of $T^{-H}$ (i.e., Hermitian conjugate of first row of $T^{-1}$) is the right eigenvector of $A^H$ associated with $\lambda_1$.
+Therefore, $\vecnot{v}^H A = \lambda_1 \vecnot{v}^H$.
+Finally, the fact that $\vecnot{u} = B^n \vecnot{u} \rightarrow \vecnot{u} \vecnot{v}^H \vecnot{u}$ implies that $\vecnot{v}^H \vecnot{u} = 1$.
+\end{proof}
 
 
 
