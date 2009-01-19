@@ -12,12 +12,13 @@
    height="1052.3622047"
    id="svg1404"
    sodipodi:version="0.32"
-   inkscape:version="0.44.1"
-   sodipodi:docbase="/usr/home/chmbrlnd/Courses"
+   inkscape:version="0.45.1"
+   sodipodi:docbase="/Users/courses/Desktop/FREDsvn/EduDocs/Probability/Figures/1Chapter"
    sodipodi:docname="intersection.svg"
    inkscape:export-filename="/usr/home/chmbrlnd/Courses/intersection.png"
    inkscape:export-xdpi="90"
-   inkscape:export-ydpi="90">
+   inkscape:export-ydpi="90"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape">
   <defs
      id="defs1406" />
   <sodipodi:namedview
@@ -34,9 +35,9 @@
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:window-width="810"
-     inkscape:window-height="576"
-     inkscape:window-x="46"
-     inkscape:window-y="137" />
+     inkscape:window-height="581"
+     inkscape:window-x="250"
+     inkscape:window-y="63" />
   <metadata
      id="metadata1409">
     <rdf:RDF>
@@ -52,29 +53,42 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1">
-    <path
-       sodipodi:type="arc"
-       style="opacity:1;fill:#e0e0e0;fill-opacity:1;fill-rule:nonzero;stroke:#808080;stroke-width:3.18527198;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="path2215"
-       sodipodi:cx="302.85715"
-       sodipodi:cy="438.07648"
-       sodipodi:rx="108.57143"
-       sodipodi:ry="102.85714"
-       d="M 411.42857 438.07648 A 108.57143 102.85714 0 1 1  194.28572,438.07648 A 108.57143 102.85714 0 1 1  411.42857 438.07648 z"
-       transform="matrix(0.916714,0,0,0.967644,-76.60446,527.431)" />
-    <path
-       sodipodi:type="arc"
-       style="opacity:1;fill:#e0e0e0;fill-opacity:1;fill-rule:nonzero;stroke:#808080;stroke-width:3.18527365;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="path2217"
-       sodipodi:cx="302.85715"
-       sodipodi:cy="438.07648"
-       sodipodi:rx="108.57143"
-       sodipodi:ry="102.85714"
-       d="M 411.42857 438.07648 A 108.57143 102.85714 0 1 1  194.28572,438.07648 A 108.57143 102.85714 0 1 1  411.42857 438.07648 z"
-       transform="matrix(0.916714,0,0,0.967643,-176.6044,527.4313)" />
-    <path
-       style="opacity:1;fill:#a0a0e0;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 151.02894,865.25223 C 121.41018,882.501 101.49769,914.62279 101.49769,951.34598 C 101.49769,988.06916 121.41018,1020.1597 151.02894,1037.4085 C 180.6477,1020.1597 200.56019,988.06912 200.56019,951.34598 C 200.56019,914.62283 180.6477,882.50098 151.02894,865.25223 z "
-       id="path2242" />
+    <g
+       id="g2306">
+      <path
+         transform="matrix(0.916714,0,0,0.967644,-76.60446,527.431)"
+         d="M 411.42857 438.07648 A 108.57143 102.85714 0 1 1  194.28572,438.07648 A 108.57143 102.85714 0 1 1  411.42857 438.07648 z"
+         sodipodi:ry="102.85714"
+         sodipodi:rx="108.57143"
+         sodipodi:cy="438.07648"
+         sodipodi:cx="302.85715"
+         id="path2215"
+         style="opacity:1;fill:#e0e0e0;fill-opacity:1;fill-rule:nonzero;stroke:#808080;stroke-width:3.18527198;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         sodipodi:type="arc" />
+      <path
+         transform="matrix(0.916714,0,0,0.967643,-176.6044,527.4313)"
+         d="M 411.42857 438.07648 A 108.57143 102.85714 0 1 1  194.28572,438.07648 A 108.57143 102.85714 0 1 1  411.42857 438.07648 z"
+         sodipodi:ry="102.85714"
+         sodipodi:rx="108.57143"
+         sodipodi:cy="438.07648"
+         sodipodi:cx="302.85715"
+         id="path2217"
+         style="opacity:1;fill:#e0e0e0;fill-opacity:1;fill-rule:nonzero;stroke:#808080;stroke-width:3.18527365;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         sodipodi:type="arc" />
+      <path
+         id="path2242"
+         d="M 151.02894,865.25223 C 121.41018,882.501 101.49769,914.62279 101.49769,951.34598 C 101.49769,988.06916 121.41018,1020.1597 151.02894,1037.4085 C 180.6477,1020.1597 200.56019,988.06912 200.56019,951.34598 C 200.56019,914.62283 180.6477,882.50098 151.02894,865.25223 z "
+         style="opacity:1;fill:#a0a0e0;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+       x="149.25943"
+       y="955.70709"
+       id="text2302"><tspan
+         sodipodi:role="line"
+         id="tspan2304"
+         x="149.25943"
+         y="955.70709">I</tspan></text>
   </g>
 </svg>

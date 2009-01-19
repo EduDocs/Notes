@@ -1,7 +1,8 @@
 \documentclass[12pt,openany]{book}
 
 \usepackage{amsmath,amssymb,amsthm}
-\usepackage{graphics,epsfig}
+\usepackage{graphics,epsfig,psfrag}
+\usepackage{makeidx}
 
 \topmargin          0in
 \headheight         0.25in
@@ -24,19 +25,22 @@
 \newcommand{\RationalNumbers}{\mathbb{Q}}
 \newcommand{\Integers}{\mathbb{Z}}
 \newcommand{\NaturalNumbers}{\mathbb{N}}
+\newcommand{\IndexSet}{\mathbb{I}}
+\newcommand{\Complement}{\text{c}}
 
 %% Definitions
 %%
 \renewcommand{\baselinestretch}{1.25}
 
+\makeindex
 
 \begin{document}
 
 \frontmatter
 
 \chapter*{Copyright}
-Copyright \copyright\ 2006 \\
-Jean-Francois Chamberland
+Copyright \copyright\ 2006--2009 \\
+%Jean-Francois Chamberland
 
 Permission is granted to copy, distribute and/or modify this document under the terms of the \emph{GNU Free Documentation License}, Version 1.2 or any later version published by the \emph{Free Software Foundation}; with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
 A copy of the license is included in the section entitled ``GNU Free Documentation License''.
@@ -47,14 +51,17 @@ A copy of the license is included in the section entitled ``GNU Free Documentati
 
 \include{0Preface}
 \include{1Mathematical_Review}
-\include{2Concepts_of_Probability_Theory}
-\include{3Conditional_Probability}
-\include{4Notions_of_Combinatorics}
-\include{5Discrete_Random_Variables}
-\include{6Continuous_Random_Variables}
-\include{7Sums_of_Random_variables}
+%\include{2Concepts_of_Probability_Theory}
+%\include{3Conditional_Probability}
+%\include{4Notions_of_Combinatorics}
+%\include{5Discrete_Random_Variables}
+%\include{6Continuous_Random_Variables}
+%\include{7Sums_of_Random_variables}
 
-\appendix
+%\appendix
 
-\include{fdl}
+%\include{fdl}
+
+\printindex
+
 \end{document}
