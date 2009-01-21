@@ -248,7 +248,11 @@ The second equality is obtained by writing
 = \sum_{k=1}^n \Pr (A_k) \Pr (B | A_k) .
 \end{split}
 \end{equation*}
-The application of the third axiom of probability is justified because $A_1, A_2, \ldots, A_n$ are disjoint events.
+The application of the third axiom of probability is justified because
+\begin{equation*}
+A_1, A_2, \ldots, A_n
+\end{equation*}
+are disjoint events.
 \end{proof}
 
 \begin{example}
@@ -262,7 +266,7 @@ Using Bayes' rule, we can easily compute the probability that a person who teste
 \begin{equation*}
 \begin{split}
 \Pr (D|P)
-&= \frac{ \Pr(D) \Pr(P|D) }{ \Pr(D) \Pr(P|D) + \Pr(D^c) \Pr(P|D^c) } \\
+&= \frac{ \Pr(D) \Pr(P|D) }{ \Pr(D) \Pr(P|D) + \Pr(D^{\Complement}) \Pr(P|D^{\Complement}) } \\
 &= \frac{ 0.01 \cdot 0.95 }{ 0.01 \cdot 0.95 + 0.99 \cdot 0.05 } \\
 &\approx 0.1610 .
 \end{split}
