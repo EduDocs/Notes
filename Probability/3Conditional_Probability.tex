@@ -2,17 +2,18 @@
 \label{chapter:ConditionalProbability}
 
 Conditional probability provides a way to compute the likelihood of an event based on \emph{partial information}.
-This is a powerful concept that is used extensively in decision making and estimation.
+This is a powerful concept that is used extensively throughout engineering with applications to decision making, networks and digital communications.
 
 
-\section{Conditioning on an Event}
+\section{Conditioning on Events}
 
-It may be best to begin our discussion of conditional probability with a straightforward example.
+We begin our discussion of conditional probability with an illustrative example.
+The intuition gained through this simple exercise is then generalized by introducing a formal definition for this important concept.
 
 \begin{example}
 The rolling of a fair die is an experiment with six equally likely outcomes.
 As such, the probability of obtaining any of the outcomes is $1/6$.
-However, if we are told that the number on top is an odd number then only three possibilities remain, namely $\{1, 3, 5 \}$.
+However, if we are told that the upper face displays an odd number, then only three possibilities remain, namely $\{1, 3, 5 \}$.
 
 \begin{center}
 \includegraphics[height=3.675cm]{Figures/3Chapter/condevent}
@@ -20,7 +21,7 @@ However, if we are told that the number on top is an odd number then only three 
 
 These three outcomes had equal probabilities before the additional information was revealed.
 It is natural to assume that they remain equally likely afterwards.
-In particular, it is reasonable to assign a probability of $1/3$ to each of the three possible outcomes, in view of the new information.
+In particular, it is reasonable to assign a probability of $1/3$ to each of the three outcomes still plausible, in view of the new information.
 Note that we can express the probability of getting, say, a three given that the outcome is an odd number as
 \begin{equation*}
 \begin{split}
@@ -32,9 +33,9 @@ Note that we can express the probability of getting, say, a three given that the
 \end{equation*}
 \end{example}
 
-This argument can be generalized by introducing a formal definition for the concept of conditional probability.
+Having reviewed a specific situation, we now turn to the more encompassing setting.
 Let $B$ be an event such that $\Pr (B) > 0$.
-A conditional probability law assigns to every event $A$ a number $\Pr (A|B)$, termed the \emph{conditional probability of $A$ given $B$}, such that
+A conditional probability law assigns to every event $A$ a number $\Pr (A|B)$, termed the \emph{conditional probability of $A$ given $B$}, such that \index{Conditional Probability}
 \begin{equation} \label{equation:ConditionalProbability}
 \Pr (A | B) = \frac{\Pr (A \cap B)}{\Pr (B)}.
 \end{equation}
@@ -44,7 +45,7 @@ For every event $A$, we have
 \Pr (A|B) = \frac{\Pr (A \cap B)}{\Pr (B)} \geq 0.
 \end{equation*}
 That is, $\Pr (A|B)$ is nonnegative.
-The probability of the sample space $\Omega$ is equal to
+The probability of the entire sample space $\Omega$ is equal to
 \begin{equation*}
 \Pr (\Omega | B) = \frac{\Pr (\Omega \cap B)}{\Pr (B)}
 = \frac{\Pr (B)}{\Pr (B)} = 1 .
@@ -64,11 +65,11 @@ is also a sequence of disjoint events and
 \end{split}
 \end{equation*}
 where the third equality follows from the third axiom of probability applied to the set $\bigcup_{k=1}^{\infty} (A_k \cap B )$.
-Thus, the conditional probability law defined by \eqref{equation:ConditionalProbability} satisfies the three axioms of probability.
+Hence, the conditional probability law defined by \eqref{equation:ConditionalProbability} satisfies the three axioms of probability.
 
 \begin{example}
 A fair coin is tossed repetitively until heads is observed.
-In Example~\ref{example:CoinTossSequence}, we found that the probability of observing heads for the first time on trial $n$ is $2^{-n}$.
+In Example~\ref{example:CoinTossSequence}, we found that the probability of observing heads for the first time on trial $n$ is $2^{-k}$.
 We now wish to compute the probability that heads occurred for the first time on the second trial given that it took an even number of tosses to observe heads.
 In this example, $A = \{ 2 \}$ and $B$ is the set of even numbers.
 The probability that the outcome is two given that the number of tosses is even is equal to
@@ -83,10 +84,10 @@ The probability that the outcome is two given that the number of tosses is even 
 \end{split}
 \end{equation*}
 In the above computation, we have used the fact that the probability of flipping the coin an even number of times is equal to $1/3$.
-This result was obtained in Example~\ref{example:CoinTossSequence}.
+This fact was obtained in Example~\ref{example:CoinTossSequence}.
 \end{example}
 
-The definiton of conditional probability can be employed to compute the probability of several events occurring simultaneously.
+The definition of conditional probability can be employed to compute the probability of several events occurring simultaneously.
 Let $A_1, A_2, \ldots, A_n$ be a collection of events.
 The probability of events $A_1$ through $A_n$ taking place at the same time is given by
 \begin{equation} \label{equation:SimultaneousEvents}
@@ -110,7 +111,7 @@ We wish to compute the probability that all three balls are blue.
 The probability of drawing a blue ball the first time is equal to $8/12$.
 The probability of drawing a blue ball the second time given that the first ball is blue is $7/11$.
 Finally, the probability of drawing a blue ball the third time given that the previous two balls are blue is $6/10$.
-Using \eqref{equation:SimultaneousEvents}, we can compute the probability drawing three blue balls
+Using \eqref{equation:SimultaneousEvents}, we can compute the probability drawing three blue balls as
 \begin{equation*}
 \Pr (\text{3 blue balls})
 = \frac{8}{12} \frac{7}{11} \frac{6}{10}
@@ -125,15 +126,15 @@ Using \eqref{equation:SimultaneousEvents}, we can compute the probability drawin
 
 \section{The Total Probability Theorem}
 
-The probability of events $A$ and $B$ occuring at the same time can be calculated as a special case of \eqref{equation:SimultaneousEvents}.
+The probability of events $A$ and $B$ occurring at the same time can be calculated as a special case of \eqref{equation:SimultaneousEvents}.
 For two events, this computational formula simplifies to
 \begin{equation} \label{equation:ProbabilityIntersection}
 \Pr (A \cap B) = \Pr (A|B) \Pr (B) .
 \end{equation}
 We can also obtain this equation directly from the definition of conditional probability.
-This property is a key observation that plays a central role in establishing two important results, the total probability theorem and Bayes' rule.
+This property is a key observation that plays a central role in establishing two important results, the \emph{total probability theorem} and \emph{Bayes' rule}.
 To formulate these two theorems, we need to revisit the notion of a partition.
-A collection of events $A_1, A_2, \ldots, A_n$ is said to be a \emph{partition} of the sample space $\Omega$ if these events are disjoint and their union is the entire sample space,
+A collection of events $A_1, A_2, \ldots, A_n$ is said to be a \emph{partition} of the sample space $\Omega$ if these events are disjoint and their union is the entire sample space, \index{Partition}
 \begin{equation*}
 \bigcup_{k=1}^n A_k = \Omega .
 \end{equation*}
@@ -142,10 +143,10 @@ Visually, a partition divides an entire set into disjoint subsets.
 \includegraphics[height=4.23cm]{Figures/3Chapter/setpartition2}
 \end{center}
 
-\begin{theorem}[Total Probability Theorem] \label{theorem:TotalProbability}
+\begin{theorem}[Total Probability Theorem] \label{theorem:TotalProbability} \index{Total Probability Theorem}
 Let $A_1, A_2, \ldots, A_n$ be a collection of events that forms a partition of the sample space $\Omega$.
 Suppose that $\Pr (A_k) > 0$ for all $k$.
-Then for any event $B$ we can write
+Then, for any event $B$, we can write
 \begin{equation*}
 \begin{split}
 \Pr (B) &= \Pr (A_1 \cap B) + \Pr (A_2 \cap B) + \cdots + \Pr (A_n \cap B) \\
@@ -182,7 +183,7 @@ where the fourth equality is obtained by applying the third axiom of probability
 \end{center}
 A graphical interpretation of Theorem~\ref{theorem:TotalProbability} is illustrated above.
 Event $B$ can be decomposed into the disjoint union of $A_1 \cap B, A_2 \cap B, \ldots, A_n \cap B$.
-The probability of event $B$ can then be computed by adding
+The probability of event $B$ can then be computed by adding these various parts
 \begin{equation*}
 \Pr (A_1 \cap B), \Pr (A_2 \cap B), \ldots, \Pr (A_n \cap B) .
 \end{equation*}
@@ -193,8 +194,8 @@ A first ball is drawn from the urn.
 If this ball is red then the experiment stops, otherwise one more ball is drawn from the urn.
 What is the probability of obtaining a red ball?
 
-In this problem, there are three events of interest.
-If we denote the drawing of a red ball by $r$ and the drawing of a blue ball by $b$, then these three events can be represented by $\{ r, br, bb \}$.
+In this problem, there are three outcomes of interest.
+If we denote the drawing of a red ball by $r$ and the drawing of a blue ball by $b$, then these three outcomes can be represented by $\{ r, br, bb \}$.
 The probability of drawing a red ball initially is $\Pr (r) = 4/12$.
 The probabilities of drawing two balls can be computed using \eqref{equation:SimultaneousEvents}, and they are given by
 \begin{align*}
@@ -219,10 +220,10 @@ The overall probability of getting a red ball, $\Pr (R)$, can be computed by app
 The following result is also very useful.
 It relates the conditional probability of $A$ given $B$ to the conditional probability of $B$ given $A$.
 
-\begin{theorem}[Bayes' Rule]
+\begin{theorem}[Bayes' Rule] \index{Bayes' Rule}
 Let $A_1, A_2, \ldots, A_n$ be a collection of events that forms a partition of the sample space $\Omega$.
 Suppose that $\Pr (A_k) > 0$ for all $k$.
-Then for any event $B$ such that $\Pr (B) > 0$, we can write
+Then, for any event $B$ such that $\Pr (B) > 0$, we can write
 \begin{equation*}
 \begin{split}
 \Pr (A_i | B)
@@ -259,7 +260,8 @@ are disjoint events.
 April, a biochemist, designs a test for a latent disease.
 If a subject has the disease, the probability that the test results are positive is $0.95$.
 Similarly, if a subject does not have the disease, the probability that the test results are negative is $0.95$.
-If one percent of the population has the disease, we wish to find the probability that a person who tested positive has the disease.
+Suppose that one percent of the population has the disease.
+We wish to find the probability that a person who tested positive has the disease.
 
 Let $D$ denote the event that the person has the disease, and let $P$ be the event that the test results are positive.
 Using Bayes' rule, we can easily compute the probability that a person who tested positive has the disease,
@@ -277,8 +279,9 @@ Although the test is fairly accurate, the probability that a person with a posit
 
 \section{Independence}
 \label{section:Independence}
-Events $A$ and $B$ are said to be \emph{independent} if $\Pr (A \cap B) = \Pr(A) \Pr(B)$.
-Interestingly, independence is closely linked to the concept of condtional probability.
+
+Events $A$ and $B$ are said to be \emph{independent} if $\Pr (A \cap B) = \Pr(A) \Pr(B)$. \index{Independence}
+Interestingly, independence is closely linked to the concept of conditional probability.
 If $\Pr(B) > 0$ and events $A$ and $B$ are independent, then
 \begin{equation*}
 \Pr (A | B) = \frac{ \Pr (A \cap B) }{\Pr (B)}
@@ -286,8 +289,8 @@ If $\Pr(B) > 0$ and events $A$ and $B$ are independent, then
 = \Pr (A).
 \end{equation*}
 The \emph{a priori} probability of event $A$ is identical to the \emph{a posteriori} probability of $A$ given $B$.
-That is, if $A$ is independent of $B$, then $B$ contains no information about $A$.
-We note that independence is a symmetric relation; if $A$ is independent of $B$, then $B$ is independent of $A$.
+That is, if $A$ is independent of $B$, then partial knowledge about $B$ contains no information on the likely occurrence of $A$.
+We note that independence is a symmetric relation; if $A$ is independent of $B$, then $B$ is also independent of $A$.
 It is therefore unambiguous to say that $A$ and $B$ are independent events.
 
 \begin{example}
@@ -330,20 +333,20 @@ If $\Pr (A) > 0$, $\Pr (B) > 0$, and $\Pr (A \cap B) = 0$ then
 \begin{equation*}
 \Pr (A \cap B) = 0 < \Pr (A) \Pr(B).
 \end{equation*}
-Hence $A$ and $B$ cannot be independent if they are disjoint, non-trivial sets.
+Thus, $A$ and $B$ cannot be independent if they are disjoint, non-trivial sets.
 
 
 \subsection{Independence of Multiple Events}
 
 The concept of independence can be extended to multiple events.
-The events $A_1, A_2, \ldots, A_n$ are \emph{independent} provided that
-\begin{equation*}
-\Pr \left( \bigcap_{k \in S} A_k \right)
-= \prod_{k \in S} \Pr (A_k) ,
-\end{equation*}
-for every subset $S$ of $\{1, 2, \ldots, n\}$.
+The events $A_1, A_2, \ldots, A_n$ are \emph{independent} provided that \index{Independence}
+\begin{equation} \label{equation:IndependenceMultipleEvents}
+\Pr \left( \bigcap_{i \in \IndexSet} A_i \right)
+= \prod_{i \in \IndexSet} \Pr (A_i) ,
+\end{equation}
+for every subset $\IndexSet$ of $\{1, 2, \ldots, n\}$.
 
-For instance, consider a collection of three events, $A$, $B$, and $C$.
+For instance, consider a collection of three events, $A$, $B$ and $C$.
 These events are independent if
 \begin{equation} \label{equation:ThreeIndependentEvents}
 \begin{split}
@@ -356,32 +359,32 @@ and, in addition,
 \begin{equation*}
 \Pr (A \cap B \cap C) = \Pr (A) \Pr (B) \Pr(C) .
 \end{equation*}
-The three equalities in \eqref{equation:ThreeIndependentEvents} assert that $A$, $B$, and $C$ are \emph{pairwise independent}.
+The three equalities in \eqref{equation:ThreeIndependentEvents} assert that $A$, $B$ and $C$ are \emph{pairwise independent}.
 Note that the fourth condition does not follow from the first three conditions, nor does it imply any of them.
 Pairwise independence does not imply independence.
 
 \begin{example}
 A fair coin is flipped twice.
 Let $A$ denote the event that heads is observed on the first toss.
-Let $B$ be the event that heads is observed on the second toss.
+Let $B$ be the event that heads is obtained on the second toss.
 Finally, let $C$ be the event that the two coins show distinct sides.
 These three events each have a probability of $1/2$.
-Futhermore, we have
+Furthermore, we have
 \begin{equation*}
 \Pr (A \cap B) = \Pr (A \cap C) = \Pr (B \cap C) = \frac{1}{4} .
 \end{equation*}
 That is, these events are pairwise independent.
-However, we observe that
+However, we can verify that
 \begin{equation*}
 \Pr (A \cap B \cap C) = 0 \neq \frac{1}{8} = \Pr (A) \Pr (B) \Pr (C) .
 \end{equation*}
-Clearly, events $A$, $B$, and $C$ are not independent.
+This shows that events $A$, $B$ and $C$ are not independent.
 \end{example}
 
 \begin{example}
 Two dice are rolled at the same time, a red die and a blue die.
 Let $A$ be the event that the number on the red die is odd.
-Let $B$ be the event that the number on the red die is either two, three, or four.
+Let $B$ be the event that the number on the red die is either two, three or four.
 Also, let $C$ be the event that the product of the two dice is twelve.
 The individual probabilities of these events are
 \begin{align*}
@@ -389,13 +392,13 @@ The individual probabilities of these events are
 \Pr (B) &= \Pr (\text{red} \in \{2, 3, 4\}) = \frac{1}{2} \\
 \Pr (C) &= \Pr (\text{product = 12}) = \frac{4}{36} .
 \end{align*}
-Also, note that these events are not pairwise independent because
+We note that these events are not pairwise independent because
 \begin{align*}
 \Pr (A \cap B) &= \frac{1}{6} \neq \frac{1}{4} = \Pr(A) \Pr(B) \\
 \Pr (A \cap C) &= \frac{1}{36} \neq \frac{1}{18} = \Pr(A) \Pr(C) \\
 \Pr (B \cap C) &= \frac{1}{12} \neq \frac{1}{18} = \Pr(B) \Pr(C) .
 \end{align*}
-Thus, the multiple events $A$, $B$, and $C$ are not independent.
+The multiple events $A$, $B$ and $C$ are not independent.
 On the other hand, the probability of these three events occurring simultaneously is
 \begin{equation*}
 \Pr (A \cap B \cap C) = \frac{1}{36}
@@ -408,7 +411,7 @@ On the other hand, the probability of these three events occurring simultaneousl
 
 We introduced earlier the meaning of conditional probability, and we showed that the set of conditional probabilities $\{ \Pr (A|B) \}$ specifies a valid probability law.
 It is therefore possible to discuss independence with respect to conditional probability.
-We say that events $A_1$ and $A_2$ are \emph{conditionally independent} if
+We say that events $A_1$ and $A_2$ are \emph{conditionally independent} if \index{Conditional Independence}
 \begin{equation*}
 \Pr (A_1 \cap A_2 | B) = \Pr (A_1 | B) \Pr (A_2 | B) .
 \end{equation*}
@@ -424,8 +427,8 @@ Under the assumption that $\Pr (A_1 | B) > 0$, we can combine the previous two e
 \begin{equation*}
 \Pr (A_2 | A_1 \cap  B) = \Pr (A_2 | B) .
 \end{equation*}
-This latter result asserts that given event $B$ has occurred, the additional information that $A_1$ also occurred does not affect the conditional probability of $A_2$.
-It is easy to show that conditional independence is a symmetric relation.
+This latter result asserts that, given event $B$ has taken place, the additional information that $A_1$ also occurred does not affect the conditional probability of $A_2$.
+It is simple to show that conditional independence is a symmetric relation as well.
 
 \begin{example}
 Suppose that a fair coin is tossed until heads is observed.
@@ -456,7 +459,7 @@ In particular, we have
 We emphasize that events $A_1$ and $A_2$ are not independent with respect to the unconditional probability law.
 \end{example}
 
-Two events which are independent with respect to the unconditional probability law, may not be conditionally independent.
+Two events that are independent with respect to an unconditional probability law, may not be conditionally independent.
 
 \begin{example}
 Two dice are rolled at the same time, a red die and a blue die.
@@ -482,13 +485,14 @@ whereas the joint conditional probability is
 These two events are not conditionally independent.
 \end{example}
 
-We can also extend conditional independence to several events.
+It is possible to extend the notion of conditional independence to several events.
 The events $A_1, A_2, \ldots, A_n$ are conditionally independent given $B$ if
 \begin{equation*}
-\Pr \left( \bigcap_{k \in S} A_k \Big| B \right)
-= \prod_{k \in S} \Pr (A_k | B)
+\Pr \left( \bigcap_{i \in \IndexSet} A_i \Big| B \right)
+= \prod_{i \in \IndexSet} \Pr (A_i | B)
 \end{equation*}
-for every subset $S$ of $\{1, 2, \ldots, n\}$.
+for every subset $\IndexSet$ of $\{1, 2, \ldots, n\}$.
+This definition is analogous to \eqref{equation:IndependenceMultipleEvents}, albeit using the proper conditional probability law.
 
 
 \section{Equivalent Notations}
