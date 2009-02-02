@@ -35,7 +35,7 @@ Note that we can express the probability of getting, say, a three given that the
 
 Having reviewed a specific situation, we now turn to the more encompassing setting.
 Let $B$ be an event such that $\Pr (B) > 0$.
-A conditional probability law assigns to every event $A$ a number $\Pr (A|B)$, termed the \emph{conditional probability of $A$ given $B$}, such that \index{Conditional Probability}
+A conditional probability law assigns to every event $A$ a number $\Pr (A|B)$, termed the \emph{conditional probability of $A$ given $B$}, such that \index{Conditional probability}
 \begin{equation} \label{equation:ConditionalProbability}
 \Pr (A | B) = \frac{\Pr (A \cap B)}{\Pr (B)}.
 \end{equation}
@@ -143,7 +143,7 @@ Visually, a partition divides an entire set into disjoint subsets.
 \includegraphics[height=4.23cm]{Figures/3Chapter/setpartition2}
 \end{center}
 
-\begin{theorem}[Total Probability Theorem] \label{theorem:TotalProbability} \index{Total Probability Theorem}
+\begin{theorem}[Total Probability Theorem] \label{theorem:TotalProbability} \index{Total probability theorem}
 Let $A_1, A_2, \ldots, A_n$ be a collection of events that forms a partition of the sample space $\Omega$.
 Suppose that $\Pr (A_k) > 0$ for all $k$.
 Then, for any event $B$, we can write
@@ -220,7 +220,7 @@ The overall probability of getting a red ball, $\Pr (R)$, can be computed by app
 The following result is also very useful.
 It relates the conditional probability of $A$ given $B$ to the conditional probability of $B$ given $A$.
 
-\begin{theorem}[Bayes' Rule] \index{Bayes' Rule}
+\begin{theorem}[Bayes' Rule] \index{Bayes' rule}
 Let $A_1, A_2, \ldots, A_n$ be a collection of events that forms a partition of the sample space $\Omega$.
 Suppose that $\Pr (A_k) > 0$ for all $k$.
 Then, for any event $B$ such that $\Pr (B) > 0$, we can write
@@ -411,7 +411,7 @@ On the other hand, the probability of these three events occurring simultaneousl
 
 We introduced earlier the meaning of conditional probability, and we showed that the set of conditional probabilities $\{ \Pr (A|B) \}$ specifies a valid probability law.
 It is therefore possible to discuss independence with respect to conditional probability.
-We say that events $A_1$ and $A_2$ are \emph{conditionally independent} if \index{Conditional Independence}
+We say that events $A_1$ and $A_2$ are \emph{conditionally independent} if \index{Conditional independence}
 \begin{equation*}
 \Pr (A_1 \cap A_2 | B) = \Pr (A_1 | B) \Pr (A_2 | B) .
 \end{equation*}
