@@ -1,4 +1,4 @@
-\chapter{Concepts of Probability Theory}
+\chapter[Basic Concepts]{Basic Concepts of Probability}
 
 The theory of probability provides the mathematical tools necessary to study and analyze uncertain phenomena that occur in nature.
 It establishes a formal framework to understand and predict the outcome of a random experiment.
@@ -149,6 +149,7 @@ Combining these two equations yields the desired result.
 
 
 \subsection{Finite Sample Spaces}
+\label{section:FiniteSampleSpaces}
 
 If a sample space $\Omega$ contains a finite number of elements, then a probability law on $\Omega$ is determined completely by the probabilities of individual outcomes.
 Denote a sample space $\Omega$ containing $n$ elements by $\Omega = \{ s_1, s_2, \ldots, s_n \}$.
@@ -166,10 +167,10 @@ If in addition all the elements of $\Omega$ are equally likely with
 \Pr (s_1) = \Pr (s_2) = \cdots = \Pr (s_n) = \frac{1}{n} ,
 \end{equation*}
 then the probability of an event $A$ becomes
-\begin{equation*}
+\begin{equation} \label{equation:ProbEquiProbableOutcomes}
 \Pr (A) = \frac{ |A| }{n}
 = \frac{ \text{number of elements in $A$} }{n} .
-\end{equation*}
+\end{equation}
 
 \begin{example}
 The rolling of a fair die is an experiment with a finite number of equally likely outcomes.

@@ -1,29 +1,31 @@
-\chapter{Notions of Combinatorics}
+\chapter[Equiprobable Outcomes]{Equiprobable Outcomes and Combinatorics}
 
-Often, in experiments with finite sample spaces, the outcomes are equiprobable.
-In such cases, the probability of an event amounts to the number of outcomes comprising this event divided by the total number of outcomes in the sample space.
-While counting outcomes may appear straightforward, it is in many circumstances a daunting task.
-For example, consider the number of distinct subsets of the integers $\{ 1, 2, \ldots, n \}$ that do not contain two consecutive integers.
+The simplest probabilistic scenario is one where the sample space $\Omega$ is finite and all the possible outcomes are equally likely.
+In such cases, computing the probability of an event amounts to counting the number of outcomes comprising this event and dividing the sum by the total number of elements contained in the sample space.
+This situation was first explored in Section~\ref{section:FiniteSampleSpaces}, with an explicit formula for computing probabilities appearing in \eqref{equation:ProbEquiProbableOutcomes}.
+
+While counting outcomes may appear intuitively straightforward, it is in many circumstances a daunting task.
+For instance, consider the number of distinct subsets of the integers $\{ 1, 2, \ldots, n \}$ that do not contain two consecutive integers.
 This number is equal to
 \begin{equation*}
 \frac{ \phi^{n+2} - (1 - \phi)^{n+2} }{ \sqrt{5} } ,
 \end{equation*}
 where $\phi = (1 + \sqrt{5}) / \sqrt{2}$ is the \emph{golden ratio}.
-It can also be obtained recursively through the \emph{Fibonacci} recurrence relation.
-
-Calculating the number of ways that certain patterns can be formed is part of the field of \emph{combinatorics}.
-In this section, we introduce useful counting techniques that can be applied to situations pertinent to probability theory.
+This somewhat surprising result can be obtained iteratively through the \emph{Fibonacci} recurrence relation, and it attests of the fact that counting may at times be challenging.
+Calculating the number of ways that certain patterns can be formed is part of the field of \emph{combinatorics}. \index{Combinatorics}
+In this chapter, we introduce useful counting techniques that can be applied to situations pertinent to probability.
 
 
 \section{The Counting Principle}
 
-The counting principle is the guiding rule for computing the number of elements in a cartesian product.
+The counting principle is a guiding rule for computing the number of elements in a cartesian product.
 Suppose that $S$ and $T$ are finite sets with $m$ and $n$ elements, respectively.
 The cartesian product of $S$ and $T$ is given by
 \begin{equation*}
 S \times T = \{ (x, y) | x \in S \text{ and } y \in T \} .
 \end{equation*}
 The number of elements in the cartesian product $S \times T$ is equal to $m n$.
+This is illustrated in the figure below.
 
 \begin{center}
 \includegraphics[height=6.495cm]{Figures/4Chapter/countingprinciple}
@@ -77,22 +79,22 @@ Hence, the number of distinct subsets of $S$ is given by $2^n$.
 
 \section{Permutations}
 
-Consider the integer set $S = \{ 1, 2, \ldots, n \}$.
-A \emph{permutation} of $S$ is an ordered arrangement of its elements, a list without repetitions.
+Again, consider the integer set $S = \{ 1, 2, \ldots, n \}$.
+A \emph{permutation} of $S$ is an ordered arrangement of its elements, a list without repetitions. \index{Permutation}
 The number of permutations of $S$ can be computed as follows.
-The number of distinct possibilities for the first item is $n$.
+First, there are $n$ distinct possibilities for the first item in the list.
 The number of possibilities for the second item is $n-1$, namely all the integers in $S$ except the first element in the list.
 Similarly, the number of distinct possibilities for the $m$th item is $n - m + 1$.
-This pattern continues until all the elements in $S$ are listed.
-Summarizing, we find that the total number of permutations of $S$ is $n$ \emph{factorial},
+This pattern continues until all the elements in $S$ are recorded.
+Summarizing, we find that the total number of permutations of $S$ is $n$ \emph{factorial}, \index{Factorial}
 \begin{equation*}
 n! = n (n-1) \cdots 1 .
 \end{equation*}
 
 \begin{example}
 We wish to compute the number of permutations of $S = \{ 1, 2, 3 \}$.
-Since the set $S$ contains three elements, it has $3! = 6$ permutations.
-They can be listed as $123, 132, 213, 231, 312, 321$.
+Since the set $S$ possesses three elements, it has $3! = 6$ different permutations.
+They can be written as $123, 132, 213, 231, 312, 321$.
 \end{example}
 
 \begin{center}
@@ -103,7 +105,7 @@ They can be listed as $123, 132, 213, 231, 312, 321$.
 \subsection{Stirling's Formula*}
 
 The number $n!$ grows very rapidly as a function of $n$.
-A good approximation for $n!$ when $n$ is large is given by Stirling's formula,
+A good approximation for $n!$ when $n$ is large is given by \emph{Stirling's formula}, \index{Stirling's Formula}
 \begin{equation*}
 n! \sim n^n e^{-n} \sqrt{ 2 \pi n}
 \end{equation*}
@@ -113,11 +115,11 @@ The notation $a_n \sim b_n$ signifies that the ratio $a_n / b_n \rightarrow 1$ a
 
 \subsection{$k$-Permutations}
 
-Suppose that we list only $k$ elements out of the set $S = \{ 1, 2, \ldots, n \}$, where $k \leq n$.
+Suppose that we rank only $k$ elements out of the set $S = \{ 1, 2, \ldots, n \}$, where $k \leq n$.
 We wish to count the number of distinct $k$-permutations of $S$.
 Following our previous argument, we can choose one of $n$ elements to be the first item listed, one of $(n-1)$ elements for the second item, and so on.
-The procedure terminates when $k$ items have been listed.
-The number of possible sequences is
+The procedure terminates when $k$ items have been recorded.
+The number of possible sequences is then given by
 \begin{equation*}
 \frac{n!}{(n-k)!} = n (n-1) \cdots (n-k+1) .
 \end{equation*}
@@ -147,7 +149,7 @@ The number of possibilities is equivalent to the number of $k$-permutations of $
 \section{Combinations}
 
 Consider the integer set $S = \{ 1, 2, \ldots, n \}$.
-A \emph{combination} is a subset of $S$.
+A \emph{combination} is a subset of $S$. \index{Combination}
 We emphasize that a combination differs from a permutation in that elements in a combination have no specific ordering.
 The $2$-element subsets of $S = \{ 1, 2, 3, 4 \}$ are
 \begin{equation*}
@@ -174,7 +176,7 @@ Since the total number of $k$-permutations of $S$ is $n! / (n-k)!$, the number o
 \begin{equation*}
 \binom{n}{k} = \frac{n!}{k! (n-k)!} = \frac{ n (n-1) \cdots (n-k+1) }{ k! } .
 \end{equation*}
-This expression is called a \emph{binomial coefficient}.
+This expression is termed a \emph{binomial coefficient}. \index{Binomial Coefficient}
 Observe that selecting a $k$-element subset of $S$ is equivalent to choosing the $n-k$ elements that belong to its complement.
 It follows that
 \begin{equation*}
@@ -183,7 +185,7 @@ It follows that
 
 \begin{example}[Sampling without Replacement or Ordering]
 An urn contains $n$ balls numbered one through $n$.
-A ball is drawn from the urn and placed in a jar.
+A ball is drawn from the urn and placed in a separate jar.
 This process is repeated until the jar contains $k$ balls, where $k \leq n$.
 We wish to compute the number of distinct combinations the jar can hold after the completion of this experiment.
 Because there is no ordering in the jar, this amounts to counting the number of $k$-element subsets of a given $n$-element set, which is given by
@@ -208,15 +210,15 @@ Let $n_1, n_2, \ldots, n_r$ be nonnegative integers such that
 \begin{equation*}
 \sum_{p = 1}^r n_p = n.
 \end{equation*}
-Consider the following iterative algorithm that leads to a partition of $S$.
-First, we select a subset of $n_1$ elements from $S$.
-Having chosen the first subset, we select a second subset containing $n_2$ elements from the remaining $n - n_1$ elements.
+Consider the following iterative algorithm that leads to a \emph{partition} of $S$. \index{Partition}
+First, we choose a subset of $n_1$ elements from $S$.
+Having selected the first subset, we pick a second subset containing $n_2$ elements from the remaining $n - n_1$ elements.
 We continue this procedure by successively choosing subsets of $n_p$ elements from the remaining $n - n_1 - \cdots - n_{p-1}$ elements, until no element remains.
 This algorithm yields a partition of $S$ into $r$ subsets, with the $p$th subset containing exactly $n_p$ elements.
 
 We wish to count the number of such partitions.
 We know that there are $\binom{n}{n_1}$ ways to form the first subset.
-Examining our algorithm, we see that there are
+Examining our algorithm, we see that there are exactly
 \begin{equation*}
 \binom{n - n_1 - \cdots - n_{p-1}}{n_p}
 \end{equation*}
@@ -231,7 +233,7 @@ which after simplification can be written as
 \binom{n}{n_1, n_2, \ldots, n_r}
 = \frac{n!}{n_1! n_2! \cdots n_r!} .
 \end{equation*}
-This expression is called a \emph{multinomial coefficient}.
+This expression is called a \emph{multinomial coefficient}. \index{Multinomial coefficient}
 
 \begin{example}
 A die is rolled nine times.
@@ -243,14 +245,14 @@ The number of distinct sequences in which one, three, and five each appear three
 \end{example}
 
 In the above analysis, we assume that the cardinality of each subset is fixed.
-Suppose instead that we are interested in counting the number of ways to pick the cardinality of the subsets that form the partition.
+Suppose instead that we are interested in counting the number of ways to pick the cardinality of the subsets that form the partition. \index{Partition}
 Specifically, we wish to compute the number of ways integers $n_1, n_2, \ldots, n_r$ can be selected such that every integer is nonnegative and
 \begin{equation*}
 \sum_{p = 1}^r n_p = n.
 \end{equation*}
 We can visualize the number of possible assignments as follows.
 Picture $n$ balls space out on a straight line and consider $r-1$ vertical markers, each of which can be put between two consecutive balls, before the first ball, or after the last ball. 
-For instance, if there are five balls and two markers then one possible assignement is illustrated below.
+For instance, if there are five balls and two markers then one possible assignment is illustrated below.
 
 \begin{center}
 \includegraphics[height=5.28cm]{Figures/4Chapter/partitioning}
@@ -259,7 +261,7 @@ For instance, if there are five balls and two markers then one possible assignem
 The number of objects in the first subset corresponds to the number balls before the first marker.
 Similarly, the number of objects in the $p$th subset is equal to the number of balls between the $p$th marker and the preceding one.
 Finally, the number of objects in the last subset is simply the number of balls after the last marker.
-In the figure, the integer assignment is
+The integer assignment associated with the figure above is
 \begin{equation*}
 (n_1, n_2, n_3) = (0,2,3).
 \end{equation*}
@@ -268,10 +270,10 @@ In the figure, the integer assignment is
 \includegraphics[height=1.53cm]{Figures/4Chapter/partitioning2}
 \end{center}
 
-Two consecutive markers imply that the corresponding subset is empty.
+In this scheme, two consecutive markers imply that the corresponding subset is empty.
 There is a natural bijection between an integer assignment and the graphical representation depicted above.
-To count the number of possible integer assignments, it then suffices to compute the number of ways to position the markers and the balls.
-In particular, there are $n + r - 1$ positions, $n$ balls, and $r - 1$ markers.
+To count the number of possible integer assignments, it suffices to calculate the number of ways to position the markers and the balls.
+In particular, there are $n + r - 1$ positions, $n$ balls and $r - 1$ markers.
 The number of ways to assign the markers is equal to the number of $n$-combinations of $n + r - 1$ elements,
 \begin{equation*}
 \binom{n + r - 1}{n} = \binom{n + r - 1}{r - 1} .
@@ -294,11 +296,11 @@ The number of possible outcomes is therefore given by
 
 \section{Computing Probabilities}
 
-In this section, we present two straightforward applications of combinatorics to computing the probability of winning the lottery.
+In this section, we present two applications of combinatorics to computing the probability of winning the lottery.
 
 \begin{example}[Pick 3 Texas Lottery]
 The Texas Lottery game ``Pick $3$'' is easy to play.
-A player must pick three numbers from zero to nine, and choose how to play them: exact order, or any order.
+A player must pick three numbers from zero to nine, and choose how to play them: exact order or any order.
 The Pick $3$ balls are drawn using three air-driven machines.
 These machines use compressed air to mix and select each ball.
 
@@ -322,7 +324,7 @@ While, if the same number is selected three times, the probability of winning be
 \begin{example}[Mega Millions Texas Lottery]
 To play the Mega Millions game, a player must select five numbers from $1$ to $56$ in the upper white play area of the play board, and one Mega Ball number from $1$ to $46$ in the lower yellow play area of the play board.
 All drawing equipment is stored in a secured on-site storage room.
-Only authorized drawings department personnel have keys to this door.
+Only authorized drawings department personnel have keys to the door.
 Upon entry of the secured room to begin the drawing process, a lottery drawing specialist examines the security seal to determine if any unauthorized access has occurred.
 For each drawing, the Lotto Texas balls are mixed by four acrylic mixing paddles rotating clockwise.
 High speed is used for mixing and low speed for ball selection.
