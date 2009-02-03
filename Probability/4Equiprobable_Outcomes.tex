@@ -10,7 +10,7 @@ This number is equal to
 \begin{equation*}
 \frac{ \phi^{n+2} - (1 - \phi)^{n+2} }{ \sqrt{5} } ,
 \end{equation*}
-where $\phi = (1 + \sqrt{5}) / \sqrt{2}$ is the \emph{golden ratio}.
+where $\phi = (1 + \sqrt{5}) / 2$ is the \emph{golden ratio}.
 This somewhat surprising result can be obtained iteratively through the \emph{Fibonacci} recurrence relation, and it attests of the fact that counting may at times be challenging.
 Calculating the number of ways that certain patterns can be formed is part of the field of \emph{combinatorics}. \index{Combinatorics}
 In this chapter, we introduce useful counting techniques that can be applied to situations pertinent to probability.
@@ -376,5 +376,22 @@ The probability of winning the Mega Millions Grand Prize is
 = \frac{51!5!}{56!} \frac{1}{46}
 = \frac{1}{175 711 536} .
 \end{equation*}
+\end{example}
+
+\begin{example}[Sinking Boat]
+Six couples (twelve people total) are out at sea on a small sail boat.
+Unfortunately, the boat hits an iceberg and starts sinking slowly.
+Two Coast Guard boats, the Ibis and the Mako, come to the rescue of the passengers.
+Each person must decide which of the two rescue boats to board.
+What is the probability that no two people from a same couple end up on the Mako?
+
+Suppose that all the passengers choose a rescue boat independently of one another.
+There are therefore $2^{12}$ possible arrangements of people on the Mako after the rescue operation, all equally likely.
+Using the counting technique discussed at the very beginning of the chapter, we gather that
+\begin{equation*}
+\frac{ \phi^{14} - (1 - \phi)^{14} }{ \sqrt{5} } = 377
+\end{equation*}
+of these arrangements will lead to no two people from a same couple being on the Mako.
+Thus, the probability that no couples are united on the Mako is $377/4096$.
 \end{example}
 
