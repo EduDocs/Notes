@@ -69,7 +69,7 @@ Hence, the conditional probability law defined by \eqref{equation:ConditionalPro
 
 \begin{example}
 A fair coin is tossed repetitively until heads is observed.
-In Example~\ref{example:CoinTossSequence}, we found that the probability of observing heads for the first time on trial $n$ is $2^{-k}$.
+In Example~\ref{example:CoinTossSequence}, we found that the probability of observing heads for the first time on trial $k$ is $2^{-k}$.
 We now wish to compute the probability that heads occurred for the first time on the second trial given that it took an even number of tosses to observe heads.
 In this example, $A = \{ 2 \}$ and $B$ is the set of even numbers.
 The probability that the outcome is two given that the number of tosses is even is equal to
@@ -98,22 +98,22 @@ The probability of events $A_1$ through $A_n$ taking place at the same time is g
 This formula can be verified by expanding each of the conditional probabilities using \eqref{equation:ConditionalProbability},
 \begin{equation*}
 \Pr \left( \bigcap_{k=1}^n A_k \right)
-= \Pr (A_1) \frac{\Pr (A_2 \cap A_1)}{\Pr (A_1)}
+= \Pr (A_1) \frac{\Pr (A_1 \cap A_2)}{\Pr (A_1)}
 \frac{\Pr (A_1 \cap A_2 \cap A_3)}{\Pr (A_1 \cap A_2)}
 \cdots \frac{\Pr \left( \bigcap_{k=1}^{n} A_k \right)}
 {\Pr \left( \bigcap_{k=1}^{n-1} A_k \right)} .
 \end{equation*}
 
 \begin{example}
-An urn contains eight blue balls and four green balls.
+An urn contains eight red balls and four green balls.
 Three balls are drawn from this urn without replacement.
-We wish to compute the probability that all three balls are blue.
-The probability of drawing a blue ball the first time is equal to $8/12$.
-The probability of drawing a blue ball the second time given that the first ball is blue is $7/11$.
-Finally, the probability of drawing a blue ball the third time given that the previous two balls are blue is $6/10$.
-Using \eqref{equation:SimultaneousEvents}, we can compute the probability drawing three blue balls as
+We wish to compute the probability that all three balls are red.
+The probability of drawing a red ball the first time is equal to $8/12$.
+The probability of drawing a red ball the second time given that the first ball is red is $7/11$.
+Finally, the probability of drawing a red ball the third time given that the previous two balls are red is $6/10$.
+Using \eqref{equation:SimultaneousEvents}, we can compute the probability drawing three red balls as
 \begin{equation*}
-\Pr (\text{3 blue balls})
+\Pr (\text{3 red balls})
 = \frac{8}{12} \frac{7}{11} \frac{6}{10}
 = \frac{14}{55} .
 \end{equation*}
@@ -193,26 +193,26 @@ The probability of event $B$ can then be computed by adding these various parts
 \end{equation*}
 
 \begin{example}
-An urn contains eight blue balls and four red balls.
+An urn contains eight red balls and four green balls.
 A first ball is drawn from the urn.
-If this ball is red then the experiment stops, otherwise one more ball is drawn from the urn.
-What is the probability of obtaining a red ball?
+If this ball is green then the experiment stops, otherwise one more ball is drawn from the urn.
+What is the probability of obtaining a green ball?
 
 In this problem, there are three outcomes of interest.
-If we denote the drawing of a red ball by $r$ and the drawing of a blue ball by $b$, then these three outcomes can be represented by $\{ r, br, bb \}$.
-The probability of drawing a red ball initially is $\Pr (r) = 4/12$.
+If we denote the drawing of a green ball by $g$ and the drawing of a red ball by $r$, then these three outcomes can be represented by $\{ g, rg, rr \}$.
+The probability of drawing a green ball initially is $\Pr (g) = 4/12$.
 The probabilities of drawing two balls can be computed using \eqref{equation:SimultaneousEvents}, and they are given by
 \begin{align*}
-\Pr (br) &= \frac{8}{12} \frac{4}{11} = \frac{8}{33} \\
-\Pr (bb) &= \frac{8}{12} \frac{7}{11} = \frac{14}{33} .
+\Pr (rg) &= \frac{8}{12} \frac{4}{11} = \frac{8}{33} \\
+\Pr (rr) &= \frac{8}{12} \frac{7}{11} = \frac{14}{33} .
 \end{align*}
-Let $R$ denote the event that a red ball is obtained during the experiment.
-The overall probability of getting a red ball, $\Pr (R)$, can be computed by applying the total probability theorem
+Let $G$ denote the event that a green ball is obtained during the experiment.
+The overall probability of getting a green ball, $\Pr (G)$, can be computed by applying the total probability theorem
 \begin{equation*}
 \begin{split}
-\Pr (R) &= \Pr (R \cap r) + \Pr (R \cap br) + \Pr (R \cap bb) \\
-&= \Pr(r) \Pr (R|r) + \Pr(br) \Pr (R|br) + \Pr(bb) \Pr (R|bb) \\
-&= \frac{1}{3} \cdot 1 + \frac{8}{33} \cdot 1 + \frac{14}{33} \cdot 0
+\Pr (G) &= \Pr (G \cap g) + \Pr (G \cap rg) + \Pr (G \cap rr) \\
+&= \Pr (G|g) \Pr(g) + \Pr (G|rg) \Pr(rg) + \Pr (G|rr) \Pr(rr) \\
+&= 1 \cdot \frac{1}{3} + 1 \cdot \frac{8}{33} + 0 \cdot \frac{14}{33}
 = \frac{19}{33} .
 \end{split}
 \end{equation*}
