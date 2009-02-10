@@ -386,12 +386,9 @@ Each person must decide which of the two rescue boats to board.
 What is the probability that no two people from a same couple end up on the Mako?
 
 Suppose that all the passengers choose a rescue boat independently of one another.
-There are therefore $2^{12}$ possible arrangements of people on the Mako after the rescue operation, all equally likely.
-Using the counting technique discussed at the very beginning of the chapter, we gather that
-\begin{equation*}
-\frac{ \phi^{14} - (1 - \phi)^{14} }{ \sqrt{5} } = 377
-\end{equation*}
-of these arrangements will lead to no two people from a same couple being on the Mako.
-Thus, the probability that no couples are united on the Mako is $377/4096$.
+For a given couple, the probability that the two members do not end up on the Mako is $3/4$.
+Since couples act independently, the probability that no two people from a same couple are united on the Mako becomes $3^6/4^6$.
+There are a total of $2^{12}$ possible arrangements of people on the Mako after the rescue operation, all equally likely.
+Thus, there are only $729$ arrangments where no two members from a same couple board the Mako.
 \end{example}
 
