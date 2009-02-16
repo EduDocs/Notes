@@ -389,6 +389,39 @@ Suppose that all the passengers choose a rescue boat independently of one anothe
 For a given couple, the probability that the two members do not end up on the Mako is $3/4$.
 Since couples act independently, the probability that no two people from a same couple are united on the Mako becomes $3^6/4^6$.
 There are a total of $2^{12}$ possible arrangements of people on the Mako after the rescue operation, all equally likely.
-Thus, there are only $729$ arrangments where no two members from a same couple board the Mako.
+Thus, there are only $729$ arrangements where no two members from a same couple board the Mako.
+\end{example}
+
+\begin{example}[The Locksmith Convention*]
+A total of $n$ people are gathering to attend a two-day, secret locksmith convention.
+As tradition dictates, every locksmith brings a lock and two keys to the convention.
+At the opening ceremony, all the locksmiths sit around a large table, and they exchange a key to their own locks with the two members sitting immediately next to them.
+The rules of the secret society stipulate that the conference can only continue on the second day if a working lock-and-key combination can be reconstituted.
+If each locksmith decides to attend the second day of the convention with probability half, independently of others, what is the probability that the reunion can proceed on the second day?
+
+Given that there are $n$ people on the first day, the number of arrangements on the second day is $2^n$, and they are all equally likely.
+To find the probability that the reunion can proceed, it suffices to count the number of ways in which at least two people that were sitting next to each other during the opening ceremony are present.
+Alternatively, we can compute the likelihood that this does not occur.
+To solve this problem, we label the people attending the opening ceremony using integers one through $n$, according to their positions around the table.
+We consider three situations that may occur on the second day for which the society's requirements are not met: member~$1$ is present, member~$n$ is present, and they are both absent from the conference.
+If member~$1$ is present, then members~$2$ and $n$ cannot be there on the second day, and the number of possible non-qualifying arrangements is equal to the number of distinct subsets of the integers $\{3, 4,\ldots, n-1\}$ that do not contain consecutive integers.
+This number can be deduced from the discussion at the beginning of this chapter, and is given by
+\begin{equation*}
+\frac{ \phi^{n-1} - (1 - \phi)^{n-1} }{ \sqrt{5} } .
+\end{equation*}
+By symmetry, the number of arrangements for which a lock-and-key combination cannot be reconstituted when member~$n$ shows up on the second day is
+\begin{equation*}
+\frac{ \phi^{n-1} - (1 - \phi)^{n-1} }{ \sqrt{5} } .
+\end{equation*}
+Finally, if both members~$1$ and $n$ are absent, then there are a total of
+\begin{equation*}
+\frac{ \phi^{n} - (1 - \phi)^{n} }{ \sqrt{5} }
+\end{equation*}
+combinations for which the meeting cannot proceed, as this is the number of distinct subsets of the integers $\{ 2, 3, \ldots, n-1 \}$ that do not contain consecutive integers.
+Thus, the probability that the meeting can proceed is
+\begin{equation*}
+1 - \frac{ 2 \frac{ \phi^{n-1} - (1 - \phi)^{n-1} }{ \sqrt{5} }
++ \frac{ \phi^{n} - (1 - \phi)^{n} }{ \sqrt{5} } }{2^n} .
+\end{equation*}
 \end{example}
 
