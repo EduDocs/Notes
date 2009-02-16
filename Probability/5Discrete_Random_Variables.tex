@@ -1,14 +1,27 @@
 \chapter{Discrete Random Variables}
 \label{chapter:DiscreteRandomVariables}
+
 Suppose that an experiment and a sample space are given.
-A \emph{random variable} is a real-valued function of the outcome of the experiment.
-That is, the random variable assigns a specific number to every outcome of an experiment.
-The numerical value of a particular outcome is called the \emph{value} of the random variable.
+A \emph{random variable} is a real-valued function of the outcome of the experiment. \index{Random variable}
+That is, the random variable assigns a specific number to every possible outcome of the experiment.
+The numerical value of a particular outcome is called the \emph{value} of the random variable. \index{Value}
 
 \begin{figure}[ht]
 \begin{center}
+\begin{psfrags}
+\psfrag{S}[l]{Sample Space}
+\psfrag{1}[c]{$1$}
+\psfrag{2}[c]{$2$}
+\psfrag{3}[c]{$3$}
+\psfrag{4}[c]{$4$}
+\psfrag{5}[c]{$5$}
+\psfrag{6}[c]{$6$}
+\psfrag{7}[c]{$7$}
+\psfrag{R}[c]{Real Numbers}
 \includegraphics[height=4.92cm]{Figures/5Chapter/rv}
-\caption{The sample space in this example has seven possible outcomes.  A random variable maps each of these outcomes to a real number.}
+\caption{The sample space in this example has seven possible outcomes.
+A random variable maps each of these outcomes to a real number.}
+\end{psfrags}
 \end{center}
 \end{figure}
 
@@ -19,17 +32,24 @@ The value of the random variable, in this case, is simply the number of dots tha
 
 \begin{figure}[ht]
 \begin{center}
+\begin{psfrags}
+\psfrag{1}[c]{$1$}
+\psfrag{2}[c]{$2$}
+\psfrag{3}[c]{$3$}
+\psfrag{4}[c]{$4$}
+\psfrag{5}[c]{$5$}
+\psfrag{6}[c]{$6$}
 \includegraphics[height=8.5cm]{Figures/5chapter/rvdices}
 \caption{This random variable takes its input from the rolling of a die and assigns to each outcome a real number that corresponds to number of dots that appears on the top face of the die.}
+\end{psfrags}
 \end{center}
 \end{figure}
 \end{example}
 
-The simplest class of random variables is the collection of \emph{discrete random variables}.
+The simplest class of random variables is the collection of \emph{discrete random variables}. \index{Discrete random variable}
 A variable is called discrete if its range is finite or countably infinite; that is, if the random variable can only take a finite or countable number of values.
 
 \begin{example}
-A random variable can take a countably infinite number of values.
 Consider the experiment where a coin is tossed repetitively until heads is observed.
 The corresponding random variable, which maps the number of tosses to an integer, is a discrete random variable that takes a countable number of values.
 In particular, the range of this random variable is given by the positive integers $\{1, 2, \ldots \}$.
@@ -38,7 +58,7 @@ In particular, the range of this random variable is given by the positive intege
 \section{Probability Mass Functions}
 
 A discrete random variable $X$ is characterized by the probability of each of the elements in the range of $X$.
-We identify the probabilities of individual elements in the range of $X$ using the \emph{probability mass function} (PMF) of $X$, which we denote by $p_X$.
+We identify the probabilities of individual elements in the range of $X$ using the \emph{probability mass function (PMF)} of $X$, which we denote by $p_X$. \index{Probability mass function (PMF)}
 If $x$ is a possible value of $X$ then the \emph{probability mass} of $x$, written $p_X (x)$, is defined by
 \begin{equation} \label{equation:PMF}
 p_X (x) = \Pr ( \{ X = x \} ) = \Pr ( X = x ) .
@@ -52,19 +72,29 @@ p_X (x)
 
 \begin{figure}[ht]
 \begin{center}
+\begin{psfrags}
+\psfrag{S}[l]{Sample Space}
+\psfrag{1}[c]{$1$}
+\psfrag{2}[c]{$2$}
+\psfrag{3}[c]{$3$}
+\psfrag{4}[c]{$4$}
+\psfrag{5}[c]{$5$}
+\psfrag{6}[c]{$6$}
+\psfrag{7}[c]{$7$}
+\psfrag{x}[l]{$x$}
 \includegraphics[height=4.92cm]{Figures/5Chapter/pmf}
 \caption{The probability mass of $x$ is given by the probability of the set of all outcomes which $X$ maps to $x$.}
+\end{psfrags}
 \end{center}
 \end{figure}
 
 
-Let $X(\Omega)$ denote the collection of all the possible numerical values $X$ can take.
-This set is called the range of $X$.
+Let $X(\Omega)$ denote the collection of all the possible numerical values $X$ can take; this set is known as the range of $X$.
 Using this notation, we can write
 \begin{equation} \label{equation:NormalizationPMF}
 \sum_{x \in X(\Omega)} p_X(x) = 1 .
 \end{equation}
-Note that the sets defined by $\{ \omega \in \Omega | X(\omega) = x \}$ are disjoint and form a partition of the sample space $\Omega$, as $x$ ranges over all the possible values in $X (\Omega)$.
+We emphasize that the sets defined by $\{ \omega \in \Omega | X(\omega) = x \}$ are disjoint and form a partition of the sample space $\Omega$, as $x$ ranges over all the possible values in $X (\Omega)$.
 Thus, \eqref{equation:NormalizationPMF} follows immediately from the countable additivity axiom and the normalization axiom of probability laws.
 In general, if $X$ is a discrete random variable and $S$ is a subset of $X(\Omega)$, we can write
 \begin{equation} \label{equation:FunctionPMF}
@@ -73,7 +103,7 @@ In general, if $X$ is a discrete random variable and $S$ is a subset of $X(\Omeg
 This equation provides an explicit formula to compute the probability of any subset of $X (\Omega)$.
 
 \begin{example}
-An urn contains three balls numbered one, two, and three.
+An urn contains three balls numbered one, two and three.
 Two balls are drawn from the urn without replacement.
 We wish to find the probability that the sum of the two selected numbers is odd.
 
@@ -81,6 +111,7 @@ Let $\Omega$ be the set of ordered pairs corresponding to the possible outcomes 
 \begin{equation*}
 \Omega = \{ (1, 2), (1, 3), (2, 1), (2, 3), (3, 1), (3, 2) \}.
 \end{equation*}
+Note that these outcomes are equiprobable.
 We employ $X$ to represent the sum of the two selected numbers.
 The PMF of random variable $X$ is given by
 \begin{equation*}
@@ -93,15 +124,17 @@ If $S$ denotes the event that the sum of the two numbers is odd, then the probab
 \end{equation*}
 \end{example}
 
+
 \section{Important Discrete Random Variables}
 
-There is a number of discrete random variables that appear frequently in probability theory.
-These random variables arise in many different contexts.
-Discrete random variables occur primarily in applications where counting is involved.
+A number of discrete random variables appears frequently in problems related to probability.
+These random variables arise in many different contexts, and they are worth getting acquainted with.
+In general, discrete random variables occur primarily in situations where counting is involved.
 
-\subsection{The Bernoulli Random Variable}
 
-The first and simplest random variable is the \emph{Bernoulli random variable}.
+\subsection{Bernoulli Random Variables}
+
+The first and simplest discrete random variable is the \emph{Bernoulli random variable}. \index{Bernoulli random variable}
 Let $X$ be a random variable that takes on only two possible numerical values, $X(\Omega) = \{0, 1\}$.
 The PMF of this random variable is given by
 \begin{equation*}
@@ -116,21 +149,21 @@ where $p \in [0, 1]$.
 \begin{center}
 \includegraphics[width=8cm]{Figures/5chapter/bernoulli}
 \end{center}
-\caption{The PMF of a Bernoulli random variable appears on the figure for $p = 0.75$.}
+\caption{The PMF of a Bernoulli random variable appears on the figure for parameter $p = 0.75$.}
 \end{figure}
 
 \begin{example}
 Consider the flipping of a biased coin, for which heads is obtained with probability $p$ and tails is obtained with probability $1-p$.
-A random variable that maps heads to one, and tails to zero, is a Bernoulli random variable.
+A random variable that maps heads to one, and tails to zero, is a Bernoulli random variable with parameter~$p$.
 In fact, every Bernoulli random variable is equivalent to the tossing of a coin.
 \end{example}
 
 
-\subsection{The Binomial Random Variable}
+\subsection{Binomial Random Variables}
 
 Multiple independent Bernoulli random variables can be combined to construct more sophisticated random variables.
 Suppose $X$ is the sum of $n$ independent and identically distributed Bernoulli random variables.
-Then $X$ is called a \emph{binomial random variable} with parameters $n$ and $p$.
+Then $X$ is called a \emph{binomial random variable} with parameters $n$ and $p$. \index{Binomial random variable}
 The PMF of $X$ is given by
 \begin{equation*}
 p_X (k) = \Pr (X = k)
@@ -174,14 +207,14 @@ The probability of winning more than \$40 is
 \end{example}
 
 
-\subsection{The Poisson Random Variable}
+\subsection{Poisson Random Variables}
 
-The probability mass function of a Poisson random variable is given by
+The probability mass function of a \emph{Poisson random variable} is given by \index{Poisson random variable}
 \begin{equation*}
 p_X (k) = \frac{\lambda^k}{k!} e^{- \lambda}, \quad k = 0, 1, \ldots
 \end{equation*}
 where $\lambda$ is a positive number.
-Note that we have
+Note that, using Taylor series expansion,  we have
 \begin{equation*}
 \sum_{k = 0}^{\infty} p_X (k)
 = \sum_{k = 0}^{\infty} \frac{\lambda^k}{k!} e^{- \lambda}
@@ -189,8 +222,8 @@ Note that we have
 = e^{- \lambda} e^{\lambda} = 1 ,
 \end{equation*}
 which shows that this PMF fulfills the normalization axiom of probability laws.
-The Poisson random variable is of fundamental importance when counting the number of occurrences of an event in a certain time period.
-It finds extensive use in communication and queuing theory.
+The Poisson random variable is of fundamental importance when counting the number of occurrences of a phenomenon in a certain time period.
+It finds extensive use in networking, inventory management and queueing applications.
 
 \begin{figure}[ht]
 \begin{center}
@@ -204,12 +237,12 @@ Requests at an Internet server arrive at a rate of $\lambda$ connections per sec
 The number of service requests per second is modeled as a random variable with a Poisson distribution.
 We wish to find the probability that no service requests arrive during a time interval of one second.
 
-Let $N$ be a random variable that represents the number of requests that arrives in one second.
+Let $N$ be a random variable that represents the number of requests that arrives within a span of one second.
 By assumption, $N$ is a Poisson random variable with PMF
 \begin{equation*}
 p_N (k) = \frac{ \lambda^k }{k!} e^{-\lambda} .
 \end{equation*}
-The probability that no service requests arrive in one second is given by $p_N (0) = e^{-\lambda}$.
+The probability that no service requests arrive in one second is simply given by $p_N (0) = e^{-\lambda}$.
 \end{example}
 
 It is possible to obtain a Poisson random variable as the limit of a sequence of binomial random variables.
@@ -232,9 +265,9 @@ In the limit, as $n$ approaches infinity, we get
 \left( 1 - \frac{\lambda}{n} \right)^{n-k}
 = \frac{\lambda^k}{k!} e^{- \lambda} .
 \end{equation*}
-The sequence of binomial random variables $\{ X_n \}$ converges in distribution to the Poisson random variable $X$.
+Thus, the sequence of binomial random variables $\{ X_n \}$ converges in distribution to the Poisson random variable $X$.
 
-This discussion suggests that the Poisson PMF can be used to approximate the PMF of a binomial random variable.
+This discussion suggests that the Poisson PMF can be employed to approximate the PMF of a binomial random variable in certain circumstances.
 Suppose that $Y$ is a binomial random variable with parameters $n$ and $p$.
 If $n$ is large and $p$ is small then the probability that $Y$ equals $k$ can be approximated by
 \begin{equation*}
@@ -243,15 +276,16 @@ p_{Y} (k) = \frac{n!}{n^k (n-k)!} \frac{\lambda^k}{k!}
 \approx \frac{\lambda^k}{k!} e^{- \lambda} ,
 \end{equation*}
 where $\lambda = n p$.
+The latter expression can be computed numerically in a straightforward manner.
 
 \begin{example}
-The probability of a bit error on a wireless communication channel is $10^{-2}$.
+The probability of a bit error on a wireless communication channel is equal to $10^{-2}$.
 We wish to approximate the probability that a block of $1000$ bits has four or more errors.
 
-Suppose that the probability of individual errors is independent from bit to bit.
-Each bit transmission then corresponds to a Bernoulli trial, with a zero indicating a correct transmission and a one representing a bit error.
-The number of bit errors in $1000$ transmissions becomes a binomial random variable with parameter $n = 1000$ and $p = 10^{-2}$.
-The probability of making four or more errors can be approximated using a Poisson random variable with $\lambda = np = 10$.
+Assume that the probability of individual errors is independent from bit to bit.
+The transmission of each bit can be modeled as a Bernoulli trial, with a zero indicating a correct transmission and a one representing a bit error.
+The total number of bit errors in $1000$ transmissions then corresponds to a binomial random variable with parameters $n = 1000$ and $p = 10^{-2}$.
+The probability of making four or more errors can be approximated using a Poisson random variable with constant $\lambda = np = 10$.
 Thus, we can approximate the probability that a block of $1000$ bits has four or more errors by
 \begin{equation*}
 \begin{split}
@@ -261,19 +295,20 @@ Thus, we can approximate the probability that a block of $1000$ bits has four or
 &\approx 0.01034 .
 \end{split}
 \end{equation*}
+% The exact value in this case is
 \end{example}
 
 
-\subsection{The Geometric Random Variable}
+\subsection{Geometric Random Variables}
 
-Consider an experiment where a Bernoulli trial is repeated multiple times until a one is observed.
+Consider a random experiment where a Bernoulli trial is repeated multiple times until a one is observed.
 At each time step, the probability of getting a one is equal to $p$ and the probability of getting a zero is $1-p$.
-The number of trials carried out before completion, which we denote by $X$, is recorded as the outcome of this experiment.
-The random variable $X$ is a \emph{geometric random variable}, and its PMF is given by
+The number of trials carried out before completion, which we denote by $X$, is recorded as the outcome of the experiment.
+The random variable $X$ is a \emph{geometric random variable}, and its PMF is given by \index{Geometric random variable}
 \begin{equation*}
 p_X (k) = (1-p)^{k-1} p, \quad k = 1, 2, \ldots
 \end{equation*}
-We note that $(1-p)^{k-1} p$ is simply the probability of obtaining a sequence of $k-1$ zero immediately followed by a one.
+We stress that $(1-p)^{k-1} p$ simply represents the probability of obtaining a sequence of $k-1$ zero immediately followed by a one.
 
 \begin{figure}[ht]
 \begin{center}
@@ -281,18 +316,18 @@ We note that $(1-p)^{k-1} p$ is simply the probability of obtaining a sequence o
 \end{center}
 \caption{The PMF of a geometric random variable is a decreasing function of $k$.
 It is shown here for $p = 0.25$.
-Again, note that the values of the PMF are only present for $k = 1, 2, \ldots, 16$.}
+Again, the values of the PMF are only present for $k = 1, 2, \ldots, 16$.}
 \end{figure}
 
 \begin{example}
-Suppose that the Brazos Soda Company introduces another ``Under the Caps'' promotion.
+The Brazos Soda Company introduces another ``Under the Caps'' promotion.
 This time, a customer can win an additional bottle of soda by looking under the cap of her bottle.
 The probability to win is $1/5$, and it is independent from bottle to bottle.
 A customer purchases one bottle of soda from the Brazos Soda company and hence enters the contest.
-For every additional bottle of soda won by looking under the cap of the bottle, the customer gets an additional chance to play.
-We wish to find the PMF of the number of bottles obtained by the customer.
+For every extra bottle of soda won by looking under the cap, the customer gets an additional chance to play.
+We wish to find the PMF of the number of bottles obtained by this customer.
 
-Let $X$ denote the total number of bottles obtained by the customer.
+Let $X$ denote the total number of bottles obtained by this customer.
 The random variable $X$ is geometric and its PMF is
 \begin{equation*}
 p_X (k) = \left( \frac{1}{5} \right)^{k-1} \frac{4}{5},
@@ -301,11 +336,11 @@ where $k = 1, 2, \ldots$
 \end{example}
 
 \paragraph{Memoryless Property:}
-The geometric random variable satisfies the \emph{memoryless property},
+A remarkable aspect of the geometric random variable is that it satisfies the \emph{memoryless property}, \index{Memoryless property}
 \begin{equation*}
 \Pr (X = k + j | X > k) = \Pr (X = j).
 \end{equation*}
-This can be proved by using the propeties of conditional probability.
+This can be established using the properties of conditional probability.
 Let $X$ be a geometric random variable with parameter $p$, and assume that $k$ and $j$ are positive integers.
 We can write the conditional probability of $X$ as
 \begin{equation*}
@@ -318,15 +353,15 @@ We can write the conditional probability of $X$ as
 = \Pr (X = j).
 \end{split}
 \end{equation*}
-In words, the probability that the number of trials carried out before completion is equal to $k + j$ given $k$ unsuccessful trials is equal to the unconditioned probability that the total number of trials is $j$.
-It can be shown that the geometrica random variable is the only discrete random variable that fulfills the memoryless property.
+In words, the probability that the number of trials carried out before completion is $k + j$ given $k$ unsuccessful trials is equal to the unconditioned probability that the total number of trials is $j$.
+It can be shown that the geometric random variable is the only discrete random variable that possesses this memoryless property.
 
 
-\subsection{The Discrete Uniform Random Variable}
+\subsection{Discrete Uniform Random Variables}
 
-A finite random variable where all the possible outcomes are equally likely is called a \emph{discrete uniform random variable}.
+A finite random variable where all the possible outcomes are equally likely is called a \emph{discrete uniform random variable}. \index{Uniform random variable (discrete)}
 Let $X$ be a uniform random variable taking value in $X (\Omega) = \{ 1, 2, \ldots, n \}$.
-Its PMF is given by
+Its PMF is therefore given by
 \begin{equation*}
 p_X (k) = \left\{ \begin{array}{ll}
 1/n, & \text{if }k = 1, 2, \ldots, n \\
@@ -353,14 +388,24 @@ In particular, if $\omega \in \Omega$ is the outcome of the experiment, then $X$
 
 \begin{figure}[ht]
 \begin{center}
+\begin{psfrags}
+\psfrag{1}[c]{$1$}
+\psfrag{2}[c]{$2$}
+\psfrag{3}[c]{$3$}
+\psfrag{4}[c]{$4$}
+\psfrag{5}[c]{$5$}
+\psfrag{S}[l]{Sample Space}
+\psfrag{X}[c]{$X$}
+\psfrag{Y}[c]{$Y = g(X)$}
 \includegraphics[height=4.93cm]{Figures/5Chapter/fcn}
+\end{psfrags}
 \caption{A function of a random variable is a random variable itself.
 In this figure $Y$ is obtained by passing random variable $X$ through a function $g$.}
 \end{center}
 \end{figure}
 
-If $X$ is a discrete random variable, then so is $Y$.
-The set of all the possible values $Y$ can take is denoted by $g(X(\Omega))$.
+Furthermore, if $X$ is a discrete random variable, then so is $Y$.
+The set of all the possible values $Y$ can take is denoted by $g(X(\Omega))$, and the number of elements in $g(X(\Omega))$ is no greater than the number of elements in $X(\Omega)$.
 The PMF of $Y$, which we represent by $p_Y (y)$, is obtained as follows.
 If $y \in g(X(\Omega))$ then
 \begin{equation} \label{equation:DefinitionFunctionPMF}
@@ -372,7 +417,7 @@ In particular, $p_Y (y)$ is non-zero only if there exists an $x \in X(\Omega)$ s
 \begin{example}
 Let $X$ be a random variable and let $Y = g(X) = aX + b$, where $a$ and $b$ are constant.
 That is, $Y$ is an affine function of $X$.
-Given that $a \neq 0$, the probability that $Y$ is equal to $y$ is given by
+Suppose that $a \neq 0$, then the probability of $Y$ being equal to value $y$ is given by
 \begin{equation*}
 p_Y(y) = p_X \left( \frac{ y - b }{a} \right) .
 \end{equation*}
@@ -380,711 +425,4 @@ p_Y(y) = p_X \left( \frac{ y - b }{a} \right) .
 
 Linear and affine functions of random variables are commonplace in probability.
 In example~\ref{BrazosSodaCompany1}, for instance, we have implicitly used the linear function $Y = 10 X$ to compute the probability of winning more than \$40.
-
-
-\section{Expectations}
-
-The PMF of random variable $X$ provides a complete characterization of the  random variable by specifying the probability of every possible outcome of $X$.
-This description is, in general, very useful.
-However, it is sometimes desirable to summarize the information contained in the PMF of a random variable to a few parameters.
-This can be achieved using the concept of expectations.
-
-Consider a discrete random variable $X$ with PMF $p_X$, and let $g$ be a real-value function on the range of $X$.
-The \emph{expected value} of $g(X)$ is defined by
-\begin{equation} \label{equation:Expectation}
-\Expect \left[ g(X) \right]
-= \sum_{x \in X(\Omega)} g(x) p_X (x) .
-\end{equation}
-It is important to realize that there exist random variables and functions for which the above sum does not converge.
-In such cases, we simply say that the expected value of $g(X)$ does not exist.
-
-\begin{example}
-Let $g(x) = c$ be a constant, then the expectation of $g(X) = c$ is equal to
-\begin{equation*}
-\Expect \left[ c \right]
-= \sum_{x \in X(\Omega)} c p_X (x)
-= c \sum_{x \in X(\Omega)} p_X (x)
-= c,
-\end{equation*}
-where the last inequality follows from the normalization axiom of probability laws.
-We conclude that the expectation of a constant is the constant itself.
-\end{example}
-
-We introduced in section~\ref{subsection:FunctionDiscreteRV} functions of random variables.
-Suppose that we create a new random variable $Y$ by applying a real-valued function $g$ to $X$,
-\begin{equation*}
-Y = g(X) .
-\end{equation*}
-We can compute the expectation of $Y$ using two different formula.
-First, we can employ \eqref{equation:Expectation} directly to $Y$,
-\begin{equation*}
-\Expect [Y] = \sum_{y \in g(X(\Omega))} y p_Y(y),
-\end{equation*}
-where $p_Y (y)$ is given by \eqref{equation:FunctionPMF}.
-Alternatively, we also have
-\begin{equation*}
-\Expect [Y] = \Expect [g(X)] = \sum_{x \in X(\Omega)} g(x) p_X(x) .
-\end{equation*}
-To verify that these formula are consistent, we proceed as follows
-\begin{equation*}
-\begin{split}
-\Expect [Y] &= \sum_{y \in g(X(\Omega))} y p_Y(y) \\
-&= \sum_{y \in g(X(\Omega))} y
-\sum_{\{x \in X(\Omega) | g(x) = y\}} p_X(x) \\
-&= \sum_{y \in g(X(\Omega))}
-\sum_{\{x \in X(\Omega) | g(x) = y\}} y p_X(x) \\
-&= \sum_{y \in g(X(\Omega))}
-\sum_{\{x \in X(\Omega) | g(x) = y\}} g(x) p_X(x) \\
-&= \sum_{x \in X(\Omega)} g(x) p_X(x)
-= \Expect [g(X)].
-\end{split}
-\end{equation*}
-Indeed these two methods of computing the expected value of $Y$ are equivalent.
-
-
-\subsection{The Mean}
-
-The simplest non-trivial expectation is called the \emph{mean}.
-For random variable $X$, the mean is simply the expected value of $X$ itself.
-It is represented by $\Expect [X]$ and, according to \eqref{equation:Expectation}, it is given by
-\begin{equation*}
-\Expect [X] = \sum_{x \in X(\Omega)} x p_X (x) .
-\end{equation*}
-
-\begin{example}
-Let $X$ be a geometric random variable with
-\begin{equation*}
-p_X (k) = (1-p)^{k-1} p, \quad k = 1, 2, \ldots
-\end{equation*}
-The mean of this random variable is
-\begin{equation*}
-\begin{split}
-\Expect [X] &= \sum_{k=1}^{\infty} k (1-p)^{k-1} p
-= p \sum_{k=1}^{\infty} k (1-p)^{k-1}
-= \frac{1}{p} .
-\end{split}
-\end{equation*}
-\end{example}
-
-\begin{example}
-Let $X$ be a binomial random variable with
-\begin{equation*}
-p_X (k) = \binom{n}{k} p^k (1-p)^{n-k} ,
-\end{equation*}
-where $k = 0, 1, \ldots, n$.
-The mean of this binomial random variable is computed as
-\begin{equation*}
-\begin{split}
-\Expect [X] &= \sum_{k=0}^n k \binom{n}{k} p^k (1-p)^{n-k} \\
-&= \sum_{k=1}^n \frac{n!}{(k-1)!(n-k)!} p^k (1-p)^{n-k} \\
-&= \sum_{l=0}^{n-1} \frac{n!}{l!(n-1-l)!} p^{l+1} (1-p)^{n-l-1} \\
-&= n p \sum_{l=0}^{n-1} \binom{n-1}{l} p^{l} (1-p)^{n-1-l}
-= n p .
-\end{split}
-\end{equation*}
-\end{example}
-
-It may be insightful to relate the mean of a random variable to classical mechanics.
-Let $X$ be a random variable and suppose that, for every $x \in X(\Omega)$, we place a stone of mass $p_X(x)$ at position $x$ along the real axis.
-The mean of random variable $X$ coincides with the center of mass of the particles.
-
-\begin{example}
-Let $X$ be a Bernoulli random variable such that
-\begin{equation*}
-p_X (x) = \left\{ \begin{array}{ll}
-0.25, & \text{if }x = 0 \\
-0.75, & \text{if }x = 1.
-\end{array} \right.
-\end{equation*}
-The mean of $X$ is given by
-\begin{equation*}
-\Expect [X] = 0 \times 0.25 + 1 \times 0.75 = 0.75 .
-\end{equation*}
-Consider a two-particle system with masses $m_1 = 0.25$ and $m_2 = 0.75$.
-In the coordinate system illustrated below, the particles are located at $r_1 = 0$ and $r_2 = 1$.
-Their center of mass is given by
-\begin{equation*}
-R = \frac{ m_1 r_1 + m_2 r_2 }{ m_1 + m_2 } = 0.75 .
-\end{equation*}
-The center of mass coincides with the mean of $X$.
-
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[height=1.8cm]{Figures/5Chapter/mass}
-\end{center}
-\caption{The center of mass on the figure is indicated by the tip of the arrow.}
-\end{figure}
-\end{example}
-
-Suppose $X$ is a random variable with finite mean.
-Let $Y$ be the affine function of $X$ given by
-\begin{equation*}
-Y = aX + b,
-\end{equation*}
-where $a$ and $b$ are fixed real numbers.
-The mean of random variable $Y$ is given by
-\begin{equation*}
-\Expect [Y] = a \Expect [X] + b.
-\end{equation*}
-We can compute the mean of $Y$ using \eqref{equation:Expectation}.
-It is equal to
-\begin{equation*}
-\begin{split}
-\Expect [Y] &= \sum_{x \in X(\Omega)} (ax + b) p_X(x) \\
-&= a \sum_{x \in X(\Omega)} x p_X(x) + b \sum_{x \in X(\Omega)} p_X(x) \\
-&= a \Expect [X] + b.
-\end{split}
-\end{equation*}
-
-It is not much harder to show that the expectation is a linear operator.
-Suppose that $g$ and $h$ are two real-valued functions such that $\Expect [g(X)]$ and $\Expect [h(X)]$ exist.
-We can compute the expectation of $a g(X) + h(X)$ as
-\begin{equation*}
-\begin{split}
-\Expect [ a g(X) + h(X) ] &= \sum_{x \in X(\Omega)} (a g(x) + h(x)) p_X(x) \\
-&= a \sum_{x \in X(\Omega)} g(x) p_X(x) + \sum_{x \in X(\Omega)} h(x) p_X(x) \\
-&= a \Expect [g(X)] + \Expect [h(X)] .
-\end{split}
-\end{equation*}
-That is, the expectation is both additive and homogeneous.
-
-
-\subsection{The Variance}
-
-The second most common descriptive quantity associated wth a random variable $X$ is its \emph{variance}, which we denote by $\Var (X)$.
-It is defined by
-\begin{equation} \label{equation:Variance}
-\Var (X) = \Expect \left[ \left( X - \Expect [X] \right)^2 \right] .
-\end{equation}
-The variance is always nonnegative.
-It provides a measure of the dispersion of $X$ around its mean.
-For discrete random variables, it can be computed explicitly as
-\begin{equation*}
-\Var (X) = \sum_{x \in X(\Omega)} \left( X - \Expect [X] \right)^2 p_X (x) .
-\end{equation*}
-The square root of the variance is referred to as the \emph{standard deviation} of $X$, and it is denoted by $\sigma_X$.
-
-\begin{example}
-Let $X$ be a Poisson random variable with parameter $\lambda$.
-The mean of $X$ is given by
-\begin{equation*}
-\Expect [X] = \sum_{k=0}^{\infty} k \frac{\lambda^k}{k!} e^{- \lambda}
-= \sum_{k=1}^{\infty} \frac{\lambda^k}{(k-1)!} e^{- \lambda}
-= \lambda \sum_{l=0}^{\infty} \frac{\lambda^l}{l!} e^{- \lambda}
-= \lambda .
-\end{equation*}
-The variance of $X$ can be calculated as
-\begin{equation*} \label{equation:VarianceExplicit}
-\begin{split}
-\Var (X) &= \sum_{k=0}^{\infty} \left( k - \lambda \right)^2
-\frac{\lambda^k}{k!} e^{- \lambda} \\
-&= \sum_{k=0}^{\infty} \left(\lambda^2 - 2 k \lambda + k + k(k-1) \right)
-\frac{\lambda^k}{k!} e^{- \lambda} \\
-&= \lambda^2 - 2 \lambda^2 + \lambda +
-\sum_{k=0}^{\infty} k(k-1) \frac{\lambda^k}{k!} e^{- \lambda} \\
-&= \lambda - \lambda^2 +
-\sum_{k=2}^{\infty} \frac{\lambda^k}{(k-2)!} e^{- \lambda} \\
-&= \lambda - \lambda^2 +
-\lambda^2 \sum_{l=0}^{\infty} \frac{\lambda^l}{l!} e^{- \lambda}
-= \lambda .
-\end{split}
-\end{equation*}
-Both the mean and the variance of a Poisson random variable with parameter $\lambda$ are equal to $\lambda$.
-\end{example}
-
-\begin{theorem}
-Suppose $X$ is a random variable with finite mean and variance, and let $Y$ be the affine function of $X$ given by $Y = aX + b$, where $a$ and $b$ are constants.
-The variance of $Y$ is given by
-\begin{equation*}
-\Expect [Y] = a \Expect [X] + b.
-\end{equation*}
-\end{theorem}
-\begin{proof}
-Consider \eqref{equation:VarianceExplicit} applied to $Y = aX + b$.
-\begin{equation*}
-\begin{split}
-\Var(Y)
-&= \sum_{x \in X(\Omega)} \left( ax + b - \Expect [aX + b] \right)^2 p_X(x) \\
-&= \sum_{x \in X(\Omega)} \left( ax + b - a \Expect [X] - b \right)^2 p_X(x) \\
-&= a^2 \sum_{x \in X(\Omega)} \left( x - \Expect [X] \right)^2 p_X(x)
-= a^2 \Var(X) .
-\end{split}
-\end{equation*}
-Clearly, the variance is not a linear operator.
-\end{proof}
-
-
-\subsection{Moments}
-
-The \emph{moments} of a random variable $X$ are likewise important quantities used in summarizing the PMF of $X$.
-The $n$th moment of random variable $X$ is defined by
-\begin{equation*}
-\Expect [X^n] = \sum_{x \in X(\Omega)} x^n p_X (x) .
-\end{equation*}
-The mean of a random variable is also its first moment.
-The variance of the random variable $X$ can be defined in terms of its first two moments, $\Expect [X]$ and $\Expect [X^2]$.
-This alternate formula is sometimes convenient for computation purposes.
-
-\begin{theorem}
-The variance of random variable $X$ can be expressed in terms of the moments of $X$,
-\begin{equation*}
-\Var (X) = \Expect \left[ X^2 \right] - \left( \Expect [X] \right)^2.
-\end{equation*}
-\end{theorem}
-\begin{proof}
-Suppose that the variance of $X$ is finite.
-We can expand \eqref{equation:Variance} as
-\begin{equation*}
-\begin{split}
-\Var (X) &= \sum_{x \in X(\Omega)} \left( x - \Expect [X] \right)^2 p_X (x) \\
-&= \sum_{x \in X(\Omega)} \left( x^2 - 2 x \Expect [X] + \left( \Expect [X] \right)^2 \right) p_X (x) \\
-&= \sum_{x \in X(\Omega)} x^2 p_X (x) - 2 \Expect [X] \sum_{x \in X(\Omega)} x p_X (x) + \left( \Expect [X] \right)^2 \sum_{x \in X(\Omega)} p_X (x) \\
-&= \Expect \left[ X^2 \right] - \left( \Expect [X] \right)^2.
-\end{split}
-\end{equation*}
-This alternate formula for the variance of $X$ is sometimes easier to compute.
-\end{proof}
-
-\begin{example}
-Let $X$ be a discrete uniform random variable with PMF
-\begin{equation*}
-p_X (k) = \left\{ \begin{array}{ll}
-1/n, & \text{if }k = 1, 2, \ldots, n \\
-0, & \text{otherwise} .
-\end{array} \right.
-\end{equation*}
-The mean of this uniform random variable is easily seen to equal
-\begin{equation*}
-\Expect [X] = \frac{n+1}{2} .
-\end{equation*}
-Its variance is obtained  as
-\begin{equation*}
-\begin{split}
-\Var (X) &= \Expect [X^2] - \left( \Expect [X] \right)^2 \\
-&= \sum_{k=1}^n \frac{k^2}{n} - \left( \frac{n+1}{2} \right)^2 \\
-&= \frac{n(n+1)(2n+1)}{6} - \left( \frac{n+1}{2} \right)^2 \\
-&= \frac{4 n^3 + 3 n^2 - 4 n -3}{12} .
-\end{split}
-\end{equation*}
-\end{example}
-
-
-\section{Pairs of Random Variables}
-
-So far, our treatment has been focused on single random variables.
-It is sometimes convenient or required to model random phenomena using multiple random variables.
-In this section, we extend some of the concepts developed for single random variables to multiple random variables.
-
-\subsection{Joint Probability Mass Functions}
-
-Consider two discrete variables $X$ and $Y$ associated with a single experiment.
-The random pair $(X, Y)$ is characterized by the \emph{joint probability mass function} of $X$ and $Y$, which we denote by $p_{X,Y}$.
-If $x$ is a possible value of $X$ and $y$ is a possible value of $Y$, then the probability mass of $(x, y)$ is given by
-\begin{equation*}
-\begin{split}
-p_{X,Y} (x, y) &= \Pr ( \{ X = x \} \cap \{ Y = y \} ) \\
-&= \Pr ( X = x, Y = y ).
-\end{split}
-\end{equation*}
-Note the similarity between the definition of the joint PMF and \eqref{equation:PMF}.
-
-Suppose that $S$ is a subset of $X(\Omega) \times Y(\Omega)$.
-We can express the probability of event $S$ as
-\begin{equation*}
-\begin{split}
-\Pr (S) &= \Pr (\{ \omega \in \Omega | (X(\omega), Y(\omega)) \in S \}) \\
-&= \sum_{(x,y) \in S} p_{X,Y} (x, y) .
-\end{split}
-\end{equation*}
-In particular, we have
-\begin{equation*}
-\sum_{x \in X(\Omega)} \sum_{y \in Y(\Omega)} p_{X,Y} (x, y) = 1.
-\end{equation*}
-
-To distinguish between the joint PMF of $X$ and $Y$ and the individual PMFs $p_X$ and $p_Y$, we refer to the latter as the \emph{marginal probability mass functions}.
-We can compute the marginal PMFs of $X$ and $Y$ from the joint PMF $p_{X,Y}$ by using the formulas
-\begin{align*}
-p_X (x) &= \sum_{y \in Y(\Omega)} p_{X,Y} (x,y), \\
-p_Y (y) &= \sum_{x \in X(\Omega)} p_{X,Y} (x,y).
-\end{align*}
-On the other hand, knowledge of the marginal PMFs $p_X$ and $p_Y$ is not sufficient to obtain a complete description of the joint PMF $p_{X,Y}$.
-
-\begin{example} \label{example:JointPMFwoReplacement}
-An urn contains three balls numbered one, two, and three.
-A random experiment consists of drawing two balls from the urn, without replacement.
-The number appearing on the first ball is a random variable, which we denote by $X$.
-Similarly, we refer to the number inscribed on the second ball as $Y$.
-The joint PMF of $X$ and $Y$ is given by
-\begin{center}
-\begin{tabular}{|c|c|c|c|}
-\hline
-$p_{X,Y} (x,y)$ & $1$ & $2$ & $3$ \\
-\hline
-$1$ & $0$ & $1/6$ & $1/6$ \\
-\hline
-$2$ & $1/6$ & $0$ & $1/6$ \\
-\hline
-$3$ & $1/6$ & $1/6$ & $0$ \\
-\hline
-\end{tabular}
-\end{center}
-We can compute the marginal PMF of $X$ as
-\begin{equation*}
-\begin{split}
-p_X (x) &= \sum_{y \in Y(\Omega)} p_{X,Y} (x,y) \\
-&= \frac{1}{6} + \frac{1}{6} = \frac{1}{3},
-\end{split}
-\end{equation*}
-where $x \in \{1, 2, 3 \}$.
-Likewise, the marginal PMF of $Y$ is seen to equal
-\begin{equation*}
-p_Y (y) = \left\{ \begin{array}{ll}
-1/3, & \text{if }y = 1, 2, 3 \\
-0, & \text{otherwise} .
-\end{array} \right.
-\end{equation*}
-\end{example}
-
-\begin{example} \label{example:JointPMFwithReplacement}
-Again, suppose that an urn contains three balls numbered one, two, and three.
-This time the random experiment consists of drawing two balls from the urn with replacement.
-We use $X$ and $Y$ to denote the numbers appearing on the first and second balls, respectively.
-The joint PMF of $X$ and $Y$ is now equal to
-\begin{center}
-\begin{tabular}{|c|c|c|c|}
-\hline
-$p_{X,Y} (x,y)$ & $1$ & $2$ & $3$ \\
-\hline
-$1$ & $1/9$ & $1/9$ & $1/9$ \\
-\hline
-$2$ & $1/9$ & $1/9$ & $1/9$ \\
-\hline
-$3$ & $1/9$ & $1/9$ & $1/9$ \\
-\hline
-\end{tabular}
-\end{center}
-Note that the marginal PMF of $X$ and $Y$ are the same as in example~\ref{example:JointPMFwoReplacement}.
-However, the joint PMFs differ.
-\end{example}
-
-Examples~\ref{example:JointPMFwoReplacement}~\&~\ref{example:JointPMFwithReplacement} illustrate the fact that knowledge of marginal PMFs is not sufficient to characterize the underlying joint PMF.
-
-
-\subsection{Functions and Expectations}
-
-Let $X$ and $Y$ be two random variables with joint PMF $p_{X,Y}$.
-Consider a third random variable defined by $Z = g(X,Y)$, where $g$ is a real-valued function.
-We can obtain the PMF of $Z$ by computing
-\begin{equation*}
-p_Z (z)
-= \sum_{\{ (x,y) | g(x,y) = z \}} p_{X,Y} (x, y).
-\end{equation*}
-This is simply the analog of \eqref{equation:FunctionPMF} for multiple random variables.
-
-The definition of expectations can also be extended to multiple random variable.
-In particular, the expected value of $g(X,Y)$ is given by
-\begin{equation} \label{equation:ExpectationMultipleRV}
-\Expect [g(X,Y)] = \sum_{x \in X(\Omega)} \sum_{y \in Y(\Omega)} g(x,y) p_{X,Y} (x,y) .
-\end{equation}
-
-\begin{example}
-An urn contains three balls numbered one, two, and three.
-Two balls are selected from the urn at random, without replacement.
-We employ $X$ to represent the number on the first ball, and $Y$ for the number on the second ball.
-We wish to compute the expected value of the function $X + Y$.
-
-Using \eqref{equation:ExpectationMultipleRV}, we compute the expectation of $g(X,Y) = X + Y$ as
-\begin{equation*}
-\begin{split}
-\Expect [g(X,Y)] &= \Expect [X + Y] \\
-&= \sum_{x \in X(\Omega)} \sum_{y \in Y(\Omega)} (x + y) p_{X,Y} (x,y) \\
-&= \sum_{x \in X(\Omega)} x p_X (x) + \sum_{y \in Y(\Omega)} y p_Y (y)
-= 4.
-\end{split}
-\end{equation*}
-The expected value of $X + Y$ is four.
-\end{example}
-
-
-\section{Conditional Random Variables}
-
-Many random variables of practical interest are dependent.
-That is, the realization of random variable $X$ may provide partial information about the random variable $Y$.
-This inter-dependence is captured by the concept of conditioning, which was first discussed in chapter~\ref{chapter:ConditionalProbability}.
-In this section, we extend the concept of conditioning to multiple random variables.
-We study the probability of events concerning random variable $Y$ given that some information about random variable $X$ is available.
-
-Let $X$ and $Y$ be two random variables associated with the same experiment.
-The \emph{conditional probability mass function} of $Y$ given $X = x$, denoted by $p_{Y|X}$, is defined by
-\begin{equation*}
-\begin{split}
-p_{Y|X} (y|x) &= \Pr ( Y = y | X = x) \\
-&= \frac{\Pr (\{Y = y\} \cap \{ X = x \})}{\Pr (X = x)} \\
-&= \frac{ p_{X,Y} (x,y) }{p_X(x)},
-\end{split}
-\end{equation*}
-provided that $p_X (x) \neq 0$.
-Note that conditioning is not defined when $p_X (x) = 0$, as it has no meaning.
-
-Let $x$ be fixed with $p_X (x) > 0$.
-The conditional PMF $p_{Y|X}$ introduced above is a valid PMF since it is nonnegative and
-\begin{equation*}
-\begin{split}
-\sum_{y \in Y(\Omega)} p_{Y|X} (y|x)
-&= \sum_{y \in Y(\Omega)} \frac{p_{X,Y} (x,y)}{p_X (x)} \\
-&= \frac{1}{p_X (x)} \sum_{y \in Y(\Omega)} p_{X,Y} (x,y) \\
-&= 1.
-\end{split}
-\end{equation*}
-The probability of an event $S$ given $X = x$ is then obtained by summing the contidiononal probability $p_{Y|X}$ over all outcomes included in $S$,
-\begin{equation*}
-P (Y \in S | X = x) = \sum_{y \in S} p_{Y|X} (y | x) .
-\end{equation*}
-
-\begin{example}
-Suppose that an urn contains three balls numbered one, two, and three.
-Two balls are drawn from this urn without replacement.
-We wish to find the probability that the number on the first ball is a one.
-We also wish to find the probability that the first ball is a one given that the number on the second ball is a two.
-
-The probability that the number on the first ball is a one is given by the marginal distribution of the first drawing, which was computed in example~\ref{example:JointPMFwoReplacement}.
-It is equal to
-\begin{equation*}
-\Pr ( \text{first ball} = 1) = 1/3.
-\end{equation*}
-To compute the probability that the first ball is a one conditioned on the second ball being a two, we use the joint PMF derived in example~\ref{example:JointPMFwoReplacement},
-\begin{equation*}
-\Pr (\text{first ball} =1 | \text{ second ball} =2) = \frac{1/6}{1/3} = 1/2 .
-\end{equation*}
-The conditioning affects the probability of the first number drawn being equal to one.
-\end{example}
-
-The definition of conditional PMF can be rearranged to obtain a convenient formula to calculate the joint PMF of $X$ and $Y$, namely
-\begin{equation*}
-\begin{split}
-p_{X,Y} (x,y) &= p_{Y|X} (y|x) p_X (x) \\
-& = p_{X|Y} (x|y) p_Y (y) .
-\end{split}
-\end{equation*}
-This formula can be use to compute the joint PMF of $X$ and $Y$ sequentially.
-
-%\begin{example}
-%\end{example}
-
-It is possible to define the conditional PMF of a random variable $X$, conditioned on an event $S$ where $\Pr (X \in S) > 0$.
-Let $X$ be a random variable associated with a particular experiment, and let $S$ be a non-trivial event corresponding to this experiment.
-The conditional PMF of $X$ given $S$ is defined by
-\begin{equation} \label{equation:ConditionalEventPMF}
-p_{X|S} (x) = \Pr (X = x | S)
-= \frac{\Pr (\{X = x\} \cap S)}{\Pr (S)} .
-\end{equation}
-Note that the sets $\{ X = x \}$ form a partition of $\Omega$ as $x$ ranges over all the possible values in $X (\Omega)$.
-By the total probability theorem, we deduce that
-\begin{equation*}
-\sum_{x \in X(\Omega)} \Pr ( \{X = x\} \cap S) = \Pr (S)
-\end{equation*}
-and, consequently, we get
-\begin{equation*}
-\sum_{x \in X(\Omega)} p_{X|S} (x) = 1 .
-\end{equation*}
-Hence, $p_{X|S}$ is a valid PMF.
-
-\begin{example}[Splitting Property of Poisson PMF]
-A digital communication system transmits out either a one with probability $p$ or a zero with probability $1 - p$, independently of previous transmissions.
-The number of transmitted binary digits within a given time interval has a Poisson PMF with parameter $\lambda$.
-We wish to show that the number of ones sent in that same time interval has a Poisson PMF with parameter $p \lambda$.
-
-Let $L_1$ be the number of ones, $L_0$ be the number of zeros, and $L = L_0 + L_
-1$ be the total number of transmissions during the interval.
-The number of ones given that the total number of transmissions is $\ell$ is given by
-\begin{equation*}
-p_{L_1|L} (k | \ell) = \binom{\ell}{k} p^k (1-p)^{\ell - k},
-\quad k = 0, 1, \ldots, \ell.
-\end{equation*}
-The probability that $L_1$ is equal to $k$ is therefore equal to
-\begin{equation*}
-\begin{split}
-p_{L_1} (k) &= \sum_{\ell = 0}^{\infty} p_{L_1|L} (k | \ell) p_L(\ell) \\
-&= \sum_{\ell = k}^{\infty} \binom{\ell}{k} p^k (1-p)^{\ell - k}
-\frac{\lambda^{\ell}}{\ell !} e^{-\lambda} \\
-&= \sum_{m = 0}^{\infty} \binom{m+k}{k} p^k (1-p)^{m}
-\frac{\lambda^{m+k}}{(m+k)!} e^{-\lambda} \\
-&= \frac{(\lambda p)^k}{k!} e^{-\lambda}
-\sum_{m = 0}^{\infty} \frac{( (1-p) \lambda)^{m}}{m!} \\
-&= \frac{(\lambda p)^k}{k!} e^{-p \lambda} .
-\end{split}
-\end{equation*}
-That is, $L_1$ has a Poisson PMF with parameter $p \lambda$.
-\end{example}
-
-
-\subsection{Conditional Expectations}
-
-The \emph{conditional expectation} of $Y$ given $X = x$ is simply the expectation of $Y$ with respect to the conditional PMF $p_{Y|X}$,
-\begin{equation*}
-\Expect [Y | X = x ] = \sum_{y \in Y(\Omega)} y p_{Y|X} (y|x).
-\end{equation*}
-This conditional expectation can be viewed as a function of $x$,
-\begin{equation*}
-h(x) = \Expect [Y | X = x] .
-\end{equation*}
-It is therefore mathematically accurate and sometimes desirable to talk about the random variable $h (X) = \Expect [Y | X]$.
-Let $X$ and $Y$ be two random variables associated with an experiment.
-The outcome of this experiment determines the value of $X$, say $X = x$, which in turn produces the value $h(x) = \Expect [Y | X = x]$.
-A conditional expectation is simply a special random variable.
-
-Not too surprisingly, the expectation of $\Expect [Y | X]$ is given by
-\begin{equation*}
-\begin{split}
-\Expect \left[ \Expect [Y | X] \right]
-&= \sum_{x \in X(\Omega)} \Expect [Y | X = x] p_X (x) \\
-&= \sum_{x \in X(\Omega)} \sum_{y \in Y(\Omega)} y p_{Y|X} (y|x) p_X (x) \\
-&= \sum_{x \in X(\Omega)} \sum_{y \in Y(\Omega)} y p_{X,Y} (x, y) \\
-&= \sum_{y \in Y(\Omega)} y \sum_{x \in X(\Omega)} p_{X,Y} (x, y) \\
-&= \sum_{y \in Y(\Omega)} y p_{Y} (y)
-= \Expect [Y] .
-\end{split}
-\end{equation*}
-Using a similar argument, it is straightforward to show that
-\begin{equation*}
-\Expect \left[ \Expect [g (Y) | X] \right] = \Expect [g(Y)] .
-\end{equation*}
-
-\begin{example}
-An entrepreneur opens a small business that sells two kinds of beverages from the Brazos Soda Company, cherry soda and lemonade.
-The number of bottles sold in an hour at the store is found to be a Poisson random variable with parameter $\lambda = 10$.
-Every customer selects a cherry soda with probability $p$ and a lemonade with probability $(1 - p)$, independently of other customers.
-We wish to find the conditional PMF and the conditional mean of the number of cherry sodas sold in an hour given that a total of ten beverages was purchased by customers during that time period.
-
-Let $B$ represent the number of bottles sold during an hour.
-Similarly, let $C$ and $L$ be the number of cherry sodas and lemonades sold during that hour, respectively.
-We note that $B = C + L$.
-The conditonal PMF of $C$ given that the total number of beverages sold equals ten ($B = 10$) is
-\begin{equation} \label{equation:ConditionalPoisson}
-\begin{split}
-p_{C|B} (k | 10)
-&= \frac{ \Pr \left( \{ C = k \} \cap \{ B = 10 \} \right) }
-{ \Pr (B = 10) } \\
-&= \frac{ \Pr ( C = k ) \Pr ( L = 10-k ) }{ \Pr (B = 10) } \\
-&= \frac{ \frac{ 10^k p^k }{ k!} e^{-10p}
-\frac{10^{10-k} (1-p)^{10-k}}{(10-k)!} e^{-10(1-p)} }
-{ \frac{ 10^{10} }{ 10!} e^{-10} } \\
-&= \binom{10}{k} p^k (1-p)^{10-k} .
-\end{split}
-\end{equation}
-This reduces to the PMF of a binomial random variable.
-The conditional mean is then seen to equal
-\begin{equation*}
-\Expect [ C | B=10] = \sum_{k=0}^{10}
-k \binom{10}{k} p^k (1-p)^{10-k} = 10 p .
-\end{equation*}
-Note that we have used the splitting property of the Poisson PMF in \eqref{equation:ConditionalPoisson}.
-\end{example}
-
-We can define the expectation of $X$ conditioned on an event $S$ in an analogous manner.
-Let $S$ be an event such that $\Pr (S) > 0$.
-The conditional expectation of $X$ given $S$ is
-\begin{equation*}
-\Expect [X | S] = \sum_{x \in X(\Omega)} x p_{X|S} (x) ,
-\end{equation*}
-where $p_{X|S}$ is as defined in \eqref{equation:ConditionalEventPMF}.
-Similarly, we have
-\begin{equation*}
-\Expect [g(X) | S] = \sum_{x \in X(\Omega)} g(x) p_{X|S} (x) ,
-\end{equation*}
-
-\begin{example}
-Spring break is coming and a student decides to renew his shirt collection.
-The number of shirts purchased by the student is a random variable denoted by $N$.
-The PMF of this random variable is a geometric distribution with parameter $p = 0.5$.
-Any one shirt is \$10 or \$20 or \$50 with respective probabilities 0.5, 0.3, and 0.2, and independently of other shirts.
-We wish to compute the expected amount of money spent by the student.
-Also, we wish to compute the expected amount of money spent given that the student buys at least five shirts.
-
-Let $C_i$ be the cost of the $i$th shirt.
-The total amount of money spent by the student is
-\begin{equation*}
-T = \sum_{i=1}^N C_i .
-\end{equation*}
-Its mean is equal to
-\begin{equation*}
-\begin{split}
-\Expect [T] = \Expect \left[ \sum_{i=1}^N C_i \right]
-&= \Expect \left[ \Expect \left[
-\sum_{i=1}^N C_i \Big| N \right] \right] \\
-&= \Expect \left[ \sum_{i=1}^N \Expect [ C_i | N ] \right] \\
-&= 21 \Expect [ N ] = 42.
-\end{split}
-\end{equation*}
-The student is expected to spend \$42.
-Given that the student buys at least five shirts, the conditional expectation becomes
-\begin{equation*}
-\begin{split}
-\Expect [T | N \geq 5]
-&= \Expect \left[ \sum_{i=1}^N C_i \Big| N \geq 5 \right] \\
-&= \Expect \left[ \Expect \left[
-\sum_{i=1}^N C_i \Big| N \right] \bigg| N \geq 5 \right] \\
-&= 21 \Expect [ N | N \geq 5] \\
-&= 21 \sum_{n=5}^{\infty} n p_{N | N \geq 5} (n)
-= 126 .
-\end{split}
-\end{equation*}
-Condition on buying more than five shirts, the student is expected to spend \$126.
-In computing the conditional expectation, we have use the memoryless property of the geometric random variable.
-\end{example}
-
-
-\section{Independence}
-
-Let $X$ and $Y$ be two random variables associated with one experiment.
-Then $X$ and $Y$ are \emph{independent random variables} if
-\begin{equation*}
-p_{X,Y} (x,y) = p_X (x) p_Y (y)
-\end{equation*}
-for every $x \in X(\Omega)$ and every $y \in Y(\Omega)$.
-
-There is a clear relation between the concept of independence introduced in section~\ref{section:Independence} and the independence of two random variables.
-Two random variables are independent if and only if the events $\{ X = x \}$ and $\{ Y = y \}$ are independent for every $x \in X(\Omega)$ and every $y \in Y(\Omega)$.
-
-\begin{theorem}
-If $X$ and $Y$ are independent random variables, then
-\begin{equation*}
-\Expect [X Y] = \Expect [X] \Expect [Y] .
-\end{equation*}
-\end{theorem}
-\begin{proof}
-Assume that both $\Expect [X]$ and $\Expect[Y]$ exist, then
-\begin{equation*}
-\begin{split}
-\Expect [XY]
-&= \sum_{x \in X(\Omega)} \sum_{y \in Y(\Omega)} x y p_{X,Y} (x,y) \\
-&= \sum_{x \in X(\Omega)} \sum_{y \in Y(\Omega)} x y p_X (x) p_Y (y) \\
-&= \sum_{x \in X(\Omega)} x p_X (x) \sum_{y \in Y(\Omega)} y p_Y (y) \\
-&= \Expect [X] \Expect [Y] ,
-\end{split}
-\end{equation*}
-where we have used the fact that $p_{X,Y} (x,y) = p_X (x) p_Y (y)$ for independent random variables.
-\end{proof}
-
-%\begin{example}
-%\end{example}
-
-A similar argument can be used to show that
-\begin{equation*}
-\Expect[ g(X) h(Y) ] = \Expect [ g(X) ] \Expect [ h(Y) ]
-\end{equation*}
-whenever $X$ and $Y$ are independent random variables and the individual expectations exist.
-
-We saw that a random variable can also be independent from an event.
-Let $X$ be a random variable and let $S$ be a non-trivial event.
-The variable $X$ is \emph{independent} of $S$ if
-\begin{equation*}
-\Pr (\{X = x \} \cap S ) = p_X (x) \Pr (S)
-\end{equation*}
-for every $x \in X(\Omega)$.
-In particular, if $X$ is independent of event $S$ then
-\begin{equation*}
-p_{X|S} (x) = p_X (x)
-\end{equation*}
-for all $x \in X(\Omega)$.
 
