@@ -299,20 +299,6 @@ This provides a simple way to compute the mean and the variance of $X$, which ar
 \end{example}
 
 
-\subsection{Ordinary Generating Functions}
-
-In the special yet important case where $X(\Omega)$ is a subset of the non-negative integers, it is sometimes useful to use the \emph{ordinary generating function}.
-This function is defined by
-\begin{equation*}
-G_X(z) = \sum_{k=0}^{\infty} z^k p_X (k) .
-\end{equation*}
-Note that $M_X (s) = G_X (e^s)$ and $G_X(z) = M_X (\log z)$.
-The probability $\Pr (X = k)$ can be recovered from $G_X (z)$ using Taylor's formula,
-\begin{equation*}
-p_X(k) = \frac{G_X^{(k)} (0)}{k!}
-\end{equation*}
-where $G_X^{(k)}$ is the $k$th derivative of $G_X$.
-
 
 \subsection{Sums of Independent Random Variables}
 
