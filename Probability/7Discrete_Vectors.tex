@@ -4,12 +4,14 @@
 Thus far, our treatment has been focused on single random variables.
 It is sometimes convenient or required to model random phenomena using multiple random variables.
 In this section, we extend some of the concepts developed for single random variables to multiple random variables.
+We begin our study of random vectors with a simple case, pairs of random variables.
 
-\subsection{Joint Probability Mass Functions}
+
+\section{Joint Probability Mass Functions}
 
 Consider two discrete variables $X$ and $Y$ associated with a single experiment.
-The random pair $(X, Y)$ is characterized by the \emph{joint probability mass function} of $X$ and $Y$, which we denote by $p_{X,Y}$.
-If $x$ is a possible value of $X$ and $y$ is a possible value of $Y$, then the probability mass of $(x, y)$ is given by
+The random pair $(X, Y)$ is characterized by the \emph{joint probability mass function} of $X$ and $Y$, which we denote by $p_{X,Y}$. \index{Joint probability mass function}
+If $x$ is a possible value of $X$ and $y$ is a possible value of $Y$, then the probability mass of $(x, y)$ is denoted by
 \begin{equation*}
 \begin{split}
 p_{X,Y} (x, y) &= \Pr ( \{ X = x \} \cap \{ Y = y \} ) \\
@@ -17,6 +19,27 @@ p_{X,Y} (x, y) &= \Pr ( \{ X = x \} \cap \{ Y = y \} ) \\
 \end{split}
 \end{equation*}
 Note the similarity between the definition of the joint PMF and \eqref{equation:PMF}.
+
+\begin{figure}[ht]
+\begin{center}
+\begin{psfrags}
+\psfrag{1}[c]{$1$}
+\psfrag{2}[c]{$2$}
+\psfrag{3}[c]{$3$}
+\psfrag{4}[c]{$4$}
+\psfrag{5}[c]{$5$}
+\psfrag{6}[c]{$6$}
+\psfrag{7}[c]{$7$}
+\psfrag{S}[l]{Sample Space}
+\psfrag{R}[c]{$\RealNumbers$}
+\psfrag{X}[c]{$X$}
+\psfrag{Y}[c]{$Y$}
+\psfrag{P}[c]{$(X,Y)$}
+\includegraphics[width=11cm]{Figures/7Chapter/prv}
+\end{psfrags}
+\caption{The random pair $(X, Y)$ maps each outcome contained in the sample space to a real vector in $\RealNumbers^2$.}
+\end{center}
+\end{figure}
 
 Suppose that $S$ is a subset of $X(\Omega) \times Y(\Omega)$.
 We can express the probability of event $S$ as
@@ -31,13 +54,14 @@ In particular, we have
 \sum_{x \in X(\Omega)} \sum_{y \in Y(\Omega)} p_{X,Y} (x, y) = 1.
 \end{equation*}
 
-To distinguish between the joint PMF of $X$ and $Y$ and the individual PMFs $p_X$ and $p_Y$, we refer to the latter as the \emph{marginal probability mass functions}.
-We can compute the marginal PMFs of $X$ and $Y$ from the joint PMF $p_{X,Y}$ by using the formulas
+To further distinguish between the joint PMF of $X$ and $Y$ and the individual PMFs $p_X (\cdot)$ and $p_Y (\cdot)$, we occasionally refer to the latter as \emph{marginal probability mass functions}. \index{Probability mass function}
+We can compute the marginal PMFs of $X$ and $Y$ from the joint PMF $p_{X,Y}$ using the formulas
 \begin{align*}
 p_X (x) &= \sum_{y \in Y(\Omega)} p_{X,Y} (x,y), \\
 p_Y (y) &= \sum_{x \in X(\Omega)} p_{X,Y} (x,y).
 \end{align*}
-On the other hand, knowledge of the marginal PMFs $p_X$ and $p_Y$ is not sufficient to obtain a complete description of the joint PMF $p_{X,Y}$.
+On the other hand, knowledge of the marginal PMFs $p_X (\cdot)$ and $p_Y (\cdot)$ is not sufficient to obtain a complete description of the joint PMF $p_{X,Y} (\cdot,\cdot)$.
+Examples~\ref{example:JointPMFwoReplacement}~\&~\ref{example:JointPMFwithReplacement} illustrate the fact that knowledge of marginal PMFs is not sufficient to characterize the underlying joint PMF.
 
 \begin{example} \label{example:JointPMFwoReplacement}
 An urn contains three balls numbered one, two, and three.
@@ -69,14 +93,14 @@ where $x \in \{1, 2, 3 \}$.
 Likewise, the marginal PMF of $Y$ is seen to equal
 \begin{equation*}
 p_Y (y) = \left\{ \begin{array}{ll}
-1/3, & \text{if }y = 1, 2, 3 \\
+1/3, & \text{if }y \in \{ 1, 2, 3 \} \\
 0, & \text{otherwise} .
 \end{array} \right.
 \end{equation*}
 \end{example}
 
 \begin{example} \label{example:JointPMFwithReplacement}
-Again, suppose that an urn contains three balls numbered one, two, and three.
+Again, suppose that an urn contains three balls numbered one, two and three.
 This time the random experiment consists of drawing two balls from the urn with replacement.
 We use $X$ and $Y$ to denote the numbers appearing on the first and second balls, respectively.
 The joint PMF of $X$ and $Y$ is now equal to
@@ -93,34 +117,59 @@ $3$ & $1/9$ & $1/9$ & $1/9$ \\
 \hline
 \end{tabular}
 \end{center}
-Note that the marginal PMF of $X$ and $Y$ are the same as in example~\ref{example:JointPMFwoReplacement}.
-However, the joint PMFs differ.
+We can verify that the marginal PMF of $X$ and $Y$ are the same as in Example~\ref{example:JointPMFwoReplacement};
+however, the joint PMFs differ.
 \end{example}
 
-Examples~\ref{example:JointPMFwoReplacement}~\&~\ref{example:JointPMFwithReplacement} illustrate the fact that knowledge of marginal PMFs is not sufficient to characterize the underlying joint PMF.
 
+\section{Functions and Expectations}
 
-\subsection{Functions and Expectations}
-
-Let $X$ and $Y$ be two random variables with joint PMF $p_{X,Y}$.
-Consider a third random variable defined by $Z = g(X,Y)$, where $g$ is a real-valued function.
+Let $X$ and $Y$ be two random variables with joint PMF $p_{X,Y} (\cdot, \cdot)$.
+Consider a third random variable defined by $Z = g(X,Y)$, where $g : \RealNumbers^2 \mapsto \RealNumbers$ is a real-valued function.
 We can obtain the PMF of $Z$ by computing
 \begin{equation*}
 p_Z (z)
 = \sum_{\{ (x,y) | g(x,y) = z \}} p_{X,Y} (x, y).
 \end{equation*}
-This is simply the analog of \eqref{equation:FunctionPMF} for multiple random variables.
+This equation is the analog of \eqref{equation:FunctionPMF} for multiple random variables.
 
-The definition of expectations can also be extended to multiple random variable.
-In particular, the expected value of $g(X,Y)$ is given by
+\begin{figure}[ht]
+\begin{center}
+\begin{psfrags}
+\psfrag{1}[c]{$1$}
+\psfrag{2}[c]{$2$}
+\psfrag{3}[c]{$3$}
+\psfrag{4}[c]{$4$}
+\psfrag{5}[c]{$5$}
+\psfrag{S}[l]{Sample Space}
+\psfrag{R}[c]{$\RealNumbers$}
+\psfrag{X}[c]{$X$}
+\psfrag{Y}[c]{$Y$}
+\psfrag{Z}[c]{$Z$}
+\psfrag{g}[c]{$Z = g(X,Y)$}
+\includegraphics[width=11cm]{Figures/7Chapter/vfcn}
+\end{psfrags}
+\caption{A real-valued function of two random variables, $X$ and $Y$, is also a random variable.
+Above, $Z = g(X, Y)$ maps outcomes in the sample space to real numbers.}
+\end{center}
+\end{figure}
+
+\begin{example} \label{example:SumDice1}
+Two dice, a blue die and a red one, are rolled simultaneously.
+The random variable $X$ represents the number of dots that appears on the top face of the blue die, whereas $Y$ is equal to the number of dots on the red die.
+We can form a random variable $Z$ that describes the sum of the two dice by defining $Z = X + Y$.
+\end{example}
+
+The definition of expectations can also be extended to multiple random variables.
+In particular, the expected value of $g(X,Y)$ is obtained by computing
 \begin{equation} \label{equation:ExpectationMultipleRV}
 \Expect [g(X,Y)] = \sum_{x \in X(\Omega)} \sum_{y \in Y(\Omega)} g(x,y) p_{X,Y} (x,y) .
 \end{equation}
 
 \begin{example}
-An urn contains three balls numbered one, two, and three.
+An urn contains three balls numbered one, two and three.
 Two balls are selected from the urn at random, without replacement.
-We employ $X$ to represent the number on the first ball, and $Y$ for the number on the second ball.
+We employ $X$ to represent the number on the first ball and $Y$ for the number on the second ball.
 We wish to compute the expected value of the function $X + Y$.
 
 Using \eqref{equation:ExpectationMultipleRV}, we compute the expectation of $g(X,Y) = X + Y$ as
@@ -140,12 +189,12 @@ The expected value of $X + Y$ is four.
 
 Many random variables of practical interest are dependent.
 That is, the realization of random variable $X$ may provide partial information about the random variable $Y$.
-This inter-dependence is captured by the concept of conditioning, which was first discussed in chapter~\ref{chapter:ConditionalProbability}.
+This inter-dependence is captured by the concept of conditioning, which was first discussed in Chapter~\ref{chapter:ConditionalProbability}.
 In this section, we extend the concept of conditioning to multiple random variables.
 We study the probability of events concerning random variable $Y$ given that some information about random variable $X$ is available.
 
 Let $X$ and $Y$ be two random variables associated with the same experiment.
-The \emph{conditional probability mass function} of $Y$ given $X = x$, denoted by $p_{Y|X}$, is defined by
+The \emph{conditional probability mass function} of $Y$ given $X = x$, denoted by $p_{Y|X} (\cdot, \cdot)$, is defined by \index{Conditional probability mass function}
 \begin{equation*}
 \begin{split}
 p_{Y|X} (y|x) &= \Pr ( Y = y | X = x) \\
@@ -154,39 +203,47 @@ p_{Y|X} (y|x) &= \Pr ( Y = y | X = x) \\
 \end{split}
 \end{equation*}
 provided that $p_X (x) \neq 0$.
-Note that conditioning is not defined when $p_X (x) = 0$, as it has no meaning.
+Note that conditioning is not defined when $p_X (x)$ vanishes, as it has no meaning.
+This is similar to conditional probability only being defined over events with non-zero probabilities.
 
 Let $x$ be fixed with $p_X (x) > 0$.
-The conditional PMF $p_{Y|X}$ introduced above is a valid PMF since it is nonnegative and
+The conditional PMF introduced above is a valid PMF since it is nonnegative and
 \begin{equation*}
 \begin{split}
 \sum_{y \in Y(\Omega)} p_{Y|X} (y|x)
 &= \sum_{y \in Y(\Omega)} \frac{p_{X,Y} (x,y)}{p_X (x)} \\
-&= \frac{1}{p_X (x)} \sum_{y \in Y(\Omega)} p_{X,Y} (x,y) \\
-&= 1.
+&= \frac{1}{p_X (x)} \sum_{y \in Y(\Omega)} p_{X,Y} (x,y) = 1.
 \end{split}
 \end{equation*}
-The probability of an event $S$ given $X = x$ is then obtained by summing the contidiononal probability $p_{Y|X}$ over all outcomes included in $S$,
+The probability that $Y$ belongs to $S$ given $X = x$ is then obtained by summing the conditional probability $p_{Y|X} (\cdot, \cdot)$ over all outcomes included in $S$,
 \begin{equation*}
 P (Y \in S | X = x) = \sum_{y \in S} p_{Y|X} (y | x) .
 \end{equation*}
 
 \begin{example}
-Suppose that an urn contains three balls numbered one, two, and three.
+Suppose that an urn contains three balls numbered one, two and three.
 Two balls are drawn from this urn without replacement.
-We wish to find the probability that the number on the first ball is a one.
-We also wish to find the probability that the first ball is a one given that the number on the second ball is a two.
+We wish to find the probability that the number on the second ball is odd.
+We also wish to find the probability that the second ball is odd given that the number on the first ball is a three.
 
-The probability that the number on the first ball is a one is given by the marginal distribution of the first drawing, which was computed in example~\ref{example:JointPMFwoReplacement}.
-It is equal to
+The probability that the number on the second ball is odd is given by the marginal distribution of the second  drawing, which was computed in Example~\ref{example:JointPMFwoReplacement}.
+In the notation of that example, we have
 \begin{equation*}
-\Pr ( \text{first ball} = 1) = 1/3.
+\Pr (Y \in \{1, 3\})
+= p_Y (1) + p_Y (3)
+= \frac{1}{3} + \frac{1}{3}
+= \frac{2}{3} .
 \end{equation*}
-To compute the probability that the first ball is a one conditioned on the second ball being a two, we use the joint PMF derived in example~\ref{example:JointPMFwoReplacement},
+To compute the probability that the second ball is odd conditioned on the first ball being a three, we use the joint PMF derived in Example~\ref{example:JointPMFwoReplacement},
 \begin{equation*}
-\Pr (\text{first ball} =1 | \text{ second ball} =2) = \frac{1/6}{1/3} = 1/2 .
+\begin{split}
+\Pr ( Y \in \{ 1, 3 \} | X = 3)
+&= p_{Y|X}(1|3) + p_{Y|X}(3|3) \\
+&= \frac{p_{X,Y}(1,3)}{p_X (3)} + \frac{p_{X,Y}(3,3)}{p_X (3)} \\
+&= \frac{1/6}{1/3} + \frac{0}{1/3} = \frac{1}{2} .
+\end{split}
 \end{equation*}
-The conditioning affects the probability of the first number drawn being equal to one.
+The conditioning affects the probability of the second number drawn being odd.
 \end{example}
 
 The definition of conditional PMF can be rearranged to obtain a convenient formula to calculate the joint PMF of $X$ and $Y$, namely
@@ -201,7 +258,7 @@ This formula can be use to compute the joint PMF of $X$ and $Y$ sequentially.
 %\begin{example}
 %\end{example}
 
-It is possible to define the conditional PMF of a random variable $X$, conditioned on an event $S$ where $\Pr (X \in S) > 0$.
+It is also possible to define the conditional PMF of a random variable $X$, conditioned on an event $S$ where $\Pr (X \in S) > 0$.
 Let $X$ be a random variable associated with a particular experiment, and let $S$ be a non-trivial event corresponding to this experiment.
 The conditional PMF of $X$ given $S$ is defined by
 \begin{equation} \label{equation:ConditionalEventPMF}
@@ -217,40 +274,41 @@ and, consequently, we get
 \begin{equation*}
 \sum_{x \in X(\Omega)} p_{X|S} (x) = 1 .
 \end{equation*}
-Hence, $p_{X|S}$ is a valid PMF.
+Hence, we conclude that $p_{X|S} (\cdot)$ is a valid PMF.
 
 \begin{example}[Splitting Property of Poisson PMF]
 A digital communication system transmits out either a one with probability $p$ or a zero with probability $1 - p$, independently of previous transmissions.
 The number of transmitted binary digits within a given time interval has a Poisson PMF with parameter $\lambda$.
 We wish to show that the number of ones sent in that same time interval has a Poisson PMF with parameter $p \lambda$.
 
-Let $L_1$ be the number of ones, $L_0$ be the number of zeros, and $L = L_0 + L_
-1$ be the total number of transmissions during the interval.
-The number of ones given that the total number of transmissions is $\ell$ is given by
+Let $M$ denote the number of ones within the stipulated interval, $N$ be the number of zeros, and $K = M + N$ be the total number of transmissions during the same interval.
+The number of ones given that the total number of transmissions is $k$ is given by
 \begin{equation*}
-p_{L_1|L} (k | \ell) = \binom{\ell}{k} p^k (1-p)^{\ell - k},
-\quad k = 0, 1, \ldots, \ell.
+p_{M|K} (m | k) = \binom{k}{m} p^m (1-p)^{k - m},
+\quad m = 0, 1, \ldots, k.
 \end{equation*}
-The probability that $L_1$ is equal to $k$ is therefore equal to
+The probability that $M$ is equal to $m$ is therefore equal to
 \begin{equation*}
 \begin{split}
-p_{L_1} (k) &= \sum_{\ell = 0}^{\infty} p_{L_1|L} (k | \ell) p_L(\ell) \\
-&= \sum_{\ell = k}^{\infty} \binom{\ell}{k} p^k (1-p)^{\ell - k}
-\frac{\lambda^{\ell}}{\ell !} e^{-\lambda} \\
-&= \sum_{m = 0}^{\infty} \binom{m+k}{k} p^k (1-p)^{m}
-\frac{\lambda^{m+k}}{(m+k)!} e^{-\lambda} \\
-&= \frac{(\lambda p)^k}{k!} e^{-\lambda}
-\sum_{m = 0}^{\infty} \frac{( (1-p) \lambda)^{m}}{m!} \\
-&= \frac{(\lambda p)^k}{k!} e^{-p \lambda} .
+p_{M} (m) &= \sum_{k = 0}^{\infty} p_{M|K} (m | k) p_K(k) \\
+&= \sum_{k = m}^{\infty} \binom{k}{m} p^m (1-p)^{k - m}
+\frac{\lambda^{k}}{k !} e^{-\lambda} \\
+&= \sum_{u = 0}^{\infty} \binom{u+m}{m} p^m (1-p)^{u}
+\frac{\lambda^{u+m}}{(u+m)!} e^{-\lambda} \\
+&= \frac{(\lambda p)^m}{m!} e^{-\lambda}
+\sum_{u = 0}^{\infty} \frac{( (1-p) \lambda)^{u}}{u!}
+= \frac{(\lambda p)^m}{m!} e^{-p \lambda} .
 \end{split}
 \end{equation*}
-That is, $L_1$ has a Poisson PMF with parameter $p \lambda$.
+Above, we have used the change of variables $k = u+m$.
+We have also rearranged the sum into a familiar form, leveraging the fact that the summation of a Poisson PMF over all its possible values is equal to one.
+We can see that $M$ has a Poisson PMF with parameter $p \lambda$.
 \end{example}
 
 
-\subsection{Conditional Expectations}
+\section{Conditional Expectations}
 
-The \emph{conditional expectation} of $Y$ given $X = x$ is simply the expectation of $Y$ with respect to the conditional PMF $p_{Y|X}$,
+The \emph{conditional expectation} of $Y$ given $X = x$ is simply the expectation of $Y$ with respect to the conditional PMF $p_{Y|X} (\cdot)$, \index{Conditional expectation}
 \begin{equation*}
 \Expect [Y | X = x ] = \sum_{y \in Y(\Omega)} y p_{Y|X} (y|x).
 \end{equation*}
@@ -261,7 +319,7 @@ h(x) = \Expect [Y | X = x] .
 It is therefore mathematically accurate and sometimes desirable to talk about the random variable $h (X) = \Expect [Y | X]$.
 Let $X$ and $Y$ be two random variables associated with an experiment.
 The outcome of this experiment determines the value of $X$, say $X = x$, which in turn produces the value $h(x) = \Expect [Y | X = x]$.
-A conditional expectation is simply a special random variable.
+In this sense, a conditional expectation is simply a special random variable.
 
 Not too surprisingly, the expectation of $\Expect [Y | X]$ is given by
 \begin{equation*}
@@ -269,8 +327,8 @@ Not too surprisingly, the expectation of $\Expect [Y | X]$ is given by
 \Expect \left[ \Expect [Y | X] \right]
 &= \sum_{x \in X(\Omega)} \Expect [Y | X = x] p_X (x) \\
 &= \sum_{x \in X(\Omega)} \sum_{y \in Y(\Omega)} y p_{Y|X} (y|x) p_X (x) \\
-&= \sum_{x \in X(\Omega)} \sum_{y \in Y(\Omega)} y p_{X,Y} (x, y) \\
-&= \sum_{y \in Y(\Omega)} y \sum_{x \in X(\Omega)} p_{X,Y} (x, y) \\
+&= \sum_{y \in Y(\Omega)} \sum_{x \in X(\Omega)} y p_{X,Y} (x, y) \\
+%&= \sum_{y \in Y(\Omega)} y \sum_{x \in X(\Omega)} p_{X,Y} (x, y) \\
 &= \sum_{y \in Y(\Omega)} y p_{Y} (y)
 = \Expect [Y] .
 \end{split}
@@ -284,40 +342,31 @@ Using a similar argument, it is straightforward to show that
 An entrepreneur opens a small business that sells two kinds of beverages from the Brazos Soda Company, cherry soda and lemonade.
 The number of bottles sold in an hour at the store is found to be a Poisson random variable with parameter $\lambda = 10$.
 Every customer selects a cherry soda with probability $p$ and a lemonade with probability $(1 - p)$, independently of other customers.
-We wish to find the conditional PMF and the conditional mean of the number of cherry sodas sold in an hour given that a total of ten beverages was purchased by customers during that time period.
+We wish to find the conditional mean of the number of cherry sodas purchased in an hour given that a total of ten beverages was purchased by customers during that time period.
 
 Let $B$ represent the number of bottles sold during an hour.
-Similarly, let $C$ and $L$ be the number of cherry sodas and lemonades sold during that hour, respectively.
+Similarly, let $C$ and $L$ be the number of cherry sodas and lemonades purchased during that hour, respectively.
 We note that $B = C + L$.
-The conditonal PMF of $C$ given that the total number of beverages sold equals ten ($B = 10$) is
+The conditional PMF of $C$ given that the total number of beverages sold equals ten ($B = 10$) is
 \begin{equation} \label{equation:ConditionalPoisson}
-\begin{split}
 p_{C|B} (k | 10)
-&= \frac{ \Pr \left( \{ C = k \} \cap \{ B = 10 \} \right) }
-{ \Pr (B = 10) } \\
-&= \frac{ \Pr ( C = k ) \Pr ( L = 10-k ) }{ \Pr (B = 10) } \\
-&= \frac{ \frac{ 10^k p^k }{ k!} e^{-10p}
-\frac{10^{10-k} (1-p)^{10-k}}{(10-k)!} e^{-10(1-p)} }
-{ \frac{ 10^{10} }{ 10!} e^{-10} } \\
-&= \binom{10}{k} p^k (1-p)^{10-k} .
-\end{split}
+= \binom{10}{k} p^k (1-p)^{10-k} .
 \end{equation}
-This reduces to the PMF of a binomial random variable.
+This follows from the fact that every customer selects a cherry soda with probability $p$, independently of other customers.
 The conditional mean is then seen to equal
 \begin{equation*}
 \Expect [ C | B=10] = \sum_{k=0}^{10}
 k \binom{10}{k} p^k (1-p)^{10-k} = 10 p .
 \end{equation*}
-Note that we have used the splitting property of the Poisson PMF in \eqref{equation:ConditionalPoisson}.
 \end{example}
 
-We can define the expectation of $X$ conditioned on an event $S$ in an analogous manner.
+We can define the expectation of $X$ conditioned on event $S$ in an analogous manner.
 Let $S$ be an event such that $\Pr (S) > 0$.
 The conditional expectation of $X$ given $S$ is
 \begin{equation*}
 \Expect [X | S] = \sum_{x \in X(\Omega)} x p_{X|S} (x) ,
 \end{equation*}
-where $p_{X|S}$ is as defined in \eqref{equation:ConditionalEventPMF}.
+where $p_{X|S} (\cdot)$ is as defined in \eqref{equation:ConditionalEventPMF}.
 Similarly, we have
 \begin{equation*}
 \Expect [g(X) | S] = \sum_{x \in X(\Omega)} g(x) p_{X|S} (x) ,
@@ -327,16 +376,17 @@ Similarly, we have
 Spring break is coming and a student decides to renew his shirt collection.
 The number of shirts purchased by the student is a random variable denoted by $N$.
 The PMF of this random variable is a geometric distribution with parameter $p = 0.5$.
-Any one shirt is \$10 or \$20 or \$50 with respective probabilities 0.5, 0.3, and 0.2, and independently of other shirts.
+Any one shirt costs \$10, \$20 or \$50 with respective probabilities 0.5, 0.3 and 0.2, independently of other shirts.
 We wish to compute the expected amount of money spent by the student.
-Also, we wish to compute the expected amount of money spent given that the student buys at least five shirts.
+Also, we wish to compute the expected amount of money disbursed given that the student buys at least five shirts.
 
 Let $C_i$ be the cost of the $i$th shirt.
-The total amount of money spent by the student is
+The total amount of money spent by the student, denoted by $T$, can be expressed as
 \begin{equation*}
 T = \sum_{i=1}^N C_i .
 \end{equation*}
-Its mean is equal to
+The mean of $T$ can be computed using nested expectation.
+It is equal to
 \begin{equation*}
 \begin{split}
 \Expect [T] = \Expect \left[ \sum_{i=1}^N C_i \right]
@@ -367,13 +417,13 @@ In computing the conditional expectation, we have use the memoryless property of
 \section{Independence}
 
 Let $X$ and $Y$ be two random variables associated with one experiment.
-Then $X$ and $Y$ are \emph{independent random variables} if
+We say that $X$ and $Y$ are \emph{independent random variables} if \index{Independence}
 \begin{equation*}
 p_{X,Y} (x,y) = p_X (x) p_Y (y)
 \end{equation*}
 for every $x \in X(\Omega)$ and every $y \in Y(\Omega)$.
 
-There is a clear relation between the concept of independence introduced in section~\ref{section:Independence} and the independence of two random variables.
+There is a clear relation between the concept of independence introduced in Section~\ref{section:Independence} and the independence of two random variables.
 Two random variables are independent if and only if the events $\{ X = x \}$ and $\{ Y = y \}$ are independent for every $x \in X(\Omega)$ and every $y \in Y(\Omega)$.
 
 \begin{theorem}
@@ -389,21 +439,26 @@ Assume that both $\Expect [X]$ and $\Expect[Y]$ exist, then
 \Expect [XY]
 &= \sum_{x \in X(\Omega)} \sum_{y \in Y(\Omega)} x y p_{X,Y} (x,y) \\
 &= \sum_{x \in X(\Omega)} \sum_{y \in Y(\Omega)} x y p_X (x) p_Y (y) \\
-&= \sum_{x \in X(\Omega)} x p_X (x) \sum_{y \in Y(\Omega)} y p_Y (y) \\
-&= \Expect [X] \Expect [Y] ,
+&= \sum_{x \in X(\Omega)} x p_X (x) \sum_{y \in Y(\Omega)} y p_Y (y)
+= \Expect [X] \Expect [Y] ,
 \end{split}
 \end{equation*}
 where we have used the fact that $p_{X,Y} (x,y) = p_X (x) p_Y (y)$ for independent random variables.
 \end{proof}
 
-%\begin{example}
-%\end{example}
+\begin{example}
+Two dice of different colors are rolled, as in Example~\ref{example:SumDice1}.
+We wish to compute the expected value of their product.
+We know that the mean of each role is $\Expect [X] = \Expect [Y] = 3.5$.
+Furthermore, it is easy to show that $X$ and $Y$, the numbers of dots on the two dice, are independent random variable.
+The expected value of their product is then equal to the product of the individual means, $\Expect [XY] = \Expect [X] \Expect [Y] = 12.25$.
+\end{example}
 
 A similar argument can be used to show that
 \begin{equation*}
 \Expect[ g(X) h(Y) ] = \Expect [ g(X) ] \Expect [ h(Y) ]
 \end{equation*}
-whenever $X$ and $Y$ are independent random variables and the individual expectations exist.
+whenever $X$ and $Y$ are independent random variables and the corresponding expectations exist.
 
 We saw that a random variable can also be independent from an event.
 Let $X$ be a random variable and let $S$ be a non-trivial event.

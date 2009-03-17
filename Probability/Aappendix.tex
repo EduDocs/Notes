@@ -1,3 +1,5 @@
+\chapter{Sums}
+
 \begin{equation*}
 \begin{split}
 \Expect [Y] &= \sum_{y \in g(X(\Omega))} y p_Y(y) \\
@@ -7,7 +9,33 @@
 \end{equation*}
 
 
-The sum of the first $n$ numbers is equal to $\frac{n (n+1)}{2}$.
+\begin{proposition}
+For any positive integer $n$, we have
+\begin{equation*}
+\sum_{k=1}^n k = \frac{n (n+1)}{2} .
+\end{equation*}
+\end{proposition}
+\begin{proof}
+This equation can be established through the following steps,
+\begin{equation*}
+\begin{split}
+2 \sum_{k=1}^n k
+&= \sum_{k=1}^n k + \sum_{k=1}^n (n + 1 - k) \\
+&= \sum_{k=1}^n \left( k + (n + 1 - k) \right) \\
+&= \sum_{k=1}^n (n + 1)
+= n (n+1) .
+\end{split}
+\end{equation*}
+The desired result is obtained by deviding both sides by two.
+\end{proof}
+
+\begin{proposition}
+For any positive integer $n$, we have
+\begin{equation*}
+\sum_{k=1}^n k^2 = \frac{n (n+1) (2n+1)}{6} .
+\end{equation*}
+\end{proposition}
+
 The sum of the first $n$ square numbers is equal to $\frac{n (n+1)(2n + 1)}{6}$.
 The sum of the first $n$ cubic numbers is equal to $\frac{n^2 (n+1)^2}{4}$.
 
