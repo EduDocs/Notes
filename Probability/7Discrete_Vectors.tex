@@ -194,7 +194,7 @@ In this section, we extend the concept of conditioning to multiple random variab
 We study the probability of events concerning random variable $Y$ given that some information about random variable $X$ is available.
 
 Let $X$ and $Y$ be two random variables associated with the same experiment.
-The \emph{conditional probability mass function} of $Y$ given $X = x$, denoted by $p_{Y|X} (\cdot, \cdot)$, is defined by \index{Conditional probability mass function}
+The \emph{conditional probability mass function} of $Y$ given $X = x$, denoted by $p_{Y|X} (\cdot | \cdot)$, is defined by \index{Conditional probability mass function}
 \begin{equation*}
 \begin{split}
 p_{Y|X} (y|x) &= \Pr ( Y = y | X = x) \\
@@ -215,9 +215,9 @@ The conditional PMF introduced above is a valid PMF since it is nonnegative and
 &= \frac{1}{p_X (x)} \sum_{y \in Y(\Omega)} p_{X,Y} (x,y) = 1.
 \end{split}
 \end{equation*}
-The probability that $Y$ belongs to $S$ given $X = x$ is then obtained by summing the conditional probability $p_{Y|X} (\cdot, \cdot)$ over all outcomes included in $S$,
+The probability that $Y$ belongs to $S$ given $X = x$ is then obtained by summing the conditional probability $p_{Y|X} (\cdot | \cdot)$ over all outcomes included in $S$,
 \begin{equation*}
-P (Y \in S | X = x) = \sum_{y \in S} p_{Y|X} (y | x) .
+\Pr (Y \in S | X = x) = \sum_{y \in S} p_{Y|X} (y | x) .
 \end{equation*}
 
 \begin{example}
@@ -308,7 +308,7 @@ We can see that $M$ has a Poisson PMF with parameter $p \lambda$.
 
 \section{Conditional Expectations}
 
-The \emph{conditional expectation} of $Y$ given $X = x$ is simply the expectation of $Y$ with respect to the conditional PMF $p_{Y|X} (\cdot)$, \index{Conditional expectation}
+The \emph{conditional expectation} of $Y$ given $X = x$ is simply the expectation of $Y$ with respect to the conditional PMF $p_{Y|X} (\cdot | \cdot)$, \index{Conditional expectation}
 \begin{equation*}
 \Expect [Y | X = x ] = \sum_{y \in Y(\Omega)} y p_{Y|X} (y|x).
 \end{equation*}
