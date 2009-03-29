@@ -171,92 +171,111 @@ Finally, given a measurable set $S$, the probability that $X \in S$ can be expre
 In fact, this formula is often used to compute the probability of admissible sets.
 
 
+\section{Important Distributions}
+
+Our intuition about continuous random variables can be developed by looking at examples.
+In this section, we introduce important random variables and their distributions.
+These random variables find widespread application in various fields of engineering.
 
 
-\section{The Gaussian (Normal) Random Variable}
+\subsection{The Uniform Distribution}
 
-The \emph{Gaussian random variable} is of fundamental importance in probability and statistics.
-As we will see later, it is often used to model the distribution of a sum of random components.
+A (continuous) \emph{uniform random variable} is such that all intervals of the same length contained within its support are equally probable. \index{Uniform random variable}
+The PDF of a uniform random variable is defined by two parameters, $a$ and $b$, which are its minimum and maximum possible values, respectively.
+The PDF $f_X(x)$ is given by
+\begin{equation*}
+f_X(x) = \begin{cases} \frac{1}{b-a}, & x \in [a, b] \\
+0, & \text{otherwise}. \end{cases}
+\end{equation*}
+The associated cumulative distribution function becomes
+\begin{equation*}
+F_X(x) = \begin{cases} 0, & x < a \\
+\frac{x-a}{b-a}, & a \leq x \leq b \\
+1, & x \geq b . \end{cases}
+\end{equation*}
+
+\begin{example}
+David comes to campus every morning using the Aggie Spirit Transit.
+On his route, a bus comes every thirty minutes, from sunrise until sunset.
+David, who does not believe in alarm clocks or watches, wakes up with daylight.
+After cooking a hefty breakfast, he walks to the bus stop.
+If his arrival time at the bus stop is uniformly distributed between 9:00 a.m.\ and 9:30 a.m., what is the probability that he waits less than five minutes for the bus?
+
+Let $t_0$ be the time at which he arrives at the bus stop, and denote by $T$ the time he spends waiting.
+The time at which the next bus arrives at David's stop is uniformly distributed between $t_0$ and $t_0 + 30$.
+The amount of time that David spends at the bus stop is therefore uniformly distributed between $0$ and $30$ minutes.
+Accordingly, we have
+\begin{equation*}
+f_T(t) = \begin{cases} \frac{1}{30}, & t \in [0, 30] \\
+0, & \text{otherwise}. \end{cases}
+\end{equation*}
+The probability that David waits less than five minutes found to be
+\begin{equation*}
+\Pr (T < 5) = \int_0^5 \frac{1}{30} dt = \frac{1}{6} .
+\end{equation*}
+\end{example}
+
+
+\subsection{The Gaussian (Normal) Random Variable}
+
+The \emph{Gaussian random variable} is of fundamental importance in probability and statistics. \index{Gaussian random variable}
+As we will soon see, it is often used to model the distribution of a sum of random components.
 The PDF for a Gaussian random variable $X$ is given by
 \begin{equation*}
 f_X (x) = \frac{1}{\sqrt{2 \pi} \sigma} e^{- \frac{(x - m)^2}{2 \sigma^2}}
 \quad - \infty < x < \infty,
 \end{equation*}
 where $m$ and $\sigma > 0$ are constants.
-The CDF of a Gaussian random variable does not admit a closed-form expression, but it can be expressed as
+A Gaussian random variable whose distribution has parameters $m = 0$ and $\sigma = 1$ is call a \emph{normal random variable}, a name that points to its great popularity. \index{Normal Random variable}
+The CDF of a Gaussian random variable does not admit a closed-form expression; it can be expressed as
 \begin{equation*}
 \begin{split}
-F_X (x) &= \Pr (X \leq x) \\
-&= \frac{1}{\sqrt{2 \pi} \sigma}
+F_X (x) &= \Pr (X \leq x)
+= \frac{1}{\sqrt{2 \pi} \sigma}
 \int_{- \infty}^{x} e^{- \frac{(\xi - m)^2}{2 \sigma^2}} d\xi \\
 &= \frac{1}{\sqrt{2 \pi}}
-\int_{- \infty}^{(x - m)/\sigma} e^{- \frac{\zeta^2}{2}} d\zeta \\
-&= \Phi \left( \frac{x - m}{\sigma} \right),
+\int_{- \infty}^{(x - m)/\sigma} e^{- \frac{\zeta^2}{2}} d\zeta
+= \Phi \left( \frac{x - m}{\sigma} \right),
 \end{split}
 \end{equation*}
-where $\Phi$ is the \emph{standard normal cumulative distribution function} defined by
+where $\Phi (\cdot)$ is termed the \emph{standard normal cumulative distribution function} defined by
 \begin{equation*}
 \Phi (x) = 
 \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^x e^{-\frac{\zeta^2}{2}} d\zeta .
 \end{equation*}
-We note that the function $\Phi$ is no more than a convenient notation.
+We emphasize that the function $\Phi (\cdot)$ is nothing more than a convenient notation for the CDF of a normal random variable.
 
-\begin{example}
-A binary signal is transmitted through a communication channel.
+\begin{example} \label{example:NoiseCommunicationSystem1}
+A binary signal is transmitted through a noisy communication channel.
 The sent signal takes on either a value of $1$ or $-1$.
 The message received at the output of the communication channel is corrupted by additive thermal noise.
 This noise can be accurately modeled as a Gaussian random variable.
 The receiver declares that a $1$ ($-1$) was transmitted if the sent signal is positive (negative).
 What is the probability of making an erroneous decision.
 
-Let $s \in \{ -1, 1 \}$ be the transmitted signal, $N$ be the value of the thermal noise, and $Z$ represent the value of the received signal.
-An error can occur in one of two possible ways: $s = 1$ was transmitted and $Z$ is less than zero, or $s = -1$ was transmitted and $Z$ is greater than zero.
-Using the total probability theorem, we get
+Let $X \in \{ -1, 1 \}$ be the transmitted signal, $N$ be the value of the thermal noise, and $Y$ represent the value of the received signal.
+An error can occur in one of two possible ways: $X = 1$ was transmitted and $Y$ is less than zero, or $X = -1$ was transmitted and $Y$ is greater than zero.
+Using the total probability theorem, we get can compute the probability of error as
 \begin{equation*}
-\Pr (\text{error}) = \Pr (Z \geq 0 | s = -1) \Pr (s = -1)
-+ \Pr (Z \leq 0 | s = 1) \Pr (s = 1).
+\Pr (Y \geq 0 | X = -1) \Pr (X = -1)
++ \Pr (Y \leq 0 | X = 1) \Pr (X = 1).
 \end{equation*}
 By the symmetry of the problem, it is easily argued that
 \begin{equation*}
 \begin{split}
-\Pr (\text{error}) &= \Pr (Z \geq 0 | s = -1) = \Pr (N > 1) \\
+\Pr (Y \leq 0 | X = 1) &= \Pr (Y \geq 0 | X = -1) = \Pr (N > 1) \\
 &= \int_{1}^{\infty} \frac{1}{\sqrt{2 \pi} \sigma}
-e^{- \frac{\xi^2}{2 \sigma^2}} d\xi \\
-&= 1 - \Phi \left( \frac{1}{\sigma} \right) .
+e^{- \frac{\xi^2}{2 \sigma^2}} d\xi
+= 1 - \Phi \left( \frac{1}{\sigma} \right) .
 \end{split}
 \end{equation*}
-The reliability of this transmission scheme depends on the amount of noise present at the receiver.
+The probability that the receiver makes an erroneous decision is $1 - \Phi (1/\sigma)$.
+Clearly, the reliability of this transmission scheme depends on the amount of noise present at the receiver.
 \end{example}
 
-Next, we show that the standard normal PDF integrates to one.
-The solution is easy to follow, but hard to discover.
-It is therefore useful to include it here.
-Consider a standard normal PDF,
-\begin{equation*}
-f_X(x) = \frac{1}{\sqrt{2 \pi}} e^{- \frac{x^2}{2}} .
-\end{equation*}
-We can show that $f_X (x)$ integrates to one using a subtle argument and a straightforward change of variables.
-Consider the square of the integrated PDF,
-\begin{equation*}
-\begin{split}
-\left(\int_{- \infty}^{\infty} f_X (\xi) d\xi \right)^2
-&= \int_{- \infty}^{\infty} \frac{1}{\sqrt{2 \pi}} e^{- \frac{\xi^2}{2}} d\xi
-\int_{- \infty}^{\infty} \frac{1}{\sqrt{2 \pi}} e^{- \frac{\zeta^2}{2}} d\zeta \\
-&= \int_{- \infty}^{\infty} \int_{- \infty}^{\infty}
-\frac{1}{2 \pi} e^{- \frac{\xi^2 + \zeta^2}{2}} d\xi d\zeta \\
-&= \int_{0}^{2 \pi} \frac{1}{2 \pi} d\theta
-\int_{0}^{\infty} e^{- \frac{r^2}{2}} r dr \\
-&= \left. \left( - e^{- \frac{r^2}{2}} \right) \right|_0^{\infty} = 1.
-\end{split}
-\end{equation*}
-Since the square is equal to one and the integral is nonnegative, we conclude that the normal PDF integrates to one.
-
-
-\subsection{The Error Function and the $Q$-function}
-
-The normal random variable is so frequent in mathematics and engineering that variations of its CDF also possess their own names.
-The \emph{error function} is a function which is primarily encountered in the fields of statistics and partial differential equations.
-It is defined as
+The normal random variable is so frequent in applied mathematics and engineering that variations of its CDF possess their own names.
+The \emph{error function} is a function which is primarily encountered in the fields of statistics and partial differential equations. \index{Error function}
+It is defined by
 \begin{equation*}
 \mathrm{erf} (x) = \frac{2}{\sqrt{\pi}} \int_0^x e^{-\xi^2} d\xi .
 \end{equation*}
@@ -264,24 +283,41 @@ The error function is related to the standard normal cumulative distribution fun
 \begin{equation*}
 \Phi (x) = \frac{1 + \mathrm{erf} \left( {x}/{\sqrt{2}} \right)}{2}.
 \end{equation*}
-If $X$ is a standard normal random variable, then $\mathrm{erf} \left( x/{\sqrt{2}} \right)$ denotes the probability that $X$ lies between $-x$ and $x$.
-
-In engineering, it is customary to use the \emph{$Q$-function}, which is given by
-\begin{equation*}
+If $X$ is a standard normal random variable, then $\mathrm{erf} \left( x/{\sqrt{2}} \right)$ denotes the probability that $X$ lies in the interval $(-x, x)$.
+In engineering, it is customary to employ the \emph{$Q$-function}, which is given by \index{Q-function}
+\begin{equation} \label{equation:Qfunction}
 \begin{split}
-Q (x) &= \frac{1}{\sqrt{2 \pi}} \int_x^{\infty} e^{-\frac{\xi^2}{2}} d\xi \\
-&= 1 - \Phi (x) \\
+Q (x) &= \frac{1}{\sqrt{2 \pi}} \int_x^{\infty} e^{-\frac{\xi^2}{2}} d\xi
+= 1 - \Phi (x) \\
 &= \frac{ 1 - \mathrm{erf} \left( {x}/{\sqrt{2}} \right) }{2} .
 \end{split}
+\end{equation}
+Equation \eqref{equation:Qfunction} may prove useful while using various software packages that provide a built-in implementation for $\mathrm{erf}(x)$, but not for the $Q$-function.
+The probability of an erreneous decision in Example~\ref{example:NoiseCommunicationSystem1} can be expressed concisely using the Q-function as $Q (1/\sigma)$.
+
+
+Next, we prove that the standard normal PDF integrates to one.
+The solution is easy to follow, but hard to discover.
+It is therefore useful to include it here.
+Consider a standard normal PDF,
+\begin{equation*}
+f_X(x) = \frac{1}{\sqrt{2 \pi}} e^{- \frac{x^2}{2}} .
 \end{equation*}
-The last equation may prove useful while using various software packages that provide a built-in implementation for $\mathrm{erf}(x)$, but not for the $Q$-function.
-
-
-\section{Important Distributions}
-
-Our intuition about continuous random variables can be further developed by looking at additional examples.
-In this section, we introduce important random variables and their distributions.
-These random variables find widespread application in various fields of engineering.
+We can show that $f_X (x)$ integrates to one using a subtle argument and a straightforward change of variables.
+We start with the square of the integrated PDF and get
+\begin{equation*}
+\begin{split}
+\left(\int_{- \infty}^{\infty} f_X (\xi) d\xi \right)^2
+&= \int_{- \infty}^{\infty} \frac{1}{\sqrt{2 \pi}} e^{- \frac{\xi^2}{2}} d\xi
+\int_{- \infty}^{\infty} \frac{1}{\sqrt{2 \pi}} e^{- \frac{\zeta^2}{2}} d\zeta \\
+&= \int_{- \infty}^{\infty} \int_{- \infty}^{\infty}
+\frac{1}{2 \pi} e^{- \frac{\xi^2 + \zeta^2}{2}} d\xi d\zeta
+= \int_{0}^{2 \pi} \frac{1}{2 \pi} d\theta
+\int_{0}^{\infty} e^{- \frac{r^2}{2}} r dr \\
+&= \left. \left( - e^{- \frac{r^2}{2}} \right) \right|_0^{\infty} = 1.
+\end{split}
+\end{equation*}
+Since the square is equal to one and the integral is nonnegative, we conclude that the normal PDF integrates to one.
 
 
 \subsection{The Exponential Distribution}
@@ -445,7 +481,8 @@ Suppose that service request arrivals at an Internet server are independent and 
 Let $S_m$ be a random variable that denotes the time of the $m$th arrival, then $S_m$ is an $m$-Erlang  random variable.
 \end{example}
 
-\subsection{Additional Distributions}
+
+\section{Additional Distributions}
 
 Probability distributions arise in many different contexts and assume various forms.
 We conclude this section on important probability distribution by mentioning a few additional distributions that are commonly used in engineering.
