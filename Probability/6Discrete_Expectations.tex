@@ -401,11 +401,12 @@ Although these quantities will not play an important role in our exposition of p
 
 
 \section{Ordinary Generating Functions}
+\label{section:OrdinaryGeneratingFunctions}
 
 In the special yet important case where $X(\Omega)$ is a subset of the non-negative integers, it is sometimes useful to employ the \emph{ordinary generating function}. \index{Ordinary generating function}
 This function bears a close resemblance to the $z$-transform and is defined by
 \begin{equation} \label{equation:OrdinaryGeneratingFunction}
-G_X(z) = \Expect \left[ z^k \right] = \sum_{k=0}^{\infty} z^k p_X (k) .
+G_X(z) = \Expect \left[ z^X \right] = \sum_{k=0}^{\infty} z^k p_X (k) .
 \end{equation}
 It is also called the \emph{probability-generating function} because of the following property. \index{Probability-generating function}
 The probability $\Pr (X = k) = p_X(k)$ can be recovered from the corresponding generating function $G_X (z)$ through Taylor series expansion.
@@ -430,17 +431,17 @@ and hence the radius of convergence of any probability-generating function must 
 The \emph{factorial moments} of $X$ can also be computed based the ordinary generating function,
 \begin{equation*}
 \Expect \left[ \frac{X!}{(X-k)!} \right]
-= \lim_{z \uparrow 1} G^{(k)} (z)
+= \lim_{z \uparrow 1} G_X^{(k)} (z)
 \end{equation*}
 for any integer $k \geq 0$.
 In particular, we have
 \begin{equation*}
-\Expect [X] = \lim_{z \uparrow 1} \frac{d G(z)}{dz} .
+\Expect [X] = \lim_{z \uparrow 1} \frac{d G_X(z)}{dz} .
 \end{equation*}
 Similarly, the second moment of $X$ is equal to
 \begin{equation*}
 \Expect \left[ X^2 \right]
-= \lim_{z \uparrow 1} \left( \frac{d^2 G(z)}{dz^2} + \frac{d G(z)}{dz} \right) .
+= \lim_{z \uparrow 1} \left( \frac{d^2 G_X(z)}{dz^2} + \frac{d G_X(z)}{dz} \right) .
 \end{equation*}
 
 The ordinary generating function plays an important role in dealing with sums of discrete random variables.

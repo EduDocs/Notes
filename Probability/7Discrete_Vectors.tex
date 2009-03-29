@@ -186,6 +186,7 @@ The expected value of $X + Y$ is four.
 
 
 \section{Conditional Random Variables}
+\label{section:ConditionalRandomVariables}
 
 Many random variables of practical interest are dependent.
 That is, the realization of random variable $X$ may provide partial information about the random variable $Y$.
@@ -455,12 +456,52 @@ The expected value of their product is then equal to the product of the individu
 \end{example}
 
 A similar argument can be used to show that
-\begin{equation*}
+\begin{equation} \label{equation:DiscreteProduct}
 \Expect[ g(X) h(Y) ] = \Expect [ g(X) ] \Expect [ h(Y) ]
-\end{equation*}
+\end{equation}
 whenever $X$ and $Y$ are independent random variables and the corresponding expectations exist.
 
-We saw that a random variable can also be independent from an event.
+One intesting application of \eqref{equation:DiscreteProduct} occurs when taking the sum of independent random variables.
+Let $X$ and $Y$ be two independent random variables that take on integer values, and define $U = X + Y$.
+The ordinary generating function of $U$, as defined in Section~\ref{section:OrdinaryGeneratingFunctions}, is given by
+\begin{equation*}
+\begin{split}
+G_U (z) &= \Expect \left[ z^U \right]
+= \Expect \left[ z^{X + Y} \right] \\
+&= \Expect \left[ z^X z^Y \right]
+= \Expect \left[ z^X \right] \Expect \left[ z^Y \right] \\
+&= G_X(z) G_Y(z) .
+\end{split}
+\end{equation*}
+That is, the generating function of a sum of independent random variables is equal to the product of the individual ordinary generating functions, provided that the latter both exist.
+
+\begin{example}
+Let $X$ be a Poisson random variable with parameter $\alpha$ and, similarly, let $Y$ be a Poisson random variable with parameter $\beta$.
+We wish to find the probability mass function of $U = X + Y$.
+
+To solve this problem, we use ordinary generating functions.
+First, we compute the generating function of $X$,
+\begin{equation*}
+\begin{split}
+G_X (z) &= \Expect \left[ z^X \right]
+= \sum_{k=0}^{\infty} \frac{\alpha^k}{k!} e^{-\alpha} z^k \\
+&= e^{-\alpha} \sum_{k=0}^{\infty} \frac{(\alpha z)^k}{k!}
+= e^{-\alpha} e^{\alpha z} = e^{\alpha (z-1)} .
+\end{split}
+\end{equation*}
+By analogy, we also have $G_Y (z) = e^{\beta (z-1)}$.
+The ordinary generating function of $U = X + Y$ then becomes
+\begin{equation*}
+G_U (z) = G_X (z) G_Y(z) = e^{\alpha (z-1)} e^{\beta (z-1)}
+= e^{(\alpha + \beta) (z-1)} .
+\end{equation*}
+We conclude, by the uniqueness of generating functions, that $U$ is a Poisson random variable with parameter $\alpha + \beta$ and, accordingly, we get
+\begin{equation*}
+p_U (k) = \frac{ (\alpha + \beta)^k }{k!} e^{- (\alpha + \beta) }, \quad k = 0, 1, 2, \ldots
+\end{equation*}
+\end{example}
+
+We saw in Section~\ref{section:ConditionalRandomVariables} that a random variable can also be conditioned on a specific event.
 Let $X$ be a random variable and let $S$ be a non-trivial event.
 The variable $X$ is \emph{independent} of $S$ if
 \begin{equation*}
