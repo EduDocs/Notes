@@ -226,7 +226,7 @@ f_X (x) = \frac{1}{\sqrt{2 \pi} \sigma} e^{- \frac{(x - m)^2}{2 \sigma^2}}
 \quad - \infty < x < \infty,
 \end{equation*}
 where $m$ and $\sigma > 0$ are constants.
-A Gaussian random variable whose distribution has parameters $m = 0$ and $\sigma = 1$ is call a \emph{normal random variable}, a name that points to its great popularity. \index{Normal Random variable}
+A Gaussian random variable whose distribution has parameters $m = 0$ and $\sigma = 1$ is call a \emph{normal random variable}, a name that points to its great popularity. \index{Normal random variable}
 The CDF of a Gaussian random variable does not admit a closed-form expression; it can be expressed as
 \begin{equation*}
 \begin{split}
@@ -293,7 +293,7 @@ Q (x) &= \frac{1}{\sqrt{2 \pi}} \int_x^{\infty} e^{-\frac{\xi^2}{2}} d\xi
 \end{split}
 \end{equation}
 Equation \eqref{equation:Qfunction} may prove useful while using various software packages that provide a built-in implementation for $\mathrm{erf}(x)$, but not for the $Q$-function.
-The probability of an erreneous decision in Example~\ref{example:NoiseCommunicationSystem1} can be expressed concisely using the Q-function as $Q (1/\sigma)$.
+The probability of an erroneous decision in Example~\ref{example:NoiseCommunicationSystem1} can be expressed concisely using the Q-function as $Q (1/\sigma)$.
 
 
 Next, we prove that the standard normal PDF integrates to one.
@@ -322,9 +322,9 @@ Since the square is equal to one and the integral is nonnegative, we conclude th
 
 \subsection{The Exponential Distribution}
 
-The \emph{exponential random variable} is also a very important continuous random variable.
+The \emph{exponential random variable} is also a very important continuous random variable. \index{Exponential random variable}
 It is used in engineering to model the lifetime of devices and systems, and the time between occurrences of events.
-An exponential random variable $X$ with parameter $\lambda$ has PDF
+An exponential random variable $X$ with parameter $\lambda > 0$ has PDF
 \begin{equation*}
 f_X (x) = \lambda e^{- \lambda x} \quad x \geq 0.
 \end{equation*}
@@ -335,57 +335,69 @@ F_X (x) = 1 - e^{- \lambda x} .
 The parameter $\lambda$ characterizes the rate at  which events occur.
 
 \begin{example}
+Connection requests at an Internet server are characterized by an exponential inter-arrival time with parameter $\lambda = 1/2$.
+If a requests arrives at time $t_0$, what is the probability that the next packet arrives within two minutes?
+
+The probability that the inter-arrival time $T$ is less than two minutes can be computed as
+\begin{equation*}
+\begin{split}
+\Pr ( T < 2 ) &= \int_0^2 \frac{1}{2} e^{- \frac{\xi}{2}} d\xi
+= \left. - e^{- \frac{\xi}{2}} \right|_0^2 \\
+&= 1 - e^{-1} \approx 0.632 .
+\end{split}
+\end{equation*}
 \end{example}
 
 The exponential random variable can be obtained as the limit of a sequence of geometric random variables.
 Let $\lambda$ be fixed and defined $p_n = \lambda/n$.
-We define the PMF of the random variable $X_n$ as
+We define the PMF of random variable $Y_n$ as
 \begin{equation*}
-p_{X_n} (k) = (1 - p_n)^{k-1} p_n
+p_{Y_n} (k) = (1 - p_n)^{k-1} p_n
 = \left( 1 - \frac{\lambda}{n} \right)^{k-1} \frac{\lambda}{n}
 \quad k = 1, 2, \ldots
 \end{equation*}
-The random variable $X_n$ is a standard geometric random variable with parameter $p_n = \lambda/n$.
-For every $n$, we define a new variable $Y_n$ by
+That is, random variable $Y_n$ is a standard geometric random variable with parameter $p_n = \lambda/n$.
+For every $n$, we define a new variable $X_n$ by
 \begin{equation*}
-Y_n = \frac{X_n}{n}.
+X_n = \frac{Y_n}{n}.
 \end{equation*}
-The random variable $Y_n$ has PMF
+By construction, the random variable $X_n$ has PMF
 \begin{equation*}
-p_{Y_n} (y) = \left\{ \begin{array}{ll}
+p_{X_n} (y) = \left\{ \begin{array}{ll}
 (1 - p_n)^{k-1} p_n, & \text{if }y = k/n \\
 0, & \text{otherwise} .
 \end{array} \right.
 \end{equation*}
-For any $x \geq 0$, the CDF of the random variable $Y_n$ can be computed as
+For any $x \geq 0$, the CDF of the random variable $X_n$ can be computed as
 \begin{equation*}
 \begin{split}
-\Pr (Y_n \leq x)
-= \Pr (X_n \leq n x)
-&= \sum_{k = 1}^{\lfloor n x \rfloor} p_{X_n} (k) \\
-&= \sum_{k = 1}^{\lfloor n x \rfloor} (1 - p_n)^{k-1} p_n \\
+\Pr (X_n \leq x)
+&= \Pr (Y_n \leq n x)
+= \sum_{k = 1}^{\lfloor n x \rfloor} p_{Y_n} (k) \\
+&= \sum_{k = 1}^{\lfloor n x \rfloor} (1 - p_n)^{k-1} p_n
 % &= p_n \frac{1 - (1 - p_n)^{\lfloor n x \rfloor}}{1 - (1 - p_n)} \\
-&= 1 - (1 - p_n)^{\lfloor n x \rfloor} .
+= 1 - (1 - p_n)^{\lfloor n x \rfloor} .
 \end{split}
 \end{equation*}
 In the limit, as $n$ grows unbounded, we get
 \begin{equation*}
 \begin{split}
-\lim_{n \rightarrow \infty} \Pr (Y_n \leq x)
+\lim_{n \rightarrow \infty} \Pr (X_n \leq x)
 &= \lim_{n \rightarrow \infty} \left[ 1 - (1 - p_n)^{\lfloor n x \rfloor} \right] \\
 &= 1 - \lim_{n \rightarrow \infty}
 \left( 1 - \frac{\lambda}{n} \right)^{\lfloor n x \rfloor} \\
 &= 1 - e^{- \lambda x} .
 \end{split}
 \end{equation*}
-Thus, the sequence of scaled geometric random variable $\{ Y_n \}$ converges in distribution to the exponential random variable $X$.
+Thus, the sequence of scaled geometric random variable $\{ X_n \}$ converges in distribution to an exponential random variable $X$ with parameter $\lambda$.
 
 \paragraph{Memoryless Property:}
-An interesting feature of the exponential random variable is that it satisfies the \emph{memoryless property},
+An interesting feature of the exponential random variable is that it satisfies the \emph{memoryless property}, \index{memoryless property}
 \begin{equation*}
 \Pr (X > t + u | X > t) = \Pr (X > u).
 \end{equation*}
-The proof of this fact is a straightforward application of conditional probability.
+This is not so surprising in view of its relation with the geometric random variable.
+This fact can be shown by a straightforward application of conditional probability.
 Suppose that $X$ is an exponential random variable with parameter $\lambda$.
 Also, let $t$ and $u$ be two positive numbers.
 The memoryless property is obtained by expanding the conditional probability using definition \eqref{equation:ConditionalProbability},
@@ -393,27 +405,54 @@ The memoryless property is obtained by expanding the conditional probability usi
 \begin{split}
 \Pr (X > t + u | X > t)
 &= \frac{\Pr( \{ X > t + u \} \cap \{ X > t \} ) }{ \Pr ( X > t ) } \\
-&= \frac{\Pr( X > t + u ) }{ \Pr ( X > t ) } \\
-&= \frac{e^{- \lambda (t + u)} }{ e^{- \lambda t } } \\
+&= \frac{\Pr( X > t + u ) }{ \Pr ( X > t ) }
+= \frac{e^{- \lambda (t + u)} }{ e^{- \lambda t } } \\
 &= e^{- \lambda u } = \Pr (X > u).
 \end{split}
 \end{equation*}
 In reality, the exponential random variable is the only continuous random variable that satisfies the memoryless property.
 
 \begin{example}
+Century Oak Networks maintains a bank of servers for its operation.
+The hard drives on every server have a half-life of two years.
+We wish to compute the probability that a specific disk need replacement within its first year of usage.
+
+Half-lives are typically used to describe quantities that undergo exponential decay.
+Let $T$ denote the time elapsed until failure of the disk.
+We know that $T$ is an exponential random variable and, although we are not given $\lambda$ explicitly, we have
+\begin{equation*}
+\Pr ( T > 2 ) = \frac{1}{2} .
+\end{equation*}
+We use the memoryless property to solve this problem,
+\begin{equation*}
+\begin{split}
+\Pr (T > 2) &= \Pr (T > 1) \Pr (T > 1 + 1 | T > 1) \\
+&= \Pr (T > 1) \Pr (T > 1)
+= \left( \Pr(T > 1) \right)^2 .
+\end{split}
+\end{equation*}
+It follows that $\Pr (T > 1) = \sqrt{ \Pr (T > 2) }$.
+We can then write $\Pr (T < 1) = 1 - \Pr (T > 1) \approx 0.293$.
 \end{example}
+
+
+\section{Additional Distributions}
+
+Probability distributions arise in many different contexts and assume various forms.
+We conclude this chapter on continuous random variables by mentioning a few additional distributions that find application in engineering.
+It is interesting to note the interconnection between various random variables and their corresponding probability distributions.
 
 
 \subsection{The Gamma Distribution}
 
 The gamma distribution defines a versatile collection of random variables.
-The PDF of a \emph{gamma random variable} is given by
+The PDF of a \emph{gamma random variable} is given by \index{Gamma random variable}
 \begin{equation*}
 f_X (x) = \frac{\lambda (\lambda x)^{\alpha - 1} e^{-\lambda x}}{\Gamma (\alpha)} \quad  x > 0,
 \end{equation*}
 where $\Gamma(z)$ is the gamma function defined by
 \begin{equation*}
-\Gamma (z) = \int_0^{\infty} \xi^{z-1} e^{-\xi} d\xi \quad x > 0 .
+\Gamma (z) = \int_0^{\infty} \xi^{z-1} e^{-\xi} d\xi \quad z > 0 .
 \end{equation*}
 The two parameters $\alpha > 0$ and $\lambda > 0$ affect the shape of this distribution significantly.
 By varying these two parameters, it is possible for the gamma PDF to accurately model a wide array of empirical data.
@@ -444,13 +483,14 @@ d\xi d\zeta \\
 \frac{1}{r^2 \sin \theta \cos \theta} e^{-r^2}
 4 r^3 \sin \theta \cos \theta dr d\theta \\
 &= \int_0^{\pi / 2} \int_0^{\infty}
- e^{-r^2} 4 r dr d\theta \\
-&= \pi .
+ e^{-r^2} 4 r dr d\theta
+= \pi .
 \end{split}
 \end{equation*}
 
 Many common distributions are special cases of the gamma distribution.
 The gamma distribution becomes an exponential distribution whenever $\alpha = 1$.
+
 
 \paragraph{The Chi-Square Distribution:}
 When $\lambda = 1/2$ and $\alpha = k/2$ for some positive integer $k$, the gamma distribution becomes a \emph{chi-square distribution},
@@ -462,7 +502,7 @@ The chi-square distribution is one of the probability distributions most widely 
 
 \paragraph{The $m$-Erlang Distribution:}
 When $\alpha = k$, a positive integer, the gamma distribution is called an \emph{$m$-Erlang distribution}.
-This distribution finds application in queuing theory.
+This distribution finds application in queueing theory.
 Its PDF is given by
 \begin{equation*}
 f_X (x) = \frac{\lambda (\lambda x)^{k - 1} e^{-\lambda x}}{(k-1)!} \quad  x > 0.
@@ -477,19 +517,24 @@ S_m = \sum_{k=1}^m X_m.
 Then, $S_m$ is an $m$-Erlang random variable.
 
 \begin{example}
-Suppose that service request arrivals at an Internet server are independent and memoryless.
+Suppose that service requests at an Internet are characterized by independent and memoryless inter-arrival periods.
 Let $S_m$ be a random variable that denotes the time of the $m$th arrival, then $S_m$ is an $m$-Erlang  random variable.
 \end{example}
 
 
-\section{Additional Distributions}
+\subsection{The Rayleigh Distribution}
 
-Probability distributions arise in many different contexts and assume various forms.
-We conclude this section on important probability distribution by mentioning a few additional distributions that are commonly used in engineering.
-It is interesting to note the interconnection between various random variables and their corresponding probability distributions.
+The \emph{Rayleigh distribution} arises primarily when two zero-mean random variables have Gaussian distribution, are uncorrelated and possess equal variance. \index{Rayleigh random variable}
+The magnitude of such a random vectors has a Rayleigh distribution.
+The Rayleigh PDF is given by
+\begin{equation*}
+f_X (x) = \frac{x}{\sigma^2} e^{- \frac{x^2}{2 \sigma^2} } \quad x \geq 0 .
+\end{equation*}
+Interestingly, if $X$ is a Rayleigh random variable then $X^2$ has an exponential distribution.
 
-\paragraph{The Laplace Distribution:}
-The \emph{Laplace distribution} is sometimes called a double exponential distribution because it can be thought of as an exponential function and its reflection spliced together.
+
+\subsection{The Laplace Distribution}
+The \emph{Laplace distribution} is sometimes called a double exponential distribution because it can be thought of as an exponential function and its reflection spliced together. \index{Laplace random variable}
 The PDF of a Laplacian random variable is
 \begin{equation*}
 f_X (x) = \frac{1}{2b} e^{- \frac{|x|}{b}} \quad - \infty < x < \infty,
@@ -497,13 +542,14 @@ f_X (x) = \frac{1}{2b} e^{- \frac{|x|}{b}} \quad - \infty < x < \infty,
 where $b$ is a positive constant.
 The difference between two independent and identically distributed exponential random variables is governed by a Laplace distribution.
 
-\paragraph{The Cauchy Distribution:}
-The \emph{Cauchy distribution} is also considered a heavy-tail distribution.
+
+\subsection{The Cauchy Distribution}
+The \emph{Cauchy distribution} is considered a heavy-tail distribution. \index{Cauchy random variable}
 The PDF of a Cauchy random variable is given by
 \begin{equation*}
 f_X (x) = \frac{ \gamma^2 }{\pi \left( \gamma^2 + x^2 \right)} \quad - \infty < x < \infty.
 \end{equation*}
-This distribution has no mean, although its median is zero.
+This distribution does not have a mean, although its median is zero.
 Cauchy random variables are sometimes used in detection theory to model communication channels with extremely impulsive noise.
 It also finds applications in the fields of physics.
 Physicists sometimes refer to this distribution as the \emph{Lorentz distribution}.
