@@ -1,4 +1,4 @@
-\chapter{Expectations (Discrete)}
+\chapter{Discrete Expectations}
 \label{chapter:ExpectationsDiscrete}
 
 When a large collection of data is gathered, one is typically interested not necessarily in each individual data point, but rather in certain descriptive quantities such as the average or the median.
@@ -416,10 +416,10 @@ G_X(z) = \sum_{k=0}^{\infty} \frac{G_X^{(k)} (0)}{k!} z^k .
 \end{equation*}
 Comparing this equation to \eqref{equation:OrdinaryGeneratingFunction}, we conclude that
 \begin{equation*}
-p_X(k) = \frac{1}{k!} \left. \frac{d^k G_X(z)}{dz^k} \right|_{z=0}
-=\frac{G_X^{(k)} (0)}{k!}
+p_X(k) = \frac{1}{k!} \frac{d^k G_X}{dz^k} (0)
+= \frac{G_X^{(k)} (0)}{k!}
 \end{equation*}
-where $G_X^{(k)} (\cdot)$ denotes the $k$th derivative of $G_X(z)$ with respect to $z$.
+where $G_X^{(k)} (\cdot)$ denotes the $k$th derivative of $G_X(\cdot)$.
 We note that, for $|z| \leq 1$, we have
 \begin{equation*}
 \left| \sum_{k=0}^{\infty} z^k p_X(k) \right|
@@ -456,13 +456,13 @@ G_X(z) = p_X(0) + p_X(1) z
 \end{equation*}
 \end{example}
 
-\begin{example}
-Let $S$ be a binomial random variables with parameters $n$ and $p$.
+\begin{example}[Binomial random varible]
+Let $S$ be a binomial random variable with parameters $n$ and $p$.
 The ordinary generating function of $S$ can be computed as
 \begin{equation*}
 \begin{split}
 G_S(z) &= \sum_{k=0}^{n} z^k p_S (k)
-= \sum_{k=0}^{n} \binom{n}{k} p^k (1 - p)^{n-k} z^k \\
+= \sum_{k=0}^{n} z^k \binom{n}{k} p^k (1 - p)^{n-k} \\
 &= \sum_{k=0}^{n} \binom{n}{k} (pz)^k (1 - p)^{n-k}
 = (1 - p + pz)^n .
 \end{split}
@@ -471,5 +471,25 @@ G_S(z) &= \sum_{k=0}^{n} z^k p_S (k)
 
 We know, from Section~\ref{subsection:BinormialRandomVariables}, that one way to create a binomial random variable is to sum $n$ independent and identically distributed Bernoulli random variables, all with parameter $p$.
 Looking at the ordinary generating functions above, we notice that the $G_S(z)$ is the product of $n$ copies of $G_X(z)$.
-Intuitively, it appears that the sum of independent discrete random variables leads to the product of their ordinary generating functions.
+Intuitively, it appears that the sum of independent discrete random variables leads to the product of their ordinary generating functions, a fact that we will be checking shortly.
+
+\begin{example}[Poisson Random Variable]
+Suppose that $X$ has a Poisson distribution with parameter $\lambda > 0$.
+The function $G_X(s)$ can be computed as follows,
+\begin{equation*}
+G_X(z) = \sum_{k = 0}^\infty z^{k} \frac{e^{-\lambda}\lambda^k}{k!}
+= e^{-\lambda} \sum_{k = 0}^\infty \frac{(\lambda z)^k}{k!}
+= e^{-\lambda} e^{\lambda z} = e^{\lambda(z - 1)} .
+\end{equation*}
+The first two moments of $X$ are given by
+\begin{align*}
+\Expect [X] &= \lim_{z \uparrow 1} \frac{d G_X}{dz} (z)
+= \lim_{z \uparrow 1} \lambda e^{\lambda(z - 1)} = \lambda \\
+\Expect \left[ X^2 \right] &= \lim_{z \uparrow 1}
+\left( \frac{d^2 G_X}{dz^2} (z) + \frac{d G_X}{dz} (z) \right)
+= \lim_{z \uparrow 1} \left( \lambda^2 + \lambda \right)
+e^{\lambda (z - 1)} = \lambda^2 + \lambda .
+\end{align*}
+This provides an efficient way to compute the mean and variance of $X$, which are both equal to $\lambda$.
+\end{example}
 

@@ -1,4 +1,4 @@
-\chapter{Random Vectors (Discrete)}
+\chapter{Discrete Random Vectors}
 \label{chapter:RandomVectorsDiscrete}
 
 Thus far, our treatment has been focused on single random variables.
@@ -125,11 +125,11 @@ however, the joint PMFs differ.
 \section{Functions and Expectations}
 
 Let $X$ and $Y$ be two random variables with joint PMF $p_{X,Y} (\cdot, \cdot)$.
-Consider a third random variable defined by $Z = g(X,Y)$, where $g : \RealNumbers^2 \mapsto \RealNumbers$ is a real-valued function.
-We can obtain the PMF of $Z$ by computing
+Consider a third random variable defined by $V = g(X,Y)$, where $g : \RealNumbers^2 \mapsto \RealNumbers$ is a real-valued function.
+We can obtain the PMF of $V$ by computing
 \begin{equation*}
-p_Z (z)
-= \sum_{\{ (x,y) | g(x,y) = z \}} p_{X,Y} (x, y).
+p_V (v)
+= \sum_{\{ (x,y) | g(x,y) = v \}} p_{X,Y} (x, y).
 \end{equation*}
 This equation is the analog of \eqref{equation:FunctionPMF} for multiple random variables.
 
@@ -145,19 +145,19 @@ This equation is the analog of \eqref{equation:FunctionPMF} for multiple random 
 \psfrag{R}[c]{$\RealNumbers$}
 \psfrag{X}[c]{$X$}
 \psfrag{Y}[c]{$Y$}
-\psfrag{Z}[c]{$Z$}
-\psfrag{g}[c]{$Z = g(X,Y)$}
+\psfrag{Z}[c]{$V$}
+\psfrag{g}[c]{$V = g(X,Y)$}
 \includegraphics[width=11cm]{Figures/7Chapter/vfcn}
 \end{psfrags}
 \caption{A real-valued function of two random variables, $X$ and $Y$, is also a random variable.
-Above, $Z = g(X, Y)$ maps outcomes in the sample space to real numbers.}
+Above, $V = g(X, Y)$ maps outcomes in the sample space to real numbers.}
 \end{center}
 \end{figure}
 
 \begin{example} \label{example:SumDice1}
 Two dice, a blue die and a red one, are rolled simultaneously.
 The random variable $X$ represents the number of dots that appears on the top face of the blue die, whereas $Y$ is equal to the number of dots on the red die.
-We can form a random variable $Z$ that describes the sum of the two dice by defining $Z = X + Y$.
+We can form a random variable $U$ that describes the sum of the two dice by defining $U = X + Y$.
 \end{example}
 
 The definition of expectations can also be extended to multiple random variables.
@@ -461,7 +461,73 @@ A similar argument can be used to show that
 \end{equation}
 whenever $X$ and $Y$ are independent random variables and the corresponding expectations exist.
 
-One intesting application of \eqref{equation:DiscreteProduct} occurs when taking the sum of independent random variables.
+
+\section{Sums of Random Variables}
+
+We now turn to the question of determining the distribution of a sum of independent random variables in terms of the PMF of the summands.
+Suppose $X$ and $Y$ are two independent random variables that take on integer values.
+Let $p_X(\cdot)$ and $p_Y(\cdot)$ be the PMFs of $X$ and $Y$, respectively.
+We wish to determine the distribution $p_U (\cdot)$ of $U$ where $U = X + Y$.
+To accomplish this, it suffices to compute the probability that $U$ assumes a value $k$, where $k$ is an arbitrary integer,
+\begin{equation*}
+\begin{split}
+p_U (k) &= \Pr (U = k) = \Pr (X + Y = k) \\
+&= \sum_{ \{ (x,y) \in X(\Omega) \times Y(\Omega) | x + y = k \} } p_{X,Y} (x, y) \\
+&= \sum_{ m \in \mathbb{U} } p_{X,Y} (m, k-m) \\
+&= \sum_{ m \in \mathbb{U} } p_X (m) p_Y(k-m) .
+\end{split}
+\end{equation*}
+The latter operation is called a \emph{discrete convolution}. \index{Discrete Convolution}
+That is, the PMF of $U = X + Y$ is the discrete convolution of $p_X (\cdot)$ and $p_Y (\cdot)$ given by
+\begin{equation} \label{equation:DiscreteConvolution}
+p_U(k) = (p_X \star p_Y)(k)
+= \sum_{m = - \infty}^{\infty} p_X(m) p_Y(k-m) .
+\end{equation}
+
+It is easy to see that the discrete convolution is commutative, and it is straightforward to show that it is associative.
+Consider the random variables
+\begin{equation*}
+S_n = \sum_{k=1}^n X_k \quad n \geq 1 ,
+\end{equation*}
+where $X_1, X_2, \ldots$ are independent integer-valued random variables with common PMF $p_X (\cdot)$.
+The PMF of $S_1$ is simply $p_X (\cdot)$.
+The PMF of $S_n$ can be obtained recursively using the formula
+\begin{equation*}
+S_n = S_{n-1} + X_n .
+\end{equation*}
+
+\begin{example}[Binomial Random Variables]
+Suppose that $S_n$ is a sum of $n$ independent and identically distributed Bernoulli random variables with parameter $p \in (0,1)$.
+The PMF of $S_1$ is equal to
+\begin{equation*}
+p_{S_1} (k) = \begin{cases} 1 - p & k = 0 \\
+p & k = 1 .  \end{cases}
+\end{equation*}
+Assume that the PMF of $S_{n-1}$ is given by
+\begin{equation*}
+p_{S_{n-1}} (k)
+= \binom{n-1}{k} p^k (1-p)^{n-1-k} ,
+\quad k = 0, 1, \ldots n-1 .
+\end{equation*}
+The PMF of $S_n$ can be computed using the discrete convolution,
+\begin{equation*}
+\begin{split}
+p_{S_n} (k) &= \sum_{m = - \infty}^{\infty} p_{S_{n-1}}(m) p_X(k-m) \\
+&= p_{S_{n-1}}(k) (1-p) + p_{S_{n-1}}(k-1) p \\
+&= \binom{n-1}{k} p^{k} (1-p)^{n-k} + \binom{n-1}{k-1} p^{k} (1-p)^{n-k} \\
+&= \binom{n}{k} p^{k} (1-p)^{n-k}
+\end{split}
+\end{equation*}
+where $k = 0, 1, \ldots, n$.
+Thus, by the principle of mathematical induction, we gather that the sum of $n$ independent Bernoulli random variables, each with parameter $p$, is a binomial random variable with parameters $n$ and $p$.
+\end{example}
+
+The convolution of two binomial distributions, one with parameter $m$ and $p$ and the other with parameters $n$ and $p$, is a binomial random distribution with parameters $(m+n)$ and $p$.
+This fact follows from the previous example.
+%The convolution of $k$ geometric distributions with common parameter $p$ is a negative binomial distribution with parameters $p$ and $k$.
+%This can be seen by considering the experiment which consists of tossing a coin until the $k$th head appears.
+
+One interesting application of \eqref{equation:DiscreteProduct} occurs when taking the sum of independent random variables.
 Let $X$ and $Y$ be two independent random variables that take on integer values, and define $U = X + Y$.
 The ordinary generating function of $U$, as defined in Section~\ref{section:OrdinaryGeneratingFunctions}, is given by
 \begin{equation*}
@@ -475,21 +541,17 @@ G_U (z) &= \Expect \left[ z^U \right]
 \end{equation*}
 That is, the generating function of a sum of independent random variables is equal to the product of the individual ordinary generating functions, provided that the latter both exist.
 
-\begin{example}
-Let $X$ be a Poisson random variable with parameter $\alpha$ and, similarly, let $Y$ be a Poisson random variable with parameter $\beta$.
+\begin{example}[Sum of Poisson Random Variables]
+Let $X$ be a Poisson random variable with parameter $\alpha$ and let $Y$ be a Poisson random variable with parameter $\beta$.
 We wish to find the probability mass function of $U = X + Y$.
 
 To solve this problem, we use ordinary generating functions.
-First, we compute the generating function of $X$,
-\begin{equation*}
-\begin{split}
-G_X (z) &= \Expect \left[ z^X \right]
-= \sum_{k=0}^{\infty} \frac{\alpha^k}{k!} e^{-\alpha} z^k \\
-&= e^{-\alpha} \sum_{k=0}^{\infty} \frac{(\alpha z)^k}{k!}
-= e^{-\alpha} e^{\alpha z} = e^{\alpha (z-1)} .
-\end{split}
-\end{equation*}
-By analogy, we also have $G_Y (z) = e^{\beta (z-1)}$.
+First, recall that the generating function of a Poisson random variable with parameter $\lambda$ is $e^{\lambda (z-1)}$.
+The ordinary generating functions of $X$ and $Y$ are therefore equal to
+\begin{align*}
+G_X (z) &= e^{\alpha (z-1)} \\
+G_Y (z) &= e^{\beta (z-1)} .
+\end{align*}
 The ordinary generating function of $U = X + Y$ then becomes
 \begin{equation*}
 G_U (z) = G_X (z) G_Y(z) = e^{\alpha (z-1)} e^{\beta (z-1)}
@@ -497,7 +559,8 @@ G_U (z) = G_X (z) G_Y(z) = e^{\alpha (z-1)} e^{\beta (z-1)}
 \end{equation*}
 We conclude, by the uniqueness of generating functions, that $U$ is a Poisson random variable with parameter $\alpha + \beta$ and, accordingly, we get
 \begin{equation*}
-p_U (k) = \frac{ (\alpha + \beta)^k }{k!} e^{- (\alpha + \beta) }, \quad k = 0, 1, 2, \ldots
+p_U (k) = \frac{ (\alpha + \beta)^k }{k!} e^{- (\alpha + \beta) },
+\quad k = 0, 1, 2, \ldots
 \end{equation*}
 \end{example}
 

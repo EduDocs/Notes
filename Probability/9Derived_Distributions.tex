@@ -255,21 +255,21 @@ f_Y(y) = \begin{cases} 1 & y \in [0,1] \\
 
 This provides valuable insight about our original goal.
 Suppose that $Y$ is a continuous random variable uniformly distributed over $[0,1]$.
-We wish to generate continuous random variable $Z$ with CDF $F_X(\cdot)$.
+We wish to generate continuous random variable $V$ with CDF $F_X(\cdot)$.
 First, we note that, when $F_X (\cdot)$ is invertible, we have
 \begin{equation*}
 F_X^{-1} \left( F_X (X) \right) = X .
 \end{equation*}
 Thus, applying $F_X^{-1} (\cdot)$ to the uniform random variable $Y$ should work.
-Define $Z = F_X^{-1} (Y)$, and consider the PDF of $Z$.
+Define $V = F_X^{-1} (Y)$, and consider the PDF of $V$.
 Using our previous results, we have
 \begin{equation*}
 \begin{split}
-f_Z (z) = \frac{ f_Y (y) }{ \left| \frac{d F_X^{-1}}{dy} (y) \right| }
-= f_Y (y) \frac{d F_X}{dy} (z) = f_X (z)
+f_V (v) = \frac{ f_Y (y) }{ \left| \frac{d F_X^{-1}}{dy} (y) \right| }
+= f_Y (y) \frac{d F_X}{dy} (v) = f_X (v)
 \end{split}
 \end{equation*}
-where $y = F_X (z)$.
+where $y = F_X (v)$.
 Hence, this technique can be employed to generate a random variable with PDF $f_X (\cdot)$ from a continuous random variable that is uniformly distributed over $[0,1]$.
 More specifically, to create a continuous random variable $X$ with CDF $F_X (\cdot)$, one can apply the function $F_X^{-1} (\cdot)$ to a random variable $Y$ that is uniformly distributed over $[0,1]$.
 
@@ -444,8 +444,8 @@ Furthermore, if $X$ and $Y$ are independent random variables, then the two event
 
 \begin{example}
 Consider a random experiment where an outcome $(\omega_1, \omega_2)$ is selected at random from the unit square.
-Let $X = \omega_1$, $Y = \omega_2$ and $Z = \omega_1 + \omega_2$.
-We wish to show that $X$ and $Y$ are independent, and that $X$ and $Z$ are not independent.
+Let $X = \omega_1$, $Y = \omega_2$ and $U = \omega_1 + \omega_2$.
+We wish to show that $X$ and $Y$ are independent, and that $X$ and $U$ are not independent.
 
 We begin by computing the joint CDF of $X$ and $Y$.
 For $x,y \in [0,1]$, we have
@@ -466,20 +466,20 @@ F_{X,Y}(x,y)
 \end{equation*}
 Thus, we gather that $X$ and $Y$ are independent.
 
-Next, we show that $X$ and $Z$ are not independent.
-First, we note that $F_Z (1) = \frac{1}{2}$ and $F_X (1/2) = 1/2$.
-Consider the joint CDF of $X$ and $Z$ evaluated at $(1/2, 1)$,
+Next, we show that $X$ and $U$ are not independent.
+First, we note that $F_U (1) = \frac{1}{2}$ and $F_X (1/2) = 1/2$.
+Consider the joint CDF of $X$ and $U$ evaluated at $(1/2, 1)$,
 \begin{equation*}
 \begin{split}
-F_{X,Z} \left( \frac{1}{2} ,1 \right)
+F_{X,U} \left( \frac{1}{2} ,1 \right)
 &= \int_{0}^{\frac{1}{2}} \int_{0}^{1-\xi} d\zeta d\xi
 = \int_{0}^{\frac{1}{2}} (1 - \xi) d\xi \\
 %&= \frac{1}{2} - \frac{1}{8} \\
 &= \frac{3}{8}
-\neq F_X \left( \frac{1}{2} \right) F_Z(1) .
+\neq F_X \left( \frac{1}{2} \right) F_U(1) .
 \end{split}
 \end{equation*}
-Thus, $X$ and $Z$ are clearly not independent.
+Thus, $X$ and $U$ are clearly not independent.
 \end{example}
 
 
@@ -487,45 +487,44 @@ Thus, $X$ and $Z$ are clearly not independent.
 
 Sums of independent random variables play an important role in solving engineering problems.
 We therefore turn to the question of determining the distribution of a sum of independent random variables in terms of the PDFs of its constituents.
-If $X$ and $Y$ are independent random variables, the distribution of their sum $Z = X + Y$ can be obtained by using the \emph{convolution} operator. \index{Convolution}
+If $X$ and $Y$ are independent random variables, the distribution of their sum $U = X + Y$ can be obtained by using the \emph{convolution} operator. \index{Convolution}
 Let $f_X (\cdot)$ and $f_Y (\cdot)$ be the PDFs of $X$ and $Y$, respectively.
 The convolution of $f_X(\cdot)$ and $f_Y(\cdot)$ is the function defined by
 \begin{equation*}
 \begin{split}
-(f_X \star f_Y) (z)
-&= \int_{-\infty}^{\infty} f_X(\xi) f_Y(z - \xi) d\xi \\
-&= \int_{-\infty}^{\infty} f_X(z - \zeta) f_Y(\zeta) d\zeta .
+(f_X \star f_Y) (u)
+&= \int_{-\infty}^{\infty} f_X(\xi) f_Y(u - \xi) d\xi \\
+&= \int_{-\infty}^{\infty} f_X(u - \zeta) f_Y(\zeta) d\zeta .
 \end{split}
 \end{equation*}
-The PDF of the sum $Z = X + Y$ is the convolution of the individual densities,
+The PDF of the sum $U = X + Y$ is the convolution of the individual densities,
 \begin{equation*}
-f_Z (z) = (f_X \star f_Y) (z) .
+f_U (u) = (f_X \star f_Y) (u) .
 \end{equation*}
-To show that this is indeed the case, we first consider the CDF of $Z$,
+To show that this is indeed the case, we first consider the CDF of $U$,
 \begin{equation*}
 \begin{split}
-\Pr (Z \leq z) &= \Pr (X + Y \leq z) \\
-&= \int_{-\infty}^{\infty} \Pr (X + Y \leq z | X = \xi) f_X(\xi) d\xi \\
-&= \int_{-\infty}^{\infty} \Pr (Y \leq z - \xi) f_X(\xi) d\xi \\
-&= \int_{-\infty}^{\infty} F_Y (z - \xi) f_X(\xi) d\xi .
+\Pr (U \leq u) &= \Pr (X + Y \leq u) \\
+&= \int_{-\infty}^{\infty} \Pr (X + Y \leq u | X = \xi) f_X(\xi) d\xi \\
+&= \int_{-\infty}^{\infty} \Pr (Y \leq u - \xi) f_X(\xi) d\xi \\
+&= \int_{-\infty}^{\infty} F_Y (u - \xi) f_X(\xi) d\xi .
 \end{split}
 \end{equation*}
 The last equality above follows from the independence of $X$ and $Y$.
-Taking the derivative of $F_Z (z)$ with respect to $z$, we obtain
+Taking the derivative of $F_U (u)$ with respect to $u$, we obtain
 \begin{equation*}
 \begin{split}
-\frac{d}{dz} F_Z (z) &= \frac{d}{dz} \Pr (Z \leq z) \\
-&= \int_{-\infty}^{\infty} \frac{d}{dz} F_Y (z - \xi) f_X(\xi) d\xi \\
-&= \int_{-\infty}^{\infty} f_Y (z - \xi) f_X(\xi) d\xi .
+\frac{d}{du} F_U (u) &= \frac{d}{du} \Pr (U \leq u) \\
+&= \int_{-\infty}^{\infty} \frac{d}{du} F_Y (u - \xi) f_X(\xi) d\xi \\
+&= \int_{-\infty}^{\infty} f_Y (u - \xi) f_X(\xi) d\xi .
 \end{split}
 \end{equation*}
-This shows that $f_Z(z) = (f_X \star f_Y) (z)$.
-
+This shows that $f_U(u) = (f_X \star f_Y) (u)$.
 
 \begin{example}[Sum of Uniform Random Variables]
 Suppose that two numbers are independently selected from the interval $[0,1]$, each with a uniform distribution.
 We wish to compute the PDF of their sum.
-Let $X$ and $Y$ be random variables describing the two choices, and let $Z = X + Y$ represent the sum.
+Let $X$ and $Y$ be random variables describing the two choices, and let $U = X + Y$ represent the sum.
 The PDFs of $X$ and $Y$ are
 \begin{equation*}
 f_X(\xi) = f_Y(\xi)
@@ -534,26 +533,26 @@ f_X(\xi) = f_Y(\xi)
 \end{equation*}
 The PDF of their sum is therefore equal to
 \begin{equation*}
-f_Z(z) = \int_{-\infty}^{+\infty} f_X(z - \xi) f_Y(\xi) d\xi .
+f_U(u) = \int_{-\infty}^{+\infty} f_X(u - \xi) f_Y(\xi) d\xi .
 \end{equation*}
 Since $f_Y(y) = 1$ when $0 \leq y \leq 1$ and zero otherwise, the integral becomes
 \begin{equation*}
-f_Z(z) = \int_0^1 f_X(z - \xi) d\xi .
+f_U(u) = \int_0^1 f_X(u - \xi) d\xi .
 \end{equation*}
-This integrand is zero unless $0 \leq z - \xi \leq 1$ (i.e., unless $z - 1 \leq \xi \leq z$).
-Thus, if $0 \leq z \leq 1$, we get
+This integrand is zero unless $0 \leq u - \xi \leq 1$ (i.e., unless $u - 1 \leq \xi \leq u$).
+Thus, if $0 \leq u \leq 1$, we get
 \begin{equation*}
-f_Z(z) = \int_0^z d\xi = z ;
+f_U(u) = \int_0^u d\xi = u ;
 \end{equation*}
-while, if $1 < z \leq 2$, we have
+while, if $1 < u \leq 2$, we have
 \begin{equation*}
-f_Z(z) = \int_{z - 1}^1 d\xi = 2 - z .
+f_U(u) = \int_{u - 1}^1 d\xi = 2 - u .
 \end{equation*}
-If $z < 0$ or $z > 2$, the value of the PDF becomes zero, $f_Z(z) = 0$.
-Hence, the PDF of $Z$ can be written as
+If $u < 0$ or $u > 2$, the value of the PDF becomes zero, $f_U(u) = 0$.
+Hence, the PDF of $U$ can be written as
 \begin{equation*}
-f_Z(z) = \begin{cases} z & 0 \leq z \leq 1, \\
-2-z & 1 < z \leq 2, \\
+f_U(u) = \begin{cases} u & 0 \leq u \leq 1, \\
+2-u & 1 < u \leq 2, \\
 0 & \text{otherwise} . \end{cases}
 \end{equation*}
 \end{example}
@@ -562,25 +561,25 @@ f_Z(z) = \begin{cases} z & 0 \leq z \leq 1, \\
 Suppose two numbers are independently selected at random from the postive real numbers according to an exponential distribution with parameter $\lambda$. 
 We wish to find the PDF of their sum.
 
-Let $X$ and $Y$ represent these two numbers, and denote their sum by $Z = X + Y$.
+Let $X$ and $Y$ represent these two numbers, and denote their sum by $V = X + Y$.
 The random variables $X$ and $Y$ have PDFs
 \begin{equation*}
 f_X (\xi) = f_Y (\xi) = \begin{cases} \lambda e^{-\lambda \xi} & \xi \geq 0 \\
 0 & \text{otherwise} . \end{cases}
 \end{equation*}
-When $z \geq 0$, we can use the convolution formula and write
+When $V \geq 0$, we can use the convolution formula and write
 \begin{equation*}
 \begin{split}
-f_Z (z) &= \int_{-\infty}^{\infty} f_X(z - \xi) f_Y(\xi) d\xi \\
-&= \int_0^z \lambda e^{-\lambda(z - \xi)} \lambda e^{-\lambda \xi} d\xi \\
-&= \int_0^z \lambda^2 e^{-\lambda z} d\xi
-= \lambda^2 z e^{-\lambda z}.
+f_V (v) &= \int_{-\infty}^{\infty} f_X(v - \xi) f_Y(\xi) d\xi \\
+&= \int_0^v \lambda e^{-\lambda(v - \xi)} \lambda e^{-\lambda \xi} d\xi \\
+&= \int_0^v \lambda^2 e^{-\lambda v} d\xi
+= \lambda^2 v e^{-\lambda v}.
 \end{split}
 \end{equation*}
-On the other hand, if $z < 0$ then we get $f_Z(z) = 0$.
-Hence, the PDF of $Z$ is given by
+On the other hand, if $v < 0$ then we get $f_V(v) = 0$.
+Hence, the PDF of $V$ is given by
 \begin{equation*}
-f_Z (z) = \begin{cases} \lambda^2 z e^{-\lambda z} & z \geq 0 \\
+f_V (v) = \begin{cases} \lambda^2 v e^{-\lambda v} & v \geq 0 \\
 0 & \text{otherwise} . \end{cases}
 \end{equation*}
 This is an Erlang distribution with parameter $m = 2$ and $\lambda > 0$.
@@ -588,32 +587,32 @@ This is an Erlang distribution with parameter $m = 2$ and $\lambda > 0$.
 
 \begin{example}[Sum of Gaussian Random Variables]
 It is an interesting and important fact that the sum of two independent Gaussian random variables is again a Gaussian random variable.
-Suppose $X$ has mean $m_1$ and variance $\sigma_1^2$, and $Y$ has mean $m_2$ and variance $\sigma_2^2$, then $Z = X + Y$ has a Gaussian density with mean $m_1 + m_2$ and variance $\sigma_1^2 + \sigma_2^2$.
+Suppose $X$ has mean $m_1$ and variance $\sigma_1^2$, and $Y$ has mean $m_2$ and variance $\sigma_2^2$, then $V = X + Y$ has a Gaussian density with mean $m_1 + m_2$ and variance $\sigma_1^2 + \sigma_2^2$.
 We will show this property in the special case where both random variables are standard normal random variable.
 The general case can be done in a similar manner, but the computations are more involved.
 
 Suppose $X$ and $Y$ are two independent Gaussian random variables with PDFs
 \begin{equation*}
-f_X(\xi) = f_Y(\xi) = \frac 1{\sqrt{2\pi}} e^{-\xi^2/2} .
+f_X(\xi) = f_Y(\xi) = \frac 1{\sqrt{2\pi}} e^{-\frac{\xi^2}{2}} .
 \end{equation*}
-Then, the PDF of $Z = X + Y$ is given by
+Then, the PDF of $V = X + Y$ is given by
 \begin{equation*}
 \begin{split}
-f_Z (z) &= (f_X \star f_Y) (z)
+f_V (v) &= (f_X \star f_Y) (v)
 = \frac{1}{2\pi}
-\int_{-\infty}^{\infty} e^{-\frac{(z - \xi)^2}{2}} e^{-\frac{\xi^2}{2}} d\xi \\
-&= \frac{1}{2\pi} e^{- \frac{z^2}{4}}
-\int_{-\infty}^{\infty} e^{- \left( \xi - \frac{z}{2} \right)^2} d\xi \\
-&= \frac{1}{2 \sqrt{\pi}} e^{- \frac{z^2}{4}}
+\int_{-\infty}^{\infty} e^{-\frac{(v - \xi)^2}{2}} e^{-\frac{\xi^2}{2}} d\xi \\
+&= \frac{1}{2\pi} e^{- \frac{v^2}{4}}
+\int_{-\infty}^{\infty} e^{- \left( \xi - \frac{v}{2} \right)^2} d\xi \\
+&= \frac{1}{2 \sqrt{\pi}} e^{- \frac{v^2}{4}}
 \left( \int_{-\infty}^{\infty} \frac{1}{\sqrt{\pi}}
-e^{-\left( \xi - \frac{z}{2} \right)^2} d\xi \right) .
+e^{-\left( \xi - \frac{v}{2} \right)^2} d\xi \right) .
 \end{split}
 \end{equation*}
-The expression within the parentheses is equal to one because it is the integral of a Gaussian PDF with $m = z/2$ and $\sigma^2 = 1/2$.
+The expression within the parentheses is equal to one because it is the integral of a Gaussian PDF with $m = v/2$ and $\sigma^2 = 1/2$.
 Thus, we obtain
 \begin{equation*}
-f_Z(z) = \frac{1}{\sqrt{4\pi}} e^{-\frac{z^2}{4}} ,
+f_V(v) = \frac{1}{\sqrt{4\pi}} e^{-\frac{v^2}{4}} ,
 \end{equation*}
-which verifies that $Z$ is indeed Gaussian.
+which verifies that $V$ is indeed Gaussian.
 \end{example}
 

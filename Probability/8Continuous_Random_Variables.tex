@@ -38,7 +38,7 @@ Furthermore, since the realization of $X$ is a real number, we have
 \end{gather*}
 Suppose $x_1 < x_2$, then we can write $\{ X \leq x_2 \}$ as the union of the two disjoint sets $\{ X \leq x_1 \}$ and $\{ x_1 < X \leq x_2 \}$.
 It follows that
-\begin{equation} \label{equation:MonotoneIncreasingCDF}
+\begin{equation} \label{equation:NonDecreasingCDF}
 \begin{split}
 F_X (x_2) &= \Pr (X \leq x_2) \\
 &= \Pr (X \leq x_1) + \Pr (x_1 < X \leq x_2) \\
@@ -46,7 +46,7 @@ F_X (x_2) &= \Pr (X \leq x_2) \\
 \end{split}
 \end{equation}
 Thus, the CDF is a non-decreasing function.
-We note from \eqref{equation:MonotoneIncreasingCDF} that the probability of $X$ falling in the interval $(x_1, x_2]$ is
+We note from \eqref{equation:NonDecreasingCDF} that the probability of $X$ falling in the interval $(x_1, x_2]$ is
 \begin{equation} \label{equation:IntervalCDF}
 \Pr (x_1 < X \leq x_2) = F_X (x_2) - F_X (x_1).
 \end{equation}
