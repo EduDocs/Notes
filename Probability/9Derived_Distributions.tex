@@ -1,0 +1,485 @@
+\chapter{Functions and Derived Distributions}
+\index{Functions of Random Variables}
+
+We have already seen that it is possible to form new discrete random variables by applying real-valued functions to existing random variables.
+In a similar manner, it is possible to generate a new random variable $Y$ by taking a well-behaved function $g(\cdot)$ of a continuous random variable $X$.
+The graphical interpretation of this notion is analog to the discrete case and appears below.
+
+\begin{figure}[ht]
+\begin{center}
+\begin{psfrags}
+\psfrag{S}[l]{Sample Space}
+\psfrag{X}[c]{$X$}
+\psfrag{Y}[c]{$Y = g(X)$}
+\includegraphics[width=9.26cm]{Figures/9Chapter/fcn}
+\end{psfrags}
+\caption{A function of a random variable is a random variable itself.
+In this figure, $Y$ is obtained by applying function $g(\cdot)$ to the value of continuous random variable $X$.}
+\end{center}
+\end{figure}
+
+Let $X$ be a continuous random variable, and let $g: \RealNumbers \mapsto \RealNumbers$ be an admissible function.
+Variable $Y = g(X)$, defined pointwise, is itself random.
+The probability that $Y$ falls in a specific set $S$ depends on both the function $g(\cdot)$ and the PDF of $X$,
+\begin{equation*}
+\Pr (Y \in S) = \Pr (g(X) \in S) 
+= \Pr \left( X \in g^{-1}(S) \right).
+\end{equation*}
+In particular, we can derive the CDF of $Y$ using the formula
+\begin{equation} \label{equation:DerivedCDF}
+F_Y(y) = \Pr (g(X) \leq y) = \int_{ \{ \xi \in X(\Omega) | g(\xi) \leq y \} } f_X(\xi) d\xi .
+\end{equation}
+
+\begin{example}
+Let $X$ be a Rayleigh  random variable with parameter $\sigma^2  = 1$, and define $Y = X^2$.
+We wish to find the distribution of $Y$.
+From \eqref{equation:DerivedCDF}, we can compute the CDF of $Y$.
+For $y > 0$, we get
+\begin{equation*}
+\begin{split}
+F_Y(y) &= \Pr (Y \leq y) = \Pr \left( X^2 \leq y \right) \\
+&= \Pr (- \sqrt{y} \leq X \leq \sqrt{y})
+= \int_0^{\sqrt{y}} \xi e^{- \frac{\xi^2}{2}} d\xi \\
+&= \int_0^{y} \frac{1}{2} e^{- \frac{\zeta}{2}} d\zeta
+= 1 - e^{-\frac{y}{2}} .
+\end{split}
+\end{equation*}
+We have employed the fact that $X \geq 0$ in determining the boundaries of integration, and we have used the substitution $\zeta = \xi^2$ in computing the integral.
+We recognize $F_Y(\cdot)$ as the CDF of an exponential random variable.
+This shows that the square of a Rayleigh random variable has an exponential distribution.
+\end{example}
+
+The fact that $X$ is a continuous random variable does not provide much insight on the properties of $Y$.
+In general, $Y$ could be a continuous random variable, a discrete random variable or neither.
+To gain a better understanding of derived distributions, we begin our exposition of functions of continuous random variables by exploring special cases.
+
+
+\section{Monotone Functions}
+
+A \emph{monotonic function} is a function which preserves a given order.
+For instance, $g(\cdot)$ is monotonically increasing if, for all $x_1$ and $x_2$ such that $x_1 \leq x_2$, we get $g(x_1) \leq g(x_2)$.
+Likewise, a function $g(\cdot)$ is termed monotonically decreasing provided that $g(x_1) \geq g(x_2)$ whenever $x_1 \leq x_2$.
+Monotonic functions of continuous random variable are easy to handle.
+For non-decreasing function $g(\cdot)$ of random variable $X$, we have
+\begin{equation} \label{equation:MonotoneIncreasingCDF}
+\begin{split}
+F_Y(y) &= \Pr ( Y \leq y) = \Pr ( g(X) \leq y) \\
+&= \Pr \left( X \leq \sup \{ g^{-1} (y) \} \right)
+= F_X \left( \sup \{ g^{-1} (y) \} \right) .
+\end{split}
+\end{equation}
+The supremum comes from the fact that multiple values of $x$ may lead to a same value of $y$; that is, the set $g^{-1}(y) = \{ x | g(x) = y \}$ may contain several elements.
+These elements all need to be accounted for in our expression, and this is accomplished by selecting the largest one.
+
+\begin{figure}[ht]
+\begin{center}
+\begin{psfrags}
+\psfrag{x}[c]{$g^{-1} = \{ x | g(x) = y \}$}
+\psfrag{y}[c]{$y$}
+\psfrag{X}[c]{$X$}
+\psfrag{Y}[c]{$Y$}
+\includegraphics[width=6.5cm]{Figures/9Chapter/MonotoneIncreasing}
+\end{psfrags}
+\caption{A function of a random variable is a random variable itself.
+In this figure, $Y$ is obtained by passing random variable $X$ through a function $g(\cdot)$.}
+\end{center}
+\end{figure}
+
+\begin{example}
+Let $X$ be a continuous random variable uniformly distributed over interal $[0, 1]$.
+We wish to characterize the derived distribution of $Y = 2X$.
+This can be accomplished as follows; for $y \in [0, 2]$, we have
+\begin{equation*}
+\begin{split}
+F_Y(y) &= \Pr (Y \leq y) = \Pr \left( X \leq \frac{y}{2} \right) \\
+&= \int_0^{\frac{y}{2}} dx = \frac{y}{2} .
+\end{split}
+\end{equation*}
+Thus, $Y$ is a uniform random variable with support $[0, 2]$.
+By taking derivatives, we obtain the PDF of $Y$ as
+\begin{equation*}
+f_Y(y) = \begin{cases} \frac{1}{2}, & y \in [0, 2] \\
+0, & \text{otherwise}. \end{cases}
+\end{equation*}
+\end{example}
+
+Alternatively, suppose that $g(\cdot)$ is a \emph{monotone decreasing} function and let $Y = g(X)$.
+The CDF of $Y$ is then equal to
+\begin{equation} \label{equation:MonotoneDecreasingCDF}
+\begin{split}
+F_Y(y) &= \Pr (Y \leq y) = \Pr (g(X) \leq y) \\
+&= \Pr \left( X \geq \inf \{ g^{-1} (y) \} \right)
+= 1 - F_X \left( \inf \{ g^{-1} (y) \} \right) .
+\end{split}
+\end{equation}
+This is very similar to the previous case in that the infimum accounts for the fact that the set $g^{-1} = \{ x | g(x) = y \}$ may contain multiple elements.
+Also, note that \eqref{equation:MonotoneDecreasingCDF} relies on the fact that $X$ is a continuous random variable.
+
+
+\section{Differentiable Functions}
+
+As discussed at the beginning of the chapter, a function of a continuous random variable does not necessarily result in a continuous random variable.
+To gain insight about this topic, it is best to first consider the situation where $g(\cdot)$ is a differentiable and strictly increasing function.
+Note that, with these two properties, $g(\cdot)$ becomes an invertible function.
+It is therefore possible to write $x = g^{-1} (y)$, as the value of $x$ is unambiguous.
+In such a case, we can write the CDF of $Y$ as
+\begin{equation*}
+\begin{split}
+F_Y(y) &= \Pr (Y \leq y) = \Pr (g(X) \leq y) \\
+&= \Pr \left( X \leq g^{-1}(y) \right)
+= F_X \left( g^{-1} (y) \right) .
+\end{split}
+\end{equation*}
+Differentiating this equation with respect to $y$, we obtain the PDF of $Y$
+\begin{equation*}
+\begin{split}
+f_Y (y) &= \frac{d}{dy} F_Y(y)
+= \frac{d}{dy} F_X \left( g^{-1} (y) \right) \\
+&= f_X \left( g^{-1} (y) \right) \frac{d}{dy} g^{-1} (y)
+= f_X \left( g^{-1} (y) \right) \frac{dx}{dy} .
+\end{split}
+\end{equation*}
+With the simple substitution $x = g^{-1} (y)$, we get
+\begin{equation*}
+f_Y (y) = f_X (x) \frac{dx}{dy}
+= \frac{f_X (x)}{g'(x)} .
+\end{equation*}
+Note that $g'(x)$ is non-zero because $g(\cdot)$ is a strictly increasing function.
+From this analysis, we gather that $Y=g(X)$ is a continuous random variable.
+More specifically, if $g(\cdot)$ is a differentiable and strictly increasing function, then we can express the PDF of $Y = g(X)$ in terms of the PDF of $X$ and the derivative of $g(\cdot)$.
+
+Similarly, suppose that $g$ is a differentiable and strictly decreasing function.
+In this case, the CDF of the random variable $Y = g(X)$ becomes
+\begin{equation*}
+F_Y(y) = \Pr (g(X) \leq y)
+= \Pr \left( X \geq g^{-1}(y) \right)
+= 1 - F_X \left( g^{-1} (y) \right) ,
+\end{equation*}
+and its PDF is given by
+\begin{equation*}
+\begin{split}
+f_Y (y) &= \frac{d}{dy} \left( 1 - F_X \left( g^{-1} (y) \right) \right) \\
+&= - f_X \left( g^{-1} (y) \right) \frac{dx}{dy}
+= \frac{f_X (x)}{- g'(x)} .
+\end{split}
+\end{equation*}
+Again, we find that $Y = g(X)$ is a continuous random variable and the PDF of $Y$ can be written in therms of $f_X( \cdot)$ and the derivative of $g(\cdot)$.
+
+Combining these two results, we observe that if $g(\cdot)$ is differentiable and strictly monotone, the PDF of $Y$ becomes
+\begin{equation} \label{equation:MonotoneFunctionPDF}
+f_Y (y) = f_X \left( g^{-1} (y) \right) \left| \frac{dx}{dy} \right|
+= \frac{f_X (x)}{\left| g'(x) \right|}
+\end{equation}
+where $x = g^{-1}(y)$.
+
+\begin{example}
+Suppose that $X$ is a Gaussian random variable with PDF
+\begin{equation*}
+f_X(x) = \frac{1}{\sqrt{2 \pi}} e^{- \frac{x^2}{2}} .
+\end{equation*}
+We wish to find the PDF of random variable $Y$ where $Y = a X + b$ and $a \neq 0$.
+
+In this example, $g(x) = ax + b$.
+The inverse of function of $g$ is then equal to
+\begin{equation*}
+x = g^{-1} (y) = \frac{y - b}{a} ,
+\end{equation*}
+and its derivative is given by
+\begin{equation*}
+\frac{dx}{dy} = \frac{d}{dy} g^{-1}(y) = \frac{1}{a} .
+\end{equation*}
+The PDF of $Y$ can be computed using \eqref{equation:MonotoneFunctionPDF}, which yields
+\begin{equation*}
+f_Y(y) = f_X \left( g^{-1} (y) \right) \left| \frac{dx}{dy} \right|
+= \frac{1}{\sqrt{2 \pi} |a|} e^{- \frac{(y-b)^2}{2 a^2} }.
+\end{equation*}
+Thus, an affine function of a Gaussian random variable is also a Gaussian random variable.
+\end{example}
+
+Finally, suppose that $g(\cdot)$ is a differentiable function with a finite number of local extrema.
+Then, $g(\cdot)$ is piecewise monotonic and we can write the PDF of $Y= g(X)$ as
+\begin{equation} \label{equation:FunctionPDF}
+f_Y (y) = \sum_{\{ x \in X(\Omega) | g(x) = y\}}
+\frac{f_X (x)}{\left| g'(x) \right|} .
+\end{equation}
+In words, $f_Y (y)$ is obtained by first identifying all the values of $x$ for which $g(x) = y$.
+The PDF of $Y$ is then computed explicitly by finding the local contribution of each of these values to $f_Y(y)$ using the methodology developed above.
+This is accomplished by applying \eqref{equation:MonotoneFunctionPDF} repetitively to every value of $x$ such that $g(x) = y$.
+% This is illustrated in Figure.
+It is certainly useful to compare \eqref{equation:FunctionPDF} to its discrete equivalent \eqref{equation:DefinitionFunctionPMF}, which is easier to understand and visualize.
+
+\begin{example}
+The distribution of a Rayleigh random variable is given by
+\begin{equation*}
+f_X (x) = \frac{x}{\sigma^2} e^{- \frac{x^2}{2 \sigma^2} } \quad x \geq 0,
+\end{equation*}
+where $\sigma > 0$.
+Let $Y = X^2$ and find the distribution of random variable $Y$.
+
+Since $Y$ is the square of $X$, we have $g(x) = x^2$.
+The PDF of $Y$ is found to be
+\begin{equation*}
+f_Y(y) = \frac{f_X (x)}{|g'(x)|}
+= \frac{1}{\sigma^2} e^{- \frac{x^2}{2 \sigma^2} }
+= \frac{1}{2 \sigma^2} e^{- \frac{y}{2 \sigma^2} }
+\end{equation*}
+where $y \geq 0$.
+Random variable $Y$ has an exponential distribution with parameter $2 \sigma^2$.
+Note that we do not need to account for the negative square root $x = - \sqrt{y}$ since the Rayleigh random variable has a one-side PDF.
+\end{example}
+
+
+\section{Generating Random Variables}
+
+In engineering, computer simulations are often used as a first step in validating a concept or evaluating design candidates.
+Many such projects involve the generation of multiple random variables.
+In this section, we explore a methodology that can be employed to generate arbitrary random variable based on a number generator that outputs a random variable uniformly distributed between zero and one.
+
+\subsection{Continuous Random Variables}
+
+For the continuous case, we begin with a simple observation.
+Let $X$ be a continuous random variable with PDF $f_X (\cdot)$.
+Consider the random variable $Y = F_X(X)$.
+Since $F_X (\cdot)$ is differentiable and strictly increasing over the support of $X$, we get
+\begin{equation*}
+f_Y (y) = \frac{f_X (x)}{| F_X'(x) |}
+= \frac{f_X (x)}{| f_X (x) |} = 1
+\end{equation*}
+where $y \in [0, 1]$ and $x = F_X^{-1} (y)$.
+The PDF of $Y$ is zero outside of this interval because $0 \leq F_X (x) \leq 1$.
+Thus, using an arbitrary continuous random variable $X$, we can generate a uniform random variable $Y$ with PDF
+\begin{equation*}
+f_Y(y) = \begin{cases} 1 & y \in [0,1] \\
+0 & \text{otherwise} . \end{cases}
+\end{equation*}
+
+This provides valuable insight about our original goal.
+Suppose that $Y$ is a continuous random variable uniformly distributed over $[0,1]$.
+We wish to generate continuous random variable $Z$ with CDF $F_X(\cdot)$.
+First, we note that, when $F_X (\cdot)$ is invertible, we have
+\begin{equation*}
+F_X^{-1} \left( F_X (X) \right) = X .
+\end{equation*}
+Thus, applying $F_X^{-1} (\cdot)$ to the uniform random variable $Y$ should work.
+Define $Z = F_X^{-1} (Y)$, and consider the PDF of $Z$.
+Using our previous results, we have
+\begin{equation*}
+\begin{split}
+f_Z (z) = \frac{ f_Y (y) }{ \left| \frac{d F_X^{-1}}{dy} (y) \right| }
+= f_Y (y) \frac{d F_X}{dy} (z) = f_X (z)
+\end{split}
+\end{equation*}
+where $y = F_X (z)$.
+Hence, this technique can be employed to generate a random variable with PDF $f_X (\cdot)$ from a continuous random variable that is uniformly distributed over $[0,1]$.
+More specifically, to create a continuous random variable $X$ with CDF $F_X (\cdot)$, one can apply the function $F_X^{-1} (\cdot)$ to a random variable $Y$ that is uniformly distributed over $[0,1]$.
+
+\begin{example}
+Suppose that $Y$ is a continuous random variable uniformly distributed over $[0,1]$.
+We wish to create an exponential random variable $X$ with parameter $\lambda$ by taking a function of $Y$.
+
+Random variable $X$ is nonnegative, and its CDF is given by $F_X(x) = 1 - e^{- \lambda x}$ for $x \geq 0$.
+The inverse of $F_X (\cdot)$ is given by
+\begin{equation*}
+F_X^{-1} (y) = - \frac{ \log (1 - y) }{\lambda} .
+\end{equation*}
+Thus, we can generate the desired random variable $X$ as
+\begin{equation*}
+X = - \frac{ \log (1 - Y) }{\lambda} .
+\end{equation*}
+For $x \geq 0$, we have
+\begin{equation*}
+f_X (x) = \frac{ f_Y (y) }{ \frac{1}{\lambda (1 - y)} }
+= \lambda e^{- \lambda x}
+\end{equation*}
+where we have use the notation $y = 1 - e^{- \lambda x}$.
+This is indeed the expected result.
+\end{example}
+
+
+\section{Multiple Continuous Random Variables}
+
+Probability density functions can be extended to the case of multiple continuous random variable.
+We denote the \emph{joint probability density function} of random variables $X$ and $Y$ by $f_{X,Y} (\cdot, \cdot)$. \index{Joint Probability Density Function}
+In general, $f_{X,Y} (\cdot, \cdot)$ is a nonnegative function such that
+\begin{equation*}
+\int_{-\infty}^{\infty} \int_{-\infty}^{\infty}
+f_{X, Y} (\xi, \zeta) d\zeta d\xi = 1.
+\end{equation*}
+Furthermore, for a measurable set $S$, the probability that $(X,Y) \in S$ can be computed through the integral
+\begin{equation*}
+\begin{split}
+\Pr ((X,Y) \in S)
+&= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty}
+\mathrm{1}_{S}(\xi, \zeta) f_{X, Y} (\xi, \zeta) d\zeta d\xi \\
+&= \int \int_{S}
+f_{X, Y} (\xi, \zeta) d\zeta d\xi .
+\end{split}
+\end{equation*}
+If $S$ is the rectangular set
+\begin{equation*}
+S = \left\{ (x,y) \in X(\Omega) \times Y(\Omega) \big| a \leq x \leq b, c \leq y \leq d \right\} ,
+\end{equation*}
+then the probability that $(X,Y) \in S$ becomes the typical integral
+\begin{equation*}
+\Pr ((X,Y) \in S)
+= \Pr (a \leq X \leq b, c \leq Y \leq d)
+= \int_{a}^{b} \int_{c}^{d}
+f_{X, Y} (\xi, \zeta) d\zeta d\xi .
+\end{equation*}
+
+\begin{example}
+Suppose that the random pair $(X, Y)$ is uniformly distributed over the unit circle.
+Then, the joint PDF $f_{X,Y} (\cdot, \cdot)$ is given by
+\begin{equation*}
+f_{X,Y} (x, y) = \begin{cases} \frac{1}{\pi} & x^2 + y^2 \leq 1 \\
+0 & \text{otherwise} . \end{cases}
+\end{equation*}
+We wish to find the probability that the point $(X, Y)$ lies inside the circle of radius $1/2$.
+
+Let $S = \{ (x, y) \in X(\Omega) \times Y(\Omega) | x^2 + y^2 \leq 0.5 \}$.
+The probability that $(X, Y)$ lies in $S$ is given by
+\begin{equation*}
+\Pr ((X,Y) \in S)
+= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty}
+\mathbf{1}_{S}(\xi, \zeta) \frac{1}{\pi} d\xi d\zeta
+= \frac{1}{4} .
+\end{equation*}
+Thus, the probability that $(X,Y)$ lies in the circle of radius half is one fourth.
+\end{example}
+
+It is also possible to define the \emph{joint cumulative distribution function} of a pair of random variables, \index{Joint cumulative distribution function}
+\begin{equation*}
+F_{X,Y} (x,y) = \Pr (X \leq x, Y \leq y) .
+\end{equation*}
+For continuous random variables, the joint CDF of $X$ and $Y$ can derived from their joint PDF,
+\begin{equation*}
+F_{X,Y} (x,y) = \int_{-\infty}^x \int_{-\infty}^y f_{X,Y} (\xi,\zeta) d\zeta d\xi .
+\end{equation*}
+Calculus asserts that the following is also true,
+\begin{equation*}
+f_{X,Y} (x,y) = \frac{\partial^2 F_{X,Y}}{\partial x \partial y} (x,y) .
+\end{equation*}
+
+
+\subsection{Conditional Distribution}
+
+It is possible to derive the PDF of a random variable condition on a certain event, or on another random variable.
+Let $X$ and $Y$ be two random variable associated with the same experiment.
+The \emph{conditional probability distribution function} of $Y$ given $X = x$, denoted by $f_{Y|X}$, is defined by
+\begin{equation} \label{equation:ContinuousConditonalPDF}
+f_{Y|X} (y|x) = \frac{f_{X,Y} (x,y)}{f_X(x)},
+\end{equation}
+provided that $f_X(x) \neq 0$.
+We emphasize that there is a strong similarity between the definition of the conditional PDF and PMF.
+For a fixed value $X = x$, the conditional PDF $f_{Y|X} (y|x)$ is a legitimate PDF since it is nonnegative and it integrates to one.
+
+\begin{example}
+Consider a random experiment where an outcome $(\omega_1, \omega_2)$ is selected at random from the unit circle.
+Let $X = \omega_1$ and $Y = \omega_2$.
+We wish to compute the conditional PDF of $Y$ given that $X = \sqrt{3}{2}$.
+We apply the definition of the conditional PDF, with
+\begin{equation*}
+\begin{split}
+f_{Y|X} \left( y \Big| \frac{1}{2} \right)
+= \frac{f_{X,Y} \left( \frac{1}{2}, y \right)}
+{\int_{-\frac{\sqrt{3}}{2}}^{\frac{\sqrt{3}}{2}}
+f_{X,Y} \left( \frac{1}{2} , \zeta \right) d \zeta }
+= \begin{cases} \frac{1}{\sqrt{3}} & |y| \leq \frac{\sqrt{3}}{2} \\
+0 & \text{otherwise} . \end{cases}
+\end{split}
+\end{equation*}
+\end{example}
+
+Let $\{ Y \in S \}$ be an event such that $\Pr (Y \in S) > 0$.
+The conditional PDF of $Y$ given $\{ Y \in S \}$ is defined by
+\begin{equation*}
+f_{Y|S} (y)
+= \left\{ \begin{array}{cc} \frac{ f_Y(y) }{\Pr (Y \in S)}, & y \in S \\
+0, & \text{otherwise}. \end{array} \right.
+\end{equation*}
+This PDF can be used to compute the conditional probability of specific events given $Y \in S$.
+Let $T$ be a measurable set, then
+\begin{equation*}
+\begin{split}
+\Pr ( Y \in T | Y \in S)
+&= \frac{ \Pr ( Y \in T \cap Y \in S) }{ \Pr ( Y \in S) } \\
+&= \frac{ \int_{Y \cap T} f_Y(y) dy }{ \Pr ( Y \in S) } \\
+&= \int_{T} f_{Y|S} (y) dy .
+\end{split}
+\end{equation*}
+
+%\begin{example}
+%\end{example}
+
+
+\subsection{Independence}
+
+Two continuous random variables $X$ and $Y$ are mutually \emph{independent} if their joint CDF is the product of their respective CDFs, \index{independence}
+\begin{equation*}
+F_{X,Y} (x,y) = F_X (x) F_Y(y)
+\end{equation*}
+for any $x \in X(\Omega)$ and $y \in Y(\Omega)$.
+We emphasize that this necessarily implies that the joint PDF is the product of the individual PDFs as well,
+\begin{equation*}
+f_{X,Y} (x,y) = \frac{\partial^2 F_{X,Y}}{\partial x \partial y} (x, y)
+= \frac{d F_X}{dx} (x) \frac{d F_Y}{dy} (y)
+= f_X (x) f_Y (y)
+\end{equation*}
+for any $x \in X(\Omega)$ and $y \in Y(\Omega)$.
+
+From \eqref{equation:ContinuousConditonalPDF}, we gather that the conditional PDF of $Y$ given $X=x$ is equal to the marginal PDF of $Y$ whenever $X$ and $Y$ are independent
+\begin{equation*}
+f_{Y|X} (y|x) = \frac{f_{X,Y} (x, y)}{f_X(x)}
+= \frac{f_X (x) f_Y (y)}{f_X(x)} = f_Y (y),
+\end{equation*}
+provided that $f_X(x) \neq 0$.
+Furthermore, if $X$ and $Y$ are independent random variables, then the two events $\{ X \in S \}$ and $\{ Y \in T \}$ are independent
+\begin{equation*}
+\begin{split}
+&\Pr (X \in S, Y \in T) = \int_S \int_T f_{X,Y} (x,y) dy dx \\
+&= \int_S f_X (x) dx \int_T f_Y (y) dy
+= \Pr (X \in S) \Pr (Y \in T).
+\end{split}
+\end{equation*}
+
+\begin{example}
+Consider a random experiment where an outcome $(\omega_1, \omega_2)$ is selected at random from the unit square.
+Let $X = \omega_1$, $Y = \omega_2$ and $Z = \omega_1 + \omega_2$.
+We wish to show that $X$ and $Y$ are independent, and that $X$ and $Z$ are not independent.
+
+We begin by computing the joint CDF of $X$ and $Y$.
+For $x,y \in [0,1]$, we have
+\begin{equation*}
+F_{X,Y}(x,y) = \int_0^{x} \int_0^{y} d\zeta d\xi
+= x y = F_X(x) F_Y(y) .
+\end{equation*}
+More generally, if $x, y \in \mathbb{R}^2$, we get
+\begin{equation*}
+\begin{split}
+F_{X,Y}(x,y)
+&= \int_{-\infty}^{x} \int_{-\infty}^{y}
+\mathbf{1}_{[0,1]^2} (\xi, \zeta) d\zeta d\xi \\
+&= \int_{-\infty}^{x} \mathbf{1}_{[0,1]} (\xi) d \xi
+\int_{-\infty}^{y} \mathbf{1}_{[0,1]} (\zeta) d\zeta
+= F_X(x) F_Y(y) .
+\end{split}
+\end{equation*}
+Thus, we gather that $X$ and $Y$ are independent.
+
+Next, we show that $X$ and $Z$ are not independent.
+First, we note that $F_Z (1) = \frac{1}{2}$ and $F_X (1/2) = 1/2$.
+Consider the joint CDF of $X$ and $Z$ evaluated at $(1/2, 1)$,
+\begin{equation*}
+\begin{split}
+F_{X,Z} \left( \frac{1}{2} ,1 \right)
+&= \int_{0}^{\frac{1}{2}} \int_{0}^{1-\xi} d\zeta d\xi
+= \int_{0}^{\frac{1}{2}} (1 - \xi) d\xi \\
+%&= \frac{1}{2} - \frac{1}{8} \\
+&= \frac{3}{8}
+\neq F_X \left( \frac{1}{2} \right) F_Z(1) .
+\end{split}
+\end{equation*}
+Thus, $X$ and $Z$ are clearly not independent.
+\end{example}
+
+
