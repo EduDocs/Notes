@@ -483,3 +483,137 @@ Thus, $X$ and $Z$ are clearly not independent.
 \end{example}
 
 
+\subsection{Sums of Random Variables}
+
+Sums of independent random variables play an important role in solving engineering problems.
+We therefore turn to the question of determining the distribution of a sum of independent random variables in terms of the PDFs of its constituents.
+If $X$ and $Y$ are independent random variables, the distribution of their sum $Z = X + Y$ can be obtained by using the \emph{convolution} operator. \index{Convolution}
+Let $f_X (\cdot)$ and $f_Y (\cdot)$ be the PDFs of $X$ and $Y$, respectively.
+The convolution of $f_X(\cdot)$ and $f_Y(\cdot)$ is the function defined by
+\begin{equation*}
+\begin{split}
+(f_X \star f_Y) (z)
+&= \int_{-\infty}^{\infty} f_X(\xi) f_Y(z - \xi) d\xi \\
+&= \int_{-\infty}^{\infty} f_X(z - \zeta) f_Y(\zeta) d\zeta .
+\end{split}
+\end{equation*}
+The PDF of the sum $Z = X + Y$ is the convolution of the individual densities,
+\begin{equation*}
+f_Z (z) = (f_X \star f_Y) (z) .
+\end{equation*}
+To show that this is indeed the case, we first consider the CDF of $Z$,
+\begin{equation*}
+\begin{split}
+\Pr (Z \leq z) &= \Pr (X + Y \leq z) \\
+&= \int_{-\infty}^{\infty} \Pr (X + Y \leq z | X = \xi) f_X(\xi) d\xi \\
+&= \int_{-\infty}^{\infty} \Pr (Y \leq z - \xi) f_X(\xi) d\xi \\
+&= \int_{-\infty}^{\infty} F_Y (z - \xi) f_X(\xi) d\xi .
+\end{split}
+\end{equation*}
+The last equality above follows from the independence of $X$ and $Y$.
+Taking the derivative of $F_Z (z)$ with respect to $z$, we obtain
+\begin{equation*}
+\begin{split}
+\frac{d}{dz} F_Z (z) &= \frac{d}{dz} \Pr (Z \leq z) \\
+&= \int_{-\infty}^{\infty} \frac{d}{dz} F_Y (z - \xi) f_X(\xi) d\xi \\
+&= \int_{-\infty}^{\infty} f_Y (z - \xi) f_X(\xi) d\xi .
+\end{split}
+\end{equation*}
+This shows that $f_Z(z) = (f_X \star f_Y) (z)$.
+
+
+\begin{example}[Sum of Uniform Random Variables]
+Suppose that two numbers are independently selected from the interval $[0,1]$, each with a uniform distribution.
+We wish to compute the PDF of their sum.
+Let $X$ and $Y$ be random variables describing the two choices, and let $Z = X + Y$ represent the sum.
+The PDFs of $X$ and $Y$ are
+\begin{equation*}
+f_X(\xi) = f_Y(\xi)
+= \begin{cases} 1 & 0 \leq \xi \leq 1 \\
+0 & \text{otherwise} . \end{cases}
+\end{equation*}
+The PDF of their sum is therefore equal to
+\begin{equation*}
+f_Z(z) = \int_{-\infty}^{+\infty} f_X(z - \xi) f_Y(\xi) d\xi .
+\end{equation*}
+Since $f_Y(y) = 1$ when $0 \leq y \leq 1$ and zero otherwise, the integral becomes
+\begin{equation*}
+f_Z(z) = \int_0^1 f_X(z - \xi) d\xi .
+\end{equation*}
+This integrand is zero unless $0 \leq z - \xi \leq 1$ (i.e., unless $z - 1 \leq \xi \leq z$).
+Thus, if $0 \leq z \leq 1$, we get
+\begin{equation*}
+f_Z(z) = \int_0^z d\xi = z ;
+\end{equation*}
+while, if $1 < z \leq 2$, we have
+\begin{equation*}
+f_Z(z) = \int_{z - 1}^1 d\xi = 2 - z .
+\end{equation*}
+If $z < 0$ or $z > 2$, the value of the PDF becomes zero, $f_Z(z) = 0$.
+Hence, the PDF of $Z$ can be written as
+\begin{equation*}
+f_Z(z) = \begin{cases} z & 0 \leq z \leq 1, \\
+2-z & 1 < z \leq 2, \\
+0 & \text{otherwise} . \end{cases}
+\end{equation*}
+\end{example}
+
+\begin{example}[Sum of Exponential Random Variables]
+Suppose two numbers are independently selected at random from the postive real numbers according to an exponential distribution with parameter $\lambda$. 
+We wish to find the PDF of their sum.
+
+Let $X$ and $Y$ represent these two numbers, and denote their sum by $Z = X + Y$.
+The random variables $X$ and $Y$ have PDFs
+\begin{equation*}
+f_X (\xi) = f_Y (\xi) = \begin{cases} \lambda e^{-\lambda \xi} & \xi \geq 0 \\
+0 & \text{otherwise} . \end{cases}
+\end{equation*}
+When $z \geq 0$, we can use the convolution formula and write
+\begin{equation*}
+\begin{split}
+f_Z (z) &= \int_{-\infty}^{\infty} f_X(z - \xi) f_Y(\xi) d\xi \\
+&= \int_0^z \lambda e^{-\lambda(z - \xi)} \lambda e^{-\lambda \xi} d\xi \\
+&= \int_0^z \lambda^2 e^{-\lambda z} d\xi
+= \lambda^2 z e^{-\lambda z}.
+\end{split}
+\end{equation*}
+On the other hand, if $z < 0$ then we get $f_Z(z) = 0$.
+Hence, the PDF of $Z$ is given by
+\begin{equation*}
+f_Z (z) = \begin{cases} \lambda^2 z e^{-\lambda z} & z \geq 0 \\
+0 & \text{otherwise} . \end{cases}
+\end{equation*}
+This is an Erlang distribution with parameter $m = 2$ and $\lambda > 0$.
+\end{example}
+
+\begin{example}[Sum of Gaussian Random Variables]
+It is an interesting and important fact that the sum of two independent Gaussian random variables is again a Gaussian random variable.
+Suppose $X$ has mean $m_1$ and variance $\sigma_1^2$, and $Y$ has mean $m_2$ and variance $\sigma_2^2$, then $Z = X + Y$ has a Gaussian density with mean $m_1 + m_2$ and variance $\sigma_1^2 + \sigma_2^2$.
+We will show this property in the special case where both random variables are standard normal random variable.
+The general case can be done in a similar manner, but the computations are more involved.
+
+Suppose $X$ and $Y$ are two independent Gaussian random variables with PDFs
+\begin{equation*}
+f_X(\xi) = f_Y(\xi) = \frac 1{\sqrt{2\pi}} e^{-\xi^2/2} .
+\end{equation*}
+Then, the PDF of $Z = X + Y$ is given by
+\begin{equation*}
+\begin{split}
+f_Z (z) &= (f_X \star f_Y) (z)
+= \frac{1}{2\pi}
+\int_{-\infty}^{\infty} e^{-\frac{(z - \xi)^2}{2}} e^{-\frac{\xi^2}{2}} d\xi \\
+&= \frac{1}{2\pi} e^{- \frac{z^2}{4}}
+\int_{-\infty}^{\infty} e^{- \left( \xi - \frac{z}{2} \right)^2} d\xi \\
+&= \frac{1}{2 \sqrt{\pi}} e^{- \frac{z^2}{4}}
+\left( \int_{-\infty}^{\infty} \frac{1}{\sqrt{\pi}}
+e^{-\left( \xi - \frac{z}{2} \right)^2} d\xi \right) .
+\end{split}
+\end{equation*}
+The expression within the parentheses is equal to one because it is the integral of a Gaussian PDF with $m = z/2$ and $\sigma^2 = 1/2$.
+Thus, we obtain
+\begin{equation*}
+f_Z(z) = \frac{1}{\sqrt{4\pi}} e^{-\frac{z^2}{4}} ,
+\end{equation*}
+which verifies that $Z$ is indeed Gaussian.
+\end{example}
+

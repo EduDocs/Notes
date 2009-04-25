@@ -500,25 +500,25 @@ f_X (x) = \frac{x^{\frac{k}{2} - 1} e^{-\frac{x}{2}}}{2^{\frac{k}{2}}\Gamma (k/2
 The chi-square distribution is one of the probability distributions most widely used in statistical inference problems.
 
 
-\paragraph{The $m$-Erlang Distribution:}
-When $\alpha = k$, a positive integer, the gamma distribution is called an \emph{$m$-Erlang distribution}.
+\paragraph{The Erlang Distribution:}
+When $\alpha = m$, a positive integer, the gamma distribution is called an \emph{Erlang distribution}.
 This distribution finds application in queueing theory.
 Its PDF is given by
 \begin{equation*}
-f_X (x) = \frac{\lambda (\lambda x)^{k - 1} e^{-\lambda x}}{(k-1)!} \quad  x > 0.
+f_X (x) = \frac{\lambda (\lambda x)^{m - 1} e^{-\lambda x}}{(m-1)!} \quad  x > 0.
 \end{equation*}
 
 An $m$-Erlang can be obtained as the sum of $m$ exponential random variables.
-Let $X_1, X_2, \ldots, X_m$ be $m$ independent exponential random variables.
-Consider the random variable $S_m$ given by
+Specifically, let $X_1, X_2, \ldots, X_m$ be independent exponential random variables, each with parameter $\lambda > 0$.
+The random variable $S_m$ given by
 \begin{equation*}
-S_m = \sum_{k=1}^m X_m.
+S_m = \sum_{k=1}^m X_k
 \end{equation*}
-Then, $S_m$ is an $m$-Erlang random variable.
+is an Erlang random variable with parameter $m$ and $\lambda$.
 
 \begin{example}
 Suppose that service requests at an Internet are characterized by independent and memoryless inter-arrival periods.
-Let $S_m$ be a random variable that denotes the time of the $m$th arrival, then $S_m$ is an $m$-Erlang  random variable.
+Let $S_m$ be a random variable that denotes the time of the $m$th arrival, then $S_m$ is an Erlang  random variable.
 \end{example}
 
 
