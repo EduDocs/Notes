@@ -9,10 +9,11 @@ Two components define a probabilistic model, a sample space and a probability la
 
 \section{Sample Spaces and Events}
 
-In the context of probability theory, an \emph{experiment} is a random process that produces one of several \emph{outcomes}. \index{Experiment} \index{Outcome}
+In the context of probability, an \emph{experiment} is a random occurrence that produces one of several \emph{outcomes}. \index{Experiment} \index{Outcome}
 The set of all possible outcomes is called the \emph{sample space} of the experiment, and it is denoted by $\Omega$. \index{Sample space}
 An \emph{admissible} subset of the sample space is called an \emph{event}. \index{Event}
 
+\begin{figure}[htb!]
 \begin{center}
 \begin{psfrags}
 \psfrag{1}[c]{$1$}
@@ -22,56 +23,70 @@ An \emph{admissible} subset of the sample space is called an \emph{event}. \inde
 \psfrag{5}[c]{$5$}
 \psfrag{6}[c]{$6$}
 \psfrag{7}[c]{$7$}
-\psfrag{S}[l]{Sample Space $\Omega$}
-\psfrag{E}[l]{One Event}
-\psfrag{O}[r]{One Outcome}
-\includegraphics[height=4.85cm]{Figures/2Chapter/samplespace}
+\psfrag{E}[l]{event}
+\psfrag{O}[r]{outcome}
+\includegraphics[height=4.13cm]{Figures/2Chapter/samplespace}
 \end{psfrags}
+\caption{A sample space contains all the possible outcomes; an admissible subset of the sample space is called an event.}
+\label{figure:SampleSpace}
 \end{center}
+\end{figure}
 
 \begin{example}
 The rolling of a die forms a common experiment.
-The sample space $\Omega$ corresponding to this experiment is given by the six faces of a die.
+A sample space $\Omega$ corresponding to this experiment is given by the six faces of a die.
 The set of prime numbers less than or equal to six, namely $\{ 2, 3, 5 \}$, is one of many possible events.
 The actual number observed after rolling the die is the outcome of the experiment.
 
+\begin{figure}[htb!]
 \begin{center}
 \includegraphics[height=3.375cm]{Figures/2Chapter/dices}
+\caption{A possible sample space for the rolling of a die is $\Omega = \{ 1, 2, \ldots, 6 \}$, and the subset $\{2, 3, 5 \}$ forms a specific event.}
 \end{center}
+\end{figure}
 \end{example}
 
 There is essentially no restriction on what constitutes an experiment.
 The flipping of a coin, the flipping of $n$ coins, and the flipping of an infinite sequence of coins are all random experiments.
 Also, two similar experiments may have different sample spaces.
-The sample space $\Omega$ for observing the number of heads in $n$ tosses of a coin is $\{ 0, 1, \ldots, n \}$; whereas for describing the complete history of the $n$ coin tosses, the sample space becomes much larger with $2^n$ distinct sequences of heads and tales.
+The sample space $\Omega$ for observing the number of heads in $n$ tosses of a coin is $\{ 0, 1, \ldots, n \}$; however, when describing the complete history of the $n$ coin tosses, the sample space becomes much larger with $2^n$ distinct sequences of heads and tales.
 Ultimately, the choice of a particular sample space depends on the properties one wishes to observe.
 Yet some rules must be followed in selecting a sample space.
 \begin{enumerate}
-\item The elements of a sample space should be \emph{distinct} and \emph{mutually exclusive}. \index{Distinct elements} \index{Mutually exclusive}
+\item The elements of a sample space should be \emph{distinct} and \emph{mutually exclusive}.
 This insures that the outcome of an experiment is unique.
-\item A sample space must be \emph{collectively exhaustive}. \index{Collectively exhaustive}
+\index{Distinct elements}
+\index{Mutually exclusive}
+\item A sample space must be \emph{collectively exhaustive}.
 That is, every possible outcome of the experiment must be accounted for in the sample space.
+\index{Collectively exhaustive}
 \end{enumerate}
-The sample space should be detailed enough to distinguish between all outcomes of interest, while avoiding frivolous details.
+In general, a sample space should be detailed enough to distinguish between all outcomes of interest, while avoiding frivolous details.
 
 \begin{example}
 Consider the space composed of the odd integers contained between one and six, the even integers contained between one and six, and the prime numbers less than or equal to six.
-This space cannot be a sample space for the rolling of a die since its elements are not mutually exclusive.
+This collection cannot be a sample space for the rolling of a die because its elements are not mutually exclusive.
 In particular, the numbers three and five are both odd and prime, while the number two is prime and even.
 This violates the uniqueness criterion.
 
+\begin{figure}[htb!]
 \begin{center}
 \includegraphics[height=4.125cm]{Figures/2Chapter/nonadmissiblespace}
+\caption{This set cannot be a sample space as the elements are not mutually exclusive.}
 \end{center}
+\end{figure}
 
 Alternatively, the elements of the space composed of the odd numbers between one and six, and the even numbers between one and six, are distinct and mutually exclusive;
-an integer cannot be simultaneously even and odd.
-Furthermore, this space is collectively exhaustive since every integer between one and six is either even or odd.
-This latter space is a possible sample space for the rolling of a die.
+an integer cannot be simultaneously odd and even.
+Moreover, this space is collectively exhaustive since every integer between one and six is either odd or even.
+This latter description forms a possible sample space for the rolling of a die.
 
+\begin{figure}[htb!]
 \begin{center}
 \includegraphics[height=3.75cm]{Figures/2Chapter/admissiblespace}
 \end{center}
+\caption{A possible sample space for the rolling of a die is composed of two sets, the odd numbers and the even numbers between one and six.}
+\end{figure}
 \end{example}
 
 
@@ -103,13 +118,15 @@ The first property describes the relation between inclusion and probabilities.
 \begin{proposition}
 If $A \subset B$, then $\Pr (A) \leq \Pr (B)$.
 \end{proposition}
+\begin{proof}
 Since $A \subset B$, we have $B = A \cup (B - A)$.
 Noting that $A$ and $B - A$ are disjoint sets, we get
 \begin{equation*}
 \Pr (B) = \Pr (A) + \Pr (B - A) \geq \Pr (A) ,
 \end{equation*}
 where the inequality follows from the nonnegativity of probability laws.
-
+\end{proof}
+\begin{figure}[htb!]
 \begin{center}
 \begin{psfrags}
 \psfrag{A}[c]{$A$}
@@ -117,13 +134,15 @@ where the inequality follows from the nonnegativity of probability laws.
 \psfrag{D}[l]{$B - A$}
 \includegraphics[height=3.03cm]{Figures/2Chapter/subset}
 \end{psfrags}
+\caption{If event $A$ is a subset of event $B$, then the probability of $A$ is less than or equal to the probability of $B$.}
 \end{center}
+\end{figure}
 
 The second property specifies the probability of the union of two events that are not necessarily mutually exclusive.
-\begin{proposition}
+\begin{proposition} \label{proposition:ProbabilityUnion}
 $\Pr (A \cup B) = \Pr (A) + \Pr (B) - \Pr (A \cap B)$.
 \end{proposition}
-
+\begin{proof}
 Using the third axiom of probability on the disjoint sets $A$ and $(A \cup B) - A$, we can write
 \begin{equation*}
 \Pr (A \cup B)
@@ -137,7 +156,8 @@ Similarly, applying the third axiom to $A \cap B$ and $B - (A \cap B)$, we obtai
 = \Pr (A \cap B) + \Pr (B - A) .
 \end{equation*}
 Combining these two equations yields the desired result.
-
+\end{proof}
+\begin{figure}[htb!]
 \begin{center}
 \begin{psfrags}
 \psfrag{A}[r]{$A$}
@@ -145,14 +165,45 @@ Combining these two equations yields the desired result.
 \psfrag{I}[c]{$A \cap B$}
 \includegraphics[height=3.03cm]{Figures/2Chapter/intersection}
 \end{psfrags}
+\caption{The probability of the union of $A$ and $B$ is equal to the probability of $A$ plus the probability of $B$ minus the probability of their intersection.}
 \end{center}
+\end{figure}
+
+We can use Proposition~\ref{proposition:ProbabilityUnion} to derive a bound on the probability of unions.
+This result, which is sometimes called the \emph{Boole inequality}, states that the probability of at least one event occurring is no greater than the sum of the probability of the individual events.
+\index{Boole inequality}
+
+\begin{theorem}[Union Bound] \index{Union bound}
+Let $A_1, A_2, \ldots, A_n$ be a collection of events, then
+\begin{equation} \label{equation:UnionBound}
+\Pr \left( \bigcup_{k=1}^{n} A_k \right)
+\leq \sum_{k = 1}^{n} \Pr (A_k) .
+\end{equation}
+\end{theorem}
+\begin{proof}
+We show this result using induction.
+First, we note that the result is trivially true for $n = 1$.
+As an inductive hypothesis, assume that \eqref{equation:UnionBound} holds for some $n \geq 1$.
+Then, we have
+\begin{equation*}
+\begin{split}
+\Pr \left( \bigcup_{k=1}^{n+1} A_k \right)
+&= \Pr \left( A_{n+1} \bigcup \left( \bigcup_{k=1}^{n} A_k \right) \right) \\
+&= \Pr (A_{n+1}) + \Pr \left( \bigcup_{k=1}^{n} A_k \right)
+- \Pr \left( A_{n+1} \bigcap \left( \bigcup_{k=1}^{n} A_k \right) \right) \\
+&\leq \Pr (A_{n+1}) + \Pr \left( \bigcup_{k=1}^{n} A_k \right)
+\leq \sum_{k = 1}^{n+1} \Pr (A_k) .
+\end{split}
+\end{equation*}
+Thus, by the principle of mathematical induction, \eqref{equation:UnionBound} is valid for all integers $n > 0$.
+\end{proof}
 
 
 \subsection{Finite Sample Spaces}
 \label{section:FiniteSampleSpaces}
 
-If a sample space $\Omega$ contains a finite number of elements, then a probability law on $\Omega$ is determined completely by the probabilities of individual outcomes.
-Denote a sample space $\Omega$ containing $n$ elements by $\Omega = \{ s_1, s_2, \ldots, s_n \}$.
+If a sample space $\Omega$ contains a finite number of elements, then a probability law on $\Omega$ is completely determined by the probabilities of its individual outcomes.
+Denote a sample space containing $n$ elements by $\Omega = \{ s_1, s_2, \ldots, s_n \}$.
 Any event in $\Omega$ is of the form $A = \{ s_i \in \Omega | i \in \IndexSet \}$, where $\IndexSet$ is a subset of the integers one through $n$.
 The probability of event $A$ is therefore given by the third axiom of probability,
 \begin{equation*}
@@ -160,7 +211,7 @@ The probability of event $A$ is therefore given by the third axiom of probabilit
 = \Pr ( \{ s_i \in \Omega | i \in \IndexSet \} )
 = \sum_{i \in \IndexSet} \Pr (s_i) .
 \end{equation*}
-Note that, by definition, distinct outcomes are always disjoint events.
+We note that, by definition, distinct outcomes are always disjoint events.
 
 If in addition all the elements of $\Omega$ are equally likely with
 \begin{equation*}
@@ -169,8 +220,8 @@ If in addition all the elements of $\Omega$ are equally likely with
 then the probability of an event $A$ becomes
 \begin{equation} \label{equation:ProbEquiProbableOutcomes}
 \Pr (A) = \frac{ |A| }{n}
-= \frac{ \text{number of elements in $A$} }{n} .
 \end{equation}
+where $|A|$ denotes the number of elements in $A$.
 
 \begin{example}
 The rolling of a fair die is an experiment with a finite number of equally likely outcomes.
@@ -178,8 +229,7 @@ The probability of observing any of the faces labeled one through six is $1/6$.
 The probability of any event can easily be computed by counting the number of distinct outcomes included in the event.
 For instance, the probability of rolling a prime number is
 \begin{equation*}
-\Pr (\text{outcome is prime})
-= \Pr ( \{ 2, 3, 5 \} )
+\Pr ( \{ 2, 3, 5 \} )
 = \Pr (2) + \Pr(3) + \Pr(5) = \frac{3}{6} .
 \end{equation*}
 \end{example}
@@ -190,7 +240,7 @@ For instance, the probability of rolling a prime number is
 Consider a sample space that consists of a countably infinite number of elements, $\Omega = \{ s_1, s_2, \ldots \}$.
 Again, a probability law on $\Omega$ is specified by the probabilities of individual outcomes.
 An event in $\Omega$ can be written as $A = \{ s_j \in \Omega | j \in \JndexSet \}$, where $\JndexSet$ is a subset of the positive integers.
-Using the third axiom of probability, $\Pr (A)$ is given by
+Using the third axiom of probability, $\Pr (A)$ can be written as
 \begin{equation*}
 \Pr (A)
 = \Pr ( \{ s_j \in \Omega | j \in \JndexSet \} )
@@ -202,8 +252,9 @@ It is therefore well-defined.
 \begin{example} \label{example:CoinTossSequence}
 Suppose that a fair coin is tossed repetitively until heads is observed.
 The number of coin tosses is recorded as the outcome of this experiment.
-The sample space for this experiment is $\Omega = \{ 1, 2, \ldots \}$, a countably infinite set.
+A natural sample space for this experiment is $\Omega = \{ 1, 2, \ldots \}$, a countably infinite set.
 
+\begin{figure}[htb!]
 \begin{center}
 \begin{psfrags}
 \psfrag{1}[c]{$1$}
@@ -215,9 +266,11 @@ The sample space for this experiment is $\Omega = \{ 1, 2, \ldots \}$, a countab
 \psfrag{7}[c]{$7$}
 \includegraphics[height=0.765cm]{Figures/2Chapter/countablespace}
 \end{psfrags}
+\caption{A countable set is a collection of elements with the same cardinality as some subset of the natural numbers.}
 \end{center}
+\end{figure}
 
-The probability of observing heads on the first trial is $0.5$, and the probability of observing heads for the first time on trial $k$ is $2^{-k}$.
+The probability of observing heads on the first trial is $1/2$, and the probability of observing heads for the first time on trial $k$ is $2^{-k}$.
 The probability of the entire sample space is equal to
 \begin{equation*}
 \Pr ( \Omega ) = \sum_{k=1}^{\infty} \Pr (k)
@@ -226,7 +279,7 @@ The probability of the entire sample space is equal to
 as expected.
 Similarly, the probability of the number of coin tosses being even can be computed as
 \begin{equation*}
-\Pr ( \text{outcome is even} )
+\Pr ( \{ 2, 4, 6, \ldots \} )
 = \sum_{k=1}^{\infty} \Pr (2k)
 = \sum_{k = 1}^{\infty} \frac{1}{2^{2k}}
 = \frac{1}{4} \frac{1}{ \left( 1 - \frac{1}{4} \right) }
@@ -237,27 +290,29 @@ Similarly, the probability of the number of coin tosses being even can be comput
 
 \subsection{Uncountably Infinite Models}
 
-Probabilistic models with uncountably infinite sample spaces differ from the finite and countable cases in that a probability law may not necessarily be specified by the probability of single-element outcomes.
-This difficulty arises from the large number of elements contained in the sample space $\Omega$ when the latter is uncountable.
+Probabilistic models with uncountably infinite sample spaces differ from the finite and countable cases in that a probability law may not necessarily be specified by the probabilities of single-element outcomes.
+This difficulty arises from the large number of elements contained in the sample space when the latter is uncountable.
 Many subsets of $\Omega$ do not have a finite or countable representation, and as such the third axiom of probability cannot be applied to relate the probabilities of these events to the probabilities of individual outcomes.
 Despite these apparent difficulties, probabilistic models with uncountably infinite sample spaces are extremely useful in practice.
 To develop an understanding of uncountable probabilistic models, we consider the unit interval $[0, 1]$.
 
+\begin{figure}[htb!]
 \begin{center}
 \begin{psfrags}
 \psfrag{0}[c]{$0$}
 \psfrag{1}[c]{$1$}
 \includegraphics[height=1.17cm]{Figures/2Chapter/uncountablespace}
 \end{psfrags}
+\caption{The unit interval $[0,1]$, composed of all real numbers between zero and one, is an example of an uncountable set.}
 \end{center}
+\end{figure}
 
-Suppose that one element is chosen at random from this interval, and that all the elements are equally likely.
+Suppose that an element is chosen at random from this interval, with all elements being equally likely.
 By the first axiom of probability, we have $\Pr \left( [0,1] \right) = 1$.
 Furthermore, if two intervals have the same length, the probabilities of the outcome falling in either interval should be identical.
-For instance,
-$\Pr \left( \left( 0, 0.25 \right) \right)
-= \Pr \left( \left( 0.75, 1 \right) \right)$.
+For instance, $\Pr \left( \left( 0, 0.25 \right) \right) = \Pr \left( \left( 0.75, 1 \right) \right)$.
 
+\begin{figure}[htb!]
 \begin{center}
 \begin{psfrags}
 \psfrag{0}[l]{$0$}
@@ -266,21 +321,26 @@ $\Pr \left( \left( 0, 0.25 \right) \right)
 \psfrag{1}[r]{$1$}
 \includegraphics[height=1.18cm]{Figures/2Chapter/intervals}
 \end{psfrags}
+\caption{If the outcome of an experiment is uniformly distributed over $[0,1]$, then two subintervals of equal length have the same probabilities.}
 \end{center}
+\end{figure}
 
-In an extension of the previous observation, we define the probability of an open interval $(a, b)$ where $0 \leq a < b \leq 1$ by
+In an extension of the previous observation, we take the probability of an open interval $(a, b)$ where $0 \leq a < b \leq 1$ by
 \begin{equation} \label{equation:DefinitionProbabilityLaw1}
 \Pr ( (a,b) ) = b - a .
 \end{equation}
 Using the third axiom of probability, it is then possible to find the probability of a finite or countable union of disjoint open intervals.
 
+\begin{figure}[htb!]
 \begin{center}
 \begin{psfrags}
 \psfrag{0}[l]{$0$}
 \psfrag{1}[r]{$1$}
 \includegraphics[height=3.285cm]{Figures/2Chapter/lineintervals}
 \end{psfrags}
+\caption{The probabilities of events that are formed through the union of disjoint intervals can be computed easily.}
 \end{center}
+\end{figure}
 
 Specifically, for constants $0 \leq a_1 < b_1 < a_2 < b_2 < \cdots \leq 1$, we get
 \begin{equation*}
@@ -317,14 +377,17 @@ In this document, we will see many probabilistic models with uncountably infinit
 The mathematical tools required to handle such models will be treated alongside.
 
 \begin{example}
-Suppose that a participant at a game-show is required to spin the wheel of misfortune, a perfect circle with unit circumference.
-When subjected to a vigorous spin, the wheel is equally likely to stop anywhere along its periphery.
+Suppose that a participant at a game-show is required to spin the wheel of serendipity, a perfect circle with unit circumference.
+When subjected to a vigorous spin, the wheel is equally likely to stop anywhere along its perimeter.
 The sampling space for this experiment is $[0, 1)$, an uncountable set.
 Its probability is given by $\Pr ([0, 1)) = 1$.
 
+\begin{figure}[htp!]
 \begin{center}
 \includegraphics[height=3.15cm]{Figures/2Chapter/wheel}
+\caption{The wheel of serendipity provides an example of a random experiment for which the sample space is uncountable.}
 \end{center}
+\end{figure}
 
 The probability that the wheel stops in the first quadrant is given by
 \begin{equation*}

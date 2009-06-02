@@ -6,15 +6,16 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="744.09448819"
    height="1052.3622047"
    id="svg3267"
    sodipodi:version="0.32"
-   inkscape:version="0.43"
-   sodipodi:docbase="/home/chmbrlnd/Courses"
-   sodipodi:docname="dices.svg">
+   inkscape:version="0.45.1"
+   sodipodi:docbase="/Users/chmbrlnd/Desktop/FREDsvn/EduDocs/Probability/Figures/2Chapter"
+   sodipodi:docname="dices.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape">
   <defs
      id="defs3269" />
   <sodipodi:namedview
@@ -31,7 +32,7 @@
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:window-width="713"
-     inkscape:window-height="538"
+     inkscape:window-height="581"
      inkscape:window-x="322"
      inkscape:window-y="72" />
   <metadata
@@ -54,14 +55,17 @@
        id="rect2210"
        width="310.58591"
        height="223.0858"
-       x="-11.073348"
-       y="853.31927" />
+       x="-21.073349"
+       y="853.31927"
+       ry="13"
+       rx="14" />
     <g
-       id="g4358">
+       id="g4358"
+       transform="translate(-10,0)">
       <path
          id="rect3542"
          d="M 95.814207,864.86606 C 95.279557,864.90649 94.755707,865.01824 94.251707,865.14731 C 94.215707,865.15653 94.162527,865.16891 94.126707,865.17856 C 90.293777,866.21112 87.501707,869.69808 87.501707,873.86606 L 87.501707,955.86606 C 87.501707,956.02187 87.493957,956.14974 87.501707,956.30356 L 87.501707,1055.866 C 87.501707,1060.852 91.515707,1064.866 96.501707,1064.866 L 178.50171,1064.866 C 183.48771,1064.866 187.50171,1060.852 187.50171,1055.866 L 187.50171,964.86606 L 278.50171,964.86606 C 283.48771,964.86606 287.50171,960.85206 287.50171,955.86606 L 287.50171,873.86606 C 287.50171,868.88006 283.48771,864.86606 278.50171,864.86606 L 179.18921,864.86606 L 96.501707,864.86606 C 96.267987,864.86606 96.043337,864.84873 95.814207,864.86606 z "
-         style="fill:#ffffff;fill-opacity:0;fill-rule:nonzero;stroke:#000000;stroke-width:1.875;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:3.75,7.5;stroke-dashoffset:0;stroke-opacity:1" />
+         style="fill:#ffffff;fill-opacity:0;fill-rule:nonzero;stroke:#000000;stroke-width:1.875;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:3.75, 7.5;stroke-dashoffset:0;stroke-opacity:1" />
       <g
          id="g3640">
         <rect
