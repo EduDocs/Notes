@@ -6,18 +6,19 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="744.09448819"
    height="1052.3622047"
    id="svg3267"
    sodipodi:version="0.32"
-   inkscape:version="0.43"
-   sodipodi:docbase="/usr/home/chmbrlnd/Courses"
-   sodipodi:docname="eventd.svg"
+   inkscape:version="0.45.1"
+   sodipodi:docbase="/Users/chmbrlnd/Desktop/FREDsvn/EduDocs/Probability/Figures/3Chapter"
+   sodipodi:docname="condevent.svg"
    inkscape:export-filename="/usr/home/chmbrlnd/Courses/samplespaced.png"
    inkscape:export-xdpi="89.999969"
-   inkscape:export-ydpi="89.999969">
+   inkscape:export-ydpi="89.999969"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape">
   <defs
      id="defs3269" />
   <sodipodi:namedview
@@ -35,8 +36,8 @@
      showgrid="true"
      inkscape:window-width="954"
      inkscape:window-height="654"
-     inkscape:window-x="166"
-     inkscape:window-y="62" />
+     inkscape:window-x="516"
+     inkscape:window-y="103" />
   <metadata
      id="metadata3272">
     <rdf:RDF>
@@ -52,10 +53,15 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1">
-    <path
-       style="opacity:1;fill:#ffffff;fill-opacity:0;fill-rule:nonzero;stroke:#000000;stroke-width:2.49998736;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       d="M -23.500015,828.61211 L -23.500015,836.11211 L -23.500015,1063.6121 L -23.500015,1071.1121 L 298.49998,1071.1121 L 298.49998,1063.6121 L 298.49998,836.11211 L 298.49998,828.61211 L -23.500015,828.61211 z "
-       id="rect2210" />
+    <rect
+       style="opacity:1;fill:#ffffff;fill-opacity:0;fill-rule:nonzero;stroke:#000000;stroke-width:2.50001216;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect3886"
+       width="322"
+       height="242.49998"
+       x="-23.500017"
+       y="828.61212"
+       ry="14.131333"
+       rx="14.514501" />
     <rect
        style="fill:#ffffff;fill-opacity:0;fill-rule:nonzero;stroke:#6060e0;stroke-width:1.87501407;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect3739"
