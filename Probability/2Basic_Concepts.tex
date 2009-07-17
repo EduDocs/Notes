@@ -9,9 +9,9 @@ Two components define a probabilistic model, a sample space and a probability la
 
 \section{Sample Spaces and Events}
 
-In the context of probability, an \emph{experiment} is a random occurrence that produces one of several \emph{outcomes}. \index{Experiment} \index{Outcome}
-The set of all possible outcomes is called the \emph{sample space} of the experiment, and it is denoted by $\Omega$. \index{Sample space}
-An \emph{admissible} subset of the sample space is called an \emph{event}. \index{Event}
+In the context of probability, an \emph{experiment} is a random occurrence that produces one of several \emph{outcomes}.\index{Experiment}\index{Outcome}
+The set of all possible outcomes is called the \emph{sample space} of the experiment, and it is denoted by $\Omega$.\index{Sample space}
+An \emph{admissible} subset of the sample space is called an \emph{event}.\index{Event}
 
 \begin{figure}[htb!]
 \begin{center}
@@ -25,7 +25,7 @@ An \emph{admissible} subset of the sample space is called an \emph{event}. \inde
 \psfrag{7}[c]{$7$}
 \psfrag{E}[l]{event}
 \psfrag{O}[r]{outcome}
-\includegraphics[height=4.13cm]{Figures/2Chapter/samplespace}
+\includegraphics[height=4.275cm]{Figures/2Chapter/samplespace}
 \end{psfrags}
 \caption{A sample space contains all the possible outcomes; an admissible subset of the sample space is called an event.}
 \label{figure:SampleSpace}
@@ -40,31 +40,28 @@ The actual number observed after rolling the die is the outcome of the experimen
 
 \begin{figure}[htb!]
 \begin{center}
-\includegraphics[height=3.375cm]{Figures/2Chapter/dices}
+\includegraphics[height=3.38cm]{Figures/2Chapter/dices}
 \caption{A possible sample space for the rolling of a die is $\Omega = \{ 1, 2, \ldots, 6 \}$, and the subset $\{2, 3, 5 \}$ forms a specific event.}
 \end{center}
 \end{figure}
 \end{example}
 
 There is essentially no restriction on what constitutes an experiment.
-The flipping of a coin, the flipping of $n$ coins, and the flipping of an infinite sequence of coins are all random experiments.
+The flipping of a coin, the flipping of $n$ coins, and the tossing of an infinite sequence of coins are all random experiments.
 Also, two similar experiments may have different sample spaces.
 The sample space $\Omega$ for observing the number of heads in $n$ tosses of a coin is $\{ 0, 1, \ldots, n \}$; however, when describing the complete history of the $n$ coin tosses, the sample space becomes much larger with $2^n$ distinct sequences of heads and tales.
-Ultimately, the choice of a particular sample space depends on the properties one wishes to observe.
+Ultimately, the choice of a particular sample space depends on the properties one wishes to analyze.
 Yet some rules must be followed in selecting a sample space.
 \begin{enumerate}
 \item The elements of a sample space should be \emph{distinct} and \emph{mutually exclusive}.
-This insures that the outcome of an experiment is unique.
-\index{Distinct elements}
-\index{Mutually exclusive}
+This insures that the outcome of an experiment is unique.\index{Distinct elements}\index{Mutually exclusive}
 \item A sample space must be \emph{collectively exhaustive}.
-That is, every possible outcome of the experiment must be accounted for in the sample space.
-\index{Collectively exhaustive}
+That is, every possible outcome of the experiment must be accounted for in the sample space.\index{Collectively exhaustive}
 \end{enumerate}
 In general, a sample space should be detailed enough to distinguish between all outcomes of interest, while avoiding frivolous details.
 
 \begin{example}
-Consider the space composed of the odd integers contained between one and six, the even integers contained between one and six, and the prime numbers less than or equal to six.
+Consider the space composed of the odd integers located between one and six, the even integers contained between one and six, and the prime numbers less than or equal to six.
 This collection cannot be a sample space for the rolling of a die because its elements are not mutually exclusive.
 In particular, the numbers three and five are both odd and prime, while the number two is prime and even.
 This violates the uniqueness criterion.
@@ -72,20 +69,20 @@ This violates the uniqueness criterion.
 \begin{figure}[htb!]
 \begin{center}
 \includegraphics[height=4.125cm]{Figures/2Chapter/nonadmissiblespace}
-\caption{This set cannot be a sample space as the elements are not mutually exclusive.}
+\caption{This collection of objects cannot be a sample space as the elements are not mutually exclusive.}
 \end{center}
 \end{figure}
 
 Alternatively, the elements of the space composed of the odd numbers between one and six, and the even numbers between one and six, are distinct and mutually exclusive;
 an integer cannot be simultaneously odd and even.
-Moreover, this space is collectively exhaustive since every integer between one and six is either odd or even.
+Moreover, this space is collectively exhaustive because every integer between one and six is either odd or even.
 This latter description forms a possible sample space for the rolling of a die.
 
 \begin{figure}[htb!]
 \begin{center}
 \includegraphics[height=3.75cm]{Figures/2Chapter/admissiblespace}
 \end{center}
-\caption{A possible sample space for the rolling of a die is composed of two sets, the odd numbers and the even numbers between one and six.}
+\caption{A possible sample space for the rolling of a die is composed of two objects, the odd numbers and the even numbers between one and six.}
 \end{figure}
 \end{example}
 
@@ -93,7 +90,7 @@ This latter description forms a possible sample space for the rolling of a die.
 \section{Probability Laws}
 \label{section:ProbabilityLaws}
 
-A \emph{probability law} specifies the likelihood of any event related to an experiment. \index{Probability law}
+A \emph{probability law} specifies the likelihood of any event related to an experiment.\index{Probability law}
 Formally, a probability law assigns to every event $A$ a number $\Pr (A)$, called the \emph{probability of event $A$}, such that the following axioms are satisfied.
 \begin{enumerate}
 \item \textbf{(Nonnegativity)} $\Pr (A) \geq 0$, for every event $A$.
@@ -114,7 +111,7 @@ More generally, if $A_1, A_2, \ldots$ is a sequence of disjoint events and $\big
 
 A number of properties can be deduced from the three axioms of probability.
 We prove two such properties below.
-The first property describes the relation between inclusion and probabilities.
+The first statement describes the relation between inclusion and probabilities.
 \begin{proposition}
 If $A \subset B$, then $\Pr (A) \leq \Pr (B)$.
 \end{proposition}
@@ -138,7 +135,7 @@ where the inequality follows from the nonnegativity of probability laws.
 \end{center}
 \end{figure}
 
-The second property specifies the probability of the union of two events that are not necessarily mutually exclusive.
+The second statement specifies the probability of the union of two events that are not necessarily mutually exclusive.
 \begin{proposition} \label{proposition:ProbabilityUnion}
 $\Pr (A \cup B) = \Pr (A) + \Pr (B) - \Pr (A \cap B)$.
 \end{proposition}
@@ -169,11 +166,10 @@ Combining these two equations yields the desired result.
 \end{center}
 \end{figure}
 
-We can use Proposition~\ref{proposition:ProbabilityUnion} to derive a bound on the probability of unions.
-This result, which is sometimes called the \emph{Boole inequality}, states that the probability of at least one event occurring is no greater than the sum of the probability of the individual events.
-\index{Boole inequality}
+We can use Proposition~\ref{proposition:ProbabilityUnion} to derive a bound on the probabilities of unions.
+This result, which is sometimes called the \emph{Boole inequality}, asserts that the probability of at least one event occurring is no greater than the sum of the probability of the individual events.\index{Boole inequality}
 
-\begin{theorem}[Union Bound] \index{Union bound}
+\begin{theorem}[Union Bound]\index{Union bound}
 Let $A_1, A_2, \ldots, A_n$ be a collection of events, then
 \begin{equation} \label{equation:UnionBound}
 \Pr \left( \bigcup_{k=1}^{n} A_k \right)
@@ -195,7 +191,7 @@ Then, we have
 \leq \sum_{k = 1}^{n+1} \Pr (A_k) .
 \end{split}
 \end{equation*}
-Thus, by the principle of mathematical induction, \eqref{equation:UnionBound} is valid for all integers $n > 0$.
+Therefore, by the principle of mathematical induction, \eqref{equation:UnionBound} is valid for all positive integers.
 \end{proof}
 
 
@@ -225,7 +221,7 @@ where $|A|$ denotes the number of elements in $A$.
 
 \begin{example}
 The rolling of a fair die is an experiment with a finite number of equally likely outcomes.
-The probability of observing any of the faces labeled one through six is $1/6$.
+The probability of observing any of the faces labeled one through six is therefore equal to $1/6$.
 The probability of any event can easily be computed by counting the number of distinct outcomes included in the event.
 For instance, the probability of rolling a prime number is
 \begin{equation*}
@@ -293,7 +289,7 @@ Similarly, the probability of the number of coin tosses being even can be comput
 Probabilistic models with uncountably infinite sample spaces differ from the finite and countable cases in that a probability law may not necessarily be specified by the probabilities of single-element outcomes.
 This difficulty arises from the large number of elements contained in the sample space when the latter is uncountable.
 Many subsets of $\Omega$ do not have a finite or countable representation, and as such the third axiom of probability cannot be applied to relate the probabilities of these events to the probabilities of individual outcomes.
-Despite these apparent difficulties, probabilistic models with uncountably infinite sample spaces are extremely useful in practice.
+Despite these apparent difficulties, probabilistic models with uncountably infinite sample spaces are quite useful in practice.
 To develop an understanding of uncountable probabilistic models, we consider the unit interval $[0, 1]$.
 
 \begin{figure}[htb!]
@@ -307,10 +303,10 @@ To develop an understanding of uncountable probabilistic models, we consider the
 \end{center}
 \end{figure}
 
-Suppose that an element is chosen at random from this interval, with all elements being equally likely.
+Suppose that an element is chosen at random from this interval, with all elements having equal weight.
 By the first axiom of probability, we have $\Pr \left( [0,1] \right) = 1$.
 Furthermore, if two intervals have the same length, the probabilities of the outcome falling in either interval should be identical.
-For instance, $\Pr \left( \left( 0, 0.25 \right) \right) = \Pr \left( \left( 0.75, 1 \right) \right)$.
+For instance, it is natural to anticipate that $\Pr \left( \left( 0, 0.25 \right) \right) = \Pr \left( \left( 0.75, 1 \right) \right)$.
 
 \begin{figure}[htb!]
 \begin{center}
@@ -319,13 +315,13 @@ For instance, $\Pr \left( \left( 0, 0.25 \right) \right) = \Pr \left( \left( 0.7
 \psfrag{0.25}[r]{$0.25$}
 \psfrag{0.75}[l]{$0.75$}
 \psfrag{1}[r]{$1$}
-\includegraphics[height=1.18cm]{Figures/2Chapter/intervals}
+\includegraphics[height=1.185cm]{Figures/2Chapter/intervals}
 \end{psfrags}
-\caption{If the outcome of an experiment is uniformly distributed over $[0,1]$, then two subintervals of equal length have the same probabilities.}
+\caption{If the outcome of an experiment is uniformly distributed over $[0,1]$, then two subintervals of equal length should have the same probabilities.}
 \end{center}
 \end{figure}
 
-In an extension of the previous observation, we take the probability of an open interval $(a, b)$ where $0 \leq a < b \leq 1$ by
+In an extension of the previous observation, we take the probability of an open interval $(a, b)$ where $0 \leq a < b \leq 1$ to equal
 \begin{equation} \label{equation:DefinitionProbabilityLaw1}
 \Pr ( (a,b) ) = b - a .
 \end{equation}
@@ -336,7 +332,7 @@ Using the third axiom of probability, it is then possible to find the probabilit
 \begin{psfrags}
 \psfrag{0}[l]{$0$}
 \psfrag{1}[r]{$1$}
-\includegraphics[height=3.285cm]{Figures/2Chapter/lineintervals}
+\includegraphics[height=3.28cm]{Figures/2Chapter/lineintervals}
 \end{psfrags}
 \caption{The probabilities of events that are formed through the union of disjoint intervals can be computed easily.}
 \end{center}
@@ -345,7 +341,7 @@ Using the third axiom of probability, it is then possible to find the probabilit
 Specifically, for constants $0 \leq a_1 < b_1 < a_2 < b_2 < \cdots \leq 1$, we get
 \begin{equation*}
 \Pr \left( \bigcup_{k=1}^{\infty} (a_k,b_k) \right)
-= \sum_{k=1}^{\infty} b_k - a_k .
+= \sum_{k=1}^{\infty} \left( b_k - a_k \right) .
 \end{equation*}
 The probabilities of more complex events can be obtained by considering additional elementary set operations.
 However, it suffices to say for now that specifying the probability of the outcome falling in $(a,b)$ for every possible open interval is enough to define a probability law on $\Omega$.
@@ -369,11 +365,11 @@ For this carefully crafted example, it appears that the probability of an admiss
 \end{equation*}
 This is indeed accurate for the experiment at hand.
 In fact, the class of admissible events for this experiment is simply the collection of all sets for which the integral $\int_A dx$ can be computed.
-In other words, if a number is chosen at random from $[0,1]$, then the probability of this number falling in the measurable set $A \subset [0,1]$ is
+In other words, if a number is chosen at random from $[0,1]$, then the probability of this number falling in measurable set $A \subset [0,1]$ is
 \begin{equation*}
 \Pr (A) = \int_{A} dx .
 \end{equation*}
-In this document, we will see many probabilistic models with uncountably infinite sample spaces.
+In these notes, we will see many probabilistic models with uncountably infinite sample spaces.
 The mathematical tools required to handle such models will be treated alongside.
 
 \begin{example}
@@ -406,13 +402,13 @@ If $B \subset [0, 1)$ is the measurable set representing a winning outcome, then
 
 \subsection{Probability and Measure Theory*}
 
-A systematic treatment of probability involves advanced mathematical concepts.
-The basis of our intuition for the infinite is the set of natural numbers,
+A thorough treatment of probability involves advanced mathematical concepts, especially when it comes to infinite sample spaces.
+The basis of our intuition for the infinite is the set of \emph{natural numbers},\index{Natural numbers}
 \begin{equation*}
 \NaturalNumbers = \{ 1, 2, \ldots \}.
 \end{equation*}
-Two sets are said to have the same \emph{cardinality} if their elements can be put in one-to-one correspondence. \index{Cardinality}
-A set with the same cardinality as the natural numbers is said to be \emph{countable}. \index{Countable}
+Two sets are said to have the same \emph{cardinality} if their elements can be put in one-to-one correspondence.\index{Cardinality}
+A set with the same cardinality as a subset of the natural numbers is said to be \emph{countable}.\index{Countable}
 That is, the elements of a countable set can always be listed in sequence
 \begin{equation*}
 s_1, s_2, \ldots
@@ -420,16 +416,16 @@ s_1, s_2, \ldots
 although the order may have nothing to do with any relation between the elements.
 The integers and the rational numbers are examples of countably infinite sets.
 It may be surprising at first to learn that there exist uncountable sets.
-To escape beyond the countable, one needs set theoretic tools such as \emph{power sets}. \index{Power set}
+To escape beyond the countable, one needs set theoretic tools such as \emph{power sets}.\index{Power set}
 The set of real numbers is uncountably infinite; it cannot be put in one-to-one correspondence with the natural numbers.
 A typical progression in analysis consists of using the finite to get at the countably infinite, and then to use the countably infinite to get at the uncountable.
 
 It is tempting to try to assign probabilities to every subset of a sample space $\Omega$.
 However, for uncountably infinite sample spaces, this leads to serious difficulties that cannot be resolved.
 In general, it is necessary to work with special subclasses of the class of all subsets of a sample space $\Omega$.
-The collections of the appropriate kinds are called fields and $\sigma$-fields, and they are defined and studied in \emph{measure theory}. \index{Measure theory}
+The collections of the appropriate kinds are called fields and $\sigma$-fields, and they are defined and studied in \emph{measure theory}.\index{Measure theory}
 This leads to measure-theoretic probability, and to its unified treatment of the discrete and the continuous.
 Fortunately, it is possible to develop an intuitive and working understanding of probability without worrying about these issues.
-At some point of your academic career, you may wish to study analysis and measure theory more carefully and in greater details.
+At some point in your academic career, you may wish to study analysis and measure theory more carefully and in greater details.
 However, it is not our current purpose to initiate the study of these fields.
 

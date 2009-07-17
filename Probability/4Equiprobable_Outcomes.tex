@@ -25,8 +25,9 @@ The cartesian product of $S$ and $T$ is given by
 S \times T = \{ (x, y) | x \in S \text{ and } y \in T \} .
 \end{equation*}
 The number of elements in the cartesian product $S \times T$ is equal to $m n$.
-This is illustrated in the figure below.
+This is illustrated in Figure~\ref{figure:CountingPrinciple}.
 
+\begin{figure}[htb!]
 \begin{center}
 \begin{psfrags}
 \psfrag{1}[c]{$1$}
@@ -36,7 +37,11 @@ This is illustrated in the figure below.
 \psfrag{b}[c]{$b$}
 \includegraphics[height=6.495cm]{Figures/4Chapter/countingprinciple}
 \end{psfrags}
+\caption{This figure provides a graphical interpretation of the cartesian product of $S = \{ 1, 2, 3 \}$ and $T = \{ a, b \}$.
+In general, if $S$ has $m$ elements and $T$ contains $n$ elements, then the cartesian product $S \times T$ consists of $m n$ elements.}
+\label{figure:CountingPrinciple}
 \end{center}
+\end{figure}
 
 \begin{example}
 Consider an experiment consisting of flipping a coin and rolling a die.
@@ -60,15 +65,19 @@ The ball is then replaced in the urn.
 This procedure is repeated $k$ times.
 We wish to compute the number of possible sequences that results from this experiment.
 There are $k$ drawings and $n$ possibilities per drawing.
-Using the counting principle, we conclude that the number of distinct sequences is $n^k$.
+Using the counting principle, we gather that the number of distinct sequences is $n^k$.
 
+\begin{figure}[htb!]
 \begin{center}
 \begin{psfrags}
 \psfrag{1}[c]{$1$}
 \psfrag{2}[c]{$2$}
 \includegraphics[height=1.91cm]{Figures/4Chapter/sequences}
 \end{psfrags}
+\caption{The cartesian product $\{ 1, 2 \}^2$ has four distinct ordered pairs.}
+\label{figure:Sequences}
 \end{center}
+\end{figure}
 \end{example}
 
 \begin{example}
@@ -82,6 +91,7 @@ For every element of $S$, a characteristic function in $2^S$ is either zero or o
 There are therefore $2^n$ distinct characteristic functions from $S$ to $\{ 0, 1\}$.
 Hence, the number of distinct subsets of $S$ is given by $2^n$.
 
+\begin{figure}[htb!]
 \begin{center}
 \begin{psfrags}
 \psfrag{1}[c]{$1$}
@@ -89,7 +99,11 @@ Hence, the number of distinct subsets of $S$ is given by $2^n$.
 \psfrag{3}[c]{$3$}
 \includegraphics[height=4.965cm]{Figures/4Chapter/powerset}
 \end{psfrags}
+\caption{The power set of $\{ 1, 2, 3 \}$ contains eight elements.
+They are displayed above.}
+\label{figure:PowerSet}
 \end{center}
+\end{figure}
 \end{example}
 
 
@@ -98,8 +112,8 @@ Hence, the number of distinct subsets of $S$ is given by $2^n$.
 Again, consider the integer set $S = \{ 1, 2, \ldots, n \}$.
 A \emph{permutation} of $S$ is an ordered arrangement of its elements, a list without repetitions. \index{Permutation}
 The number of permutations of $S$ can be computed as follows.
-First, there are $n$ distinct possibilities for the first item in the list.
-The number of possibilities for the second item is $n-1$, namely all the integers in $S$ except the first element in the list.
+Clearly, there are $n$ distinct possibilities for the first item in the list.
+The number of possibilities for the second item is $n-1$, namely all the integers in $S$ except the element we initially selected.
 Similarly, the number of distinct possibilities for the $m$th item is $n - m + 1$.
 This pattern continues until all the elements in $S$ are recorded.
 Summarizing, we find that the total number of permutations of $S$ is $n$ \emph{factorial}, \index{Factorial}
@@ -113,6 +127,7 @@ Since the set $S$ possesses three elements, it has $3! = 6$ different permutatio
 They can be written as $123, 132, 213, 231, 312, 321$.
 \end{example}
 
+\begin{figure}[htb!]
 \begin{center}
 \begin{psfrags}
 \psfrag{1}[c]{$1$}
@@ -120,7 +135,10 @@ They can be written as $123, 132, 213, 231, 312, 321$.
 \psfrag{3}[c]{$3$}
 \includegraphics[height=3.06cm]{Figures/4Chapter/permutation}
 \end{psfrags}
+\caption{Ordering the numbers one, two and three leads to six possible permutations.}
+\label{figure:Permutation}
 \end{center}
+\end{figure}
 
 
 \subsection{Stirling's Formula*}
@@ -128,9 +146,8 @@ They can be written as $123, 132, 213, 231, 312, 321$.
 The number $n!$ grows very rapidly as a function of $n$.
 A good approximation for $n!$ when $n$ is large is given by \emph{Stirling's formula}, \index{Stirling's formula}
 \begin{equation*}
-n! \sim n^n e^{-n} \sqrt{ 2 \pi n}
+n! \sim n^n e^{-n} \sqrt{ 2 \pi n} .
 \end{equation*}
-as $n \rightarrow \infty$.
 The notation $a_n \sim b_n$ signifies that the ratio $a_n / b_n \rightarrow 1$ as $n \rightarrow \infty$.
 
 
@@ -147,12 +164,13 @@ The number of possible sequences is then given by
 
 \begin{example}
 A recently formed music group has four original songs they can play.
-They are asked to perform two songs at a music festival.
+They are asked to perform two songs at South by Southwest.
 We wish to compute the number of song arrangements the group can offer in concert.
 Abstractly, this is equivalent to computing the number of $2$-permutations of four songs.
 Thus, the number of distinct arrangements is ${4!}/{2!} = 12$.
 \end{example}
 
+\begin{figure}[htb!]
 \begin{center}
 \begin{psfrags}
 \psfrag{1}[c]{$1$}
@@ -161,7 +179,10 @@ Thus, the number of distinct arrangements is ${4!}/{2!} = 12$.
 \psfrag{4}[c]{$4$}
 \includegraphics[height=4.215cm]{Figures/4Chapter/kpermutation}
 \end{psfrags}
+\caption{There are twelve 2-permutations of the numbers one through four.}
+\label{figure:Kpermutation}
 \end{center}
+\end{figure}
 
 \begin{example}[Sampling without Replacement, with  Ordering]
 An urn contains $n$ balls numbered one through $n$.
@@ -191,6 +212,7 @@ whereas the $2$-permutations of $S$ are more numerous with
 \end{equation*}
 There are therefore fewer $2$-element subsets of $S$ than $2$-permutations of $S$.
 
+\begin{figure}[htb!]
 \begin{center}
 \begin{psfrags}
 \psfrag{1}[c]{$1$}
@@ -199,10 +221,13 @@ There are therefore fewer $2$-element subsets of $S$ than $2$-permutations of $S
 \psfrag{4}[c]{$4$}
 \includegraphics[height=4.95cm]{Figures/4Chapter/combination}
 \end{psfrags}
+\caption{There are six 2-element subsets of the numbers one through four.}
+\label{figure:Combination}
 \end{center}
+\end{figure}
 
 We can compute the number of $k$-element combinations of $S = \{ 1, 2, \ldots, n \}$ as follows.
-First, we note that a $k$-permutation can be formed by first selecting $k$ objects from $S$ and then ordering them.
+Note that a $k$-permutation can be formed by first selecting $k$ objects from $S$ and then ordering them.
 There are $k!$ distinct ways of ordering $k$ objects.
 The number of $k$-permutations must then equal the number of $k$-element combinations multiplied by $k!$.
 Since the total number of $k$-permutations of $S$ is $n! / (n-k)!$, the number of $k$-element combinations is found to be
@@ -285,14 +310,18 @@ Specifically, we wish to compute the number of ways integers $n_1, n_2, \ldots, 
 \end{equation*}
 We can visualize the number of possible assignments as follows.
 Picture $n$ balls space out on a straight line and consider $r-1$ vertical markers, each of which can be put between two consecutive balls, before the first ball, or after the last ball. 
-For instance, if there are five balls and two markers then one possible assignment is illustrated below.
+For instance, if there are five balls and two markers then one possible assignment is illustrated in Figure~\ref{figure:Partitioning}.
 
+\begin{figure}[htb!]
 \begin{center}
 \begin{psfrags}
 \psfrag{1}[c]{$1$}
 \includegraphics[height=5.28cm]{Figures/4Chapter/partitioning}
 \end{psfrags}
+\caption{The number of possible cardinality assignments for the partition of a set of $n$ elements into $r$ subsets is equivalent to the number of ways to select $n$ positions out of $n + r - 1$ candidates.} 
+\label{figure:Partitioning}
 \end{center}
+\end{figure}
 
 The number of objects in the first subset corresponds to the number balls before the first marker.
 Similarly, the number of objects in the $p$th subset is equal to the number of balls between the $p$th marker and the preceding one.
@@ -302,12 +331,16 @@ The integer assignment associated with the figure above is
 (n_1, n_2, n_3) = (0,2,3).
 \end{equation*}
 
+\begin{figure}[htb!]
 \begin{center}
 \begin{psfrags}
 \psfrag{1}[c]{$1$}
 \includegraphics[height=1.53cm]{Figures/4Chapter/partitioning2}
 \end{psfrags}
+\caption{The assignment displayed in Figure~\ref{figure:Partitioning} corresponds to having no element in the first set, two elements in the second set and three elements in the last one.}
+\label{figure:Partitioning2}
 \end{center}
+\end{figure}
 
 In this scheme, two consecutive markers imply that the corresponding subset is empty.
 There is a natural bijection between an integer assignment and the graphical representation depicted above.
@@ -343,7 +376,7 @@ A player must pick three numbers from zero to nine, and choose how to play them:
 The Pick $3$ balls are drawn using three air-driven machines.
 These machines use compressed air to mix and select each ball.
 
-The probability of winning while playing the exact order is
+The probability of winning when playing the exact order is
 \begin{equation*}
 \frac{1}{10} \frac{1}{10} \frac{1}{10}
 = \frac{1}{1000} .
@@ -353,11 +386,11 @@ If three distinct numbers are selected then the probability of winning is
 \begin{equation*}
 \frac{3!}{1000} = \frac{3}{500} .
 \end{equation*}
-If a number is repeated twice, the probability of winning is
+If a number is repeated twice, the probability of winning becomes
 \begin{equation*}
 \frac{\binom{3}{2}}{1000} = \frac{3}{1000} .
 \end{equation*}
-While, if the same number is selected three times, the probability of winning becomes $1/1000$.
+Finally, if a same number is selected three times, the probability of winning decreases to $1/1000$.
 \end{example}
 
 \begin{example}[Mega Millions Texas Lottery]
@@ -368,7 +401,7 @@ Upon entry of the secured room to begin the drawing process, a lottery drawing s
 For each drawing, the Lotto Texas balls are mixed by four acrylic mixing paddles rotating clockwise.
 High speed is used for mixing and low speed for ball selection.
 As each ball is selected, it rolls down a chute into an official number display area.
-We wish to compute the probability of winning the Mega Millions Grand Prize, which require the correct selection of the five white balls plus the gold Mega ball.
+We wish to compute the probability of winning the Mega Millions Grand Prize, which requires the correct selection of the five white balls plus the gold Mega ball.
 
 The probability of winning the Mega Millions Grand Prize is
 \begin{equation*}
@@ -395,7 +428,7 @@ Thus, there are only $729$ arrangements where no two members from a same couple 
 \begin{example}[The Locksmith Convention*]
 A total of $n$ people are gathering to attend a two-day, secret locksmith convention.
 As tradition dictates, every locksmith brings a lock and two keys to the convention.
-At the opening ceremony, all the locksmiths sit around a large table, and they exchange a key to their own locks with the two members sitting immediately next to them.
+At the opening ceremony, all the locksmiths sit around a large table, and they exchange keys to their own locks with the two members sitting immediately next to them.
 The rules of the secret society stipulate that the conference can only continue on the second day if a working lock-and-key combination can be reconstituted.
 If each locksmith decides to attend the second day of the convention with probability half, independently of others, what is the probability that the reunion can proceed on the second day?
 

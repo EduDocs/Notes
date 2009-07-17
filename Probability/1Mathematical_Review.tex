@@ -17,11 +17,11 @@ Although we shall not initiate a study of these fields, the rules we follow in d
 \psfrag{7}[c]{$7$}
 \includegraphics[height=3.825cm]{Figures/1Chapter/basicset}
 \end{psfrags}
-\caption{Illustration of a set and its elements.}
+\caption{This is an illustration of a generic set and its elements.}
 \end{center}
 \end{figure}
 
-A \emph{set} is a collection of objects, which are the \emph{elements} of the set. \index{Set} \index{Element}
+A \emph{set} is a collection of objects, which are called the \emph{elements} of the set.\index{Set}\index{Element}
 If an element $x$ belongs to a set $S$, we express this fact by writing $x \in S$.
 If $x$ does not belong to $S$, we write $x \notin S$.
 We use the equality symbol to denote \emph{logical identity}.
@@ -31,11 +31,11 @@ In particular, the sets $S$ and $T$ contain precisely the same elements.
 If $x$ and $y$ are different objects then we write $x \neq y$.
 Also, we can express the fact that $S$ and $T$ are different sets by writing $S \neq T$.
 
-A set $S$ is a \emph{subset} of $T$ if every element of $S$ is also contained in $T$. \index{Subset}
+A set $S$ is a \emph{subset} of $T$ if every element of $S$ is also contained in $T$.\index{Subset}
 We express this relation by writing $S \subset T$.
 Note that this definition does not require $S$ to be different from $T$.
 In fact, $S = T$ if and only if $S \subset T$ and $T \subset S$.
-If $S \subset T$ and $S$ is different from $T$, then $S$ is a \emph{proper subset} of $T$ and we write $S \subsetneq T$. \index{Proper subset}
+If $S \subset T$ and $S$ is different from $T$, then $S$ is a \emph{proper subset} of $T$, which we express as $S \subsetneq T$.\index{Proper subset}
 
 There are many ways to specify a set.
 If the set contains only a few elements, one can simply list the objects in the set;
@@ -47,21 +47,23 @@ The content of a set can also be enumerated whenever $S$ has a countable number 
 S = \{ x_1, x_2, \ldots \} .
 \end{equation*}
 Usually, the way to specify a set is to take some collection $T$ of objects and some property that elements of $T$ may or may not possess, and to form the set consisting of all elements of $T$ having that property.
-For example, starting with the integers $\Integers$, we can form the subset of $S$ consisting of all even numbers,
+For example, starting with the integers $\Integers$, we can form the subset $S$ consisting of all even numbers,
 \begin{equation*}
 S = \{ x \in \Integers | x \text{ is an even number} \}.
 \end{equation*}
 More generally, we denote the set of all elements that satisfy a certain property $P$ by $S = \{ x | x \text{ satisfies } P \}$.
-The braces are to be read as the words ``the set of'' whereas the symbol $|$ stands for the words ``such that.''
+The braces are to be read as the words ``the set of'' while the symbol $|$ stands for the words ``such that.''
 
 It is convenient to introduce two special sets.
-The \emph{empty set}, denoted by $\emptyset$, is a set that contains no elements. \index{Empty set}
+The \emph{empty set}, denoted by $\emptyset$, is a set that contains no elements.\index{Empty set}
 The \emph{universal set} is the collection of all objects of interest in a particular context, and it is represented by $\Omega$.
 Once a universal set $\Omega$ is specified, we need only consider sets that are subsets of $\Omega$.
-In the context of probability, $\Omega$ is often called the \emph{sample space}. \index{Sample space}
-The \emph{complement} of a set $S$, with respect to the universal set $\Omega$, is the collection of all objects in $\Omega$ that do not belong to $S$, \index{Complement}
-$S^{\Complement} = \{ x \in \Omega | x \notin S \}$.
-We note that $\Omega^{\Complement} = \emptyset$.
+In the context of probability, $\Omega$ is often called the \emph{sample space}.\index{Sample space}
+The \emph{complement} of a set $S$, with respect to the universal set $\Omega$, is the collection of all objects in $\Omega$ that do not belong to $S$,\index{Complement}
+\begin{equation*}
+S^{\Complement} = \{ x \in \Omega | x \notin S \}.
+\end{equation*}
+For example, we note that $\Omega^{\Complement} = \emptyset$.
 
 
 \section{Elementary Set Operations}
@@ -70,52 +72,53 @@ Probability theory makes extensive use of elementary set operations.
 Below, we review the ideas of set theory, and establish basic terminology and notation.
 Consider two sets, $S$ and $T$.
 
-\begin{figure}[htb]
+\begin{figure}[htb!]
 \begin{center}
 \begin{psfrags}
 \psfrag{S}[c]{$S$}
 \psfrag{T}[c]{$T$}
 \includegraphics[height=3.00cm]{Figures/1Chapter/sets}
 \end{psfrags}
-\caption{Graphical representation of two sets, $S$ and $T$.}
+\caption{This is an abstract representation of two sets, $S$ and $T$.
+Their elements are located in the shaded areas.}
 \end{center}
 \end{figure}
 
-The \emph{union} of sets $S$ and $T$ is the collection of all elements that belong to $S$ or $T$ (or both), and it is denoted by $S \cup T$. \index{Union}
+The \emph{union} of sets $S$ and $T$ is the collection of all elements that belong to $S$ or $T$ (or both), and it is denoted by $S \cup T$.\index{Union}
 Formally, we define the union of these two sets by $S \cup T = \{ x | x \in S \text{ or } x \in T \}$.
 
-\begin{figure}[htb]
+\begin{figure}[htb!]
 \begin{center}
 \begin{psfrags}
 \psfrag{U}[c]{$S \cup T$}
-\includegraphics[height=3.00cm]{Figures/1Chapter/union}
+\includegraphics[height=3.03cm]{Figures/1Chapter/union}
 \end{psfrags}
-\caption{The union of sets $S$ and $T$.}
+\caption{The union of sets $S$ and $T$ consists of all elements that are contained in $S$ or $T$.}
 \end{center}
 \end{figure}
 
-The \emph{intersection} of sets $S$ and $T$ is the collection of all elements that belong to $S$ and $T$. \index{Intersection}
+The \emph{intersection} of sets $S$ and $T$ is the collection of all elements that belong to $S$ and $T$.\index{Intersection}
 It is denoted by $S \cap T$, and it can be expressed mathematically as $S \cap T = \{ x | x \in S \text{ and } x \in T \}$.
 
-\begin{figure}[htb]
+\begin{figure}[htb!]
 \begin{center}
 \begin{psfrags}
 \psfrag{I}[c]{$S \cap T$}
-\includegraphics[height=3.00cm]{Figures/1Chapter/intersection}
+\includegraphics[height=3.03cm]{Figures/1Chapter/intersection}
 \end{psfrags}
-\caption{The intersection of sets $S$ and $T$.}
+\caption{The intersection of sets $S$ and $T$ only contains elements that are both in $S$ and $T$.}
 \end{center}
 \end{figure}
 
 When $S$ and $T$ have no elements in common, we write $S \cap T = \emptyset$.
-We also express this fact by saying that $S$ and $T$ are \emph{disjoint}. \index{Disjoint sets}
+We also express this fact by saying that $S$ and $T$ are \emph{disjoint}.\index{Disjoint sets}
 More generally, a collection of sets is said to be disjoint if no two sets have a common element.
-A collection of sets is said to form a \emph{partition} of $S$ if the sets in the collection are disjoint and their union is $S$. \index{Partition}
+A collection of sets is said to form a \emph{partition} of $S$ if the sets in the collection are disjoint and their union is $S$.\index{Partition}
 
 \begin{figure}[htb]
 \begin{center}
-\includegraphics[height=3.00cm]{Figures/1Chapter/setpartition}
-\caption{A partition of $S$ is collection of sets that are disjoint and whose union is $S$.}
+\includegraphics[height=3.03cm]{Figures/1Chapter/setpartition}
+\caption{A partition of $S$ is a collection of sets that are disjoint and whose union is $S$.}
 \end{center}
 \end{figure}
 
@@ -126,29 +129,29 @@ This set is sometimes called the complement of $T$ relative to $S$, or the compl
 \begin{center}
 \begin{psfrags}
 \psfrag{D}[c]{$S - T$}
-\includegraphics[height=3.00cm]{Figures/1Chapter/difference}
+\includegraphics[height=3.03cm]{Figures/1Chapter/difference}
 \end{psfrags}
-\caption{The complement of $T$ relative to $S$.}
+\caption{The complement of $T$ relative to $S$ contains all the elements of $S$ that are not in $T$.}
 \end{center}
 \end{figure}
 
-We have already looked at the definition of the union and the intersection of two sets.
+So far, we have looked at the definition of the union and the intersection of two sets.
 We can also form the union or the intersection of arbitrarily many sets.
-This is defined in the obvious way,
+This is defined in a straightforward way,
 \begin{align*}
 \bigcup_{\alpha \in \IndexSet} S_{\alpha}
 &= \{ x | x \in S_{\alpha} \text{ for some } \alpha \in \IndexSet \} \\
 \bigcap_{\alpha \in \IndexSet} S_{\alpha}
 &= \{ x | x \in S_{\alpha} \text{ for all } \alpha \in \IndexSet \} .
 \end{align*}
-The index set $\IndexSet$ can be finite or even infinite.
+The index set $\IndexSet$ can be finite or infinite.
 
 
 \section{Additional Rules and Properties}
 
 Given a collection of sets, it is possible to form new ones by applying elementary set operations to them.
 As in algebra, one uses parentheses to indicate precedence.
-For instance, $R \cup (S \cap T)$ denotes the union of two sets $R$ and $S \cap T$, while $(R \cup S) \cap T$ represents the intersection of two sets $R \cup S$ and $T$.
+For instance, $R \cup (S \cap T)$ denotes the union of two sets $R$ and $S \cap T$, whereas $(R \cup S) \cap T$ represents the intersection of two sets $R \cup S$ and $T$.
 The sets thus formed are quite different.
 
 \begin{figure}[htb]
@@ -156,9 +159,9 @@ The sets thus formed are quite different.
 \begin{psfrags}
 \psfrag{P1}[c]{$R \cup (S \cap T)$}
 \psfrag{P2}[c]{$(R \cup S) \cap T$}
-\includegraphics[height=4.53cm]{Figures/1Chapter/triple}
+\includegraphics[height=4.55cm]{Figures/1Chapter/triple}
 \end{psfrags}
-\caption{The order of set operation is important; parentheses should be employed to indicate precedence.}
+\caption{The order of set operations is important; parentheses should be employed to specify precedence.}
 \end{center}
 \end{figure}
 
@@ -168,7 +171,7 @@ For instance, we have the following distributive laws
 R \cap (S \cup T) &= (R \cap S) \cup (R \cap T) \\
 R \cup (S \cap T) &= (R \cup S) \cap (R \cup T).
 \end{align*}
-Two particularly useful equivalent combinations of operations are given by \emph{De~Morgan's laws}, which state that \index{De Morgan's laws}
+Two particularly useful equivalent combinations of operations are given by \emph{De~Morgan's laws}, which state that\index{De Morgan's laws}
 \begin{align*}
 R - (S \cup T) &= (R - S) \cap (R - T) \\
 R - (S \cap T) &= (R - S) \cup (R - T).
@@ -193,8 +196,8 @@ The second law can be obtained in a similar fashion.
 \section{Cartesian Products}
 
 There is yet another way to create new sets form existing ones.
-It involves the notion of an \emph{ordered pair} of objects. \index{Ordered pair}
-Given sets $S$ and $T$, the \emph{cartesian product} $S \times T$ is the set of all ordered pairs $(x, y)$ for which $x$ is an element of $S$ and $y$ is an element of $T$, $S \times T = \{ (x, y) | x \in S \text{ and } y \in T \}$.  \index{Cartesian product}
+It involves the notion of an \emph{ordered pair} of objects.\index{Ordered pair}
+Given sets $S$ and $T$, the \emph{cartesian product} $S \times T$ is the set of all ordered pairs $(x, y)$ for which $x$ is an element of $S$ and $y$ is an element of $T$, $S \times T = \{ (x, y) | x \in S \text{ and } y \in T \}$.\index{Cartesian product}
 
 \begin{figure}[htb]
 \begin{center}
@@ -206,7 +209,8 @@ Given sets $S$ and $T$, the \emph{cartesian product} $S \times T$ is the set of 
 \psfrag{b}[c]{$b$}
 \includegraphics[height=3.06cm]{Figures/1Chapter/cartesianproduct}
 \end{psfrags}
-\caption{Cartesian products can be used to create new sets.}
+\caption{Cartesian products can be used to create new sets.
+In this example, the sets $\{ 1, 2, 3 \}$ and $\{ a, b \}$ are employed to create a cartesian product with six elements.}
 \end{center}
 \end{figure}
 

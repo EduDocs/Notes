@@ -7,29 +7,32 @@ This is a powerful concept that is used extensively throughout engineering with 
 
 \section{Conditioning on Events}
 
-We begin our discussion of conditional probability with an illustrative example.
+We begin our treatment of conditional probability with an illustrative example.
 The intuition gained through this simple exercise is then generalized by introducing a formal definition for this important concept.
 
 \begin{example}
 The rolling of a fair die is an experiment with six equally likely outcomes.
 As such, the probability of obtaining any of the outcomes is $1/6$.
-However, if we are told that the upper face displays an odd number, then only three possibilities remain, namely $\{1, 3, 5 \}$.
+However, if we are told that the upper face features an odd number, then only three possibilities remain, namely $\{1, 3, 5 \}$.
 
+\begin{figure}[htb!]
 \begin{center}
+\begin{psfrags}
 \includegraphics[height=3.675cm]{Figures/3Chapter/condevent}
+\end{psfrags}
+\caption{Partial information about the outcome of an experiment may change the likelihood of events.
+The resulting values are known as conditional probabilities.}
+\label{figure:CondEvent}
 \end{center}
+\end{figure}
 
 These three outcomes had equal probabilities before the additional information was revealed.
-It is natural to assume that they remain equally likely afterwards.
+It is then natural to assume that they remain equally likely afterwards.
 In particular, it is reasonable to assign a probability of $1/3$ to each of the three outcomes still plausible, in view of the new information.
-Note that we can express the probability of getting, say, a three given that the outcome is an odd number as
+Note that we can express the probability of getting a three given that the outcome is an odd number as
 \begin{equation*}
-\begin{split}
-\Pr (\text{3 given } \{ \text{odd numbers} \})
-&= \frac{\Pr (\text{3 and } \{ \text{odd numbers} \})}
-{\Pr (\text{odd numbers})} \\
-&= \frac{\Pr(3)}{\Pr (\{1,3,5\})} = \frac{1}{3} .
-\end{split}
+\frac{\Pr (3 \cap \{ 1, 3, 5 \})}{\Pr (\{ 1, 3, 5 \} ) }
+= \frac{\Pr(3)}{\Pr (\{1,3,5\})} = \frac{1}{3} .
 \end{equation*}
 \end{example}
 
@@ -65,7 +68,7 @@ is also a sequence of disjoint events and
 \end{split}
 \end{equation*}
 where the third equality follows from the third axiom of probability applied to the set $\bigcup_{k=1}^{\infty} (A_k \cap B )$.
-Hence, the conditional probability law defined by \eqref{equation:ConditionalProbability} satisfies the three axioms of probability.
+Then, the conditional probability law defined by \eqref{equation:ConditionalProbability} satisfies the three axioms of probability.
 
 \begin{example}
 A fair coin is tossed repetitively until heads is observed.
@@ -74,17 +77,14 @@ We now wish to compute the probability that heads occurred for the first time on
 In this example, $A = \{ 2 \}$ and $B$ is the set of even numbers.
 The probability that the outcome is two given that the number of tosses is even is equal to
 \begin{equation*}
-\begin{split}
-\Pr ( 2 | \text{even numbers} )
-&= \frac{\Pr ( 2 \cap \{ \text{even numbers} \} )}
-{\Pr (\text{even numbers})} \\
-&= \frac{\Pr (2)}{\Pr (\text{even numbers})} \\
-&= \frac{1/4}{1/3}
+\Pr ( 2 | B )
+= \frac{\Pr ( 2 \cap B )}{\Pr (B)}
+= \frac{\Pr (2)}{\Pr (B)}
+= \frac{1/4}{1/3}
 = \frac{3}{4} .
-\end{split}
 \end{equation*}
 In the above computation, we have used the fact that the probability of flipping the coin an even number of times is equal to $1/3$.
-This fact was obtained in Example~\ref{example:CoinTossSequence}.
+This fact was established in Example~\ref{example:CoinTossSequence}.
 \end{example}
 
 The definition of conditional probability can be employed to compute the probability of several events occurring simultaneously.
@@ -103,6 +103,7 @@ This formula can be verified by expanding each of the conditional probabilities 
 \cdots \frac{\Pr \left( \bigcap_{k=1}^{n} A_k \right)}
 {\Pr \left( \bigcap_{k=1}^{n-1} A_k \right)} .
 \end{equation*}
+We emphasize that these expressions implicitly assume that $\Pr \left( \bigcap_{k=1}^{n-1} A_k \right) \neq 0$.
 
 \begin{example}
 An urn contains eight red balls and four green balls.
@@ -111,20 +112,24 @@ We wish to compute the probability that all three balls are red.
 The probability of drawing a red ball the first time is equal to $8/12$.
 The probability of drawing a red ball the second time given that the first ball is red is $7/11$.
 Finally, the probability of drawing a red ball the third time given that the previous two balls are red is $6/10$.
-Using \eqref{equation:SimultaneousEvents}, we can compute the probability drawing three red balls as
+Using \eqref{equation:SimultaneousEvents}, we can compute the probability of drawing three red balls as
 \begin{equation*}
-\Pr (\text{3 red balls})
+\Pr (rrr)
 = \frac{8}{12} \frac{7}{11} \frac{6}{10}
 = \frac{14}{55} .
 \end{equation*}
 
+\begin{figure}[htb!]
 \begin{center}
 \begin{psfrags}
 \psfrag{1}[c]{$1$}
 \psfrag{2}[c]{$2$}
 \includegraphics[height=7.11cm]{Figures/3Chapter/balls}
 \end{psfrags}
+\caption{Conditional probabilities can be used to calculate the probability of multiple events occurring at the same time.}
+\label{figure:Balls}
 \end{center}
+\end{figure}
 \end{example}
 
 
@@ -143,9 +148,14 @@ A collection of events $A_1, A_2, \ldots, A_n$ is said to be a \emph{partition} 
 \bigcup_{k=1}^n A_k = \Omega .
 \end{equation*}
 Visually, a partition divides an entire set into disjoint subsets.
+
+\begin{figure}[htb!]
 \begin{center}
-\includegraphics[height=4.23cm]{Figures/3Chapter/setpartition2}
+\includegraphics[height=3.034cm]{Figures/3Chapter/setpartition2}
+\caption{A partition of $S$ can be formed by selecting a collection of subsets that are disjoint and whose union is $S$.}
+\label{figure:SetPartitiion2}
 \end{center}
+\end{figure}
 
 \begin{theorem}[Total Probability Theorem] \label{theorem:TotalProbability} \index{Total probability theorem}
 Let $A_1, A_2, \ldots, A_n$ be a collection of events that forms a partition of the sample space $\Omega$.
@@ -182,10 +192,15 @@ Combining these two facts, we get
 where the fourth equality is obtained by applying the third axiom of probability.
 \end{proof}
 
+\begin{figure}[htb!]
 \begin{center}
-\includegraphics[height=4.23cm]{Figures/3Chapter/setpartition3}
+\includegraphics[height=3.034cm]{Figures/3Chapter/setpartition3}
+\caption{The total probability theorem states that the probability of event $B$ can be computed by summing over all $\Pr(A_i \cap B)$, where $A_1, A_2, \ldots, A_n$ forms a partition of $\Omega$.}
+\label{figure:SetPartition3}
 \end{center}
-A graphical interpretation of Theorem~\ref{theorem:TotalProbability} is illustrated above.
+\end{figure}
+
+A graphical interpretation of Theorem~\ref{theorem:TotalProbability} is illustrated in Figure~\ref{figure:SetPartition3}.
 Event $B$ can be decomposed into the disjoint union of $A_1 \cap B, A_2 \cap B, \ldots, A_n \cap B$.
 The probability of event $B$ can then be computed by adding these various parts
 \begin{equation*}
@@ -206,7 +221,7 @@ The probabilities of drawing two balls can be computed using \eqref{equation:Sim
 \Pr (rg) &= \frac{8}{12} \frac{4}{11} = \frac{8}{33} \\
 \Pr (rr) &= \frac{8}{12} \frac{7}{11} = \frac{14}{33} .
 \end{align*}
-Let $G$ denote the event that a green ball is obtained during the experiment.
+Let $G = \{ g, rg \}$ denote the event that a green ball is obtained during the experiment.
 The overall probability of getting a green ball, $\Pr (G)$, can be computed by applying the total probability theorem
 \begin{equation*}
 \begin{split}
@@ -304,26 +319,26 @@ The sample space for this experiment is composed of thirty-six equally likely ou
 Consider the probability of getting a four on the red die given that the blue die shows a six,
 \begin{equation*}
 \begin{split}
-\Pr (\text{red = 4} | \text{blue = 6})
-&= \frac{ \Pr (\text{red = 4} \cap \text{blue = 6}) }
-{ \Pr (\text{blue = 6}) } \\
-&= \frac{1}{6} = \Pr (\text{red = 4}) .
+\Pr (\{ r=4 \} | \{ b=6 \})
+&= \frac{ \Pr (\{ r=4 \} \cap \{ b=6 \}) }
+{ \Pr ( b=6 ) } \\
+&= \frac{1}{6} = \Pr ( r=4 ) .
 \end{split}
 \end{equation*}
 From this equation, we gather that
 \begin{equation*}
-\Pr (\text{red = 4} \cap \text{blue = 6})
-= \Pr (\text{red = 4}) \Pr (\text{blue = 6}) .
+\Pr (\{ r=4 \} \cap \{ b=6 \})
+= \Pr ( r=4 ) \Pr ( b=6 ) .
 \end{equation*}
 Thus, rolling a four on the red die and rolling a six on the blue die are independent events.
 
 Similarly, consider the probability of obtaining a four on the red die given that the sum of the two dice is eleven,
 \begin{equation*}
 \begin{split}
-\Pr (\text{red = 4} | \text{sum = 11})
-&= \frac{ \Pr (\text{red = 4} \cap \text{sum = 11}) }
-{ \Pr (\text{sum = 11}) } = 0 \\
-&\neq \frac{1}{6} = \Pr (\text{red = 4}) .
+\Pr (\{ r=4 \} | \{ r+b=11 \})
+&= \frac{ \Pr (\{ r=4 \} \cap \{ r+b=11 \}) }
+{ \Pr ( r+b=11 ) } = 0 \\
+&\neq \frac{1}{6} = \Pr ( r=4 ) .
 \end{split}
 \end{equation*}
 In this case, we conclude that getting a four on the red die and a sum total of eleven are not independent events.
@@ -365,7 +380,7 @@ and, in addition,
 \end{equation*}
 The three equalities in \eqref{equation:ThreeIndependentEvents} assert that $A$, $B$ and $C$ are \emph{pairwise independent}.
 Note that the fourth condition does not follow from the first three conditions, nor does it imply any of them.
-Pairwise independence does not imply independence.
+Pairwise independence does not necessarily imply independence.
 
 \begin{example}
 A fair coin is flipped twice.
@@ -392,9 +407,9 @@ Let $B$ be the event that the number on the red die is either two, three or four
 Also, let $C$ be the event that the product of the two dice is twelve.
 The individual probabilities of these events are
 \begin{align*}
-\Pr (A) &= \Pr (\text{red is odd}) = \frac{1}{2} \\
-\Pr (B) &= \Pr (\text{red} \in \{2, 3, 4\}) = \frac{1}{2} \\
-\Pr (C) &= \Pr (\text{product = 12}) = \frac{4}{36} .
+\Pr (A) &= \Pr (r \in \{1, 3, 5\}) = \frac{1}{2} \\
+\Pr (B) &= \Pr (r \in \{2, 3, 4\}) = \frac{1}{2} \\
+\Pr (C) &= \Pr (r \times b = 12) = \frac{4}{36} .
 \end{align*}
 We note that these events are not pairwise independent because
 \begin{align*}
@@ -469,21 +484,21 @@ Two events that are independent with respect to an unconditional probability law
 Two dice are rolled at the same time, a red die and a blue die.
 We can easily compute the probability of simultaneously getting a two on the red die and a six on the blue die,
 \begin{equation*}
-\Pr (\text{red = 2} \cap \text{blue = 6}) = \frac{1}{36}
-= \Pr (\text{red = 2}) \Pr (\text{blue = 6}) .
+\Pr (\{ r=2 \} \cap \{ b=6 \}) = \frac{1}{36}
+= \Pr ( r=2 ) \Pr ( b=6 ) .
 \end{equation*}
 Clearly, these two events are independent.
 
 Now, consider the probability of rolling a two on the red die and a six on the blue die given that the sum of the two dice is an odd number.
 The individual conditional probabilities are given by
 \begin{equation*}
-\Pr (\text{red = 2} | \text{sum is odd})
-= \Pr (\text{blue = 6} | \text{sum is odd})
+\Pr (\{ r=2 \} | \{ r+b \text{ is odd} \})
+= \Pr (\{ b=6 \} | \{ r+b \text{ is odd} \})
 = \frac{1}{6},
 \end{equation*}
 whereas the joint conditional probability is
 \begin{equation*}
-\Pr (\text{red = 2} \cap \text{blue = 6} | \text{sum is odd})
+\Pr (\{ r=2 \} \cap \{ b=6 \} | \{ r+b \text{ is odd} \})
 = 0 .
 \end{equation*}
 These two events are not conditionally independent.
@@ -503,7 +518,7 @@ This definition is analogous to \eqref{equation:IndependenceMultipleEvents}, alb
 
 In the study of probability, we are frequently interested in the probability of multiple events occurring simultaneously.
 So far, we have expressed the joint probability of events $A$ and $B$ using the notation $\Pr (A \cap B)$.
-For mathematical convenience, we also represent the probability that two events occur at the same time by
+For notational convenience, we also represent the probability that two events occur at the same time by
 \begin{equation*}
 \Pr (A, B) = \Pr (A \cap B) .
 \end{equation*}
