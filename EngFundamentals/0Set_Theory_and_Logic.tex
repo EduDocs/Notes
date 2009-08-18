@@ -37,7 +37,7 @@ Our main purpose here is to learn how to state mathematical results clearly and 
 
 A proof in mathematics demonstrates the truth of certain \textbf{statement}.
 It is therefore natural to begin with a brief discussion of statements.
-A statement, or \textbf{proposition}, is te content of an assertion.
+A statement, or \textbf{proposition}, is the content of an assertion.
 It is either true or false, but cannot be both true and false at the same time.
 For example, the expression ``There are no classes at Texas A\&M University today'' is a statement since it is either true or false.
 The expression ``Do not cheat and do not tolerate those who do'' is not a statement.
@@ -51,7 +51,7 @@ They correspond to the English expressions: and; or; not; if, then; if and only 
 In the discussion below, $P$ and $Q$ represent two abstract statements.
 
 A logical \defn{logic}{conjunction} is an operation on two logical propositions that produces a value of true if both statements are true, and is false otherwise.
-The conjunction of $P$ and $Q$, denoted by $P \wedge Q$, is precisely defined by
+The conjunction (or logical AND) of $P$ and $Q$, denoted by $P \wedge Q$, is precisely defined by
 \begin{center}
 \begin{tabular}{|c|c|c|}
 \hline
@@ -66,7 +66,7 @@ F & F & F \\
 \end{center}
 
 Similarly, a logical \defn{logic}{disjunction} is an operator on two logical propositions that is true if either statements is true or both are true, and is false otherwise.
-The disjunction of $P$ and $Q$, denoted $P \vee Q$, is defined by
+The disjunction (or logical OR) of $P$ and $Q$, denoted $P \vee Q$, is defined by
 \begin{center}
 \begin{tabular}{|c|c|c|}
 \hline
@@ -81,7 +81,7 @@ F & F & F \\
 \end{center}
 
 In mathematics, a \defn{logic}{negation} is an operator on the logical value of a proposition that sends true to false and false to true.
-The negation of $P$, denoted $\neg P$, is given by
+The negation (or logical NOT) of $P$, denoted $\neg P$, is given by
 \begin{center}
 \begin{tabular}{|c|c|}
 \hline
@@ -112,7 +112,7 @@ F & F & T \\
 Although it may seem strange at first glance, this truth table is universally accepted by mathematicians.
 It is important to get used to it.
 Logicians draw a firm distinction between the \defn{logic}{conditional connective} and the \defn{logic}{implication relation}.
-These logicians use the phrase ``if $P$ then $Q$'' for the conditional connective and the phrase ``$P$ implies $Q$'' for the implication relation.
+They use the phrase ``if $P$ then $Q$'' for the conditional connective and the phrase ``$P$ implies $Q$'' for the implication relation.
 They explain the difference between these two forms by saying that the conditional is the contemplated relation, while the implication is the asserted relation.
 We will discuss this distinction in the Section~\ref{section:Relations}, where we formally study relations between statements.
 The importance and soundness of the conditional form $P \rightarrow Q$ will become clearer then.
@@ -557,13 +557,13 @@ In this case, the equivalence classes can be associated with the days of the yea
 In elementary mathematics, functions are typically described in terms of graphs and formulas.
 The drawback of this approach is that one tends to picture only ``nice'' functions.
 In fact, Cauchy himself published in 1821 an incorrect proof of the false assertion that ``a sequence of continuous functions that converges everywhere has a continuous limit function''.
-Nowadays, every teacher warns his students that one must be careful because the world is filled with not so ``nice'' functions.
+Nowadays, every teacher warns their students that one must be careful because the world is filled with not so ``nice'' functions.
 
 \index{functions}
 The modern approach to defining functions is based on set theory.
 A \textbf{function} $f: X\rightarrow Y$ is a rule that assigns a single value $f(x)\in Y$ to each element $x\in X$.
 The notation $f: X \rightarrow Y$ is used to emphasize the role of the \defn{functions}{domain} $X$ and the \defn{functions}{codomain} $Y$.
-The \emph{range} of $f$ is the subset of $Y$ which is actually achieved by $f$ or  $\{f(x) \in Y | x\in X \}$.
+The \textbf{range} of $f$ is the subset of $Y$ which is actually achieved by $f$ or  $\{f(x) \in Y | x\in X \}$.
 Since the term codomain is somewhat uncommon, people often use the term range instead of codomain either intentionally (for simplicity) or unintentionally (due to confusion).
 \begin{definition}
 Formally, a \textbf{function} $f: X \rightarrow Y$ from $X$ to $Y$ is defined by a subset $F \subset X \times Y$ such that $A_x = \{ y\in Y | (x,y)\in F \}$ has exactly one element for each $x\in X$.
