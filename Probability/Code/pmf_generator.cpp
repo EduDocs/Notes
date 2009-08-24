@@ -54,7 +54,10 @@ double bernoulli_pmf (double p, int k) {
 double binomial_pmf (double p, int n, int k) {
   double p_x;
 
-  p_x = binomial_coef(n, k) * pow(p,k) * pow(1-p,n-k);
+  if (k < 0 || k > n)
+    { p_x = 0; }
+  else
+    { p_x = binomial_coef(n, k) * pow(p,k) * pow(1-p,n-k); }
 
   return p_x;
 }
@@ -106,8 +109,40 @@ int main () {
   pmf_out = fopen ("data1.csv","w");
   for (m=0; m<=4; m++)
   {
-    pmf = bernoulli_pmf (0.6, m);
-    fprintf (pmf_out, "%d,%.3f\n", m, pmf);
+    pmf = bernoulli_pmf (0.25, m);
+    fprintf (pmf_out, "%d %.6f\n", m, pmf);
+  };
+  fclose (pmf_out);
+
+  pmf_out = fopen ("data2.csv","w");
+  for (m=0; m<=9; m++)
+  {
+    pmf = binomial_pmf (0.25, n, m);
+    fprintf (pmf_out, "%d %.6f\n", m, pmf);
+  };
+  fclose (pmf_out);
+
+  pmf_out = fopen ("data3.csv","w");
+  for (m=0; m<=14; m++)
+  {
+    pmf = poisson_pmf (2, m);
+    fprintf (pmf_out, "%d %.6f\n", m, pmf);
+  };
+  fclose (pmf_out);
+
+  pmf_out = fopen ("data4.csv","w");
+  for (m=0; m<=14; m++)
+  {
+    pmf = geometric_pmf (0.25, m);
+    fprintf (pmf_out, "%d %.6f\n", m, pmf);
+  };
+  fclose (pmf_out);
+
+  pmf_out = fopen ("data5.csv","w");
+  for (m=0; m<=9; m++)
+  {
+    pmf = uniform_pmf (n, m);
+    fprintf (pmf_out, "%d %.6f\n", m, pmf);
   };
   fclose (pmf_out);
 
