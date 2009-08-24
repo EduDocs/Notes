@@ -468,6 +468,12 @@ The following standard notation is used for interval subsets of the real numbers
 & [a,b) \;\! \triangleq \{ x\in \mathbb{R} | a \leq x < b \}
 \end{align*}
 
+\begin{example}[\defn{set theory}{Russell's Paradox}]
+Let $R$ be the set of all sets that do not contain themselves or $R = \{S|S\notin S\}$.
+The paradox arises from the fact that the definition implies the logical contradiction $R\in R \Leftrightarrow R\notin R$.
+Axiomatic set theory eliminates this paradox by disallowing self-referencing constructions like this.
+\end{example}
+
 There are also some standard relations defined between any two sets $A,B$.
 \begin{definition}
 We say that $A$ \textbf{equals} $B$ (denoted $A=B$) if $x\in A$ implies $x\in B$ and $x\in B$ implies $x\in A$.
@@ -511,11 +517,6 @@ One can apply De Morgan's Law in set theory to see that
 \end{align*}
 to interchange union (or intersection) with set difference.
 
-\begin{example}[\defn{set theory}{Russell's Paradox}]
-Let $R$ be the set of all sets that do not contain themselves or $R = \{S|S\notin S\}$.
-The paradox arises from the fact that the definition implies the logical contradiction $R\in R \Leftrightarrow R\notin R$.
-\end{example}
-
 Another way to build sets is by grouping elements into pairs, triples, and vectors.
 \begin{definition}
 The \defn{set theory}{Cartesian Product} (denoted $A\times B$) of two sets is the set of ordered pairs $\{(a,b) | a\in A, b\in B\}$.
@@ -541,16 +542,20 @@ A relation on $A$ is said to be:
 \end{enumerate}
 
 A relation is called an \defn{set theory}{equivalence relation} if it is reflexive, symmetric, and transitive.
-For example, let $A$ be a set of people and $P(x,y)$ be the statement ``$x$ has the same birthday as $y$''.
+For example, let $A$ be a set of people and $P(x,y)$ be the statement ``$x$ has the same birthday (month and day) as $y$''.
 Then, we can define $\sim$ such that $a\sim b$ holds iff $P(x,y)$ is true.
 In this case, the set $E$ is given by $E = \{ (x,y)\in A\times A | P(x,y) \}$.
 One can verify that it is an equivalence relation by checking that it is reflexive, symmetric, and transitive.
 
 One important characteristic of an equivalence relation is that it partitions the entire set $A$ into disjoint \defn{set theory}{equivalence classes}.
+The equivalence class associated with $a\in A$ is given by  $[a] = \left\{x\in A | x \sim a\right\}$.
+In the birthday example, there is a natural equivalence class associated with each day of the year.
+The set of all equivalence classes is called the \defn{set theory}{quotient set} and is denoted $A \setminus \sim = \{ [a] | a\in A \}$.
+
 In fact, there is a natural equivalence relation defined by any disjoint partition of a set.
 For example, let $A_{i,j}$ be the set of people in $A$ whose birthday was on the $j$-th day of the $i$-th month.
 It follows that $x\sim y$ iff there exists a single $i,j$ such that $x,y\in A_{i,j}$.
-In this case, the equivalence classes can be associated with the days of the year.
+In this case, the days of year are used as equivalence classes to define the equivalence relation.
 
 \section{Functions}
 
