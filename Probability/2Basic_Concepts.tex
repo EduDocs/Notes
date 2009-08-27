@@ -58,7 +58,7 @@ This insures that the outcome of an experiment is unique.\index{Distinct element
 \item A sample space must be \emph{collectively exhaustive}.
 That is, every possible outcome of the experiment must be accounted for in the sample space.\index{Collectively exhaustive}
 \end{enumerate}
-In general, a sample space should be detailed enough to distinguish between all outcomes of interest, while avoiding frivolous details.
+In general, a sample space should be precise enough to distinguish between all outcomes of interest, while avoiding frivolous details.
 
 \begin{example}
 Consider the space composed of the odd integers located between one and six, the even integers contained between one and six, and the prime numbers less than or equal to six.
@@ -135,7 +135,7 @@ where the inequality follows from the nonnegativity of probability laws.
 \end{center}
 \end{figure}
 
-The second statement specifies the probability of the union of two events that are not necessarily mutually exclusive.
+Our second result specifies the probability of the union of two events that are not necessarily mutually exclusive.
 \begin{proposition} \label{proposition:ProbabilityUnion}
 $\Pr (A \cup B) = \Pr (A) + \Pr (B) - \Pr (A \cap B)$.
 \end{proposition}
@@ -167,7 +167,7 @@ Combining these two equations yields the desired result.
 \end{figure}
 
 We can use Proposition~\ref{proposition:ProbabilityUnion} to derive a bound on the probabilities of unions.
-This result, which is sometimes called the \emph{Boole inequality}, asserts that the probability of at least one event occurring is no greater than the sum of the probability of the individual events.\index{Boole inequality}
+This result, which is sometimes called the \emph{Boole inequality}, asserts that the probability of at least one event occurring is no greater than the sum of the probabilities of the individual events.\index{Boole inequality}
 
 \begin{theorem}[Union Bound]\index{Union bound}
 Let $A_1, A_2, \ldots, A_n$ be a collection of events, then
@@ -178,7 +178,7 @@ Let $A_1, A_2, \ldots, A_n$ be a collection of events, then
 \end{theorem}
 \begin{proof}
 We show this result using induction.
-First, we note that the result is trivially true for $n = 1$.
+First, we note that the claim is trivially true for $n = 1$.
 As an inductive hypothesis, assume that \eqref{equation:UnionBound} holds for some $n \geq 1$.
 Then, we have
 \begin{equation*}
@@ -243,12 +243,7 @@ Using the third axiom of probability, $\Pr (A)$ can be written as
 = \sum_{j \in \JndexSet} \Pr (s_j) .
 \end{equation*}
 The possibly infinite sum $\sum_{j \in \JndexSet} \Pr (s_j)$ always converges since the summands are nonnegative and the sum is bounded above by one.
-It is therefore well-defined.
-
-\begin{example} \label{example:CoinTossSequence}
-Suppose that a fair coin is tossed repetitively until heads is observed.
-The number of coin tosses is recorded as the outcome of this experiment.
-A natural sample space for this experiment is $\Omega = \{ 1, 2, \ldots \}$, a countably infinite set.
+It is consequently well defined.
 
 \begin{figure}[htb!]
 \begin{center}
@@ -266,8 +261,13 @@ A natural sample space for this experiment is $\Omega = \{ 1, 2, \ldots \}$, a c
 \end{center}
 \end{figure}
 
+\begin{example} \label{example:CoinTossSequence}
+Suppose that a fair coin is tossed repetitively until heads is observed.
+The number of coin tosses is recorded as the outcome of this experiment.
+A natural sample space for this experiment is $\Omega = \{ 1, 2, \ldots \}$, a countably infinite set.
+
 The probability of observing heads on the first trial is $1/2$, and the probability of observing heads for the first time on trial $k$ is $2^{-k}$.
-The probability of the entire sample space is equal to
+The probability of the entire sample space is therefore equal to
 \begin{equation*}
 \Pr ( \Omega ) = \sum_{k=1}^{\infty} \Pr (k)
 = \sum_{k=1}^{\infty} \frac{1}{2^k} = 1 ,
@@ -363,7 +363,7 @@ For this carefully crafted example, it appears that the probability of an admiss
 \begin{equation*}
 \Pr (A) = \int_{A} dx .
 \end{equation*}
-This is indeed accurate for the experiment at hand.
+This is indeed accurate for the current scenario.
 In fact, the class of admissible events for this experiment is simply the collection of all sets for which the integral $\int_A dx$ can be computed.
 In other words, if a number is chosen at random from $[0,1]$, then the probability of this number falling in measurable set $A \subset [0,1]$ is
 \begin{equation*}
@@ -373,29 +373,29 @@ In these notes, we will see many probabilistic models with uncountably infinite 
 The mathematical tools required to handle such models will be treated alongside.
 
 \begin{example}
-Suppose that a participant at a game-show is required to spin the wheel of serendipity, a perfect circle with unit circumference.
+Suppose that a participant at a game-show is required to spin the wheel of serendipity, a perfect circle with unit radius.
 When subjected to a vigorous spin, the wheel is equally likely to stop anywhere along its perimeter.
-The sampling space for this experiment is $[0, 1)$, an uncountable set.
-Its probability is given by $\Pr ([0, 1)) = 1$.
+A sampling space for this experiment is the collection of all angles from $0$ to $2 \pi$, an uncountable set.
+The probability of $\Omega$ is invariably equal to one, $\Pr ([0, 2 \pi)) = 1$.
 
-\begin{figure}[htp!]
+\begin{figure}[tbh!]
 \begin{center}
 \includegraphics[height=3.15cm]{Figures/2Chapter/wheel}
 \caption{The wheel of serendipity provides an example of a random experiment for which the sample space is uncountable.}
 \end{center}
 \end{figure}
 
-The probability that the wheel stops in the first quadrant is given by
+Also, the probability that the wheel stops in the first quadrant is given by
 \begin{equation*}
-\Pr \left( \left[ 0, \frac{1}{4} \right) \right) = \frac{1}{4}.
+\Pr \left( \left[ 0, \frac{\pi}{2} \right) \right) = \frac{1}{4}.
 \end{equation*}
-Similarly, the probability that the wheel stops in an interval $(a, b)$ where $0 \leq a \leq b < 1$ is
+More generally, the probability that the wheel stops in an interval $(a, b)$ where $0 \leq a \leq b < 2 \pi$ can be written as
 \begin{equation*}
-\Pr ((a,b)) = b - a.
+\Pr ((a,b)) = \frac{b - a}{2 \pi}.
 \end{equation*}
-If $B \subset [0, 1)$ is the measurable set representing a winning outcome, then the probability of success at the wheel is
+If $B \subset [0, 2 \pi)$ is a measurable set representing all winning outcomes, then the probability of success at the wheel becomes
 \begin{equation*}
-\Pr(B) = \int_B dy .
+\Pr(B) = \int_B \frac{1}{2 \pi} d\theta .
 \end{equation*}
 \end{example}
 
@@ -409,16 +409,12 @@ The basis of our intuition for the infinite is the set of \emph{natural numbers}
 \end{equation*}
 Two sets are said to have the same \emph{cardinality} if their elements can be put in one-to-one correspondence.\index{Cardinality}
 A set with the same cardinality as a subset of the natural numbers is said to be \emph{countable}.\index{Countable}
-That is, the elements of a countable set can always be listed in sequence
-\begin{equation*}
-s_1, s_2, \ldots
-\end{equation*}
-although the order may have nothing to do with any relation between the elements.
+That is, the elements of a countable set can always be listed in sequence, $s_1, s_2, \ldots$; although the order may have nothing to do with any relation between the elements.
 The integers and the rational numbers are examples of countably infinite sets.
 It may be surprising at first to learn that there exist uncountable sets.
 To escape beyond the countable, one needs set theoretic tools such as \emph{power sets}.\index{Power set}
 The set of real numbers is uncountably infinite; it cannot be put in one-to-one correspondence with the natural numbers.
-A typical progression in analysis consists of using the finite to get at the countably infinite, and then to use the countably infinite to get at the uncountable.
+A typical progression in analysis consists of using the finite to get at the countably infinite, and then to employ the countably infinite to get at the uncountable.
 
 It is tempting to try to assign probabilities to every subset of a sample space $\Omega$.
 However, for uncountably infinite sample spaces, this leads to serious difficulties that cannot be resolved.

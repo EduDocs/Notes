@@ -3,8 +3,9 @@
 
 Suppose that an experiment and a sample space are given.
 A \emph{random variable} is a real-valued function of the outcome of the experiment. \index{Random variable}
-That is, the random variable assigns a specific number to every possible outcome of the experiment.
-The numerical value of a particular outcome is called the \emph{value} of the random variable. \index{Value of a random variable}
+In other words, the random variable assigns a specific number to every possible outcome of the experiment.
+The numerical value of a particular outcome is simply called the \emph{value} of the random variable. \index{Value of a random variable}
+Because of the structure of real numbers, it is possible to define pertinent statistical properties on random variables that otherwise do not apply to probability spaces in general.
 
 \begin{figure}[ht]
 \begin{center}
@@ -149,7 +150,7 @@ where $p \in [0, 1]$.
 \begin{center}
 \includegraphics[width=8cm]{Figures/5chapter/bernoulli_pmf}
 \end{center}
-\caption{The PMF of a Bernoulli random variable appears on the figure for parameter $p = 0.75$.}
+\caption{The PMF of a Bernoulli random variable appears on the figure for parameter $p = 0.25$.}
 \end{figure}
 
 \begin{example}
@@ -181,7 +182,7 @@ We can easily verify that $X$ fulfills the normalization axiom,
 \begin{center}
 \includegraphics[width=8cm]{Figures/5chapter/binomial_pmf}
 \end{center}
-\caption{This figure shows a binomial random variable with parameters $n = 12$ and $p = 0.4$.}
+\caption{This figure shows a binomial random variable with parameters $n = 8$ and $p = 0.25$.}
 \end{figure}
 
 \begin{example} \label{BrazosSodaCompany1}
@@ -229,7 +230,7 @@ It finds extensive use in networking, inventory management and queueing applicat
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[width=8cm]{Figures/5chapter/poisson_pmf}
-\caption{This figure shows the PMF of a Poisson random variable with parameter $\lambda = 4.8$.  Note that the values of the PMF are only present for $k = 0, 1, \ldots, 15$.}
+\caption{This figure shows the PMF of a Poisson random variable with parameter $\lambda = 2$.  Note that the values of the PMF are only present for $k = 0, 1, \ldots, 8$.}
 \end{center}
 \end{figure}
 
@@ -267,6 +268,13 @@ In the limit, as $n$ approaches infinity, we get
 = \frac{\lambda^k}{k!} e^{- \lambda} .
 \end{equation*}
 Thus, the sequence of binomial random variables $\{ X_n \}$ converges in distribution to the Poisson random variable $X$.
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=8cm]{Figures/5chapter/convergence_pmf}
+\end{center}
+\caption{The levels of a binomial PMF with parameter $p = \lambda/n$ converge to the probabilities of a Poisson PMF with parameter $\lambda$ as $n$ increases to infinity.}
+\end{figure}
 
 This discussion suggests that the Poisson PMF can be employed to approximate the PMF of a binomial random variable in certain circumstances.
 Suppose that $Y$ is a binomial random variable with parameters $n$ and $p$.
@@ -317,7 +325,7 @@ We stress that $(1-p)^{k-1} p$ simply represents the probability of obtaining a 
 \end{center}
 \caption{The PMF of a geometric random variable is a decreasing function of $k$.
 It is shown here for $p = 0.25$.
-Again, the values of the PMF are only present for $k = 1, 2, \ldots, 16$.}
+Again, the values of the PMF are only present for $k = 1, 2, \ldots, 12$.}
 \end{figure}
 
 \begin{example}
@@ -377,7 +385,7 @@ The tossing of a fair coin and the rolling of a die are two examples of uniform 
 \includegraphics[width=8cm]{Figures/5chapter/uniform_pmf}
 \end{center}
 \caption{The uniform random variable corresponds to the situation where all the possible values of the random variable are equally likely.
-It is shown here for the case where $n = 10$.}
+It is shown here for the case where $n = 8$.}
 \end{figure}
 
 \section{Functions of Random Variables}
