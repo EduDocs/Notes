@@ -1,6 +1,6 @@
 \chapter[Equiprobable Outcomes]{Equiprobable Outcomes and Combinatorics}
 
-The simplest probabilistic scenario is one where the sample space $\Omega$ is finite and all the possible outcomes are equally likely.
+The simplest probabilistic scenario is perhaps one where the sample space $\Omega$ is finite and all the possible outcomes are equally likely.
 In such cases, computing the probability of an event amounts to counting the number of outcomes comprising this event and dividing the sum by the total number of elements contained in the sample space.
 This situation was first explored in Section~\ref{section:FiniteSampleSpaces}, with an explicit formula for computing probabilities appearing in \eqref{equation:ProbEquiProbableOutcomes}.
 
@@ -81,7 +81,7 @@ Using the counting principle, we gather that the number of distinct sequences is
 \end{example}
 
 \begin{example}
-The power set of $S$, denoted by $2^S$, is the set of all subsets of $S$.
+The power set of $S$, denoted by $2^S$, is the collection of all subsets of $S$.
 In set theory, $2^S$ represents the set of all functions from $S$ to $\{ 0, 1\}$.
 By identifying a function in $2^S$ with the corresponding preimage of one, we obtain a bijection between $2^S$ and the subsets of $S$.
 In particular, each function in $2^S$ is the characteristic function of a subset of $S$.
@@ -113,7 +113,7 @@ Again, consider the integer set $S = \{ 1, 2, \ldots, n \}$.
 A \emph{permutation} of $S$ is an ordered arrangement of its elements, a list without repetitions. \index{Permutation}
 The number of permutations of $S$ can be computed as follows.
 Clearly, there are $n$ distinct possibilities for the first item in the list.
-The number of possibilities for the second item is $n-1$, namely all the integers in $S$ except the element we initially selected.
+The number of possibilities for the second item is $n-1$, namely all the integers in $S$ except the element we selected initially.
 Similarly, the number of distinct possibilities for the $m$th item is $n - m + 1$.
 This pattern continues until all the elements in $S$ are recorded.
 Summarizing, we find that the total number of permutations of $S$ is $n$ \emph{factorial}, \index{Factorial}
@@ -155,9 +155,9 @@ The notation $a_n \sim b_n$ signifies that the ratio $a_n / b_n \rightarrow 1$ a
 
 Suppose that we rank only $k$ elements out of the set $S = \{ 1, 2, \ldots, n \}$, where $k \leq n$.
 We wish to count the number of distinct $k$-permutations of $S$.
-Following our previous argument, we can choose one of $n$ elements to be the first item listed, one of $(n-1)$ elements for the second item, and so on.
+Following our previous argument, we can choose one of $n$ elements to be the first item listed, one of the remaining $(n-1)$ elements for the second item, and so on.
 The procedure terminates when $k$ items have been recorded.
-The number of possible sequences is then given by
+The number of possible sequences is therefore given by
 \begin{equation*}
 \frac{n!}{(n-k)!} = n (n-1) \cdots (n-k+1) .
 \end{equation*}
@@ -221,7 +221,7 @@ There are therefore fewer $2$-element subsets of $S$ than $2$-permutations of $S
 \psfrag{4}[c]{$4$}
 \includegraphics[height=4.95cm]{Figures/4Chapter/combination}
 \end{psfrags}
-\caption{There are six 2-element subsets of the numbers one through four.}
+\caption{There exist six 2-element subsets of the numbers one through four.}
 \label{figure:Combination}
 \end{center}
 \end{figure}
@@ -271,7 +271,7 @@ Let $n_1, n_2, \ldots, n_r$ be nonnegative integers such that
 Consider the following iterative algorithm that leads to a \emph{partition} of $S$. \index{Partition}
 First, we choose a subset of $n_1$ elements from $S$.
 Having selected the first subset, we pick a second subset containing $n_2$ elements from the remaining $n - n_1$ elements.
-We continue this procedure by successively choosing subsets of $n_p$ elements from the remaining $n - n_1 - \cdots - n_{p-1}$ elements, until no element remains.
+We continue this procedure by successively choosing subsets of $n_p$ elements from the residual $n - n_1 - \cdots - n_{p-1}$ elements, until no element remains.
 This algorithm yields a partition of $S$ into $r$ subsets, with the $p$th subset containing exactly $n_p$ elements.
 
 We wish to count the number of such partitions.
@@ -296,7 +296,7 @@ This expression is called a \emph{multinomial coefficient}. \index{Multinomial c
 \begin{example}
 A die is rolled nine times.
 We wish to compute the number of outcomes for which every odd number appears three times.
-The number of distinct sequences in which one, three, and five each appear three times is equal to the number of partitions of $\{ 1, 2, \ldots, 9 \}$ into three subsets of size three, namely
+The number of distinct sequences in which one, three and five each appear three times is equal to the number of partitions of $\{ 1, 2, \ldots, 9 \}$ into three subsets of size three, namely
 \begin{equation*}
 \frac{9!}{3! 3! 3!} = 1680 .
 \end{equation*}
@@ -323,10 +323,11 @@ For instance, if there are five balls and two markers then one possible assignme
 \end{center}
 \end{figure}
 
-The number of objects in the first subset corresponds to the number balls before the first marker.
-Similarly, the number of objects in the $p$th subset is equal to the number of balls between the $p$th marker and the preceding one.
+The number of objects in the first subset corresponds to the number balls appearing before the first marker.
+Similarly, the number of objects in the $p$th subset is equal to the number of balls positioned between the $p$th marker and the preceding one.
 Finally, the number of objects in the last subset is simply the number of balls after the last marker.
-The integer assignment associated with the figure above is
+In this scheme, two consecutive markers imply that the corresponding subset is empty.
+For example, the integer assignment associated with the Figure~\ref{figure:Partitioning} is
 \begin{equation*}
 (n_1, n_2, n_3) = (0,2,3).
 \end{equation*}
@@ -342,9 +343,8 @@ The integer assignment associated with the figure above is
 \end{center}
 \end{figure}
 
-In this scheme, two consecutive markers imply that the corresponding subset is empty.
 There is a natural bijection between an integer assignment and the graphical representation depicted above.
-To count the number of possible integer assignments, it suffices to calculate the number of ways to position the markers and the balls.
+To count the number of possible integer assignments, it suffices to calculate the number of ways to place the markers and the balls.
 In particular, there are $n + r - 1$ positions, $n$ balls and $r - 1$ markers.
 The number of ways to assign the markers is equal to the number of $n$-combinations of $n + r - 1$ elements,
 \begin{equation*}
@@ -368,7 +368,7 @@ The number of possible outcomes is therefore given by
 
 \section{Combinatorial Examples}
 
-In this section, we present two applications of combinatorics to computing the probability of winning the lottery.
+In this section, we present a few applications of combinatorics to computing the probabilities of specific events.
 
 \begin{example}[Pick 3 Texas Lottery]
 The Texas Lottery game ``Pick $3$'' is easy to play.
@@ -382,7 +382,7 @@ The probability of winning when playing the exact order is
 = \frac{1}{1000} .
 \end{equation*}
 The probability of winning while playing any order depends on the numbers selected.
-If three distinct numbers are selected then the probability of winning is
+If three distinct numbers are selected, then the probability of winning is
 \begin{equation*}
 \frac{3!}{1000} = \frac{3}{500} .
 \end{equation*}
@@ -414,29 +414,29 @@ The probability of winning the Mega Millions Grand Prize is
 \begin{example}[Sinking Boat]
 Six couples (twelve people total) are out at sea on a small sail boat.
 Unfortunately, the boat hits an iceberg and starts sinking slowly.
-Two Coast Guard boats, the Ibis and the Mako, come to the rescue of the passengers.
-Each person must decide which of the two rescue boats to board.
+Two Coast Guard boats, the Ibis and the Mako, come to the rescue.
+Each passenger must decide which of the two rescue boats to board.
 What is the probability that no two people from a same couple end up on the Mako?
 
 Suppose that all the passengers choose a rescue boat independently of one another.
 For a given couple, the probability that the two members do not end up on the Mako is $3/4$.
 Since couples act independently, the probability that no two people from a same couple are united on the Mako becomes $3^6/4^6$.
-There are a total of $2^{12}$ possible arrangements of people on the Mako after the rescue operation, all equally likely.
-Thus, there are only $729$ arrangements where no two members from a same couple board the Mako.
+In other words, there are a total of $4096$ possible arrangements of people on the Mako after the rescue operation, all equally likely;
+only $729$ of these arrangements are such that no two members from a same couple board the Mako.
 \end{example}
 
 \begin{example}[The Locksmith Convention*]
 A total of $n$ people are gathering to attend a two-day, secret locksmith convention.
 As tradition dictates, every locksmith brings a lock and two keys to the convention.
 At the opening ceremony, all the locksmiths sit around a large table, and they exchange keys to their own locks with the two members sitting immediately next to them.
-The rules of the secret society stipulate that the conference can only continue on the second day if a working lock-and-key combination can be reconstituted.
+The rules of the secret society stipulate that the conference can only proceed on the second day if a working lock-and-key combination can be reconstituted.
 If each locksmith decides to attend the second day of the convention with probability half, independently of others, what is the probability that the reunion can proceed on the second day?
 
 Given that there are $n$ people on the first day, the number of arrangements on the second day is $2^n$, and they are all equally likely.
 To find the probability that the reunion can proceed, it suffices to count the number of ways in which at least two people that were sitting next to each other during the opening ceremony are present.
 Alternatively, we can compute the likelihood that this does not occur.
 To solve this problem, we label the people attending the opening ceremony using integers one through $n$, according to their positions around the table.
-We consider three situations that may occur on the second day for which the society's requirements are not met: member~$1$ is present, member~$n$ is present, and they are both absent from the conference.
+We consider three situations that may occur on the second day for which the society's requirements are not met.
 If member~$1$ is present, then members~$2$ and $n$ cannot be there on the second day, and the number of possible non-qualifying arrangements is equal to the number of distinct subsets of the integers $\{3, 4,\ldots, n-1\}$ that do not contain consecutive integers.
 This number can be deduced from the discussion at the beginning of this chapter, and is given by
 \begin{equation*}
@@ -451,7 +451,7 @@ Finally, if both members~$1$ and $n$ are absent, then there are a total of
 \frac{ \phi^{n} - (1 - \phi)^{n} }{ \sqrt{5} }
 \end{equation*}
 combinations for which the meeting cannot proceed, as this is the number of distinct subsets of the integers $\{ 2, 3, \ldots, n-1 \}$ that do not contain consecutive integers.
-Thus, the probability that the meeting can proceed is
+Collecting these results, we gather that the probability of the meeting being cancelled on the second day is
 \begin{equation*}
 1 - \frac{ 2 \phi^{n-1} - 2 (1 - \phi)^{n-1}
 + \phi^{n} - (1 - \phi)^{n} }{2^n \sqrt{5}} .
