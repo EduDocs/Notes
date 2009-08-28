@@ -2,7 +2,7 @@
 \label{chapter:ConditionalProbability}
 
 Conditional probability provides a way to compute the likelihood of an event based on \emph{partial information}.
-This is a powerful concept that is used extensively throughout engineering with applications to decision making, networks and digital communications.
+This is a powerful concept that is used extensively throughout engineering with applications to decision making, networks, communications and many other fields.
 
 
 \section{Conditioning on Events}
@@ -27,8 +27,8 @@ The resulting values are known as conditional probabilities.}
 \end{figure}
 
 These three outcomes had equal probabilities before the additional information was revealed.
-It is then natural to assume that they remain equally likely afterwards.
-In particular, it is reasonable to assign a probability of $1/3$ to each of the three outcomes that are still possible after learning the new information.
+It then seems natural to assume that they remain equally likely afterwards.
+In particular, it is reasonable to assign a probability of $1/3$ to each of the three outcomes that remain possible candidates after learning the new information.
 Note that we can express the probability of getting a three given that the outcome is an odd number as
 \begin{equation*}
 \frac{\Pr (3 \cap \{ 1, 3, 5 \})}{\Pr (\{ 1, 3, 5 \} ) }
@@ -68,7 +68,7 @@ is also a sequence of disjoint events and
 \end{split}
 \end{equation*}
 where the third equality follows from the third axiom of probability applied to the set $\bigcup_{k=1}^{\infty} (A_k \cap B )$.
-Then, the conditional probability law defined by \eqref{equation:ConditionalProbability} satisfies the three axioms of probability.
+Thus, the conditional probability law defined by \eqref{equation:ConditionalProbability} satisfies the three axioms of probability.
 
 \begin{example}
 A fair coin is tossed repetitively until heads is observed.
@@ -106,13 +106,13 @@ This formula can be verified by expanding each of the conditional probabilities 
 We emphasize that these expressions implicitly assume that $\Pr \left( \bigcap_{k=1}^{n-1} A_k \right) \neq 0$.
 
 \begin{example}
-An urn contains eight red balls and four green balls.
+An urn contains eight blue balls and four green balls.
 Three balls are drawn from this urn without replacement.
-We wish to compute the probability that all three balls are red.
-The probability of drawing a red ball the first time is equal to $8/12$.
-The probability of drawing a red ball the second time given that the first ball is red is $7/11$.
-Finally, the probability of drawing a red ball the third time given that the previous two balls are red is $6/10$.
-Using \eqref{equation:SimultaneousEvents}, we can compute the probability of drawing three red balls as
+We wish to compute the probability that all three balls are blue.
+The probability of drawing a blue ball the first time is equal to $8/12$.
+The probability of drawing a blue ball the second time given that the first ball is blue is $7/11$.
+Finally, the probability of drawing a blue ball the third time given that the previous two balls are blue is $6/10$.
+Using \eqref{equation:SimultaneousEvents}, we can compute the probability of drawing three blue balls as
 \begin{equation*}
 \Pr (rrr)
 = \frac{8}{12} \frac{7}{11} \frac{6}{10}
@@ -126,7 +126,7 @@ Using \eqref{equation:SimultaneousEvents}, we can compute the probability of dra
 \psfrag{2}[c]{$2$}
 \includegraphics[height=7.11cm]{Figures/3Chapter/balls}
 \end{psfrags}
-\caption{Conditional probabilities can be used to calculate the probability of multiple events occurring at the same time.}
+\caption{Conditional probabilities can be employed to calculate the probability of multiple events occurring at the same time.}
 \label{figure:Balls}
 \end{center}
 \end{figure}
@@ -292,7 +292,7 @@ Using Bayes' rule, we can easily compute the probability that a person who teste
 &\approx 0.1610 .
 \end{split}
 \end{equation*}
-Although the test is fairly accurate, the probability that a person with a positive test carries the disease remains small.
+Although the test first appeared fairly accurate, the probability that a person with a positive test carries the disease remains small.
 \end{example}
 
 
@@ -330,7 +330,7 @@ From this equation, we gather that
 \Pr (\{ r=4 \} \cap \{ b=6 \})
 = \Pr ( r=4 ) \Pr ( b=6 ) .
 \end{equation*}
-Thus, rolling a four on the red die and rolling a six on the blue die are independent events.
+As such, rolling a four on the red die and rolling a six on the blue die are independent events.
 
 Similarly, consider the probability of obtaining a four on the red die given that the sum of the two dice is eleven,
 \begin{equation*}
@@ -352,7 +352,7 @@ If $\Pr (A) > 0$, $\Pr (B) > 0$, and $\Pr (A \cap B) = 0$ then
 \begin{equation*}
 \Pr (A \cap B) = 0 < \Pr (A) \Pr(B).
 \end{equation*}
-Thus, $A$ and $B$ cannot be independent if they are disjoint, non-trivial sets.
+Hence, $A$ and $B$ cannot be independent if they are disjoint, non-trivial sets.
 
 
 \subsection{Independence of Multiple Events}
@@ -379,7 +379,7 @@ and, in addition,
 \Pr (A \cap B \cap C) = \Pr (A) \Pr (B) \Pr(C) .
 \end{equation*}
 The three equalities in \eqref{equation:ThreeIndependentEvents} assert that $A$, $B$ and $C$ are \emph{pairwise independent}.
-Note that the fourth condition does not follow from the first three conditions, nor does it imply any of them.
+Note that the fourth equation does not follow from the first three conditions, nor does it imply any of them.
 Pairwise independence does not necessarily imply independence.
 
 \begin{example}
@@ -390,9 +390,9 @@ Finally, let $C$ be the event that the two coins show distinct sides.
 These three events each have a probability of $1/2$.
 Furthermore, we have
 \begin{equation*}
-\Pr (A \cap B) = \Pr (A \cap C) = \Pr (B \cap C) = \frac{1}{4} .
+\Pr (A \cap B) = \Pr (A \cap C) = \Pr (B \cap C) = \frac{1}{4}
 \end{equation*}
-That is, these events are pairwise independent.
+and, therefore, these events are pairwise independent.
 However, we can verify that
 \begin{equation*}
 \Pr (A \cap B \cap C) = 0 \neq \frac{1}{8} = \Pr (A) \Pr (B) \Pr (C) .
@@ -417,8 +417,8 @@ We note that these events are not pairwise independent because
 \Pr (A \cap C) &= \frac{1}{36} \neq \frac{1}{18} = \Pr(A) \Pr(C) \\
 \Pr (B \cap C) &= \frac{1}{12} \neq \frac{1}{18} = \Pr(B) \Pr(C) .
 \end{align*}
-The multiple events $A$, $B$ and $C$ are not independent.
-On the other hand, the probability of these three events occurring simultaneously is
+Consequently, the multiple events $A$, $B$ and $C$ are not independent.
+Still, the probability of these three events occurring simultaneously is
 \begin{equation*}
 \Pr (A \cap B \cap C) = \frac{1}{36}
 = \frac{1}{2} \cdot \frac{1}{2} \cdot \frac{4}{36}
@@ -430,11 +430,11 @@ On the other hand, the probability of these three events occurring simultaneousl
 
 We introduced earlier the meaning of conditional probability, and we showed that the set of conditional probabilities $\{ \Pr (A|B) \}$ specifies a valid probability law.
 It is therefore possible to discuss independence with respect to conditional probability.
-We say that events $A_1$ and $A_2$ are \emph{conditionally independent} if \index{Conditional independence}
+We say that events $A_1$ and $A_2$ are \emph{conditionally independent}, given event $B$, if \index{Conditional independence}
 \begin{equation*}
 \Pr (A_1 \cap A_2 | B) = \Pr (A_1 | B) \Pr (A_2 | B) .
 \end{equation*}
-Note that if $A_1$ and $A_2$ are conditionally independent given event $B$, we can use equation \eqref{equation:ConditionalProbability} to write
+Note that if $A_1$ and $A_2$ are conditionally independent, we can use equation \eqref{equation:ConditionalProbability} to write
 \begin{equation*}
 \begin{split}
 \Pr (A_1 \cap A_2 | B) &= \frac{ \Pr (A_1 \cap A_2 \cap  B) }{\Pr (B)} \\
@@ -446,7 +446,7 @@ Under the assumption that $\Pr (A_1 | B) > 0$, we can combine the previous two e
 \begin{equation*}
 \Pr (A_2 | A_1 \cap  B) = \Pr (A_2 | B) .
 \end{equation*}
-This latter result asserts that, given event $B$ has taken place, the additional information that $A_1$ also occurred does not affect the conditional probability of $A_2$.
+This latter result asserts that, given event $B$ has taken place, the additional information that $A_1$ has also occurred does not affect the likelihood of $A_2$.
 It is simple to show that conditional independence is a symmetric relation as well.
 
 \begin{example}
@@ -469,7 +469,7 @@ The joint probability of events $A_1$ and $A_2$ given $B$ is equal to
 &= \Pr (A_1 | B) \Pr (A_2 | B) .
 \end{split}
 \end{equation*}
-It follows that $A_1$ and $A_2$ are conditionally independent given $B$.
+We conclude that $A_1$ and $A_2$ are conditionally independent given $B$.
 In particular, we have
 \begin{align*}
 \Pr (A_2 | A_1 \cap  B) &= \Pr (A_2 | B) \\
@@ -511,14 +511,14 @@ The events $A_1, A_2, \ldots, A_n$ are conditionally independent given $B$ if
 = \prod_{i \in \IndexSet} \Pr (A_i | B)
 \end{equation*}
 for every subset $\IndexSet$ of $\{1, 2, \ldots, n\}$.
-This definition is analogous to \eqref{equation:IndependenceMultipleEvents}, albeit using the proper conditional probability law.
+This definition is analogous to \eqref{equation:IndependenceMultipleEvents}, albeit using the relevant conditional probability law.
 
 
 \section{Equivalent Notations}
 
 In the study of probability, we are frequently interested in the probability of multiple events occurring simultaneously.
 So far, we have expressed the joint probability of events $A$ and $B$ using the notation $\Pr (A \cap B)$.
-For notational convenience, we also represent the probability that two events occur at the same time by
+For mathematical convenience, we also represent the probability that two events occur at the same time by
 \begin{equation*}
 \Pr (A, B) = \Pr (A \cap B) .
 \end{equation*}
