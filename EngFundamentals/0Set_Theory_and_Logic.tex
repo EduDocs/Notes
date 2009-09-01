@@ -504,7 +504,7 @@ Two sets are said to be \defn{set theory}{disjoint} if $A\cap B = \emptyset$.
 \end{definition}
 
 \begin{definition}
-The \defn{set theory}{set difference} between $A$ and $B$ (denoted $A-B$ or $A \setminus B$) is the set of elements in $A$ but not in $B$
+The \defn{set theory}{set difference} between $A$ and $B$ (denoted $A-B$ or $A \setminus \!B$) is the set of elements in $A$ but not in $B$
 This means that
 \[ x\in A-B \Leftrightarrow (x\in A)\wedge (x\notin B). \]
 If there is some implied universal set $U$, then the \defn{set theory}{complement} (denoted $A^c$) is defined by $A^c = U-A$
@@ -550,12 +550,21 @@ One can verify that it is an equivalence relation by checking that it is reflexi
 One important characteristic of an equivalence relation is that it partitions the entire set $A$ into disjoint \defn{set theory}{equivalence classes}.
 The equivalence class associated with $a\in A$ is given by  $[a] = \left\{x\in A | x \sim a\right\}$.
 In the birthday example, there is a natural equivalence class associated with each day of the year.
-The set of all equivalence classes is called the \defn{set theory}{quotient set} and is denoted $A \setminus \sim = \{ [a] | a\in A \}$.
+The set of all equivalence classes is called the \defn{set theory}{quotient set} and is denoted $A \setminus \!\sim = \{ [a] | a\in A \}$.
 
 In fact, there is a natural equivalence relation defined by any disjoint partition of a set.
 For example, let $A_{i,j}$ be the set of people in $A$ whose birthday was on the $j$-th day of the $i$-th month.
 It follows that $x\sim y$ iff there exists a single $i,j$ such that $x,y\in A_{i,j}$.
 In this case, the days of year are used as equivalence classes to define the equivalence relation.
+
+\begin{example}
+Consider the set $\mathbb{N} \times \mathbb{N} = \{ (a,b) | a,b\in\mathbb{N} \}$ of ordered pairs of natural numbers.
+If one associates the element $(a,b)$ with the fraction $a/b$, then entire set is associated with the set of (possibly reducible) fractions.
+Now, consider the equivalence relation $(a,b) \sim (c,d)$ if $ad=bc$.
+In this case, two ordered pairs are equivalent if their associated fractions evaluate to the same real number.
+The quotient set $\mathbb{N} \times \mathbb{N} \setminus \!\sim$ can therefore be associated with the set of reduced fractions.
+\end{example}
+
 
 \section{Functions}
 

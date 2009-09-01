@@ -419,7 +419,7 @@ A closed subset $A$ of a complete space $X$ is itself a complete space.
 \end{theorem}
 
 \begin{definition}
-The \defn{topology}{completion} of a metrizable space $X$ consists of a complete metric space $X'$ and an isometry $\phi : X' \rightarrow X$ such that $\phi(X)$ is a dense subset of $X'$.
+The \defn{topology}{completion} of a metrizable space $X$ consists of a complete metric space $X'$ and an isometry $\phi : X \rightarrow X'$ such that $\phi(X)$ is a dense subset of $X'$.
 Moreover, the completion is unique up to isometry.
 \end{definition}
 
@@ -438,37 +438,10 @@ Two Cauchy sequences $x_1, x_2, \ldots$ and $y_1, y_2, \ldots$ are equivalent if
 
 \begin{example}
 Let $\mathcal{C}(\mathbb{Q})$ denote the set of all Cauchy sequences $q_1, q_2, \ldots$ of rational numbers where $\sim$ represents the equivalence relation on this set defined above.
-Then, the set of equivalence classes (or quotient set) $\mathcal{C}(\mathbb{Q}) \setminus \!\! \sim$ is one-to-one correspondence with the real numbers.
+Then, the set of equivalence classes (or quotient set) $\mathcal{C}(\mathbb{Q}) \setminus \!\! \sim$ is in one-to-one correspondence with the real numbers.
 This construction is the standard completion of $\mathbb{Q}$.
 Since every Cauchy sequence of rationals converges to a real number, the isometry is given by mapping each equivalence class to its limit point in $\RealNumbers$.
 \end{example}
-
-\begin{definition}
-A metrizable space $X$ is \defn{topology}{totally bounded} if, for any $\epsilon > 0$, there exists a finite set of $B(x,\epsilon)$ balls that cover (i.e., whose union equals) $X$.
-\end{definition}
-
-\begin{definition}
-A metrizable space $X$ is \defn{topology}{compact} if it is complete and totally bounded.
-\end{definition}
-
-\begin{example}
-The closed interval $[0,1]\subset \RealNumbers$ is compact.
-On the other hand, the standard metric space of real numbers is not compact because it is neither complete nor totally bounded.
-\end{example}
-
-\begin{theorem}
-A closed subset $A$ of a compact space $X$ is itself a compact space.
-\end{theorem}
-
-\begin{theorem}
-Let $X$ be a compact space and $x_1,x_2,\ldots \in X$ be a sequence.
-Then, there is a subsequence $x_{n_1},x_{n_2},\ldots$, defined by some increasing sequence $n_1,n_2,\ldots \in \mathbb{N}$, that converges.
-\end{theorem}
-
-
-\subsection{Applications}
-
-Minimum/maximum of a continuous function on a compact set
 
 \begin{definition}
 Let $A$ be a subset of a metric space $(X,d)$ and $f: X \rightarrow X$ be a function.
@@ -499,4 +472,106 @@ The sequence $x_n$ is Cauchy because $d(x_m,x_n)$ can be made arbitrarily small 
 Since $(X,d)$ is complete, it must converge to a fixed point and $x^*$ is the unique fixed point in $A$.
 \end{proof}
 
+\begin{example}
+Suppose the function $f: \RealNumbers \rightarrow \RealNumbers$ satisfies $|f(x)| \leq a |x|$ for all $x\in X$.
+If $X$ be a closed subset of the real numbers containing zero and $a\in[0,1)$, then $f$ is a contraction on $X$ and $x_{n+1} = f(x_n) \rightarrow 0$ for all $x_1 \in X$.
+\end{example}
+
+
+\subsection{Compactness}
+
+\begin{definition}
+A metrizable space $X$ is \defn{topology}{totally bounded} if, for any $\epsilon > 0$, there exists a finite set of $B(x,\epsilon)$ balls that cover (i.e., whose union equals) $X$.
+\end{definition}
+
+\begin{definition}
+A metrizable space $X$ is \defn{topology}{compact} if it is complete and totally bounded.
+\end{definition}
+
+The closed interval $[0,1]\subset \RealNumbers$ is compact.
+In fact, any subset of $\RealNumbers^n$ is compact iff it is closed and bounded.
+On the other hand, the standard metric space of real numbers is not compact because it is neither complete nor totally bounded.
+
+\begin{theorem}
+\label{thm:CompactClosedSubsetCompact}
+A closed subset $A$ of a compact space $X$ is itself a compact space.
+\end{theorem}
+
+The following theorem highlights one of the main reasons that compact spaces are desirable in practice.
+
+\begin{theorem}
+Let $X$ be a compact space and $x_1,x_2,\ldots \in X$ be a sequence.
+Then, there is a subsequence $x_{n_1},x_{n_2},\ldots$, defined by some increasing sequence $n_1,n_2,\ldots \in \mathbb{N}$, that converges.
+\end{theorem}
+\begin{proof}
+Suppose for some $x\in X$, it holds that, for any $\epsilon > 0$, the set $B(x,\epsilon)$ contains infinitely many elements in the sequence $x_1,x_2,\ldots$.
+In this case, we can choose $n_1,n_2,\ldots$ so that $|x - x_{n_j}|$ is strictly decreasing whenever it is non-zero.
+Therefore, the subsequence converges to $x$ because $X$ is complete.
+
+On the other hand, suppose the sequence has no convergent subsequence.
+Then, for every $x\in X$, there is an $\epsilon >0$ such that $B(x,\epsilon)$ does not contain infinitely many elements in the sequence.
+Since $X$ is totally bounded, we also find that, for any $\epsilon >0$, $X$ is covered by a finite set of balls of radius $\epsilon$.
+But, for each $\epsilon >0$, this gives a contradiction because all the elements in the infinite sequence must fall into a finite number balls each containing finitely many elements.
+By contradiction, this implies that there is a subsequence that converges.
+%First, we suppose the sequence has no convergent subsequence.
+%Then, we notice that the set $A = \{x_1,x_2,\ldots \}$ is closed and therefore compact by \ref{thm:CompactClosedSubsetCompact}.
+%Since any limit point of $A$ can be used to generate a convergent subsequnce, we must also conclude that $A$ has no limit points.
+%This implies that there is an $\epsilon > 0$ such that infinitely balls aronud $x$'s does not cover $X$.
+%Therefore, $X$ is not totally bounded and we have a contradiction.
+\end{proof}
+
+Functions from compact sets to the real numbers are very important in practice.
+To keep the discussion self-contained, we first review the extreme values of sets of real numbers.
+
+\begin{definition}
+The \defn{set theory}{supremum} (or least upper bound) of $X\subseteq \RealNumbers$, denoted $\sup X$, is the smallest extended real number $M \in \RealNumbers \cup \{-\infty,\infty\}$ such that $x\leq M$ for all $x\in X$.
+It is always well-defined and equals $-\infty$ if $X=\emptyset$.
+\end{definition}
+
+\begin{definition}
+The \defn{set theory}{maximum} of $X\subseteq \RealNumbers$, denoted $\max X$, is the largest value achieved by the set.
+It equals $\sup X$ if $\sup X \in X$ and is undefined otherwise.
+\end{definition}
+
+\begin{definition}
+The \defn{set theory}{infimum} (or greatest lower bound) of $X\subseteq \RealNumbers$, denoted $\inf X$, is the largest extended real number $m \in \RealNumbers \cup \{-\infty,\infty\}$ such that $x\geq m$ for all $x\in X$.
+It is always well-defined and equals $\infty$ if $X=\emptyset$.
+\end{definition}
+
+\begin{definition}
+The \defn{set theory}{minimum} of $X\subseteq \RealNumbers$, denoted $\min X$, is the smallest value achieved by the set.
+It equals $\inf X$ if $\inf X \in X$ and is undefined otherwise.
+\end{definition}
+
+\begin{lemma}
+\label{lem:SupremumSequence}
+Let $X$ be a metrizable space and $f: X\rightarrow \RealNumbers$ be a function from $X$ to the real numbers.
+Let $M = \sup f(A)$ for some non-empty $A \subseteq X$.
+Then, there exists a sequence $x_1,x_2,\ldots \in A$ such that $\lim_n f(x_n) = M$.
+\end{lemma}
+\begin{proof}
+If $M=\infty$, then $A$ has no finite upper bound and, for any $y\in \RealNumbers$, there exists an $x\in A$ such that $f(x)>y$.
+In this case, we can let $x_1$ be any element of $A$ and $x_{n+1}$ be any element of $A$ such that $f(x_{n+1}) > f(x_n) + 1$.
+If $M<\infty$, then $A$ has a finite upper bound and, for any $\epsilon >0$, there is an $x$ such that $M-f(x)<\epsilon$.
+Otherwise, one arrives at the contradiction $\sup f(A) < M$.
+Therefore, we can construct the sequence $x_1,x_2,\ldots$ by choosing $x_n\in A$ to be any point that satisfies $M-f(x_n)\leq \frac{1}{n}$.
+\end{proof}
+
+\begin{theorem}
+Let $X$ be a metrizable space and $f: X\rightarrow \RealNumbers$ be a continuous function from $X$ to the real numbers.
+If $A$ is a compact subset of $X$, then there exists $x\in A$ such that $f(x)=\sup f(A)$ (i.e., $f$ achieves a maximum on $A$).
+\end{theorem}
+\begin{proof}
+Using Lemma \ref{lem:SupremumSequence}, one finds that there is a sequence $x_1,x_2,\ldots \in A$ such that $\lim_n f(x_n) = \sup f(A)$.
+Since $A$ is compact, there must also be a subsequence $x_{n_1},x_{n_2},\ldots$ that converges to some $x^* \in A$.
+Finally, the continuity of $f$ shows that
+\[f(A) = \lim_n f(x_n) = \lim_k f(x_{n_k}) = f(\lim_k x_{n_k}) = f(x*).\]
+\end{proof}
+
+\begin{corollary}
+A continuous function from a compact subset $A$, of a metrizable space $X$, to the real numbers achieves a minimum on $A$.
+\end{corollary}
+
+%\begin{example}
+%\end{example}
 
