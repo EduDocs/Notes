@@ -8,6 +8,11 @@ approx: poisson_approx.o
 poisson_approx.o: poisson_approx.cpp
 	g++ -c poisson_approx.cpp -o poisson_approx.o
 
+random: pran.o
+	g++ pran.o -o pran
+prandom.o: pran.cpp
+	g++ -c pran.cpp -o pran.o
+
 clean:
 	rm *.o
 
