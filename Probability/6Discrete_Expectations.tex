@@ -1,22 +1,22 @@
 \chapter{Discrete Expectations}
 \label{chapter:ExpectationsDiscrete}
 
-When a large collection of data is gathered, one is typically interested not necessarily in each individual data point, but rather in certain descriptive quantities such as the average or the median.
+When a large collection of data is gathered, one is typically interested, not necessarily in each individual data point, but rather in certain descriptive quantities such as the average or the median.
 The same is true for random variables.
-The PMF of random variable $X$ provides a complete characterization of the distribution of $X$ by specifying the probability of every possible value of $X$.
-Still, it may be desirable to summarize the information contained in the PMF of a random variable into a few parameters.
-One way to achieve this goal and obtain meaningful descriptive quantities is through the concept of expectation.
+The PMF of discrete random variable $X$ provides a complete characterization of the distribution of $X$ by specifying the probability of every possible value of $X$.
+Still, it may be desirable to summarize the information contained in the PMF of a random variable in a few parameters.
+One way to achieve this goal and obtain meaningful descriptive quantities is through the expectation operator.
 
 
 \section{Expected Value}
 
-The \emph{expected value} $\Expect [X]$ of random variable $X$ is defined by \index{Expected value}
+The \emph{expected value} $\Expect [X]$ of discrete random variable $X$ is defined by \index{Expected value}
 \begin{equation} \label{equation:DiscreteMean}
 \Expect [X] = \sum_{x \in X(\Omega)} x p_X (x) ,
 \end{equation}
-provided that the sum converges absolutely.
+whenever this sum converges absolutely.
 If the above sum is not absolutely convergent, then $X$ is said not to possess an expected value.
-In some sense, the expected value $\Expect [X]$ offers useful information about the underlying random variable $X$ without giving a comprehensive and overly detailed description.
+As mentioned above, the expected value $\Expect [X]$ offers useful information about the underlying random variable $X$ without giving a comprehensive and overly detailed description.
 The expected value of a random variable, as defined in \eqref{equation:DiscreteMean}, is also called the \emph{mean} of $X$. \index{Mean}
 It is important to realize that $\Expect [X]$ is not a function of random variable $X$; rather, it is a function of the PMF of $X$.
 
@@ -30,41 +30,44 @@ Thus, the mean of this random variable is $3.5$.
 \end{example}
 
 \begin{example}
-Assume that a standard coin is flipped repetitively until heads is observed.
-The total number of tosses performed during this experiment is assigned as the value of random variable $X$.
-The possible values that $X$ can take are therefore given by $X (\Omega) = \{ 1, 2, \ldots \}$.
+Assume that a fair coin is flipped repetitively until heads is observed.
+The value of random variable $X$ is taken to be the total number of tosses performed during this experiment.
+The possible values for $X$ are therefore given by $X (\Omega) = \{ 1, 2, \ldots \}$.
 Recall that the PMF of $X$ is equal to $p_X(k) = 2^{-k}$, where $k$ is a positive integer.
 The expected value of this geometric random variable can be computed as
 \begin{equation*}
 \Expect [X] = \sum_{k=1}^{\infty} \frac{k}{2^k}
 = 2.
 \end{equation*}
-In other words, the expected number of tosses until the coin lands on heads is two.
+In other words, the expected number of tosses until the coin produces heads is equal to two.
 \end{example}
 
-In both cases, computing the expected value of the random variable provides a concise summary of its behavior.
-This procedure takes as input the PMF, a detailed characterization of the random variable, and returns a much simplified and yet relevant scalar attribute, its mean.
+In general, determining the expectation of a random variable requires as input its PMF, a detailed characterization of the random variable, and returns a much simpler scalar attribute, its mean.
+That is, computing the expected value of the random variable provides a concise summary of its overall behavior.
 
 
 \section{Functions and Expectations}
 
-The mean offers only one instance where the distribution of a random variable is condensed into a scalar quantity.
-The notion of \emph{expectation} can be combined with traditional functions to create alternate descriptions and other meaningful attributes. \index{Expectation}
+The mean forms one instance where the distribution of a random variable is condensed into a scalar quantity.
+There are additional examples.
+For instance, the notion of an \emph{expectation} can be combined with traditional functions to create alternate descriptions and other meaningful quantities. \index{Expectation}
 
 Suppose that $X$ is a discrete random variable.
 Let $g: X(\Omega) \mapsto \mathbb{R}$ be a real-valued function on the range of $X$, and consider the expectation of $g(X)$.
-One way to determine the expected value of $g(X)$ is to first notice that $Y = g(X)$ is itself a random variable, find the PMF of $Y$, and then apply the definition of expected value provided in \eqref{equation:DiscreteMean}.
+The expected value $\Expect [g(X)]$ is an alternate scalar quantity that provides partial information about the distribution of $X$.
+One way to determine the expected value of $g(X)$ is to first note that $Y = g(X)$ is itself a random variable, find the PMF of $Y$, and then apply the definition of expected value provided in \eqref{equation:DiscreteMean}.
 
 Yet, there is another and more direct way to compute this quantity.
-The \emph{expectation} of $g(X)$ can be written as \index{Expectation}
+The \emph{expectation} of $g(X)$ can be expressed as \index{Expectation}
 \begin{equation} \label{equation:DiscreteExpectation}
 \Expect \left[ g(X) \right]
 = \sum_{x \in X(\Omega)} g(x) p_X (x) .
 \end{equation}
 Again, it is worth mentioning that there exist random variables and functions for which the above sum does not converge.
 In such cases, we simply say that the expected value of $g(X)$ does not exist.
-Also, we note that the mean $\Expect [X]$ is a special case of \eqref{equation:DiscreteExpectation} where $g(X) = X$.
-We explore additional examples below.
+Also, notice that the mean $\Expect [X]$ is a special case of \eqref{equation:DiscreteExpectation} where $g(X) = X$.
+Thus, the definition of $\Expect [g(X)]$ given above subsumes our original description of $\Expect [X]$, which appeared in \eqref{equation:DiscreteMean}.
+We explore pertinent examples below.
 
 \begin{example}
 The simplest possible scenario for \eqref{equation:DiscreteExpectation} is a situation where the function $g(x)$ is a constant.
@@ -73,10 +76,10 @@ In this case, the expectation of $g(X) = c$ is equal to
 \Expect [ c ]
 = \sum_{x \in X(\Omega)} c p_X (x)
 = c \sum_{x \in X(\Omega)} p_X (x)
-= c,
+= c .
 \end{equation*}
-where the last inequality follows from the normalization axiom of probability laws.
-The expectation of a constant is always the constant itself.
+The last inequality follows from the normalization axiom of probability laws.
+Thus, the expectation of a constant is always the constant itself.
 \end{example}
 
 \begin{example}
@@ -92,12 +95,13 @@ The expectation of $\IndicatorFcn_S (x)$ is equal to
 = \sum_{x \in S} p_X(x)
 = \Pr (x \in S) .
 \end{equation*}
-That is, the expectation of the indicator function of $S$ is simply the probability that $X$ takes on value in $S$.
+That is, the expectation of the indicator function of $S$ is simply the probability that $X$ takes on a value in $S$.
+This alternate means of computing the probability of an event can sometimes be employ to solve probability problems.
 \end{example}
 
 Let random variable $Y$ be defined by applying real-valued function $g(\cdot)$ to $X$, with $Y = g(X)$.
-The mean of $Y$ is equal to the expectation of $g(X)$, and we know from our previous discussion that this value can be obtained by applying two different formulas.
-For consistency, we need to make sure that we get a same solution using either approach.
+The mean of $Y$ is equal to the expectation of $g(X)$, and we know from the ongoing discussion that this value can be obtained by applying two different formulas.
+For consistency, we need to verify that the two approaches give a same solution.
 
 First, we can apply \eqref{equation:DiscreteMean} directly to $Y$, and obtain
 \begin{equation*}
@@ -108,10 +112,10 @@ Alternatively, using \eqref{equation:DiscreteExpectation}, we have
 \begin{equation*}
 \Expect [Y] = \Expect [g(X)] = \sum_{x \in X(\Omega)} g(x) p_X(x) .
 \end{equation*}
-We can verify that these two procedures lead to a same solution as follows.
+We can confirm that these two expression lead to a same solution as follows.
 Recall that the PMF of $Y$ evaluated at $y$ is obtained by summing the values of $p_X(\cdot)$ over all $x \in X(\Omega)$ such that $g(x) = y$.
 Mathematically, this can be expressed as $p_Y (y) = \sum_{ \{x \in X(\Omega) | g(x) = y \} } p_X (x)$.
-Using this result, we get
+Using this equality, we have
 \begin{equation*}
 \begin{split}
 \Expect [Y] &= \sum_{y \in g(X(\Omega))} y p_Y(y)
@@ -125,8 +129,8 @@ Using this result, we get
 = \Expect [g(X)] .
 \end{split}
 \end{equation*}
-We emphasize that summing over all possible values of $Y$ and after summing over the preimage of $y$ for every $y \in Y(\Omega)$ is equivalent to summing over all $x \in X(\Omega)$.
-Thus, we have shown that computing the expectation of a function using the two methods outlined above leads to a same solution.
+We emphasize that first summing over all possible values of $Y$ and then summing over the preimage of $y$ for every $y \in Y(\Omega)$ is equivalent to summing over all $x \in X(\Omega)$.
+Hence, we have shown that computing the expectation of a function using the two methods outlined above leads to a same solution.
 
 \begin{example}
 Brazos Extreme Events Radio creates the ``Extreme Trio'' contest.

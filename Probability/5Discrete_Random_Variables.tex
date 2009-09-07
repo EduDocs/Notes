@@ -19,7 +19,7 @@ Because of the structure of real numbers, it is possible to define pertinent sta
 \psfrag{6}[c]{$6$}
 \psfrag{7}[c]{$7$}
 \psfrag{R}[r]{Real Numbers}
-\includegraphics[width=11cm]{Figures/5Chapter/rv}
+\includegraphics[height=4.96cm]{Figures/5Chapter/rv}
 \caption{The sample space in this example has seven possible outcomes.
 A random variable maps each of these outcomes to a real number.}
 \end{psfrags}
@@ -29,7 +29,7 @@ A random variable maps each of these outcomes to a real number.}
 \begin{example}
 There are six possible outcomes to the rolling of a fair die, namely each of the six faces.
 These faces map naturally to the integers one through six.
-The value of the random variable, in this case, is simply the number of dots that appears on the top face of the die.
+The value of the random variable, in this case, is simply the number of dots that appear on the top face of the die.
 
 \begin{figure}[ht]
 \begin{center}
@@ -40,8 +40,8 @@ The value of the random variable, in this case, is simply the number of dots tha
 \psfrag{4}[c]{$4$}
 \psfrag{5}[c]{$5$}
 \psfrag{6}[c]{$6$}
-\includegraphics[width=7.44cm]{Figures/5chapter/rvdices}
-\caption{This random variable takes its input from the rolling of a die and assigns to each outcome a real number that corresponds to number of dots that appears on the top face of the die.}
+\includegraphics[height=5.99cm]{Figures/5chapter/rvdices}
+\caption{This random variable takes its input from the rolling of a die and assigns to each outcome a real number that corresponds to the number of dots that appear on the top face of the die.}
 \end{psfrags}
 \end{center}
 \end{figure}
@@ -83,7 +83,7 @@ p_X (x)
 \psfrag{6}[c]{$6$}
 \psfrag{7}[c]{$7$}
 \psfrag{x}[l]{$x$}
-\includegraphics[width=11cm]{Figures/5Chapter/pmf}
+\includegraphics[height=4.97cm]{Figures/5Chapter/pmf}
 \caption{The probability mass of $x$ is given by the probability of the set of all outcomes which $X$ maps to $x$.}
 \end{psfrags}
 \end{center}
@@ -101,7 +101,7 @@ In general, if $X$ is a discrete random variable and $S$ is a subset of $X(\Omeg
 \begin{equation} \label{equation:FunctionPMF}
 \Pr (S) = \Pr \left( \{ \omega \in \Omega | X(\omega) \in S \} \right) = \sum_{x \in S} p_X (x) .
 \end{equation}
-This equation provides an explicit formula to compute the probability of any subset of $X (\Omega)$.
+This equation offers an explicit formula to compute the probability of any subset of $X (\Omega)$, provided that $X$ is discrete.
 
 \begin{example}
 An urn contains three balls numbered one, two and three.
@@ -109,9 +109,7 @@ Two balls are drawn from the urn without replacement.
 We wish to find the probability that the sum of the two selected numbers is odd.
 
 Let $\Omega$ be the set of ordered pairs corresponding to the possible outcomes of the experiment,
-\begin{equation*}
-\Omega = \{ (1, 2), (1, 3), (2, 1), (2, 3), (3, 1), (3, 2) \}.
-\end{equation*}
+$\Omega = \{ (1, 2), (1, 3), (2, 1), (2, 3), (3, 1), (3, 2) \}$.
 Note that these outcomes are equiprobable.
 We employ $X$ to represent the sum of the two selected numbers.
 The PMF of random variable $X$ is given by
@@ -137,7 +135,7 @@ In general, discrete random variables occur primarily in situations where counti
 
 The first and simplest discrete random variable is the \emph{Bernoulli random variable}. \index{Bernoulli random variable}
 Let $X$ be a random variable that takes on only two possible numerical values, $X(\Omega) = \{0, 1\}$.
-The PMF of this random variable is given by
+Then $X$ is a Bernoulli random variable and its PMF is given by
 \begin{equation*}
 p_X (x) = \left\{ \begin{array}{ll}
 1 - p, & \text{if }x = 0 \\
@@ -148,14 +146,14 @@ where $p \in [0, 1]$.
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[width=8cm]{Figures/5chapter/bernoulli_pmf}
+\includegraphics[width=8.5cm]{Figures/5chapter/bernoulli_pmf}
 \end{center}
-\caption{The PMF of a Bernoulli random variable appears on the figure for parameter $p = 0.25$.}
+\caption{The PMF of a Bernoulli random variable appears above for parameter $p = 0.25$.}
 \end{figure}
 
 \begin{example}
 Consider the flipping of a biased coin, for which heads is obtained with probability $p$ and tails is obtained with probability $1-p$.
-A random variable that maps heads to one, and tails to zero, is a Bernoulli random variable with parameter~$p$.
+A random variable that maps heads to one and tails to zero is a Bernoulli random variable with parameter~$p$.
 In fact, every Bernoulli random variable is equivalent to the tossing of a coin.
 \end{example}
 
@@ -172,7 +170,7 @@ p_X (k) = \Pr (X = k)
 = \binom{n}{k} p^k (1-p)^{n-k},
 \end{equation*}
 where $k = 0, 1, \ldots n$.
-We can easily verify that $X$ fulfills the normalization axiom,
+Note that we can easily verify that $X$ fulfills the normalization axiom,
 \begin{equation*}
 \sum_{k=0}^n \binom{n}{k} p^k (1-p)^{n-k}
 = \left( p + (1-p) \right)^n = 1.
@@ -180,14 +178,14 @@ We can easily verify that $X$ fulfills the normalization axiom,
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[width=8cm]{Figures/5chapter/binomial_pmf}
+\includegraphics[width=8.5cm]{Figures/5chapter/binomial_pmf}
 \end{center}
 \caption{This figure shows a binomial random variable with parameters $n = 8$ and $p = 0.25$.}
 \end{figure}
 
 \begin{example} \label{BrazosSodaCompany1}
 The Brazos Soda Company creates an ``Under the Caps'' promotion whereby a customer can win an instant cash prize of \$10 by looking under a bottle cap.
-The chance to win is one in twelve, and it is independent from bottle to bottle.
+The likelihood to win is one in twelve, and it is independent from bottle to bottle.
 A customer buys twelve bottles of soda from this company.
 We wish to find the PMF of the number of winning bottles, which we denote by $X$.
 Also, we want to compute the probability of winning more than \$40.
@@ -229,7 +227,7 @@ It finds extensive use in networking, inventory management and queueing applicat
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[width=8cm]{Figures/5chapter/poisson_pmf}
+\includegraphics[width=8.5cm]{Figures/5chapter/poisson_pmf}
 \caption{This figure shows the PMF of a Poisson random variable with parameter $\lambda = 2$.  Note that the values of the PMF are only present for $k = 0, 1, \ldots, 8$.}
 \end{center}
 \end{figure}
@@ -248,7 +246,7 @@ The probability that no service requests arrive in one second is simply given by
 \end{example}
 
 It is possible to obtain a Poisson random variable as the limit of a sequence of binomial random variables.
-Suppose $\lambda$ is fixed and let $p_n = \lambda/n$.
+Fix $\lambda$ and let $p_n = \lambda/n$.
 For $k = 1, 2, \ldots n$, we define the PMF of the random variable $X_n$ as
 \begin{equation*}
 \begin{split}
@@ -271,7 +269,7 @@ Thus, the sequence of binomial random variables $\{ X_n \}$ converges in distrib
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[width=8cm]{Figures/5chapter/convergence_pmf}
+\includegraphics[width=8.5cm]{Figures/5chapter/convergence_pmf}
 \end{center}
 \caption{The levels of a binomial PMF with parameter $p = \lambda/n$ converge to the probabilities of a Poisson PMF with parameter $\lambda$ as $n$ increases to infinity.}
 \end{figure}
@@ -321,11 +319,11 @@ We stress that $(1-p)^{k-1} p$ simply represents the probability of obtaining a 
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[width=8cm]{Figures/5chapter/geometric_pmf}
+\includegraphics[width=8.5cm]{Figures/5chapter/geometric_pmf}
 \end{center}
 \caption{The PMF of a geometric random variable is a decreasing function of $k$.
-It is shown here for $p = 0.25$.
-Again, the values of the PMF are only present for $k = 1, 2, \ldots, 12$.}
+It is plotted above for $p = 0.25$.
+The values of the PMF are only present for $k = 1, 2, \ldots, 12$.}
 \end{figure}
 
 \begin{example}
@@ -349,7 +347,7 @@ A remarkable aspect of the geometric random variable is that it satisfies the \e
 \begin{equation*}
 \Pr (X = k + j | X > k) = \Pr (X = j).
 \end{equation*}
-This can be established using the properties of conditional probability.
+This can be established using the definition of conditional probability.
 Let $X$ be a geometric random variable with parameter $p$, and assume that $k$ and $j$ are positive integers.
 We can write the conditional probability of $X$ as
 \begin{equation*}
@@ -362,8 +360,8 @@ We can write the conditional probability of $X$ as
 = \Pr (X = j).
 \end{split}
 \end{equation*}
-In words, the probability that the number of trials carried out before completion is $k + j$ given $k$ unsuccessful trials is equal to the unconditioned probability that the total number of trials is $j$.
-It can be shown that the geometric random variable is the only discrete random variable that possesses this memoryless property.
+In words, the probability that the number of trials carried out before completion is $k + j$, given $k$ unsuccessful trials, is equal to the unconditioned probability that the total number of trials is $j$.
+It can be shown that the geometric random variable is the only discrete random variable that possesses the memoryless property.
 
 
 \subsection{Discrete Uniform Random Variables}
@@ -378,15 +376,16 @@ p_X (k) = \left\{ \begin{array}{ll}
 \end{array} \right.
 \end{equation*}
 We encountered specific cases of this random variable before.
-The tossing of a fair coin and the rolling of a die are two examples of uniform random variables.
+The tossing of a fair coin and the rolling of a die can both be used to construct uniform random variables.
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[width=8cm]{Figures/5chapter/uniform_pmf}
+\includegraphics[width=8.5cm]{Figures/5chapter/uniform_pmf}
 \end{center}
-\caption{The uniform random variable corresponds to the situation where all the possible values of the random variable are equally likely.
-It is shown here for the case where $n = 8$.}
+\caption{A uniform random variable corresponds to a situation where all the possible values of the random variable are equally likely.
+It is shown above for the case where $n = 8$.}
 \end{figure}
+
 
 \section{Functions of Random Variables}
 \label{subsection:FunctionDiscreteRV}
@@ -397,7 +396,7 @@ Given a random variable $X$, it is possible to create a new random variable $Y$ 
 If $X$ is a random variable then $Y = g(X)$ is also a random variable since it associates a numerical value to every outcome of the experiment.
 In particular, if $\omega \in \Omega$ is the outcome of the experiment, then $X$ takes on value $x = X(\omega)$ and $Y$ takes on value $Y(\omega) = g(x)$.
 
-\begin{figure}[ht]
+\begin{figure}[htb!]
 \begin{center}
 \begin{psfrags}
 \psfrag{1}[c]{$1$}
@@ -408,9 +407,9 @@ In particular, if $\omega \in \Omega$ is the outcome of the experiment, then $X$
 \psfrag{S}[l]{Sample Space}
 \psfrag{X}[c]{$X$}
 \psfrag{Y}[c]{$Y = g(X)$}
-\includegraphics[width=9.26cm]{Figures/5Chapter/fcn}
+\includegraphics[height=4.97cm]{Figures/5Chapter/fcn}
 \end{psfrags}
-\caption{A function of a random variable is a random variable itself.
+\caption{A real-valued function of a random variable is a random variable itself.
 In this figure, $Y$ is obtained by passing random variable $X$ through a function $g$.}
 \end{center}
 \end{figure}
@@ -420,9 +419,9 @@ The set of all the possible values $Y$ can take is denoted by $g(X(\Omega))$, an
 The PMF of $Y$, which we represent by $p_Y (y)$, is obtained as follows.
 If $y \in g(X(\Omega))$ then
 \begin{equation} \label{equation:DefinitionFunctionPMF}
-p_Y (y) = \sum_{ \{x \in X(\Omega) | g(x) = y \} } p_X (x) ,
+p_Y (y) = \sum_{ \{x \in X(\Omega) | g(x) = y \} } p_X (x) ;
 \end{equation}
-otherwise $p_Y (y) = 0$.
+otherwise, $p_Y (y) = 0$.
 In particular, $p_Y (y)$ is non-zero only if there exists an $x \in X(\Omega)$ such that $g(x) = y$ and $p_X (x) > 0$.
 
 \begin{example}
@@ -435,5 +434,14 @@ p_Y(y) = p_X \left( \frac{ y - b }{a} \right) .
 \end{example}
 
 Linear and affine functions of random variables are commonplace in probability.
-In example~\ref{BrazosSodaCompany1}, for instance, we have implicitly used the linear function $Y = 10 X$ to compute the probability of winning more than \$40.
+In Example~\ref{BrazosSodaCompany1}, for instance, we have implicitly used the linear function $Y = 10 X$ to compute the probability of winning more than \$40.
+
+
+\section*{Further Reading}
+
+\begin{small}
+\begin{enumerate}
+\item Bertsekas, D.P., and Tsitsiklis, J.N., \emph{Introduction to Probability}, Athena Scientific, 2002: Sections~2.1--2.3.
+\end{enumerate}
+\end{small}
 

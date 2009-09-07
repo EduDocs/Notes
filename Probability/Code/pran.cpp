@@ -3,13 +3,17 @@
 #include "fl-ran.h"
 
 int main() {
+  int seed;
   int index;
   int samples = 10000;
   int die[6];
   float hist[6];
   unsigned long long int mypseudo;
 
-  Ran myran(18);
+  printf("Enter seed: ");
+  scanf("%d", &seed);
+  printf("\n");
+  Ran myran(seed);
 
   for (index = 1; index <= 6; index++)
   { die[index] = 0; };
