@@ -552,6 +552,7 @@ Then, there exists a sequence $x_1,x_2,\ldots \in A$ such that $\lim_n f(x_n) = 
 \begin{proof}
 If $M=\infty$, then $A$ has no finite upper bound and, for any $y\in \RealNumbers$, there exists an $x\in A$ such that $f(x)>y$.
 In this case, we can let $x_1$ be any element of $A$ and $x_{n+1}$ be any element of $A$ such that $f(x_{n+1}) > f(x_n) + 1$.
+
 If $M<\infty$, then $A$ has a finite upper bound and, for any $\epsilon >0$, there is an $x$ such that $M-f(x)<\epsilon$.
 Otherwise, one arrives at the contradiction $\sup f(A) < M$.
 Therefore, we can construct the sequence $x_1,x_2,\ldots$ by choosing $x_n\in A$ to be any point that satisfies $M-f(x_n)\leq \frac{1}{n}$.
@@ -565,7 +566,7 @@ If $A$ is a compact subset of $X$, then there exists $x\in A$ such that $f(x)=\s
 Using Lemma \ref{lem:SupremumSequence}, one finds that there is a sequence $x_1,x_2,\ldots \in A$ such that $\lim_n f(x_n) = \sup f(A)$.
 Since $A$ is compact, there must also be a subsequence $x_{n_1},x_{n_2},\ldots$ that converges to some $x^* \in A$.
 Finally, the continuity of $f$ shows that
-\[f(A) = \lim_n f(x_n) = \lim_k f(x_{n_k}) = f(\lim_k x_{n_k}) = f(x*).\]
+\[\sup f(A) = \lim_n f(x_n) = \lim_k f(x_{n_k}) = f(\lim_k x_{n_k}) = f(x^*).\]
 \end{proof}
 
 \begin{corollary}

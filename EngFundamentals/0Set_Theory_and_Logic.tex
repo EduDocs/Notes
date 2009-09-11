@@ -109,8 +109,13 @@ F & F & T \\
 \hline
 \end{tabular}
 \end{center}
+This table should match your intuition when $P$ is true.
+When $P$ is false, students often think the resulting truth value should be undefined.
 Although it may seem strange at first glance, this truth table is universally accepted by mathematicians.
-It is important to get used to it.
+To motivate this definition, one can think of $P \rightarrow Q$ as a promise that $Q$ is true whenever $P$ is true.
+When $P$ is false, the promise is kept by default.
+This definition allows one to combine many statements together and detect broken promises without being distracted by uninformative statements.
+
 Logicians draw a firm distinction between the \defn{logic}{conditional connective} and the \defn{logic}{implication relation}.
 They use the phrase ``if $P$ then $Q$'' for the conditional connective and the phrase ``$P$ implies $Q$'' for the implication relation.
 They explain the difference between these two forms by saying that the conditional is the contemplated relation, while the implication is the asserted relation.
@@ -476,15 +481,15 @@ Axiomatic set theory eliminates this paradox by disallowing self-referencing con
 
 There are also some standard relations defined between any two sets $A,B$.
 \begin{definition}
-We say that $A$ \textbf{equals} $B$ (denoted $A=B$) if $x\in A$ implies $x\in B$ and $x\in B$ implies $x\in A$.
+We say that $A$ \textbf{equals} $B$ (denoted $A=B$) if, for all $x$,  $x\in A$ iff $x\in B$.
 This means that
-\[ A=B \Leftrightarrow (x\in A)\leftrightarrow (x\in B). \]
+\[ A=B \Leftrightarrow \forall x \left( (x\in A)\leftrightarrow (x\in B) \right). \]
 \end{definition}
 
 \begin{definition}
-We say that $A$ is a \defn{set theory}{subset} of $B$ (denoted $A\subseteq B$) if $x\in A$ implies $x\in B$.
+We say that $A$ is a \defn{set theory}{subset} of $B$ (denoted $A\subseteq B$) if, for all $x$, $x\in A$ implies $x\in B$.
 This means that
-\[ A\subseteq B  \Leftrightarrow (x\in A)\rightarrow (x\in B). \]
+\[ A\subseteq B  \Leftrightarrow \forall x \left( (x\in A)\rightarrow (x\in B) \right). \]
 It is a \textbf{proper subset} (denoted $A\subset B$) if $A\subseteq B$ and $A\neq B$.
 \end{definition}
 
