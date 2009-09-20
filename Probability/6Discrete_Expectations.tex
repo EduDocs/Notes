@@ -5,7 +5,7 @@ When a large collection of data is gathered, one is typically interested, not ne
 The same is true for random variables.
 The PMF of discrete random variable $X$ provides a complete characterization of the distribution of $X$ by specifying the probability of every possible value of $X$.
 Still, it may be desirable to summarize the information contained in the PMF of a random variable in a few parameters.
-One way to achieve this goal and obtain meaningful descriptive quantities is through the expectation operator.
+One way to accomplish this task and thereby obtain meaningful descriptive quantities is through the expectation operator.
 
 
 \section{Expected Value}
@@ -16,7 +16,7 @@ The \emph{expected value} $\Expect [X]$ of discrete random variable $X$ is defin
 \end{equation}
 whenever this sum converges absolutely.
 If the above sum is not absolutely convergent, then $X$ is said not to possess an expected value.
-As mentioned above, the expected value $\Expect [X]$ offers useful information about the underlying random variable $X$ without giving a comprehensive and overly detailed description.
+As mentioned above, the expected value $\Expect [X]$ provides insightful information about the underlying random variable $X$ without giving a comprehensive and overly detailed description.
 The expected value of a random variable, as defined in \eqref{equation:DiscreteMean}, is also called the \emph{mean} of $X$. \index{Mean}
 It is important to realize that $\Expect [X]$ is not a function of random variable $X$; rather, it is a function of the PMF of $X$.
 
@@ -26,20 +26,20 @@ The expected value of the roll can be computed as
 \begin{equation*}
 \sum_{k=1}^6 \frac{k}{6} = \frac{42}{12} = 3.5 .
 \end{equation*}
-Thus, the mean of this random variable is $3.5$.
+In other words, the mean of this random variable is $3.5$.
 \end{example}
 
 \begin{example}
 Assume that a fair coin is flipped repetitively until heads is observed.
 The value of random variable $X$ is taken to be the total number of tosses performed during this experiment.
 The possible values for $X$ are therefore given by $X (\Omega) = \{ 1, 2, \ldots \}$.
-Recall that the PMF of $X$ is equal to $p_X(k) = 2^{-k}$, where $k$ is a positive integer.
+Recall that, in this case, the PMF of $X$ is equal to $p_X(k) = 2^{-k}$, where $k$ is a positive integer.
 The expected value of this geometric random variable can be computed as
 \begin{equation*}
 \Expect [X] = \sum_{k=1}^{\infty} \frac{k}{2^k}
 = 2.
 \end{equation*}
-In other words, the expected number of tosses until the coin produces heads is equal to two.
+The expected number of tosses until the coin produces heads is equal to two.
 \end{example}
 
 In general, determining the expectation of a random variable requires as input its PMF, a detailed characterization of the random variable, and returns a much simpler scalar attribute, its mean.
@@ -55,15 +55,15 @@ For instance, the notion of an \emph{expectation} can be combined with tradition
 Suppose that $X$ is a discrete random variable.
 Let $g: X(\Omega) \mapsto \mathbb{R}$ be a real-valued function on the range of $X$, and consider the expectation of $g(X)$.
 The expected value $\Expect [g(X)]$ is an alternate scalar quantity that provides partial information about the distribution of $X$.
-One way to determine the expected value of $g(X)$ is to first note that $Y = g(X)$ is itself a random variable, find the PMF of $Y$, and then apply the definition of expected value provided in \eqref{equation:DiscreteMean}.
+One way to determine the expected value of $g(X)$ is to first note that $Y = g(X)$ is itself a random variable, find the derived distribution of $Y$, and then apply the definition of expected value provided in \eqref{equation:DiscreteMean}.
 
-Yet, there is another and more direct way to compute this quantity.
+Still, there is another and more direct way to compute this quantity.
 The \emph{expectation} of $g(X)$ can be expressed as \index{Expectation}
 \begin{equation} \label{equation:DiscreteExpectation}
 \Expect \left[ g(X) \right]
 = \sum_{x \in X(\Omega)} g(x) p_X (x) .
 \end{equation}
-Again, it is worth mentioning that there exist random variables and functions for which the above sum does not converge.
+It is worth re-emphasizing that there exist random variables and functions for which the above sum does not converge.
 In such cases, we simply say that the expected value of $g(X)$ does not exist.
 Also, notice that the mean $\Expect [X]$ is a special case of \eqref{equation:DiscreteExpectation} where $g(X) = X$.
 Thus, the definition of $\Expect [g(X)]$ given above subsumes our original description of $\Expect [X]$, which appeared in \eqref{equation:DiscreteMean}.
@@ -90,10 +90,12 @@ Let $S$ be a subset of the real numbers, and define the \emph{indicator function
 \end{equation*}
 The expectation of $\IndicatorFcn_S (x)$ is equal to
 \begin{equation*}
+\begin{split}
 \Expect \left[ \IndicatorFcn_S (x) \right]
-= \sum_{x \in X(\Omega)} \IndicatorFcn_S (x) p_X(x)
-= \sum_{x \in S} p_X(x)
+&= \sum_{x \in X(\Omega)} \IndicatorFcn_S (x) p_X(x) \\
+&= \sum_{x \in S} p_X(x)
 = \Pr (x \in S) .
+\end{split}
 \end{equation*}
 That is, the expectation of the indicator function of $S$ is simply the probability that $X$ takes on a value in $S$.
 This alternate means of computing the probability of an event can sometimes be employ to solve probability problems.
@@ -101,7 +103,7 @@ This alternate means of computing the probability of an event can sometimes be e
 
 Let random variable $Y$ be defined by applying real-valued function $g(\cdot)$ to $X$, with $Y = g(X)$.
 The mean of $Y$ is equal to the expectation of $g(X)$, and we know from the ongoing discussion that this value can be obtained by applying two different formulas.
-For consistency, we need to verify that the two approaches give a same solution.
+To ensure consistency, we verify that the two approaches give a same solution.
 
 First, we can apply \eqref{equation:DiscreteMean} directly to $Y$, and obtain
 \begin{equation*}
@@ -112,10 +114,10 @@ Alternatively, using \eqref{equation:DiscreteExpectation}, we have
 \begin{equation*}
 \Expect [Y] = \Expect [g(X)] = \sum_{x \in X(\Omega)} g(x) p_X(x) .
 \end{equation*}
-We can confirm that these two expression lead to a same solution as follows.
+We can confirm that these two expressions lead to a same answer as follows.
 Recall that the PMF of $Y$ evaluated at $y$ is obtained by summing the values of $p_X(\cdot)$ over all $x \in X(\Omega)$ such that $g(x) = y$.
 Mathematically, this can be expressed as $p_Y (y) = \sum_{ \{x \in X(\Omega) | g(x) = y \} } p_X (x)$.
-Using this equality, we have
+Using this equality, we can write
 \begin{equation*}
 \begin{split}
 \Expect [Y] &= \sum_{y \in g(X(\Omega))} y p_Y(y)
@@ -129,7 +131,7 @@ Using this equality, we have
 = \Expect [g(X)] .
 \end{split}
 \end{equation*}
-We emphasize that first summing over all possible values of $Y$ and then summing over the preimage of $y$ for every $y \in Y(\Omega)$ is equivalent to summing over all $x \in X(\Omega)$.
+Note that first summing over all possible values of $Y$ and then over the preimage of every $y \in Y(\Omega)$ is equivalent to summing over all $x \in X(\Omega)$.
 Hence, we have shown that computing the expectation of a function using the two methods outlined above leads to a same solution.
 
 \begin{example}
@@ -218,7 +220,7 @@ p_X (x) = \left\{ \begin{array}{ll}
 \end{equation*}
 The mean of $X$ is given by
 \begin{equation*}
-\Expect [X] = 0 \times 0.25 + 1 \times 0.75 = 0.75 .
+\Expect [X] = 0 \cdot 0.25 + 1 \cdot 0.75 = 0.75 .
 \end{equation*}
 Consider a two-particle system with masses $m_1 = 0.25$ and $m_2 = 0.75$, respectively.
 In the coordinate system illustrated below, the particles are located at positions $x_1 = 0$ and $x_2 = 1$.
@@ -238,34 +240,50 @@ The center of mass thus corresponds to the mean of $X$.
 \includegraphics[height=1.8cm]{Figures/6Chapter/mass}
 \end{psfrags}
 \end{center}
-\caption{The center of mass on the figure is indicated by the tip of the arrow.}
+\caption{The center of mass on the figure is indicated by the tip of the arrow.
+In general, the mean of a random variable corresponds to the center of mass of the associated particle system}
 \end{figure}
 \end{example}
 
 
 \subsection{The Variance}
 
-A second common descriptive quantity associated with random variable $X$ is its \emph{variance}, which we denote by $\Var [X]$. \index{Variance}
+A second widespread descriptive quantity associated with random variable $X$ is its \emph{variance}, which we denote by $\Var [X]$. \index{Variance}
 It is defined by
 \begin{equation} \label{equation:VarianceExplicit}
 \Var [X] = \Expect \left[ \left( X - \Expect [X] \right)^2 \right] .
 \end{equation}
-The variance is always nonnegative.
+Obviously, the variance is always nonnegative.
 It provides a measure of the dispersion of $X$ around its mean.
 For discrete random variables, it can be computed explicitly as
 \begin{equation*}
-\Var [X] = \sum_{x \in X(\Omega)} \left( X - \Expect [X] \right)^2 p_X (x) .
+\Var [X] = \sum_{x \in X(\Omega)} \left( x - \Expect [X] \right)^2 p_X (x) .
 \end{equation*}
-The square root of the variance is referred to as the \emph{standard deviation} of $X$, and it is often denoted by $\sigma_X$. \index{Standard deviation}
+The square root of the variance is referred to as the \emph{standard deviation} of $X$, and it is often denoted by $\sigma$. \index{Standard deviation}
+
+\begin{example}
+Suppose $X$ is a Bernoulli random variable with parameter $p$.
+We can compute the mean of $X$ as
+\begin{equation*}
+\Expect [X] = 1 \cdot p + 0 \cdot (1 - p) = p .
+\end{equation*}
+It variance is given by
+\begin{equation*}
+\Var [X] = (1 - p)^2 \cdot p + (0 - p)^2 \cdot (1 - p)
+= p (1 - p) .
+\end{equation*}
+\end{example}
 
 \begin{example}
 Let $X$ be a Poisson random variable with parameter $\lambda$.
 The mean of $X$ is given by
 \begin{equation*}
-\Expect [X] = \sum_{k=0}^{\infty} k \frac{\lambda^k}{k!} e^{- \lambda}
-= \sum_{k=1}^{\infty} \frac{\lambda^k}{(k-1)!} e^{- \lambda}
-= \lambda \sum_{\ell=0}^{\infty} \frac{\lambda^\ell}{\ell!} e^{- \lambda}
+\begin{split}
+\Expect [X] &= \sum_{k=0}^{\infty} k \frac{\lambda^k}{k!} e^{- \lambda}
+= \sum_{k=1}^{\infty} \frac{\lambda^k}{(k-1)!} e^{- \lambda} \\
+&= \lambda \sum_{\ell=0}^{\infty} \frac{\lambda^\ell}{\ell!} e^{- \lambda}
 = \lambda .
+\end{split}
 \end{equation*}
 The variance of $X$ can be calculated as
 \begin{equation*}
@@ -274,8 +292,8 @@ The variance of $X$ can be calculated as
 \frac{\lambda^k}{k!} e^{- \lambda} \\
 &= \sum_{k=0}^{\infty} \left(\lambda^2 + k (1 - 2 \lambda) + k(k-1) \right)
 \frac{\lambda^k}{k!} e^{- \lambda} \\
-&= \lambda^2 + \lambda (1 - 2 \lambda)
-+ \sum_{k=0}^{\infty} k(k-1) \frac{\lambda^k}{k!} e^{- \lambda} \\
+%&= \lambda^2 + \lambda (1 - 2 \lambda)
+%+ \sum_{k=0}^{\infty} k(k-1) \frac{\lambda^k}{k!} e^{- \lambda} \\
 &= \lambda - \lambda^2
 + \sum_{k=2}^{\infty} \frac{\lambda^k}{(k-2)!} e^{- \lambda}
 %&= \lambda - \lambda^2 +
@@ -289,18 +307,13 @@ Both the mean and the variance of a Poisson random variable with parameter $\lam
 
 \subsection{Affine Functions}
 
+\begin{proposition}
 Suppose $X$ is a random variable with finite mean.
-Let $Y$ be the affine function of $X$ given by
-\begin{equation*}
-Y = aX + b,
-\end{equation*}
-where $a$ and $b$ are fixed real numbers.
-The mean of random variable $Y$ is given by
-\begin{equation*}
-\Expect [Y] = a \Expect [X] + b.
-\end{equation*}
-We can compute the expected value of $Y$ using \eqref{equation:DiscreteExpectation}.
-It is equal to
+Let $Y$ be the affine function of $X$ defined by $Y = aX + b$, where $a$ and $b$ are fixed real numbers.
+The mean of random variable $Y$ is equal to $\Expect [Y] = a \Expect [X] + b$.
+\end{proposition}
+\begin{proof}
+This can be computed using \eqref{equation:DiscreteExpectation};
 \begin{equation*}
 \begin{split}
 \Expect [Y] &= \sum_{x \in X(\Omega)} (ax + b) p_X(x) \\
@@ -308,9 +321,11 @@ It is equal to
 &= a \Expect [X] + b.
 \end{split}
 \end{equation*}
+This result can be summarized as $\Expect [a X + b] = a \Expect [X] + b$.
+\end{proof}
 
 It is not much harder to show that the expectation is a linear functional.
-Suppose that $g$ and $h$ are two real-valued functions such that $\Expect [g(X)]$ and $\Expect [h(X)]$ both exist.
+Suppose that $g(\cdot)$ and $h(\cdot)$ are two real-valued functions such that $\Expect [g(X)]$ and $\Expect [h(X)]$ both exist.
 We can write the expectation of $a g(X) + h(X)$ as
 \begin{equation*}
 \begin{split}
@@ -319,13 +334,13 @@ We can write the expectation of $a g(X) + h(X)$ as
 &= a \Expect [g(X)] + \Expect [h(X)] .
 \end{split}
 \end{equation*}
-That is, the expectation is both additive and homogeneous.
+This demonstrates that the expectation is both additive and homogeneous.
 
-Suppose $X$ is a random variable with finite mean and variance, and let $Y$ be the affine function of $X$ given by $Y = aX + b$, where $a$ and $b$ are constants.
-We can show that the variance of $Y$ is given by
-\begin{equation*}
-\Var [Y] = a^2 \Var [X].
-\end{equation*}
+\begin{proposition}
+Assume that $X$ is a random variable with finite mean and variance, and let $Y$ be the affine function of $X$ given by $Y = aX + b$, where $a$ and $b$ are constants.
+The variance of $Y$ is given by $\Var [Y] = a^2 \Var [X]$.
+\end{proposition}
+\begin{proof}
 Consider \eqref{equation:VarianceExplicit} applied to $Y = aX + b$,
 \begin{equation*}
 \begin{split}
@@ -336,13 +351,14 @@ Consider \eqref{equation:VarianceExplicit} applied to $Y = aX + b$,
 = a^2 \Var [X] .
 \end{split}
 \end{equation*}
-The variance of an affine function only depends on the expectation of its argument, $\Expect [X]$, and the value of $a$.
-A translation by $b$ does not affect the variance of $Y = aX + b$.
+The variance of an affine function only depends on the distribution of its argument, $X$, and parameter $a$.
+A translation of the PMF by $b$ does not affect the variance of $Y = aX + b$.
+\end{proof}
 
 
 \section{Moments}
 
-The \emph{moments} of a random variable $X$ are likewise important quantities used in summarizing the PMF of $X$. \index{Moments}
+The \emph{moments} of a random variable $X$ are likewise important quantities used in providing partial information about the PMF of $X$. \index{Moments}
 The $n$th moment of random variable $X$ is defined by
 \begin{equation} \label{equation:DiscreteMoments}
 \Expect [X^n] = \sum_{x \in X(\Omega)} x^n p_X (x) .
@@ -351,15 +367,15 @@ The mean of a random variable is also its first moment.
 The variance of a random variable $X$ can be defined in terms of its first two moments, $\Expect [X]$ and $\Expect [X^2]$.
 This alternate formula is sometimes more convenient for computational purposes.
 
-\begin{theorem}
+\begin{proposition}
 The variance of random variable $X$ can be expressed in terms of the moments of $X$,
 \begin{equation*}
 \Var [X] = \Expect \left[ X^2 \right] - \left( \Expect [X] \right)^2.
 \end{equation*}
-\end{theorem}
+\end{proposition}
 \begin{proof}
 Suppose that the variance of $X$ exists and is finite.
-We can expand \eqref{equation:VarianceExplicit} as
+Starting from \eqref{equation:VarianceExplicit}, we can expand the variance of $X$ as follows,
 \begin{equation*}
 \begin{split}
 \Var [X] &= \sum_{x \in X(\Omega)} \left( x - \Expect [X] \right)^2 p_X (x) \\
@@ -368,9 +384,10 @@ We can expand \eqref{equation:VarianceExplicit} as
 &= \Expect \left[ X^2 \right] - \left( \Expect [X] \right)^2.
 \end{split}
 \end{equation*}
+The last equality is our desired result.
 \end{proof}
 
-This alternate formula for the variance of random variable $X$ is sometimes easier to compute.
+We offer below an example where this alternate formula for the variance is applied.
 
 \begin{example}
 Let $X$ be a uniform random variable with PMF
@@ -401,7 +418,7 @@ Closely related to the moments of a random variable are its \emph{central moment
 The $k$th central moment of $X$ is defined by $\Expect \left[ \left( X - E[X] \right)^k \right]$.
 The variance is an example of a central moment, as we can see from definition \eqref{equation:VarianceExplicit}.
 The central moments are used to define the \emph{skewness} of random variable, which is a measure of asymmetry; and its \emph{kurtosis}, which assesses whether the variance is due to infrequent extreme deviations or more frequent, modest-size deviations.
-Although these quantities will not play an important role in our exposition of probability, they each reveal a different property of random variables and they are encountered frequently in statistics. 
+Although these quantities will not play a central role in our exposition of probability, they each reveal a different property of random variables and they are encountered frequently in statistics. 
 
 
 \section{Ordinary Generating Functions}
@@ -416,14 +433,12 @@ It is also called the \emph{probability-generating function} because of the foll
 The probability $\Pr (X = k) = p_X(k)$ can be recovered from the corresponding generating function $G_X (z)$ through Taylor series expansion.
 Within the radius of convergence of $G_X(z)$, we have
 \begin{equation*}
-G_X(z) = \sum_{k=0}^{\infty} \frac{G_X^{(k)} (0)}{k!} z^k .
+G_X(z) = \sum_{k=0}^{\infty} \frac{1}{k!} \left( \frac{d^k G_X}{dz^k}(0) \right) z^k .
 \end{equation*}
 Comparing this equation to \eqref{equation:OrdinaryGeneratingFunction}, we conclude that
 \begin{equation*}
-p_X(k) = \frac{1}{k!} \frac{d^k G_X}{dz^k} (0)
-= \frac{G_X^{(k)} (0)}{k!}
+p_X(k) = \frac{1}{k!} \frac{d^k G_X}{dz^k} (0) .
 \end{equation*}
-where $G_X^{(k)} (\cdot)$ denotes the $k$th derivative of $G_X(\cdot)$.
 We note that, for $|z| \leq 1$, we have
 \begin{equation*}
 \left| \sum_{k=0}^{\infty} z^k p_X(k) \right|
@@ -431,22 +446,6 @@ We note that, for $|z| \leq 1$, we have
 \leq \sum_{k=0}^{\infty} p_X(k) = 1
 \end{equation*}
 and hence the radius of convergence of any probability-generating function must include one.
-
-The \emph{factorial moments} of $X$ can also be computed based the ordinary generating function,
-\begin{equation*}
-\Expect \left[ \frac{X!}{(X-k)!} \right]
-= \lim_{z \uparrow 1} G_X^{(k)} (z)
-\end{equation*}
-for any integer $k \geq 0$.
-In particular, we have
-\begin{equation*}
-\Expect [X] = \lim_{z \uparrow 1} \frac{d G_X(z)}{dz} .
-\end{equation*}
-Similarly, the second moment of $X$ is equal to
-\begin{equation*}
-\Expect \left[ X^2 \right]
-= \lim_{z \uparrow 1} \left( \frac{d^2 G_X(z)}{dz^2} + \frac{d G_X(z)}{dz} \right) .
-\end{equation*}
 
 The ordinary generating function plays an important role in dealing with sums of discrete random variables.
 As a hint of what lies ahead, we compute ordinary generating functions for Bernoulli and Binomial random variables below.
@@ -460,7 +459,7 @@ G_X(z) = p_X(0) + p_X(1) z
 \end{equation*}
 \end{example}
 
-\begin{example}[Binomial random varible]
+\begin{example}[Binomial random variable]
 Let $S$ be a binomial random variable with parameters $n$ and $p$.
 The ordinary generating function of $S$ can be computed as
 \begin{equation*}
@@ -477,9 +476,21 @@ We know, from Section~\ref{subsection:BinormialRandomVariables}, that one way to
 Looking at the ordinary generating functions above, we notice that the $G_S(z)$ is the product of $n$ copies of $G_X(z)$.
 Intuitively, it appears that the sum of independent discrete random variables leads to the product of their ordinary generating functions, a fact that we will be checking shortly.
 
+The mean and second moment of $X$ can be computed based on its ordinary generating function,
+In particular, we have
+\begin{equation*}
+\Expect [X] = \lim_{z \uparrow 1} \frac{d G_X}{dz}(z) .
+\end{equation*}
+Similarly, the second moment of $X$ can be derived as
+\begin{equation*}
+\Expect \left[ X^2 \right]
+= \lim_{z \uparrow 1} \left( \frac{d^2 G_X}{dz^2}(z) + \frac{d G_X}{dz}(z) \right) .
+\end{equation*}
+This can be quite useful, as seen in the following example.
+
 \begin{example}[Poisson Random Variable]
 Suppose that $X$ has a Poisson distribution with parameter $\lambda > 0$.
-The function $G_X(s)$ can be computed as follows,
+The function $G_X(s)$ is computed using the distribution of $X$,
 \begin{equation*}
 G_X(z) = \sum_{k = 0}^\infty z^{k} \frac{e^{-\lambda}\lambda^k}{k!}
 = e^{-\lambda} \sum_{k = 0}^\infty \frac{(\lambda z)^k}{k!}
@@ -494,6 +505,6 @@ The first two moments of $X$ are given by
 = \lim_{z \uparrow 1} \left( \lambda^2 + \lambda \right)
 e^{\lambda (z - 1)} = \lambda^2 + \lambda .
 \end{align*}
-This provides an efficient way to compute the mean and variance of $X$, which are both equal to $\lambda$.
+This provides a very efficient way to compute the mean and variance of $X$, which are both equal to $\lambda$.
 \end{example}
 
