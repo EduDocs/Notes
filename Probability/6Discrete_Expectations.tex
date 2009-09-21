@@ -4,7 +4,7 @@
 When a large collection of data is gathered, one is typically interested, not necessarily in each individual data point, but rather in certain descriptive quantities such as the average or the median.
 The same is true for random variables.
 The PMF of discrete random variable $X$ provides a complete characterization of the distribution of $X$ by specifying the probability of every possible value of $X$.
-Still, it may be desirable to summarize the information contained in the PMF of a random variable in a few parameters.
+Still, it may be desirable to summarize the information contained in the PMF of a random variable.
 One way to accomplish this task and thereby obtain meaningful descriptive quantities is through the expectation operator.
 
 
@@ -15,7 +15,7 @@ The \emph{expected value} $\Expect [X]$ of discrete random variable $X$ is defin
 \Expect [X] = \sum_{x \in X(\Omega)} x p_X (x) ,
 \end{equation}
 whenever this sum converges absolutely.
-If the above sum is not absolutely convergent, then $X$ is said not to possess an expected value.
+If this sum is not absolutely convergent, then $X$ is said not to possess an expected value.
 As mentioned above, the expected value $\Expect [X]$ provides insightful information about the underlying random variable $X$ without giving a comprehensive and overly detailed description.
 The expected value of a random variable, as defined in \eqref{equation:DiscreteMean}, is also called the \emph{mean} of $X$. \index{Mean}
 It is important to realize that $\Expect [X]$ is not a function of random variable $X$; rather, it is a function of the PMF of $X$.
@@ -43,29 +43,30 @@ The expected number of tosses until the coin produces heads is equal to two.
 \end{example}
 
 In general, determining the expectation of a random variable requires as input its PMF, a detailed characterization of the random variable, and returns a much simpler scalar attribute, its mean.
-That is, computing the expected value of the random variable provides a concise summary of its overall behavior.
+Hence, computing the expected value of the random variable yields a concise summary of its overall behavior.
 
 
 \section{Functions and Expectations}
 
 The mean forms one instance where the distribution of a random variable is condensed into a scalar quantity.
-There are additional examples.
+There are several additional examples.
 For instance, the notion of an \emph{expectation} can be combined with traditional functions to create alternate descriptions and other meaningful quantities. \index{Expectation}
 
 Suppose that $X$ is a discrete random variable.
 Let $g: X(\Omega) \mapsto \mathbb{R}$ be a real-valued function on the range of $X$, and consider the expectation of $g(X)$.
-The expected value $\Expect [g(X)]$ is an alternate scalar quantity that provides partial information about the distribution of $X$.
-One way to determine the expected value of $g(X)$ is to first note that $Y = g(X)$ is itself a random variable, find the derived distribution of $Y$, and then apply the definition of expected value provided in \eqref{equation:DiscreteMean}.
+The expected value $\Expect [g(X)]$ is a scalar quantity that can also provide partial information about the distribution of $X$.
+One way to determine the expected value of $g(X)$ is to first note that $Y = g(X)$ is itself a random variable.
+We can therefore find the derived distribution of $Y$, and then apply the definition of expected value provided in \eqref{equation:DiscreteMean}.
 
-Still, there is another and more direct way to compute this quantity.
-The \emph{expectation} of $g(X)$ can be expressed as \index{Expectation}
+Still, there is a more direct way to compute this quantity;
+the \emph{expectation} of $g(X)$ can be expressed as \index{Expectation}
 \begin{equation} \label{equation:DiscreteExpectation}
 \Expect \left[ g(X) \right]
 = \sum_{x \in X(\Omega)} g(x) p_X (x) .
 \end{equation}
 It is worth re-emphasizing that there exist random variables and functions for which the above sum does not converge.
 In such cases, we simply say that the expected value of $g(X)$ does not exist.
-Also, notice that the mean $\Expect [X]$ is a special case of \eqref{equation:DiscreteExpectation} where $g(X) = X$.
+Also, notice that the mean $\Expect [X]$ is the special case of \eqref{equation:DiscreteExpectation} where $g(X) = X$.
 Thus, the definition of $\Expect [g(X)]$ given above subsumes our original description of $\Expect [X]$, which appeared in \eqref{equation:DiscreteMean}.
 We explore pertinent examples below.
 
@@ -97,13 +98,13 @@ The expectation of $\IndicatorFcn_S (x)$ is equal to
 = \Pr (x \in S) .
 \end{split}
 \end{equation*}
-That is, the expectation of the indicator function of $S$ is simply the probability that $X$ takes on a value in $S$.
-This alternate means of computing the probability of an event can sometimes be employ to solve probability problems.
+Thus, the expectation of the indicator function of $S$ is simply the probability that $X$ takes on a value in $S$.
+This alternate means of computing the probability of an event can sometimes be employed to solve probability problems.
 \end{example}
 
 Let random variable $Y$ be defined by applying real-valued function $g(\cdot)$ to $X$, with $Y = g(X)$.
 The mean of $Y$ is equal to the expectation of $g(X)$, and we know from the ongoing discussion that this value can be obtained by applying two different formulas.
-To ensure consistency, we verify that the two approaches give a same solution.
+To ensure consistency, we verify that these two approaches lead to a same solution.
 
 First, we can apply \eqref{equation:DiscreteMean} directly to $Y$, and obtain
 \begin{equation*}
@@ -114,7 +115,7 @@ Alternatively, using \eqref{equation:DiscreteExpectation}, we have
 \begin{equation*}
 \Expect [Y] = \Expect [g(X)] = \sum_{x \in X(\Omega)} g(x) p_X(x) .
 \end{equation*}
-We can confirm that these two expressions lead to a same answer as follows.
+We prove that these two expressions describe a same answer as follows.
 Recall that the PMF of $Y$ evaluated at $y$ is obtained by summing the values of $p_X(\cdot)$ over all $x \in X(\Omega)$ such that $g(x) = y$.
 Mathematically, this can be expressed as $p_Y (y) = \sum_{ \{x \in X(\Omega) | g(x) = y \} } p_X (x)$.
 Using this equality, we can write
@@ -207,8 +208,8 @@ Notice how we rearranged the sum into a familiar form to compute its value.
 \end{example}
 
 It may be insightful to relate the mean of a random variable to classical mechanics.
-Let $X$ be a random variable and suppose that, for every $x \in X(\Omega)$, we place a pebble of mass $p_X(x)$ at position $x$ along a real line.
-The mean of random variable $X$ as defined in \eqref{equation:DiscreteMean} coincides with the center of mass of the particles.
+Let $X$ be a random variable and suppose that, for every $x \in X(\Omega)$, we place an infinitesimal particle of mass $p_X(x)$ at position $x$ along a real line.
+The mean of random variable $X$ as defined in \eqref{equation:DiscreteMean} coincides with the center of mass of the system of particles.
 
 \begin{example}
 Let $X$ be a Bernoulli random variable such that
@@ -228,7 +229,7 @@ From classical mechanics, we know that their center of mass can be expressed as
 \begin{equation*}
 \frac{ m_1 x_1 + m_2 x_2 }{ m_1 + m_2 } = 0.75 .
 \end{equation*}
-The center of mass thus corresponds to the mean of $X$.
+As anticipated, the center of mass corresponds to the mean of $X$.
 
 \begin{figure}[ht]
 \begin{center}
@@ -253,7 +254,7 @@ It is defined by
 \begin{equation} \label{equation:VarianceExplicit}
 \Var [X] = \Expect \left[ \left( X - \Expect [X] \right)^2 \right] .
 \end{equation}
-Obviously, the variance is always nonnegative.
+Evidently, the variance is always nonnegative.
 It provides a measure of the dispersion of $X$ around its mean.
 For discrete random variables, it can be computed explicitly as
 \begin{equation*}
@@ -267,7 +268,7 @@ We can compute the mean of $X$ as
 \begin{equation*}
 \Expect [X] = 1 \cdot p + 0 \cdot (1 - p) = p .
 \end{equation*}
-It variance is given by
+Its variance is given by
 \begin{equation*}
 \Var [X] = (1 - p)^2 \cdot p + (0 - p)^2 \cdot (1 - p)
 = p (1 - p) .
@@ -301,7 +302,7 @@ The variance of $X$ can be calculated as
 = \lambda .
 \end{split}
 \end{equation*}
-Both the mean and the variance of a Poisson random variable with parameter $\lambda$ are equal to $\lambda$.
+Both the mean and the variance of a Poisson random variable are equal to its parameter $\lambda$.
 \end{example}
 
 
@@ -351,8 +352,8 @@ Consider \eqref{equation:VarianceExplicit} applied to $Y = aX + b$,
 = a^2 \Var [X] .
 \end{split}
 \end{equation*}
-The variance of an affine function only depends on the distribution of its argument, $X$, and parameter $a$.
-A translation of the PMF by $b$ does not affect the variance of $Y = aX + b$.
+The variance of an affine function only depends on the distribution of the argument, $p_X(\cdot)$, and parameter $a$.
+A translation of the argument by $b$ does not affect the variance of $Y = aX + b$.
 \end{proof}
 
 
@@ -364,7 +365,7 @@ The $n$th moment of random variable $X$ is defined by
 \Expect [X^n] = \sum_{x \in X(\Omega)} x^n p_X (x) .
 \end{equation}
 The mean of a random variable is also its first moment.
-The variance of a random variable $X$ can be defined in terms of its first two moments, $\Expect [X]$ and $\Expect [X^2]$.
+The variance of a random variable $X$ can be described in terms of its first two moments, $\Expect [X]$ and $\Expect [X^2]$.
 This alternate formula is sometimes more convenient for computational purposes.
 
 \begin{proposition}
@@ -388,6 +389,7 @@ The last equality is our desired result.
 \end{proof}
 
 We offer below an example where this alternate formula for the variance is applied.
+This allows the application of standard sums from calculus.
 
 \begin{example}
 Let $X$ be a uniform random variable with PMF

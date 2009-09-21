@@ -1,16 +1,16 @@
 \chapter{Discrete Random Vectors}
 \label{chapter:RandomVectorsDiscrete}
 
-Thus far, our treatment has been focused on single random variables.
-It is sometimes convenient or required to model random phenomena using multiple random variables.
+Thus far, our treatment of probability has been focused on single random variables.
+It is often convenient or required to model stochastic phenomena using multiple random variables.
 In this section, we extend some of the concepts developed for single random variables to multiple random variables.
-We begin our study of random vectors with a simple case, pairs of random variables.
+We initiate our exposition of random vectors with a simple case, pairs of random variables.
 
 
 \section{Joint Probability Mass Functions}
 
 Consider two discrete variables $X$ and $Y$ associated with a single experiment.
-The random pair $(X, Y)$ is characterized by the \emph{joint probability mass function} of $X$ and $Y$, which we denote by $p_{X,Y}$. \index{Joint probability mass function}
+The random pair $(X, Y)$ is characterized by the \emph{joint probability mass function} of $X$ and $Y$, which we denote by $p_{X,Y}(\cdot,\cdot)$. \index{Joint probability mass function}
 If $x$ is a possible value of $X$ and $y$ is a possible value of $Y$, then the probability mass of $(x, y)$ is denoted by
 \begin{equation*}
 \begin{split}
@@ -35,9 +35,9 @@ Note the similarity between the definition of the joint PMF and \eqref{equation:
 \psfrag{X}[c]{$X$}
 \psfrag{Y}[c]{$Y$}
 \psfrag{P}[c]{$(X,Y)$}
-\includegraphics[width=11cm]{Figures/7Chapter/prv}
+\includegraphics[height=5.20cm]{Figures/7Chapter/prv}
 \end{psfrags}
-\caption{The random pair $(X, Y)$ maps each outcome contained in the sample space to a real vector in $\RealNumbers^2$.}
+\caption{The random pair $(X, Y)$ maps every outcome contained in the sample space to a real vector in $\RealNumbers^2$.}
 \end{center}
 \end{figure}
 
@@ -55,12 +55,12 @@ In particular, we have
 \end{equation*}
 
 To further distinguish between the joint PMF of $X$ and $Y$ and the individual PMFs $p_X (\cdot)$ and $p_Y (\cdot)$, we occasionally refer to the latter as \emph{marginal probability mass functions}. \index{Probability mass function (PMF)} \index{Marginal probability mass function}
-We can compute the marginal PMFs of $X$ and $Y$ from the joint PMF $p_{X,Y}$ using the formulas
+We can compute the marginal PMFs of $X$ and $Y$ from the joint PMF $p_{X,Y}(\cdot,\cdot)$ using the formulas
 \begin{align*}
 p_X (x) &= \sum_{y \in Y(\Omega)} p_{X,Y} (x,y), \\
 p_Y (y) &= \sum_{x \in X(\Omega)} p_{X,Y} (x,y).
 \end{align*}
-On the other hand, knowledge of the marginal PMFs $p_X (\cdot)$ and $p_Y (\cdot)$ is not sufficient to obtain a complete description of the joint PMF $p_{X,Y} (\cdot,\cdot)$.
+On the other hand, knowledge of the marginal distributions $p_X (\cdot)$ and $p_Y (\cdot)$ is not enough to obtain a complete description of the joint PMF $p_{X,Y} (\cdot,\cdot)$.
 Examples~\ref{example:JointPMFwoReplacement}~\&~\ref{example:JointPMFwithReplacement} illustrate the fact that knowledge of marginal PMFs is not sufficient to characterize the underlying joint PMF.
 
 \begin{example} \label{example:JointPMFwoReplacement}
@@ -80,7 +80,7 @@ $2$ & $1/6$ & $0$ & $1/6$ \\
 \hline
 $3$ & $1/6$ & $1/6$ & $0$ \\
 \hline
-\end{tabular}
+\end{tabular} .
 \end{center}
 We can compute the marginal PMF of $X$ as
 \begin{equation*}
@@ -103,7 +103,7 @@ p_Y (y) = \left\{ \begin{array}{ll}
 Again, suppose that an urn contains three balls numbered one, two and three.
 This time the random experiment consists of drawing two balls from the urn with replacement.
 We use $X$ and $Y$ to denote the numbers appearing on the first and second balls, respectively.
-The joint PMF of $X$ and $Y$ is now equal to
+The joint PMF of $X$ and $Y$ now becomes
 \begin{center}
 \begin{tabular}{|c|c|c|c|}
 \hline
@@ -115,9 +115,9 @@ $2$ & $1/9$ & $1/9$ & $1/9$ \\
 \hline
 $3$ & $1/9$ & $1/9$ & $1/9$ \\
 \hline
-\end{tabular}
+\end{tabular} .
 \end{center}
-We can verify that the marginal PMF of $X$ and $Y$ are the same as in Example~\ref{example:JointPMFwoReplacement};
+We can easily verify that the marginal distributions of $X$ and $Y$ are the same as in Example~\ref{example:JointPMFwoReplacement};
 however, the joint PMFs differ.
 \end{example}
 
@@ -131,7 +131,7 @@ We can obtain the PMF of $V$ by computing
 p_V (v)
 = \sum_{\{ (x,y) | g(x,y) = v \}} p_{X,Y} (x, y).
 \end{equation*}
-This equation is the analog of \eqref{equation:FunctionPMF} for multiple random variables.
+This equation is the analog of \eqref{equation:FunctionPMF} for pairs of random variables.
 
 \begin{figure}[ht]
 \begin{center}
@@ -160,7 +160,7 @@ The random variable $X$ represents the number of dots that appears on the top fa
 We can form a random variable $U$ that describes the sum of the two dice by defining $U = X + Y$.
 \end{example}
 
-The definition of expectations can also be extended to multiple random variables.
+The definition of the expectation operator can also be extended to multiple random variables.
 In particular, the expected value of $g(X,Y)$ is obtained by computing
 \begin{equation} \label{equation:ExpectationMultipleRV}
 \Expect [g(X,Y)] = \sum_{x \in X(\Omega)} \sum_{y \in Y(\Omega)} g(x,y) p_{X,Y} (x,y) .
@@ -188,8 +188,8 @@ The expected value of $X + Y$ is four.
 \section{Conditional Random Variables}
 \label{section:ConditionalRandomVariables}
 
-Many random variables of practical interest are dependent.
-That is, the realization of random variable $X$ may provide partial information about the random variable $Y$.
+Many events of practical interest are dependent.
+That is, knowledge about event $A$ may provide partial information about the realization of event $B$.
 This inter-dependence is captured by the concept of conditioning, which was first discussed in Chapter~\ref{chapter:ConditionalProbability}.
 In this section, we extend the concept of conditioning to multiple random variables.
 We study the probability of events concerning random variable $Y$ given that some information about random variable $X$ is available.
@@ -204,8 +204,8 @@ p_{Y|X} (y|x) &= \Pr ( Y = y | X = x) \\
 \end{split}
 \end{equation*}
 provided that $p_X (x) \neq 0$.
-Note that conditioning is not defined when $p_X (x)$ vanishes, as it has no meaning.
-This is similar to conditional probability only being defined over events with non-zero probabilities.
+Note that conditioning is not defined when $p_X (x)$ vanishes, as it has no relevant meaning.
+This is similar to conditional probabilities being only defined for conditional events with non-zero probabilities.
 
 Let $x$ be fixed with $p_X (x) > 0$.
 The conditional PMF introduced above is a valid PMF since it is nonnegative and
@@ -221,33 +221,54 @@ The probability that $Y$ belongs to $S$ given $X = x$ is then obtained by summin
 \Pr (Y \in S | X = x) = \sum_{y \in S} p_{Y|X} (y | x) .
 \end{equation*}
 
-\begin{example}
-Suppose that an urn contains three balls numbered one, two and three.
-Two balls are drawn from this urn without replacement.
-We wish to find the probability that the number on the second ball is odd.
-We also wish to find the probability that the second ball is odd given that the number on the first ball is a three.
+\begin{example}[Hypergeometric Random Variable]
+A wireless communication channel is employed to transmit a data packet that contains a total of $m$ bits.
+The first $n$ bits of this message are dedicated to the packet header, which stores very sensitive information.
+The wireless connection is unreliable; every transmitted bit is received properly with probability $1-p$ and erased with probability $p$, independently of other bits.
+We wish to derive the conditional probability distribution of the number of erasures located in the header, given that the total number of corrupted bits in the packet is equal to $e$.
 
-The probability that the number on the second ball is odd is given by the marginal distribution of the second  drawing, which was computed in Example~\ref{example:JointPMFwoReplacement}.
-In the notation of that example, we have
-\begin{equation*}
-\Pr (Y \in \{1, 3\})
-= p_Y (1) + p_Y (3)
-= \frac{1}{3} + \frac{1}{3}
-= \frac{2}{3} .
-\end{equation*}
-To compute the probability that the second ball is odd conditioned on the first ball being a three, we use the joint PMF derived in Example~\ref{example:JointPMFwoReplacement},
+Let $H$ represent the number of erasures in the header, and denote the number of corrupted bits in the entire message by $C$.
+The conditional probability mass function of $H$ given $C = c$ is equal to
 \begin{equation*}
 \begin{split}
-\Pr ( Y \in \{ 1, 3 \} | X = 3)
-&= p_{Y|X}(1|3) + p_{Y|X}(3|3) \\
-&= \frac{p_{X,Y}(1,3)}{p_X (3)} + \frac{p_{X,Y}(3,3)}{p_X (3)} \\
-&= \frac{1/6}{1/3} + \frac{0}{1/3} = \frac{1}{2} .
+p_{H|C} (h|c) &= \frac{p_{H,C} (h,c)}{p_H (h)} \\
+&= \frac{\binom{n}{h} (1-p)^{n-h} p^h
+\binom{m-n}{c-h} (1-p)^{(m-n)-(c-h)} p^{c - h}}{\binom{m}{c} (1-p)^{m-c} p^c} \\
+&= \frac{\binom{n}{h} \binom{m-n}{c-h}}{\binom{m}{c}} ,
 \end{split}
 \end{equation*}
-The conditioning affects the probability of the second number drawn being odd.
+where $h = 0, 1, \ldots \min \{ e, m \}$.
+Clearly, the conditioning affects the probability distribution of the number of corrupted bits in the header.
+In general, a random variable with such a distribution is known as a \emph{hypergeometric random variable}. \index{Hypergeometric random variable}
 \end{example}
 
-The definition of conditional PMF can be rearranged to obtain a convenient formula to calculate the joint PMF of $X$ and $Y$, namely
+%\begin{example}
+%Suppose that an urn contains three balls numbered one, two and three.
+%Two balls are drawn from this urn without replacement.
+%We wish to find the probability that the number on the second ball is odd.
+%We also wish to identify the probability that the second ball is odd given that the number on the first ball is a three.
+%
+%The probability that the number on the second ball is odd is given by the marginal distribution of the second  drawing, which was derived in Example~\ref{example:JointPMFwoReplacement}.
+%In the notation of that example, we have
+%\begin{equation*}
+%\Pr (Y \in \{1, 3\})
+%= p_Y (1) + p_Y (3)
+%= \frac{1}{3} + \frac{1}{3}
+%= \frac{2}{3} .
+%\end{equation*}
+%To compute the probability that the second ball is odd conditioned on the first ball being a three, we use the joint PMF obtained in Example~\ref{example:JointPMFwoReplacement},
+%\begin{equation*}
+%\begin{split}
+%\Pr ( Y \in \{ 1, 3 \} | X = 3)
+%&= p_{Y|X}(1|3) + p_{Y|X}(3|3) \\
+%&= \frac{p_{X,Y}(1,3)}{p_X (3)} + \frac{p_{X,Y}(3,3)}{p_X (3)} \\
+%&= \frac{1/6}{1/3} + \frac{0}{1/3} = \frac{1}{2} .
+%\end{split}
+%\end{equation*}
+%The conditioning affects the probability of the second number drawn being odd.
+%\end{example}
+
+The definition of conditional PMF can be rearranged to obtain a convenient formula to calculate the joint distribution of $X$ and $Y$, namely
 \begin{equation*}
 \begin{split}
 p_{X,Y} (x,y) &= p_{Y|X} (y|x) p_X (x) \\
@@ -256,33 +277,12 @@ p_{X,Y} (x,y) &= p_{Y|X} (y|x) p_X (x) \\
 \end{equation*}
 This formula can be use to compute the joint PMF of $X$ and $Y$ sequentially.
 
-%\begin{example}
-%\end{example}
-
-It is also possible to define the conditional PMF of a random variable $X$, conditioned on an event $S$ where $\Pr (X \in S) > 0$.
-Let $X$ be a random variable associated with a particular experiment, and let $S$ be a non-trivial event corresponding to this experiment.
-The conditional PMF of $X$ given $S$ is defined by
-\begin{equation} \label{equation:ConditionalEventPMF}
-p_{X|S} (x) = \Pr (X = x | S)
-= \frac{\Pr (\{X = x\} \cap S)}{\Pr (S)} .
-\end{equation}
-Note that the sets $\{ X = x \}$ form a partition of $\Omega$ as $x$ ranges over all the possible values in $X (\Omega)$.
-By the total probability theorem, we deduce that
-\begin{equation*}
-\sum_{x \in X(\Omega)} \Pr ( \{X = x\} \cap S) = \Pr (S)
-\end{equation*}
-and, consequently, we get
-\begin{equation*}
-\sum_{x \in X(\Omega)} p_{X|S} (x) = 1 .
-\end{equation*}
-Hence, we conclude that $p_{X|S} (\cdot)$ is a valid PMF.
-
 \begin{example}[Splitting Property of Poisson PMF]
-A digital communication system transmits out either a one with probability $p$ or a zero with probability $1 - p$, independently of previous transmissions.
+A digital communication system sends out either a one with probability $p$ or a zero with probability $1 - p$, independently of previous transmissions.
 The number of transmitted binary digits within a given time interval has a Poisson PMF with parameter $\lambda$.
 We wish to show that the number of ones sent in that same time interval has a Poisson PMF with parameter $p \lambda$.
 
-Let $M$ denote the number of ones within the stipulated interval, $N$ be the number of zeros, and $K = M + N$ be the total number of transmissions during the same interval.
+Let $M$ denote the number of ones within the stipulated interval, $N$ be the number of zeros, and $K = M + N$ be the total number of bits sent during the same interval.
 The number of ones given that the total number of transmissions is $k$ is given by
 \begin{equation*}
 p_{M|K} (m | k) = \binom{k}{m} p^m (1-p)^{k - m},
@@ -291,7 +291,8 @@ p_{M|K} (m | k) = \binom{k}{m} p^m (1-p)^{k - m},
 The probability that $M$ is equal to $m$ is therefore equal to
 \begin{equation*}
 \begin{split}
-p_{M} (m) &= \sum_{k = 0}^{\infty} p_{M|K} (m | k) p_K(k) \\
+p_{M} (m) &= \sum_{k = 0}^{\infty} p_{K,M} (k, m)
+= \sum_{k = 0}^{\infty} p_{M|K} (m | k) p_K(k) \\
 &= \sum_{k = m}^{\infty} \binom{k}{m} p^m (1-p)^{k - m}
 \frac{\lambda^{k}}{k !} e^{-\lambda} \\
 &= \sum_{u = 0}^{\infty} \binom{u+m}{m} p^m (1-p)^{u}
@@ -305,6 +306,35 @@ Above, we have used the change of variables $k = u+m$.
 We have also rearranged the sum into a familiar form, leveraging the fact that the summation of a Poisson PMF over all its possible values is equal to one.
 We can see that $M$ has a Poisson PMF with parameter $p \lambda$.
 \end{example}
+
+
+\subsection{Conditioning on Events}
+
+It is also possible to define the conditional PMF of a random variable $X$, conditioned on an event $S$ where $\Pr (X \in S) > 0$.
+Let $X$ be a random variable associated with a particular experiment, and let $S$ be a non-trivial event corresponding to this experiment.
+The conditional PMF of $X$ given $S$ is defined by
+\begin{equation} \label{equation:ConditionalEventPMF}
+p_{X|S} (x) = \Pr (X = x | S)
+= \frac{\Pr (\{X = x\} \cap S)}{\Pr (S)} .
+\end{equation}
+Note that the sets $\{ X = x \}$ form a partition of $\Omega$ as $x$ ranges over all the possible values in $X (\Omega)$.
+Using the total probability theorem, we gather that
+\begin{equation*}
+\sum_{x \in X(\Omega)} \Pr ( \{X = x\} \cap S) = \Pr (S)
+\end{equation*}
+and, consequently, we get
+\begin{equation*}
+\begin{split}
+\sum_{x \in X(\Omega)} p_{X|S} (x)
+&= \sum_{x \in X(\Omega)} \frac{\Pr (\{X = x\} \cap S)}{\Pr (S)} \\
+&= \frac{\sum_{x \in X(\Omega)} \Pr (\{X = x\} \cap S)}{\Pr (S)}
+=1 .
+\end{split}
+\end{equation*}
+We conclude that $p_{X|S} (\cdot)$ is a valid PMF.
+
+%\begin{example}
+%\end{example}
 
 
 \section{Conditional Expectations}
@@ -462,7 +492,7 @@ A similar argument can be used to show that
 whenever $X$ and $Y$ are independent random variables and the corresponding expectations exist.
 
 
-\section{Sums of Random Variables}
+\subsection{Sums of Independent Random Variables}
 
 We now turn to the question of determining the distribution of a sum of independent random variables in terms of the PMF of the summands.
 Suppose $X$ and $Y$ are two independent random variables that take on integer values.
@@ -576,4 +606,8 @@ In particular, if $X$ is independent of event $S$ then
 p_{X|S} (x) = p_X (x)
 \end{equation*}
 for all $x \in X(\Omega)$.
+
+
+\section{Multiple Random Variables}
+
 
