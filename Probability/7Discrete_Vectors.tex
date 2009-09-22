@@ -333,8 +333,25 @@ and, consequently, we get
 \end{equation*}
 We conclude that $p_{X|S} (\cdot)$ is a valid PMF.
 
-%\begin{example}
-%\end{example}
+\begin{example}
+A data packet is sent to a destination over an unreliable wireless communication link.
+Data is successfully decoded at the receiver with probability $p$, or the transmission fails with probability $(1-p)$, independently of previous trials.
+When decoding fails, a retransmission is requested immediately.
+However, if packet transmission fails $n$ consecutive times, then the data is dropped from the queue altogether, with not further attempt.
+Let $X$ denote the number of transmissions, and let $S$ be the event that the data packet is successfully transmitted.
+We wish to compute the conditional PMF of $X$ given $S$.
+
+First, we note that a successful transmission can happen at any of $n$ possible instants.
+These outcomes being mutually exclusive, the probability of $S$ can be written as
+\begin{equation*}
+\Pr(S) = \sum_{k=1}^n (1-p)^{k-1} p = 1 - (1-p)^n .
+\end{equation*}
+Thus, the conditional PMF $p_{N|S} (\cdot)$ is equal to
+\begin{equation*}
+p_{N|S} (k) = \frac{ (1-p)^{k-1} p }{1 - (1-p)^n} ,
+\end{equation*}
+where $k = 1, 2, \ldots n$.
+\end{example}
 
 
 \section{Conditional Expectations}
@@ -373,10 +390,10 @@ Using a similar argument, it is straightforward to show that
 An entrepreneur opens a small business that sells two kinds of beverages from the Brazos Soda Company, cherry soda and lemonade.
 The number of bottles sold in an hour at the store is found to be a Poisson random variable with parameter $\lambda = 10$.
 Every customer selects a cherry soda with probability $p$ and a lemonade with probability $(1 - p)$, independently of other customers.
-We wish to find the conditional mean of the number of cherry sodas purchased in an hour given that a total of ten beverages was purchased by customers during that time period.
+We wish to find the conditional mean of the number of cherry sodas purchased in an hour given that a total of ten beverages was purchased by customers during this time period.
 
 Let $B$ represent the number of bottles sold during an hour.
-Similarly, let $C$ and $L$ be the number of cherry sodas and lemonades purchased during that hour, respectively.
+Similarly, let $C$ and $L$ be the number of cherry sodas and lemonades purchased during the same time interval, respectively.
 We note that $B = C + L$.
 The conditional PMF of $C$ given that the total number of beverages sold equals ten ($B = 10$) is
 \begin{equation} \label{equation:ConditionalPoisson}
@@ -457,12 +474,12 @@ for every $x \in X(\Omega)$ and every $y \in Y(\Omega)$.
 There is a clear relation between the concept of independence introduced in Section~\ref{section:Independence} and the independence of two random variables.
 Two random variables are independent if and only if the events $\{ X = x \}$ and $\{ Y = y \}$ are independent for every $x \in X(\Omega)$ and every $y \in Y(\Omega)$.
 
-\begin{theorem}
+\begin{proposition}
 If $X$ and $Y$ are independent random variables, then
 \begin{equation*}
 \Expect [X Y] = \Expect [X] \Expect [Y] .
 \end{equation*}
-\end{theorem}
+\end{proposition}
 \begin{proof}
 Assume that both $\Expect [X]$ and $\Expect[Y]$ exist, then
 \begin{equation*}
@@ -498,7 +515,7 @@ We now turn to the question of determining the distribution of a sum of independ
 Suppose $X$ and $Y$ are two independent random variables that take on integer values.
 Let $p_X(\cdot)$ and $p_Y(\cdot)$ be the PMFs of $X$ and $Y$, respectively.
 We wish to determine the distribution $p_U (\cdot)$ of $U$ where $U = X + Y$.
-To accomplish this, it suffices to compute the probability that $U$ assumes a value $k$, where $k$ is an arbitrary integer,
+To accomplish this task, it suffices to compute the probability that $U$ assumes a value $k$, where $k$ is an arbitrary integer,
 \begin{equation*}
 \begin{split}
 p_U (k) &= \Pr (U = k) = \Pr (X + Y = k) \\
@@ -507,55 +524,13 @@ p_U (k) &= \Pr (U = k) = \Pr (X + Y = k) \\
 &= \sum_{ m \in \mathbb{U} } p_X (m) p_Y(k-m) .
 \end{split}
 \end{equation*}
-The latter operation is called a \emph{discrete convolution}. \index{Discrete Convolution}
-That is, the PMF of $U = X + Y$ is the discrete convolution of $p_X (\cdot)$ and $p_Y (\cdot)$ given by
+The latter operation is called a \emph{discrete convolution}. \index{Discrete convolution}
+In particular, the PMF of $U = X + Y$ is the discrete convolution of $p_X (\cdot)$ and $p_Y (\cdot)$ given by
 \begin{equation} \label{equation:DiscreteConvolution}
-p_U(k) = (p_X \star p_Y)(k)
+p_U(k) = (p_X \ast p_Y)(k)
 = \sum_{m = - \infty}^{\infty} p_X(m) p_Y(k-m) .
 \end{equation}
-
-It is easy to see that the discrete convolution is commutative, and it is straightforward to show that it is associative.
-Consider the random variables
-\begin{equation*}
-S_n = \sum_{k=1}^n X_k \quad n \geq 1 ,
-\end{equation*}
-where $X_1, X_2, \ldots$ are independent integer-valued random variables with common PMF $p_X (\cdot)$.
-The PMF of $S_1$ is simply $p_X (\cdot)$.
-The PMF of $S_n$ can be obtained recursively using the formula
-\begin{equation*}
-S_n = S_{n-1} + X_n .
-\end{equation*}
-
-\begin{example}[Binomial Random Variables]
-Suppose that $S_n$ is a sum of $n$ independent and identically distributed Bernoulli random variables with parameter $p \in (0,1)$.
-The PMF of $S_1$ is equal to
-\begin{equation*}
-p_{S_1} (k) = \begin{cases} 1 - p & k = 0 \\
-p & k = 1 .  \end{cases}
-\end{equation*}
-Assume that the PMF of $S_{n-1}$ is given by
-\begin{equation*}
-p_{S_{n-1}} (k)
-= \binom{n-1}{k} p^k (1-p)^{n-1-k} ,
-\quad k = 0, 1, \ldots n-1 .
-\end{equation*}
-The PMF of $S_n$ can be computed using the discrete convolution,
-\begin{equation*}
-\begin{split}
-p_{S_n} (k) &= \sum_{m = - \infty}^{\infty} p_{S_{n-1}}(m) p_X(k-m) \\
-&= p_{S_{n-1}}(k) (1-p) + p_{S_{n-1}}(k-1) p \\
-&= \binom{n-1}{k} p^{k} (1-p)^{n-k} + \binom{n-1}{k-1} p^{k} (1-p)^{n-k} \\
-&= \binom{n}{k} p^{k} (1-p)^{n-k}
-\end{split}
-\end{equation*}
-where $k = 0, 1, \ldots, n$.
-Thus, by the principle of mathematical induction, we gather that the sum of $n$ independent Bernoulli random variables, each with parameter $p$, is a binomial random variable with parameters $n$ and $p$.
-\end{example}
-
-The convolution of two binomial distributions, one with parameter $m$ and $p$ and the other with parameters $n$ and $p$, is a binomial random distribution with parameters $(m+n)$ and $p$.
-This fact follows from the previous example.
-%The convolution of $k$ geometric distributions with common parameter $p$ is a negative binomial distribution with parameters $p$ and $k$.
-%This can be seen by considering the experiment which consists of tossing a coin until the $k$th head appears.
+It can be shown that the discrete convolution is commutative and associative.
 
 One interesting application of \eqref{equation:DiscreteProduct} occurs when taking the sum of independent random variables.
 Let $X$ and $Y$ be two independent random variables that take on integer values, and define $U = X + Y$.
@@ -569,7 +544,7 @@ G_U (z) &= \Expect \left[ z^U \right]
 &= G_X(z) G_Y(z) .
 \end{split}
 \end{equation*}
-That is, the generating function of a sum of independent random variables is equal to the product of the individual ordinary generating functions, provided that the latter both exist.
+That is, the generating function of a sum of independent random variables is equal to the product of the individual ordinary generating functions, provided that the latter functions exist.
 
 \begin{example}[Sum of Poisson Random Variables]
 Let $X$ be a Poisson random variable with parameter $\alpha$ and let $Y$ be a Poisson random variable with parameter $\beta$.
@@ -582,7 +557,7 @@ The ordinary generating functions of $X$ and $Y$ are therefore equal to
 G_X (z) &= e^{\alpha (z-1)} \\
 G_Y (z) &= e^{\beta (z-1)} .
 \end{align*}
-The ordinary generating function of $U = X + Y$ then becomes
+The ordinary generating function of $U = X + Y$ becomes
 \begin{equation*}
 G_U (z) = G_X (z) G_Y(z) = e^{\alpha (z-1)} e^{\beta (z-1)}
 = e^{(\alpha + \beta) (z-1)} .
@@ -610,4 +585,135 @@ for all $x \in X(\Omega)$.
 
 \section{Multiple Random Variables}
 
+The concept of joint distribution can be extended to any number of random variables.
+Let $X_1, X_2, \ldots, X_n$ be random variables; their joint PMF is defined by
+\begin{equation*}
+p_{X_1, X_2, \ldots, X_n} (x_1, x_2, \ldots, x_n) = \Pr \left( \bigcap_{k=1}^n \{ X_k = x_k \} \right),
+\end{equation*}
+or, in concise vector form, $p_{\mathbf{X}} (\mathbf{x}) = \Pr ( \mathbf{X} = \mathbf{x} )$.
+When the random variables $X_1, X_2, \ldots, X_n$ are independent, their joint PMF becomes
+\begin{equation*}
+p_{\mathbf{X}} (\mathbf{x}) = \prod_{k=1}^n p_{X_k} (x_k) .
+\end{equation*}
+Although we do not discuss this in details, we emphasize that most concepts introduced in this chapter can be extended to multiple random variables in a straightforward manner.
+Also, we note that, from an abstract perspective, the space defined by vectors of the form $( X_1 (\omega), X_2 (\omega), \ldots, X_n (\omega) )$, $\omega \in \Omega$, is itself a sample space on which random variables can be defined.
 
+Consider the random variables
+\begin{equation*}
+S_n = \sum_{k=1}^n X_k \quad n \geq 1 ,
+\end{equation*}
+where $X_1, X_2, \ldots$ are independent integer-valued random variables, each with marginal PMF $p_X (\cdot)$.
+Obviously, the distribution of $S_1$ is simply $p_X (\cdot)$.
+More generally, the PMF of $S_n$ can be obtained recursively using the formula
+\begin{equation*}
+S_n = S_{n-1} + X_n ,
+\end{equation*}
+and therefore $p_{S_n} (k) = (p_X \ast p_X \ast \cdots \ast p_X ) (k)$, the $n$-fold convolution of $p_X (\cdot)$.
+Furthermore, the ordinary generating function of $S_n$ is simply
+\begin{equation*}
+G_{S_n} (z) = \left( G_X (z) \right)^n.
+\end{equation*}
+
+\begin{example}[Binomial Random Variables]
+Suppose that $S_n$ is a sum of $n$ independent and identically distributed Bernoulli random variables with parameter $p \in (0,1)$.
+The PMF of $S_1$ is equal to
+\begin{equation*}
+p_{S_1} (k) = \begin{cases} 1 - p & k = 0 \\
+p & k = 1 .  \end{cases}
+\end{equation*}
+Assume that the PMF of $S_{n-1}$ is given by
+\begin{equation*}
+p_{S_{n-1}} (k)
+= \binom{n-1}{k} p^k (1-p)^{n-1-k} ,
+\quad k = 0, 1, \ldots n-1 .
+\end{equation*}
+Then, the distribution of $S_n$ can be computed using the discrete convolution,
+\begin{equation*}
+\begin{split}
+p_{S_n} (k) &= \sum_{m = - \infty}^{\infty} p_{S_{n-1}}(m) p_X(k-m) \\
+&= p_{S_{n-1}}(k) (1-p) + p_{S_{n-1}}(k-1) p \\
+&= \binom{n-1}{k} p^{k} (1-p)^{n-k} + \binom{n-1}{k-1} p^{k} (1-p)^{n-k} \\
+&= \binom{n}{k} p^{k} (1-p)^{n-k}
+\end{split}
+\end{equation*}
+where $k = 0, 1, \ldots, n$.
+Thus, by the principle of mathematical induction, we gather that the sum of $n$ independent Bernoulli random variables, each with parameter $p$, is a binomial random variable with parameters $n$ and $p$.
+\end{example}
+
+The convolution of two binomial distributions, one with parameter $m$ and $p$ and the other with parameters $n$ and $p$, is a binomial random distribution with parameters $(m+n)$ and $p$.
+This fact follows directly from the previous example.
+
+\begin{example}[Negative Binomial Random Variable*]
+Suppose that a Bernoulli trial is repeated multiple times until $r$ ones are observed.
+We denote by $X$ the random variable that represents the total number of trials before completion.
+Its distribution is given by
+\begin{equation*}
+p_X (k) = \binom{k-1}{r-1} p^r (1-p)^{k-r}, \quad k = r, r+1, \ldots
+\end{equation*}
+where $p$ is the parameter of each Bernoulli trial.
+In general, a random variable with such a distribution is known as a \emph{negative binomial random variable}. \index{Negative binomial random variable}
+We wish to show that $X$ can be obtained as a sum of $r$ geometric distributions.
+
+We perform this task using the ordinary generating function of $X$.
+We use a trick to derive $G_X(z)$ from $p_X(\cdot)$.
+First, we note that
+\begin{equation*}
+G_X (z) = \sum_{k = r}^{\infty} z^k \binom{k-1}{r-1} p^r (1-p)^{k-r} .
+\end{equation*}
+Consider the derivative of $G_X(z)$,
+\begin{equation*}
+\begin{split}
+\frac{d G_X}{dz} (z)
+&= \sum_{k=r}^{\infty} k z^{k-1} \binom{k-1}{r-1} p^r (1-p)^{k-r} \\
+&= (1-p) \sum_{\ell=r-1}^{\infty} (\ell+1) z^{\ell} \binom{\ell}{r-1} p^r (1-p)^{\ell-r} \\
+&= (1-p) \sum_{\ell=r-1}^{\infty} ( (\ell-r+1) + r ) z^{\ell} \binom{\ell}{r-1} p^r (1-p)^{\ell-r} \\
+&= (1-p) \left( \sum_{\ell=r}^{\infty} (\ell-r+1) z^{\ell} \binom{\ell}{r-1} p^r (1-p)^{\ell-r}
++ \sum_{\ell=r-1}^{\infty} r z^{\ell} \binom{\ell}{r-1} p^r (1-p)^{\ell-r} \right) \\
+&= (1-p) \left( \sum_{\ell=r}^{\infty} \ell z^{\ell} \binom{\ell-1}{r-1} p^r (1-p)^{\ell-r}
++ \sum_{\ell=r-1}^{\infty} r z^{\ell} \binom{\ell}{r-1} p^r (1-p)^{\ell-r} \right) \\
+%
+&= \sum_{k=r}^{\infty} k z^{k-1} \binom{k-1}{r-1} p^r (1-p)^{k-r} \\
+&= (1-p) \sum_{\ell=r}^{\infty} (r + \ell) z^{\ell} \binom{\ell-1}{r-1} p^r (1-p)^{\ell-r} \\
+&= (1-p) \left( r \sum_{\ell=r}^{\infty} z^\ell \binom{\ell-1}{r-1} p^r (1-p)^{\ell-r}
++ \sum_{k=r+1}^{\infty} (k-r) z^{k-1} \binom{k-1}{r-1} p^r (1-p)^{k-1-r} \right) \\
+\end{split}
+\end{equation*}
+\begin{equation*}
+\begin{split}
+\frac{d G_X}{dz} (z)
+&= \sum_{k=r+1}^{\infty}(k-r) z^{k-1} \binom{k-2}{r} p^r (1-p)^{k-r}
++ \sum_{k=r+1}^{\infty} k z^{k-1} \binom{k-2}{r-1} p^r (1-p)^{k-r} \\
+&= \sum_{k=r+1}^{\infty}(r-1) z^{k-1} \binom{k-2}{r-1} p^r (1-p)^{k-r}
++ \sum_{k=r+1}^{\infty} k z^{k-1} \binom{k-2}{r-1} p^r (1-p)^{k-r} \\
+&= \sum_{k=r+1}^{\infty}r z^{k-1} \binom{k-2}{r-1} p^r (1-p)^{k-r}
++ \sum_{k=r+1}^{\infty} (k-1) z^{k-1} \binom{k-2}{r-1} p^r (1-p)^{k-r} \\
+&= \sum_{\ell=r}^{\infty}r z^\ell \binom{\ell-1}{r-1} p^r (1-p)^{\ell+1-r}
++ \sum_{\ell=r}^{\infty} \ell z^{\ell} \binom{\ell-1}{r-1} p^r (1-p)^{\ell+1-r} \\
+&= (1-p) \left( r G_X(z) + z \frac{d G_X}{dz} (z) \right)
+\end{split}
+\end{equation*}
+It follows that
+\begin{equation*}
+\frac{1}{G_X(z)} \frac{d G_X}{dz}(z) = \frac{(1-p) r}{1 - (1-p) z}
+\end{equation*}
+and, therefore, we get
+\begin{equation*}
+G_X(z) = \left( \frac{p}{1 - (1-p) z} \right)^r .
+\end{equation*}
+
+\begin{equation*}
+\begin{split}
+&= p^r + \sum_{k=1}^{\infty} z^k \binom{k+r-1}{r-1} p^r (1-p)^k \\
+&= p^r + \sum_{\ell=0}^{\infty} z^{\ell+1} \binom{\ell+1+r-1}{r-1} p^r (1-p)^{\ell+1} \\
+&= p^r + (1-p) z \sum_{\ell=0}^{\infty} z^{\ell} \left( \binom{\ell + r - 1}{r - 1} + \binom{\ell+r-1}{r-2} \right) p^r (1-p)^{\ell} \\
+&= p^r + (1-p) z \left( G_X (z) + \sum_{\ell=0}^{\infty} z^{\ell} \frac{r-1}{\ell} \binom{\ell+r-1}{r-1} p^r (1-p)^{\ell} \right) \\
+\end{split}
+\end{equation*}
+
+Integrating both sides, we get
+which in turns yields $G_X(z) = C_2 $.
+
+Let $X$ be the sum of $k$ geometric distributions
+\end{example}
+%The convolution of $k$ geometric distributions with common parameter $p$ is a negative binomial distribution with parameters $p$ and $k$.
+%This can be seen by considering the experiment which consists of tossing a coin until the $k$th head appears.
