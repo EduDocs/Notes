@@ -645,75 +645,47 @@ This fact follows directly from the previous example.
 
 \begin{example}[Negative Binomial Random Variable*]
 Suppose that a Bernoulli trial is repeated multiple times until $r$ ones are observed.
-We denote by $X$ the random variable that represents the total number of trials before completion.
-Its distribution is given by
+We denote by $X$ the random variable that represents the number of zeros observed before completion.
+The distribution of $X$ is given by
 \begin{equation*}
-p_X (k) = \binom{k-1}{r-1} p^r (1-p)^{k-r}, \quad k = r, r+1, \ldots
+p_X (k) = \binom{k-r-1}{r-1} p^r (1-p)^k, \quad k = 0, 1, \ldots
 \end{equation*}
 where $p$ is the parameter of each Bernoulli trial.
 In general, a random variable with such a distribution is known as a \emph{negative binomial random variable}. \index{Negative binomial random variable}
-We wish to show that $X$ can be obtained as a sum of $r$ geometric distributions.
 
-We perform this task using the ordinary generating function of $X$.
+%We wish to show that $X$ can be obtained as a sum of $r$ geometric distributions.
+
+We perform this task by computing the ordinary generating function of $X$.
 We use a trick to derive $G_X(z)$ from $p_X(\cdot)$.
-First, we note that
+By definition, we have
 \begin{equation*}
-G_X (z) = \sum_{k = r}^{\infty} z^k \binom{k-1}{r-1} p^r (1-p)^{k-r} .
+G_X (z) = \sum_{k = r}^{\infty} z^k \binom{k-r-1}{r-1} p^r (1-p)^k .
 \end{equation*}
 Consider the derivative of $G_X(z)$,
 \begin{equation*}
 \begin{split}
 \frac{d G_X}{dz} (z)
-&= \sum_{k=r}^{\infty} k z^{k-1} \binom{k-1}{r-1} p^r (1-p)^{k-r} \\
-&= (1-p) \sum_{\ell=r-1}^{\infty} (\ell+1) z^{\ell} \binom{\ell}{r-1} p^r (1-p)^{\ell-r} \\
-&= (1-p) \sum_{\ell=r-1}^{\infty} ( (\ell-r+1) + r ) z^{\ell} \binom{\ell}{r-1} p^r (1-p)^{\ell-r} \\
-&= (1-p) \left( \sum_{\ell=r}^{\infty} (\ell-r+1) z^{\ell} \binom{\ell}{r-1} p^r (1-p)^{\ell-r}
-+ \sum_{\ell=r-1}^{\infty} r z^{\ell} \binom{\ell}{r-1} p^r (1-p)^{\ell-r} \right) \\
-&= (1-p) \left( \sum_{\ell=r}^{\infty} \ell z^{\ell} \binom{\ell-1}{r-1} p^r (1-p)^{\ell-r}
-+ \sum_{\ell=r-1}^{\infty} r z^{\ell} \binom{\ell}{r-1} p^r (1-p)^{\ell-r} \right) \\
-%
-&= \sum_{k=r}^{\infty} k z^{k-1} \binom{k-1}{r-1} p^r (1-p)^{k-r} \\
-&= (1-p) \sum_{\ell=r}^{\infty} (r + \ell) z^{\ell} \binom{\ell-1}{r-1} p^r (1-p)^{\ell-r} \\
-&= (1-p) \left( r \sum_{\ell=r}^{\infty} z^\ell \binom{\ell-1}{r-1} p^r (1-p)^{\ell-r}
-+ \sum_{k=r+1}^{\infty} (k-r) z^{k-1} \binom{k-1}{r-1} p^r (1-p)^{k-1-r} \right) \\
+&= \sum_{k=0}^{\infty} k z^{k-1} \binom{k-r-1}{r-1} p^r (1-p)^k
+= \sum_{k=0}^{\infty} k z^{k-1} \frac{(k-r-1)!}{(r-1)!k!} p^r (1-p)^k \\
+&= \sum_{k=1}^{\infty} z^{k-1} \frac{(k-r-1)!}{(r-1)!(k-1)!} p^r (1-p)^k
+= \sum_{\ell=0}^{\infty} z^{\ell} \frac{(\ell-r)!}{(r-1)!\ell!} p^r (1-p)^{\ell+1} \\
+&= (1-p) \sum_{\ell=0}^{\infty} (\ell-r) z^{\ell} \binom{\ell-r-1}{r-1} p^r (1-p)^{\ell} \\
+&= (1-p) \left( z \frac{d G_X}{dz} (z) - r G_X(z) \right) .
 \end{split}
 \end{equation*}
+It follows from this equation that
 \begin{equation*}
-\begin{split}
-\frac{d G_X}{dz} (z)
-&= \sum_{k=r+1}^{\infty}(k-r) z^{k-1} \binom{k-2}{r} p^r (1-p)^{k-r}
-+ \sum_{k=r+1}^{\infty} k z^{k-1} \binom{k-2}{r-1} p^r (1-p)^{k-r} \\
-&= \sum_{k=r+1}^{\infty}(r-1) z^{k-1} \binom{k-2}{r-1} p^r (1-p)^{k-r}
-+ \sum_{k=r+1}^{\infty} k z^{k-1} \binom{k-2}{r-1} p^r (1-p)^{k-r} \\
-&= \sum_{k=r+1}^{\infty}r z^{k-1} \binom{k-2}{r-1} p^r (1-p)^{k-r}
-+ \sum_{k=r+1}^{\infty} (k-1) z^{k-1} \binom{k-2}{r-1} p^r (1-p)^{k-r} \\
-&= \sum_{\ell=r}^{\infty}r z^\ell \binom{\ell-1}{r-1} p^r (1-p)^{\ell+1-r}
-+ \sum_{\ell=r}^{\infty} \ell z^{\ell} \binom{\ell-1}{r-1} p^r (1-p)^{\ell+1-r} \\
-&= (1-p) \left( r G_X(z) + z \frac{d G_X}{dz} (z) \right)
-\end{split}
+\frac{1}{G_X(z)} \frac{d G_X}{dz}(z) = - \frac{(1-p) r}{1 - (1-p) z}
 \end{equation*}
-It follows that
+or, alternatively, we can write
 \begin{equation*}
-\frac{1}{G_X(z)} \frac{d G_X}{dz}(z) = \frac{(1-p) r}{1 - (1-p) z}
+\frac{d}{dz} \log \left( G_X(z) \right) = - \frac{(1-p) r}{1 - (1-p) z} .
 \end{equation*}
-and, therefore, we get
+Using the boundary condtion $G_X(1) = 1$ we obtain the ordinary generating function of $X$ as
 \begin{equation*}
 G_X(z) = \left( \frac{p}{1 - (1-p) z} \right)^r .
 \end{equation*}
-
-\begin{equation*}
-\begin{split}
-&= p^r + \sum_{k=1}^{\infty} z^k \binom{k+r-1}{r-1} p^r (1-p)^k \\
-&= p^r + \sum_{\ell=0}^{\infty} z^{\ell+1} \binom{\ell+1+r-1}{r-1} p^r (1-p)^{\ell+1} \\
-&= p^r + (1-p) z \sum_{\ell=0}^{\infty} z^{\ell} \left( \binom{\ell + r - 1}{r - 1} + \binom{\ell+r-1}{r-2} \right) p^r (1-p)^{\ell} \\
-&= p^r + (1-p) z \left( G_X (z) + \sum_{\ell=0}^{\infty} z^{\ell} \frac{r-1}{\ell} \binom{\ell+r-1}{r-1} p^r (1-p)^{\ell} \right) \\
-\end{split}
-\end{equation*}
-
-Integrating both sides, we get
-which in turns yields $G_X(z) = C_2 $.
-
-Let $X$ be the sum of $k$ geometric distributions
 \end{example}
+
 %The convolution of $k$ geometric distributions with common parameter $p$ is a negative binomial distribution with parameters $p$ and $k$.
 %This can be seen by considering the experiment which consists of tossing a coin until the $k$th head appears.
