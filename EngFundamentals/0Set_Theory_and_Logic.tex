@@ -452,7 +452,7 @@ It is important to note that the order elements are presented is irrelevant and 
 Likewise, repeated elements have no effect and the set $\{ a,e,i,o,u,e,o \}$ is the same as $A$.
 A \defn{set theory}{singleton} set is a set containing exactly one element such as $\{a\}$.
 
-There are a number of standard sets worth mentioning: the integers $\mathbb{Z}$, the real numbers $\mathbb{R}$, and the complex numbers $\mathbb{C}$.
+There are a number of standard sets worth mentioning: the \defn{set theory}{integers} $\mathbb{Z}$, the \defn{set theory}{real numbers} $\mathbb{R}$, and the \defn{set theory}{complex numbers} $\mathbb{C}$.
 It is possible to construct these sets in a rigorous manner, but instead we will assume their meaning is intuitively clear.
 New sets can be defined in terms of old sets using \defn{set theory}{set-builder notation}.
 Let $P(x)$ be a logical statement about objects $x$ in the set $X$, then the ``set of elements in $X$ such that $P(x)$ is true'' is denoted by
@@ -460,7 +460,7 @@ Let $P(x)$ be a logical statement about objects $x$ in the set $X$, then the ``s
 For example, the set of even integers is given by
 \[ \{ x\in \mathbb{Z} | \textrm{``}x\textrm{ is even''} \} = \{ \ldots,-4,-2,0,2,4,\ldots \}. \]
 If no element $x\in X$ satisfies the condition, then the result is the \defn{set theory}{empty set} which is denoted $\emptyset$.
-Using set-builder notation, we can also define the natural numbers $\mathbb{N}$ and the rational numbers $\mathbb{Q}$ with
+Using set-builder notation, we can also define the \defn{set theory}{natural numbers} $\mathbb{N}$ and the \defn{set theory}{rational numbers} $\mathbb{Q}$ with
 \begin{align*}
 \mathbb{N} & = \{ n\in \mathbb{Z} | n\geq 1 \} \\
 \mathbb{Q} & = \{ q\in \mathbb{R} | q=a/b, a\in \mathbb{Z}, b\in \mathbb{N} \}.
@@ -521,6 +521,16 @@ One can apply De Morgan's Law in set theory to see that
 (A \cap B)^c & = A^c \cup B^c,
 \end{align*}
 to interchange union (or intersection) with set difference.
+
+We can also form the union or the intersection of arbitrarily many sets.
+This is defined in a straightforward way,
+\begin{align*}
+\bigcup_{\alpha \in I} S_{\alpha}
+&= \{ x | x \in S_{\alpha} \text{ for some } \alpha \in I \} \\
+\bigcap_{\alpha \in I} S_{\alpha}
+&= \{ x | x \in S_{\alpha} \text{ for all } \alpha \in I \} .
+\end{align*}
+It is worth noting that this definition works well if the index set if finite, countably infinite, or even uncountably infinite.
 
 Another way to build sets is by grouping elements into pairs, triples, and vectors.
 \begin{definition}
@@ -621,15 +631,14 @@ Let the function $f: \mathbb{R} \rightarrow \mathbb{R}$ be defined by $f(x)=x^2+
 
 \begin{problem}
 \label{problem:SetFunctionInverse}
-Let $f:X\rightarrow Y$, $A\subseteq X$, and $B\subseteq Y$.
-Using the rules
+For all $f:X\rightarrow Y$, $A\subseteq X$, and $B\subseteq Y$, we have the rules:
 \begin{align*}
 (a) & \; x \in A \Rightarrow f(x) \in f(A) &
 (b) & \; y \in f(A) \Rightarrow \exists x\in A \textrm{ s.t. } f(x)=y \\
 (c) & \; x\in f^{-1}(B) \Rightarrow f(x) \in B &
-(d) & \; f(x) \in B \Rightarrow x\in f^{-1}(B),
+(d) & \; f(x) \in B \Rightarrow x\in f^{-1}(B)
 \end{align*}
-show that $f^{-1}(f(A)) \supseteq A$ and $f(f^{-1}(B)) \subseteq B$.
+Use these rules to show that $f^{-1}(f(A)) \supseteq A$ and $f(f^{-1}(B)) \subseteq B$.
 \end{problem}
 \noindent \textbf{S~\ref{problem:SetFunctionInverse}.}
 The first result follows from
