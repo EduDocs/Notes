@@ -320,7 +320,7 @@ By Theorem~\ref{theorem:ClosureConditions}, we find that $f(x) \in \Closure{ f(A
 $(2 \Rightarrow 3)$.
 Suppose that for every subset $A \subseteq X$, $f \left( \Closure{A} \right) \subseteq \Closure{ f(A) }$.
 Let $C \subseteq Y$ be a closed set and let $A = f^{-1} (C)$.
-By elementary set theory, we have $f(A) \subseteq C$.
+By P~\ref{problem:SetFunctionInverse}, we have $f(A) \subseteq C$.
 If $x \in \Closure{A}$, then
 \begin{equation*}
 f(x) \in f \left( \Closure{A} \right) \subseteq \Closure{f (A)} \subseteq \Closure{C} = C.
@@ -332,9 +332,10 @@ $(3 \Rightarrow 1)$.
 Let $O$ be an open set in $Y$.
 Let $\Complement{O} = Y - O$; then $\Complement{O}$ is closed in $Y$.
 By assumption, $f^{-1} (\Complement{O})$ is closed in $X$.
-Using elementary set theory,
+Using elementary set theory, we have
 \begin{equation*}
-f^{-1} (O) = f^{-1} (Y - \Complement{O}) = f^{-1}(Y) - f^{-1}(\Complement{O}) = X - f^{-1}(\Complement{O}).
+X - f^{-1}(O^c) = \{ x\in X | f(x) \notin O^c \} = \{ x \in X | f(x) \in O \} = f^{-1} (O).
+%f^{-1} (O) = f^{-1} (Y - \Complement{O}) = f^{-1}(Y) - f^{-1}(\Complement{O}) = X - f^{-1}(\Complement{O}).
 \end{equation*}
 That is, $f^{-1} (O)$ is open.
 \end{proof}

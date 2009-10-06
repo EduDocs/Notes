@@ -98,6 +98,14 @@ AB = BA = I.
 If $A$ is invertible then its inverse will be denoted by $A^{-1}$.
 \end{definition}
 
+\begin{lemma}
+\label{lemma:widematrix_has_nullvector}
+Let $A$ be an $m \times n$ matrix over $F$ with $m<n$.
+Then, there exists a length-$n$ column vector $\vecnot{x}$ (over $F$) such that $A \vecnot{x} = \vecnot{0}$.
+\end{lemma}
+\begin{proof}
+This result follows easily from row reduction and the proof is left as an exercise for the reader.
+\end{proof}
 
 \section{Vector Spaces}
 
@@ -181,16 +189,20 @@ is a subspace of $F^{n \times 1}$.
 
 \begin{definition}
 Let $U$ be a set of vectors in a vector space $V$.
-The \defn{vector space}{subspace spanned} by $U$ is defined to be the intersection $W$ of all subspaces of $V$ which contain $U$.
+The \defn{vector space}{span} of $U$, denoted $\Span(U)$, is defined to be the set of all finite linear combinations of vectors in $U$.
+%The \defn{vector space}{subspace spanned} by $U$ is defined to be the intersection $W$ of all subspaces of $V$ which contain $U$.
 \end{definition}
 
-The subspace spanned by a non-empty subset $U \subset V$, where $V$ is a vector space, is the set of all linear combinations of vectors in $U$.
+The subspace spanned by $U$ can also be defined equivalently as the intersection of all subspaces of $V$ which contain $U$.
+It is easy to see that all finite linear combinations of vectors in $U$ must be in all subspaces containing $U$.
+One can show the converse by considering its contrapositive: There exists a finite linear combination of vectors in $U$ and a subspace containing $U$ such that the vector is not in the subspace.
+Of course, this contradicts the closure property of the subspace.
 
 
 \subsection{Bases and Dimension}
 \label{section:BasesAndDimension}
 
-The dimension of a vector space can be defined using the concept of a basis for the space.
+The dimension of a vector space is defined using the concept of a basis for the space.
 
 \begin{definition}
 Let $V$ be a vector space over $F$.
@@ -205,6 +217,32 @@ A few important consequences follow immediately from this definition.
 Any subset of a linearly independent set is also linearly independent.
 Any set which contains the $\vecnot{0}$ vector is linearly dependent.
 A set $U \subset V$ is linearly independent if and only if each finite subset of $U$ is linearly independent.
+
+\iffalse
+
+\begin{lemma}
+Let $V$ be a vector space over $F$ and suppose a subset $U \subseteq V \setminus \{ \vecnot{0} \}$ is linearly dependent.
+Then, there are at least two distinct vectors $\vecnot{u} \in U$ such that (i) $\vecnot{u} \in \Span \left(U \setminus  \{\vecnot{u} \}\right)$ and (ii) $\Span \left( U \setminus \{\vecnot{u} \}\right) = \Span(U)$.
+\end{lemma}
+\begin{proof}
+%If $\vecnot{0} \in U$, then this is trivially true by choosing $\vecnot{u}_1 = \vecnot{0}$.
+%Therefore, we assume wolog that $\vecnot{0} \notin U$.
+Since $U$ is linearly dependent, there exist distinct vectors $\vecnot{u}_1, \ldots, \vecnot{u}_n \in U$ and scalars $s_1, \ldots, s_n \in F$, not all of which are $0$, such that
+\begin{equation*}
+\sum_{i=1}^n s_i \vecnot{u}_i = 0.
+\end{equation*}
+Since none of the $\vecnot{u}_i$ are $\vecnot{0}$, this implies that at least two coefficients (e.g., $s_j,s_k$) are non-zero.
+This allows us to solve for either $\vecnot{u}_j$ or $\vecnot{u}_k$ in terms of the other vectors in $U$.
+Therefore, they both satisfy (i).
+%Therefore, we have
+%\begin{equation*}
+%\vecnot{u}_j = -\frac{s_2}{s_1} \vecnot{u}_2 - \frac{s_3}{s_1} \vecnot{u}_3 - \ldots -\frac{s_n}{s_1} \vecnot{u}_n, 
+%\end{equation*}
+%which clearly implies (i).
+Result (ii) for each vector follows from (i) for the same vector because, for example, any linear combination including $\vecnot{u}_j$ can be rewritten in terms of vectors in $U \setminus  \{\vecnot{u}_j \}$.
+\end{proof}
+
+\fi
 
 \begin{definition}
 Let $V$ be a vector space over $F$.
@@ -262,7 +300,7 @@ It follows that $\vecnot{w} = A \vecnot{v}$ and, as a consequence, $\{ A_1, \ldo
 
 \begin{theorem}
 Let $V$ be a vector space which is spanned by a finite set of vectors $W = \left\{ \vecnot{w}_1, \ldots, \vecnot{w}_n \right\}$.
-Then any linearly independent set of vectors in $V$ is finite and contains no more than $n$ elements.
+Then, any linearly independent set of vectors in $V$ is finite and contains no more than $n$ elements.
 \end{theorem}
 \begin{proof}
 Assume that $U = \left\{ \vecnot{u}_1, \ldots, \vecnot{u}_m \right\} \subset V$ with $m > n$.
@@ -277,16 +315,18 @@ For any $m$ scalars $s_1, \ldots, s_m$ we have
 = \sum_{j=1}^m \sum_{i=1}^n ( a_{ij} s_j ) \vecnot{w}_i
 = \sum_{i=1}^n \left( \sum_{j=1}^m a_{ij} s_j \right) \vecnot{w}_i . 
 \end{equation*}
-Because $m > n$ there exist scalars $s_1, \ldots, s_n$, not all $0$, such that
+Collecting the $a_{ij}$ coefficients into an $n$ by $m$ matrix $A$ shows that
 \begin{equation*}
-\sum_{j=1}^m a_{ij} s_j = 0, \quad 1 \leq i \leq n. 
+\left[ \begin{array}{c} t_1 \\ \vdots \\ t_n \end{array} \right] = A \left[ \begin{array}{c} s_1 \\ \vdots \\ s_m \end{array} \right].
 \end{equation*}
+Since $n<m$, Lemma~\ref{lemma:widematrix_has_nullvector} implies that there exist scalars $s_1, \ldots, s_n$, not all $0$, such that $t_1 = t_2 = \cdots = t_m = 0$.
 For these scalars, $\sum_{j=1}^m s_j \vecnot{u}_j = 0$.
 That is, the set $U$ is linearly dependent.
 \end{proof}
 
 If $V$ is a finite-dimensional vector space, then any two bases of $V$ have the same number of elements.
-This allows us to define the dimension of a finite-dimensional vector space.
+Therefore, the dimension of a finite-dimensional vector space is uniquely defined.
+While this may seem intuitively obvious to many readers, the previous theorem shows that this intuition from $\mathbb{R}^n$ does not break down for other fields and vector spaces.
 
 \begin{definition}
 The \defn{vector space}{dimension} of a finite-dimensional vector space is defined as the number of elements in any basis for $V$.
@@ -325,9 +365,9 @@ Every vector $\vecnot{w} \in V$ can be expressed uniquely as
 \begin{equation*}
 \vecnot{w} = \sum_{i=1}^n s_i \vecnot{v}_i.
 \end{equation*}
-Recall that a set is an unordered collection of objects.
-Yet it is possible to order the elements of $\left\{ \vecnot{v}_1, \ldots, \vecnot{v}_n \right\}$.
-One of the useful features of an ordered basis is that it enables the introduction of a coordinate system in $V$.
+While standard vector and matrix notation requires that the basis elements be ordered, a set is an unordered collection of objects.
+Ordering this set (e.g., $\vecnot{v}_1, \ldots, \vecnot{v}_n$) allows the first element in the coordinate vector to be associated with the first vector in our basis and so on.
+
 
 \begin{definition}
 If $V$ is a finite-dimensional vector space, an \defn{vector space}{ordered basis} for $V$ is a finite sequence of vectors which is linearly independent and spans $V$.
@@ -352,6 +392,7 @@ Note that the standard basis contains a natural ordering: $\vecnot{e}_1, \ldots,
 Vectors in $F^n$ can therefore be unambiguously expressed as $n$-tuples.
 \end{example}
 
+\iffalse
 Let $V$ be a finite-dimensional vector space and assume that
 \begin{align*}
 \mathcal{A} &= \vecnot{v}_1, \ldots, \vecnot{v}_n \\
@@ -362,9 +403,9 @@ There are unique scalars $p_{ij}$ such that
 \begin{equation*}
 \vecnot{w}_j = \sum_{i=1}^n p_{ij} \vecnot{v}_i \quad 1 \leq j \leq n.
 \end{equation*}
-Let $\vecnot{u} \in \mathcal{B}$ and
+Let $\vecnot{u} \in V$ and
 \begin{equation*}
-\vecnot{u} = \left[ \begin{array}{c} t_1 \\ \vdots \\ t_n \end{array} \right]_{\mathcal{B}}.
+\left[ \vecnot{u} \right]_{\mathcal{B}} = \left[ \begin{array}{c} t_1 \\ \vdots \\ t_n \end{array} \right].
 \end{equation*}
 Then, we can write
 \begin{equation*}
@@ -387,6 +428,7 @@ Furthermore, the columns of $P$ are given by
 \begin{equation*}
 P_j = \left[ \vecnot{w}_j \right]_{\mathcal{A}} \quad 1 \leq j \leq n.
 \end{equation*}
+\fi
 
 \begin{problem} \label{problem:OrderBasisFromMatrix}
 Suppose that $\mathcal{A} = \vecnot{v}_1, \ldots, \vecnot{v}_n$ is an ordered basis for $V$.
@@ -399,25 +441,36 @@ Show that there exists an ordered basis $\mathcal{B} = \vecnot{w}_1, \ldots, \ve
 for every $\vecnot{u} \in V$.
 \end{problem}
 \textbf{S~\ref{problem:OrderBasisFromMatrix}}.
-Consider the ordered basis $\mathcal{A} = \vecnot{v}_1, \ldots, \vecnot{v}_n$.
-If $\mathcal{B} = \vecnot{w}_1, \ldots, \vecnot{w}_n$ is an ordered basis for $V$ such that $\left[ \vecnot{u} \right]_{\mathcal{A}} = P \left[ \vecnot{u} \right]_{\mathcal{B}}$ then
+Consider the ordered basis $\mathcal{A} = \vecnot{v}_1, \ldots, \vecnot{v}_n$ and let $Q = P^{-1}$.
+For all $\vecnot{u} \in V$, we have $\vecnot{u} = \sum_{i=1}^n s_i \vecnot{v}_i$, where
 \begin{equation*}
-\vecnot{w}_j = \sum_{i = 1}^n p_{ij} \vecnot{v}_i.
+\left[ \vecnot{u} \right]_{\mathcal{A}} = \left[ \begin{array}{c} s_1 \\ \vdots \\ s_n \end{array} \right].
 \end{equation*}
-We need only show that the vectors $\vecnot{w}_1, \ldots, \vecnot{w}_n$ defined by these equations form a basis for $V$.
-Let $Q = P^{-1}$, then
+If we define
+\begin{equation*}
+\vecnot{w}_i = \sum_{k = 1}^n p_{ki} \vecnot{v}_k,
+\end{equation*}
+and
+\begin{equation*}
+t_i = \sum_{i=1} q_{ij} s_j,
+\end{equation*}
+then we find that
 \begin{equation*}
 \begin{split}
-\sum_{j = 1}^n q_{jk} \vecnot{w}_j
-&= \sum_{j = 1}^n q_{jk} \sum_{i = 1}^n p_{ij} \vecnot{v}_i
-= \sum_{j = 1}^n \sum_{i = 1}^n p_{ij} q_{jk} \vecnot{v}_i \\
-&= \sum_{i = 1}^n \left( \sum_{j = 1}^n p_{ij} q_{jk} \right) \vecnot{v}_i
-= \vecnot{v}_k .
+\sum_{i = 1}^n t_i \vecnot{w}_i
+&= \sum_{i = 1}^n \sum_{j=1}^n q_{ij} s_j \vecnot{w}_i
+= \sum_{i = 1}^n \sum_{j=1}^n q_{ij} s_j \sum_{k = 1}^n p_{ki} \vecnot{v}_k \\
+& = \sum_{j=1}^n s_j \sum_{k=1}^n \vecnot{v}_k \sum_{i = 1}^n p_{ki} q_{ij}
+= \sum_{j=1}^n s_j \sum_{k=1}^n \vecnot{v}_k \delta_{jk} \\
+& = \sum_{j=1}^n s_j \vecnot{v}_j
+= \vecnot{u}.
 \end{split}
 \end{equation*}
-The subspace spanned by the set $\mathcal{B} = \vecnot{w}_1, \ldots, \vecnot{w}_n$ contains $\mathcal{A}$.
-Thus $\mathcal{V}$ is a basis for $V$.
-By definition, it clear that $\left[ \vecnot{u} \right]_{\mathcal{A}} = P \left[ \vecnot{u} \right]_{\mathcal{B}}$ and $\left[ \vecnot{u} \right]_{\mathcal{B}} = P^{-1} \left[ \vecnot{u} \right]_{\mathcal{A}}$.
+This shows that $\mathcal{B} = \vecnot{w}_1, \ldots, \vecnot{w}_n$ is an ordered basis for $V$ and
+\begin{equation*}
+\left[ \vecnot{u} \right]_{\mathcal{B}} = \left[ \begin{array}{c} t_1 \\ \vdots \\ t_n \end{array} \right].
+\end{equation*}
+The definition of $t_i$ also shows that $\left[ \vecnot{u} \right]_{\mathcal{B}} = P^{-1} \left[ \vecnot{u} \right]_{\mathcal{A}}$ and therefore $\left[ \vecnot{u} \right]_{\mathcal{A}} = P \left[ \vecnot{u} \right]_{\mathcal{B}}$.
 
 
 
