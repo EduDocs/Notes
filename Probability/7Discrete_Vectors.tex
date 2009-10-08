@@ -4,7 +4,7 @@
 Thus far, our treatment of probability has been focused on single random variables.
 It is often convenient or required to model stochastic phenomena using multiple random variables.
 In this section, we extend some of the concepts developed for single random variables to multiple random variables.
-We initiate our exposition of random vectors with a simple case, pairs of random variables.
+We center our exposition of random vectors around the a simple case, pairs of random variables.
 
 
 \section{Joint Probability Mass Functions}
@@ -42,7 +42,7 @@ Note the similarity between the definition of the joint PMF and \eqref{equation:
 \end{figure}
 
 Suppose that $S$ is a subset of $X(\Omega) \times Y(\Omega)$.
-We can express the probability of event $S$ as
+We can express the probability of $S$ as
 \begin{equation*}
 \begin{split}
 \Pr (S) &= \Pr (\{ \omega \in \Omega | (X(\omega), Y(\omega)) \in S \}) \\
@@ -61,14 +61,14 @@ p_X (x) &= \sum_{y \in Y(\Omega)} p_{X,Y} (x,y), \\
 p_Y (y) &= \sum_{x \in X(\Omega)} p_{X,Y} (x,y).
 \end{align*}
 On the other hand, knowledge of the marginal distributions $p_X (\cdot)$ and $p_Y (\cdot)$ is not enough to obtain a complete description of the joint PMF $p_{X,Y} (\cdot,\cdot)$.
-Examples~\ref{example:JointPMFwoReplacement}~\&~\ref{example:JointPMFwithReplacement} illustrate the fact that knowledge of marginal PMFs is not sufficient to characterize the underlying joint PMF.
+This fact is illustrated in Examples~\ref{example:JointPMFwoReplacement}~\&~\ref{example:JointPMFwithReplacement}.
 
 \begin{example} \label{example:JointPMFwoReplacement}
-An urn contains three balls numbered one, two, and three.
+An urn contains three balls numbered one, two and three.
 A random experiment consists of drawing two balls from the urn, without replacement.
 The number appearing on the first ball is a random variable, which we denote by $X$.
 Similarly, we refer to the number inscribed on the second ball as $Y$.
-The joint PMF of $X$ and $Y$ is given by
+The joint PMF of $X$ and $Y$ is specified below,
 \begin{center}
 \begin{tabular}{|c|c|c|c|}
 \hline
@@ -84,10 +84,8 @@ $3$ & $1/6$ & $1/6$ & $0$ \\
 \end{center}
 We can compute the marginal PMF of $X$ as
 \begin{equation*}
-\begin{split}
-p_X (x) &= \sum_{y \in Y(\Omega)} p_{X,Y} (x,y) \\
-&= \frac{1}{6} + \frac{1}{6} = \frac{1}{3},
-\end{split}
+p_X (x) = \sum_{y \in Y(\Omega)} p_{X,Y} (x,y)
+= \frac{1}{6} + \frac{1}{6} = \frac{1}{3},
 \end{equation*}
 where $x \in \{1, 2, 3 \}$.
 Likewise, the marginal PMF of $Y$ is seen to equal
@@ -157,7 +155,7 @@ Above, $V = g(X, Y)$ maps outcomes in the sample space to real numbers.}
 \begin{example} \label{example:SumDice1}
 Two dice, a blue die and a red one, are rolled simultaneously.
 The random variable $X$ represents the number of dots that appears on the top face of the blue die, whereas $Y$ is equal to the number of dots on the red die.
-We can form a random variable $U$ that describes the sum of the two dice by defining $U = X + Y$.
+We can form a random variable $U$ that describes the sum of the two dice, $U = X + Y$.
 \end{example}
 
 The definition of the expectation operator can also be extended to multiple random variables.
@@ -169,7 +167,7 @@ In particular, the expected value of $g(X,Y)$ is obtained by computing
 \begin{example}
 An urn contains three balls numbered one, two and three.
 Two balls are selected from the urn at random, without replacement.
-We employ $X$ to represent the number on the first ball and $Y$ for the number on the second ball.
+We employ $X$ and $Y$ to represent the numbers on the first and second balls, respectively.
 We wish to compute the expected value of the function $X + Y$.
 
 Using \eqref{equation:ExpectationMultipleRV}, we compute the expectation of $g(X,Y) = X + Y$ as
@@ -194,8 +192,8 @@ This inter-dependence is captured by the concept of conditioning, which was firs
 In this section, we extend the concept of conditioning to multiple random variables.
 We study the probability of events concerning random variable $Y$ given that some information about random variable $X$ is available.
 
-Let $X$ and $Y$ be two random variables associated with the same experiment.
-The \emph{conditional probability mass function} of $Y$ given $X = x$, denoted by $p_{Y|X} (\cdot | \cdot)$, is defined by \index{Conditional probability mass function}
+Let $X$ and $Y$ be two random variables associated with a same experiment.
+The \emph{conditional probability mass function} of $Y$ given $X = x$, which we write $p_{Y|X} (\cdot | \cdot)$, is defined by \index{Conditional probability mass function}
 \begin{equation*}
 \begin{split}
 p_{Y|X} (y|x) &= \Pr ( Y = y | X = x) \\
@@ -204,7 +202,7 @@ p_{Y|X} (y|x) &= \Pr ( Y = y | X = x) \\
 \end{split}
 \end{equation*}
 provided that $p_X (x) \neq 0$.
-Note that conditioning is not defined when $p_X (x)$ vanishes, as it has no relevant meaning.
+Note that conditioning on $X = x$ is not possible when $p_X (x)$ vanishes, as it has no relevant meaning.
 This is similar to conditional probabilities being only defined for conditional events with non-zero probabilities.
 
 Let $x$ be fixed with $p_X (x) > 0$.
@@ -216,7 +214,7 @@ The conditional PMF introduced above is a valid PMF since it is nonnegative and
 &= \frac{1}{p_X (x)} \sum_{y \in Y(\Omega)} p_{X,Y} (x,y) = 1.
 \end{split}
 \end{equation*}
-The probability that $Y$ belongs to $S$ given $X = x$ is then obtained by summing the conditional probability $p_{Y|X} (\cdot | \cdot)$ over all outcomes included in $S$,
+The probability that $Y$ belongs to $S$, given $X = x$, is obtained by summing the conditional probability $p_{Y|X} (\cdot | \cdot)$ over all outcomes included in $S$,
 \begin{equation*}
 \Pr (Y \in S | X = x) = \sum_{y \in S} p_{Y|X} (y | x) .
 \end{equation*}
@@ -333,12 +331,21 @@ and, consequently, we get
 \end{equation*}
 We conclude that $p_{X|S} (\cdot)$ is a valid PMF.
 
+Another interpretation of \eqref{equation:ConditionalEventPMF} is the following.
+Let $Y = \IndicatorFcn_S (\cdot)$, the indicator function of $S$, with
+\begin{equation*}
+\IndicatorFcn_S (\omega) = \begin{cases} 1, & \omega \in S\\
+0, & \omega \notin S . \end{cases}
+\end{equation*}
+Then $p_{X|S} (x) = p_{X|Y} (x | 1)$.
+In some sense, conditioning on an event is a special case of a conditional probability mass function.
+
 \begin{example}
 A data packet is sent to a destination over an unreliable wireless communication link.
-Data is successfully decoded at the receiver with probability $p$, or the transmission fails with probability $(1-p)$, independently of previous trials.
-When decoding fails, a retransmission is requested immediately.
-However, if packet transmission fails $n$ consecutive times, then the data is dropped from the queue altogether, with not further attempt.
-Let $X$ denote the number of transmissions, and let $S$ be the event that the data packet is successfully transmitted.
+Data is successfully decoded at the receiver with probability $p$, and the transmission fails with probability $(1-p)$, independently of previous trials.
+When initial decoding fails, a retransmission is requested immediately.
+However, if packet transmission fails $n$ consecutive times, then the data is dropped from the queue altogether, with not further transmission attempt.
+Let $X$ denote the number of trials, and let $S$ be the event that the data packet is successfully transmitted.
 We wish to compute the conditional PMF of $X$ given $S$.
 
 First, we note that a successful transmission can happen at any of $n$ possible instants.
@@ -356,7 +363,7 @@ where $k = 1, 2, \ldots n$.
 
 \section{Conditional Expectations}
 
-The \emph{conditional expectation} of $Y$ given $X = x$ is simply the expectation of $Y$ with respect to the conditional PMF $p_{Y|X} (\cdot | \cdot)$, \index{Conditional expectation}
+The \emph{conditional expectation} of $Y$ given $X = x$ is simply the expectation of $Y$ with respect to the conditional PMF $p_{Y|X} (\cdot | x)$, \index{Conditional expectation}
 \begin{equation*}
 \Expect [Y | X = x ] = \sum_{y \in Y(\Omega)} y p_{Y|X} (y|x).
 \end{equation*}
@@ -365,9 +372,8 @@ This conditional expectation can be viewed as a function of $x$,
 h(x) = \Expect [Y | X = x] .
 \end{equation*}
 It is therefore mathematically accurate and sometimes desirable to talk about the random variable $h (X) = \Expect [Y | X]$.
-Let $X$ and $Y$ be two random variables associated with an experiment.
-The outcome of this experiment determines the value of $X$, say $X = x$, which in turn produces the value $h(x) = \Expect [Y | X = x]$.
-In this sense, a conditional expectation is simply a special random variable.
+In particular, if $X$ and $Y$ are two random variables associated with an experiment, the outcome of this experiment determines the value of $X$, say $X = x$, which in turn yields the conditional expectation $h(x) = \Expect [Y | X = x]$.
+In this sense, the conditional expectation $\Expect [Y | X]$ is simply an instance of a random variable.
 
 Not too surprisingly, the expectation of $\Expect [Y | X]$ is given by
 \begin{equation*}
@@ -395,7 +401,7 @@ We wish to find the conditional mean of the number of cherry sodas purchased in 
 Let $B$ represent the number of bottles sold during an hour.
 Similarly, let $C$ and $L$ be the number of cherry sodas and lemonades purchased during the same time interval, respectively.
 We note that $B = C + L$.
-The conditional PMF of $C$ given that the total number of beverages sold equals ten ($B = 10$) is
+The conditional PMF of $C$ given that the total number of beverages sold equals ten is
 \begin{equation} \label{equation:ConditionalPoisson}
 p_{C|B} (k | 10)
 = \binom{10}{k} p^k (1-p)^{10-k} .
@@ -408,7 +414,7 @@ k \binom{10}{k} p^k (1-p)^{10-k} = 10 p .
 \end{equation*}
 \end{example}
 
-We can define the expectation of $X$ conditioned on event $S$ in an analogous manner.
+We can define the expectation of $X$ conditioned on event $S$ in an analogous fashion.
 Let $S$ be an event such that $\Pr (S) > 0$.
 The conditional expectation of $X$ given $S$ is
 \begin{equation*}
@@ -425,7 +431,7 @@ Spring break is coming and a student decides to renew his shirt collection.
 The number of shirts purchased by the student is a random variable denoted by $N$.
 The PMF of this random variable is a geometric distribution with parameter $p = 0.5$.
 Any one shirt costs \$10, \$20 or \$50 with respective probabilities 0.5, 0.3 and 0.2, independently of other shirts.
-We wish to compute the expected amount of money spent by the student.
+We wish to compute the expected amount of money spent by the student during his shopping spree.
 Also, we wish to compute the expected amount of money disbursed given that the student buys at least five shirts.
 
 Let $C_i$ be the cost of the $i$th shirt.
@@ -433,15 +439,15 @@ The total amount of money spent by the student, denoted by $T$, can be expressed
 \begin{equation*}
 T = \sum_{i=1}^N C_i .
 \end{equation*}
-The mean of $T$ can be computed using nested expectation.
+The mean of $T$ can be computed using nested conditional expectation.
 It is equal to
 \begin{equation*}
 \begin{split}
-\Expect [T] = \Expect \left[ \sum_{i=1}^N C_i \right]
-&= \Expect \left[ \Expect \left[
+\Expect [T] &= \Expect \left[ \sum_{i=1}^N C_i \right]
+= \Expect \left[ \Expect \left[
 \sum_{i=1}^N C_i \Big| N \right] \right] \\
-&= \Expect \left[ \sum_{i=1}^N \Expect [ C_i | N ] \right] \\
-&= 21 \Expect [ N ] = 42.
+&= \Expect \left[ \sum_{i=1}^N \Expect [ C_i | N ] \right]
+= 21 \Expect [ N ] = 42.
 \end{split}
 \end{equation*}
 The student is expected to spend \$42.
@@ -452,19 +458,19 @@ Given that the student buys at least five shirts, the conditional expectation be
 &= \Expect \left[ \sum_{i=1}^N C_i \Big| N \geq 5 \right] \\
 &= \Expect \left[ \Expect \left[
 \sum_{i=1}^N C_i \Big| N \right] \bigg| N \geq 5 \right] \\
-&= 21 \Expect [ N | N \geq 5] \\
-&= 21 \sum_{n=5}^{\infty} n p_{N | N \geq 5} (n)
+&= 21 \Expect [ N | N \geq 5]
+%&= 21 \sum_{n=5}^{\infty} n p_{N | N \geq 5} (n)
 = 126 .
 \end{split}
 \end{equation*}
 Condition on buying more than five shirts, the student is expected to spend \$126.
-In computing the conditional expectation, we have use the memoryless property of the geometric random variable.
+Note that, in computing the conditional expectation, we have used the memoryless property of the geometric random variable.
 \end{example}
 
 
 \section{Independence}
 
-Let $X$ and $Y$ be two random variables associated with one experiment.
+Let $X$ and $Y$ be two random variables associated with a same experiment.
 We say that $X$ and $Y$ are \emph{independent random variables} if \index{Independence}
 \begin{equation*}
 p_{X,Y} (x,y) = p_X (x) p_Y (y)
@@ -472,7 +478,7 @@ p_{X,Y} (x,y) = p_X (x) p_Y (y)
 for every $x \in X(\Omega)$ and every $y \in Y(\Omega)$.
 
 There is a clear relation between the concept of independence introduced in Section~\ref{section:Independence} and the independence of two random variables.
-Two random variables are independent if and only if the events $\{ X = x \}$ and $\{ Y = y \}$ are independent for every $x \in X(\Omega)$ and every $y \in Y(\Omega)$.
+Random variables $X$ and $Y$ are independent if and only if the events $\{ X = x \}$ and $\{ Y = y \}$ are independent for every $x \in X(\Omega)$ and every $y \in Y(\Omega)$.
 
 \begin{proposition}
 If $X$ and $Y$ are independent random variables, then
@@ -498,7 +504,7 @@ where we have used the fact that $p_{X,Y} (x,y) = p_X (x) p_Y (y)$ for independe
 Two dice of different colors are rolled, as in Example~\ref{example:SumDice1}.
 We wish to compute the expected value of their product.
 We know that the mean of each role is $\Expect [X] = \Expect [Y] = 3.5$.
-Furthermore, it is easy to show that $X$ and $Y$, the numbers of dots on the two dice, are independent random variable.
+Furthermore, it is straightforward to show that $X$ and $Y$, the numbers of dots on the two dice, are independent random variable.
 The expected value of their product is then equal to the product of the individual means, $\Expect [XY] = \Expect [X] \Expect [Y] = 12.25$.
 \end{example}
 
@@ -532,8 +538,8 @@ p_U(k) = (p_X \ast p_Y)(k)
 \end{equation}
 It can be shown that the discrete convolution is commutative and associative.
 
-One interesting application of \eqref{equation:DiscreteProduct} occurs when taking the sum of independent random variables.
-Let $X$ and $Y$ be two independent random variables that take on integer values, and define $U = X + Y$.
+One interesting application of \eqref{equation:DiscreteProduct} occurs when dealing with sums of independent random variables.
+Suppose $X$ and $Y$ are two independent random variables that take on integer values, and let $U = X + Y$.
 The ordinary generating function of $U$, as defined in Section~\ref{section:OrdinaryGeneratingFunctions}, is given by
 \begin{equation*}
 \begin{split}
@@ -557,7 +563,7 @@ The ordinary generating functions of $X$ and $Y$ are therefore equal to
 G_X (z) &= e^{\alpha (z-1)} \\
 G_Y (z) &= e^{\beta (z-1)} .
 \end{align*}
-The ordinary generating function of $U = X + Y$ becomes
+As such, the ordinary generating function of $U = X + Y$ becomes
 \begin{equation*}
 G_U (z) = G_X (z) G_Y(z) = e^{\alpha (z-1)} e^{\beta (z-1)}
 = e^{(\alpha + \beta) (z-1)} .
@@ -567,6 +573,7 @@ We conclude, by the uniqueness of generating functions, that $U$ is a Poisson ra
 p_U (k) = \frac{ (\alpha + \beta)^k }{k!} e^{- (\alpha + \beta) },
 \quad k = 0, 1, 2, \ldots
 \end{equation*}
+This method of finding the PMF of $U$ is more concise than using the discrete convolution.
 \end{example}
 
 We saw in Section~\ref{section:ConditionalRandomVariables} that a random variable can also be conditioned on a specific event.
@@ -590,15 +597,18 @@ Let $X_1, X_2, \ldots, X_n$ be random variables; their joint PMF is defined by
 \begin{equation*}
 p_{X_1, X_2, \ldots, X_n} (x_1, x_2, \ldots, x_n) = \Pr \left( \bigcap_{k=1}^n \{ X_k = x_k \} \right),
 \end{equation*}
-or, in concise vector form, $p_{\mathbf{X}} (\mathbf{x}) = \Pr ( \mathbf{X} = \mathbf{x} )$.
-When the random variables $X_1, X_2, \ldots, X_n$ are independent, their joint PMF becomes
+or, in vector form, $p_{\mathbf{X}} (\mathbf{x}) = \Pr ( \mathbf{X} = \mathbf{x} )$.
+When the random variables $X_1, X_2, \ldots, X_n$ are independent, their joint PMF reduces to
 \begin{equation*}
 p_{\mathbf{X}} (\mathbf{x}) = \prod_{k=1}^n p_{X_k} (x_k) .
 \end{equation*}
-Although we do not discuss this in details, we emphasize that most concepts introduced in this chapter can be extended to multiple random variables in a straightforward manner.
+Although not discussed in details herein, we emphasize that most concepts introduced in this chapter can be extended to multiple random variables in a straightforward manner.
 Also, we note that, from an abstract perspective, the space defined by vectors of the form $( X_1 (\omega), X_2 (\omega), \ldots, X_n (\omega) )$, $\omega \in \Omega$, is itself a sample space on which random variables can be defined.
 
-Consider the random variables
+
+\subsection{Sums of Independent Random Variables}
+
+Consider the empirical sums
 \begin{equation*}
 S_n = \sum_{k=1}^n X_k \quad n \geq 1 ,
 \end{equation*}
@@ -609,7 +619,7 @@ More generally, the PMF of $S_n$ can be obtained recursively using the formula
 S_n = S_{n-1} + X_n ,
 \end{equation*}
 and therefore $p_{S_n} (k) = (p_X \ast p_X \ast \cdots \ast p_X ) (k)$, the $n$-fold convolution of $p_X (\cdot)$.
-Furthermore, the ordinary generating function of $S_n$ is simply
+Furthermore, the ordinary generating function of $S_n$ can be written as
 \begin{equation*}
 G_{S_n} (z) = \left( G_X (z) \right)^n.
 \end{equation*}
@@ -640,52 +650,62 @@ where $k = 0, 1, \ldots, n$.
 Thus, by the principle of mathematical induction, we gather that the sum of $n$ independent Bernoulli random variables, each with parameter $p$, is a binomial random variable with parameters $n$ and $p$.
 \end{example}
 
-The convolution of two binomial distributions, one with parameter $m$ and $p$ and the other with parameters $n$ and $p$, is a binomial random distribution with parameters $(m+n)$ and $p$.
-This fact follows directly from the previous example.
+The convolution of two binomial distributions, one with parameter $m$ and $p$ and the other with parameters $n$ and $p$, is also a binomial random distribution with parameters $(m+n)$ and $p$.
+This fact follows directly from the previous argument.
 
 \begin{example}[Negative Binomial Random Variable*]
-Suppose that a Bernoulli trial is repeated multiple times until $r$ ones are observed.
-We denote by $X$ the random variable that represents the number of zeros observed before completion.
+Suppose that a Bernoulli trial is repeated multiple times until $r$ ones are obtained.
+We denote by $X$ the random variable that represents the number of zeros observed before completion of the process.
 The distribution of $X$ is given by
 \begin{equation*}
-p_X (k) = \binom{k-r-1}{r-1} p^r (1-p)^k, \quad k = 0, 1, \ldots
+p_X (k) = \binom{k+r-1}{r-1} p^r (1-p)^k, \quad k = 0, 1, \ldots
 \end{equation*}
-where $p$ is the parameter of each Bernoulli trial.
+where $p$ is the common parameter of the Bernoulli trials.
 In general, a random variable with such a distribution is known as a \emph{negative binomial random variable}. \index{Negative binomial random variable}
 
-%We wish to show that $X$ can be obtained as a sum of $r$ geometric distributions.
-
-We perform this task by computing the ordinary generating function of $X$.
-We use a trick to derive $G_X(z)$ from $p_X(\cdot)$.
+We wish to show that $X$ can be obtained as a sum of $r$ independent random variables, a task which we perform by looking at its ordinary generating function.
+We use properties of differential equations to derive $G_X(z)$ from $p_X(\cdot)$.
 By definition, we have
 \begin{equation*}
-G_X (z) = \sum_{k = r}^{\infty} z^k \binom{k-r-1}{r-1} p^r (1-p)^k .
+G_X (z) = \sum_{k = 0}^{\infty} z^k \binom{k+r-1}{r-1} p^r (1-p)^k .
 \end{equation*}
 Consider the derivative of $G_X(z)$,
 \begin{equation*}
 \begin{split}
 \frac{d G_X}{dz} (z)
-&= \sum_{k=0}^{\infty} k z^{k-1} \binom{k-r-1}{r-1} p^r (1-p)^k
-= \sum_{k=0}^{\infty} k z^{k-1} \frac{(k-r-1)!}{(r-1)!k!} p^r (1-p)^k \\
-&= \sum_{k=1}^{\infty} z^{k-1} \frac{(k-r-1)!}{(r-1)!(k-1)!} p^r (1-p)^k
-= \sum_{\ell=0}^{\infty} z^{\ell} \frac{(\ell-r)!}{(r-1)!\ell!} p^r (1-p)^{\ell+1} \\
-&= (1-p) \sum_{\ell=0}^{\infty} (\ell-r) z^{\ell} \binom{\ell-r-1}{r-1} p^r (1-p)^{\ell} \\
-&= (1-p) \left( z \frac{d G_X}{dz} (z) - r G_X(z) \right) .
+&= \sum_{k=0}^{\infty} k z^{k-1} \binom{k+r-1}{r-1} p^r (1-p)^k \\
+%&= \sum_{k=1}^{\infty} k z^{k-1} \frac{(k+r-1)!}{(r-1)!k!} p^r (1-p)^k \\
+&= \sum_{k=1}^{\infty} z^{k-1} \frac{(k+r-1)!}{(r-1)!(k-1)!} p^r (1-p)^k \\
+%&= \sum_{\ell=0}^{\infty} z^{\ell} \frac{(\ell+r)!}{(r-1)!\ell!} p^r (1-p)^{\ell+1} \\
+&= (1-p) \sum_{\ell=0}^{\infty} (\ell+r) z^{\ell} \binom{\ell+r-1}{r-1} p^r (1-p)^{\ell} \\
+&= (1-p) \left( z \frac{d G_X}{dz} (z) + r G_X(z) \right) .
 \end{split}
 \end{equation*}
 It follows from this equation that
 \begin{equation*}
-\frac{1}{G_X(z)} \frac{d G_X}{dz}(z) = - \frac{(1-p) r}{1 - (1-p) z}
+\frac{1}{G_X(z)} \frac{d G_X}{dz}(z) = \frac{(1-p) r}{1 - (1-p) z}
 \end{equation*}
 or, alternatively, we can write
 \begin{equation*}
-\frac{d}{dz} \log \left( G_X(z) \right) = - \frac{(1-p) r}{1 - (1-p) z} .
+\frac{d}{dz} \log \left( G_X(z) \right) = \frac{(1-p) r}{1 - (1-p) z} .
 \end{equation*}
-Using the boundary condtion $G_X(1) = 1$ we obtain the ordinary generating function of $X$ as
+Integrating both sides yields 
+\begin{equation*}
+\log \left( G_X(z) \right) = - r \log \left( 1 - (1-p) z \right) + c .
+\end{equation*}
+Applying boundary condition $G_X(1) = 1$, we get the ordinary generating function of $X$ as
 \begin{equation*}
 G_X(z) = \left( \frac{p}{1 - (1-p) z} \right)^r .
 \end{equation*}
+From this equation, we can deduce that $X$ is the sum of $r$ independent random variables, $Y_1, \ldots, Y_r$, each with ordinary generating function
+\begin{equation*}
+G_{Y_i}(z) = \frac{p}{1 - (1-p) z} .
+\end{equation*}
+In particular, the distribution of $Y_i$ is given by
+\begin{equation*}
+p_{Y_i} (m) = \frac{1}{m!} \frac{d^m G_{Y_i}}{dz^k} (0) = p (1-p)^m
+\quad m = 0, 1, \ldots
+\end{equation*}
+It may be instructive to compare this distribution with the PMF of a geometric random variable.
 \end{example}
 
-%The convolution of $k$ geometric distributions with common parameter $p$ is a negative binomial distribution with parameters $p$ and $k$.
-%This can be seen by considering the experiment which consists of tossing a coin until the $k$th head appears.

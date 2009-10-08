@@ -1,7 +1,7 @@
 \chapter{Discrete Expectations}
 \label{chapter:ExpectationsDiscrete}
 
-When a large collection of data is gathered, one is typically interested, not necessarily in each individual data point, but rather in certain descriptive quantities such as the average or the median.
+When a large collection of data is gathered, one is typically interested not necessarily in each individual data point, but rather in certain descriptive quantities such as the average or the median.
 The same is true for random variables.
 The PMF of discrete random variable $X$ provides a complete characterization of the distribution of $X$ by specifying the probability of every possible value of $X$.
 Still, it may be desirable to summarize the information contained in the PMF of a random variable.
@@ -53,7 +53,7 @@ There are several additional examples.
 For instance, the notion of an \emph{expectation} can be combined with traditional functions to create alternate descriptions and other meaningful quantities. \index{Expectation}
 
 Suppose that $X$ is a discrete random variable.
-Let $g: X(\Omega) \mapsto \mathbb{R}$ be a real-valued function on the range of $X$, and consider the expectation of $g(X)$.
+Let $g: \mathbb{R} \mapsto \mathbb{R}$ be a real-valued function on the range of $X$, and consider the expectation of $g(X)$.
 The expected value $\Expect [g(X)]$ is a scalar quantity that can also provide partial information about the distribution of $X$.
 One way to determine the expected value of $g(X)$ is to first note that $Y = g(X)$ is itself a random variable.
 We can therefore find the derived distribution of $Y$, and then apply the definition of expected value provided in \eqref{equation:DiscreteMean}.
@@ -72,7 +72,7 @@ We explore pertinent examples below.
 
 \begin{example}
 The simplest possible scenario for \eqref{equation:DiscreteExpectation} is a situation where the function $g(x)$ is a constant.
-In this case, the expectation of $g(X) = c$ is equal to
+In this case, the expectation of $g(X) = c$ becomes
 \begin{equation*}
 \Expect [ c ]
 = \sum_{x \in X(\Omega)} c p_X (x)
@@ -99,7 +99,7 @@ The expectation of $\IndicatorFcn_S (x)$ is equal to
 \end{split}
 \end{equation*}
 Thus, the expectation of the indicator function of $S$ is simply the probability that $X$ takes on a value in $S$.
-This alternate means of computing the probability of an event can sometimes be employed to solve probability problems.
+This alternate way of computing the probability of an event can sometimes be employed to solve probability problems.
 \end{example}
 
 Let random variable $Y$ be defined by applying real-valued function $g(\cdot)$ to $X$, with $Y = g(X)$.
@@ -275,7 +275,7 @@ Its variance is given by
 \end{equation*}
 \end{example}
 
-\begin{example}
+\begin{example} \label{example:PoissonMeanVariance}
 Let $X$ be a Poisson random variable with parameter $\lambda$.
 The mean of $X$ is given by
 \begin{equation*}
@@ -322,7 +322,7 @@ This can be computed using \eqref{equation:DiscreteExpectation};
 &= a \Expect [X] + b.
 \end{split}
 \end{equation*}
-This result can be summarized as $\Expect [a X + b] = a \Expect [X] + b$.
+We can summarize this property as $\Expect [a X + b] = a \Expect [X] + b$.
 \end{proof}
 
 It is not much harder to show that the expectation is a linear functional.
@@ -335,7 +335,7 @@ We can write the expectation of $a g(X) + h(X)$ as
 &= a \Expect [g(X)] + \Expect [h(X)] .
 \end{split}
 \end{equation*}
-This demonstrates that the expectation is both additive and homogeneous.
+This demonstrates that the expectation is both homogeneous and additive.
 
 \begin{proposition}
 Assume that $X$ is a random variable with finite mean and variance, and let $Y$ be the affine function of $X$ given by $Y = aX + b$, where $a$ and $b$ are constants.
@@ -352,7 +352,7 @@ Consider \eqref{equation:VarianceExplicit} applied to $Y = aX + b$,
 = a^2 \Var [X] .
 \end{split}
 \end{equation*}
-The variance of an affine function only depends on the distribution of the argument, $p_X(\cdot)$, and parameter $a$.
+The variance of an affine function only depends on the distribution of its argument and parameter $a$.
 A translation of the argument by $b$ does not affect the variance of $Y = aX + b$.
 \end{proof}
 
@@ -364,15 +364,11 @@ The $n$th moment of random variable $X$ is defined by
 \begin{equation} \label{equation:DiscreteMoments}
 \Expect [X^n] = \sum_{x \in X(\Omega)} x^n p_X (x) .
 \end{equation}
-The mean of a random variable is also its first moment.
-The variance of a random variable $X$ can be described in terms of its first two moments, $\Expect [X]$ and $\Expect [X^2]$.
-This alternate formula is sometimes more convenient for computational purposes.
+The mean of random variable $X$ is its first moment.
 
 \begin{proposition}
-The variance of random variable $X$ can be expressed in terms of the moments of $X$,
-\begin{equation*}
-\Var [X] = \Expect \left[ X^2 \right] - \left( \Expect [X] \right)^2.
-\end{equation*}
+The variance of random variable $X$ can be expressed in terms of its first two moments,
+$\Var [X] = \Expect \left[ X^2 \right] - \left( \Expect [X] \right)^2$.
 \end{proposition}
 \begin{proof}
 Suppose that the variance of $X$ exists and is finite.
@@ -385,10 +381,10 @@ Starting from \eqref{equation:VarianceExplicit}, we can expand the variance of $
 &= \Expect \left[ X^2 \right] - \left( \Expect [X] \right)^2.
 \end{split}
 \end{equation*}
-The last equality is our desired result.
+This alternate formula is sometimes convenient for computational purposes.
 \end{proof}
 
-We offer below an example where this alternate formula for the variance is applied.
+We offer below an example where the above formula for the variance is applied.
 This allows the application of standard sums from calculus.
 
 \begin{example}
@@ -420,13 +416,13 @@ Closely related to the moments of a random variable are its \emph{central moment
 The $k$th central moment of $X$ is defined by $\Expect \left[ \left( X - E[X] \right)^k \right]$.
 The variance is an example of a central moment, as we can see from definition \eqref{equation:VarianceExplicit}.
 The central moments are used to define the \emph{skewness} of random variable, which is a measure of asymmetry; and its \emph{kurtosis}, which assesses whether the variance is due to infrequent extreme deviations or more frequent, modest-size deviations.
-Although these quantities will not play a central role in our exposition of probability, they each reveal a different property of random variables and they are encountered frequently in statistics. 
+Although these quantities will not play a central role in our exposition of probability, they each reveal a different characteristic of a random variable and they are encountered frequently in statistics. 
 
 
 \section{Ordinary Generating Functions}
 \label{section:OrdinaryGeneratingFunctions}
 
-In the special yet important case where $X(\Omega)$ is a subset of the non-negative integers, it is sometimes useful to employ the \emph{ordinary generating function}. \index{Ordinary generating function}
+In the special yet important case where $X(\Omega)$ is a subset of the non-negative integers, it is occasionally useful to employ the \emph{ordinary generating function}. \index{Ordinary generating function}
 This function bears a close resemblance to the $z$-transform and is defined by
 \begin{equation} \label{equation:OrdinaryGeneratingFunction}
 G_X(z) = \Expect \left[ z^X \right] = \sum_{k=0}^{\infty} z^k p_X (k) .
@@ -474,7 +470,7 @@ G_S(z) &= \sum_{k=0}^{n} z^k p_S (k)
 \end{equation*}
 \end{example}
 
-We know, from Section~\ref{subsection:BinormialRandomVariables}, that one way to create a binomial random variable is to sum $n$ independent and identically distributed Bernoulli random variables, all with parameter $p$.
+We know, from Section~\ref{subsection:BinormialRandomVariables}, that one way to create a binomial random variable is to sum $n$ independent and identically distributed Bernoulli random variables, each with parameter $p$.
 Looking at the ordinary generating functions above, we notice that the $G_S(z)$ is the product of $n$ copies of $G_X(z)$.
 Intuitively, it appears that the sum of independent discrete random variables leads to the product of their ordinary generating functions, a fact that we will be checking shortly.
 
@@ -508,5 +504,6 @@ The first two moments of $X$ are given by
 e^{\lambda (z - 1)} = \lambda^2 + \lambda .
 \end{align*}
 This provides a very efficient way to compute the mean and variance of $X$, which are both equal to $\lambda$.
+Compare this method with Example~\ref{example:PoissonMeanVariance}.
 \end{example}
 
