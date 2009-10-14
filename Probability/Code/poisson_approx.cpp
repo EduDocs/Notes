@@ -61,10 +61,10 @@ int main () {
   double pmf;
 
   pmf_out = fopen ("approx1.csv","w");
-  for (m=0; m<=25; m++)
+  for (m=0; m<=15; m++)
   {
     fprintf (pmf_out, "%d", m);
-    for (n=10; n<=25; n = n+5)
+    for (n=5; n<=35; n = n+10)
     {
       {
         p = lambda / n;
