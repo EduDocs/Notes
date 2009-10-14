@@ -184,25 +184,25 @@ Note that we can easily verify that $X$ fulfills the normalization axiom,
 \end{figure}
 
 \begin{example} \label{BrazosSodaCompany1}
-The Brazos Soda Company creates an ``Under the Caps'' promotion whereby a customer can win an instant cash prize of \$10 by looking under a bottle cap.
-The likelihood to win is one in twelve, and it is independent from bottle to bottle.
-A customer buys twelve bottles of soda from this company.
+The Brazos Soda Company creates an ``Under the Caps'' promotion whereby a customer can win an instant cash prize of \$1 by looking under a bottle cap.
+The likelihood to win is one in four, and it is independent from bottle to bottle.
+A customer buys eight bottles of soda from this company.
 We wish to find the PMF of the number of winning bottles, which we denote by $X$.
-Also, we want to compute the probability of winning more than \$40.
+Also, we want to compute the probability of winning more than \$4.
 
-The random variable $X$ is binomial with parameters $n = 12$ and $p = 1/12$.
+The random variable $X$ is binomial with parameters $n = 8$ and $p = 1/4$.
 Its PMF is given by
 \begin{equation*}
-p_X (k) = \binom{12}{k} \left( \frac{1}{12} \right)^k
-\left( \frac{11}{12} \right)^{n-k}
-= \binom{12}{k} \frac{11^{n-k}}{12^n} ,
+p_X (k) = \binom{8}{k} \left( \frac{1}{4} \right)^k
+\left( \frac{3}{4} \right)^{8-k}
+= \binom{8}{k} \frac{3^{8-k}}{4^8} ,
 \end{equation*}
-where $k = 0, 1, \ldots, 12$.
-The probability of winning more than \$40 is
+where $k = 0, 1, \ldots, 8$.
+The probability of winning more than \$4 is
 \begin{equation*}
-\Pr (\$10 \times X > \$40)
+\Pr ( X\$ > \$4)
 = \Pr (X > 4)
-= \sum_{k=5}^{12} \binom{12}{k} \frac{11^{n-k}}{12^n} .
+= \sum_{k=5}^{8} \binom{8}{k} \frac{3^{8-k}}{4^8} .
 \end{equation*}
 \end{example}
 

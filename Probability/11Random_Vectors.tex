@@ -1,0 +1,320 @@
+\chapter{Random Vectors}
+
+Probability density functions can be extended to the case of multiple continuous random variable.
+We denote the \emph{joint probability density function} of random variables $X$ and $Y$ by $f_{X,Y} (\cdot, \cdot)$. \index{Joint Probability Density Function}
+In general, $f_{X,Y} (\cdot, \cdot)$ is a nonnegative function such that
+\begin{equation*}
+\int_{-\infty}^{\infty} \int_{-\infty}^{\infty}
+f_{X, Y} (\xi, \zeta) d\zeta d\xi = 1.
+\end{equation*}
+Furthermore, for a measurable set $S$, the probability that $(X,Y) \in S$ can be computed through the integral
+\begin{equation*}
+\begin{split}
+\Pr ((X,Y) \in S)
+&= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty}
+\mathrm{1}_{S}(\xi, \zeta) f_{X, Y} (\xi, \zeta) d\zeta d\xi \\
+&= \int \int_{S}
+f_{X, Y} (\xi, \zeta) d\zeta d\xi .
+\end{split}
+\end{equation*}
+If $S$ is the rectangular set
+\begin{equation*}
+S = \left\{ (x,y) \in X(\Omega) \times Y(\Omega) \big| a \leq x \leq b, c \leq y \leq d \right\} ,
+\end{equation*}
+then the probability that $(X,Y) \in S$ becomes the typical integral
+\begin{equation*}
+\Pr ((X,Y) \in S)
+= \Pr (a \leq X \leq b, c \leq Y \leq d)
+= \int_{a}^{b} \int_{c}^{d}
+f_{X, Y} (\xi, \zeta) d\zeta d\xi .
+\end{equation*}
+
+\begin{example}
+Suppose that the random pair $(X, Y)$ is uniformly distributed over the unit circle.
+Then, the joint PDF $f_{X,Y} (\cdot, \cdot)$ is given by
+\begin{equation*}
+f_{X,Y} (x, y) = \begin{cases} \frac{1}{\pi} & x^2 + y^2 \leq 1 \\
+0 & \text{otherwise} . \end{cases}
+\end{equation*}
+We wish to find the probability that the point $(X, Y)$ lies inside the circle of radius $1/2$.
+
+Let $S = \{ (x, y) \in X(\Omega) \times Y(\Omega) | x^2 + y^2 \leq 0.5 \}$.
+The probability that $(X, Y)$ lies in $S$ is given by
+\begin{equation*}
+\Pr ((X,Y) \in S)
+= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty}
+\mathbf{1}_{S}(\xi, \zeta) \frac{1}{\pi} d\xi d\zeta
+= \frac{1}{4} .
+\end{equation*}
+Thus, the probability that $(X,Y)$ lies in the circle of radius half is one fourth.
+\end{example}
+
+It is also possible to define the \emph{joint cumulative distribution function} of a pair of random variables, \index{Joint cumulative distribution function}
+\begin{equation*}
+F_{X,Y} (x,y) = \Pr (X \leq x, Y \leq y) .
+\end{equation*}
+For continuous random variables, the joint CDF of $X$ and $Y$ can derived from their joint PDF,
+\begin{equation*}
+F_{X,Y} (x,y) = \int_{-\infty}^x \int_{-\infty}^y f_{X,Y} (\xi,\zeta) d\zeta d\xi .
+\end{equation*}
+Calculus asserts that the following is also true,
+\begin{equation*}
+f_{X,Y} (x,y) = \frac{\partial^2 F_{X,Y}}{\partial x \partial y} (x,y) .
+\end{equation*}
+
+
+\section{Conditional Distribution}
+
+It is possible to derive the PDF of a random variable condition on a certain event, or on another random variable.
+Let $X$ and $Y$ be two random variable associated with the same experiment.
+The \emph{conditional probability distribution function} of $Y$ given $X = x$, denoted by $f_{Y|X}$, is defined by
+\begin{equation} \label{equation:ContinuousConditonalPDF}
+f_{Y|X} (y|x) = \frac{f_{X,Y} (x,y)}{f_X(x)},
+\end{equation}
+provided that $f_X(x) \neq 0$.
+We emphasize that there is a strong similarity between the definition of the conditional PDF and PMF.
+For a fixed value $X = x$, the conditional PDF $f_{Y|X} (y|x)$ is a legitimate PDF since it is nonnegative and it integrates to one.
+
+\begin{example}
+Consider a random experiment where an outcome $(\omega_1, \omega_2)$ is selected at random from the unit circle.
+Let $X = \omega_1$ and $Y = \omega_2$.
+We wish to compute the conditional PDF of $Y$ given that $X = \sqrt{3}{2}$.
+We apply the definition of the conditional PDF, with
+\begin{equation*}
+\begin{split}
+f_{Y|X} \left( y \Big| \frac{1}{2} \right)
+= \frac{f_{X,Y} \left( \frac{1}{2}, y \right)}
+{\int_{-\frac{\sqrt{3}}{2}}^{\frac{\sqrt{3}}{2}}
+f_{X,Y} \left( \frac{1}{2} , \zeta \right) d \zeta }
+= \begin{cases} \frac{1}{\sqrt{3}} & |y| \leq \frac{\sqrt{3}}{2} \\
+0 & \text{otherwise} . \end{cases}
+\end{split}
+\end{equation*}
+\end{example}
+
+Let $\{ Y \in S \}$ be an event such that $\Pr (Y \in S) > 0$.
+The conditional PDF of $Y$ given $\{ Y \in S \}$ is defined by
+\begin{equation*}
+f_{Y|S} (y)
+= \left\{ \begin{array}{cc} \frac{ f_Y(y) }{\Pr (Y \in S)}, & y \in S \\
+0, & \text{otherwise}. \end{array} \right.
+\end{equation*}
+This PDF can be used to compute the conditional probability of specific events given $Y \in S$.
+Let $T$ be a measurable set, then
+\begin{equation*}
+\begin{split}
+\Pr ( Y \in T | Y \in S)
+&= \frac{ \Pr ( Y \in T \cap Y \in S) }{ \Pr ( Y \in S) } \\
+&= \frac{ \int_{Y \cap T} f_Y(y) dy }{ \Pr ( Y \in S) } \\
+&= \int_{T} f_{Y|S} (y) dy .
+\end{split}
+\end{equation*}
+
+%\begin{example}
+%\end{example}
+
+
+\section{Independence}
+
+Two continuous random variables $X$ and $Y$ are mutually \emph{independent} if their joint CDF is the product of their respective CDFs, \index{independence}
+\begin{equation*}
+F_{X,Y} (x,y) = F_X (x) F_Y(y)
+\end{equation*}
+for any $x \in X(\Omega)$ and $y \in Y(\Omega)$.
+We emphasize that this necessarily implies that the joint PDF is the product of the individual PDFs as well,
+\begin{equation*}
+f_{X,Y} (x,y) = \frac{\partial^2 F_{X,Y}}{\partial x \partial y} (x, y)
+= \frac{d F_X}{dx} (x) \frac{d F_Y}{dy} (y)
+= f_X (x) f_Y (y)
+\end{equation*}
+for any $x \in X(\Omega)$ and $y \in Y(\Omega)$.
+
+From \eqref{equation:ContinuousConditonalPDF}, we gather that the conditional PDF of $Y$ given $X=x$ is equal to the marginal PDF of $Y$ whenever $X$ and $Y$ are independent
+\begin{equation*}
+f_{Y|X} (y|x) = \frac{f_{X,Y} (x, y)}{f_X(x)}
+= \frac{f_X (x) f_Y (y)}{f_X(x)} = f_Y (y),
+\end{equation*}
+provided that $f_X(x) \neq 0$.
+Furthermore, if $X$ and $Y$ are independent random variables, then the two events $\{ X \in S \}$ and $\{ Y \in T \}$ are independent
+\begin{equation*}
+\begin{split}
+&\Pr (X \in S, Y \in T) = \int_S \int_T f_{X,Y} (x,y) dy dx \\
+&= \int_S f_X (x) dx \int_T f_Y (y) dy
+= \Pr (X \in S) \Pr (Y \in T).
+\end{split}
+\end{equation*}
+
+\begin{example}
+Consider a random experiment where an outcome $(\omega_1, \omega_2)$ is selected at random from the unit square.
+Let $X = \omega_1$, $Y = \omega_2$ and $U = \omega_1 + \omega_2$.
+We wish to show that $X$ and $Y$ are independent, and that $X$ and $U$ are not independent.
+
+We begin by computing the joint CDF of $X$ and $Y$.
+For $x,y \in [0,1]$, we have
+\begin{equation*}
+F_{X,Y}(x,y) = \int_0^{x} \int_0^{y} d\zeta d\xi
+= x y = F_X(x) F_Y(y) .
+\end{equation*}
+More generally, if $x, y \in \mathbb{R}^2$, we get
+\begin{equation*}
+\begin{split}
+F_{X,Y}(x,y)
+&= \int_{-\infty}^{x} \int_{-\infty}^{y}
+\mathbf{1}_{[0,1]^2} (\xi, \zeta) d\zeta d\xi \\
+&= \int_{-\infty}^{x} \mathbf{1}_{[0,1]} (\xi) d \xi
+\int_{-\infty}^{y} \mathbf{1}_{[0,1]} (\zeta) d\zeta
+= F_X(x) F_Y(y) .
+\end{split}
+\end{equation*}
+Thus, we gather that $X$ and $Y$ are independent.
+
+Next, we show that $X$ and $U$ are not independent.
+First, we note that $F_U (1) = \frac{1}{2}$ and $F_X (1/2) = 1/2$.
+Consider the joint CDF of $X$ and $U$ evaluated at $(1/2, 1)$,
+\begin{equation*}
+\begin{split}
+F_{X,U} \left( \frac{1}{2} ,1 \right)
+&= \int_{0}^{\frac{1}{2}} \int_{0}^{1-\xi} d\zeta d\xi
+= \int_{0}^{\frac{1}{2}} (1 - \xi) d\xi \\
+%&= \frac{1}{2} - \frac{1}{8} \\
+&= \frac{3}{8}
+\neq F_X \left( \frac{1}{2} \right) F_U(1) .
+\end{split}
+\end{equation*}
+Thus, $X$ and $U$ are clearly not independent.
+\end{example}
+
+
+\section{Sums of Random Variables}
+
+Sums of independent random variables play an important role in solving engineering problems.
+We therefore turn to the question of determining the distribution of a sum of independent random variables in terms of the PDFs of its constituents.
+If $X$ and $Y$ are independent random variables, the distribution of their sum $U = X + Y$ can be obtained by using the \emph{convolution} operator. \index{Convolution}
+Let $f_X (\cdot)$ and $f_Y (\cdot)$ be the PDFs of $X$ and $Y$, respectively.
+The convolution of $f_X(\cdot)$ and $f_Y(\cdot)$ is the function defined by
+\begin{equation*}
+\begin{split}
+(f_X \star f_Y) (u)
+&= \int_{-\infty}^{\infty} f_X(\xi) f_Y(u - \xi) d\xi \\
+&= \int_{-\infty}^{\infty} f_X(u - \zeta) f_Y(\zeta) d\zeta .
+\end{split}
+\end{equation*}
+The PDF of the sum $U = X + Y$ is the convolution of the individual densities,
+\begin{equation*}
+f_U (u) = (f_X \star f_Y) (u) .
+\end{equation*}
+To show that this is indeed the case, we first consider the CDF of $U$,
+\begin{equation*}
+\begin{split}
+\Pr (U \leq u) &= \Pr (X + Y \leq u) \\
+&= \int_{-\infty}^{\infty} \Pr (X + Y \leq u | X = \xi) f_X(\xi) d\xi \\
+&= \int_{-\infty}^{\infty} \Pr (Y \leq u - \xi) f_X(\xi) d\xi \\
+&= \int_{-\infty}^{\infty} F_Y (u - \xi) f_X(\xi) d\xi .
+\end{split}
+\end{equation*}
+The last equality above follows from the independence of $X$ and $Y$.
+Taking the derivative of $F_U (u)$ with respect to $u$, we obtain
+\begin{equation*}
+\begin{split}
+\frac{d}{du} F_U (u) &= \frac{d}{du} \Pr (U \leq u) \\
+&= \int_{-\infty}^{\infty} \frac{d}{du} F_Y (u - \xi) f_X(\xi) d\xi \\
+&= \int_{-\infty}^{\infty} f_Y (u - \xi) f_X(\xi) d\xi .
+\end{split}
+\end{equation*}
+This shows that $f_U(u) = (f_X \star f_Y) (u)$.
+
+\begin{example}[Sum of Uniform Random Variables]
+Suppose that two numbers are independently selected from the interval $[0,1]$, each with a uniform distribution.
+We wish to compute the PDF of their sum.
+Let $X$ and $Y$ be random variables describing the two choices, and let $U = X + Y$ represent the sum.
+The PDFs of $X$ and $Y$ are
+\begin{equation*}
+f_X(\xi) = f_Y(\xi)
+= \begin{cases} 1 & 0 \leq \xi \leq 1 \\
+0 & \text{otherwise} . \end{cases}
+\end{equation*}
+The PDF of their sum is therefore equal to
+\begin{equation*}
+f_U(u) = \int_{-\infty}^{+\infty} f_X(u - \xi) f_Y(\xi) d\xi .
+\end{equation*}
+Since $f_Y(y) = 1$ when $0 \leq y \leq 1$ and zero otherwise, the integral becomes
+\begin{equation*}
+f_U(u) = \int_0^1 f_X(u - \xi) d\xi .
+\end{equation*}
+This integrand is zero unless $0 \leq u - \xi \leq 1$ (i.e., unless $u - 1 \leq \xi \leq u$).
+Thus, if $0 \leq u \leq 1$, we get
+\begin{equation*}
+f_U(u) = \int_0^u d\xi = u ;
+\end{equation*}
+while, if $1 < u \leq 2$, we have
+\begin{equation*}
+f_U(u) = \int_{u - 1}^1 d\xi = 2 - u .
+\end{equation*}
+If $u < 0$ or $u > 2$, the value of the PDF becomes zero, $f_U(u) = 0$.
+Hence, the PDF of $U$ can be written as
+\begin{equation*}
+f_U(u) = \begin{cases} u & 0 \leq u \leq 1, \\
+2-u & 1 < u \leq 2, \\
+0 & \text{otherwise} . \end{cases}
+\end{equation*}
+\end{example}
+
+\begin{example}[Sum of Exponential Random Variables]
+Suppose two numbers are independently selected at random from the postive real numbers according to an exponential distribution with parameter $\lambda$. 
+We wish to find the PDF of their sum.
+
+Let $X$ and $Y$ represent these two numbers, and denote their sum by $V = X + Y$.
+The random variables $X$ and $Y$ have PDFs
+\begin{equation*}
+f_X (\xi) = f_Y (\xi) = \begin{cases} \lambda e^{-\lambda \xi} & \xi \geq 0 \\
+0 & \text{otherwise} . \end{cases}
+\end{equation*}
+When $V \geq 0$, we can use the convolution formula and write
+\begin{equation*}
+\begin{split}
+f_V (v) &= \int_{-\infty}^{\infty} f_X(v - \xi) f_Y(\xi) d\xi \\
+&= \int_0^v \lambda e^{-\lambda(v - \xi)} \lambda e^{-\lambda \xi} d\xi \\
+&= \int_0^v \lambda^2 e^{-\lambda v} d\xi
+= \lambda^2 v e^{-\lambda v}.
+\end{split}
+\end{equation*}
+On the other hand, if $v < 0$ then we get $f_V(v) = 0$.
+Hence, the PDF of $V$ is given by
+\begin{equation*}
+f_V (v) = \begin{cases} \lambda^2 v e^{-\lambda v} & v \geq 0 \\
+0 & \text{otherwise} . \end{cases}
+\end{equation*}
+This is an Erlang distribution with parameter $m = 2$ and $\lambda > 0$.
+\end{example}
+
+\begin{example}[Sum of Gaussian Random Variables]
+It is an interesting and important fact that the sum of two independent Gaussian random variables is again a Gaussian random variable.
+Suppose $X$ has mean $m_1$ and variance $\sigma_1^2$, and $Y$ has mean $m_2$ and variance $\sigma_2^2$, then $V = X + Y$ has a Gaussian density with mean $m_1 + m_2$ and variance $\sigma_1^2 + \sigma_2^2$.
+We will show this property in the special case where both random variables are standard normal random variable.
+The general case can be done in a similar manner, but the computations are more involved.
+
+Suppose $X$ and $Y$ are two independent Gaussian random variables with PDFs
+\begin{equation*}
+f_X(\xi) = f_Y(\xi) = \frac 1{\sqrt{2\pi}} e^{-\frac{\xi^2}{2}} .
+\end{equation*}
+Then, the PDF of $V = X + Y$ is given by
+\begin{equation*}
+\begin{split}
+f_V (v) &= (f_X \star f_Y) (v)
+= \frac{1}{2\pi}
+\int_{-\infty}^{\infty} e^{-\frac{(v - \xi)^2}{2}} e^{-\frac{\xi^2}{2}} d\xi \\
+&= \frac{1}{2\pi} e^{- \frac{v^2}{4}}
+\int_{-\infty}^{\infty} e^{- \left( \xi - \frac{v}{2} \right)^2} d\xi \\
+&= \frac{1}{2 \sqrt{\pi}} e^{- \frac{v^2}{4}}
+\left( \int_{-\infty}^{\infty} \frac{1}{\sqrt{\pi}}
+e^{-\left( \xi - \frac{v}{2} \right)^2} d\xi \right) .
+\end{split}
+\end{equation*}
+The expression within the parentheses is equal to one because it is the integral of a Gaussian PDF with $m = v/2$ and $\sigma^2 = 1/2$.
+Thus, we obtain
+\begin{equation*}
+f_V(v) = \frac{1}{\sqrt{4\pi}} e^{-\frac{v^2}{4}} ,
+\end{equation*}
+which verifies that $V$ is indeed Gaussian.
+\end{example}
+

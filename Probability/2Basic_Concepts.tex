@@ -369,6 +369,7 @@ In other words, if a number is chosen at random from $[0,1]$, then the probabili
 \begin{equation*}
 \Pr (A) = \int_{A} dx .
 \end{equation*}
+This method of computing probabilities can be extended to more complicated problems.
 In these notes, we will see many probabilistic models with uncountably infinite sample spaces.
 The mathematical tools required to handle such models will be treated alongside.
 
@@ -387,7 +388,9 @@ The probability of $\Omega$ is invariably equal to one, $\Pr ([0, 2 \pi)) = 1$.
 
 Also, the probability that the wheel stops in the first quadrant is given by
 \begin{equation*}
-\Pr \left( \left[ 0, \frac{\pi}{2} \right) \right) = \frac{1}{4}.
+\Pr \left( \left[ 0, \frac{\pi}{2} \right) \right)
+= \int_{0}^{\frac{\pi}{2}} \frac{1}{2 \pi} d\theta
+= \frac{1}{4}.
 \end{equation*}
 More generally, the probability that the wheel stops in an interval $(a, b)$ where $0 \leq a \leq b < 2 \pi$ can be written as
 \begin{equation*}

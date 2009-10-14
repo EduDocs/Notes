@@ -4,14 +4,14 @@
 Thus far, our treatment of probability has been focused on single random variables.
 It is often convenient or required to model stochastic phenomena using multiple random variables.
 In this section, we extend some of the concepts developed for single random variables to multiple random variables.
-We center our exposition of random vectors around the a simple case, pairs of random variables.
+We center our exposition of random vectors around a simple case, pairs of random variables.
 
 
 \section{Joint Probability Mass Functions}
 
-Consider two discrete variables $X$ and $Y$ associated with a single experiment.
+Consider two discrete random variables $X$ and $Y$ associated with a single experiment.
 The random pair $(X, Y)$ is characterized by the \emph{joint probability mass function} of $X$ and $Y$, which we denote by $p_{X,Y}(\cdot,\cdot)$. \index{Joint probability mass function}
-If $x$ is a possible value of $X$ and $y$ is a possible value of $Y$, then the probability mass of $(x, y)$ is denoted by
+If $x$ is a possible value of $X$ and $y$ is a possible value of $Y$, then the probability mass function of $(x, y)$ is denoted by
 \begin{equation*}
 \begin{split}
 p_{X,Y} (x, y) &= \Pr ( \{ X = x \} \cap \{ Y = y \} ) \\
@@ -54,7 +54,7 @@ In particular, we have
 \sum_{x \in X(\Omega)} \sum_{y \in Y(\Omega)} p_{X,Y} (x, y) = 1.
 \end{equation*}
 
-To further distinguish between the joint PMF of $X$ and $Y$ and the individual PMFs $p_X (\cdot)$ and $p_Y (\cdot)$, we occasionally refer to the latter as \emph{marginal probability mass functions}. \index{Probability mass function (PMF)} \index{Marginal probability mass function}
+To further distinguish between the joint PMF of $(X, Y)$ and the individual PMFs $p_X (\cdot)$ and $p_Y (\cdot)$, we occasionally refer to the latter as \emph{marginal probability mass functions}. \index{Probability mass function (PMF)} \index{Marginal probability mass function}
 We can compute the marginal PMFs of $X$ and $Y$ from the joint PMF $p_{X,Y}(\cdot,\cdot)$ using the formulas
 \begin{align*}
 p_X (x) &= \sum_{y \in Y(\Omega)} p_{X,Y} (x,y), \\
@@ -464,7 +464,7 @@ Given that the student buys at least five shirts, the conditional expectation be
 \end{split}
 \end{equation*}
 Condition on buying more than five shirts, the student is expected to spend \$126.
-Note that, in computing the conditional expectation, we have used the memoryless property of the geometric random variable.
+Note that, in computing the conditional expectation, we have used the memoryless property of the geometric random variable, $\Expect [ N | N \geq 5] = \Expect [ N | N > 4] = 4 + \Expect [ N ] = 6$.
 \end{example}
 
 
@@ -703,7 +703,7 @@ G_{Y_i}(z) = \frac{p}{1 - (1-p) z} .
 \end{equation*}
 In particular, the distribution of $Y_i$ is given by
 \begin{equation*}
-p_{Y_i} (m) = \frac{1}{m!} \frac{d^m G_{Y_i}}{dz^k} (0) = p (1-p)^m
+p_{Y_i} (m) = \frac{1}{m!} \frac{d^m G_{Y_i}}{dz^m} (0) = p (1-p)^m
 \quad m = 0, 1, \ldots
 \end{equation*}
 It may be instructive to compare this distribution with the PMF of a geometric random variable.
