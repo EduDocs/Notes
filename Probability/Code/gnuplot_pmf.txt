@@ -1,0 +1,38 @@
+
+
+set terminal postscript eps enhanced color solid lw 3 font 32
+set xlabel "Value"
+set ylabel "Probability Mass Function"
+set boxwidth 0.5 absolute
+set style fill solid 0.5
+
+set out 'bernoulli_pmf.eps'
+set title "Bernoulli Random Variable"
+set xrange [-1:4]
+set yrange [0:0.8]
+plot "data1.csv" t 'p = 0.25' with boxes lt 9 lw 3
+
+set out 'binomial_pmf.eps'
+set title "Binomial Random Variable"
+set xrange [-1:9]
+set yrange [0:0.35]
+plot "data2.csv" t 'p = 0.25' with boxes lt 9 lw 3
+
+set out 'poisson_pmf.eps'
+set title "Poisson Random Variable"
+set xrange [-1:9]
+set yrange [0:0.3]
+plot "data3.csv" t 'l = 2' with boxes lt 9 lw 3
+
+set out 'geometric_pmf.eps'
+set title "Geometric Random Variable"
+set xrange [-1:13]
+set yrange [0:0.3]
+plot "data4.csv" t 'p = 0.25' with boxes lt 9 lw 3
+
+set out 'uniform_pmf.eps'
+set title "Uniform Random Variable"
+set xrange [0:9]
+set yrange [0:0.16]
+plot "data5.csv" t 'n = 8' with boxes lt 9 lw 3
+

@@ -1,0 +1,41 @@
+set terminal postscript eps enhanced color solid lw 3 font 32
+set xlabel "Value"
+set ylabel "Probability Density Function"
+set parametric
+
+set title "Uniform Distribution"
+set xrange [0:5]
+set yrange [0:1.2]
+set out 'uniform_pdf.eps'
+plot t,0.5*(sgn(t) - sgn(t-1)) t 'max = 1' lt 9 lw 3, t,0.5*0.5*(sgn(t) - sgn(t-2)) t 'max = 2' lt 3 lw 3, t,0.25*0.5*(sgn(t) - sgn(t-4)) t 'max = 4' lt 1 lw 3
+
+set title "Gaussian Distribution"
+set xrange [-5:5]
+set yrange [0:0.5]
+set out 'gaussian_pdf.eps'
+plot t,exp(-t**2/2)/sqrt(2*pi) t '1' lt 9 lw 3, t,exp(-t**2/4)/sqrt(4*pi) t '2' lt 3 lw 3, t,exp(-t**2/8)/sqrt(8*pi) t '4' lt 1 lw 3
+
+set title "Exponential Distribution"
+set xrange [0:5]
+set yrange [0:2]
+set out 'exponential_pdf.eps'
+plot t,2*exp(-2*t) t '2' lt 9 lw 3, t,exp(-t) t '1' lt 3 lw 3, t,0.5*exp(-0.5*t) t '0.5' lt 1 lw 3
+
+set title "Laplace Distribution"
+set xrange [-5:5]
+set yrange [0:1]
+set out 'laplace_pdf.eps'
+plot t,exp(-2*abs(t)) t '0.5' lt 9 lw 3, t,0.5*exp(-abs(t)) t '1' lt 3 lw 3, t,0.25*exp(-0.5*abs(t)) t '2' lt 1 lw 3
+
+set title "Rayleigh Distribution"
+set xrange [0:5]
+set yrange [0:0.7]
+set out 'rayleigh_pdf.eps'
+plot t,t*exp(-t**2/2) t '1' lt 9 lw 3, t,0.5*t*exp(-t**2/4) t '2' lt 3 lw 3, t,0.25*t*exp(-t**2/8) t '4' lt 1 lw 3
+
+set title "Cauchy Distribution"
+set xrange [-5:5]
+set yrange [0:0.4]
+set out 'cauchy_pdf.eps'
+plot t,0.5/(pi*(0.5+t**2)) t '0.5' lt 9 lw 3, t,1/(pi*(1+t**2)) t '1' lt 3 lw 3, t,2/(pi*(2+t**2)) t '2' lt 1 lw 3
+

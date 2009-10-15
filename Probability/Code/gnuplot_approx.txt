@@ -1,0 +1,14 @@
+
+set terminal postscript eps enhanced color solid lw 3 font 32
+set xlabel "Value"
+set ylabel "Probability Mass Function"
+set title "Convergence to Poisson Distribution"
+set boxwidth 0.5 absolute
+
+set xrange [-1:15]
+set yrange [0:0.45]
+
+set out 'convergence_pmf.eps'
+
+plot 'approx1.csv' u 1:2 t 'n = 5' with boxes lt 8 lw 3, 'approx1.csv' u 1:3 t 'n = 15' with boxes lt 1 lw 3, 'approx1.csv' u 1:4 t 'n = 25' with boxes lt 3 lw 3, 'approx1.csv' u 1:5 t 'n = 35' with boxes lt 9 lw 3, 'poisson1.csv' t 'Poisson' with boxes lt 7 lw 3 
+
