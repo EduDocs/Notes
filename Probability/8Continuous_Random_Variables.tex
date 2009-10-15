@@ -194,6 +194,13 @@ F_X(x) = \begin{cases} 0, & x < a \\
 1, & x \geq b . \end{cases}
 \end{equation*}
 
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=8.5cm]{Figures/8chapter/uniform_pdf}
+\end{center}
+\caption{The PDF of a uniform random variable appears above for intervals $[0,1]$, $[0,2]$ and $[0,4]$.}
+\end{figure}
+
 \begin{example}
 David comes to campus every morning using the Aggie Spirit Transit.
 On his route, a bus comes every thirty minutes, from sunrise until sunset.
@@ -226,6 +233,14 @@ f_X (x) = \frac{1}{\sqrt{2 \pi} \sigma} e^{- \frac{(x - m)^2}{2 \sigma^2}}
 \quad - \infty < x < \infty,
 \end{equation*}
 where $m$ and $\sigma > 0$ are constants.
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=8.5cm]{Figures/8chapter/gaussian_pdf}
+\end{center}
+\caption{The PDF of a Gaussian random variable appears above for parameters $m = 0$ and $\sigma^2 \in \{ 1, 2, 4 \}$.}
+\end{figure}
+
 A Gaussian random variable whose distribution has parameters $m = 0$ and $\sigma = 1$ is call a \emph{normal random variable}, a name that points to its great popularity. \index{Normal random variable}
 The CDF of a Gaussian random variable does not admit a closed-form expression; it can be expressed as
 \begin{equation*}
@@ -333,6 +348,13 @@ For $x \geq 0$, its CDF is equal to
 F_X (x) = 1 - e^{- \lambda x} .
 \end{equation*}
 The parameter $\lambda$ characterizes the rate at  which events occur.
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=8.5cm]{Figures/8chapter/exponential_pdf}
+\end{center}
+\caption{The PDF of an exponential random variable appears above for $\lambda \in \{0.5, 1, 2 \}$.}
+\end{figure}
 
 \begin{example}
 Connection requests at an Internet server are characterized by an exponential inter-arrival time with parameter $\lambda = 1/2$.
@@ -532,6 +554,13 @@ f_X (x) = \frac{x}{\sigma^2} e^{- \frac{x^2}{2 \sigma^2} } \quad x \geq 0 .
 \end{equation*}
 Interestingly, if $X$ is a Rayleigh random variable then $X^2$ has an exponential distribution.
 
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=8.5cm]{Figures/8chapter/rayleigh_pdf}
+\end{center}
+\caption{The PDF of a Rayleigh random variable appears above for $\sigma^2 \in \{ 1, 2, 4 \}$.}
+\end{figure}
+
 
 \subsection{The Laplace Distribution}
 The \emph{Laplace distribution} is sometimes called a double exponential distribution because it can be thought of as an exponential function and its reflection spliced together. \index{Laplace random variable}
@@ -542,6 +571,12 @@ f_X (x) = \frac{1}{2b} e^{- \frac{|x|}{b}} \quad - \infty < x < \infty,
 where $b$ is a positive constant.
 The difference between two independent and identically distributed exponential random variables is governed by a Laplace distribution.
 
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=8.5cm]{Figures/8chapter/laplace_pdf}
+\end{center}
+\caption{The PDF of a Laplace random variable appears above for $b \in \{0.5, 1, 2 \}$.}
+\end{figure}
 
 \subsection{The Cauchy Distribution}
 The \emph{Cauchy distribution} is considered a heavy-tail distribution. \index{Cauchy random variable}
@@ -553,4 +588,11 @@ This distribution does not have a mean, although its median is zero.
 Cauchy random variables are sometimes used in detection theory to model communication channels with extremely impulsive noise.
 It also finds applications in the fields of physics.
 Physicists sometimes refer to this distribution as the \emph{Lorentz distribution}.
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=8.5cm]{Figures/8chapter/cauchy_pdf}
+\end{center}
+\caption{The PDF of a Cauchy random variable appears above for $\gamma^2 \in \{ 1, 2, 4 \}$.}
+\end{figure}
 
