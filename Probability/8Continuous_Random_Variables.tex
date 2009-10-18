@@ -4,7 +4,7 @@ In our previous discussion, we introduced discrete random variables and discusse
 Discrete random variables are quite useful in many contexts, yet they form only a small subset of the collection of random variables pertinent to applied probability and engineering.
 In this chapter, we consider random variables that range over a continuum of possible values; that is, random variables that can take on an uncountable set of values.
 
-Continuous random variables are powerful mathematical abstractions that allow practioners to pose and solve important engineering problems, which cannot be addressed using discrete models.
+Continuous random variables are powerful mathematical abstractions that allow practitioners to pose and solve important engineering problems, which cannot be addressed using discrete models.
 While this extra flexibility is useful and desirable, it comes at a certain cost.
 A continuous random variable cannot be characterized by a probability mass function.
 This difficulty emerges from the limitations of the third axiom of probability laws, which only applies to countable collections of disjoint events.
@@ -19,7 +19,7 @@ In particular, we develop a continuous counterpart to the probability mass funct
 We begin our exposition of continuous random variables by introducing a general concept which can be employed to bridge our understanding of discrete and continuous random variables.
 Recall that a \emph{random variable} is a real-valued function acting on the outcomes of an experiment. \index{Random variable}
 In particular, given a sample space, random variable $X$ is a function from $\Omega$ to $\RealNumbers$.
-The \emph{cumulative distribution function (CDF)} of $X$ is defined pointwise as the probability of the event $\{X \leq x \}$, \index{Cumulative distribution function}
+The \emph{cumulative distribution function (CDF)} of $X$ is defined point-wise as the probability of the event $\{X \leq x \}$, \index{Cumulative distribution function}
 \begin{equation*}
 F_X (x) = \Pr ( \{ X \leq x \} ) = \Pr (X \leq x).
 \end{equation*}
@@ -64,6 +64,14 @@ p_X (x) = \Pr (X \leq x) - \Pr (X < x) = F_X (x) - \lim_{u \uparrow x} F_X (u).
 \end{equation*}
 Fortunately, this formula is simpler when the random variable $X$ only takes integer values, as seen in the example below.
 
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=8.5cm]{Figures/8chapter/discrete_cdf}
+\end{center}
+\caption{This figure shows the PMF of a discrete random variable, along with the corresponding CDF.
+The values of the PMF are depicted by the height of the rectangles; their cumulative sums lead to the values of the CDF.}
+\end{figure}
+
 \begin{example}
 Let $X$ be a geometric random variable with parameter $p$,
 \begin{equation*}
@@ -85,7 +93,6 @@ p_X (k) &= F_X (x) - \lim_{u \uparrow x} F_X (u) = F_X (k) - F_X (k-1) \\
 \end{split}
 \end{equation*}
 \end{example}
-% FIG
 
 
 \subsection{Continuous Random Variables}
@@ -107,7 +114,15 @@ This cumulative distribution function is differentiable with
 \end{equation*}
 and therefore $X$ is a continuous random variable.
 \end{example}
-%FIG
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=8.5cm]{Figures/8chapter/continuous_cdf}
+\end{center}
+\caption{The CDF of a continuous random variable is differentiable.
+This figure provides one example of a continuous random variable.
+Both, the CDF $F_X(\cdot)$ and its derivative $f_X(\cdot)$ (PDF) are displayed.}
+\end{figure}
 
 
 \subsection{Mixed Random Variables*}
@@ -117,7 +132,15 @@ There exist random variables for which neither of these two situations apply.
 Such random variables are sometimes called \emph{mixed random variables}. \index{Mixed random variable}
 Our exposition of mixed random variables in this document is very limited.
 Still, we emphasize that a good understanding of discrete and continuous random variables is instrumental in understanding and solving problems with mixed random variables.
-%FIG
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=8.5cm]{Figures/8chapter/mixed_cdf}
+\end{center}
+\caption{This figure shows the CDF of a mixed random variable.
+In general, mixed random variables do not have a PMF or a PDF.
+Their CDF may be composed of a mixture of differentiable intervals and discontinuous jumps.}
+\end{figure}
 
 
 \section{Probability Density Functions}
@@ -338,6 +361,7 @@ Since the square of the desired integral is nonnegative and equal to one, we can
 
 
 \subsection{The Exponential Distribution}
+\label{section:ExponentialDistribution}
 
 The \emph{exponential random variable} is also frequently encountered in engineering. \index{Exponential random variable}
 It can be used to model the lifetime of devices and systems, and the time elapsed between specific occurrences.
@@ -482,16 +506,6 @@ where $\Gamma(\cdot)$ denotes the gamma function defined by
 The two parameters $\alpha > 0$ and $\lambda > 0$ affect the shape of the corresponding distribution significantly.
 By varying these two parameters, it is possible for the gamma PDF to accurately model a wide array of empirical data.
 
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[width=8.5cm]{Figures/8chapter/gamma_pdf}
-\end{center}
-\caption{Gamma distributions form a two-parameter family of PDFs and, depending on $(\alpha, \lambda)$, they can be employed to model various situations.
-The parameters used above are $(1, 0.5)$ for the exponential distribution, $(2, 0.5)$ for the chi-square distribution and $(4, 2)$ for the Erlang distribution;
-they are all instances of gamma distributions.}
-\label{figure:GammaDistribution}
-\end{figure}
-
 The gamma function can be evaluated recursively using integration by parts; this yields the relation $\Gamma (z+1) = z \Gamma (z)$ for $z > 0$.
 For nonnegative integers, it can easily be shown that $\Gamma (k + 1) = k!$.
 Perhaps, the most well-known value for the gamma function at a non-integer argument is $\Gamma ( 1/2 ) = \sqrt{\pi}$.
@@ -514,6 +528,18 @@ d\xi d\zeta \\
 \end{equation*}
 Many common distributions are special cases of the gamma distribution, as seen in Figure~\ref{figure:GammaDistribution}.
 
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=8.5cm]{Figures/8chapter/gamma_pdf}
+\end{center}
+\caption{Gamma distributions form a two-parameter family of PDFs and, depending on $(\alpha, \lambda)$, they can be employed to model various situations.
+The parameters used above are $(1, 0.5)$ for the exponential distribution, $(2, 0.5)$ for the chi-square distribution and $(4, 2)$ for the Erlang distribution;
+they are all instances of gamma distributions.}
+\label{figure:GammaDistribution}
+\end{figure}
+
+\paragraph{The Exponential Distribution:}
+When $\alpha = 1$, the gamma distribution simply reduces to the exponential distribution discussed in Section~\ref{section:ExponentialDistribution}.
 
 \paragraph{The Chi-Square Distribution:}
 When $\lambda = 1/2$ and $\alpha = k/2$ for some positive integer $k$, the gamma distribution becomes a \emph{chi-square distribution},
@@ -552,7 +578,7 @@ The Rayleigh PDF is given by \index{Rayleigh random variable}
 f_X (x) = \frac{x}{\sigma^2} e^{- \frac{x^2}{2 \sigma^2} } \quad x \geq 0 .
 \end{equation*}
 The \emph{Rayleigh distribution} arises in the context of wireless communications.
-Suppose that $Y_1$ and $Y_2$ are two indepenent normal random variables, then the  magnitude of this random vectors possesses a Rayleigh distribution.
+Suppose that $Y_1$ and $Y_2$ are two independent normal random variables, then the  magnitude of this random vectors possesses a Rayleigh distribution.
 Also, if $X$ is a Rayleigh random variable then $X^2$ has an exponential distribution.
 
 \begin{figure}[ht]
@@ -595,7 +621,7 @@ Physicists sometimes refer to this distribution as the \emph{Lorentz distributio
 \begin{center}
 \includegraphics[width=8.5cm]{Figures/8chapter/cauchy_pdf}
 \end{center}
-\caption{Cauchy distributions are categorized as heavy-tail distributions because of their very slow decay.
+\caption{%Cauchy distributions are categorized as heavy-tail distributions because of their very slow decay.
 The PDFs of Cauchy random variables are shown above for parameters $\gamma^2 \in \{ 1, 2, 4 \}$.}
 \end{figure}
 
