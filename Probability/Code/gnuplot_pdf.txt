@@ -16,10 +16,16 @@ set out 'gaussian_pdf.eps'
 plot t,exp(-t**2/2)/sqrt(2*pi) t '1' lt 9 lw 3, t,exp(-t**2/4)/sqrt(4*pi) t '2' lt 3 lw 3, t,exp(-t**2/8)/sqrt(8*pi) t '4' lt 1 lw 3
 
 set title "Exponential Distribution"
-set xrange [0:5]
+set xrange [0:2]
 set yrange [0:2]
 set out 'exponential_pdf.eps'
 plot t,2*exp(-2*t) t '2' lt 9 lw 3, t,exp(-t) t '1' lt 3 lw 3, t,0.5*exp(-0.5*t) t '0.5' lt 1 lw 3
+
+set title "Gamma Distribution"
+set xrange [0:5]
+set yrange [0:0.6]
+set out 'gamma_pdf.eps'
+plot t,0.5*exp(-0.5*t) t 'Exponential' lt 9 lw 3, t,t*exp(-t/2)/4 t 'Chi-Square' lt 3 lw 3, t,16*(t**3)*exp(-2*t)/6 t 'Erlang' lt 1 lw 3
 
 set title "Laplace Distribution"
 set xrange [-5:5]
