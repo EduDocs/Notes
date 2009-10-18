@@ -1,10 +1,10 @@
 \chapter{Continuous Random Variables}
 
 In our previous discussion, we introduced discrete random variables and discussed their properties.
-Discrete random variables are very useful in many contexts, yet they form only a small subset of the collection of random variables pertinent to applied probability and engineering.
-In this chapter, we consider random variables with a continuous range of possible values; that is, random variables that can take on an uncountable number of values.
+Discrete random variables are quite useful in many contexts, yet they form only a small subset of the collection of random variables pertinent to applied probability and engineering.
+In this chapter, we consider random variables that range over a continuum of possible values; that is, random variables that can take on an uncountable set of values.
 
-Continuous random variables are powerful mathematical abstractions that allow us to pose and solve important engineering problems, which cannot be addressed using discrete models.
+Continuous random variables are powerful mathematical abstractions that allow practioners to pose and solve important engineering problems, which cannot be addressed using discrete models.
 While this extra flexibility is useful and desirable, it comes at a certain cost.
 A continuous random variable cannot be characterized by a probability mass function.
 This difficulty emerges from the limitations of the third axiom of probability laws, which only applies to countable collections of disjoint events.
@@ -16,10 +16,10 @@ In particular, we develop a continuous counterpart to the probability mass funct
 
 \section{Cumulative Distribution Functions}
 
-We begin our exposition of continuous random variables by introducing a general concept which can be used to bridge our understanding of discrete and continuous random variables.
-Recall that a \emph{random variable} is a real-valued function of the outcome of an experiment. \index{Random variable}
-In particular, given a sample space, $X$ is a function from $\Omega$ to $\RealNumbers$.
-The \emph{cumulative distribution function (CDF)} of random variable $X$ is defined using the probability of the event $\{X \leq x \}$, \index{Cumulative distribution function}
+We begin our exposition of continuous random variables by introducing a general concept which can be employed to bridge our understanding of discrete and continuous random variables.
+Recall that a \emph{random variable} is a real-valued function acting on the outcomes of an experiment. \index{Random variable}
+In particular, given a sample space, random variable $X$ is a function from $\Omega$ to $\RealNumbers$.
+The \emph{cumulative distribution function (CDF)} of $X$ is defined pointwise as the probability of the event $\{X \leq x \}$, \index{Cumulative distribution function}
 \begin{equation*}
 F_X (x) = \Pr ( \{ X \leq x \} ) = \Pr (X \leq x).
 \end{equation*}
@@ -31,7 +31,7 @@ F_X (x) = \Pr \left( X^{-1} ( (- \infty, x]) \right)
 In essence, the CDF is a convenient way to specify the probability of all events of the form $\{ X \in (-\infty, x] \}$.
 
 The CDF of random variable $X$ exists for any well-behaved function $X : \Omega \mapsto \RealNumbers$.
-Furthermore, since the realization of $X$ is a real number, we have
+Moreover, since the realization of $X$ is a real number, we have
 \begin{gather*}
 \lim_{x \downarrow - \infty} F_X (x) = 0 \\
 \lim_{x \uparrow \infty} F_X (x) = 1.
@@ -45,8 +45,8 @@ F_X (x_2) &= \Pr (X \leq x_2) \\
 &\geq \Pr (X \leq x_1) = F_X (x_1).
 \end{split}
 \end{equation}
-Thus, the CDF is a non-decreasing function.
-We note from \eqref{equation:NonDecreasingCDF} that the probability of $X$ falling in the interval $(x_1, x_2]$ is
+In other words, a CDF is always a non-decreasing function.
+Finally, we note from \eqref{equation:NonDecreasingCDF} that the probability of $X$ falling in the interval $(x_1, x_2]$ is
 \begin{equation} \label{equation:IntervalCDF}
 \Pr (x_1 < X \leq x_2) = F_X (x_2) - F_X (x_1).
 \end{equation}
@@ -75,7 +75,7 @@ F_X (x) = \sum_{k = 1}^{\lfloor x \rfloor} (1 - p)^{k-1} p
 = 1 - (1 - p)^{\lfloor x \rfloor} ,
 \end{equation*}
 where $\lfloor \cdot \rfloor$ is the standard floor function.
-For integer $k \geq 1$, the PMF of geometric random variable $X$ can be recovered from the CDF by calculating
+For integer $k \geq 1$, the PMF of geometric random variable $X$ can be recovered from the CDF as follows,
 \begin{equation*}
 \begin{split}
 p_X (k) &= F_X (x) - \lim_{u \uparrow x} F_X (u) = F_X (k) - F_X (k-1) \\
@@ -85,11 +85,12 @@ p_X (k) &= F_X (x) - \lim_{u \uparrow x} F_X (u) = F_X (k) - F_X (k-1) \\
 \end{split}
 \end{equation*}
 \end{example}
+% FIG
 
 
 \subsection{Continuous Random Variables}
 
-With the concept of a CDF clearly defined, we can safely provide a more precise definition for continuous random variables.
+Having defined the concept of a CDF, we can safely provide a more precise definition for continuous random variables.
 Let $X$ be a random variable with CDF $F_X (x)$, then $X$ is said to be a \emph{continuous random variable} if $F_X (x)$ is differentiable with respect to $x$. \index{Continuous random variable}
 
 \begin{example}
@@ -106,23 +107,24 @@ This cumulative distribution function is differentiable with
 \end{equation*}
 and therefore $X$ is a continuous random variable.
 \end{example}
+%FIG
 
 
 \subsection{Mixed Random Variables*}
 
-It should be becoming apparent by now that the CDF of a discrete random variable is a discontinuous staircase-like function.
-The CDF of a continuous random variable, on the other hand, is continuous and differentiable almost everywhere.
+Generally speaking, the CDF of a discrete random variable is a discontinuous staircase-like function, whereas the CDF of a continuous random variable is continuous and differentiable almost everywhere.
 There exist random variables for which neither of these two situations apply.
 Such random variables are sometimes called \emph{mixed random variables}. \index{Mixed random variable}
 Our exposition of mixed random variables in this document is very limited.
-Still, we emphasize that a good understanding of discrete and continuous random variables is very beneficial in understanding and solving problems with mixed random variables.
+Still, we emphasize that a good understanding of discrete and continuous random variables is instrumental in understanding and solving problems with mixed random variables.
+%FIG
 
 
 \section{Probability Density Functions}
 
-As mentioned above, the CDF of a continuous random variable $X$ is a differentiable function.
-We denote the derivative by $f_X (x)$ and call it the \emph{probability density function (PDF)} of $X$. \index{Probability density function (PDF)}
-If $X$ is a random variable with PDF $f_X (x)$ then, by the fundamental theorem of calculus, we get
+As mentioned above, the CDF of continuous random variable $X$ is a differentiable function.
+The derivative of $F_X (\cdot)$ is called the \emph{probability density function (PDF)} of $X$, and it is denoted by $f_X(\cdot)$. \index{Probability density function (PDF)}
+If $X$ is a random variable with PDF $f_X (x)$ then, by the fundamental theorem of calculus, we have
 \begin{equation*}
 F_X (x) = \int_{- \infty}^x f_X (\xi) d\xi .
 \end{equation*}
@@ -131,9 +133,10 @@ Equivalently, we can write
 f_X (x) = \frac{d F_X}{dx} (x) .
 \end{equation*}
 Note that PDFs are only defined for continuous random variables.
-This is somewhat restrictive, however the PDF is very convenient as it can be employed to derive properties for continuous random variables which would be difficult to compute otherwise.
+This is somewhat restrictive.
+Still, the PDF is a very powerful tool that can be employed to derive properties of continuous random variables which would be difficult to compute otherwise.
 
-For $x_1 < x_2$, we can combine the definition of $f_X(x)$ and \eqref{equation:IntervalCDF} to obtain
+For $x_1 < x_2$, we can combine the definition of $f_X(\cdot)$ and \eqref{equation:IntervalCDF} to obtain
 \begin{equation*}
 \Pr (x_1 < X \leq x_2) = \int_{x_1}^{x_2} f_X (\xi) d\xi .
 \end{equation*}
@@ -145,17 +148,17 @@ Furthermore, it is easily seen that for any continuous random variable
 &= \int_{x_2}^{x_2} f_X (\xi) d\xi = 0.
 \end{split}
 \end{equation*}
-In other words, if $X$ is a continuous random variable, then the probability that $X = x$ is zero for any real number $x$.
+In other words, if $X$ is a continuous random variable, then $\Pr (X = x) = 0$ for any real number $x$.
 An immediate corollary of this fact is
 \begin{equation*}
 \begin{split}
 \Pr (x_1 < X < x_2)
 &= \Pr (x_1 \leq X < x_2)
 = \Pr (x_1 < X \leq x_2) \\
-&= \Pr (x_1 \leq X \leq x_2) .
+&= \Pr (x_1 \leq X \leq x_2) ;
 \end{split}
 \end{equation*}
-The inclusion or exclusion of endpoints in an interval does not affect the probability of the corresponding interval when $X$ is a continuous random variable.
+the inclusion or exclusion of endpoints in an interval does not affect the probability of the corresponding interval when $X$ is a continuous random variable.
 
 We can derive properties for the PDF of continuous random variable $X$ based on the axioms of probability laws.
 First, the probability that $X$ is a real number is given by
@@ -163,17 +166,16 @@ First, the probability that $X$ is a real number is given by
 \Pr (-\infty < X < \infty) = \int_{-\infty}^{\infty} f_X (\xi) d\xi = 1.
 \end{equation*}
 Thus, $f_X (x)$ must integrate to one.
-Also, since the probabilities of events are nonnegative, we must have $f_X (x) \geq 0$ (almost) everywhere.
-Finally, given a measurable set $S$, the probability that $X \in S$ can be expressed through an integral,
+Also, because the probabilities of events are nonnegative, we must have $f_X (x) \geq 0$ everywhere.
+Finally, given an admissible set $S$, the probability that $X \in S$ can be expressed through an integral,
 \begin{equation*}
 \Pr (X \in S) = \int_S f_X (\xi) d\xi .
 \end{equation*}
-In fact, this formula is often used to compute the probability of admissible sets.
 
 
 \section{Important Distributions}
 
-Our intuition about continuous random variables can be developed by looking at examples.
+Good intuition about continuous random variables can be developed by looking at examples.
 In this section, we introduce important random variables and their distributions.
 These random variables find widespread application in various fields of engineering.
 
@@ -198,7 +200,7 @@ F_X(x) = \begin{cases} 0, & x < a \\
 \begin{center}
 \includegraphics[width=8.5cm]{Figures/8chapter/uniform_pdf}
 \end{center}
-\caption{The PDF of a uniform random variable appears above for intervals $[0,1]$, $[0,2]$ and $[0,4]$.}
+\caption{This figure shows the PDFs of uniform random variables with support intervals $[0,1]$, $[0,2]$ and $[0,4]$.}
 \end{figure}
 
 \begin{example}
@@ -208,15 +210,15 @@ David, who does not believe in alarm clocks or watches, wakes up with daylight.
 After cooking a hefty breakfast, he walks to the bus stop.
 If his arrival time at the bus stop is uniformly distributed between 9:00 a.m.\ and 9:30 a.m., what is the probability that he waits less than five minutes for the bus?
 
-Let $t_0$ be the time at which he arrives at the bus stop, and denote by $T$ the time he spends waiting.
+Let $t_0$ be the time at which David arrives at the bus stop, and denote by $T$ the time he spends waiting.
 The time at which the next bus arrives at David's stop is uniformly distributed between $t_0$ and $t_0 + 30$.
-The amount of time that David spends at the bus stop is therefore uniformly distributed between $0$ and $30$ minutes.
+The amount of time that he spends at the bus stop is therefore uniformly distributed between $0$ and $30$ minutes.
 Accordingly, we have
 \begin{equation*}
 f_T(t) = \begin{cases} \frac{1}{30}, & t \in [0, 30] \\
 0, & \text{otherwise}. \end{cases}
 \end{equation*}
-The probability that David waits less than five minutes found to be
+The probability that David waits less than five minutes is
 \begin{equation*}
 \Pr (T < 5) = \int_0^5 \frac{1}{30} dt = \frac{1}{6} .
 \end{equation*}
@@ -226,22 +228,22 @@ The probability that David waits less than five minutes found to be
 \subsection{The Gaussian (Normal) Random Variable}
 
 The \emph{Gaussian random variable} is of fundamental importance in probability and statistics. \index{Gaussian random variable}
-As we will soon see, it is often used to model the distribution of a sum of random components.
-The PDF for a Gaussian random variable $X$ is given by
+It is often used to model the distribution of a sum of random components.
+The PDF of a Gaussian random variable is given by
 \begin{equation*}
 f_X (x) = \frac{1}{\sqrt{2 \pi} \sigma} e^{- \frac{(x - m)^2}{2 \sigma^2}}
 \quad - \infty < x < \infty,
 \end{equation*}
-where $m$ and $\sigma > 0$ are constants.
+where $m$ and $\sigma > 0$ are real parameters.
 
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[width=8.5cm]{Figures/8chapter/gaussian_pdf}
 \end{center}
-\caption{The PDF of a Gaussian random variable appears above for parameters $m = 0$ and $\sigma^2 \in \{ 1, 2, 4 \}$.}
+\caption{The distributions of Gaussian random variables appear above for parameters $m = 0$ and $\sigma^2 \in \{ 1, 2, 4 \}$.}
 \end{figure}
 
-A Gaussian random variable whose distribution has parameters $m = 0$ and $\sigma = 1$ is call a \emph{normal random variable}, a name that points to its great popularity. \index{Normal random variable}
+A Gaussian random variable whose distribution has parameters $m = 0$ and $\sigma = 1$ is called a \emph{normal random variable}, a name that hints at its popularity. \index{Normal random variable}
 The CDF of a Gaussian random variable does not admit a closed-form expression; it can be expressed as
 \begin{equation*}
 \begin{split}
@@ -253,7 +255,7 @@ F_X (x) &= \Pr (X \leq x)
 = \Phi \left( \frac{x - m}{\sigma} \right),
 \end{split}
 \end{equation*}
-where $\Phi (\cdot)$ is termed the \emph{standard normal cumulative distribution function} defined by
+where $\Phi (\cdot)$ is termed the \emph{standard normal cumulative distribution function} and is defined by
 \begin{equation*}
 \Phi (x) = 
 \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^x e^{-\frac{\zeta^2}{2}} d\zeta .
@@ -266,19 +268,19 @@ The sent signal takes on either a value of $1$ or $-1$.
 The message received at the output of the communication channel is corrupted by additive thermal noise.
 This noise can be accurately modeled as a Gaussian random variable.
 The receiver declares that a $1$ ($-1$) was transmitted if the sent signal is positive (negative).
-What is the probability of making an erroneous decision.
+What is the probability of making an erroneous decision?
 
-Let $X \in \{ -1, 1 \}$ be the transmitted signal, $N$ be the value of the thermal noise, and $Y$ represent the value of the received signal.
-An error can occur in one of two possible ways: $X = 1$ was transmitted and $Y$ is less than zero, or $X = -1$ was transmitted and $Y$ is greater than zero.
+Let $S \in \{ -1, 1 \}$ denote the transmitted signal, $N$ be the value of the thermal noise, and $Y$ represent the value of the received signal.
+An error can occur in one of two possible ways: $S = 1$ was transmitted and $Y$ is less than zero, or $S = -1$ was transmitted and $Y$ is greater than zero.
 Using the total probability theorem, we get can compute the probability of error as
 \begin{equation*}
-\Pr (Y \geq 0 | X = -1) \Pr (X = -1)
-+ \Pr (Y \leq 0 | X = 1) \Pr (X = 1).
+\Pr (Y \geq 0 | S = -1) \Pr (S = -1)
++ \Pr (Y \leq 0 | S = 1) \Pr (S = 1).
 \end{equation*}
-By the symmetry of the problem, it is easily argued that
+By symmetry, it is easily argued that
 \begin{equation*}
 \begin{split}
-\Pr (Y \leq 0 | X = 1) &= \Pr (Y \geq 0 | X = -1) = \Pr (N > 1) \\
+\Pr (Y \leq 0 | S = 1) &= \Pr (Y \geq 0 | S = -1) = \Pr (N > 1) \\
 &= \int_{1}^{\infty} \frac{1}{\sqrt{2 \pi} \sigma}
 e^{- \frac{\xi^2}{2 \sigma^2}} d\xi
 = 1 - \Phi \left( \frac{1}{\sigma} \right) .
@@ -288,7 +290,7 @@ The probability that the receiver makes an erroneous decision is $1 - \Phi (1/\s
 Clearly, the reliability of this transmission scheme depends on the amount of noise present at the receiver.
 \end{example}
 
-The normal random variable is so frequent in applied mathematics and engineering that variations of its CDF possess their own names.
+The normal random variable is so frequent in applied mathematics and engineering that many variations of its CDF possess their own names.
 The \emph{error function} is a function which is primarily encountered in the fields of statistics and partial differential equations. \index{Error function}
 It is defined by
 \begin{equation*}
@@ -307,7 +309,7 @@ Q (x) &= \frac{1}{\sqrt{2 \pi}} \int_x^{\infty} e^{-\frac{\xi^2}{2}} d\xi
 &= \frac{ 1 - \mathrm{erf} \left( {x}/{\sqrt{2}} \right) }{2} .
 \end{split}
 \end{equation}
-Equation \eqref{equation:Qfunction} may prove useful while using various software packages that provide a built-in implementation for $\mathrm{erf}(x)$, but not for the $Q$-function.
+Equation \eqref{equation:Qfunction} may prove useful when using software packages that provide a built-in implementation for $\mathrm{erf}(\cdot)$, but not for the $Q$-function.
 The probability of an erroneous decision in Example~\ref{example:NoiseCommunicationSystem1} can be expressed concisely using the Q-function as $Q (1/\sigma)$.
 
 
@@ -318,8 +320,8 @@ Consider a standard normal PDF,
 \begin{equation*}
 f_X(x) = \frac{1}{\sqrt{2 \pi}} e^{- \frac{x^2}{2}} .
 \end{equation*}
-We can show that $f_X (x)$ integrates to one using a subtle argument and a straightforward change of variables.
-We start with the square of the integrated PDF and get
+We can show that $f_X (x)$ integrates to one using a subtle argument and a change of variables.
+We start with the square of the integrated PDF and proceed from there,
 \begin{equation*}
 \begin{split}
 \left(\int_{- \infty}^{\infty} f_X (\xi) d\xi \right)^2
@@ -332,13 +334,13 @@ We start with the square of the integrated PDF and get
 &= \left. \left( - e^{- \frac{r^2}{2}} \right) \right|_0^{\infty} = 1.
 \end{split}
 \end{equation*}
-Since the square is equal to one and the integral is nonnegative, we conclude that the normal PDF integrates to one.
+Since the square of the desired integral is nonnegative and equal to one, we can conclude that the normal PDF integrates to one.
 
 
 \subsection{The Exponential Distribution}
 
-The \emph{exponential random variable} is also a very important continuous random variable. \index{Exponential random variable}
-It is used in engineering to model the lifetime of devices and systems, and the time between occurrences of events.
+The \emph{exponential random variable} is also frequently encountered in engineering. \index{Exponential random variable}
+It can be used to model the lifetime of devices and systems, and the time elapsed between specific occurrences.
 An exponential random variable $X$ with parameter $\lambda > 0$ has PDF
 \begin{equation*}
 f_X (x) = \lambda e^{- \lambda x} \quad x \geq 0.
@@ -353,7 +355,7 @@ The parameter $\lambda$ characterizes the rate at  which events occur.
 \begin{center}
 \includegraphics[width=8.5cm]{Figures/8chapter/exponential_pdf}
 \end{center}
-\caption{The PDF of an exponential random variable appears above for $\lambda \in \{0.5, 1, 2 \}$.}
+\caption{The distributions of exponential random variables appear above for parameters $\lambda \in \{0.5, 1, 2 \}$.}
 \end{figure}
 
 \begin{example}
@@ -379,7 +381,7 @@ p_{Y_n} (k) = (1 - p_n)^{k-1} p_n
 \quad k = 1, 2, \ldots
 \end{equation*}
 That is, random variable $Y_n$ is a standard geometric random variable with parameter $p_n = \lambda/n$.
-For every $n$, we define a new variable $X_n$ by
+For every $n$, we create a new variable $X_n$,
 \begin{equation*}
 X_n = \frac{Y_n}{n}.
 \end{equation*}
@@ -411,18 +413,18 @@ In the limit, as $n$ grows unbounded, we get
 &= 1 - e^{- \lambda x} .
 \end{split}
 \end{equation*}
-Thus, the sequence of scaled geometric random variable $\{ X_n \}$ converges in distribution to an exponential random variable $X$ with parameter $\lambda$.
+Thus, the sequence of scaled geometric random variables $\{ X_n \}$ converges in distribution to an exponential random variable $X$ with parameter $\lambda$.
 
 \paragraph{Memoryless Property:}
 An interesting feature of the exponential random variable is that it satisfies the \emph{memoryless property}, \index{Memoryless property}
 \begin{equation*}
 \Pr (X > t + u | X > t) = \Pr (X > u).
 \end{equation*}
-This is not so surprising in view of its relation with the geometric random variable.
+This is not so surprising in view of its relation to the geometric random variable.
 This fact can be shown by a straightforward application of conditional probability.
 Suppose that $X$ is an exponential random variable with parameter $\lambda$.
 Also, let $t$ and $u$ be two positive numbers.
-The memoryless property is obtained by expanding the conditional probability using definition \eqref{equation:ConditionalProbability},
+The memoryless property can be verified by expanding the conditional probability of $X$ using definition \eqref{equation:ConditionalProbability},
 \begin{equation*}
 \begin{split}
 \Pr (X > t + u | X > t)
@@ -435,13 +437,13 @@ The memoryless property is obtained by expanding the conditional probability usi
 In reality, the exponential random variable is the only continuous random variable that satisfies the memoryless property.
 
 \begin{example}
-Century Oak Networks maintains a bank of servers for its operation.
-The hard drives on every server have a half-life of two years.
-We wish to compute the probability that a specific disk need replacement within its first year of usage.
+A prominent company, Century Oak Networks, maintains a bank of servers for its operation.
+Hard drives on the servers have a half-life of two years.
+We wish to compute the probability that a specific disk needs repair within its first year of usage.
 
 Half-lives are typically used to describe quantities that undergo exponential decay.
 Let $T$ denote the time elapsed until failure of the disk.
-We know that $T$ is an exponential random variable and, although we are not given $\lambda$ explicitly, we have
+We know that $T$ is an exponential random variable and, although we are not given $\lambda$ explicitly, we know that
 \begin{equation*}
 \Pr ( T > 2 ) = \frac{1}{2} .
 \end{equation*}
@@ -453,45 +455,46 @@ We use the memoryless property to solve this problem,
 = \left( \Pr(T > 1) \right)^2 .
 \end{split}
 \end{equation*}
-It follows that $\Pr (T > 1) = \sqrt{ \Pr (T > 2) }$.
+It follows that $\Pr (T > 1) = \sqrt{ \Pr (T > 2) } = 1 / \sqrt{2}$.
 We can then write $\Pr (T < 1) = 1 - \Pr (T > 1) \approx 0.293$.
+An alternative way to solve this problem would be to first find the value of $\lambda$ associated with $T$, and then compute $\Pr (T < 1)$ from the corresponding integral.
 \end{example}
 
 
 \section{Additional Distributions}
 
-Probability distributions arise in many different contexts and assume various forms.
-We conclude this chapter on continuous random variables by mentioning a few additional distributions that find application in engineering.
+Probability distributions arise in many different contexts and they assume various forms.
+We conclude this first chapter on continuous random variables by mentioning a few additional distributions that find applications in engineering.
 It is interesting to note the interconnection between various random variables and their corresponding probability distributions.
 
 
 \subsection{The Gamma Distribution}
 
-The gamma distribution defines a versatile collection of random variables.
+The gamma PDF defines a versatile collection of distributions.
 The PDF of a \emph{gamma random variable} is given by \index{Gamma random variable}
 \begin{equation*}
 f_X (x) = \frac{\lambda (\lambda x)^{\alpha - 1} e^{-\lambda x}}{\Gamma (\alpha)} \quad  x > 0,
 \end{equation*}
-where $\Gamma(z)$ is the gamma function defined by
+where $\Gamma(\cdot)$ denotes the gamma function defined by
 \begin{equation*}
 \Gamma (z) = \int_0^{\infty} \xi^{z-1} e^{-\xi} d\xi \quad z > 0 .
 \end{equation*}
-The two parameters $\alpha > 0$ and $\lambda > 0$ affect the shape of this distribution significantly.
+The two parameters $\alpha > 0$ and $\lambda > 0$ affect the shape of the corresponding distribution significantly.
 By varying these two parameters, it is possible for the gamma PDF to accurately model a wide array of empirical data.
 
-The gamma function can be evaluated recursively using integration by parts; this yields the relation
-\begin{equation*}
-\Gamma (z+1) = z \Gamma (z) \quad z > 0.
-\end{equation*}
-For nonnegative integers, it can easily be shown that
-\begin{equation*}
-\Gamma (k + 1) = k! .
-\end{equation*}
-Perhaps, the most well-known value for the gamma function at a non-integer argument is
-\begin{equation*}
-\Gamma \left( \frac{1}{2} \right)
-= \sqrt{\pi} .
-\end{equation*}
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=8.5cm]{Figures/8chapter/gamma_pdf}
+\end{center}
+\caption{Gamma distributions form a two-parameter family of PDFs and, depending on $(\alpha, \lambda)$, they can be employed to model various situations.
+The parameters used above are $(1, 0.5)$ for the exponential distribution, $(2, 0.5)$ for the chi-square distribution and $(4, 2)$ for the Erlang distribution;
+they are all instances of gamma distributions.}
+\label{figure:GammaDistribution}
+\end{figure}
+
+The gamma function can be evaluated recursively using integration by parts; this yields the relation $\Gamma (z+1) = z \Gamma (z)$ for $z > 0$.
+For nonnegative integers, it can easily be shown that $\Gamma (k + 1) = k!$.
+Perhaps, the most well-known value for the gamma function at a non-integer argument is $\Gamma ( 1/2 ) = \sqrt{\pi}$.
 Interestingly, this specific value for the gamma function can be evaluated by a method similar to the one we used to integrate the Gaussian distribution,
 \begin{equation*}
 \begin{split}
@@ -509,9 +512,7 @@ d\xi d\zeta \\
 = \pi .
 \end{split}
 \end{equation*}
-
-Many common distributions are special cases of the gamma distribution.
-The gamma distribution becomes an exponential distribution whenever $\alpha = 1$.
+Many common distributions are special cases of the gamma distribution, as seen in Figure~\ref{figure:GammaDistribution}.
 
 
 \paragraph{The Chi-Square Distribution:}
@@ -530,7 +531,7 @@ Its PDF is given by
 f_X (x) = \frac{\lambda (\lambda x)^{m - 1} e^{-\lambda x}}{(m-1)!} \quad  x > 0.
 \end{equation*}
 
-An $m$-Erlang can be obtained as the sum of $m$ exponential random variables.
+An $m$-Erlang random variable can be obtained by summing $m$ independent exponential random variables.
 Specifically, let $X_1, X_2, \ldots, X_m$ be independent exponential random variables, each with parameter $\lambda > 0$.
 The random variable $S_m$ given by
 \begin{equation*}
@@ -539,32 +540,32 @@ S_m = \sum_{k=1}^m X_k
 is an Erlang random variable with parameter $m$ and $\lambda$.
 
 \begin{example}
-Suppose that service requests at an Internet are characterized by independent and memoryless inter-arrival periods.
+Suppose that service requests at an Internet are characterized by independent, memoryless inter-arrival periods.
 Let $S_m$ be a random variable that denotes the time of the $m$th arrival, then $S_m$ is an Erlang  random variable.
 \end{example}
 
 
 \subsection{The Rayleigh Distribution}
 
-The \emph{Rayleigh distribution} arises primarily when two zero-mean random variables have Gaussian distribution, are uncorrelated and possess equal variance. \index{Rayleigh random variable}
-The magnitude of such a random vectors has a Rayleigh distribution.
-The Rayleigh PDF is given by
+The Rayleigh PDF is given by \index{Rayleigh random variable}
 \begin{equation*}
 f_X (x) = \frac{x}{\sigma^2} e^{- \frac{x^2}{2 \sigma^2} } \quad x \geq 0 .
 \end{equation*}
-Interestingly, if $X$ is a Rayleigh random variable then $X^2$ has an exponential distribution.
+The \emph{Rayleigh distribution} arises in the context of wireless communications.
+Suppose that $Y_1$ and $Y_2$ are two indepenent normal random variables, then the  magnitude of this random vectors possesses a Rayleigh distribution.
+Also, if $X$ is a Rayleigh random variable then $X^2$ has an exponential distribution.
 
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[width=8.5cm]{Figures/8chapter/rayleigh_pdf}
 \end{center}
-\caption{The PDF of a Rayleigh random variable appears above for $\sigma^2 \in \{ 1, 2, 4 \}$.}
+\caption{This figure plots the distributions of Rayleigh random variables for parameters $\sigma^2 \in \{ 1, 2, 4 \}$.}
 \end{figure}
 
 
 \subsection{The Laplace Distribution}
 The \emph{Laplace distribution} is sometimes called a double exponential distribution because it can be thought of as an exponential function and its reflection spliced together. \index{Laplace random variable}
-The PDF of a Laplacian random variable is
+The PDF of a Laplacian random variable then becomes
 \begin{equation*}
 f_X (x) = \frac{1}{2b} e^{- \frac{|x|}{b}} \quad - \infty < x < \infty,
 \end{equation*}
@@ -575,8 +576,10 @@ The difference between two independent and identically distributed exponential r
 \begin{center}
 \includegraphics[width=8.5cm]{Figures/8chapter/laplace_pdf}
 \end{center}
-\caption{The PDF of a Laplace random variable appears above for $b \in \{0.5, 1, 2 \}$.}
+\caption{The PDF of a Laplace random variable can be constructed using an exponential function and its reflection spliced together.
+This figures shows Lapace PDFs for parameters $b \in \{0.5, 1, 2 \}$.}
 \end{figure}
+
 
 \subsection{The Cauchy Distribution}
 The \emph{Cauchy distribution} is considered a heavy-tail distribution. \index{Cauchy random variable}
@@ -584,15 +587,15 @@ The PDF of a Cauchy random variable is given by
 \begin{equation*}
 f_X (x) = \frac{ \gamma^2 }{\pi \left( \gamma^2 + x^2 \right)} \quad - \infty < x < \infty.
 \end{equation*}
-This distribution does not have a mean, although its median is zero.
-Cauchy random variables are sometimes used in detection theory to model communication channels with extremely impulsive noise.
-It also finds applications in the fields of physics.
+An interesting fact about this distribution is that, although its median is zero, it does not have a mean.
+Cauchy random variables are sometimes used in detection theory to model communication systems subject to extreme noise conditions; they also finds applications in physics.
 Physicists sometimes refer to this distribution as the \emph{Lorentz distribution}.
 
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[width=8.5cm]{Figures/8chapter/cauchy_pdf}
 \end{center}
-\caption{The PDF of a Cauchy random variable appears above for $\gamma^2 \in \{ 1, 2, 4 \}$.}
+\caption{Cauchy distributions are categorized as heavy-tail distributions because of their very slow decay.
+The PDFs of Cauchy random variables are shown above for parameters $\gamma^2 \in \{ 1, 2, 4 \}$.}
 \end{figure}
 
