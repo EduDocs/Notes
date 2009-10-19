@@ -514,11 +514,8 @@ A similar argument can be used to show that
 \end{equation}
 whenever $X$ and $Y$ are independent random variables and the corresponding expectations exist.
 
-
-\subsection{Sums of Independent Random Variables}
-
-We now turn to the question of determining the distribution of a sum of independent random variables in terms of the PMF of the summands.
-Suppose $X$ and $Y$ are two independent random variables that take on integer values.
+We now turn to the question of determining the distribution of a sum of two independent random variables in terms of the marginal PMF of the summands.
+Suppose $X$ and $Y$ are independent random variables that take on integer values.
 Let $p_X(\cdot)$ and $p_Y(\cdot)$ be the PMFs of $X$ and $Y$, respectively.
 We wish to determine the distribution $p_U (\cdot)$ of $U$ where $U = X + Y$.
 To accomplish this task, it suffices to compute the probability that $U$ assumes a value $k$, where $k$ is an arbitrary integer,
@@ -604,9 +601,6 @@ p_{\mathbf{X}} (\mathbf{x}) = \prod_{k=1}^n p_{X_k} (x_k) .
 \end{equation*}
 Although not discussed in details herein, we emphasize that most concepts introduced in this chapter can be extended to multiple random variables in a straightforward manner.
 Also, we note that, from an abstract perspective, the space defined by vectors of the form $( X_1 (\omega), X_2 (\omega), \ldots, X_n (\omega) )$, $\omega \in \Omega$, is itself a sample space on which random variables can be defined.
-
-
-\subsection{Sums of Independent Random Variables}
 
 Consider the empirical sums
 \begin{equation*}
@@ -708,4 +702,13 @@ p_{Y_i} (m) = \frac{1}{m!} \frac{d^m G_{Y_i}}{dz^m} (0) = p (1-p)^m
 \end{equation*}
 It may be instructive to compare this distribution with the PMF of a geometric random variable.
 \end{example}
+
+
+\section*{Further Reading}
+
+\begin{small}
+\begin{enumerate}
+\item Bertsekas, D.P., and Tsitsiklis, J.N., \emph{Introduction to Probability}, Athena Scientific, 2002: Sections~2.5--2.7.
+\end{enumerate}
+\end{small}
 
