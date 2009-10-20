@@ -566,7 +566,7 @@ S_m = \sum_{k=1}^m X_k
 is an Erlang random variable with parameter $m$ and $\lambda$.
 
 \begin{example}
-Suppose that service requests at an Internet are characterized by independent, memoryless inter-arrival periods.
+Suppose that the requests arriving at a computer server on the Internet are characterized by independent, memoryless inter-arrival periods.
 Let $S_m$ be a random variable that denotes the time of the $m$th arrival, then $S_m$ is an Erlang  random variable.
 \end{example}
 
@@ -588,6 +588,11 @@ Also, if $X$ is a Rayleigh random variable then $X^2$ has an exponential distrib
 \caption{This figure plots the distributions of Rayleigh random variables for parameters $\sigma^2 \in \{ 1, 2, 4 \}$.}
 \end{figure}
 
+\begin{example}
+Radio signals propagating through wireless media get reflected, refrated and diffrated.
+This creates variations in signal strength at the destinations, a phenomenon known as fading.
+Rayleigh random variables are often employed to model amplitude fluctuations of radio signals in urban environments.
+\end{example}
 
 \subsection{The Laplace Distribution}
 The \emph{Laplace distribution} is sometimes called a double exponential distribution because it can be thought of as an exponential function and its reflection spliced together. \index{Laplace random variable}
@@ -608,21 +613,22 @@ This figures shows Lapace PDFs for parameters $b \in \{0.5, 1, 2 \}$.}
 
 
 \subsection{The Cauchy Distribution}
-The \emph{Cauchy distribution} is considered a heavy-tail distribution. \index{Cauchy random variable}
+The \emph{Cauchy distribution} is considered a heavy-tail distribution because its tails are not exponentially bounded. \index{Cauchy random variable}
 The PDF of a Cauchy random variable is given by
 \begin{equation*}
 f_X (x) = \frac{ \gamma^2 }{\pi \left( \gamma^2 + x^2 \right)} \quad - \infty < x < \infty.
 \end{equation*}
-An interesting fact about this distribution is that, although its median is zero, it does not have a mean.
-Cauchy random variables are sometimes used in detection theory to model communication systems subject to extreme noise conditions; they also finds applications in physics.
+An interesting fact about this distribution is that it has no mean, variance or higher moments defined.
+Also, if $X_1, X_2, \ldots, X_n$ are independent random variables, each with a standard Cauchy distribution, then the sample mean $(X_1 + X_2 + \cdots + X_n)/n$ possesses the same Cauchy distribution.
+Cauchy random variables appear in detection theory to model communication systems subject to extreme noise conditions; they also finds applications in physics.
 Physicists sometimes refer to this distribution as the \emph{Lorentz distribution}.
 
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[width=8.5cm]{Figures/8chapter/cauchy_pdf}
 \end{center}
-\caption{%Cauchy distributions are categorized as heavy-tail distributions because of their very slow decay.
-The PDFs of Cauchy random variables are shown above for parameters $\gamma^2 \in \{ 1, 2, 4 \}$.}
+\caption{Cauchy distributions are categorized as heavy-tail distributions because of their very slow decay.
+The PDFs of Cauchy random variables are shown above for parameters $\gamma^2 \in \{ 0.5, 2, 4 \}$.}
 \end{figure}
 
 
