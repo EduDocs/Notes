@@ -344,7 +344,7 @@ In some sense, conditioning on an event is a special case of a conditional proba
 A data packet is sent to a destination over an unreliable wireless communication link.
 Data is successfully decoded at the receiver with probability $p$, and the transmission fails with probability $(1-p)$, independently of previous trials.
 When initial decoding fails, a retransmission is requested immediately.
-However, if packet transmission fails $n$ consecutive times, then the data is dropped from the queue altogether, with not further transmission attempt.
+However, if packet transmission fails $n$ consecutive times, then the data is dropped from the queue altogether, with no further transmission attempt.
 Let $X$ denote the number of trials, and let $S$ be the event that the data packet is successfully transmitted.
 We wish to compute the conditional PMF of $X$ given $S$.
 
