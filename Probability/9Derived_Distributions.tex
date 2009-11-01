@@ -107,7 +107,7 @@ It is therefore advisable to define $F_Y (y)$ in terms of $g^{-1} ((-\infty, y])
 \end{figure}
 
 \begin{example}
-Let $X$ be a continuous random variable uniformly distributed over interal $[0, 1]$.
+Let $X$ be a continuous random variable uniformly distributed over interval $[0, 1]$.
 We wish to characterize the derived distribution of $Y = 2X$.
 This can be accomplished as follows.
 For $y \in [0, 2]$, we get
@@ -126,7 +126,7 @@ f_Y(y) = \begin{cases} \frac{1}{2}, & y \in [0, 2] \\
 More generally, an affine function of a uniform random variable is also a uniform random variable.
 \end{example}
 
-The same methodology applies to non-increasing funtions.
+The same methodology applies to non-increasing functions.
 Suppose that $g(\cdot)$ is monotone decreasing, and let $Y = g(X)$ be a function of continuous random variable $X$.
 The CDF of $Y$ is then equal to
 \begin{equation} \label{equation:MonotoneDecreasingCDF}
@@ -346,19 +346,19 @@ We wish to create an exponential random variable $X$ with parameter $\lambda$ by
 Random variable $X$ is nonnegative, and its CDF is given by $F_X(x) = 1 - e^{- \lambda x}$ for $x \geq 0$.
 The inverse of $F_X (\cdot)$ is given by
 \begin{equation*}
-F_X^{-1} (y) = - \frac{ \log (1 - y) }{\lambda} .
+F_X^{-1} (y) = - \frac{1}{\lambda} \log (1 - y) .
 \end{equation*}
-Thus, we can generate the desired random variable $X$ with
+We can therefore generate the desired random variable $X$ with
 \begin{equation*}
-X = - \frac{ \log (1 - Y) }{\lambda} .
+X = - \frac{1}{\lambda} \log (1 - Y) .
 \end{equation*}
-For $x \geq 0$, we have
+Indeed, for $x \geq 0$, we obtain
 \begin{equation*}
 f_X (x) = \frac{ f_Y (y) }{ \frac{1}{\lambda (1 - y)} }
 = \lambda e^{- \lambda x}
 \end{equation*}
-where we implicitly defined $y = 1 - e^{- \lambda x}$.
-This is indeed the expected result.
+where we have implicitly defined $y = 1 - e^{- \lambda x}$.
+This is the desired distribution.
 \end{example}
 
 
@@ -384,25 +384,33 @@ Taking $X = g(Y)$, we get
 \end{split}
 \end{equation*}
 Of course, implementing a discrete random variable through a case statement may lead to an excessively slow routine.
-For many discrete random variables, there are much more efficent ways to generate the desired output.
+For many discrete random variables, there are much more efficient ways to generate the desired output.
 
 
-\section{Discrete Approximations}
+\section{Discrete Approximations*}
 
-Traditionally, the analysis of complex systems has relied on abstract models that are suitable for tractable analytical solutions.
-The hope was that such an approach would lead to accurate prediction about the behavior of the system under various parameters and initial conditions.
-Nowadays, computer simulations play a key role in the analysis of complex systems, enabling the study of mechanisms that are otherwise not amenable to analysis.
-Moreover, algorithms that make random decisions during their execution, termed \emph{randomized algorithms, play a central role in computer simulations.
+Traditionally, the study of complex systems has relied on empirical observations and abstract mathematical models that are amenable to analysis.
+The hope is that such an approach will lead to accurate predictions about the behavior of the underlying system, under various parameters and initial conditions.
+While this approach has had and continues to have many successes, the immense capabilities of contemporary computer servers has enabled the complementary means of numerical methods.
+Computer simulations now play a key role in the analysis of many complex systems, permitting the study of entities and mechanisms that are otherwise not amenable to analysis.
+Monte Carlo techniques and other numerical simulations are used extensively in almost all areas of engineering and physical sciences.
+Moreover, algorithms that make random decisions during their execution, termed \emph{randomized algorithms}, are widespread in numerical simulations. \index{Randomized algorithms}
+
+When using computers to study continuous mathematics, discretization techniques must be applied.
+The study of efficient discrete algorithms that provide accurate approximations to continuous problems is known as \emph{numerical analysis}.
+Problems in one dimension can usually be handled very precisely through finite precision arithmetic, as the number of bits used to represent numbers in modern computers is vast.
+For example, computer routines are used extensively to simulate continuous random variables.
+In higher dimensions, care must be taken to discretize volumes and approximate local interactions.
+Potential discretization techniques include finite element methods, finite differences and high-resolution schemes.
 
 
 \section*{Further Reading}
 
 \begin{small}
 \begin{enumerate}
-\item Ross, S., \emph{A First Course in Probability}, 7th edition, Pearson Prentice Hall,2
-006: Sections~5.7.
-\item Bertsekas, D.P., and Tsitsiklis, J.N., \emph{Introduction to Probability}, Athena Sc
-ientific, 2002: Section~3.6.
+\item Ross, S., \emph{A First Course in Probability}, 7th edition, Pearson Prentice Hall, 2006: Section~5.7.
+\item Bertsekas, D.P., and Tsitsiklis, J.N., \emph{Introduction to Probability}, Athena Scientific, 2002: Section~3.6.
+\item Mitzenmacher, M., and Upfal, E., \emph{Probability and Computing: Randomized Algorithms and Probabilistic Analysis}, Cambridge, 2005: Chapters~1~\&~10.
 \end{enumerate}
 \end{small}
 
