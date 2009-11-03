@@ -70,23 +70,6 @@ Of course, the variance can also be obtained by solving the integral equation di
 \end{example}
 
 
-\subsection{Conditional Expectation}
-
-The conditional expectation of a function $g(Y)$ is simply the integral of $g(Y)$ weighted by the proper conditional PDF,
-\begin{align*}
-E[g(Y) | X = x] &= \int_{Y(\Omega)} g(Y) f_{Y|X} (y|x) dy \\
-E[g(Y) | S] &= \int_{Y(\Omega)} g(Y) f_{Y|S} (y) dy .
-\end{align*}
-Note again that the function
-\begin{equation*}
-h(x) = \Expect [Y | X=x]
-\end{equation*}
-defines a random variable since the conditional expectation of $Y$ may vary as a function of $X$.
-A conditional expectation is, itself, a random variable.
-
-%\begin{example}
-%\end{example}
-
 \section{Moment Generating Functions}
 
 The \emph{moment generating function} of a random variable $X$ is defined by

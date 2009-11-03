@@ -113,6 +113,24 @@ Let $T$ be a measurable set, then
 %\begin{example}
 %\end{example}
 
+\subsection{Conditional Expectation}
+
+The conditional expectation of a function $g(Y)$ is simply the integral of $g(Y)$ weighted by the proper conditional PDF,
+\begin{align*}
+E[g(Y) | X = x] &= \int_{Y(\Omega)} g(Y) f_{Y|X} (y|x) dy \\
+E[g(Y) | S] &= \int_{Y(\Omega)} g(Y) f_{Y|S} (y) dy .
+\end{align*}
+Note again that the function
+\begin{equation*}
+h(x) = \Expect [Y | X=x]
+\end{equation*}
+defines a random variable since the conditional expectation of $Y$ may vary as a function of $X$.
+A conditional expectation is, itself, a random variable.
+
+%\begin{example}
+%\end{example}
+
+
 
 \section{Independence}
 
@@ -194,14 +212,14 @@ Let $f_X (\cdot)$ and $f_Y (\cdot)$ be the PDFs of $X$ and $Y$, respectively.
 The convolution of $f_X(\cdot)$ and $f_Y(\cdot)$ is the function defined by
 \begin{equation*}
 \begin{split}
-(f_X \star f_Y) (u)
+(f_X \ast f_Y) (u)
 &= \int_{-\infty}^{\infty} f_X(\xi) f_Y(u - \xi) d\xi \\
 &= \int_{-\infty}^{\infty} f_X(u - \zeta) f_Y(\zeta) d\zeta .
 \end{split}
 \end{equation*}
 The PDF of the sum $U = X + Y$ is the convolution of the individual densities,
 \begin{equation*}
-f_U (u) = (f_X \star f_Y) (u) .
+f_U (u) = (f_X \ast f_Y) (u) .
 \end{equation*}
 To show that this is indeed the case, we first consider the CDF of $U$,
 \begin{equation*}
@@ -221,7 +239,7 @@ Taking the derivative of $F_U (u)$ with respect to $u$, we obtain
 &= \int_{-\infty}^{\infty} f_Y (u - \xi) f_X(\xi) d\xi .
 \end{split}
 \end{equation*}
-This shows that $f_U(u) = (f_X \star f_Y) (u)$.
+This shows that $f_U(u) = (f_X \ast f_Y) (u)$.
 
 \begin{example}[Sum of Uniform Random Variables]
 Suppose that two numbers are independently selected from the interval $[0,1]$, each with a uniform distribution.
@@ -300,7 +318,7 @@ f_X(\xi) = f_Y(\xi) = \frac 1{\sqrt{2\pi}} e^{-\frac{\xi^2}{2}} .
 Then, the PDF of $V = X + Y$ is given by
 \begin{equation*}
 \begin{split}
-f_V (v) &= (f_X \star f_Y) (v)
+f_V (v) &= (f_X \ast f_Y) (v)
 = \frac{1}{2\pi}
 \int_{-\infty}^{\infty} e^{-\frac{(v - \xi)^2}{2}} e^{-\frac{\xi^2}{2}} d\xi \\
 &= \frac{1}{2\pi} e^{- \frac{v^2}{4}}
