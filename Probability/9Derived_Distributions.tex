@@ -289,7 +289,26 @@ The end result leads to \eqref{equation:FunctionPDF}.}
 \end{figure}
 
 \begin{example}
-Phase
+Suppose $X$ is a continuous random variable uniformly distributed over $[0, 2 \pi)$.
+Let $Y = \cos (X)$, the random sampling of a sinusoidal waveform.
+We wish to find the PDF of $Y$.
+
+For $y \in (-1, 1)$, the preimage $g^{-1} (y)$ contains two values in $[0, 2\pi)$, namely $\arccos (y)$ and $2 \pi - \arccos (y)$.
+Also, we know from calculus that
+\begin{equation*}
+\frac{d}{dx} \cos (x) = - \sin (x) .
+\end{equation*}
+We can therefore write the PDF of $Y$ as
+\begin{equation*}
+\begin{split}
+f_Y (y) &= \frac{f_X( \arccos (y) )}{ \left| - \sin (\arccos (y)) \right|}
++ \frac{f_X( 2 \pi - \arccos (y) )}{ \left| - \sin (2\pi - \arccos (y)) \right| } \\
+&= \frac{1}{2 \pi \sqrt{1 - y^2} } + \frac{1}{ 2 \pi \sqrt{ 1 - y^2} } \\
+&= \frac{1}{\pi \sqrt{1 - y^2} } ,
+\end{split}
+\end{equation*}
+where $-1 < y < 1$.
+The CDF of $Y$ can be obtained by integrating $f_Y (y)$; not too surprisingly, this integral involves a trigonometric substitution.
 \end{example}
 
 
