@@ -116,10 +116,10 @@ A Rayleigh random variable $R$ can be generated through the expression $R = \sqr
 Thus, the parameter $\sigma^2$ in $f_R (\cdot)$ is a tribute to its typical construction, not a representation of its actual variance.
 \end{example}
 
-For nonnegative random variable $X$, an alternative way to compute $\Expect [X]$ is provided by Propositon~\ref{proposition:MeanAlternative}. \index{Expectation}
+For nonnegative random variable $X$, an alternative way to compute $\Expect [X]$ is provided by Proposition~\ref{proposition:MeanAlternative}. \index{Expectation}
 
 \begin{proposition} \label{proposition:MeanAlternative}
-Suppose that $X$ is a nonnegative random varible with finite mean, then
+Suppose that $X$ is a nonnegative random variable with finite mean, then
 \begin{equation*}
 \Expect [X] = \int_0^{\infty} \Pr (X > x) dx .
 \end{equation*}
@@ -140,7 +140,7 @@ Interchanging the order of integration is allowed because $X$ is assumed to have
 
 \begin{example}
 A player throws darts at a circular target hung on a wall.
-The dartboar has unit radius, and darts are distributed uniformly over the target.
+The dart-board has unit radius, and darts are distributed uniformly over the target.
 We wish to compute the expected distance from each dart to the center of the dartboard.
 
 Let $R$ denote the distance from a dart to the center of the target.
@@ -170,7 +170,7 @@ M_X (s) = \int_{-\infty}^{\infty} f_X (\xi) e^{s \xi} d\xi .
 \end{equation*}
 The experienced reader will quickly recognize the definition of $M_X(s)$ as a variant of the \emph{Laplace Transform}, a widely used linear operator.
 The moment generating function gets its name from the following property.
-Suppose that the moment generating function exists within an open interval around $s = 0$, then the $n$th momemnt of $X$ is given by
+Suppose that the moment generating function exists within an open interval around $s = 0$, then the $n$th moment of $X$ is given by
 \begin{equation*}
 \begin{split}
 \frac{d^n}{ds^n} M_X (s) \Big|_{s=0}
@@ -180,7 +180,7 @@ Suppose that the moment generating function exists within an open interval aroun
 = \Expect [X^n] .
 \end{split}
 \end{equation*}
-In words, if we differentiate $M_X(s)$ a total of $n$ times and then evaluate the resulting function at zero, we obain the $n$th moment of $X$.
+In words, if we differentiate $M_X(s)$ a total of $n$ times and then evaluate the resulting function at zero, we obtain the $n$th moment of $X$.
 In particular, we have $M_X'(0) = \Expect [X]$ and $M_X''(0) = \Expect [X^2]$.
 
 \begin{example}[Exponential Random Variable]
@@ -371,7 +371,7 @@ Using dominating function $h(x) = x/a$, we conclude that $\Pr(X \geq a) \leq a^{
 
 \subsection{The Chebyshev Inequality}
 
-The \emph{Chebyshev inequality} provides an extention to this methodology to various dominating functions. \index{Chebyshev inequality}
+The \emph{Chebyshev inequality} provides an extension to this methodology to various dominating functions. \index{Chebyshev inequality}
 This yields a number of bounds that become useful in different contexts.
 
 \begin{proposition}[Chebyshev Inequality]
@@ -403,77 +403,148 @@ i_S \Pr (X \in S) &= \Expect \left[ i_s \IndicatorFcn_S (X) \right]
 = \Expect [ h(X) ] .
 \end{split}
 \end{equation*}
-When $i_S > 0$, this provides the upper bound $\Pr (X \in S) \leq i_S^{-1} \Expect [g (X)]$.
+When $i_S > 0$, this provides the upper bound $\Pr (X \in S) \leq i_S^{-1} \Expect [h (X)]$.
 \end{proof}
 
 Although the proof assumes a continuous random variable, we emphasize that the Chebyshev inequality applies to both discrete and continuous random variables alike.
-Furthermore, in some cases, the inequality can be tight.
+The interested reader can rework the proof using a discrete random variable and its associated PMF.
+We provide special instances of the Chebyshev inequality below.
 
 \begin{example}
-Supose that $0 < b \leq a^2$.
-Also, assume that $S = \{ x | |x| \geq a^2 \}$.
-Let $X$ be a discrete random variable with PMF
+Consider the nonnegative function $h(x) = x^2$ and let $S = \{ x | x^2 \geq b^2 \}$ where $b$ is a positive constant.
+We wish to find a bound on the probability that $|X|$ exceeds $b$.
+Using the Chebyshev inequality, we have $i_S = \inf_{x \in S} x^2 = b^2$ and, consequently, we have
+\begin{equation*}
+b^2 \Pr (X \in S) \leq \Expect \left[ X^2 \right] .
+\end{equation*}
+Constant $b$ being a positive real number, we can rewrite this equation as
+\begin{equation*}
+\Pr (|X| \geq b) = \Pr (X \in S) \leq \frac{\Expect \left[ X^2 \right]}{b^2} .
+\end{equation*}
+\end{example}
+
+\begin{example}[The Cantelli Inequality]
+Suppose that $X$ is a random variable with mean $m$ and variance $\sigma^2$.
+We wish to show that
+\begin{equation*}
+\Pr ( X - m \geq a ) \leq \frac{\sigma^2}{\sigma^2 + a^2},
+\end{equation*}
+where $a \geq 0$.
+
+This equation is slightly more involved and requires a small optimization in addition to the Chebyshev inequality.
+Define $Y = X - m$ and note that, by construction, we have $\Expect [Y] = 0$.
+Consider the probability $\Pr (Y \geq a)$ where $a > 0$, and let $S = \{ y | y \geq a \}$.
+Also, define the nonnegative function $h(y) = (y + b)^2$, where $b > 0$.
+Following the steps of the Chebyshev inequality, we write the infimum of $h(y)$ over $S$ as
+\begin{equation*}
+i_S = \inf_{y \in S} (y + b)^2 = (a + b)^2 .
+\end{equation*}
+Then, applying the Chebyshev inequality, we obtain
+\begin{equation} \label{equation:CantelliProof}
+\Pr (Y \geq a) \leq \frac{ \Expect \left[ (Y + b)^2 \right] }{(a + b)^2}
+= \frac{ \sigma^2 + b^2 }{ (a + b)^2 } .
+\end{equation}
+This inequality holds for any $b > 0$.
+To get the tightest upper bound, we minimize the right-hand side of \eqref{equation:CantelliProof} with respect to $b$.
+Differentiating this expression and setting the derivative to zero yields
+\begin{equation*}
+\frac{ 2 b }{(a + b)^2 } = \frac{ 2 \left( \sigma^2 + b^2 \right) }{(a + b)^3}
+\end{equation*}
+or, equivalently, $b = \sigma^2 / a$.
+A second derivative test ensures that this is indeed a minimum.
+Collecting these results, we obtain
+\begin{equation*}
+\Pr (Y \geq a) \leq \frac{ \sigma^2 + b^2 }{ (a + b)^2 }
+%= \frac{ \sigma^2 + \sigma^4/a^2 }{ (a + \sigma^2/a)^2 }
+%= \frac{ \sigma^2 (a^2 + \sigma^2) }{ (a^2 + \sigma^2)^2 }
+= \frac{ \sigma^2 }{ a^2 + \sigma^2 } .
+\end{equation*}
+Substituting $Y = X - m$ leads to the desired result.
+\end{example}
+
+In some circumstances, a Chebyshev inequality can be tight.
+
+\begin{example}
+Let $a$ and $b$ be two constants such that $0 < b \leq a$.
+Consider the function $h(x) = x^2$ along with the set $S = \{ x | x^2 \geq a^2 \}$.
+Furthermore, let $X$ be a discrete random variable with PMF
 \begin{equation*}
 p_X (x) = \left\{ \begin{array}{ll} 1 - \frac{b^2}{a^2}, & x = 0 \\
 \frac{b^2}{a^2}, & x = a \\
 0, & \text{otherwise.} \end{array} \right.
 \end{equation*}
-Then, $\Expect \left[ X^2 \right] = b^2$ and $\Pr (X \in S) = b^2 / a^2$.
-In this case, the Chebyshev inequality is tight.
-\end{example}
-
-
-The \emph{Markov inequality} is a special case of the Chebyshev inequality that employs that relies on the second moment of a random variable. \index{Markov inequality}
-Consider the function  $g(x) = x^2$ and let $S = \{ x | x^2 \geq b \}$ where $b$ is a positive constant.
-We wish to find a bound on the probability that $|X|$ exceeds $b$.
-Using the Chebyshev inequality, we have $i_S = \inf_{x \in S} x^2 = b^2$ and, consequently, we have
+For this random variable, we have $\Pr (X \in S) = b^2/a^2$.
+By inspection, we also gather that the second moment of $X$ is equal to $\Expect \left[ X^2 \right] = b^2$.
+Applying the Chebyshev inequality, we get $i_S = \inf_{x \in S} h(x) = a^2$ and therefore
 \begin{equation*}
-b^2 \Pr (X \in S) \leq \Expect [X^2] .
+\Pr (X \in S) \leq i_S^{-1} \Expect \left[ h(X) \right]
+= \frac{b^2}{a^2} .
 \end{equation*}
-Because $b$ is a positive real number, we can rewrite this equation as
-\begin{equation*}
-\Pr (|X| \geq b) = \Pr (X \in S) \leq \frac{\Expect [X^2]}{b^2} .
-\end{equation*}
-
-
-\newpage
-
-\begin{example}[The Cantelli Inequality]
-Suppose that $X$ is random variable with mean $m$ and variance $\sigma^2$.
-We wish to show that
-\begin{equation*}
-\Pr ( X - m \geq \alpha ) \leq \frac{\sigma^2}{\sigma^2 + \alpha^2},
-\end{equation*}
-where $\alpha \geq 0$.
+That is, in this particular case, the inequality is met with equality.
 \end{example}
 
 
 \subsection{The Chernoff Bound}
 
-\subsection{The Hoeffding Bound}
-
-See Fine's book page~493.
-
-\subsection{Jensen's Inequality}
-
-Suppose that $g$ is a convex function, that is
+The \emph{Chernoff bound} is yet another upper bound that can be constructed from the Chebyshev inequality. \index{Chernoff bound}
+Still, because of its central role in many application domains, it deserves its own section.
+Suppose that we want to find a bound on the probability $\Pr (X \geq a)$.
+We can apply the Chebyshev inequality using the nonnegative function $h(x) = e^{sx}$, where $s > 0$.
+For this specific construction, $S = [a, \infty)$ and
 \begin{equation*}
-p g(x) + (1-p) g(y) \geq g(px + (1-p)y)
+i_S = \inf_{x \in S} e^{sx} = e^{sa} .
 \end{equation*}
-for all $p \in (0,1)$ and all real numbers $x$ and $y$.
-Then, we get
+It follows that
 \begin{equation*}
-\Expect [g(X)] \geq g \left( \Expect [X] \right) ,
+\Pr (X \geq a) \leq e^{-sa} \Expect[ e^{sX} ] = e^{-sa} M_X(s) .
 \end{equation*}
-provided both expectation exist.
+Since this inequality holds for any $s > 0$, we can optimize the upper bound over all possible values of $s$,
+\begin{equation} \label{equation:ChernoffBound}
+\Pr (X \geq a) \leq \inf_{s > 0} e^{-sa} M_X(s) .
+\end{equation}
+The Chernoff bound is often expressed in terms of the log-moment generating function $\Lambda (s) = \log \left( M_X (s) \right)$.
+In this latter case, \eqref{equation:ChernoffBound} reduces to
+\begin{equation} \label{equation:LogChernoffBound}
+\log \left( \Pr (X \geq a) \right) \leq - \sup_{s > 0} \left( sa - \Lambda (s) \right) .
+\end{equation}
+The right-hand side of \eqref{equation:LogChernoffBound} is called the \emph{Legendre transformation} of $\Lambda (s)$. \index{Legendre transformation}
+Figure~\ref{figure:ChernoffBound} plots $e^{s(x-a)}$ for various values of $s > 0$.
+It should be noted that all these functions dominate $\IndicatorFcn_{[a, \infty)}(x)$, and therefore they each provide a different bound on $\Pr (X \geq a)$.
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=8.5cm]{Figures/10chapter/chernoff_bound}
+\end{center}
+\caption{This figure illustrates how exponential functions can be employed to provide a bound on $\Pr (X > a)$.
+Optimizing over all admissible exponential functions, $e^{s(x-a)}$ with $s > 0$, leads to the celebrated Chernoff bound.}
+\label{figure:ChernoffBound}
+\end{figure}
+
+
+%\subsection{The Hoeffding Bound}
+%
+%See Fine's book page~493.
+%
+%\subsection{Jensen's Inequality}
+%
+%Suppose that $g$ is a convex function, that is
+%\begin{equation*}
+%p g(x) + (1-p) g(y) \geq g(px + (1-p)y)
+%\end{equation*}
+%for all $p \in (0,1)$ and all real numbers $x$ and $y$.
+%Then, we get
+%\begin{equation*}
+%\Expect [g(X)] \geq g \left( \Expect [X] \right) ,
+%\end{equation*}
+%provided both expectation exist.
 
 
 \section*{Further Reading}
 
-\begin{small}\begin{enumerate}\item Ross, S., \emph{A First Course in Probability}, 7th edition, Pearson Prentice Hall,2
-006: Sections~5.2, 7.7, 8.2.
-\item Bertsekas, D.P., and Tsitsiklis, J.N., \emph{Introduction to Probability}, Athena Sc
-ientific, 2002: Section~3.1, 4.1, 7.1.
+\begin{small}
+\begin{enumerate}
+\item Ross, S., \emph{A First Course in Probability}, 7th edition, Pearson Prentice Hall, 2006: Sections~5.2, 7.7, 8.2.
+\item Bertsekas, D.P., and Tsitsiklis, J.N., \emph{Introduction to Probability}, Athena Scientific, 2002: Section~3.1, 4.1, 7.1.
 \end{enumerate}
 \end{small}
 
