@@ -134,7 +134,7 @@ A conditional expectation is, itself, a random variable.
 
 \section{Independence}
 
-Two continuous random variables $X$ and $Y$ are mutually \emph{independent} if their joint CDF is the product of their respective CDFs, \index{independence}
+Two continuous random variables $X$ and $Y$ are mutually \emph{independent} if their joint CDF is the product of their respective CDFs, \index{Independence}
 \begin{equation*}
 F_{X,Y} (x,y) = F_X (x) F_Y(y)
 \end{equation*}
@@ -335,4 +335,43 @@ f_V(v) = \frac{1}{\sqrt{4\pi}} e^{-\frac{v^2}{4}} ,
 \end{equation*}
 which verifies that $V$ is indeed Gaussian.
 \end{example}
+
+
+
+\subsection{Below}
+
+
+Let $X$ and $Y$ be independent random variables.
+Consider the random variable $Z = X + Y$.
+The moment generating function of $Z$ is given by
+\begin{equation*}
+\begin{split}
+M_Z (s) &= \Expect \left[ e^{sZ} \right]
+= \Expect \left[ e^{s(X + Y)} \right] \\
+&= \Expect \left[ e^{sX} e^{sY} \right]
+= \Expect \left[ e^{sX} \right] \Expect \left[ e^{sY} \right] \\
+&= M_X(s) M_Y(s) .
+\end{split}
+\end{equation*}
+
+\begin{example}[Sum of Gaussian Random Variables]
+Suppose $X$ and $Y$ are independent Gaussian varibles.
+We denote the mean and variance of $X$ by $m_X$ and $\sigma_X^2$.
+Similarly, we represent the mean and variance of $Y$ by $m_Y$ and $\sigma_Y^2$.
+We wish to show that the sum $U = X + Y$ is Gaussian with parameters $m_X + m_Y$ and $\sigma_X^2 + \sigma_Y^2$.
+
+The moment generating functions of $X$ and $Y$ are
+\begin{align*}
+M_X (s) &= e^{m_X s + \frac{\sigma_X^2 s^2}{2}} \\
+M_Y (s) &= e^{m_Y s + \frac{\sigma_Y^2 s^2}{2}}
+\end{align*}
+The moment generating function of $U = X + Y$ is equal to
+\begin{equation*}
+M_U (s) = M_X (s) M_Y (s)
+= \exp \left( (m_X + m_Y) s + \frac{(\sigma_X^2 + \sigma_Y^2) s^2}{2} \right) ,
+\end{equation*}
+which implies that $U$ is a Gaussian random variable with mean $m_X + m_Y$ and variance $\sigma_X^2 + \sigma_Y^2$.
+\end{example}
+
+
 

@@ -50,7 +50,7 @@ e^{2 \pi i \frac{(m-n)}{T} t} dt
 = 0 .
 \end{split}
 \end{equation*}
-Next, we show that these basis functions have unit energy,
+Next, we show that these basis elements have unit energy,
 \begin{equation*}
 \begin{split}
 \left\| \phi_m(t) \right\|^2
@@ -66,8 +66,8 @@ These basis elements are scaled versions of the \emph{$T$-spaced truncated sinus
 \end{example}
 
 The $T$-spaced truncated sinusoids of Example~\ref{example:TSpacedTruncatedSinusoids} form a collection of basis waveforms that can be employed to create a signal.
-To further illustrate this point, we show explicitly how orthonormal waveforms are used in the modulation and demodulation of data symbols.
-Suppose that a signal is formed by taking a linear combination of the waveforms $\{ \phi_k(t) \}$, weighted by the real numbers $\{ u_k \}$, with
+To further illustrate this point, we show explicitly how orthonormal waveforms can be used in the modulation and demodulation of data symbols.
+Suppose that a signal is produced by taking a linear combination of the waveforms $\{ \phi_k(t) \}$, weighted by the real numbers $\{ u_k \}$, with
 \begin{equation*}
 u(t) = \sum_{k} u_k \phi_k(t) .
 \end{equation*}
@@ -96,8 +96,8 @@ Then, the transmitted signal becomes
 \begin{equation*}
 u(t) = u \phi (t) .
 \end{equation*}
-To extract the value of $u$, we simply compute the inner product of the signal with the basis element $\phi(t)$, which yields $u = \langle u(t), \phi(t) \rangle$.
-The original bit $s$ is obtained by taking the inverse of $u$ under function $f(\cdot)$, with $s = f^{-1} (u)$.
+To extract the value of $u$ for the signal $u(t)$, we simply compute the inner product of the signal with the basis element $\phi(t)$, which yields $u = \langle u(t), \phi(t) \rangle$.
+The original bit $s$ is then obtained by taking the inverse of $u$ under function $f(\cdot)$, with $s = f^{-1} (u)$.
 \end{example}
 
 Except for noise considerations, this section presents the first principles under which modern digital communication systems operate.
@@ -109,26 +109,26 @@ Below, we continue our analysis of modulation and demodulation schemes by lookin
 In practical communication systems, a succession of symbols is transmitted to the destination.
 Not only can waveforms interfere with one another in signal space, they can also disrupt signal quality across time.
 Suppose that a different symbol is sent every $T$ seconds using time shifts of a basic pulse waveform $p(t)$.
-The transmitted signal, accounting for the different values of $\{ u_k \}$, is equal to
+The transmitted signal, accounting for the different values of $\{ u_n \}$, is equal to
 \begin{equation*}
 u(t) = \sum_{n} u_n p (t - nT) .
 \end{equation*}
 Note that in this case, the available waveforms are simply translated versions of one another.
-Ideally, we would like the collection $\{ p(t - kT) \}$ to be orthonormal.
+Ideally, we want the collection $\{ p(t - nT) \}$ to be orthonormal.
 This would greatly simplify system implementation and decision making at the receiver.
-However, we cannot use standard techniques such as the Gram-Schmidt procedure to construct a set of orthogonal waveforms, because the elements of $\{ p(t - kT) \}$ are constrained to be translated version of one another.
+However, we cannot use standard techniques such as the Gram-Schmidt procedure to construct a set of orthogonal waveforms, because the elements of $\{ p(t - nT) \}$ are constrained to be translated version of one another.
 Getting an orthonormal set requires more work.
 
 As before, each symbol $u_n$ is identified at the destination by passing the received signal through a linear time-invariant filter, which is mathematically equivalent to performing an inner-product integral.
-Since the waveforms $\{ p(t-kT) \}$ are shifted vesions of a same function, it is natural to expect the various filters to implement projections onto shifted versions of a single element $q(t)$.
+Since the waveforms $\{ p(t-nT) \}$ are shifted versions of a same function, it is natural to expect the various filters to implement projections onto shifted versions of a single element $q(t)$.
 A uniform treatment of the demodulation operation can therefore be conducted by looking a the inner product between $u(t)$ and $q(t-\tau)$.
 Let
 \begin{equation} \label{equation:InnerProductReceiver}
 \begin{split}
 r(\tau) &= \langle u(t), q(t-\tau) \rangle
 = \int_{\mathbb{R}} u(t) q^*(t-\tau) dt \\
-&= \sum_{l} u_l \int_{\mathbb{R}} p(t - lT) q^*(t-\tau) dt \\
-&= \sum_{l} u_l g(\tau - lT) .
+&= \sum_{k} u_k \int_{\mathbb{R}} p(t - kT) q^*(t-\tau) dt \\
+&= \sum_{k} u_k g(\tau - kT) .
 \end{split}
 \end{equation}
 where $g(\tau) = \langle p(t), q(t-\tau) \rangle$.
@@ -186,8 +186,7 @@ Thus, the system exhibits no intersymbol interference if and only if \eqref{equa
 
 Equivalently, condition~\eqref{equation:NoInterSymbolInterferenceSpecification} is satisfied whenever
 \begin{equation} \label{equation:NyquistNoISI}
-\sum_{m = -\infty}^{\infty} \hat{g} \left( f - \frac{m}{T} \right) \mathrm{rect} (fT)
-= T \mathrm{rect} (fT) .
+\sum_{m = -\infty}^{\infty} \hat{g} \left( f - \frac{m}{T} \right) = T .
 \end{equation}
 We formalize this key result, known as the \emph{Nyquist pulse-shaping criterion}, in the theorem below.
 
@@ -198,17 +197,16 @@ Furthermore, assume that the function
 \hat{z} (f) = F \sum_{m=-\infty}^{\infty} \hat{g} \left( f - \frac{m}{T} \right)
 \mathrm{rect} (fT)
 \end{equation*}
-has finite power.
+has finite energy.
 Then, a necessary and sufficient condition for
 \begin{equation*}
 g(nT) = \begin{cases} 1, & n = 0 \\
 0, & \text{otherwise} \end{cases}
 \end{equation*}
-is that $\hat{z} (f)$ satisfies
-\begin{equation*}
-\hat{z}(f) = \frac{1}{T} \sum_{m=-\infty}^{\infty} \hat{g} \left( f - \frac{m}{T} \right)
-\mathrm{rect} (fT) = \mathrm{rect} (fT) .
-\end{equation*}
+is that the following equality holds for all values of $f \in \mathbb{R}$,
+\begin{equation} \label{equation:NyquistCriterionFrequencyCondition}
+\sum_{m=-\infty}^{\infty} \hat{g} \left( f - \frac{m}{T} \right) = T .
+\end{equation}
 \end{theorem}
 
 \begin{example}
@@ -229,7 +227,7 @@ g(\tau) &= \langle p(t), q(t-\tau) \rangle
 \end{split}
 \end{equation*}
 Obviously, this selection leads to the desired property with $g(0) = 1$, and $g(nT) = 0$ for any non-zero integer~$n$.
-One of the design issues with the rectangular pulse is that its bandwidth is infinite.
+One of the design issues with the rectangular pulse is that its bandwidth is infinite and decays slowly.
 This becomes a problem in most practical systems where spectral bandwidth comes at a premium.
 \end{example}
 
@@ -262,18 +260,16 @@ In the frequency domain, we have
 = T \mathrm{rect} (T f) .
 \end{split}
 \end{equation*}
-We can therefore compute the function $\hat{z}(f)$ as
+We can therefore verify condition~\eqref{equation:NyquistCriterionFrequencyCondition} as
 \begin{equation*}
-\begin{split}
-\hat{z} (f) &= \frac{1}{T} \sum_{m = -\infty}^{\infty}
-\hat{g} \left( f - \frac{m}{T} \right) \mathrm{rect} (fT) \\
-&= \sum_{m = - \infty}^{\infty} \mathrm{rect} (Tf - m) \mathrm{rect}(Tf)
-= \mathrm{rect}(TF) .
-\end{split}
+\sum_{m = -\infty}^{\infty}
+\hat{g} \left( f - \frac{m}{T} \right)
+= \sum_{m = - \infty}^{\infty} T \mathrm{rect} (Tf - m)
+= T .
 \end{equation*}
 That is, the conditions of Theorem~\ref{theorem:NyquistPulseCriterion} hold and, consequently, $g(0) = 1$ and $g(n) = 0$ for any non-zero integer.
 One of the positive attributes of the $\mathrm{sinc} (\cdot)$ waveform is that it is bandwidth-limited.
-However, this pulse is not time-limited and it is therefore impractical, as using $\mathrm{sinc} (\cdot)$ waveforms would entail infinite delay at the destination.
+However, this pulse is not time-limited and it is therefore somewhat impractical, as using $\mathrm{sinc} (\cdot)$ waveforms would entail infinite delay at the destination.
 \end{example}
 
 Although, there are many choices for $\hat{g}(f)$ that satisfy Theorem~\ref{theorem:NyquistPulseCriterion}, we are primarily interested in waveforms that are approximately both bandwidth-limited and time-limited.

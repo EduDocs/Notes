@@ -1,15 +1,16 @@
 \chapter{Expectations and Bounds}
 
 The concept of expectation, which was originally introduced in the context of discrete random variables, can be generalized to other types of random variables.
+For instance, the expectation of a continuous random variable is defined in terms of its probability density function (PDF).
 We know from our previous discussion that expectations provide an effective way to summarize the information contained in the distribution of a random variable.
-As we will see, expectations are also very useful in establishing bounds on probabilities.
+As we will see shortly, expectations are also very useful in establishing bounds on probabilities.
 
 
-\section{Continuous Expectations}
+\section{Expectations Revisited}
 
-The definition of expectation for continuous random variables is very similar to it discrete counterpart;
-the weighted sum is replaced by a weighted integral.
-For a continuous random variable $X$, the \emph{expectation} of $g(X)$ is given by \index{Expectation}
+The definition of an expectation associated with a continuous random variable is very similar to its discrete counterpart;
+the weighted sum is simply replaced by a weighted integral.
+For a continuous random variable $X$ with PDF $f_X(\cdot)$, the \emph{expectation} of $g(X)$ is defined by \index{Expectation}
 \begin{equation*}
 \Expect [g(X)]
 = \int_{X(\Omega)} g(\xi) f_X (\xi) d\xi .
@@ -19,22 +20,22 @@ In particular, the \emph{mean} of $X$ is equal to \index{Mean}
 \Expect [X]
 = \int_{X(\Omega)} x f_X (x) dx
 \end{equation*}
-and its \emph{variance} becomes \index{variance}
+and its \emph{variance} becomes \index{Variance}
 \begin{equation*}
 \Var (X) = \Expect \left[ (X - \Expect[X])^2 \right]
 = \int_{X(\Omega)} (\xi - \Expect[X])^2 f_X (\xi) d\xi .
 \end{equation*}
-We note that the variance of continuous random variable $X$ can also be computed as $\Var(X) = \Expect \left[ X^2 \right] - \left( E[X] \right)^2$.
+As before, the variance of random variable $X$ can also be computed using $\Var(X) = \Expect \left[ X^2 \right] - \left( E[X] \right)^2$.
 
 \begin{example}
-We wish to find the mean and variance of a Gaussian random variable with parameter $m$ and $\sigma^2$.
-The PDF of this random variable is therefore given by
+We wish to calculate the mean and variance of a Gaussian random variable with parameters $m$ and $\sigma^2$.
+First, we recall that the PDF of this random variable can be written as
 \begin{equation*}
 f_X (\xi) = \frac{1}{\sqrt{2 \pi} \sigma} e^{-\frac{(\xi - m)^2}{2\sigma^2}}
 \end{equation*}
 for $- \infty < \xi < \infty$.
 
-The mean of $X$ can be obtained by a simple change of variable,
+The mean of $X$ can be obtained through a change of variables,
 \begin{equation*}
 \begin{split}
 \Expect [X]
@@ -48,25 +49,112 @@ The mean of $X$ can be obtained by a simple change of variable,
 = m.
 \end{split}
 \end{equation*}
-To derive the variance, we start with the following equation dictated by the normalization condition
+Above, we leveraged the facts that $\zeta e^{-\frac{\zeta^2}{2}}$ is absolutely integrable and an odd function.
+We also took advantage of the normalization condition which asserts that a Gaussian PDF integrates to one.
+To derive the variance, we again use the normalization condition; for a Gaussian PDF, this property implies that
 \begin{equation*}
 \int_{-\infty}^{\infty} e^{- \frac{(\xi-m)^2}{2 \sigma^2}} d\xi
-= \sqrt{2 \pi} \sigma ,
+= \sqrt{2 \pi} \sigma .
 \end{equation*}
-We differentiate both sides of this equation with respect to $\sigma$ and get
+Differentiating both sides of this equation with respect to $\sigma$, we get
 \begin{equation*}
 \int_{-\infty}^{\infty} \frac{(\xi-m)^2}{\sigma^3}
 e^{- \frac{(\xi-m)^2}{2 \sigma^2}} d\xi
 = \sqrt{2 \pi} .
 \end{equation*}
-A straightforward rearrangement of the terms yields
+Rearranging the terms yields
 \begin{equation*}
 \int_{-\infty}^{\infty} \frac{(\xi-m)^2}{\sqrt{2 \pi} \sigma}
 e^{- \frac{(\xi-m)^2}{2 \sigma^2}} d\xi
-= \sigma^2 ,
+= \sigma^2 .
 \end{equation*}
-which is the desired result,
-Of course, the variance can also be obtained by solving the integral equation directly.
+Hence, $\Var(X) = \Expect \left[ (X-m)^2 \right] = \sigma^2$.
+Of course, the variance can also be obtained by carrying the integral directly, using integration by parts.
+\end{example}
+
+
+\begin{example}
+Suppose that $R$ is a Rayleigh random variable with parameter $\sigma^2$.
+We wish to compute its mean and variance.
+
+Recall that $R$ is a non-negative random variable with PDF
+\begin{equation*}
+f_R (r) = \frac{r}{\sigma^2} e^{- \frac{r^2}{2 \sigma^2} } \quad r \geq 0 .
+\end{equation*}
+Using this distribution, we get
+\begin{equation*}
+\begin{split}
+\Expect [R] &= \int_0^{\infty} \xi f_R(\xi) d\xi
+= \int_0^{\infty} \frac{\xi^2}{\sigma^2} e^{- \frac{\xi^2}{2 \sigma^2}} d\xi \\
+&= \left. - \xi e^{- \frac{\xi^2}{2 \sigma^2}} \right|_0^{\infty}
++ \int_0^{\infty} e^{- \frac{\xi^2}{2 \sigma^2}} d\xi \\
+&= \sqrt{ 2 \pi } \sigma \int_0^{\infty} \frac{1}{\sqrt{2 \pi}} e^{- \frac{\zeta^2}{2 \sigma^2}} d\zeta
+= \frac{\sqrt{2 \pi} \sigma}{2} .
+\end{split}
+\end{equation*}
+Integration by parts is key in solving this integral.
+Also, notice the judicious use of the fact that the integral of a standard random variable over $[0, \infty)$ must be equal to $1/2$.
+We compute the second moment of $R$ below,
+\begin{equation*}
+\begin{split}
+\Expect \left[ R^2 \right] &= \int_0^{\infty} \xi^2 f_R(\xi) d\xi
+= \int_0^{\infty} \frac{\xi^3}{\sigma^2} e^{- \frac{\xi^2}{2 \sigma^2}} d\xi \\
+&= \left. - \xi^2 e^{- \frac{\xi^2}{2 \sigma^2}} \right|_0^{\infty}
++ \int_0^{\infty} 2 \xi e^{- \frac{\xi^2}{2 \sigma^2}} d\xi \\
+&= \left. - 2 \sigma^2 e^{- \frac{\xi^2}{2 \sigma^2}} \right|_0^{\infty}
+= 2 \sigma^2 .
+\end{split}
+\end{equation*}
+The variance of $R$ is therefore equal to
+\begin{equation*}
+\Var [R] = \frac{(4 - \pi)}{2} \sigma^2 .
+\end{equation*}
+Typically, $\sigma^2$ is employed to denote the variance of a random variable.
+It may be confusing at first to have a random variable $R$ described in terms of parameter $\sigma^2$ whose variance is equal to $(4 - \pi) \sigma^2/2$.
+This is an artifact of the following relation.
+A Rayleigh random variable $R$ can be generated through the expression $R = \sqrt{X^2 + Y^2}$, where $X$ and $Y$ are independent zero-mean Gaussian variables with variance $\sigma^2$.
+Thus, the parameter $\sigma^2$ in $f_R (\cdot)$ is a tribute to its typical construction, not a representation of its actual variance.
+\end{example}
+
+For nonnegative random variable $X$, an alternative way to compute $\Expect [X]$ is provided by Propositon~\ref{proposition:MeanAlternative}. \index{Expectation}
+
+\begin{proposition} \label{proposition:MeanAlternative}
+Suppose that $X$ is a nonnegative random varible with finite mean, then
+\begin{equation*}
+\Expect [X] = \int_0^{\infty} \Pr (X > x) dx .
+\end{equation*}
+\end{proposition}
+\begin{proof}
+We offer a proof for the case where $X$ is a continuous random variable, although the result remains true in general,
+\begin{equation*}
+\begin{split}
+\int_0^{\infty} \Pr (X > x) dx
+&= \int_0^{\infty} \int_x^{\infty} f_X(\xi) d\xi dx \\
+&= \int_0^{\infty} \int_0^{\xi} f_X(\xi) dx d\xi \\
+&= \int_0^{\infty} \xi f_X(\xi) d\xi
+= \Expect [X] .
+\end{split}
+\end{equation*}
+Interchanging the order of integration is allowed because $X$ is assumed to have finite mean.
+\end{proof}
+
+\begin{example}
+A player throws darts at a circular target hung on a wall.
+The dartboar has unit radius, and darts are distributed uniformly over the target.
+We wish to compute the expected distance from each dart to the center of the dartboard.
+
+Let $R$ denote the distance from a dart to the center of the target.
+For $0 \leq r \leq 1$, the probability that $R$ exceeds $r$ is given by
+\begin{equation*}
+\Pr (R > r) = 1 - \Pr (R \leq r) = 1 - \frac{\pi r^2}{\pi} = 1 - r^2 .
+\end{equation*}
+It follows that the expected value of $R$ is
+\begin{equation*}
+\Expect [R] = \int_0^1 \left( 1 - r^2 \right) dr
+= \left.  \left( r - \frac{r^3}{3} \right) \right|_0^1
+= 1 - \frac{1}{3} = \frac{2}{3} .
+\end{equation*}
+Notice how we were able to compute the answer without finding an explicit expression for $f_R (\cdot)$.
 \end{example}
 
 
@@ -74,21 +162,26 @@ Of course, the variance can also be obtained by solving the integral equation di
 
 The \emph{moment generating function} of a random variable $X$ is defined by
 \begin{equation*}
-M_X (s) = \mathrm{E} \left[ e^{s X} \right] .
+M_X (s) = \Expect \left[ e^{s X} \right] .
 \end{equation*}
-This function gets its name from the following property.
-If the moment generating function exists in an interval around $s = 0$, then the $n$th momemnt of $X$ is given by
+For continuous random variables, the moment generating function becomes
+\begin{equation*}
+M_X (s) = \int_{-\infty}^{\infty} f_X (\xi) e^{s \xi} d\xi .
+\end{equation*}
+The experienced reader will quickly recognize the definition of $M_X(s)$ as a variant of the \emph{Laplace Transform}, a widely used linear operator.
+The moment generating function gets its name from the following property.
+Suppose that the moment generating function exists within an open interval around $s = 0$, then the $n$th momemnt of $X$ is given by
 \begin{equation*}
 \begin{split}
 \frac{d^n}{ds^n} M_X (s) \Big|_{s=0}
-&= \frac{d^n}{ds^n} \mathrm{E} \left[ e^{s X} \right] \Big|_{s=0}
-= \mathrm{E} \left[ \frac{d^n}{ds^n} e^{s X} \right] \bigg|_{s=0} \\
-&= \mathrm{E} \left[ X^n e^{s X} \right] \Big|_{s=0}
-= \mathrm{E} [X^n] .
+&= \frac{d^n}{ds^n} \Expect \left[ e^{s X} \right] \Big|_{s=0}
+= \Expect \left[ \frac{d^n}{ds^n} e^{s X} \right] \bigg|_{s=0} \\
+&= \Expect \left[ X^n e^{s X} \right] \Big|_{s=0}
+= \Expect [X^n] .
 \end{split}
 \end{equation*}
-In words, if we differentiate the function $M_X(s)$ a total of $n$ times and then evaluate the resulting at zero, we obain the $n$th moment of $X$.
-In particular, we have $M_X'(0) = \mathrm{E} [X]$ and $M_X''(0) = \mathrm{E} [X^2]$.
+In words, if we differentiate $M_X(s)$ a total of $n$ times and then evaluate the resulting function at zero, we obain the $n$th moment of $X$.
+In particular, we have $M_X'(0) = \Expect [X]$ and $M_X''(0) = \Expect [X^2]$.
 
 \begin{example}[Exponential Random Variable]
 Let $X$ be an exponential random variable with parameter $\lambda$.
@@ -110,148 +203,210 @@ more generally, the $n$th moment of $X$ can be computed as
 = \left. \frac{n! \lambda}{(\lambda - s)^{n+1}} \right|_{s=0}
 = \frac{n!}{\lambda^n} .
 \end{equation*}
-Incidentally, we deduce from these results that the variance of $X$ is equal to $1/\lambda^2$.
+Incidentally, we can deduce from these results that the variance of $X$ is $1/\lambda^2$.
 \end{example}
 
-\begin{example}[Discrete Uniform Random Variable]
-Suppose $X$ is a discrete uniform random variable taking value in $X(\Omega) = \{ 1, 2, \ldots, n \}$.
-Then, $p_X(k) = 1/n$ for $1 \leq k \leq n$ and
+The definition of the moment generating function applies to discrete random variables as well.
+In fact, for integer-valued random variables, the moment generating function and the ordinary generating function are related through the equation \index{Ordinary generating function} \index{Moment generating function}
 \begin{equation*}
-M_X(s) = \sum_{k = 1}^n \frac{1}{n} e^{sk}
+M_X (s) = \sum_{k \in X(\Omega)} e^{sk} p_X(k) = G_X (e^s) .
+\end{equation*}
+
+\begin{example}[Discrete Uniform Random Variable]
+Suppose $U$ is a discrete uniform random variable taking value in $U(\Omega) = \{ 1, 2, \ldots, n \}$.
+Then, $p_U(k) = 1/n$ for $1 \leq k \leq n$ and
+\begin{equation*}
+M_U(s) = \sum_{k = 1}^n \frac{1}{n} e^{sk}
 = \frac{1}{n} \sum_{k = 1}^n e^{sk}
 = \frac {e^s (e^{ns} - 1)} {n (e^s - 1)} .
 \end{equation*}
-Using this expression, we can easily get the first two moments of $X$,
-\begin{align*}
-\Expect [X] &= \frac{d M_X}{ds} (0)
-= \lim_{s \rightarrow 0} \frac{1}{n} \sum_{k = 1}^n k e^{sk} = \frac{n + 1}{2} \\
-\Expect \left[ X^2 \right] &= \frac{d^2 M_X}{ds^2} (0)
-= \lim_{s \rightarrow 0} \frac{1}{n} \sum_{k=1}^n k^2 e^{sk}
-= \frac {(n + 1)(2n + 1)}{6} .
-\end{align*}
-Thus, the mean of $X$ is $(n+1)/2$ and its variance is $(n^2 - 1)/12$.
-\end{example}
-
-\begin{example}[Gaussian Random Variable]
-Let $U$ be a standard normal random variable whose PDF is given by
-\begin{equation*}
-f_U (\xi) = \frac{1}{\sqrt{2 \pi}} e^{- \frac{\xi^2}{2}}.
-\end{equation*}
-The moment generating function of $U$ is equal to
+This provides an alternate and somewhat more intricate way to compute the mean of $U$,
 \begin{equation*}
 \begin{split}
-M_U (s) &= \Expect \left[ e^{sU} \right]
+\Expect [U] &= \frac{d M_U}{ds} (0)
+= \lim_{s \rightarrow 0}
+\frac{n e^{(n+2)s} - (n+1) e^{(n+1)s} + e^s}{n \left( e^s - 1 \right)^2} \\
+&= \lim_{s \rightarrow 0}
+\frac{n(n+2) e^{(n+1)s} - (n+1)^2 e^{ns} + 1}{2n \left( e^s - 1 \right)} \\
+&= \lim_{s \rightarrow 0}
+\frac{n(n+1)(n+2)n e^{(n+1)s} - n (n+1)^2 e^{ns}}{2n e^s}
+= \frac {n + 1}{2} .
+\end{split}
+\end{equation*}
+Notice the double application of \emph{l'H\^{o}pital's rule} to evaluate the derivative of $M_U(s)$ at zero.
+This may be deemed a more contrived method to derive the expected value of a discrete uniform random variables, yet it does not rely on prior knowledge of special sums.
+Incidentally, through similar steps, one can derive the second moment of $U$, which is equal to
+\begin{equation*}
+\Expect \left[ U^2 \right] = \frac{(n+1)(2n+1)}{6} .
+\end{equation*}
+From these two results, we compute the variance of $U$ as $(n^2 - 1)/12$.
+\end{example}
+
+The simple form of the moment generating function of a standard normal random variable points to its importance in many situations.
+In particular, the exponential function is analytic and possesses many different representations.
+
+\begin{example}[Gaussian Random Variable]
+Let $X$ be a standard normal random variable whose PDF is given by
+\begin{equation*}
+f_X (\xi) = \frac{1}{\sqrt{2 \pi}} e^{- \frac{\xi^2}{2}}.
+\end{equation*}
+The moment generating function of $X$ is
+\begin{equation*}
+\begin{split}
+M_X (s) &= \Expect \left[ e^{sX} \right]
 = \int_{- \infty}^{\infty} \frac{1}{\sqrt{2 \pi}} e^{- \frac{\xi^2}{2}} e^{s\xi} d\xi \\
-&= \frac{1}{\sqrt{2 \pi}} \int_{- \infty}^{\infty}
-\frac{1}{\sqrt{2 \pi}} e^{- \frac{\xi^2 + 2 s \xi}{2}} d\xi \\
-&= e^{\frac{s^2}{2}} \frac{1}{\sqrt{2 \pi}} \int_{- \infty}^{\infty}
+&= \int_{- \infty}^{\infty} \frac{1}{\sqrt{2 \pi}} e^{- \frac{\xi^2 + 2 s \xi}{2}} d\xi
+= e^{\frac{s^2}{2}} \int_{- \infty}^{\infty}
 \frac{1}{\sqrt{2 \pi}} e^{- \frac{\xi^2 - 2 s \xi + s^2}{2}} d\xi \\
-&= e^{\frac{s^2}{2}} \frac{1}{\sqrt{2 \pi}}
-\int_{- \infty}^{\infty} \frac{1}{\sqrt{2 \pi}} e^{- \frac{(\xi - s)^2}{2}} d\xi
+&= e^{\frac{s^2}{2}} \int_{- \infty}^{\infty}
+\frac{1}{\sqrt{2 \pi}} e^{- \frac{(\xi - s)^2}{2}} d\xi
 = e^{\frac{s^2}{2}} .
 \end{split}
 \end{equation*}
 The last equality follows from the normalization condition and the fact that the integrand is a Gaussian PDF.
 \end{example}
 
-Let $M_U(s)$ be the generating function associated with a random variable $U$, and consider the random variable $V = aU + b$ where $a$ and $b$ are constant.
+Let $M_X(s)$ be the generating function associated with a random variable $X$, and consider the random variable $Y = aX + b$ where $a$ and $b$ are constant.
 The moment generating function of $V$ can be obtained as follows,
 \begin{equation*}
-M_V (s) = \Expect \left[ e^{s V} \right]
+M_Y (s) = \Expect \left[ e^{s X} \right]
 = \Expect \left[ e^{s (aX + b)} \right]
 = e^{sb} \Expect \left[ e^{saX} \right]
 = e^{sb} M_X (as) .
 \end{equation*}
-Thus, if $V$ is an affine function of $U$ then $M_V (s) = e^{sb} M_X (as)$.
+Thus, if $Y$ is an affine function of $X$ then $M_Y (s) = e^{sb} M_X (as)$.
 
 \begin{example}
-We can use this result of find the moment generating function of a Gaussian random variable with mean $m$ and variance $\sigma^2$.
-From above, we know that the moment generating function of a standard normal random variable is $M_U (s) = e^{\frac{s^2}{2}}$.
-Furthermore, recall that $V = \sigma U + m$ is a Gaussian random variable with parameter $m$ and $\sigma^2$.
-The moment generating function of $V$ then becomes
+We can use this technique to find the moment generating function of a Gaussian random variable with parameters $m$ and variance $\sigma^2$.
+Recall that an affine function of a Gaussian random variable is also Gaussian.
+Let $Y = \sigma X + m$, then the moment generating function of $Y$ becomes
 \begin{equation*}
-M_V (s) = e^{sm} M_U (\sigma s) = e^{m s + \frac{\sigma^2 s^2}{2}} .
+M_Y (s) = \Expect \left[ e^{sY} \right]
+= \Expect \left[ e^{s(\sigma X + m)} \right]
+= e^{sm} \Expect \left[ e^{s\sigma X} \right]
+= e^{sm + \frac{s^2 \sigma^2}{2} } .
 \end{equation*}
-\end{example}
-
-Let $X$ and $Y$ be independent random variables.
-Consider the random variable $Z = X + Y$.
-The moment generating function of $Z$ is given by
-\begin{equation*}
-\begin{split}
-M_Z (s) &= \mathrm{E} \left[ e^{sZ} \right]
-= \mathrm{E} \left[ e^{s(X + Y)} \right] \\
-&= \mathrm{E} \left[ e^{sX} e^{sY} \right]
-= \mathrm{E} \left[ e^{sX} \right] \mathrm{E} \left[ e^{sY} \right] \\
-&= M_X(s) M_Y(s) .
-\end{split}
-\end{equation*}
-
-\begin{example}[Sum of Gaussian Random Variables]
-Suppose $X$ and $Y$ are independent Gaussian varibles.
-We denote the mean and variance of $X$ by $m_X$ and $\sigma_X^2$.
-Similarly, we represent the mean and variance of $Y$ by $m_Y$ and $\sigma_Y^2$. 
-We wish to show that the sum $U = X + Y$ is Gaussian with parameters $m_X + m_Y$ and $\sigma_X^2 + \sigma_Y^2$.
-
-The moment generating functions of $X$ and $Y$ are
+From the moment generating function of $Y$, we get
 \begin{align*}
-M_X (s) &= e^{m_X s + \frac{\sigma_X^2 s^2}{2}} \\
-M_Y (s) &= e^{m_Y s + \frac{\sigma_Y^2 s^2}{2}}
+\Expect [Y] &= \frac{d M_Y}{ds} (0)
+= \left. \left[ \left(m + s \sigma^2 \right)
+e^{sm + \frac{s^2 \sigma^2}{2} } \right] \right|_{s=0} = m \\
+\begin{split}
+\Expect \left[ Y^2 \right] &= \frac{d^2 M_Y}{ds^2} (0)
+= \left.  \left[ \sigma^2 e^{sm + \frac{s^2 \sigma^2}{2} }
++ \left(m + s \sigma^2 \right)^2  e^{sm + \frac{s^2 \sigma^2}{2} } \right]
+\right|_{s=0} \\
+&= \sigma^2 + m^2 .
+\end{split}
 \end{align*}
-The moment generating function of $U = X + Y$ is equal to
-\begin{equation*}
-M_U (s) = M_X (s) M_Y (s)
-= \exp \left( (m_X + m_Y) s + \frac{(\sigma_X^2 + \sigma_Y^2) s^2}{2} \right) ,
-\end{equation*}
-which implies that $U$ is a Gaussian random variable with mean $m_X + m_Y$ and variance $\sigma_X^2 + \sigma_Y^2$.
+The mean of $Y$ is $m$ and its variance is equal to $\sigma^2$, as anticipated.
 \end{example}
 
 
 \section{Important Inequalities}
 
 There are situations for which computing the exact value of a probability is impossible or impractical.
-For these situations, it may be acceptable to use bounds for the value of an elusive probability.
+In such cases, it may be acceptable to provide bounds on the value of an elusive probability.
+The expectation is most important in finding pertinent bounds.
+
+As we will see, many such bounds rely on the concept of dominating functions.
+Suppose that $g(x)$ and $h(x)$ are two nonnegative function such that $g(x) \leq h(x)$ for all $x \in \RealNumbers$.
+Then, for any a continuous random variable $X$, the following inequality holds
+\begin{equation*}
+\begin{split}
+\Expect [g(X)] &= \int_{-\infty}^{\infty} g(x) f_X(x) dx \\
+&\leq \int_{-\infty}^{\infty} h(x) f_X (x) dx
+= \Expect [h(X)] .
+\end{split}
+\end{equation*}
+This is illustrated in Figure~\ref{figure:DominatingFcn}
+\begin{figure}[thb]
+\begin{center}
+\begin{psfrags}
+\psfrag{Y}[c]{$\RealNumbers$}
+\psfrag{X}[c]{$\RealNumbers$}
+\psfrag{h}[c]{$h(x)$}
+\psfrag{g}[c]{$g(x)$}
+\includegraphics[width=6.5cm]{Figures/10Chapter/DominatingFcn}
+\end{psfrags}
+\caption{If $g(x)$ and $h(x)$ are two nonnegative functions such that $g(x) \leq h(x)$ for all $x \in \RealNumbers$, then the weighted integral $\Expect [g (X)]$ will be less than the weighted integral $\Expect [h(X)]$.}
+\label{figure:DominatingFcn}
+\end{center}
+\end{figure}
+
+\subsection{The Markov Inequality}
+
+We begin our exposition of bounding techniques with a result known as the \emph{Markov inequality}. \index{Markov inequality}
+Recall that, for admissible set $S \subset \RealNumbers$, we have
+\begin{equation*}
+\Pr (X \in S) = \Expect \left[ \IndicatorFcn_S (X) \right] .
+\end{equation*}
+Thus, to obtain a bound on $\Pr (X \in S)$, it suffices to find a function that dominates $\IndicatorFcn_S (\cdot)$ and for which we can compute the expectation.
+
+In particular, suppose that we wish to bound $\Pr (X \geq a)$ where $X$ is a nonnegative random variable.
+Then, in this case, we select $S = [a, \infty)$ and function $h(x) = x/a$.
+For any $x \geq 0$, we have $h(x) \geq \IndicatorFcn_S(x)$, as illustrated in Figure~\ref{figure:MarkovInequality}.
+It follows that
+\begin{equation*}
+\Pr (X \geq a) = \Expect \left[ \IndicatorFcn_S(X) \right] \leq \frac{\Expect [X]}{a} .
+\end{equation*}
+
+\begin{figure}[thb]
+\begin{center}
+\begin{psfrags}
+\psfrag{Y}[c]{$\RealNumbers$}
+\psfrag{X}[c]{$\RealNumbers$}
+\psfrag{h}[l]{$h(x) = \frac{x}{a}$}
+\psfrag{g}[l]{$g(x) = \IndicatorFcn_S (x)$}
+\psfrag{a}[c]{$a$}
+\includegraphics[width=6.5cm]{Figures/10Chapter/Markov}
+\end{psfrags}
+\caption{Suppose that we wish to find a bound for $\Pr (X \leq a)$.
+We define the set $S = [a, \infty)$ and function $g(x) = \IndicatorFcn_S (x)$.
+Using dominating function $h(x) = x/a$, we conclude that $\Pr(X \geq a) \leq a^{-1} \Expect [X]$ for any nonnegative random variable $X$.}
+\label{figure:MarkovInequality}
+\end{center}
+\end{figure}
 
 
 \subsection{The Chebyshev Inequality}
 
-The \emph{Chebyshev inequality} provides a means to compute such bounds. \index{Chebyshev inequality}
-Suppose that $g (\cdot)$ is a nonnegative function and let $S$ be a measurable set.
-We denote the infimum of $g (\cdot)$ over $S$ by
+The \emph{Chebyshev inequality} provides an extention to this methodology to various dominating functions. \index{Chebyshev inequality}
+This yields a number of bounds that become useful in different contexts.
+
+\begin{proposition}[Chebyshev Inequality]
+Suppose $h (\cdot)$ is a nonnegative function and let $S$ be an admissible set.
+We denote the infimum of $h (\cdot)$ over $S$ by
 \begin{equation*}
-i_S = \inf_{ x \in S } g (x) .
+i_S = \inf_{ x \in S } h (x) .
 \end{equation*}
 The Chebyshev inequality asserts that
 \begin{equation} \label{equation:ChebyshevInequality}
 i_S \Pr (X \in S)
-\leq \Expect \left[ g(X) \right] .
+\leq \Expect [ h(X) ]
 \end{equation}
-This result is remarkably powerful, still it is easy to show.
-The definition of $i_S$ and the fact that $g (\cdot)$ is nonnegative imply that
+where $X$ is an arbitrary random variable.
+\end{proposition}
+\begin{proof}
+This is a remarkably powerful result and it can be shown as follows.
+The definition of $i_S$ and the fact that $h (\cdot)$ is nonnegative imply that
 \begin{equation*}
-i_S \mathbf{1}_S (x) \leq g(x) \mathbf{1}_S (x) \leq g(x)
+i_S \IndicatorFcn_S (x) \leq h(x) \IndicatorFcn_S (x) \leq h(x)
 \end{equation*}
-for any value of $x$.
-Thus, for all realizations of $X$, we have $i_X \mathbf{1}_S (X) \leq g(X)$.
-Taking the expectactions of these functions with respect to $X$, we get
+for any $x \in \RealNumbers$.
+Moreover, for any such $x$ and distribution $f_X(\cdot)$, we get $i_S \IndicatorFcn_S (x) f_X(x) \leq h(x) f(x)$, which implies
 \begin{equation*}
-i_S \Pr (X \in S)
-= \Expect \left[ i_S \mathbf{1}_S (X) \right]
-\leq \Expect [g (X)] .
+\begin{split}
+i_S \Pr (X \in S) &= \Expect \left[ i_s \IndicatorFcn_S (X) \right]
+= \int i_S \IndicatorFcn_S (\xi) f_X(\xi) d\xi \\
+&\leq \int h (\xi) f_X(\xi) d\xi
+= \Expect [ h(X) ] .
+\end{split}
 \end{equation*}
+When $i_S > 0$, this provides the upper bound $\Pr (X \in S) \leq i_S^{-1} \Expect [g (X)]$.
+\end{proof}
 
-\begin{example}
-Many engineering applications require knowledge of the form $\Pr (X \geq a)$ for some threshold $a > 0$.
-We wish to derive an upper bound for $\Pr (X \geq a)$ based solely on the mean of $X$.
-Using the Chebyshev inequaltiy, we define $S = [a, \infty)$.
-Clearly, the infimum value of $S$ is $\inf_{x \in S} x = a$.
-Thus, applying \eqref{equation:ChebyshevInequality}, we obtain
-\begin{equation*}
-\Pr (X \geq a) \leq \frac{ \Expect [X] }{ a } .
-\end{equation*}
-\end{example}
-
-We note that the Chebyshev inequality can be applied to both discrete and continuous random variables alike.
+Although the proof assumes a continuous random variable, we emphasize that the Chebyshev inequality applies to both discrete and continuous random variables alike.
 Furthermore, in some cases, the inequality can be tight.
 
 \begin{example}
@@ -267,7 +422,6 @@ Then, $\Expect \left[ X^2 \right] = b^2$ and $\Pr (X \in S) = b^2 / a^2$.
 In this case, the Chebyshev inequality is tight.
 \end{example}
 
-\subsection{The Markov Inequality}
 
 The \emph{Markov inequality} is a special case of the Chebyshev inequality that employs that relies on the second moment of a random variable. \index{Markov inequality}
 Consider the function  $g(x) = x^2$ and let $S = \{ x | x^2 \geq b \}$ where $b$ is a positive constant.

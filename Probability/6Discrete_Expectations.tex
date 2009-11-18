@@ -89,13 +89,13 @@ Let $S$ be a subset of the real numbers, and define the \emph{indicator function
 \IndicatorFcn_S (x) = \begin{cases} 1, & x \in S\\
 0, & x \notin S . \end{cases}
 \end{equation*}
-The expectation of $\IndicatorFcn_S (x)$ is equal to
+The expectation of $\IndicatorFcn_S (X)$ is equal to
 \begin{equation*}
 \begin{split}
-\Expect \left[ \IndicatorFcn_S (x) \right]
+\Expect \left[ \IndicatorFcn_S (X) \right]
 &= \sum_{x \in X(\Omega)} \IndicatorFcn_S (x) p_X(x) \\
 &= \sum_{x \in S \cap X(\Omega)} p_X(x)
-= \Pr (x \in S) .
+= \Pr (X \in S) .
 \end{split}
 \end{equation*}
 Thus, the expectation of the indicator function of $S$ is simply the probability that $X$ takes on a value in $S$.
@@ -423,7 +423,7 @@ Although these quantities will not play a central role in our exposition of prob
 \label{section:OrdinaryGeneratingFunctions}
 
 In the special yet important case where $X(\Omega)$ is a subset of the non-negative integers, it is occasionally useful to employ the \emph{ordinary generating function}. \index{Ordinary generating function}
-This function bears a close resemblance to the $z$-transform and is defined by
+This function bears a close resemblance to the \emph{$z$-transform} and is defined by \index{$z$-transform}
 \begin{equation} \label{equation:OrdinaryGeneratingFunction}
 G_X(z) = \Expect \left[ z^X \right] = \sum_{k=0}^{\infty} z^k p_X (k) .
 \end{equation}
