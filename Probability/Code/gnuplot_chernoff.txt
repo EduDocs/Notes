@@ -1,0 +1,16 @@
+set terminal postscript eps enhanced color solid lw 3 font 32
+set title "Exponential Bounds"
+set xlabel "Argument"
+set ylabel "Dominating Functions"
+set parametric
+
+set xrange [0:4]
+set yrange [0:5]
+set out 'chernoff_bound.eps'
+
+plot "step1.csv" with step notitle lt -1 lw 3, \
+t,exp(0.25*(t-2)) notitle lt 3 lw 3, \
+t,exp(0.5*(t-2)) notitle lt 3 lw 3, \
+t,exp(t-2) notitle lt 3 lw 3, \
+t,exp(2*(t-2)) notitle lt 3 lw 3
+
