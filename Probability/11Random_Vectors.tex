@@ -1,27 +1,66 @@
 \chapter{Random Vectors}
 
-Probability density functions can be extended to the case of multiple continuous random variable.
-We denote the \emph{joint probability density function} of random variables $X$ and $Y$ by $f_{X,Y} (\cdot, \cdot)$. \index{Joint Probability Density Function}
-In general, $f_{X,Y} (\cdot, \cdot)$ is a nonnegative function such that
+In this section, we expand our exposition of continuous random variables to random vectors.
+Being versed at dealing with multiple random variables is an essential part of statistics, engineering and science in general.
+Again, our initial survey of this topic revolves around pairs of continuous random variables.
+More complex scenarios will be considered in the later.
+
+
+\section{Joint Distribution Functions}
+
+Let $X$ and $Y$ be two random variables.
+The \emph{joint cumulative distribution function} of $X$ and $Y$ is defined by \index{Joint cumulative distribution function}
 \begin{equation*}
-\int_{-\infty}^{\infty} \int_{-\infty}^{\infty}
-f_{X, Y} (\xi, \zeta) d\zeta d\xi = 1.
+F_{X,Y} (x, y) = \Pr (X \leq x, Y \leq y) \quad x, y \in \RealNumbers .
 \end{equation*}
-Furthermore, for a measurable set $S$, the probability that $(X,Y) \in S$ can be computed through the integral
+Keeping in mind that $X$ and $Y$ are real-valued functions acting on the outcomes of a same experiment, we can also write
+\begin{equation*}
+F_{X,Y} (x, y) = \Pr \left( \{ \omega \in \Omega | X(\omega) \leq x, Y(\omega) \leq y \} \right) .
+\end{equation*}
+From this characterization, we can identify a few properties of the joint CDF;
 \begin{equation*}
 \begin{split}
-\Pr ((X,Y) \in S)
-&= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty}
-\mathrm{1}_{S}(\xi, \zeta) f_{X, Y} (\xi, \zeta) d\zeta d\xi \\
-&= \int \int_{S}
-f_{X, Y} (\xi, \zeta) d\zeta d\xi .
+\lim_{y \uparrow \infty} F_{X,Y} (x, y)
+&= \lim_{y \uparrow \infty} \Pr \left( \{ \omega \in \Omega | X(\omega) \leq x, Y(\omega) \leq y \} \right) \\
+&= \Pr \left( \{ \omega \in \Omega | X(\omega) \leq x, Y(\omega) \in \RealNumbers \} \right) \\
+&= \Pr \left( \{ \omega \in \Omega | X(\omega) \leq x \} \right)
+= F_X (x) .
 \end{split}
 \end{equation*}
-If $S$ is the rectangular set
+Similarly, we have $\lim_{x \uparrow \infty} F_{X,Y} (x,y) = F_Y (y)$.
+Furthermore, $\lim_{x \downarrow -\infty} F_{X,Y} (x,y) 
+= \lim_{y \downarrow -\infty} F_{X,Y} (x,y) = 0$.
+
+When the function $F_{X,Y} (\cdot, \cdot)$ is totally differentiable, it is possible to define the \emph{joint probability density function} of $X$ and $Y$, \index{Joint probability density function}
+\begin{equation} \label{equation:JointPDF}
+f_{X,Y} (x,y) = \frac{\partial^2 F_{X,Y}}{\partial x \partial y} (x,y)
+= \frac{\partial^2 F_{X,Y}}{\partial y \partial x} (x,y) \quad x,y \in  \RealNumbers .
+\end{equation}
+Hereafter, we refer to a pair of random variables as continuous if the corresponding joint PDF is defined unambiguously through \eqref{equation:JointPDF}.
+When this is the case, standard calculus asserts that the following equation holds,
 \begin{equation*}
-S = \left\{ (x,y) \in X(\Omega) \times Y(\Omega) \big| a \leq x \leq b, c \leq y \leq d \right\} ,
+F_{X,Y} (x,y) = \int_{-\infty}^x \int_{-\infty}^y f_{X,Y} (\xi,\zeta) d\zeta d\xi .
 \end{equation*}
-then the probability that $(X,Y) \in S$ becomes the typical integral
+From its definition, we note that $f_{X,Y} (\cdot, \cdot)$ is a nonnegative function which integrates to one,
+\begin{equation*}
+\iint\limits_{\RealNumbers^2}
+f_{X, Y} (\xi, \zeta) d\zeta d\xi = 1.
+\end{equation*}
+Furthermore, for an admissible set $S \subset \RealNumbers^2$, the probability that $(X,Y) \in S$ can be evaluated through the integral form
+\begin{equation} \label{equation:ProbabilityJointPDF}
+\begin{split}
+\Pr ((X,Y) \in S)
+&= \iint\limits_{\RealNumbers^2}
+\mathrm{1}_{S}(\xi, \zeta) f_{X, Y} (\xi, \zeta) d\zeta d\xi \\
+&= \iint\limits_{S}
+f_{X, Y} (\xi, \zeta) d\zeta d\xi .
+\end{split}
+\end{equation}
+In particular, if $S$ is the rectangular set
+\begin{equation*}
+S = \left\{ (x,y) \in \RealNumbers^2 \big| a \leq x \leq b, c \leq y \leq d \right\} ,
+\end{equation*}
+then the probability that $(X,Y) \in S$ reduces to the typical integral form
 \begin{equation*}
 \Pr ((X,Y) \in S)
 = \Pr (a \leq X \leq b, c \leq Y \leq d)
@@ -31,84 +70,163 @@ f_{X, Y} (\xi, \zeta) d\zeta d\xi .
 
 \begin{example}
 Suppose that the random pair $(X, Y)$ is uniformly distributed over the unit circle.
-Then, the joint PDF $f_{X,Y} (\cdot, \cdot)$ is given by
+We can express the joint PDF $f_{X,Y} (\cdot, \cdot)$ as
 \begin{equation*}
 f_{X,Y} (x, y) = \begin{cases} \frac{1}{\pi} & x^2 + y^2 \leq 1 \\
 0 & \text{otherwise} . \end{cases}
 \end{equation*}
-We wish to find the probability that the point $(X, Y)$ lies inside the circle of radius $1/2$.
+We wish to find the probability that the point $(X, Y)$ lies inside a circle of radius $1/2$.
 
-Let $S = \{ (x, y) \in X(\Omega) \times Y(\Omega) | x^2 + y^2 \leq 0.5 \}$.
-The probability that $(X, Y)$ lies in $S$ is given by
+Let $S = \{ (x, y) \in \RealNumbers^2 | x^2 + y^2 \leq 0.5 \}$.
+The probability that $(X, Y)$ belongs to $S$ is given by
 \begin{equation*}
 \Pr ((X,Y) \in S)
-= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty}
-\mathbf{1}_{S}(\xi, \zeta) \frac{1}{\pi} d\xi d\zeta
+= \iint\limits_{\RealNumbers^2}
+\frac{ \mathbf{1}_{S}(\xi, \zeta) }{\pi} d\xi d\zeta
 = \frac{1}{4} .
 \end{equation*}
-Thus, the probability that $(X,Y)$ lies in the circle of radius half is one fourth.
+Thus, the probability that $(X,Y)$ is contained within a circle of radius half is one fourth.
 \end{example}
 
-It is also possible to define the \emph{joint cumulative distribution function} of a pair of random variables, \index{Joint cumulative distribution function}
+\begin{example}
+Let $X$ and $Y$ be two independent zero-mean Gaussian random variables with variance $\sigma^2$.
+For $(x, y) \in \RealNumbers^2$, their joint PDF is given by
 \begin{equation*}
-F_{X,Y} (x,y) = \Pr (X \leq x, Y \leq y) .
+f_{X,Y} (x,y) = \frac{1}{2 \pi \sigma^2} e^{- \frac{ x^2 + y^2 }{2 \sigma^2} } .
 \end{equation*}
-For continuous random variables, the joint CDF of $X$ and $Y$ can derived from their joint PDF,
+We wish to find the probability that $(X,Y)$ falls within a circle of radius $r$ centered around the origin.
+
+We can compute this probability using integral formula \eqref{equation:ProbabilityJointPDF} applied to this particular problem.
+Let $R = \sqrt{X^2 + Y^2}$ and assume $r > 0$, then
 \begin{equation*}
-F_{X,Y} (x,y) = \int_{-\infty}^x \int_{-\infty}^y f_{X,Y} (\xi,\zeta) d\zeta d\xi .
+\begin{split}
+\Pr (R \leq r) &= \iint\limits_{R \leq r} f_{X,Y} (x,y) dx dy
+= \iint\limits_{R \leq r} \frac{1}{2 \pi \sigma^2}
+e^{- \frac{ x^2 + y^2 }{2 \sigma^2} } (x,y) dx dy \\
+&= \int_0^r \int_0^{2\pi} \frac{1}{2 \pi \sigma^2}
+e^{- \frac{ r^2 }{2 \sigma^2} } r d\theta dr
+= 1 - e^{- \frac{ r^2 }{2 \sigma^2} } .
+\end{split}
 \end{equation*}
-Calculus asserts that the following is also true,
+The probability that $(X, Y)$ is contained within a circle of radius $r$ is $1 - e^{- \frac{ r^2 }{2 \sigma^2} }$.
+Furthermore, if we recognize $R$ as a continuous random variable, we can write its PDF as
 \begin{equation*}
-f_{X,Y} (x,y) = \frac{\partial^2 F_{X,Y}}{\partial x \partial y} (x,y) .
+f_R (r) = \frac{r}{\sigma^2} e^{- \frac{r^2}{2 \sigma^2} } \quad r \geq 0 .
 \end{equation*}
+That is, $R$ possesses a Rayleigh distribution with parameter $\sigma^2$.
+\end{example}
 
 
-\section{Conditional Distribution}
+\section{Conditional Distributions}
 
-It is possible to derive the PDF of a random variable condition on a certain event, or on another random variable.
-Let $X$ and $Y$ be two random variable associated with the same experiment.
-The \emph{conditional probability distribution function} of $Y$ given $X = x$, denoted by $f_{Y|X}$, is defined by
-\begin{equation} \label{equation:ContinuousConditonalPDF}
-f_{Y|X} (y|x) = \frac{f_{X,Y} (x,y)}{f_X(x)},
+We can define the conditional CDF of random variable $X$, given non-vanishing event $A$, in a straightforward manner
+\begin{equation*}
+F_{X|A} (x) = \Pr (X \leq x | A)
+= \frac{ \Pr ( \{ X \leq x \} \cap A ) }{\Pr(A)} \quad x \in \RealNumbers .
+\end{equation*}
+Note that event $A$ can be defined in terms of variables $X$ and $Y$.
+For instance, we may use $A = \{ Y \geq X \}$ as our condition.
+Under proper conditions, it is equally easy to specify the conditional PDF of $X$ given $A$,
+\begin{equation*}
+f_{X|A} (x) = \frac{d F_{X|A}}{dx} (x) \quad x \in \RealNumbers .
+\end{equation*}
+
+\begin{example}
+Let $X$ and $Y$ be continuous random variables with joint PDF
+\begin{equation*}
+f_{X,Y} (x,y) = \lambda^2 e^{-\lambda (x + y)} \quad x,y \in \RealNumbers_+ .
+\end{equation*}
+We wish to compute the conditional PDF of $X$ given $A = \{ X \leq Y \}$.
+
+To solve this problem, we first compute the probability of $\{ X \leq x \} \cap A$,
+\begin{equation*}
+\begin{split}
+\Pr ( \{ X \leq x \} \cap A )
+&= \int_0^x \int_0^{\xi} f_{X,Y} (\xi, \zeta) d\zeta d\xi
+= \int_0^x \int_0^{\xi} \lambda^2 e^{-\lambda (\xi + \zeta)} d\zeta d\xi \\
+&= \int_0^x \lambda e^{- \lambda \xi} \left( 1 - e^{- \lambda \xi} \right) d\xi
+= \frac{ \left( 1 - e^{-\lambda x} \right)^2 }{2} .
+\end{split}
+\end{equation*}
+By symmetry, we gather that $\Pr(A) = 1/2$ and, as such
+\begin{equation*}
+f_{X | A} (x) = 2 \lambda e^{-\lambda x} \left( 1 - e^{-\lambda x} \right)
+\end{equation*}
+for $x \in \RealNumbers_+$.
+\end{example}
+
+One case of special interest is the situation where event $A$ is defined in terms of random variable $X$ itself.
+In particular, consider the PDF of $X$ conditioned on the fact that $X$ belongs to an interval $I$.
+Then, $A = \{ X \in I \}$ and the conditional CDF of $X$ becomes
+\begin{equation*}
+\begin{split}
+F_{X|A} (x) &= \Pr (X \leq x | X \in I) \\
+&= \frac{ \Pr \left( \{ X \leq x \} \cap \{ X \in I \} \right) }{\Pr(X \in I)} \\
+&= \frac{ \Pr \left( X \in (-\infty, x] \cap I \right) }{\Pr(X \in I)} .
+\end{split}
+\end{equation*}
+Differentiating with respect to $x$, we obtain the conditional PDF of $X$,
+\begin{equation*}
+f_{X|A} (x) = \frac{ f_X (x) }{ \Pr (X \in I) } 
+\end{equation*}
+for any $x \in I$.
+In words, the conditional PDF of $X$ becomes a scaled version of $f_X(\cdot)$ whenever $x \in I$, and it is equal to zero otherwise.
+Essentially, this is equivalent to re-normalizing the PDF of $X$ accounting for the fact that $X \in I$.
+
+%\begin{example}
+%\end{example}
+
+\subsection{Conditioning on Values}
+
+Suppose that $X$ and $Y$ form a pair of random variables with joint PDF $f_{X,Y} (\cdot, \cdot)$.
+With care,it is possible and desirable to define the conditional PDF of $X$, conditioned on $Y = y$. \index{Conditional probability density function}
+For any $y \in \RealNumbers$ such that $f_Y (y) > 0$, we defined the conditional PDF of $X$ given $Y = y$ as
+\begin{equation} \label{equation:ConditionalPDF}
+f_{X|Y} (x|y) = \frac{ f_{X,Y} (x,y) }{ f_Y (y) } .
 \end{equation}
-provided that $f_X(x) \neq 0$.
-We emphasize that there is a strong similarity between the definition of the conditional PDF and PMF.
-For a fixed value $X = x$, the conditional PDF $f_{Y|X} (y|x)$ is a legitimate PDF since it is nonnegative and it integrates to one.
+Intuitively, this definition is motivated by the following property.
+For small $\Delta_x$ and $\Delta_y$, we can write
+\begin{equation*}
+\begin{split}
+&\Pr (x \leq X \leq x + \Delta_x | y \leq Y \leq y + \Delta_y) \\
+&= \frac{\Pr (x \leq X \leq x + \Delta_x, y \leq Y \leq y + \Delta_y)}
+{\Pr (y \leq Y \leq y + \Delta_y)} \\
+&\approx \frac{f_{X,Y} (x, y) \Delta_x \Delta_y} {f_Y (y) \Delta_y}
+= \frac{f_{X,Y} (x, y)}{f_Y (y)} \Delta_x .
+\end{split}
+\end{equation*}
+Loosely speaking, $f_{X|Y} (x|y) \Delta_x$ represent the probability that $X$ lies close to $x$, given that $Y$ is near $y$.
+
+Using this definition, it is possible to compute the probabilities of events associated with $X$ conditioned on random value of random variable $Y$,
+\begin{equation*}
+\Pr (X \in S | Y = y) = \int_S f_{X|Y} (x|y) dx .
+\end{equation*}
+Still, a word of caution is in order.
+The technical difficulty that surfaces when conditioning on $Y =y$ stems from the fact that $\Pr (Y = y) = 0$.
+Remember that, in general, conditional probability is only defined for non-vanishing events.
+Although we were able to circumvent this issue, care must be taken when dealing with the conditional PDF of \eqref{equation:ConditionalPDF}, as it only provide valuable insight when the pair of random variable $(X, Y)$ is continuous.
 
 \begin{example}
 Consider a random experiment where an outcome $(\omega_1, \omega_2)$ is selected at random from the unit circle.
 Let $X = \omega_1$ and $Y = \omega_2$.
-We wish to compute the conditional PDF of $Y$ given that $X = \sqrt{3}{2}$.
-We apply the definition of the conditional PDF, with
+We wish to compute the conditional PDF of $X$ given that $Y = 0.5$.
+
+First, we compute the marginal PDF of $Y$ evaluated at $Y = 0.5$,
+\begin{equation*}
+f_Y (0.5) = \int_{\RealNumbers} f_{X,Y} (x, 0.5) dx
+= \int_{\frac{\sqrt{3}}{2}}^{\frac{\sqrt{3}}{2}} \frac{1}{\pi} dx
+= \frac{\sqrt{3}}{\pi} .
+\end{equation*}
+We then apply definition \eqref{equation:ConditionalPDF} to obtain the desired conditional PDF of $X$,
 \begin{equation*}
 \begin{split}
-f_{Y|X} \left( y \Big| \frac{1}{2} \right)
-= \frac{f_{X,Y} \left( \frac{1}{2}, y \right)}
-{\int_{-\frac{\sqrt{3}}{2}}^{\frac{\sqrt{3}}{2}}
-f_{X,Y} \left( \frac{1}{2} , \zeta \right) d \zeta }
-= \begin{cases} \frac{1}{\sqrt{3}} & |y| \leq \frac{\sqrt{3}}{2} \\
+f_{X|Y} ( x | 0.5 ) &= \frac{f_{X,Y} (x, 0.5)}{f_{Y} ( 0.5 ) }
+= \frac{\pi}{\sqrt{3}} f_{X,Y} (x, 0.5) \\
+&= \begin{cases} \frac{1}{\sqrt{3}} & |y| \leq \frac{\sqrt{3}}{2} \\
 0 & \text{otherwise} . \end{cases}
 \end{split}
 \end{equation*}
 \end{example}
-
-Let $\{ Y \in S \}$ be an event such that $\Pr (Y \in S) > 0$.
-The conditional PDF of $Y$ given $\{ Y \in S \}$ is defined by
-\begin{equation*}
-f_{Y|S} (y)
-= \left\{ \begin{array}{cc} \frac{ f_Y(y) }{\Pr (Y \in S)}, & y \in S \\
-0, & \text{otherwise}. \end{array} \right.
-\end{equation*}
-This PDF can be used to compute the conditional probability of specific events given $Y \in S$.
-Let $T$ be a measurable set, then
-\begin{equation*}
-\begin{split}
-\Pr ( Y \in T | Y \in S)
-&= \frac{ \Pr ( Y \in T \cap Y \in S) }{ \Pr ( Y \in S) } \\
-&= \frac{ \int_{Y \cap T} f_Y(y) dy }{ \Pr ( Y \in S) } \\
-&= \int_{T} f_{Y|S} (y) dy .
-\end{split}
-\end{equation*}
 
 %\begin{example}
 %\end{example}
@@ -125,35 +243,149 @@ Note again that the function
 h(x) = \Expect [Y | X=x]
 \end{equation*}
 defines a random variable since the conditional expectation of $Y$ may vary as a function of $X$.
-A conditional expectation is, itself, a random variable.
+After all, a conditional expectation is itself a random variable.
 
 %\begin{example}
 %\end{example}
 
 
+\subsection{Derived Distributions}
+
+Suppose that $X_1$ and $X_2$ are jointly continuous random variables.
+Furthermore, let $Y_1 = g_1 (X_1, X_2)$ and $Y_2 = g_2 (X_1, X_2)$, where $g_1 (\cdot, \cdot)$ and $g_2 (\cdot, \cdot)$ are real-valued functions.
+Under certain conditions, the pair of random variables $(Y_1, Y_2)$ will also be continuous.
+Deriving the joint PDF of $(Y_1, Y_2)$ can get convoluted, a task forgo.
+Nevertheless, we examine a simple case where an expression for $f_{Y_1, Y_2} (\cdot, \cdot)$ remains manageable.
+
+Consider the scenario where the functions $g_1 (\cdot, \cdot)$ and $g_2 (\cdot, \cdot)$ are totally differentiable, with Jacobian determinant
+\begin{equation*}
+\begin{split}
+&J(x_1, x_2) = \left| \begin{array}{cc}
+\frac{\partial g_1}{\partial x_1} (x_1, x_2) &
+\frac{\partial g_1}{\partial x_2} (x_1, x_2) \\
+\frac{\partial g_2}{\partial x_1} (x_1, x_2) &
+\frac{\partial g_2}{\partial x_2} (x_1, x_2)
+\end{array} \right| \\
+&= \frac{\partial g_1}{\partial x_1} (x_1, x_2)
+\frac{\partial g_2}{\partial x_2} (x_1, x_2)
+- \frac{\partial g_1}{\partial x_2} (x_1, x_2)
+\frac{\partial g_2}{\partial x_1} (x_1, x_2)
+\neq 0 .
+\end{split}
+\end{equation*}
+Also, assume that the system of equations
+\begin{align*}
+g_1 (x_1, x_2) &= y_1 \\
+g_2 (x_1, x_2) &= y_2
+\end{align*}
+has a unique solution.
+We represent this solution by $x_1 = h_1 (y_1, y_2)$ and $x_2 = h_2 (y_1, y_2)$.
+Then, the random variables $(Y_1, Y_2)$ are jointly continuous with joint PDF
+\begin{equation*}
+f_{Y_1, Y_2} (y_1, y_2) =
+\frac{f_{X_1, X_2} (x_1, x_2)}{ | J(x_1, x_2) |}
+\end{equation*}
+where $x_1 = h_1 (y_1, y_2)$ and $x_2 = h_2 (y_1, y_2)$.
+Note the close resemblance between this equation and the derived distribution of \eqref{equation:MonotoneFunctionPDF}.
+Looking back at Chapter~\ref{chapter:DerivedDistributions} offers an idea of what proving this result entails.
+It also hints at how this result can be modified to accommodate non-unique mappings.
+
+\begin{example}
+By far, the most important application of this result relates to the properties of Gaussian vectors.
+Suppose that $X_1$ and $X_2$ are jointly continuous random variables, and let
+\begin{equation*}
+\mathbf{X} = \left[ \begin{array}{c} X_1 \\ X_2 \end{array} \right] .
+\end{equation*}
+Define the mean of $\mathbf{X}$ by
+\begin{equation*}
+\mathbf{m} = \Expect [\mathbf{X}] 
+= \left[ \begin{array}{c} \Expect[ X_1 ] \\ \Expect[ X_2 ] \end{array} \right] .
+\end{equation*}
+and its covariance by
+\begin{equation*}
+\begin{split}
+\Sigma &= \Expect \left[ \left( \mathbf{X} - \mathbf{m} \right)
+\left(\mathbf{X} - \mathbf{m} \right)^T \right] \\
+&= \left[ \begin{array}{cc} \Expect \left[ (X_1 - m_1)^2 \right] &
+\Expect[ (X_1 - m_1) (X_2 - m_2) ]  \\
+\Expect[ (X_2 - m_2) (X_1 - m_1) ] &
+\Expect \left[ (X_2 - m_2)^2 \right] \end{array} \right] .
+\end{split}
+\end{equation*}
+Random variables $X_1$ and $X_2$ are said to be jointly Gaussian provided that their joint PDF is of the form
+\begin{equation*}
+f_{X_1, X_2} (x_1, x_2) = \frac{1}{2 \pi |\Sigma|^{\frac{1}{2}}}
+\exp \left( - \frac{1}{2} \left( \mathbf{x} - \mathbf{m} \right)^T \Sigma^{-1} \left( \mathbf{x} - \mathbf{m} \right) \right) .
+\end{equation*}
+Assume that the random variables $Y_1$ and $Y_2$ are generated through the matrix equation
+\begin{equation*}
+\mathbf{Y} = \left[ \begin{array}{c} Y_1 \\ Y_2 \end{array} \right]
+= A \mathbf{X} + \mathbf{b} ,
+\end{equation*}
+where $A$ is a $2 \times 2$ invertible matrix and $\mathbf{b}$ is a vector.
+In this case, $\mathbf{X} = A^{-1} \left( \mathbf{Y} - \mathbf{b} \right)$ and the corresponding Jacobian determinant is
+\begin{equation*}
+J(x_1, x_2)
+= \left| \begin{array}{cc} a_{11} & a_{12} \\ a_{21} & a_{22} \end{array} \right|
+= | A | .
+\end{equation*}
+It follows that the joint PDF of $(Y_1, Y_2)$ is given by
+\begin{equation*}
+\begin{split}
+&f_{Y_1, Y_2} (y_1, y_2)
+%= \frac{ f_{X_1, X_2} (x_1, x_2) }{ |A| }
+= \frac{1}{2 \pi |\Sigma|^{\frac{1}{2}} |A|}
+\exp \left( - \frac{1}{2}
+\left( \mathbf{x} - \mathbf{m} \right)^T \Sigma^{-1} \left( \mathbf{x} - \mathbf{m} \right) \right) \\
+&= \frac{1}{2 \pi |A \Sigma A|^{\frac{1}{2}}}
+\exp \left( - \frac{1}{2}
+\left( A^{-1} \left( \mathbf{y} - \mathbf{b} \right) - \mathbf{m} \right)^T
+\Sigma^{-1}
+\left( A^{-1} \left( \mathbf{y} - \mathbf{b} \right) - \mathbf{m} \right) \right) \\
+&= \frac{1}{2 \pi |A \Sigma A|^{\frac{1}{2}}}
+\exp \left( - \frac{1}{2}
+\left( \mathbf{y} - \mathbf{b} - A \mathbf{m} \right)^T
+\left( A \Sigma A \right)^{-1}
+\left( \mathbf{y} - \mathbf{b} - A \mathbf{m} \right) \right) .
+\end{split}
+\end{equation*}
+Looking at this equation, we conclude that random variables $Y_1$ and $Y_2$ are jointly Gaussian, as their joint PDF possesses the proper form.
+It should come as no surprise that the mean of $\mathbf{Y}$ is
+$\Expect \left[ \mathbf{Y} \right] = A \mathbf{m} + \mathbf{b}$
+and its covariance matrix is equal to
+\begin{equation*}
+\Expect \left[ \left( \mathbf{Y} - \Expect \left[ \mathbf{Y} \right] \right)
+\left( \mathbf{Y} - \Expect \left[ \mathbf{Y} \right] \right)^T \right]
+= A \Sigma A .
+\end{equation*}
+These admirable properties generalize to higher dimensions.
+An affine transformation of a Gaussian random vector is itself a Gaussian random vector.
+Furthemore, to obtain the derived distribution of the latter vector, it suffices to compute its mean and covariance, and substitute the resulting parameters in the general form of the Gaussian PDF.
+Collectively, these features underly many contemporary successes of engineering.
+\end{example}
+
 
 \section{Independence}
 
-Two continuous random variables $X$ and $Y$ are mutually \emph{independent} if their joint CDF is the product of their respective CDFs, \index{Independence}
+Two random variables $X$ and $Y$ are mutually \emph{independent} if their joint CDF is the product of their respective CDFs, \index{Independence}
 \begin{equation*}
 F_{X,Y} (x,y) = F_X (x) F_Y(y)
 \end{equation*}
-for any $x \in X(\Omega)$ and $y \in Y(\Omega)$.
-We emphasize that this necessarily implies that the joint PDF is the product of the individual PDFs as well,
+for $x, y \in \RealNumbers$.
+In the jointly continuous case, this definition necessarily implies that the joint PDF $f_{X,Y}(\cdot, \cdot)$ is the product of the marginal PDFs as well,
 \begin{equation*}
 f_{X,Y} (x,y) = \frac{\partial^2 F_{X,Y}}{\partial x \partial y} (x, y)
 = \frac{d F_X}{dx} (x) \frac{d F_Y}{dy} (y)
 = f_X (x) f_Y (y)
 \end{equation*}
-for any $x \in X(\Omega)$ and $y \in Y(\Omega)$.
-
-From \eqref{equation:ContinuousConditonalPDF}, we gather that the conditional PDF of $Y$ given $X=x$ is equal to the marginal PDF of $Y$ whenever $X$ and $Y$ are independent
+for $x, y \in \RealNumbers$.
+Furthermore, from \eqref{equation:ConditionalPDF}, we gather that the conditional PDF of $Y$ given $X=x$ is equal to the marginal PDF of $Y$ whenever $X$ and $Y$ are independent
 \begin{equation*}
 f_{Y|X} (y|x) = \frac{f_{X,Y} (x, y)}{f_X(x)}
 = \frac{f_X (x) f_Y (y)}{f_X(x)} = f_Y (y),
 \end{equation*}
 provided that $f_X(x) \neq 0$.
-Furthermore, if $X$ and $Y$ are independent random variables, then the two events $\{ X \in S \}$ and $\{ Y \in T \}$ are independent
+Finally, if $X$ and $Y$ are independent random variables, then the two events $\{ X \in S \}$ and $\{ Y \in T \}$ are independent
 \begin{equation*}
 \begin{split}
 &\Pr (X \in S, Y \in T) = \int_S \int_T f_{X,Y} (x,y) dy dx \\
@@ -187,21 +419,23 @@ F_{X,Y}(x,y)
 Thus, we gather that $X$ and $Y$ are independent.
 
 Next, we show that $X$ and $U$ are not independent.
-First, we note that $F_U (1) = \frac{1}{2}$ and $F_X (1/2) = 1/2$.
-Consider the joint CDF of $X$ and $U$ evaluated at $(1/2, 1)$,
+Note that $F_U (1) = 0.5$ and $F_X (0.5) = 0.5$.
+Consider the joint CDF of $X$ and $U$ evaluated at $(0.5, 1)$,
 \begin{equation*}
 \begin{split}
-F_{X,U} \left( \frac{1}{2} ,1 \right)
+F_{X,U} (0.5, 1)
 &= \int_{0}^{\frac{1}{2}} \int_{0}^{1-\xi} d\zeta d\xi
 = \int_{0}^{\frac{1}{2}} (1 - \xi) d\xi \\
 %&= \frac{1}{2} - \frac{1}{8} \\
 &= \frac{3}{8}
-\neq F_X \left( \frac{1}{2} \right) F_U(1) .
+\neq F_X (0.5) F_U(1) .
 \end{split}
 \end{equation*}
-Thus, $X$ and $U$ are clearly not independent.
+Clearly, random variables $X$ and $U$ are not independent.
 \end{example}
 
+
+\newpage
 
 \section{Sums of Random Variables}
 
@@ -278,7 +512,7 @@ f_U(u) = \begin{cases} u & 0 \leq u \leq 1, \\
 \end{example}
 
 \begin{example}[Sum of Exponential Random Variables]
-Suppose two numbers are independently selected at random from the postive real numbers according to an exponential distribution with parameter $\lambda$. 
+Suppose two numbers are independently selected at random from the positive real numbers according to an exponential distribution with parameter $\lambda$. 
 We wish to find the PDF of their sum.
 
 Let $X$ and $Y$ represent these two numbers, and denote their sum by $V = X + Y$.
@@ -355,7 +589,7 @@ M_Z (s) &= \Expect \left[ e^{sZ} \right]
 \end{equation*}
 
 \begin{example}[Sum of Gaussian Random Variables]
-Suppose $X$ and $Y$ are independent Gaussian varibles.
+Suppose $X$ and $Y$ are independent Gaussian variables.
 We denote the mean and variance of $X$ by $m_X$ and $\sigma_X^2$.
 Similarly, we represent the mean and variance of $Y$ by $m_Y$ and $\sigma_Y^2$.
 We wish to show that the sum $U = X + Y$ is Gaussian with parameters $m_X + m_Y$ and $\sigma_X^2 + \sigma_Y^2$.
