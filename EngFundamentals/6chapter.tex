@@ -5,34 +5,52 @@
 
 \begin{definition}
 Let $V$ be a vector space over the field $F$ and let $T$ be a linear operator on $V$.
-An \emph{eigenvalue} of $T$ is a scalar $\lambda \in F$ such that there exists a non-zero vector $\vecnot{v} \in V$ with $T \vecnot{v} = \lambda \vecnot{v}$.
-Any vector $\vecnot{v}$ such that $T \vecnot{v} = \lambda \vecnot{v}$ is called an \emph{eigenvector} of $T$ associated with the characteristic value $\lambda$.
+An \defn{eigenvalues}{eigenvalue} of $T$ is a scalar $\lambda \in F$ such that there exists a non-zero vector $\vecnot{v} \in V$ with $T \vecnot{v} = \lambda \vecnot{v}$.
+Any vector $\vecnot{v}$ such that $T \vecnot{v} = \lambda \vecnot{v}$ is called an \defn{eigenvalues}{eigenvector} of $T$ associated with the eigenvalue value $\lambda$.
 \end{definition}
 
 \begin{definition}
-If $A$ is an $n \times n$ matrix over the field $F$, a \emph{characteristic value} of $A$ is a scalar $\lambda \in F$ such that the matrix $(A - \lambda I)$ is singular.
+The \defn{eigenvalues}{spectrum} $\sigma(T)$ of a linear operator $T: V \rightarrow V$ is the set of all scalars such that the operator $(T-\lambda I)$ is not invertible.
 \end{definition}
 
-Let $A$ be a matrix over the field of real or complex numbers.
-A nonzero vector $\vecnot{v}$ is called a \emph{right eigenvector} for the eigenvalue $\lambda$ if $A \vecnot{v} = \lambda \vecnot{v}$.
-It is called a \emph{left eigenvector} if $\vecnot{v}^H A = \lambda \vecnot{v}^H$.
+\begin{example}
+Let $V=\ell_2$ be the Hilbert space of infinite square-summable sequences and $T:V\rightarrow V$ be the right-shift operator defined by
+\[ T (v_1,v_2,\ldots) = (0,v_1,v_2,\ldots). \]
+Since $T$ is not invertible, it follows that the scalar $0$ is in the spectrum of $T$.
+But, it is not an eigenvalue because $T \vecnot{v} = \vecnot{0}$ implies $\vecnot{v} = 0$ and an eigenvector must be a non-zero vector.
+In fact, this operator does not have any eigenvalues.
+\end{example}
 
-The polynomial $\chi_A (\lambda) = \det (\lambda I - A)$ is called the \emph{characteristic polynomial} of $A$.
-The equation $\det (A - \lambda I) = 0$ is called the characteristic equation of $A$.
-The set of roots of the characteristic polynomial $\chi_A (\lambda)$ is called the \emph{spectrum} of $A$, and is denoted $\sigma(A)$.
+For finite-dimensional spaces, things are quite a bit simpler.
 
-\begin{fact}
+\begin{theorem}
 Let $A$ be the matrix representation of a linear operator on a finite-dimensional vector space $V$, and let $\lambda$ be a scalar.
-The following are equivalent,
+The following are equivalent:
 \begin{enumerate}
-\item $\lambda$ is a characteristic value of $A$
+\item $\lambda$ is an eigenvalue of $A$
 \item the operator $(A - \lambda I)$ is singular
 \item $\det (A - \lambda I) = 0$.
 \end{enumerate}
-\end{fact}
+\end{theorem}
+\begin{proof}
+First, we show the first and third are equivalent.
+If $\lambda$ is an eigenvalue of $A$, then there exists a vector $\vecnot{v} \in V$ such that $A \vecnot{v} = \lambda \vecnot{v}$.
+Therefore, $(A-\lambda I)\vecnot{v} = 0$ and $(A - \lambda I)$ is singular.
+Likewise, if $(A-\lambda I)\vecnot{v} = 0$ for some $\vecnot{v} \in V$ and $\lambda \in F$, then $A \vecnot{v} = \lambda \vecnot{v}$.
+To show the second and third are equivalent, we note that the determinant of a matrix is zero iff it is singular.
+\end{proof}
 
-The latter criterion is important.
-It implies that every eigenvalue $\lambda$ is a root of the characteristic polynomial $\det( A - \lambda I )$.
+The last criterion is important.
+It implies that every eigenvalue $\lambda$ is a root of the polynomial 
+\[ \chi_A (\lambda) \triangleq \det (\lambda I - A) \]
+called the \defn{eigenvalues}{characteristic polynomial} of $A$.
+The equation $\det (A - \lambda I) = 0$ is called the characteristic equation of $A$.
+The spectrum $\sigma(A)$ is given by the roots of the characteristic polynomial $\chi_A (\lambda)$.
+
+Let $A$ be a matrix over the field of real or complex numbers.
+A nonzero vector $\vecnot{v}$ is called a \textbf{right eigenvector} for the eigenvalue $\lambda$ if $A \vecnot{v} = \lambda \vecnot{v}$.
+It is called a \textbf{left eigenvector} if $\vecnot{v}^H A = \lambda \vecnot{v}^H$.
+
 \begin{definition}
 Let $\lambda$ be an eigenvalue of the matrix $A$.
 The \defn{eigenvalues}{eigenspace} associated with $\lambda$ is the set $E_\lambda = \{ \vecnot{v} \in V | A \vecnot{v} = \lambda \vecnot{v} \}$.
@@ -43,6 +61,26 @@ The \defn{eigenvalues}{geometric multiplicity} of an eigenvalue $\lambda$ is equ
 \begin{theorem}
 If the eigenvalues of an $n \times n$ matrix are all distinct, then the eigenvectors of $A$ are linearly independent.
 \end{theorem}
+\begin{proof}
+We will prove the slightly stronger statement: if $\lambda_1 , \lambda_2 , \ldots, \lambda_k $ are distinct eigenvalues with eigenvectors $\vecnot{v}_1 , \vecnot{v}_2 , \ldots, \vecnot{v}_k$, then the eigenvectors are linearly independent.
+Suppose that
+\begin{equation*}
+\sum_{i=1}^k c_i \vecnot{v}_i = \vecnot{0}
+\end{equation*}
+for scalars $c_1, c_2, \ldots, c_k$.
+Notice that one can annihilate $\vecnot{v}_j$ from this equation by multiplying both sides by $(A-\lambda_j I)$.
+So, multiplying both sides by a product of these matrices gives
+\begin{align*}
+\prod_{j=1,j\neq m}^k (A-\lambda_j I) \sum_{i=1}^k c_j \vecnot{v}_i
+&= \left( \prod_{j=1,j\neq m}^k (A-\lambda_j I) \right) c_m \vecnot{v}_m \\
+&= c_m \prod_{j=1,j\neq m}^k (\lambda_m - \lambda_j) = \vecnot{0}.
+\end{align*}
+Since all eigenvalues are distinct, we must conclude that $c_m = 0$.
+Since the choice of $m$ was arbitrary, it follows that $c_1,c_2,\ldots,c_k$ are all zero.
+Therefore, the vectors $\vecnot{v}_1 , \vecnot{v}_2 , \ldots, \vecnot{v}_k$ are linearly independent.
+\end{proof}
+
+\iffalse
 \begin{proof}
 We will prove the slightly stronger statement: if $\lambda_1 , \lambda_2 , \ldots, \lambda_k $ are distinct eigenvalues with eigenvectors $\vecnot{v}_1 , \vecnot{v}_2 , \ldots, \vecnot{v}_k$, then the eigenvectors are linearly independent.
 The proof is by contradiction, so we suppose that the eigenvalues are distinct but $\vecnot{v}_1 , \vecnot{v}_2 , \ldots, \vecnot{v}_k$ are linearly dependent.
@@ -65,7 +103,7 @@ A \sum_{j=1}^m c_{i_j} \vecnot{v}_{i_j}
 \end{equation}
 We now take $\lambda_{i_1}$ times \eqref{equation:eigenvectors1}, and subtract it from the last equation to get
 \begin{equation*}
-\sum_{j=2}^m c_{i_j} (\lambda_{i_j} - \lambda_{i_1})
+\sum_{j=2}^m c_{i_j} (\lambda_{i_j} - \lambda_{i_1}) \vecnot{v}_{i_j}
 = \sum_{j=2}^m c_{i_j}' \vecnot{v}_{i_j}
  = \vecnot{0} .
 \end{equation*}
@@ -78,10 +116,11 @@ It is worth noting that we fail to get a contradiction only if all eigenvalues a
 If they are all the same, then all the $c_{i_j}'$ coefficients are zero and there is no linear combination.
 While it may seem a little strange this problem occurs only when all eigenvalues are equal, it is not too hard to see that a minimal set of linearly dependent eigenvalues will always have this property.
 \end{proof}
+\fi
 
 \begin{definition}
 Let $T$ be a linear operator on a finite-dimensional vector space $V$.
-The operator $T$ is \emph{diagonalizable} if there exists a basis $\mathcal{B}$ for $V$ such that each basis vector is an eigenvector of $T$,
+The operator $T$ is \defn{eigenvalues}{diagonalizable} if there exists a basis $\mathcal{B}$ for $V$ such that each basis vector is an eigenvector of $T$,
 \begin{equation*}
 \left[ T \right]_{\mathcal{B}}
 = \left[ \begin{array}{cccc}
@@ -98,8 +137,11 @@ Similarly, a matrix $A$ is diagonalizable if there exists an invertible matrix $
 A = S \Lambda S^{-1}
 \end{equation*}
 where $\Lambda$ is a diagonal matrix.
-We proceed to show that if an $n \times n$ matrix has $n$ linearly independent eigenvectors, then it is diagonalizable.
 
+\begin{theorem}
+If an $n \times n$ matrix has $n$ linearly independent eigenvectors, then it is diagonalizable.
+\end{theorem}
+\begin{proof}
 Suppose that the $n \times n$ matrix $A$ has $n$ linearly independent eigenvectors, which we denote by $\vecnot{v}_1, \ldots, \vecnot{v}_n$.
 Let the eigenvalue of $\vecnot{v}_i$ be denoted by $\lambda_i$ so that
 \begin{equation*}
@@ -145,15 +187,36 @@ A &= S \Lambda S^{-1} \\
 \Lambda &= S^{-1} A S .
 \end{align*}
 That is, the matrix $A$ is diagonalizable.
+\end{proof}
 
 The type of the transformation from $A$ to $\Lambda$ arises in a variety of contexts.
+\begin{definition}
 If there exists an invertible matrix $T$ such that
 \begin{equation*}
 A = T B T^{-1},
 \end{equation*}
-then matrices $A$ and $B$ are said to be \emph{similar}.
+then matrices $A$ and $B$ are said to be \defn{eigenvalues}{similar}.
+\end{definition}
+
 If $A$ and $B$ are similar, then they have the same eigenvalues.
 Similar matrices can be considered representations of the same linear operator using different bases.
+
+\begin{lemma}
+Let $A$ be an $n\times n$ Hermitian matrix (i.e., $A^H = A$).
+Then, the eigenvalues of $A$ are real and the eigenvectors association with distinct eigenvalues are orthogonal.
+\end{lemma}
+\begin{proof}
+First, we notice that $A = A^H$ implies $\vecnot{v}^H A \vecnot{v}$ is real because
+\[ \overline{s} = \left( \vecnot{v}^H A \vecnot{v} \right)^H = \vecnot{v}^H A^H \vecnot{v} = \vecnot{v}^H A \vecnot{v} = s. \]
+If $A \vecnot{v} = \lambda_1 \vecnot{v}$, left multiplication by $\vecnot{v}^H$ shows that
+\[ \vecnot{v}^H A \vecnot{v} = \lambda_1 \vecnot{v}^H \vecnot{v} = \lambda_1 \| \vecnot{v} \|. \]
+Therefore, $\lambda_1$ is real.
+Next, assume that $A \vecnot{w} = \lambda_2 \vecnot{w}$ and $\lambda_2 \neq \lambda_1$.
+Then, we have
+\[ \lambda_1 \lambda_2 \vecnot{w}^H \vecnot{v} = \vecnot{w}^H A^H A \vecnot{v} = \vecnot{w} A^2 \vecnot{v} = \lambda_1^2 \vecnot{w}^H \vecnot{v}. \]
+We also assume, without loss of generality, that $\lambda_1 \neq 0$.
+Therefore, if $\lambda_2 \neq \lambda_1$, then $\vecnot{w}^H \vecnot{v} = 0$ and the eigenvectors are orthogonal.
+\end{proof}
 
 \section{Applications of Eigenvalues}
 
@@ -165,8 +228,8 @@ It is well known that the solution of the 1st-order linear differential equation
 is given by
 \[ x(t) = e^{at} x(0) + C. \]
 
-It turns out that this formula can be extended to coupled equations.
-Let $A$ be a diagonalizable matrix and consider the 1st order linear differential equation
+It turns out that this formula can be extended to coupled differential equations.
+Let $A$ be a diagonalizable matrix and consider the the set of 1st order linear differential equations defined by
 \[ \frac{d}{dt} \vecnot{x}(t) = A \vecnot{x}(t). \]
 Using the decomposition $A = S \Lambda S^{-1}$ and the substitution $\vecnot{x}(t) = S \vecnot{y}(t)$, we find that
 \begin{align*}
@@ -182,7 +245,8 @@ Solving each individual equation gives
 and we can group them together in matrix form as
 \[ \vecnot{y}(t) = e^{\Lambda t} \vecnot{y}(0) + \vecnot{c}. \]
 In terms of $\vecnot{x}(t)$, this gives
-\[ \vecnot{x}(t) = S e^{\Lambda t} S^{-1} \vecnot{x}(0) + \vecnot{c}'. \]
+\[ \vecnot{x}(t) = S e^{\Lambda t} S^{-1} \vecnot{x}(0) + \vecnot{c}', \]
+where $\vecnot{c}' = S \vecnot{c}$.
 In the next section, we will see this is equal to $ \vecnot{x}(t) = e^{A t} \vecnot{x}(0) + \vecnot{c}'$.
 
 \subsection{Functions of a Matrix}
@@ -408,13 +472,13 @@ Therefore, $\| A^k \| \rightarrow 0$ and $A$ is convergent.
 On the other hand, if $\rho(A) \geq 1$, then there is a Jordan block $J_i$ with $| \lambda | \geq 1$ and $| [ J_i^k ]_{1,1} | \geq 1$ for all $k\geq 0$.
 \end{proof}
 
-In many cases, the structure of a large power of a matrix also has nice properties.
+In some cases, one can make stronger statements about large powers of a matrix.
 
 \begin{definition}
 A matrix $A$ has a \textbf{unique eigenvalue of maximum modulus} if the Jordan block associated with that eigenvalue is $1\times 1$ and all other Jordan blocks are associated with eigenvalues of smaller magnitude.
 \end{definition}
 
-The following theorem shows that a normalized matrix of this type converges to limit.
+The following theorem shows that a properly normalized matrix of this type converges to a non-zero limit.
 
 \begin{theorem}
 If $A$ has a unique eigenvalue $\lambda_1$ of maximum modulus, then

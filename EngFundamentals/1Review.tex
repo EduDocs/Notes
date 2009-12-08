@@ -390,12 +390,13 @@ There exists a sequence of points of $A$ converging to $x$ if and only if $x \in
 \end{theorem}
 \begin{proof}
 Suppose $x_n \rightarrow x$, where $x_n \in A$.
-By Theorem~\ref{theorem:ClosureConditions}, every neighborhood $O$ of $x$ contains a point of $A$, so $x \in \Closure{A}$.
-Let $d$ be a metric for the topology of $X$.
+Then, for every open set $O$ containing $x$, there is an $N$, such that $x_n \in O$ for all $n>N$.
+By Theorem~\ref{theorem:ClosureConditions}, this implies that $x \in \Closure{A}$.
+Let $d$ be a metric for the topology of $X$ and $x$ be a point in $\Closure{A}$.
 For each positive integer $n$, consider the neighborhood $B_d \left( x, \frac{1}{n} \right)$.
-Choose $x_n$ to be a point of $A \cap B_d \left( x, \frac{1}{n} \right)$,
-then the sequence $x_1, x_2, \ldots$ converges to $x$.
-Notice that the ``if'' proof holds for any topological space, while ``only if'' requires a metric.
+Since $x\in \Closure{A}$, the set $A \cap B_d \left( x, \frac{1}{n} \right)$ is not empty and we choose $x_n$ to be any point in this set.
+It follows that the sequence $x_1, x_2, \ldots$ converges to $x$.
+Notice that the ``only if'' proof holds for any topological space, while ``if'' requires a metric.
 \end{proof}
 
 \begin{theorem}

@@ -13,8 +13,9 @@ That is, every square matrix is similar to an upper-triangular matrix.
 \end{lemma}
 
 \begin{proof}
-We proof this lemma by induction.
-Suppose that the result holds for $k \leq n-1$ and let $A \in \ComplexNumbers^{n \times n}$.
+We proof this lemma by induction on the size $n$ of the matrix.
+Since it is clearly true for scalars (i.e., matrices of size $n=1$), the base case is trivial.
+Now, suppose that the result holds for all $k=1,2,\ldots,n-1$ and let $A \in \ComplexNumbers^{n \times n}$.
 There exists an eigenvector $\vecnot{u}$ of $A$ such that $\left\| \vecnot{u} \right\|_2 = 1$.
 Using the Gram-Schmidt procedure, it is possible to construct an orthonormal basis $\mathcal{B} = \vecnot{x}_1, \ldots, \vecnot{x}_n$ for $\ComplexNumbers^n$, with $\vecnot{x}_1 = \vecnot{u}_1$.
 Define the matrix $U_n$ by

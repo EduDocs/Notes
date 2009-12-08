@@ -1,28 +1,40 @@
-\chapter{Representations and Approximations}
+\chapter{Representation and Approximation}
 
 \section{Best Approximation}
-
-Orthogonal projections are very useful in many contexts.
-In essence, the Gram-Schmidt process is a sequence of orthogonal projections.
-
-Suppose $W$ is a subspace of an inner-product space $V$, and let $\vecnot{v}$ be an arbitrary vector in $V$.
-Consider the problem of finding a vector $\vecnot{w} \in W$ such that $\left\| \vecnot{v} - \vecnot{w} \right\|$ is minimized.
-The vector $\vecnot{w} \in W$ is a \defn{inner-product space}{best approximation} to $\vecnot{v} \in V$ if
+\index{inner-product space!best approximation}
+Suppose $W$ is a subspace of a Banach space $V$.
+For any $\vecnot{v} \in V$, consider the problem of finding a vector $\vecnot{w} \in W$ such that $\left\| \vecnot{v} - \vecnot{w} \right\|$ is as small as possible.
+\begin{definition}
+The vector $\vecnot{w} \in W$ is a \defn{Banach space}{best approximation} of $\vecnot{v} \in V$ by vectors in $W$ if
 \begin{equation*}
 \left\| \vecnot{v} - \vecnot{w} \right\| \leq \left\| \vecnot{v} - \vecnot{w}' \right\|
 \end{equation*}
-for every vector $\vecnot{w}' \in W$.
-
-\begin{theorem} \label{theorem:OrthogonalProjection}
-Suppose $W$ is a subspace of an inner-product space $V$, and let $\vecnot{v}$ be a vector in $V$.
-\begin{enumerate}
-\item The vector $\vecnot{w} \in W$ is a best approximation of $\vecnot{v} \in V$ by vectors in $W$ if and only if $\vecnot{v} - \vecnot{w}$ is orthogonal to every vector in $W$.
-\item If a best approximation to $\vecnot{v} \in V$ by vectors in $W$ exists, it is unique.
-\item If $W$ is finite-dimensional and $\vecnot{w}_1, \ldots, \vecnot{w}_n$ is an orthogonal basis for $W$, then
+for all $\vecnot{w}' \in W$.
+\end{definition}
+\noindent If $W$ is spanned by the vectors $\vecnot{w}_1, \ldots, \vecnot{w}_n \in V$, then we can write
 \begin{equation*}
-\vecnot{w} = \sum_{i=1}^n \frac{ \left\langle \vecnot{v} | \vecnot{w}_i \right\rangle }{ \left\| \vecnot{w}_i \right\|^2 } \vecnot{w}_i
+\begin{split}
+\vecnot{v} &= \vecnot{w} + \vecnot{e} \\
+&= s_1 \vecnot{w}_1 + \cdots + s_n \vecnot{w}_n + \vecnot{e},
+\end{split}
 \end{equation*}
-is the best approximation to $\vecnot{v}$ by vectors in $W$.
+where $\vecnot{e}$ is the approximation error.
+
+This problem is, in general, rather difficult.
+However, if the norm $\| \cdot \|$ corresponds to the induced norm of an inner product, then one can use orthogonal projection and the problem is greatly simplified.
+This chapter focuses mainly on computing the best approximation of arbitrary vectors in a Hilbert space.
+\begin{theorem} \label{theorem:OrthogonalProjection}
+Suppose $W$ is a subspace of a Hilbert space $V$ and $\vecnot{v}$ is a vector in $V$.
+Then, we have the following:
+\begin{enumerate}
+\item The vector $\vecnot{w} \in W$ is the best approximation of $\vecnot{v} \in V$ by vectors in $W$ if and only if $\vecnot{v} - \vecnot{w}$ is orthogonal to every vector in $W$.
+\item If a best approximation of $\vecnot{v} \in V$ by vectors in $W$ exists, it is unique.
+\item If $W$ has a countable orthogonal basis $\vecnot{w}_1, \vecnot{w}_2, \ldots$ and is closed, then
+\begin{equation}
+\label{equation:OrthogonalProjectionOrthogonalVectors}
+\vecnot{w} = \sum_{i=1}^\infty \frac{ \left\langle \vecnot{v} | \vecnot{w}_i \right\rangle }{ \left\| \vecnot{w}_i \right\|^2 } \vecnot{w}_i
+\end{equation}
+is the best approximation of $\vecnot{v}$ by vectors in $W$.
 \end{enumerate}
 \end{theorem}
 \begin{proof}
@@ -55,7 +67,7 @@ Note that every vector in $W$ can be expressed as $\vecnot{w} - \vecnot{w}'$ whe
 for every $\vecnot{w}'' \in W$.
 If $\vecnot{w}'$ is in $W$ and $\vecnot{w}' \neq \vecnot{w}$ then we may take
 \begin{equation*}
-\vecnot{w}'' = - \frac{ \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 } \left( \vecnot{w} - \vecnot{w}' \right).
+\vecnot{w}'' = - \frac{ \left\langle  \vecnot{w} - \vecnot{w}' | \vecnot{v} - \vecnot{w} \right\rangle }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 } \left( \vecnot{w} - \vecnot{w}' \right).
 \end{equation*}
 Inequality~\eqref{equation:InequalityOrthogonalVectors} then reduces to the statement
 \begin{equation*}
@@ -71,12 +83,8 @@ Suppose $\vecnot{w}, \vecnot{w}' \in W$ are best approximations of $\vecnot{v}$ 
 Then $\left\| \vecnot{v} - \vecnot{w} \right\| = \left\| \vecnot{v} - \vecnot{w}' \right\|$ and \eqref{equation:OrthogonalVector} implies that $\left\| \vecnot{w} - \vecnot{w}' \right\| = 0$.
 That is, if a best approximation exists then it is unique.
 
-Assume that $W$ is finite-dimensional and let $\vecnot{w}_1, \ldots, \vecnot{w}_n$ be an orthonormal basis for $W$.
-Furthermore, let
-\begin{equation*}
-\vecnot{w} = \sum_{i=1}^n \frac{ \left\langle \vecnot{v} | \vecnot{w}_i \right\rangle }{ \left\| \vecnot{w}_i \right\|^2 } \vecnot{w}_i .
-\end{equation*}
-Then $\vecnot{v} -\vecnot{w}$ is orthogonal to $\vecnot{w}_j$ for $j = 1, \ldots, n$, i.e.,
+Assume that $W$ is closed and has a countable orthogonal basis $\vecnot{w}_1, \ldots, \vecnot{w}_n$ and let $\vecnot{w}$ be defined by \eqref{equation:OrthogonalProjectionOrthogonalVectors}.
+Then $\vecnot{v} -\vecnot{w}$ is orthogonal to $\vecnot{w}_j$ for $j \in \mathbb{N}$, i.e.,
 \begin{equation*}
 \begin{split}
 \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w}_j \right\rangle
@@ -87,13 +95,16 @@ Then $\vecnot{v} -\vecnot{w}$ is orthogonal to $\vecnot{w}_j$ for $j = 1, \ldots
 = 0.
 \end{split}
 \end{equation*}
-That is, $\vecnot{v} - \vecnot{w}$ is orthogonal to every vector in $W$ and therefore $\vecnot{w}$ is the best approximation to $\vecnot{v}$ by vectors in $W$.
+That is, $\vecnot{v} - \vecnot{w}$ is orthogonal to every vector in $W$ and therefore $\vecnot{w}$ is the best approximation of $\vecnot{v}$ by vectors in $W$.
 \end{proof}
 
 \begin{definition}
-Whenever the vector $\vecnot{w}$ in Theorem~\ref{theorem:OrthogonalProjection} exists, it is equal to the \emph{orthogonal projection of $\vecnot{v}$ onto $W$}.
-If every vector in $V$ has an orthogonal projection onto $W$, then we can define a mapping $E: V \rightarrow W$ that assigns to each vector in $V$ its orthogonal projection onto $W$ is called the \emph{orthogonal projection of $V$ onto $W$}.
+Whenever the vector $\vecnot{w}$ in Theorem~\ref{theorem:OrthogonalProjection} exists, it is called the \textbf{orthogonal projection} of $\vecnot{v}$ onto $W$.
+If every vector in $V$ has an orthogonal projection onto $W$, then the mapping $E: V \rightarrow W$, which assigns to each vector in $V$ its orthogonal projection onto $W$, is called the orthogonal projection of $V$ onto $W$.
 \end{definition}
+
+One can use Theorem~\ref{theorem:OrthogonalSubspaceDirectSum} to verify that this is consistent with the concept of orthogonal projection from Definition~\ref{definition:OrthogonalProjection}.
+
 
 \begin{problem}
 Let $W$ be the subspace of $\RealNumbers^2$ spanned by the vector $(1,2)$.
@@ -110,53 +121,51 @@ E = \left[ \begin{array}{cc} 1 & 0 \\ 0 & 0 \end{array} \right].
 \end{enumerate}
 \end{problem}
 
-\begin{corollary}
-Let $V$ be an inner-product space, $W$ be a finite-dimensional subspace, and $E$ be the orthogonal projection of $V$ on $W$.
-Then the mapping
-\begin{equation*}
-\vecnot{v} \mapsto \vecnot{v} - E \vecnot{v}
-\end{equation*}
-is the orthogonal projection of $V$ on $W^{\bot}$.
-\end{corollary}
-\begin{proof}
-Let $\vecnot{v}$ be any vector in $V$.
-Then, $\vecnot{v} - E\vecnot{v}$ is in $W^{\bot}$, and for any $\vecnot{u}$ in $W^{\bot}$, $\vecnot{v} - \vecnot{u} = E \vecnot{v} + \left( \vecnot{v} - E \vecnot{v} - \vecnot{u} \right)$.
-Since $E \vecnot{v} \in W$ and $\vecnot{v} - E \vecnot{v} - \vecnot{u} \in W^{\bot}$, it follows that
-\begin{equation*}
-\begin{split}
-\left\| \vecnot{v} - \vecnot{u} \right\|^2 &= \left\| E \vecnot{v} \right\|^2 + \left\| \vecnot{v} - E \vecnot{v} - \vecnot{u} \right\|^2 \\
-&\geq \left\| \vecnot{v} - \left( \vecnot{v} - E \vecnot{v} \right) \right\|^2
-\end{split}
-\end{equation*}
-with strict inequality when $\vecnot{u} \neq \vecnot{v} - E \vecnot{v}$.
-Thus, $\vecnot{v} - E \vecnot{v}$ is the best approximation to $\vecnot{v}$ by vectors in $W^{\bot}$.
-\end{proof}
+%\begin{corollary}
+%Let $V$ be an inner-product space, $W$ be a finite-dimensional subspace, and $E$ be the orthogonal projection of $V$ on $W$.
+%Then the mapping
+%\begin{equation*}
+%\vecnot{v} \mapsto \vecnot{v} - E \vecnot{v}
+%\end{equation*}
+%is the orthogonal projection of $V$ on $W^{\bot}$.
+%\end{corollary}
+%\begin{proof}
+%Let $\vecnot{v}$ be any vector in $V$.
+%Then, $\vecnot{v} - E\vecnot{v}$ is in $W^{\bot}$, and for any $\vecnot{u}$ in $W^{\bot}$, $\vecnot{v} - \vecnot{u} = E \vecnot{v} + \left( \vecnot{v} - E \vecnot{v} - \vecnot{u} \right)$.
+%Since $E \vecnot{v} \in W$ and $\vecnot{v} - E \vecnot{v} - \vecnot{u} \in W^{\bot}$, it follows that
+%\begin{equation*}
+%\begin{split}
+%\left\| \vecnot{v} - \vecnot{u} \right\|^2 &= \left\| E \vecnot{v} \right\|^2 + \left\| \vecnot{v} - E \vecnot{v} - \vecnot{u} \right\|^2 \\
+%&\geq \left\| \vecnot{v} - \left( \vecnot{v} - E \vecnot{v} \right) \right\|^2
+%\end{split}
+%\end{equation*}
+%with strict inequality when $\vecnot{u} \neq \vecnot{v} - E \vecnot{v}$.
+%Thus, $\vecnot{v} - E \vecnot{v}$ is the best approximation of $\vecnot{v}$ by vectors in $W^{\bot}$.
+%\end{proof}
 
 \begin{theorem} \label{theorem:OrthogonalSubspaceDirectSum}
-Suppose $V$ is an inner-product space.
-Let $W$ be a finite-dimensional subspace of $V$ and let $E$ denote the orthogonal projection of $V$ on $W$.
-Then $E$ is an idempotent linear transformation of $V$ onto $W$, $E \vecnot{w}' = \vecnot{0}\,$ iff $\vecnot{w}' \in W^{\bot}$, and
+Suppose $W$ is a closed subspace of a separable Hilbert space $V$ and let $E$ denote the orthogonal projection of $V$ on $W$.
+Then, $E$ is an idempotent linear transformation of $V$ onto $W$, $E \vecnot{w}' = \vecnot{0}\,$ iff $\vecnot{w}' \in W^{\bot}$, and
 \begin{equation*}
 V = W \oplus W^{\bot}.
 \end{equation*}
 \end{theorem}
 \begin{proof}
 Let $\vecnot{v}$ be any vector in $V$.
-Then $E \vecnot{v}$ is the best approximation of $\vecnot{v}$ by vectors in $W$.
-If $\vecnot{v} \in W$ then $E \vecnot{v} = \vecnot{v}$.
-It follows that $E \left( E \vecnot{v} \right) = E \vecnot{v}$ for any $\vecnot{v} \in V$ since $E \vecnot{v} \in W$.
+Since $E \vecnot{v}$ is the best approximation of $\vecnot{v}$ by vectors in $W$, it follows that $\vecnot{v} \in W$ implies $E \vecnot{v} = \vecnot{v}$.
+Therefore, $E \left( E \vecnot{v} \right) = E \vecnot{v}$ for any $\vecnot{v} \in V$ since $E \vecnot{v} \in W$.
 That is, $E^2 = E$ and $E$ is idempotent.
 
-To show that $E$ is a linear transformation, let $\{ \vecnot{w}_1 , \vecnot{w}_2 , \ldots , \vecnot{w}_n \}$ be an orthonormal basis for $W$ (whose existence follows from Corollary~\ref{cor:orthonormal_basis}).
+To show that $E$ is a linear transformation, let $\vecnot{w}_1 , \vecnot{w}_2 , \ldots$ be a countable orthonormal basis for $W$ (whose existence follows from Theorem~\ref{theorem:SeparableHilbertSpace}).
 Using part 3 of Theorem~\ref{theorem:OrthogonalProjection}, we find that
 \begin{align*}
 E \left( s_1 \vecnot{v}_1 + \vecnot{v}_2 \right)
-& = \sum_{i=1}^n \langle  s_1 \vecnot{v}_1 + \vecnot{v}_2 | \vecnot{w}_i \rangle \vecnot{w}_i \\
-& = s_1 \sum_{i=1}^n \langle  \vecnot{v}_1 | \vecnot{w}_i \rangle \vecnot{w}_i + \sum_{i=1}^n \langle  \vecnot{v}_2 | \vecnot{w}_i \rangle \vecnot{w}_i \\
+& = \sum_{i=1}^\infty \langle  s_1 \vecnot{v}_1 + \vecnot{v}_2 | \vecnot{w}_i \rangle \vecnot{w}_i \\
+& = s_1 \sum_{i=1}^\infty \langle  \vecnot{v}_1 | \vecnot{w}_i \rangle \vecnot{w}_i + \sum_{i=1}^\infty \langle  \vecnot{v}_2 | \vecnot{w}_i \rangle \vecnot{w}_i \\
 & = s_1 E \vecnot{v}_1 + E \vecnot{v}_2.
 \end{align*}
 Therefore, $E$ is a linear transformation.
-It also follows that $E \vecnot{w}' = \vecnot{0}$ iff $\vecnot{w}' \in W^{\bot}$ because $W^{\bot}$ can be defined by the fact that $\langle \vecnot{w}' | \vecnot{w}_i \rangle = 0$ for $i=1,2,\ldots,n$.
+It also follows that $E \vecnot{w}' = \vecnot{0}$ iff $\vecnot{w}' \in W^{\bot}$ because $W^{\bot}$ can be defined by the fact that $\langle \vecnot{w}' | \vecnot{w}_i \rangle = 0$ for $i\in \mathbb{N}$.
 
 \iffalse
 To show that $E$ is a linear transformation, consider vectors $\vecnot{v}_1, \vecnot{v}_2 \in V$ and scalar $s \in F$.
@@ -189,83 +198,66 @@ Hence $V$ is the direct sum of $W$ and $W^{\bot}$.
 Again, let $\vecnot{v} \in V$ and recall that (by Theorem~\ref{theorem:OrthogonalProjection}) $E \vecnot{v}$ is the unique vector in $W$ such that $\vecnot{v} - E \vecnot{v}$ is in $W^{\bot}$.
 Therefore, the equation $\vecnot{v} = E \vecnot{v} + \left( \vecnot{v} - E \vecnot{v} \right)$ gives a unique decomposition of $\vecnot{v}$ into $E \vecnot{v} \in W$ and $\vecnot{v} - E \vecnot{v} \in W^{\bot}$.
 This unique decomposition implies that $V$ is the direct sum of $W$ and $W^{\bot}$.
-Of course, from the definition of $W^{\bot}$ it follows that
+Lastly, one finds from the definition of $W^{\bot}$ that
 \[W \cap W^{\bot} = \left\{ \vecnot{u} \in W | \langle \vecnot{u} | \vecnot{w} \rangle =0 \; \forall \; \vecnot{w}\in W \right\}  \subseteq \left\{ \vecnot{u} \in W | \langle \vecnot{u} | \vecnot{u} \rangle =0 \right\}  = \{ \vecnot{0} \} .\]
 \end{proof}
 
 \begin{corollary}
-Let $W$ be a finite-dimensional subspace of an inner-product space $V$, and let $E$ be the orthogonal projection of $V$ on $W$.
+Let $W$ be a closed subspace of a separable Hilbert space $V$ and $E$ be the orthogonal projection of $V$ on $W$.
 Then $I - E$ is the orthogonal projection of $V$ on $W^{\bot}$.
-It is an idempotent linear transformation of $V$ onto $W^{\bot}$ with nullspace $W$.
 \end{corollary}
+\begin{proof}
+This follows directly from the orthogonal decomposition in Theorem~\ref{theorem:OrthogonalSubspaceDirectSum}.
+One can also verify that $I-E$ is an idempotent linear transformation of $V$ with range $W^{\bot}$ and nullspace $W$.
+From Definition \ref{definition:OrthogonalProjection}, we see that $I-E$ is an orthogonal projection.
+\end{proof}
 
 Theorem~\ref{theorem:OrthogonalSubspaceDirectSum} also implies the following result, known as Bessel's inequality.
 
 \begin{corollary}
-Let $\vecnot{v}_1, \ldots, \vecnot{v}_n$ be an orthogonal set of distinct, non-zero vectors in an inner-product space $V$.
+Let $\vecnot{v}_1, \vecnot{v}_2, \ldots$ be a countable orthogonal set of distinct non-zero vectors in an inner-product space $V$.
 If $\vecnot{v} \in V$ then
 \begin{equation*}
-\sum_{i=1}^n \frac{ \left| \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle \right|^2 }{ \left\| \vecnot{v}_i \right\|^2 }
+\sum_{i=1}^\infty \frac{ \left| \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle \right|^2 }{ \left\| \vecnot{v}_i \right\|^2 }
 \leq \left\| \vecnot{v} \right\|^2.
 \end{equation*}
 Moreover, equality holds if and only if
 \begin{equation*}
-\vecnot{v} = \sum_{i=1}^n \frac{ \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle }{ \left\| \vecnot{v}_i \right\|^2 } \vecnot{v}_i.
+\vecnot{v} = \sum_{i=1}^\infty \frac{ \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle }{ \left\| \vecnot{v}_i \right\|^2 } \vecnot{v}_i.
 \end{equation*}
 \end{corollary}
 \begin{proof}
 Define
 \begin{equation*}
-\vecnot{w} = \sum_{i=1}^n \frac{ \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle }{ \left\| \vecnot{v}_i \right\|^2 } \vecnot{v}_i.
+\vecnot{w} = \sum_{i=1}^\infty \frac{ \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle }{ \left\| \vecnot{v}_i \right\|^2 } \vecnot{v}_i.
 \end{equation*}
 Then $\vecnot{v} = \vecnot{w} + \vecnot{u}$, where $\left\langle \vecnot{w} | \vecnot{u} \right\rangle = 0$ and $\left\| \vecnot{v} \right\|^2 = \left\| \vecnot{w} \right\|^2 + \left\| \vecnot{u} \right\|^2$.
 Noting that
 \begin{equation*}
 \left\| \vecnot{w} \right\|^2
-= \sum_{i=1}^n \frac{ \left| \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle \right|^2 }{ \left\| \vecnot{v}_i \right\|^2 },
+= \sum_{i=1}^\infty \frac{ \left| \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle \right|^2 }{ \left\| \vecnot{v}_i \right\|^2 },
 \end{equation*}
-we obtain the desired result.
+we obtain the desired result, with equality iff $\vecnot{u} = \vecnot{0}$.
 \end{proof}
 
-If $\vecnot{v}_1, \ldots, \vecnot{v}_n$ is an orthonormal set, Bessel's inequality states that
+If $\vecnot{v}_1, \vecnot{v}_2, \ldots$ is an orthonormal set, Bessel's inequality states that
 \begin{equation*}
-\sum_{i=1}^n \left| \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle \right|^2 \leq \left\| \vecnot{v} \right\|^2.
+\sum_{i=1}^\infty \left| \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle \right|^2 \leq \left\| \vecnot{v} \right\|^2.
 \end{equation*}
-It follows that the vector $\vecnot{v}$ is in the subspace spanned by $\vecnot{v}_1, \ldots, \vecnot{v}_n$ if an only if
+It follows that the vector $\vecnot{v}$ is in the closure of the subspace spanned by $\vecnot{v}_1, \vecnot{v}_2, \ldots$ if an only if
 \begin{equation*}
-\vecnot{v} = \sum_{i=1}^n \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle \vecnot{v}_i.
+\vecnot{v} = \sum_{i=1}^\infty \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle \vecnot{v}_i.
 \end{equation*}
 
 
-\section{Approximations in Hilbert Spaces}
-\index{Hilbert space}
+\section{Computing Approximations in Hilbert Space}
 
-Suppose $V$ is a normed space and let $\vecnot{w}_1, \ldots, \vecnot{w}_n \in V$ be a sequence of linearly independent vectors.
-Denote the span of $\vecnot{w}_1, \ldots, \vecnot{w}_n$ by $W$.
-Consider the problem of finding a vector $\hat{\vecnot{v}} \in W$ such that $\left\| \vecnot{v} - \hat{\vecnot{v}} \right\|$ is minimized.
-Recall that the vector
-\begin{equation*}
-\hat{\vecnot{v}} = s_1 \vecnot{w}_1 + \cdots + s_n \vecnot{w}_n
-\end{equation*}
-is said to be a \defn{Hilbert space}{best approximation} to $\vecnot{v} \in V$ by vectors in $W$.
-We can write
-\begin{equation*}
-\begin{split}
-\vecnot{v} &= \hat{\vecnot{v}} + \vecnot{e} \\
-&= s_1 \vecnot{w}_1 + \cdots + s_n \vecnot{w}_n + \vecnot{e},
-\end{split}
-\end{equation*}
-where $\vecnot{e}$ is the approximation error.
+\subsection{Normal Equations}
 
-This problem is, in general, very difficult.
-However, if the norm $\| \cdot \|$ corresponds to the induced norm of an inner product, the problem greatly simplifies as it becomes possible to use the properties of the projection theorem.
-For instance, if $\vecnot{w}_1, \ldots, \vecnot{w}_n$ is an orthogonal set then
-\begin{equation} \label{equation:OrthogonalProjectionOrthogonalVectors}
-\hat{\vecnot{v}} = \sum_{i=1}^n \frac{ \left\langle \vecnot{v} | \vecnot{w}_i \right\rangle }{ \left\| \vecnot{w}_i \right\|^2 } \vecnot{w}_i.
-\end{equation}
+Suppose $V$ is a Hilbert space the subspace $W$ is spanned by $\vecnot{w}_1, \ldots, \vecnot{w}_n \in V$.
 Consider the situation where the sequence $\vecnot{w}_1, \ldots, \vecnot{w}_n$ is linearly independent, but not orthogonal.
 In this case, it is not possible to apply \eqref{equation:OrthogonalProjectionOrthogonalVectors} directly.
-It is nevertheless possible to obtain a similar expression for $\hat{\vecnot{v}}$.
+It is nevertheless possible to obtain a similar expression for the best approximation of $\vecnot{v}$ by vectors in $W$.
 Theorem~\ref{theorem:OrthogonalProjection} asserts that $\hat{\vecnot{v}} \in W$ is a best approximation of $\vecnot{v} \in V$ by vectors in $W$ if and only if $\vecnot{v} - \hat{\vecnot{v}}$ is orthogonal to every vector in $W$.
 This implies that
 \begin{equation*}
@@ -346,6 +338,7 @@ A matrix $M\in F^{n \times n}$ is \defn{matrix}{positive-definite} if $\vecnot{v
 \end{definition}
 
 An important aspect of positive-definite matrices is that they are always invertible.
+This follows from noting that $M\vecnot{v} = \vecnot{0}$ for $\vecnot{v}\neq\vecnot{0}$ implies that $\vecnot{v}^H M \vecnot{v} = \vecnot{0}$ and contradicts the definition of positive definite.
 
 \begin{theorem}
 A Grammian matrix $G$ is always positive-semidefinite.
@@ -388,12 +381,12 @@ Therefore, the sequence of vectors $\vecnot{w}_1, \ldots, \vecnot{w}_n$ is linea
 
 \begin{theorem}
 Let $\vecnot{w}_1, \ldots, \vecnot{w}_n$ be vectors in an inner-product space $V$ and denote the span of $\vecnot{w}_1, \ldots, \vecnot{w}_n$ by $W$.
-For any vector $\vecnot{v} \in V$, the norm of the error vector $\vecnot{e}$ given by
+For any vector $\vecnot{v} \in V$, the norm of the error vector
 \begin{equation} \label{equation:OrthogonalProjectionError}
 \vecnot{e} = \vecnot{v} - \sum_{i=1}^n s_i \vecnot{w}_i
 \end{equation}
 is minimized when the error vector $\vecnot{e}$ is orthogonal to every vector in $W$.
-If $\hat{\vecnot{v}}$ denotes the \defn{inner-product space}{least-squares} approximation to $\vecnot{v}$ then
+If $\hat{\vecnot{v}}$ denotes the \defn{inner-product space}{least-squares} approximation of $\vecnot{v}$ then
 \begin{equation*}
 \left\langle \vecnot{v} - \hat{\vecnot{v}} | \vecnot{w}_j \right\rangle = 0
 \end{equation*}
@@ -460,14 +453,17 @@ That is, $\left\| \vecnot{e} \right\|^2$ is minimized if and only if $\vecnot{v}
 Note that it is also possible to prove this theorem using the Cauchy-Schwarz inequality or the projection theorem.
 
 
-\section{Matrix Representations}
+\section{Approximation for Systems of Linear Equations}
 
-For finite-dimensional vector spaces, powerful matrix representations can be derived for least-squares problems.
-Suppose that the approximation vector is given by
+\subsection{Matrix Representation}
+
+For finite-dimensional vector spaces, least-squares (i.e., best approximation) problems have natural matrix representations.
+Suppose $V = F^m$ and $\vecnot{w}_1, \vecnot{w}_2, \ldots, \vecnot{w}_n \in V$ are column vectors.
+Then, the approximation vector is given by
 \begin{equation*}
 \hat{\vecnot{v}} = \sum_{i=1}^n s_i \vecnot{w}_i
-= \left[ \vecnot{w}_1 \cdots \vecnot{w}_n \right]
-\left[ \begin{array}{c} s_1 \\ \vdots \\ s_n \end{array} \right] .
+%= \left[ \vecnot{w}_1 \cdots \vecnot{w}_n \right]
+%\left[ \begin{array}{c} s_1 \\ \vdots \\ s_n \end{array} \right] .
 \end{equation*}
 In matrix form, we have
 \begin{equation*}
@@ -512,12 +508,12 @@ The optimal solution for the least-squares problem is therefore given by
 \end{equation*}
 The matrix $\left( A^H A \right)^{-1} A^H$ is often called the \defn{matrix}{pseudoinverse}.
 
-The best approximation to $\vecnot{v} \in V$ by vectors in $W$ is equal to
+The best approximation of $\vecnot{v} \in V$ by vectors in $W$ is equal to
 \begin{equation*}
 \hat{\vecnot{v}} = A \vecnot{s} = A \left( A^H A \right)^{-1} A^H \vecnot{v} .
 \end{equation*}
-The matrix $P = A \left( A^H A \right)^{-1} A^H$ is a \defn{matrix}{projection matrix}.
-The matrix $P$ projects onto the range of $A$; that is, it projects onto the subspace spanned by the columns of $A$.
+The matrix $P = A \left( A^H A \right)^{-1} A^H$ is called the \defn{matrix}{projection matrix} for the range of $A$.
+It defines an orthogonal projection onto the range of $A$ (i.e., the subspace spanned by the columns of $A$).
 
 
 \subsection{Generalized Inner Products}
@@ -576,7 +572,7 @@ We can then find an explicit expression for the approximation error,
 \end{equation*}
 
 
-\section{Applications and Examples}
+\section{Applications and Examples in Signal Processing}
 \index{applications}
 
 \subsection{Linear Regression}
@@ -615,137 +611,227 @@ The line that minimizes the sums of the squares of the \emph{vertical} distances
 \end{equation*}
 
 
-\subsection{Minimum Mean-Squared Estimation}
+\subsection{Linear Minimum Mean-Squared Estimation}
 
-Let $Z_1, \ldots, Z_n$ be a set of zero-mean random variables.
-The goal of the minimum mean-squared estimation problem is to find coefficients $s_1, \ldots, s_n$ such that the squared of the error term in
-\begin{equation*}
-X = s_1 Z_1 + \cdots + s_n Z_n + e
-\end{equation*}
-is minimized.
+Let $Y, X_1, \ldots, X_n$ be a set of zero-mean random variables.
+The goal of the linear minimum mean-squared estimation (LMMSE) problem is to find coefficients $s_1, \ldots, s_n$ such that
+\[ \hat{Y} = s_1 X_1 + \cdots + s_n X_n. \]
+minimizes the MSE $\Expect[|Y-\hat{Y}|^2]$.
 Using the inner product defined by
 \begin{equation} \label{equation:ExpectationInnerProduct}
 \left\langle X | Y \right\rangle = \Expect \left[ X \overline{Y} \right],
 \end{equation}
-we can compute the minimum mean-squared estimate of $\vecnot{s}$ as
+we can compute the linear minimum mean-squared estimate $\hat{Y}$ using
 \begin{equation*}
 G \vecnot{s} = \vecnot{t},
 \end{equation*}
 where
 \begin{equation*}
 G = \left[ \begin{array}{cccc}
-\Expect \left[ Z_1 \overline{Z}_1 \right]
-& \Expect \left[ Z_2 \overline{Z}_1 \right] & \cdots
-& \Expect \left[ Z_n \overline{Z}_1 \right] \\
-\Expect \left[ Z_1 \overline{Z}_2 \right]
-& \Expect \left[ Z_2 \overline{Z}_2 \right] & \cdots
-& \Expect \left[ Z_n \overline{Z}_2 \right] \\
+\Expect \left[ X_1 \overline{X}_1 \right]
+& \Expect \left[ X_2 \overline{X}_1 \right] & \cdots
+& \Expect \left[ X_n \overline{X}_1 \right] \\
+\Expect \left[ X_1 \overline{X}_2 \right]
+& \Expect \left[ X_2 \overline{X}_2 \right] & \cdots
+& \Expect \left[ X_n \overline{X}_2 \right] \\
 \vdots & \vdots & \ddots & \vdots \\
-\Expect \left[ Z_1 \overline{Z}_n \right]
-& \Expect \left[ Z_2 \overline{Z}_n \right] & \cdots
-& \Expect \left[ Z_n \overline{Z}_n \right] \\
+\Expect \left[ X_1 \overline{X}_n \right]
+& \Expect \left[ X_2 \overline{X}_n \right] & \cdots
+& \Expect \left[ X_n \overline{X}_n \right] \\
 \end{array} \right]
 \end{equation*}
 and
 \begin{equation*}
 \vecnot{t} = \left[ \begin{array}{c}
-\Expect \left[ X \overline{Z}_1 \right] \\
-\Expect \left[ X \overline{Z}_2 \right] \\ \vdots \\
-\Expect \left[ X \overline{Z}_n \right] \end{array} \right] .
+\Expect \left[ Y \overline{X}_1 \right] \\
+\Expect \left[ Y \overline{X}_2 \right] \\ \vdots \\
+\Expect \left[ Y \overline{X}_n \right] \end{array} \right] .
 \end{equation*}
-Provided that the matrix $G$ is invertible, the minimum mean-squared error is given by
+If the matrix $G$ is invertible, the minimum mean-squared error is given by
 \begin{equation*}
-\left\| e \right\|^2 = E \left[ X \overline{X} \right]
+\left\| Y - \hat{Y} \right\|^2 = \Expect \left[ Y \overline{Y} \right]
 - \vecnot{t}^H G^{-1} \vecnot{t} .
 \end{equation*}
 
 
-\subsection{Wiener Filter}
+\subsection{The Wiener Filter}
 
-Suppose that the sequence of data $\left\{ y[t] \right\}$ is wide-sense stationary, and consider the FIR filter
+Suppose that the sequence of zero-mean random variables $\left\{ X[t] \right\}$ is wide-sense stationary, and consider the FIR filter
 \begin{equation*}
 \begin{split}
-z[t] &= \sum_{k=0}^{K-1} f[k] y[t - k] \\
-&= \left[ \begin{array}{ccc} y[t] & \hdots & y[t-K+1] \end{array} \right]
-\left[ \begin{array}{c} f[0] \\ \vdots \\ f[K-1] \end{array} \right]
-= \left( \vecnot{y}[t] \right)^T \vecnot{f} .
+Y[t] &= \sum_{k=0}^{K-1} h[k] X[t - k] \\
+&= \left[ \begin{array}{ccc} X[t] & \hdots & X[t-K+1] \end{array} \right]
+\left[ \begin{array}{c} h[0] \\ \vdots \\ h[K-1] \end{array} \right]
+= \left( \vecnot{X}[t] \right)^T \vecnot{h} .
 \end{split}
 \end{equation*}
-The goal is to design this filter in such a way that its output is as close as possible to a desired sequence $\left\{ x[t] \right\}$.
+The goal is to design this filter in such a way that its output is as close as possible to a desired sequence $\left\{ Z[t] \right\}$.
 In particular, we want to minimize the mean-squared error
 \begin{equation*}
-\left\| e[t] \right\|^2 = \Expect \left[ e[t] \bar{e}[t] \right],
+\left\| Z[t] - Y[t] \right\|^2 = \Expect \left[ \left| Z[t] - Y[t] \right|^2 \right].
 \end{equation*}
-where $e[t]$ is defined by
-\begin{equation*}
-e[t] = x[t] - z[t].
-\end{equation*}
+
 By the orthogonality principle, the mean-squared error is minimized when the error is orthogonal to the data; that is, for $j = 0, 1, \ldots, K-1$, we have
 \begin{equation*}
-\left\langle x[t] - \sum_{k=0}^{K-1} f[k] y[t - k] \Big| y[t - j] \right\rangle = 0,
+\left\langle Z[t] - \sum_{k=0}^{K-1} h[k] X[t - k] \Big| X[t - j] \right\rangle = 0,
 \end{equation*}
 or, equivalently, we can write
 \begin{equation*}
-\left\langle x[t] | y[t - j] \right\rangle
-= \sum_{k=0}^{K-1} f[k] \left\langle y[t - k] | y[t - j] \right\rangle .
+\left\langle Z[t] | X[t - j] \right\rangle
+= \sum_{k=0}^{K-1} h[k] \left\langle X[t - k] | X[t - j] \right\rangle .
 \end{equation*}
 Using \eqref{equation:ExpectationInnerProduct}, we obtain
 \begin{equation} \label{equation:WienerHopfConditions}
-\Expect \left[ x[t] \bar{y}[t - j] \right]
-= \sum_{k=0}^{K-1} f[k] \Expect \left[ y[t - k] \bar{y}[t - j] \right] .
+\Expect \left[ Z[t] \overline{X}[t - j] \right]
+= \sum_{k=0}^{K-1} h[k] \Expect \left[ X[t - k] \overline{X}[t - j] \right] .
 \end{equation}
 where $j = 1, \ldots, K-1$.
 
-For this specific case where the normal equations are defined in terms of the expectation operator, these equations are called the \defn{applicatons}{Wiener-Hopf} equations.
+For this specific case where the normal equations are defined in terms of the expectation operator, these equations are called the \defn{applications}{Wiener-Hopf} equations.
 The Grammian of the Wiener-Hopf equations can be expressed in a more familiar form using the autocorrelation matrix.
-Recall that $\{ y[t] \}$ is a wide-sense stationary process.
+Recall that $\{ X[t] \}$ is a wide-sense stationary process.
 As such, we have
 \begin{equation*}
-R_{yy} (j-k) = R_{yy} (j, k) = \Expect \left[ y[t-k] \bar{y}[t-j] \right]
-= \left\langle y[t-k] | y[t-j] \right\rangle .
+R_{xx} (j-k) = R_{xx} (j, k) = \Expect \left[ X[t-k] \overline{X}[t-j] \right]
+= \left\langle X[t-k] | X[t-j] \right\rangle .
 \end{equation*}
 Also define
 \begin{equation*}
-R_{xy}(j) = \Expect \left[ x[t] \bar{y}[t-j] \right]
-= \left\langle x[t] | y[t-j] \right\rangle .
+R_{zx}(j) = \Expect \left[ Z[t] \overline{X}[t-j] \right]
+= \left\langle Z[t] | X[t-j] \right\rangle .
 \end{equation*}
 Using this notation, we can rewrite \eqref{equation:WienerHopfConditions} as
 \begin{equation*}
-\vecnot{R_{xy}} = \left[ \begin{array}{c}
-R_{xy} (0) \\ R_{xy} (1) \\ \vdots \\ R_{xy} (K-1) \end{array} \right]
-= R_{yy}
+R_{zx} = \left[ \begin{array}{c}
+R_{zx} (0) \\ R_{zx} (1) \\ \vdots \\ R_{zx} (K-1) \end{array} \right]
+= R_{xx}
 \left[ \begin{array}{c}
-f [0] \\
-f [1] \\ \vdots \\
-f [K-1] \end{array} \right]
+h [0] \\
+h [1] \\ \vdots \\
+h [K-1] \end{array} \right]
 \end{equation*}
 where the $K \times K$ autocorrelation matrix is given by
 \begin{equation*}
-R_{yy} = \left[ \begin{array}{cccc}
-R_{yy} [0] & \bar{R}_{yy}[1] & \cdots & \bar{R}_{yy}[K-1] \\
-R_{yy} [1] & R_{yy}[0] & \cdots & \bar{R}_{yy}[K-2] \\
+R_{xx} = \left[ \begin{array}{cccc}
+R_{xx} [0] & \overline{R}_{xx}[1] & \cdots & \overline{R}_{xx}[K-1] \\
+R_{xx} [1] & R_{xx}[0] & \cdots & \overline{R}_{xx}[K-2] \\
 \vdots & \vdots & \ddots & \vdots \\
-R_{yy} [K-1] & R_{yy}[K-2] & \cdots & R_{yy}[0]
+R_{xx} [K-1] & R_{xx}[K-2] & \cdots & R_{xx}[0]
 \end{array} \right] .
 \end{equation*}
-Note that the matrix $R_{yy}$ is Toeplitz, i.e., all the elements on a diagonal are equal.
-Assuming that $R_{yy}$ is invertible, the optimal filter taps are then given by
+Note that the matrix $R_{xx}$ is Toeplitz, i.e., all the elements on a diagonal are equal.
+Assuming that $R_{xx}$ is invertible, the optimal filter taps are then given by
 \begin{equation*}
-\vecnot{f} = R_{yy}^{-1} \vecnot{t}.
+\vecnot{h} = R_{xx}^{-1} R_{zx}.
 \end{equation*}
 
-The minimum mean-squared error is determined as follows,
+The minimum mean-squared error is given by
 \begin{equation*}
 \begin{split}
-\| e \|^2 &= \| x \|^2 - \| z \|^2 \\
-&= \Expect [x \bar{x}] - \Expect \left[ \vecnot{f}^H \overline{\vecnot{y}} \vecnot{y}^T \vecnot{f} \right] \\
-&= \Expect [x \bar{x}] - \vecnot{f}^H R_{yy} \vecnot{f}
-= \Expect [x \bar{x}] - \vecnot{R_{xy}}^H \vecnot{f} .
+\| Z-Y \|^2 &= \| Z \|^2 - \| Y \|^2 \\
+&= \Expect [Z \overline{Z}] - \Expect \left[ \vecnot{h}^H \overline{\vecnot{X}} \vecnot{X}^T \vecnot{h} \right] \\
+&= \Expect [Z \overline{Z}] - \vecnot{h}^H R_{xx} \vecnot{h} \\
+&= \Expect [Z \overline{Z}] - R_{zx}^H \vecnot{h} ,
 \end{split}
 \end{equation*}
+where $t$ can be ignored because the processes are WSS.
+
+\subsection{LMMSE Filtering in Practice}
+
+While theoretical treatments of optimal filtering often assume one has well-defined random variables with known statistics, this is rarely the case in practice.
+Yet, there is a very close connection between Wiener filter and natural data driven approaches.
+Consider the problem from the previous section and let $x[1],x[2],\ldots_1,x[N]$ and $z[1],z[2],\ldots,z[N]$ be realizations of the random processes.
+
+As an application, one can think of the $x[t]$ sequence as the received samples in a wireless communication system and the $z[t]$ sequence as a \emph{pilot sequence} (i.e., known to both the transmitter and receiver).
+It is assumed the transmitted sequence ihas been convolved with an unknown LTI system.
+This type of degradation is known as intersymbol interference (ISI) and the goal is to find a linear filter $h[0],h[1],\ldots,h[K-1]$ that removes as much ISI as possible.
+A suitable cost funciton for this goal is
+\[ J(\vecnot{h}) = \sum_{t=K}^N \lambda^{N-t} \left| z[t] - \sum_{k=0}^{K-1} h[k] x[t-k] \right|^2, \]
+where the exponential weighting factor $\lambda$ emphasizes the most recently received symbols because, in reality, the channel conditions are changing with time.
+
+Using the vector $\vecnot{z} = [ \begin{array}{cccc} z[K] & z[K+1] & \cdots & z[N] \end{array} ]$ and the matrix
+\[ A = \left[ \begin{array}{cccc} x[K] & x[K-1] & \cdots & x[1] \\ x[K+1] & x[K] & \cdots & x[2] \\ \vdots & \vdots & \ddots & \vdots \\ x[N] & x[N-1] & \cdots & x[N-K+1] \end{array} \right], \]
+we can rewrite this cost function as
+\[ J(\vecnot{h}) = (A\vecnot{h}-\vecnot{z})^H \Lambda (A\vecnot{h}-\vecnot{z}), \]
+where $\Lambda$ is a diagonal matrix whose diagonal contains $ [ \begin{array}{ccccc} \lambda^{N-K} & \lambda^{N-K+1} & \cdots & \lambda^1 & \lambda^0 \end{array} ]$.
+Using the orthogonality principle, one finds that the optimal solution is given by the normal equation
+\[ A^H \Lambda A \vecnot{h} = A^H \Lambda \vecnot{z}. \]
+
+To see the connection with Wiener filtering, the key observation is that the matrix $A^H \Lambda A$ and the vector $ A^H \Lambda \vecnot{z}$ are sample-average estimates of the correlation matrix and cross-correlation vector.
+This is because, for large $N$ and $\lambda$ close to 1, we have
+\[ \left[ A^H \Lambda A \right]_{ij} = \sum_{t=K}^N \lambda^{N-t} x[t-j+1] \overline{x}[t-i+1] \approx \frac{R_{xx}(i-j)}{1-\lambda} \]
+and
+\[ \left[ A^H \Lambda \vecnot{z} \right]_i = \sum_{t=K}^N \lambda^{N-t} z[t] \overline{x}[t-i+1] \approx \frac{R_{zx}(i)}{1-\lambda}. \]
+
+Another benefit of this approach is that, as each new sample arrives, the solution $\vecnot{h}$ can be updated with low complexity.
+Consider the matrix $G_N = A^H \Lambda A$ and vector $\vecnot{b}_N = A^H \Lambda \vecnot{z}$ as a function of $N$.
+Then, $G_{N+1} = \lambda G_N + \vecnot{u}^H \vecnot{u}$ and $\vecnot{t}_{N+1} = \lambda \vecnot{b}_N + z[N+1] \vecnot{u}^H$, where
+\[ \vecnot{u} = \left[ \begin{array}{cccc} x[N+1] & x[N] & \cdots & x[N-K+2] \end{array} \right]. \]
+The updated solution vector $\vecnot{h}_{N+1} = G_{N+1}^{-1} \vecnot{b}_{N+1}$ can be computed efficiently using the Sherman-Morrison matrix inversion formula.
 
 
+\section{Dual Approximation}
 
+\subsection{Minimum-Norm Solutions}
 
+In many cases, one is interested in finding the minimum-norm vector that satisfies some feasibility constraints.
+For example, an underdetermined system of linear equations has an infinite number of solutions.
+But, in practice, it often makes sense to prefer the minimum-norm solution over other solutions.
+Finding this solution is very similar to finding the best approximation.
+
+Let $V$ be a Hilbert space and $\vecnot{w}_1 ,\vecnot{w}_2 , \ldots, \vecnot{w}_n$ be a set of linearly independent vectors in $W$.
+For any $\vecnot{v} \in V$, consider finding the scalars $s_1,s_2,\ldots,s_n$ that minimize
+\[ \left\| \vecnot{v} - \sum_{i=1}^n s_i \vecnot{w}_i \right\|. \]
+The answer is clearly given by the best approximation of $\vecnot{v}$ by vectors in the span of $\vecnot{w}_1 ,\vecnot{w}_2 , \ldots, \vecnot{w}_n$.
+The orthogonality principle tells us that $s_1,s_2,\ldots,s_n$ must satisfy
+\begin{equation} \label{eqn:DualNormalEquations}
+\left[ \begin{array}{cccc}
+\left\langle \vecnot{w}_1 | \vecnot{w}_1 \right\rangle
+& \left\langle \vecnot{w}_2 | \vecnot{w}_1 \right\rangle & \cdots
+& \left\langle \vecnot{w}_n | \vecnot{w}_1 \right\rangle \\
+\left\langle \vecnot{w}_1 | \vecnot{w}_2 \right\rangle
+& \left\langle \vecnot{w}_2 | \vecnot{w}_2 \right\rangle & \cdots
+& \left\langle \vecnot{w}_n | \vecnot{w}_2 \right\rangle \\
+\vdots & \vdots & \ddots & \vdots \\
+\left\langle \vecnot{w}_1 | \vecnot{w}_n \right\rangle
+& \left\langle \vecnot{w}_2 | \vecnot{w}_n \right\rangle & \cdots
+& \left\langle \vecnot{w}_n | \vecnot{w}_n \right\rangle
+\end{array} \right]
+\left[ \begin{array}{c}
+s_1 \\ s_2 \\ \vdots \\ s_n \end{array} \right]
+= \left[ \begin{array}{c}
+\left\langle \vecnot{v} | \vecnot{w}_1 \right\rangle \\
+\left\langle \vecnot{v} | \vecnot{w}_2 \right\rangle \\ \vdots \\
+\left\langle \vecnot{v} | \vecnot{w}_n \right\rangle \end{array} \right] .
+\end{equation}
+
+The same problem can also be posed in a different manner.
+\begin{theorem}
+Let $V$ be a Hilbert space and $\vecnot{w}_1 ,\vecnot{w}_2 , \ldots, \vecnot{w}_n$ be a set of linearly independent vectors in $V$.
+The \defn{inner-product space}{dual approximation} problem is to find the vector $\vecnot{w}\in V$ of minimum-norm that satisfes $\left\langle \vecnot{w} | \vecnot{w}_i \right\rangle = c_i$ for $i=1,\ldots,n$.
+This vector is given by
+\[ \vecnot{w} = \sum_{i=1}^n s_i \vecnot{w}_i, \]
+where the coefficients  $s_1,s_2,\ldots,s_n$ can be found by solving \eqref{eqn:DualNormalEquations} with $\left\langle \vecnot{v} | \vecnot{w}_i \right\rangle = c_i$.
+\end{theorem}
+\begin{proof}
+Let $W = \Span(\vecnot{w}_1 ,\vecnot{w}_2 , \ldots, \vecnot{w}_n)$ and notice that the subset
+\[ A = \{ \vecnot{u} \in V | \left\langle \vecnot{u} | \vecnot{w}_i \right\rangle = c_i\; \forall\; i=1,\ldots,n \} \]
+is simply the orthogonal complement $W^{\bot}$ translated by any vector $\vecnot{v}\in A$.
+Therefore, the vector achieving $\min_{\vecnot{u}\in A} \| \vecnot{u} \|$ is the error vector in the best approximation of some $\vecnot{v}\in A$ by vectors in $W^{\bot}$.
+Using the unique decomposition $\vecnot{v} = \hat{\vecnot{v}} + \vecnot{w}$ implied by the orthogonal decomposition $V = W^{\bot} \oplus W$, one finds that the error vector $\vecnot{w}$ must lie in $W$.
+Moreover, the normal equations, given by modifying \eqref{eqn:DualNormalEquations}, show that the error vector $\vecnot{w}$ is the unique vector in $W$ that satisfies $\left\langle \vecnot{w} | \vecnot{w}_i \right\rangle = c_i$ for $i=1,\ldots,n$.
+\end{proof}
+
+\subsection{Underdetermined Linear Systems}
+
+Let $A \in \ComplexNumbers^{m\times n}$ with $m<n$ be the matrix representation of an underdetermined system of linear equations and $\vecnot{v} \in \ComplexNumbers^m$ be any column vector.
+Then, the dual approximation theorem can be applied to solve the problem
+\[ \min_{\vecnot{s} : A\vecnot{s} = \vecnot{v}} \| \vecnot{s} \| . \]
+To see this as a dual approximation, we can rewrite the constraint as $(A^H)^H \vecnot{s} = \vecnot{v}$.
+Then, the theorem concludes that the minimum norm solution lies in $\mathcal{R}(A^H)$ (i.e., the column space of $A^H$).
+Using this, one can define $\hat{\vecnot{s}} = A^H \vecnot{t}$ and see that $A (A^H \vecnot{t}) = \vecnot{v}$.
+If the rows of $A$ are linearly independent, then the columns of $A^H$ are linearly independent and $(A A^H)^{-1}$ exists.
+In this case, the solution $\hat{\vecnot{s}}$ can be obtained in closed form and is given by
+\[ \hat{\vecnot{s}} = A^H \left( A A^H \right)^{-1} \vecnot{v}. \]
 
 

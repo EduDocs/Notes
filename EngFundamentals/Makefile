@@ -6,4 +6,4 @@ book: book.tex
 	pdflatex book.tex
 
 clean:
-	rm -f *.aux *.dvi *.log *.ps book.pdf
+	rm -f *.idx *.aux *.dvi *.log *.ps book.pdf

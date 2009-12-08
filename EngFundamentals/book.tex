@@ -2,8 +2,19 @@
 
 \usepackage{times}
 \usepackage{amsmath,amssymb,amsthm}
+
 \usepackage{makeidx}
-\usepackage{hyperref}
+\makeindex
+
+\usepackage[hyperindex]{hyperref}
+%\usepackage{chappg}
+
+%\numberwithin{page}{chapter}
+%\renewcommand{\thepage}{\arabic{chapter}-\arabic{page}}
+%\let\oldchapter=\chapter
+%\def\resetpage{\setcounter{page}{1}}
+%\def\chapter{\expandafter\resetpage\oldchapter}
+
 
 \topmargin         -0.25in
 \oddsidemargin      0.5in
@@ -53,7 +64,6 @@
 \renewcommand{\baselinestretch}{1.25}
 \newcommand{\defn}[2]{\textbf{\textrm{#2}}\index{#1!#2}}
 
-\makeindex
 
 \begin{document}
 
@@ -61,7 +71,7 @@
 
 %\author{Major Contributors \\ Jean-Francois Chamberland and Henry D. Pfister} 
 \title{Engineering Fundamentals} 
-\date{October 12th, 2009} 
+\date{November 20th, 2009} 
 
 \maketitle
 
