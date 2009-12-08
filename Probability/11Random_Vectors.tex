@@ -1,9 +1,9 @@
 \chapter{Random Vectors}
 
-In this section, we expand our exposition of continuous random variables to random vectors.
+In this chapter, we expand our exposition of continuous random variables to random vectors.
 Being versed at dealing with multiple random variables is an essential part of statistics, engineering and science in general.
 Again, our initial survey of this topic revolves around pairs of continuous random variables.
-More complex scenarios will be considered in the later.
+More complex scenarios will be considered in the later parts of this chapter.
 
 
 \section{Joint Distribution Functions}
@@ -27,16 +27,19 @@ From this characterization, we can identify a few properties of the joint CDF;
 = F_X (x) .
 \end{split}
 \end{equation*}
-Similarly, we have $\lim_{x \uparrow \infty} F_{X,Y} (x,y) = F_Y (y)$.
-Furthermore, $\lim_{x \downarrow -\infty} F_{X,Y} (x,y) 
-= \lim_{y \downarrow -\infty} F_{X,Y} (x,y) = 0$.
+Similarly, we can write $\lim_{x \uparrow \infty} F_{X,Y} (x,y) = F_Y (y)$.
+Taking limits in the other direction, we get
+\begin{equation*}
+\lim_{x \downarrow -\infty} F_{X,Y} (x,y) 
+= \lim_{y \downarrow -\infty} F_{X,Y} (x,y) = 0 .
+\end{equation*}
 
 When the function $F_{X,Y} (\cdot, \cdot)$ is totally differentiable, it is possible to define the \emph{joint probability density function} of $X$ and $Y$, \index{Joint probability density function}
 \begin{equation} \label{equation:JointPDF}
 f_{X,Y} (x,y) = \frac{\partial^2 F_{X,Y}}{\partial x \partial y} (x,y)
 = \frac{\partial^2 F_{X,Y}}{\partial y \partial x} (x,y) \quad x,y \in  \RealNumbers .
 \end{equation}
-Hereafter, we refer to a pair of random variables as continuous if the corresponding joint PDF is defined unambiguously through \eqref{equation:JointPDF}.
+Hereafter, we refer to a pair of random variables as continuous if the corresponding joint PDF exists and is defined unambiguously through \eqref{equation:JointPDF}.
 When this is the case, standard calculus asserts that the following equation holds,
 \begin{equation*}
 F_{X,Y} (x,y) = \int_{-\infty}^x \int_{-\infty}^y f_{X,Y} (\xi,\zeta) d\zeta d\xi .
@@ -46,7 +49,7 @@ From its definition, we note that $f_{X,Y} (\cdot, \cdot)$ is a nonnegative func
 \iint\limits_{\RealNumbers^2}
 f_{X, Y} (\xi, \zeta) d\zeta d\xi = 1.
 \end{equation*}
-Furthermore, for an admissible set $S \subset \RealNumbers^2$, the probability that $(X,Y) \in S$ can be evaluated through the integral form
+Furthermore, for any admissible set $S \subset \RealNumbers^2$, the probability that $(X,Y) \in S$ can be evaluated through the integral formula
 \begin{equation} \label{equation:ProbabilityJointPDF}
 \begin{split}
 \Pr ((X,Y) \in S)
@@ -56,7 +59,7 @@ Furthermore, for an admissible set $S \subset \RealNumbers^2$, the probability t
 f_{X, Y} (\xi, \zeta) d\zeta d\xi .
 \end{split}
 \end{equation}
-In particular, if $S$ is the rectangular set
+In particular, if $S$ is the cartesian product of two intervals, 
 \begin{equation*}
 S = \left\{ (x,y) \in \RealNumbers^2 \big| a \leq x \leq b, c \leq y \leq d \right\} ,
 \end{equation*}
@@ -89,7 +92,7 @@ Thus, the probability that $(X,Y)$ is contained within a circle of radius half i
 \end{example}
 
 \begin{example}
-Let $X$ and $Y$ be two independent zero-mean Gaussian random variables with variance $\sigma^2$.
+Let $X$ and $Y$ be two independent zero-mean Gaussian random variables, each with variance $\sigma^2$.
 For $(x, y) \in \RealNumbers^2$, their joint PDF is given by
 \begin{equation*}
 f_{X,Y} (x,y) = \frac{1}{2 \pi \sigma^2} e^{- \frac{ x^2 + y^2 }{2 \sigma^2} } .
@@ -109,11 +112,11 @@ e^{- \frac{ r^2 }{2 \sigma^2} } r d\theta dr
 \end{split}
 \end{equation*}
 The probability that $(X, Y)$ is contained within a circle of radius $r$ is $1 - e^{- \frac{ r^2 }{2 \sigma^2} }$.
-Furthermore, if we recognize $R$ as a continuous random variable, we can write its PDF as
+Recognizing that $R$ is a continuous random variable, we can write its PDF as
 \begin{equation*}
 f_R (r) = \frac{r}{\sigma^2} e^{- \frac{r^2}{2 \sigma^2} } \quad r \geq 0 .
 \end{equation*}
-That is, $R$ possesses a Rayleigh distribution with parameter $\sigma^2$.
+From this equation, we gather That $R$ possesses a Rayleigh distribution with parameter $\sigma^2$.
 \end{example}
 
 
@@ -126,7 +129,7 @@ F_{X|A} (x) = \Pr (X \leq x | A)
 \end{equation*}
 Note that event $A$ can be defined in terms of variables $X$ and $Y$.
 For instance, we may use $A = \{ Y \geq X \}$ as our condition.
-Under proper conditions, it is equally easy to specify the conditional PDF of $X$ given $A$,
+Under suitable conditions, it is equally straightforward to specify the conditional PDF of $X$ given $A$,
 \begin{equation*}
 f_{X|A} (x) = \frac{d F_{X|A}}{dx} (x) \quad x \in \RealNumbers .
 \end{equation*}
@@ -155,7 +158,7 @@ f_{X | A} (x) = 2 \lambda e^{-\lambda x} \left( 1 - e^{-\lambda x} \right)
 for $x \in \RealNumbers_+$.
 \end{example}
 
-One case of special interest is the situation where event $A$ is defined in terms of random variable $X$ itself.
+One case of special interest is the situation where event $A$ is defined in terms of the random variable $X$ itself.
 In particular, consider the PDF of $X$ conditioned on the fact that $X$ belongs to an interval $I$.
 Then, $A = \{ X \in I \}$ and the conditional CDF of $X$ becomes
 \begin{equation*}
@@ -171,7 +174,7 @@ f_{X|A} (x) = \frac{ f_X (x) }{ \Pr (X \in I) }
 \end{equation*}
 for any $x \in I$.
 In words, the conditional PDF of $X$ becomes a scaled version of $f_X(\cdot)$ whenever $x \in I$, and it is equal to zero otherwise.
-Essentially, this is equivalent to re-normalizing the PDF of $X$ accounting for the fact that $X \in I$.
+Essentially, this is equivalent to re-normalizing the PDF of $X$ over interval $I$, accounting for the partial information given by $X \in I$.
 
 %\begin{example}
 %\end{example}
@@ -179,8 +182,9 @@ Essentially, this is equivalent to re-normalizing the PDF of $X$ accounting for 
 \subsection{Conditioning on Values}
 
 Suppose that $X$ and $Y$ form a pair of random variables with joint PDF $f_{X,Y} (\cdot, \cdot)$.
-With care,it is possible and desirable to define the conditional PDF of $X$, conditioned on $Y = y$. \index{Conditional probability density function}
-For any $y \in \RealNumbers$ such that $f_Y (y) > 0$, we defined the conditional PDF of $X$ given $Y = y$ as
+With great care, it is possible and desirable to define the conditional PDF of $X$, conditioned on $Y = y$. \index{Conditional probability density function}
+Special attention must be given to this case because the event $\{ Y = y \}$ has probability zero when $Y$ is a continuous random variable.
+Still, when $X$ and $Y$ are jointly continuous and for any $y \in \RealNumbers$ such that $f_Y (y) > 0$, we can defined the conditional PDF of $X$ given $Y = y$ as
 \begin{equation} \label{equation:ConditionalPDF}
 f_{X|Y} (x|y) = \frac{ f_{X,Y} (x,y) }{ f_Y (y) } .
 \end{equation}
@@ -195,19 +199,19 @@ For small $\Delta_x$ and $\Delta_y$, we can write
 = \frac{f_{X,Y} (x, y)}{f_Y (y)} \Delta_x .
 \end{split}
 \end{equation*}
-Loosely speaking, $f_{X|Y} (x|y) \Delta_x$ represent the probability that $X$ lies close to $x$, given that $Y$ is near $y$.
+Thus, loosely speaking, $f_{X|Y} (x|y) \Delta_x$ represents the probability that $X$ lies close to $x$, given that $Y$ is near $y$.
 
 Using this definition, it is possible to compute the probabilities of events associated with $X$ conditioned on random value of random variable $Y$,
 \begin{equation*}
 \Pr (X \in S | Y = y) = \int_S f_{X|Y} (x|y) dx .
 \end{equation*}
-Still, a word of caution is in order.
-The technical difficulty that surfaces when conditioning on $Y =y$ stems from the fact that $\Pr (Y = y) = 0$.
-Remember that, in general, conditional probability is only defined for non-vanishing events.
-Although we were able to circumvent this issue, care must be taken when dealing with the conditional PDF of \eqref{equation:ConditionalPDF}, as it only provide valuable insight when the pair of random variable $(X, Y)$ is continuous.
+A word of caution is in order.
+The technical difficulty that surfaces when conditioning on $\{ Y = y \}$ stems from the fact that $\Pr (Y = y) = 0$.
+Remember that, in general, conditional probability is only defined for non-vanishing conditions.
+Although we were able to circumvent this issue, care must be taken when dealing with the conditional PDF of \eqref{equation:ConditionalPDF}, as it only provide valuable insight when the random variables $(X, Y)$ are jointly continuous.
 
 \begin{example}
-Consider a random experiment where an outcome $(\omega_1, \omega_2)$ is selected at random from the unit circle.
+Consider the experiment where an outcome $(\omega_1, \omega_2)$ is selected at random from the unit circle.
 Let $X = \omega_1$ and $Y = \omega_2$.
 We wish to compute the conditional PDF of $X$ given that $Y = 0.5$.
 
@@ -235,8 +239,8 @@ f_{X|Y} ( x | 0.5 ) &= \frac{f_{X,Y} (x, 0.5)}{f_{Y} ( 0.5 ) }
 
 The conditional expectation of a function $g(Y)$ is simply the integral of $g(Y)$ weighted by the proper conditional PDF,
 \begin{align*}
-E[g(Y) | X = x] &= \int_{Y(\Omega)} g(Y) f_{Y|X} (y|x) dy \\
-E[g(Y) | S] &= \int_{Y(\Omega)} g(Y) f_{Y|S} (y) dy .
+E[g(Y) | X = x] &= \int_{\RealNumbers} g(Y) f_{Y|X} (y|x) dy \\
+E[g(Y) | S] &= \int_{\RealNumbers} g(Y) f_{Y|S} (y) dy .
 \end{align*}
 Note again that the function
 \begin{equation*}
@@ -254,7 +258,8 @@ After all, a conditional expectation is itself a random variable.
 Suppose that $X_1$ and $X_2$ are jointly continuous random variables.
 Furthermore, let $Y_1 = g_1 (X_1, X_2)$ and $Y_2 = g_2 (X_1, X_2)$, where $g_1 (\cdot, \cdot)$ and $g_2 (\cdot, \cdot)$ are real-valued functions.
 Under certain conditions, the pair of random variables $(Y_1, Y_2)$ will also be continuous.
-Deriving the joint PDF of $(Y_1, Y_2)$ can get convoluted, a task forgo.
+Deriving the joint PDF of $(Y_1, Y_2)$ can get convoluted, a task we forgo.
+It requires the skillful application of vector calculus.
 Nevertheless, we examine a simple case where an expression for $f_{Y_1, Y_2} (\cdot, \cdot)$ remains manageable.
 
 Consider the scenario where the functions $g_1 (\cdot, \cdot)$ and $g_2 (\cdot, \cdot)$ are totally differentiable, with Jacobian determinant
@@ -281,17 +286,17 @@ g_2 (x_1, x_2) &= y_2
 has a unique solution.
 We represent this solution by $x_1 = h_1 (y_1, y_2)$ and $x_2 = h_2 (y_1, y_2)$.
 Then, the random variables $(Y_1, Y_2)$ are jointly continuous with joint PDF
-\begin{equation*}
+\begin{equation} \label{equation:DerivedJointPDF}
 f_{Y_1, Y_2} (y_1, y_2) =
 \frac{f_{X_1, X_2} (x_1, x_2)}{ | J(x_1, x_2) |}
-\end{equation*}
+\end{equation}
 where $x_1 = h_1 (y_1, y_2)$ and $x_2 = h_2 (y_1, y_2)$.
 Note the close resemblance between this equation and the derived distribution of \eqref{equation:MonotoneFunctionPDF}.
 Looking back at Chapter~\ref{chapter:DerivedDistributions} offers an idea of what proving this result entails.
 It also hints at how this result can be modified to accommodate non-unique mappings.
 
 \begin{example}
-By far, the most important application of this result relates to the properties of Gaussian vectors.
+By far, the most important application of \eqref{equation:DerivedJointPDF} pertains to the properties of Gaussian vectors.
 Suppose that $X_1$ and $X_2$ are jointly continuous random variables, and let
 \begin{equation*}
 \mathbf{X} = \left[ \begin{array}{c} X_1 \\ X_2 \end{array} \right] .
@@ -322,14 +327,14 @@ Assume that the random variables $Y_1$ and $Y_2$ are generated through the matri
 \mathbf{Y} = \left[ \begin{array}{c} Y_1 \\ Y_2 \end{array} \right]
 = A \mathbf{X} + \mathbf{b} ,
 \end{equation*}
-where $A$ is a $2 \times 2$ invertible matrix and $\mathbf{b}$ is a vector.
+where $A$ is a $2 \times 2$ invertible matrix and $\mathbf{b}$ is a constant vector.
 In this case, $\mathbf{X} = A^{-1} \left( \mathbf{Y} - \mathbf{b} \right)$ and the corresponding Jacobian determinant is
 \begin{equation*}
 J(x_1, x_2)
 = \left| \begin{array}{cc} a_{11} & a_{12} \\ a_{21} & a_{22} \end{array} \right|
 = | A | .
 \end{equation*}
-It follows that the joint PDF of $(Y_1, Y_2)$ is given by
+Applying \eqref{equation:DerivedJointPDF}, we gather that the joint PDF of $(Y_1, Y_2)$ is expressed as
 \begin{equation*}
 \begin{split}
 &f_{Y_1, Y_2} (y_1, y_2)
@@ -349,7 +354,7 @@ It follows that the joint PDF of $(Y_1, Y_2)$ is given by
 \left( \mathbf{y} - \mathbf{b} - A \mathbf{m} \right) \right) .
 \end{split}
 \end{equation*}
-Looking at this equation, we conclude that random variables $Y_1$ and $Y_2$ are jointly Gaussian, as their joint PDF possesses the proper form.
+Looking at this equation, we conclude that random variables $Y_1$ and $Y_2$ are also jointly Gaussian, as their joint PDF possesses the proper form.
 It should come as no surprise that the mean of $\mathbf{Y}$ is
 $\Expect \left[ \mathbf{Y} \right] = A \mathbf{m} + \mathbf{b}$
 and its covariance matrix is equal to
@@ -358,10 +363,11 @@ and its covariance matrix is equal to
 \left( \mathbf{Y} - \Expect \left[ \mathbf{Y} \right] \right)^T \right]
 = A \Sigma A .
 \end{equation*}
-These admirable properties generalize to higher dimensions.
-An affine transformation of a Gaussian random vector is itself a Gaussian random vector.
-Furthemore, to obtain the derived distribution of the latter vector, it suffices to compute its mean and covariance, and substitute the resulting parameters in the general form of the Gaussian PDF.
-Collectively, these features underly many contemporary successes of engineering.
+In other words, a non-trivial transformation of a two-dimensional Gaussian vector yields another Gaussian vector.
+This admirable property generalizes to higher dimensions.
+Indeed, if $\mathbf{Y} = A \mathbf{X} + \mathbf{b}$ where $A$ is an $n \times n$ invertible matrix and $\mathbf{X}$ is a Gaussian random vector, then $\mathbf{Y}$ remains a Gaussian random vector.
+Furthermore, to obtain the derived distribution of the latter vector, it suffices to compute its mean and covariance, and substitute the resulting parameters in the general form of the Gaussian PDF.
+Collectively, the features of joint Gaussian random vectors underly many contemporary successes of engineering.
 \end{example}
 
 
@@ -379,25 +385,25 @@ f_{X,Y} (x,y) = \frac{\partial^2 F_{X,Y}}{\partial x \partial y} (x, y)
 = f_X (x) f_Y (y)
 \end{equation*}
 for $x, y \in \RealNumbers$.
-Furthermore, from \eqref{equation:ConditionalPDF}, we gather that the conditional PDF of $Y$ given $X=x$ is equal to the marginal PDF of $Y$ whenever $X$ and $Y$ are independent
+Furthermore, from \eqref{equation:ConditionalPDF}, we gather that the conditional PDF of $Y$ given $X=x$ is equal to the marginal PDF of $Y$ whenever $X$ and $Y$ are independent,
 \begin{equation*}
 f_{Y|X} (y|x) = \frac{f_{X,Y} (x, y)}{f_X(x)}
-= \frac{f_X (x) f_Y (y)}{f_X(x)} = f_Y (y),
+= \frac{f_X (x) f_Y (y)}{f_X(x)} = f_Y (y)
 \end{equation*}
-provided that $f_X(x) \neq 0$.
-Finally, if $X$ and $Y$ are independent random variables, then the two events $\{ X \in S \}$ and $\{ Y \in T \}$ are independent
+provided of course that $f_X(x) \neq 0$.
+Finally, if $X$ and $Y$ are independent random variables, then the two events $\{ X \in S \}$ and $\{ Y \in T \}$ are also independent
 \begin{equation*}
 \begin{split}
-&\Pr (X \in S, Y \in T) = \int_S \int_T f_{X,Y} (x,y) dy dx \\
-&= \int_S f_X (x) dx \int_T f_Y (y) dy
-= \Pr (X \in S) \Pr (Y \in T).
+\Pr (X \in S, Y \in T) &= \int_S \int_T f_{X,Y} (x,y) dy dx \\
+&= \int_S f_X (x) dx \int_T f_Y (y) dy \\
+&= \Pr (X \in S) \Pr (Y \in T).
 \end{split}
 \end{equation*}
 
 \begin{example}
 Consider a random experiment where an outcome $(\omega_1, \omega_2)$ is selected at random from the unit square.
 Let $X = \omega_1$, $Y = \omega_2$ and $U = \omega_1 + \omega_2$.
-We wish to show that $X$ and $Y$ are independent, and that $X$ and $U$ are not independent.
+We wish to show that $X$ and $Y$ are independent, but that $X$ and $U$ are not independent.
 
 We begin by computing the joint CDF of $X$ and $Y$.
 For $x,y \in [0,1]$, we have
@@ -435,12 +441,10 @@ Clearly, random variables $X$ and $U$ are not independent.
 \end{example}
 
 
-\newpage
+\section{Multiple Continuous Random Variables}
 
-\section{Sums of Random Variables}
-
-Sums of independent random variables play an important role in solving engineering problems.
-We therefore turn to the question of determining the distribution of a sum of independent random variables in terms of the PDFs of its constituents.
+As mentioned before, sums of independent random variables play an important role in solving engineering problems.
+We therefore turn to the question of determining the distribution of a sum of independent continuous random variables in terms of the PDFs of its constituents.
 If $X$ and $Y$ are independent random variables, the distribution of their sum $U = X + Y$ can be obtained by using the \emph{convolution} operator. \index{Convolution}
 Let $f_X (\cdot)$ and $f_Y (\cdot)$ be the PDFs of $X$ and $Y$, respectively.
 The convolution of $f_X(\cdot)$ and $f_Y(\cdot)$ is the function defined by
@@ -451,28 +455,30 @@ The convolution of $f_X(\cdot)$ and $f_Y(\cdot)$ is the function defined by
 &= \int_{-\infty}^{\infty} f_X(u - \zeta) f_Y(\zeta) d\zeta .
 \end{split}
 \end{equation*}
-The PDF of the sum $U = X + Y$ is the convolution of the individual densities,
+The PDF of the sum $U = X + Y$ is the convolution of the individual densities $f_X(\cdot)$ and $f_Y(\cdot)$,
 \begin{equation*}
 f_U (u) = (f_X \ast f_Y) (u) .
 \end{equation*}
 To show that this is indeed the case, we first consider the CDF of $U$,
 \begin{equation*}
 \begin{split}
-\Pr (U \leq u) &= \Pr (X + Y \leq u) \\
-&= \int_{-\infty}^{\infty} \Pr (X + Y \leq u | X = \xi) f_X(\xi) d\xi \\
-&= \int_{-\infty}^{\infty} \Pr (Y \leq u - \xi) f_X(\xi) d\xi \\
+F_U (u) &= \Pr (U \leq u) = \Pr (X + Y \leq u) \\
+&= \int_{-\infty}^{\infty} \int_{-\infty}^{u - \xi} f_{X,Y} (\xi, \zeta) d\zeta d\xi \\
+&= \int_{-\infty}^{\infty} \int_{-\infty}^{u - \xi} f_Y (\zeta) d\zeta f_X (\xi) d\xi \\
+%&= \int_{-\infty}^{\infty} \Pr (Y \leq u - \xi) f_X(\xi) d\xi \\
 &= \int_{-\infty}^{\infty} F_Y (u - \xi) f_X(\xi) d\xi .
 \end{split}
 \end{equation*}
-The last equality above follows from the independence of $X$ and $Y$.
 Taking the derivative of $F_U (u)$ with respect to $u$, we obtain
 \begin{equation*}
 \begin{split}
-\frac{d}{du} F_U (u) &= \frac{d}{du} \Pr (U \leq u) \\
+\frac{d}{du} F_U (u)
+&= \frac{d}{du} \int_{-\infty}^{\infty} F_Y (u - \xi) f_X(\xi) d\xi \\
 &= \int_{-\infty}^{\infty} \frac{d}{du} F_Y (u - \xi) f_X(\xi) d\xi \\
 &= \int_{-\infty}^{\infty} f_Y (u - \xi) f_X(\xi) d\xi .
 \end{split}
 \end{equation*}
+Notice the judicious use of the fundamental theorem of calculus.
 This shows that $f_U(u) = (f_X \ast f_Y) (u)$.
 
 \begin{example}[Sum of Uniform Random Variables]
@@ -487,23 +493,24 @@ f_X(\xi) = f_Y(\xi)
 \end{equation*}
 The PDF of their sum is therefore equal to
 \begin{equation*}
-f_U(u) = \int_{-\infty}^{+\infty} f_X(u - \xi) f_Y(\xi) d\xi .
+f_U(u) = \int_{-\infty}^{\infty} f_X(u - \xi) f_Y(\xi) d\xi .
 \end{equation*}
-Since $f_Y(y) = 1$ when $0 \leq y \leq 1$ and zero otherwise, the integral becomes
+Since $f_Y(y) = 1$ when $0 \leq y \leq 1$ and zero otherwise, this integral becomes
 \begin{equation*}
-f_U(u) = \int_0^1 f_X(u - \xi) d\xi .
+f_U (u) = \int_0^1 f_X(u - \xi) d\xi
+= \int_0^1 \IndicatorFcn_{[0,1]}(u - \xi) d\xi .
 \end{equation*}
-This integrand is zero unless $0 \leq u - \xi \leq 1$ (i.e., unless $u - 1 \leq \xi \leq u$).
+The integrand above is zero unless $0 \leq u - \xi \leq 1$ (i.e., unless $u - 1 \leq \xi \leq u$).
 Thus, if $0 \leq u \leq 1$, we get
 \begin{equation*}
 f_U(u) = \int_0^u d\xi = u ;
 \end{equation*}
-while, if $1 < u \leq 2$, we have
+while, if $1 < u \leq 2$, we obtain
 \begin{equation*}
 f_U(u) = \int_{u - 1}^1 d\xi = 2 - u .
 \end{equation*}
 If $u < 0$ or $u > 2$, the value of the PDF becomes zero, $f_U(u) = 0$.
-Hence, the PDF of $U$ can be written as
+Collecting these results, we can write the PDF of $U$ as
 \begin{equation*}
 f_U(u) = \begin{cases} u & 0 \leq u \leq 1, \\
 2-u & 1 < u \leq 2, \\
@@ -512,7 +519,7 @@ f_U(u) = \begin{cases} u & 0 \leq u \leq 1, \\
 \end{example}
 
 \begin{example}[Sum of Exponential Random Variables]
-Suppose two numbers are independently selected at random from the positive real numbers according to an exponential distribution with parameter $\lambda$. 
+Two numbers are selected independently from the positive real numbers, each according to an exponential distribution with parameter $\lambda$. 
 We wish to find the PDF of their sum.
 
 Let $X$ and $Y$ represent these two numbers, and denote their sum by $V = X + Y$.
@@ -531,7 +538,7 @@ f_V (v) &= \int_{-\infty}^{\infty} f_X(v - \xi) f_Y(\xi) d\xi \\
 \end{split}
 \end{equation*}
 On the other hand, if $v < 0$ then we get $f_V(v) = 0$.
-Hence, the PDF of $V$ is given by
+The PDF of $V$ is therefore given by
 \begin{equation*}
 f_V (v) = \begin{cases} \lambda^2 v e^{-\lambda v} & v \geq 0 \\
 0 & \text{otherwise} . \end{cases}
@@ -540,10 +547,10 @@ This is an Erlang distribution with parameter $m = 2$ and $\lambda > 0$.
 \end{example}
 
 \begin{example}[Sum of Gaussian Random Variables]
-It is an interesting and important fact that the sum of two independent Gaussian random variables is again a Gaussian random variable.
-Suppose $X$ has mean $m_1$ and variance $\sigma_1^2$, and $Y$ has mean $m_2$ and variance $\sigma_2^2$, then $V = X + Y$ has a Gaussian density with mean $m_1 + m_2$ and variance $\sigma_1^2 + \sigma_2^2$.
+It is an interesting and important fact that the sum of two independent Gaussian random variables is itself a Gaussian random variable.
+Suppose $X$ is Gaussian with mean $m_1$ and variance $\sigma_1^2$, and similarly $Y$ is Gaussian with mean $m_2$ and variance $\sigma_2^2$, then $V = X + Y$ has a Gaussian density with mean $m_1 + m_2$ and variance $\sigma_1^2 + \sigma_2^2$.
 We will show this property in the special case where both random variables are standard normal random variable.
-The general case can be done in a similar manner, but the computations are more involved.
+The general case can be attained in a similar manner, but the computations are more involved.
 
 Suppose $X$ and $Y$ are two independent Gaussian random variables with PDFs
 \begin{equation*}
@@ -562,7 +569,7 @@ f_V (v) &= (f_X \ast f_Y) (v)
 e^{-\left( \xi - \frac{v}{2} \right)^2} d\xi \right) .
 \end{split}
 \end{equation*}
-The expression within the parentheses is equal to one because it is the integral of a Gaussian PDF with $m = v/2$ and $\sigma^2 = 1/2$.
+The expression within the parentheses is equal to one because the integrant is a Gaussian PDF with $m = v/2$ and $\sigma^2 = 1/2$.
 Thus, we obtain
 \begin{equation*}
 f_V(v) = \frac{1}{\sqrt{4\pi}} e^{-\frac{v^2}{4}} ,
@@ -570,42 +577,37 @@ f_V(v) = \frac{1}{\sqrt{4\pi}} e^{-\frac{v^2}{4}} ,
 which verifies that $V$ is indeed Gaussian.
 \end{example}
 
-
-
-\subsection{Below}
-
-
 Let $X$ and $Y$ be independent random variables.
-Consider the random variable $Z = X + Y$.
-The moment generating function of $Z$ is given by
+Consider the random variable $U = X + Y$.
+The moment generating function of $U$ is given by
 \begin{equation*}
 \begin{split}
-M_Z (s) &= \Expect \left[ e^{sZ} \right]
+M_U (s) &= \Expect \left[ e^{sU} \right]
 = \Expect \left[ e^{s(X + Y)} \right] \\
 &= \Expect \left[ e^{sX} e^{sY} \right]
 = \Expect \left[ e^{sX} \right] \Expect \left[ e^{sY} \right] \\
 &= M_X(s) M_Y(s) .
 \end{split}
 \end{equation*}
+That is, the moment generating function of the sum of two independent random variables is the product of the individual moment generating functions.
 
 \begin{example}[Sum of Gaussian Random Variables]
-Suppose $X$ and $Y$ are independent Gaussian variables.
-We denote the mean and variance of $X$ by $m_X$ and $\sigma_X^2$.
-Similarly, we represent the mean and variance of $Y$ by $m_Y$ and $\sigma_Y^2$.
-We wish to show that the sum $U = X + Y$ is Gaussian with parameters $m_X + m_Y$ and $\sigma_X^2 + \sigma_Y^2$.
+In this example, we revisit the problem of adding independent Gaussian variables using moment generating functions.
+Again, let $X$ and $Y$ denote the two independent Gaussian variables.
+We denote the mean and variance of $X$ by $m_1$ and $\sigma_1^2$.
+Likewise, we represent the mean and variance of $Y$ by $m_2$ and $\sigma_2^2$.
+We wish to show that the sum $U = X + Y$ is Gaussian with parameters $m_1 + m_2$ and $\sigma_1^2 + \sigma_2^2$.
 
 The moment generating functions of $X$ and $Y$ are
 \begin{align*}
-M_X (s) &= e^{m_X s + \frac{\sigma_X^2 s^2}{2}} \\
-M_Y (s) &= e^{m_Y s + \frac{\sigma_Y^2 s^2}{2}}
+M_X (s) &= e^{m_1 s + \frac{\sigma_1^2 s^2}{2}} \\
+M_Y (s) &= e^{m_2 s + \frac{\sigma_2^2 s^2}{2}}
 \end{align*}
-The moment generating function of $U = X + Y$ is equal to
+The moment generating function of $U = X + Y$ is therefore equal to
 \begin{equation*}
 M_U (s) = M_X (s) M_Y (s)
-= \exp \left( (m_X + m_Y) s + \frac{(\sigma_X^2 + \sigma_Y^2) s^2}{2} \right) ,
+= \exp \left( (m_1 + m_2) s + \frac{(\sigma_1^2 + \sigma_2^2) s^2}{2} \right) ,
 \end{equation*}
-which implies that $U$ is a Gaussian random variable with mean $m_X + m_Y$ and variance $\sigma_X^2 + \sigma_Y^2$.
+which shows that $U$ is a Gaussian random variable with mean $m_1 + m_2$ and variance $\sigma_1^2 + \sigma_2^2$, as desired.
 \end{example}
-
-
 

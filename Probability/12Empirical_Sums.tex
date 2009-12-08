@@ -1,39 +1,255 @@
-\chapter{Sum of Independent Random Variables}
+\chapter{Sequences and Limit Theorems}
+
+Some of the most astonishing results in probability are related to the properties of sequences of random variables and the convergence of empirical distributions.
+
+\section{Types of Convergence}
+
+The premise on which most probabilistic convergence results lie is a sequence of random variables $X_1, X_2, \ldots$ and a limiting random variable $X$, all of which are defined on the same probability space.
+Recall that a random variable is a function of the outcome of a random experiment.
+The above statement stipulate that all the random variables listed above are functions of the outcome of a same experiment.
+
+Statements that can be made about a sequence of random variables range from simple assertions to more intricate claims.
+For instance, the sequence may appear to approach a deterministic quantity or to behave increasingly akin to a certain function.
+Alternatively, the CDFs of the random variables in the sequence may appear to converge towards a precise function.
+Being able to recognize specific patterns within the sequence is key in establishing converge results.
+The different statement one can make about the sequence $X_1, X_2, \ldots$ lead to the different types of convergence encountered in probability.
+Below, we discuss briefly three types of convergence.
+
+\begin{example}
+Suppose that $X_1, X_2, \ldots$ is a sequence of independent Gaussian random variables, each with mean $m$ and variance $\sigma^2$.
+Define the partial sums
+\begin{equation} \label{equation:GaussianEmpiricalSum}
+S_n = \sum_{i=1}^n X_i ,
+\end{equation}
+and consider the sequence
+\begin{equation} \label{equation:GaussianEmpiricalAverage}
+S_1, \frac{S_2}{2}, \frac{S_3}{3}, \ldots
+\end{equation}
+We know that affine transformation of Gaussian random variables remain Gaussian.
+Furthermore, we know that sums of jointly Gaussian random variables are also Gaussian.
+Thus, $S_n / n$ possesses a Gaussian distribution with mean
+\begin{equation*}
+\Expect \left[ \frac{S_n}{n} \right]
+= \frac{ \Expect [ S_n ] }{n}
+= \frac{ \Expect [ X_1 ] + \cdots + \Expect [ X_n ] }{n}
+= m
+\end{equation*}
+and variance
+\begin{equation*}
+\Var \left[ \frac{S_n}{n} \right]
+= \frac{ \Var [ S_n ] }{n^2}
+= \frac{ \Var [ X_1 ] + \cdots + \Var [ X_n ] }{n^2}
+= \frac{ \sigma^2 }{n} .
+\end{equation*}
+It appears that the PDF of $S_n / n$ concentrates around $m$ as $n$ approaches infinity.
+That is, the sequence in \eqref{equation:GaussianEmpiricalAverage} seems to become increasingly predictable.
+\end{example}
+
+\begin{example}
+Again, let $X_1, X_2, \ldots$ be a sequence as describe above, and let $S_n$ be defined accroding to \eqref{equation:GaussianEmpiricalSum}.
+This time, we wish to characterize the properties of
+\begin{equation*}
+S_1 - m, \frac{S_2 - 2m}{\sqrt{2}}, \frac{S_3 - 3m}{\sqrt{3}}, \ldots
+\end{equation*}
+From our discussion, we know that $(S_n -nm) / \sqrt{n}$ is a Gaussian random variables.
+We can compute its mean and variance as follows
+\begin{gather*}
+\Expect \left[ \frac{S_n -nm}{\sqrt{n}} \right]
+= \frac{ \Expect [ S_n - nm] }{n}
+= 0 \\
+\Var \left[ \frac{S_n - mn}{\sqrt{n}} \right]
+= \frac{ \Var [ S_n - mn] }{n}
+= \frac{ \Var [ S_n ] }{n}
+= \sigma^2 .
+\end{gather*}
+No matter how large $n$ is, the random variable $(S_n - nm)/\sqrt{n}$ has a Gaussian distribution with mean zero and variance $\sigma^2$.
+Intriguingly, the distributions remains fix throughout the sequence.
+\end{example}
+
+
+\subsection{Convergence in Probability}
+
+The basic concept behing the definition of \emph{convergence in probability} is that the probability that a random variable deviates from its typical behavior becomes less likely as the sequence progresses. \index{Convergence in probability}
+Formally, a sequence $X_1, X_2, \ldots$ of random variables converges in probability to $X$ if for every $\epsilon > 0$,
+\begin{equation*}
+\lim_{n \rightarrow \infty} \Pr \left( \left| X_n - X \right| \geq \epsilon \right) = 0 .
+\end{equation*}
+
+\subsection{Mean Square Convergence}
+
+We say that a sequence $X_1, X_2, \ldots$ of random variables \emph{converges in mean square} to $X$ if \index{Mean square convergence}
+\begin{equation*}
+\lim_{n \rightarrow \infty} \Expect \left[ \left| X_n - X \right|^2 \right] = 0 .
+\end{equation*}
+That is, the second moment of the difference between $X_n$ and $X$ vanishes as $n$ goes to infinity.
+Convergence in the mean square sense implies convergence in probability.
+
+\begin{proposition} \label{proposition:ConvergenceImplication1}
+Let $X_1, X_2, \ldots$ be a sequence of random variables that converge in mean square to $X$.
+Then, the sequence $X_1, X_2, \ldots$ also converges to $X$ in probability.
+\end{proposition}
+\begin{proof}
+Suppose that $\epsilon > 0$ is fixed.
+The sequence $X_1, X_2, \ldots$ converges in mean square to $X$.
+Thus, for $\delta > 0$, there exists an $N$ such that $n \geq N$ implies
+\begin{equation*}
+\lim_{n \rightarrow \infty} \Expect \left[ \left| X_n - X \right|^2 \right] < \delta .
+\end{equation*}
+If we apply the Chebyshev inequality to $X_n - X$, we get
+\begin{equation*}
+\Pr \left( \left| X_n - X \right| \geq \epsilon \right)
+\leq \frac{ \Expect \left[ \left| X_n - X \right|^2 \right] }{ \epsilon^2 }
+< \frac{ \delta }{ \epsilon^2 }
+\end{equation*}
+Since $\delta$ can be made arbitrarily small, we conclude that this sequence also converges to $X$ in probability.
+\end{proof}
+
+\subsection{Convergence in Distribution}
+
+A sequence $X_1, X_2, \ldots$ of random variables is said to \emph{converge in distribution} to a random variable $X$ if \index{Convergence in distribution}
+\begin{equation*}
+\lim_{n \rightarrow \infty} F_{X_n} (x) = F_X (x)
+\end{equation*}
+at every point $x \in \RealNumbers$ where $F_X (\cdot)$ is continuous.
+This type of convergence is also called \emph{weak convergence}.  \index{Weak convergence}
+
+\begin{example}
+Let $X_n$ be a continuous random variable that is uniformly distributed over $[0, 1/n]$.
+Then, the sequence $X_1, X_2, \ldots$ converges in distribution to $0$.
+
+In this example, $X = 0$ and
+\begin{equation*}
+F_X (x) = \begin{cases} 1 & x \geq 0 \\
+0 & x < 0. \end{cases}
+\end{equation*}
+Futhermore, for every $x < 0$, we have $F_{X_n} (x) = 0$; and for every $x > 0$, we have
+\begin{equation*}
+\lim_{n \rightarrow \infty} F_{X_n} (x) = 1.
+\end{equation*}
+Hence, the sequence $X_1, X_2, \ldots$ converges in distribution to a constant.
+\end{example}
+
 
 \section{Law of Large Numbers}
 
-\begin{theorem}[The Weak Law of Large Numbers]
-Let $X_1, X_2, \ldots$ be independent and identically distributed random variables with mean $m$ and finite variance.
+Laws of large numbers focus on the convergence of empirical averages.
+Although, there are many such laws, we only state the simplest one below.
+Suppose that $X_1, X_2, \ldots$ is a sequence of independent and identically distributed random variable, each with finite second moment.
+Furthermore, for $n \geq 1$, define the empirical sum
+\begin{equation*}
+S_n = \sum_{i=1}^n X_n .
+\end{equation*}
+The law of large number asserts that the squence of empirical averages,
+\begin{equation*}
+\frac{S_n}{n} = \frac{1}{n} \sum_{i=1}^n X_n ,
+\end{equation*}
+converges in probability to the mean $\Expect [X]$.
+
+\begin{theorem}[Law of Large Numbers]
+Let $X_1, X_2, \ldots$ be independent and identically distributed random variables with mean $\Expect [X]$ and finite variance.
 For every $\epsilon > 0$, we have
 \begin{equation*}
-\Pr \left( |S_n - m| \geq \epsilon \right)
-= \Pr \left( \left| \frac{X_1 + \cdots + X_n}{n} - m \right| \geq \epsilon \right) \rightarrow 0.
+\lim_{n \rightarrow \infty}
+\Pr \left( \left| \frac{S_n}{n} - \Expect [X] \right| \geq \epsilon \right)
+= \lim_{n \rightarrow \infty}
+\Pr \left( \left| \frac{X_1 + \cdots + X_n}{n} - \Expect [X] \right| \geq \epsilon \right)
+= 0 .
 \end{equation*}
 \end{theorem}
 \begin{proof}
+Taking the expectation of the empirical average, we obtain
 \begin{equation*}
-S_n = \frac{X_1 + \cdots X_n}{n} .
-\end{equation*}
-We have
-\begin{equation*}
-\Expect [S_n] = 
-\frac{\Expect [X_1] + \cdots \Expect [X_n]}{n} = m .
+\Expect \left[ \frac{S_n}{n} \right]
+= \frac{ \Expect \left[ S_n \right] }{n}
+= \frac{\Expect [X_1] + \cdots + \Expect [X_n] }{n}
+= \Expect [X] .
 \end{equation*}
 Using independence, we also have
 \begin{equation*}
-\Var (S_n) = \frac{ \Var( X_1 + \cdots + X_n )}{n^2}
-= \frac{ \Var( X_1 ) + \cdots + \Var(X_n )}{n^2}
-= \sigma^2 / n
+\Var \left[ \frac{S_n}{n} \right]
+= \frac{ \Var [X_1] + \cdots + \Var [X_n] }{n^2}
+= \frac{ \Var [X] }{n} .
 \end{equation*}
-We apply the Chebyshev inequality and obtain
+As $n$ goes to infinity, the variance of the empirical average $S_n / n$ vanishes.
+Thus, we showed that the sequence $\{ S_n / n \}$ of empirical averages converges in mean square to $\Expect [X]$ since
 \begin{equation*}
-\Pr (|M_n - m| \geq \epsilon) \leq \frac{ \sigma^2}{n \epsilon^2} .
+\lim_{n \rightarrow \infty}
+\Expect \left[ \left| \frac{S_n}{n} - \Expect [X] \right|^2 \right] 
+= \lim_{n \rightarrow \infty}
+\Var \left[ \frac{S_n}{n} \right] = 0 .
 \end{equation*}
-for any $\epsilon > 0$.
+To get convergence in probability, we apply the Chebyshev inequality, as we did in Proposion~\ref{proposition:ConvergenceImplication1},
+\begin{equation*}
+\Pr \left( \left| \frac{S_n}{n} - \Expect [X] \right| \geq \epsilon \right)
+\leq \frac{ \Var \left[ \frac{S_n}{n} \right] }{\epsilon^2}
+= \frac{ \Var [X] }{n \epsilon^2} ,
+\end{equation*}
+which clearly goes to zero as $n$ approaches infinity.
 \end{proof}
 
+\begin{example}
+Suppose that a die is thrown repitively.
+We are interested in the average number of times a six shows up on the top face, as the number of throws becomes very large.
 
-\subsection{The Hoeffding Bound}
+Let $D_n$ be a random variable that represent the number on the $n$th roll.
+Also, define the random variable $X_n = \IndicatorFcn_{\{ D_n = 6 \}}$.
+Then, $X_n$ is a Bernoulli random variable with parameter $p = 1/6$, and the empirical average $S_n / n$ is equal to the number of times a six was observed divided by the total number of rolls.
+By the law of large numbers, we have
+\begin{equation*}
+\lim_{n \rightarrow \infty}
+\Pr \left( \left| \frac{S_n}{n} - \frac{1}{6} \right| \geq \epsilon \right) = 0 .
+\end{equation*}
+That is, as the number of rolls increases, the average number of times a six was observe converges to the probability of getting a six.
+\end{example}
+
+
+\section{The Central Limit Theorem}
+
+The \emph{central limit theorem} is a remarkable result in probability, and partly explains the prevalence of Gaussian random variables.
+In some sense, it characterizes the behavior of the sum of a large number of independent random variables.
+
+\begin{theorem}[Central Limit Theorem]
+Let $X_1, X_2, \ldots$ be independent and identically distributed random variables, each with mean $\Expect [X]$ and variance $\sigma^2$.
+The distribution of
+\begin{equation*}
+\frac{ S_n - n \Expect [X] }{ \sigma \sqrt{n} }
+\end{equation*}
+converges in distribution to a standard normal random variable as $n \rightarrow \infty$.
+In particular, for any $x \in \RealNumbers$,
+\begin{equation*}
+\lim_{n \rightarrow \infty}
+\Pr \left( \frac{ S_n - n \Expect [X] }{ \sigma \sqrt{n} } \leq x \right)
+= \int_{- \infty}^x \frac{1}{\sqrt{2 \pi}} e^{- \frac{\xi^2}{2}} d\xi .
+\end{equation*}
+\end{theorem}
+
+
+\subsection{Normal Approximation}
+
+The central limit theorem can be employed to approximate the CDF of large sums.
+Again, let
+\begin{equation*}
+S_n = X_1 + \cdots + X_n
+\end{equation*}
+where $X_1, X_2, \ldots$ are independent and indentically distributed random variables with mean $\Expect [X]$ and variance $\sigma^2$.
+When $n$ is large, the CDF of $S_n$ can by estimated by approximating
+\begin{equation*}
+\frac{ S_n - n \Expect [X] } { \sigma \sqrt{n} }
+\end{equation*}
+as a standard normal random variable.
+More specifically, we have
+\begin{equation*}
+\begin{split}
+F_{S_n} (x) 
+&= \Pr (S_n \leq x)
+= \Pr \left( \frac{ S_n - n \Expect [X] }{ \sigma \sqrt{n} }
+\leq \frac{x - n \Expect [x]}{\sigma \sqrt{n}} \right) \\
+&\approx \Phi \left( \frac{x - n \Expect [x]}{\sigma \sqrt{n}} \right) ,
+\end{split}
+\end{equation*}
+where $\Phi (\cdot)$ is the CDF of a standard normal random variable.
+
+%\subsection{The Hoeffding Bound}
 
 
 %
