@@ -46,7 +46,7 @@ That is, the sequence in \eqref{equation:GaussianEmpiricalAverage} seems to beco
 \end{example}
 
 \begin{example}
-Again, let $X_1, X_2, \ldots$ be a sequence as describe above, and let $S_n$ be defined accroding to \eqref{equation:GaussianEmpiricalSum}.
+Again, let $X_1, X_2, \ldots$ be a sequence as describe above, and let $S_n$ be defined according to \eqref{equation:GaussianEmpiricalSum}.
 This time, we wish to characterize the properties of
 \begin{equation*}
 S_1 - m, \frac{S_2 - 2m}{\sqrt{2}}, \frac{S_3 - 3m}{\sqrt{3}}, \ldots
@@ -69,7 +69,7 @@ Intriguingly, the distributions remains fix throughout the sequence.
 
 \subsection{Convergence in Probability}
 
-The basic concept behing the definition of \emph{convergence in probability} is that the probability that a random variable deviates from its typical behavior becomes less likely as the sequence progresses. \index{Convergence in probability}
+The basic concept behind the definition of \emph{convergence in probability} is that the probability that a random variable deviates from its typical behavior becomes less likely as the sequence progresses. \index{Convergence in probability}
 Formally, a sequence $X_1, X_2, \ldots$ of random variables converges in probability to $X$ if for every $\epsilon > 0$,
 \begin{equation*}
 \lim_{n \rightarrow \infty} \Pr \left( \left| X_n - X \right| \geq \epsilon \right) = 0 .
@@ -122,7 +122,7 @@ In this example, $X = 0$ and
 F_X (x) = \begin{cases} 1 & x \geq 0 \\
 0 & x < 0. \end{cases}
 \end{equation*}
-Futhermore, for every $x < 0$, we have $F_{X_n} (x) = 0$; and for every $x > 0$, we have
+Furthermore, for every $x < 0$, we have $F_{X_n} (x) = 0$; and for every $x > 0$, we have
 \begin{equation*}
 \lim_{n \rightarrow \infty} F_{X_n} (x) = 1.
 \end{equation*}
@@ -139,7 +139,7 @@ Furthermore, for $n \geq 1$, define the empirical sum
 \begin{equation*}
 S_n = \sum_{i=1}^n X_n .
 \end{equation*}
-The law of large number asserts that the squence of empirical averages,
+The law of large number asserts that the sequence of empirical averages,
 \begin{equation*}
 \frac{S_n}{n} = \frac{1}{n} \sum_{i=1}^n X_n ,
 \end{equation*}
@@ -178,7 +178,7 @@ Thus, we showed that the sequence $\{ S_n / n \}$ of empirical averages converge
 = \lim_{n \rightarrow \infty}
 \Var \left[ \frac{S_n}{n} \right] = 0 .
 \end{equation*}
-To get convergence in probability, we apply the Chebyshev inequality, as we did in Proposion~\ref{proposition:ConvergenceImplication1},
+To get convergence in probability, we apply the Chebyshev inequality, as we did in Proposition~\ref{proposition:ConvergenceImplication1},
 \begin{equation*}
 \Pr \left( \left| \frac{S_n}{n} - \Expect [X] \right| \geq \epsilon \right)
 \leq \frac{ \Var \left[ \frac{S_n}{n} \right] }{\epsilon^2}
@@ -188,7 +188,7 @@ which clearly goes to zero as $n$ approaches infinity.
 \end{proof}
 
 \begin{example}
-Suppose that a die is thrown repitively.
+Suppose that a die is thrown repetitively.
 We are interested in the average number of times a six shows up on the top face, as the number of throws becomes very large.
 
 Let $D_n$ be a random variable that represent the number on the $n$th roll.
@@ -201,6 +201,107 @@ By the law of large numbers, we have
 \end{equation*}
 That is, as the number of rolls increases, the average number of times a six was observe converges to the probability of getting a six.
 \end{example}
+
+
+\subsection{Heavy-Tailed Distributions}
+
+There are situations where the law of large numbers does not apply.
+For example, when dealing with \emph{heavy-tailed distributions}, one needs to be very careful.
+In this section, we study Cauchy random variables in greater details.
+First, we show that the sum of two independent Cauchy random variables is itself a Cauchy random variable.
+
+Let $X_1$ and $X_2$ be two independent Cauchy random variables with parameter $\gamma_1$ and $\gamma_2$, respectively.
+We wish to compute the PDF of $S = X_1 + X_2$.
+For continuous random variable, the PDF of $S$ is given by the convolution of $f_{X_1} (\cdot)$ and $f_{X_2} (\cdot)$.
+Thus, we can write
+\begin{equation*}
+\begin{split}
+f_S (x) &= \int_{-\infty}^{\infty} f_{X_1} (\xi) f_{X_2} (x - \xi) d\xi \\
+ &= \int_{-\infty}^{\infty}
+\frac{\gamma_1}{\pi \left( \gamma_1^2 + \xi^2 \right)}
+\frac{\gamma_2}{\pi \left( \gamma_2^2 + (x - \xi)^2 \right)} d\xi .
+\end{split}
+\end{equation*}
+This integral is somewhat difficult to solve.
+We therefore resort to complex analysis and contour integration to get the answer.
+Let $C$ be a contour that goes along the real line from $-a$ to $a$, and then counterclockwise along a semicircle centered at zero.
+For $a$ large enough, Cauchy's residue theorem requires that
+\begin{equation} \label{equation:CauchyConvolutionContour}
+\begin{split}
+\oint_{C} f_{X_1} (z) f_{X_2} (x - z) dz
+&= \oint_{C} 
+\frac{\gamma_1}{\pi \left( \gamma_1^2 + z^2 \right)}
+\frac{\gamma_2}{\pi \left( \gamma_2^2 + (x - z)^2 \right)} dz \\
+&= 2 \pi i \left( \operatorname{Res} (g, i \gamma_1)
++ \operatorname{Res} (g, x + i \gamma_2) \right)
+\end{split}
+\end{equation}
+where we have implicitly defined the function
+\begin{equation*}
+\begin{split}
+g(z) &= \frac{\gamma_1 \gamma_2}{\pi^2 \left( \gamma_1^2 + z^2 \right)
+\left( \gamma_2^2 + (z - x)^2 \right) } \\
+&= \frac{\gamma_1 \gamma_2}{\pi^2
+( z - i \gamma_1 ) ( z + i \gamma_1 )
+( z - x + i \gamma_2 ) ( z - x - i \gamma_2 ) } .
+\end{split}
+\end{equation*}
+Again, only two residues are contained within the enclosed region.
+Because they are simple pole, their values are given by
+\begin{align*}
+\operatorname{Res} (g, i \gamma_1)
+&= \lim_{z \rightarrow i \gamma_1} (z - i \gamma_1) g(z)
+= \frac{\gamma_2}{2 i \pi^2
+\left( ( x - i \gamma_1 )^2 + \gamma_2^2 \right) } \\
+\operatorname{Res} (g, x + i \gamma_2)
+&= \lim_{z \rightarrow x + i \gamma_2} (z - x - i \gamma_2) g(z)
+= \frac{\gamma_1}{2 i \pi^2
+\left( ( x + i \gamma_2 )^2 + \gamma_1^2 \right) } .
+\end{align*}
+It follows that
+\begin{equation*}
+\begin{split}
+& 2 \pi i \left( \operatorname{Res} (g, i \gamma_1)
++ \operatorname{Res} (g, x + i \gamma_2) \right) \\
+&= \frac{\gamma_2}{\pi \left( ( x - i \gamma_1 )^2 + \gamma_2^2 \right) }
++ \frac{\gamma_1}{\pi \left( ( x + i \gamma_2 )^2 + \gamma_1^2 \right) } \\
+%&= \frac{\gamma_2}{\pi (x - i \gamma_1 - i \gamma_2) (x - i \gamma_1 + i \gamma_2) }
+%+ \frac{\gamma_1}{\pi (x + i \gamma_2 - i \gamma_1) (x + i \gamma_2 + i \gamma_1) } \\
+%&= \frac{\gamma_2 (x + i \gamma_2 + i \gamma_1) + \gamma_1 (x - i \gamma_1 - i \gamma_2)}
+%{\pi (x - i \gamma_1 - i \gamma_2) (x - i \gamma_1 + i \gamma_2)
+%(x + i \gamma_2 + i \gamma_1) } \\
+%&= \frac{(\gamma_1 + \gamma_2) (x - i \gamma_1 + i \gamma_2)}
+%{\pi (x - i \gamma_1 - i \gamma_2) (x - i \gamma_1 + i \gamma_2)
+%(x + i \gamma_2 + i \gamma_1) } \\
+&= \frac{(\gamma_1 + \gamma_2)}
+{\pi \left( (\gamma_1 + \gamma_2)^2 + x^2 \right) }
+\end{split}
+\end{equation*}
+The contribution of the arc in \eqref{equation:CauchyConvolutionContour} vanishes as $a \rightarrow \infty$.
+We can then conclude that the PDF of $S$ is equal to
+\begin{equation*}
+f_S (x) = \frac{(\gamma_1 + \gamma_2)}
+{\pi \left( (\gamma_1 + \gamma_2)^2 + x^2 \right) } .
+\end{equation*}
+The sum of two independent Cauchy random variables with parameters $\gamma_1$ and $\gamma$ is itself a Cauchy random variable with parameter $\gamma_1 + \gamma_2$.
+
+Let $X_1, X_2, \ldots$ form a sequence of independent Cauchy random variables, each with parameter $\gamma$.
+Also, consider the empirical sum
+\begin{equation*}
+S_n = \sum_{i=1}^n X_n .
+\end{equation*}
+Using mathematical induction and the aforementioned fact, it is straightforward to show that $S_n$ is a Cauchy random variable with parameter $n \gamma$.
+Furthermore, for $x \in \RealNumbers$, the PDF of the empirical average $S_n / n$ is given by
+\begin{equation*}
+\frac{f_{S_n} ( n x )}{\left| \frac{1}{n} \right|}
+= \frac{n^2 \gamma}{\pi \left( n^2 \gamma^2 + (nx)^2 \right)}
+= \frac{\gamma}{\pi \left( \gamma^2 + x^2 \right)} ,
+\end{equation*}
+where we have used the methodology developed in Chapter~\ref{chapter:DerivedDistributions}.
+Amazingly, the empirical average of a sequence of independent Cauchy random variables, each with parameter $\gamma$, remains a Cauchy random variable with the same parameter.
+Clearly, the law of large numbers does not apply to this scenario.
+Note that our version of the law of large numbers requires the random variables to have finite second moment, a condition that is clearly violated by the Cauchy distribution.
+This explains why convergence does not take place in this situation.
 
 
 \section{The Central Limit Theorem}
@@ -223,6 +324,62 @@ In particular, for any $x \in \RealNumbers$,
 \end{equation*}
 \end{theorem}
 
+\begin{proof}
+Initially, we assume that $\Expect [X] = 0$ and $\sigma^2 = 1$.
+Furthermore, we only study the situation where the moment generating function of $X$ exists and is finite.
+Consider the log-moment generating function of $X$,
+\begin{equation*}
+\Lambda_X (s) = \log \left( M_X (s) \right)
+= \log \left( \Expect \left[ e^{sX} \right] \right) .
+\end{equation*}
+The first two derivatives of $\Lambda_X (s)$ are equal to
+\begin{gather*}
+\frac{d \Lambda_X}{ds} (s)
+= \frac{1}{M_X (s)} \frac{d M_X}{ds} (s) \\
+\frac{d^2 \Lambda_X}{ds^2} (s)
+= \frac{1}{M_X (s)} \left( \frac{d M_X}{ds} (s) \right)^2
++ \frac{1}{M_X (s)} \frac{d^2 M_X}{ds^2} (s) .
+\end{gather*}
+Collecting these results and evaluating the functions at zero, we get $\Lambda_X (0) = 0$, $\frac{d \Lambda_X}{ds} (0) = \Expect [X] = 0$, and $\frac{d^2 \Lambda_X}{ds^2} (0) = \Expect \left[ X^2 \right] = 1$.
+Next, we consider the log-moment generating function of $S_n / \sqrt{n}$.
+Recall that the expectation of a product of independent random variables is equal to the product of their individual expectations.
+Using this property, we get
+\begin{equation*}
+\begin{split}
+\log \left( \Expect \left[ e^{s S_n / \sqrt{n} } \right] \right)
+&= \log \left( \Expect \left[ e^{s X_1 / \sqrt{n} }
+\cdots e^{s X_n / \sqrt{n} } \right] \right) \\
+&= \log \left( M_X \left( \frac{s}{\sqrt{n}} \right)
+\cdots M_X \left( \frac{s}{\sqrt{n}} \right) \right) \\
+&= n \Lambda_X \left( s n^{-1/2} \right) .
+\end{split}
+\end{equation*}
+To explore the asymptotic behavior of $S_n / \sqrt{n}$, we take the limit of $n \Lambda_X \left( s n^{-1/2} \right)$ as $n \rightarrow \infty$.
+In doing so, notice the double use of L'H\^{o}pital's rule,
+\begin{equation*}
+\begin{split}
+\lim_{n \rightarrow \infty} \frac{1}{n^{-1}} \Lambda \left( s n^{-1/2} \right)
+&= \lim_{n \rightarrow \infty} \frac{1}{n^{-2}}
+\frac{d \Lambda}{ds} \left( s n^{-1/2} \right) \frac{s n^{-3/2}}{2} \\
+&= \lim_{n \rightarrow \infty} \frac{s}{2 n^{-1/2}}
+\frac{d \Lambda}{ds} \left( s n^{-1/2} \right) \\
+&= \lim_{n \rightarrow \infty} \frac{s}{n^{-3/2}}
+\frac{d^2 \Lambda}{ds^2} \left( s n^{-1/2} \right) \frac{s n^{-3/2}}{2} \\
+&= \lim_{n \rightarrow \infty} \frac{s^2}{2}
+\frac{d^2 \Lambda}{ds^2} \left( s n^{-1/2} \right) = \frac{s^2}{2} .
+\end{split}
+\end{equation*}
+That is, the moment generating function of $S_n / \sqrt{n}$ converges point-wise to $e^{s^2/2}$ as $n \rightarrow \infty$.
+In fact, this implies that
+\begin{equation*}
+\Pr \left( \frac{S_n}{\sqrt{n}} \leq x \right) \rightarrow \int_{-\infty}^x \frac{1}{\sqrt{2 \pi}} e^{-\frac{\xi^2}{2}} d\xi
+\end{equation*}
+as $n \rightarrow \infty$.
+In other words, $S_n / \sqrt{n}$ converges in distribution to a standard normal random variable.
+The more general case where $\Expect [X]$ and $\Var [X]$ are arbitrary constants can be established in an analog manner by proper scaling of the random variables $X_1, X_2, \ldots$
+\end{proof}
+
+In the last step of the proof, we stated that point-wise convergence of the moment generating functions implies convergence in distribution, a sophisticated result we quote without proof.
 
 \subsection{Normal Approximation}
 
@@ -231,7 +388,7 @@ Again, let
 \begin{equation*}
 S_n = X_1 + \cdots + X_n
 \end{equation*}
-where $X_1, X_2, \ldots$ are independent and indentically distributed random variables with mean $\Expect [X]$ and variance $\sigma^2$.
+where $X_1, X_2, \ldots$ are independent and identically distributed random variables with mean $\Expect [X]$ and variance $\sigma^2$.
 When $n$ is large, the CDF of $S_n$ can by estimated by approximating
 \begin{equation*}
 \frac{ S_n - n \Expect [X] } { \sigma \sqrt{n} }
@@ -249,6 +406,8 @@ F_{S_n} (x)
 \end{equation*}
 where $\Phi (\cdot)$ is the CDF of a standard normal random variable.
 
+
+%Do Jensen from homework 11.
 %\subsection{The Hoeffding Bound}
 
 
