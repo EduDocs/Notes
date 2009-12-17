@@ -322,6 +322,17 @@ Adding $m-n$ rows of zeros to the previous $R$ matrix gives an $m\times n$ matri
 
 \section{Hermitian Matrices and Complex Numbers}
 
+\begin{definition}
+A square matrix $Q \in \mathbb{R}^{n \times n}$ is \defn{matrix}{orthogonal} if $Q^T Q = Q Q^T = I$.
+\end{definition}
+
+\begin{definition}
+A square matrix $U \in \mathbb{C}^{n \times n}$ is \defn{matrix}{unitary} if $U^H U = U U^H = I$.
+\end{definition}
+
+It is worth noting that, for unitary (resp. orthogonal) matrices, it suffices to check only that $U^H U = I$ (resp. $Q^T Q = I$) because $U$ is invertible (e.g., it has linearly independent columns) and
+\[ U^H U = I \implies I = U U^{-1} = U (U^H U) U^{-1} = U U^H. \]
+
 A useful analogy between matrices and complex numbers is as follows.
 \begin{itemize}
 \item \emph{Hermitian matrices} satisfying $A^H = A$ are analogous to real numbers, whose complex conjugates are equal to themselves.

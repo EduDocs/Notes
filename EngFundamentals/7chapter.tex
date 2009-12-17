@@ -1,7 +1,7 @@
 \chapter{Singular Value Decomposition}
 
 
-\section{Hermitian Matrices}
+\section{Diagonalization of Hermitian Matrices}
 
 \begin{lemma}[Schur Decomposition]
 For any square matrix $A$, there exists a unitary matrix $U$ such that
@@ -13,10 +13,10 @@ That is, every square matrix is similar to an upper-triangular matrix.
 \end{lemma}
 
 \begin{proof}
-We proof this lemma by induction on the size $n$ of the matrix.
+We prove this lemma by induction on the size $n$ of the matrix.
 Since it is clearly true for scalars (i.e., matrices of size $n=1$), the base case is trivial.
 Now, suppose that the result holds for all $k=1,2,\ldots,n-1$ and let $A \in \ComplexNumbers^{n \times n}$.
-There exists an eigenvector $\vecnot{u}$ of $A$ such that $\left\| \vecnot{u} \right\|_2 = 1$.
+Since every matrix has at least one eigenvector, we let $\vecnot{u}$ be an eigenvector of $A$ normalized so that $\left\| \vecnot{u} \right\|_2 = 1$.
 Using the Gram-Schmidt procedure, it is possible to construct an orthonormal basis $\mathcal{B} = \vecnot{x}_1, \ldots, \vecnot{x}_n$ for $\ComplexNumbers^n$, with $\vecnot{x}_1 = \vecnot{u}_1$.
 Define the matrix $U_n$ by
 \begin{equation*}
@@ -102,8 +102,8 @@ This proves every Hermitian matrix has a complete set of orthonormal eigenvector
 
 \section{Singular Value Decomposition}
 
-The singular value decomposition (SVD) provides a factorization for all matrices.
-In general, a matrix $A$ can be factored into a product of unitary matrices and a diagonal matrix, as explained below.
+The singular value decomposition (SVD) provides a matrix factorization related to the eigenvalue decomposition that works for all matrices.
+In general, any matrix $A \in \mathbb{C}^{m \times n}$ can be factored into a product of unitary matrices and a diagonal matrix, as explained below.
 
 \begin{theorem}
 Let $A$ be a matrix in $\ComplexNumbers^{m \times n}$.
@@ -139,7 +139,10 @@ For $i \leq r$, let
 \end{equation*}
 and observe that
 \begin{equation*}
-\left\langle \vecnot{u}_i | \vecnot{u}_j \right\rangle = \delta_{i-j} .
+\left\langle \vecnot{u}_i | \vecnot{u}_j \right\rangle
+= \frac{\vecnot{v}_j^H A^H A \vecnot{v}_i}{\sqrt{\lambda_i \lambda_j}}
+= \frac{\vecnot{v}_j^H \vecnot{v}_i \lambda_i}{\sqrt{\lambda_i \lambda_j}}
+= \delta_{ij} .
 \end{equation*}
 Also note that $\{ \vecnot{u}_i \}$ are eigenvectors of $A A^H$ since
 \begin{equation*}
@@ -169,3 +172,63 @@ U^H A V = \Diag \left( \sqrt{\lambda_1}, \ldots, \sqrt{\lambda_n} \right)
 \end{equation*}
 as desired.
 \end{proof}
+
+\section{Properties of the SVD}
+
+Many of the important properties of the SVD can be understood better by separating the non-zero singular values from the zero singular values.
+To do this, we note that every rank $r$ matrix $A \in \ComplexNumbers^{m \times n}$ has a singular value decomposition
+\begin{equation*}
+A = U \Sigma V^H
+= \left[ \begin{array}{cc} U_1 & U_2 \end{array} \right]
+\left[ \begin{array}{cc} \Sigma_1 & 0 \\ 0 & 0 \end{array} \right]
+\left[ \begin{array}{c} V_1^H \\ V_2^H \end{array} \right]
+= U_1 \Sigma_1 V_1^H,
+\end{equation*}
+where $U \in \ComplexNumbers^{m \times m}$ and $V \in \ComplexNumbers^{n \times n}$ are unitary and $U_1 \in \ComplexNumbers^{m \times r}$, $U_2 \in \ComplexNumbers^{m \times m-r}$, $V_1 \in \ComplexNumbers^{n \times r}$, and $V_2 \in \ComplexNumbers^{n \times n-r}$ have orthonormal columns.
+The diagonal matrix $\Sigma_1 \in \RealNumbers^{r \times r}$ contains the non-zero singular values
+\[ \sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_r > 0. \]
+The factorization $A = U \Sigma V^H$ is called the \textbf{full SVD} of the matrix $A$ while the factorization $A = U_1 \Sigma_1 V_1$ is called the \defn{matrix}{compact SVD} of $A$.
+The compact SVD of a rank-$r$ matrix retains only the $r$ columns of $U,V$ associated with non-zero singular values.
+
+Let $V,W$ be inner product spaces and let $A$ define a mapping from $V$ to $W$.
+Then, the columns of $V_1$ form an orthonormal basis for the vectors in $W$ that are mapped to non-zero vectors (i.e., $\mathcal{N}(A)^\bot$) while the columns of $V_2$ form an orthonormal basis of $\mathcal{N}(A)$.
+Likewise, the columns of $U_1$ form a orthonormal basis for the range of $A$ while the vectors in $U_2$ form orthonormal basis for $\mathcal{R}(A)^\bot$.
+It follows that the full SVD computes orthonormal bases for all of the four fundamental subspaces of the matrix $A$.
+For example, it is easy to show that
+\begin{align*}
+\mathcal{R}(A) &= \textrm{span} (U_1) \\
+\mathcal{R}(A^H) &= \textrm{span} (V_1) \\
+\mathcal{N}(A) &= \textrm{span} (V_2) \\
+\mathcal{N}(A^H) &= \textrm{span} (U_2)
+\end{align*}
+To see this, notice that $A \sum_{i=1}^t c_i \vecnot{v}_i = \sum_{i=1}^t c_i \sigma_i \vecnot{u}_i$.
+
+From this, we can compute easily any projection onto a fundamental subspace.
+First, we point out that the projection onto the column space of any matrix $W\in \mathbb{C}^{m \times n}$ with orthonormal columns (i.e., $W^H W = I$) is given by
+\[ P_W = W (W^H W)^{-1} W^H = W W^H. \]
+Therefore, the projection matrices for the fundamental subspaces are given by
+\begin{align*}
+P_{\mathcal{R}(A)} &= U_1 U_1^H \\
+P_{\mathcal{R}(A^H)} &= V_1 V_1^H \\
+P_{\mathcal{N}(A)} &= V_2 V_2^H \\
+P_{\mathcal{N}(A^H)} &= U_2 U_2^H
+\end{align*}
+
+This decomposition also provides a rank revealing decomposition of a rank-$r$ matrix
+\[ A = \sum_{i=1}^r \sigma_i \vecnot{u}_i \vecnot{v}_i^H, \]
+where $\vecnot{u}_i$ is the $i$th column of $U$ and $\vecnot{v}$ is the $i$th column of $V$.
+This shows $A$ as the sum of $r$ rank-1 matrices.
+It also allows one to compute
+\begin{align*}
+\| A \|_F &= \sum_{i=1}^r \sigma_i^2 \\
+\| A \|_2 &= \sigma_1
+\end{align*}
+
+The pseudoinverse of $A$ is also very easy to compute from the SVD.
+In particular, one finds that
+\[ A^\dagger = V \Sigma^\dagger U^H = V_1 \Sigma_1^{-1} U_1^H. \]
+One can verify this by computing $A^\dagger A$ and $A A^\dagger$.
+It also follows from the fact that the pseudoinverse of a scalar $\sigma$ is $\sigma^{-1}$ if $\sigma \neq 0$ and zero otherwise.
+
+
+
