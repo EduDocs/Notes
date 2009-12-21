@@ -4,7 +4,7 @@
 
 \begin{theorem}
 Let $V$ and $W$ be vector spaces over the field $F$.
-Let $T$ and $U$ be two linear transformations form $V$ into $W$.
+Let $T$ and $U$ be two linear transformations from $V$ into $W$.
 The function $(T+U)$ defined pointwise by
 \begin{equation*}
 (T + U) \left( \vecnot{v} \right) = T \vecnot{v} + U \vecnot{v}
@@ -54,7 +54,7 @@ We denote the space of linear transformations from $V$ into $W$ by $L(V,W)$.
 Note that $L(V,W)$ is defined only when $V$ and $W$ are vector spaces over the same field.
 
 \begin{fact}
-Let $V$ be an $n$-dimensional vector spaces over the field $F$, and let $W$ be an $m$-dimensional vector space over $F$.
+Let $V$ be an $n$-dimensional vector space over the field $F$, and let $W$ be an $m$-dimensional vector space over $F$.
 Then the space $L(V,W)$ is finite-dimensional and has dimension $mn$.
 \end{fact}
 
@@ -160,7 +160,7 @@ for all $\vecnot{v}_1, \vecnot{v}_2 \in V$ and $s \in F$.
 Let $F$ be a field and let $s_1, \ldots, s_n$ be scalars in $F$.
 Then the functional $f$ on $F^n$ defined by
 \begin{equation*}
-f(v_1, \ldots, v_n) = s_1 v_1 + \cdots, s_n v_n
+f(v_1, \ldots, v_n) = s_1 v_1 + \cdots + s_n v_n
 \end{equation*}
 is a linear functional.
 It is the linear functional which is represented by the matrix
@@ -327,7 +327,7 @@ To see this, we can write
 \frac{ \left\| T \vecnot{v} \right\| }{ \left\| \vecnot{v} \right\| }
 = \sup_{ \vecnot{v} \in V - \left\{ \vecnot{0} \right\} }
 \left\| T \frac{\vecnot{v}}{\| \vecnot{v} \|} \right\|
-= \sup_{\vecnot{u} \in V, \left\| \vecnot{v} \right\| = 1 }
+= \sup_{\vecnot{u} \in V, \left\| \vecnot{u} \right\| = 1 }
 \left\| T \vecnot{u} \right\| .
 \end{equation*}
 
@@ -526,7 +526,7 @@ Note that $\left\| A \right\|_F^2 = \Trace (A^H A)$.
 
 \section{Linear Functionals on Hilbert Spaces}
 
-Let $V$ be an inner-product space, and let $\vecnot{w}$ be some fixed vector in $V$.
+Let $V$ be an inner-product space, and let $\vecnot{v}$ be some fixed vector in $V$.
 Define the function $f_{\vecnot{v}}$ from $V$ into $F$ by
 \begin{equation*}
 f_{\vecnot{v}} \left( \vecnot{w} \right)
@@ -560,9 +560,9 @@ and let $f_{\vecnot{v}}$ be the functional defined by
 f_{\vecnot{v}} \left( \vecnot{w} \right) = \left\langle \vecnot{w} | \vecnot{v} \right\rangle .
 \end{equation*}
 It is easy to verify that
-\[ \| f \| \triangleq \sup_{\vecnot{u}\in V - \{ \vecnot{0} \}} \frac{f(\vecnot{u})}{\| \vecnot{u} \|} = \| v \|. \]
-Since $f$ is continuous, it follows that $\| f \| < \infty$ and $\| v \| < \infty$.
-The Cauchy-Schwarz inequality shows that $\langle \vecnot{w} | \vecnot{v} \rangle \leq \| w \| \| v \|$ so that $f$ is continuous (and therefore linear) because $\| v \| < \infty$.
+\[ \| f \| \triangleq \sup_{\vecnot{u}\in V - \{ \vecnot{0} \}} \frac{f(\vecnot{u})}{\| \vecnot{u} \|} = \| \vecnot{v} \|. \]
+Since $f$ is continuous, it follows that $\| f \| < \infty$ and $\| \vecnot{v} \| < \infty$.
+The Cauchy-Schwarz inequality shows that $\langle \vecnot{w} | \vecnot{v} \rangle \leq \| \vecnot{w} \| \| \vecnot{v} \|$ so that $f$ is continuous (and therefore linear) because $\| \vecnot{v} \| < \infty$.
 Then, 
 \begin{equation*}
 f_{\vecnot{v}} \left( \vecnot{v}_j \right) = \left\langle \vecnot{v}_j \Big| 
@@ -755,7 +755,7 @@ Then, for every $\vecnot{v} \in V$, we have
 This implies that $\left\langle \vecnot{v} | T^* \vecnot{w} \right\rangle = 0$, by the definition of the adjoint.
 Since this is true for every $\vecnot{v} \in V$, we get $T^* \vecnot{w} = \vecnot{0}$, so $\vecnot{w} \in N_{T^*}$.
 Then $\left[ R_T \right]^{\bot} \subseteq N_{T^*}$, which combined with our previous result yields $\left[ R_T \right]^{\bot} = N_{T^*}$.
-Using a similar argument, one can show that $\left[ R_{T^*} \right]^* = N_T$.
+Using a similar argument, one can show that $\left[ R_{T^*} \right]^{\bot} = N_T$.
 \end{proof}
 
 

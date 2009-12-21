@@ -31,7 +31,7 @@ Consider the system
 Applying the above recursion gives
 \begin{align*}
 y_1 & = \frac{1}{1}  = 1 \\
-y_2 & = \frac{1}{1} (2 - 1\cdot 1)  = 2 \\
+y_2 & = \frac{1}{1} (2 - 1\cdot 1)  = 1 \\
 y_3 & = \frac{1}{1} (9 - 1\cdot 1 - 2\cdot 1) = 6.
 \end{align*}
 \end{example}
@@ -280,7 +280,7 @@ Therefore, applying $L_j^{-H}$ on the right also cancels the elements to the rig
 After $n-1$ rounds, we find that $D = A^{(n)}$ is a diagonal matrix.
 
 There are a number of redundancies in the computation described above.
-First off, the $L$ matrix computed by LU decomposition is identical the to the $L$ matrix computed by LDLT decomposition.
+First off, the $L$ matrix computed by LU decomposition is identical to the $L$ matrix computed by LDLT decomposition.
 Therefore, one can save operations by defining $A^{(j+1)} = L_j^{-1} A^{(j)}$.
 Moreover, the elements to the right of the diagonal in $A^{(j)}$ do not affect the computation at all.
 So, one can roughly half the number of additions and multiplies by only updating the lower triangular part of $A^{(j)}$.

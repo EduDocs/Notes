@@ -54,7 +54,7 @@ It is called a \textbf{left eigenvector} if $\vecnot{v}^H A = \lambda \vecnot{v}
 \begin{definition}
 Let $\lambda$ be an eigenvalue of the matrix $A$.
 The \defn{eigenvalues}{eigenspace} associated with $\lambda$ is the set $E_\lambda = \{ \vecnot{v} \in V | A \vecnot{v} = \lambda \vecnot{v} \}$.
-The \defn{eigenvalues}{algebraic multiplicity} of $\lambda$ is the multiplicity of the zero $t=\lambda$ in the characteristic polynomial $\chi_A (t)$.
+The \defn{eigenvalues}{algebraic multiplicity} of $\lambda$ is the multiplicity of the zero at $t=\lambda$ in the characteristic polynomial $\chi_A (t)$.
 The \defn{eigenvalues}{geometric multiplicity} of an eigenvalue $\lambda$ is equal to dimension of the eigenspace $E_\lambda$ or $\textrm{nullity}(A - t I)$.
 \end{definition}
 
@@ -226,7 +226,7 @@ Therefore, if $\lambda_2 \neq \lambda_1$, then $\vecnot{w}^H \vecnot{v} = 0$ and
 It is well known that the solution of the 1st-order linear differential equation
 \[ \frac{d}{dt} x(t) = a x(t) \]
 is given by
-\[ x(t) = e^{at} x(0) + C. \]
+\[ x(t) = e^{at} x(0). \]
 
 It turns out that this formula can be extended to coupled differential equations.
 Let $A$ be a diagonalizable matrix and consider the the set of 1st order linear differential equations defined by
@@ -235,19 +235,23 @@ Using the decomposition $A = S \Lambda S^{-1}$ and the substitution $\vecnot{x}(
 \begin{align*}
 \frac{d}{dt} \vecnot{x}(t)
 & = \frac{d}{dt} S \vecnot{y}(t) \\
-& = S \frac{d}{dt} \vecnot{y}(t) \\
+& = S \frac{d}{dt} \vecnot{y}(t).
+\end{align*}
+and
+\begin{align*}
+\frac{d}{dt} \vecnot{x}(t)
+& = A \vecnot{x}(t) \\
 & = A S \vecnot{y}(t).
 \end{align*}
 This implies that
 \[ \frac{d}{dt} \vecnot{y}(t) = S^{-1} A S \vecnot{y}(t) = \Lambda \vecnot{y}(t). \]
 Solving each individual equation gives
-\[ y_j (t) = e^{\lambda_j t} y_j (0) + c_j \]
-and we can group them together in matrix form as
-\[ \vecnot{y}(t) = e^{\Lambda t} \vecnot{y}(0) + \vecnot{c}. \]
+\[ y_j (t) = e^{\lambda_j t} y_j (0) \]
+and we can group them together in matrix form with
+\[ \vecnot{y}(t) = e^{\Lambda t} \vecnot{y}(0). \]
 In terms of $\vecnot{x}(t)$, this gives
-\[ \vecnot{x}(t) = S e^{\Lambda t} S^{-1} \vecnot{x}(0) + \vecnot{c}', \]
-where $\vecnot{c}' = S \vecnot{c}$.
-In the next section, we will see this is equal to $ \vecnot{x}(t) = e^{A t} \vecnot{x}(0) + \vecnot{c}'$.
+\[ \vecnot{x}(t) = S e^{\Lambda t} S^{-1} \vecnot{x}(0). \]
+In the next section, we will see this is equal to $ \vecnot{x}(t) = e^{A t} \vecnot{x}(0)$.
 
 \subsection{Functions of a Matrix}
 
