@@ -7,10 +7,10 @@ pdftk book.pdf cat 53-65 output book_ch5.pdf
 pdftk book.pdf cat 66-77 output book_ch6.pdf
 pdftk book.pdf cat 78-94 output book_ch7.pdf
 pdftk book.pdf cat 95-113 output book_ch8.pdf
-pdftk book.pdf cat 114-125 output book_ch8.pdf
-pdftk book.pdf cat 126-138 output book_ch8.pdf
-pdftk book.pdf cat 139-152 output book_ch8.pdf
-pdftk book.pdf cat 153-162 output book_ch8.pdf
+pdftk book.pdf cat 114-125 output book_ch9.pdf
+pdftk book.pdf cat 126-138 output book_ch10.pdf
+pdftk book.pdf cat 139-152 output book_ch11.pdf
+pdftk book.pdf cat 153-162 output book_ch12.pdf
 #pdftk book.pdf cat 130-133 output book_appendix.pdf
 #pdftk book.pdf cat 134-137 output book_index.pdf
 
