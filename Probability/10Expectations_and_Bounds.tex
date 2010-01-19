@@ -526,18 +526,39 @@ Optimizing over all admissible exponential functions, $e^{s(x-a)}$ where $s > 0$
 \end{figure}
 
 
-%\subsection{Jensen's Inequality}
-%
-%Suppose that $g$ is a convex function, that is
-%\begin{equation*}
-%p g(x) + (1-p) g(y) \geq g(px + (1-p)y)
-%\end{equation*}
-%for all $p \in (0,1)$ and all real numbers $x$ and $y$.
-%Then, we get
-%\begin{equation*}
-%\Expect [g(X)] \geq g \left( \Expect [X] \right) ,
-%\end{equation*}
-%provided both expectation exist.
+\subsection{Jensen's Inequality}
+
+Some inequalities can also be derived based on the properties of a single function.
+The \emph{Jensen inequality} is one such example. \index{Jensen inequality}
+Suppose that function $g(\cdot)$ is convex and twice differentiable.
+In particular,
+\begin{equation*}
+\frac{d^2 g}{dx^2} (x) \geq 0
+\end{equation*}
+for all $x \in \RealNumbers$.
+From the fundamental theorem of calculus, we have
+\begin{equation*}
+g(x) = g(a) + \int_a^x \frac{dg}{dx} (\xi) d\xi .
+\end{equation*}
+Futhermore, because the second derivative of $g(\cdot)$ is a non-negative function, we gather that $\frac{dg}{dx} (\cdot)$ is a monotone increasing function.
+As such, for any value of $a$, we have
+\begin{equation*}
+g(x) = g(a) + \int_a^x \frac{dg}{dx} (\xi) d\xi
+\geq g(a) + \int_a^x \frac{dg}{dx} (a) d\xi
+= g(a) + (x-a) \frac{dg}{dx} (a) .
+\end{equation*}
+In particular, for random variable $X$, we have
+\begin{equation*}
+g(X) \geq g(a) + (X-a) \frac{dg}{dx} (a) .
+\end{equation*}
+Choosing $a = \Expect [X]$ and taking expections on both sides, we obtain
+\begin{equation*}
+\Expect [g(X)] \geq g(\Expect [X])
++ (\Expect [X]-\Expect [X]) \frac{dg}{dx} (\Expect [X])
+= g(\Expect [X]) .
+\end{equation*}
+That is, $\Expect [g(X)] \geq g(\Expect [X])$, provided that the two expectations exist.
+Jensen's inequality actually holds for convex functions that are not twice differentiable, but the proof is much harder in the general setting.
 
 
 \section*{Further Reading}
