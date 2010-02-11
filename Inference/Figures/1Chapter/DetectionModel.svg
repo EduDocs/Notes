@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
+
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:cc="http://creativecommons.org/ns#"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
@@ -12,15 +13,22 @@
    height="1052.3622047"
    id="svg2160"
    sodipodi:version="0.32"
-   inkscape:version="0.45.1"
-   sodipodi:docbase="/Users/courses/Desktop/ECEN662/ClassNotes/Figures"
+   inkscape:version="0.47pre3 r22311"
    sodipodi:docname="DetectionModel.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
    inkscape:export-filename="/Users/courses/Desktop/ECEN662/ClassNotes/Figures/Inference.png"
    inkscape:export-xdpi="90"
-   inkscape:export-ydpi="90">
+   inkscape:export-ydpi="90"
+   version="1.1">
   <defs
      id="defs2162">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective2960" />
     <marker
        inkscape:stockid="Arrow2Mend"
        orient="auto"
@@ -53,7 +61,8 @@
      inkscape:window-x="11"
      inkscape:window-y="22"
      showguides="true"
-     inkscape:guide-bbox="true" />
+     inkscape:guide-bbox="true"
+     inkscape:window-maximized="0" />
   <metadata
      id="metadata2165">
     <rdf:RDF>
@@ -69,6 +78,16 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1">
+    <path
+       sodipodi:type="arc"
+       style="fill:#ffffff;fill-opacity:0;fill-rule:nonzero;stroke:#000000;stroke-width:3.87080407;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:11.61241222, 11.61241222;stroke-dashoffset:0;stroke-opacity:1"
+       id="path2499"
+       sodipodi:cx="141.5"
+       sodipodi:cy="1079.3622"
+       sodipodi:rx="196.5"
+       sodipodi:ry="122"
+       d="M 338 1079.3622 A 196.5 122 0 1 1  -55,1079.3622 A 196.5 122 0 1 1  338 1079.3622 z"
+       transform="matrix(0.5089059,0,0,0.8196721,-138.76021,-245.1112)" />
     <g
        id="g4542">
       <g
@@ -198,16 +217,6 @@
              y="629.28662">0</tspan></text>
       </g>
     </g>
-    <path
-       sodipodi:type="arc"
-       style="fill:#ffffff;fill-opacity:0;fill-rule:nonzero;stroke:#000000;stroke-width:3.87080407;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:11.61241222, 11.61241222;stroke-dashoffset:0;stroke-opacity:1"
-       id="path2499"
-       sodipodi:cx="141.5"
-       sodipodi:cy="1079.3622"
-       sodipodi:rx="196.5"
-       sodipodi:ry="122"
-       d="M 338 1079.3622 A 196.5 122 0 1 1  -55,1079.3622 A 196.5 122 0 1 1  338 1079.3622 z"
-       transform="matrix(0.5089059,0,0,0.8196721,-138.76021,-245.1112)" />
     <path
        sodipodi:type="arc"
        style="fill:#ffffff;fill-opacity:0;fill-rule:nonzero;stroke:#000000;stroke-width:3.87080407;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:11.61241222, 11.61241222;stroke-dashoffset:0;stroke-opacity:1"
