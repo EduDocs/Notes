@@ -550,12 +550,12 @@ Thus, the optimal detector selects an hypothesis by minimizing the Euclidean dis
 
 How would you prove that \emph{Gray coding} is optimal for minimizing the probability of bit error over a fixed QAM constellation.
 
-\newpage
-
-\section{Generalized Likelihood Ratio Tests}
-\section{Robust Detection}
-\section{Non-Parametric Detection}
-\section{Decentralized Detection}
+%\newpage
+%
+%\section{Generalized Likelihood Ratio Tests}
+%\section{Robust Detection}
+%\section{Non-Parametric Detection}
+%\section{Decentralized Detection}
 
 \newpage
 
@@ -586,10 +586,10 @@ We can equivalently write the optimal detection procedure as a threshold test on
 \decreg{H_1}{H_0} \frac{ \log \eta }{n} .
 \end{equation*}
 
-\subsection{Sequential Detection}
-\subsection{Quickest Change Detection}
+%\subsection{Sequential Detection}
+%\subsection{Quickest Change Detection}
 
-\newpage
+%\newpage
 
 \section{Asymptotic Performance Evaluation}
 
@@ -791,7 +791,7 @@ We examine these two terms individually.
 We apply a union bound on the first term and obtain
 \begin{equation*}
 \begin{split}
-&\sum_{i=1}^n \Pr \left( S_n \neq \bar{S}_n \right)
+&\Pr \left( S_n \neq \bar{S}_n \right)
 \leq \Pr \left( \bigcup_{i=1}^n \{ Z_i \neq \bar{Z}_{i,n} \} \right) \\
 &\leq \sum_{i=1}^n \Pr (|Z_i| > n) = n \Pr (|Z_i| > n) .
 \end{split}
@@ -1109,7 +1109,7 @@ Given an open set $G$ with $z \in G$, there exists $\delta > 0$ such that $(z - 
 The large deviations lower bounds of \eqref{equation:CramerLower} thus follows.
 
 Next, we consider the case where $\upsilon$ is of unbounded support, while both $\upsilon((- \infty,0)) > 0$ and $\upsilon ((0, \infty)) > 0$.
-Select real number $N$ such that $upsilon((- M,0)) > 0$ and $\upsilon ((0, M)) > 0$, and let
+Select real number $N$ such that $\upsilon((- M,0)) > 0$ and $\upsilon ((0, M)) > 0$, and let
 \begin{equation*}
 \Lambda_N (\lambda) = \log \int_{- M}^M e^{\lambda z} d \upsilon .
 \end{equation*}
@@ -1155,20 +1155,22 @@ Hence, in this case, \eqref{equation:CramerLower} follows from
 \end{equation*}
 \end{proof}
 
+\newpage
+
 \subsection{Asymptotic Tests}
 
 Suppose $Y_1, Y_2, \ldots$ is a sequence of random variables.
 We wish to determine whether the sequence of observations is distributed according to $\mu_0^n$ or $\mu_1^n$, correspondng to hypotheses $H_0$ and $H_1$ respectively.
-A decision test $\mathcal{S}$ is a sequence of decision functions $\mathcal{S}^n : \Gamma^n \rightarrow \{ 0, 1 \}$, with the interpretation that when $(Y_1, \ldots, Y_n) = (y_1, \ldots, y_n)$ is observed, then $H_0$ is accepted if $\mathcal{S}^n (y_1, \ldots, y_n) = -$, while $H_1$ is admitted if $\mathcal{S}^n (y_1, \ldots, y_n) = 1$.
+A decision test $\mathcal{S}$ is a sequence of decision functions $\mathcal{S}^n : \Gamma^n \rightarrow \{ 0, 1 \}$, with the interpretation that when $(Y_1, \ldots, Y_n) = (y_1, \ldots, y_n)$ is observed, then $H_0$ is accepted if $\mathcal{S}^n (y_1, \ldots, y_n) = 0$, while $H_1$ is admitted if $\mathcal{S}^n (y_1, \ldots, y_n) = 1$.
 
-The performance of a decision test $\mathcal{S}$ is determined by the conditional error probabilities
+The performance of a decision test $\mathcal{S}$ is determined by the conditional probabilities of error
 \begin{align*}
 \alpha_n &= \Pr (\mathcal{S} = 1 | H_0) &
 \beta_n &= \Pr (\mathcal{S} = 0 | H_1) .
 \end{align*}
-The goal is to minimize $\beta_n$, subject to a contraint on $\alpha_n$.
+Our first goal is to minimize $\beta_n$, subject to a contraint on $\alpha_n$.
 Again, assume that $\mu_0$ and $\mu_1$ are mutually absolutely continuous and that they are distinguishable.
-Then, the corresponding likelihood ratio exists.
+Then, the corresponding likelihood ratio $\frac{d\mu_1}{d\mu_0}$ exists.
 We denote the observed logarithmic likelihood ratio by
 \begin{equation*}
 X_j = \log \frac{d \mu_1}{d \mu_0} (y_j) .
@@ -1177,19 +1179,19 @@ Note that we have
 \begin{equation*}
 E_{\mu_0} X_j = E_{\mu_1} \left[ X_j e^{- X_j} \right]
 \end{equation*}
-exists (with possibly $E_{\mu_0} X_j = - \infty$) as $xe^{-x} \leq 1$.
-Similarly,
+and therefore $E_{\mu_0} X_j$ exists (with possibly $E_{\mu_0} X_j = - \infty$) as $xe^{-x} \leq 1$.
+Likewise, we can write
 \begin{equation*}
-E_{\mu_1} X_j = E_{\mu_0} \left[ X_j e^{X_j} \right] > E_{\mu_0} X_j
+E_{\mu_1} X_j = E_{\mu_0} \left[ X_j e^{X_j} \right] > E_{\mu_0} X_j ,
 \end{equation*}
-exists (with possibly $E_{\mu_1} X_j = \infty$) since $X_1$ is non-zero with positive probability.
+which implies that $E_{\mu_1} X_j$ exists (with possibly $E_{\mu_1} X_j = \infty$) because $X_1$ is non-zero with positive probability.
 
 A Neyman-Pearson test is a decision rule in which, for any $n \in \mathbb{N}$, the normalized observed logarithmic likelihood ratio
 \begin{equation*}
 S_n = \frac{1}{n} \sum_{j=1}^n X_j
 \end{equation*}
 is compared to a threshold $\gamma_n$.
-Hypothesis $H_1$ is accepted when $S_n$ exceeds $\gamma_n$, whereas $H_0$ is admited if $S_n \leq \gamma_n$.
+Hypothesis $H_1$ is accepted when $S_n$ exceeds $\gamma_n$, whereas $H_0$ is admited whenever $S_n \leq \gamma_n$.
 We have already seen that for finite $n$, Neyman-Pearson tests are optimal.
 The exponential rates of $\alpha_n$ and $\beta_n$ for Neyman-Pearson test with constant thresholds $\gamma$ are therefore of interest.
 These rates can be obtained by looking at the large deviations of $S_n$.
@@ -1200,7 +1202,7 @@ The Neyman-Pearson test with constant threshold $\gamma \in (E_{\mu_0} X_j, E_{\
 \lim_{n \rightarrow \infty} \frac{1}{n} \log \alpha_n = - \Lambda_0^* (\gamma) < 0 \\
 \lim_{n \rightarrow \infty} \frac{1}{n} \log \beta_n = \gamma - \Lambda_0^* (\gamma) < 0
 \end{align*}
-where $\Gamma_0^* (\cdot)$ is the Fenchel-Legendre transform of
+where $\Lambda_0^* (\cdot)$ is the Fenchel-Legendre transform of
 \begin{equation*}
 \Lambda_0 (\gamma) = \log E_{\mu_0} \left[ e^{\lambda X_j} \right] .
 \end{equation*}
@@ -1306,7 +1308,7 @@ Hence, by the identity
 \frac{1}{n} \log \beta_n
 &\geq \frac{1}{n} \log E_{\mu_0} \left[ \SetIn_{ S_n \in [\bar{x}_0 - \eta, \gamma_n] }
 e^{n S_n} \right] \\
-\geq E_{\mu_0} X_j - \eta + \frac{1}{n} \log \Pr (S_n \in [\bar{x}_0 - \eta, \gamma_n] | H_0) .
+&\geq E_{\mu_0} X_j - \eta + \frac{1}{n} \log \Pr (S_n \in [\bar{x}_0 - \eta, \gamma_n] | H_0) .
 \end{split}
 \end{equation*}
 Combining the above two equations, the optimality of the Neyman-Pearson tests yields

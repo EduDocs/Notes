@@ -1,0 +1,118 @@
+\chapter{Classical Estimation}
+
+
+In statistics, \emph{probabilities} can be employed to predict the outcomes of a random experiment based on known parameters.
+For a specific distribution, we can write the probability of a set $S$ as
+\begin{equation*}
+\Pr (X \in S ; \theta) = \mu_{\theta} (S) = \int_S d\mu_{\theta}(x) .
+\end{equation*}
+When random variable $X$ takes on elements from a countable space, we can express the probability of individual elements as
+\begin{equation*}
+\Pr (X = x_i; \theta) = \mu_{\theta} (x_i) = p_{X} (x_i ; \theta) .
+\end{equation*}
+Moreover, if $X$ is a continuous random variable, then $d\mu_{\theta} (x) = f_X (x ; \theta) dx$ and we recover the familiar expression
+\begin{equation*}
+\Pr (X \in S ; \theta) = \mu_{\theta} (S) = \int_{S} f_X (x; \theta) dx .
+\end{equation*}
+In the equations above, $\theta$ is an abstract parameter that specifies the probability measure on $X$.
+This dependence is made explicity, as to avoid confusion.
+When $\theta$ is known, the probability distribution $\mu_{\theta} (\cdot)$ is also known.
+As such, events such as $\{ X \in S \}$ can be computed unambiguously.
+In the special situation where $X$ is discrete, we can think of $\mu_{\theta}$ as a map
+\begin{equation*}
+\mu_{\theta} : x \mapsto p_X (x; \theta) ;
+\end{equation*}
+similarly, if $X$ is a continuous random variable, we have
+\begin{equation*}
+\frac{d \mu_{\theta}}{dx} : x \mapsto f(x; \theta) .
+\end{equation*}
+In both cases, there are function from the range of $X$ to the real numbers.
+We emphasize that many results in estimation require strong regularity conditions.
+As such, it is common to assume that the probability meassure $\mu_{\theta}$ corresponds either to a discrete or a continuous random variable.
+
+In many situations, $\theta$ is not known a priori.
+Rather, it is the mathematical object we wish to make inferences about.
+This processs becomes especially meaningful when the $\mu_{\theta}$ belongs to a parametrized family of distributions.
+In other words, we seek to gain information about $\theta$ based on the outcome of a random experiment.
+Given a specific outcome $x$, a map that plays a fundamental role in making inferences on $\theta$ is the \emph{likelihood function} $L(\theta; x)$.
+When distributions in $\{ \mu_{\theta} \}$ are discrete, then the likelihood function assumes the form
+\begin{equation*}
+L(\cdot ; x) : \theta \mapsto p_X(x ; \theta) .
+\end{equation*}
+When the distribution are continuous, then the likelihood function becomes
+\begin{equation*}
+L(\cdot ; x) : \theta \mapsto f_X(x ; \theta) .
+\end{equation*}
+Notice the apparent disconnect between discrete and continuous scenarios.
+This may not be suprising to readers familiar with probability.
+Still, this separation is hard to resolved using measure-theoretic notation, as most results in estimation rely on smoothness and regularity conditions.
+While we seek to develop a unified conceptual framework, the details will often be provided for one of the two possible cases mentioned above, with a natural bias for parametrized family of continuous distributions.
+
+
+\section{Score Function}
+
+The \emph{score function} plays an important role in inference.
+It is defined as the gradient of the logarithm of the likelihood function,
+\begin{equation*}
+\frac{\partial}{\partial \theta} \log L(\theta ; x)
+= \frac{1}{L (\theta; x)} \frac{\partial L (\theta; x)}{\partial \theta} .
+\end{equation*}
+Note that the score is a function of both $\theta$ and observation $x$.
+Under proper conditions, the expected value of the score for a given $\theta$ vanishes.
+Suppose that $X$ is a continuous random variable with density $f_{X} (x; \theta)$.
+Then, we have
+\begin{equation*}
+\begin{split}
+&\mathrm{E} \left[ \frac{\partial}{\partial \theta} \log L(\theta ; X) \right]
+= \mathrm{E} \left[ \frac{1}{L (\theta; X)} \frac{\partial L (\theta; X)}{\partial \theta} \right] \\
+&= \int \frac{1}{L (\theta; x)} \frac{\partial L (\theta; x)}{\partial \theta} f_{X} (x; \theta) dx
+= \int \frac{\partial L (\theta; x)}{\partial \theta} dx \\
+&= \frac{\partial}{\partial \theta} \int f_X (x; \theta) dx
+= \frac{\partial}{\partial \theta} 1 = 0 .
+\end{split}
+\end{equation*}
+Above, we have used the fact that $L (\theta; x) = f_X (x; \theta)$.
+The regularity conditions were necessary to interchange the order of integration and differentiation.
+An interesting point about this property is the following consequence: the empirical average of the score function evaluated with true parameter $\theta$ tends to zero as the number of independent samples approaches infinity.
+
+
+\section{Fisher Information}
+
+A second quantity that is of paramount importance in statistics is the \emph{Fisher Information}.
+It is defined as the variance of the score function.
+Since the score has mean zero, we have
+\begin{equation*}
+\begin{split}
+I (\theta)
+&= \mathrm{E} \left[ \left( \frac{\partial}{\partial \theta} \log L (\theta; X) \right)^2 \Big| \theta \right] \\
+&= \mathrm{E} \left[ \left( \frac{\partial}{\partial \theta} \log f_X (X; \theta) \right)^2 \Big| \theta \right] .
+\end{split}
+\end{equation*}
+The expectation above is with respect to $\mu_{\theta}$, the measure on $X$.
+
+When $\log f(x; \theta)$ is twice differentiable with respect to $\theta$ and under regularity condition
+\begin{equation*}
+\int \frac{\partial^2}{\partial \theta^2} f_X (x; \theta) dx
+= \frac{\partial^2}{\partial \theta^2} \int f_X (x; \theta) dx = 0 ,
+\end{equation*}
+we can rewrite the Fisher information as
+\begin{equation*}
+I (\theta)
+= - \mathrm{E} \left[ \frac{\partial^2}{\partial \theta^2} \log f (X; \theta) \Big| \theta \right] .
+\end{equation*}
+In some sense, the Fisher Information is a measure of sharpness.
+A smooth curve with shallow maximum will feature a low negative expected second moment, thereby providing little information.
+A sharp curve with high peaks will have a high negative expected second derivative, thereby offering more information.
+
+The Fisher information presents two important properties of information measures.
+First, for two independent expeciriment, the combined Fisher information $I_{(X,Y)} (\theta)$ is the sum of the information contained in each individual experiment,
+\begin{equation*}
+I_{(X,Y)} (\theta) = I_{X} (\theta) + I_{Y} (\theta) .
+\end{equation*}
+Second, Fisher information is subject to the data processing inequality.
+If $Y = g(X)$ is a statistic, then
+\begin{equation*}
+I_Y (\theta) \leq I_X (\theta).
+\end{equation*}
+
+
