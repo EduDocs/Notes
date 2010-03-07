@@ -303,17 +303,16 @@ The objective of this brief discussion is to provide partial insight on the role
 One subtlety remains in providing a definition for $i(\cdot)$, the case where $\Pr (E) = 0$.
 This scenario is handled by stating that zero-probability events contain no information.
 
-\begin{definition}[Probabilistic Information]
+\begin{definition}[Probabilistic Information] \label{definition:ProbabilisticInformation}
 Let $(\Omega, \mathcal{F}, P)$ be a probability space.
-The information of event $E \in \mathcal{F}$ under measure $P$ is defined by
-\begin{equation*}
-i(E) = \begin{cases} - \log \left( \Pr (E) \right), & \Pr (E) > 0 \\
-0, & \Pr (E) = 0 . \end{cases}
-\end{equation*}
+The probabilisitc information of event $E \in \mathcal{F}$ is equal to $i(\Pr(E))$, where function $i: [0, \infty) \mapsto \RealNumbers$ is defined by
+\begin{equation} \label{equation:InformationFunction}
+i(s) = \begin{cases} - \log s, & s > 0 \\
+0, & s = 0 . \end{cases}
+\end{equation}
 \end{definition}
 
-In statistics and physics, the preferred function is the natural logarithm; whereas information theorists typically pick two as a basis for the logarithm function.
-It is straightforward to generalized the concept of probabilistic information from probability spaces to random variables.
+It is straightforward to generalized the concept of probabilistic information from probability spaces to discrete and continuous random variables.
 
 
 \subsection{Information Mass Function}
@@ -357,5 +356,214 @@ I [X ; Y] &= \mathrm{E}_{\upsilon} \left[ i_X (X) + i_Y (Y) - i_{(X,Y)} (X,Y) \r
 p_{X,Y} (x, y) \log \frac{p_{X,Y} (x, y)}{p_X (x) p_Y (y)} .
 \end{split}
 \end{equation*}
-Of course, these quantities are related and discussed at length in the literature.
-Still, a probabilistic information viewpoint provides intuition as to why the logarithmic function unifies these various quantities.
+Of course, these quantities are inter-related, and they discussed at length in the literature.
+Still, a probabilistic information viewpoint provides intuition as to why the logarithmic function unifies these various criteria.
+
+
+\subsection{Information Density Function}
+
+Extending the concept of information to continuous random variables is a straightforward task.
+
+\begin{definition}[IDF]
+Let $X$ be a continuous random variable with density $f_X (\cdot)$.
+The information density function of $X$ is defined by
+\begin{equation*}
+i_X (x) = i \left( f_X (x) \right) .
+\end{equation*}
+\end{definition}
+
+This definition can be motivated by a Riemann-type asymptotic argument.
+Suppose $X$ is a real-valued random variable with continuous density $f_X (\cdot)$.
+Let $\delta > 0$ be fixed.
+By the mean-value theorem, there exists $x_k \in [ k \delta , (k+1) \delta )$ such that
+\begin{equation*}
+f_X (x_k) \delta = \int_{k \delta}^{(k+1) \delta} f_X (\xi) d\xi .
+\end{equation*}
+Denote by $X_{\delta}$ the discrete random variable created by choosing one $x_k$ for every interval $[ k \delta , (k+1) \delta )$, and subsequently defining the probability mass function of $X_{\delta}$ by
+\begin{equation*}
+p_{X_{\delta}} (x_k) = \Pr (X_{\delta} = x_k) = f_X (x_k) \delta .
+\end{equation*}
+The entropy associated with $X_{\delta}$ is given by
+\begin{equation*}
+\begin{split}
+&- \sum_{x_k} p_{X_{\delta}} (x_k) i_{X_{\delta}} (x_k)
+= - \sum_{x_k} f_X (x_k) \delta i \left( \delta f_X (x_k) \right) \\
+&= - \delta \log \delta
+- \sum_{x_k} f_X (x_k) \delta i \left( f_X (x_k) \right) .
+\end{split}
+\end{equation*}
+Taking limits, as $\delta \rightarrow 0$, we recover the standard differential entropy
+\begin{equation*}
+H [X] = \mathrm{E}_{\mu} \left[ i_X (X) \right]
+= \mathrm{E}_{\mu} \left[ i (f_X(X)) \right] .
+\end{equation*}
+We note that, using this definition of information density, the Kullback-Leibler divergence of $Y$ from $X$ has exactly the same form in the continuous case as it does in the discrete setting,
+\begin{equation*}
+D[X \| Y] = \mathrm{E}_{\mu} \left[ i_Y(X) - i_X (X) \right] .
+%= \int_{X(\Omega)} f_X (x) \log \frac{ f_X(x) }{ f_Y (x) } dx
+\end{equation*}
+
+
+\section{Information and Geometry}
+
+The entropy provides a measure of uncertainty associated with a random variable, and it is obtained by taking expectation.
+This quantity and its derivates are very pertinent in the contexts of data compression and reliable communication.
+Still, the entropy of random variable $X$ fails to capture the geometry of space associated with the codomain of $X$.
+If $X$ is discrete, then its entropy can be computed based solely on $\{ p_X (\cdot) \}$;
+it does not dependend on the labels $\{ x_k \}$.
+In particular, assume that $X$ takes on value in $\{ 1, \ldots, n \}$ and let $\sigma (\cdot)$ be a permutation on these same integers; then $H [X] = H [\sigma(X)]$.
+More generally, if $X$ is a discrete random variable and $g(\cdot)$ is an injective function, then $H[X] = H[g(X)]$.
+Clearly, the entropy is completely disconnected from $X(\Omega)$.
+
+A similar observation can be made about continuous random variables, although it is harder to characterize mathematically.
+Let $\lambda$ denote the Lebesgue measure on $\RealNumbers$.
+If two probability density functions $f_X (\cdot)$ and $f_Y (\cdot)$ are such that
+\begin{equation*}
+\lambda ( \{ x : f_X (x) > \tau \} )
+= \lambda ( \{ y : f_X (y) > \tau \} )
+\end{equation*}
+for all $\tau \geq 0$, then the random variables $X$ and $Y$ have the same differential entropy.
+In particular, the differential entropy is invariant to translations and reflections.
+
+One way to relate the information of random variable $X$ to its codomain is through variations.
+Suppose that $i_X (\cdot)$ is the information density of a continuous random variable.
+If $i_X (\cdot)$ is diffentiable, then we can define the score of $X$ as follows.
+
+\begin{definition}[Score] \label{definition:ScoreX}
+Let $X$ be a continuous random variable with information density function $i_X (\cdot)$.
+If $i_X(\cdot)$ is differentiable at point $x \in X(\Omega)$, then the score of $X$ is defined as the derivative of $i_X(\cdot)$ evaluated at $x$.
+If, in addition, $f_X (x) > 0$, then the score becomes
+\begin{equation} \label{equation:ScoreX}
+V_X (x) = \frac{d i_X}{dx} (x) = \frac{d \log f_X}{dx} (x) = \frac{1}{f_X (x)} \frac{d f_X}{dx} (x) .
+\end{equation}
+\end{definition}
+
+When the score of $X$ exists almost everywhere, is can be employed to analyze properties of the information density.
+For example, we can compute the variation of $i_X (\cdot)$ as
+\begin{equation*}
+V (f_X) = \int_{\RealNumbers} \left| \frac{d i_X}{dx} (x) \right| dx
+\end{equation*}
+or its weighted variation
+\begin{equation*}
+V_{\mu} (f_X) = \mathrm{E}_{\mu} \left[ \left| \frac{d i_X}{dx} (X) \right| \right] .
+\end{equation*}
+A close look at this second expression reveals that $V_{\mu} (f_X)$ is the $L_1$-norm of the score function with respect to $\mu$.
+Not so surprisingly, the $L_2$-norm of the score function also plays a fundamental role in statistics and information theory.
+It forms a basis for the paramount Fisher information.
+
+\begin{definition}[Fisher information] \label{definition:FisherInformationX}
+Let $X$ be a continuous random variable with differentiable density $i_X (\cdot)$.
+The Fisher information of $X$ is defined by
+\begin{equation} \label{equation:FisherInformationX}
+\begin{split}
+J_X &= \mathrm{E}_{\mu} \left[ \left( \frac{d i_X}{dx} (X) \right)^2 \right]
+= \mathrm{E}_{\mu} \left[ \left( \frac{d \log f_X}{dx} (X) \right)^2 \right] \\
+&= \mathrm{E}_{\mu} \left[ \left( \frac{1}{f_X (x)} \frac{d f_X}{dx} (X) \right)^2 \right] .
+\end{split}
+\end{equation}
+Alternatively, we can write $J_X = \mathrm{E}_{\mu} \left[ \left| V_X (X) \right|^2 \right]$, which clearly exposes the relation between the Fisher information and the $L_2$-norm of $V_X (\cdot)$ with respect to distribution $\mu$.
+\end{definition}
+
+
+
+\newpage
+
+\section{Questions}
+
+\begin{enumerate}
+
+\item Consider the probabilistic information of Definition~\ref{definition:ProbabilisticInformation}.
+\begin{enumerate}
+\item Show that the information function defined in \eqref{equation:InformationFunction} is additive.
+\item Let $X$ and $Y$ be independent discrete random variables with probability mass functions $p_X(\cdot)$ and $p_Y (\cdot)$, respectively.
+Let $\upsilon$ be the probability distribution on $X(\Omega) \times Y(\Omega)$ induced by $(X,Y)$.
+Using part (a), prove that $H[(X,Y)] = H [X] + H[Y]$. 
+\item Again, let $X$ and $Y$ be discrete random variables with probability mass functions $p_X(\cdot)$ and $p_Y (\cdot)$, respectively.
+Show that
+\begin{equation*}
+\mathrm{E}_{\mu} [i_Y (X)] \geq \mathrm{E}_{\mu} [i_X (X)]
+\end{equation*}
+where $\mu$ is the probability distribution on $X(\Omega)$ induced by $X$.
+\end{enumerate}
+
+\item In this question, we consider the score function defined in \eqref{equation:ScoreX} and the Fisher information of \eqref{equation:FisherInformationX}.
+Suppose $X$ and $Y$ are independent continuous random variables with differentiable density.
+Futhermore, assume that $f_X(\cdot)$ and $f_Y(\cdot)$ are non-zero everywhere.
+\begin{enumerate}
+\item Show that the expected value of the score function of $X$ is equal to zero, $\mathrm{E}_{\mu} [V_X(X)] = 0$, where $\mu$ is the distribution induced by $X$.
+\item Let $Z = X + Y$ and recall that
+\begin{equation*}
+f_Z (z) = \int_{\RealNumbers} f_X (\xi) f_Y (z -\xi) d\xi .
+\end{equation*}
+Under the aforementioned assumptions, show that for a specific $z$
+\begin{equation*}
+\tilde{f}_z (\xi) = \frac{f_X (\xi) f_Y (z -\xi)}{f_Z(z)}
+\end{equation*}
+is a probability density function; moreover, $\tilde{f}_z (\xi) = f_{X | Z} (x | z)$.
+\item Show that
+\begin{equation*}
+V_Z (z) = \frac{\frac{d f_Z}{dz}(z)}{f_Z(z)}
+= \mathrm{E} \left[ \left. \frac{\frac{d f_X}{dx}(X)}{f_X(X)} \right| Z = z \right]
+= \mathrm{E} \left[ V_X(X) | Z = z \right] ,
+\end{equation*}
+where the expectation is with respect to $f_{X|Z} (\cdot|z)$.
+\item By symmetry, we can argue from part (b) that
+\begin{equation*}
+V_Z(z) = \mathrm{E} \left[ V_Y(Y) | Z = z \right] .
+\end{equation*}
+Collecting these two results, we can then write
+\begin{equation*}
+\mathrm{E} \left[ a V_X(X) + b V_Y(Y) | Z = z \right] = (a + b) V_Z (z) .
+\end{equation*}
+Note that the conditional probability measure above does not admit a conditional density.
+Using this fact and nested conditional expectation, show that
+\begin{equation*}
+(a + b)^2 J_Z \leq a^2 J_X + b^2 J_Y .
+\end{equation*}
+\item Pick values for $a$ and $b$ to show that
+\begin{equation*}
+\frac{1}{J_Z} \geq \frac{1}{J_X} + \frac{1}{J_Y} .
+\end{equation*}
+\end{enumerate}
+
+
+\item Consider two probability mass functions, $p_X (\cdot)$ and $p_Y (\cdot)$, defined over the integers $\{ 1, \ldots, m \}$.
+Assume that these PMFs are strictly positive over their shared domain.
+We observe a sequence of independent and identically distributed random variable $Z_1, Z_2, \ldots$ and we wish to determine whether elements in this sequence are generated using $p_X (\cdot)$ or $p_Y (\cdot)$ (the only two possibilities).
+For convenience, we assume that
+\begin{equation*}
+\mathrm{E}_{p_X} [Z] < \tau < \mathrm{E}_{p_Y} [Z] .
+\end{equation*}
+We restrict our attention to log-likelihood ratio tests where the empirical average
+\begin{equation} \label{equation:AverageLogLikelihoodRatio}
+A_n = \frac{1}{n} \sum_{k=1}^n \log \frac{p_Y (Z_k)}{p_X (Z_k)} 
+\end{equation}
+is compared to threshold value $\tau$.
+
+\begin{enumerate}
+\item Express the log-likelihood ratio of \eqref{equation:AverageLogLikelihoodRatio} in terms of the information mass functions $i_X (\cdot)$ and $i_Y (\cdot)$.
+\item Argue that the empirical average \eqref{equation:AverageLogLikelihoodRatio} converges in probability to a constant.
+Find the value of this constant when the underlying distribution is $p_X(\cdot)$.
+\item For the rest of this problem, let $p_X (\cdot)$ be a binomial distribution with parameter $(p, 4)$ where $p < 0.5$; and let $p_Y(\cdot)$ be a binomial distribution with parameter $(1-p, 4)$.
+Find the distribution of $n A_n$ under $p_X (\cdot)$.
+\item Derive a Chernoff bound for $\Pr (A_n > \tau)$ given that the underlying probability is $p_X (\cdot)$.
+\item Find the large deviation principle governing the sequence.
+\end{enumerate}
+
+\end{enumerate}
+
+
+The notions of information discussed so far capture the uncertainty associated with random
+only capture the are based on 
+
+In the discrete case, the the information mass function is 
+
+
+\begin{equation*}
+\mathrm{E}_{\mu} \left[ \log \frac{p_X(k)}{p_Y(k)} \right]
+\end{equation*}
+
+\begin{itemize}
+\item Stein's lemma
+\item inner product and Fisher information
+\end{itemize}
