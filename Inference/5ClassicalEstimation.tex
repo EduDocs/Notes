@@ -1,40 +1,54 @@
 \chapter{Classical Estimation}
 
 
-In statistics, \emph{probabilities} can be employed to predict the outcomes of a random experiment based on known parameters.
-For a specific distribution, we can write the probability of a set $S$ as
+From a statistics point of view, \emph{probabilities} are used to predict the outcomes of a random experiment.
+For a specific distribution $\mu$ on the observation space $\mathcal{X}$, we can therefore express the probability of set $S \subset \mathcal{X}$ as
+\begin{equation*}
+\Pr (X \in S) = \mu (S) = \int_S d\mu (x) .
+\end{equation*}
+Often, in inference problems, the distribution $\mu$ comes from a collection of probability measures parametrized by $\theta$.
+Under such circumstances, we can make this dependence on $\theta$ explicit and write
 \begin{equation*}
 \Pr (X \in S ; \theta) = \mu_{\theta} (S) = \int_S d\mu_{\theta}(x) .
 \end{equation*}
-When random variable $X$ takes on elements from a countable space, we can express the probability of individual elements as
+This notation, although somewhat cumbersome, will prove useful in posing pertinent inference problems.
+
+When the support of random variable $X$ is a countable set, we can express the probability of individual elements as
 \begin{equation*}
 \Pr (X = x_i; \theta) = \mu_{\theta} (x_i) = p_{X} (x_i ; \theta) .
 \end{equation*}
-Moreover, if $X$ is a continuous random variable, then $d\mu_{\theta} (x) = f_X (x ; \theta) dx$ and we recover the familiar expression
+Random variable $X$ is then said to be a \emph{discrete random variable}.
+Furthermore, if $X$ is a \emph{continuous random variable}, then $d\mu_{\theta} (x) = f_X (x ; \theta) dx$, and we recover the familiar equation
 \begin{equation*}
 \Pr (X \in S ; \theta) = \mu_{\theta} (S) = \int_{S} f_X (x; \theta) dx .
 \end{equation*}
-In the equations above, $\theta$ is an abstract parameter that specifies the probability measure on $X$.
-This dependence is made explicity, as to avoid confusion.
-When $\theta$ is known, the probability distribution $\mu_{\theta} (\cdot)$ is also known.
+In these notes, we reserve the term continuous random variable for scenarios where the cumulative distribution function is differentiable with derivative $f_X (x; \theta)$.
+
+As mentioned above, $\theta$ is an abstract parameter that specifies the probability distribution associated with $X$.
+When $\theta$ is known, then so is the governing probability distribution $\mu_{\theta}$.
 As such, events such as $\{ X \in S \}$ can be computed unambiguously.
-In the special situation where $X$ is discrete, we can think of $\mu_{\theta}$ as a map
+In the special situation where $X$ is discrete, we can think of $\mu_{\theta}$ as a map form $\mathcal{X}$ to $\RealNumbers$,
 \begin{equation*}
-\mu_{\theta} : x \mapsto p_X (x; \theta) ;
+\mu_{\theta} : x_i \mapsto p_X (x_i; \theta) .
 \end{equation*}
-similarly, if $X$ is a continuous random variable, we have
+Similarly, when $X$ is a continuous random variable, we get
 \begin{equation*}
 \frac{d \mu_{\theta}}{dx} : x \mapsto f(x; \theta) .
 \end{equation*}
-In both cases, there are function from the range of $X$ to the real numbers.
-We emphasize that many results in estimation require strong regularity conditions.
-As such, it is common to assume that the probability meassure $\mu_{\theta}$ corresponds either to a discrete or a continuous random variable.
+Having to resort to probability mass functions and probability density functions may appear overly restrictive at first.
+After all, there can be random variables that are neither discrete nor continuous.
+However, several results in estimation require strong regularity conditions over collection of parametrized distributions.
+It is consequently not too constraining and common in practice to assume that the probability measure $\mu_{\theta}$ corresponds either to a discrete or a continuous random variable.
+
+
+\section{Statistical Inference}
 
 In many situations, $\theta$ is not known a priori.
 Rather, it is the mathematical object we wish to make inferences about.
-This processs becomes especially meaningful when the $\mu_{\theta}$ belongs to a parametrized family of distributions.
-In other words, we seek to gain information about $\theta$ based on the outcome of a random experiment.
-Given a specific outcome $x$, a map that plays a fundamental role in making inferences on $\theta$ is the \emph{likelihood function} $L(\theta; x)$.
+That is, based on the outcome of a random experiment, we wish to gain information about $\theta$.
+This process is especially meaningful when the family of distribution $\{ \mu_{\theta} \}$ is somewhat smooth with respect to parameter  $\theta$.
+
+Given a specific outcome $x$, a map that plays a fundamental role in making inferences about $\theta$ is the \emph{likelihood function} $L(\theta; x)$.
 When distributions in $\{ \mu_{\theta} \}$ are discrete, then the likelihood function assumes the form
 \begin{equation*}
 L(\cdot ; x) : \theta \mapsto p_X(x ; \theta) .
@@ -43,37 +57,47 @@ When the distribution are continuous, then the likelihood function becomes
 \begin{equation*}
 L(\cdot ; x) : \theta \mapsto f_X(x ; \theta) .
 \end{equation*}
-Notice the apparent disconnect between discrete and continuous scenarios.
-This may not be suprising to readers familiar with probability.
-Still, this separation is hard to resolved using measure-theoretic notation, as most results in estimation rely on smoothness and regularity conditions.
-While we seek to develop a unified conceptual framework, the details will often be provided for one of the two possible cases mentioned above, with a natural bias for parametrized family of continuous distributions.
+In both cases, these maps are functions from the parameter set $\mathcal{U}$ to the real numbers.
+Notice the apparent disconnect between the discrete and continuous cases.
+This separation is hard resolved mathematically, as it stems from the distinction between the countable and the uncountable.
+Still, these two versions of the likelihood function often play a similar role conceptually.
+Keeping this in mind, we seek to develop a unified framework for these two scenarios; details and proof will often be provided for one of the two possible aforementioned cases, with a natural bias for parametrized family of continuous distributions.
+
+While $\mu_{\theta}$ underlies the probability of events under parameter $\theta$ and $L (\theta; x)$ provides information about parameter $\theta$ based on observation $x$, when seen as functions from $\mathcal{U} \times \mathcal{X} \mapsto \RealNumbers$, we get
+\begin{equation*}
+L(\theta; x_i) = p_X (x_i; \theta) \quad \text{or} \quad L(\theta; x) = f_X (x; \theta) .
+\end{equation*}
+In other words, likelihoods and probabilities are perspectives on functions over the caratesian product $\mathcal{U} \times \mathcal{X}$.
+It is valuable to learn the distrinction between these two terms, as the nomenclature enable a more precise discussion of statistical problems and solutions.
+It is also important to understand the relation between likelihoods and probabilities, as proofs may require a change in perspective and a corresponding shift in notation.
 
 
 \section{Score Function}
 
-The \emph{score function} plays an important role in inference.
+The \emph{score function} plays a fundamental role in inference.
 It is defined as the gradient of the logarithm of the likelihood function,
 \begin{equation*}
 \frac{\partial}{\partial \theta} \log L(\theta ; x)
-= \frac{1}{L (\theta; x)} \frac{\partial L (\theta; x)}{\partial \theta} .
+= \frac{1}{L (\theta; x)} \frac{\partial}{\partial \theta} L (\theta; x) .
 \end{equation*}
 Note that the score is a function of both $\theta$ and observation $x$.
-Under proper conditions, the expected value of the score for a given $\theta$ vanishes.
+Also, its very definition assumes that the function $L(\theta;, x)$ is smooth enough over $\mathcal{U} \times \mathcal{X}$ for the gradient to exist.
+Under proper regularity conditions, the expected value of the score vanishes.
 Suppose that $X$ is a continuous random variable with density $f_{X} (x; \theta)$.
 Then, we have
 \begin{equation*}
 \begin{split}
-&\mathrm{E} \left[ \frac{\partial}{\partial \theta} \log L(\theta ; X) \right]
-= \mathrm{E} \left[ \frac{1}{L (\theta; X)} \frac{\partial L (\theta; X)}{\partial \theta} \right] \\
-&= \int \frac{1}{L (\theta; x)} \frac{\partial L (\theta; x)}{\partial \theta} f_{X} (x; \theta) dx
-= \int \frac{\partial L (\theta; x)}{\partial \theta} dx \\
+&\mathrm{E}_{\mu_{\theta}} \left[ \frac{\partial \log L}{\partial \theta} (\theta ; X) \right]
+= \mathrm{E}_{\mu_{\theta}} \left[ \frac{1}{L (\theta; X)} \frac{\partial L}{\partial \theta} (\theta; X) \right] \\
+&= \int \frac{1}{L (\theta; x)} \frac{\partial L}{\partial \theta} (\theta; x) f_{X} (x; \theta) dx
+= \int \frac{\partial f_X}{\partial \theta} (x; \theta) dx \\
 &= \frac{\partial}{\partial \theta} \int f_X (x; \theta) dx
 = \frac{\partial}{\partial \theta} 1 = 0 .
 \end{split}
 \end{equation*}
-Above, we have used the fact that $L (\theta; x) = f_X (x; \theta)$.
-The regularity conditions were necessary to interchange the order of integration and differentiation.
-An interesting point about this property is the following consequence: the empirical average of the score function evaluated with true parameter $\theta$ tends to zero as the number of independent samples approaches infinity.
+We have used the fact that $L (\theta; x) = f_X (x; \theta)$.
+The regularity conditions are necessary to interchange the order of integration and differentiation.
+An interesting point about this property is the following property: the empirical average of the score function evaluated with true parameter $\theta$ tends to zero as the number of independent samples approaches infinity.
 
 
 \section{Fisher Information}
@@ -83,36 +107,255 @@ It is defined as the variance of the score function.
 Since the score has mean zero, we have
 \begin{equation*}
 \begin{split}
-I (\theta)
-&= \mathrm{E} \left[ \left( \frac{\partial}{\partial \theta} \log L (\theta; X) \right)^2 \Big| \theta \right] \\
-&= \mathrm{E} \left[ \left( \frac{\partial}{\partial \theta} \log f_X (X; \theta) \right)^2 \Big| \theta \right] .
+I_X (\theta)
+&= \mathrm{E}_{\mu_{\theta}} \left[ \left( \frac{\partial \log L}{\partial \theta} (\theta; X) \right)^2 \right] \\
+&= \mathrm{E}_{\mu_{\theta}} \left[ \left( \frac{\partial \log f_X}{\partial \theta} (X; \theta) \right)^2 \right] .
 \end{split}
 \end{equation*}
 The expectation above is with respect to $\mu_{\theta}$, the measure on $X$.
 
-When $\log f(x; \theta)$ is twice differentiable with respect to $\theta$ and under regularity condition
+When $\log f_X (x; \theta)$ is twice differentiable with respect to $\theta$ and under regularity condition
 \begin{equation*}
-\int \frac{\partial^2}{\partial \theta^2} f_X (x; \theta) dx
+\int \frac{\partial^2 f_X}{\partial \theta^2} (x; \theta) dx
 = \frac{\partial^2}{\partial \theta^2} \int f_X (x; \theta) dx = 0 ,
 \end{equation*}
 we can rewrite the Fisher information as
-\begin{equation*}
-I (\theta)
-= - \mathrm{E} \left[ \frac{\partial^2}{\partial \theta^2} \log f (X; \theta) \Big| \theta \right] .
-\end{equation*}
+\begin{equation} \label{equation:FisherInformation2}
+I_X (\theta)
+= - \mathrm{E}_{\mu_{\theta}} \left[ \frac{\partial^2 \log f_X}{\partial \theta^2} (X; \theta) \right] .
+\end{equation}
 In some sense, the Fisher Information is a measure of sharpness.
 A smooth curve with shallow maximum will feature a low negative expected second moment, thereby providing little information.
 A sharp curve with high peaks will have a high negative expected second derivative, thereby offering more information.
 
 The Fisher information presents two important properties of information measures.
-First, for two independent expeciriment, the combined Fisher information $I_{(X,Y)} (\theta)$ is the sum of the information contained in each individual experiment,
+First, for two independent experiments, the combined Fisher information $I_{(X,Y)} (\theta)$ is the sum of the information contained in each individual experiment,
 \begin{equation*}
 I_{(X,Y)} (\theta) = I_{X} (\theta) + I_{Y} (\theta) .
 \end{equation*}
 Second, Fisher information is subject to the data processing inequality.
-If $Y = g(X)$ is a statistic, then
+If $T = g(X)$ is a statistic, then $I_T (\theta) \leq I_X (\theta)$.
+
+
+\subsection{Fisher Information Matrix}
+
+Looking at \eqref{equation:FisherInformation2}, it is possible to extend the concept of Fisher information to vector parameters.
+Suppose $\theta = (\theta_1, \ldots, \theta_n)$, the Fisher information matrix of $\theta$ is defined component-wise by
+\begin{equation} \label{equation:FisherInformationMatrix}
+\left[ I_X (\theta) \right]_{ij}
+= - \mathrm{E}_{\mu_{\theta}} \left[ \frac{\partial^2 \log L}{\partial \theta_i \partial \theta_j} (\theta; X) \right] .
+\end{equation}
+The Fisher information matrix plays an important role in the Cramer-Rao lower bound applied to vector parameters.
+
+
+\section{Cram\'{e}r-Rao Lower Bound}
+
+
+First, we recall the Cauchy-Schwarz inequality
 \begin{equation*}
-I_Y (\theta) \leq I_X (\theta).
+\left| \int g h d\mu \right| \leq \| g \|_2 \| h \|_2 .
+\end{equation*}
+When $\| h \|_2 > 0$, we can use this inequality to provide a lower bound on $\| g \|_2^2$,
+\begin{equation} \label{equation:CauchySchwarzUB}
+\| g \|_2^2 \geq \frac{ \left| \int g h d\mu \right|^2 }{ \| h \|_2^2} .
+\end{equation}
+In the present case, we wish to find a lower bound on the variance of an unbiased estimator,
+\begin{equation*}
+\mathrm{E}_{\mu_{\theta}} \left[ \left( \hat{\theta} (X) - \theta \right)^2 \right]
+= \left\| \hat{\theta} (X) - \theta \right\|_2^2 .
+\end{equation*}
+Thus, naturally, we have $g(x) = \hat{\theta}(x) - \theta$.
+The genius of the Cramer-Rao lower bound lies in the selection of function $h (\cdot)$, the score function
+\begin{equation*}
+h(x) = \frac{\partial \log f_X}{\partial \theta} (x; \theta)
+= \frac{1}{f_X (x; \theta)} \frac{\partial f_X}{\partial \theta} (x; \theta) .
+\end{equation*}
+For this particular choice, we get
+\begin{equation*}
+\begin{split}
+\| h \|_2^2
+&= \mathrm{E}_{\mu_{\theta}} \left[ \left( \frac{\partial \log f_X}{\partial \theta} (X; \theta) \right)^2 \right] \\
+&= - \mathrm{E}_{\mu_{\theta}} \left[ \frac{\partial^2 \log f}{\partial \theta^2} (X; \theta) \right] ,
+\end{split}
+\end{equation*}
+where the second inequality holds under proper regularity conditions.
+We recognize $\| h \|_2^2$ as the Fisher information $I_X(\theta)$.
+The last step of the proof is to evaluate the numerator on the right-hand side of \eqref{equation:CauchySchwarzUB},
+\begin{equation*}
+\begin{split}
+\int g h d\mu
+&= \int \left( \hat{\theta}(x) - \theta \right)
+\frac{1}{f_X (x; \theta)} \frac{\partial f_X}{\partial \theta} (x; \theta)
+f_X (x; \theta) dx \\
+&= \int \left( \hat{\theta}(x) - \theta \right)
+\frac{\partial f_X}{\partial \theta} (x; \theta) dx \\
+&= \int \hat{\theta}(x) \frac{\partial f_X}{\partial \theta} (x; \theta) dx
+- \theta \int \frac{\partial f_X}{\partial \theta} (x; \theta) dx \\
+&= \frac{\partial}{\partial \theta} \int \hat{\theta}(x) f_X (x; \theta) dx
+- \theta \frac{\partial}{\partial \theta} \int f_X (x; \theta) dx \\
+&= \frac{\partial}{\partial \theta} \theta - \theta \frac{\partial}{\partial \theta} 1
+= 1 .
+\end{split}
+\end{equation*}
+Collecting these results, we obtain the scalar version of the Cramer-Rao lower bound,
+\begin{equation*}
+\mathrm{E}_{\mu_{\theta}} \left[ \left( \hat{\theta} (X) - \theta \right)^2 \right]
+\geq \frac{1}{I_X (\theta)} .
 \end{equation*}
 
 
+\begin{example}
+Let $\theta$ be an unknown scalar parameter that represent the amplitude of a signal.
+Observations about this signal are made in the following fashion,
+\begin{equation*}
+X_n = \theta + W_n \quad n = 0, 1, \ldots, N-1
+\end{equation*}
+where $\{ W_n \}$ forms a sequence of independent zero-mean Gaussian random variables, each with variance $\sigma^2$.
+We wish to find a lower bound on the variance of an unbiased estimator.
+\end{example}
+
+
+\subsection{Vector Parameters}
+
+In certain problems of statistical inference, it is natural and mathematically desirable to parametrize the set of probability measures $\{ \mu_{\theta} \}$ using a vector, $\theta = (\theta_1, \ldots, \theta_n)$.
+Two basic considerations come into play when building the parameter space $\mathcal{U}$.
+First, the parametrization should capture the regularity or smoothness of the parameters we wish to estimate.
+Second, the objective criterion should be easily expressible in terms of $\theta$.
+Keeping this in mind, we extend the Cramer-Rao lower bound to the case where $\theta$ is a vector.
+Again, we restrict our analysis to unbiased estimator and we seek to obtain a lower bound on the variance of every component in $\theta = (\theta_1, \ldots, \theta_2)$.
+
+\begin{theorem}
+Let $\{ f_X (x; \theta) \}$ be a collection of continuous probability distributions indexed by vector $\theta = (\theta_1, \ldots, \theta_n) \in \mathcal{U}$.
+Under suitable regularity conditions, the variance of any unbiased estimator $\hat{\theta} (\cdot)$ must satisfy
+\begin{equation*}
+\mathrm{E}_{\mu_{\theta}} \left[ \left( \hat{\theta}_i (X) - \theta \right)^2 \right]
+\geq \left[ I_X^{-1} (\theta) \right]_{ii}
+\end{equation*}
+where $I_X(\theta)$ is the Fisher information matrix associated with vector $\theta$.
+\end{theorem}
+
+
+\newpage
+$Z = X + Y$
+\begin{equation*}
+\begin{split}
+I_Z (\theta)
+&= \mathrm{E}_{\mu_{\theta}} \left[ \left( \frac{\partial \log f_Z}{\partial \theta} (Z; \theta) \right)^2 \right] \\
+&= \int_{\RealNumbers} \left( \frac{1}{f_Z (z; \theta)} \frac{\partial f_Z}{\partial \theta} (z; \theta) \right)^2 f_Z (z; \theta) dz
+\end{split}
+\end{equation*}
+
+\begin{equation*}
+f_Z (z; \theta) = \int_{\RealNumbers} f_X (\xi; \theta) f_Y (z - \xi; \theta) d\xi
+\end{equation*}
+
+\begin{theorem}
+Let $X$ and $Y$ be independent continuous random variables.
+Assume that $f_X(\cdot; \theta)$ and $f_Y(\cdot; \theta)$ are differential probability density functions that are strictly positive over $\RealNumbers$.
+\end{theorem}
+
+\begin{equation*}
+\begin{split}
+\frac{\partial}{\partial \theta} f_Z (z; \theta)
+&= \frac{\partial}{\partial \theta} \int_{\RealNumbers} f_X (\xi; \theta) f_Y (z - \xi; \theta) d\xi \\
+&= \int_{\RealNumbers} \frac{\partial}{\partial \theta}
+\left( f_X (\xi; \theta) f_Y (z - \xi; \theta) \right) d\xi \\
+&= \int_{\RealNumbers}
+\frac{\partial f_X}{\partial \theta} (\xi; \theta) f_Y (z - \xi; \theta)
++ f_X (\xi; \theta) \frac{\partial f_Y}{\partial \theta} (z - \xi; \theta) d\xi \\
+\end{split}
+\end{equation*}
+
+
+\newpage
+
+\subsection{Probability and Information}
+
+Consider a sample space $(\Omega, \mathcal{F})$ with a given probability measure.
+We wish to develop a function $i(\cdot)$ that captures the amount of information contained in an event $E \in \mathcal{F}$.
+This function should operate on $\Pr(E)$, and it should be additive over independent events.
+Specifically, if $E_1$ and $E_2$ are independent, then
+\begin{equation} \label{equation:InformationAdditivity}
+i \left( \Pr (E_1 \cap E_2) \right)
+= i \left( \Pr (E_1) \right) + i \left( \Pr (E_2) \right) .
+\end{equation}
+Recall that, for independent events, $\Pr(E_1 \cap E_2)$ is equal to the product of $\Pr(E_1)$ and $\Pr(E_2)$,
+\begin{equation} \label{equation:IndependentEventsAdditiveProbabilities}
+\Pr (E_1 \cap E_2) = \Pr (E_1) \Pr (E_1) .
+\end{equation}
+Together, \eqref{equation:InformationAdditivity} and \eqref{equation:IndependentEventsAdditiveProbabilities} demand that $i(\cdot)$ be a homomorphism between semigroup $((0,1], \times)$ and semigroup $( [0, \infty), +)$. 
+This single requirement drastically narrows the potential candidates for $i(\cdot)$.
+We stress that these two semigroups are embedded, respectively, in the multiplicative group of positive real numbers and the additive group of real numbers.
+It is well-known that logarithmic functions are the only continuous isomorphisms from $(\RealNumbers^+, \times)$ to $(\RealNumbers, +)$.
+It then appears that functions of the form
+\begin{equation*}
+i \left( \Pr (E) \right) = a \log_b \left( \Pr (E) \right)
+\end{equation*}
+arise naturally as possible information measures for events.
+Multiplicative constant $a$ and base $b$ of the logarithm act as arbitrary scaling factors,
+\begin{equation*}
+a \log_b ( x ) = a \frac{ \log ( x ) }{ \log ( b) }
+= \frac{a}{ \log (b) } \log ( x )
+\end{equation*}
+By taking $a = -1$ and $b > 1$, we get positive values for the amount of information associated with non-trivial events.
+
+The objective of this brief discussion is to provide partial insight on the role of logarithmic functions as measures of information.
+One subtlety remains in providing a definition for $i(\cdot)$, the case where $\Pr (E) = 0$.
+This scenario is handled by stating that zero-probability events contain no information.
+
+\begin{definition}[Probabilistic Information]
+Let $(\Omega, \mathcal{F}, P)$ be a probability space.
+The information of event $E \in \mathcal{F}$ under measure $P$ is defined by
+\begin{equation*}
+i(E) = \begin{cases} - \log \left( \Pr (E) \right), & \Pr (E) > 0 \\
+0, & \Pr (E) = 0 . \end{cases}
+\end{equation*}
+\end{definition}
+
+In statistics and physics, the preferred function is the natural logarithm; whereas information theorists typically pick two as a basis for the logarithm function.
+It is straightforward to generalized the concept of probabilistic information from probability spaces to random variables.
+
+
+\subsection{Information Mass Function}
+
+Suppose $X$ is a discrete random variable on $(\Omega, \mathcal{F}, P)$.
+The information mass function of $X$ is a function that measure the information content associated with the possible values of $X$.
+For any $x_k \in X(\Omega)$, we have
+\begin{equation*}
+i_X (x_k) = i \left( \Pr (X = x_k) \right) = i \left( \Pr \left( \{ \omega : X(\omega) = x_k \} \right) \right) .
+\end{equation*}
+For all other elements in the codomain of $X$, we have $\Pr (X = x) = 0$ and hence $i_X (x) = i (0) = 0$.
+
+\begin{definition}[IMF]
+Let $X$ be a discrete random variable with probability mass function $p_X (\cdot)$.
+The information of $X$ is defined by
+\begin{equation*}
+i_X (x_k) = i \left( p_X (x_k) \right) = - \log p_X (x_k),
+\end{equation*}
+where $x_k \in X(\Omega)$.
+More generally, we have $i_X (x) = i \left( p_X (x) \right)$.
+\end{definition}
+
+Based on this definition, we can easily express several quantities found in information theory
+Let $\mu$ be the probability distribution on the codomain of $X$ induced by measure $P$.
+The entropy of discrete random variable $X$ becomes
+\begin{equation*}
+H [X] = \mathrm{E}_{\mu} \left[ i_X (X) \right] = - \sum_{x \in X(\Omega)} p_X (x) \log p_X (x) .
+\end{equation*}
+The Kullback-Leibler divergence of $Y$ from $X$ can be expressed as
+\begin{equation*}
+\begin{split}
+D [X \| Y] &= \mathrm{E}_{\mu} \left[ i_Y (X) - i_X (X) \right] \\
+&= \sum_{x \in X(\Omega)} p_X (x) \log \frac{p_X (x)}{p_Y (x)} .
+\end{split}
+\end{equation*}
+Finally, if $\upsilon$ denotes the probability distribution on the codomain of $X \times Y$ induced by measure $P$, then the mutual information of discrete random variables $X$ and $Y$ reduces to
+\begin{equation*}
+\begin{split}
+I [X ; Y] &= \mathrm{E}_{\upsilon} \left[ i_X (X) + i_Y (Y) - i_{(X,Y)} (X,Y) \right] \\
+&= \sum_{x \in X(\Omega)} \sum_{y \in Y(\Omega)}
+p_{X,Y} (x, y) \log \frac{p_{X,Y} (x, y)}{p_X (x) p_Y (y)} .
+\end{split}
+\end{equation*}
+Of course, these quantities are related and discussed at length in the literature.
+Still, a probabilistic information viewpoint provides intuition as to why the logarithmic function unifies these various quantities.
