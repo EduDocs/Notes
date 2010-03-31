@@ -1,26 +1,27 @@
 \chapter{Quantization}
 
+\index{quantization}
 As mentioned in the introduction, two operations are necessary to transform an analog waveform into a digital signal.
 The first action, sampling, consists of converting a continuous-time input into a discrete-time function.
 The second operation is the process of approximating continuous-space sample values by a discrete set of possible points.
-This process, termed \emph{quantization}, is equally essential to transmit an analog signal over digital media.
+This process, termed \textbf{quantization}, is also essential to transmit an analog signal over digital media.
 Quantization invariably induces a loss in signal quality.
-The \emph{distortion} between the original and quantized functions is usually unwanted, and it cannot be reversed.
+The \defn{quantization}{distortion} between the original and quantized functions is usually unwanted, and cannot be reversed.
 Yet, for a specific application, the level of signal degradation can be controlled.
 
 In this chapter, we focus primarily on the quantization of real numbers.
-Still, the techniques exposed herein can easily be extended to complex numbers by quantizing the real and imaginary parts of a complex number separately.
+The techniques described here can easily be extended to complex numbers by quantizing the real and imaginary parts separately.
 In a more abstract sense, the quantization of a complex number is equivalent to vector quantization for a pair of real numbers.
 
 
 \section{Scalar Quantizers}
 
-Generic quantizers operate on large classes of signals and are very robust.
-In scalar quantization, each source value is processed individually, with the quantizer output taking one of finitely many possibilities.
-The number of quantization levels tends to be a base-two exponent as the outputs of a quantizer are often represented using binary strings.
-Mathematically, a quantizer can be expressed as a function taking value in a finite set.
-Suppose that the input to the quantizer is a real number, and its output is a value that belongs to set $\mathcal{Q}$.
-Then, we can describe the quantizer as a function $Q : \mathbb{R} \mapsto \mathcal{Q}$ with output
+Quantizers can generally be designed to be very robust for a large class of signals.
+In scalar quantization, each source value is processed individually; the input value is mapped to an output taking one of finitely many values.
+The number of quantization levels is typically chosen to be a power-of-2 because the outputs are usually represented using binary strings.
+Mathematically, a quantizer is a function taking value in a finite set.
+The input to the quantizer is a real number and the output belongs to set $\mathcal{Q}$.
+Then, one can define the quantizer as a function $Q : \mathbb{R} \mapsto \mathcal{Q}$ with output
 \begin{equation*}
 x_{\mathrm{q}} = Q(x) .
 \end{equation*}
@@ -46,20 +47,28 @@ Figure~\ref{figure:Quantizer} shows the functional representation of a four-leve
 \label{figure:Quantizer}
 \end{center}
 \end{figure}
-The output of the quantizer in this example is determined according to a nearest neighbor rule.
-We note that this quantization function is not injective (one-to-one) and, as such, does not have an inverse.
+The output of the quantizer in this example is determined according to a nearest neighbor rule and this implies that
+\[ Q(x) =
+\begin{cases}
+q_1 & \mathrm{if }\; x < \frac{q_1 + q_2}{2} \\
+q_2 & \mathrm{if }\; \frac{q_1 + q_2}{2} \leq x < \frac{q_2 + q_3}{2} \\
+q_3 & \mathrm{if }\; \frac{q_2 + q_3}{2} \leq x < \frac{q_3 + q_4}{2} \\
+q_4 & \mathrm{if }\; x \geq \frac{q_3 + q_4}{2} 
+\end{cases}. \]
+We note that this quantization function is not one-to-one and, therefore, does not have an inverse.
 \end{example}
 
 
 \section{Distortion Measures}
 
 To compare different quantizers, a performance metric must be established.
-A common distortion criterion with desirable properties is the square of the error
+A common distortion measure with desirable properties is the square of the error
 \begin{equation} \label{equation:QuantizationErrorSquared}
-d(x, x_{\mathrm{q}}) = (x - Q(x))^2 ,
+d(x, x_{\mathrm{q}}) = \left|x - Q(x) \right|^2 ,
 \end{equation}
-where $x - x_{\mathrm{q}}$ is called the \emph{quantization error}.
-The criterion in \eqref{equation:QuantizationErrorSquared} specifies how close the output $x_{\mathrm{q}}$ is to the input for a specific value of $x$.
+where $x - x_{\mathrm{q}}$ is called the \defn{quantization}{quantization error}.
+The expression in \eqref{equation:QuantizationErrorSquared} measures how close the output $x_{\mathrm{q}}$ is to the input for a specific value of $x$.
+It is popular in communications and signal processing because it is proportional to the increase in noise power caused by quantization.
 
 When a quantizer is employed to discretize the value of a sampled waveform, it is appropriate to evaluate the performance of the quantizer in terms of the difference between the original function and the reconstructed version rather than the distortion between the sample values themselves.
 Suppose that $x(t)$ is a bandwidth-limited process with bandwidth $W$.
@@ -72,26 +81,26 @@ Assume that the sampled values are quantized before reconstruction, with
 \begin{equation*}
 x_{\mathrm{q}} (nT) = Q ( x(nT) ) .
 \end{equation*}
-A legitimate question is whether $x_{\mathrm{q}}(t)$, the approximation to $x(t)$ using the quantized data
+A legitimate question is, how close is the approximation $x_{\mathrm{q}}(t)$ to the original signal $x(t)$ using the quantized data
 \begin{equation*}
 x_{\mathrm{q}}(t) = \sum_{n = -\infty}^{\infty} x_{\mathrm{q}}(nT) \mathrm{sinc} \left( \frac{t}{T} - n \right) ,
 \end{equation*}
 is anywhere close to $x(t)$.
-Consider the performance criterion
+A useful performance criterion is the energy in the qunatization error signal,
 \begin{equation*}
-\int_{\mathbb{R}} ( x(t) - x_{\mathrm{q}} (t) )^2 dt ,
+\int_{\mathbb{R}} \left| x(t) - x_{\mathrm{q}} (t) \right|^2 dt ,
 \end{equation*}
 which quantifies the total distortion between the original and reconstructed signals.
 Using Parseval's identity, we get
 \begin{equation*}
 \begin{split}
-&\int_{\mathbb{R}} ( x(t) - x_{\mathrm{q}} (t) )^2 dt
-= \int_{\mathbb{R}} ( \hat{x} (f) - \hat{x}_{\mathrm{q}} (f) )^2 df \\
-&= \int_{\mathbb{R}} \left( \sum_{n = -\infty}^{\infty}
+&\int_{\mathbb{R}} \left|  x(t) - x_{\mathrm{q}} (t) \right|^2 dt
+= \int_{\mathbb{R}} \left| \hat{x} (f) - \hat{x}_{\mathrm{q}} (f) \right|^2 df \\
+&= \int_{\mathbb{R}} \left| \sum_{n = -\infty}^{\infty}
 \frac{\left( x(nT) - x_{\mathrm{q}}(nT) \right)}{2W} e^{2 \pi i \frac{n}{2 W} f}
-\mathrm{rect} \left( \frac{f}{2W} \right) \right)^2 df \\
+\mathrm{rect} \left( \frac{f}{2W} \right) \right|^2 df \\
 &= \sum_{n = -\infty}^{\infty}
-( x(nT) - x_{\mathrm{q}}(nT) )^2 .
+| x(nT) - x_{\mathrm{q}}(nT) |^2 .
 \end{split}
 \end{equation*}
 Above, we have used the fact that the basis elements
@@ -99,16 +108,16 @@ Above, we have used the fact that the basis elements
 \left\{ e^{2 \pi i \frac{n}{2 W} f} \mathrm{rect} \left( \frac{f}{2W} \right) : n \in \mathbb{Z} \right\}
 \end{equation*}
 are orthogonal.
-By minimizing the quantization error for individual samples, it turns out that we are also minimizing the overall squared error between the original and reconstructed waveforms $x(t)$ and $x_{\mathrm{q}}(t)$.
+Minimizing the quantization error for individual samples turns out to also minimize the overall squared error between the original and reconstructed waveforms $x(t)$ and $x_{\mathrm{q}}(t)$.
 
 
 \subsection{Mean Squared Error}
 
 Since the quantizer is designed to operate on an information signal, a more relevant assessment of performance weighs in the accuracy of the quantizer over all possible realizations of the random input.
-An appropriate distortion measure for the quantization of a stochastic signal is provided by the \emph{mean squared error (MSE)},
+An appropriate distortion measure for the quantization of a stochastic signal is provided by the \defn{quantization}{mean squared error} (MSE),
 \begin{equation} \label{equation:QuantizationMSE}
 \mathrm{E} [ d(X, X_{\mathrm{q}}) ]
-= \mathrm{E} \left[ (X - Q(X))^2 \right] .
+= \mathrm{E} \left[ \left( X - Q(X) \right)^2 \right] .
 \end{equation}
 Note that this performance metric depends on the distribution of the input signal, and hence is tied to a specific application.
 A quantizer can be said to work well in a particular context.
@@ -129,7 +138,7 @@ We can therefore compute the mean squared error as follows,
 \begin{equation*}
 \begin{split}
 \mathrm{E} [ d(X, X_{\mathrm{q}}) ]
-&= \mathrm{E} \left[ (X - Q(X))^2 \right]
+&= \mathrm{E} \left[ \left( X - Q(X) \right)^2 \right]
 = \int_0^{16} \frac{(x - Q(x))^2}{16} dx \\
 &= \sum_{m=1}^8 \int_{2m-2}^{2m} \frac{(x - (2m - 1))^2}{16} dx \\
 &= \frac{1}{2} \int_{0}^{2} (x - 1)^2 dx = \frac{1}{3} .
@@ -142,15 +151,16 @@ That is, the mean squared error associated with this input distribution and quan
 
 \subsection{Signal to Quantization-Noise Ratio}
 
-One of the criticisms about the MSE of \eqref{equation:QuantizationMSE} is that it has a tendency to assign a larger distortion value to signal input with sizable second moments.
+One of the criticisms about the MSE of \eqref{equation:QuantizationMSE} is that it has a tendency to assign a larger distortion value to signal input with larger second moments.
 Indeed, an information process likely to feature large amplitudes is bound to yield outputs with a large mean squared error.
 On the other hand, under this absolute metric, most quantizers may appear to work well for minute signals as their mean squared errors are destined to remain small.
-An alternative and closely related criterion that takes into consideration the power of the original signal is the \emph{signal-to-quantization-noise ratio (SQNR)},
+A normalized version of this criterion that takes into consideration the power of the original signal is the \defn{quantization}{signal-to-quantization-noise ratio} (SQNR),
 \begin{equation} \label{equation:SQNR}
 \text{SQNR}
 = \frac{\mathrm{E} \left[ X^2 \right]}{\mathrm{E} \left[ (X - Q(X))^2 \right]} .
 \end{equation}
 Because of the implicit normalization associated with \eqref{equation:SQNR}, this latter measure is more suitable to compare quantizer performance for different input processes.
+Like many quantities in communications and signal processing, the value is often specified in decibels by applying the function $10\log_{10}(\cdot)$.
 
 \begin{example}
 Assume that the values of a discrete-time information signal are uniformly distributed over $[0,2]$.
@@ -171,12 +181,12 @@ Nevertheless, the quantization scheme seems more suited to the signal described 
 The SQNR of the current scheme is given by
 \begin{equation*}
 \text{SQNR} = \frac{\mathrm{E}[Y^2]}{\mathrm{E} [ d(Y, Y_{\mathrm{q}}) ]}
-= 3 \mathrm{E}[Y^2] = 4.
+= 3 \mathrm{E}[Y^2] = 4 \approx 6.02 \, \text{dB}.
 \end{equation*}
 This can be compared with the SQNR of the problem featured in Example~\ref{example:UniformQuantizer}, which is given by
 \begin{equation} \label{equation:UniformQuantizerSQNR}
 \text{SQNR} = \frac{\mathrm{E}[X^2]}{\mathrm{E} [ d(X, X_{\mathrm{q}}) ]}
-= 3 \mathrm{E}[X^2] = 256.
+= 3 \mathrm{E}[X^2] = 256 \approx 24.08 \, \text{dB}.
 \end{equation}
 Obviously, the SQNR is much better in the case of Example~\ref{example:UniformQuantizer}.
 Can you think of an eight-level quantization scheme that would perform better for the current problem, perhaps rivaling the SQNR of \eqref{equation:UniformQuantizerSQNR}?
@@ -186,8 +196,113 @@ Both the mean squared error and the signal-to-quantization-noise ratio are valid
 Still, they must be put in proper context, especially when comparing scenarios where the distributions of the input signals differ.
 For a fixed input process, a quantization scheme that minimizes the MSE will invariably maximize the SQNR.
 
+\begin{example}[Quantization Rule of Thumb]
+Consider a signal whose amplitude is bounded between -1 and 1 and whose amplitude distribution has a uniform distribution over the same range.
+Suppose that $n$ bits are represent $2^n$ uniformly spaced quantization levels $q_m = -1-2^{-n} + m 2^{-n+1}$ for $m=1,\ldots,2^n$.
+The performance as a function of $n$ is typically approximated by the rule that the \textbf{SQNR increases by 6.02 dB per bit} for additional quantization bits.
 
-\section{Uniform Quantizers}
+In this case, the quantizer function is
+\[ Q(x) =
+\begin{cases}
+-1+2^{-n} & \mathrm{if} \; x < -1 \\
+\frac{1}{2^{n-1}} \left( \lfloor 2^{n-1} x \rfloor - \frac{1}{2} \right) & \mathrm{if} \; - 1 \leq x < 1 \\
+1+2^{-n} & \mathrm{if} \; x \geq 1.
+\end{cases}
+\]
+By symmetry, the distribution of the quantization error is the same for each quantization cell so it suffices to calcluate
+\begin{align*}
+\mathrm{E} \left[ \left( X - Q(X) \right)^2 \big| Q(X)=2^{-n} \right]
+&= \int_{0}^{2^{-n+1}} f_{X|Q(X)=2^{-n}}(x) (x-2^{-n})^2 dx \\
+&= \int_{0}^{2^{-n+1}} 2^{n-1} (x^2-2^{-n+1}x+2^{-2n}) dx \\
+&= \frac{2^{-2n+2}}{3} - \frac{2^{-2n+2}}{2} + 2^{-2n} \\
+&= \frac{2^{-2n}}{3}.
+\end{align*}
+Since $E[X^2] = 2/3$, the SQNR in decibels is therefore given by
+\[ \text{SQNR} = 10 \log_{10} \left( \frac{2\cdot 3}{3\cdot 2^{-2n}} \right)  = (2n+1) 10 \log_{10} 2 \approx 6.02 n + 3.01 \, \text{dB}. \]
+As we expected, the SQNR increases by 6.02 dB per bit.
+What is surprising is that, for large $n$,  this rule holds for any continuous amplitude distribution supported on $[-1,1]$.
+\end{example}
+
+\subsection{Dithering}
+
+While the SQNR accurately measures the increase in noise power caused by quantization, it does not give any information about the spectral content of the quantization noise.
+For many applications it is also important that the quantization noise is white (i.e., uncorrelated in time).
+To see the problem with standard quantization, consider the periodic signal $x_n$ that satisfies $x_{n+N} = x_n$.
+In this case, the quantized version $y_n = Q(x_n)$ and the quantization error $e_n = y_n - x_n$ are also periodic.
+Therefore, the spectral energy of the quantization noise is concentrated in the harmonics of the fundamental frequency.
+
+Since the quantizer affects only value at a time, one might wonder how the quantization noise becomes correlated.
+The mechanism for this is that the quantization noise is correlated with input value.
+For example, one can compute this correlation for the quantizer in Example~\ref{example:UniformQuantizer} and see that
+\begin{align*}
+\mathrm{E} \left[X \left(X - Q(X)\right) \right] 
+&= \int_0^{16} \frac{x(x - Q(x))}{16} dx \\
+&= \sum_{m=1}^8 \int_{2m-2}^{2m} \frac{x(x - (2m - 1))}{16} dx \\
+&= \sum_{m=1}^8 \int_{2m-2}^{2m} \frac{x(x - (2m - 1))}{16} dx \\
+&= \frac{1}{2} \int_{0}^{2} (x+(2m-2))(x - 1) dx \\
+&= \frac{1}{2} \int_{0}^{2} x(x - 1) dx = \frac{1}{3}.
+\end{align*}
+From this, we see that the correlation is the same as the MSE.
+This means that quantizing a pure sinusoid will typically create new spurious harmonics whose powers are proportional to the power in the original sinusoid.
+
+The process of adding a small amount of noise before quantization is called \defn{quantization}{dithering}.
+Of course, the added noise increases the overall noise power in the system by a small amount.
+But, if then noise is chosen to be i.i.d. uniform over one quantization interval, then correlation becomes exactly zero.
+Now, we let $Z$ be a uniform random variable on $[-1,1]$ and notice that
+\[  \mathrm{E} \left[Q(X+Z)|X=x \right] = \int_{-1}^{1} \frac{1}{2} Q(x+z) dz = x. \]
+From this, we can repeat the calculation from above to see that
+\begin{align*}
+\mathrm{E} \left[X \left(X - Q(X+Z)\right) \right] 
+&= \int_0^{16} \int_{-1}^{1} \frac{x(x - Q(x+z))}{32} dz \, dx \\
+&= \int_0^{16} \frac{x(x - x)}{16} dz \, dx \\
+&= 0.
+\end{align*}
+This implies that the quantization noise is uncorrelated with the signal.
+One can also show that it is white (i.e., uncorrelated with time-shifts of itself).
+
+
+\subsection{Non-Uniform Quantization Via Companding}
+
+Uniform quantizers are quite robust because their performance is relatively insensitive to the input distribution.
+When the input statistics are not uniform, it is possible to design a non-uniform quantizer with the same number of levels and lower SQNR.
+One way of doing this is by quantizing the signal after it is processed by a \textbf{compressor}.
+After reconstruction, an \textbf{expander} is used to reverse the effect of the compresor.
+Since quantization occurs after compression, the quanitization levels are effectively remapped by the compressor.
+This whole process is called \defn{quantization}{companding}.
+
+Let the compressor $g(x)$ be an invertible function mapping real numbers to real numbers.
+Then, one has $X_q = g^{-1} \left( Q \left( g(X) \right) \right)$.
+When the quantization step size $\Delta$ is small, the step size $\Delta'$ after compression can be approximated by
+\[ \Delta' = \frac{\Delta}{g'(x)}. \]
+This allow one to approximate the quantization noise variance by
+\[ E \left[ (X_q - X)^2 \right] = \frac{\Delta^2}{12} \int_{-x_0}^{x_0} \frac{f_X (x)}{|g'(x)|^2} dx, \]
+where the quantization levels cover the range $[-x_0,x_0]$.
+Under the same assumption, the optimum compressor is proportional to
+\[ g(x) = \int_{0}^{x} \sqrt[3]{f_X (z)} dz . \]
+
+For signals with a wide dynamic range, the SQNR depends heavily of the local average signal power.
+Using a logarithmic compressor allows one efficiently quantize these signal so that the SQNR is independent of local signal power.
+Since larger quantization cells are used for large signal values, the quantization noise naturally scales with the signal power.
+For audio signals, the perceptual effect of noise typically depends more on the SQNR than the noise power.
+Therefore, logarithmic compression is natrual choice for such signals.
+
+In fact, transforms of this type have been standardized for use in the telephone system.
+The standard transform in the United States is called $\mu$-law companding and maps uniformly spaced 14-bit samples into non-uniformly spaced 8-bit samples.
+The resulting distortion is not easily undetectable by the human ear.
+The $\mu$-law companding algorithm maps $[-1,1]$ to $[-1,1]$ using the rule, for some $\mu >0$,
+\[ g(x) = \mathrm{sgn}(x)\frac{\ln \left( 1+ \mu |x| \right)}{\ln (1+\mu)}. \]
+
+The benefits of companding are actually due to two different mechanisms.
+First, the amplitude distribution of speech decays rapidly, so it makes sense to include more quantization levels in the small signal range.
+Adjusting for this correctly actually increases the SQNR.
+Second, human perception of audio depends on the SQNR instead of the noise power.
+So, matching the quantization noise to the perceptual measure improves perceived quality.
+In many cases, however, it is possible that the SQNR decreases while the perceived quality increases.
+
+
+\section{Optimal Quantization}
+
+\subsection{Uniform Quantizers}
 \label{section:UniformQuantizers}
 
 Finding an optimal quantizer is not an easy task.
@@ -196,7 +311,7 @@ A means to reduce the difficulty of identifying an optimal quantization scheme i
 This can be achieved, for instance, by imposing a rule on the respective position of the quantization points.
 Restricting the search space to uniform quantizers is one possible way to ensure that an optimal quantizer can be found.
 
-A \emph{uniform quantizer} is a function where the locations of successive outputs are situated at a fixed interval, $q_m - q_{m-1} = \Delta$ for all the possible values.
+A \defn{quantization}{uniform quantizer} is a function where the locations of successive outputs are situated at a fixed interval, $q_m - q_{m-1} = \Delta$ for all the possible values.
 That is, the distance between two quantization points is the same for all neighbors.
 This scheme is one of the simplest quantizer designs.
 The quantization function considered in Figure~\ref{figure:Quantizer} is in fact a uniform quantizer.
@@ -272,10 +387,10 @@ The resulting minimization problem need not have a closed-form solution, in cont
 This task is often accomplished by discretizing the search space and applying numerical techniques to identify the best candidate.
 
 
-\section{Non-Uniform Quantizers}
+\subsection{Non-Uniform Quantizers}
 \label{section:NonUniformQuantizers}
 
-For a \emph{non-uniform quantizer}, the restriction that neighboring quantization points should be equidistant is relaxed.
+For a \defn{quantization}{non-uniform quantizer}, the restriction that neighboring quantization points should be equidistant is relaxed.
 As such, these points can be located anywhere on the real line, and the decision region corresponding to each quantization point need not have a simple structure.
 The collection of non-uniform quantizers is much larger then the set of uniform quantizers described in Section~\ref{section:UniformQuantizers}.
 This greater flexibility in choosing a quantizer often results in better overall performance.
@@ -294,8 +409,9 @@ An optimal quantizer for these points is a function $Q^{\star} : \mathbb{R} \map
 The last equality follows from the fact that a quantization point can be selected independently for every possible input value.
 It should then be clear that the value of the function $Q^{\star}(\cdot)$ evaluated at $x$ is the point $q_m$ that is closest to $x$,
 \begin{equation*}
-Q^{\star}(x) = \arg \min_{\{ q_m \}} (x - q_m)^2 .
+Q^{\star}(x) = \arg \min_{\{ q_m \}} (x - q_m)^2 ,
 \end{equation*}
+where ties can be broken arbitrarily.
 In particular, an optimal $M$-level scalar quantizer always has $M$ decision regions, each being an interval containing its quantization point.
 
 Also, we can assume that the decision intervals are given.
@@ -335,7 +451,7 @@ b_m = \frac{q_m + q_{m+1}}{2}
 \end{equation*}
 where $m = 1, 2, \ldots, M-1$.
 Furthermore, the quantization point corresponding to decision interval $(b_{m-1}, b_m]$ is equal to the expectation of $X$ conditioned on $b_{m-1} < X \leq b_m$.
-These properties are collectively known as the \emph{Lloyd-Max} conditions.
+These properties are collectively known as the Lloyd-Max conditions.
 
 
 \subsection{Lloyd-Max Algorithm}
@@ -344,7 +460,7 @@ The Lloyd-Max conditions enumerated above define a set of rules that are necessa
 Yet, they do not provide an explicit means to compute the exact positions of the quantization points in an optimal quantizer.
 Furthermore, it may not be possible to find these points analytically.
 
-A method that is frequently used to find a non-uniform scalar quantizer is the \emph{Lloyd-Max algorithm}.
+A method that is frequently used to find a non-uniform scalar quantizer is the \defn{quantization}{Lloyd-Max algorithm}.
 This algorithm starts with an initial assignment for the quantization points which, in this case, we label $q_1^{(0)}, q_2^{(0)}, \ldots, q_M^{(0)}$.
 The ensuring procedure is to alternate iteratively between the following two steps.
 \begin{enumerate}
@@ -365,13 +481,12 @@ This insures that performance improves with every iteration.
 The algorithm terminates when a satisfactory level of performance has been achieved, or when the quantization points have converged to their final values.
 % While the Lloyd-Max algorithm typically leads good quantizers, it is not guaranteed to converge to the optimal solution.
 
-
 \section{Vector Quantizers}
 
 A quantizer can work either on single-source outputs or on blocks of source outputs.
 So far, we have studied the former approach by focusing on scalar quantizers.
 Although more involved, the second method where multiple outputs are aggregated prior to being quantized typically yields better results.
-This latter approach, called \emph{vector quantization}, is especially powerful for sources producing signals that are strongly correlated over time.
+This latter approach, called \defn{quantization}{vector quantization}, is especially powerful for sources producing signals that are strongly correlated over time.
 We do not explore the details of vector quantization in this document, however we motivate its purpose through a simple example.
 
 \begin{example} \label{example:VectorQuantization}
@@ -469,10 +584,10 @@ On the downside, the mathematical treatment of a quantization problem becomes mo
 
 All the quantizers described up to this point are generic schemes designed to work well with abstract sources.
 In practice, many quantization algorithms are tailored to specific applications.
-These quantizers are called \emph{analysis-synthesis} coders, and their design is typically fairly intricate.
+These quantizers are called \defn{quantization}{analysis-synthesis} coders, and their design is typically fairly intricate.
 They require advanced models and are often evaluated according to complex performance metrics.
 These criteria are rooted in human perception rather than conventional mathematics.
-When developed properly, model-based quantization schemes achieve better compression ratios than the \emph{waveform coders} presented hitherto.
+When developed properly, model-based quantization schemes achieve better compression ratios than the \defn{quantization}{waveform coders} presented hitherto.
 A serious treatment of analysis-synthesis algorithms is beyond the scope of this document.
 Nevertheless, we mention two popular schemes below for illustrative purposes.
 
@@ -483,7 +598,7 @@ Human speech is modeled as a much simpler random process than most other audio s
 As a result, some auditory information which is relevant in generic audio signals becomes inconsequential in the context of speech.
 The primary performance criteria for voice signals are intelligibility and pleasantness of the received signal.
 In addition, most speech applications require low delay, as long delays interfere with speech interaction in real-time applications.
-The \emph{Code Excited Linear Prediction (CELP)} is a class of algorithms developed for human speech.
+The \defn{quantization}{Code Excited Linear Prediction} (CELP) is a class of algorithms developed for human speech.
 The basic idea behind this approach is to model human speech production using a time-varying linear filter.
 The speech samples are subsequently separated in two distinct parts.
 The first component contains the current parameters governing the operation of the linear filter; these parameters are selected from a finite set of possible values.
@@ -496,7 +611,7 @@ However, a speech coder applied to music fails to provide an adequate rendition 
 The JPEG algorithm is a file format designed to store photographs and paintings digitally.
 The acronym JPEG is derived from the name of the committee that created this standard.
 A JPEG file can actually be created in various ways.
-A commonly used procedure specified in this standard is the \emph{JPEG file interchange format (JFIF)}, which we describe briefly.
+A commonly used procedure specified in this standard is the \defn{quantization}{JPEG file interchange format} (JFIF), which we describe briefly.
 The encoding process consists of several steps.
 First, an image is represented using YCbCr, an encoding scheme that specifies every pixel (sample point) in the image according to a light intensity component (Y) and two chroma (Cb and Cr) for colors.
 This scheme, as opposed to RGB, is interesting because it parallels the way the human visual system perceives image elements.
@@ -507,7 +622,7 @@ The resolution of the chroma data is reduced, compared to the light intensity co
 This reflects the fact that the human eye is less sensitive to fine color details than to fine brightness details.
 Furthermore, human perception is much more sensitive to small variations in color or brightness over large areas than to the strength of high-frequency brightness variations.
 Thus, the magnitudes of the high-frequency components are stored with a lower accuracy than the low-frequency components.
-The resulting data for all $8 \times 8$ blocks is further compressed with a lossless algorithm, a variant of \emph{Huffman encoding}.
+The resulting data for all $8 \times 8$ blocks is further compressed with a lossless algorithm that is a variant of the \defn{source coding}{Huffman code}.
 The important concept exposed in this example is how JPEG is built with a specific application in mind, and therefore quantizes sample data as to minimize the perceived distortion.
 This is a very good illustration of an analysis-synthesis quantizer.
 

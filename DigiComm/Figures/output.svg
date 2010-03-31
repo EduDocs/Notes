@@ -2,7 +2,7 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:cc="http://creativecommons.org/ns#"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
@@ -12,12 +12,19 @@
    height="1052.3622047"
    id="svg2614"
    sodipodi:version="0.32"
-   inkscape:version="0.45.1"
+   inkscape:version="0.46+devel"
    sodipodi:docbase="/usr/home/chmbrlnd/Courses/ECEN455"
    sodipodi:docname="output.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape">
   <defs
      id="defs2616">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective27" />
     <marker
        inkscape:stockid="Arrow1Mend"
        orient="auto"
@@ -40,15 +47,15 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="0"
      inkscape:zoom="1"
-     inkscape:cx="362.24405"
+     inkscape:cx="463.26045"
      inkscape:cy="131.67237"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
-     inkscape:window-width="697"
-     inkscape:window-height="581"
-     inkscape:window-x="172"
-     inkscape:window-y="22" />
+     inkscape:window-width="949"
+     inkscape:window-height="633"
+     inkscape:window-x="157"
+     inkscape:window-y="232" />
   <metadata
      id="metadata2619">
     <rdf:RDF>
@@ -144,31 +151,24 @@
          y="998.76843">O</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:16px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
-       x="684.67188"
+       style="font-size:16px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="686.67188"
        y="799.69427"
        id="text2268"><tspan
          sodipodi:role="line"
          id="tspan2270"
-         x="684.67188"
+         x="686.67188"
          y="799.69427">D</tspan></text>
-    <g
-       id="g3636"
-       transform="translate(-465.95635,524.52784)">
-      <path
-         transform="matrix(0.6893939,0,0,0.7109375,258.83519,89.826872)"
-         d="M 931.42856 260.93362 A 47.142857 45.714287 0 1 1  837.14285,260.93362 A 47.142857 45.714287 0 1 1  931.42856 260.93362 z"
-         sodipodi:ry="45.714287"
-         sodipodi:rx="47.142857"
-         sodipodi:cy="260.93362"
-         sodipodi:cx="884.28571"
-         id="path3630"
-         style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#ff0000;stroke-width:9.99881649;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-         sodipodi:type="arc" />
-      <path
-         id="path3632"
-         d="M 846.08794,252.96595 L 890.82478,297.70279"
-         style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#ff0000;stroke-width:7;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-    </g>
+    <text
+       id="text2526"
+       y="798.69427"
+       x="400.67188"
+       style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans"
+       xml:space="preserve"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan2530"
+         x="400.67188"
+         y="798.69427">R</tspan></text>
   </g>
 </svg>

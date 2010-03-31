@@ -2,6 +2,12 @@
 
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{graphics,epsfig,psfrag}
+\usepackage{tikz}
+
+\usepackage{makeidx}
+\makeindex
+
+\usepackage[hyperindex]{hyperref}
 
 \topmargin          0.0in
 \headheight         0.25in
@@ -12,9 +18,9 @@
 \textwidth          5.5in
 
 \newtheorem{theorem}{Theorem}[section]
-\newtheorem{proposition}{Proposition}
-\newtheorem{definition}{Definition}
-\newtheorem{example}{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
 
 \newcommand{\SetIn}{\ensuremath{\mathrm{1\!1}}}
 \newcommand{\Expect}{\ensuremath{\mathrm{E}}}
@@ -28,7 +34,7 @@
 %% Definitions
 %%
 \renewcommand{\baselinestretch}{1.25}
-
+\newcommand{\defn}[2]{\textbf{\textrm{#2}}\index{#1!#2}}
 
 \begin{document}
 
@@ -42,7 +48,7 @@ Henry Pfister}
 
 \title{A First Course in Digital Communications}
 
-\date{Fall 2008}
+\date{Spring 2010}
 
 \maketitle
 
@@ -57,18 +63,27 @@ A copy of the license is included in the section entitled ``GNU Free Documentati
 
 \include{0Preface}
 
+.
+
 \mainmatter
 
+
 \include{1Introduction}
+\include{4Compression}
+\include{3DTCommunications}
 \include{2FourierAnalysis}
 \include{3Quantization}
-\include{4Compression}
-\include{5ChannelCoding}
-\include{6Modulation}
+%\include{5ChannelCoding}
+%\include{6Modulation}
 
 \appendix
 
 %\include{A0VectorSpaces}
 
 %\include{fdl}
+
+\backmatter
+
+\printindex
+
 \end{document}

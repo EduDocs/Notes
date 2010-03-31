@@ -1,10 +1,14 @@
-\chapter{Data Compression}
+%\chapter{Data Compression}
+%
+%Having explored the process of turning an analog information signal into a digital sequence using sampling and quantization, we begin our treatment of digital information.
+%From here on, we assume that information sources are digital in nature.
 
-Having explored the process of turning an analog information signal into a digital sequence using sampling and quantization, we begin our treatment of digital information.
-From here on, we assume that information sources are digital in nature.
-That is, they produce a succession of symbols, each drawn from a \emph{discrete alphabet}.
-The two main goals of the current chapter are to find an adequate measure of information for digital systems and to describe compression algorithms that can be employed to represent the said information in a succinct manner.
-\emph{Data compression}, also known as \emph{source coding}, is important because it reduces the consumption of expensive resources such as hard disk space or transmission bandwidth.
+\chapter{Sources of Digital Information}
+
+Digital systems use sequences of symbols (e.g., binary systems use 0's and 1's) to represent information.
+A \emph{source} of digital information is assumed to produce a succession of symbols, each drawn from a \emph{discrete alphabet}.
+The three goals of this chapter are to understand the nature of digital information, find an adequate measure of information for digital systems and to describe compression algorithms that can be employed to represent the said information in a succinct manner.
+\emph{Data compression}, also known as \textbf{source coding}, is important because it reduces the consumption of expensive resources such as hard disk space or transmission bandwidth.
 Alternatively, it can be applied to lower the cost of communication, reduce latency or improve the quality of the received messages.
 
 This document offers an introductory treatment of \emph{lossless compression} algorithms, whereby the original message can be recovered perfectly from the compressed data.
@@ -34,7 +38,7 @@ These sources are easy to analyze and can be described unambiguously in a straig
 Furthermore, discrete memoryless sources provide valuable insights into the design of efficient compression algorithms for more general settings.
 
 \begin{definition}
-A \emph{discrete memoryless source} is a digital information source that produces a sequence of independent and identically distributed symbols over time.
+A \defn{source coding}{discrete memoryless source} is a digital information source that produces a sequence of independent and identically distributed symbols over time.
 Mathematically, it consists of an alphabet $\mathcal{X}$ and a probability mass function $p_X(\cdot)$ such that, at any time~$t$, the probability that the source outputs symbol $x \in \mathcal{X}$ is equal to $p_X(x)$, irrespective of the past and future.
 \end{definition}
 
@@ -86,7 +90,7 @@ We address this issue by introducing entropy, a concept closely related to the n
 
 \section{Entropy}
 
-The \emph{entropy} can be viewed as a measure of uncertainty in a random variable.
+The \defn{information theory}{entropy} can be viewed as a measure of uncertainty in a random variable.
 In the context of digital communications, it serves as a measure of information in that it provides a lower bound on the expected number of bits required to describe the output of a discrete memoryless source.
 This lower bound is tight and can be approached using various schemes, as we will see shortly.
 
@@ -168,16 +172,16 @@ It is therefore possible to construct accurate entropy estimates based on empiri
 
 \section{Variable-Length Compression Codes}
 
-A \emph{code} is a rule for converting a symbol (or a group of symbols) into a string of bits called a \emph{codeword}.
+A \defn{source coding}{code} is a rule for converting a symbol (or a group of symbols) into a string of bits called a \defn{source coding}{codeword}.
 Mathematically, an encoder is a mapping $c : \mathcal{X} \mapsto \mathcal{C}$ from the input alphabet $\mathcal{X}$ to the collection of possible codewords $\mathcal{C}$.
-The goal of a \emph{compression code} is, of course, to provide a more concise representation of the information signal.
+The goal of a \defn{source coding}{compression code} is, of course, to provide a more concise representation of the information signal.
 In lossless compression, the function $c$ must be injective over the support of $X$.
 Without this one-to-one relationship, decoding errors are bound to happen.
 Encoding schemes can be partitioned into two categories based on the structure of their codebooks.
-If the codewords all share the same bit-length, then the corresponding code is called a \emph{fixed-length code}.
+If the codewords all share the same bit-length, then the corresponding code is called a \defn{source coding}{fixed-length code}.
 This section focuses on codes in the second category, variable-length codes, which are often used in lossless data compression.
 
-As the name suggests, a \emph{variable-length code} is an encoding function that maps source symbols to a variable number of bits.
+As the name suggests, a \defn{source coding}{variable-length code} is an encoding function that maps source symbols to a variable number of bits.
 This is a beneficial feature for many compression schemes, as the greater flexibility sometimes leads to better compression ratio.
 The motivation behind variable-length encoding is the intuition that data compression can be achieved by assigning short bit strings to likely symbols, and necessarily longer bit strings to less probable ones.
 In dealing with variable-length codes, it is essential to recognize that they are inherently more tricky than fixed-length ones.
@@ -186,10 +190,10 @@ This is in stark contrast with fixed-length codes where codewords are positioned
 To ensure that the binary output of a variable-length encoder can be recovered unambiguously, the code needs specific properties.
 
 Variable-length codes can be nested in order of decreasing generality as non-singular, uniquely decodable and instantaneous.
-A code is \emph{non-singular} if each source symbol is mapped to a different bit string.
+A code is \defn{source coding}{non-singular} if each source symbol is mapped to a different bit string.
 That is, the mapping $c$ from $\mathcal{X}$ to $\mathcal{C}$ is one-to-one.
 Rather, if two symbols map to the same codeword, then it is intuitively clear that the original message cannot be recovered with certainty.
-A code is said to be \emph{uniquely decodable} if its extensions are non-singular.
+A code is said to be \defn{source coding}{uniquely decodable} if its extensions are non-singular.
 The extension of a code $c$ is obtained by concatenating its codewords when $c$ is applied to a multitude of source symbols.
 Given the string of symbols $x_1, x_2, \ldots, x_n$, the extension of $c$ produces the output bit string
 \begin{equation*}
@@ -202,7 +206,7 @@ There is no separation marker or frame between adjacent codewords, no commas or 
 The decoder, given a starting point, must infer the boundaries of every codeword from the data.
 This process is called \emph{parsing}.
 The third and final property of variable-length encoding is related to parsing.
-A code is \emph{instantaneous}, or \emph{prefix-free}, if no codeword in $\mathcal{C}$ is a prefix of a any other encoded symbol in $\mathcal{C}$.
+A code is \emph{instantaneous}, or \defn{source coding}{prefix-free}, if no codeword in $\mathcal{C}$ is a prefix of a any other encoded symbol in $\mathcal{C}$.
 This property guarantees that each encoded symbol can be identified with no further delay once the corresponding string of bits is received or read.
 
 \begin{example}
@@ -439,7 +443,7 @@ If symbols are encoded individually using an optimal prefix-free code $c : \math
 
 Theorem~\ref{theorem:EntropyBoundsPrefixCodes} identifies properties of an optimal prefix-code.
 However, it does not provide an algorithmic methodology to design such a code.
-This is addressed by the \emph{Huffman encoding algorithm}, a technique that produces an efficient variable-length code for lossless data compression.
+This is addressed by the \defn{source coding}{Huffman code}, which provides an efficient variable-length code for lossless data compression.
 Not too surprisingly, the underlying strategy in this scheme is to assign short strings of bits to likely symbols, and necessarily longer ones to less probable source outputs.
 The encoding is specifically crafted so that the code table forms a prefix-free code.
 Huffman codes are the most efficient compression mapping for individual source symbols.
@@ -543,7 +547,7 @@ The binary tree and the resulting Huffman code are shown in Figure~\ref{figure:H
 \psfrag{x4}[c]{$x_4$}
 \epsfig{file=Figures/huffman2,width=87.791mm}
 \end{psfrags}
-\caption{This figure depcits a Huffman code construction for an alphabet of size four.}
+\caption{This figure depicts a Huffman code construction for an alphabet of size four.}
 \label{figure:Huffman2}
 \end{center}
 \end{figure}
@@ -623,7 +627,7 @@ Repeating this procedure with an Huffman code that takes three symbols as its in
 
 Example~\ref{example:JointSourceCoding} illustrates well how encoding several source symbol at a time can lead to a decrease in the expected codeword length per symbol.
 The joint encoding of source symbols works even better for sources that are correlated over time.
-Although we will not discuss the specificities of this scenario, it is informative to mention that joint source coding is instrumental in approaching the entropy rate of correlated sources.
+Although we will not discuss the specifics of this scenario, it is informative to mention that joint source coding is instrumental in approaching the entropy rate of correlated sources.
 This is especially important considering the fact that symbol-by-symbol encoding may perform very poorly for correlated sources.
 
 
@@ -643,12 +647,12 @@ This strategy alone, encoding multiple source symbols at a time, is not powerful
 To design effective fixed-length codes, two components are necessary.
 First, we need to relax the assumption that the data compression scheme should be lossless, rather we allow a small probability of encoding failure.
 In particular, we assume that the probability of encoding failure, where data cannot be decoded properly, is $\delta > 0$, where $\delta$ is implicitly very small.
-The second ingredient to fixed-length compression is the \emph{asymptotic equipartition property}, which we review next.
+The second ingredient to fixed-length compression is the asymptotic equipartition property, which we review next.
 
 
 \subsection{Asymptotic Equipartition Property}
 
-The AEP is a general property of the output samples of discrete memoryless sources.
+The \textbf{asymptotic equipartition property} (\defn{information theory}{AEP}) is a general property of the output samples of discrete memoryless sources.
 This property implies that, given a very long sequence of $n$ source symbols, the probability that $(X_1, \ldots, X_n)$ belongs to a set of typical sample strings is almost one.
 It takes a few steps to make this statement precise.
 
@@ -687,7 +691,7 @@ In particular, we have
 where $\sigma^2$ is the variance of random variable $- \log_2 (p_X(X))$.
 \end{proof}
 
-Drawing intuition from the proof of Theorem~\ref{theorem:WeakLawEntropy}, we define the \emph{typical set} $T_{\epsilon}^{(n)}$ as
+Drawing intuition from the proof of Theorem~\ref{theorem:WeakLawEntropy}, we define the \defn{information theory}{typical set} $T_{\epsilon}^{(n)}$ as
 \begin{equation*}
 T_{\epsilon}^{(n)}
 = \left\{ \mathbf{x} \in \mathcal{X}^n :
@@ -747,59 +751,77 @@ For any $\delta > 0$, $\epsilon > 0$ and $n$ sufficiently large, there exists a 
 
 \section{Universal Source-Coding Algorithms}
 
-Huffman coding has some important drawbacks.
-The source statistics have to be known in advance to design a Huffman code.
-If one only has access to the source outputs, the coding procedure requires two passes through the data, one to estimate the statistics of the source, and a second one for encoding.
-The Huffman encoding algorithm is designed primarily for source blocks of length 1.
-To take advantage of the source memory, and to get better rates, one has to consider longer block lengths.
-Yet, complexity increases rapidly with block length for the Huffman algorithm. 
-To provide a partial answer to these drawbacks, we study an example of a universal source-coding algorithm, namely the Lempel-Ziv algorithm.
+Huffman coding has two important drawbacks.
+First, the source statistics are used to design a Huffman code.
+If one only has access to the source outputs, the design procedure requires two passes through the data, one to estimate the statistics of the source, and a second one for encoding.
+To overcome this, one can use adaptive Huffman codes where the code is updated dynamically to match the statistics of the sequence as it is observed.
+This is a problem because
+The second problem is that one must jointly encode multiple symbols to take advantage of source memory and reduce length rounding loss.
+In this case, one finds that the complexity increases exponentially with the number of symbols that are encoded together.
+To provide a partial solution to these drawbacks, we study an example of a universal source-coding algorithm, namely the Lempel-Ziv algorithm.
+This type of \defn{source coding}{universal data compression} is the basis for standard file compression algorithms (e.g., winzip, gzip).
 
-The basic idea behind the \emph{Lempel-Ziv algorithm} is to parse the input sequence into non-overlapping strings of different lengths while constructing a list of the strings seen thus far.
+The basic idea behind the \defn{source coding}{Lempel-Ziv algorithm} is to parse the input sequence into non-overlapping strings of different lengths while constructing a dictionary of the strings seen thus far.
+There are many versions of this algorithm and we discuss the variant known as LZ78 that was described in a 1978 paper by Lempel and Ziv.
 The encoding algorithm works as follows.
-First, initialize the list to contain all strings of length one.
+First, initialize the dictionary to contain all strings of length one and set the input pointer to the beginning of the string.
 Then, apply the following iterative procedure.
 \begin{enumerate}
-\item Search for the longest binary string $w$ which has appeared in the dictionary table.
-\item Encode this binary string by its index in the dictionary.
-\item Add $w$ followed by the first digit of the next block to the dictionary.
+\item Starting at the input pointer, find the longest substring $w$ that is already in the dictionary.
+\item Concatenate $w$ with the next symbol $y$ in the string and add $wy$ to the first empty location in the dictionary.
+\item Encode the pair by sending the dictionary index of $w$ and the value of $y$.
+\item Set the input pointer to the symbol after $y$.
 \end{enumerate}
-Practical aspects of this algorithm include the size of the dictionary
+There are a number of practical variants of this algorithm that improve performance and/or reduce the implementation complexity.
 
 Decompression works in the reverse fashion.
-Starting from the dictionary table and the encoded bits, one can resolve the input without ambiguity.
+Each received index and symbol can be immediately decoded and used to build a copy of the dictionary at the receiver.
+In this fashion, one can resolve the input without ambiguity.
 
 \begin{example}
-Suppose that we are to use a Lemple-Ziv algorithm with dictionary size $2^3 = 8$.
-The source sequence is sequentially parsed into strings that have not appeared so far.
+Suppose that we are to use a Lempel-Ziv algorithm with dictionary size $2^3 = 8$.
+The dictionary is initialized to contain $0$ and $1$ in the first two positions.
+Then, the source sequence is sequentially parsed into strings that have not appeared so far.
 For example, 
 \begin{equation*}
-1011010100010 \ldots \rightarrow 1, 0, 11, 01, 010, 00, 10, \ldots
+10110101000101 \ldots \rightarrow 10,11,01,010,00,101 \ldots
 \end{equation*}
-The dictionary table at this point has seven elements.
+The dictionary table at this point has eight elements.
 
 \begin{center}
 \begin{tabular}{|c|c|c|c|}
 \hline
-Index & Binary String & Index & Binary String \\
+Index & Dictionary String & Encoded Index & Added Bit \\
 \hline
-000 & 1 & 100 & 010 \\
-001 & 0 & 101 & 00 \\
-010 & 11 & 110 & 10 \\
-011 & 01 & 111 & \\
+000 & 0 & N/A & N/A \\
+001 & 1 & N/A & N/A \\
+010 & 10 & 001 & 0 \\
+011 & 11 & 001 & 1 \\
+100 & 01 & 000 & 1 \\
+101 & 010 & 100 & 0 \\
+110 & 00 & 000 & 0 \\
+111 & 101 & 010 & 1 \\
 \hline
 \end{tabular}
 \end{center}
 
-Each phrase (the bit string contained between two commas) is coded by giving the location of its prefix in the dictionary table, and the value of the additional bit;
+Each phrase (the bit string contained between two commas) is coded by giving the location of its prefix in the dictionary table, and the value of the additional bit.
+This results in the coded sequence
 \begin{equation*}
-\begin{split}
-& 1, 0, 11, 01, 010, 00, 10, \ldots \\
-& \rightarrow (000, 1)(000, 0)(001, 1)(010, 1)(100, 0)(010, 0)(001, 0) \ldots
-\end{split}
+10,11,01,010,00,101 \rightarrow (001, 0)(001, 1)(000, 1)(100, 0)(000, 0)(010, 1),
 \end{equation*}
 where the first number of each pair gives the index of the prefix in the table and the second number gives the last bit of the new phrase. 
-The Lempel-Ziv coding algorithm asymptotically achieves the entropy rate for an unknown ergodic source.
+When applied to sequences generated by any stationary ergodic source, the Lempel-Ziv coding algorithm asymptotically achieves the optimal encoding rate (known as the entropy rate).
 \end{example}
 
-This type of \emph{universal data compression} is the basis for file compression algorithms (e.g., winzip, gzip).
+Most readers will notice that this algorithm, as stated, requires prior knowledge of the total number of phrases in the dictionary.
+In fact, this problem can be solved easily and the solution actually requires fewer transmitted bits.
+The key point is that both the transmitter and receiver know the number of phrases currently in the dictionary.
+Let $M$ be the current number of phrases in the dictionary.
+Then, the transmitter can be simply send the $\lceil \log_2 M \rceil$ least significant bits of the index.
+Since the receiver also knows $M$, there will be no confusion.
+In this case, the encoded sequence will be
+\begin{equation*}
+10,11,01,010,00,101 \rightarrow (1, 0)(01, 1)(00, 1)(100, 0)(000, 0)(010, 1).
+\end{equation*}
+

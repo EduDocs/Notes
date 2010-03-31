@@ -1,15 +1,16 @@
 \chapter{Fourier Analysis and Sampling}
 \label{chapter:FourierAnalysisSampling}
 
-\emph{Fourier analysis} refers to a collection of tools that can be applied to express a function in terms of complex sinusoids, called basis elements, of different frequencies.
+\index{Fourier analysis}
+\textbf{Fourier analysis} refers to a collection of tools that can be applied to express a function in terms of complex sinusoids, called basis elements, of different frequencies.
 The result of the decomposition is the amplitude and the phase to be imparted to each basis element in the reconstruction.
-This decomposition is termed the \emph{frequency domain representation} of the original signal.
+This decomposition is termed the \defn{Fourier analysis}{frequency domain} representation of the original signal.
 
 Fourier analysis is extremely useful in engineering, with a myriad of applications.
 Part of its appeal lies in the fact that basis elements are characteristic functions of linear time-invariant systems.
 This property, which may seem nebulous at this point, is instrumental in solving many challenging problems, and makes Fourier analysis a powerful methodology for the design of communication systems.
 We assume that the reader is familiar with basic Fourier analysis, and only review details that are pertinent to our treatment of communication systems.
-This is not intended to be a comprehensive treatment of harmonic analysis.
+This is not intended to be a comprehensive treatment of the subject.
 
 
 \section{Fourier Series}
@@ -18,10 +19,10 @@ This is not intended to be a comprehensive treatment of harmonic analysis.
 Fourier series can be employed to express, as weighted sums of sinusoidal components, either periodic functions or functions that are time-limited.
 Suppose that $s(t)$ is a function that is nonzero only for $-\frac{T}{2} \leq t \leq \frac{T}{2}$, and is square integrable
 \begin{equation*}
-\| s(t) \|^2 = \int_{\mathbb{R}} |s(t)|^2 dt
+\| s(t) \|^2 \triangleq \int_{\mathbb{R}} |s(t)|^2 dt
 = \int_{-\frac{T}{2}}^{\frac{T}{2}} |s(t)|^2 dt < \infty .
 \end{equation*}
-Then $s(t)$ possesses a \emph{Fourier series representation}, which is defined by
+Then $s(t)$ possesses a \defn{Fourier analysis}{Fourier series} representation, which is defined by
 \begin{equation} \label{equation:FourierSeries1}
 s(t) = \begin{cases} \sum_{k=-\infty}^{\infty}
 \hat{s}_k e^{2 \pi i \frac{k}{T} t}, & |t| \leq \frac{T}{2} \\
@@ -65,7 +66,7 @@ This fact provides insight into the sampling theorem, which we will review short
 
 \section{Fourier Transforms}
 
-The \emph{Fourier transform} applies to functions that are not necessarily time-limited.
+The \defn{Fourier analysis}{Fourier transform} applies to functions that are not necessarily time-limited.
 Assume that $x(t)$ is a signal that is square integrable,
 \begin{equation} \label{equation:L2Condition}
 \| x(t) \|^2 = \int_{\mathbb{R}} | x(t) |^2 dt < \infty .
@@ -101,6 +102,14 @@ The Fourier transform of $\mathrm{rect} (t)$ can be computed as follows,
 Thus, the Fourier transform of $\mathrm{rect}(\cdot)$ is the famous $\mathrm{sinc}(\cdot)$ function, which plays a fundamental role in the sampling and reconstruction of information signals.
 \end{example}
 
+The Fourier transform $\hat{x}(f)$ of a square-integrable signal $x(t)$ also allows one to pose the question, ``How much signal energy is contained the frequencies between $f_0$ and $f_1$?".
+The answer, for $f_0 \leq f_1$, is given by the integral
+\[ \int_{f_0}^{f_1} \left| \hat{x}(f) \right|^2 df. \]
+This integral exposes the quantity $\mathcal{G}_x (f) = \left| \hat{x}(f) \right|^2$ as the \defn{Fourier analysis}{energy spectral density} of $x(t)$.
+For technical reasons, we actually define the energy spectral density later in terms of its Fourier transform.
+In practice, the answer to the above question also depends on whether the signal is real or complex.
+For real signals, the integral is typically computed over the range $f_0 < |f| < f_1$.
+
 When condition~\eqref{equation:L2Condition} is not satisfied, it may be hazardous to use Fourier analysis and frequency domain representations.
 Strictly speaking, the Fourier transform of a function may not exist if it behaves wildly.
 Casually taking the Fourier transforms of arbitrary signals should be avoided.
@@ -118,15 +127,15 @@ x(t) &= \int_{\mathbb{R}} \hat{x}(f) e^{2 \pi i f t} df
 \end{split}
 \end{equation}
 where the second equality follows from \eqref{equation:FourierTransform} and the third equality is obtained by changing the order of integration.
-Recall that we can use a $\delta$-function to write (informally)
+Recall that we can use the Dirac delta function $\delta(t)$ to write (informally)
 \begin{equation*}
 x(t) = \int_{\mathbb{R}} \delta (t - \tau) x(\tau) d\tau .
 \end{equation*}
-Since \eqref{equation:NestedFourierRepresentation} holds for any time~$t$, we gather that
+Since \eqref{equation:NestedFourierRepresentation} holds for any time~$t$, we find that
 \begin{equation*}
-\delta (t) = \int_{\mathbb{R}} e^{2 \pi i f t} df ,
+\delta (t) = \int_{\mathbb{R}} e^{2 \pi i f t} df 
 \end{equation*}
-and hence the (cavalier) Fourier transform of the $\delta$-function is $\mathcal{F} [ \delta(t) ] = 1$.
+is one representation of $\delta(t)$ and hence the (cavalier) Fourier transform of the $\delta$-function is $\mathcal{F} [ \delta(t) ] = 1$.
 
 
 \subsection{Periodic Signals}
@@ -182,22 +191,22 @@ Which representation to use depends on the problem at hand.
 \label{subsection:SpectralDensity}
 
 The energy content of a deterministic signal $x(t)$ is given by \eqref{equation:L2Condition}.
-If the energy content of $x(t)$ is finite, i.e.\ $\| x(t) \|^2 < \infty$, then we can define its \emph{time autocorrelation function} by
+If the energy content of $x(t)$ is finite, i.e.\ $\| x(t) \|^2 < \infty$, then we can define its \defn{Fourier analysis}{autocorrelation function} by
 \begin{equation*}
 R_x(\tau) = \int_{\mathbb{R}} x(t)x^*(t - \tau) dt .
 \end{equation*}
 Using this notation, we can write the energy content of $x(t)$ as $R_x(0)$.
 
 \begin{definition}
-The \emph{energy spectral density} of $x(t)$, denoted by $\mathcal{G}_x (f)$, is the Fourier transform of its time autocorrelation function,
+The \defn{Fourier analysis}{energy spectral density} of $x(t)$, denoted by $\mathcal{G}_x (f)$, is defined to be the Fourier transform of its autocorrelation function,
 \begin{equation*}
 \mathcal{G}_x(f) = \mathcal{F} [ R_x (\tau) ] = | \hat{x}(f) |^2.
 \end{equation*}
 \end{definition}
 
 Intuitively, the energy spectral density captures the frequency content of a signal and helps identify how its energy is distributed across frequencies.
-The \emph{spectral bandwidth} of Fourier transform $\hat{x}(f)$ is the smallest value of $W$ such that $\mathcal{G}_x(f) = 0$ for all $|f| > W$.
-A signal $x(t)$ is \emph{bandwidth-limited} to $W$ if it can be obtained as the inverse Fourier tranform of a function $\hat{x}(f)$, where $\hat{x}(f)$ is identically zero for all $|f| > W$.
+The \defn{Fourier analysis}{spectral bandwidth} of Fourier transform $\hat{x}(f)$ is the smallest value of $W$ such that $\mathcal{G}_x(f) = 0$ for all $|f| > W$.
+A signal $x(t)$ is \defn{Fourier analysis}{bandwidth-limited} to $W$ if it can be obtained as the inverse Fourier transform of a function $\hat{x}(f)$, where $\hat{x}(f)$ is identically zero for all $|f| > W$.
 
 
 \subsection{Linear Time-Invariant Filters}
@@ -218,7 +227,8 @@ The output signal can then be recovered by taking the inverse Fourier transform 
 \begin{equation*}
 y(t) = \mathcal{F}^{-1} [ \hat{y}(f) ] = \mathcal{F}^{-1} [ \hat{x}(f) \hat{h}(f) ] .
 \end{equation*}
-
+This also implies that the spectral density, $\mathcal{G}_y(f)$, of $y(t)$ satisfies
+\[ \mathcal{G}_y(f) = \mathcal{G}_x(f) \mathcal{G}_h(f). \]
 
 \section{Sampling Deterministic Signals}
 
@@ -287,7 +297,7 @@ x(nT)
 \end{equation*}
 Thus, we have $s_{k} = T x(-kT)$ and formula \eqref{equation:SamplingReconstructionFormula} follows.
 The sampling rate corresponding to $T = \frac{1}{2W}$ is the minimum rate at which perfect reconstruction is possible.
-It is called the \emph{Nyquist rate}.
+It is called the \defn{Fourier analysis}{Nyquist rate}.
 \end{proof}
 
 We can gain better intuition about sampling using the Fourier transform representation for periodic signals developed in Section~\ref{section:PeriodicSignals}.
@@ -304,7 +314,7 @@ Looking at the sampled signal in the frequency domain, we get
 where we have used \eqref{equation:ImpulseTrainFrequency} to express the Fourier transform of an impulse train.
 When the sampling rate is fast enough, the translated copies of $\hat{x}(f)$ contained in the transform $\hat{x}_{\mathrm{s}}(f)$ do not overlap, and the original signal can be recovered using an ideal lowpass filter.
 However, when the sampling period~$T$ is too small, the various copies of $\hat{x}(f)$ overlap and the content of the original is partially destroyed.
-This is know as \emph{aliasing}.
+This is know as \defn{Fourier analysis}{aliasing}.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -334,16 +344,38 @@ The human eye acts as a lowpass filter and transforms the succession of images i
 High-speed cameras are used to record slow-motion playback movies.
 As a consequence, they must run at much higher frame-rates than normal cameras.
 
+\subsection{Imperfect Sampling and Reconstruction}
+
+In practice, it is impossible to measure (i.e., sample) a signal $x(t)$ instantaneously.
+A more realistic model is that the sample value is given by the integral
+\[ \int_{\mathbb{R}} x(t) p(t-nT) dt, \]
+for some sampling waveform $p(t)$.
+In this case, the resulting samples are identical to the perfect sampling of the filtered waveform $y(t)=x(t)*p(-t)$.
+Therefore, the sample values are given by
+\[ y(nT) = \int_{\mathbb{R}} x(t) p(t-nT) dt. \]
+It also follows that, if no aliasing occurs, the imperfection can be eliminated completely using a discrete-time filter to equalize the resulting samples.
+
+A similar imperfection occurs during reconstruction.
+In practice, it is not possible to weight each sample by the exact sinc interpolation waveform.
+Instead, the samples $x(nT)$ are weighted by some arbitrary pulse shape $p(t)$.
+In this case, the reconstruction output is given by
+\[ y(t) = \sum_{n=-\infty}^{\infty} x(nT) p(t-nT). \]
+Since $p(t-nT) = \delta(t-nT) * p(t)$, we can see this instead as perfect reconstruction followed by filtering and write
+\[ y(t) = \left( \sum_{n=-\infty}^{\infty} x(nT) \delta (t-nT) \right) * p(t) = x(t) * p(t). \]
+Again, it follows that this imperfection can therefore be eliminated completely by post-filtering.
+The main advantage in practice is that one can jointly optimize both $p(t)$ and the post-filter to provide good performance while using inexpensive components.
+
 
 \section{Stochastic Signals}
 \label{section:StocahsticSignalsFAS}
+\index{random process}
 
-A \emph{stochastic process} (or \emph{random process}) is an extension of the concept of \emph{random variable} to the situation where the values of a signal are not known beforehand.
+A \textbf{random process} (or \defn{random process}{stochastic process}) is an extension of the concept of random variable to the situation where the values of a signal are not known beforehand.
 Mathematically, a stochastic process can be viewed in two different ways.
 First, the process can be thought of as an instantiation of a random experiment where the outcome is selected from a collection of time functions.
 Alternatively, a stochastic process can be viewed as a collection of random variables indexed by time.
-If the index set corresponds to the real numbers, then the process is a \emph{continuous-time random process}.
-Whereas if the index set is discrete, then the random process is a \emph{discrete-time random process}.
+If the index set corresponds to the real numbers, then the process is a \defn{random process}{continuous-time} \textbf{random process}.
+Whereas if the index set is discrete, then it is a \defn{random process}{discrete-time} \textbf{random process}.
 The viewpoint where a stochastic process is regarded as a collection of random variables tends to prevail in the study of digital communications.
 \begin{figure}[htbp]
 \begin{center}
@@ -365,28 +397,28 @@ Random processes are frequently employed in the design of communication systems.
 For example, they can be used to model the data originating from a source, channel variations, noise and interference.
 Their importance will become evident as we progress through these notes.
 In general, it is difficult to provide a complete mathematical description for a random process.
-For now, we restrict our attention to \emph{stationary} and \emph{ergodic} random processes.
+For now, we restrict our attention to \defn{random process}{stationary} and \defn{random process}{ergodic} random processes.
 
 \begin{definition}[Stationarity]
-A random process $X(t)$ is wide-sense stationary if its \emph{mean}
+A random process $X(t)$ is wide-sense stationary if its \defn{random process}{mean}
 \begin{equation*}
 m_X(t) = \mathrm{E} [X(t)]
 \end{equation*}
-is independent of time, and its \emph{autocorrelation function} defined by
+is independent of time, and its \defn{random process}{autocorrelation function}, defined by
 \begin{equation*}
-R_X(t_1, t_2) = \mathrm{E} [X(t_1) X^*(t_2)]
+R_X(t_1, t_2) = \mathrm{E} [X(t_1) X^*(t_2)],
 \end{equation*}
 only depends on the difference between $t_1$ and $t_2$.
 With a slight abuse of notation, we can denote the mean and autocorrelation of a stationary process respectively by $m_X$ and $R_X(\tau)$, where $\tau = t_1 - t_2$.
 \end{definition}
 
 \begin{definition}[Ergodicity]
-The \emph{ergodic theorems} assert that, under certain conditions, the time average of a function along all the possible trajectories of a random process exists and is equal to its ensemble average,
+The \defn{random process}{ergodic theorems} assert that, under certain conditions, the time average of a function along all the possible trajectories of a random process exists and is equal to its ensemble average,
 \begin{equation*}
 \lim_{T \rightarrow \infty} \frac{1}{T} \int_{- \frac{T}{2}}^{\frac{T}{2}} g(X(t)) dt
 = \mathrm{E}[g(X(t))] .
 \end{equation*}
-When a stochastic process fulfills these conditions, it is called \emph{ergodic}.
+When a stochastic process fulfills these conditions, it is called \defn{random process}{ergodic}.
 \end{definition}
 
 \begin{figure}[htbp]
@@ -413,7 +445,7 @@ Such a postulate appears reasonable, especially given the many successful commun
 
 \subsection{Power Spectral Density}
 
-The \emph{power spectral density} of a stochastic signal is an extension to the spectral density discussed in Section~\ref{subsection:SpectralDensity}.
+The \defn{random process}{power spectral density} of a stochastic signal is an extension to the spectral density discussed in Section~\ref{subsection:SpectralDensity}.
 The definition of the power spectral density is somewhat more intricate due to the more complex nature of random signals.
 In particular, it must account for uncertainty in the process.
 
@@ -596,7 +628,7 @@ Mathematically, this situation is captured by the equation
 \begin{equation*}
 y(t) = x(t) \cos (2 \pi f_{\mathrm{c}} t) .
 \end{equation*}
-The signal $y(t)$ is a special form of a \emph{bandpass signal}.
+The signal $y(t)$ is a special form of a \defn{Fourier analysis}{bandpass signal}.
 Its Fourier transform $\hat{y}(f)$ is non-zero only for frequencies contained in a small neighborhood of carrier frequency $f_{\mathrm{c}}$.
 That is, $\hat{y}(f) = 0$ for all frequencies such that $|f - f_{\mathrm{c}}| \geq W$.
 To apply the sampling tools derived above to the information bearing signal $x(t)$, we need to shift the corresponding spectrum to the origin.
@@ -606,7 +638,7 @@ The Fourier transform of $y(t)$ is given by
 \hat{y}(f) = \frac{1}{2} \hat{x}(f+f_{\mathrm{c}}) + \frac{1}{2} \hat{x}(f - f_{\mathrm{c}}) .
 \end{equation*}
 Our strategy is to first eliminate $\frac{1}{2} \hat{x}(f + f_{\mathrm{c}})$ from $\hat{y}(f)$, and then to scale and shift $\frac{1}{2} \hat{x}(f + f_{\mathrm{c}})$ back to the origin.
-Define the \emph{step function} by
+Define the \defn{Fourier analysis}{step function} by
 \begin{equation*}
 \mathrm{step} (t) = \frac{1}{2} + \frac{1}{2} \mathrm{sign}(t). 
 \end{equation*}
@@ -637,7 +669,7 @@ The second component of this signal,
 \begin{equation*}
 y(t) \ast \frac{1}{\pi t} ,
 \end{equation*}
-is called the \emph{Hilbert transform} of $y(t)$.
+is called the \defn{Fourier analysis}{Hilbert transform} of $y(t)$.
 Once $x(t)$ is brought back to baseband, the standard sampling theorem applies and a discrete-time version of the signal can be produced.
 
 % Bandpass processes

@@ -80,6 +80,7 @@ The MPEG standards, including the MP3 audio layer, provide examples of lossy com
 \begin{psfrags}
 \psfrag{O}[c]{Output}
 \psfrag{I}[c]{Interpolation}
+\psfrag{R}[c]{Reconstruction}
 \psfrag{D}[c]{Decompression}
 \epsfig{file=Figures/output,width=112.7mm}
 \end{psfrags}
@@ -87,8 +88,9 @@ The MPEG standards, including the MP3 audio layer, provide examples of lossy com
 \caption{The operations executed at the transmitter must typically be undone at the destination.
 While passed through the output block, the received data is first decompressed and put in a format that suitable for signal processing.
 Furthermore, an analog signal must be reconstructed from the sampled data point.
-An exception to this rule is quantization; once performed, a small part of the original information is lost.
-Quantization cannot be undone, yet the amount of distortion introduced through this process can easily be controlled.}
+While these two steps can reversed without any loss, the quantization step cannot.
+This is because quantization loses a small part of the original information.
+Instead, the reconstruction step reverses quantization step in an approximate way to minimize the distortion.}
 \label{figure:BlockOutput}
 \end{figure}
 
@@ -97,10 +99,9 @@ The received message must be decompressed.
 Note that for the destination to be able to recover the original data, it must understand the encoding scheme utilized by the sender.
 In other words, the decoding method must be known at the receiver.
 If the original signal is a continuous-time waveform, then an interpolator can be used to reconstruct the waveform from its sample values.
-The quantization block present at the input does not have a counterpart at the output.
-This deficiency can be explained through the fact that quantization cannot be undone.
-Information is lost whenever a continuous-space signal is discretized.
-The level of \emph{distortion} associated with quantization can, however, be controlled by selecting an appropriate quantizer.
+The quantization block present at the input does not have an exact counterpart at the output.
+This deficiency follows from the fact that quantization cannot be perfectly undone because information is lost whenever a continuous-valued signal is discretized.
+The level of \emph{distortion} associated with quantization can, however, be controlled by choosing an appropriate quantizer and reconstructing the signal in a sensible way.
 In most cases, the impact of quantization is minimal.
 
 
@@ -196,7 +197,10 @@ Data on a hard disk drive is recorded by magnetizing ferromagnetic material dire
 \paragraph{Compact Disc:}
 The compact disc (CD) is an optical disc used to store digital data, and remains one of the popular playback media for commercial audio recordings.
 A standard compact disc can store approximately 650 Megabytes of data.
-In a recordable compact disc (CD-R), a photosensitive dye is used.
+The data is stored on the disc as a sequence of bumps that are stamped into the polycarbonate during production.
+A reflective layer is added so that the data can be read by using a laser to distinguish between \emph{pits} and \emph{lands}.
+
+In a recordable compact disc (CD-R), a photosensitive dye is used instead.
 The write laser of a CD recorder changes the color of the dye to allow a standard CD player to read the data, just as it would with a standard stamped disc.
 A re-recordable disc medium (CD-RW) uses a metallic alloy instead of a dye.
 The write laser in this case is used to heat and alter the properties of the alloy, and hence change its reflectivity.
