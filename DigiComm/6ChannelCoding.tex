@@ -1,0 +1,533 @@
+\chapter{Channel Coding}
+
+\index{channel coding}
+\section{Introduction}
+
+\subsection{What is channel coding and why do we use it?}
+
+Channel coding is the art of adding redundancy to a message in order to make it more robust against noise.
+It is used because noise and errors are essentially unavoidable in many systems (e.g., wireless communications and magnetic storage).
+Coding allows one to trade-off rate for reliability and usually provides large gains in overall system efficiency.
+In contrast, source coding (or compression) is used to remove the redundancy from sources (e.g., zip files JPEG pictures).
+Channel coding carefully adds redundancy to a message so that it can be transmitted reliably over noisy channels. 
+
+\begin{example}[Repeat Code]
+Consider the 1 bit message $u\in\left\{ 0,1\right\} $ mapped to a codeword of length $2t+1$ by repeating the message bit.
+This gives a binary code with two codewords: $\mathcal{C}=\{\underbrace{00\ldots00}_{2t+1},\underbrace{11\ldots11}_{2t+1}\}$.
+If fewer than $t$ errors, then received sequence is closer to correct codeword.
+Therefore, a decoder which chooses the codeword closest to the received sequence will decode successfully.
+For a binary code, the code rate is defined to be
+\[R=\frac{\mbox{\# information bits}}{\mbox{\# code bits}},\]
+and this gives $\frac{1}{2t+1}$ for the repeat code.
+\end{example}
+
+
+\begin{example}[Credit Card Numbers]
+Credit card numbers use a check digit to detect single errors and adjacent transpositions.
+Let $\underline{x}$ be a credit card number whose digits are given by $\underline{x}=\left(x_{1},x_{2},\ldots,x_{16}\right)$,
+then
+\[ \left[\sum_{i=1}^{8}x_{2i}+\sum_{i=1}^{8}\left(2x_{2i-1}\bmod9\right)\right]\bmod10=0\]
+Consider the number 5420 1213 7904 9210.
+In this case, the first sum gives $4+0+2+3+9+4+2+0=24$ and the second sum gives: $1+4+2+2+5+0+0+2=16$.
+So, we have the overall sum $\left[24+16\right]\bmod10=0$.
+The code detects single errors because, for $i=1,\ldots,8$, changing $x_{2i}$ to $x_{2i}'$ changes the check value by $x_{2i}'-x_{2i}$ and changing $x_{2i-1}$ to $x_{2i-1}'$ changes the check value by $2(x_{2i}'-x_{2i})\bmod 9$.
+Likewise,  swapping $x_{1},x_{2}$ changes the check by
+\[ \left[(x_{1}-x_{2})+(2x_{2}\bmod9-2x_{1}\bmod9)\right]\bmod10. \]
+\end{example}
+
+Coding is used in many systems and devices including:
+\begin{itemize}
+\item CD players / DVD players : Modulation code + Reed-Solomon (RS) codes
+\item Satellite Digital Video Broadcasting (DVB): Convolutional Code + RS
+code.
+\item Deep Space Communications: From simple codes in the 1970s to Turbo/LDPC
+codes in the 2000s
+\item Cell Phones: Convolutional codes for voice and Turbo/LDPC codes for data
+\end{itemize}
+
+\subsection{Channels and Error Models}
+
+\begin{figure}[t]
+\begin{center}
+\includegraphics[width=0.8\textwidth,keepaspectratio]{Figures/commfig2}
+\end{center}
+\vspace{-4mm}
+\caption{Block diagram of digital communication from a coding perspective.}
+\end{figure}
+
+When designing and analyzing channel codes, one often uses a simple model of a communications channel known as a \defn{channel coding}{discrete memoryless channel} (DMC).
+The channel input $X$ is an element of input alphabet $\mathcal{X}$ and the channel output $Y$ is an element of the output alphabet $\mathcal{Y}$.
+The main assumption is that each channel use is indepedent and governed by the probability law
+\[ W(y|x) \triangleq \Pr\left(Y=y|X=x\right).\]
+
+[Add figure with transition diagrams]
+
+The \defn{channel coding}{binary symmetric channel} (BSC) with error probability $p$ is defined by $\mathcal{X}=\mathcal{Y}=\left\{ 0,1\right\} $ and
+\[ W(y|x)=\begin{cases}
+p & \mbox{if }x\neq y\\
+1-p & \mbox{if }x=y\end{cases}\]
+The \defn{channel coding}{binary erasure channel} (BEC) with erasure probability $\epsilon$ is defined by $\mathcal{X}=\left\{ 0,1\right\} $, $\mathcal{Y}=\left\{ 0,1,?\right\}$ and
+\[ W(y|x)=\begin{cases}
+\epsilon & \mbox{if }y=?\\
+1-\epsilon & \mbox{if }x=y\\
+0 & \mbox{if }x\neq y\end{cases}\]
+The \defn{channel coding}{binary-input AWGN channel} (BIAWGN) with $\sigma^{2}=\frac{N_{0}}{2}$ is defined by $\mathcal{X}=\left\{ -1,1\right\} $, $\mathcal{Y}=\mathbb{R}$ and
+\[ W(y|x)=\frac{1}{\sqrt{\pi N_{0}}}e^{-\left|y-x\right|^{2}/N_{0}},\]
+where $N_{0}$ is the noise spectral density at the receiver.
+
+The SNR of communication system is defined in terms of the \textbf{energy per information bit},$E_{b}$, and the average \textbf{energy per transmitted symbol}, $E_{s}$.
+The conversion between these two quantities is based on keeping track of the units
+\[E_{s}=\frac{\mbox{\# information bits}}{\mbox{\# transmitted symbols}}\;\frac{\mbox{Energy}}{\mbox{information bit}}=R'\, E_{b}. \]
+The information rate $R'$ (bits/channel use) is equal to the code rate $R$ for binary-input channels.
+To make a fair comparisons, one must use the rate-normalized quantity $E_{b}/N_{0}$ (pronounced ebb-no).
+The normalization adjusts for the extra energy used to send parity symbols.
+The \defn{channel coding}{coding gain} is the reduction in required $E_b / N_0$ to achieve a particular error rate.
+In other cases, it more convenient to use the quantity $E_{s}/N_{0}$ (pronounced ess-no).
+
+For example, a bit-error rate (BER) of $10^{-5}$ is achieved by uncoded BPSK transmission with $E_{b}/N_{0}=9.6\;\mathrm{dB}$.
+Whereas, a rate-$\frac{1}{2}$ code with moderate decoding complexity (Viterbi decoding of a convolutional code) has a BER of $10^{-5}$ at $E_{b}/N_{0}=4.2\;\mathrm{dB}$.
+The coding gain in this case is $9.6-4.2=5.4\mbox{ dB}$
+
+\section{The Basics of Coding}
+
+\subsection{Codes}
+
+\begin{figure}[t]
+\begin{center}
+\includegraphics[width=2in,keepaspectratio]{Figures/hammvenn}
+\end{center}
+\vspace{-4mm}
+\caption{Venn diagram representation of the (7,4) binary Hamming code.}
+\end{figure}
+
+Let $\mathcal{X}$ be the input alphabet of a channel (assume $\left|\mathcal{X}\right|=q$)
+\begin{definition}
+A length-$n$ \defn{channel coding}{code} over the alphabet $\mathcal{X}$ is simply a subset $\mathcal{C}\subseteq\mathcal{X}^{n}$ of all input sequences.
+\end{definition}
+If a binary code has $M=\left|\mathcal{C}\right|$ codewords, then the code rate is $R=\frac{\log_{2}M}{n}$.
+This means we can send $k$ information bits when $M=2^k$.
+
+For example, the binary repeat code of length 5 is defined by $\mathcal{X}=\left\{ 0,1\right\}$ and
+\[\mathcal{C}=\left\{ 00000,11111\right\} \subset\left\{ 0,1\right\} ^{5}. \]
+Likewise, the binary even parity code of length 3 is
+\[ \mathcal{C}=\left\{ 000,110,101,011\right\} \subset\left\{ 0,1\right\} ^{3} \].
+
+\begin{definition}
+The \defn{channel coding}{Hamming distance} $d(\underline{x},\underline{y})$ is equal to the number of places where the vectors differ.
+It can be defined mathematically by
+\[ d(\underline{x},\underline{y}) = \sum_{i=1}^{n}( 1- \delta_{x_{i},y_{i}}), \]
+where $\delta_{a,b}$ is Kronecker delta function
+\[\delta_{a,b}=\begin{cases}
+0 & \mbox{if }a\neq b\\
+1 & \mbox{if }a=b\end{cases}. \]
+\end{definition}
+
+The distance between codewords is typically measured with the Hamming distance.
+Using this metric, the set $\mathcal{X}^{n}$ forms a discrete metric space
+Another important code parameter is the minimum distance $d_{min}$ between any two
+codewords is
+\[ d_{min}\triangleq\min_{\underline{x},\underline{y}\in\mathcal{C},\underline{x}\neq\underline{y}}d(\underline{x},\underline{y}).\]
+
+\begin{example}[Hamming Code]
+The (7,4) binary Hamming Code has $n=7$, $M=16$, and $d_{min}=3$.
+The code can be defined in terms of a Venn diagram showing three partially overlapping sets.
+Each of the seven subregions represent a code bit and the three circles represent even parity costraints.
+Encoding can be done by choosing $x_0,\ldots,x_3$ arbitrarily and then computing the last three parity bits.
+Any single error can be corrected by observing each bit error gives a unique pattern of parity violations.
+The codewords can be listed as follows:
+\[\begin{array}{cccc}
+0000000 & 0100110 & 1000011 & 1100101\\
+0001111 & 0101001 & 1001100 & 1101010\\
+0010101 & 0110011 & 1010110 & 1110000\\
+0011010 & 0111100 & 1011001 & 1111111
+\end{array} \]
+\end{example}
+
+\subsection{Decoding}
+
+Consider the decoding problem for binary codes with $\mathcal{X}=\mathcal{Y}=\left\{ 0,1\right\} $ and $\mathcal{C}\subseteq\mathcal{X}^{n}$.
+The channel input is $\underline{x}\in\mathcal{C}$, the received sequence is $\underline{y}$, and the number of errors is $t=d(\underline{x},\underline{y})$
+It is not hard to verify that minimum distance decoding, which returns the codeword closest to the channel output, is optimal.
+Breaking ties arbitrarily, one can write
+\[ \hat{\underline{x}}=\arg\min_{\underline{w}\in\mathcal{C}}d(\underline{w},\underline{y})\]
+
+The following implies that the minimum distance decoder can always correct $t$ errors if $d_{min}\geq2t+1$.
+\begin{proposition}
+For any received sequence $\underline{y}$, there is at most one codeword $\underline{w}$ such that $d(\underline{y},\underline{w})\leq\frac{d_{min}-1}{2}$.
+\end{proposition}
+\begin{proof}
+Suppose there are codewords $\underline{w},\underline{z}$ where $d(\underline{y},\underline{w})$ and $d(\underline{y},\underline{z})$
+are $\leq\frac{d_{min}-1}{2}$.
+Then, the triangle inequality implies $d(\underline{w},\underline{z})\!\leq\! d(\underline{y},\underline{w})\!+\! d(\underline{y},\underline{z})\!\leq\! d_{min}-1$ and contradicts the definition of $d_{min}$.
+Therefore, if $t\leq\frac{d_{min}-1}{2}$, then $\underline{x}$ is the unique codeword such that $d(\underline{x},\underline{y})\leq\frac{d_{min}-1}{2}$.
+\end{proof}
+
+The following allows simultaneous error correction of $t$ errors and detection of $d$ errors.
+\begin{proposition}
+If $d_{min}\geq t+d+1$ and $d\geq t$, then a single decoder can
+both correct $t$ and detect $d$ errors.
+\end{proposition}
+\begin{proof}
+Assume that each codeword is surrounded a inner ball of radius $t$ and an outer ball of radius $d$.
+If the received vector is in an inner ball, decode to the codeword at the center.
+Otherwise, declare decoding failure.
+
+From the previous result, we see that no two inner balls overlap and that the inner ball of one codeword does not overlap the outer ball of any codeword.
+If the number of errors is at most $t$, then received vector will be in the inner ball of the transmitted codeword and will be decoded correctly.
+If the number of errors is between $t+1$ and $d$, then received vector will not be in the inner ball of any codeword and failure will be declared.
+\end{proof}
+
+\begin{proposition}
+If $d_{min}\geq e+1$, then there is a decoder which corrects all patterns of $e$ erasures.
+\end{proposition}
+\begin{proof}
+Make a list of all codewords and then erase any $e$ positions.
+Each erasure reduces the minimum distance between any two codewords by at most one.
+After $e$ steps, the new $d_{min}\geq e+1-e=1$.
+This implies that the codewords, defined by the remaining symbols, are all unique.
+\end{proof}
+
+\section{Binary Linear Codes}
+
+
+\subsection{Basic Properties}
+
+\begin{table}
+\begin{center}
+\begin{tabular}{c||c|c}
++ & 0 & 1\tabularnewline
+\hline
+\hline
+0 & 0 & 1\tabularnewline
+\hline 
+1 & 1 & 0\tabularnewline
+\end{tabular}~~~\begin{tabular}{c||c|c}
+{*} & 0 & 1\tabularnewline
+\hline
+\hline
+0 & 0 & 0\tabularnewline
+\hline 
+1 & 0 & 1\tabularnewline
+\end{tabular}
+\caption{The addition and multiplication operations for the binary field.}
+\label{tab:BinaryField}
+\end{center}
+\end{table}
+
+This chapter focuses almost exclusively on binary linear codes, which are the simplest and most important class of error-correcting codes.
+The restriction to linear codes can be motivated by two things: simplicity and performance.
+We will see later that linear codes are much simpler to describe, encode, and analyze.
+Moreover, there are very few cases where non-linear codes are better than linear codes.
+So, there is essentially no performance penalty for this simplicity.
+
+Linear codes, like linear algebra, make use of matrices and vectors of elements that can be added, subtracted, multipled, and divided.
+A set of numbers which obey all the standard rules of arithmetic is an algebraic object known as a \defn{channel coding}{field}.
+For example, the real and complex numbers are both fields.
+It turns out that the binary alphabet, $\left\{ 0,1\right\} $, with standard arithmetic ($+,-,*,/$) performed modulo 2 is also a field.
+The operations are shown explicitly in Table~\ref{tab:BinaryField}.
+
+For linear algebra over a field, the scalar (i.e., field) operations are used to define vector and matrix operations.
+Vector addition is defined element-wise, so that $\left[\underline{x}+\underline{y}\right]_{i}=x_{i}+y_{i}$.
+An $(n,k)$ \defn{channel coding}{binary linear code} is $\mathcal{C}\subseteq\left\{ 0,1\right\} ^{n}$ with $\left|\mathcal{C}\right|=2^{k}$ where $\underline{x},\underline{y}\in\mathcal{C}$ implies $\underline{x}+\underline{y}\in\mathcal{C}$
+Since $\underline{x}+\underline{x}=\underline{0}$, this implies all zero vector $\underline{0}\in\mathcal{C}$.
+For example, the $n=3$ ``even parity'' code is a (3,2) binary linear code with codewords $\mathcal{C}=\left\{ 000,110,101,011\right\} $.
+
+\begin{definition}
+The \defn{channel coding}{Hamming weight} $w(\underline{x})$ is the number of non-zero elements in $\underline{x}$ or
+\[ w(\underline{x}) = \sum_{i=1}^{n}(1-\delta_{x_i , 0}). \]
+For binary vectors, this also implies that the Hamming distance is given by
+\[d(\underline{x},\underline{y})=w(\underline{x}-\underline{y}). \]
+\end{definition}
+
+Linear codes also have a simplified distance structure.
+Instead of considering the minimum distance between all codewords, it suffices to focus only on the all-zero codeword.
+
+\begin{proposition}
+The minimum distance of a linear code is given by
+\[ d_{min} =\min_{\underline{x}\in\mathcal{C},\underline{x}\neq\underline{0}}w(\underline{x}-\underline{y}). \]
+\end{proposition}
+\begin{proof}
+The linear property of the code allows one to translate computations involving the distance between two codewords to expressions involving the Hamming weight of one codeword.
+This gives
+\begin{align*}
+d_{min}
+&\triangleq\min_{\underline{x},\underline{y}\in\mathcal{C},\underline{x}\neq\underline{y}}d(\underline{x},\underline{y}) \\
+&=\min_{\underline{x},\underline{y}\in\mathcal{C},\underline{x}\neq\underline{y}}w(\underline{x}-\underline{y}) \\
+&=\min_{\underline{x}\in\mathcal{C},\underline{x}\neq\underline{0}}w(\underline{x}-\underline{y}),
+\end{align*}
+where the last step follows from the fact that
+\[ \left\{\underline{x}-\underline{y} \,|\, \underline{x},\underline{y}\in\mathcal{C},\underline{x}\neq \underline{y} \right\}
+= \left\{\underline{x}\in\mathcal{C} \,|\, \underline{x}\neq \underline{0} \right\}. \]
+\end{proof}
+
+\subsection{Generator and Parity-Check Matrices}
+
+Linear codes can be represented compactly using matrices.
+The generator defines the code by allowing one to list all the codewords.
+
+\begin{definition}
+The \defn{channel coding}{generator matrix} $\underline{G}$ of an $(n,k)$ binary linear code is a $k\times n$ binary matrix such that all codewords, $\underline{x}\in\mathcal{C}$, can be written as $\underline{u}\cdot\underline{G}=\underline{x}$ for some message vector $\underline{u}\in\left\{ 0,1\right\} ^{k}$.
+Therefore, the code is the row space of $\underline{G}$).
+\end{definition}
+
+\begin{example}
+The generator matrix
+\[\underline{G}=\left[\begin{array}{ccccc}
+1 & 0 & 1 & 1 & 0\\
+1 & 1 & 1 & 0 & 1\end{array}\right] \]
+defines the $(5,2)$ code
+\[ \mathcal{C} = \left\{ 00000,10110,01011,11101\right\}. \]
+Encoding $\underline{u}=[11]$ gives $\underline{u}\cdot\underline{G}=[0\,\,1\,\,0\,\,1\,\,1]$
+\end{example}
+
+If $\underline{G}$ has full rank $k$ (over the binary field), then the code has $2^{k}$ distinct codewords.
+Otherwise, some non-zero messages encode to the all-zero codeword and there are at most $2^{k-1}$ codewords.
+
+\begin{definition}
+The generator matrix is in \defn{channel coding}{systematic form} if $\underline{G}=\left[\underline{P}\,\,\,\underline{I}_{k}\right]$, where $\underline{I}_{k}$ is the $k\times k$ identity matrix.
+The matrix $\underline{P}$ is called the \defn{channel coding}{parity generator} of the code because $\underline{u}\cdot\underline{P}$ computes the parity bits for $\underline{u}$.
+For a generator matrix in systematic form, the message vector appears in codeword
+\[\underline{u}\cdot\underline{G}=\underline{u}\cdot\left[\underline{P}\;\;\underline{I}_{k}\right]=\left[\underline{u}\!\cdot\!\underline{P}\;\;\underline{u}\right]. \]
+\end{definition}
+
+The parity-check (PC) matrix defines the code by listing the parity-check equations that each codeword must satisfy.
+
+\begin{definition}
+The \defn{channel coding}{parity-check matrix} $\underline{H}$ of an $(n,k)$ binary linear code is an $(n-k)\times n$ binary matrix such that $\underline{x}\cdot\underline{H}^{T}=\underline{0}$ for all $\underline{x}\in\mathcal{C}$.
+Therefore, the code is the null space of $\underline{H}$.
+\end{definition}
+
+While the generator matrix defines the code and an encoder, the parity-check matrix defines only the code; there is no implied encoder.
+There is also a relationship between and generator and parity-check matrix for the same code.
+Recall that, for all codewords $\underline{x}$,  there is a message $\underline{u}$ such that $\underline{x}=\underline{u}\cdot\underline{G}$.
+This means that $\underline{G}\cdot\underline{H}^{T}=\underline{0}$.
+
+\begin{example}
+For the $(5,2)$ code we saw previously, one possible parity-check matrix is
+\[ \underline{H}=\left[\begin{array}{ccccc}
+1 & 0 & 0 & 1 & 1\\
+0 & 1 & 0 & 0 & 1\\
+0 & 0 & 1 & 1 & 1\end{array}\right]. \]
+Notice that it satisfies $\underline{G}\cdot\underline{H}^{T}=0$ for the previous $\underline{G}$.
+\end{example}
+
+In general, we assume that $\underline{H}$ has full rank.
+Otherwise, there are redundant constraints and some row can eliminated without changing the code.
+
+A parity-check matrix is in \defn{channel coding}{systematic form} if $H=\left[\underline{I}_{n-k}\,\,\,\,-\underline{P}^{T}\right]$.
+When both the generator and parity-check matrices are in systematic form, we can write
+\begin{align*}
+\underline{G}\cdot\underline{H}^{T}
+&=\left[\underline{P}\,\,\,\,\underline{I}_{k}\right]\cdot\left[\underline{I}_{n-k}\,\,\,\,-\underline{P}^{T}\right]^{T} \\
+&=\left[\underline{P}\,\,\,\,\underline{I}_{k}\right]\cdot \left[ \begin{array}{c} \underline{I}_{n-k} \\ -\underline{P} \end{array} \right] \\
+&=\underline{P}-\underline{P} \\
+&=\underline{0}.
+\end{align*}
+
+\begin{example}
+A \defn{channel coding}{single parity-check code} is an $(n,n-1)$ binary linear code with parity-check matrix
+\[ H=[\underbrace{1,1,\ldots,1}_{n\;\mathrm{times}}]. \]
+For all codewords $\underline{x}$, the parity-check constraint $\underline{x}\cdot\underline{H}^{T}=\underline{0}$ implies that $\sum_{i=1}^{n}x_{i}\bmod2=0$ (i.e., the codeword has an even number of ones).
+The minimum distance is $d_{min} = 2$ and the generator matrix is given by
+\begin{equation*}
+G=\left[\begin{array}{ccccc} 1 & 1 & 0 & \cdots & 0 \\ 1 & 0 & 1 & \cdots & 0 \\ \vdots & 0 & \ldots & \ddots & 0 \\ 1 & 0 & 0 & 0 & 1 \end{array}\right].
+\end{equation*}
+\end{example}
+
+Next, we consider the minimum distance of a code in terms of its generator and parity check matrices.
+In general, it is very difficult to compute the minimum distance without enumerating all codewords.
+But, one can get upper and lower bounds on the minimum distance much more easily.
+In this way, the minimum distance can be found approximately.
+
+Since the minimum distance is equal to the minimum of the Hamming weight overall codewords, it is clearly upper bounded by the Hamming weight of any particular non-zero codeword.
+This gives, for any non-zero codewords $\underline{x}$,
+\[ d_{min} \leq w(\underline{x}). \]
+Likewise, the parity-check matrix can be used to lower bound the minimum distance.
+\begin{proposition}
+The minimum distance of a code with parity-check matrix
+\[\underline{H}=\left[\underline{h}_{1},\underline{h}_{2},\ldots,\underline{h}_{n}\right] \]
+is equal to the minimum number of columns that sum to zero or
+\[ d_{min}=\min\left\{ w(\underline{x})|\underline{x}\cdot\underline{H}^{T}=\underline{0},\underline{x}\in\left\{ 0,1\right\} ^{n}\backslash\underline{0}\right\}. \]
+\end{proposition}
+\begin{proof}
+Notice that
+\[ \underline{x}\cdot\underline{H}^{T}=\sum_{i=1}^n x_{i}\underline{h}_{i}=\sum_{i:x_{i}=1}\underline{h}_{i}, \]
+where $\underline{h}_{i}$is the $i$th column of $\underline{H}$.
+Therefore, the statement that $\underline{x}\cdot\underline{H}^{T}=\underline{0}$ (i.e., $\underline{x}$ is a codeword) is equivalent to the statement that the sum of $w(\underline{x})$ columns is $\underline{0}$.
+Taking the minimum over all non-zero codewords gives the minimum distance.
+\end{proof}
+
+One can also bound the minimum distance in terms of error-correction ability.
+Recall that a code corrects all error patterns of weight $t$ if and only if $d_{min}\geq2t+1$.
+This gives a simple lower bound on the minimum distance.
+
+\begin{example}
+Correcting all single errors requires $\frac{d_{min}-1}{2}=1$ or $d_{min}=3$.
+Let us try to find the longest code, for a fixed number of parity bits $m$, that corrects all single errors.
+In this case, $\underline{H}$ is  matrix with $m$ rows and we can add columns, one at a time, until it is not possible to add a column without losing the ability to correct a single error.
+How many columns can we choose?
+The maximum value is $n=2^m -1$ and the resuting optimal code is called the \defn{channel coding}{binary Hamming code} of length $n$.
+\end{example}
+
+\subsection{Decoding}
+
+Assume a codeword $\underline{x}\in\mathcal{C}$ is transmitted over a channel and $\underline{r}=\underline{x}+\underline{e}$ is received, where $\underline{e}$ is the \textbf{error pattern} with $w(\underline{e})$ errors.
+For any received sequence $\underline{r}$, a \defn{channel coding}{decoder} either returns a codeword $\underline{\hat{x}}=D(\underline{r})$ or declares failure.
+The decoded message $\underline{\hat{u}}$ associated with $\underline{\hat{x}}$ is the unique message satisfying $\underline{\hat{x}} = \underline{\hat{u}} \underline{G}$.
+A decoder makes
+\begin{itemize}
+\item a \textbf{block error} (or word error) if $\underline{\hat{x}}\neq\underline{x}$ and $P_{B}$ is used to denote the probability of block error,
+\item $b$ \textbf{code bit errors} if $w(\underline{\hat{x}}-\underline{x})=b$ and $P_{b}$ is used to denote the probability that a randomly chosen bit in $\underline{\hat{x}}$ is in error,
+\item and $b$ \textbf{message bit errors} if $w(\underline{\hat{u}}-\underline{u})=b$ and $P_{b}$ is used to denote the probability that a randomly chosen bit in $\underline{\hat{u}}$ is in error.
+\end{itemize}
+From this, we see that the probability of bit error $P_{b}$ can have multiple meanings.
+The correct meaning can usually be inferred from the context.
+Decoding can also be simplified for linear codes.
+
+\begin{definition}
+Let $\underline{s}=\underline{r}\cdot\underline{H}^{T}$ be the \defn{channel coding}{syndrome} of the received vector $\underline{r}$.
+\end{definition}
+It turns out that $\underline{s}$ depends only on the error pattern.
+Since $\underline{x}\in\mathcal{C}$, we have
+\[ \underline{s}=\underline{r}\cdot\underline{H}^{T}=(\underline{x}+\underline{e})\cdot\underline{H}^{T}=\underline{x}\cdot\underline{H}^{T}+\underline{e}\cdot\underline{H}^{T}=\underline{e}\cdot\underline{H}^{T}. \]
+
+A \defn{channel coding}{syndrome decoder} $\underline{\hat{e}}=D_{s}(\underline{s})$ maps the syndrome $\underline{s}$ to an estimated error pattern $\underline{\hat{e}}$.
+Let us define the equivalence relation $\sim$ by $\underline{x}\sim\underline{y}$ iff $\underline{x}\cdot\underline{H}^{T}=\underline{y}\cdot\underline{H}^{T}$.
+Then, a syndrome decoder can correct exactly one error pattern in each equivalence class.
+The best choice for correction is the most-likely error pattern in that equivalence class
+For any linear code, we can construct the \defn{channel coding}{standard array} to see this connection.
+
+For our example code, the process is as follows
+\begin{enumerate}
+\item Start with 8 by 5 table and list the zero syndrome and all codewords on first row
+\item Pick a minimum weight vector of length $n$ that is not already in table and compute its syndrome
+\item Add a new row by writing syndrome followed by the minimum weight vector plus each codeword
+\item Repeat from step 2 until table is complete.
+\end{enumerate}
+The resulting syndrome table is
+\begin{center}
+\begin{tabular}{|c||c|c|c|c|}
+\hline 
+syn\textbackslash{}cw & 00000 & 10110 & 01011 & 11101\tabularnewline
+\hline
+\hline 
+110 & 10000 & 00110 &  & 01101\tabularnewline
+\hline 
+011 & 01000 &  & 00011 & \tabularnewline
+\hline 
+100 & 00100 & 10010 &  & 11001\tabularnewline
+\hline 
+010 & 00010 &  & 01001 & \tabularnewline
+\hline 
+001 & 00001 & 10111 &  & 11100\tabularnewline
+\hline 
+101 & 11000 & 01110 & 10011 & \tabularnewline
+\hline 
+111 & 01100 & 11010 &  & 10001\tabularnewline
+\hline
+\end{tabular}
+\end{center}
+We will see later that this process always enumerates all $2^{n}$ binary vectors.
+
+\begin{example}
+To see syndrome decoding in action, let $\underline{x}=10110$ and $\underline{e}=11000$.
+Then,$\underline{r}=01110$ and $\underline{s}=101$.
+Looking in the syndrome table, we find that $\underline{\hat{x}}=10110$.
+\end{example}
+
+\subsection{Manipulating Linear Codes}
+
+It follows from linear algebra that any $\underline{G},\underline{H}$ can be put in systematic form using elementary row operations and (possibly) a column permutation.
+For the parity-check matrix $H$, the basic idea is to use elemtary row operations to form an identity matrix in the first few columns (i.e., put it in reduced row-echelon form).
+For the generator matrix $G$, elementary row operations are used to form an identity matrix in the last few columns.
+Sometimes an identity cannot be formed in the desired columns and a column permutation is required to complete the process.
+For this reason, two codes are called \underbar{equivalent} if and only if they differ only in the order of the code symbols.
+
+\begin{definition}
+For a matrix, an \defn{channel coding}{elementary row operation} is one of the following operations:
+\begin{enumerate}
+\item interchaging any two rows,
+\item scaling any row by a non-zero constant,
+\item and adding a multiple of one row to another row.
+\end{enumerate}
+\end{definition}
+
+\begin{example}
+In this example, we consider a parity-check matrix
+\[ \underline{H} =\left[\begin{array}{cccccc}
+1 & 1 & 0 & 1 & 0 & 0\\
+0 & 1 & 1 & 0 & 1 & 0\\
+1 & 1 & 0 & 0 & 1 & 1\end{array}\right] \]
+that requires a column permutation for systematic form.
+Let us put $\underline{H}$ is reduced row-echelon form and then find a column permutation to achieve an identity in the first few rows.
+The first step gives
+\[ \underline{H} \rightarrow\left[\begin{array}{cccccc}
+1 & 1 & 0 & 1 & 0 & 0\\
+0 & 1 & 1 & 0 & 1 & 0\\
+0 & 0 & 0 & 1 & 1 & 1\end{array}\right]\rightarrow\left[\begin{array}{cccccc}
+1 & 0 & 1 & 1 & 1 & 0\\
+0 & 1 & 1 & 0 & 1 & 0\\
+0 & 0 & 0 & 1 & 1 & 1\end{array}\right]
+\rightarrow\left[\begin{array}{cccccc}
+1 & 0 & 1 & 0 & 0 & 1\\
+0 & 1 & 1 & 0 & 1 & 0\\
+0 & 0 & 0 & 1 & 1 & 1\end{array}\right], \]
+and a column permutation gives
+\[ \tilde{\underline{H}}=\left[\begin{array}{cccccc}
+1 & 0 & 0 & 1 & 0 & 1\\
+0 & 1 & 0 & 1 & 1 & 0\\
+0 & 0 & 1 & 0 & 1 & 1\end{array}\right]. \]
+Now, we can compute parity generator and generator associated with $\tilde{\underline{H}}$ to get
+\[ \tilde{\underline{P}}=\left[\begin{array}{ccc}
+1 & 1 & 0\\
+0 & 1 & 1\\
+1 & 0 & 1\end{array}\right] \quad 
+\tilde{\underline{G}}=\left[\begin{array}{cccccc}
+1 & 1 & 0 & 1 & 0 & 0\\
+0 & 1 & 1 & 0 & 1 & 0\\
+1 & 0 & 1 & 0 & 0 & 1\end{array}\right]. \]
+Finally, reversing the column permutation gives, for the original code, a generator
+\[\underline{G}=\left[\begin{array}{cccccc}
+1 & 1 & 1 & 0 & 0 & 0\\
+0 & 1 & 0 & 1 & 1 & 0\\
+1 & 0 & 0 & 1 & 0 & 1\end{array}\right]  \]
+that contains an identity in a subset of its columns.
+\end{example}
+
+\section{Performance analysis}
+
+\iffalse
+
+\item Block error probability for decoding
+
+\begin{itemize}
+\item Bounded distance decoding with $t=\left\lfloor \frac{d_{min}-1}{2}\right\rfloor $
+
+\begin{itemize}
+\item $P_{B}\leq1-\sum_{i=0}^{t}{n \choose i}p^{i}(1-p)^{n-i}=\sum_{i=t+1}^{n}{n \choose i}p^{i}(1-p)^{n-i}$
+\item Holds with equality if decoder failures are treated as errors
+\end{itemize}
+\item Syndrome decoding ($P_{B}$ = 1 - prob. of each error pattern that
+is corrected) 
+
+\begin{itemize}
+\item $P_{B}=1-\sum R_{i}p^{i}(1-p)^{i}$ where $R_{i}$ is the \# of coset
+leaders with weight $i$ 
+\end{itemize}
+\end{itemize}
+\end{itemize}
+
+\section{Cyclic Codes}
+
+Define all polynomials
+
+careful of syndrome definition: depends on H matrix
+
+discuss root structure
+
+generator/parity check matrix from polynomial mult
+
+general, primitive for all cyclic codes
+
+\fi
+
