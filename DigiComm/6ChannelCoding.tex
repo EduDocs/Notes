@@ -13,7 +13,8 @@ Channel coding carefully adds redundancy to a message so that it can be transmit
 
 \begin{example}[Repeat Code]
 Consider the 1 bit message $u\in\left\{ 0,1\right\} $ mapped to a codeword of length $2t+1$ by repeating the message bit.
-This gives a binary code with two codewords: $\mathcal{C}=\{\underbrace{00\ldots00}_{2t+1},\underbrace{11\ldots11}_{2t+1}\}$.
+This gives a binary code with two codewords:
+\[ \mathcal{C}=\{\underbrace{00\ldots00}_{2t+1},\underbrace{11\ldots11}_{2t+1}\}. \]
 If fewer than $t$ errors, then received sequence is closer to correct codeword.
 Therefore, a decoder which chooses the codeword closest to the received sequence will decode successfully.
 For a binary code, the code rate is defined to be
@@ -393,41 +394,56 @@ Since $\underline{x}\in\mathcal{C}$, we have
 
 A \defn{channel coding}{syndrome decoder} $\underline{\hat{e}}=D_{s}(\underline{s})$ maps the syndrome $\underline{s}$ to an estimated error pattern $\underline{\hat{e}}$.
 Let us define the equivalence relation $\sim$ by $\underline{x}\sim\underline{y}$ iff $\underline{x}\cdot\underline{H}^{T}=\underline{y}\cdot\underline{H}^{T}$.
-Then, a syndrome decoder can correct exactly one error pattern in each equivalence class.
-The best choice for correction is the most-likely error pattern in that equivalence class
-For any linear code, we can construct the \defn{channel coding}{standard array} to see this connection.
+This means that two binary vectors are equivalent if they have the same syndrome.
+A syndrome decoder can be designed correct exactly one error pattern in each equivalence class.
+The best choice for correction is the most-likely error pattern in that equivalence class.
+For most channels, these vectors are chosen to be the minimum weight vector in the equivalence class.
 
-For our example code, the process is as follows
+The \defn{channel coding}{standard array} is way of listing all vectors of length-$n$ that exposes the connectiion between syndromes, codewords, and error correction.
+In general, it is a $2^{n-k}\times 2^k$ table that contains each length-$n$ binary vector exactly once.
+The main idea behind this table is that, when one chooses to correct a particular error pattern, the decoder is automatically defined for all received sequences equal to that error pattern plus a codeword.
+Of course, this limits one's ability choose correctable error patterns.
+
+
+Each row is indexed by a syndrome $\underline{s}$ and contains all binary vectors $\underline{x}$ that satisfy the equation $\underline{s}=\underline{x}\cdot\underline{H}^{T}$.
+The first row is reserved for $\underline{s}=\underline{0}$ and contains the all-zero codeword $\underline{c}_1$ in the first column followed the remaining codewords $\underline{c}_2,\ldots,\underline{c}_{2^k}$ in any order.
+The first column contains the correctable error patterns $\underline{e}_1 ,\ldots, \underline{e}_{2^{n-k}}$ where $\underline{e}_1$ is the all-zero sequence.
+The row-$i$ column-$j$ entry always contains $\underline{e}_i + \underline{c}_j$, and is therefore defined by the first row and first column of the table.
+The column associated with a particular codeword can be seen as all the received vectors that will be decoded to that codeword.
+
+
+Using the parity-check matrix for our $(5,2)$ our example code, the process is as follows
 \begin{enumerate}
 \item Start with 8 by 5 table and list the zero syndrome and all codewords on first row
 \item Pick a minimum weight vector of length $n$ that is not already in table and compute its syndrome
 \item Add a new row by writing syndrome followed by the minimum weight vector plus each codeword
 \item Repeat from step 2 until table is complete.
 \end{enumerate}
-The resulting syndrome table is
+The resulting standard array is
 \begin{center}
 \begin{tabular}{|c||c|c|c|c|}
 \hline 
-syn\textbackslash{}cw & 00000 & 10110 & 01011 & 11101\tabularnewline
+syn\textbackslash cw &  00000 & 10110 & 01011 & 11101\tabularnewline
 \hline
 \hline 
-110 & 10000 & 00110 &  & 01101\tabularnewline
+100 & 10000 & 00110 &  & 01101\tabularnewline
 \hline 
-011 & 01000 &  & 00011 & \tabularnewline
+010 & 01000 &  & 00011 & \tabularnewline
 \hline 
-100 & 00100 & 10010 &  & 11001\tabularnewline
+001 & 00100 & 10010 &  & 11001\tabularnewline
 \hline 
-010 & 00010 &  & 01001 & \tabularnewline
+101 & 00010 &  & 01001 & \tabularnewline
 \hline 
-001 & 00001 & 10111 &  & 11100\tabularnewline
+111 & 00001 & 10111 &  & 11100\tabularnewline
 \hline 
-101 & 11000 & 01110 & 10011 & \tabularnewline
+110 & 11000 & 01110 & 10011 & \tabularnewline
 \hline 
-111 & 01100 & 11010 &  & 10001\tabularnewline
+011 & 01100 & 11010 &  & 10001\tabularnewline
 \hline
 \end{tabular}
 \end{center}
-We will see later that this process always enumerates all $2^{n}$ binary vectors.
+To see if you understand this example, try filling in the missing entries.
+ONe can prove that this process always enumerates all $2^{n}$ binary vectors, so you can test your answers by checking if all binary vectors appear in the table exactly once.
 
 \begin{example}
 To see syndrome decoding in action, let $\underline{x}=10110$ and $\underline{e}=11000$.
@@ -494,28 +510,21 @@ Finally, reversing the column permutation gives, for the original code, a genera
 that contains an identity in a subset of its columns.
 \end{example}
 
-\section{Performance analysis}
+\section{Performance Analysis}
+
+Consider an $(n,k)$ binary code of rate-$R$ with $d_{min} \geq 2t^* + 1$ and a decoder that corrects all error patterns of weight at most $t^*$.
+It is relatively easy to upper bound the probability of block error when this code and decoder are used on a BSC, because a block error cannot occur unless there are more than $t^*$ errors.
+This gives
+\[ P_{B}\leq1-\sum_{i=0}^{t^*}{n \choose i}p^{i}(1-p)^{n-i}=\sum_{i=t^*+1}^{n}{n \choose i}p^{i}(1-p)^{n-i}. \]
+If the code bits are transmitted over an AWGN channel using BPSK followed by a hard-decision detector, then we also have
+\[ p= Q\left( \sqrt{\frac{2 E_s}{N_0}} \right) = Q\left( \sqrt{\frac{2 R  E_b}{N_0}} \right). \]
+The latter expression allows us to make relatively fair comparisons between coding systems with different rates.
+ 
+For syndrome decoding, one can compute the probability of block error (including decoding failure) exactly by observing that the decoder only returns the correct codeword if the error vector is a coset leader.
+In this case, we can define $A_h$ be the number of coset leaders with Hamming weight $h$ and write
+\[ P_{B} = 1-\sum_{h=0}^{n} A_h p^h (1-p)^{n-h}. \]
 
 \iffalse
-
-\item Block error probability for decoding
-
-\begin{itemize}
-\item Bounded distance decoding with $t=\left\lfloor \frac{d_{min}-1}{2}\right\rfloor $
-
-\begin{itemize}
-\item $P_{B}\leq1-\sum_{i=0}^{t}{n \choose i}p^{i}(1-p)^{n-i}=\sum_{i=t+1}^{n}{n \choose i}p^{i}(1-p)^{n-i}$
-\item Holds with equality if decoder failures are treated as errors
-\end{itemize}
-\item Syndrome decoding ($P_{B}$ = 1 - prob. of each error pattern that
-is corrected) 
-
-\begin{itemize}
-\item $P_{B}=1-\sum R_{i}p^{i}(1-p)^{i}$ where $R_{i}$ is the \# of coset
-leaders with weight $i$ 
-\end{itemize}
-\end{itemize}
-\end{itemize}
 
 \section{Cyclic Codes}
 
