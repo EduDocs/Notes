@@ -103,7 +103,7 @@ The coding gain in this case is $9.6-4.2=5.4\mbox{ dB}$
 
 Let $\mathcal{X}$ be the input alphabet of a channel (assume $\left|\mathcal{X}\right|=q$)
 \begin{definition}
-A length-$n$ \defn{channel coding}{code} over the alphabet $\mathcal{X}$ is simply a subset $\mathcal{C}\subseteq\mathcal{X}^{n}$ of all input sequences.
+A length-$n$ \textbf{code} over the alphabet $\mathcal{X}$ is simply a subset $\mathcal{C}\subseteq\mathcal{X}^{n}$ of all input sequences.
 \end{definition}
 If a binary code has $M=\left|\mathcal{C}\right|$ codewords, then the code rate is $R=\frac{\log_{2}M}{n}$.
 This means we can send $k$ information bits when $M=2^k$.
@@ -111,7 +111,7 @@ This means we can send $k$ information bits when $M=2^k$.
 For example, the binary repeat code of length 5 is defined by $\mathcal{X}=\left\{ 0,1\right\}$ and
 \[\mathcal{C}=\left\{ 00000,11111\right\} \subset\left\{ 0,1\right\} ^{5}. \]
 Likewise, the binary even parity code of length 3 is
-\[ \mathcal{C}=\left\{ 000,110,101,011\right\} \subset\left\{ 0,1\right\} ^{3} \].
+\[ \mathcal{C}=\left\{ 000,110,101,011\right\} \subset\left\{ 0,1\right\} ^{3} . \]
 
 \begin{definition}
 The \defn{channel coding}{Hamming distance} $d(\underline{x},\underline{y})$ is equal to the number of places where the vectors differ.
@@ -222,8 +222,12 @@ Moreover, there are very few cases where non-linear codes are better than linear
 So, there is essentially no performance penalty for this simplicity.
 
 Linear codes, like linear algebra, make use of matrices and vectors of elements that can be added, subtracted, multipled, and divided.
-A set of numbers which obey all the standard rules of arithmetic is an algebraic object known as a \defn{channel coding}{field}.
+A set of numbers which obey all the standard rules of arithmetic is an algebraic object known as a \textbf{field}.
 For example, the real and complex numbers are both fields.
+
+There are also fields which have a finite number of elements.
+Let $a,d$ be positive integers so that the division of $a$ by $d$ gives the equation $a = dq+r$, where $q$ is quotient and $0\leq r \leq d-1$ is the remainder.
+The modulo operation is defined to return the remainder from division and is denoted $r = a \bmod d$.
 It turns out that the binary alphabet, $\left\{ 0,1\right\} $, with standard arithmetic ($+,-,*,/$) performed modulo 2 is also a field.
 The operations are shown explicitly in Table~\ref{tab:BinaryField}.
 
@@ -326,7 +330,7 @@ When both the generator and parity-check matrices are in systematic form, we can
 \end{align*}
 
 \begin{example}
-A \defn{channel coding}{single parity-check code} is an $(n,n-1)$ binary linear code with parity-check matrix
+A \textbf{single parity-check code} is an $(n,n-1)$ binary linear code with parity-check matrix
 \[ H=[\underbrace{1,1,\ldots,1}_{n\;\mathrm{times}}]. \]
 For all codewords $\underline{x}$, the parity-check constraint $\underline{x}\cdot\underline{H}^{T}=\underline{0}$ implies that $\sum_{i=1}^{n}x_{i}\bmod2=0$ (i.e., the codeword has an even number of ones).
 The minimum distance is $d_{min} = 2$ and the generator matrix is given by
@@ -367,13 +371,13 @@ Correcting all single errors requires $\frac{d_{min}-1}{2}=1$ or $d_{min}=3$.
 Let us try to find the longest code, for a fixed number of parity bits $m$, that corrects all single errors.
 In this case, $\underline{H}$ is  matrix with $m$ rows and we can add columns, one at a time, until it is not possible to add a column without losing the ability to correct a single error.
 How many columns can we choose?
-The maximum value is $n=2^m -1$ and the resuting optimal code is called the \defn{channel coding}{binary Hamming code} of length $n$.
+The maximum value is $n=2^m -1$ and the resuting optimal code is called the binary \defn{channel coding}{Hamming code} of length $n$.
 \end{example}
 
 \subsection{Decoding}
 
 Assume a codeword $\underline{x}\in\mathcal{C}$ is transmitted over a channel and $\underline{r}=\underline{x}+\underline{e}$ is received, where $\underline{e}$ is the \textbf{error pattern} with $w(\underline{e})$ errors.
-For any received sequence $\underline{r}$, a \defn{channel coding}{decoder} either returns a codeword $\underline{\hat{x}}=D(\underline{r})$ or declares failure.
+For any received sequence $\underline{r}$, a \textbf{decoder} either returns a codeword $\underline{\hat{x}}=D(\underline{r})$ or declares failure.
 The decoded message $\underline{\hat{u}}$ associated with $\underline{\hat{x}}$ is the unique message satisfying $\underline{\hat{x}} = \underline{\hat{u}} \underline{G}$.
 A decoder makes
 \begin{itemize}
@@ -386,7 +390,7 @@ The correct meaning can usually be inferred from the context.
 Decoding can also be simplified for linear codes.
 
 \begin{definition}
-Let $\underline{s}=\underline{r}\cdot\underline{H}^{T}$ be the \defn{channel coding}{syndrome} of the received vector $\underline{r}$.
+Let $\underline{s}=\underline{r}\cdot\underline{H}^{T}$ be the \textbf{syndrome} of the received vector $\underline{r}$.
 \end{definition}
 It turns out that $\underline{s}$ depends only on the error pattern.
 Since $\underline{x}\in\mathcal{C}$, we have
@@ -443,12 +447,12 @@ syn\textbackslash cw &  00000 & 10110 & 01011 & 11101\tabularnewline
 \end{tabular}
 \end{center}
 To see if you understand this example, try filling in the missing entries.
-ONe can prove that this process always enumerates all $2^{n}$ binary vectors, so you can test your answers by checking if all binary vectors appear in the table exactly once.
+One can prove that this process always enumerates all $2^{n}$ binary vectors, so you can test your answers by checking if all binary vectors appear in the table exactly once.
 
 \begin{example}
 To see syndrome decoding in action, let $\underline{x}=10110$ and $\underline{e}=11000$.
-Then,$\underline{r}=01110$ and $\underline{s}=101$.
-Looking in the syndrome table, we find that $\underline{\hat{x}}=10110$.
+Then, $\underline{r}=01110$ and $\underline{s}=110$.
+Looking in the syndrome table, we find that $\underline{\hat{e}}=11000$ and $\underline{\hat{x}}=10110$.
 \end{example}
 
 \subsection{Manipulating Linear Codes}
@@ -457,10 +461,10 @@ It follows from linear algebra that any $\underline{G},\underline{H}$ can be put
 For the parity-check matrix $H$, the basic idea is to use elemtary row operations to form an identity matrix in the first few columns (i.e., put it in reduced row-echelon form).
 For the generator matrix $G$, elementary row operations are used to form an identity matrix in the last few columns.
 Sometimes an identity cannot be formed in the desired columns and a column permutation is required to complete the process.
-For this reason, two codes are called \underbar{equivalent} if and only if they differ only in the order of the code symbols.
+For this reason, two codes are called \textbf{equivalent} if and only if they differ only in the order of the code symbols.
 
 \begin{definition}
-For a matrix, an \defn{channel coding}{elementary row operation} is one of the following operations:
+For a matrix, an \textbf{elementary row operation} is any one of the following operations:
 \begin{enumerate}
 \item interchaging any two rows,
 \item scaling any row by a non-zero constant,
@@ -524,10 +528,179 @@ For syndrome decoding, one can compute the probability of block error (including
 In this case, we can define $A_h$ be the number of coset leaders with Hamming weight $h$ and write
 \[ P_{B} = 1-\sum_{h=0}^{n} A_h p^h (1-p)^{n-h}. \]
 
-\iffalse
-
 \section{Cyclic Codes}
 
+\subsection{Basic Properties}
+In this section, we consider a subset of linear codes which have even more algebraic structure.
+A cyclic (or circular) shift of a vector is another vector with the same elements in the same order, but starting from an different index.
+For example, the left circular shift of $(x_0,x_1,\ldots,x_{n-1})$ by 1 position gives the vector $(x_{n-1},x_0,x_1,\ldots,x_{n-2})$.
+
+\begin{definition}
+A \defn{channel coding}{cyclic code} is a linear code where any cyclic shift of a codeword is also a codeword.
+\end{definition}
+
+\begin{example}
+Consider the $(7,3)$ binary linear code whose 8 codewords are
+\[ \mathcal{C} = \left\{
+0000000,
+1011100,
+0101110,
+1110010,
+0010111,
+1001011,
+0111001,
+1100101
+\right\}. \]
+Since all non-zero codewords are circular shifts of a single codeword, it is a cyclic code.
+Its cyclic structure can also be exposed by choosing the generator matrix to be
+\[ \underline{G} = \left[ \begin{array}{ccccccc}
+1 & 0 & 1 & 1 & 1 & 0 & 0 \\
+0 & 1 & 0 & 1 & 1 & 1 & 0 \\
+0 & 0 & 1 & 0 & 1 & 1 & 1 \end{array} \right] \]
+and the parity-check matrix to be
+\[ \underline{H} = \left[ \begin{array}{ccccccc}
+1 & 1 & 0 & 1 & 0 & 0 & 0 \\
+0 & 1 & 1 & 0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 1 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1 & 1 & 0 & 1 \end{array} \right]. \]
+\end{example}
+
+The benefits of cyclic codes follow largely from a close conection to polynomial arithmetic.
+This allows the encoding and decoding of cyclic codes to make use of efficient algorithms and hardware for polynomial arithmetic.
+Consider an $(n,k)$ cyclic code and assume each codeword vector $\underline{c}=(c_0,c_1,\ldots,c_{n-1})$ and message vector $\underline{m}=(m_0,m_1,\ldots,m_{k-1})$ is associated with a polynomial
+\[ c(x) = \sum_{i=0}^{n-1} c_i x^i \quad \quad  m(x) = \sum_{i=0}^{k-1} m_i x^i. \]
+It turns out that every $(n,k)$ cyclic code is uniquely defined by its generator polynomial $g(x)$, which allows all codewords $c(x)=m(x)g(x)$ to be generated by multiplication with some message polynomial $m(x)$.
+The generator polynomial for the code in the previous example is $g(x) = 1 + x^2 + x^3 + x^4$.
+
+Before proceeding any further, we must define a few mathematical terms asociated with polynomial arithmetic.
+The \textbf{degree} of a polynomial $c(x)$, denoted $\deg\left( c(x) \right)$, is the maximum power of $x$ that appears in the polynomial.
+For the example $g(x)$, we have $\deg \left( g(x) \right) = 4$.
+In fact, for all $(n,k)$ cyclic codes, we have
+$\deg \left( c(x) \right) \leq n-1$,
+$\deg \left( m(x) \right) \leq k-1$, and
+$\deg \left( g(x) \right) = n-k$.
+
+For a polynomial $a(x)$ and a divisor $d(x)$, the \textbf{remainder} $r(x)$ and \textbf{quotient} $q(x)$  are uniqely defined by $\deg\left( r(x) \right) < \deg \left(d(x) \right)$ and
+\[ \frac{a(x)}{d(x)} = q(x) + \frac{r(x)}{d(x)}. \]
+In discrete mathematicss, the \defn{channel coding}{modulo polynomial} operation
+\[ a(x) \bmod d(x) = r(x) \]
+is used to compactly represent the remainder of division by $d(x)$.
+\begin{proposition}
+For an $(n,k)$ cyclic code defined by its generator polynomial $g(x)$, the parity-check polynomial $h(x)$ is defined uniquely by $g(x)h(x)=x^n - 1$ and satisfies
+\[ h(x)c(x) = 0 \bmod x^n - 1, \]
+for all codeword polynomials $c(x)$.
+\end{proposition}
+\begin{proof}
+One can prove this statement by observing that $c(x)=m(x)g(x)$ for some $m(x)$ and therefore
+\[ h(x)c(x) = m(x)g(x)h(x) = m(x)(x^n - 1). \]
+Since $x^n -1$ divides $h(x)c(x)$ without remainder, the result follows.
+\end{proof}
+The parity-check polynomial for the code in the previous example is $h(x) = 1 + x^2 + x^3$.
+
+In general, the generator matrix of an $(n,k)$ cyclic code with generator $g(x)=g_0 + g_1 x + g_2 x^2 + \cdots g_{n-k} x^{n-k}$ can be written in the form
+\[ \underline{G} = \left[ \begin{array}{ccccccc}
+g_0 & g_1 & \cdots & g_{n-k} & 0 & 0 & 0 \\
+0 & g_0 & g_1 & \cdots & g_{n-k} & 0 & 0 \\
+\vdots & \vdots & \ddots & \ddots & \ddots & \ddots & 0 \\
+0 & 0 & 0 & g_0 & \cdots & g_{n-k-1} & g_{n-k} \end{array} \right]. \]
+Likewise, the parity-check polynomial $h(x) = h_0 + h_1 x + h_2 x^2 + \cdots h_{k} x^k$ gives rise to a parity-check matrix of the form
+\[ \underline{H} = \left[ \begin{array}{ccccccc}
+h_k & h_{k-1} & \cdots & h_0 & 0 & 0 & 0 \\
+0 & h_k & h_{k-1} & \cdots & h_0 & 0 & 0 \\
+\vdots & \vdots & \ddots & \ddots & \ddots & \ddots & 0 \\
+0 & 0 & 0 & h_k & \cdots & h_1 & h_0 \end{array} \right]. \]
+
+The encoder mapping $\underline{c} = \underline{m} \, \underline{G}$ is actually identical to the encoder mapping $c(x) = m(x) g(x)$.
+If the rows and columns of $\underline{G}$ are numbered from zero, then this can be seen by associating the $i$th row of $\underline{G}$ with $x^i$ and the $j$th column of $\underline{G}$ with $x^j$.
+Observing that $[\underline{G}]_{ij} = g_{j-i}$ for $i \leq j \leq n-1$ and 0 otherwise, we find that
+\begin{align*}
+c(x)
+&= \sum_{j=0}^{n-1} x^j c_j 
+= \sum_{j=0}^{n-1} x^j \sum_{i=0}^{k-1} m_i [\underline{G}]_{ij} 
+= \sum_{j=0}^{n-1} x^j \sum_{i=0}^{k-1} m_i g_{j-i} \\
+&= \sum_{i=0}^{k-1} m_i x^i \sum_{j=i}^{n-1} x^{j-i} g_{j-i} 
+= \sum_{i=0}^{k-1} m_i x^i g(x) 
+= m(x) g(x).
+\end{align*}
+
+\begin{example}
+The binary Hamming codes are a family of $(n,k)$ cyclic codes, that can correct all single errors, with $n=2^r - 1$ and $k=n-r$.
+The generator polynomials for $k=3,4,5$ are given by
+\begin{align*}
+(7,4) & \quad \quad g(x) = 1+x^2+x^3 \\
+(15,11) & \quad \quad g(x) = 1+x^3+x^4 \\
+(31,26) & \quad \quad g(x) = 1+x^3+x^5.
+\end{align*}
+\end{example}
+
+\subsection{Systematic Encoding}
+
+For cyclic codes, the basic encoding process $c(x)=m(x)g(x)$ does not provide systematic encoding.
+One can overcome this limitation by observing that $c(x) \bmod g(x) = 0$ for all codewords.
+Using this equation instead, one can choose the codeword have the format
+\[ c(x) = p(x) + x^{n-k} m(x), \]
+where the message $m(x)$ appears as the last $k$ bits in the codeword and the parity polynomial $p(x)=p_0 + p_1 x + \cdots p_{n-k-1} x^{n-k-1}$ has degree $\deg\left( p(x)\right) = n-k-1$.
+Applying the modulo $g(x)$ operation to both sides of this equation shows that
+\[ 0 = c(x) \bmod g(x) = p(x) \bmod g(x) + x^{n-k} m(x) \bmod g(x). \]
+Solving for $p(x)$ gives
+\[ p(x) = - x^{n-k} m(x) \bmod g(x), \]
+where $p(x) = p(x) \bmod g(x)$ follows from the fact that $\deg\left( p(x)\right) < \deg\left( g(x)\right)$.
+For cyclic codes, this process defines the standard \defn{channel coding}{systematic encoder} used in practice.
+It turns out that that  $p(x)$ can be calculated efficiently using a shift register circuit.
+So, systematic encoders for cyclic codes are easy to implement in practice.
+
+\begin{example}
+Consider our example $(7,3)$ code with $g(x) = 1 + x^2 + x^3 + x^4$.
+The message $\underline{m} = [0\;1\;1]$ is associated with the message polynomial $m(x) = x+x^2$ and the systematic encoding equation says that
+\[ p(x) = - x^4 m(x) \bmod g(x) = -x^5 - x^6 \bmod 1+x^2 + x^3 + x^4. \]
+To compute $p(x)$, we proceed by using polynomial long division
+\begin{center}
+\polylongdiv{-x^5 - x^6}{x^4+x^3+x^2+1}
+\end{center}
+This implies that $p(x) = x^3+1$ and $c(x) = 1+x^3 + x^5 + x^6$.
+One can verify that this is a codeword by observing that $(1+x^2)(1+x^2+x^3+x^4)\bmod 2 = 1+x^3+x^5+x^6$.
+\end{example}
+
+\subsection{Cyclic Redundancy Check}
+
+A \defn{channel coding}{cyclic redundancy check} (CRC) code calculates its check bits using a process very similar to the systematic encoding of cyclic codes.
+The main difference is that the message polynomial $m(x)$ is not constrained to be $k$ bits in length and it is not multiplied by $x^{n-k}$ before the modulo operation.
+Let $g(x)$ be the CRC polynomial and $m(x)$ be the message polynomial, then the CRC encoder generates the check polynomial
+\[ p(x) = m(x) \mod g(x). \]
+Since  $\deg \left(p(x)\right) < \deg \left(g(x)\right)$, the resulting check sequence is represented by exactly $\deg \left(g(x)\right)-1$ bits.
+Many of the CRCs defined in standards (or commonly used in practice) have subtle variations such as
+\begin{itemize}
+\item extra bits are appended to the start or end of the message,
+\item the shift register state is initialized to a non-zero value,
+\item the message sequence is XOR'd with a known sequence before division,
+\item and the bit (or byte) ordering may differ between standards.
+\end{itemize}
+
+In most specifications, the CRC polynomial is not described as a polynomial but instead given as the hexadecimal value of the binary representation of $g(x)$.
+Moreover, the topmost bit is not included in this value because the length is know and it must a 1.
+\begin{example}
+The standard unix CRC32 polynomial is often listed in hexadecimal as \texttt{04C11DB7}.
+Writing this in binary gives
+\[ 0000\;0100\;1100\;0001\;0001\;1101\;1011\;0111. \]
+Counting from the right (i.e., the LSB), we find ones in the positions
+\[ 0,1,2,4,5,7,8,10,11,12,16,22,23,26. \]
+Therefore, it follows that
+\[ g(x) = x^{32} + x^{26} + x^{23} + x^{22} + x^{16} + x^{12} + x^{11} + x^{10} + x^8 + x^7 + x^5 + x^4 + x^2 + x + 1.\]
+Notice the $x^{32}$ is added based on the known length of the CRC and is not described by the hexadecimal value.
+\end{example}
+
+The CRC32 algorithm prepends the data sequence by 32 ones, performs the modulo, and then inverts the resulting parity sequence.
+The ASCII sequence ``123456789" has the hexadecimal representation \texttt{31\,32\,33\,34\,35\,36\,37\,38\,39} and is commonly used to test CRC implementations.
+For this sequence, the correct CRC result, in hexadecimal, is \texttt{CBF43926}.
+
+
+\iffalse
+\begin{tabular}{ccccccc}
+& $x^3$ & $+x^2$ & $+x$ & $+1$ & & \\
+$ x^4 + x^3 + x^2 + 1 $ & $x^6$ & $+x^5$ & $+0x^4$ & $+x^3$ & 
+\begin{equation*}
+
+each codeword is a 
 Define all polynomials
 
 careful of syndrome definition: depends on H matrix
@@ -539,4 +712,3 @@ generator/parity check matrix from polynomial mult
 general, primitive for all cyclic codes
 
 \fi
-
