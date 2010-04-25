@@ -36,7 +36,24 @@ Note that we can express the probability of getting a three given that the outco
 \end{equation*}
 \end{example}
 
-Having reviewed a specific situation, we now turn to the more encompassing setting.
+\begin{example}
+Let $A,B$ be events (i.e., subsets) in the sample space $\Omega$ associated with a particular random experiment and assume that $\Pr(B)>0$.
+To gain intuition for more general conditional probabilities, consider repeating the experiment $N$ times and tallying the results relative to $A,B$.
+Let $N_{AB}$ be the number of times that both $A$ and $B$ occurred, $N_{A\overline{B}}$ be the number of times that only $A$ occurred,  $N_{\overline{A}B}$ be the number of times that only $B$ occurred, and  $N_{\overline{A}\overline{B}}$ be the number of times that neither occurred.
+From this, we see that $A$ occurred exactly $N_A = N_{AB} + N_{A\overline{B}}$ times and $B$ occurred exactly $N_B = N_{AB} + N_{\overline{A}B}$ times.
+
+The frequentist view of probability is based on the fact that, as $N$ becomes large, one can compute event probabilities by taking the ratio of the number of times the event occurred to the number of trials.
+This implies that
+\begin{equation*}
+\Pr (A\cap B) \approx\frac{N_{AB}}{N} \quad \quad
+\Pr (B) \approx \frac{N_{B}}{N}.
+\end{equation*}
+Likewise, the conditional probability that $A$ occurs given knowledge that $B$ occurred can be computed with
+\[ \Pr (A | B) \approx \frac{N_{AB}}{N_B} = \frac{N_{AB} / N}{N_B / N} \approx \frac{\Pr (A \cap B)}{\Pr (B)}. \]
+As the number of trials approaches infinity, the approximation becomes exact and one obtains the definition of conditional probability.
+\end{example}
+
+Having considered intuitive arguments, we now give the mathematical definition of conditional probability.
 Let $B$ be an event such that $\Pr (B) > 0$.
 A conditional probability law assigns to every event $A$ a number $\Pr (A|B)$, termed the \emph{conditional probability of $A$ given $B$}, such that \index{Conditional probability}
 \begin{equation} \label{equation:ConditionalProbability}
@@ -95,7 +112,7 @@ The probability of events $A_1$ through $A_n$ taking place at the same time is g
 = \Pr (A_1) \Pr (A_2 | A_1) \Pr (A_3 | A_1 \cap A_2)
 \cdots \Pr \left( A_n \bigg| \bigcap_{k=1}^{n-1} A_k \right) .
 \end{equation}
-This formula can be verified by expanding each of the conditional probabilities using \eqref{equation:ConditionalProbability},
+This formula is known as the \emph{chain rule of probability} and can be verified by expanding each of the conditional probabilities using \eqref{equation:ConditionalProbability},
 \begin{equation*}
 \Pr \left( \bigcap_{k=1}^n A_k \right)
 = \Pr (A_1) \frac{\Pr (A_1 \cap A_2)}{\Pr (A_1)}

@@ -1,17 +1,17 @@
-pdftk book.pdf cat 1-6 output book_toc.pdf
-pdftk book.pdf cat 7-13 output book_ch1.pdf
-pdftk book.pdf cat 14-25 output book_ch2.pdf
-pdftk book.pdf cat 26-39 output book_ch3.pdf
-pdftk book.pdf cat 40-52 output book_ch4.pdf
-pdftk book.pdf cat 53-65 output book_ch5.pdf
-pdftk book.pdf cat 66-77 output book_ch6.pdf
-pdftk book.pdf cat 78-94 output book_ch7.pdf
-pdftk book.pdf cat 95-113 output book_ch8.pdf
-pdftk book.pdf cat 114-125 output book_ch9.pdf
-pdftk book.pdf cat 126-138 output book_ch10.pdf
-pdftk book.pdf cat 139-152 output book_ch11.pdf
-pdftk book.pdf cat 153-162 output book_ch12.pdf
-#pdftk book.pdf cat 130-133 output book_appendix.pdf
-#pdftk book.pdf cat 134-137 output book_index.pdf
+pdftk book.pdf cat 1-6 output $1_toc.pdf
+pdftk book.pdf cat 7-13 output $1_ch1.pdf
+pdftk book.pdf cat 14-25 output $1_ch2.pdf
+pdftk book.pdf cat 26-39 output $1_ch3.pdf
+pdftk book.pdf cat 40-52 output $1_ch4.pdf
+pdftk book.pdf cat 53-65 output $1_ch5.pdf
+pdftk book.pdf cat 66-77 output $1_ch6.pdf
+pdftk book.pdf cat 78-94 output $1_ch7.pdf
+pdftk book.pdf cat 95-113 output $1_ch8.pdf
+pdftk book.pdf cat 114-125 output $1_ch9.pdf
+pdftk book.pdf cat 126-138 output $1_ch10.pdf
+pdftk book.pdf cat 139-152 output $1_ch11.pdf
+pdftk book.pdf cat 153-162 output $1_ch12.pdf
+#pdftk book.pdf cat 130-133 output $1_appendix.pdf
+#pdftk book.pdf cat 134-137 output $1_index.pdf
 
 

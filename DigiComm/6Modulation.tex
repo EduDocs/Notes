@@ -1,5 +1,26 @@
-\chapter{Modulation and Demodulation}
+\chapter{Waveform Communication}
+\label{chapter:ContinuousTimeComm}
 
+In Chapter~\ref{chapter:DiscreteTimeComm}, we introduced digital communication using a discrete-time model that allowed us to ignore the details of the more realistic continuous-time model.
+The goal of this chapter is to delve into the details of waveform-based communication and see that the discrete-time model can be derived from the continuous-time model under some conditions.
+The \defn{communication}{waveform channel} defines the probabilistic mapping between the deterministic channel input waveform $s(t)$ and the random-process $R(t)$ observed at the output of the channel.
+The basic model is that $R(t) = s(t) + N(t)$, where $N(t)$ is Gaussian white-noise random process with autocorrelation function $R_N (\tau) = \delta(\tau) N_0 / 2$.
+In some cases, the channel will also act as a linear filter and produce $R(t) = h(t) * s(t) + N(t)$, where $h(t)$ is the channel response.
+
+\begin{figure}
+\begin{center}
+\begin{psfrags}
+\psfrag{c}[c]{Channel}
+\psfrag{x}[l]{$s(t)$}
+\psfrag{n}[l]{$N(t)$}
+\psfrag{r}[l]{$R(t)$}
+\epsfig{file=Figures/channel.eps,width=6.5cm}
+\end{psfrags}
+\end{center}
+\caption{Block diagram of a basic waveform channel for input signal $s(t)$, noise process $N(t)$, and received signal $R(t)$.}
+\end{figure}
+
+\iffalse
 \emph{Modulation} is the process by which a string of bits is converted into a signal suitable for transmission over a communication channel.
 \emph{Demodulation} is the reverse operation at the destination where the information symbols are extracted from the received signal.
 The shapes of the waveforms employed to create the transmitted signal are critical to the overall performance and operation of the system.
@@ -16,33 +37,67 @@ u(t) = \sum_k u_k \phi_k(t) .
 \end{equation*}
 This procedure provides a simple framework to transition back and forth between a digital sequence and the corresponding modulated signal.
 At the destination, the sequence of binary symbols is demodulated by passing the received signal through linear time-invariant filters, and then mapping the resulting real number to one of the possible $b$-bit messsages.
+\fi
 
+\section{A Single Digital Symbol}
 
-\section{Orthogonal Waveforms}
+Suppose that one would like to send a single digital symbol taking $M$ different values to a receiver through a waveform channel.
+Then, one can associate a waveform $s_m (t)$ with each symbol $m=1,\ldots,M$ and transmit the waveform assigned with the desired message.
+For mathematical convenience, we assume that each waveform is zero outside of the interval $0\leq t\leq T$ where $T$ is symbol duration.
 
-The simplest scenario for modulation and demodulation occurs when the basis waveforms $\{ \phi_k (t) \}$ are orthonormal, with
+The demodulation process is based on mathematical operation, known as an inner product, that maps any two signals to a complex number.
+The \defn{communication}{inner product} $\langle s(t) , r(t) \rangle$ between the signals $s(t)$ and $r(t)$ is defined by
 \begin{equation*}
-\left\langle \phi_m (t), \phi_n (t) \right\rangle
-= \int_{\mathbb{R}} \phi_m (t) \phi_n^* (t) dt 
-= \begin{cases} 1, & m = n \\
-0, & \text{otherwise} . \end{cases}
+\left\langle s (t), r^* (t) \right\rangle
+= \int_{-\infty}^{\infty} s(t) r^* (t) dt,
 \end{equation*}
-These functions can be employed to communicate data in a straightforward manner.
-Before exploring the role of orthogonal waveforms in digital communication systems, we examine a familar set of functions and show that it is orthonormal.
+where $r^* (t)$ is the complex conjugate of $r(t)$.
+Mathematically, we are treating the set of all finite-energy signals as a \defn{communication}{vector space} and using this inner product to define distances and angles in this space.
+The energy (or length squared) of a signal $s(t)$ is given by
+\[ \int_{-\infty}^{\infty} \left| s(t) \right|^2 dt = \langle s(t),s(t) \rangle. \]
+Two signals $s_1 (t),s_2 (t)$ are said to be \defn{communication}{orthogonal} if $\langle s_1(t),s_2 (t)\rangle = 0$.
+A signal $s(t)$ is said to be \textbf{normalized} if $\langle s(t),s(t) \rangle = 1$.
+A set of signals is said to be \textbf{orthonormal} if every signal in the set is orthogonal to every other signal in the set and all signals in the set are normalized.
+The set of all linear combinations of signal waveforms is called the \defn{communication}{signal space}.
 
-\begin{example}[$T$-spaced Truncated Sinusoids] \label{example:TSpacedTruncatedSinusoids}
-Consider the collection of waveform given by
+\subsubsection{Orthonormal Waveforms}
+The simplest scenario occurs when the set of signal waveforms $\{ s_1 (t), \ldots , s_M (t) \}$ is orthonormal.
+In this case, one can demodulate the received signal $R(t)$ by computing
+\[ R_j = \langle R(t), s_j (t) \rangle, \]
+for each $j=1,\ldots,M$.
+Due to the noise process, the resulting values $R_1 , \ldots, R_M$ are Gaussian random variables.
+Their expected values depend on which waveform was actually transmitted.
+If $s_m (t)$ was transmitted, then $R(t) = s_m(t) + N(t)$, $E[R(t)] = s_m(t)$, and we have
+\begin{align*}
+E \left[R_j \right]
+&= E \left[ \int_{-\infty}^{\infty} R(t) s_j^* (t) dt \right] \\
+&= \int_{-\infty}^{\infty} E \left[ R(t) \right] s_j^* (t) dt \\
+&= \int_{-\infty}^{\infty} s_m (t) s_j^* (t) dt \\
+&= \delta_{m,j}.
+\end{align*}
+
+The random variables $R_1, \ldots , R_M$ also have some other nice properties.
+They are uncorrelated because the the waveforms are orthogonal and they have variance $N_0  / 2$ because the waveforms are normalized.
+Proving this statement will be left as a homework exercise.
+
+This transforms the waveform detection problem into a detection problem for a length-$M$ vector of Gaussian random variables.
+If $s_m (t)$ was transmitted, then the mean of the random vector is the unit vector with a one in the $m$th position.
+Based on the techniques from Chapter~\ref{chapter:DiscreteTimeComm}, the maximum-likelihood decision rule chooses the symbol whose unit vector is closest to the random vector $R_1,\ldots,R_M$ in Euclidean distance.
+
+\begin{example}[Frequency-Shift Keying] \label{example:TSpacedTruncatedSinusoids}
+For a fixed time-interval $T$, consider the collection of waveforms given by
 \begin{equation*}
-\phi_m(t) = \frac{1}{\sqrt{T}} e^{2 \pi i \frac{m}{T} t} \mathrm{rect} \left( \frac{t}{T} \right) .
+s_m(t) = \frac{1}{\sqrt{T}} e^{2 \pi i \frac{m}{T} t} \mathrm{rect} \left( \frac{t}{T} \right) .
 \end{equation*}
 for $m = 1, \ldots, M$.
+This set of waveforms is known as $M$-ary frequency-shift keying (or $M$-FSK).
 We wish to show that these waveforms are orthonormal.
 
-To prove that they are orthogonal, we consider the inner product of $\phi_m(t)$ and $\phi_n(t)$ when $m \neq n$,
+To prove that they are orthogonal, we consider the inner product of $s_m(t)$ and $s_n(t)$ when $m \neq n$,
 \begin{equation*}
 \begin{split}
-\left\langle \phi_m (t), \phi_n (t) \right\rangle
-&= \int_{\mathbb{R}} \phi_m (t) \phi_n^* (t) dt 
+\left\langle s_m (t), s_n (t) \right\rangle
+&= \int_{\mathbb{R}} s_m (t) s_n^* (t) dt 
 = \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}}
 e^{2 \pi i \frac{m}{T} t} e^{- 2 \pi i \frac{n}{T} t} dt \\
 &= \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}}
@@ -53,18 +108,71 @@ e^{2 \pi i \frac{(m-n)}{T} t} dt
 Next, we show that these basis elements have unit energy,
 \begin{equation*}
 \begin{split}
-\left\| \phi_m(t) \right\|^2
-&= \int_{\mathbb{R}} \phi_m (t) \phi_m^* (t) dt 
+\left\| s_m(t) \right\|^2
+&= \int_{\mathbb{R}} s_m (t) s_m^* (t) dt 
 = \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}}
 e^{2 \pi i \frac{m}{T} t} e^{- 2 \pi i \frac{m}{T} t} dt \\
 &= \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} dt
 = 1 .
 \end{split}
 \end{equation*}
-Thus, the collection of waveforms $\{ \phi_1 (t), \ldots, \phi_M (t) \}$ forms an orthonormal set.
-These basis elements are scaled versions of the \emph{$T$-spaced truncated sinusoids}.
 \end{example}
 
+\subsubsection{General Waveforms}
+
+When the signal waveforms are not orthonormal, the detection problem is solved most easily by constructing a set of orthonormal basis vectors for the signal space.
+In general, this can be accomplished by applying the Gram-Schmidt orthogonalization process to the signal waveforms.
+Rather than focusing on this process, we assume that $\{ \phi_1 (t), \ldots , \phi_N (t) \}$ is an orthonormal set of waveforms such that the coefficients $a_{m,k}$ allow us to write
+\[ s_m (t) = \sum_{k=1}^N a_{m,k} \phi_k (t). \]
+This implies that the orthonormal set spans the signal space.
+
+In this case, the received signal $R(t)$ can be demodulated by computing
+\[ R_j = \langle R(t), \phi_j (t) \rangle, \]
+for each $j=1,\ldots,N$.
+Again, the noise process implies that $R_1 , \ldots, R_N$ are Gaussian random variables whose means are determined by which waveform was actually transmitted.
+For $j=1,\ldots,N$, the noise component of $R_j$ is independent of the transmitted signal, and is given by
+\[ N_j = \int_{-\infty}^{\infty} N(t) \phi_j^* dt. \]
+Therefore, $R_j = E[R_j] + N_j$ and the mean, if $s_m (t)$ was transmitted, is given by
+\begin{align*}
+E \left[R_j \right]
+&= E \left[ \int_{-\infty}^{\infty} R(t) \phi_j^* (t) dt \right] \\
+&= \int_{-\infty}^{\infty} E \left[ R(t) \right] \phi_j^* (t) dt \\
+&= \int_{-\infty}^{\infty} s_m (t) \phi_j^* (t) dt \\
+&= \int_{-\infty}^{\infty} \left( \sum_{k=1}^N a_{m,k} \phi_k (t) \right) \phi_j^* (t) dt \\
+&= \sum_{k=1}^N a_{m,k} \delta_{k,j} dt \\
+&= a_{m,j}. \\
+\end{align*}
+
+Again, we have transformed the waveform detection problem into a detection problem for a vector of Gaussian random variables.
+In this case, however, there are $M$ different mean vectors of dimension $N$.
+Based on the techniques from Chapter~\ref{chapter:DiscreteTimeComm}, the maximum-likelihood decision rule chooses the symbol $\hat{m}$ whose coordinate vector $(a_{\hat{m},1},\ldots. a_{\hat{m},N})$ is closest to the random vector $R_1,\ldots,R_N$ in Euclidean distance.
+
+This approach can be seen as first projecting the infinite-dimensional received waveform onto a finite-dimensional subspace and then using the optimal detector on this finite-dimensional space.
+To show that this overall approach is optimal, one must also prove that the residual waveform
+\[ \tilde{N}(t) = R(t) - \sum_{j=1}^N R_j \phi_j (t) \]
+does not contain any information relevant to the decision.
+While this is indeed true, we ignore this detail for now.
+
+\begin{figure}
+\begin{center}
+\begin{psfrags}
+\psfrag{p1}[l]{$\phi_1(t)$}
+\psfrag{p2}[l]{$\phi_2(t)$}
+\psfrag{p3}[l]{$\phi_{N-1}(t)$}
+\psfrag{p4}[l]{$\phi_N(t)$}
+\psfrag{i}[c]{$\int_{0}^T (\cdot) dt$}
+\psfrag{r}[l]{$r(t)$}
+\psfrag{r1}[l]{$r_1$}
+\psfrag{r2}[l]{$r_2$}
+\psfrag{r3}[l]{$r_{N-1}$}
+\psfrag{r4}[l]{$r_N$}
+\epsfig{file=Figures/correlator.eps,width=8cm}
+\end{psfrags}
+\end{center}
+\caption{For a particular realization $r(t)$ of the received signal, the received projection onto the signal-space basis vector can be computed by a bank of correlators.}
+\end{figure}
+
+\iffalse
 The $T$-spaced truncated sinusoids of Example~\ref{example:TSpacedTruncatedSinusoids} form a collection of basis waveforms that can be employed to create a signal.
 To further illustrate this point, we show explicitly how orthonormal waveforms can be used in the modulation and demodulation of data symbols.
 Suppose that a signal is produced by taking a linear combination of the waveforms $\{ \phi_k(t) \}$, weighted by the real numbers $\{ u_k \}$, with
@@ -102,7 +210,7 @@ The original bit $s$ is then obtained by taking the inverse of $u$ under functio
 
 Except for noise considerations, this section presents the first principles under which modern digital communication systems operate.
 Below, we continue our analysis of modulation and demodulation schemes by looking at the implications of sending multiple waveforms over time.
-
+\fi
 
 \section{Time-Shift Waveforms}
 
@@ -280,13 +388,7 @@ u(t) = \sum_k u_k p(t -kT)
 is defined by $\frac{1}{2T}$; it represents the smallest possible bandwidth for which it is possible to prevent intersymbol interference.
 The spectral bandwidth of $\hat{g}(f)$ is the smallest possible value of $W$ such that $\hat{g}(f) = 0$ for $|f| > W$.
 
-
-
-spectral bandwidth
-
-
-\newpage
-
+\iffalse
 \subsection{Pulse Amplitude Modulation}
 
 Pulse amplitude modulation (PAM) is a simple form of modulation, where data is embedded in the amplitude of a single waveform,
@@ -420,5 +522,5 @@ Roughly speaking, for large PAM constellations, the energy consumption per bit d
 
 \subsection{Linear Time-Invariant Filters and Inner Products}
 
-
+\fi
 
