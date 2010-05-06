@@ -1,11 +1,11 @@
 \chapter{Waveform Communication}
 \label{chapter:ContinuousTimeComm}
 
-In Chapter~\ref{chapter:DiscreteTimeComm}, we introduced digital communication using a discrete-time model that allowed us to ignore the details of the more realistic continuous-time model.
+In Chapter~\ref{chapter:DiscreteTimeComm}, we introduced digital communication using a discrete-time model that allowed us to neglect the details of the more realistic continuous-time model.
 The goal of this chapter is to delve into the details of waveform-based communication and see that the discrete-time model can be derived from the continuous-time model under some conditions.
 The \defn{communication}{waveform channel} defines the probabilistic mapping between the deterministic channel input waveform $s(t)$ and the random-process $R(t)$ observed at the output of the channel.
 The basic model is that $R(t) = s(t) + N(t)$, where $N(t)$ is Gaussian white-noise random process with autocorrelation function $R_N (\tau) = \delta(\tau) N_0 / 2$.
-In some cases, the channel will also act as a linear filter and produce $R(t) = h(t) * s(t) + N(t)$, where $h(t)$ is the channel response.
+%In some cases, the channel will also act as a linear filter and produce $R(t) = h(t) * s(t) + N(t)$, where $h(t)$ is the channel response.
 
 \begin{figure}
 \begin{center}
@@ -36,14 +36,14 @@ Next, these real numbers are used to form a transmission signal by creating a we
 u(t) = \sum_k u_k \phi_k(t) .
 \end{equation*}
 This procedure provides a simple framework to transition back and forth between a digital sequence and the corresponding modulated signal.
-At the destination, the sequence of binary symbols is demodulated by passing the received signal through linear time-invariant filters, and then mapping the resulting real number to one of the possible $b$-bit messsages.
+At the destination, the sequence of binary symbols is demodulated by passing the received signal through linear time-invariant filters, and then mapping the resulting real number to one of the possible $b$-bit messages.
 \fi
 
 \section{A Single Digital Symbol}
 
 Suppose that one would like to send a single digital symbol taking $M$ different values to a receiver through a waveform channel.
 Then, one can associate a waveform $s_m (t)$ with each symbol $m=1,\ldots,M$ and transmit the waveform assigned with the desired message.
-For mathematical convenience, we assume that each waveform is zero outside of the interval $0\leq t\leq T$ where $T$ is symbol duration.
+For mathematical convenience, we assume that the energy integral exists and is finite for each waveform.
 
 The demodulation process is based on mathematical operation, known as an inner product, that maps any two signals to a complex number.
 The \defn{communication}{inner product} $\langle s(t) , r(t) \rangle$ between the signals $s(t)$ and $r(t)$ is defined by
@@ -52,6 +52,7 @@ The \defn{communication}{inner product} $\langle s(t) , r(t) \rangle$ between th
 = \int_{-\infty}^{\infty} s(t) r^* (t) dt,
 \end{equation*}
 where $r^* (t)$ is the complex conjugate of $r(t)$.
+This is the same as the cross-correlation between $r(t)$ and $s(t)$ evaluated at lag-time 0.
 Mathematically, we are treating the set of all finite-energy signals as a \defn{communication}{vector space} and using this inner product to define distances and angles in this space.
 The energy (or length squared) of a signal $s(t)$ is given by
 \[ \int_{-\infty}^{\infty} \left| s(t) \right|^2 dt = \langle s(t),s(t) \rangle. \]
@@ -60,11 +61,12 @@ A signal $s(t)$ is said to be \textbf{normalized} if $\langle s(t),s(t) \rangle 
 A set of signals is said to be \textbf{orthonormal} if every signal in the set is orthogonal to every other signal in the set and all signals in the set are normalized.
 The set of all linear combinations of signal waveforms is called the \defn{communication}{signal space}.
 
-\subsubsection{Orthonormal Waveforms}
+\subsection{Orthonormal Waveforms}
 The simplest scenario occurs when the set of signal waveforms $\{ s_1 (t), \ldots , s_M (t) \}$ is orthonormal.
 In this case, one can demodulate the received signal $R(t)$ by computing
 \[ R_j = \langle R(t), s_j (t) \rangle, \]
 for each $j=1,\ldots,M$.
+This is the same as correlating the received signal with each of the transmitted waveforms.
 Due to the noise process, the resulting values $R_1 , \ldots, R_M$ are Gaussian random variables.
 Their expected values depend on which waveform was actually transmitted.
 If $s_m (t)$ was transmitted, then $R(t) = s_m(t) + N(t)$, $E[R(t)] = s_m(t)$, and we have
@@ -82,7 +84,14 @@ Proving this statement will be left as a homework exercise.
 
 This transforms the waveform detection problem into a detection problem for a length-$M$ vector of Gaussian random variables.
 If $s_m (t)$ was transmitted, then the mean of the random vector is the unit vector with a one in the $m$th position.
-Based on the techniques from Chapter~\ref{chapter:DiscreteTimeComm}, the maximum-likelihood decision rule chooses the symbol whose unit vector is closest to the random vector $R_1,\ldots,R_M$ in Euclidean distance.
+Let $(r_1, \ldots, r_M)$ be the realization of the random vector $(R_1,\ldots,R_M)$.
+Then, based on the techniques from Chapter~\ref{chapter:DiscreteTimeComm}, we know that the maximum-likelihood decision rule chooses the symbol whose unit vector is closest to $(r_1,\ldots,r_M)$ in Euclidean distance.
+This implies that we should choose the signal $s_{m^*}(t)$ if
+\[ \sum_{i=1}^M (r_i - \delta_{m^*,i})^2 \leq \sum_{i=1}^M (r_i - \delta_{m,i})^2 \quad \mathrm{for}\; m=1,\ldots,M. \]
+Expanding both sides of this equation shows that this is equivalent to
+\[ r_{m^*} \geq r_m \quad \mathrm{for}\; m=1,\ldots,M. \]
+This whole process is known as a correlation-based receiver.
+
 
 \begin{example}[Frequency-Shift Keying] \label{example:TSpacedTruncatedSinusoids}
 For a fixed time-interval $T$, consider the collection of waveforms given by
@@ -118,7 +127,7 @@ e^{2 \pi i \frac{m}{T} t} e^{- 2 \pi i \frac{m}{T} t} dt \\
 \end{equation*}
 \end{example}
 
-\subsubsection{General Waveforms}
+\subsection{General Waveforms}
 
 When the signal waveforms are not orthonormal, the detection problem is solved most easily by constructing a set of orthonormal basis vectors for the signal space.
 In general, this can be accomplished by applying the Gram-Schmidt orthogonalization process to the signal waveforms.
@@ -129,10 +138,11 @@ This implies that the orthonormal set spans the signal space.
 In this case, the received signal $R(t)$ can be demodulated by computing
 \[ R_j = \langle R(t), \phi_j (t) \rangle, \]
 for each $j=1,\ldots,N$.
+This is the same as correlating the received signal with each of the basis waveforms.
 Again, the noise process implies that $R_1 , \ldots, R_N$ are Gaussian random variables whose means are determined by which waveform was actually transmitted.
 For $j=1,\ldots,N$, the noise component of $R_j$ is independent of the transmitted signal, and is given by
-\[ N_j = \int_{-\infty}^{\infty} N(t) \phi_j^* dt. \]
-Therefore, $R_j = E[R_j] + N_j$ and the mean, if $s_m (t)$ was transmitted, is given by
+\[ N_j = \langle N(t), \phi_j (t) \rangle = \int_{-\infty}^{\infty} N(t) \phi_j^* dt. \]
+Therefore, $R_j = E[R_j] + N_j$ and, assuming $s_m (t)$ was transmitted, the mean is given by
 \begin{align*}
 E \left[R_j \right]
 &= E \left[ \int_{-\infty}^{\infty} R(t) \phi_j^* (t) dt \right] \\
@@ -140,18 +150,19 @@ E \left[R_j \right]
 &= \int_{-\infty}^{\infty} s_m (t) \phi_j^* (t) dt \\
 &= \int_{-\infty}^{\infty} \left( \sum_{k=1}^N a_{m,k} \phi_k (t) \right) \phi_j^* (t) dt \\
 &= \sum_{k=1}^N a_{m,k} \delta_{k,j} dt \\
-&= a_{m,j}. \\
+&= a_{m,j}. 
 \end{align*}
 
 Again, we have transformed the waveform detection problem into a detection problem for a vector of Gaussian random variables.
 In this case, however, there are $M$ different mean vectors of dimension $N$.
-Based on the techniques from Chapter~\ref{chapter:DiscreteTimeComm}, the maximum-likelihood decision rule chooses the symbol $\hat{m}$ whose coordinate vector $(a_{\hat{m},1},\ldots. a_{\hat{m},N})$ is closest to the random vector $R_1,\ldots,R_N$ in Euclidean distance.
+Let $(r_1, \ldots, r_N)$ be the realization of the random vector $(R_1,\ldots,R_N)$.
+Based on the techniques from Chapter~\ref{chapter:DiscreteTimeComm}, the maximum-likelihood decision rule chooses the symbol $m^*$ whose coordinate vector $(a_{m^*,1},\ldots. a_{m^*,N})$ is closest to $(r_1,\ldots,r_N )$ in Euclidean distance.
+This implies that we should choose the signal $s_{m^*}(t)$ if
+\[ \sum_{i=1}^N (r_i - a_{m^*,i})^2 \leq \sum_{i=1}^N (r_i - a_{m,i})^2 \quad \mathrm{for}\; m=1,\ldots,M. \]
 
-This approach can be seen as first projecting the infinite-dimensional received waveform onto a finite-dimensional subspace and then using the optimal detector on this finite-dimensional space.
-To show that this overall approach is optimal, one must also prove that the residual waveform
-\[ \tilde{N}(t) = R(t) - \sum_{j=1}^N R_j \phi_j (t) \]
-does not contain any information relevant to the decision.
-While this is indeed true, we ignore this detail for now.
+This approach can be seen as first projecting the infinite-dimensional received waveform onto the finite-dimensional signal-subspace and then using the optimal detector assuming only the projection was observed.
+This overall approach is optimal only if the projection is a \textbf{sufficient statistic} for maximum-likelihood decision problem.
+While this is indeed true, we disregard this detail for now.
 
 \begin{figure}
 \begin{center}
@@ -169,8 +180,35 @@ While this is indeed true, we ignore this detail for now.
 \epsfig{file=Figures/correlator.eps,width=8cm}
 \end{psfrags}
 \end{center}
-\caption{For a particular realization $r(t)$ of the received signal, the received projection onto the signal-space basis vector can be computed by a bank of correlators.}
+\caption{For a particular realization $r(t)$ of the received signal, the projection $(r_1,\ldots,r_N)$ onto the signal-space basis vectors can be computed by a bank of correlators.}
 \end{figure}
+
+\subsection{The Matched Filter}
+
+Let $s(t)$ be a finite-energy signal and $R(t)=s(t)+N(t)$ be the received waveform.
+Suppose that the receiver computes $R = \langle R(t), z(t) \rangle$ with an arbitrary finite-energy signal $z(t)$.
+One's ability to detect $s(t)$ correctly is largely dependent on the SNR of $R$, which is given by
+\[ SNR = \frac{\left|\int_{-\infty}^{\infty} s(t)z^* (t) dt \right|^2}{\mathrm{Var}(R)}
+= \frac{2\left|\int_{-\infty}^{\infty} s(t)z^* (t) dt \right|^2}{N_0 \int_{-\infty}^{\infty} \left| z(t) \right|^2}. \]
+Choosing $z(t) = c \, s(t)$, for $c\neq 0$, maximizes this function and gives
+\[ SNR = \frac{2\left|c \int_{-\infty}^{\infty} s(t) s^* (t) dt \right|^2}{N_0 \int_{-\infty}^{\infty} \left| c\, s(t) \right|^2}
+= \frac{2 E_s}{N_0}, \]
+where $E_s$ is the energy in the waveform $s(t)$.
+This is the reason that receivers based on the inner product (i.e., cross-correlation) can be optimal.
+
+Using a bank of correlators requires timing information to zero each integrator at the correct time.
+In many cases, it is more convenient to build a filter $h(t)$ matched to the transmitted waveform and sample this filter as needed.
+The \defn{communication}{matched filter} $h(t) = s^* (-t)$ is the time-reversed complex-conjugate of the transmitted waveform.
+Then, $y(t) = h(t) * R(t)$ can be sampled at time $0$ to get
+\begin{align*}
+y(0)
+&= \int_{-\infty}^{\infty} R(\tau) h(t-\tau) d \tau \bigg|_{t = 0} \\
+&= \int_{-\infty}^{\infty} R(\tau) s^* (\tau-t) d \tau \bigg|_{t = 0} \\
+&= \int_{-\infty}^{\infty} R(\tau) s^* (\tau) d \tau \\
+&= \langle R(t) , s(t) \rangle.
+\end{align*}
+
+This shows that correlating against $s(t)$ is mathematically identical to filtering by $h(t) = s^* (-t)$ followed by sampling.
 
 \iffalse
 The $T$-spaced truncated sinusoids of Example~\ref{example:TSpacedTruncatedSinusoids} form a collection of basis waveforms that can be employed to create a signal.
@@ -217,9 +255,9 @@ Below, we continue our analysis of modulation and demodulation schemes by lookin
 In practical communication systems, a succession of symbols is transmitted to the destination.
 Not only can waveforms interfere with one another in signal space, they can also disrupt signal quality across time.
 Suppose that a different symbol is sent every $T$ seconds using time shifts of a basic pulse waveform $p(t)$.
-The transmitted signal, accounting for the different values of $\{ u_n \}$, is equal to
+The transmitted signal, accounting for the different values of $\{ x_n \}$, is equal to
 \begin{equation*}
-u(t) = \sum_{n} u_n p (t - nT) .
+s(t) = \sum_{n = -\infty}^{\infty} x_n p (t - nT) .
 \end{equation*}
 Note that in this case, the available waveforms are simply translated versions of one another.
 Ideally, we want the collection $\{ p(t - nT) \}$ to be orthonormal.
@@ -227,33 +265,113 @@ This would greatly simplify system implementation and decision making at the rec
 However, we cannot use standard techniques such as the Gram-Schmidt procedure to construct a set of orthogonal waveforms, because the elements of $\{ p(t - nT) \}$ are constrained to be translated version of one another.
 Getting an orthonormal set requires more work.
 
-As before, each symbol $u_n$ is identified at the destination by passing the received signal through a linear time-invariant filter, which is mathematically equivalent to performing an inner-product integral.
-Since the waveforms $\{ p(t-nT) \}$ are shifted versions of a same function, it is natural to expect the various filters to implement projections onto shifted versions of a single element $q(t)$.
-A uniform treatment of the demodulation operation can therefore be conducted by looking a the inner product between $u(t)$ and $q(t-\tau)$.
-Let
+As before, the received signal is the random process $R(t) = s(t) + N(t)$ and $N(t)$ is zero-mean Gaussian white-noise process.
+One can detect the symbol $x_m$  by correlating the received signal with the waveform $p(t-mT)$.
+This gives
+\begin{align*}
+R_m &= \langle R(t), p (t-mT) \rangle \\
+&= \int_{-\infty}^{\infty} R(t) p^* (t-mT) dt \\
+&=  \int_{-\infty}^{\infty} N(t) p^* (t-mT) dt +
+\sum_{n = -\infty}^{\infty} x_n \int_{-\infty}^{\infty} p(t-nT) p^* (t-mT) dt \\
+&=  \int_{-\infty}^{\infty} N(t) p^* (t-mT) dt +
+\sum_{n = -\infty}^{\infty} x_n r_p \left( (m-n) T \right) \\
+&=  \underbrace{Z_m}_{\mathrm{noise}} + \underbrace{x_m r_p (0)}_{\mathrm{signal}} + \sum_{n = -\infty, n\neq m}^{\infty} \underbrace{x_n r_p \left( (m-n) T \right)}_{\mathrm{intersymbol\;interference}},
+\end{align*}
+where $r_p (\tau)$ is the autocorrelation function of $p(t)$ and
+\[ Z_m =  \int_{-\infty}^{\infty} N(t) p^* (t-mT) dt. \]
+
+Alternatively, one can use a receive filter $h(t)$ and define $Y(t) = R(t) * h(t)$.
+If one chooses $h(t) = p^* (-t)$, then the received filter is matched to the pulse waveform and sampling $Y(t)$ gives
+\begin{align*}
+Y(mT)
+&= \int_{-\infty}^{\infty} R(\tau) h(mT-\tau) d \tau \\
+&= \int_{-\infty}^{\infty} R(\tau) p^* (\tau - mT) d \tau \\
+&= R_m .
+\end{align*}
+This shows that sampling the matched filter is equivalent to the correlation-based receiver.
+
+
+\iffalse
+We also generalize the system model in this section to include a LTI channel response $h_c (t)$ and a LTI receive filter $h_r (t)$.
+Since we assume that the noise is added inside the receiver, before the receive filter, this implies that the received signal is given by
+\begin{align*}
+R(t)
+&= s(t) * h_c (t) * h_r (t) + N(t) * h_r(t) \\
+&= \left( \sum_{n = -\infty}^{\infty} x_n p (t - nT) \right) * h_c (t) * h_r (t) + N(t) * h_r(t) \\
+&= \left( \sum_{n = -\infty}^{\infty} x_n g(t - nT) \right) + N(t) * h_r(t),
+\end{align*}
+where $g(t) = p (t) * h_c (t) * h_r (t)$.
+In this case, the receive filter $h_r (t)$ can be chosen to optimize system performance.
+
+As before, one can detect the symbol $x_n$  by correlating the received signal with the waveform $p(t-nT)$ associated with $x_n$.
+This gives
 \begin{equation} \label{equation:InnerProductReceiver}
 \begin{split}
-r(\tau) &= \langle u(t), q(t-\tau) \rangle
-= \int_{\mathbb{R}} u(t) q^*(t-\tau) dt \\
-&= \sum_{k} u_k \int_{\mathbb{R}} p(t - kT) q^*(t-\tau) dt \\
+r(\tau) &= \langle u(t), h_r (t-\tau) \rangle
+= \int_{\mathbb{R}} u(t) {h_r}^*(t-\tau) dt \\
+&= \sum_{k} u_k \int_{\mathbb{R}} p(t - kT) {h_r}^*(t-\tau) dt \\
 &= \sum_{k} u_k g(\tau - kT) .
 \end{split}
 \end{equation}
-where $g(\tau) = \langle p(t), q(t-\tau) \rangle$.
-By convention, $q(t)$ is defined such that element $u_n$ is acquired by looking at $r(nT)$.
-Rewritting \eqref{equation:InnerProductReceiver}, we get
+
+is identified at the destination by passing the received signal through a linear time-invariant filter, which is 
+For the ideal channel $h_c(t) = \delta(t)$, one can choose $h_r (t) = p^* (-t)$
+ and plays the role of the matched filter.
+
+So, sampling the output at regular times $t=0,T,2T,\ldots$ is mathematically equivalent to performing a sequence of inner-product integrals.
+\begin{align*}
+R(mT)
+&= \langle R(t), h_{r}^* (mT-t) \rangle \\
+&= \int_{-\infty}^{\infty} R(t) h_{r} (mT-t)
+\end{align*}
+
+As before, each symbol $x_n$ is identified at the destination by passing the received signal through a linear time-invariant filter, which is 
+Since the waveforms $\{ p(t-nT) \}$ are shifted versions of a same function, it is natural to expect the various filters to implement projections onto shifted versions of a single element $h_r (t)$.
+A uniform treatment of the demodulation operation can therefore be conducted by looking a the inner product between $u(t)$ and $h_r (t-\tau)$.
+
+\begin{equation} \label{equation:InnerProductReceiver}
+\begin{split}
+r(\tau) &= \langle u(t), h_r (t-\tau) \rangle
+= \int_{\mathbb{R}} u(t) {h_r}^*(t-\tau) dt \\
+&= \sum_{k} u_k \int_{\mathbb{R}} p(t - kT) {h_r}^*(t-\tau) dt \\
+&= \sum_{k} u_k g(\tau - kT) .
+\end{split}
+\end{equation}
+where $g(\tau) = \langle p(t), h_r (t-\tau) \rangle$.
+By convention, $h_r (t)$ is defined such that element $x_n$ is acquired by looking at $r(nT)$.
+\fi
+
+More generally, we can define $g(t) = p(t) * h(t)$ and let $y_s (t)$ be the deterministic signal portion of $Y(t)$.
+Then, we find that
+\[ y_s (t) = \sum_{n = -\infty}^{\infty} x_n g(t - nT). \]
+Rewriting this, we get
 \begin{equation*}
-r(nT) = u_n g(0) + \sum_{k \neq n} u_k g((n - k)T) .
+y_s (mT) = x_m g(0) + \sum_{n=-\infty,n \neq m}^{\infty} x_n g\left( (m - n)T \right) .
 \end{equation*}
 The first term in this expansion contains the desired symbols.
 The remaining sum is called \emph{intersymbol interference (ISI)}; it contains the contributions from all the other time-shifted waveforms.
-To retrieve the information sequence unambiguously, we wish to have $r(nT) = u_n$, irrespective of the values in the sequence $\{ u_k \}$.
+To retrieve the information sequence unambiguously, we wish to have $y_s (mT) = x_m$, irrespective of the values in the sequence $\{ x_n \}$.
 This will be achieved provided that
 \begin{equation} \label{equation:NoInterSymbolInterferenceSpecification}
-g(nT) = \begin{cases} 1, & k = n \\
+g(nT) = \begin{cases} 1, & n = 0 \\
 0, & \text{otherwise} . \end{cases}
 \end{equation}
-To understand how this condition impacts our choice of a functions $p(t)$ and $q(t)$, we use the frequency representation of $g(\tau)$.
+
+\iffalse
+The random portion $r_n (t)$ of the received waveform is defined by
+\[ r_n (t) = \int_{-\infty}^{\infty} N(t-\tau) h_r (\tau) d \tau. \]
+\fi
+
+Using this, we let $Y_m = Y(mT)$ be the sampled output of the receive filter notice that
+\[ Y_m = y_s (mT) + Z_m, \]
+where $Z_m$ is the zero-mean Gaussian noise corrupting deterministic output $y_s (mT)$.
+If the condition in (\ref{equation:NoInterSymbolInterferenceSpecification}) holds, then we find that
+\[ Y_m = x_m + Z_m, \]
+and we have recovered exactly the discrete-time model of communication discussed in Chapter~\ref{chapter:DiscreteTimeComm}.
+
+\subsection{The Nyquist Criterion}
+
+To understand how the condition~(\ref{equation:NoInterSymbolInterferenceSpecification}) impacts our choice of a functions $p(t)$ and $h (t)$, we use the frequency representation of $g(\tau)$.
 Looking at the inverse Fourier transform of $\hat{g}(f)$, we get
 \begin{equation*}
 \begin{split}
@@ -317,15 +435,25 @@ is that the following equality holds for all values of $f \in \mathbb{R}$,
 \end{equation}
 \end{theorem}
 
+It is important to note that the Nyquist criterion is applied not the transmitted pulse $p(t)$, but to the overall response $g(t)$.
+If the channel is ideal (i.e., $h_c (t) = 1$), then $g(t) = p(t) * h (t)$ and we are free to design both the transmit pulse and receive filter.
+But, optimum detection in white-noise requires that $h (t)$ is matched to $p(t)$.
+Therefore, the best solution is to \emph{split} the $g(t)$ filter between the transmitter and receiver.
+If $\hat{g}(f)$ is real and positive, then we can simply choose
+\[ \hat{p}(f) = \hat{h} (f) = \sqrt{\hat{g}(f)}. \]
+This is known as a \defn{communication}{square-root Nyquist pulse}.
+In this case, $\hat{p}(f)$ is real and $p(t) = p^* (-t)$ and the matched filter is $h(t) = p^*(-t) = p(t)$.
+Since $\hat{g}(f)$ satisfies the Nyquist criterion, this allows one to achieve optimum detection without ISI.
+
 \begin{example}
-One of the simplest possible choices for waveforms $p(t)$ and $q(t)$ is
+One of the simplest possible choices for waveforms $p(t)$ and $h (t)$ is
 \begin{equation*}
-p(t) = q(t) = \frac{1}{\sqrt{T}} \mathrm{rect} \left( \frac{t}{T} \right) .
+p(t) = h (t) = \frac{1}{\sqrt{T}} \mathrm{rect} \left( \frac{t}{T} \right) .
 \end{equation*}
 In this case, we get
 \begin{equation*}
 \begin{split}
-g(\tau) &= \langle p(t), q(t-\tau) \rangle
+g(\tau) &= \langle p(t), h (t-\tau) \rangle
 = \frac{1}{T} \int_{\mathbb{R}} \mathrm{rect} \left( \frac{t}{T} \right)
 \mathrm{rect} \left( \frac{t - \tau}{T} \right) dt \\
 &= \frac{1}{T} \int_{\mathbb{R}} \mathrm{rect} \left( \frac{t}{T} \right)
@@ -337,19 +465,20 @@ g(\tau) &= \langle p(t), q(t-\tau) \rangle
 Obviously, this selection leads to the desired property with $g(0) = 1$, and $g(nT) = 0$ for any non-zero integer~$n$.
 One of the design issues with the rectangular pulse is that its bandwidth is infinite and decays slowly.
 This becomes a problem in most practical systems where spectral bandwidth comes at a premium.
+Notice also that this is the square-root Nyquist pulse associated with a triangular $g(t)$.
 \end{example}
 
 \begin{example}
 Consider the pulse-shaping criterion applied to
 \begin{equation*}
-p(t) = q(t) = \frac{1}{\sqrt{T}} \mathrm{sinc} \left( \frac{t}{T} \right) .
+p(t) = h (t) = \frac{1}{\sqrt{T}} \mathrm{sinc} \left( \frac{t}{T} \right) .
 \end{equation*}
 We wish to show that this choice of waveforms satisfies the Nyquist criterion and leads to a set of orthogonal time-shift waveforms.
 
 First, we find an expression for $g(\tau)$,
 \begin{equation*}
 \begin{split}
-g(\tau) &= \langle p(t), q(t-\tau) \rangle
+g(\tau) &= \langle p(t), h (t-\tau) \rangle
 = \frac{1}{T} \int_{\mathbb{R}} \mathrm{sinc} \left( \frac{t}{T} \right)
 \mathrm{sinc} \left( \frac{t - \tau}{T} \right) dt \\
 &= \frac{1}{T} \int_{\mathbb{R}} \mathrm{sinc} \left( \frac{t}{T} \right)
@@ -377,16 +506,89 @@ We can therefore verify condition~\eqref{equation:NyquistCriterionFrequencyCondi
 \end{equation*}
 That is, the conditions of Theorem~\ref{theorem:NyquistPulseCriterion} hold and, consequently, $g(0) = 1$ and $g(n) = 0$ for any non-zero integer.
 One of the positive attributes of the $\mathrm{sinc} (\cdot)$ waveform is that it is bandwidth-limited.
-However, this pulse is not time-limited and it is therefore somewhat impractical, as using $\mathrm{sinc} (\cdot)$ waveforms would entail infinite delay at the destination.
+However, this pulse is not time-limited and it decays quite slowly in the time-domain.
+It is therefore somewhat impractical, as using $\mathrm{sinc} (\cdot)$ waveforms without truncation would entail infinite delay at the destination.
+Notice that this is the square-root Nyquist pulse associated with $\hat{g}(f)=T \mathrm{rect}(Tf)$ and that the square root has no effect.
 \end{example}
 
 Although, there are many choices for $\hat{g}(f)$ that satisfy Theorem~\ref{theorem:NyquistPulseCriterion}, we are primarily interested in waveforms that are approximately both bandwidth-limited and time-limited.
 The \emph{Nyquist bandwidth} associated with a signal
 \begin{equation*}
-u(t) = \sum_k u_k p(t -kT)
+s(t) = \sum_{n=-\infty}^{\infty} x_n p(t -kT)
 \end{equation*}
 is defined by $\frac{1}{2T}$; it represents the smallest possible bandwidth for which it is possible to prevent intersymbol interference.
 The spectral bandwidth of $\hat{g}(f)$ is the smallest possible value of $W$ such that $\hat{g}(f) = 0$ for $|f| > W$.
+
+\begin{example}
+The \defn{communication}{raised-cosine Nyquist pulse} introduces some bandwidth expansion in order to achieve a more rapid pulse decay in the time-domain.
+It is the basis for the one of the most popular pulse shaping filters used in digital communications.
+In the frequency domain, it has the representation
+\begin{equation*}
+\hat{g} (f) =
+\begin{cases} T & \mathrm{if}\;|f| \leq \frac{1 - \beta}{2T} \\
+ \frac{T}{2}\left[1 + \cos\left(\frac{\pi T}{\beta}\left[|f| - \frac{1 - \beta}{2T}\right]\right)\right] & \mathrm{if}\;\frac{1 - \beta}{2T} < |f| \leq \frac{1 + \beta}{2T} \\
+ 0 & \mathrm{otherwise},
+\end{cases}
+\end{equation*}
+where $\beta$ is the roll-off factor that measures the excess bandwidth (beyond the Nyquist minimum) used by the filter.
+
+To compute the correct pulse-shaping filter, we must take the square-root in the frequency domain and the inverse Fourier transform.
+This results in the \defn{communication}{root raised-cosine pulse} given by
+\begin{equation*}
+p(t) =
+\begin{cases}
+1-\beta+4\dfrac{\beta}{\pi} & \mathrm{if}\; t = 0 \\
+\dfrac{\beta}{\sqrt{2}}
+\left[ \left(1+\dfrac{2}{\pi}\right)\sin\left(\dfrac{\pi}{4\beta}\right) + \left(1-\dfrac{2}{\pi}\right)\cos\left(\dfrac{\pi}{4\beta}\right) \right]
+& \mathrm{if}\; t = \pm \dfrac{T_s}{4\beta} \\
+\dfrac{\sin\left[\pi \dfrac{t}{T_s}\left(1-\beta\right)\right] + 4\beta\dfrac{t}{T_s}\cos\left[\pi\dfrac{t}{T_s}\left(1+\beta\right)\right]}{\pi \dfrac{t}{T_s}\left[1-\left(4\beta\dfrac{t}{T_s} \right)^2 \right]}
+& \mathrm{otherwise}.
+\end{cases}
+\end{equation*}
+In this case, the slow $1/t$ decay rate of the sinc function has been improved to a decay rate of $1/t^2$.
+\end{example}
+
+\subsection{Passband Communication}
+
+Until now, our study of waveform communication has focused on \defn{communication}{baseband signals}, which have the majority of their energy near DC.
+Signals which occupy a narrow frequency band well separated from DC are known as \defn{communication}{passband signals}.
+All of wireless communications is based on passband signals because low-frequency electromagnetic waves require enormous antennas for efficient transmission.
+Typical frequency ranges for wireless communications start around 800 MHz and short-range communication is possible up until about 60 GHz.
+
+The process of shifting a baseband signal in frequency to make it passband is know as mixing.
+Let $s(t)$ be a baseband signal with bandwidth $W$ and define
+\[ x(t) = e^{2\pi j f_0 t} s(t). \]
+From the modulation property of the Fourier transform, one sees that
+\[ \hat{x}(f) = \hat{s}(f-f_0). \]
+This implies that $x(t)$ is a passband signal centered at frequency $f_0$ with bandwidth $2W$.
+
+The resulting $x(t)$ must be complex because it does not have negative-frequency conjugate-symmetry.
+But, any signal represented by a single time-varying voltage on a single wire is necessarily real.
+Therefore, we must take the real part of $x(t)$ to obtain a physically realizable passband signal.
+The result
+\begin{align*}
+\Re \left\{ x(t) \right \}
+& = \frac{1}{2} e^{2\pi j f_0 t} s(t) + \frac{1}{2}  e^{-2\pi j f_0 t} s^* (t) \\
+& = \Re \left\{ s(t) \right\} \cos(2 \pi f_0 t) - \Im \left\{ s(t) \right\} \sin (2\pi f_0 t)
+\end{align*}
+shows us how to mix a complex baseband signal $s(t)$ with real oscillators (i.e., for the sine and cosine) to generate the passband signal.
+This mixing process is known as \textbf{quadrature amplitude modulation}.
+
+In wireless communication, the real passband signal is coupled to an antenna to generate radio waves that propagate through space.
+At the receiver, another antenna couples the received radio waves into the the time-varying voltage $r(t)$.
+Demodulation of the received waveform $r(t) = \Re \left\{ x(t) \right \}$ is done using a similar process with
+\begin{align*}
+y(t)
+& = r(t) e^{-2\pi j f_0 t} \\
+& =  \frac{1}{2} \Re \left\{ s(t) \right\} \left( \cos^2 (2 \pi f_0 t) - j \cos(2\pi f_0 t) \sin(2\pi f_0 t) \right) \\
+& \quad + \frac{j}{2} \Im \left\{ s(t) \right\} \left( \sin^2 (2 \pi f_0 t) - j \cos(2\pi f_0 t) \sin(2\pi f_0 t) \right) \\
+& =  \frac{1}{2} \Re \left\{ s(t) \right\} \left( 1 + \cos(4\pi f_0 t) - j \sin(4\pi f_0 t) \right) \\
+& \quad + \frac{j}{2} \Im \left\{ s(t) \right\} \left( 1 - \cos(4 \pi f_0 t) - j \sin(4 \pi f_0 t \right).
+\end{align*}
+If $f_0 + W < 2 f_0 - W$, then we can use an ideal low-pass filter $h(t)$ (with cutoff $f_0+W$) to remove the \emph{images} at $2f_0$ without affecting the signal.
+This gives
+\[ y(t) * h(t) = \frac{1}{2} s(t). \]
+So this approach allows us to upconvert $s(t)$ to a passband signal and then downconvert it back to a bandpass signal.
 
 \iffalse
 \subsection{Pulse Amplitude Modulation}
@@ -411,7 +613,7 @@ and $d$ denotes the distance between adjacent points.
 
 A closely related modulation scheme is quadrature amplitude modulation (QAM).
 In this scheme, data is conveyed to the destination by changing the amplitude of two carrier waves.
-Equivalently, QAM can be interpreted as modulating a compex amplitude onto a single waveform,
+Equivalently, QAM can be interpreted as modulating a complex amplitude onto a single waveform,
 \begin{equation*}
 u(t) = (u + iv) \phi(t) .
 \end{equation*}
@@ -434,7 +636,7 @@ In phase shift keying (PSK), the transmitted signal $u(t)$ is given by
 u(t) = \frac{1}{\sqrt{T}} e^{2 \pi i f_{\mathrm{c}} t + i \theta}
 \mathrm{rect} \left( \frac{t}{T} \right) ,
 \end{equation*}
-where $\theta$ is one of finitely many possibility and the carrier freqency $f_{\mathrm{c}}$ is an integer multiple of $\frac{1}{T}$.
+where $\theta$ is one of finitely many possibility and the carrier frequency $f_{\mathrm{c}}$ is an integer multiple of $\frac{1}{T}$.
 The data in PSK is embedded in $\theta$, the phase of the sinusoid.
 Note that the function $u(t)$ can be rewritten as
 \begin{equation*}
@@ -460,7 +662,7 @@ HERE
 
 \newpage
 
-\section{High-Dimentional Signal Constellations}
+\section{High-Dimensional Signal Constellations}
 
 \subsection{Orthogonal Signal Waveforms}
 
