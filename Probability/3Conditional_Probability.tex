@@ -7,7 +7,7 @@ This is a powerful concept that is used extensively throughout engineering with 
 
 \section{Conditioning on Events}
 
-We begin our treatment of conditional probability with an illustrative example.
+We begin our description of conditional probability with an illustrative example.
 The intuition gained through this simple exercise is then generalized by introducing a formal definition for this important concept.
 
 \begin{example}
@@ -28,8 +28,8 @@ The resulting values are known as conditional probabilities.}
 
 These three outcomes had equal probabilities before the additional information was revealed.
 It then seems natural to assume that they remain equally likely afterwards.
-In particular, it is reasonable to assign a probability of $1/3$ to each of the three outcomes that remain possible candidates after learning the new information.
-Note that we can express the probability of getting a three given that the outcome is an odd number as
+In particular, it is reasonable to assign a probability of $1/3$ to each of the three outcomes that remain possible candidates after receiving the side information.
+We can express the probability of getting a three given that the outcome is an odd number as
 \begin{equation*}
 \frac{\Pr (3 \cap \{ 1, 3, 5 \})}{\Pr (\{ 1, 3, 5 \} ) }
 = \frac{\Pr(3)}{\Pr (\{1,3,5\})} = \frac{1}{3} .
@@ -37,29 +37,32 @@ Note that we can express the probability of getting a three given that the outco
 \end{example}
 
 \begin{example}
-Let $A,B$ be events (i.e., subsets) in the sample space $\Omega$ associated with a particular random experiment and assume that $\Pr(B)>0$.
-To gain intuition for more general conditional probabilities, consider repeating the experiment $N$ times and tallying the results relative to $A,B$.
-Let $N_{AB}$ be the number of times that both $A$ and $B$ occurred, $N_{A\overline{B}}$ be the number of times that only $A$ occurred,  $N_{\overline{A}B}$ be the number of times that only $B$ occurred, and  $N_{\overline{A}\overline{B}}$ be the number of times that neither occurred.
-From this, we see that $A$ occurred exactly $N_A = N_{AB} + N_{A\overline{B}}$ times and $B$ occurred exactly $N_B = N_{AB} + N_{\overline{A}B}$ times.
+Let $A$ and $B$ be events associated with a random experiment, and assume that $\Pr(B)>0$.
+To gain additional insight into conditional probability, we consider the scenario where this experiment is repeated $N$ times.
+Let $N_{AB}$ be the number of trials for which $A \cap B$ occurred, $N_{A\overline{B}}$ be the number of times where only $A$ occurred,  $N_{\overline{A}B}$ be the number of times where only $B$ occurred, and  $N_{\overline{A}\overline{B}}$ be the number of trials for which neither took place.
+From these definitions, we gather that $A$ was observed exactly $N_A = N_{AB} + N_{A\overline{B}}$ times, and $B$ was seen $N_B = N_{AB} + N_{\overline{A}B}$ times.
 
-The frequentist view of probability is based on the fact that, as $N$ becomes large, one can compute event probabilities by taking the ratio of the number of times the event occurred to the number of trials.
-This implies that
+The frequentist view of probability is based on the fact that, as $N$ becomes large, one can approximate the probability of an event by taking the ratio of the number of times this event occurred over the total number of trials.
+For instance, we can write
+\begin{xalignat*}{2}
+\Pr (A\cap B) & \approx \frac{N_{AB}}{N} &
+\Pr (B) & \approx \frac{N_{B}}{N}.
+\end{xalignat*}
+Likewise, the conditional probability of $A$ given knowledge that $B$ has occurred can be computed using
 \begin{equation*}
-\Pr (A\cap B) \approx\frac{N_{AB}}{N} \quad \quad
-\Pr (B) \approx \frac{N_{B}}{N}.
+\Pr (A | B) \approx \frac{N_{AB}}{N_B}
+= \frac{N_{AB} / N}{N_B / N} \approx \frac{\Pr (A \cap B)}{\Pr (B)}.
 \end{equation*}
-Likewise, the conditional probability that $A$ occurs given knowledge that $B$ occurred can be computed with
-\[ \Pr (A | B) \approx \frac{N_{AB}}{N_B} = \frac{N_{AB} / N}{N_B / N} \approx \frac{\Pr (A \cap B)}{\Pr (B)}. \]
-As the number of trials approaches infinity, the approximation becomes exact and one obtains the definition of conditional probability.
+As $N$ approaches infinity, these approximations become exact and unveil the formula for conditional probability.
 \end{example}
 
-Having considered intuitive arguments, we now give the mathematical definition of conditional probability.
+Having considered intuitive arguments, we turn to the mathematical definition of conditional probability.
 Let $B$ be an event such that $\Pr (B) > 0$.
 A conditional probability law assigns to every event $A$ a number $\Pr (A|B)$, termed the \emph{conditional probability of $A$ given $B$}, such that \index{Conditional probability}
 \begin{equation} \label{equation:ConditionalProbability}
 \Pr (A | B) = \frac{\Pr (A \cap B)}{\Pr (B)}.
 \end{equation}
-We can show that the set of conditional probabilities $\{ \Pr (A | B) \}$ specifies a valid probability law, as defined in Section~\ref{section:ProbabilityLaws}.
+We can show that the collection of conditional probabilities $\{ \Pr (A | B) \}$ specifies a valid probability law, as defined in Section~\ref{section:ProbabilityLaws}.
 For every event $A$, we have
 \begin{equation*}
 \Pr (A|B) = \frac{\Pr (A \cap B)}{\Pr (B)} \geq 0.
@@ -120,7 +123,7 @@ This formula is known as the \emph{chain rule of probability} and can be verifie
 \cdots \frac{\Pr \left( \bigcap_{k=1}^{n} A_k \right)}
 {\Pr \left( \bigcap_{k=1}^{n-1} A_k \right)} .
 \end{equation*}
-We emphasize that these expressions implicitly assume that $\Pr \left( \bigcap_{k=1}^{n-1} A_k \right) \neq 0$.
+This latter expression implicitly assumes that $\Pr \left( \bigcap_{k=1}^{n-1} A_k \right) \neq 0$.
 
 \begin{example}
 An urn contains eight blue balls and four green balls.
@@ -131,7 +134,7 @@ The probability of drawing a blue ball the second time given that the first ball
 Finally, the probability of drawing a blue ball the third time given that the previous two balls are blue is $6/10$.
 Using \eqref{equation:SimultaneousEvents}, we can compute the probability of drawing three blue balls as
 \begin{equation*}
-\Pr (rrr)
+\Pr (bbb)
 = \frac{8}{12} \frac{7}{11} \frac{6}{10}
 = \frac{14}{55} .
 \end{equation*}
@@ -191,11 +194,7 @@ We can therefore write
 \begin{equation*}
 B = B \cap \Omega = B \cap \left( \bigcup_{k=1}^n A_k \right) .
 \end{equation*}
-Since $A_1, A_2, \ldots, A_n$ are disjoint sets, the events
-\begin{equation*}
-A_1 \cap B, A_2 \cap B, \ldots, A_n \cap B
-\end{equation*}
-are also disjoint.
+Since $A_1, A_2, \ldots, A_n$ are disjoint sets, the events $A_1 \cap B, A_2 \cap B, \ldots, A_n \cap B$ are also disjoint.
 Combining these two facts, we get
 \begin{equation*}
 \begin{split}
@@ -206,7 +205,7 @@ Combining these two facts, we get
 = \sum_{k=1}^n \Pr (A_k) \Pr \left( B |A_k \right) ,
 \end{split}
 \end{equation*}
-where the fourth equality is obtained by applying the third axiom of probability.
+where the fourth equality follows from the third axiom of probability.
 \end{proof}
 
 \begin{figure}[htb!]
@@ -219,33 +218,28 @@ where the fourth equality is obtained by applying the third axiom of probability
 
 A graphical interpretation of Theorem~\ref{theorem:TotalProbability} is illustrated in Figure~\ref{figure:SetPartition3}.
 Event $B$ can be decomposed into the disjoint union of $A_1 \cap B, A_2 \cap B, \ldots, A_n \cap B$.
-The probability of event $B$ can then be computed by adding these various parts
+The probability of event $B$ can then be computed by adding the corresponding summands
 \begin{equation*}
 \Pr (A_1 \cap B), \Pr (A_2 \cap B), \ldots, \Pr (A_n \cap B) .
 \end{equation*}
 
 \begin{example}
-An urn contains eight red balls and four green balls.
-A first ball is drawn from the urn.
-If this ball is green then the experiment stops, otherwise a second ball is drawn from the urn.
-What is the probability of obtaining a green ball?
+An urn contains five green balls and three red balls.
+A second urn contains three green balls and nine red balls.
+One of the two urns is picked at random, with equal probabilities, and a ball is drawn from the selected urn.
+We wish to compute the probability of obtaining a green ball.
 
-In this problem, there are three outcomes of interest.
-If we denote the drawing of a green ball by $g$ and the drawing of a red ball by $r$, then these three outcomes can be represented by $\{ g, rg, rr \}$.
-The probability of drawing a green ball initially is $\Pr (g) = 4/12$.
-The probabilities of drawing two balls can be computed using \eqref{equation:SimultaneousEvents}, and they are given by
-\begin{align*}
-\Pr (rg) &= \frac{8}{12} \frac{4}{11} = \frac{8}{33} \\
-\Pr (rr) &= \frac{8}{12} \frac{7}{11} = \frac{14}{33} .
-\end{align*}
-Let $G = \{ g, rg \}$ denote the event that a green ball is obtained during the experiment.
-The overall probability of getting a green ball, $\Pr (G)$, can be computed by applying the total probability theorem
+In this problem, using a divide and conquer approach seems appropriate.
+We therefore utilize the Total Probability Theorem.
+If the first urn is chosen, then the probability of getting a green ball is $5/8$.
+One the other hand, if a ball is drawn from the second urn, the probability that it is green reduces to $3/12$.
+Since the probability of selecting either urn is $1/2$, we can write the overall probability of getting a green ball as
 \begin{equation*}
 \begin{split}
-\Pr (G) &= \Pr (G \cap g) + \Pr (G \cap rg) + \Pr (G \cap rr) \\
-&= \Pr (G|g) \Pr(g) + \Pr (G|rg) \Pr(rg) + \Pr (G|rr) \Pr(rr) \\
-&= 1 \cdot \frac{1}{3} + 1 \cdot \frac{8}{33} + 0 \cdot \frac{14}{33}
-= \frac{19}{33} .
+\Pr (g) &= \Pr (g \cap U_1) + \Pr (g \cap U_2) \\
+&= \Pr (g | U_1) \Pr (U_1) + \Pr (g | U_2) \Pr (U_2) \\
+&= \frac{5}{8} \cdot \frac{1}{2} + \frac{3}{12} \cdot \frac{1}{2}
+= \frac{7}{16}.
 \end{split}
 \end{equation*}
 \end{example}
@@ -260,14 +254,14 @@ It relates the conditional probability of $A$ given $B$ to the conditional proba
 Let $A_1, A_2, \ldots, A_n$ be a collection of events that forms a partition of the sample space $\Omega$.
 Suppose that $\Pr (A_k) > 0$ for all $k$.
 Then, for any event $B$ such that $\Pr (B) > 0$, we can write
-\begin{equation*}
+\begin{equation} \label{equation:BayesRule}
 \begin{split}
 \Pr (A_i | B)
 &= \frac{ \Pr (A_i) \Pr (B | A_i) }{ \Pr (B) } \\
 &= \frac{ \Pr (A_i) \Pr (B | A_i) }
 { \sum_{k=1}^n \Pr (A_k) \Pr (B | A_k) } .
 \end{split}
-\end{equation*}
+\end{equation}
 \end{theorem}
 \begin{proof}
 Bayes' rule is easily verified.
@@ -276,20 +270,7 @@ We expand the probability of $A_i \cap B$ using \eqref{equation:ProbabilityInter
 \Pr (A_i \cap B) = \Pr (A_i | B) \Pr (B) = \Pr (B | A_i) \Pr (A_i).
 \end{equation*}
 Rearranging the terms yields the first equality.
-The second equality is obtained by writing
-\begin{equation*}
-\begin{split}
-\Pr (B) &= \Pr (B \cap \Omega)
-= \Pr \left( B \cap \left( \bigcup_{k=1}^n A_k \right) \right) \\
-&= \sum_{k=1}^n \Pr (B \cap A_k)
-= \sum_{k=1}^n \Pr (A_k) \Pr (B | A_k) .
-\end{split}
-\end{equation*}
-The application of the third axiom of probability is justified because
-\begin{equation*}
-A_1, A_2, \ldots, A_n
-\end{equation*}
-are disjoint events.
+The second equality in \eqref{equation:BayesRule} is obtained by applying Theorem~\ref{theorem:TotalProbability} to the denominator $\Pr(B)$.
 \end{proof}
 
 \begin{example}
@@ -309,14 +290,14 @@ Using Bayes' rule, we can easily compute the probability that a person who teste
 &\approx 0.1610 .
 \end{split}
 \end{equation*}
-Although the test first appeared fairly accurate, the probability that a person with a positive test carries the disease remains small.
+Although the test may appear fairly accurate, the probability that a person with a positive test carries the disease remains small.
 \end{example}
 
 
 \section{Independence}
 \label{section:Independence}
 
-Events $A$ and $B$ are said to be \emph{independent} if $\Pr (A \cap B) = \Pr(A) \Pr(B)$. \index{Independence}
+Two events $A$ and $B$ are said to be \emph{independent} if $\Pr (A \cap B) = \Pr(A) \Pr(B)$. \index{Independence}
 Interestingly, independence is closely linked to the concept of conditional probability.
 If $\Pr(B) > 0$ and events $A$ and $B$ are independent, then
 \begin{equation*}
@@ -324,8 +305,8 @@ If $\Pr(B) > 0$ and events $A$ and $B$ are independent, then
 = \frac{ \Pr (A) \Pr(B) }{\Pr (B)}
 = \Pr (A).
 \end{equation*}
-The \emph{a priori} probability of event $A$ is identical to the \emph{a posteriori} probability of $A$ given $B$.
-That is, if $A$ is independent of $B$, then partial knowledge about $B$ contains no information on the likely occurrence of $A$.
+That is, the \emph{a priori} probability of event $A$ is identical to the \emph{a posteriori} probability of $A$ given $B$.
+In other words, if $A$ is independent of $B$, then partial knowledge of $B$ contains no information about the likely occurrence of $A$.
 We note that independence is a symmetric relation; if $A$ is independent of $B$, then $B$ is also independent of $A$.
 It is therefore unambiguous to say that $A$ and $B$ are independent events.
 
@@ -383,7 +364,7 @@ The events $A_1, A_2, \ldots, A_n$ are \emph{independent} provided that \index{I
 for every subset $\IndexSet$ of $\{1, 2, \ldots, n\}$.
 
 For instance, consider a collection of three events, $A$, $B$ and $C$.
-These events are independent if
+These events are independent provided that
 \begin{equation} \label{equation:ThreeIndependentEvents}
 \begin{split}
 \Pr (A \cap B) &= \Pr (A) \Pr (B) \\
@@ -495,7 +476,7 @@ In particular, we have
 We emphasize that events $A_1$ and $A_2$ are not independent with respect to the unconditional probability law.
 \end{example}
 
-Two events that are independent with respect to an unconditional probability law, may not be conditionally independent.
+Two events that are independent with respect to an unconditional probability law may not be conditionally independent.
 
 \begin{example}
 Two dice are rolled at the same time, a red die and a blue die.
@@ -506,7 +487,7 @@ We can easily compute the probability of simultaneously getting a two on the red
 \end{equation*}
 Clearly, these two events are independent.
 
-Now, consider the probability of rolling a two on the red die and a six on the blue die given that the sum of the two dice is an odd number.
+Consider the probability of rolling a two on the red die and a six on the blue die given that the sum of the two dice is an odd number.
 The individual conditional probabilities are given by
 \begin{equation*}
 \Pr (\{ r=2 \} | \{ r+b \text{ is odd} \})

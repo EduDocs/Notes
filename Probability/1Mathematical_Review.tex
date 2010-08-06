@@ -2,8 +2,9 @@
 
 Set theory is now generally accepted as the foundation of modern mathematics, and it plays an instrumental role in the treatment of probability.
 Unfortunately, a simple description of set theory can lead to paradoxes, while a rigorous axiomatic approach is quite tedious.
-As such, we assume that the meaning of a set as a collection of objects is intuitively clear and proceed to define relevant notation and operations.
+In these notes, we circumvent these difficulties and assume that the meaning of a set as a collection of objects is intuitively clear.
 This standpoint is known as naive set theory.
+We proceed to define relevant notation and operations.
 
 \begin{figure}[htb]
 \begin{center}
@@ -52,24 +53,24 @@ For example, starting with the integers $\Integers$, we can form the subset $S$ 
 S = \{ x \in \Integers | x \text{ is an even number} \}.
 \end{equation*}
 More generally, we denote the set of all elements that satisfy a certain property $P$ by $S = \{ x | x \text{ satisfies } P \}$.
-The braces are to be read as the words ``the set of'' while the symbol $|$ stands for the words ``such that.''
+The braces are to be read as ``the set of'' while the symbol $|$ stands for the words ``such that.''
 
 It is convenient to introduce two special sets.
 The \emph{empty set}, denoted by $\emptyset$, is a set that contains no elements.\index{Empty set}
 The \emph{universal set} is the collection of all objects of interest in a particular context, and it is represented by $\Omega$.
 Once a universal set $\Omega$ is specified, we need only consider sets that are subsets of $\Omega$.
 In the context of probability, $\Omega$ is often called the \emph{sample space}.\index{Sample space}
-The \emph{complement} of a set $S$, with respect to the universal set $\Omega$, is the collection of all objects in $\Omega$ that do not belong to $S$,\index{Complement}
+The \emph{complement} of a set $S$, relative to the universal set $\Omega$, is the collection of all objects in $\Omega$ that do not belong to $S$,\index{Complement}
 \begin{equation*}
 S^{\Complement} = \{ x \in \Omega | x \notin S \}.
 \end{equation*}
-For example, we note that $\Omega^{\Complement} = \emptyset$.
+For example, we have $\Omega^{\Complement} = \emptyset$.
 
 
 \section{Elementary Set Operations}
 
-Probability theory makes extensive use of elementary set operations.
-Below, we review the ideas of set theory, and establish basic terminology and notation.
+The field of probability makes extensive use of set theory.
+Below, we review elementary set operations, and we establish basic terminology and notation.
 Consider two sets, $S$ and $T$.
 
 \begin{figure}[htb!]

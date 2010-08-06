@@ -2,7 +2,7 @@
 
 The theory of probability provides the mathematical tools necessary to study and analyze uncertain phenomena that occur in nature.
 It establishes a formal framework to understand and predict the outcome of a random experiment.
-It can also be used to model complex systems and characterize stochastic processes.
+It can be used to model complex systems and characterize stochastic processes.
 This is instrumental in designing efficient solutions to many engineering problems.
 Two components define a probabilistic model, a sample space and a probability law.
 
@@ -49,12 +49,12 @@ The actual number observed after rolling the die is the outcome of the experimen
 There is essentially no restriction on what constitutes an experiment.
 The flipping of a coin, the flipping of $n$ coins, and the tossing of an infinite sequence of coins are all random experiments.
 Also, two similar experiments may have different sample spaces.
-The sample space $\Omega$ for observing the number of heads in $n$ tosses of a coin is $\{ 0, 1, \ldots, n \}$; however, when describing the complete history of the $n$ coin tosses, the sample space becomes much larger with $2^n$ distinct sequences of heads and tales.
+A sample space $\Omega$ for observing the number of heads in $n$ tosses of a coin is $\{ 0, 1, \ldots, n \}$; however, when describing the complete history of the $n$ coin tosses, the sample space becomes much larger with $2^n$ distinct sequences of heads and tales.
 Ultimately, the choice of a particular sample space depends on the properties one wishes to analyze.
 Yet some rules must be followed in selecting a sample space.
 \begin{enumerate}
 \item The elements of a sample space should be \emph{distinct} and \emph{mutually exclusive}.
-This insures that the outcome of an experiment is unique.\index{Distinct elements}\index{Mutually exclusive}
+This ensures that the outcome of an experiment is unique.\index{Distinct elements}\index{Mutually exclusive}
 \item A sample space must be \emph{collectively exhaustive}.
 That is, every possible outcome of the experiment must be accounted for in the sample space.\index{Collectively exhaustive}
 \end{enumerate}
@@ -75,14 +75,14 @@ This violates the uniqueness criterion.
 
 Alternatively, the elements of the space composed of the odd numbers between one and six, and the even numbers between one and six, are distinct and mutually exclusive;
 an integer cannot be simultaneously odd and even.
-Moreover, this space is collectively exhaustive because every integer between one and six is either odd or even.
+Moreover, this space is collectively exhaustive because every integer is either odd or even.
 This latter description forms a possible sample space for the rolling of a die.
 
 \begin{figure}[htb!]
 \begin{center}
 \includegraphics[height=3.75cm]{Figures/2Chapter/admissiblespace}
 \end{center}
-\caption{A possible sample space for the rolling of a die is composed of two objects, the odd numbers and the even numbers between one and six.}
+\caption{A candidate sample space for the rolling of a die is composed of two objects, the odd numbers and the even numbers between one and six.}
 \end{figure}
 \end{example}
 
@@ -90,7 +90,7 @@ This latter description forms a possible sample space for the rolling of a die.
 \section{Probability Laws}
 \label{section:ProbabilityLaws}
 
-A \emph{probability law} specifies the likelihood of any event related to an experiment.\index{Probability law}
+A \emph{probability law} specifies the likelihood of events related to an experiment.\index{Probability law}
 Formally, a probability law assigns to every event $A$ a number $\Pr (A)$, called the \emph{probability of event $A$}, such that the following axioms are satisfied.
 \begin{enumerate}
 \item \textbf{(Nonnegativity)} $\Pr (A) \geq 0$, for every event $A$.
@@ -98,7 +98,7 @@ Formally, a probability law assigns to every event $A$ a number $\Pr (A)$, calle
 \begin{equation*}
 \Pr (\Omega) = 1 .
 \end{equation*}
-\item \textbf{(Countable Additivity)} If $A$ and $B$ are disjoint events with $A \cap B = \emptyset$, then the probability of their union satisfies
+\item \textbf{(Countable Additivity)} If $A$ and $B$ are disjoint events, $A \cap B = \emptyset$, then the probability of their union satisfies
 \begin{equation*}
 \Pr (A \cup B) = \Pr (A) + \Pr (B) .
 \end{equation*}
@@ -184,9 +184,9 @@ Then, we have
 \begin{equation*}
 \begin{split}
 \Pr \left( \bigcup_{k=1}^{n+1} A_k \right)
-&= \Pr \left( A_{n+1} \bigcup \left( \bigcup_{k=1}^{n} A_k \right) \right) \\
+&= \Pr \left( A_{n+1} \cup \left( \bigcup_{k=1}^{n} A_k \right) \right) \\
 &= \Pr (A_{n+1}) + \Pr \left( \bigcup_{k=1}^{n} A_k \right)
-- \Pr \left( A_{n+1} \bigcap \left( \bigcup_{k=1}^{n} A_k \right) \right) \\
+- \Pr \left( A_{n+1} \cap \left( \bigcup_{k=1}^{n} A_k \right) \right) \\
 &\leq \Pr (A_{n+1}) + \Pr \left( \bigcup_{k=1}^{n} A_k \right)
 \leq \sum_{k = 1}^{n+1} \Pr (A_k) .
 \end{split}
@@ -207,9 +207,9 @@ The probability of event $A$ is therefore given by the third axiom of probabilit
 = \Pr ( \{ s_i \in \Omega | i \in \IndexSet \} )
 = \sum_{i \in \IndexSet} \Pr (s_i) .
 \end{equation*}
-We note that, by definition, distinct outcomes are always disjoint events.
+We emphasize that, by definition, distinct outcomes are always disjoint events.
 
-If in addition all the elements of $\Omega$ are equally likely with
+If in addition the elements of $\Omega$ are equally likely with
 \begin{equation*}
 \Pr (s_1) = \Pr (s_2) = \cdots = \Pr (s_n) = \frac{1}{n} ,
 \end{equation*}
@@ -304,7 +304,7 @@ To develop an understanding of uncountable probabilistic models, we consider the
 \end{figure}
 
 Suppose that an element is chosen at random from this interval, with all elements having equal weight.
-By the first axiom of probability, we have $\Pr \left( [0,1] \right) = 1$.
+By the first axiom of probability, we must have $\Pr \left( [0,1] \right) = 1$.
 Furthermore, if two intervals have the same length, the probabilities of the outcome falling in either interval should be identical.
 For instance, it is natural to anticipate that $\Pr \left( \left( 0, 0.25 \right) \right) = \Pr \left( \left( 0.75, 1 \right) \right)$.
 
@@ -317,7 +317,7 @@ For instance, it is natural to anticipate that $\Pr \left( \left( 0, 0.25 \right
 \psfrag{1}[r]{$1$}
 \includegraphics[height=1.185cm]{Figures/2Chapter/intervals}
 \end{psfrags}
-\caption{If the outcome of an experiment is uniformly distributed over $[0,1]$, then two subintervals of equal length should have the same probabilities.}
+\caption{If the outcome of an experiment is uniformly distributed over $[0,1]$, then two subintervals of equal lengths should have the same probabilities.}
 \end{center}
 \end{figure}
 
@@ -343,7 +343,7 @@ Specifically, for constants $0 \leq a_1 < b_1 < a_2 < b_2 < \cdots \leq 1$, we g
 \Pr \left( \bigcup_{k=1}^{\infty} (a_k,b_k) \right)
 = \sum_{k=1}^{\infty} \left( b_k - a_k \right) .
 \end{equation*}
-The probabilities of more complex events can be obtained by considering additional elementary set operations.
+The probabilities of more complex events can be obtained by applying additional elementary set operations.
 However, it suffices to say for now that specifying the probability of the outcome falling in $(a,b)$ for every possible open interval is enough to define a probability law on $\Omega$.
 In the example at hand, \eqref{equation:DefinitionProbabilityLaw1} completely determines the probability law on $[0,1]$.
 
@@ -386,7 +386,7 @@ The probability of $\Omega$ is invariably equal to one, $\Pr ([0, 2 \pi)) = 1$.
 \end{center}
 \end{figure}
 
-Also, the probability that the wheel stops in the first quadrant is given by
+The probability that the wheel stops in the first quadrant is given by
 \begin{equation*}
 \Pr \left( \left[ 0, \frac{\pi}{2} \right) \right)
 = \int_{0}^{\frac{\pi}{2}} \frac{1}{2 \pi} d\theta
@@ -422,12 +422,12 @@ A typical progression in analysis consists of using the finite to get at the cou
 It is tempting to try to assign probabilities to every subset of a sample space $\Omega$.
 However, for uncountably infinite sample spaces, this leads to serious difficulties that cannot be resolved.
 In general, it is necessary to work with special subclasses of the class of all subsets of a sample space $\Omega$.
-The collections of the appropriate kinds are called fields and $\sigma$-fields, and they are defined and studied in \emph{measure theory}.\index{Measure theory}
+The collections of the appropriate kinds are called fields and $\sigma$-fields, and they are studied in \emph{measure theory}.\index{Measure theory}
 This leads to measure-theoretic probability, and to its unified treatment of the discrete and the continuous.
 
 Fortunately, it is possible to develop an intuitive and working understanding of probability without worrying about these issues.
 At some point in your academic career, you may wish to study analysis and measure theory more carefully and in greater details.
-However, it is not our current purpose to initiate the study of these fields.
+However, it is not our current purpose to initiate the rigorous treatment of these topics.
 
 
 \section*{Further Reading}
