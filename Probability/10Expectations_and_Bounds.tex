@@ -18,7 +18,7 @@ For a continuous random variable $X$ with PDF $f_X(\cdot)$, the \emph{expectatio
 In particular, the \emph{mean} of $X$ is equal to \index{Mean}
 \begin{equation*}
 \Expect [X]
-= \int_{\RealNumbers} x f_X (x) dx
+= \int_{\RealNumbers} \xi f_X (\xi) d\xi
 \end{equation*}
 and its \emph{variance} becomes \index{Variance}
 \begin{equation*}
@@ -48,9 +48,10 @@ The mean of $X$ can be obtained through direct integration, with a change of var
 = m.
 \end{split}
 \end{equation*}
-In finding a solution, we have leveraged the facts that $\zeta e^{-\frac{\zeta^2}{2}}$ is absolutely integrable and an odd function.
+In finding a solution, we have leveraged the facts that $\zeta e^{-\frac{\zeta^2}{2}}$ is an absolutely integrable, odd function.
 We also took advantage of the normalization condition which ensures that a Gaussian PDF integrates to one.
-To derive the variance, we again use the normalization condition; for a Gaussian PDF, this property implies that
+To derive the variance, we again use the normalization condition.
+For a Gaussian PDF, this property implies that
 \begin{equation*}
 \int_{-\infty}^{\infty} e^{- \frac{(\xi-m)^2}{2 \sigma^2}} d\xi
 = \sqrt{2 \pi} \sigma .
@@ -68,7 +69,7 @@ e^{- \frac{(\xi-m)^2}{2 \sigma^2}} d\xi
 = \sigma^2 .
 \end{equation*}
 Hence, $\Var(X) = \Expect \left[ (X-m)^2 \right] = \sigma^2$.
-Of course, the variance can also be obtained by more conventional methods, using integration by parts.
+Of course, the variance can also be obtained by more conventional methods.
 \end{example}
 
 
@@ -87,11 +88,12 @@ Using this distribution, we get
 = \int_0^{\infty} \frac{\xi^2}{\sigma^2} e^{- \frac{\xi^2}{2 \sigma^2}} d\xi \\
 &= \left. - \xi e^{- \frac{\xi^2}{2 \sigma^2}} \right|_0^{\infty}
 + \int_0^{\infty} e^{- \frac{\xi^2}{2 \sigma^2}} d\xi \\
-&= \sqrt{ 2 \pi } \sigma \int_0^{\infty} \frac{1}{\sqrt{2 \pi}} e^{- \frac{\zeta^2}{2 \sigma^2}} d\zeta
+&= \sqrt{ 2 \pi } \sigma
+\int_0^{\infty} \frac{1}{\sqrt{2 \pi} \sigma} e^{- \frac{\zeta^2}{2 \sigma^2}} d\zeta
 = \frac{\sqrt{2 \pi} \sigma}{2} .
 \end{split}
 \end{equation*}
-Integration by parts is key in solving this integral.
+Integration by parts is key in solving this expectation.
 Also, notice the judicious use of the fact that the integral of a standard normal random variable over $[0, \infty)$ must be equal to $1/2$.
 We compute the second moment of $R$ below,
 \begin{equation*}
@@ -115,7 +117,7 @@ A Rayleigh random variable $R$ can be generated through the expression $R = \sqr
 Thus, the parameter $\sigma^2$ in $f_R (\cdot)$ is a tribute to this popular construction, not a representation of its actual variance.
 \end{example}
 
-For nonnegative random variable $X$, an alternative way to compute $\Expect [X]$ is provided by Proposition~\ref{proposition:MeanAlternative}. \index{Expectation}
+For nonnegative random variable $X$, an alternative way to compute $\Expect [X]$ is described in Proposition~\ref{proposition:MeanAlternative}. \index{Expectation}
 
 \begin{proposition} \label{proposition:MeanAlternative}
 Suppose that $X$ is a nonnegative random variable with finite mean, then
@@ -134,12 +136,12 @@ We offer a proof for the special case where $X$ is a continuous random variable,
 = \Expect [X] .
 \end{split}
 \end{equation*}
-Interchanging the order of integration is allowed because $X$ is assumed to have finite mean.
+Interchanging the order of integration is justified because $X$ is assumed to have finite mean.
 \end{proof}
 
 \begin{example}
 A player throws darts at a circular target hung on a wall.
-The dart-board has unit radius, and the position of every dart is distributed uniformly over the target.
+The dartboard has unit radius, and the position of every dart is distributed uniformly over the target.
 We wish to compute the expected distance from each dart to the center of the dartboard.
 
 Let $R$ denote the distance from a dart to the center of the target.
@@ -147,7 +149,7 @@ For $0 \leq r \leq 1$, the probability that $R$ exceeds $r$ is given by
 \begin{equation*}
 \Pr (R > r) = 1 - \Pr (R \leq r) = 1 - \frac{\pi r^2}{\pi} = 1 - r^2 .
 \end{equation*}
-It follows that the expected value of $R$ is
+Then, by Proposition~\ref{proposition:MeanAlternative}, the expected value of $R$ is equal to
 \begin{equation*}
 \Expect [R] = \int_0^1 \left( 1 - r^2 \right) dr
 = \left.  \left( r - \frac{r^3}{3} \right) \right|_0^1
@@ -234,15 +236,15 @@ The moment generating function provides an alternate and somewhat intricate way 
 \end{equation*}
 Notice the double application of \emph{l'H\^{o}pital's rule} to evaluate the derivative of $M_U(s)$ at zero.
 This may be deemed a more contrived method to derive the expected value of a discrete uniform random variables, but it does not rely on prior knowledge of special sums.
-Incidentally, through similar steps, one can derive the second moment of $U$, which is equal to
+Through similar steps, one can derive the second moment of $U$, which is equal to
 \begin{equation*}
 \Expect \left[ U^2 \right] = \frac{(n+1)(2n+1)}{6} .
 \end{equation*}
-From these two results, we can calculate the variance of $U$ as $(n^2 - 1)/12$.
+From these two results, we can show that the variance of $U$ is $(n^2 - 1)/12$.
 \end{example}
 
 The simple form of the moment generating function of a standard normal random variable points to its importance in many situations.
-In particular, the exponential function is analytic and possesses many different representations.
+The exponential function is analytic and possesses many representations.
 
 \begin{example}[Gaussian Random Variable]
 Let $X$ be a standard normal random variable whose PDF is given by
@@ -310,7 +312,7 @@ The expectation is most important in finding pertinent bounds.
 
 As we will see, many upper bounds rely on the concept of dominating functions.
 Suppose that $g(x)$ and $h(x)$ are two nonnegative function such that $g(x) \leq h(x)$ for all $x \in \RealNumbers$.
-Then, for any a continuous random variable $X$, the following inequality holds
+Then, for any continuous random variable $X$, the following inequality holds
 \begin{equation*}
 \begin{split}
 \Expect [g(X)] &= \int_{-\infty}^{\infty} g(x) f_X(x) dx \\
@@ -319,7 +321,7 @@ Then, for any a continuous random variable $X$, the following inequality holds
 \end{split}
 \end{equation*}
 This is illustrated in Figure~\ref{figure:DominatingFcn}.
-In other words, the weighted integral of $g(\cdot)$ is dominated by the weighted integral of $h(\cdot)$, where $f_X (\cdot)$ acts as the weighting function.
+In words, the weighted integral of $g(\cdot)$ is dominated by the weighted integral of $h(\cdot)$, where $f_X (\cdot)$ acts as the weighting function.
 This notion is instrumental in understanding bounding techniques.
 \begin{figure}[thb]
 \begin{center}
@@ -330,7 +332,7 @@ This notion is instrumental in understanding bounding techniques.
 \psfrag{g}[c]{$g(x)$}
 \includegraphics[width=6.5cm]{Figures/10Chapter/DominatingFcn}
 \end{psfrags}
-\caption{If $g(x)$ and $h(x)$ are two nonnegative functions such that $g(x) \leq h(x)$ for all $x \in \RealNumbers$, then $\Expect [g (X)]$ will be less than or equal to $\Expect [h(X)]$.}
+\caption{If $g(x)$ and $h(x)$ are two nonnegative functions such that $g(x) \leq h(x)$ for all $x \in \RealNumbers$, then $\Expect [g (X)]$ is less than or equal to $\Expect [h(X)]$.}
 \label{figure:DominatingFcn}
 \end{center}
 \end{figure}
@@ -345,8 +347,8 @@ Recall that, for admissible set $S \subset \RealNumbers$, we have
 \end{equation*}
 Thus, to obtain a bound on $\Pr (X \in S)$, it suffices to find a function that dominates $\IndicatorFcn_S (\cdot)$ and for which we can compute the expectation.
 
-In particular, suppose that we wish to bound $\Pr (X \geq a)$ where $X$ is a nonnegative random variable.
-Then, in this case, we select $S = [a, \infty)$ and function $h(x) = x/a$.
+Suppose that we wish to bound $\Pr (X \geq a)$ where $X$ is a nonnegative random variable.
+In this case, we can select $S = [a, \infty)$ and function $h(x) = x/a$.
 For any $x \geq 0$, we have $h(x) \geq \IndicatorFcn_S(x)$, as illustrated in Figure~\ref{figure:MarkovInequality}.
 It follows that
 \begin{equation*}
@@ -364,7 +366,7 @@ It follows that
 \includegraphics[width=6.5cm]{Figures/10Chapter/Markov}
 \end{psfrags}
 \caption{Suppose that we wish to find a bound for $\Pr (X \leq a)$.
-We define the set $S = [a, \infty)$ and function $g(x) = \IndicatorFcn_S (x)$.
+We define set $S = [a, \infty)$ and function $g(x) = \IndicatorFcn_S (x)$.
 Using dominating function $h(x) = x/a$, we conclude that $\Pr(X \geq a) \leq a^{-1} \Expect [X]$ for any nonnegative random variable $X$.}
 \label{figure:MarkovInequality}
 \end{center}
@@ -374,7 +376,7 @@ Using dominating function $h(x) = x/a$, we conclude that $\Pr(X \geq a) \leq a^{
 \subsection{The Chebyshev Inequality}
 
 The \emph{Chebyshev inequality} provides an extension to this methodology to various dominating functions. \index{Chebyshev inequality}
-This yields a number of bounds that become useful in different contexts.
+This yields a number of bounds that become useful in a myriad of contexts.
 
 \begin{proposition}[Chebyshev Inequality]
 Suppose $h (\cdot)$ is a nonnegative function and let $S$ be an admissible set.
@@ -400,8 +402,8 @@ Moreover, for any such $x$ and distribution $f_X(\cdot)$, we can write $i_S \Ind
 \begin{equation*}
 \begin{split}
 i_S \Pr (X \in S) &= \Expect \left[ i_s \IndicatorFcn_S (X) \right]
-= \int i_S \IndicatorFcn_S (\xi) f_X(\xi) d\xi \\
-&\leq \int h (\xi) f_X(\xi) d\xi
+= \int_{\RealNumbers} i_S \IndicatorFcn_S (\xi) f_X(\xi) d\xi \\
+&\leq \int_{\RealNumbers} h (\xi) f_X(\xi) d\xi
 = \Expect [ h(X) ] .
 \end{split}
 \end{equation*}
