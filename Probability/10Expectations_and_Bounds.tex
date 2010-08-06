@@ -417,7 +417,7 @@ We provide special instances of the Chebyshev inequality below.
 \begin{example}
 Consider the nonnegative function $h(x) = x^2$ and let $S = \{ x | x^2 \geq b^2 \}$ where $b$ is a positive constant.
 We wish to find a bound on the probability that $|X|$ exceeds $b$.
-Using the Chebyshev inequality, we have $i_S = \inf_{x \in S} x^2 = b^2$ and, consequently, we have
+Using the Chebyshev inequality, we have $i_S = \inf_{x \in S} x^2 = b^2$ and, consequently, we get
 \begin{equation*}
 b^2 \Pr (X \in S) \leq \Expect \left[ X^2 \right] .
 \end{equation*}
@@ -449,8 +449,8 @@ Then, applying the Chebyshev inequality, we obtain
 = \frac{ \sigma^2 + b^2 }{ (a + b)^2 } .
 \end{equation}
 This inequality holds for any $b > 0$.
-To produce a tighter upper bound, we minimize the right-hand side of \eqref{equation:CantelliProof} over all possible values of $b$.
-Differentiating this expression and setting the derivative to zero yields
+To produce a better upper bound, we minimize the right-hand side of \eqref{equation:CantelliProof} over all possible values of $b$.
+Differentiating this expression and setting the derivative equal to zero yields
 \begin{equation*}
 \frac{ 2 b }{(a + b)^2 } = \frac{ 2 \left( \sigma^2 + b^2 \right) }{(a + b)^3}
 \end{equation*}
@@ -502,15 +502,15 @@ It follows that
 \begin{equation*}
 \Pr (X \geq a) \leq e^{-sa} \Expect[ e^{sX} ] = e^{-sa} M_X(s) .
 \end{equation*}
-Since this inequality holds for any $s > 0$, we can optimize the upper bound over all possible values of $s$, therby picking the best one,
+Because this inequality holds for any $s > 0$, we can optimize the upper bound over all possible values of $s$, thereby picking the best one,
 \begin{equation} \label{equation:ChernoffBound}
 \Pr (X \geq a) \leq \inf_{s > 0} e^{-sa} M_X(s) .
 \end{equation}
 This inequality is called the Chernoff bound.
-It is sometimes expressed in terms of the log-moment generating function $\Lambda (s) = \log \left( M_X (s) \right)$.
+It is sometimes expressed in terms of the log-moment generating function $\Lambda (s) = \log M_X (s)$.
 In this latter case, \eqref{equation:ChernoffBound} translates into
 \begin{equation} \label{equation:LogChernoffBound}
-\log \left( \Pr (X \geq a) \right) \leq - \sup_{s > 0} \left( sa - \Lambda (s) \right) .
+\log \Pr (X \geq a) \leq - \sup_{s > 0} \left\{ sa - \Lambda (s) \right\} .
 \end{equation}
 The right-hand side of \eqref{equation:LogChernoffBound} is called the \emph{Legendre transformation} of $\Lambda (s)$. \index{Legendre transformation}
 Figure~\ref{figure:ChernoffBound} plots $e^{s(x-a)}$ for various values of $s > 0$.
@@ -530,10 +530,9 @@ Optimizing over all admissible exponential functions, $e^{s(x-a)}$ where $s > 0$
 
 \subsection{Jensen's Inequality}
 
-Some inequalities can also be derived based on the properties of a single function.
+Some inequalities can be derived based on the properties of a single function.
 The \emph{Jensen inequality} is one such example. \index{Jensen inequality}
-Suppose that function $g(\cdot)$ is convex and twice differentiable.
-In particular,
+Suppose that function $g(\cdot)$ is convex and twice differentiable, with
 \begin{equation*}
 \frac{d^2 g}{dx^2} (x) \geq 0
 \end{equation*}
@@ -545,11 +544,13 @@ g(x) = g(a) + \int_a^x \frac{dg}{dx} (\xi) d\xi .
 Futhermore, because the second derivative of $g(\cdot)$ is a non-negative function, we gather that $\frac{dg}{dx} (\cdot)$ is a monotone increasing function.
 As such, for any value of $a$, we have
 \begin{equation*}
-g(x) = g(a) + \int_a^x \frac{dg}{dx} (\xi) d\xi
-\geq g(a) + \int_a^x \frac{dg}{dx} (a) d\xi
+\begin{split}
+g(x) &= g(a) + \int_a^x \frac{dg}{dx} (\xi) d\xi \\
+&\geq g(a) + \int_a^x \frac{dg}{dx} (a) d\xi
 = g(a) + (x-a) \frac{dg}{dx} (a) .
+\end{split}
 \end{equation*}
-In particular, for random variable $X$, we have
+For random variable $X$, we then have
 \begin{equation*}
 g(X) \geq g(a) + (X-a) \frac{dg}{dx} (a) .
 \end{equation*}
@@ -559,8 +560,8 @@ Choosing $a = \Expect [X]$ and taking expections on both sides, we obtain
 + (\Expect [X]-\Expect [X]) \frac{dg}{dx} (\Expect [X])
 = g(\Expect [X]) .
 \end{equation*}
-That is, $\Expect [g(X)] \geq g(\Expect [X])$, provided that the two expectations exist.
-Jensen's inequality actually holds for convex functions that are not twice differentiable, but the proof is much harder in the general setting.
+That is, $\Expect [g(X)] \geq g(\Expect [X])$, provided that these two expectations exist.
+The Jensen inequality actually holds for convex functions that are not twice differentiable, but the proof is much harder in the general setting.
 
 
 \section*{Further Reading}
@@ -568,7 +569,9 @@ Jensen's inequality actually holds for convex functions that are not twice diffe
 \begin{small}
 \begin{enumerate}
 \item Ross, S., \emph{A First Course in Probability}, 7th edition, Pearson Prentice Hall, 2006: Sections~5.2, 7.7, 8.2.
-\item Bertsekas, D.P., and Tsitsiklis, J.N., \emph{Introduction to Probability}, Athena Scientific, 2002: Section~3.1, 4.1, 7.1.
+\item Bertsekas, D. P., and Tsitsiklis, J. N., \emph{Introduction to Probability}, Athena Scientific, 2002: Section~3.1, 4.1, 7.1.
+\item Gubner, J. A., \emph{Probability and Random Processes for Electrical and Computer Engineers}, Cambridge, 2006: Sections~4.2--4.3.
+\item Miller, S. L., and Childers, D. G., \emph{Probability and Random Processes with Applications to Signal Processing and Communications}, 2004: Section~5.2.
 \end{enumerate}
 \end{small}
 

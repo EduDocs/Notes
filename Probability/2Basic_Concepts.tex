@@ -166,8 +166,17 @@ Combining these two equations yields the desired result.
 \end{center}
 \end{figure}
 
-We can use Proposition~\ref{proposition:ProbabilityUnion} to derive a bound on the probabilities of unions.
-This result, which is sometimes called the \emph{Boole inequality}, asserts that the probability of at least one event occurring is no greater than the sum of the probabilities of the individual events.\index{Boole inequality}
+The statement of Proposition~\ref{proposition:ProbabilityUnion} can be extended to finite unions of events.
+Specifically, we can write
+\begin{equation*}
+\Pr \left( \bigcup_{k=1}^{n} A_k \right)
+= \sum_{k = 1}^{n} (-1)^{k-1} \sum_{\IndexSet \subset \{1, \ldots, n \}, |\IndexSet| =k } \Pr \left( \bigcap_{i \in \IndexSet} A_i \right)
+\end{equation*}
+where the rightmost sum runs over all subsets $\IndexSet$ of $\{ 1, \ldots, n \}$ that contain exactly $k$ elements.
+This more encompassing equation is known as the \emph{inclusion-exclusion principle}.\index{Inclusion-exclusion principle}
+
+We can use Proposition~\ref{proposition:ProbabilityUnion} recursively to derive a bound on the probabilities of unions.
+This theorem, which is sometimes called the \emph{Boole inequality}, asserts that the probability of at least one event occurring is no greater than the sum of the probabilities of the individual events.\index{Boole inequality}
 
 \begin{theorem}[Union Bound]\index{Union bound}
 Let $A_1, A_2, \ldots, A_n$ be a collection of events, then
@@ -434,8 +443,10 @@ However, it is not our current purpose to initiate the rigorous treatment of the
 
 \begin{small}
 \begin{enumerate}
-\item Ross, S., \emph{A First Course in Probability}, 7th edition, Pearson Prentice Hall,2006: Chapter~2.
-\item Bertsekas, D.P., and Tsitsiklis, J.N., \emph{Introduction to Probability}, Athena Scientific, 2002: Section~1.2.
+\item Ross, S., \emph{A First Course in Probability}, 7th edition, Pearson Prentice Hall, 2006: Chapter~2.
+\item Bertsekas, D. P., and Tsitsiklis, J. N., \emph{Introduction to Probability}, Athena Scientific, 2002: Section~1.2.
+\item Miller, S. L., and Childers, D. G., \emph{Probability and Random Processes with Applications to Signal Processing and Communications}, 2004: Sections~2.1--2.3.
+\item Gubner, J. A., \emph{Probability and Random Processes for Electrical and Computer Engineers}, Cambridge, 2006: Sections~1.1,1.3--1.4.
 \end{enumerate}
 \end{small}
 

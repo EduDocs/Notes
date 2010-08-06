@@ -7,14 +7,13 @@ This is a powerful concept that is used extensively throughout engineering with 
 
 \section{Conditioning on Events}
 
-We begin our description of conditional probability with an illustrative example.
-The intuition gained through this simple exercise is then generalized by introducing a formal definition for this important concept.
+We begin our description of conditional probability with illustrative examples.
+The intuition gained through this exercise is then generalized by introducing a formal definition for this important concept.
 
 \begin{example}
 The rolling of a fair die is an experiment with six equally likely outcomes.
 As such, the probability of obtaining any of the outcomes is $1/6$.
 However, if we are told that the upper face features an odd number, then only three possibilities remain, namely $\{1, 3, 5 \}$.
-
 \begin{figure}[htb!]
 \begin{center}
 \begin{psfrags}
@@ -25,7 +24,6 @@ The resulting values are known as conditional probabilities.}
 \label{figure:CondEvent}
 \end{center}
 \end{figure}
-
 These three outcomes had equal probabilities before the additional information was revealed.
 It then seems natural to assume that they remain equally likely afterwards.
 In particular, it is reasonable to assign a probability of $1/3$ to each of the three outcomes that remain possible candidates after receiving the side information.
@@ -39,21 +37,21 @@ We can express the probability of getting a three given that the outcome is an o
 \begin{example}
 Let $A$ and $B$ be events associated with a random experiment, and assume that $\Pr(B)>0$.
 To gain additional insight into conditional probability, we consider the scenario where this experiment is repeated $N$ times.
-Let $N_{AB}$ be the number of trials for which $A \cap B$ occurred, $N_{A\overline{B}}$ be the number of times where only $A$ occurred,  $N_{\overline{A}B}$ be the number of times where only $B$ occurred, and  $N_{\overline{A}\overline{B}}$ be the number of trials for which neither took place.
-From these definitions, we gather that $A$ was observed exactly $N_A = N_{AB} + N_{A\overline{B}}$ times, and $B$ was seen $N_B = N_{AB} + N_{\overline{A}B}$ times.
+Let $N_{AB}$ be the number of trials for which $A \cap B$ occurs, $N_{A\overline{B}}$ be the number of times where only $A$ occurs,  $N_{\overline{A}B}$ be the number of times where only $B$ occurs, and  $N_{\overline{A}\overline{B}}$ be the number of trials for which neither takes place.
+From these definitions, we gather that $A$ is observed exactly $N_A = N_{AB} + N_{A\overline{B}}$ times, and $B$ is seen $N_B = N_{AB} + N_{\overline{A}B}$ times.
 
-The frequentist view of probability is based on the fact that, as $N$ becomes large, one can approximate the probability of an event by taking the ratio of the number of times this event occurred over the total number of trials.
+The frequentist view of probability is based on the fact that, as $N$ becomes large, one can approximate the probability of an event by taking the ratio of the number of times this event occurs over the total number of trials.
 For instance, we can write
 \begin{xalignat*}{2}
 \Pr (A\cap B) & \approx \frac{N_{AB}}{N} &
 \Pr (B) & \approx \frac{N_{B}}{N}.
 \end{xalignat*}
-Likewise, the conditional probability of $A$ given knowledge that $B$ has occurred can be computed using
-\begin{equation*}
+Likewise, the conditional probability of $A$ given knowledge that the outcome lies in $B$ can be computed using
+\begin{equation} \label{equation:FrequentistApproximation}
 \Pr (A | B) \approx \frac{N_{AB}}{N_B}
 = \frac{N_{AB} / N}{N_B / N} \approx \frac{\Pr (A \cap B)}{\Pr (B)}.
-\end{equation*}
-As $N$ approaches infinity, these approximations become exact and unveil the formula for conditional probability.
+\end{equation}
+As $N$ approaches infinity, these approximations become exact and \eqref{equation:FrequentistApproximation} unveils the formula for conditional probability.
 \end{example}
 
 Having considered intuitive arguments, we turn to the mathematical definition of conditional probability.
@@ -65,9 +63,9 @@ A conditional probability law assigns to every event $A$ a number $\Pr (A|B)$, t
 We can show that the collection of conditional probabilities $\{ \Pr (A | B) \}$ specifies a valid probability law, as defined in Section~\ref{section:ProbabilityLaws}.
 For every event $A$, we have
 \begin{equation*}
-\Pr (A|B) = \frac{\Pr (A \cap B)}{\Pr (B)} \geq 0.
+\Pr (A|B) = \frac{\Pr (A \cap B)}{\Pr (B)} \geq 0
 \end{equation*}
-That is, $\Pr (A|B)$ is nonnegative.
+and, hence, $\Pr (A|B)$ is nonnegative.
 The probability of the entire sample space $\Omega$ is equal to
 \begin{equation*}
 \Pr (\Omega | B) = \frac{\Pr (\Omega \cap B)}{\Pr (B)}
@@ -95,7 +93,7 @@ A fair coin is tossed repetitively until heads is observed.
 In Example~\ref{example:CoinTossSequence}, we found that the probability of observing heads for the first time on trial $k$ is $2^{-k}$.
 We now wish to compute the probability that heads occurred for the first time on the second trial given that it took an even number of tosses to observe heads.
 In this example, $A = \{ 2 \}$ and $B$ is the set of even numbers.
-The probability that the outcome is two given that the number of tosses is even is equal to
+The probability that the outcome is two, given that the number of tosses is even, is equal to
 \begin{equation*}
 \Pr ( 2 | B )
 = \frac{\Pr ( 2 \cap B )}{\Pr (B)}
@@ -115,7 +113,7 @@ The probability of events $A_1$ through $A_n$ taking place at the same time is g
 = \Pr (A_1) \Pr (A_2 | A_1) \Pr (A_3 | A_1 \cap A_2)
 \cdots \Pr \left( A_n \bigg| \bigcap_{k=1}^{n-1} A_k \right) .
 \end{equation}
-This formula is known as the \emph{chain rule of probability} and can be verified by expanding each of the conditional probabilities using \eqref{equation:ConditionalProbability},
+This formula is known as the \emph{chain rule of probability}, and it can be verified by expanding each of the conditional probabilities using \eqref{equation:ConditionalProbability},
 \begin{equation*}
 \Pr \left( \bigcap_{k=1}^n A_k \right)
 = \Pr (A_1) \frac{\Pr (A_1 \cap A_2)}{\Pr (A_1)}
@@ -131,7 +129,7 @@ Three balls are drawn from this urn without replacement.
 We wish to compute the probability that all three balls are blue.
 The probability of drawing a blue ball the first time is equal to $8/12$.
 The probability of drawing a blue ball the second time given that the first ball is blue is $7/11$.
-Finally, the probability of drawing a blue ball the third time given that the previous two balls are blue is $6/10$.
+Finally, the probability of drawing a blue ball the third time given that the first two balls are blue is $6/10$.
 Using \eqref{equation:SimultaneousEvents}, we can compute the probability of drawing three blue balls as
 \begin{equation*}
 \Pr (bbb)
@@ -146,7 +144,7 @@ Using \eqref{equation:SimultaneousEvents}, we can compute the probability of dra
 \psfrag{2}[c]{$2$}
 \includegraphics[height=7.11cm]{Figures/3Chapter/balls}
 \end{psfrags}
-\caption{Conditional probabilities can be employed to calculate the probability of multiple events occurring at the same time.}
+\caption{Conditional probability can be employed to calculate the probability of multiple events occurring at the same time.}
 \label{figure:Balls}
 \end{center}
 \end{figure}
@@ -167,7 +165,7 @@ A collection of events $A_1, A_2, \ldots, A_n$ is said to be a \emph{partition} 
 \begin{equation*}
 \bigcup_{k=1}^n A_k = \Omega .
 \end{equation*}
-Visually, a partition divides an entire set into disjoint subsets.
+Visually, a partition divides an entire set into disjoint subsets, as exemplified in Figure~\ref{figure:SetPartitiion2}.
 
 \begin{figure}[htb!]
 \begin{center}
@@ -211,7 +209,7 @@ where the fourth equality follows from the third axiom of probability.
 \begin{figure}[htb!]
 \begin{center}
 \includegraphics[height=3.034cm]{Figures/3Chapter/setpartition3}
-\caption{The total probability theorem states that the probability of event $B$ can be computed by summing over all $\Pr(A_i \cap B)$, where $A_1, A_2, \ldots, A_n$ forms a partition of $\Omega$.}
+\caption{The total probability theorem states that the probability of event $B$ can be computed by summing $\Pr(A_i \cap B)$ over all members of the partition $A_1, A_2, \ldots, A_n$.}
 \label{figure:SetPartition3}
 \end{center}
 \end{figure}
@@ -229,9 +227,9 @@ A second urn contains three green balls and nine red balls.
 One of the two urns is picked at random, with equal probabilities, and a ball is drawn from the selected urn.
 We wish to compute the probability of obtaining a green ball.
 
-In this problem, using a divide and conquer approach seems appropriate.
-We therefore utilize the Total Probability Theorem.
-If the first urn is chosen, then the probability of getting a green ball is $5/8$.
+In this problem, using a divide and conquer approach seems appropriate;
+we therefore utilize the total probability theorem.
+If the first urn is chosen, then the ensuing probability of getting a green ball is $5/8$.
 One the other hand, if a ball is drawn from the second urn, the probability that it is green reduces to $3/12$.
 Since the probability of selecting either urn is $1/2$, we can write the overall probability of getting a green ball as
 \begin{equation*}
@@ -275,13 +273,13 @@ The second equality in \eqref{equation:BayesRule} is obtained by applying Theore
 
 \begin{example}
 April, a biochemist, designs a test for a latent disease.
-If a subject has the disease, the probability that the test results are positive is $0.95$.
-Similarly, if a subject does not have the disease, the probability that the test results are negative is $0.95$.
-Suppose that one percent of the population has the disease.
+If a subject has the disease, the probability that the test results turn out positive is $0.95$.
+Similarly, if a subject does not have the disease, the probability that the test results come up negative is $0.95$.
+Suppose that one percent of the population is infected by the disease.
 We wish to find the probability that a person who tested positive has the disease.
 
-Let $D$ denote the event that the person has the disease, and let $P$ be the event that the test results are positive.
-Using Bayes' rule, we can easily compute the probability that a person who tested positive has the disease,
+Let $D$ denote the event that a person has the disease, and let $P$ be the event that the test results are positive.
+Using Bayes' rule, we can compute the probability that a person who tested positive has the disease,
 \begin{equation*}
 \begin{split}
 \Pr (D|P)
@@ -290,7 +288,7 @@ Using Bayes' rule, we can easily compute the probability that a person who teste
 &\approx 0.1610 .
 \end{split}
 \end{equation*}
-Although the test may appear fairly accurate, the probability that a person with a positive test carries the disease remains small.
+Although the test may initially appear fairly accurate, the probability that a person with a positive test carries the disease remains small.
 \end{example}
 
 
@@ -343,14 +341,13 @@ In this case, we conclude that getting a four on the red die and a sum total of 
 \end{example}
 
 The basic idea of independence seems intuitively clear: if knowledge about the occurrence of event $B$ has no impact on the probability of $A$, then these two events must be independent.
-Yet independent events are not necessarily easy to visualize in terms of the sample space.
+Yet, independent events are not necessarily easy to visualize in terms of their sample space.
 A common mistake is to assume that two events are independent if they are disjoint.
-Two mutually exclusive events can hardly be independent.
-If $\Pr (A) > 0$, $\Pr (B) > 0$, and $\Pr (A \cap B) = 0$ then
+Two mutually exclusive events can hardly be independent: if $\Pr (A) > 0$, $\Pr (B) > 0$, and $\Pr (A \cap B) = 0$ then
 \begin{equation*}
 \Pr (A \cap B) = 0 < \Pr (A) \Pr(B).
 \end{equation*}
-Hence, $A$ and $B$ cannot be independent if they are disjoint, non-trivial sets.
+Hence, $A$ and $B$ cannot be independent if they are disjoint, non-trivial events.
 
 
 \subsection{Independence of Multiple Events}
@@ -364,7 +361,7 @@ The events $A_1, A_2, \ldots, A_n$ are \emph{independent} provided that \index{I
 for every subset $\IndexSet$ of $\{1, 2, \ldots, n\}$.
 
 For instance, consider a collection of three events, $A$, $B$ and $C$.
-These events are independent provided that
+These events are independent whenever
 \begin{equation} \label{equation:ThreeIndependentEvents}
 \begin{split}
 \Pr (A \cap B) &= \Pr (A) \Pr (B) \\
@@ -379,6 +376,7 @@ and, in addition,
 The three equalities in \eqref{equation:ThreeIndependentEvents} assert that $A$, $B$ and $C$ are \emph{pairwise independent}.
 Note that the fourth equation does not follow from the first three conditions, nor does it imply any of them.
 Pairwise independence does not necessarily imply independence.
+This is illustrated below.
 
 \begin{example}
 A fair coin is flipped twice.
@@ -451,8 +449,8 @@ It is simple to show that conditional independence is a symmetric relation as we
 Suppose that a fair coin is tossed until heads is observed.
 The number of trials is recorded as the outcome of this experiment.
 We denote by $B$ the event that the coin is tossed more than one time.
-Moreover, we let $A_1$ be the event that the number of trials is an even number, and $A_2$ be the event that the number of trials is less than six.
-The conditional probabilities of $A_1$ and $A_2$ given that the coin is tossed more than once are
+Moreover, we let $A_1$ be the event that the number of trials is an even number; and $A_2$, the event that the number of trials is less than six.
+The conditional probabilities of $A_1$ and $A_2$, given that the coin is tossed more than once, are
 \begin{align*}
 \Pr (A_1 | B) &= \frac{ \Pr (A_1 \cap B) }{ \Pr (B) }
 = \frac{1/3}{1/2} = \frac{2}{3} \\
@@ -509,7 +507,7 @@ The events $A_1, A_2, \ldots, A_n$ are conditionally independent given $B$ if
 = \prod_{i \in \IndexSet} \Pr (A_i | B)
 \end{equation*}
 for every subset $\IndexSet$ of $\{1, 2, \ldots, n\}$.
-This definition is analogous to \eqref{equation:IndependenceMultipleEvents}, albeit using the relevant conditional probability law.
+This definition is analogous to \eqref{equation:IndependenceMultipleEvents}, albeit using the appropriate conditional probability law.
 
 
 \section{Equivalent Notations}
@@ -539,8 +537,10 @@ From this point forward, we use these equivalent notations interchangeably.
 
 \begin{small}
 \begin{enumerate}
-\item Ross, S., \emph{A First Course in Probability}, 7th edition, Pearson Prentice Hall,2006: Chapter~3.
-\item Bertsekas, D.P., and Tsitsiklis, J.N., \emph{Introduction to Probability}, Athena Scientific, 2002: Sections~1.3--1.5.
+\item Ross, S., \emph{A First Course in Probability}, 7th edition, Pearson Prentice Hall, 2006: Chapter~3.
+\item Bertsekas, D. P., and Tsitsiklis, J. N., \emph{Introduction to Probability}, Athena Scientific, 2002: Sections~1.3--1.5.
+\item Miller, S. L., and Childers, D. G., \emph{Probability and Random Processes with Applications to Signal Processing and Communications}, 2004: Sections~2.4--2.6.
+\item Gubner, J. A., \emph{Probability and Random Processes for Electrical and Computer Engineers}, Cambridge, 2006: Sections~1.5--1.6.
 \end{enumerate}
 \end{small}
 
