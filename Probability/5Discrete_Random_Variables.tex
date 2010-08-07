@@ -47,8 +47,8 @@ The value of the random variable, in this case, is simply the number of dots tha
 \end{figure}
 \end{example}
 
-The simplest class of random variables is the collection of \emph{discrete random variables}. \index{Discrete random variable}
-A variable is called discrete if its range is finite or countably infinite; that is, if the random variable can only take a finite or countable number of values.
+A simple class of random variables is the collection of \emph{discrete random variables}. \index{Discrete random variable}
+A variable is called discrete if its range is finite or countably infinite; that is, it can only take a finite or countable number of values.
 
 \begin{example}
 Consider the experiment where a coin is tossed repetitively until heads is observed.
@@ -58,8 +58,8 @@ The range of this random variable is given by the positive integers $\{1, 2, \ld
 
 \section{Probability Mass Functions}
 
-A discrete random variable $X$ is characterized by the probability of each of the elements in the range of $X$.
-We identify the probabilities of individual elements in the range of $X$ using the \emph{probability mass function (PMF)} of $X$, which we denote by $p_X$. \index{Probability mass function (PMF)}
+A discrete random variable $X$ is characterized by the probability of each of the elements in its range.
+We identify the probabilities of individual elements in the range of $X$ using the \emph{probability mass function (PMF)} of $X$, which we denote by $p_X (\cdot)$. \index{Probability mass function (PMF)}
 If $x$ is a possible value of $X$ then the \emph{probability mass} of $x$, written $p_X (x)$, is defined by
 \begin{equation} \label{equation:PMF}
 p_X (x) = \Pr ( \{ X = x \} ) = \Pr ( X = x ) .
@@ -70,6 +70,8 @@ p_X (x)
 = \Pr (  X^{-1} (x)  )
 = \Pr ( \{ \omega \in \Omega | X(\omega) = x \} ) .
 \end{equation*}
+Here, $X^{-1} (x)$ denotes the \emph{preimage} of $x$ defined by $\{ \omega \in \Omega | X(\omega) = x \}$. \index{Preimage}
+This is not to be confused with the inverse of a bijection.
 
 \begin{figure}[ht]
 \begin{center}
@@ -133,9 +135,9 @@ In general, discrete random variables occur primarily in situations where counti
 
 \subsection{Bernoulli Random Variables}
 
-The first and simplest discrete random variable is the \emph{Bernoulli random variable}. \index{Bernoulli random variable}
+The first and simplest random variable is the \emph{Bernoulli random variable}. \index{Bernoulli random variable}
 Let $X$ be a random variable that takes on only two possible numerical values, $X(\Omega) = \{0, 1\}$.
-Then $X$ is a Bernoulli random variable and its PMF is given by
+Then, $X$ is a Bernoulli random variable and its PMF is given by
 \begin{equation*}
 p_X (x) = \left\{ \begin{array}{ll}
 1 - p, & \text{if }x = 0 \\
@@ -170,7 +172,7 @@ p_X (k) = \Pr (X = k)
 = \binom{n}{k} p^k (1-p)^{n-k},
 \end{equation*}
 where $k = 0, 1, \ldots n$.
-Note that we can easily verify that $X$ fulfills the normalization axiom,
+We can easily verify that $X$ fulfills the normalization axiom,
 \begin{equation*}
 \sum_{k=0}^n \binom{n}{k} p^k (1-p)^{n-k}
 = \left( p + (1-p) \right)^n = 1.
@@ -200,8 +202,7 @@ p_X (k) = \binom{8}{k} \left( \frac{1}{4} \right)^k
 where $k = 0, 1, \ldots, 8$.
 The probability of winning more than \$4 is
 \begin{equation*}
-\Pr ( X\$ > \$4)
-= \Pr (X > 4)
+\Pr (X > 4)
 = \sum_{k=5}^{8} \binom{8}{k} \frac{3^{8-k}}{4^8} .
 \end{equation*}
 \end{example}
@@ -222,7 +223,7 @@ Note that, using Taylor series expansion,  we have
 = e^{- \lambda} e^{\lambda} = 1 ,
 \end{equation*}
 which shows that this PMF fulfills the normalization axiom of probability laws.
-The Poisson random variable is of fundamental importance when counting the number of occurrences of a phenomenon in a certain time period.
+The Poisson random variable is of fundamental importance when counting the number of occurrences of a phenomenon within a certain time period.
 It finds extensive use in networking, inventory management and queueing applications.
 
 \begin{figure}[ht]
@@ -286,17 +287,17 @@ where $\lambda = n p$.
 The latter expression can be computed numerically in a straightforward manner.
 
 \begin{example}
-The probability of a bit error on a wireless communication channel is equal to $10^{-2}$.
+The probability of a bit error on a communication channel is equal to $10^{-2}$.
 We wish to approximate the probability that a block of $1000$ bits has four or more errors.
 
 Assume that the probability of individual errors is independent from bit to bit.
 The transmission of each bit can be modeled as a Bernoulli trial, with a zero indicating a correct transmission and a one representing a bit error.
-The total number of bit errors in $1000$ transmissions then corresponds to a binomial random variable with parameters $n = 1000$ and $p = 10^{-2}$.
+The total number of errors in $1000$ transmissions then corresponds to a binomial random variable with parameters $n = 1000$ and $p = 10^{-2}$.
 The probability of making four or more errors can be approximated using a Poisson random variable with constant $\lambda = np = 10$.
 Thus, we can approximate the probability that a block of $1000$ bits has four or more errors by
 \begin{equation*}
 \begin{split}
-\Pr [ N \geq 4 ] &= 1 - \Pr [ N < 4 ]
+\Pr ( N \geq 4 ) &= 1 - \Pr ( N < 4 )
 \approx 1 - \sum_{k=0}^3 \frac{\lambda^k}{k!} e^{-\lambda} \\
 &= 1 - e^{-10} \left( 1 + 10 + 50 + \frac{500}{3} \right) \\
 &\approx 0.01034 .
@@ -310,7 +311,7 @@ Thus, we can approximate the probability that a block of $1000$ bits has four or
 
 Consider a random experiment where a Bernoulli trial is repeated multiple times until a one is observed.
 At each time step, the probability of getting a one is equal to $p$ and the probability of getting a zero is $1-p$.
-The number of trials carried out before completion, which we denote by $X$, is recorded as the outcome of the experiment.
+The number of trials carried out before completion, which we denote by $X$, is recorded as the outcome of this experiment.
 The random variable $X$ is a \emph{geometric random variable}, and its PMF is given by \index{Geometric random variable}
 \begin{equation*}
 p_X (k) = (1-p)^{k-1} p, \quad k = 1, 2, \ldots
@@ -330,11 +331,11 @@ The values of the PMF are only present for $k = 1, 2, \ldots, 12$.}
 The Brazos Soda Company introduces another ``Under the Caps'' promotion.
 This time, a customer can win an additional bottle of soda by looking under the cap of her bottle.
 The probability to win is $1/5$, and it is independent from bottle to bottle.
-A customer purchases one bottle of soda from the Brazos Soda company and hence enters the contest.
+A customer purchases one bottle of soda from the Brazos Soda Company and thereby enters the contest.
 For every extra bottle of soda won by looking under the cap, the customer gets an additional chance to play.
 We wish to find the PMF of the number of bottles obtained by this customer.
 
-Let $X$ denote the total number of bottles obtained by this customer.
+Let $X$ denote the total number of bottles obtained by the customer.
 The random variable $X$ is geometric and its PMF is
 \begin{equation*}
 p_X (k) = \left( \frac{1}{5} \right)^{k-1} \frac{4}{5},
@@ -367,7 +368,7 @@ It can be shown that the geometric random variable is the only discrete random v
 \subsection{Discrete Uniform Random Variables}
 
 A finite random variable where all the possible outcomes are equally likely is called a \emph{discrete uniform random variable}. \index{Uniform random variable (discrete)}
-Let $X$ be a uniform random variable taking value in $X (\Omega) = \{ 1, 2, \ldots, n \}$.
+Let $X$ be a uniform random variable taking value over $X (\Omega) = \{ 1, 2, \ldots, n \}$.
 Its PMF is therefore given by
 \begin{equation*}
 p_X (k) = \left\{ \begin{array}{ll}
@@ -382,7 +383,7 @@ The tossing of a fair coin and the rolling of a die can both be used to construc
 \begin{center}
 \includegraphics[width=8.5cm]{Figures/5chapter/uniform_pmf}
 \end{center}
-\caption{A uniform random variable corresponds to a situation where all the possible values of the random variable are equally likely.
+\caption{A uniform random variable corresponds to the situation where all the possible values of the random variable are equally likely.
 It is shown above for the case where $n = 8$.}
 \end{figure}
 
@@ -410,13 +411,13 @@ In particular, if $\omega \in \Omega$ is the outcome of the experiment, then $X$
 \includegraphics[height=4.97cm]{Figures/5Chapter/fcn}
 \end{psfrags}
 \caption{A real-valued function of a random variable is a random variable itself.
-In this figure, $Y$ is obtained by passing random variable $X$ through a function $g$.}
+In this figure, $Y$ is obtained by passing random variable $X$ through a function $g (\cdot)$.}
 \end{center}
 \end{figure}
 
 Furthermore, if $X$ is a discrete random variable, then so is $Y$.
-The set of all the possible values $Y$ can take is denoted by $g(X(\Omega))$, and the number of elements in $g(X(\Omega))$ is no greater than the number of elements in $X(\Omega)$.
-The PMF of $Y$, which we represent by $p_Y (y)$, is obtained as follows.
+The set of possible values $Y$ can take is denoted by $g(X(\Omega))$, and the number of elements in $g(X(\Omega))$ is no greater than the number of elements in $X(\Omega)$.
+The PMF of $Y$, which we represent by $p_Y (\cdot)$, is obtained as follows.
 If $y \in g(X(\Omega))$ then
 \begin{equation} \label{equation:DefinitionFunctionPMF}
 p_Y (y) = \sum_{ \{x \in X(\Omega) | g(x) = y \} } p_X (x) ;
@@ -431,10 +432,25 @@ Suppose that $a \neq 0$, then the probability of $Y$ being equal to value $y$ is
 \begin{equation*}
 p_Y(y) = p_X \left( \frac{ y - b }{a} \right) .
 \end{equation*}
+Linear and affine functions of random variables are commonplace in applied probability and engineering.
 \end{example}
 
-Linear and affine functions of random variables are commonplace in probability.
-In Example~\ref{BrazosSodaCompany1}, for instance, we have implicitly used the linear function $Y = 10 X$ to compute the probability of winning more than \$40.
+\begin{example}
+A taxi driver works in New York City.
+The distance of a ride with a typical client is a discrete uniform random variable taking value over $X(\Omega) = \{ 1, 2, \ldots, 10 \}$.
+The metered rate of fare, according to city rules, is \$2.50 upon entry and \$0.40 for each additional unit (one-fifth of a mile).
+We wish to find the PMF of $Y$, the value of a typical fare.
+
+Traveling one mile is five units and costs an extra \$2.00.
+The smallest possible fare is therefore \$4.50, with probability $1/10$.
+Similarly, a ride of $X$ miles will generate a revenue of $Y = 2.5 + 2X$ dollars for the cab driver.
+The PMF of $Y$ is thus given by
+\begin{equation*}
+p_Y (2.5 + 2k) = \frac{1}{10}
+\end{equation*}
+for $k = 1, 2, \ldots, 10$;
+and it is necessarily zero for any other argument.
+\end{example}
 
 
 \section*{Further Reading}
