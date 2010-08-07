@@ -46,24 +46,24 @@ In general, if $S$ has $m$ elements and $T$ contains $n$ elements, then the cart
 \begin{example}
 Consider an experiment consisting of flipping a coin and rolling a die.
 There are two possibilities for the coin, heads or tales, and the die has six faces.
-The total number of outcomes for this experiment is $2 \times 6 = 12$.
+The number of possible outcomes for this experiment is $2 \times 6 = 12$.
 That is, there are twelve different ways to flip a coin and roll a die.
 \end{example}
 
-The counting principle can be extended to computing the number of elements in the cartesian product of multiple sets.
+The counting principle can be broadened to calculating the number of elements in the cartesian product of multiple sets.
 Consider the finite sets $S_1, S_2, \ldots, S_r$ and their cartesian product
 \begin{equation*}
 S_1 \times S_2 \times \cdots \times S_r
-= \left\{ (s_1, s_2, \ldots, s_r) | s_p \in S_p \right\} .
+= \left\{ (s_1, s_2, \ldots, s_r) | s_i \in S_i \right\} .
 \end{equation*}
-If we denote the cardinality of $S_p$ by $n_p = | S_p |$, then the number of distinct ordered $r$-tuples of the form $(s_1, s_2, \ldots, s_r)$ is $n = n_1 n_2 \cdots n_r$.
+If we denote the cardinality of $S_i$ by $n_i = | S_i |$, then the number of distinct ordered $r$-tuples of the form $(s_1, s_2, \ldots, s_r)$ is $n = n_1 n_2 \cdots n_r$.
 
 \begin{example}[Sampling with Replacement and Ordering]
 An urn contains $n$ balls numbered one through $n$.
 A ball is drawn from the urn, and its number is recorded on an ordered list.
 The ball is then replaced in the urn.
 This procedure is repeated $k$ times.
-We wish to compute the number of possible sequences that results from this experiment.
+We wish to compute the number of possible sequences that can result from this experiment.
 There are $k$ drawings and $n$ possibilities per drawing.
 Using the counting principle, we gather that the number of distinct sequences is $n^k$.
 
@@ -81,7 +81,7 @@ Using the counting principle, we gather that the number of distinct sequences is
 \end{example}
 
 \begin{example}
-The \emph{power set} of $S$, denoted by $2^S$, is the collection of all subsets of $S$.\index{Power set}
+The \emph{power set} of $S$, denoted by $2^S$, is the collection of all subsets of $S$. \index{Power set}
 In set theory, $2^S$ represents the set of all functions from $S$ to $\{ 0, 1\}$.
 By identifying a function in $2^S$ with the corresponding preimage of one, we obtain a bijection between $2^S$ and the subsets of $S$.
 In particular, each function in $2^S$ is the characteristic function of a subset of $S$.
@@ -116,10 +116,7 @@ Clearly, there are $n$ distinct possibilities for the first item in the list.
 The number of possibilities for the second item is $n-1$, namely all the integers in $S$ except the element we selected initially.
 Similarly, the number of distinct possibilities for the $m$th item is $n - m + 1$.
 This pattern continues until all the elements in $S$ are recorded.
-Summarizing, we find that the total number of permutations of $S$ is $n$ \emph{factorial}, \index{Factorial}
-\begin{equation*}
-n! = n (n-1) \cdots 1 .
-\end{equation*}
+Summarizing, we find that the total number of permutations of $S$ is $n$ \emph{factorial}, $n! = n (n-1) \cdots 1$. \index{Factorial}
 
 \begin{example}
 We wish to compute the number of permutations of $S = \{ 1, 2, 3 \}$.
@@ -189,7 +186,7 @@ An urn contains $n$ balls numbered one through $n$.
 A ball is picked from the urn, and its number is recorded on an ordered list.
 The ball is not replaced in the urn.
 This procedure is repeated until $k$ balls are selected from the urn, where $k \leq n$.
-We wish to compute the number of possible sequences that results from this experiment.
+We wish to compute the number of possible sequences that can result from this experiment.
 The number of possibilities is equivalent to the number of $k$-permutations of $n$ elements, which is given by $n! / (n-k)!$.
 \end{example}
 
@@ -210,7 +207,7 @@ whereas the $2$-permutations of $S$ are more numerous with
 &( 3, 1 ), ( 3, 2 ), ( 3, 4 ), ( 4, 1 ), ( 4, 2 ), ( 4, 3 ) .
 \end{split}
 \end{equation*}
-There are therefore fewer $2$-element subsets of $S$ than $2$-permutations of $S$.
+There are fewer $2$-element subsets of $S$ than $2$-permutations of $S$.
 
 \begin{figure}[htb!]
 \begin{center}
@@ -236,7 +233,7 @@ Since the total number of $k$-permutations of $S$ is $n! / (n-k)!$, the number o
 \end{equation*}
 This expression is termed a \emph{binomial coefficient}. \index{Binomial coefficient}
 Observe that selecting a $k$-element subset of $S$ is equivalent to choosing the $n-k$ elements that belong to its complement.
-It follows that
+Consequently, we can write
 \begin{equation*}
 \binom{n}{k} = \binom{n}{n-k} .
 \end{equation*}
@@ -262,25 +259,25 @@ Thus, we get
 
 \section{Partitions}
 
-Abstractly, a combination is equivalent to partitioning a set into two disjoint subsets, one containing $k$ objects and the other containing the $n-k$ remaining objects.
+Abstractly, a combination is equivalent to partitioning a set into two disjoint subsets, one containing $k$ objects and the other containing the $n-k$ remaining elements.
 In general, the set $S = \{ 1, 2, \ldots, n \}$ can be partitioned into $r$ disjoint subsets.
 Let $n_1, n_2, \ldots, n_r$ be nonnegative integers such that
 \begin{equation*}
-\sum_{p = 1}^r n_p = n.
+\sum_{i = 1}^r n_i = n.
 \end{equation*}
 Consider the following iterative algorithm that leads to a \emph{partition} of $S$. \index{Partition}
 First, we choose a subset of $n_1$ elements from $S$.
 Having selected the first subset, we pick a second subset containing $n_2$ elements from the remaining $n - n_1$ elements.
-We continue this procedure by successively choosing subsets of $n_p$ elements from the residual $n - n_1 - \cdots - n_{p-1}$ elements, until no element remains.
-This algorithm yields a partition of $S$ into $r$ subsets, with the $p$th subset containing exactly $n_p$ elements.
+We continue this procedure by successively choosing subsets of $n_i$ elements from the residual $n - n_1 - \cdots - n_{i-1}$ elements, until no element remains.
+This algorithm yields a partition of $S$ into $r$ subsets, with the $i$th subset containing exactly $n_i$ elements.
 
 We wish to count the number of such partitions.
 We know that there are $\binom{n}{n_1}$ ways to form the first subset.
 Examining our algorithm, we see that there are exactly
 \begin{equation*}
-\binom{n - n_1 - \cdots - n_{p-1}}{n_p}
+\binom{n - n_1 - \cdots - n_{i-1}}{n_i}
 \end{equation*}
-ways to form the $p$th subset.
+ways to form the $i$th subset.
 Using the counting principle, the total number of partitions is then given by
 \begin{equation*}
 \binom{n}{n_1} \binom{n - n_1}{n_2}
@@ -295,7 +292,7 @@ This expression is called a \emph{multinomial coefficient}. \index{Multinomial c
 
 \begin{example}
 A die is rolled nine times.
-We wish to compute the number of outcomes for which every odd number appears three times.
+We wish to compute the number of possible outcomes for which every odd number appears three times.
 The number of distinct sequences in which one, three and five each appear three times is equal to the number of partitions of $\{ 1, 2, \ldots, 9 \}$ into three subsets of size three, namely
 \begin{equation*}
 \frac{9!}{3! 3! 3!} = 1680 .
@@ -306,7 +303,7 @@ In the above analysis, we assume that the cardinality of each subset is fixed.
 Suppose instead that we are interested in counting the number of ways to pick the cardinality of the subsets that form the partition. \index{Partition}
 Specifically, we wish to compute the number of ways integers $n_1, n_2, \ldots, n_r$ can be selected such that every integer is nonnegative and
 \begin{equation*}
-\sum_{p = 1}^r n_p = n.
+\sum_{i = 1}^r n_i = n.
 \end{equation*}
 We can visualize the number of possible assignments as follows.
 Picture $n$ balls space out on a straight line and consider $r-1$ vertical markers, each of which can be put between two consecutive balls, before the first ball, or after the last ball. 
@@ -318,13 +315,13 @@ For instance, if there are five balls and two markers then one possible assignme
 \psfrag{1}[c]{$1$}
 \includegraphics[height=5.28cm]{Figures/4Chapter/partitioning}
 \end{psfrags}
-\caption{The number of possible cardinality assignments for the partition of a set of $n$ elements into $r$ subsets is equivalent to the number of ways to select $n$ positions out of $n + r - 1$ candidates.} 
+\caption{The number of possible cardinality assignments for the partition of a set of $n$ elements into $r$ distinct subsets is equivalent to the number of ways to select $n$ positions out of $n + r - 1$ candidates.} 
 \label{figure:Partitioning}
 \end{center}
 \end{figure}
 
 The number of objects in the first subset corresponds to the number balls appearing before the first marker.
-Similarly, the number of objects in the $p$th subset is equal to the number of balls positioned between the $p$th marker and the preceding one.
+Similarly, the number of objects in the $i$th subset is equal to the number of balls positioned between the $i$th marker and the preceding one.
 Finally, the number of objects in the last subset is simply the number of balls after the last marker.
 In this scheme, two consecutive markers imply that the corresponding subset is empty.
 For example, the integer assignment associated with the Figure~\ref{figure:Partitioning} is
@@ -357,7 +354,7 @@ A ball is drawn from the urn and its number is recorded.
 The ball is then returned to the urn.
 This procedure is repeated a total of $n$ times.
 The outcome of this experiment is a table that contains the number of times each ball has come in sight.
-We are interested in computing the number of distinct outcomes.
+We are interested in computing the number of possible outcomes.
 This is equivalent to counting the ways a set with $n$ elements can be partitioned into $r$ subsets.
 The number of possible outcomes is therefore given by
 \begin{equation*}
@@ -374,7 +371,7 @@ In this section, we present a few applications of combinatorics to computing the
 The Texas Lottery game ``Pick $3$'' is easy to play.
 A player must pick three numbers from zero to nine, and choose how to play them: exact order or any order.
 The Pick $3$ balls are drawn using three air-driven machines.
-These machines use compressed air to mix and select each ball.
+These machines employ compressed air to mix and select each ball.
 
 The probability of winning when playing the exact order is
 \begin{equation*}
@@ -412,9 +409,9 @@ The probability of winning the Mega Millions Grand Prize is
 \end{example}
 
 \begin{example}[Sinking Boat]
-Six couples (twelve people total) are out at sea on a small sail boat.
+Six couples, twelve people total, are out at sea on a sail boat.
 Unfortunately, the boat hits an iceberg and starts sinking slowly.
-Two Coast Guard boats, the Ibis and the Mako, come to the rescue.
+Two Coast Guard vessels, the Ibis and the Mako, come to the rescue.
 Each passenger must decide which of the two rescue boats to board.
 What is the probability that no two people from a same couple end up on the Mako?
 
@@ -430,13 +427,14 @@ A total of $n$ people are gathering to attend a two-day, secret locksmith conven
 As tradition dictates, every locksmith brings a lock and two keys to the convention.
 At the opening ceremony, all the locksmiths sit around a large table, and they exchange keys to their own locks with the two members sitting immediately next to them.
 The rules of the secret society stipulate that the conference can only proceed on the second day if a working lock-and-key combination can be reconstituted.
-If each locksmith decides to attend the second day of the convention with probability half, independently of others, what is the probability that the reunion can proceed on the second day?
+If each locksmith decides to attend the second day of the convention with probability half, independently of others, what is the probability that the reunion can continue its course of action on the second day?
 
-Given that there are $n$ people on the first day, the number of arrangements on the second day is $2^n$, and they are all equally likely.
+There are $n$ attendants on the first day.
+The number of possible audiences on the second day is therefore $2^n$, and they are all equally likely.
 To find the probability that the reunion can proceed, it suffices to count the number of ways in which at least two people that were sitting next to each other during the opening ceremony are present.
 Alternatively, we can compute the likelihood that this does not occur.
 To solve this problem, we label the people attending the opening ceremony using integers one through $n$, according to their positions around the table.
-We consider three situations that may occur on the second day for which the society's requirements are not met.
+We consider three situations that may occur on the second day and for which the society's requirements are not met.
 If member~$1$ is present, then members~$2$ and $n$ cannot be there on the second day, and the number of possible non-qualifying arrangements is equal to the number of distinct subsets of the integers $\{3, 4,\ldots, n-1\}$ that do not contain consecutive integers.
 This number can be deduced from the discussion at the beginning of this chapter, and is given by
 \begin{equation*}
