@@ -1,10 +1,10 @@
-\chapter{Discrete Random Vectors}
+\chapter{Multiple Random Variables}
 \label{chapter:RandomVectorsDiscrete}
 
 Thus far, our treatment of probability has been focused on single random variables.
 It is often convenient or required to model stochastic phenomena using multiple random variables.
 In this section, we extend some of the concepts developed for single random variables to multiple random variables.
-We center our exposition of random vectors around a simple case, pairs of random variables.
+We center our exposition of random vectors around the simplest case, pairs of random variables.
 
 
 \section{Joint Probability Mass Functions}
@@ -37,7 +37,7 @@ Note the similarity between the definition of the joint PMF and \eqref{equation:
 \psfrag{P}[c]{$(X,Y)$}
 \includegraphics[height=5.20cm]{Figures/7Chapter/prv}
 \end{psfrags}
-\caption{The random pair $(X, Y)$ maps every outcome contained in the sample space to a real vector in $\RealNumbers^2$.}
+\caption{The random pair $(X, Y)$ maps every outcome contained in the sample space to a vector in $\RealNumbers^2$.}
 \end{center}
 \end{figure}
 
@@ -68,7 +68,7 @@ An urn contains three balls numbered one, two and three.
 A random experiment consists of drawing two balls from the urn, without replacement.
 The number appearing on the first ball is a random variable, which we denote by $X$.
 Similarly, we refer to the number inscribed on the second ball as $Y$.
-The joint PMF of $X$ and $Y$ is specified below,
+The joint PMF of $X$ and $Y$ is specified in table form below,
 \begin{center}
 \begin{tabular}{|c|c|c|c|}
 \hline
@@ -88,7 +88,7 @@ p_X (x) = \sum_{y \in Y(\Omega)} p_{X,Y} (x,y)
 = \frac{1}{6} + \frac{1}{6} = \frac{1}{3},
 \end{equation*}
 where $x \in \{1, 2, 3 \}$.
-Likewise, the marginal PMF of $Y$ is seen to equal
+Likewise, the marginal PMF of $Y$ is given by
 \begin{equation*}
 p_Y (y) = \left\{ \begin{array}{ll}
 1/3, & \text{if }y \in \{ 1, 2, 3 \} \\
@@ -101,7 +101,7 @@ p_Y (y) = \left\{ \begin{array}{ll}
 Again, suppose that an urn contains three balls numbered one, two and three.
 This time the random experiment consists of drawing two balls from the urn with replacement.
 We use $X$ and $Y$ to denote the numbers appearing on the first and second balls, respectively.
-The joint PMF of $X$ and $Y$ now becomes
+The joint PMF of $X$ and $Y$ becomes
 \begin{center}
 \begin{tabular}{|c|c|c|c|}
 \hline
@@ -115,7 +115,7 @@ $3$ & $1/9$ & $1/9$ & $1/9$ \\
 \hline
 \end{tabular} .
 \end{center}
-We can easily verify that the marginal distributions of $X$ and $Y$ are the same as in Example~\ref{example:JointPMFwoReplacement};
+The marginal distributions of $X$ and $Y$ are the same as in Example~\ref{example:JointPMFwoReplacement};
 however, the joint PMFs differ.
 \end{example}
 
@@ -123,12 +123,12 @@ however, the joint PMFs differ.
 \section{Functions and Expectations}
 
 Let $X$ and $Y$ be two random variables with joint PMF $p_{X,Y} (\cdot, \cdot)$.
-Consider a third random variable defined by $V = g(X,Y)$, where $g : \RealNumbers^2 \mapsto \RealNumbers$ is a real-valued function.
+Consider a third random variable defined by $V = g(X,Y)$, where $g (\cdot, \cdot)$ is a real-valued function.
 We can obtain the PMF of $V$ by computing
-\begin{equation*}
+\begin{equation} \label{equation:PMFSumDiscrete}
 p_V (v)
 = \sum_{\{ (x,y) | g(x,y) = v \}} p_{X,Y} (x, y).
-\end{equation*}
+\end{equation}
 This equation is the analog of \eqref{equation:FunctionPMF} for pairs of random variables.
 
 \begin{figure}[ht]
@@ -148,17 +148,29 @@ This equation is the analog of \eqref{equation:FunctionPMF} for pairs of random 
 \includegraphics[width=11cm]{Figures/7Chapter/vfcn}
 \end{psfrags}
 \caption{A real-valued function of two random variables, $X$ and $Y$, is also a random variable.
-Above, $V = g(X, Y)$ maps outcomes in the sample space to real numbers.}
+Above, $V = g(X, Y)$ maps elements of the sample space to real numbers.}
 \end{center}
 \end{figure}
 
 \begin{example} \label{example:SumDice1}
 Two dice, a blue die and a red one, are rolled simultaneously.
-The random variable $X$ represents the number of dots that appears on the top face of the blue die, whereas $Y$ is equal to the number of dots on the red die.
-We can form a random variable $U$ that describes the sum of the two dice, $U = X + Y$.
+The random variable $X$ represents the number of dots that appears on the top face of the blue die, whereas $Y$ denotes the number of dots on the red die.
+We can form a random variable $U$ that describes the sum of these two dice, $U = X + Y$.
+
+The lowest possible value for $U$ is two, and its maximum value is twelve.
+The PMF of $U$, as calculated using \eqref{equation:PMFSumDiscrete}, appears in table form below
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+$k$ & $2, 12$ & $3, 11$ & $4, 10$ & $5, 9$ & $6, 8$ & $7$ \\
+\hline
+$p_U (k)$ & $1/36$ & $1/18$ & $1/12$ & $1/9$ & $5/36$ & $1/6$ \\
+\hline
+\end{tabular}
+\end{center}
 \end{example}
 
-The definition of the expectation operator can also be extended to multiple random variables.
+The definition of the expectation operator can be extended to multiple random variables.
 In particular, the expected value of $g(X,Y)$ is obtained by computing
 \begin{equation} \label{equation:ExpectationMultipleRV}
 \Expect [g(X,Y)] = \sum_{x \in X(\Omega)} \sum_{y \in Y(\Omega)} g(x,y) p_{X,Y} (x,y) .
@@ -268,10 +280,8 @@ In general, a random variable with such a distribution is known as a \emph{hyper
 
 The definition of conditional PMF can be rearranged to obtain a convenient formula to calculate the joint distribution of $X$ and $Y$, namely
 \begin{equation*}
-\begin{split}
-p_{X,Y} (x,y) &= p_{Y|X} (y|x) p_X (x) \\
-& = p_{X|Y} (x|y) p_Y (y) .
-\end{split}
+p_{X,Y} (x,y) = p_{Y|X} (y|x) p_X (x)
+ = p_{X|Y} (x|y) p_Y (y) .
 \end{equation*}
 This formula can be use to compute the joint PMF of $X$ and $Y$ sequentially.
 
@@ -301,7 +311,7 @@ p_{M} (m) &= \sum_{k = 0}^{\infty} p_{K,M} (k, m)
 \end{split}
 \end{equation*}
 Above, we have used the change of variables $k = u+m$.
-We have also rearranged the sum into a familiar form, leveraging the fact that the summation of a Poisson PMF over all its possible values is equal to one.
+We have also rearranged the sum into a familiar form, leveraging the fact that the summation of a Poisson PMF over all possible values is equal to one.
 We can see that $M$ has a Poisson PMF with parameter $p \lambda$.
 \end{example}
 
@@ -315,7 +325,7 @@ The conditional PMF of $X$ given $S$ is defined by
 p_{X|S} (x) = \Pr (X = x | S)
 = \frac{\Pr (\{X = x\} \cap S)}{\Pr (S)} .
 \end{equation}
-Note that the sets $\{ X = x \}$ form a partition of $\Omega$ as $x$ ranges over all the possible values in $X (\Omega)$.
+Note that the events $\{ \omega \in \Omega |  X(\omega) = x \}$ form a partition of $\Omega$ as $x$ ranges over all the values in $X (\Omega)$.
 Using the total probability theorem, we gather that
 \begin{equation*}
 \sum_{x \in X(\Omega)} \Pr ( \{X = x\} \cap S) = \Pr (S)
@@ -332,13 +342,13 @@ and, consequently, we get
 We conclude that $p_{X|S} (\cdot)$ is a valid PMF.
 
 Another interpretation of \eqref{equation:ConditionalEventPMF} is the following.
-Let $Y = \IndicatorFcn_S (\cdot)$, the indicator function of $S$, with
+Let $Y = \IndicatorFcn_S (\cdot)$ symbolize the indicator function of $S$, with
 \begin{equation*}
 \IndicatorFcn_S (\omega) = \begin{cases} 1, & \omega \in S\\
 0, & \omega \notin S . \end{cases}
 \end{equation*}
 Then $p_{X|S} (x) = p_{X|Y} (x | 1)$.
-In some sense, conditioning on an event is a special case of a conditional probability mass function.
+In this sense, conditioning on an event is a special case of a conditional probability mass function.
 
 \begin{example}
 A data packet is sent to a destination over an unreliable wireless communication link.
@@ -373,9 +383,9 @@ h(x) = \Expect [Y | X = x] .
 \end{equation*}
 It is therefore mathematically accurate and sometimes desirable to talk about the random variable $h (X) = \Expect [Y | X]$.
 In particular, if $X$ and $Y$ are two random variables associated with an experiment, the outcome of this experiment determines the value of $X$, say $X = x$, which in turn yields the conditional expectation $h(x) = \Expect [Y | X = x]$.
-In this sense, the conditional expectation $\Expect [Y | X]$ is simply an instance of a random variable.
+From this point of view, the conditional expectation $\Expect [Y | X]$ is simply an instance of a random variable.
 
-Not too surprisingly, the expectation of $\Expect [Y | X]$ is given by
+Not too surprisingly, the expectation of $\Expect [Y | X]$ is equal to $\Expect [Y]$, as evinced by the following derivation,
 \begin{equation*}
 \begin{split}
 \Expect \left[ \Expect [Y | X] \right]
@@ -396,7 +406,7 @@ Using a similar argument, it is straightforward to show that
 An entrepreneur opens a small business that sells two kinds of beverages from the Brazos Soda Company, cherry soda and lemonade.
 The number of bottles sold in an hour at the store is found to be a Poisson random variable with parameter $\lambda = 10$.
 Every customer selects a cherry soda with probability $p$ and a lemonade with probability $(1 - p)$, independently of other customers.
-We wish to find the conditional mean of the number of cherry sodas purchased in an hour given that a total of ten beverages was purchased by customers during this time period.
+We wish to find the conditional mean of the number of cherry sodas purchased in an hour given that ten beverages were sold to customers during this time period.
 
 Let $B$ represent the number of bottles sold during an hour.
 Similarly, let $C$ and $L$ be the number of cherry sodas and lemonades purchased during the same time interval, respectively.
@@ -420,7 +430,7 @@ The conditional expectation of $X$ given $S$ is
 \begin{equation*}
 \Expect [X | S] = \sum_{x \in X(\Omega)} x p_{X|S} (x) ,
 \end{equation*}
-where $p_{X|S} (\cdot)$ is as defined in \eqref{equation:ConditionalEventPMF}.
+where $p_{X|S} (\cdot)$ is defined in \eqref{equation:ConditionalEventPMF}.
 Similarly, we have
 \begin{equation*}
 \Expect [g(X) | S] = \sum_{x \in X(\Omega)} g(x) p_{X|S} (x) ,
@@ -463,8 +473,11 @@ Given that the student buys at least five shirts, the conditional expectation be
 = 126 .
 \end{split}
 \end{equation*}
-Condition on buying more than five shirts, the student is expected to spend \$126.
-Note that, in computing the conditional expectation, we have used the memoryless property of the geometric random variable, $\Expect [ N | N \geq 5] = \Expect [ N | N > 4] = 4 + \Expect [ N ] = 6$.
+Conditioned on buying more than five shirts, the student is expected to spend \$126.
+Note that, in computing the conditional expectation, we have utilized the memoryless property of the geometric random variable,
+\begin{equation*}
+\Expect [ N | N \geq 5] = \Expect [ N | N > 4] = 4 + \Expect [ N ] = 6 .
+\end{equation*}
 \end{example}
 
 
@@ -478,9 +491,9 @@ p_{X,Y} (x,y) = p_X (x) p_Y (y)
 for every $x \in X(\Omega)$ and every $y \in Y(\Omega)$.
 
 There is a clear relation between the concept of independence introduced in Section~\ref{section:Independence} and the independence of two random variables.
-Random variables $X$ and $Y$ are independent if and only if the events $\{ X = x \}$ and $\{ Y = y \}$ are independent for every $x \in X(\Omega)$ and every $y \in Y(\Omega)$.
+Random variables $X$ and $Y$ are independent if and only if the events $\{ X = x \}$ and $\{ Y = y \}$ are independent for every pair $(x, y)$ such that $x \in X(\Omega)$ and $y \in Y(\Omega)$.
 
-\begin{proposition}
+\begin{proposition} \label{proposition:ExpectationProduct}
 If $X$ and $Y$ are independent random variables, then
 \begin{equation*}
 \Expect [X Y] = \Expect [X] \Expect [Y] .
@@ -504,39 +517,42 @@ where we have used the fact that $p_{X,Y} (x,y) = p_X (x) p_Y (y)$ for independe
 Two dice of different colors are rolled, as in Example~\ref{example:SumDice1}.
 We wish to compute the expected value of their product.
 We know that the mean of each role is $\Expect [X] = \Expect [Y] = 3.5$.
-Furthermore, it is straightforward to show that $X$ and $Y$, the numbers of dots on the two dice, are independent random variable.
+Furthermore, it is straightforward to show that $X$ and $Y$, the numbers of dots on the two dice, are independent random variables.
 The expected value of their product is then equal to the product of the individual means, $\Expect [XY] = \Expect [X] \Expect [Y] = 12.25$.
 \end{example}
 
-A similar argument can be used to show that
+We can parallel the proof of Proposition~\ref{proposition:ExpectationProduct} to show that
 \begin{equation} \label{equation:DiscreteProduct}
 \Expect[ g(X) h(Y) ] = \Expect [ g(X) ] \Expect [ h(Y) ]
 \end{equation}
 whenever $X$ and $Y$ are independent random variables and the corresponding expectations exist.
 
-We now turn to the question of determining the distribution of a sum of two independent random variables in terms of the marginal PMF of the summands.
+
+\subsection{Sums of Independent Random Variables}
+
+We turn to the question of determining the distribution of a sum of two independent random variables in terms of the marginal PMF of the summands.
 Suppose $X$ and $Y$ are independent random variables that take on integer values.
 Let $p_X(\cdot)$ and $p_Y(\cdot)$ be the PMFs of $X$ and $Y$, respectively.
-We wish to determine the distribution $p_U (\cdot)$ of $U$ where $U = X + Y$.
+We wish to determine the distribution $p_U (\cdot)$ of $U$, where $U = X + Y$.
 To accomplish this task, it suffices to compute the probability that $U$ assumes a value $k$, where $k$ is an arbitrary integer,
 \begin{equation*}
 \begin{split}
 p_U (k) &= \Pr (U = k) = \Pr (X + Y = k) \\
 &= \sum_{ \{ (x,y) \in X(\Omega) \times Y(\Omega) | x + y = k \} } p_{X,Y} (x, y) \\
-&= \sum_{ m \in \mathbb{U} } p_{X,Y} (m, k-m) \\
-&= \sum_{ m \in \mathbb{U} } p_X (m) p_Y(k-m) .
+&= \sum_{ m \in \Integers } p_{X,Y} (m, k-m) \\
+&= \sum_{ m \in \Integers } p_X (m) p_Y(k-m) .
 \end{split}
 \end{equation*}
 The latter operation is called a \emph{discrete convolution}. \index{Discrete convolution}
 In particular, the PMF of $U = X + Y$ is the discrete convolution of $p_X (\cdot)$ and $p_Y (\cdot)$ given by
 \begin{equation} \label{equation:DiscreteConvolution}
 p_U(k) = (p_X \ast p_Y)(k)
-= \sum_{m = - \infty}^{\infty} p_X(m) p_Y(k-m) .
+= \sum_{m \in \Integers } p_X(m) p_Y(k-m) .
 \end{equation}
-It can be shown that the discrete convolution is commutative and associative.
+The discrete convolution is commutative and associative.
 
 One interesting application of \eqref{equation:DiscreteProduct} occurs when dealing with sums of independent random variables.
-Suppose $X$ and $Y$ are two independent random variables that take on integer values, and let $U = X + Y$.
+Suppose $X$ and $Y$ are two independent random variables that take on integer values and, again, let $U = X + Y$.
 The ordinary generating function of $U$, as defined in Section~\ref{section:OrdinaryGeneratingFunctions}, is given by
 \begin{equation*}
 \begin{split}
@@ -547,7 +563,7 @@ G_U (z) &= \Expect \left[ z^U \right]
 &= G_X(z) G_Y(z) .
 \end{split}
 \end{equation*}
-That is, the generating function of a sum of independent random variables is equal to the product of the individual ordinary generating functions, provided that the latter functions exist.
+That is, the generating function of a sum of independent random variables is equal to the product of the individual ordinary generating functions.
 
 \begin{example}[Sum of Poisson Random Variables]
 Let $X$ be a Poisson random variable with parameter $\alpha$ and let $Y$ be a Poisson random variable with parameter $\beta$.
@@ -560,7 +576,7 @@ The ordinary generating functions of $X$ and $Y$ are therefore equal to
 G_X (z) &= e^{\alpha (z-1)} \\
 G_Y (z) &= e^{\beta (z-1)} .
 \end{align*}
-As such, the ordinary generating function of $U = X + Y$ becomes
+As such, the ordinary generating function of $U = X + Y$ is
 \begin{equation*}
 G_U (z) = G_X (z) G_Y(z) = e^{\alpha (z-1)} e^{\beta (z-1)}
 = e^{(\alpha + \beta) (z-1)} .
@@ -587,15 +603,15 @@ p_{X|S} (x) = p_X (x)
 for all $x \in X(\Omega)$.
 
 
-\section{Multiple Random Variables}
+\section{Numerous Random Variables}
 
-The concept of joint distribution can be extended to any number of random variables.
+The notion of a joint distribution can be applied to any number of random variables.
 Let $X_1, X_2, \ldots, X_n$ be random variables; their joint PMF is defined by
 \begin{equation*}
 p_{X_1, X_2, \ldots, X_n} (x_1, x_2, \ldots, x_n) = \Pr \left( \bigcap_{k=1}^n \{ X_k = x_k \} \right),
 \end{equation*}
 or, in vector form, $p_{\mathbf{X}} (\mathbf{x}) = \Pr ( \mathbf{X} = \mathbf{x} )$.
-When the random variables $X_1, X_2, \ldots, X_n$ are independent, their joint PMF reduces to
+When the random variables $\{ X_k \}$ are independent, their joint PMF reduces to
 \begin{equation*}
 p_{\mathbf{X}} (\mathbf{x}) = \prod_{k=1}^n p_{X_k} (x_k) .
 \end{equation*}
@@ -610,16 +626,20 @@ where $X_1, X_2, \ldots$ are independent integer-valued random variables, each w
 Obviously, the distribution of $S_1$ is simply $p_X (\cdot)$.
 More generally, the PMF of $S_n$ can be obtained recursively using the formula
 \begin{equation*}
-S_n = S_{n-1} + X_n ,
+S_n = S_{n-1} + X_n .
 \end{equation*}
-and therefore $p_{S_n} (k) = (p_X \ast p_X \ast \cdots \ast p_X ) (k)$, the $n$-fold convolution of $p_X (\cdot)$.
+This leads to the PMF
+\begin{equation*}
+p_{S_n} (k) = (p_X \ast p_X \ast \cdots \ast p_X ) (k) ,
+\end{equation*}
+which is the $n$-fold convolution of $p_X (\cdot)$.
 Furthermore, the ordinary generating function of $S_n$ can be written as
 \begin{equation*}
 G_{S_n} (z) = \left( G_X (z) \right)^n.
 \end{equation*}
 
 \begin{example}[Binomial Random Variables]
-Suppose that $S_n$ is a sum of $n$ independent and identically distributed Bernoulli random variables with parameter $p \in (0,1)$.
+Suppose that $S_n$ is a sum of $n$ independent and identically distributed Bernoulli random variables, each with parameter $p \in (0,1)$.
 The PMF of $S_1$ is equal to
 \begin{equation*}
 p_{S_1} (k) = \begin{cases} 1 - p & k = 0 \\
@@ -631,7 +651,7 @@ p_{S_{n-1}} (k)
 = \binom{n-1}{k} p^k (1-p)^{n-1-k} ,
 \quad k = 0, 1, \ldots n-1 .
 \end{equation*}
-Then, the distribution of $S_n$ can be computed using the discrete convolution,
+Then, the distribution of $S_n$ can be computed recursively using the discrete convolution,
 \begin{equation*}
 \begin{split}
 p_{S_n} (k) &= \sum_{m = - \infty}^{\infty} p_{S_{n-1}}(m) p_X(k-m) \\
@@ -685,8 +705,9 @@ or, alternatively, we can write
 \end{equation*}
 Integrating both sides yields 
 \begin{equation*}
-\log \left( G_X(z) \right) = - r \log \left( 1 - (1-p) z \right) + c .
+\log \left( G_X(z) \right) = - r \log \left( 1 - (1-p) z \right) + c ,
 \end{equation*}
+where $c$ is an arbitrary constant.
 Applying boundary condition $G_X(1) = 1$, we get the ordinary generating function of $X$ as
 \begin{equation*}
 G_X(z) = \left( \frac{p}{1 - (1-p) z} \right)^r .
