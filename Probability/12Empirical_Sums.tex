@@ -1,6 +1,9 @@
 \chapter{Sequences and Limit Theorems}
 
 Some of the most astonishing results in probability are related to the properties of sequences of random variables and the convergence of empirical distributions.
+From an engineering viewpoint, these results are important as they enable the efficient design of complex systems with very small probabilities of failure.
+Concentration behavior facilitates true economies of scale. 
+
 
 \section{Types of Convergence}
 
@@ -9,13 +12,13 @@ Recall that a random variable is a function of the outcome of a random experimen
 The above statement stipulate that all the random variables listed above are functions of the outcome of a same experiment.
 
 Statements that can be made about a sequence of random variables range from simple assertions to more intricate claims.
-For instance, the sequence may appear to approach a deterministic quantity or to behave increasingly akin to a certain function.
-Alternatively, the CDFs of the random variables in the sequence may appear to converge towards a precise function.
+For instance, the sequence may appear to move toward a deterministic quantity or to behave increasingly akin to a certain function.
+Alternatively, the CDFs of the random variables in the sequence may appear to approach a precise function.
 Being able to recognize specific patterns within the sequence is key in establishing converge results.
-The different statement one can make about the sequence $X_1, X_2, \ldots$ lead to the different types of convergence encountered in probability.
+The various statement one can make about the sequence $X_1, X_2, \ldots$ lead to the different types of convergence encountered in probability.
 Below, we discuss briefly three types of convergence.
 
-\begin{example}
+\begin{example} \label{example:GaussianLLN}
 Suppose that $X_1, X_2, \ldots$ is a sequence of independent Gaussian random variables, each with mean $m$ and variance $\sigma^2$.
 Define the partial sums
 \begin{equation} \label{equation:GaussianEmpiricalSum}
@@ -25,7 +28,7 @@ and consider the sequence
 \begin{equation} \label{equation:GaussianEmpiricalAverage}
 S_1, \frac{S_2}{2}, \frac{S_3}{3}, \ldots
 \end{equation}
-We know that affine transformation of Gaussian random variables remain Gaussian.
+We know that affine transformations of Gaussian random variables remain Gaussian.
 Furthermore, we know that sums of jointly Gaussian random variables are also Gaussian.
 Thus, $S_n / n$ possesses a Gaussian distribution with mean
 \begin{equation*}
@@ -45,13 +48,13 @@ It appears that the PDF of $S_n / n$ concentrates around $m$ as $n$ approaches i
 That is, the sequence in \eqref{equation:GaussianEmpiricalAverage} seems to become increasingly predictable.
 \end{example}
 
-\begin{example}
-Again, let $X_1, X_2, \ldots$ be a sequence as describe above, and let $S_n$ be defined according to \eqref{equation:GaussianEmpiricalSum}.
+\begin{example} \label{example:GaussianCLT}
+Again, let $X_1, X_2, \ldots$ be the sequence described above, and let $S_n$ be defined according to \eqref{equation:GaussianEmpiricalSum}.
 This time, we wish to characterize the properties of
 \begin{equation*}
 S_1 - m, \frac{S_2 - 2m}{\sqrt{2}}, \frac{S_3 - 3m}{\sqrt{3}}, \ldots
 \end{equation*}
-From our discussion, we know that $(S_n -nm) / \sqrt{n}$ is a Gaussian random variables.
+From our current discussion, we know that $(S_n -nm) / \sqrt{n}$ is a Gaussian random variables.
 We can compute its mean and variance as follows
 \begin{gather*}
 \Expect \left[ \frac{S_n -nm}{\sqrt{n}} \right]
@@ -63,7 +66,7 @@ We can compute its mean and variance as follows
 = \sigma^2 .
 \end{gather*}
 No matter how large $n$ is, the random variable $(S_n - nm)/\sqrt{n}$ has a Gaussian distribution with mean zero and variance $\sigma^2$.
-Intriguingly, the distributions remains fix throughout the sequence.
+Intriguingly, the distributions remains invariant throughout the sequence.
 \end{example}
 
 
@@ -74,6 +77,8 @@ Formally, a sequence $X_1, X_2, \ldots$ of random variables converges in probabi
 \begin{equation*}
 \lim_{n \rightarrow \infty} \Pr \left( \left| X_n - X \right| \geq \epsilon \right) = 0 .
 \end{equation*}
+In Example~\ref{example:GaussianLLN}, the sequence $\{ S_n / n \}$ converges in probability to $m$.
+
 
 \subsection{Mean Square Convergence}
 
@@ -132,8 +137,8 @@ Hence, the sequence $X_1, X_2, \ldots$ converges in distribution to a constant.
 
 \section{Law of Large Numbers}
 
-Laws of large numbers focus on the convergence of empirical averages.
-Although, there are many such laws, we only state the simplest one below.
+The law of large numbers focuses on the convergence of empirical averages.
+Although, there are many versions of this law, we only state its simplest form below.
 Suppose that $X_1, X_2, \ldots$ is a sequence of independent and identically distributed random variable, each with finite second moment.
 Furthermore, for $n \geq 1$, define the empirical sum
 \begin{equation*}
@@ -145,7 +150,7 @@ The law of large number asserts that the sequence of empirical averages,
 \end{equation*}
 converges in probability to the mean $\Expect [X]$.
 
-\begin{theorem}[Law of Large Numbers]
+\begin{theorem}[Law of Large Numbers] \index{Law of large numbers}
 Let $X_1, X_2, \ldots$ be independent and identically distributed random variables with mean $\Expect [X]$ and finite variance.
 For every $\epsilon > 0$, we have
 \begin{equation*}
@@ -193,17 +198,17 @@ We are interested in the average number of times a six shows up on the top face,
 
 Let $D_n$ be a random variable that represent the number on the $n$th roll.
 Also, define the random variable $X_n = \IndicatorFcn_{\{ D_n = 6 \}}$.
-Then, $X_n$ is a Bernoulli random variable with parameter $p = 1/6$, and the empirical average $S_n / n$ is equal to the number of times a six was observed divided by the total number of rolls.
+Then, $X_n$ is a Bernoulli random variable with parameter $p = 1/6$, and the empirical average $S_n / n$ is equal to the number of times a six is observed divided by the total number of rolls.
 By the law of large numbers, we have
 \begin{equation*}
 \lim_{n \rightarrow \infty}
 \Pr \left( \left| \frac{S_n}{n} - \frac{1}{6} \right| \geq \epsilon \right) = 0 .
 \end{equation*}
-That is, as the number of rolls increases, the average number of times a six was observe converges to the probability of getting a six.
+That is, as the number of rolls increases, the average number of times a six is observe converges to the probability of getting a six.
 \end{example}
 
 
-\subsection{Heavy-Tailed Distributions}
+\subsection{Heavy-Tailed Distributions*}
 
 There are situations where the law of large numbers does not apply.
 For example, when dealing with \emph{heavy-tailed distributions}, one needs to be very careful.
@@ -223,7 +228,7 @@ f_S (x) &= \int_{-\infty}^{\infty} f_{X_1} (\xi) f_{X_2} (x - \xi) d\xi \\
 \end{split}
 \end{equation*}
 This integral is somewhat difficult to solve.
-We therefore resort to complex analysis and contour integration to get the answer.
+We therefore resort to complex analysis and contour integration to get a solution.
 Let $C$ be a contour that goes along the real line from $-a$ to $a$, and then counterclockwise along a semicircle centered at zero.
 For $a$ large enough, Cauchy's residue theorem requires that
 \begin{equation} \label{equation:CauchyConvolutionContour}
@@ -246,8 +251,8 @@ g(z) &= \frac{\gamma_1 \gamma_2}{\pi^2 \left( \gamma_1^2 + z^2 \right)
 ( z - x + i \gamma_2 ) ( z - x - i \gamma_2 ) } .
 \end{split}
 \end{equation*}
-Again, only two residues are contained within the enclosed region.
-Because they are simple pole, their values are given by
+Only two residues are contained within the enclosed region.
+Because they are simple poles, their values are given by
 \begin{align*}
 \operatorname{Res} (g, i \gamma_1)
 &= \lim_{z \rightarrow i \gamma_1} (z - i \gamma_1) g(z)
@@ -278,7 +283,7 @@ It follows that
 \end{split}
 \end{equation*}
 The contribution of the arc in \eqref{equation:CauchyConvolutionContour} vanishes as $a \rightarrow \infty$.
-We can then conclude that the PDF of $S$ is equal to
+We then conclude that the PDF of $S$ is equal to
 \begin{equation*}
 f_S (x) = \frac{(\gamma_1 + \gamma_2)}
 {\pi \left( (\gamma_1 + \gamma_2)^2 + x^2 \right) } .
@@ -290,7 +295,7 @@ Also, consider the empirical sum
 \begin{equation*}
 S_n = \sum_{i=1}^n X_n .
 \end{equation*}
-Using mathematical induction and the aforementioned fact, it is straightforward to show that $S_n$ is a Cauchy random variable with parameter $n \gamma$.
+Using mathematical induction and the aforementioned fact, it is possible to show that $S_n$ is a Cauchy random variable with parameter $n \gamma$.
 Furthermore, for $x \in \RealNumbers$, the PDF of the empirical average $S_n / n$ is given by
 \begin{equation*}
 \frac{f_{S_n} ( n x )}{\left| \frac{1}{n} \right|}
@@ -300,16 +305,16 @@ Furthermore, for $x \in \RealNumbers$, the PDF of the empirical average $S_n / n
 where we have used the methodology developed in Chapter~\ref{chapter:DerivedDistributions}.
 Amazingly, the empirical average of a sequence of independent Cauchy random variables, each with parameter $\gamma$, remains a Cauchy random variable with the same parameter.
 Clearly, the law of large numbers does not apply to this scenario.
-Note that our version of the law of large numbers requires the random variables to have finite second moment, a condition that is clearly violated by the Cauchy distribution.
+Note that our version of the law of large numbers requires random variables to have finite second moments, a condition that is clearly violated by the Cauchy distribution.
 This explains why convergence does not take place in this situation.
 
 
 \section{The Central Limit Theorem}
 
-The \emph{central limit theorem} is a remarkable result in probability, and partly explains the prevalence of Gaussian random variables.
-In some sense, it characterizes the behavior of the sum of a large number of independent random variables.
+The \emph{central limit theorem} is a remarkable result in probability; it partly explains the prevalence of Gaussian random variables.
+In some sense, it captures the behavior of large sums of small, independent random components.
 
-\begin{theorem}[Central Limit Theorem]
+\begin{theorem}[Central Limit Theorem] \index{Central limit theorem}
 Let $X_1, X_2, \ldots$ be independent and identically distributed random variables, each with mean $\Expect [X]$ and variance $\sigma^2$.
 The distribution of
 \begin{equation*}
@@ -329,8 +334,8 @@ Initially, we assume that $\Expect [X] = 0$ and $\sigma^2 = 1$.
 Furthermore, we only study the situation where the moment generating function of $X$ exists and is finite.
 Consider the log-moment generating function of $X$,
 \begin{equation*}
-\Lambda_X (s) = \log \left( M_X (s) \right)
-= \log \left( \Expect \left[ e^{sX} \right] \right) .
+\Lambda_X (s) = \log M_X (s)
+= \log \Expect \left[ e^{sX} \right] .
 \end{equation*}
 The first two derivatives of $\Lambda_X (s)$ are equal to
 \begin{gather*}
@@ -341,20 +346,20 @@ The first two derivatives of $\Lambda_X (s)$ are equal to
 + \frac{1}{M_X (s)} \frac{d^2 M_X}{ds^2} (s) .
 \end{gather*}
 Collecting these results and evaluating the functions at zero, we get $\Lambda_X (0) = 0$, $\frac{d \Lambda_X}{ds} (0) = \Expect [X] = 0$, and $\frac{d^2 \Lambda_X}{ds^2} (0) = \Expect \left[ X^2 \right] = 1$.
-Next, we consider the log-moment generating function of $S_n / \sqrt{n}$.
+Next, we study the log-moment generating function of $S_n / \sqrt{n}$.
 Recall that the expectation of a product of independent random variables is equal to the product of their individual expectations.
 Using this property, we get
 \begin{equation*}
 \begin{split}
-\log \left( \Expect \left[ e^{s S_n / \sqrt{n} } \right] \right)
-&= \log \left( \Expect \left[ e^{s X_1 / \sqrt{n} }
-\cdots e^{s X_n / \sqrt{n} } \right] \right) \\
+\log \Expect \left[ e^{s S_n / \sqrt{n} } \right]
+&= \log \Expect \left[ e^{s X_1 / \sqrt{n} }
+\cdots e^{s X_n / \sqrt{n} } \right] \\
 &= \log \left( M_X \left( \frac{s}{\sqrt{n}} \right)
 \cdots M_X \left( \frac{s}{\sqrt{n}} \right) \right) \\
 &= n \Lambda_X \left( s n^{-1/2} \right) .
 \end{split}
 \end{equation*}
-To explore the asymptotic behavior of $S_n / \sqrt{n}$, we take the limit of $n \Lambda_X \left( s n^{-1/2} \right)$ as $n \rightarrow \infty$.
+To explore the asymptotic behavior of the sequence $\{ S_n / \sqrt{n} \}$, we take the limit of $n \Lambda_X \left( s n^{-1/2} \right)$ as $n \rightarrow \infty$.
 In doing so, notice the double use of L'H\^{o}pital's rule,
 \begin{equation*}
 \begin{split}
@@ -375,11 +380,13 @@ In fact, this implies that
 \Pr \left( \frac{S_n}{\sqrt{n}} \leq x \right) \rightarrow \int_{-\infty}^x \frac{1}{\sqrt{2 \pi}} e^{-\frac{\xi^2}{2}} d\xi
 \end{equation*}
 as $n \rightarrow \infty$.
-In other words, $S_n / \sqrt{n}$ converges in distribution to a standard normal random variable.
+In words, $S_n / \sqrt{n}$ converges in distribution to a standard normal random variable.
 The more general case where $\Expect [X]$ and $\Var [X]$ are arbitrary constants can be established in an analog manner by proper scaling of the random variables $X_1, X_2, \ldots$
 \end{proof}
 
-In the last step of the proof, we stated that point-wise convergence of the moment generating functions implies convergence in distribution, a sophisticated result we quote without proof.
+In the last step of the proof, we stated that point-wise convergence of the moment generating functions implies convergence in distribution.
+This is a sophisticated result that we quote without proof.
+
 
 \subsection{Normal Approximation}
 
@@ -389,7 +396,7 @@ Again, let
 S_n = X_1 + \cdots + X_n
 \end{equation*}
 where $X_1, X_2, \ldots$ are independent and identically distributed random variables with mean $\Expect [X]$ and variance $\sigma^2$.
-When $n$ is large, the CDF of $S_n$ can by estimated by approximating
+When $n$ is large, the CDF of $S_n$ can be estimated by approximating
 \begin{equation*}
 \frac{ S_n - n \Expect [X] } { \sigma \sqrt{n} }
 \end{equation*}
@@ -400,14 +407,13 @@ More specifically, we have
 F_{S_n} (x) 
 &= \Pr (S_n \leq x)
 = \Pr \left( \frac{ S_n - n \Expect [X] }{ \sigma \sqrt{n} }
-\leq \frac{x - n \Expect [x]}{\sigma \sqrt{n}} \right) \\
+\leq \frac{x - n \Expect [X]}{\sigma \sqrt{n}} \right) \\
 &\approx \Phi \left( \frac{x - n \Expect [x]}{\sigma \sqrt{n}} \right) ,
 \end{split}
 \end{equation*}
 where $\Phi (\cdot)$ is the CDF of a standard normal random variable.
 
 
-%Do Jensen from homework 11.
 %\subsection{The Hoeffding Bound}
 
 

@@ -2,7 +2,7 @@
 \label{chapter:DerivedDistributions}
 \index{Functions of random variables}
 
-We already know from our previous discussion that it is possible to form new discrete random variables by applying real-valued functions to existing random variables.
+We already know from our previous discussion that it is possible to form new random variables by applying real-valued functions to existing discrete random variables.
 In a similar manner, it is possible to generate a new random variable $Y$ by taking a well-behaved function $g(\cdot)$ of a continuous random variable $X$.
 The graphical interpretation of this notion is analog to the discrete case and appears in Figure~\ref{figure:FunctionContinuousRV}.
 
@@ -20,14 +20,15 @@ In this figure, $Y$ is obtained by applying function $g(\cdot)$ to the value of 
 \end{center}
 \end{figure}
 
-Let $X$ be a continuous random variable, and let $g: \RealNumbers \mapsto \RealNumbers$ be an admissible function.
-Variable $Y = g(X)$, defined pointwise, is itself random.
+Suppose $X$ is a continuous random variable and let $g(\cdot)$ be a real-valued function.
+The function composition $Y = g(X)$ is itself a random variable.
 The probability that $Y$ falls in a specific set $S$ depends on both the function $g(\cdot)$ and the PDF of $X$,
 \begin{equation*}
 \Pr (Y \in S) = \Pr (g(X) \in S) 
 = \Pr \left( X \in g^{-1}(S) \right)
-= \int_{g^{-1} (S)} f_X (\xi) d\xi .
+= \int_{g^{-1} (S)} f_X (\xi) d\xi ,
 \end{equation*}
+where $g^{-1} (S) = \{ \xi \in X(\Omega) | g(\xi) \in S \}$ denotes the preimage of $S$.
 In particular, we can derive the CDF of $Y$ using the formula
 \begin{equation} \label{equation:DerivedCDF}
 F_Y(y) = \Pr (g(X) \leq y)
@@ -37,7 +38,7 @@ F_Y(y) = \Pr (g(X) \leq y)
 \begin{example} \label{example:RayleighExponentialRV}
 Let $X$ be a Rayleigh  random variable with parameter $\sigma^2  = 1$, and define $Y = X^2$.
 We wish to find the distribution of $Y$.
-From \eqref{equation:DerivedCDF}, we can compute the CDF of $Y$.
+Using \eqref{equation:DerivedCDF}, we can compute the CDF of $Y$.
 For $y > 0$, we get
 \begin{equation*}
 \begin{split}
@@ -48,7 +49,7 @@ F_Y(y) &= \Pr (Y \leq y) = \Pr \left( X^2 \leq y \right) \\
 = 1 - e^{-\frac{y}{2}} .
 \end{split}
 \end{equation*}
-Above, we have used the fact that $X \geq 0$ in finding the boundaries of integration, and we made the change of variables $\zeta = \xi^2$ in computing the integral.
+In this derivation, we use the fact that $X \geq 0$ in identifying the boundaries of integration, and we apply the change of variables $\zeta = \xi^2$ in computing the integral.
 We recognize $F_Y(\cdot)$ as the CDF of an exponential random variable.
 This shows that the square of a Rayleigh random variable possesses an exponential distribution.
 \end{example}
@@ -64,19 +65,19 @@ A \emph{monotonic function} is a function that preserves a given order. \index{M
 For instance, $g(\cdot)$ is monotone increasing if, for all $x_1$ and $x_2$ such that $x_1 \leq x_2$, we have $g(x_1) \leq g(x_2)$.
 Likewise, a function $g(\cdot)$ is termed monotone decreasing provided that $g(x_1) \geq g(x_2)$ whenever $x_1 \leq x_2$.
 If the inequalities above are replaced by strict inequalities ($<$ and $>$), then the corresponding functions are said to be \emph{strictly monotonic}. \index{Strictly monotonic function}
-Monotonic functions of random variable are straightforward to handle because they allow a simple characterization of derived CDFs.
+Monotonic functions of random variables are straightforward to handle because they admit the simple characterization of their derived CDFs.
 For non-decreasing function $g(\cdot)$ of continuous random variable $X$, we have
 \begin{equation} \label{equation:MonotoneIncreasingCDF}
 \begin{split}
-F_Y(y) &= \Pr ( Y \leq y) = \Pr ( g(X) \leq y) \\
-&= \Pr ( g(X) \in (- \infty, y])
-= \Pr ( X \in g^{-1} ( (- \infty, y] ) ) \\
-&= \Pr \left( X \leq \sup \left\{ g^{-1} ( (- \infty, y] ) \right\} \right)
-= F_X \left( \sup \left\{ g^{-1} ( (- \infty, y] ) \right\} \right) .
+F_Y(y) &= \Pr ( Y \leq y) = \Pr ( g(X) \leq y)
+= \Pr ( g(X) \in (- \infty, y]) \\
+&= \Pr ( X \in g^{-1} ( (- \infty, y] ) )
+= \Pr \left( X \leq \sup \left\{ g^{-1} ( (- \infty, y] ) \right\} \right) \\
+&= F_X \left( \sup \left\{ g^{-1} ( (- \infty, y] ) \right\} \right) .
 \end{split}
 \end{equation}
 The supremum comes from the fact that multiple values of $x$ may lead to a same value of $y$; that is, the preimage $g^{-1}(y) = \{ x | g(x) = y \}$ may contain several elements.
-Furthermore, $g(\cdot)$ may be discontinuous and $g^{-1} (y)$ may not contain any values.
+Furthermore, $g(\cdot)$ may be discontinuous and $g^{-1} (y)$ may not contain any value.
 These scenarios all need to be accounted for in our expression, and this is accomplished by selecting the largest value in the set $g^{-1} ( (- \infty, y] )$.
 
 \begin{figure}[ht]
@@ -102,7 +103,7 @@ The preimage of point $y$ contains several elements, as seen above.}
 \psfrag{Y}[c]{$Y$}
 \includegraphics[width=6.5cm]{Figures/9Chapter/Discontinuous}
 \end{psfrags}
-\caption{If $g(\cdot)$ is discontinuous then $g^{-1} (y)$ may be empty, whereas $g^{-1} ((-\infty, y])$ is typically a well-defined interval.
+\caption{If $g(\cdot)$ is monotone increasing and discontinuous, then $g^{-1} (y)$ can be empty; whereas $g^{-1} ((-\infty, y])$ is typically a well-defined interval.
 It is therefore advisable to define $F_Y (y)$ in terms of $g^{-1} ((-\infty, y])$.}
 \end{center}
 \end{figure}
@@ -164,9 +165,9 @@ With the simple substitution $x = g^{-1} (y)$, we get
 f_Y (y) = f_X (x) \frac{dx}{dy}
 = \frac{f_X (x)}{\frac{dg}{dx}(x)} .
 \end{equation*}
-Note that $\frac{dg}{dx} (x)$ is non-zero because $g(\cdot)$ is a strictly increasing function.
+Note that $\frac{dg}{dx} (x) = \left| \frac{dg}{dx} (x) \right|$ is strictly positive because $g(\cdot)$ is a strictly increasing function.
 From this analysis, we gather that $Y=g(X)$ is a continuous random variable.
-In addition, when $g(\cdot)$ is differentiable and strictly increasing, we can express the PDF of $Y = g(X)$ in terms of the PDF of $X$ and the derivative of $g(\cdot)$, as seen above.
+In addition, we can express the PDF of $Y = g(X)$ in terms of the PDF of $X$ and the derivative of $g(\cdot)$, as seen above.
 
 \begin{figure}[ht]
 \begin{center}
@@ -191,9 +192,9 @@ We can write the CDF of random variable $Y = g(X)$ as follows,
 \begin{equation*}
 F_Y(y) = \Pr (g(X) \leq y)
 = \Pr \left( X \geq g^{-1}(y) \right)
-= 1 - F_X \left( g^{-1} (y) \right) ;
+= 1 - F_X \left( g^{-1} (y) \right) .
 \end{equation*}
-and its PDF is given by
+Its PDF is given by
 \begin{equation*}
 \begin{split}
 f_Y (y) &= \frac{d}{dy} \left( 1 - F_X \left( g^{-1} (y) \right) \right)
@@ -202,14 +203,15 @@ f_Y (y) &= \frac{d}{dy} \left( 1 - F_X \left( g^{-1} (y) \right) \right)
 \end{split}
 \end{equation*}
 where again $x = g^{-1} (y)$.
-As before, we find that $Y = g(X)$ is a continuous random variable and the PDF of $Y$ can be expressed in therms of $f_X( \cdot)$ and the derivative of $g(\cdot)$.
-Combining these two results, we observe that if $g(\cdot)$ is differentiable and strictly monotone, the PDF of $Y$ becomes
+We point out that $\frac{dg}{dx}(x) = - \left| \frac{dg}{dx}(x) \right|$ is strictly negative because $g(\cdot)$ is a strictly decreasing function.
+As before, we find that $Y = g(X)$ is a continuous random variable and the PDF of $Y$ can be expressed in terms of $f_X( \cdot)$ and the derivative of $g(\cdot)$.
+Combining these two expressions, we observe that, when $g(\cdot)$ is differentiable and strictly monotone, the PDF of $Y$ becomes
 \begin{equation} \label{equation:MonotoneFunctionPDF}
 f_Y (y) = f_X \left( g^{-1} (y) \right) \left| \frac{dx}{dy} \right|
 = \frac{f_X (x)}{\left| \frac{dg}{dx}(x) \right|}
 \end{equation}
 where $x = g^{-1}(y)$.
-The role of $\frac{dg}{dx} (\cdot)$ in finding the derived PDF $f_Y(\cdot)$ is illustrated in Figure~\ref{figure:DifferentiablePDF}.
+The role of $\left| \frac{dg}{dx} (\cdot) \right|$ in finding the derived PDF $f_Y(\cdot)$ is illustrated in Figure~\ref{figure:DifferentiablePDF}.
 
 \begin{example}
 Suppose that $X$ is a Gaussian random variable with PDF
@@ -233,8 +235,9 @@ f_Y(y) = f_X \left( g^{-1} (y) \right) \left| \frac{dx}{dy} \right|
 = \frac{1}{\sqrt{2 \pi} |a|} e^{- \frac{(y-b)^2}{2 a^2} } ,
 \end{equation*}
 which is itself a Gaussian distribution.
-Using a similar progression, we can show that an affine function of a Gaussian random variable is always a Gaussian random variable.
 \end{example}
+
+Using a similar progression, we can show that the affine function of any Gaussian random variable necessarily remains a Gaussian random variable (provided $a \neq 0$).
 
 \begin{example}
 Suppose $X$ is a Rayleigh random variable with parameter $\sigma^2 = 1$, and let $Y = X^2$.
@@ -294,7 +297,7 @@ Suppose $X$ is a continuous random variable uniformly distributed over $[0, 2 \p
 Let $Y = \cos (X)$, the random sampling of a sinusoidal waveform.
 We wish to find the PDF of $Y$.
 
-For $y \in (-1, 1)$, the preimage $g^{-1} (y)$ contains two values in $[0, 2\pi)$, namely $\arccos (y)$ and $(2 \pi - \arccos (y))$.
+For $y \in (-1, 1)$, the preimage $g^{-1} (y)$ contains two values in $[0, 2\pi)$, namely $\arccos (y)$ and $2 \pi - \arccos (y)$.
 Recall that the derivative of $\cos(x)$ is given by
 \begin{equation*}
 \frac{d}{dx} \cos (x) = - \sin (x) .
@@ -357,7 +360,8 @@ f_V (v) = \frac{ f_Y (y) }{ \left| \frac{d F_X^{-1}}{dy} (y) \right| }
 \end{equation*}
 where $y = F_X (v)$.
 Note that $f_Y (y) = 1$ for any $y \in [0,1]$ because $Y$ is uniform over the unit interval.
-We stress that this technique can be utilized to generate any random variable with PDF $f_X (\cdot)$ from a computer routine that outputs a random value uniformly distributed between zero and one.
+Hence the PDF of $F_X^{-1}(Y)$ possesses the structure wanted.
+We stress that this technique can be utilized to generate any random variable with PDF $f_X (\cdot)$ using a computer routine that outputs a random value uniformly distributed between zero and one.
 In other words, to create a continuous random variable $X$ with CDF $F_X (\cdot)$, one can apply the function $F_X^{-1} (\cdot)$ to a random variable $Y$ that is uniformly distributed over $[0,1]$.
 
 \begin{example}
@@ -391,7 +395,7 @@ We know that the corresponding CDF is given by
 \begin{equation*}
 F_X(x) = \sum_{x_i \leq x} p_X (x_i) .
 \end{equation*}
-We can generate a random variable $X$ with PMF $p_X(\cdot)$ with the following function,
+We can generate a random variable $X$ with PMF $p_X(\cdot)$ with the following case function,
 \begin{equation*}
 g(y) = \begin{cases} x_i, & \text{if } F_X(x_{i-1}) < y \leq F_X (x_i) \\
 0, & \text{otherwise}. \end{cases}
@@ -405,24 +409,24 @@ Taking $X = g(Y)$, we get
 \end{split}
 \end{equation*}
 Of course, implementing a discrete random variable through a case statement may lead to an excessively slow routine.
-For many discrete random variables, there are much more efficient ways to generate the desired output.
+For many discrete random variables, there are much more efficient ways to generate a specific output.
 
 
-\section{Discrete Approximations*}
+%\section{Discrete Approximations*}
 
-Traditionally, the study of complex systems has relied on empirical observations and abstract mathematical models that are amenable to analysis.
-The hope is that such an approach will lead to accurate predictions about the behavior of the underlying system, under various parameters and initial conditions.
-While this approach has had and continues to have many successes, the immense capabilities of contemporary computer servers has enabled the complementary means of numerical methods.
-Computer simulations now play a key role in the analysis of many complex systems, permitting the study of entities and mechanisms that are otherwise not amenable to analysis.
-Monte Carlo techniques and other numerical simulations are used extensively in almost all areas of engineering and physical sciences.
-Moreover, algorithms that make random decisions during their execution, termed \emph{randomized algorithms}, are widespread in numerical simulations. \index{Randomized algorithms}
+%Traditionally, the study of complex systems has relied on empirical observations and abstract mathematical models that are amenable to analysis.
+%The implicit hope is that such an approach will lead to accurate predictions about the behavior of the system, under various parameters and initial conditions.
+%While this approach has had and continues to have many successes, the immense capabilities of contemporary computers has enabled the complementary means of numerical methods.
+%Computer simulations now play a key role in the analysis of many complex systems, permitting the study of entities and mechanisms that are otherwise not amenable to analysis.
+%Monte Carlo techniques and other numerical simulations are used extensively in almost all areas of engineering and physical sciences.
+%Moreover, algorithms that make random decisions during their execution, termed \emph{randomized algorithms}, are widespread in numerical simulations. \index{Randomized algorithms}
 
-When using computers to study continuous mathematics, discretization techniques must be applied.
-The study of efficient discrete algorithms that provide accurate approximations to continuous problems is known as \emph{numerical analysis}.
-Problems in one dimension can usually be handled very precisely through finite precision arithmetic, as the number of bits used to represent numbers in modern computers is vast.
-For example, computer routines are used extensively to simulate continuous random variables.
-In higher dimensions, care must be taken to discretize volumes and approximate local interactions.
-Potential discretization techniques include finite element methods, finite differences and high-resolution schemes.
+%When using computers to study continuous mathematics, discretization techniques must be applied.
+%The study of efficient discrete algorithms that provide accurate approximations to continuous problems is known as \emph{numerical analysis}.
+%Problems in one dimension can usually be handled very precisely through finite precision arithmetic, as the number of bits used to represent numbers in modern computers is vast.
+%For example, computer routines are used extensively to simulate continuous random variables.
+%In higher dimensions, care must be taken to discretize volumes and approximate local interactions.
+%Potential discretization techniques include finite element methods, finite differences and high-resolution schemes.
 
 
 \section*{Further Reading}
