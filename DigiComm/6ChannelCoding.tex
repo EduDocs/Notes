@@ -88,7 +88,7 @@ In other cases, it more convenient to use the quantity $E_{s}/N_{0}$ (pronounced
 
 For example, a bit-error rate (BER) of $10^{-5}$ is achieved by uncoded BPSK transmission with $E_{b}/N_{0}=9.6\;\mathrm{dB}$.
 Whereas, a rate-$\frac{1}{2}$ code with moderate decoding complexity (Viterbi decoding of a convolutional code) has a BER of $10^{-5}$ at $E_{b}/N_{0}=4.2\;\mathrm{dB}$.
-The coding gain in this case is $9.6-4.2=5.4\mbox{ dB}$
+The coding gain in this case is $9.6-4.2=5.4\;\mathrm{dB}$
 
 \section{The Basics of Coding}
 
@@ -517,15 +517,45 @@ that contains an identity in a subset of its columns.
 
 \section{Performance Analysis}
 
-Consider an $(n,k)$ binary code of rate-$R$ with $d_{min} \geq 2t^* + 1$ and a decoder that corrects all error patterns of weight at most $t^*$.
+Consider an $(n,k)$ binary code of rate $R=k/n$ with $d_{min} \geq 2t^* + 1$ and a decoder that corrects all error patterns of weight at most $t^*$.
 It is relatively easy to upper bound the probability of block error when this code and decoder are used on a BSC, because a block error cannot occur unless there are more than $t^*$ errors.
 This gives
 \[ P_{B}\leq1-\sum_{i=0}^{t^*}{n \choose i}p^{i}(1-p)^{n-i}=\sum_{i=t^*+1}^{n}{n \choose i}p^{i}(1-p)^{n-i}. \]
+If $p$ is small enough, then we can approximate this by the first term in the sum
+\[ P_{B} \approx {n \choose t^* + 1}p^{t^* + 1}.\]
 If the code bits are transmitted over an AWGN channel using BPSK followed by a hard-decision detector, then we also have
 \[ p= Q\left( \sqrt{\frac{2 E_s}{N_0}} \right) = Q\left( \sqrt{\frac{2 R  E_b}{N_0}} \right). \]
 The latter expression allows us to make relatively fair comparisons between coding systems with different rates.
  
-For syndrome decoding, one can compute the probability of block error (including decoding failure) exactly by observing that the decoder only returns the correct codeword if the error vector is a coset leader.
+\begin{definition}
+The \defn{channel coding}{coding gain} achieved by a channel code is the reduction in $E_b / N_0$ required achieve a particular error rate.
+For example, if the uncoded system achieves an error rate of $10^{-5}$ at $E_b / N_0 = 9.6$ dB and the coded system achieves an error rate of $10^{-5}$ at $E_b / N_0 = 6.6 dB$, then the coding gain is $9.6 - 6.6 = 3$ dB at the error rate $10^{-5}$.
+The coding gain often approaches a limit, for low error rates, known as the \textbf{asymptotic coding gain}.
+\end{definition}
+
+Now, we compute the asymptotic coding gain, in terms of $t^*$ and $R$, of hard-decision decoding of a block code.
+For the uncoded system, let $\gamma_u$ be the $E_b / N_0$ so that the probability of block error is given by
+\[ P_{B}^{(u)}(\gamma_u) = 1- \left(1 - Q\left( \sqrt{2 \gamma_u} \right) \right)^k. \]
+For the coded system, let $\gamma_c$ be the $E_b / N_0$ so that the probability of block error is
+\[ P_{B}^{(c)}(\gamma_c) \approx {n \choose t^* + 1} Q\left( \sqrt{2 \gamma_c} \right)^{t^* + 1}. \]
+The exponential decay rate of these error probabilities with $E_b/N_0$ is given by
+\[ \lim_{\gamma \rightarrow \infty} \frac{1}{\gamma} \ln \left( P_{B} (\gamma) \right). \]
+
+For large $x$, the Q-function is very well approximated by
+\[ Q(x) \approx \frac{1}{\sqrt{2 \pi x^2}} e^{-x^2 / 2}. \]
+This implies that the exponential decay rate of $P_{B}^{(u)}$ is $\gamma_u$ and the exponential decay rate of  $P_{B}^{(c)}$ is $(t^* + 1)R\gamma_c$.
+Matching these exponential decay rates gives the equation
+\[ \frac{\gamma_u}{\gamma_c} = (t^* + 1) R, \]
+and converting to dB shows that the asymptotic coding gain is
+\[ 10 \log_{10} \left( (t^* + 1) R \right). \]
+
+\begin{example}
+Consider the $(15,11)$ binary Hamming code with $d_{min} = 3$ and $t^* = 1$.
+This code achieves an asymptotic coding gain of
+\[ 10 \log_{10} \left( 2 \frac{11}{15} \right) \approx 1.66 \; \mathrm{dB}. \]
+\end{example}
+
+For syndrome decoding, one can compute exactly the probability of block error (including decoding failure) by observing that the decoder only returns the correct codeword if the error vector is a coset leader.
 In this case, we can define $A_h$ be the number of coset leaders with Hamming weight $h$ and write
 \[ P_{B} = 1-\sum_{h=0}^{n} A_h p^h (1-p)^{n-h}. \]
 

@@ -436,7 +436,7 @@ is that the following equality holds for all values of $f \in \mathbb{R}$,
 \end{theorem}
 
 It is important to note that the Nyquist criterion is applied not the transmitted pulse $p(t)$, but to the overall response $g(t)$.
-If the channel is ideal (i.e., $h_c (t) = 1$), then $g(t) = p(t) * h (t)$ and we are free to design both the transmit pulse and receive filter.
+%If the channel is ideal (i.e., $h_c (t) = 1$), then $g(t) = p(t) * h (t)$ and we are free to design both the transmit pulse and receive filter.
 But, optimum detection in white-noise requires that $h (t)$ is matched to $p(t)$.
 Therefore, the best solution is to \emph{split} the $g(t)$ filter between the transmitter and receiver.
 If $\hat{g}(f)$ is real and positive, then we can simply choose
@@ -553,7 +553,7 @@ In this case, the slow $1/t$ decay rate of the sinc function has been improved t
 Until now, our study of waveform communication has focused on \defn{communication}{baseband signals}, which have the majority of their energy near DC.
 Signals which occupy a narrow frequency band well separated from DC are known as \defn{communication}{passband signals}.
 All of wireless communications is based on passband signals because low-frequency electromagnetic waves require enormous antennas for efficient transmission.
-Typical frequency ranges for wireless communications start around 800 MHz and short-range communication is possible up until about 60 GHz.
+Typical frequency ranges for wireless communications start around 100 MHz and short-range communication is possible up until about 60 GHz.
 
 The process of shifting a baseband signal in frequency to make it passband is know as mixing.
 Let $s(t)$ be a baseband signal with bandwidth $W$ and define
@@ -564,7 +564,8 @@ This implies that $x(t)$ is a passband signal centered at frequency $f_0$ with b
 
 The resulting $x(t)$ must be complex because it does not have negative-frequency conjugate-symmetry.
 But, any signal represented by a single time-varying voltage on a single wire is necessarily real.
-Therefore, we must take the real part of $x(t)$ to obtain a physically realizable passband signal.
+Therefore, we must take do something before coupling $x(t)$ to the antenna.
+It turns out that the real part of $x(t)$ gives a physically realizable passband signal that works for our purposes.
 The result
 \begin{align*}
 \Re \left\{ x(t) \right \}
@@ -585,7 +586,7 @@ y(t)
 & =  \frac{1}{2} \Re \left\{ s(t) \right\} \left( 1 + \cos(4\pi f_0 t) - j \sin(4\pi f_0 t) \right) \\
 & \quad + \frac{j}{2} \Im \left\{ s(t) \right\} \left( 1 - \cos(4 \pi f_0 t) - j \sin(4 \pi f_0 t \right).
 \end{align*}
-If $f_0 + W < 2 f_0 - W$, then we can use an ideal low-pass filter $h(t)$ (with cutoff $f_0+W$) to remove the \emph{images} at $2f_0$ without affecting the signal.
+If $f_0 + W < 2 f_0 - W$, then we can use an ideal low-pass filter $h(t)$ (with cutoff $f_0+W$) to remove the \emph{images} centered at $2f_0$ without affecting the signal.
 This gives
 \[ y(t) * h(t) = \frac{1}{2} s(t). \]
 So this approach allows us to upconvert $s(t)$ to a passband signal and then downconvert it back to a bandpass signal.

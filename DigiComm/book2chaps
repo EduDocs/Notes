@@ -5,15 +5,15 @@ then
 fi
 
 #pdftk book.pdf cat 1-62 output $1.pdf
-pdftk book.pdf cat 1-8 output $1_toc.pdf
-pdftk book.pdf cat 9-16 output $1_ch1.pdf
-pdftk book.pdf cat 17-39 output $1_ch2.pdf
-pdftk book.pdf cat 40-48 output $1_ch3.pdf
-pdftk book.pdf cat 49-67 output $1_ch4.pdf
-pdftk book.pdf cat 68-86 output $1_ch5.pdf
-pdftk book.pdf cat 87-107 output $1_ch6.pdf
-pdftk book.pdf cat 108-121 output $1_ch7.pdf
-pdftk book.pdf cat 122-123 output $1_index.pdf
-#pdftk book.pdf cat 131-134 output $1_appendix.pdf
+pdftk book.pdf cat 1-10 output $1_toc.pdf
+pdftk book.pdf cat 11-18 output $1_ch1.pdf
+pdftk book.pdf cat 19-42 output $1_ch2.pdf
+pdftk book.pdf cat 43-52 output $1_ch3.pdf
+pdftk book.pdf cat 53-72 output $1_ch4.pdf
+pdftk book.pdf cat 73-92 output $1_ch5.pdf
+pdftk book.pdf cat 93-114 output $1_ch6.pdf
+pdftk book.pdf cat 115-130 output $1_ch7.pdf
+pdftk book.pdf cat 131-132 output $1_index.pdf
+#pdftk book.pdf cat 133-134 output $1_appendix.pdf
 
 
