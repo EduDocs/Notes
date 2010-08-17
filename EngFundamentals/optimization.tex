@@ -1,0 +1,156 @@
+\chapter{Lagrangian Optimization}
+
+\section{Introduction}
+
+Lagrangian optimization is an indispensable tool in engineering and physics that allows one to solve constrained non-linear optimization problems.
+For convex problems, there are now efficient algorithms that can handle thousands of variables and constraints.
+In some cases, there are also analytical techniques that allow one to derive tight bounds on optimum value.
+These approaches have become so common that convex Lagrangian optimization problems are now taught as a fundamental part of the graduate engineering curriculum.
+
+Constrained non-linear optimization problems over $\mathbb{R}^n$ can be put into the following \defn{optimization}{standard form}.
+Let $f_i : \mathcal{D} \rightarrow \mathbb{R}$ and $h_j : \mathcal{D} \rightarrow \mathbb{R}$ be a real functionals on $\mathcal{D} \subseteq \mathbb{R}^n$ for $i=1,2,\ldots,m$ and $j=1,2,\ldots,p$.
+Then, the standard form is
+\begin{align*}
+\mathrm{minimize} \quad & f_0 (\vecnot{x}) \\
+\mathrm{subject\,to} \quad & f_i (\vecnot{x}) \leq 0, \quad i=1,2,\ldots,m \\
+& h_j (\vecnot{x}) = 0, \quad j=1,2,\ldots,p.
+\end{align*}
+The function $f_0$ is called the \defn{optimization}{objective function} while the functions $f_1,\ldots,f_m$ are called inequality constraints and the functions $h_1,\ldots,h_p$ are called equality constraints.
+
+\begin{definition}
+A vector $\vecnot{x} \in \mathcal{D}$ is \defn{optimization}{feasible} if it satisfies the constraints.
+Let $\mathcal{F} = \{ \vecnot{x} \, | \,  f_i (\vecnot{x}) \leq 0, i=1,2,\ldots,m \, , h_j (\vecnot{x}) = 0, j=1,\ldots,p \}$ be the set of feasible vectors.
+Then, the problem is feasible if $\mathcal{F} \neq \emptyset$.
+\end{definition}
+
+\begin{definition}
+The \defn{optimization}{optimal value} is
+\[ p^* = \inf \left\{ f_0 (\vecnot{x}) \, | \, \vecnot{x} \in \mathcal{F} \right\}. \]
+By convention, $p^*$ is allowed to take infinite values and $p^* = \infty$ if the problem is not feasible.
+\end{definition}
+
+Evaluating the function at any feasible point gives the trivial upper bound
+\[ p^* \leq f_0 (\vecnot{x}) \; \forall \vecnot{x}\in \mathcal{F}. \]
+
+The optimization of linear function with arbitrary affine equality and inequality constraints is called a \defn{optimization}{linear program}.
+Any linear program can be reduced to the following standard form by adding additional variables.
+
+\begin{definition}
+The standard form of a linear program (LP) is given by
+%\[ \max_{\vecnot{x}} \vecnot{c}^T \vecnot{x} \]
+\begin{align*}
+\mathrm{minimize} \quad & \vecnot{c}^T \vecnot{x} \\
+\mathrm{subject\,to} \quad & A \vecnot{x} = \vecnot{b} \\
+& \vecnot{x} \succeq \vecnot{0}.
+\end{align*}
+\end{definition}
+
+
+\subsection{The Lagrangian}
+
+The Lagrangian is used to transform constrained optimization problems into unconstrained optimization problems.
+One can think of it as introducing a non-negative cost $\lambda_i$ (resp. $\nu_j$) associated with violating the $i$th inequality (resp. $j$th equality) constraint.
+
+\begin{definition}
+The \defn{optimization}{Lagrangian} $L: \mathcal{D} \times \mathbb{R}^m \times \mathbb{R}^p \rightarrow \mathbb{R}$ associated with optimization problem is
+\[ L(\vecnot{x},\vecnot{\lambda},\vecnot{\nu}) = f_0(\vecnot{x}) + \sum_{i=1}^m \lambda_i f_i(\vecnot{x}) + \sum_{j=1}^p \nu_j h_j(\vecnot{x}), \]
+where $\lambda_i$ is the \defn{optimization}{Lagrange multiplier} associated with the $i$th inequality constraint and $\nu_j$ is the Lagrange multiplier associated with the $j$th equality constraint.
+\end{definition}
+
+\begin{theorem}[Karesh-Kuhn-Tucker]
+If all of the functions are continuously differentiable, then $\vecnot{x}^*$ is a local optimal point only if there exist $\vecnot{\lambda}^* \geq 0$ and $\vecnot{\nu}^*$ such that
+\begin{align*}
+\nabla f_0 (\vecnot{x}^*) + \sum_{i=1}^m \lambda_i^* \nabla f_i (\vecnot{x}^*) + \sum_{j=1}^p \nu_j^* \nabla h_j (\vecnot{x}^*) &= 0 \\
+\lambda_i^* f_i(\vecnot{x}^*) &= 0 .
+\end{align*}
+\end{theorem}
+\begin{proof}
+To be completed...
+Use a geometric proof for contrapositive: If conditions do not hold, then there is a small step which satisfies constraints and lower function value.
+Any small step in a direction which decreases the function (i.e., negative dot product with gradient) must also violate a constraint.
+If constraint not active, then doesn't matter.
+First consider subspace E that satisfies equality constraints (null space of Jacobian of h).
+Project gradient on E to get valid directions for equality constraints.
+Then, write projection as a positive linear combination of the gradients of the active constraints.
+If there is any part left, then the function can be reduced while satisfying the constraints.
+Otherwise, we can take a small in the gradient direction and increase the value without violating the constraints.
+\end{proof}
+
+\subsection{Lagrangian Duality}
+
+\begin{definition}
+The \defn{optimization}{Lagrangian dual} function is defined to be
+\[ g(\vecnot{\lambda},\vecnot{\nu}) = \inf_{\vecnot{x}\in \mathcal{D}} L(\vecnot{x},\vecnot{\lambda},\vecnot{\nu}). \]
+\end{definition}
+
+
+\begin{lemma}
+The Lagrangian dual problem
+\begin{align*}
+\mathrm{maximize} \quad & g(\vecnot{\lambda},\vecnot{\nu}) \\
+\mathrm{subject\,to} \quad & \vecnot{\lambda} \geq 0
+\end{align*}
+has a unique maximum value $d^* \geq p^*$.
+This property is known as \defn{optimization}{weak duality}.
+\end{lemma}
+
+\begin{proof}
+Since the Lagrangian dual function is the pointwise infimum of affine functions, it is always concave.
+Therefore, the function has a unique maximum value $d^*$.
+The upper bound on $d^*$ follows from
+\begin{align*}
+g(\vecnot{\lambda},\vecnot{\nu})
+&= \inf_{\vecnot{x}\in \mathcal{D}} L(\vecnot{x},\vecnot{\lambda},\vecnot{\nu}) \\
+&\leq \inf_{\vecnot{x}\in \mathcal{F}} L(\vecnot{x},\vecnot{\lambda},\vecnot{\nu}) \\
+&= p^* + \sum_{i=1}^m \lambda_i f_i (\vecnot{x}) \\
+&\leq p^*.
+\end{align*}
+\end{proof}
+
+The Lagrangian dual function can be $-\infty$ for a wide range of $(\vecnot{\lambda},\vecnot{\nu})$.
+In this case, it makes sense to define the set of \textbf{implicit constraints} given by
+\[ \mathcal{C} = \left\{ (\vecnot{\lambda},\vecnot{\nu}) |  g(\vecnot{\lambda},\vecnot{\nu}) > -\infty \right\}. \]
+The points $(\vecnot{\lambda},\vecnot{\nu}) \in \mathcal{C}$ are called \textbf{dual feasible}.
+
+\begin{definition}
+If $d^* = p^*$, then one says that \defn{optimization}{strong duality} holds for the problem.
+\end{definition}
+
+\begin{example}
+The Lagrangian of a linear program (LP) in standard form is
+\[ L(\vecnot{x},\vecnot{\lambda},\vecnot{\nu}) = \vecnot{c}^T \vecnot{x} + \vecnot{\nu}^T (A\vecnot{x}-\vecnot{b}) - \vecnot{\lambda}^T \vecnot{x} \]
+and the Lagrangian dual function is given by
+\begin{equation*}
+g(\vecnot{\lambda},\vecnot{\nu})
+= \inf_{\vecnot{x}\in \mathcal{D}} L(\vecnot{x},\vecnot{\lambda},\vecnot{\nu})
+= \begin{cases} -\vecnot{b}^T \vecnot{\nu} & \text{if }A^T \vecnot{\nu} - \vecnot{\lambda} + \vecnot{c} = \vecnot{0} \\
+-\infty & \text{otherwise}. \end{cases}
+\end{equation*}
+Solving the implicit constraint for $\vecnot{\lambda}$ and using the fact that $\vecnot{\lambda} \succeq \vecnot{0}$ gives the standard form of the LP dual problem
+\begin{align*}
+\mathrm{maximize} \quad & -\vecnot{b}^T \vecnot{\nu} \\
+\mathrm{subject\,to} \quad & A^T \vecnot{\nu} + c \succeq \vecnot{0}.
+\end{align*}
+Strong duality for linear programs says that, if the original LP has an optimal solution (i.e., it is neither unbounded nor infeasible), then the dual LP has an optimal solution of the same value.
+\end{example}
+
+\subsection{Convex Optimization}
+
+\begin{definition}
+An optimization problem in standard form is called \defn{optimization}{convex} if the function $f_i$ is convex for $i=0,1,\ldots,m$ and the function $h_j$ is affine (i.e., $h_j(\vecnot{x}) = \vecnot{a}_j^T \vecnot{x} - b_j)$ for $j=1,2,\ldots,p$.
+\end{definition}
+
+\begin{theorem}[Slater's Condition]
+If a convex optimization problem has a point $\vecnot{x}_0$ where $f_i(\vecnot{x}_0) < 0$ for $i=1,\ldots,m$ and $h_j (\vecnot{x}_0) = 0$ for $j=1,\ldots,p$, then strong duality holds for the problem.
+\end{theorem}
+
+\begin{example}
+For a channel with colored noise, the input distribution that maximizes the achievable information rate can be found by solving the convex optimization problem, known as water-filling, given by
+\begin{align*}
+\mathrm{minimize} \quad & -\sum_{i=1}^n \log \left( x_i + \alpha_i \right) \\
+\mathrm{subject\,to} \quad & \sum_{i=1}^n x_i = 1 \\
+& \vecnot{x} \succeq 0.
+\end{align*}
+Choosing $x_i = \frac{1}{n}$ for $i=1,\ldots,n$ gives a point that satisfies Slater's condition, so strong duality holds for this problem.
+\end{example}
+
