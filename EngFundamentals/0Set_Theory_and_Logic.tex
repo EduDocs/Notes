@@ -62,7 +62,7 @@ T & F & F \\
 F & T & F \\
 F & F & F \\
 \hline
-\end{tabular}
+\end{tabular} .
 \end{center}
 
 Similarly, a logical \defn{logic}{disjunction} is an operator on two logical propositions that is true if either statements is true or both are true, and is false otherwise.
@@ -77,7 +77,7 @@ T & F & T \\
 F & T & T \\
 F & F & F \\
 \hline
-\end{tabular}
+\end{tabular} .
 \end{center}
 
 In mathematics, a \defn{logic}{negation} is an operator on the logical value of a proposition that sends true to false and false to true.
@@ -90,7 +90,7 @@ $P$ & $\neg P$ \\
 T & F \\
 F & T \\
 \hline
-\end{tabular}
+\end{tabular} .
 \end{center}
 
 The next method of combining mathematical statements is slightly more subtle than the preceding ones.
@@ -107,7 +107,7 @@ T & F & F \\
 F & T & T \\
 F & F & T \\
 \hline
-\end{tabular}
+\end{tabular} .
 \end{center}
 This table should match your intuition when $P$ is true.
 When $P$ is false, students often think the resulting truth value should be undefined.
@@ -134,7 +134,7 @@ T & F & F \\
 F & T & F \\
 F & F & T \\
 \hline
-\end{tabular}
+\end{tabular} .
 \end{center}
 We read $P \leftrightarrow Q$ as ``$P$ if and only if $Q$.''
 The phrase ``if and only if'' is often abbreviated as ``iff''.
@@ -164,7 +164,7 @@ F & F & T & F & T & T & F & F & F & F \\
 F & F & F & F & T & F & T & F & T & T \\
 & & & 1 & 5 & 2 & 7 & 3 & 6 & 4 \\
 \hline
-\end{tabular}
+\end{tabular} .
 \end{center}
 %\end{example}
 
@@ -180,7 +180,7 @@ T & T & T & F \\
 F & F & T & T \\
 & 1 & 3 & 2 \\
 \hline
-\end{tabular}
+\end{tabular} .
 \end{center}
 For instance, the statement ``The Aggies won their last football game or the Aggies did not win their last football game'' is true regardless of whether the Aggies actually defeated their latest opponent.
 
@@ -217,7 +217,7 @@ We study two types of relations between statements, \emph{implication} and \emph
 An example of an implication meta-statement is the observation that ``if the statement `Robert graduated from Texas A\&M University' is true, then it implies that the statement `Robert is an Aggie' is also true.''
 Another example of a meta-statement is ``the statement `Fred is an Aggie and Fred is honest' being true is equivalent to the statement `Fred is honest and Fred is an Aggie' being true.''
 These two examples illustrate how meta-statements describe the relationship between statements.
-It is also instructive to note that implications and equivalences are the meta-statements analogs of conditionals and biconditionals.
+It is also instructive to note that implications and equivalences are the meta-statement analogs of conditionals and biconditionals.
 
 A \defn{logic}{logical implication} can be intuitively described as $P$ implies $Q$ if $Q$ must be true whenever $P$ is true.
 That is, $Q$ cannot be false if $P$ is true.
@@ -389,12 +389,12 @@ One way to learn to construct proofs is to read a lot of well written proofs, to
 The simplest form of proof for an implication $P \rightarrow Q$ is the \textbf{direct proof}.
 First assume that $P$ is true.
 Produce a series of steps, each one following from the previous ones, that eventually leads to conclusion $Q$.
-It warrants the name "direct proof" only to distinguish it from other, more intricate, methods of proof.
+It warrants the name ``direct proof'' only to distinguish it from other, more intricate, methods of proof.
 
 \paragraph{Proof by Contrapositive:}
 A proof by contrapositive takes advantage of the mathematical equivalence $P \rightarrow Q \Leftrightarrow \neg Q \rightarrow \neg P$.
 That is, a proof by contrapositive begins by assuming that $Q$ is false (i.e., $\neg Q$ is true).
-Then produces a series of direct implications then leads to the conclusion that $P$ is false (i.e., $\neg P$ is true).
+It then produces a series of direct implications leading to the conclusion that $P$ is false (i.e., $\neg P$ is true).
 It follows that $Q$ cannot be false when $P$ is true, so $P \rightarrow Q$.
 
 \paragraph{Proof by Contradiction:}
@@ -436,7 +436,7 @@ Unfortunately for engineers, set theory is not quite as simple as it seems.
 It turns out that simple approaches to set theory include paradoxes (e.g., statements which are both true and false).
 These paradoxes can be resolved by putting set theory in a firm axiomatic framework, but that exercise is rather unproductive for engineers.
 Instead, we adopt what is called \defn{set theory}{naive set theory} which rigorously defines the operations of set theory without worrying about possible contradictions.
-This approach is quite sufficient for most of mathematics and also acts as a stepping-stone to more formal treatments.
+This approach is sufficient for most of mathematics and also acts as a stepping-stone to more formal treatments.
 
 A \defn{set theory}{set} is any collection of objects, mathematical or otherwise.
 For example, we can think of the set of all books published in 2007.
@@ -515,12 +515,12 @@ This means that
 If there is some implied universal set $U$, then the \defn{set theory}{complement} (denoted $A^c$) is defined by $A^c = U-A$
 \end{definition}
 
-One can apply De Morgan's Law in set theory to see that
+One can apply De Morgan's Law in set theory to verify that
 \begin{align*}
 (A \cup B)^c & = A^c \cap B^c \\
 (A \cap B)^c & = A^c \cup B^c,
 \end{align*}
-to interchange union (or intersection) with set difference.
+which allows us to interchange union or intersection with set difference.
 
 We can also form the union or the intersection of arbitrarily many sets.
 This is defined in a straightforward way,
@@ -530,11 +530,11 @@ This is defined in a straightforward way,
 \bigcap_{\alpha \in I} S_{\alpha}
 &= \{ x | x \in S_{\alpha} \text{ for all } \alpha \in I \} .
 \end{align*}
-It is worth noting that this definition works well if the index set if finite, countably infinite, or even uncountably infinite.
+It is worth noting that the definitions apply whether the index set is finite, countably infinite, or even uncountably infinite.
 
 Another way to build sets is by grouping elements into pairs, triples, and vectors.
 \begin{definition}
-The \defn{set theory}{Cartesian Product} (denoted $A\times B$) of two sets is the set of ordered pairs $\{(a,b) | a\in A, b\in B\}$.
+The \defn{set theory}{Cartesian Product}, denoted $A\times B$, of two sets is the set of ordered pairs $\{(a,b) | a\in A, b\in B\}$.
 For $n$-tuples taken from the same set, the notation $A^n$ denotes the $n$-fold product $A\times A \times \cdots \times A$.
 \end{definition}
 \begin{example}
@@ -557,10 +557,10 @@ A relation on $A$ is said to be:
 \end{enumerate}
 
 A relation is called an \defn{set theory}{equivalence relation} if it is reflexive, symmetric, and transitive.
-For example, let $A$ be a set of people and $P(x,y)$ be the statement ``$x$ has the same birthday (month and day) as $y$''.
+For example, let $A$ be a set of people and $P(x,y)$ be the statement ``$x$ has the same birthday (month and day) as $y$.''
 Then, we can define $\sim$ such that $a\sim b$ holds iff $P(x,y)$ is true.
 In this case, the set $E$ is given by $E = \{ (x,y)\in A\times A | P(x,y) \}$.
-One can verify that it is an equivalence relation by checking that it is reflexive, symmetric, and transitive.
+One can verify that this is an equivalence relation by checking that it is reflexive, symmetric, and transitive.
 
 One important characteristic of an equivalence relation is that it partitions the entire set $A$ into disjoint \defn{set theory}{equivalence classes}.
 The equivalence class associated with $a\in A$ is given by  $[a] = \left\{x\in A | x \sim a\right\}$.
@@ -574,7 +574,7 @@ In this case, the days of year are used as equivalence classes to define the equ
 
 \begin{example}
 Consider the set $\mathbb{N} \times \mathbb{N} = \{ (a,b) | a,b\in\mathbb{N} \}$ of ordered pairs of natural numbers.
-If one associates the element $(a,b)$ with the fraction $a/b$, then entire set is associated with the set of (possibly reducible) fractions.
+If one associates the element $(a,b)$ with the fraction $a/b$, then the entire set is associated with the set of (possibly reducible) fractions.
 Now, consider the equivalence relation $(a,b) \sim (c,d)$ if $ad=bc$.
 In this case, two ordered pairs are equivalent if their associated fractions evaluate to the same real number.
 The quotient set $\mathbb{N} \times \mathbb{N} \setminus \!\sim$ can therefore be associated with the set of reduced fractions.
@@ -585,29 +585,29 @@ The quotient set $\mathbb{N} \times \mathbb{N} \setminus \!\sim$ can therefore b
 
 In elementary mathematics, functions are typically described in terms of graphs and formulas.
 The drawback of this approach is that one tends to picture only ``nice'' functions.
-In fact, Cauchy himself published in 1821 an incorrect proof of the false assertion that ``a sequence of continuous functions that converges everywhere has a continuous limit function''.
+In fact, Cauchy himself published in 1821 an incorrect proof of the false assertion that ``a sequence of continuous functions that converges everywhere has a continuous limit function.''
 Nowadays, every teacher warns their students that one must be careful because the world is filled with not so ``nice'' functions.
 
 \index{functions}
 The modern approach to defining functions is based on set theory.
 A \textbf{function} $f: X\rightarrow Y$ is a rule that assigns a single value $f(x)\in Y$ to each element $x\in X$.
 The notation $f: X \rightarrow Y$ is used to emphasize the role of the \defn{functions}{domain} $X$ and the \defn{functions}{codomain} $Y$.
-The \textbf{range} of $f$ is the subset of $Y$ which is actually achieved by $f$ or  $\{f(x) \in Y | x\in X \}$.
+The \textbf{range} of $f$ is the subset of $Y$ which is actually achieved by $f$, $\{f(x) \in Y | x\in X \}$.
 Since the term codomain is somewhat uncommon, people often use the term range instead of codomain either intentionally (for simplicity) or unintentionally (due to confusion).
 \begin{definition}
 Formally, a \textbf{function} $f: X \rightarrow Y$ from $X$ to $Y$ is defined by a subset $F \subset X \times Y$ such that $A_x = \{ y\in Y | (x,y)\in F \}$ has exactly one element for each $x\in X$.
-The \textbf{value} of $f$ at $x\in X$, denoted $f(x)$, the unique element of $Y$ contained in $A_x$.
+The \textbf{value} of $f$ at $x\in X$, denoted $f(x)$, is the unique element of $Y$ contained in $A_x$.
 \end{definition}
 
 Two functions are said to be equal if they have the same domain, codomain, and value for all elements of the domain.
 A function $f$ is called:
 \begin{enumerate}
-\item \defn{functions}{one-to-one} or \defn{functions}{injective} if $f(x)=f(x')$ implies that $x=x'$
-\item \defn{functions}{onto} or \defn{functions}{surjective} if its range $\{ f(x) | x\in X\}$ equals $Y$
-\item a \defn{functions}{one-to-one correspondence} or \defn{functions}{bijective} if it is both one-to-one and onto
+\item \defn{functions}{one-to-one} or \defn{functions}{injective} if $f(x)=f(x')$ implies that $x=x'$;
+\item \defn{functions}{onto} or \defn{functions}{surjective} if its range $\{ f(x) | x\in X\}$ equals $Y$;
+\item a \defn{functions}{one-to-one correspondence} or \defn{functions}{bijective} if it is both one-to-one and onto.
 \end{enumerate}
 A bijective function $f: X\rightarrow Y$ has a unique \defn{functions}{inverse function} $f^{-1} : Y\rightarrow X$ such that $f^{-1}(f(x)) = x$ for all $x\in X$ and $f(f^{-1}(y)) = y$ for all $y\in Y$.
-In fact, any one-to-one function $f: X\rightarrow Y$ can be transformed into bijective function $g: X \rightarrow R$ with $g(x)=f(x)$ by shrinking its codomain $Y$ down to its range $R$.
+In fact, any one-to-one function $f: X\rightarrow Y$ can be transformed into a bijective function $g: X \rightarrow R$ with $g(x)=f(x)$ by restricting its codomain $Y$ to its range $R$.
 
 Functions can also be applied to sets in a natural way.
 For a function $f: X\rightarrow Y$ and subset $A\subseteq X$, the \defn{functions}{image} of $A$ under $f$ is
@@ -618,7 +618,7 @@ The \defn{functions}{inverse image} or \defn{functions}{preimage} of a subset $B
 \[ f^{-1}(B) \triangleq \{ x\in X | f(x)\in B\}. \]
 For a one-to-one function $f$, the inverse image of any singleton set $\{ f(x) \}$ is the singleton set $\{ x \}$.
 It is worth noting that the notation $f^{-1}(B)$ for the preimage of $B$ can be somewhat misleading because, in some cases, $f^{-1}(f(A)) \neq A$.
-In general, one has instead that $f(f^{-1}(B)) \subseteq B$ and $f^{-1}(f(A)) \supseteq A$.
+In general, a function gives rise to the following property, $f(f^{-1}(B)) \subseteq B$ and $f^{-1}(f(A)) \supseteq A$.
 
 \begin{example}
 Let the function $f: \mathbb{R} \rightarrow \mathbb{R}$ be defined by $f(x)=x^2$. Let $A=[1,2]$ and $B = f(A) = [1,4]$.  Then,
@@ -636,7 +636,7 @@ For all $f:X\rightarrow Y$, $A\subseteq X$, and $B\subseteq Y$, we have the rule
 (a) & \; x \in A \Rightarrow f(x) \in f(A) &
 (b) & \; y \in f(A) \Rightarrow \exists x\in A \textrm{ s.t. } f(x)=y \\
 (c) & \; x\in f^{-1}(B) \Rightarrow f(x) \in B &
-(d) & \; f(x) \in B \Rightarrow x\in f^{-1}(B)
+(d) & \; f(x) \in B \Rightarrow x\in f^{-1}(B) .
 \end{align*}
 Use these rules to show that $f^{-1}(f(A)) \supseteq A$ and $f(f^{-1}(B)) \subseteq B$.
 \end{problem}
