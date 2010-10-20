@@ -235,19 +235,19 @@ The probability that $Y$ belongs to $S$, given $X = x$, is obtained by summing t
 A wireless communication channel is employed to transmit a data packet that contains a total of $m$ bits.
 The first $n$ bits of this message are dedicated to the packet header, which stores very sensitive information.
 The wireless connection is unreliable; every transmitted bit is received properly with probability $1-p$ and erased with probability $p$, independently of other bits.
-We wish to derive the conditional probability distribution of the number of erasures located in the header, given that the total number of corrupted bits in the packet is equal to $e$.
+We wish to derive the conditional probability distribution of the number of erasures located in the header, given that the total number of corrupted bits in the packet is equal to $c$.
 
 Let $H$ represent the number of erasures in the header, and denote the number of corrupted bits in the entire message by $C$.
 The conditional probability mass function of $H$ given $C = c$ is equal to
 \begin{equation*}
 \begin{split}
-p_{H|C} (h|c) &= \frac{p_{H,C} (h,c)}{p_H (h)} \\
+p_{H|C} (h|c) &= \frac{p_{H,C} (h,c)}{p_C (c)} \\
 &= \frac{\binom{n}{h} (1-p)^{n-h} p^h
 \binom{m-n}{c-h} (1-p)^{(m-n)-(c-h)} p^{c - h}}{\binom{m}{c} (1-p)^{m-c} p^c} \\
 &= \frac{\binom{n}{h} \binom{m-n}{c-h}}{\binom{m}{c}} ,
 \end{split}
 \end{equation*}
-where $h = 0, 1, \ldots \min \{ e, m \}$.
+where $h = 0, 1, \ldots \min \{ c, n \}$.
 Clearly, the conditioning affects the probability distribution of the number of corrupted bits in the header.
 In general, a random variable with such a distribution is known as a \emph{hypergeometric random variable}. \index{Hypergeometric random variable}
 \end{example}
