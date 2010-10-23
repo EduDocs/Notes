@@ -1413,8 +1413,11 @@ If $A$ is an $m \times n$ matrix with entries in the field $F$, then
 \end{corollary}
 \begin{proof}
 First, we note that the range $\mathcal{R}(A)$ of $A$ equals the column space of $A$ and therefore $\Rank(A) = \dim \left( \mathcal{R}(A) \right)$.
-Next, we notice that the null space $\mathcal{N}(A)$ of $A$ is the orthogonal complement of the row space $\mathcal{R}(A^H)$.
-Therefore, we can write
+%Next, we show the null space $\mathcal{N}(A)$ of $A$ is the orthogonal complement of the row space $\mathcal{R}(A^H)$.
+Next, we use the definition of the orthogonal complement and $\mathcal{R}(A^H) = \{ A^H \vecnot{y} | \vecnot{y} \in F^m \}$ to see that
+\[ \mathcal{R}(A^H)^{\perp} \! = \! \left\{ \vecnot{x} \in F^n \, | \, \vecnot{x}^H \vecnot{z} = \vecnot{0} \; \forall \, \vecnot{z}\in \mathcal{R}(A^H \right\}
+\! = \! \left\{ \vecnot{x} \in F^n \, | \, \vecnot{x}^H A^H \vecnot{y} = 0 \; \forall \, \vecnot{y}\in F^m \right\}. \]
+This implies that $\mathcal{R}(A^H)^{\perp} =  \left\{ \vecnot{x} \in F^n \, | \, \vecnot{x}^H A^H = 0 \right\} = \mathcal{N}(A)$ and therefore that
 \[ \dim\left( \mathcal{R}(A^H) \right) = n-\dim \left( \mathcal{R}(A^H) \right)^{\bot} = n - \dim \left(\mathcal{N}(A) \right) = \dim \left( \mathcal{R}(A) \right).\]
 \end{proof}
 
