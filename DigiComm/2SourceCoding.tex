@@ -7,10 +7,11 @@ The three goals of this chapter are to understand the nature of digital informat
 \emph{Data compression}, also known as \textbf{source coding}, is important because it reduces the consumption of expensive resources such as hard disk space or transmission bandwidth.
 Alternatively, it can be applied to lower the cost of communication, reduce latency or improve the quality of the received messages.
 
-This document offers an introductory treatment of \emph{lossless compression} algorithms, whereby the original message can be recovered perfectly from the compressed data.
-This is in contrast to \emph{lossy data compression}, which can achieve better compression ratio at the expense of introducing some distortion in the message.
+This chapter offers an introductory treatment of \emph{lossless compression} algorithms, whereby the original message can be recovered perfectly from the compressed data.
+This is in contrast to \emph{lossy data compression}, which provides improved compression ratios at the expense of introducing some distortion in the message.
 In the latter case, part of the information may be lost and the original data need not be perfectly recoverable, although the reconstructed message may be quite close to the original one.
 For instance, the JPEG algorithm can be employed as a lossy compression scheme to reduce the size of a digital photograph.
+
 In lossless data compression, two strategies are employed to reduce the expected length of a message.
 Highly probable symbols are assigned short descriptions, and less likely symbols are encoded using longer binary representations.
 Second, the statistical redundancy contained in the input signal over time is removed, leading to a more concise description of the digital data.
@@ -25,12 +26,12 @@ To describe this specific meaning, we first need to develop a rigorous mathemati
 
 As mentioned above, a digital source produces a sequence of symbols drawn from a countable alphabet.
 It can accordingly be modeled as a discrete-time random process.
-Because of their indeterminate nature, random signals and stochastic processes can be quite hard to characterize.
-In early sections of this document, we discussed two desirable attributes of random signals, namely stationary and ergodicity.
-Yet, we purposely avoided giving an explicit definition for a random process.
-A detailed discussion of the subject requires advanced concepts from probability theory, a topic that interested readers may wish to pursue on their own.
+Because of their indeterminate nature, random signals and stochastic processes can be difficult to characterize.
+Later in this document, we will discuss random processes in more detail.
+A thorough discussion of the subject requires advanced concepts from probability theory, a topic that interested readers may wish to pursue on their own.
+%Yet, we purposely avoided giving an explicit definition for a random process.
 For the sake of simplicity, we focus on a class of elementary information sources that are collectively known as discrete memoryless sources.
-These sources are easy to analyze and can be described unambiguously in a straightforward manner.
+These sources can be described simply as a sequence of independent and identically-distributed discrete random variables.
 Furthermore, discrete memoryless sources provide valuable insights into the design of efficient compression algorithms for more general settings.
 
 \begin{definition}
@@ -38,8 +39,9 @@ A \defn{source coding}{discrete memoryless source} is a digital information sour
 Mathematically, it consists of an alphabet $\mathcal{X}$ and a probability mass function $p_X(\cdot)$ such that, at any time~$t$, the probability that the source outputs symbol $x \in \mathcal{X}$ is equal to $p_X(x)$, irrespective of the past and future.
 \end{definition}
 
-For discrete memoryless sources, it suffices to define the probability mass function of individual symbols to completely characterize the statistical properties of the corresponding random signal.
-The higher-order statistics need not be specified explicitly, as they can be obtained from
+To completely characterize the statistical properties of a discrete memoryless source, it suffices to define the probability mass function of individual symbols.
+Since the source generates independent and indentically distributed symbols, the higher-order statistics need not be specified explicitly.
+Instead, they can be ontained from
 \begin{equation} \label{equation:JointDistributionMemorylessSource}
 \Pr (X_{t_1} = x_{t_1}, \ldots, X_{t_n} = x_{t_n})
 = \prod_{k = 1}^n p_X(x_{t_k})
@@ -68,12 +70,13 @@ p_X (x) = \frac{1}{2^x}, \quad x = 1, 2, \ldots
 Thus, the distribution of the source output at time~$t$ is a geometric random variable with parameter~$\frac{1}{2}$.
 \end{example}
 
-It is straightforward to show that all discrete memoryless sources are both stationary and ergodic.
-The fact that their outcomes are independent over time makes them convenient for analysis, leading to simple interpretations.
+%It is straightforward to show that all discrete memoryless sources are both stationary and ergodic.
+The independence, over time, of symbols from a discrete memoryless source makes them convenient for analysis.
+%, leading to simple interpretations.
 However, it should also be pointed out that many realistic sources are more complicated than memoryless sources.
 In particular, their outputs may be correlated over time, which can have a major impact on information rates.
-Handling intricate sources requires heavy mathematical machinery, and is beyond the scope of this document.
-The results derived using more involved sources are, nevertheless, similar in nature to the ones presented below.
+Handling more complicated sources typically requires heavy mathematical machinery, and is beyond the scope of this document.
+The results derived using more these are, nevertheless, similar in nature to the ones presented below.
 This partially explains why we choose not to study more difficult information sources in this document.
 
 Having constructed a suitable abstraction for digital sources, we turn to the subject of digital information.
@@ -87,8 +90,10 @@ We address this issue by introducing entropy, a concept closely related to the n
 \section{Entropy}
 
 The \defn{information theory}{entropy} can be viewed as a measure of uncertainty in a random variable.
-In the context of digital communications, it serves as a measure of information in that it provides a lower bound on the expected number of bits required to describe the output of a discrete memoryless source.
-This lower bound is tight and can be approached using various schemes, as we will see shortly.
+In the context of digital communications,
+% it serves as a measure of information in that
+it provides a lower bound on the expected number of bits required to describe the output of a discrete memoryless source.
+As we will see shortly, this lower bound is tight and can be approached by practical encoders
 
 \begin{definition}[Entropy]
 Let $X$ be a discrete random variable drawn from alphabet $\mathcal{X}$ according to probability mass function $p_X(\cdot)$.
@@ -171,8 +176,8 @@ It is therefore possible to construct accurate entropy estimates based on empiri
 A \defn{source coding}{code} is a rule for converting a symbol (or a group of symbols) into a string of bits called a \defn{source coding}{codeword}.
 Mathematically, an encoder is a mapping $c : \mathcal{X} \mapsto \mathcal{C}$ from the input alphabet $\mathcal{X}$ to the collection of possible codewords $\mathcal{C}$.
 The goal of a \defn{source coding}{compression code} is, of course, to provide a more concise representation of the information signal.
-In lossless compression, the function $c$ must be injective over the support of $X$.
-Without this one-to-one relationship, decoding errors are bound to happen.
+In lossless compression, the function $c$ must be invertible when restricted to the support of $X$.
+Without this one-to-one relationship, decoding errors are guaranteed to happen.
 Encoding schemes can be partitioned into two categories based on the structure of their codebooks.
 If the codewords all share the same bit-length, then the corresponding code is called a \defn{source coding}{fixed-length code}.
 This section focuses on codes in the second category, variable-length codes, which are often used in lossless data compression.
@@ -185,17 +190,18 @@ With variable-length coding, it may be impossible to know where codewords begin 
 This is in stark contrast with fixed-length codes where codewords are positioned at regular intervals and, therefore, easy to distinguish.
 To ensure that the binary output of a variable-length encoder can be recovered unambiguously, the code needs specific properties.
 
-Variable-length codes can be nested in order of decreasing generality as non-singular, uniquely decodable and instantaneous.
-A code is \defn{source coding}{non-singular} if each source symbol is mapped to a different bit string.
-That is, the mapping $c$ from $\mathcal{X}$ to $\mathcal{C}$ is one-to-one.
-Rather, if two symbols map to the same codeword, then it is intuitively clear that the original message cannot be recovered with certainty.
-A code is said to be \defn{source coding}{uniquely decodable} if its extensions are non-singular.
 The extension of a code $c$ is obtained by concatenating its codewords when $c$ is applied to a multitude of source symbols.
 Given the string of symbols $x_1, x_2, \ldots, x_n$, the extension of $c$ produces the output bit string
 \begin{equation*}
 c(x_1) c(x_2) \cdots c(x_n) .
 \end{equation*}
-An extension of $c$ is a proper encoding schemes because it takes a group of symbols as its argument and produces a string of bits as its output.
+An extension of $c$ is a proper encoding scheme because it takes a group of symbols as its argument and produces a string of bits as its output.
+
+Variable-length codes can be nested in order of decreasing generality as non-singular, uniquely decodable and instantaneous.
+A code is \defn{source coding}{non-singular} if each source symbol is mapped to a different bit string.
+That is, the mapping $c$ from $\mathcal{X}$ to $\mathcal{C}$ is one-to-one.
+Rather, if two symbols map to the same codeword, then it is intuitively clear that the original message cannot be recovered with certainty.
+A code is said to be \defn{source coding}{uniquely decodable} if its extensions are non-singular.
 
 It is important to recognize that successive codewords in a message are communicated as an undifferentiated sequence of bits.
 There is no separation marker or frame between adjacent codewords, no commas or spaces.

@@ -47,8 +47,8 @@ Our treatment of digital communications follows this general approach.
 \subsection{The Input-Output Blocks}
 
 The role of the input block is to take information in its natural form and to convert it into a digital format.
-Depending on the nature of the source, two operations may be necessary to digitalize the information waveform.
-\emph{Sampling} is a signal processing technique that reduces a continuous-time function to a discrete-time signal.
+Depending on the nature of the source, two operations may be necessary to digitize the information waveform.
+\emph{Sampling} is a signal processing technique that transforms a continuous-time function to a discrete-time signal.
 The conversion of a sound wave into a sequence of samples is a common application of sampling.
 The second action that may be needed is \emph{quantization}, which maps a continuous-space signal into a discrete set of possible values.
 The combination of these two operations will transform an analog signal into a digital message.
@@ -64,7 +64,7 @@ The combination of these two operations will transform an analog signal into a d
 \end{psfrags}
 \end{center}
 \caption{The input block can be further divided into three operations: sampling, quantization and data compression.
-The first two operations are necessary to transform an analog waveform into a digital signal; whereas the last block is optional and provides a means to reduce the size of a digitalized message.}
+The first two operations are necessary to transform an analog waveform into a digital signal; whereas the last block is optional and provides a means to reduce the size of a digitized message.}
 \label{figure:BlockInput}
 \end{figure}
 
@@ -72,7 +72,7 @@ The optional step of \emph{data compression}, or source coding, is often employe
 This, in turn, brings down the consumption of expensive resources such as power, spectral bandwidth and hard disk space.
 On the downside, data processing entails additional computations and delay, and the compressed data must be expanded before being accessed.
 This involves using extra processing on the receiver side as well.
-Some compression schemes affect the integrity of the data.
+Some compression schemes reduce the quality of the data.
 These schemes usually feature better compression ratios at the expense of introducing small variations in the data.
 The MPEG standards, including the MP3 audio layer, provide examples of lossy compression schemes.
 
@@ -87,7 +87,7 @@ The MPEG standards, including the MP3 audio layer, provide examples of lossy com
 \end{psfrags}
 \end{center}
 \caption{The operations executed at the transmitter must typically be undone at the destination.
-While passed through the output block, the received data is first decompressed and put in a format that suitable for signal processing.
+When passed through the output block, the received data is first decompressed and put in a format that suitable for signal processing.
 Furthermore, an analog signal must be reconstructed from the sampled data point.
 While these two steps can reversed without any loss, the quantization step cannot.
 This is because quantization loses a small part of the original information.
@@ -101,7 +101,7 @@ Note that for the destination to be able to recover the original data, it must u
 In other words, the decoding method must be known at the receiver.
 If the original signal is a continuous-time waveform, then an interpolator can be used to reconstruct the waveform from its sample values.
 The quantization block present at the input does not have an exact counterpart at the output.
-This deficiency follows from the fact that quantization cannot be perfectly undone because information is lost whenever a continuous-valued signal is discretized.
+This deficiency follows from the fact that quantization cannot be perfectly undone because information is typically lost when a continuous-valued signal is discretized.
 The level of \emph{distortion} associated with quantization can, however, be controlled by choosing an appropriate quantizer and reconstructing the signal in a sensible way.
 In most cases, the impact of quantization is minimal.
 
@@ -132,9 +132,9 @@ Once this is completed, the bit stream is modulated onto an analog carrier and t
 The message then propagates through the communication channel.
 This is the physical medium that bridges the gap between the transmitter and the receiver.
 In most applications, the channel acts as to transfer the data to a different place.
-However, in hard disk drives and compact discs, the information may be stored locally simply to be accessible at a later time.
+However, in hard disk drives and compact discs, the information is stored simply to be accessible at a later time.
 Most communication channels cause signal degradation.
-The message  may be subject to attenuation, interference and noise corruption.
+The message may be subject to attenuation, interference and noise corruption.
 The communication channel may be unreliable; and its environment, hard to characterize.
 Recovering the original data from a set of measurements available at the receiver is one of the many challenges of digital communication systems.
 

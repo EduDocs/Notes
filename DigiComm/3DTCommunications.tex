@@ -10,7 +10,7 @@ The process by which a string of bits is converted into a waveform suitable for 
 The reverse operation, called \defn{communication}{demodulation}, is performed at the destination and involves extracting the information symbols from the received signal.
 The mapping between the transmitted waveform and the received waveform is known as the \defn{communication}{channel}.
 
-Precise models of the physical channel can be very complicated and many of the key ideas in digital communication do not depend on its exact details.
+Precise models of the physical channel can be very complicated and many of the key ideas in digital communication do not depend on the exact details.
 For this reason, one can model and design communication systems based a simplified model that separates the communication problem from the physical models.
 In this chapter, we develop some of basic concepts in digital communications using this simplified model.
 The goal is to build some intuition about how things work without getting lost in the mathematical details.
@@ -80,7 +80,7 @@ Once a channel model has been defined, the next step is choosing how to transmit
 A common approach is to choose a small set $\mathcal{U}$ of information symbols and represent each one by a distinct channel input in the set $\mathcal{X}$.
 This is the discrete-time model of a scheme known as \defn{communication}{pulse-amplitude modulation} (PAM).
 Let $u_n \in \mathcal{U}$ be the information symbol transmitted during the $n$th time interval and $x_n = M(u_n)$ be the $n$th input to the channel, where $M: \mathcal{U} \rightarrow \mathcal{X}$ is called the symbol mapping function.
-For example, one can transmit binary information symbols by mapping ``0" to $+1$V and ``1" to $-1$V by choosing $\mathcal{U}=\{0,1\}$, $\mathcal{X}=\{-1,1\}$, and $M(u) = 1-2u$.
+For example, one can transmit binary information symbols by mapping ``0" to $+1$V and ``1" to $-1$V; mathematically, this is done by choosing $\mathcal{U}=\{0,1\}$, $\mathcal{X}=\{-1,1\}$, and $M(u) = 1-2u$.
 This particular type of PAM is called \defn{communication}{binary phase-shift keying} (BPSK) or 2-PAM.
 
 Suppose a BPSK signal is transmitted through our discrete-time AWGN channel model.
@@ -220,18 +220,18 @@ Constellations can be chosen and optimized for a variety of reasons.
 Still, there are a few very common choices:
 \begin{itemize}
 \item $M$-ary PAM ($M$-PAM) is $M$ points equally spaced along a line or
-\[ \mathcal{X} = \left\{ 2a-(M-1) \in \mathbb{C} \big| a \in \{0,1,\ldots,M-1\} \right\}. \]
+\[ \mathcal{X} = \left\{ 2a-(M-1) \, \big| \, a \in \{0,1,\ldots,M-1\} \right\} \subset \mathbb{C}. \]
 
 \item $M^2$-ary QAM ($M^2$-QAM) is an $M$ by $M$ square grid of points or
-\[ \mathcal{X} = \left\{ \left(2a-(M-1)\right)+ \left(2b-(M-1)\right)i \in \mathbb{C} \big| a,b \in \{0,1,\ldots,M-1\} \right\}. \]
+\[ \mathcal{X} = \left\{ \left(2a-(M-1)\right)+ \left(2b-(M-1)\right)i \, \big| \, a,b \in \{0,1,\ldots,M-1\} \right\} \subset \mathbb{C}. \]
 
 \item $M$-ary PSK ($M$-PSK) is $M$ points equally spaced around a circle or
-\[ \mathcal{X} = \left\{ e^{2\pi i k/M} \in \mathbb{C} \big| k \in \{0,1,\ldots,M-1\} \right\}. \]
+\[ \mathcal{X} = \left\{ e^{2\pi i k/M} \, \big| \, k \in \{0,1,\ldots,M-1\} \right\} \subset \mathbb{C}. \]
 \end{itemize}
 
 \begin{example}
 The standard QAM constellation with 16 points (known as 16-QAM) is given by
-\[ \mathcal{X} = \left\{ a+bi \in \mathbb{C} \big| a,b \in \{-3,-1,1,3\} \right\}. \]
+\[ \mathcal{X} = \left\{ a+bi \, \big| \, a,b \in \{-3,-1,1,3\} \right\} \subset \mathbb{C}. \]
 The average energy of this constellation is given by
 \[ E_s = \frac{1}{16} \sum_{a,b\in \{-3,-1,1,3\}} (a^2 + b^2) = \frac{8}{16}  \sum_{a\in \{-3,-1,1,3\}} a^2 = 10.\]
 \end{example}
@@ -249,7 +249,7 @@ Fisher commented that surely she could not tell the difference, but his colleagu
 At that point, they prepared eight cups of tea: four milk-into-tea and four tea-into-milk.
 The cups were presented in a random order and she correctly identified enough (all eight cups by some accounts) to prove her point.
 
-Adding math to this requires that one defines carefully ``can tell the difference", but this is not a big problem because, for example, one can use the hypothesis $H_0=$``she is right more than three times out of four".
+Adding math to this requires that one defines carefully ``can tell the difference", but this is not a big problem because, for example, one can use the hypothesis $H_0=$``her success rate is more than three out of four".
 There are more subtle issues, however, such as the meaning of passing the test.
 While Ms. Bristol may do this by luck, this is also easy to analyze with calculations.
 What is more problematic is understanding all the other hypotheses that can lead to the same observation.
@@ -260,7 +260,7 @@ For this reason, any scientific test of a hypothesis can only \emph{disprove} th
 If Ms. Bristol cannot get 75\% correct in a larger test, then we can be reasonably confident that ``her ability to distinguish does not meet our threshold of three times out of four".
 This is an example of a \defn{hypothesis testing}{null hypothesis} statistical test where the hypothesis can only disproven reliably.
 Adding some math to this example shows that
-\[ \Pr (\text{she makes no mistakes} | H_0 \text{ is false}) \leq (3/4)^8 \approx 0.10. \]
+\[ \Pr (\text{she identifies all cups correctly} | H_0 \text{ is false}) \leq (3/4)^8 \approx 0.10. \]
 Therefore, the observation does not support the falsification of $H_0$.
 Not much more can be concluded from this experiment.
 
