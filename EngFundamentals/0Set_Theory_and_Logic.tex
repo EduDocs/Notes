@@ -352,6 +352,13 @@ Let $U$ be a specific collection of elements, and let $P(x)$ be a statement that
 Then the statement $\forall x \in U, P(x)$ is true if $P(x)$ is true for all values of $x$ in $U$.
 The other type of quantifier often encountered in mathematical proofs is the \defn{logic}{existential quantifier}, denoted $\exists$.
 The statement $\exists x \in U, P(x)$ is true if $P(x)$ is true for at least one value of $x$ in $U$.
+Based on the meanings of the quantifiers, we have the following equivalences
+\begin{gather*}
+\neg \left( \left( \forall x \in U \right) P(x) \right)
+\Leftrightarrow \left( \exists x \in U \right) \left( \neg P(x) \right) \\
+\neg \left( \left( \exists x \in U \right) P(x) \right)
+\Leftrightarrow \left( \forall x \in U \right) \left( \neg P(x) \right) .
+\end{gather*}
 
 In mathematics, a \textbf{free variable} is a notation for a place or places in an expression into which some definite substitution may take place, or with respect to which some operation (e.g. quantification) may take place. 
 A \textbf{bound variable} is a variable for which we have no ability to choose the value.

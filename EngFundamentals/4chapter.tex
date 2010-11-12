@@ -551,18 +551,44 @@ Then, there exists a unique vector $\vecnot{v} \in V$ such that $f \left( \vecno
 \begin{proof}
 While the result holds in any Hilbert space, this proof assumes $V$ is separable for simplicity.
 Therefore, we let $\vecnot{v}_1, \vecnot{v}_2, \ldots$ be a countable orthonormal basis for $V$.
-Since $f$ is uniquely defined by where it maps basis vectors, we choose
+We wish to find a candidate vector $\vecnot{v}$ for the inner product.
+
+First, we note that $f$ is bounded and, as such, there exists $M$ such that $| f \left( \vecnot{x} \right) | \leq M \| \vecnot{x} \|$ for all $\vecnot{x} \in V$.
+Let $\vecnot{x}_n = \sum_{i=1}^n \overline{ f \left( \vecnot{v}_i \right) } \vecnot{v}_i$.
+For any $n$, we have
 \begin{equation*}
-\vecnot{v} = \sum_{i=1}^\infty \overline{f \left( \vecnot{v}_i \right)} \vecnot{v}_i
+\begin{split}
+M \left\| \vecnot{x}_n \right\| &\geq \left| f \left( \vecnot{x}_n \right) \right|
+= \sum_{i=1}^n \left| f \left( \vecnot{v}_i \right) \right|^2
+= \sum_{i=1}^n f \left( \vecnot{v}_i \right)
+\overline{ f \left( \vecnot{v}_i \right) } \\
+&= \sum_{i=1}^n \left\langle \overline{ f \left( \vecnot{v}_i \right) } \vecnot{v}_i
+\Big| \overline{ f \left( \vecnot{v}_i \right) } \vecnot{v}_i \right\rangle
+= \sum_{i=1}^n \sum_{j=1}^n
+\left\langle \overline{ f \left( \vecnot{v}_j \right) } \vecnot{v}_j
+\Big| \overline{ f \left( \vecnot{v}_i \right) } \vecnot{v}_i \right\rangle \\
+&= \left\langle \sum_{j=1}^n
+\overline{ f \left( \vecnot{v}_j \right) } \vecnot{v}_j
+\bigg| \sum_{i=1}^n
+\overline{ f \left( \vecnot{v}_i \right) } \vecnot{v}_i \right\rangle
+= \left\langle \vecnot{x}_n | \vecnot{x}_n \right\rangle
+= \left\| \vecnot{x}_n \right\| .
+\end{split}
 \end{equation*}
-and let $f_{\vecnot{v}}$ be the functional defined by
+This implies that $\| \vecnot{x}_n \| < M$ for all $n$.
+Hence, $\lim_{n \rightarrow \infty} \sum_{i=1}^n \left| f \left( \vecnot{v}_i \right) \right|^2$ is bounded and the vector
+\begin{equation*}
+\vecnot{v} = \sum_{i=1}^{\infty} \overline{ f \left( \vecnot{v}_i \right) } \vecnot{v}_i ,
+\end{equation*}
+defined as the limitpoint of a Cauchy sequence, is in $V$.
+Let $f_{\vecnot{v}}$ be the functional defined by
 \begin{equation*}
 f_{\vecnot{v}} \left( \vecnot{w} \right) = \left\langle \vecnot{w} | \vecnot{v} \right\rangle .
 \end{equation*}
-It is easy to verify that
+By the Cauchy-Schwarz, we can verify that
 \[ \| f \| \triangleq \sup_{\vecnot{u}\in V - \{ \vecnot{0} \}} \frac{f(\vecnot{u})}{\| \vecnot{u} \|} = \| \vecnot{v} \|. \]
 Since $f$ is continuous, it follows that $\| f \| < \infty$ and $\| \vecnot{v} \| < \infty$.
-The Cauchy-Schwarz inequality shows that $\langle \vecnot{w} | \vecnot{v} \rangle \leq \| \vecnot{w} \| \| \vecnot{v} \|$ so that $f$ is continuous (and therefore linear) because $\| \vecnot{v} \| < \infty$.
+%The Cauchy-Schwarz inequality shows that $\langle \vecnot{w} | \vecnot{v} \rangle \leq \| \vecnot{w} \| \| \vecnot{v} \|$ so that $f$ is continuous (and therefore linear) because $\| \vecnot{v} \| < \infty$.
 Then, 
 \begin{equation*}
 f_{\vecnot{v}} \left( \vecnot{v}_j \right) = \left\langle \vecnot{v}_j \Big| 

@@ -1,5 +1,13 @@
 \chapter{Metric Spaces and Topology}
 
+From an engineering perspective, the most important way to construct a topology on a set is to define the topology in terms of a metric on the set.
+This approach underlies our intuitive understanding of open and closed sets on the real line.
+Generally speaking, a metric captures the notion of a distance between two elements of a set.
+Topologies that are defined through metrics possess a number of properties that make them suitable for analysis.
+Identifying these common properties permits the unified treatment of different spaces that are useful in solving engineering problems.
+To gain better insight into metric spaces, we need to review the notion of a metric and to introduce a definition for topology.
+
+
 \section{Metric Spaces}
 
 \index{metric space}
@@ -24,7 +32,7 @@ The set of real numbers equipped with the metric of absolute distance $d(x,y)=\l
 \end{example}
 
 \begin{example}
-Given $\vecnot{x} = (x_1, \ldots, x_n), \vecnot{y} = (y_1, \ldots, y_n) \in \RealNumbers^n$, the \defn{metric space}{euclidean metric} $d$ on $\RealNumbers^n$ is defined by the equation
+Given $\vecnot{x} = (x_1, \ldots, x_n), \vecnot{y} = (y_1, \ldots, y_n) \in \RealNumbers^n$, the \defn{metric space}{Euclidean metric} $d$ on $\RealNumbers^n$ is defined by the equation
 \begin{equation*}
 d \left( \vecnot{x}, \vecnot{y} \right)
 = \sqrt{ (x_1 - y_1)^2 + \cdots + (x_n - y_n)^2 }.
@@ -58,7 +66,7 @@ This set is called the \defn{metric space}{$d$-open ball} of radius $\epsilon$ c
 
 \begin{problem}
 Suppose $a \in B_d(x, \epsilon)$ with $\epsilon > 0$.
-Show that there exists a $d$-open ball centered at $a$ of radius $\delta$ (i.e., $B_d(a, \delta)$) that is contained in $B_d(x, \epsilon)$.
+Show that there exists a $d$-open ball centered at $a$ of radius $\delta$, say $B_d(a, \delta)$, that is contained in $B_d(x, \epsilon)$.
 \end{problem}
 
 One of the main benefits of having a metric is that it provides some notion of ``closeness'' between points in a set.
@@ -274,7 +282,7 @@ But $x \notin B^c$, so $x\notin \Closure{A}$.
 \end{proof}
 
 \begin{definition}
-An open set $O$ containing $x$ is called an \defn{topology}{neighborhood} of $x$.
+An open set $O$ containing $x$ is called a \defn{topology}{neighborhood} of $x$.
 \end{definition}
 
 \begin{definition}
@@ -358,7 +366,7 @@ That is, $f^{-1} (O)$ is open.
 \begin{theorem}
 Suppose $X$ and $Y$ are two metrizable spaces with metrics $d_X$ and $d_Y$.
 Consider a function $f : X \rightarrow Y$.
-The function $f$ is continuous if and only if it $d$-continuous with these metrics.
+The function $f$ is continuous if and only if it is $d$-continuous with respect to these metrics.
 \end{theorem}
 \begin{proof}
 Suppose that $f$ is continuous.
