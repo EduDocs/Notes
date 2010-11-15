@@ -572,15 +572,15 @@ M \left\| \vecnot{x}_n \right\| &\geq \left| f \left( \vecnot{x}_n \right) \righ
 \bigg| \sum_{i=1}^n
 \overline{ f \left( \vecnot{v}_i \right) } \vecnot{v}_i \right\rangle
 = \left\langle \vecnot{x}_n | \vecnot{x}_n \right\rangle
-= \left\| \vecnot{x}_n \right\| .
+= \left\| \vecnot{x}_n \right\|^2 .
 \end{split}
 \end{equation*}
-This implies that $\| \vecnot{x}_n \| < M$ for all $n$.
+This implies that $\| \vecnot{x}_n \| \leq M$ for all $n$.
 Hence, $\lim_{n \rightarrow \infty} \sum_{i=1}^n \left| f \left( \vecnot{v}_i \right) \right|^2$ is bounded and the vector
 \begin{equation*}
 \vecnot{v} = \sum_{i=1}^{\infty} \overline{ f \left( \vecnot{v}_i \right) } \vecnot{v}_i ,
 \end{equation*}
-defined as the limitpoint of a Cauchy sequence, is in $V$.
+is in $V$ because it is the limit point of a Cauchy sequence.
 Let $f_{\vecnot{v}}$ be the functional defined by
 \begin{equation*}
 f_{\vecnot{v}} \left( \vecnot{w} \right) = \left\langle \vecnot{w} | \vecnot{v} \right\rangle .
@@ -604,7 +604,7 @@ An important consequence of this theorem is that the continuous dual space $V^*$
 Let $R: V^* \rightarrow V$ be the implied Riesz mapping from continuous linear functionals on $V$ (i.e., $V^*$) to elements of $V$.
 Then, $f(\vecnot{v}) = \langle \vecnot{v} | R( f ) \rangle$ for all $f \in V^*$.
 The isomorphism can be shown by verifying that $R( s f_1 + f_2 ) = \overline{s} R(f_1) + R(f_2)$ and one finds that the mapping $R$ is conjugate linear.
-The mapping is isometric because $\| f | = \| R(f) \|$.
+The mapping is isometric because $\| f \| = \| R(f) \|$.
 Based on this isomorphism, one can treat a Hilbert space as self-dual and assume without confusion that $V=V^*$.
 
 Now, we can take a closer look at the proof of this theorem for the finite dimensional case.

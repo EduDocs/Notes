@@ -1183,8 +1183,10 @@ Thus, $W = V$ and we have an orthonormal basis.
 A Hilbert space $V$ has a countable orthonormal basis if and only if $V$ is separable.
 \end{theorem}
 \begin{proof}[Sketch of proof]
-If $V$ is separable, then applying Gram-Schmidt orthogonalization to the countable dense subset generates a countable orthonormal basis.
-If $V$ has a countable orthonormal basis, then linear combinations with rational coefficients can be used to construct a countable dense subset.
+If $V$ is separable, then it contains a countable dense subset.
+Using the well-ordering theorem, this subset can be ordered into $\{ \vecnot{v}_1 , \vecnot{v}_2 , \ldots \}$ such that, for every vector $\vecnot{v}\in V$ and any $\epsilon>0$, there exists an $n$ such that $\left\| \vecnot{v} - \vecnot{v}_n \right\| < \epsilon$.
+Therefore, applying Gram-Schmidt orthogonalization, to this ordered sequence of vectors, generates a countable orthonormal basis.
+Conversely, if $V$ has a countable orthonormal basis, then linear combinations with rational coefficients can be used to construct a countable dense subset.
 \end{proof}
 
 \section{Linear Transformations}
