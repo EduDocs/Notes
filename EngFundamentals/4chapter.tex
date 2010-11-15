@@ -586,7 +586,7 @@ Let $f_{\vecnot{v}}$ be the functional defined by
 f_{\vecnot{v}} \left( \vecnot{w} \right) = \left\langle \vecnot{w} | \vecnot{v} \right\rangle .
 \end{equation*}
 By the Cauchy-Schwarz, we can verify that
-\[ \| f \| \triangleq \sup_{\vecnot{u}\in V - \{ \vecnot{0} \}} \frac{f(\vecnot{u})}{\| \vecnot{u} \|} = \| \vecnot{v} \|. \]
+\[ \| f_{\vecnot{v}} \| \triangleq \sup_{\vecnot{u}\in V - \{ \vecnot{0} \}} \frac{f_{\vecnot{v}} (\vecnot{u})}{\| \vecnot{u} \|} = \| \vecnot{v} \|. \]
 Since $f$ is continuous, it follows that $\| f \| < \infty$ and $\| \vecnot{v} \| < \infty$.
 %The Cauchy-Schwarz inequality shows that $\langle \vecnot{w} | \vecnot{v} \rangle \leq \| \vecnot{w} \| \| \vecnot{v} \|$ so that $f$ is continuous (and therefore linear) because $\| \vecnot{v} \| < \infty$.
 Then, 
@@ -595,7 +595,7 @@ f_{\vecnot{v}} \left( \vecnot{v}_j \right) = \left\langle \vecnot{v}_j \Big|
 \sum_{i=1}^\infty \overline{f \left( \vecnot{v}_i \right)} \vecnot{v}_i \right\rangle
 = f \left( \vecnot{v}_j \right) .
 \end{equation*}
-Since this is true for each $\vecnot{v}_i$, it follows that $f = f_{\vecnot{v}}$.
+Since this is true for each $\vecnot{v}_j$, it follows that $f = f_{\vecnot{v}}$.
 Now, consider any $\vecnot{v}' \in V$ such that $\left\langle \vecnot{w} | \vecnot{v} \right\rangle = \left\langle \vecnot{w} | \vecnot{v}' \right\rangle$ for all $\vecnot{w} \in W$.
 Applying Lemma~\ref{lemma:DualSpaceSeparatesPoints} shows that $\vecnot{v} = \vecnot{v}'$ and we conclude that $\vecnot{v}$ is unique.
 \end{proof}
