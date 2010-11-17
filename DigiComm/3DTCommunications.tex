@@ -1,18 +1,19 @@
 \chapter{Discrete-Time Communication}
 \label{chapter:DiscreteTimeComm}
+\index{digital communication}
 
-Most digital communications systems operate by converting digital data into continuous waveforms that can be conveyed through some physical medium to a receiver.
+Most digital communication systems operate by converting digital data into continuous waveforms that can be conveyed through some physical medium to a receiver.
 For example, digital communication through wires (e.g., Ethernet or USB) is based on moving electrons back and forth in the wire.
 In contrast, underwater wireless communication uses acoustic transmission through the water.
 While radio communication relies on the propagation of electromagnetic waves through air.
 
-The process by which a string of bits is converted into a waveform suitable for transmission is known as \defn{communication}{modulation}.
-The reverse operation, called \defn{communication}{demodulation}, is performed at the destination and involves extracting the information symbols from the received signal.
-The mapping between the transmitted waveform and the received waveform is known as the \defn{communication}{channel}.
+The process by which a string of bits is converted into a waveform suitable for transmission is known as \defn{digital communication}{modulation}.
+The reverse operation, called \defn{digital communication}{demodulation}, is performed at the destination and involves extracting the information symbols from the received signal.
+The mapping between the transmitted waveform and the received waveform is known as the \defn{digital communication}{channel}.
 
 Precise models of the physical channel can be very complicated and many of the key ideas in digital communication do not depend on the exact details.
 For this reason, one can model and design communication systems based a simplified model that separates the communication problem from the physical models.
-In this chapter, we develop some of basic concepts in digital communications using this simplified model.
+In this chapter, we develop some basic concepts of digital communication using this simplified model.
 The goal is to build some intuition about how things work without getting lost in the mathematical details.
 
 \section{A Simple Channel Model}
@@ -59,14 +60,14 @@ The goal is to build some intuition about how things work without getting lost i
 \caption{The block diagram of a digital communication system where the blocks comprising the discrete-time channel are shaded.}
 \end{figure}
 
-In this section, we introduce the \defn{communication}{discrete-time channel model} for digital communication systems.
+In this section, we introduce the \defn{digital communication}{discrete-time channel model} for digital communication systems.
 We will see later that, for some communication systems, this model is exactly equivalent to the more complicated waveform model.
 The first channel model we discuss is where the $n$th output of the channel, $Y_n$, is equal to the $n$th input to the channel, $x_n$, corrupted by an additive noise term $Z_n$ so that
 \[ Y_n = x_n + Z_n. \]
 For this model, it is typical to assume that the noise sequence $Z_1, Z_2, \ldots$ consists of independent identically distributed (i.i.d.) zero-mean Gaussian random variables with variance $\sigma^2$.
 This implies that each $Y_n$ is a Gaussian random variable with mean $x_n$ and variance $\sigma^2$, so that
 \[ f_{Y_n}(y_n) = \frac{1}{\sqrt{2\pi \sigma^2}} e^{-(y_n - x_n)^2 / (2\sigma^2)}.\]
-This model is commonly referred to as discrete-time communication in \defn{communication}{additive white Gaussian noise} (AWGN) noise.
+This model is commonly referred to as discrete-time communication in \defn{digital communication}{additive white Gaussian noise} (AWGN) noise.
 
 As an example, consider a system where the transmitter sets the voltage on end of a wire and the receiver measures the voltage on the other end of the wire.
 It turns out that the thermal agitation of electrons causes voltage fluctuations known as Johnson noise.
@@ -78,10 +79,10 @@ So, the simple model described above already gives a relatively accurate picture
 
 Once a channel model has been defined, the next step is choosing how to transmit digital data through the channel.
 A common approach is to choose a small set $\mathcal{U}$ of information symbols and represent each one by a distinct channel input in the set $\mathcal{X}$.
-This is the discrete-time model of a scheme known as \defn{communication}{pulse-amplitude modulation} (PAM).
+This is the discrete-time model of a scheme known as \defn{digital communication}{pulse-amplitude modulation} (PAM).
 Let $u_n \in \mathcal{U}$ be the information symbol transmitted during the $n$th time interval and $x_n = M(u_n)$ be the $n$th input to the channel, where $M: \mathcal{U} \rightarrow \mathcal{X}$ is called the symbol mapping function.
 For example, one can transmit binary information symbols by mapping ``0" to $+1$V and ``1" to $-1$V; mathematically, this is done by choosing $\mathcal{U}=\{0,1\}$, $\mathcal{X}=\{-1,1\}$, and $M(u) = 1-2u$.
-This particular type of PAM is called \defn{communication}{binary phase-shift keying} (BPSK) or 2-PAM.
+This particular type of PAM is called \defn{digital communication}{binary phase-shift keying} (BPSK) or 2-PAM.
 
 Suppose a BPSK signal is transmitted through our discrete-time AWGN channel model.
 The detector must measure the voltage and decide whether a 0 or 1 one was transmitted.
@@ -146,7 +147,7 @@ This is because low-frequency signals often do not propagate well through physic
 While this process will be discussed later in more detail, the following key detail affects the discrete-time model.
 High frequency modulation allows two independent signals to be modulated onto the same carrier frequency; one onto the sine wave and the other onto the cosine wave.
 This allows one to treat the transmitted value $x_n$ and received value $Y_n$ as points in 2-dimensional space.
-The set $\mathcal{X}$ of possible transmitted points in 2-dimensional space in called the \defn{communication}{symbol constellation}.
+The set $\mathcal{X}$ of possible transmitted points in 2-dimensional space in called the \defn{digital communication}{symbol constellation}.
 
 \begin{figure}
 \begin{center}
@@ -206,7 +207,7 @@ f_{Y^{(r)}_n,Y^{(i)}_n}(y^{(r)}_n,y^{(i)}_n) & =
 Therefore, the probability of receiving a $y_n$ value is simply a function of its Euclidean distance $\left| y_n - x_n \right|^2$ from the actual transmitted symbol.
 This leads to a nice geometric characterization of the optimal decision regions for the detector.
 
-The \defn{communication}{signal-to-noise ratio} (SNR) of a communication system is typically denoted by $E_s / N_0$ where $E_s$ is the average \textbf{energy per channel input symbol} and $N_0$ is the \defn{communication}{noise spectral density}.
+The \defn{digital communication}{signal-to-noise ratio} (SNR) of a communication system is typically denoted by $E_s / N_0$ where $E_s$ is the average \textbf{energy per channel input symbol} and $N_0$ is the \defn{digital communication}{noise spectral density}.
 For equiprobable signaling, one finds that
 \[ E_s = \frac{1}{|\mathcal{X}|} \sum_{x\in \mathcal{X}} |x|^2. \]
 The noise spectral density measures how much the AWGN is affects the channel and later we will see that $N_0 = 2 \sigma^2$ for our discrete-time model.
@@ -240,7 +241,7 @@ The average energy of this constellation is given by
 \index{hypothesis testing}
 
 In this section, we consider the problem of designing a symbol detector that minimizes the probability of error.
-This is known as an \defn{communication}{optimal detection} problem and has an elegant solution that is related to the classical problem of \textbf{hypothesis testing} in statistics.
+This is known as an \defn{digital communication}{optimal detection} problem and has an elegant solution that is related to the classical problem of \textbf{hypothesis testing} in statistics.
 
 \subsection{Hypothesis Testing}
 

@@ -39,11 +39,9 @@ Likewise,  swapping $x_{1},x_{2}$ changes the check by
 
 Coding is used in many systems and devices including:
 \begin{itemize}
-\item CD players / DVD players : Modulation code + Reed-Solomon (RS) codes
-\item Satellite Digital Video Broadcasting (DVB): Convolutional Code + RS
-code.
-\item Deep Space Communications: From simple codes in the 1970s to Turbo/LDPC
-codes in the 2000s
+\item CD / DVD players : Modulation code + Reed-Solomon (RS) code
+\item Digital Video Broadcasting (DVB): Convolutional Code + RS code
+\item Deep Space Communications: Advanced Turbo and LDPC codes
 \item Cell Phones: Convolutional codes for voice and Turbo/LDPC codes for data
 \end{itemize}
 
@@ -51,7 +49,7 @@ codes in the 2000s
 
 \begin{figure}[t]
 \begin{center}
-\includegraphics[width=0.8\textwidth,keepaspectratio]{Figures/commfig2}
+\includegraphics[width=0.95\textwidth,keepaspectratio]{Figures/commfig2}
 \end{center}
 \vspace{-4mm}
 \caption{Block diagram of digital communication from a coding perspective.}
@@ -612,17 +610,19 @@ $\deg \left( m(x) \right) \leq k-1$, and
 $\deg \left( g(x) \right) = n-k$.
 
 For a polynomial $a(x)$ and a divisor $d(x)$, the \textbf{remainder} $r(x)$ and \textbf{quotient} $q(x)$  are uniqely defined by $\deg\left( r(x) \right) < \deg \left(d(x) \right)$ and
-\[ \frac{a(x)}{d(x)} = q(x) + \frac{r(x)}{d(x)}. \]
+%\[ \frac{a(x)}{d(x)} = q(x) + \frac{r(x)}{d(x)}. \]
+\[ a(x) = q(x) d(x) + r(x). \]
 In discrete mathematicss, the \defn{channel coding}{modulo polynomial} operation
-\[ a(x) \bmod d(x) = r(x) \]
-is used to compactly represent the remainder of division by $d(x)$.
+\[ r(x) = a(x) \bmod d(x) \]
+is used to compactly represent the remainder $r(x)$ of division by $d(x)$.
 \begin{proposition}
 For an $(n,k)$ cyclic code defined by its generator polynomial $g(x)$, the parity-check polynomial $h(x)$ is defined uniquely by $g(x)h(x)=x^n - 1$ and satisfies
-\[ h(x)c(x) = 0 \bmod x^n - 1, \]
+\[ h(x)c(x) \bmod x^n - 1 = 0, \]
 for all codeword polynomials $c(x)$.
 \end{proposition}
 \begin{proof}
-One can prove this statement by observing that $c(x)=m(x)g(x)$ for some $m(x)$ and therefore
+First, we observe that $h(x)$ can be computed by dividing $x^n -1$ by $g(x)$.
+Therefore, one can prove this statement by observing that $c(x)=m(x)g(x)$ for some $m(x)$ and therefore
 \[ h(x)c(x) = m(x)g(x)h(x) = m(x)(x^n - 1). \]
 Since $x^n -1$ divides $h(x)c(x)$ without remainder, the result follows.
 \end{proof}
@@ -655,7 +655,7 @@ c(x)
 \end{align*}
 
 \begin{example}
-The binary Hamming codes are a family of $(n,k)$ cyclic codes, that can correct all single errors, with $n=2^r - 1$ and $k=n-r$.
+The binary Hamming codes are a family of $(n,k)$ cyclic codes, with $n=2^r - 1$ and $k=n-r$, that can correct all single errors.
 The generator polynomials for $k=3,4,5$ are given by
 \begin{align*}
 (7,4) & \quad \quad g(x) = 1+x^2+x^3 \\

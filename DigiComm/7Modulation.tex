@@ -1,9 +1,10 @@
 \chapter{Waveform Communication}
 \label{chapter:ContinuousTimeComm}
+\index{digital communication}
 
 In Chapter~\ref{chapter:DiscreteTimeComm}, we introduced digital communication using a discrete-time model that allowed us to neglect the details of the more realistic continuous-time model.
 The goal of this chapter is to delve into the details of waveform-based communication and see that the discrete-time model can be derived from the continuous-time model under some conditions.
-The \defn{communication}{waveform channel} defines the probabilistic mapping between the deterministic channel input waveform $s(t)$ and the random-process $R(t)$ observed at the output of the channel.
+The \defn{digital communication}{waveform channel} defines the probabilistic mapping between the deterministic channel input waveform $s(t)$ and the random-process $R(t)$ observed at the output of the channel.
 The basic model is that $R(t) = s(t) + N(t)$, where $N(t)$ is Gaussian white-noise random process with autocorrelation function $R_N (\tau) = \delta(\tau) N_0 / 2$.
 %In some cases, the channel will also act as a linear filter and produce $R(t) = h(t) * s(t) + N(t)$, where $h(t)$ is the channel response.
 
@@ -46,20 +47,20 @@ Then, one can associate a waveform $s_m (t)$ with each symbol $m=1,\ldots,M$ and
 For mathematical convenience, we assume that the energy integral exists and is finite for each waveform.
 
 The demodulation process is based on mathematical operation, known as an inner product, that maps any two signals to a complex number.
-The \defn{communication}{inner product} $\langle s(t) , r(t) \rangle$ between the signals $s(t)$ and $r(t)$ is defined by
+The \defn{digital communication}{inner product} $\langle s(t) , r(t) \rangle$ between the signals $s(t)$ and $r(t)$ is defined by
 \begin{equation*}
 \left\langle s (t), r^* (t) \right\rangle
 = \int_{-\infty}^{\infty} s(t) r^* (t) dt,
 \end{equation*}
 where $r^* (t)$ is the complex conjugate of $r(t)$.
 This is the same as the cross-correlation between $r(t)$ and $s(t)$ evaluated at lag-time 0.
-Mathematically, we are treating the set of all finite-energy signals as a \defn{communication}{vector space} and using this inner product to define distances and angles in this space.
+Mathematically, we are treating the set of all finite-energy signals as a \defn{digital communication}{vector space} and using this inner product to define distances and angles in this space.
 The energy (or length squared) of a signal $s(t)$ is given by
 \[ \int_{-\infty}^{\infty} \left| s(t) \right|^2 dt = \langle s(t),s(t) \rangle. \]
-Two signals $s_1 (t),s_2 (t)$ are said to be \defn{communication}{orthogonal} if $\langle s_1(t),s_2 (t)\rangle = 0$.
+Two signals $s_1 (t),s_2 (t)$ are said to be \defn{digital communication}{orthogonal} if $\langle s_1(t),s_2 (t)\rangle = 0$.
 A signal $s(t)$ is said to be \textbf{normalized} if $\langle s(t),s(t) \rangle = 1$.
 A set of signals is said to be \textbf{orthonormal} if every signal in the set is orthogonal to every other signal in the set and all signals in the set are normalized.
-The set of all linear combinations of signal waveforms is called the \defn{communication}{signal space}.
+The set of all linear combinations of signal waveforms is called the \defn{digital communication}{signal space}.
 
 \subsection{Orthonormal Waveforms}
 The simplest scenario occurs when the set of signal waveforms $\{ s_1 (t), \ldots , s_M (t) \}$ is orthonormal.
@@ -141,7 +142,7 @@ for each $j=1,\ldots,N$.
 This is the same as correlating the received signal with each of the basis waveforms.
 Again, the noise process implies that $R_1 , \ldots, R_N$ are Gaussian random variables whose means are determined by which waveform was actually transmitted.
 For $j=1,\ldots,N$, the noise component of $R_j$ is independent of the transmitted signal, and is given by
-\[ N_j = \langle N(t), \phi_j (t) \rangle = \int_{-\infty}^{\infty} N(t) \phi_j^* dt. \]
+\[ N_j = \langle N(t), \phi_j (t) \rangle = \int_{-\infty}^{\infty} N(t) \phi_j^* (t) dt. \]
 Therefore, $R_j = E[R_j] + N_j$ and, assuming $s_m (t)$ was transmitted, the mean is given by
 \begin{align*}
 E \left[R_j \right]
@@ -198,7 +199,7 @@ This is the reason that receivers based on the inner product (i.e., cross-correl
 
 Using a bank of correlators requires timing information to zero each integrator at the correct time.
 In many cases, it is more convenient to build a filter $h(t)$ matched to the transmitted waveform and sample this filter as needed.
-The \defn{communication}{matched filter} $h(t) = s^* (-t)$ is the time-reversed complex-conjugate of the transmitted waveform.
+The \defn{digital communication}{matched filter} $h(t) = s^* (-t)$ is the time-reversed complex-conjugate of the transmitted waveform.
 Then, $y(t) = h(t) * R(t)$ can be sampled at time $0$ to get
 \begin{align*}
 y(0)
@@ -441,7 +442,7 @@ But, optimum detection in white-noise requires that $h (t)$ is matched to $p(t)$
 Therefore, the best solution is to \emph{split} the $g(t)$ filter between the transmitter and receiver.
 If $\hat{g}(f)$ is real and positive, then we can simply choose
 \[ \hat{p}(f) = \hat{h} (f) = \sqrt{\hat{g}(f)}. \]
-This is known as a \defn{communication}{square-root Nyquist pulse}.
+This is known as a \defn{digital communication}{square-root Nyquist pulse}.
 In this case, $\hat{p}(f)$ is real and $p(t) = p^* (-t)$ and the matched filter is $h(t) = p^*(-t) = p(t)$.
 Since $\hat{g}(f)$ satisfies the Nyquist criterion, this allows one to achieve optimum detection without ISI.
 
@@ -504,7 +505,7 @@ We can therefore verify condition~\eqref{equation:NyquistCriterionFrequencyCondi
 = \sum_{m = - \infty}^{\infty} T \mathrm{rect} (Tf - m)
 = T .
 \end{equation*}
-That is, the conditions of Theorem~\ref{theorem:NyquistPulseCriterion} hold and, consequently, $g(0) = 1$ and $g(n) = 0$ for any non-zero integer.
+That is, the conditions of Theorem~\ref{theorem:NyquistPulseCriterion} hold and, consequently, $g(0) = 1$ and $g(nT) = 0$ for any non-zero integer.
 One of the positive attributes of the $\mathrm{sinc} (\cdot)$ waveform is that it is bandwidth-limited.
 However, this pulse is not time-limited and it decays quite slowly in the time-domain.
 It is therefore somewhat impractical, as using $\mathrm{sinc} (\cdot)$ waveforms without truncation would entail infinite delay at the destination.
@@ -520,7 +521,7 @@ is defined by $\frac{1}{2T}$; it represents the smallest possible bandwidth for 
 The spectral bandwidth of $\hat{g}(f)$ is the smallest possible value of $W$ such that $\hat{g}(f) = 0$ for $|f| > W$.
 
 \begin{example}
-The \defn{communication}{raised-cosine Nyquist pulse} introduces some bandwidth expansion in order to achieve a more rapid pulse decay in the time-domain.
+The \defn{digital communication}{raised-cosine Nyquist pulse} introduces some bandwidth expansion in order to achieve a more rapid pulse decay in the time-domain.
 It is the basis for the one of the most popular pulse shaping filters used in digital communications.
 In the frequency domain, it has the representation
 \begin{equation*}
@@ -533,7 +534,7 @@ In the frequency domain, it has the representation
 where $\beta$ is the roll-off factor that measures the excess bandwidth (beyond the Nyquist minimum) used by the filter.
 
 To compute the correct pulse-shaping filter, we must take the square-root in the frequency domain and the inverse Fourier transform.
-This results in the \defn{communication}{root raised-cosine pulse} given by
+This results in the \defn{digital communication}{root raised-cosine pulse} given by
 \begin{equation*}
 p(t) =
 \begin{cases}
@@ -550,8 +551,8 @@ In this case, the slow $1/t$ decay rate of the sinc function has been improved t
 
 \subsection{Passband Communication}
 
-Until now, our study of waveform communication has focused on \defn{communication}{baseband signals}, which have the majority of their energy near DC.
-Signals which occupy a narrow frequency band well separated from DC are known as \defn{communication}{passband signals}.
+Until now, our study of waveform communication has focused on \defn{digital communication}{baseband signals}, which have the majority of their energy near DC.
+Signals which occupy a narrow frequency band well separated from DC are known as \defn{digital communication}{passband signals}.
 All of wireless communications is based on passband signals because low-frequency electromagnetic waves require enormous antennas for efficient transmission.
 Typical frequency ranges for wireless communications start around 100 MHz and short-range communication is possible up until about 60 GHz.
 

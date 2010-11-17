@@ -17,15 +17,16 @@ This is not intended to be a comprehensive treatment of the subject.
 \label{section:FourierSeries}
 
 Fourier series can be employed to express, as weighted sums of sinusoidal components, either periodic functions or functions that are time-limited.
-Suppose that $s(t)$ is a function that is nonzero only for $-\frac{T}{2} \leq t \leq \frac{T}{2}$, and is square integrable
+Suppose that the signal $s(t)$ is zero for all $|t|\geq\frac{T}{2}$ and satisfies
 \begin{equation*}
-\| s(t) \|^2 \triangleq \int_{\mathbb{R}} |s(t)|^2 dt
-= \int_{-\frac{T}{2}}^{\frac{T}{2}} |s(t)|^2 dt < \infty .
+%\| s(t) \|^2 \triangleq
+\int_{\mathbb{R}} |s(t)|^2 dt =
+\int_{-\frac{T}{2}}^{\frac{T}{2}} |s(t)|^2 dt < \infty .
 \end{equation*}
-Then $s(t)$ possesses a \defn{Fourier analysis}{Fourier series} representation, which is defined by
+Then, $s(t)$ possesses a \defn{Fourier analysis}{Fourier series} representation, which is defined by
 \begin{equation} \label{equation:FourierSeries1}
 s(t) = \begin{cases} \sum_{k=-\infty}^{\infty}
-\hat{s}_k e^{2 \pi i \frac{k}{T} t}, & |t| \leq \frac{T}{2} \\
+\hat{s}_k e^{2 \pi i \frac{k}{T} t}, & \mathrm{if} \; |t| \leq \frac{T}{2} \\
 0, & \text{otherwise} \end{cases}
 \end{equation}
 where the Fourier series coefficients $\{ \hat{s}_k : k \in \mathbb{Z} \}$ are given by
@@ -35,7 +36,7 @@ s(t) e^{-2 \pi i \frac{k}{T} t} dt .
 \end{equation*}
 We can use the standard rectangular function $\mathrm{rect}(\cdot)$, defined by
 \begin{equation} \label{equation:RectangularFunction}
-\mathrm{rect} (t) = \begin{cases} 1, & |t| < 0.5 \\
+\mathrm{rect} (t) = \begin{cases} 1, & \mathrm{if}\; |t| < 0.5 \\
 0, & \text{otherwise} \end{cases}
 \end{equation}
 to simplify \eqref{equation:FourierSeries1}, and rewrite the Fourier representation of $s(t)$ as
@@ -44,6 +45,8 @@ s(t) = \sum_{k=-\infty}^{\infty}
 \hat{s}_k e^{2 \pi i \frac{k}{T} t}
 \mathrm{rect} \left( \frac{t}{T} \right) .
 \end{equation}
+If $s(t)$ is periodic with $s(t+T)=s(t)$, instead of being zero for $|t|>\frac{T}{2}$, then the same result holds without the rectangular window function.
+
 From a vector space perspective, \eqref{equation:FourierSeries2} asserts that $s(t)$ can be expressed as a linear combination of basis elements $\{ \theta_k (t) : k \in \mathbb{Z} \}$, where
 \begin{equation*}
 \theta_k (t) = e^{2 \pi i \frac{k}{T} t} \mathrm{rect} \left(\frac{t}{T} \right) .
@@ -66,56 +69,78 @@ This fact provides insight into the sampling theorem, which we will review short
 
 \section{Fourier Transforms}
 
+%A signal $s(t)$ is an \defn{Fourier analysis}{energy-type signal} (or \defn{Fourier anaysis}{square integrable}) if its energy
+%\[ \| s(t) \|^2 \triangleq \int_{\mathbb{R}} |s(t)|^2 dt \]
+%is finite.
 The \defn{Fourier analysis}{Fourier transform} applies to functions that are not necessarily time-limited.
-Assume that $x(t)$ is a signal that is square integrable,
+A signal $x(t)$ is \defn{Fourier analysis}{square integrable} (or an \defn{Fourier analysis}{energy-type signal}) if
 \begin{equation} \label{equation:L2Condition}
-\| x(t) \|^2 = \int_{\mathbb{R}} | x(t) |^2 dt < \infty .
+\| x(t) \|^2 \triangleq \int_{\mathbb{R}} | x(t) |^2 dt < \infty .
 \end{equation}
 Then, we can express $x(t)$ using its frequency domain representation.
 The Fourier transform of $x(t)$, which we denote by $\hat{x}(f)$ or $\mathcal{F} [x(t)]$, is defined by
 \begin{equation} \label{equation:FourierTransform}
 \hat{x}(f) = \mathcal{F} [x(t)]
-= \int_{\mathbb{R}} x(t) e^{-2 \pi i f t} dt .
+\triangleq \int_{\mathbb{R}} x(t) e^{-2 \pi i f t} dt .
 \end{equation}
-The original function can subsequently be expressed in terms of its decomposition,
+Using the inverse Fourier transform, the original function can also be expressed in terms of its decomposition with
 \begin{equation} \label{equation:InverseFourierTransform}
-x(t) = \int_{\mathbb{R}} \hat{x}(f) e^{2 \pi i f t} df .
+x(t) =  \mathcal{F}^{-1} [x(t)] \triangleq \int_{\mathbb{R}} \hat{x}(f) e^{2 \pi i f t} df .
 \end{equation}
-We sometimes denote the inverse Fourier transform of $\hat{x}(f)$ as $\mathcal{F}^{-1} [\hat{x}(f)]$.
+%We sometimes denote the inverse Fourier transform of $\hat{x}(f)$ as $\mathcal{F}^{-1} [\hat{x}(f)]$.
 It is interesting to point out the duality between the Fourier transform and its inverse, $\mathcal{F} \left[ \hat{x} (t) \right] = x(-f)$.
 This relation is rooted in the striking similarity between \eqref{equation:FourierTransform} and \eqref{equation:InverseFourierTransform}.
 
+\begin{definition}
+The \defn{Fourier analysis}{sinc function} is defined by
+\[ \mathrm{sinc}(t) \triangleq \frac{\sin (\pi t)}{\pi t}. \]
+\end{definition}
+
 \begin{example}[Rectangular Pulse]
 The rectangular pulse $\mathrm{rect} (\cdot)$, defined in \eqref{equation:RectangularFunction}, can be used to constrain various signals in time or frequency.
-Note that $\| \mathrm{rect} (t) \|^2 = 1 < \infty$, which guarantees that Fourier analysis can be applied to this function.
-The Fourier transform of $\mathrm{rect} (t)$ can be computed as follows,
+For $\alpha > 0$, one has $\| \mathrm{rect} (\alpha t) \|^2 = 1/\alpha < \infty$, which guarantees that Fourier analysis can be applied to this function.
+The Fourier transform of $\mathrm{rect} (\alpha t)$ can be computed as follows,
 \begin{equation*}
 \begin{split}
-\mathcal{F} \left[ \mathrm{rect} (t) \right]
-&= \int_{\mathbb{R}} \mathrm{rect} (t) e^{- 2 \pi i f t} dt
-= \int_{-\frac{1}{2}}^{\frac{1}{2}} e^{- 2 \pi i f t} dt \\
-&= \frac{1}{\pi f} \left( \frac{e^{\pi i f} - e^{- \pi i f}}{2i} \right)
-= \frac{ \sin \pi f }{\pi f} \\
-&= \mathrm{sinc}(f) .
+\mathcal{F} \left[ \mathrm{rect} (\alpha t) \right]
+&= \int_{\mathbb{R}} \mathrm{rect} (\alpha t) e^{- 2 \pi i f t} dt
+= \int_{-\frac{1}{2\alpha}}^{\frac{1}{2\alpha}} e^{- 2 \pi i f t} dt \\
+&= \frac{1}{\pi f} \left( \frac{e^{\pi i f/\alpha} - e^{- \pi i f/\alpha}}{2i} \right)
+= \frac{ \sin ( \pi f/\alpha ) }{\pi f}  \\
+&= \frac{1}{\alpha} \mathrm{sinc}\left( \frac{f}{\alpha} \right) .
 \end{split}
 \end{equation*}
-Thus, the Fourier transform of $\mathrm{rect}(\cdot)$ is the famous $\mathrm{sinc}(\cdot)$ function, which plays a fundamental role in the sampling and reconstruction of information signals.
+The $\mathrm{sinc}(\cdot)$ function is defined to be
+Thus, the Fourier transform of $\mathrm{rect}(t)$ is the famous $\mathrm{sinc}(f)$ function, which plays a fundamental role in the sampling and reconstruction of information signals.
 \end{example}
 
 The Fourier transform $\hat{x}(f)$ of a square-integrable signal $x(t)$ also allows one to pose the question, ``How much signal energy is contained the frequencies between $f_0$ and $f_1$?".
 The answer, for $f_0 \leq f_1$, is given by the integral
 \[ \int_{f_0}^{f_1} \left| \hat{x}(f) \right|^2 df. \]
-This integral exposes the quantity $\mathcal{G}_x (f) = \left| \hat{x}(f) \right|^2$ as the \defn{Fourier analysis}{energy spectral density} of $x(t)$.
-For technical reasons, we actually define the energy spectral density later in terms of its Fourier transform.
+This integral allows us to interpret the quantity $\left| \hat{x}(f) \right|^2$ as the \defn{Fourier analysis}{energy spectral density} of $x(t)$.
+For technical reasons, we actually define the energy spectral density later in more detail.
 In practice, the answer to the above question also depends on whether the signal is real or complex.
 For real signals, the integral is typically computed over the range $f_0 < |f| < f_1$.
 
 When condition~\eqref{equation:L2Condition} is not satisfied, it may be hazardous to use Fourier analysis and frequency domain representations.
-Strictly speaking, the Fourier transform of a function may not exist if it behaves wildly.
+Strictly speaking, the Fourier transform of a function may not exist if the function behaves wildly.
 Casually taking the Fourier transforms of arbitrary signals should be avoided.
 Having said that, there will be instances where we discuss the Fourier transforms of functions that do not fulfill \eqref{equation:L2Condition};
 one such example appears below.
-We adopt this somewhat cavalier attitude because experience allows us to avoid pitfalls, and Fourier relaxation leads to great engineering insight.
+
+\subsection{The Dirac Delta Function}
+
+The \defn{Fourier analysis}{Dirac delta function} $\delta (t)$ can be defined in a cavalier fashion with the operational rule
+\begin{equation} \label{equation:DiracDelta}
+x(t) = \int_{\mathbb{R}} \delta (t - \tau) x(\tau) d\tau .
+\end{equation}
+%\begin{equation*}
+%x(0) = \int_{\mathbb{R}} \delta (t) x(t) dt
+%\end{equation*}
+%if $x(t)$ is continuous at 0.
+A more rigorous approach, based on generalized functions, is out of the scope of this class.
+So, these notes adopt a somewhat cavalier attitude towards the Fourier transform of $\delta(t)$ an rely on experience to avoid pitfalls.
+The benefit is that this approach to Fourier analysis can lead to great engineering insight.
 The downside of this approach is that the reader is left with the burden of deciding whether a signal has a proper spectral representation, or if the definition of the Fourier transform is being applied loosely.
 
 Starting with signal $x(t)$, we can write
@@ -127,11 +152,11 @@ x(t) &= \int_{\mathbb{R}} \hat{x}(f) e^{2 \pi i f t} df
 \end{split}
 \end{equation}
 where the second equality follows from \eqref{equation:FourierTransform} and the third equality is obtained by changing the order of integration.
-Recall that we can use the Dirac delta function $\delta(t)$ to write (informally)
-\begin{equation*}
-x(t) = \int_{\mathbb{R}} \delta (t - \tau) x(\tau) d\tau .
-\end{equation*}
-Since \eqref{equation:NestedFourierRepresentation} holds for any time~$t$, we find that
+%One can also use the Dirac delta function $\delta(t)$ to write (informally)
+%\begin{equation*}
+%x(t) = \int_{\mathbb{R}} \delta (t - \tau) x(\tau) d\tau .
+%\end{equation*}
+Since \eqref{equation:NestedFourierRepresentation} holds for any time~$t$, it follows from \eqref{equation:DiracDelta} that
 \begin{equation*}
 \delta (t) = \int_{\mathbb{R}} e^{2 \pi i f t} df 
 \end{equation*}
@@ -187,15 +212,15 @@ x(t) = \sum_{k = -\infty}^{\infty} \delta(t - kT)
 Which representation to use depends on the problem at hand.
 
 
-\subsection{Spectral Density}
+\subsection{Energy Spectral Density}
 \label{subsection:SpectralDensity}
 
-The energy content of a deterministic signal $x(t)$ is given by \eqref{equation:L2Condition}.
-If the energy content of $x(t)$ is finite, i.e.\ $\| x(t) \|^2 < \infty$, then we can define its \defn{Fourier analysis}{autocorrelation function} by
+The energy of a deterministic signal $x(t)$ is given by \eqref{equation:L2Condition}.
+If the energy of $x(t)$ is finite, i.e.\ $\| x(t) \|^2 < \infty$, then we define its \defn{Fourier analysis}{autocorrelation function} by
 \begin{equation*}
 R_x(\tau) = \int_{\mathbb{R}} x(t)x^*(t - \tau) dt .
 \end{equation*}
-Using this notation, we can write the energy content of $x(t)$ as $R_x(0)$.
+Using this notation, we see that the energy of $x(t)$ is also given by $R_x(0)$.
 
 \begin{definition}
 The \defn{Fourier analysis}{energy spectral density} of $x(t)$, denoted by $\mathcal{G}_x (f)$, is defined to be the Fourier transform of its autocorrelation function,
@@ -232,8 +257,56 @@ This also implies that the spectral density, $\mathcal{G}_y(f)$, of $y(t)$ satis
 
 \section{Sampling Deterministic Signals}
 
+A great deal of inuition about sampling can be gained using the Fourier transform representation for periodic signals developed in Section~\ref{section:PeriodicSignals}.
+Let $x_{\mathrm{s}}(t)$ denote the result of sampling $x(t)$ by impulses at times $\{ nT : n \in \mathbb{Z} \}$,
+\begin{equation*}
+x_{\mathrm{s}}(t) = x(t) \sum_{n=-\infty}^{\infty} \delta(t-nT)
+= \sum_{n=-\infty}^{\infty} x(nT) \delta(t-nT).
+\end{equation*}
+Looking at the sampled signal in the frequency domain, we get
+\begin{equation*}\begin{split}
+\hat{x}_{\mathrm{s}}(f) &= \hat{x}(f) \ast \mathcal{F} \left[ \sum_{n=-\infty}^{\infty} \delta(t-nT) \right] \\
+&= \hat{x}(f) \ast \frac{1}{T} \sum_{n=-\infty}^{\infty} \delta \left( f-\frac{n}{T} \right) \\
+&= \frac{1}{T} \sum_{n=-\infty}^{\infty} \hat{x} \left( f - \frac{n}{T} \right) ,\end{split}\end{equation*}
+where we have used \eqref{equation:ImpulseTrainFrequency} to express the Fourier transform of an impulse train.
+When the sampling rate is fast enough, the translated copies of $\hat{x}(f)$ contained in the transform $\hat{x}_{\mathrm{s}}(f)$ do not overlap, and the original signal can be recovered using an ideal lowpass filter.
+However, when the sampling period~$T$ is too small, the various copies of $\hat{x}(f)$ overlap and the content of the original is partially destroyed.
+This is know as \defn{Fourier analysis}{aliasing}.
+
+\begin{figure}[thbp]
+\begin{center}
+\epsfig{file=Figures/sampling,width=8cm}
+\caption{The sampling and reconstruction of a bandwidth-limited signal.
+When the sampling rate exceeds twice the bandwidth of the original signal, this signal can be reconstituted from its sampled values.}
+\label{figure:Sampling}
+\end{center}
+\end{figure}
+A succession of power spectral densities can be found on Figure~\ref{figure:Sampling}.
+The top component shows the power spectral density of the original signal.
+The density of the sampled signal appears below.
+Finally, the reconstruction operation where a lowpass filter is employed to recovered the original function is illustrated at the bottom of the figure.
+In contrast, Figure~\ref{figure:Aliasing} exhibits a case where the sampling frequency is too low.
+\begin{figure}[thbp]
+\begin{center}
+\epsfig{file=Figures/aliasing,width=8cm}
+\caption{A low sampling frequency leads to aliasing, thereby preventing reconstruction of the original signal.}
+\label{figure:Aliasing}
+\end{center}
+\end{figure}
+Aliasing in the frequency domain prevents the original signal from being retrieved.
+
+Sampling and aliasing is also important is film and video.
+The illusion of a moving image in video is achieved by displaying a rapid succession of still pictures over time.
+Films are typically shot at a rate of twenty-four frames per second, whereas the minimum frame rate required to create the appearance of a moving image is about fifteen frames per second.
+The human eye acts as a lowpass filter and transforms the succession of images into a live video.
+High-speed cameras are used to record slow-motion playback movies.
+As a consequence, they must run at much higher frame-rates than normal cameras.
+
+\subsection{The Sampling Theorem}
+
 The sampling theorem is one of the most significant results in communications.
 Many digital communication systems rely on the validity of this theorem and on the design insights it provides for proper operation.
+
 The basic idea behind the sampling theorem can be summarized in a few words.
 If a signal $x(t)$ is bandwidth-limited to $W$, then this signal can be reconstructed from a collection of samples so long as the samples are taken at periodic intervals of $T \leq \frac{1}{2W}$.
 A formal version of the sampling theorem appears below.
@@ -296,53 +369,10 @@ x(nT)
 \frac{s_k}{T} \mathrm{sinc} ( n + k ) = \frac{s_{-n}}{T} .
 \end{equation*}
 Thus, we have $s_{k} = T x(-kT)$ and formula \eqref{equation:SamplingReconstructionFormula} follows.
-The sampling rate corresponding to $T = \frac{1}{2W}$ is the minimum rate at which perfect reconstruction is possible.
-It is called the \defn{Fourier analysis}{Nyquist rate}.
+The sampling rate $F = 2W$ associated with the sampling period $T = \frac{1}{2W}$ is the minimum rate at which perfect reconstruction is possible.
+It is called the \defn{Fourier analysis}{Nyquist rate} in honor of Swedish-American engineer Harry Nyquist.
 \end{proof}
 
-We can gain better intuition about sampling using the Fourier transform representation for periodic signals developed in Section~\ref{section:PeriodicSignals}.
-Let $x_{\mathrm{s}}(t)$ denote the result of sampling $x(t)$ by impulses at times $\{ nT : n \in \mathbb{Z} \}$,
-\begin{equation*}
-x_{\mathrm{s}}(t) = x(t) \sum_{n=-\infty}^{\infty} \delta(t-nT)
-= \sum_{n=-\infty}^{\infty} x(nT) \delta(t-nT).
-\end{equation*}
-Looking at the sampled signal in the frequency domain, we get
-\begin{equation*}\begin{split}
-\hat{x}_{\mathrm{s}}(f) &= \hat{x}(f) \ast \mathcal{F} \left[ \sum_{n=-\infty}^{\infty} \delta(t-nT) \right] \\
-&= \hat{x}(f) \ast \frac{1}{T} \sum_{n=-\infty}^{\infty} \delta \left( f-\frac{n}{T} \right) \\
-&= \frac{1}{T} \sum_{n=-\infty}^{\infty} \hat{x} \left( f - \frac{n}{T} \right) ,\end{split}\end{equation*}
-where we have used \eqref{equation:ImpulseTrainFrequency} to express the Fourier transform of an impulse train.
-When the sampling rate is fast enough, the translated copies of $\hat{x}(f)$ contained in the transform $\hat{x}_{\mathrm{s}}(f)$ do not overlap, and the original signal can be recovered using an ideal lowpass filter.
-However, when the sampling period~$T$ is too small, the various copies of $\hat{x}(f)$ overlap and the content of the original is partially destroyed.
-This is know as \defn{Fourier analysis}{aliasing}.
-
-\begin{figure}[htbp]
-\begin{center}
-\epsfig{file=Figures/sampling,width=8cm}
-\caption{The sampling and reconstruction of a bandwidth-limited signal.
-When the sampling rate exceeds twice the bandwidth of the original signal, this signal can be reconstituted from its sampled values.}
-\label{figure:Sampling}
-\end{center}
-\end{figure}
-A succession of power spectral densities can be found on Figure~\ref{figure:Sampling}.
-The top component shows the power spectral density of the original signal.
-The density of the sampled signal appears below.
-Finally, the reconstruction operation where a lowpass filter is employed to recovered the original function is illustrated at the bottom of the figure.
-In contrast, Figure~\ref{figure:Aliasing} exhibits a case where the sampling frequency is too low.
-\begin{figure}[htbp]
-\begin{center}
-\epsfig{file=Figures/aliasing,width=8cm}
-\caption{A low sampling frequency leads to aliasing, thereby preventing reconstruction of the original signal.}
-\label{figure:Aliasing}
-\end{center}
-\end{figure}
-Aliasing in the frequency domain prevents the original signal from being retrieved.
-
-The illusion of a moving image in video is achieved by displaying a rapid succession of still pictures over time.
-Films are typically shot at a rate of twenty-four frames per second, whereas the minimum frame rate required to create the appearance of a moving image is about fifteen frames per second.
-The human eye acts as a lowpass filter and transforms the succession of images into a live video.
-High-speed cameras are used to record slow-motion playback movies.
-As a consequence, they must run at much higher frame-rates than normal cameras.
 
 \subsection{Imperfect Sampling and Reconstruction}
 
@@ -362,8 +392,8 @@ In this case, the reconstruction output is given by
 \[ y(t) = \sum_{n=-\infty}^{\infty} x(nT) p(t-nT). \]
 Since $p(t-nT) = \delta(t-nT) * p(t)$, we can see this instead as perfect reconstruction followed by filtering and write
 \[ y(t) = \left( \sum_{n=-\infty}^{\infty} x(nT) \delta (t-nT) \right) * p(t) = x(t) * p(t). \]
-Again, it follows that this imperfection can therefore be eliminated completely by post-filtering.
-The main advantage in practice is that one can jointly optimize both $p(t)$ and the post-filter to provide good performance while using inexpensive components.
+Again, it follows that this imperfection can be eliminated completely by post-filtering.
+In practice, the main advantage of this observation is that one can jointly optimize both $p(t)$ and the post-filter to provide good performance while using inexpensive components.
 
 
 \section{Stochastic Signals}
@@ -400,24 +430,29 @@ In general, it is difficult to provide a complete mathematical description for a
 For now, we restrict our attention to \defn{random process}{stationary} and \defn{random process}{ergodic} random processes.
 
 \begin{definition}[Stationarity]
-A random process $X(t)$ is wide-sense stationary if its \defn{random process}{mean}
+A random process $X(t)$ is wide-sense stationary (WSS) if its \defn{random process}{mean}
 \begin{equation*}
-m_X(t) = \mathrm{E} [X(t)]
+m_X(t) \triangleq \mathrm{E} [X(t)]
 \end{equation*}
 is independent of time, and its \defn{random process}{autocorrelation function}, defined by
 \begin{equation*}
-R_X(t_1, t_2) = \mathrm{E} [X(t_1) X^*(t_2)],
+R_X(t_1, t_2) \triangleq \mathrm{E} [X(t_1) X^*(t_2)],
 \end{equation*}
 only depends on the difference between $t_1$ and $t_2$.
 With a slight abuse of notation, we can denote the mean and autocorrelation of a stationary process respectively by $m_X$ and $R_X(\tau)$, where $\tau = t_1 - t_2$.
 \end{definition}
 
-\begin{definition}[Ergodicity]
-The \defn{random process}{ergodic theorems} assert that, under certain conditions, the time average of a function along all the possible trajectories of a random process exists and is equal to its ensemble average,
+\begin{definition}[Ergodic]
+An \textbf{ergodic theorem} asserts that, under certain conditions, the time average of a random process
 \begin{equation*}
-\lim_{T \rightarrow \infty} \frac{1}{T} \int_{- \frac{T}{2}}^{\frac{T}{2}} g(X(t)) dt
-= \mathrm{E}[g(X(t))] .
+\langle g(X(t)) \rangle \triangleq \lim_{T \rightarrow \infty} \frac{1}{T} \int_{- \frac{T}{2}}^{\frac{T}{2}} g(X(t)) dt
 \end{equation*}
+exists and is equal to the ensemble average $\mathrm{E}[g(X(t))]$ for almost all trajectories of the random process.
+% exists and is equal to its ensemble average,
+%\begin{equation*}
+%\langle g(X(t)) \rangle \triangleq \lim_{T \rightarrow \infty} \frac{1}{T} \int_{- \frac{T}{2}}^{\frac{T}{2}} g(X(t)) dt
+%= \mathrm{E}[g(X(t))] .
+%\end{equation*}
 When a stochastic process fulfills these conditions, it is called \defn{random process}{ergodic}.
 \end{definition}
 
@@ -440,44 +475,53 @@ One of the important characteristics of an ergodic process is that it suffices t
 Ergodicity is a very strong property, and it is hard to test and validate.
 Rather, it is frequently taken as a premise in the design of communication systems.
 For instance, most information sources are assumed to be stationary and ergodic.
-Such a postulate appears reasonable, especially given the many successful communication systems implemented to date.
+Such a postulate appears reasonable, especially considering the many successful communication systems implemented based on this assumption.
 
 
 \subsection{Power Spectral Density}
 
-The \defn{random process}{power spectral density} of a stochastic signal is an extension to the spectral density discussed in Section~\ref{subsection:SpectralDensity}.
-The definition of the power spectral density is somewhat more intricate due to the more complex nature of random signals.
-In particular, it must account for uncertainty in the process.
-
-Let $X(t)$ be a wide-sense stationary and ergodic random process, with $R_X(0) < \infty$.
-The Fourier transform of a specific realization of $x(t)$ may not exist, as it need not fulfill condition \eqref{equation:L2Condition}.
-However, a truncated version of $x(t)$ possesses a Fourier transform.
-Consider the truncated version of $x(t)$ given by
+A signal $x(t)$ is a \defn{Fourier analysis}{power-type signal} if the limit
+\[ \lim_{T\rightarrow\infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} | x(t) |^2 dt \]
+exists and is finite.
+The Fourier transform of a power-type signal $x(t)$ may not exist though because it may not satisfy condition \eqref{equation:L2Condition}.
+However, if truncated versions of $x(t)$, defined by
 \begin{equation*}
-x_T(t) = x(t) \mathrm{rect} \left( \frac{t}{T} \right) ,
+x_T(t) \triangleq x(t) \mathrm{rect} \left( \frac{t}{T} \right) ,
 \end{equation*}
-and its Fourier transform
+are energy-type signals, then we can define the Fourier transforms
 \begin{equation*}
-\hat{x}_T(f) = \mathcal{F} \left[ x(t) \mathrm{rect} \left( \frac{t}{T} \right) \right] .
+\hat{x}_T(f) \triangleq \mathcal{F} \left[ x(t) \mathrm{rect} \left( \frac{t}{T} \right) \right] .
 \end{equation*}
-The power spectral density of $X(t)$ represents the amount of power per hertz of bandwidth present in the signal at various frequencies, and it is defined by
+From this, the \defn{Fourier analysis}{power spectral density}, which represents the power (per unit of bandwidth) present at each frequency of the signal, can be defined by
 \begin{equation*}
-\mathcal{S}_X(f) = \lim_{T \rightarrow \infty} \frac{1}{T} \mathrm{E} \left[ |\hat{x}_T(f)|^2 \right] .
+\mathcal{S}_x(f) \triangleq \lim_{T \rightarrow \infty} \frac{1}{T} |\hat{x}_T(f)|^2 .
 \end{equation*}
-Note how the truncated signal is used to overcome the difficulty of dealing with infinite-energy signals.
+Notice how the truncated signal is used to overcome the difficulty of dealing with infinite-energy signals.
 This is a common and valuable trick.
+ 
+For a stochastic signal, the definition of the \defn{random process}{power spectral density} is somewhat more intricate because it must account for uncertainty in the process.
+Let $X(t)$ be a wide-sense stationary random process with $R_X(0) < \infty$.
+Then, we can define
+\begin{equation*}
+\hat{X}_T(f) \triangleq \mathcal{F} \left[ X(t) \mathrm{rect} \left( \frac{t}{T} \right) \right] 
+\end{equation*}
+and
+\begin{equation*}
+\mathcal{S}_X(f) \triangleq \lim_{T \rightarrow \infty} \frac{1}{T} \mathrm{E} \left[ |\hat{X}_T(f)|^2 \right] .
+\end{equation*}
+
 As we will soon see, the power spectral density plays an instrumental role in the sampling theorem for random signals.
 First, we provide a means to compute $\mathcal{S}_X(f)$ from its statistical attributes.
 
-\begin{theorem}[Wiener-Khinchin]
+\begin{theorem}[Wiener-Khinchin] \label{theorem:WienerKhinchin}
 The power spectral density $\mathcal{S}_X (f)$ of a wide-sense stationary random process $X(t)$ is equal to the Fourier transform of its autocorrelation function, $\mathcal{S}_X (f) = \mathcal{F} [R_X (\tau)]$.
 \end{theorem}
 \begin{proof}
 For a wide-sense stationary process, we have
 \begin{equation*}
 \begin{split}
-\mathcal{S}_X(f) &= \lim_{T \rightarrow \infty} \frac{1}{T} \mathrm{E} \left[ |\hat{x}_T(f)|^2 \right]
-= \lim_{T \rightarrow \infty} \frac{1}{T} \mathrm{E} \left[ \hat{x}_T(f) \hat{x}_T^*(f) \right] \\
+\mathcal{S}_X(f) &= \lim_{T \rightarrow \infty} \frac{1}{T} \mathrm{E} \left[ |\hat{X}_T(f)|^2 \right]
+= \lim_{T \rightarrow \infty} \frac{1}{T} \mathrm{E} \left[ \hat{X}_T(f) \hat{X}_T^*(f) \right] \\
 &= \lim_{T \rightarrow \infty} \frac{1}{T} \mathrm{E} \left[
 \int_{-\frac{T}{2}}^{\frac{T}{2}} X(t_1) e^{-2 \pi i f t_1} dt_1
 \int_{-\frac{T}{2}}^{\frac{T}{2}} X^*(t_2) e^{2 \pi i f t_2} dt_2 \right] \\
@@ -493,6 +537,12 @@ The fourth equality is obtained by interchanging the expectation and the integra
 To guarantee that the former operation is legitimate, $\tau R_X(\tau)$ must remain finite for all $\tau$.
 \end{proof}
 
+In some cases, it may be possible to estimate the power spectral density from a single realization of $X(t)$.
+For example, the autocorrelation of $X(t)$ is ergodic if it satisfies
+\begin{equation*}
+\langle X(t) X^* (t-\tau) \rangle \triangleq \lim_{T \rightarrow \infty} \frac{1}{T} \int_{- \frac{T}{2}}^{\frac{T}{2}} X(t) X^* (t-\tau) dt = \mathrm{E} \left[ X(t) X^*(t-\tau) \right].
+\end{equation*}
+In this case, the expectation in the theorem above can be replaced by a time average and the result can be computed from a single realization.
 
 \subsection{Filtering Stochastic Processes}
 
@@ -560,6 +610,18 @@ In terms of the frequency representation, we get $m_Y = m_X \hat{h}(0)$ and
 A linear time-invariant filter can be employed to shape the spectrum of a stochastic process, and to constrain its bandwidth.
 This is an important result, as linear filters can be used to reduce the bandwidth of a random signal before sampling or to reconstruct a random signal from its samples.
 
+\subsection{Gaussian Processes}
+
+A stochastic process $X(t)$ is a \defn{random process}{Gaussian process} if, for any finite set of sampling times $t_1, t_2, \ldots, t_n$, the resulting random variables $X(t_1),X(t_2),\ldots,X(t_n)$ are jointly Gaussian random variables.
+The distribution of jointly Gaussian random variables is completely determined by their mean vector and correlation matrix.
+Therefore, a Gaussian process is completely determined by its mean function $m_X (t)$ and its autocorrelation function $R_XX (t_1,t_2)$.
+Of course, if the process is also wide-sense stationary, then this reduces to its mean value $m_X$ and its autocorrelation function $R_X (\tau)$.
+
+The most common random process in signal processing and communications is the \defn{random process}{Gaussian white-noise} process $N(t)$.
+This process is defined to be a zero-mean wide-sense stationary Gaussian process whose power spectral density $S_N (f)$ is constant (e.g., 1).
+Since this process has infinite power, it is not particularly well-defined mathematically.
+Still, we can use the cavalier Fourier transform $\mathcal{F} [ 1 ] = \delta(t)$ to argue that the autocorrelation function of $N(t)$ should be $R_N (\tau) = \delta(\tau)$.
+In practice, this is not a problem because $N(t)$ is only used as the input to a linear filter whose output process is guaranteed to have finite power.
 
 \section{Sampling Bandlimited Processes}
 

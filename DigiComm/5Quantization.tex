@@ -202,7 +202,7 @@ Consider a signal whose amplitude is bounded between -1 and 1 and whose amplitud
 Suppose that $n$ bits are represent $2^n$ uniformly spaced quantization levels $q_m = -1-2^{-n} + m 2^{-n+1}$ for $m=1,\ldots,2^n$.
 The performance as a function of $n$ is typically approximated by the rule that the \textbf{SQNR increases by 6.02 dB per bit} for additional quantization bits.
 
-In this case, the quantizer function is
+We can understand this by analyzing the quantizer function is
 \[ Q(x) =
 \begin{cases}
 -1+2^{-n} & \mathrm{if} \; x < -1 \\
@@ -212,17 +212,28 @@ In this case, the quantizer function is
 \]
 By symmetry, the distribution of the quantization error is the same for each quantization cell so it suffices to calcluate
 \begin{align*}
-\mathrm{E} \left[ \left( X - Q(X) \right)^2 \big| Q(X)=2^{-n} \right]
-&= \int_{0}^{2^{-n+1}} f_{X|Q(X)=2^{-n}}(x) (x-2^{-n})^2 dx \\
-&= \int_{0}^{2^{-n+1}} 2^{n-1} (x^2-2^{-n+1}x+2^{-2n}) dx \\
-&= \frac{2^{-2n+2}}{3} - \frac{2^{-2n+2}}{2} + 2^{-2n} \\
+\mathrm{E} \left[ \left( X - Q(X) \right)^2 \big| Q(X)=q \right]
+&= \int_{q-2^{-n}}^{q+2^{-n}} f_{X|Q(X)=q} (x) (x-q)^2 \, dx \\
+&= \int_{-2^{-n}}^{2^-n} 2^{n-1} x^2 \, dx \\
+&= 2^{n-1} \frac{2^{-3n+1}}{3} \\
 &= \frac{2^{-2n}}{3}.
 \end{align*}
-Since $E[X^2] = 2/3$, the SQNR in decibels is therefore given by
-\[ \text{SQNR} = 10 \log_{10} \left( \frac{2\cdot 3}{3\cdot 2^{-2n}} \right)  = (2n+1) 10 \log_{10} 2 \approx 6.02 n + 3.01 \, \text{dB}. \]
-As we expected, the SQNR increases by 6.02 dB per bit.
-What is surprising is that, for large $n$,  this rule holds for any continuous amplitude distribution supported on $[-1,1]$.
+The SQNR in decibels is therefore given by
+\begin{align*}
+\text{SQNR} &= 10 \log_{10} \left( \frac{3\,E[X^2]}{2^{-2n}} \right)
+= P_X + 10 \log_{10} 3 + 20n \log_{10} 2 \\
+& \approx P_X + 4.77 + 6.02 n \, \text{dB}.
+\end{align*}
+Since $E[X^2] = 2/3$, we have $P_X \approx -1.76$ dB and the SQNR simplifies to
+\[ \text{SQNR} \approx 3.01 + 6.02 n \, \text{dB}. \]
+%As we expected, the SQNR increases by 6.02 dB per bit.
 \end{example}
+
+What is surprising is that, for large $n$, this rule holds for any continuous amplitude distribution supported on $[-1,1]$.
+This can be understood by repeating the above computation for an arbitrary continuous amplitude distribution $f_X (x)$.
+As $n$ increases, the width of each quantization cell (i.e., $2^{-n+1}$) decreases rapidly and the amplitude distribution becomes essentially constant over each quantization cell.
+Therefore, the conditional amplitude distribution, given the reconstruction point, satisfies
+\[ f_{X|Q(X)=q} (x|q) \approx \begin{cases} 2^{-n+1} & \mathrm{if}\; q-2^{-n} \leq x < q+2^{-n} \\ 0 & \mathrm{otherwise.} \end{cases}. \]
 
 \subsection{Dithering}
 
@@ -248,18 +259,31 @@ This means that quantizing a pure sinusoid will typically create new spurious ha
 
 The process of adding a small amount of noise before quantization is called \defn{quantization}{dithering}.
 Of course, the added noise increases the overall noise power in the system by a small amount.
-But, if then noise is chosen to be i.i.d. uniform over one quantization interval, then correlation becomes exactly zero.
-Now, we let $Z$ be a uniform random variable on $[-1,1]$ and notice that
-\[  \mathrm{E} \left[Q(X+Z)|X=x \right] = \int_{-1}^{1} \frac{1}{2} Q(x+z) dz = x. \]
-From this, we can repeat the calculation from above to see that
+But, if the noise is chosen to be i.i.d. uniform over one quantization interval, then correlation becomes exactly zero.
+To see this, we use the quantizer $Q(x)=2\lfloor x/2 \rfloor + 1$ and let $Z$ be a uniform random variable on $[-1,1]$.
+In this case, we have
+\begin{align*}
+\mathrm{E} \left[Q(X+Z)|X=x \right]
+&= \int_{-1}^{1} \frac{1}{2} Q(x+z) dz \\
+&= \int_{-1}^{1} \frac{1}{2} \left( 2\left\lfloor \frac{x+z}{2} \right\rfloor + 1 \right) dz \\
+&= \int_{\frac{x-1}{2}}^{\frac{x+1}{2}} \left( \left\lfloor y \right\rfloor + \frac{1}{2} \right) 2 \, dy \\
+&= 1 + 2 \int_{\frac{x-1}{2}}^{\frac{x+1}{2}} \left\lfloor y \right\rfloor \, dy \\
+&= 1 + 2 \left( \left\lfloor \frac{x-1}{2} \right\rfloor \left( 1 - \left\{ \frac{x-1}{2} \right\} \right)
++ \left( \left\lfloor \frac{x-1}{2} \right\rfloor + 1 \right) \left\{\frac{x-1}{2}\right\} \right) \\
+&= 1 + 2 \left( \left\lfloor \frac{x-1}{2} \right\rfloor + \left\{ \frac{x-1}{2} \right\} \right) \\
+&= 1 + 2 \frac{x-1}{2} \\
+&= x,
+\end{align*}
+where $\{ x \} \triangleq x-\lfloor x \rfloor$.
+Using this, we can compute
 \begin{align*}
 \mathrm{E} \left[X \left(X - Q(X+Z)\right) \right] 
-&= \int_0^{16} \int_{-1}^{1} \frac{x(x - Q(x+z))}{32} dz \, dx \\
-&= \int_0^{16} \frac{x(x - x)}{16} dz \, dx \\
+&= \int_{-\infty}^{\infty} f_{X} (x) \int_{-1}^{1} f_{Z} (z) x(x - Q(x+z)) \, dz \, dx \\
+&= \int_{-\infty}^{\infty} f_{X} (x) x(x - x) \, dx \\
 &= 0.
 \end{align*}
 This implies that the quantization noise is uncorrelated with the signal.
-One can also show that it is white (i.e., uncorrelated with time-shifts of itself).
+With a little more work, one can also show that it is white (i.e., uncorrelated with time-shifts of itself).
 
 
 \subsection{Non-Uniform Quantization Via Companding}
@@ -300,6 +324,73 @@ Second, human perception of audio depends on the SQNR instead of the noise power
 So, matching the quantization noise to the perceptual measure improves perceived quality.
 In many cases, however, it is possible that the SQNR decreases while the perceived quality increases.
 
+\section{Predictive Quantization}
+
+\subsection{Delta Modulation}
+
+When a signal has a wide dynamic range but changes relatively slowly, it can be more effective to quantize the difference between adjacent sample samples.
+In this case, one can use \defn{quantization}{differential quantization} to construct the quantized sequence $\widetilde{X}_n$ from the input sequence $X_n$ using the rule
+\[ \widetilde{X}_n = \alpha \widetilde{X}_{n-1} + Q \left( X_n - \alpha \widetilde{X}_{n-1} \right), \]
+for any positive $\alpha \leq 1$.
+In this system, only the sequence $Y_n = Q \left( X_n - \alpha \widetilde{X}_{n-1} \right)$ must be transmitted or stored.
+The receiver simply reconstructs the quantized sequence using $\widetilde{X}_n = \alpha \widetilde{X}_{n-1} + Y_n$.
+
+This system is called \defn{quantization}{delta modulation} when a one-bit quantizer,
+\[ Q(x) = \begin{cases} +\Delta & \mathrm{if}\;x\geq 0 \\ -\Delta & \mathrm{if}\;x< 0 \end{cases}, \]
+is used.
+In this case, the signal is typically sampled at a rate much higher than the Nyquist rate (i.e., oversampled) to handle rapid changes in the signal.
+If the sample rate is $F$, then the maximum signal slope that can be tracked is $\Delta F$.
+The distortion caused by the input signal changing faster than this rate is called \textbf{slope overload noise}.
+For a sinusoidal signal $x(t)=A \cos (2\pi f t)$, this effect can be avoided by choosing $\Delta$ so that
+\[ \max_t \left| x'(t) \right| = 2\pi A f \leq \Delta F. \]
+
+For a slowly varying signal, the noise due to the quantization step size $\Delta$ is called \textbf{granular noise}.
+If the difference in signal amplitude is uniform over $[-\Delta,\Delta]$, then the granular noise power is given by
+\[ \sigma^2_G = \int_{-\Delta}^{0} \frac{1}{2\Delta} (x+\Delta)^2 \, dx +  \int_{0}^{\Delta} \frac{1}{2\Delta} (x-\Delta)^2 \, dx = \frac{\Delta^2}{3}. \]
+Choosing $\Delta \geq 2\pi A f / F$ to avoid slope overload noise implies that
+\[ \sigma^2_G \geq \frac{4 \pi^2 A^2 f^2}{3  F^2} . \]
+Since the signal power in the sinusoid $x(t)$ is $A^2 / 2$, this gives
+\[ SQNR = \frac{A^2}{2\sigma^2_G} \leq \frac{3 F^2}{8 \pi^2 f^2}. \]
+Comparing the bit rate vs. noise power of this system to standard quantization shows that delta modulation is sometimes better for moderate to low SQNR.
+
+The differential quantization scheme described here is a particular case of a more general approach where the next sample is predicted from the previous samples and subtracted before quantzation.
+Using better prediction allows one to quantize a residual signal that has less variation.
+
+\subsection{Estimation and Prediction}
+
+Let $X,Y$ be joint random variables defined on common sample space.
+If $X,Y$ are not independent, then it is often possible to estimate $X$ from $Y$.
+For example, let $\hat{X} = g(Y)$ be an estimate of $X$ from $Y$ based on the arbitrary function $g:\mathbb{R}\rightarrow\mathbb{R}$.
+If $Y=y$, then the MSE of this estimate is given by
+\[ E \left[ (X-g(y))^2 | Y=y \right] = E\left[ X^2 | Y=y \right] - 2 g(y) E \left[ X | Y=y \right] + g(y)^2. \]
+One can minimize the MSE, for the case where $Y=y$, by taking the derivative w.r.t. to $g(y)$.
+This shows that $g(y) = E \left[X | Y=y \right]$ minimizes the MSE and leads to a general rule that says ``The \defn{quantization}{MMSE estimate} (i.e., the minimum mean-squared error estimate) is given by the \defn{quantization}{conditional mean} of the random variable given the observation".
+Computing the conditional mean, however, can be difficult in many cases.
+
+It turns out that less information is required if we restrict our attention to linear predictors of the form $g(y) = ay+b$.
+Computing the MSE for this choice of $g(\cdot)$ gives
+\begin{align*}
+E \left[ (X-g(Y))^2 \right]
+&= E \left[ (X-aY-b)^2 \right] \\
+&= E\left[ X^2 \right] - 2 E \left[ X (aY+b) \right] + E\left[ (aY+b)^2 \right] \\
+&= E\left[ X^2 \right] - 2 a E \left[ X Y \right] - 2b E\left[X\right] + a^2 E\left[Y^2 \right] + 2ab E\left[Y \right] + b^2.
+\end{align*}
+In this case, one can minimize the MSE by taking derivatives w.r.t. $a,b$.
+This results in
+\[ a = \frac{E[X]E[Y]-E[XY]}{E[Y]^2-E[Y^2]} \quad \quad b= E[X]-a E[Y]. \]
+This is known as the \defn{quantization}{LMMSE estimate} (i.e., the linear minimum mean-square error estimate).
+
+More generally, \defn{quantization}{linear prediction} can be applied to random processes $X_0,X_1,X_2,\ldots$.
+In this case, the $m$-th order linear prediction is given by
+\[ \hat{X}_n = \sum_{i=1}^m a_i X_{n-i}. \]
+Optimizing the coefficients $a_1,\ldots,a_m$ leads to the matrix equation $R a = p$, where $R_{ij} = E \left[ X_{n-i} X_{n-j} \right]$ and $p_i = E \left[ X_n X_{n-i} \right]$.
+This type of linear prediction is often used to analyze stationary signals.
+In this case, the matrix $R$ and the vector $p$ become independent of $n$.
+
+Linear prediction is also the basis of many speech analysis techniques (e.g., speech compression and speech recognition).
+Since speech signals appear stationary when viewed in 5-10 ms blocks, the optimizing the prediction coefficients for a short block creates a prediction filter for that block.
+These prediction filters are typically used to remove the effect of the throat-tongue-mouth filter and leave only the glottal pulses generated by the vocal chords.
+Most of the information in a speech signal is actually carried by the linear prediction coefficients themselves because the glottal pulses define only the pitch and timbre of a voice.
 
 \section{Optimal Quantization}
 
@@ -521,7 +612,8 @@ For illustrative purposes, $f_{X,Y} (\cdot, \cdot)$ is shown in Figure~\ref{figu
 \end{center}
 \end{figure}
 The four quantization points for the vector quantizer are located at $q_1 = (-1.5, -1.5)$, $q_2 = (-0.5, -0.5)$, $q_3 = (0.5, 0.5)$, and $q_4 = (1.5, 1.5)$.
-The MSE associated with our vector quantizer can therefore be computed as
+Let $Q(x,y)$ the the quantizer function that maps each $(x,y)$ point to its nearest $q$-quantization point.
+Then, the MSE associated with this vector quantizer can be computed as
 \begin{equation*}
 \begin{split}
 &\mathrm{E} \left[ \| (X,Y) - Q(X,Y) \|^2 \right] \\
@@ -544,7 +636,8 @@ f_X (\varphi) = f_Y (\varphi)
 \end{equation*}
 The optimal scalar quantization scheme in this case is to put one point at $-1$ and the other at $1$.
 Once combined, the two scalar quantizers are equivalent to having points at $r_1 = (1,1)$, $r_2 = (-1,1)$, $r_3 = (-1,-1)$, and $r_4 = (1,-1)$ in the plane.
-The resulting MSE per pair of symbols becomes
+Let $R(x,y)$ the the quantizer function that maps each $(x,y)$ point to its nearest $r$-quantization point.
+Then, the resulting MSE per pair of symbols becomes
 \begin{equation*}
 \begin{split}
 &\mathrm{E} \left[ \left\| (X,Y) - R(X,Y) \right\|^2 \right] \\

@@ -632,10 +632,109 @@ The joint encoding of source symbols works even better for sources that are corr
 Although we will not discuss the specifics of this scenario, it is informative to mention that joint source coding is instrumental in approaching the entropy rate of correlated sources.
 This is especially important considering the fact that symbol-by-symbol encoding may perform very poorly for correlated sources.
 
+\section{Sources with Memory}
+
+Until now, we have focused on the compression of discrete memoryless sources because they produce i.i.d. symbols.
+The majority of real-world sources generate symbol sequences where the probability of the next symbol depends on the previously observed symbols.
+To model these sources, we use the mathematical concept of a \defn{random process}{discrete-time} \textbf{random process}.
+
+A discrete-time random process is an infinite sequence $\ldots,X_{-1},X_0,X_1,\ldots$ of random variables defined on a common sample space $\Omega$.
+This approach treats each random variable $X_n$ as a mapping $X_n : \Omega \rightarrow \mathbb{R}$.
+Using this, each $\omega\in \Omega$ defines a realization $\ldots,X_{-1} (\omega),X_0 (\omega), X_1 (\omega),\ldots$ of the random process.
+While random processes can be quite complicated in their full generality, the random processes used in this class have relatively simple descriptions.
+For example, the discrete memoryless source introduced earlier in this chapter defines a very simple random process.
+
+In this section, we introduce a simple random process with memory known as a \defn{random process}{Markov chain}.
+A Markov chain assumes that the probability of the $n$-th symbol depends only on the value of the previous symbol.
+Mathematically, this condition can be written as
+\[ P_{X_n | X_{n-1},X_{n-2},\ldots,X_0} (x_n | x_{n-1},x_{n-2},\ldots,x_0 ) =  P_{X_n | X_{n-1}}(x_n | x_{n-1} ). \]
+If the conditional probability is time-invariant (i.e., it doesn't depend on $n$), then the Markov chain is called \defn{random process}{stationary}.
+Mathematically, stationarity implies that
+\[ P_{X_n | X_{n-1}}(x_n | x_{n-1} ) = P_{X_1 | X_0}(x_n | x_{n-1}). \]
+For a stationary Markov chain, the probability simplifies to
+\[ P_{X_n , X_{n-1}, \ldots, X_0} (x_n,x_{n-1},\ldots,x_0 ) = P_{X_0}(x_0) \prod_{i=1}^{n} P_{X_1 | X_0} (x_i | x_{i-1} ). \]
+
+
+\section{Universal Source-Coding Algorithms}
+
+Huffman coding has two important drawbacks.
+First, the source statistics are used to design a Huffman code.
+If one only has access to the source outputs, the design procedure requires two passes through the data, one to estimate the statistics of the source, and a second one for encoding.
+To overcome this, one can use adaptive Huffman codes where the code is updated dynamically to match the statistics of the sequence as it is observed.
+This is a problem because
+The second problem is that one must jointly encode multiple symbols to take advantage of source memory and reduce length rounding loss.
+In this case, one finds that the complexity increases exponentially with the number of symbols that are encoded together.
+To provide a partial solution to these drawbacks, we study an example of a universal source-coding algorithm, namely the Lempel-Ziv algorithm.
+This type of \defn{source coding}{universal data compression} is the basis for standard file compression algorithms (e.g., winzip, gzip).
+
+The basic idea behind the \defn{source coding}{Lempel-Ziv algorithm} is to parse the input sequence into non-overlapping strings of different lengths while constructing a dictionary of the strings seen thus far.
+There are many versions of this algorithm and we discuss the variant known as LZ78 that was described in a 1978 paper by Lempel and Ziv.
+The encoding algorithm works as follows.
+First, initialize the dictionary to contain all strings of length one and set the input pointer to the beginning of the string.
+Then, apply the following iterative procedure.
+\begin{enumerate}
+\item Starting at the input pointer, find the longest substring $w$ that is already in the dictionary.
+\item Concatenate $w$ with the next symbol $y$ in the string and add $wy$ to the first empty location in the dictionary.
+\item Encode the pair by sending the dictionary index of $w$ and the value of $y$.
+\item Set the input pointer to the symbol after $y$.
+\end{enumerate}
+There are a number of practical variants of this algorithm that improve performance and/or reduce the implementation complexity.
+
+Decompression works in the reverse fashion.
+Each received index and symbol can be immediately decoded and used to build a copy of the dictionary at the receiver.
+In this fashion, one can resolve the input without ambiguity.
+
+\begin{example}
+Suppose that we are to use a Lempel-Ziv algorithm with dictionary size $2^3 = 8$.
+The dictionary is initialized to contain $0$ and $1$ in the first two positions.
+Then, the source sequence is sequentially parsed into strings that have not appeared so far.
+For example, 
+\begin{equation*}
+10110101000101 \ldots \rightarrow 10,11,01,010,00,101 \ldots
+\end{equation*}
+The dictionary table at this point has eight elements.
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+Index & Dictionary String & Encoded Index & Added Bit \\
+\hline
+000 & 0 & N/A & N/A \\
+001 & 1 & N/A & N/A \\
+010 & 10 & 001 & 0 \\
+011 & 11 & 001 & 1 \\
+100 & 01 & 000 & 1 \\
+101 & 010 & 100 & 0 \\
+110 & 00 & 000 & 0 \\
+111 & 101 & 010 & 1 \\
+\hline
+\end{tabular}
+\end{center}
+
+Each phrase (the bit string contained between two commas) is coded by giving the location of its prefix in the dictionary table, and the value of the additional bit.
+This results in the coded sequence
+\begin{equation*}
+10,11,01,010,00,101 \rightarrow (001, 0)(001, 1)(000, 1)(100, 0)(000, 0)(010, 1),
+\end{equation*}
+where the first number of each pair gives the index of the prefix in the table and the second number gives the last bit of the new phrase. 
+When applied to sequences generated by any stationary ergodic source, the Lempel-Ziv coding algorithm asymptotically achieves the optimal encoding rate (known as the entropy rate).
+\end{example}
+
+Most readers will notice that this algorithm, as stated, requires prior knowledge of the total number of phrases in the dictionary.
+In fact, this problem can be solved easily and the solution actually requires fewer transmitted bits.
+The key point is that both the transmitter and receiver know the number of phrases currently in the dictionary.
+Let $M$ be the current number of phrases in the dictionary.
+Then, the transmitter can be simply send the $\lceil \log_2 M \rceil$ least significant bits of the index.
+Since the receiver also knows $M$, there will be no confusion.
+In this case, the encoded sequence will be
+\begin{equation*}
+10,11,01,010,00,101 \rightarrow (1, 0)(01, 1)(00, 1)(100, 0)(000, 0)(010, 1).
+\end{equation*}
+
 
 \section{Fixed-Length Compression Codes}
 
-In the previous section, the joint encoding of multiple source symbols was shown to perform well, with the average number of bits per symbol produced by a source approaching $\mathrm{H}[X]$.
+In the previous sections, the joint encoding of multiple source symbols was shown to perform well, with the average number of bits per symbol produced by a source approaching $\mathrm{H}[X]$.
 Below, we explore how the joint encoding of symbols together with fixed-length codes can be used to produce good compression ratios.
 Fixed-length compression codes have several advantages.
 They are simple to encode and easy to decode, yielding unambiguous messages.
@@ -749,81 +848,4 @@ For any $\delta > 0$, $\epsilon > 0$ and $n$ sufficiently large, there exists a 
 \frac{\mathrm{E} [\ell_c(X_1, \ldots, X_n)]}{n} \leq \mathrm{H}[X] + \epsilon + \frac{1}{n} .
 \end{equation*}
 \end{theorem}
-
-
-\section{Universal Source-Coding Algorithms}
-
-Huffman coding has two important drawbacks.
-First, the source statistics are used to design a Huffman code.
-If one only has access to the source outputs, the design procedure requires two passes through the data, one to estimate the statistics of the source, and a second one for encoding.
-To overcome this, one can use adaptive Huffman codes where the code is updated dynamically to match the statistics of the sequence as it is observed.
-This is a problem because
-The second problem is that one must jointly encode multiple symbols to take advantage of source memory and reduce length rounding loss.
-In this case, one finds that the complexity increases exponentially with the number of symbols that are encoded together.
-To provide a partial solution to these drawbacks, we study an example of a universal source-coding algorithm, namely the Lempel-Ziv algorithm.
-This type of \defn{source coding}{universal data compression} is the basis for standard file compression algorithms (e.g., winzip, gzip).
-
-The basic idea behind the \defn{source coding}{Lempel-Ziv algorithm} is to parse the input sequence into non-overlapping strings of different lengths while constructing a dictionary of the strings seen thus far.
-There are many versions of this algorithm and we discuss the variant known as LZ78 that was described in a 1978 paper by Lempel and Ziv.
-The encoding algorithm works as follows.
-First, initialize the dictionary to contain all strings of length one and set the input pointer to the beginning of the string.
-Then, apply the following iterative procedure.
-\begin{enumerate}
-\item Starting at the input pointer, find the longest substring $w$ that is already in the dictionary.
-\item Concatenate $w$ with the next symbol $y$ in the string and add $wy$ to the first empty location in the dictionary.
-\item Encode the pair by sending the dictionary index of $w$ and the value of $y$.
-\item Set the input pointer to the symbol after $y$.
-\end{enumerate}
-There are a number of practical variants of this algorithm that improve performance and/or reduce the implementation complexity.
-
-Decompression works in the reverse fashion.
-Each received index and symbol can be immediately decoded and used to build a copy of the dictionary at the receiver.
-In this fashion, one can resolve the input without ambiguity.
-
-\begin{example}
-Suppose that we are to use a Lempel-Ziv algorithm with dictionary size $2^3 = 8$.
-The dictionary is initialized to contain $0$ and $1$ in the first two positions.
-Then, the source sequence is sequentially parsed into strings that have not appeared so far.
-For example, 
-\begin{equation*}
-10110101000101 \ldots \rightarrow 10,11,01,010,00,101 \ldots
-\end{equation*}
-The dictionary table at this point has eight elements.
-
-\begin{center}
-\begin{tabular}{|c|c|c|c|}
-\hline
-Index & Dictionary String & Encoded Index & Added Bit \\
-\hline
-000 & 0 & N/A & N/A \\
-001 & 1 & N/A & N/A \\
-010 & 10 & 001 & 0 \\
-011 & 11 & 001 & 1 \\
-100 & 01 & 000 & 1 \\
-101 & 010 & 100 & 0 \\
-110 & 00 & 000 & 0 \\
-111 & 101 & 010 & 1 \\
-\hline
-\end{tabular}
-\end{center}
-
-Each phrase (the bit string contained between two commas) is coded by giving the location of its prefix in the dictionary table, and the value of the additional bit.
-This results in the coded sequence
-\begin{equation*}
-10,11,01,010,00,101 \rightarrow (001, 0)(001, 1)(000, 1)(100, 0)(000, 0)(010, 1),
-\end{equation*}
-where the first number of each pair gives the index of the prefix in the table and the second number gives the last bit of the new phrase. 
-When applied to sequences generated by any stationary ergodic source, the Lempel-Ziv coding algorithm asymptotically achieves the optimal encoding rate (known as the entropy rate).
-\end{example}
-
-Most readers will notice that this algorithm, as stated, requires prior knowledge of the total number of phrases in the dictionary.
-In fact, this problem can be solved easily and the solution actually requires fewer transmitted bits.
-The key point is that both the transmitter and receiver know the number of phrases currently in the dictionary.
-Let $M$ be the current number of phrases in the dictionary.
-Then, the transmitter can be simply send the $\lceil \log_2 M \rceil$ least significant bits of the index.
-Since the receiver also knows $M$, there will be no confusion.
-In this case, the encoded sequence will be
-\begin{equation*}
-10,11,01,010,00,101 \rightarrow (1, 0)(01, 1)(00, 1)(100, 0)(000, 0)(010, 1).
-\end{equation*}
 
