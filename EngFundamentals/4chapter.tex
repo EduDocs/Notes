@@ -559,6 +559,7 @@ For any $n$, we have
 \begin{equation*}
 \begin{split}
 M \left\| \vecnot{x}_n \right\| &\geq \left| f \left( \vecnot{x}_n \right) \right|
+= \left| \sum_{i=1}^n \overline{ f \left( \vecnot{v}_i \right) } f(\vecnot{v}_i) \right|
 = \sum_{i=1}^n \left| f \left( \vecnot{v}_i \right) \right|^2
 = \sum_{i=1}^n f \left( \vecnot{v}_i \right)
 \overline{ f \left( \vecnot{v}_i \right) } \\
@@ -865,7 +866,7 @@ Hence, the error is orthogonal to the subspace $R_T$ and has minimal length by t
 \begin{corollary}
 If $A$ is a matrix such that $A^H A$ is invertible, then the least-squares solution to $A \vecnot{v} = \vecnot{w}$ is
 \begin{equation*}
-\vecnot{v} = \left( A^* A \right)^{-1} A^H \vecnot{w}.
+\vecnot{v} = \left( A^H A \right)^{-1} A^H \vecnot{w}.
 \end{equation*}
 \end{corollary}
 
