@@ -58,7 +58,7 @@ From our current discussion, we know that $(S_n -nm) / \sqrt{n}$ is a Gaussian r
 We can compute its mean and variance as follows
 \begin{gather*}
 \Expect \left[ \frac{S_n -nm}{\sqrt{n}} \right]
-= \frac{ \Expect [ S_n - nm] }{n}
+= \frac{ \Expect [ S_n - nm] }{\sqrt{n}}
 = 0 \\
 \Var \left[ \frac{S_n - mn}{\sqrt{n}} \right]
 = \frac{ \Var [ S_n - mn] }{n}
@@ -98,7 +98,7 @@ Suppose that $\epsilon > 0$ is fixed.
 The sequence $X_1, X_2, \ldots$ converges in mean square to $X$.
 Thus, for $\delta > 0$, there exists an $N$ such that $n \geq N$ implies
 \begin{equation*}
-\lim_{n \rightarrow \infty} \Expect \left[ \left| X_n - X \right|^2 \right] < \delta .
+\Expect \left[ \left| X_n - X \right|^2 \right] < \delta .
 \end{equation*}
 If we apply the Chebyshev inequality to $X_n - X$, we get
 \begin{equation*}
@@ -342,7 +342,7 @@ The first two derivatives of $\Lambda_X (s)$ are equal to
 \frac{d \Lambda_X}{ds} (s)
 = \frac{1}{M_X (s)} \frac{d M_X}{ds} (s) \\
 \frac{d^2 \Lambda_X}{ds^2} (s)
-= \frac{1}{M_X (s)} \left( \frac{d M_X}{ds} (s) \right)^2
+= - \left( \frac{1}{M_X (s)} \right)^2 \left( \frac{d M_X}{ds} (s) \right)^2
 + \frac{1}{M_X (s)} \frac{d^2 M_X}{ds^2} (s) .
 \end{gather*}
 Collecting these results and evaluating the functions at zero, we get $\Lambda_X (0) = 0$, $\frac{d \Lambda_X}{ds} (0) = \Expect [X] = 0$, and $\frac{d^2 \Lambda_X}{ds^2} (0) = \Expect \left[ X^2 \right] = 1$.
@@ -408,7 +408,7 @@ F_{S_n} (x)
 &= \Pr (S_n \leq x)
 = \Pr \left( \frac{ S_n - n \Expect [X] }{ \sigma \sqrt{n} }
 \leq \frac{x - n \Expect [X]}{\sigma \sqrt{n}} \right) \\
-&\approx \Phi \left( \frac{x - n \Expect [x]}{\sigma \sqrt{n}} \right) ,
+&\approx \Phi \left( \frac{x - n \Expect [X]}{\sigma \sqrt{n}} \right) ,
 \end{split}
 \end{equation*}
 where $\Phi (\cdot)$ is the CDF of a standard normal random variable.
