@@ -1,3 +1,9 @@
+iif [ $# -ne 1 ]
+then
+    echo "Rootname required as argument."
+    exit
+fi
+
 pdftk book.pdf cat 1-6 output $1_toc.pdf
 pdftk book.pdf cat 7-14 output $1_ch1.pdf
 pdftk book.pdf cat 15-26 output $1_ch2.pdf
