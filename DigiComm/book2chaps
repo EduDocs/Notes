@@ -9,11 +9,11 @@ pdftk book.pdf cat 1-10 output $1_toc.pdf
 pdftk book.pdf cat 11-18 output $1_ch1.pdf
 pdftk book.pdf cat 19-42 output $1_ch2.pdf
 pdftk book.pdf cat 43-52 output $1_ch3.pdf
-pdftk book.pdf cat 53-72 output $1_ch4.pdf
-pdftk book.pdf cat 73-92 output $1_ch5.pdf
-pdftk book.pdf cat 93-114 output $1_ch6.pdf
-pdftk book.pdf cat 115-130 output $1_ch7.pdf
-pdftk book.pdf cat 131-132 output $1_index.pdf
+pdftk book.pdf cat 53-74 output $1_ch4.pdf
+pdftk book.pdf cat 75-98 output $1_ch5.pdf
+pdftk book.pdf cat 99-120 output $1_ch6.pdf
+pdftk book.pdf cat 121-134 output $1_ch7.pdf
+pdftk book.pdf cat 137-139 output $1_index.pdf
 #pdftk book.pdf cat 133-134 output $1_appendix.pdf
 
 

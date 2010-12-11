@@ -62,8 +62,8 @@ A signal $s(t)$ is said to be \textbf{normalized} if $\langle s(t),s(t) \rangle 
 A set of signals is said to be \textbf{orthonormal} if every signal in the set is orthogonal to every other signal in the set and all signals in the set are normalized.
 The set of all linear combinations of signal waveforms is called the \defn{digital communication}{signal space}.
 
-\subsection{Orthonormal Waveforms}
-The simplest scenario occurs when the set of signal waveforms $\{ s_1 (t), \ldots , s_M (t) \}$ is orthonormal.
+\subsection{Orthogonal Waveforms}
+The simplest scenario occurs when the set of signal waveforms $\{ s_1 (t), \ldots , s_M (t) \}$ are orthogonal and each has energy $E_s$.
 In this case, one can demodulate the received signal $R(t)$ by computing
 \[ R_j = \langle R(t), s_j (t) \rangle, \]
 for each $j=1,\ldots,M$.
@@ -76,21 +76,21 @@ E \left[R_j \right]
 &= E \left[ \int_{-\infty}^{\infty} R(t) s_j^* (t) dt \right] \\
 &= \int_{-\infty}^{\infty} E \left[ R(t) \right] s_j^* (t) dt \\
 &= \int_{-\infty}^{\infty} s_m (t) s_j^* (t) dt \\
-&= \delta_{m,j}.
+&= E_s \delta_{m,j}.
 \end{align*}
 
 The random variables $R_1, \ldots , R_M$ also have some other nice properties.
-They are uncorrelated because the the waveforms are orthogonal and they have variance $N_0  / 2$ because the waveforms are normalized.
+They are uncorrelated because the the waveforms are orthogonal and they have variance $\frac{1}{2}E_s N_0$.
 Proving this statement will be left as a homework exercise.
 
 This transforms the waveform detection problem into a detection problem for a length-$M$ vector of Gaussian random variables.
-If $s_m (t)$ was transmitted, then the mean of the random vector is the unit vector with a one in the $m$th position.
+If $s_m (t)$ was transmitted, then the mean of the random vector is scaled unit vector with $E_s$ in the $m$th position.
 Let $(r_1, \ldots, r_M)$ be the realization of the random vector $(R_1,\ldots,R_M)$.
 Then, based on the techniques from Chapter~\ref{chapter:DiscreteTimeComm}, we know that the maximum-likelihood decision rule chooses the symbol whose unit vector is closest to $(r_1,\ldots,r_M)$ in Euclidean distance.
-This implies that we should choose the signal $s_{m^*}(t)$ if
-\[ \sum_{i=1}^M (r_i - \delta_{m^*,i})^2 \leq \sum_{i=1}^M (r_i - \delta_{m,i})^2 \quad \mathrm{for}\; m=1,\ldots,M. \]
+This implies that we should choose the signal $s_{\hat{m}}(t)$ if
+\[ \sum_{i=1}^M (r_i - \delta_{\hat{m},i} E_s)^2 \leq \sum_{i=1}^M (r_i - \delta_{m,i} E_s)^2 \quad \mathrm{for}\; m=1,\ldots,M. \]
 Expanding both sides of this equation shows that this is equivalent to
-\[ r_{m^*} \geq r_m \quad \mathrm{for}\; m=1,\ldots,M. \]
+\[ r_{\hat{m}} \geq r_m \quad \mathrm{for}\; m=1,\ldots,M. \]
 This whole process is known as a correlation-based receiver.
 
 
@@ -157,9 +157,9 @@ E \left[R_j \right]
 Again, we have transformed the waveform detection problem into a detection problem for a vector of Gaussian random variables.
 In this case, however, there are $M$ different mean vectors of dimension $N$.
 Let $(r_1, \ldots, r_N)$ be the realization of the random vector $(R_1,\ldots,R_N)$.
-Based on the techniques from Chapter~\ref{chapter:DiscreteTimeComm}, the maximum-likelihood decision rule chooses the symbol $m^*$ whose coordinate vector $(a_{m^*,1},\ldots. a_{m^*,N})$ is closest to $(r_1,\ldots,r_N )$ in Euclidean distance.
-This implies that we should choose the signal $s_{m^*}(t)$ if
-\[ \sum_{i=1}^N (r_i - a_{m^*,i})^2 \leq \sum_{i=1}^N (r_i - a_{m,i})^2 \quad \mathrm{for}\; m=1,\ldots,M. \]
+Based on the techniques from Chapter~\ref{chapter:DiscreteTimeComm}, the maximum-likelihood decision rule chooses the symbol $\hat{m}$ whose coordinate vector $(a_{\hat{m},1},\ldots. a_{\hat{m},N})$ is closest to $(r_1,\ldots,r_N )$ in Euclidean distance.
+This implies that we should choose the signal $s_{\hat{m}}(t)$ if
+\[ \sum_{i=1}^N (r_i - a_{\hat{m},i})^2 \leq \sum_{i=1}^N (r_i - a_{m,i})^2 \quad \mathrm{for}\; m=1,\ldots,M. \]
 
 This approach can be seen as first projecting the infinite-dimensional received waveform onto the finite-dimensional signal-subspace and then using the optimal detector assuming only the projection was observed.
 This overall approach is optimal only if the projection is a \textbf{sufficient statistic} for maximum-likelihood decision problem.
@@ -172,7 +172,7 @@ While this is indeed true, we disregard this detail for now.
 \psfrag{p2}[l]{$\phi_2(t)$}
 \psfrag{p3}[l]{$\phi_{N-1}(t)$}
 \psfrag{p4}[l]{$\phi_N(t)$}
-\psfrag{i}[c]{$\int_{0}^T (\cdot) dt$}
+\psfrag{i}[c]{$\int_{\mathbb{R}} (\cdot) dt$}
 \psfrag{r}[l]{$r(t)$}
 \psfrag{r1}[l]{$r_1$}
 \psfrag{r2}[l]{$r_2$}
@@ -188,14 +188,20 @@ While this is indeed true, we disregard this detail for now.
 
 Let $s(t)$ be a finite-energy signal and $R(t)=s(t)+N(t)$ be the received waveform.
 Suppose that the receiver computes $R = \langle R(t), z(t) \rangle$ with an arbitrary finite-energy signal $z(t)$.
-One's ability to detect $s(t)$ correctly is largely dependent on the SNR of $R$, which is given by
-\[ SNR = \frac{\left|\int_{-\infty}^{\infty} s(t)z^* (t) dt \right|^2}{\mathrm{Var}(R)}
-= \frac{2\left|\int_{-\infty}^{\infty} s(t)z^* (t) dt \right|^2}{N_0 \int_{-\infty}^{\infty} \left| z(t) \right|^2}. \]
-Choosing $z(t) = c \, s(t)$, for $c\neq 0$, maximizes this function and gives
-\[ SNR = \frac{2\left|c \int_{-\infty}^{\infty} s(t) s^* (t) dt \right|^2}{N_0 \int_{-\infty}^{\infty} \left| c\, s(t) \right|^2}
+One's ability to detect $s(t)$ correctly is largely dependent on the SNR of $R$.
+Since the noise is zero mean, we have
+\[ SNR \triangleq \frac{\left| E [ R ] \right|^2}{\mathrm{Var}(R)}
+= \frac{\left|\int_{-\infty}^{\infty} s(t)z^* (t) dt \right|^2}{\frac{N_0}{2} \int_{-\infty}^{\infty} \left| z(t) \right|^2}. \]
+Rewriting this in inner product notation shows that
+\[ SNR = \frac{2}{N_0} \frac{\left| \langle s(t), z(t) \rangle \right|^2 }{\langle z(t) , z(t) \rangle}
+= \frac{2}{N_0} \left| \left\langle s(t), \frac{z(t)}{\| z(t) \|} \right\rangle \right|^2. \]
+Our intuition about vectors tells us that we can maximize this inner product by choosing the unit vector $z(t) / \| z(t) \|$ to point in the same direction as $s(t)$.
+Therefore, choosing $z(t) = c \, s(t)$, for $c\neq 0$, maximizes this function and gives
+\[ SNR = \frac{\left|c \int_{-\infty}^{\infty} s(t) s^* (t) dt \right|^2}{\frac{N_0}{2} \int_{-\infty}^{\infty} \left| c\, s(t) \right|^2}
+= \frac{c^2 E_s^2}{\frac{N_0}{2} c^2 E_s}
 = \frac{2 E_s}{N_0}, \]
 where $E_s$ is the energy in the waveform $s(t)$.
-This is the reason that receivers based on the inner product (i.e., cross-correlation) can be optimal.
+This is one of the reasons that receivers based on the inner product (i.e., cross-correlation) can be optimal.
 
 Using a bank of correlators requires timing information to zero each integrator at the correct time.
 In many cases, it is more convenient to build a filter $h(t)$ matched to the transmitted waveform and sample this filter as needed.
@@ -264,7 +270,9 @@ Note that in this case, the available waveforms are simply translated versions o
 Ideally, we want the collection $\{ p(t - nT) \}$ to be orthonormal.
 This would greatly simplify system implementation and decision making at the receiver.
 However, we cannot use standard techniques such as the Gram-Schmidt procedure to construct a set of orthogonal waveforms, because the elements of $\{ p(t - nT) \}$ are constrained to be translated version of one another.
-Getting an orthonormal set requires more work.
+If an orthonormal set is needed, it is typically chosen by design.
+
+\subsection{Demodulation}
 
 As before, the received signal is the random process $R(t) = s(t) + N(t)$ and $N(t)$ is zero-mean Gaussian white-noise process.
 One can detect the symbol $x_m$  by correlating the received signal with the waveform $p(t-mT)$.
@@ -275,14 +283,40 @@ R_m &= \langle R(t), p (t-mT) \rangle \\
 &=  \int_{-\infty}^{\infty} N(t) p^* (t-mT) dt +
 \sum_{n = -\infty}^{\infty} x_n \int_{-\infty}^{\infty} p(t-nT) p^* (t-mT) dt \\
 &=  \int_{-\infty}^{\infty} N(t) p^* (t-mT) dt +
-\sum_{n = -\infty}^{\infty} x_n r_p \left( (m-n) T \right) \\
-&=  \underbrace{Z_m}_{\mathrm{noise}} + \underbrace{x_m r_p (0)}_{\mathrm{signal}} + \sum_{n = -\infty, n\neq m}^{\infty} \underbrace{x_n r_p \left( (m-n) T \right)}_{\mathrm{intersymbol\;interference}},
+\sum_{n = -\infty}^{\infty} x_n v \left( (m-n) T \right) \\
+&=  \underbrace{Z_m}_{\mathrm{noise}} + \underbrace{x_m v (0)}_{\mathrm{signal}} + \sum_{n = -\infty, n\neq m}^{\infty} \underbrace{x_n v \left( (m-n) T \right)}_{\mathrm{intersymbol\;interference}},
 \end{align*}
-where $r_p (\tau)$ is the autocorrelation function of $p(t)$ and
+where $v (\tau)$ is the autocorrelation function of $p(t)$ and
 \[ Z_m =  \int_{-\infty}^{\infty} N(t) p^* (t-mT) dt. \]
 
-Alternatively, one can use a receive filter $h(t)$ and define $Y(t) = R(t) * h(t)$.
-If one chooses $h(t) = p^* (-t)$, then the received filter is matched to the pulse waveform and sampling $Y(t)$ gives
+The $x_m$ term in the $R_m$ expansion contains the desired symbol.
+The sum of the remaining $x_n$ terms is called \emph{intersymbol interference (ISI)}; it contains the contributions from all the other time-shifted waveforms.
+To retrieve the information sequence unambiguously, we wish to have $R_m = x_m + Z_m$, irrespective of the values in the sequence $\{ x_n \}$.
+This will be achieved provided that
+\begin{equation} \label{equation:NoInterSymbolInterferenceSpecification}
+v(nT) = \begin{cases} 1, & n = 0 \\
+0, & \text{otherwise} . \end{cases}
+\end{equation}
+
+Notice also that the autocorrelation of the noise sequence is given by 
+\begin{align*}
+E [ Z_i Z_j^* ]
+&= E \left[ \left( \int_{-\infty}^{\infty} N(t) p^* (t-iT) dt \right) \left( \int_{-\infty}^{\infty} N^* (u) p (u-jT) du \right) \right] \\
+&= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} E[ N(t) N^* (u) ] p^* (t-iT) p (u-jT) du dt \\
+&= \frac{N_0}{2} \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \delta(t-u) p^* (t-iT) p (u-jT) du dt \\
+&= \frac{N_0}{2} \int_{-\infty}^{\infty} p^* (t-iT) p (t-jT) dt \\
+&= \frac{N_0}{2} v ( (i-j)T ).
+\end{align*}
+If \eqref{equation:NoInterSymbolInterferenceSpecification} holds, then it follows that the noise $\{ Z_m \}$ is a sequence of independent and identically distributed Gaussian random variables.
+
+\begin{example}
+Therefore, if the condition in (\ref{equation:NoInterSymbolInterferenceSpecification}) holds, then we find that
+\[ R_m = x_m + Z_m, \]
+and we have recovered exactly the discrete-time model of communication discussed in Chapter~\ref{chapter:DiscreteTimeComm}.
+\end{example}
+
+Alternatively, one can use a matched filter $h(t) = p^* (-t)$ and define the filter output to be $Y(t) = R(t) * h(t)$.
+In this case, sampling $Y(t)$ gives
 \begin{align*}
 Y(mT)
 &= \int_{-\infty}^{\infty} R(\tau) h(mT-\tau) d \tau \\
@@ -291,88 +325,9 @@ Y(mT)
 \end{align*}
 This shows that sampling the matched filter is equivalent to the correlation-based receiver.
 
-
-\iffalse
-We also generalize the system model in this section to include a LTI channel response $h_c (t)$ and a LTI receive filter $h_r (t)$.
-Since we assume that the noise is added inside the receiver, before the receive filter, this implies that the received signal is given by
-\begin{align*}
-R(t)
-&= s(t) * h_c (t) * h_r (t) + N(t) * h_r(t) \\
-&= \left( \sum_{n = -\infty}^{\infty} x_n p (t - nT) \right) * h_c (t) * h_r (t) + N(t) * h_r(t) \\
-&= \left( \sum_{n = -\infty}^{\infty} x_n g(t - nT) \right) + N(t) * h_r(t),
-\end{align*}
-where $g(t) = p (t) * h_c (t) * h_r (t)$.
-In this case, the receive filter $h_r (t)$ can be chosen to optimize system performance.
-
-As before, one can detect the symbol $x_n$  by correlating the received signal with the waveform $p(t-nT)$ associated with $x_n$.
-This gives
-\begin{equation} \label{equation:InnerProductReceiver}
-\begin{split}
-r(\tau) &= \langle u(t), h_r (t-\tau) \rangle
-= \int_{\mathbb{R}} u(t) {h_r}^*(t-\tau) dt \\
-&= \sum_{k} u_k \int_{\mathbb{R}} p(t - kT) {h_r}^*(t-\tau) dt \\
-&= \sum_{k} u_k g(\tau - kT) .
-\end{split}
-\end{equation}
-
-is identified at the destination by passing the received signal through a linear time-invariant filter, which is 
-For the ideal channel $h_c(t) = \delta(t)$, one can choose $h_r (t) = p^* (-t)$
- and plays the role of the matched filter.
-
-So, sampling the output at regular times $t=0,T,2T,\ldots$ is mathematically equivalent to performing a sequence of inner-product integrals.
-\begin{align*}
-R(mT)
-&= \langle R(t), h_{r}^* (mT-t) \rangle \\
-&= \int_{-\infty}^{\infty} R(t) h_{r} (mT-t)
-\end{align*}
-
-As before, each symbol $x_n$ is identified at the destination by passing the received signal through a linear time-invariant filter, which is 
-Since the waveforms $\{ p(t-nT) \}$ are shifted versions of a same function, it is natural to expect the various filters to implement projections onto shifted versions of a single element $h_r (t)$.
-A uniform treatment of the demodulation operation can therefore be conducted by looking a the inner product between $u(t)$ and $h_r (t-\tau)$.
-
-\begin{equation} \label{equation:InnerProductReceiver}
-\begin{split}
-r(\tau) &= \langle u(t), h_r (t-\tau) \rangle
-= \int_{\mathbb{R}} u(t) {h_r}^*(t-\tau) dt \\
-&= \sum_{k} u_k \int_{\mathbb{R}} p(t - kT) {h_r}^*(t-\tau) dt \\
-&= \sum_{k} u_k g(\tau - kT) .
-\end{split}
-\end{equation}
-where $g(\tau) = \langle p(t), h_r (t-\tau) \rangle$.
-By convention, $h_r (t)$ is defined such that element $x_n$ is acquired by looking at $r(nT)$.
-\fi
-
-More generally, we can define $g(t) = p(t) * h(t)$ and let $y_s (t)$ be the deterministic signal portion of $Y(t)$.
-Then, we find that
-\[ y_s (t) = \sum_{n = -\infty}^{\infty} x_n g(t - nT). \]
-Rewriting this, we get
-\begin{equation*}
-y_s (mT) = x_m g(0) + \sum_{n=-\infty,n \neq m}^{\infty} x_n g\left( (m - n)T \right) .
-\end{equation*}
-The first term in this expansion contains the desired symbols.
-The remaining sum is called \emph{intersymbol interference (ISI)}; it contains the contributions from all the other time-shifted waveforms.
-To retrieve the information sequence unambiguously, we wish to have $y_s (mT) = x_m$, irrespective of the values in the sequence $\{ x_n \}$.
-This will be achieved provided that
-\begin{equation} \label{equation:NoInterSymbolInterferenceSpecification}
-g(nT) = \begin{cases} 1, & n = 0 \\
-0, & \text{otherwise} . \end{cases}
-\end{equation}
-
-\iffalse
-The random portion $r_n (t)$ of the received waveform is defined by
-\[ r_n (t) = \int_{-\infty}^{\infty} N(t-\tau) h_r (\tau) d \tau. \]
-\fi
-
-Using this, we let $Y_m = Y(mT)$ be the sampled output of the receive filter notice that
-\[ Y_m = y_s (mT) + Z_m, \]
-where $Z_m$ is the zero-mean Gaussian noise corrupting deterministic output $y_s (mT)$.
-If the condition in (\ref{equation:NoInterSymbolInterferenceSpecification}) holds, then we find that
-\[ Y_m = x_m + Z_m, \]
-and we have recovered exactly the discrete-time model of communication discussed in Chapter~\ref{chapter:DiscreteTimeComm}.
-
 \subsection{The Nyquist Criterion}
 
-To understand how the condition~(\ref{equation:NoInterSymbolInterferenceSpecification}) impacts our choice of a functions $p(t)$ and $h (t)$, we use the frequency representation of $g(\tau)$.
+To understand how the condition~(\ref{equation:NoInterSymbolInterferenceSpecification}) impacts our choice of a functions $p(t)$ and $h (t)$, we let $g(t) = p(t) * h(t)$ and use the frequency representation of $g(t)$.
 Looking at the inverse Fourier transform of $\hat{g}(f)$, we get
 \begin{equation*}
 \begin{split}
@@ -386,13 +341,13 @@ where, for reasons that will soon be obvious, we have judiciously selected $F = 
 The value of $g(\tau)$ at the sample points $\{ \tau = nT : n \in \mathbb{Z} \}$ can then be expressed as
 \begin{equation} \label{equation:SamplePointsNoISI}
 \begin{split}
-g(nT) &= \sum_{m = -\infty}^{\infty} \int_{-\frac{F}{2}}^{\frac{F}{2}}
-\hat{g} \left( f - \frac{m}{T} \right) e^{2 \pi i \left( f - \frac{m}{T} \right) nT} df \\
+g(-nT) &= \sum_{m = -\infty}^{\infty} \int_{-\frac{F}{2}}^{\frac{F}{2}}
+\hat{g} \left( f - \frac{m}{T} \right) e^{-2 \pi i \left( f - \frac{m}{T} \right) nT} df \\
 &= \int_{-\frac{F}{2}}^{\frac{F}{2}}
 \left( \sum_{m = -\infty}^{\infty} \hat{g} \left( f - \frac{m}{T} \right) \right)
-e^{2 \pi i n T f} df \\
+e^{-2 \pi i n T f} df \\
 &= \frac{1}{F} \int_{-\frac{F}{2}}^{\frac{F}{2}}
-\hat{z} (f) e^{2 \pi i \frac{n}{F} f} df ,
+\hat{z} (f) e^{-2 \pi i \frac{n}{F} f} df ,
 \end{split}
 \end{equation}
 where we have defined
@@ -404,7 +359,7 @@ Notice the similarity between \eqref{equation:SamplePointsNoISI} and the Fourier
 Specifically, $\{ g(nT) : n \in \mathbb{Z} \}$ can be viewed as the Fourier series coefficients of the frequency-limited function $\hat{z}(f)$.
 Under condition \eqref{equation:NoInterSymbolInterferenceSpecification}, and using the reconstruction formula for Fourier series, we get
 \begin{equation} \label{equation:NoInterSymbolInterference}
-\hat{z}(f) = \sum_{n = -\infty}^{\infty} g(nT) e^{2 \pi i \frac{n}{F} f}
+\hat{z}(f) = \sum_{n = -\infty}^{\infty} g(-nT) e^{2 \pi i \frac{n}{F} f}
 \mathrm{rect} \left( \frac{f}{F} \right)
 = \mathrm{rect} \left( \frac{f}{F} \right)
 \end{equation}
@@ -527,7 +482,8 @@ In the frequency domain, it has the representation
 \begin{equation*}
 \hat{g} (f) =
 \begin{cases} T & \mathrm{if}\;|f| \leq \frac{1 - \beta}{2T} \\
- \frac{T}{2}\left[1 + \cos\left(\frac{\pi T}{\beta}\left[|f| - \frac{1 - \beta}{2T}\right]\right)\right] & \mathrm{if}\;\frac{1 - \beta}{2T} < |f| \leq \frac{1 + \beta}{2T} \\
+ T \cos^2 \left(\frac{\pi T}{2 \beta}\left[|f| - \frac{1 - \beta}{2T}\right]\right) & \mathrm{if}\;\frac{1 - \beta}{2T} < |f| \leq \frac{1 + \beta}{2T} \\
+% \frac{T}{2}\left[1 + \cos\left(\frac{\pi T}{\beta}\left[|f| - \frac{1 - \beta}{2T}\right]\right)\right] & \mathrm{if}\;\frac{1 - \beta}{2T} < |f| \leq \frac{1 + \beta}{2T} \\
  0 & \mathrm{otherwise},
 \end{cases}
 \end{equation*}
@@ -548,6 +504,101 @@ p(t) =
 \end{equation*}
 In this case, the slow $1/t$ decay rate of the sinc function has been improved to a decay rate of $1/t^2$.
 \end{example}
+
+
+\subsection{Linear Time-Invariant Channels}
+
+Now, we can also generalize the system model to include an LTI channel response $h_c (t)$ and a LTI receive filter $h_r (t)$.
+Since we assume that the dominant source of noise is the \emph{low-noise amplifier}, the noise is added after the channel filter but before the receive filter.
+This implies that the received signal is given by $R(t) = s(t) * h_c(t) + N(t)$ and the output of the receive filter is given by
+\begin{align*}
+Y(t)
+&= s(t) * h_c (t) * h_r (t) + N(t) * h_r(t) \\
+&= \left( \sum_{n = -\infty}^{\infty} x_n p (t - nT) \right) * h_c (t) * h_r (t) + N(t) * h_r(t) \\
+&= \sum_{n = -\infty}^{\infty} x_n g(t - nT) + \int_{-\infty}^{\infty} N(\tau) h_r (t-\tau),
+\end{align*}
+where $g(t) = p (t) * h_c (t) * h_r (t)$ and $y_s (t)$ % = \sum_{n = -\infty}^{\infty} x_n g(t - nT)$
+is the deterministic portion of $Y(t)$.
+
+Let $R_m = Y(mT)$ be the sampled output of the matched filter.
+Then, $R_m = y_s (mT) + Z_m$ with
+\begin{equation*}
+y_s (mT) = x_m g(0) + \sum_{n=-\infty,n \neq m}^{\infty} x_n g\left( (m - n)T \right)
+\end{equation*}
+and
+\[ Z_m = \int_{-\infty}^{\infty} N(\tau) h_r (mT-\tau). \]
+%Let $v(\tau)$ be the autocorrelation function of the receive filter $h_r (t)$.
+If we choose $h_r (t)$ such that its autocorrelation function $v(\tau)$ satisfies \eqref{equation:NoInterSymbolInterferenceSpecification}, then the noise $\{ Z_m \}$ is a sequence of independent and identically distributed Gaussian random variables.
+
+\iffalse
+Therefore, the sampled output of the matched filter observes the discrete-time sequence
+\begin{equation*}
+y_s (mT) = x_m g(0) + \sum_{n=-\infty,n \neq m}^{\infty} x_n g\left( (m - n)T \right)
+\end{equation*}
+in 
+the receive filter t
+Once again, if we choosewhere $g(t) = p (t) * h_c (t) * h_r (t)$.
+Although theIn this case, the receive filter $h_r (t)$ can be chosen to optimize system performance.
+
+As before, one can detect the symbol $x_n$  by correlating the received signal with the waveform $p(t-nT)$ associated with $x_n$.
+This gives
+\begin{equation} \label{equation:InnerProductReceiver}
+\begin{split}
+r(\tau) &= \langle u(t), h_r (t-\tau) \rangle
+= \int_{\mathbb{R}} u(t) {h_r}^*(t-\tau) dt \\
+&= \sum_{k} u_k \int_{\mathbb{R}} p(t - kT) {h_r}^*(t-\tau) dt \\
+&= \sum_{k} u_k g(\tau - kT) .
+\end{split}
+\end{equation}
+
+is identified at the destination by passing the received signal through a linear time-invariant filter, which is 
+For the ideal channel $h_c(t) = \delta(t)$, one can choose $h_r (t) = p^* (-t)$
+ and plays the role of the matched filter.
+
+So, sampling the output at regular times $t=0,T,2T,\ldots$ is mathematically equivalent to performing a sequence of inner-product integrals.
+\begin{align*}
+R(mT)
+&= \langle R(t), h_{r}^* (mT-t) \rangle \\
+&= \int_{-\infty}^{\infty} R(t) h_{r} (mT-t)
+\end{align*}
+
+As before, each symbol $x_n$ is identified at the destination by passing the received signal through a linear time-invariant filter, which is 
+Since the waveforms $\{ p(t-nT) \}$ are shifted versions of a same function, it is natural to expect the various filters to implement projections onto shifted versions of a single element $h_r (t)$.
+A uniform treatment of the demodulation operation can therefore be conducted by looking a the inner product between $u(t)$ and $h_r (t-\tau)$.
+
+\begin{equation} \label{equation:InnerProductReceiver}
+\begin{split}
+r(\tau) &= \langle u(t), h_r (t-\tau) \rangle
+= \int_{\mathbb{R}} u(t) {h_r}^*(t-\tau) dt \\
+&= \sum_{k} u_k \int_{\mathbb{R}} p(t - kT) {h_r}^*(t-\tau) dt \\
+&= \sum_{k} u_k g(\tau - kT) .
+\end{split}
+\end{equation}
+where $g(\tau) = \langle p(t), h_r (t-\tau) \rangle$.
+By convention, $h_r (t)$ is defined such that element $x_n$ is acquired by looking at $r(nT)$.
+\iffalse
+The random portion $r_n (t)$ of the received waveform is defined by
+\[ r_n (t) = \int_{-\infty}^{\infty} N(t-\tau) h_r (\tau) d \tau. \]
+\fi
+
+Using this, we let $Y_m = Y(mT)$ be the sampled output of the receive filter notice that
+\[ Y_m = y_s (mT) + Z_m, \]
+where $Z_m$ is the zero-mean Gaussian noise corrupting the deterministic output $y_s (mT)$.
+\begin{example}
+If the condition in (\ref{equation:NoInterSymbolInterferenceSpecification}) holds, then we find that
+\[ Y_m = x_m + Z_m, \]
+and we have recovered exactly the discrete-time model of communication discussed in Chapter~\ref{chapter:DiscreteTimeComm}.
+\end{example}
+\fi
+
+\begin{example}
+If $g(nT) \neq 0$ for some $n\neq 0$, then we say that system has ISI.
+For example, consider the case where
+\[ g(nT) = \begin{cases} 1 & \mathrm{if}\; n=0 \\ \frac{1}{4} & \mathrm{if}\; n=1 \\ 0 & \mathrm{otherwise} \end{cases}. \]
+This gives a discrete-time model of communication with ISI where
+\[ Y_m = x_m + \frac{1}{4} x_{m-1} + Z_m. \]
+\end{example}
+
 
 \subsection{Passband Communication}
 

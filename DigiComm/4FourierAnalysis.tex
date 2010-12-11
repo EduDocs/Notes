@@ -212,27 +212,61 @@ x(t) = \sum_{k = -\infty}^{\infty} \delta(t - kT)
 Which representation to use depends on the problem at hand.
 
 
-\subsection{Energy Spectral Density}
+\subsection{Spectral Density}
 \label{subsection:SpectralDensity}
 
 The energy of a deterministic signal $x(t)$ is given by \eqref{equation:L2Condition}.
 If the energy of $x(t)$ is finite, i.e.\ $\| x(t) \|^2 < \infty$, then we define its \defn{Fourier analysis}{autocorrelation function} by
 \begin{equation*}
-R_x(\tau) = \int_{\mathbb{R}} x(t)x^*(t - \tau) dt .
+R_x(\tau) \triangleq \int_{\mathbb{R}} x(t)x^*(t - \tau) dt .
 \end{equation*}
 Using this notation, we see that the energy of $x(t)$ is also given by $R_x(0)$.
 
 \begin{definition}
-The \defn{Fourier analysis}{energy spectral density} of $x(t)$, denoted by $\mathcal{G}_x (f)$, is defined to be the Fourier transform of its autocorrelation function,
+The \defn{Fourier analysis}{energy spectral density} of an energy-type signal $x(t)$, denoted by $\mathcal{G}_x (f)$, is defined to be the Fourier transform of its autocorrelation function,
 \begin{equation*}
 \mathcal{G}_x(f) = \mathcal{F} [ R_x (\tau) ] = | \hat{x}(f) |^2.
 \end{equation*}
 \end{definition}
-
 Intuitively, the energy spectral density captures the frequency content of a signal and helps identify how its energy is distributed across frequencies.
-The \defn{Fourier analysis}{spectral bandwidth} of Fourier transform $\hat{x}(f)$ is the smallest value of $W$ such that $\mathcal{G}_x(f) = 0$ for all $|f| > W$.
-A signal $x(t)$ is \defn{Fourier analysis}{bandwidth-limited} to $W$ if it can be obtained as the inverse Fourier transform of a function $\hat{x}(f)$, where $\hat{x}(f)$ is identically zero for all $|f| > W$.
 
+A signal $x(t)$ is a \defn{Fourier analysis}{power-type signal} if the limit
+\[ P_x = \lim_{T\rightarrow\infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} | x(t) |^2 dt \]
+exists and $0 < P_x < \infty$.
+The autocorrelation function of a power-type signal is defined accordingly as
+\begin{equation*}
+R_x(\tau) \triangleq  \lim_{T\rightarrow\infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} x(t)x^*(t - \tau) dt .
+\end{equation*}
+
+The Fourier transform of a power-type signal $x(t)$ may not exist though because it may not satisfy condition \eqref{equation:L2Condition}.
+However, if truncated versions of $x(t)$, defined by
+\begin{equation*}
+x_T(t) \triangleq x(t) \mathrm{rect} \left( \frac{t}{T} \right) ,
+\end{equation*}
+are energy-type signals, then we can define the Fourier transforms
+\begin{equation*}
+\hat{x}_T(f) \triangleq \mathcal{F} \left[ x(t) \mathrm{rect} \left( \frac{t}{T} \right) \right] .
+\end{equation*}
+From this, the \defn{Fourier analysis}{power spectral density}, which represents the power (per unit of bandwidth) present at each frequency of the signal, can be defined by
+\begin{equation*}
+\mathcal{S}_x(f) \triangleq \lim_{T \rightarrow \infty} \frac{1}{T} |\hat{x}_T(f)|^2 .
+\end{equation*}
+Intuitively, the power spectral density captures the frequency content of a signal and helps identify how its power is distributed across frequencies.
+
+Notice how the truncated signal is used to overcome the difficulty of dealing with infinite-energy signals.
+This is a common and valuable trick.
+
+\begin{definition}
+The power spectral density of a power-type signal $x(t)$ is also given by the Fourier transform of its autocorrelation function,
+\begin{equation*}
+\mathcal{S}_x (f) = \mathcal{F} [ R_x (\tau) ].
+\end{equation*}
+\end{definition}
+These two definitions of power spectral density are equivalent under mild conditions on $x(t)$.
+
+The \defn{Fourier analysis}{spectral bandwidth} of a signal $x(t)$ is the smallest value of $W$ such that its spectral density is zero for all $|f| > W$.
+An energy-type signal $x(t)$ is \defn{Fourier analysis}{bandwidth-limited} to $W$ if it can be obtained as the inverse Fourier transform of a function $\hat{x}(f)$, where $\hat{x}(f)$ is identically zero for all $|f| > W$.
+Likewise, a power-type signal is bandwidth-limited to $W$ if its power-spectral density $S_x (f)$ is identically zero for all $|f| > W$.
 
 \subsection{Linear Time-Invariant Filters}
 \label{subsection:LinearTimeInvariantFilters}
@@ -442,20 +476,6 @@ only depends on the difference between $t_1$ and $t_2$.
 With a slight abuse of notation, we can denote the mean and autocorrelation of a stationary process respectively by $m_X$ and $R_X(\tau)$, where $\tau = t_1 - t_2$.
 \end{definition}
 
-\begin{definition}[Ergodic]
-An \textbf{ergodic theorem} asserts that, under certain conditions, the time average of a random process
-\begin{equation*}
-\langle g(X(t)) \rangle \triangleq \lim_{T \rightarrow \infty} \frac{1}{T} \int_{- \frac{T}{2}}^{\frac{T}{2}} g(X(t)) dt
-\end{equation*}
-exists and is equal to the ensemble average $\mathrm{E}[g(X(t))]$ for almost all trajectories of the random process.
-% exists and is equal to its ensemble average,
-%\begin{equation*}
-%\langle g(X(t)) \rangle \triangleq \lim_{T \rightarrow \infty} \frac{1}{T} \int_{- \frac{T}{2}}^{\frac{T}{2}} g(X(t)) dt
-%= \mathrm{E}[g(X(t))] .
-%\end{equation*}
-When a stochastic process fulfills these conditions, it is called \defn{random process}{ergodic}.
-\end{definition}
-
 \begin{figure}[htbp]
 \begin{center}
 \begin{psfrags}
@@ -471,6 +491,20 @@ When a stochastic process fulfills these conditions, it is called \defn{random p
 \end{center}
 \end{figure}
 
+\begin{definition}[Ergodic]
+An \textbf{ergodic theorem} asserts that, under certain conditions, the time average of a random process
+\begin{equation*}
+\langle g(X(t)) \rangle \triangleq \lim_{T \rightarrow \infty} \frac{1}{T} \int_{- \frac{T}{2}}^{\frac{T}{2}} g(X(t)) dt
+\end{equation*}
+exists and is equal to the ensemble average $\mathrm{E}[g(X(t))]$ for almost all trajectories of the random process.
+% exists and is equal to its ensemble average,
+%\begin{equation*}
+%\langle g(X(t)) \rangle \triangleq \lim_{T \rightarrow \infty} \frac{1}{T} \int_{- \frac{T}{2}}^{\frac{T}{2}} g(X(t)) dt
+%= \mathrm{E}[g(X(t))] .
+%\end{equation*}
+When a stochastic process fulfills these conditions, it is called \defn{random process}{ergodic}.
+\end{definition}
+
 One of the important characteristics of an ergodic process is that it suffices to look at one realization of the process to infer many of its statistical attributes.
 Ergodicity is a very strong property, and it is hard to test and validate.
 Rather, it is frequently taken as a premise in the design of communication systems.
@@ -480,25 +514,6 @@ Such a postulate appears reasonable, especially considering the many successful 
 
 \subsection{Power Spectral Density}
 
-A signal $x(t)$ is a \defn{Fourier analysis}{power-type signal} if the limit
-\[ \lim_{T\rightarrow\infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} | x(t) |^2 dt \]
-exists and is finite.
-The Fourier transform of a power-type signal $x(t)$ may not exist though because it may not satisfy condition \eqref{equation:L2Condition}.
-However, if truncated versions of $x(t)$, defined by
-\begin{equation*}
-x_T(t) \triangleq x(t) \mathrm{rect} \left( \frac{t}{T} \right) ,
-\end{equation*}
-are energy-type signals, then we can define the Fourier transforms
-\begin{equation*}
-\hat{x}_T(f) \triangleq \mathcal{F} \left[ x(t) \mathrm{rect} \left( \frac{t}{T} \right) \right] .
-\end{equation*}
-From this, the \defn{Fourier analysis}{power spectral density}, which represents the power (per unit of bandwidth) present at each frequency of the signal, can be defined by
-\begin{equation*}
-\mathcal{S}_x(f) \triangleq \lim_{T \rightarrow \infty} \frac{1}{T} |\hat{x}_T(f)|^2 .
-\end{equation*}
-Notice how the truncated signal is used to overcome the difficulty of dealing with infinite-energy signals.
-This is a common and valuable trick.
- 
 For a stochastic signal, the definition of the \defn{random process}{power spectral density} is somewhat more intricate because it must account for uncertainty in the process.
 Let $X(t)$ be a wide-sense stationary random process with $R_X(0) < \infty$.
 Then, we can define
@@ -549,7 +564,7 @@ In this case, the expectation in the theorem above can be replaced by a time ave
 We discussed in Section~\ref{subsection:LinearTimeInvariantFilters} how the Fourier transform can simplify the analysis of the effects of linear time-invariant filters on deterministic signals.
 In this section, we consider the operation of such filters in the context of random processes.
 
-\begin{theorem}
+\begin{theorem} \label{theorem:filteredWSS}
 If a wide-sense stationary process $X(t)$ with mean $m_X$ and autocorrelation function $R_X(\tau)$ is passed through a linear time-invariant filter with impulse response $h(t)$, then the output process $Y(t)$ has mean
 \begin{equation*}
 m_Y = m_X \int_{\mathbb{R}} h(t) dt
@@ -616,6 +631,14 @@ A stochastic process $X(t)$ is a \defn{random process}{Gaussian process} if, for
 The distribution of jointly Gaussian random variables is completely determined by their mean vector and correlation matrix.
 Therefore, a Gaussian process is completely determined by its mean function $m_X (t)$ and its autocorrelation function $R_XX (t_1,t_2)$.
 Of course, if the process is also wide-sense stationary, then this reduces to its mean value $m_X$ and its autocorrelation function $R_X (\tau)$.
+
+More generally, one finds that, for any finite set of energy-type signals $s_1 (t), s_2 (t), \ldots , s_n (t)$, the random variables
+\[ Z_i = \int_{-\infty}^{\infty} s(t) X(t) dt \]
+are jointly Gaussian.
+The intuition behind this is that each integral is defined as the limit of a sequence of Riemann sums.
+Since each Riemann sum is simply the sum of Gaussian random variables, it is also Gaussian.
+This argument can be extended to show that the mean vector and correlation matrix of the vector $(Z_1, Z_2, \ldots, Z_n)$ is also jointly Gaussian.
+In fact, combining this with Theorem~\ref{theorem:filteredWSS}, implies that the output of linear time-invariant system, whose input is a wide-sense stationary Gaussian process, is also a wide-sense stationary Gaussian process. 
 
 The most common random process in signal processing and communications is the \defn{random process}{Gaussian white-noise} process $N(t)$.
 This process is defined to be a zero-mean wide-sense stationary Gaussian process whose power spectral density $S_N (f)$ is constant (e.g., 1).
