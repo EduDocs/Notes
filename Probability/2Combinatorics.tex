@@ -1,17 +1,24 @@
-\chapter{Equiprobable Outcomes and Combinatorics}
+\chapter[Combinatorics]{Combinatorics and Intuitive Probability}
 
-The simplest probabilistic scenario is perhaps one where the sample space $\Omega$ is finite and all the possible outcomes are equally likely.
-In such cases, computing the probability of an event amounts to counting the number of outcomes comprising this event and dividing the sum by the total number of elements contained in the sample space.
-This situation was first explored in Section~\ref{section:FiniteSampleSpaces}, with an explicit formula for computing probabilities appearing in \eqref{equation:ProbEquiProbableOutcomes}.
+The simplest probabilistic scenario is perhaps one where the set of possible outcomes is finite and these outcomes are all equally likely.
+In such cases, computing the probability of an event amounts to counting the number of elements comprising this event and then dividing the sum by the total number of admissible outcomes.
+
+\begin{example}
+The rolling of a fair die is an experiment with a finite number of equally likely outcomes, namely the different faces labeled one through six.
+The probability of observing a specific face is equal to
+\begin{equation*}
+\frac{1}{\text{Number of faces}} = \frac{1}{6} .
+\end{equation*}
+Similarly, the probability of an arbitrary event can be computed by counting the number of distinct outcomes included in the event.
+For instance, the probability of rolling a prime number is
+\begin{equation*}
+\Pr ( \{ 2, 3, 5 \} )
+= \frac{\text{Number of outcomes in event}}{\text{Total number of outcomes}}
+= \frac{3}{6} .
+\end{equation*}
+\end{example}
 
 While counting outcomes may appear intuitively straightforward, it is in many circumstances a daunting task.
-For instance, consider the number of distinct subsets of the integers $\{ 1, 2, \ldots, n \}$ that do not contain two consecutive integers.
-This number is equal to
-\begin{equation*}
-\frac{ \phi^{n+2} - (1 - \phi)^{n+2} }{ \sqrt{5} } ,
-\end{equation*}
-where $\phi = (1 + \sqrt{5}) / 2$ is the \emph{golden ratio}.
-This somewhat surprising result can be obtained iteratively through the \emph{Fibonacci} recurrence relation, and it attests of the fact that counting may at times be challenging.
 Calculating the number of ways that certain patterns can be formed is part of the field of \emph{combinatorics}. \index{Combinatorics}
 In this chapter, we introduce useful counting techniques that can be applied to situations pertinent to probability.
 
@@ -60,7 +67,7 @@ If we denote the cardinality of $S_i$ by $n_i = | S_i |$, then the number of dis
 
 \begin{example}[Sampling with Replacement and Ordering]
 An urn contains $n$ balls numbered one through $n$.
-A ball is drawn from the urn, and its number is recorded on an ordered list.
+A ball is drawn from the urn and its number is recorded on an ordered list.
 The ball is then replaced in the urn.
 This procedure is repeated $k$ times.
 We wish to compute the number of possible sequences that can result from this experiment.
@@ -99,8 +106,8 @@ Hence, the number of distinct subsets of $S$ is given by $2^n$.
 \psfrag{3}[c]{$3$}
 \includegraphics[height=4.965cm]{Figures/4Chapter/powerset}
 \end{psfrags}
-\caption{The power set of $\{ 1, 2, 3 \}$ contains eight elements.
-They are displayed above.}
+\caption{The power set of $\{ 1, 2, 3 \}$ contains eight subsets.
+These elements are displayed above.}
 \label{figure:PowerSet}
 \end{center}
 \end{figure}
@@ -160,7 +167,7 @@ The number of possible sequences is therefore given by
 \end{equation*}
 
 \begin{example}
-A recently formed music group has four original songs they can play.
+A recently formed music group can play four original songs.
 They are asked to perform two songs at South by Southwest.
 We wish to compute the number of song arrangements the group can offer in concert.
 Abstractly, this is equivalent to computing the number of $2$-permutations of four songs.
@@ -207,7 +214,7 @@ whereas the $2$-permutations of $S$ are more numerous with
 &( 3, 1 ), ( 3, 2 ), ( 3, 4 ), ( 4, 1 ), ( 4, 2 ), ( 4, 3 ) .
 \end{split}
 \end{equation*}
-There are fewer $2$-element subsets of $S$ than $2$-permutations of $S$.
+Consequently, there are fewer $2$-element subsets of $S$ than $2$-permutations of $S$.
 
 \begin{figure}[htb!]
 \begin{center}
@@ -225,15 +232,15 @@ There are fewer $2$-element subsets of $S$ than $2$-permutations of $S$.
 
 We can compute the number of $k$-element combinations of $S = \{ 1, 2, \ldots, n \}$ as follows.
 Note that a $k$-permutation can be formed by first selecting $k$ objects from $S$ and then ordering them.
-There are $k!$ distinct ways of ordering $k$ objects.
-The number of $k$-permutations must then equal the number of $k$-element combinations multiplied by $k!$.
-Since the total number of $k$-permutations of $S$ is $n! / (n-k)!$, the number of $k$-element combinations is found to be
+There are $k!$ distinct ways of ordering $k$ components.
+The number of $k$-permutations must therefore be equal to the number of $k$-element combinations multiplied by $k!$.
+Since the total number of $k$-permutations of $S$ is $n! / (n-k)!$, we gather that the number of $k$-element combinations is
 \begin{equation*}
 \binom{n}{k} = \frac{n!}{k! (n-k)!} = \frac{ n (n-1) \cdots (n-k+1) }{ k! } .
 \end{equation*}
 This expression is termed a \emph{binomial coefficient}. \index{Binomial coefficient}
 Observe that selecting a $k$-element subset of $S$ is equivalent to choosing the $n-k$ elements that belong to its complement.
-Consequently, we can write
+Thus, we can write
 \begin{equation*}
 \binom{n}{k} = \binom{n}{n-k} .
 \end{equation*}
@@ -250,8 +257,7 @@ Because there is no ordering in the jar, this amounts to counting the number of 
 \end{example}
 
 Again, let $S = \{1, 2, \ldots, n\}$.
-Since a combination is also a subset and the number of $k$-element combinations of $S$ is $\binom{n}{k}$, the sum of the binomial coefficients $\binom{n}{k}$ over all values of $k$ must be equal to the number of elements in the power set of $S$. \index{Power set}
-Thus, we get
+Since a combination is also a subset and the number of $k$-element combinations of $S$ is $\binom{n}{k}$, the sum of the binomial coefficients $\binom{n}{k}$ over all values of $k$ must be equal to the number of elements in the power set of $S$, \index{Power set}
 \begin{equation*}
 \sum_{k=0}^n \binom{n}{k} = 2^n .
 \end{equation*}
@@ -306,7 +312,7 @@ Specifically, we wish to compute the number of ways integers $n_1, n_2, \ldots, 
 \sum_{i = 1}^r n_i = n.
 \end{equation*}
 We can visualize the number of possible assignments as follows.
-Picture $n$ balls space out on a straight line and consider $r-1$ vertical markers, each of which can be put between two consecutive balls, before the first ball, or after the last ball. 
+Picture $n$ balls spaced out on a straight line and consider $r-1$ vertical markers, each of which can be put between two consecutive balls, before the first ball, or after the last ball. 
 For instance, if there are five balls and two markers then one possible assignment is illustrated in Figure~\ref{figure:Partitioning}.
 
 \begin{figure}[htb!]
@@ -320,7 +326,7 @@ For instance, if there are five balls and two markers then one possible assignme
 \end{center}
 \end{figure}
 
-The number of objects in the first subset corresponds to the number balls appearing before the first marker.
+The number of objects in the first subset corresponds to the number of balls appearing before the first marker.
 Similarly, the number of objects in the $i$th subset is equal to the number of balls positioned between the $i$th marker and the preceding one.
 Finally, the number of objects in the last subset is simply the number of balls after the last marker.
 In this scheme, two consecutive markers imply that the corresponding subset is empty.
@@ -379,7 +385,7 @@ The probability of winning when playing the exact order is
 = \frac{1}{1000} .
 \end{equation*}
 The probability of winning while playing any order depends on the numbers selected.
-If three distinct numbers are selected, then the probability of winning is
+When three distinct numbers are selected, the probability of winning is given by
 \begin{equation*}
 \frac{3!}{1000} = \frac{3}{500} .
 \end{equation*}
@@ -420,40 +426,6 @@ For a given couple, the probability that the two members do not end up on the Ma
 Since couples act independently, the probability that no two people from a same couple are united on the Mako becomes $3^6/4^6$.
 In other words, there are a total of $4096$ possible arrangements of people on the Mako after the rescue operation, all equally likely;
 only $729$ of these arrangements are such that no two members from a same couple board the Mako.
-\end{example}
-
-\begin{example}[The Locksmith Convention*]
-A total of $n$ people are gathering to attend a two-day, secret locksmith convention.
-As tradition dictates, every locksmith brings a lock and two keys to the convention.
-At the opening ceremony, all the locksmiths sit around a large table, and they exchange keys to their own locks with the two members sitting immediately next to them.
-The rules of the secret society stipulate that the conference can only proceed on the second day if a working lock-and-key combination can be reconstituted.
-If each locksmith decides to attend the second day of the convention with probability half, independently of others, what is the probability that the reunion can continue its course of action on the second day?
-
-There are $n$ attendants on the first day.
-The number of possible audiences on the second day is therefore $2^n$, and they are all equally likely.
-To find the probability that the reunion can proceed, it suffices to count the number of ways in which at least two people that were sitting next to each other during the opening ceremony are present.
-Alternatively, we can compute the likelihood that this does not occur.
-To solve this problem, we label the people attending the opening ceremony using integers one through $n$, according to their positions around the table.
-We consider three situations that may occur on the second day and for which the society's requirements are not met.
-If member~$1$ is present, then members~$2$ and $n$ cannot be there on the second day, and the number of possible non-qualifying arrangements is equal to the number of distinct subsets of the integers $\{3, 4,\ldots, n-1\}$ that do not contain consecutive integers.
-This number can be deduced from the discussion at the beginning of this chapter, and is given by
-\begin{equation*}
-\frac{ \phi^{n-1} - (1 - \phi)^{n-1} }{ \sqrt{5} } .
-\end{equation*}
-By symmetry, the number of arrangements for which a lock-and-key combination cannot be reconstituted when member~$n$ shows up on the second day is
-\begin{equation*}
-\frac{ \phi^{n-1} - (1 - \phi)^{n-1} }{ \sqrt{5} } .
-\end{equation*}
-Finally, if both members~$1$ and $n$ are absent, then there are a total of
-\begin{equation*}
-\frac{ \phi^{n} - (1 - \phi)^{n} }{ \sqrt{5} }
-\end{equation*}
-combinations for which the meeting cannot proceed, as this is the number of distinct subsets of the integers $\{ 2, 3, \ldots, n-1 \}$ that do not contain consecutive integers.
-Collecting these results, we gather that the probability of the meeting being cancelled on the second day is
-\begin{equation*}
-1 - \frac{ 2 \phi^{n-1} - 2 (1 - \phi)^{n-1}
-+ \phi^{n} - (1 - \phi)^{n} }{2^n \sqrt{5}} .
-\end{equation*}
 \end{example}
 
 

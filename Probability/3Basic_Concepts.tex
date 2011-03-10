@@ -69,7 +69,7 @@ This violates the uniqueness criterion.
 \begin{figure}[htb!]
 \begin{center}
 \includegraphics[height=4.125cm]{Figures/2Chapter/nonadmissiblespace}
-\caption{This collection of objects cannot be a sample space as the elements are not mutually exclusive.}
+\caption{This collection of objects cannot be a sample space as the three proposed outcomes (even, odd and prime) are not mutually exclusive.}
 \end{center}
 \end{figure}
 
@@ -109,7 +109,7 @@ More generally, if $A_1, A_2, \ldots$ is a sequence of disjoint events and $\big
 \end{equation*}
 \end{enumerate}
 
-A number of properties can be deduced from the three axioms of probability.
+A number of important properties can be deduced from the three axioms of probability.
 We prove two such properties below.
 The first statement describes the relation between inclusion and probabilities.
 \begin{proposition}
@@ -173,7 +173,7 @@ Specifically, we can write
 = \sum_{k = 1}^{n} (-1)^{k-1} \sum_{\IndexSet \subset \{1, \ldots, n \}, |\IndexSet| =k } \Pr \left( \bigcap_{i \in \IndexSet} A_i \right)
 \end{equation*}
 where the rightmost sum runs over all subsets $\IndexSet$ of $\{ 1, \ldots, n \}$ that contain exactly $k$ elements.
-This more encompassing equation is known as the \emph{inclusion-exclusion principle}.\index{Inclusion-exclusion principle}
+This more encompassing result is known as the \emph{inclusion-exclusion principle}.\index{Inclusion-exclusion principle}
 
 We can use Proposition~\ref{proposition:ProbabilityUnion} recursively to derive a bound on the probabilities of unions.
 This theorem, which is sometimes called the \emph{Boole inequality}, asserts that the probability of at least one event occurring is no greater than the sum of the probabilities of the individual events.\index{Boole inequality}
@@ -251,8 +251,7 @@ Using the third axiom of probability, $\Pr (A)$ can be written as
 = \Pr ( \{ s_j \in \Omega | j \in \JndexSet \} )
 = \sum_{j \in \JndexSet} \Pr (s_j) .
 \end{equation*}
-The possibly infinite sum $\sum_{j \in \JndexSet} \Pr (s_j)$ always converges since the summands are nonnegative and the sum is bounded above by one.
-It is consequently well defined.
+The possibly infinite sum $\sum_{j \in \JndexSet} \Pr (s_j)$ always converges since the summands are nonnegative and the sum is bounded above by one; it is consequently well defined.
 
 \begin{figure}[htb!]
 \begin{center}
@@ -312,8 +311,8 @@ To develop an understanding of uncountable probabilistic models, we consider the
 \end{center}
 \end{figure}
 
-Suppose that an element is chosen at random from this interval, with all elements having equal weight.
-By the first axiom of probability, we must have $\Pr \left( [0,1] \right) = 1$.
+Suppose that an element is chosen at random from this interval, with uniform weighting.
+By the first axiom of probability, the probability that this element belongs to the interval $[0,1]$ is given by $\Pr \left( [0,1] \right) = 1$.
 Furthermore, if two intervals have the same length, the probabilities of the outcome falling in either interval should be identical.
 For instance, it is natural to anticipate that $\Pr \left( \left( 0, 0.25 \right) \right) = \Pr \left( \left( 0.75, 1 \right) \right)$.
 
@@ -343,7 +342,7 @@ Using the third axiom of probability, it is then possible to find the probabilit
 \psfrag{1}[r]{$1$}
 \includegraphics[height=3.28cm]{Figures/2Chapter/lineintervals}
 \end{psfrags}
-\caption{The probabilities of events that are formed through the union of disjoint intervals can be computed easily.}
+\caption{The probabilities of events that are formed through the union of disjoint intervals can be computed in a straightforward manner.}
 \end{center}
 \end{figure}
 
@@ -391,7 +390,7 @@ The probability of $\Omega$ is invariably equal to one, $\Pr ([0, 2 \pi)) = 1$.
 \begin{figure}[tbh!]
 \begin{center}
 \includegraphics[height=3.15cm]{Figures/2Chapter/wheel}
-\caption{The wheel of serendipity provides an example of a random experiment for which the sample space is uncountable.}
+\caption{The wheel of serendipity forms an example of a random experiment for which the sample space is uncountable.}
 \end{center}
 \end{figure}
 
@@ -405,7 +404,7 @@ More generally, the probability that the wheel stops in an interval $(a, b)$ whe
 \begin{equation*}
 \Pr ((a,b)) = \frac{b - a}{2 \pi}.
 \end{equation*}
-If $B \subset [0, 2 \pi)$ is a measurable set representing all winning outcomes, then the probability of success at the wheel becomes
+If $B \subset [0, 2 \pi)$ is a set representing all winning outcomes, then the probability of success at the wheel becomes
 \begin{equation*}
 \Pr(B) = \int_B \frac{1}{2 \pi} d\theta .
 \end{equation*}
@@ -426,7 +425,7 @@ The integers and the rational numbers are examples of countably infinite sets.
 It may be surprising at first to learn that there exist uncountable sets.
 To escape beyond the countable, one needs set theoretic tools such as \emph{power sets}.\index{Power set}
 The set of real numbers is uncountably infinite; it cannot be put in one-to-one correspondence with the natural numbers.
-A typical progression in analysis consists of using the finite to get at the countably infinite, and then to employ the countably infinite to get at the uncountable.
+A typical progression in analysis consists of using the finite to gain intuition about the countably infinite, and then to employ the countably infinite to get at the uncountable.
 
 It is tempting to try to assign probabilities to every subset of a sample space $\Omega$.
 However, for uncountably infinite sample spaces, this leads to serious difficulties that cannot be resolved.
@@ -434,7 +433,7 @@ In general, it is necessary to work with special subclasses of the class of all 
 The collections of the appropriate kinds are called fields and $\sigma$-fields, and they are studied in \emph{measure theory}.\index{Measure theory}
 This leads to measure-theoretic probability, and to its unified treatment of the discrete and the continuous.
 
-Fortunately, it is possible to develop an intuitive and working understanding of probability without worrying about these issues.
+Fortunately, it is possible to develop a working understanding of probability without worrying excessively about these issues.
 At some point in your academic career, you may wish to study analysis and measure theory more carefully and in greater details.
 However, it is not our current purpose to initiate the rigorous treatment of these topics.
 

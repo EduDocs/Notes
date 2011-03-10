@@ -35,8 +35,9 @@ Also, we can express the fact that $S$ and $T$ are different sets by writing $S 
 A set $S$ is a \emph{subset} of $T$ if every element of $S$ is also contained in $T$.\index{Subset}
 We express this relation by writing $S \subset T$.
 Note that this definition does not require $S$ to be different from $T$.
-In fact, $S = T$ if and only if $S \subset T$ and $T \subset S$.
 If $S \subset T$ and $S$ is different from $T$, then $S$ is a \emph{proper subset} of $T$, which we indicate by $S \subsetneq T$.\index{Proper subset}
+Moreover, $S = T$ if and only if $S \subset T$ and $T \subset S$.
+In fact, this latter statement outlines a methodology to show that two sets are equal.
 
 There are many ways to specify a set.
 If the set contains only a few elements, one can simply list the objects in the set;
@@ -98,7 +99,7 @@ Formally, we define the union of these two sets by $S \cup T = \{ x | x \in S \t
 \end{center}
 \end{figure}
 
-The \emph{intersection} of sets $S$ and $T$ is the collection of all elements that belong to $S$ and $T$.\index{Intersection}
+The \emph{intersection} of sets $S$ and $T$ is the collection of all elements that belong to both $S$ and $T$.\index{Intersection}
 It is denoted by $S \cap T$, and it can be expressed mathematically as $S \cap T = \{ x | x \in S \text{ and } x \in T \}$.
 
 \begin{figure}[htb!]
@@ -140,10 +141,10 @@ So far, we have looked at the definition of the union and the intersection of tw
 We can also form the union or the intersection of arbitrarily many sets.
 This is defined in a straightforward way,
 \begin{align*}
-\bigcup_{\alpha \in \IndexSet} S_{\alpha}
-&= \{ x | x \in S_{\alpha} \text{ for some } \alpha \in \IndexSet \} \\
-\bigcap_{\alpha \in \IndexSet} S_{\alpha}
-&= \{ x | x \in S_{\alpha} \text{ for all } \alpha \in \IndexSet \} .
+\bigcup_{i \in \IndexSet} S_{i}
+&= \{ x | x \in S_{i} \text{ for some } i \in \IndexSet \} \\
+\bigcap_{i \in \IndexSet} S_{i}
+&= \{ x | x \in S_{i} \text{ for all } i \in \IndexSet \} .
 \end{align*}
 The index set $\IndexSet$ can be finite or infinite.
 
@@ -177,19 +178,19 @@ Two particularly useful equivalent combinations of operations are given by \emph
 R - (S \cup T) &= (R - S) \cap (R - T) \\
 R - (S \cap T) &= (R - S) \cup (R - T).
 \end{align*}
-These two laws can be generalized to
+These two laws can also appear in different forms,
 \begin{align*}
-\left( \bigcup_{\alpha \in \IndexSet} S_{\alpha} \right)^{\Complement}
-&= \bigcap_{\alpha \in \IndexSet} S_{\alpha}^{\Complement} \\
-\left( \bigcap_{\alpha \in \IndexSet} S_{\alpha} \right)^{\Complement}
-&= \bigcup_{\alpha \in \IndexSet} S_{\alpha}^{\Complement}
+\left( \bigcup_{i \in \IndexSet} S_{i} \right)^{\Complement}
+&= \bigcap_{i \in \IndexSet} S_{i}^{\Complement} \\
+\left( \bigcap_{i \in \IndexSet} S_{i} \right)^{\Complement}
+&= \bigcup_{i \in \IndexSet} S_{i}^{\Complement}
 \end{align*}
 when multiple sets are involved.
-To establish the first equality, suppose that $x$ belongs to $\left( \bigcup_{\alpha \in \IndexSet} S_{\alpha} \right)^{\Complement}$.
-Then $x$ is not contained in $\bigcup_{\alpha \in \IndexSet} S_{\alpha}$.
-That is, $x$ is not an element of $S_{\alpha}$ for any $\alpha \in \IndexSet$.
-This implies that $x$ belongs to $S_{\alpha}^{\Complement}$ for all $\alpha \in \IndexSet$, and therefore $x \in \bigcap_{\alpha \in \IndexSet} S_{\alpha}^{\Complement}$.
-We have shown that $\left( \bigcup_{\alpha \in \IndexSet} S_{\alpha} \right)^{\Complement} \subset \bigcap_{\alpha \in \IndexSet} S_{\alpha}^{\Complement}$.
+To establish the first equality, suppose that $x$ belongs to $\left( \bigcup_{i \in \IndexSet} S_{i} \right)^{\Complement}$.
+Then $x$ is not contained in $\bigcup_{i \in \IndexSet} S_{i}$.
+That is, $x$ is not an element of $S_{i}$ for any $i \in \IndexSet$.
+This implies that $x$ belongs to $S_{i}^{\Complement}$ for all $i \in \IndexSet$, and therefore $x \in \bigcap_{i \in \IndexSet} S_{i}^{\Complement}$.
+We have shown that $\left( \bigcup_{i \in \IndexSet} S_{i} \right)^{\Complement} \subset \bigcap_{i \in \IndexSet} S_{i}^{\Complement}$.
 The converse inclusion is obtained by reversing the above argument.
 The second law can be obtained in a similar fashion.
 
@@ -216,12 +217,71 @@ In this example, the sets $\{ 1, 2, 3 \}$ and $\{ a, b \}$ are employed to creat
 \end{figure}
 
 
+\section{Functions}
+
+A \emph{function} is a special type of relation that assigns exactly one value to each input.\index{Function}
+A common representation for a function is $f(x) = y$, where $f$ denotes the rule of correspondence.
+The \emph{domain} of a function is the set over which this function is defined; that is, the collection of arguments that can be used as input.\index{Domain}
+The \emph{codomain} is the set into which all the outputs of the function are constrained to lie.\index{Codomain}
+To specify these sets explicitly, the notation
+\begin{equation*}
+f: X \rightarrow Y
+\end{equation*}
+is frequently used, where $X$ indicates the domain and $Y$ is the codomain.
+In these notes, we adopt an intuitive point of view, with the understanding that a function maps every argument to a unique value in the codomain.
+However, a function can be defined formally as a triple $(X, Y, F)$ where $F$ is a structured subset of the Cartesian product $X \times Y$.
+
+\begin{example}
+Consider the function $f: \RealNumbers \rightarrow \RealNumbers$ where $f(x) = x^2$.
+In this case, the domain $\RealNumbers$ and the codomain $\RealNumbers$ are identical.
+The rule of correspondence for this function is $x \mapsto x^2$, which should be read ``$x$ maps to $x^2$.''
+\end{example}
+
+\begin{example}
+An interesting function that plays an important role in probability is the indicator function.
+Suppose $S$ is a subset of the real numbers.
+We define the indicator function of set $S$, denoted $\IndicatorFcn_S: \RealNumbers \rightarrow \{ 0, 1 \}$, by
+\begin{equation*}
+\IndicatorFcn_S (x) = \begin{cases} 1, & x \in S\\
+0, & x \notin S . \end{cases}
+\end{equation*}
+In words, the value of the function $\IndicatorFcn_S (\cdot)$ indicates whether its argument belongs to $S$ or not.
+A value of one represents inclusion of the argument in $S$, whereas a zero signifies exclusion.
+\end{example}
+
+The \emph{image} of function is the set of all objects of the form $f(x)$, where $x$ ranges over the elements of $X$,\index{Image}
+\begin{equation*}
+\{ f(x) \in Y | x \in X \} .
+\end{equation*}
+The image of $f: X \rightarrow Y$ is sometimes denoted by $f(X)$ and it is, in general, a subset of the codomain.
+Similarly, the \emph{preimage} of a set $T \subset Y$ under $f: X \rightarrow Y$ is the subset of $X$ defined by\index{Preimage}
+\begin{equation*}
+f^{-1} (T) = \{ x \in X | f(x) \in T \} .
+\end{equation*}
+It may be instructive to point out that the preimage of a singleton set can contain any number of elements,
+\begin{equation*}
+f^{-1} (\{ y \}) = \{ x \in X | f(x) = y \} .
+\end{equation*}
+This set, $f^{-1} (\{ y \})$, is sometimes called the \emph{level set} of $y$.
+
+A function is \emph{injective} or \emph{one-to-one} if it preserves distinctness;\index{Injective}\index{One-to-one}
+that is, different elements from the domain never map to a same element in the codomain.
+Mathematically, the function $f: X \rightarrow Y$ is injective if $f(x_1) = f(x_2)$ implies $x_1 = x_2$ for all $x_1, x_2 \in X$.
+The function $f$ is \emph{surjective} or \emph{onto} if its image is equal to its codomain.\index{Surjective}\index{Onto}
+More specifically, a function $f: X \rightarrow Y$ is surjective if and only if, for every $y \in Y$, there exists $x \in X$ such that $f(x) = y$.
+Finally, a function that is both one-to-one and onto is called a \emph{bijection}.\index{Bijection}
+A function $f$ is bijective if and only if its inverse relation $f^{-1}$ is itself a function.
+In this case, the preimage of a singleton set is necessarily a singleton set.
+The inverse of $f$ is then represented unambiguously by $f^{-1}: Y \rightarrow X$,
+with $f^{-1} (f(x)) = x$ and $f (f^{-1} (y)) = y$.
+
+
 \section{Set Theory and Probability}
 
 Set theory provides a rigorous foundation for modern probability and its axiomatic basis.
 It is employed to describe the laws of probability, give meaning to their implications and answer practical questions.
-Being familiar with basic definitions and set operations is key in understanding the subtleties of probability; it helps overcome its many challenges.
-A working knowledge of set theory becomes critical when modeling measured quantities and evolving processes that appear random, an invaluable skill for engineers.
+Becoming familiar with basic definitions and set operations is key in understanding the subtleties of probability; it will help overcome its many challenges.
+A working knowledge of set theory is especially critical when modeling measured quantities and evolving processes that appear random, an invaluable skill for engineers.
 
 
 \section*{Further Reading}
