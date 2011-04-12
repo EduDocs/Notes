@@ -203,6 +203,44 @@ Then, we have
 Therefore, by the principle of mathematical induction, \eqref{equation:UnionBound} is valid for all positive integers.
 \end{proof}
 
+The union bound is often employed in situations where finding the joint probability of multiple rare events is difficult, but computing the probabilities of the individual components is straightforward. 
+
+\begin{example}
+An urn contains 990 blue balls and 10 red balls.
+Five people each pick a ball at random, without replacement.
+We wish to compute the probability that at least one person picks a red ball.
+Let $B_k$ denote the event that person~$k$ draws a red ball.
+We note that the probability of interest can be written as $\Pr \left( \bigcup_{k=1}^5 B_k \right)$.
+
+We first approximate this probability using the union bound.
+The probability that a particular person picks a red ball is equal to 1/100.
+Applying \eqref{equation:UnionBound}, we get a bound on the probability that at least one person picks a red ball,
+\begin{equation*}
+\Pr \left( \bigcup_{k=1}^5 B_k \right)
+\leq \sum_{k=1}^5 \Pr ( B_k )
+= \sum_{k=1}^5 \frac{1}{100} = \frac{1}{20} .
+\end{equation*}
+We can also compute this probability exactly.
+The probability that no red balls are selected is given by $\binom{990}{5} / \binom{1000}{5}$.
+Hence, the probability that a least one person draws a red ball becomes
+\begin{equation*}
+\Pr \left( \bigcup_{k=1}^5 B_k \right)
+= 1 - \frac{\binom{990}{5}}{\binom{1000}{5}}
+\approx 0.0491 .
+\end{equation*}
+
+As a second application, consider the problem where the five people each draw two balls from the urn, without replacement.
+This time, we wish to approximate the probability that at least one person gets two red balls.
+Using the same steps as before, we get
+\begin{equation*}
+\Pr \left( \bigcup_{k=1}^5 C_k \right)
+\leq \sum_{k=1}^5 \Pr ( C_k )
+= \sum_{k=1}^5 \frac{\binom{10}{2}}{\binom{1000}{2}} = \frac{1}{2220} ,
+\end{equation*}
+where $C_k$ represents the event that person $k$ draws two red balls.
+In this latter scenario, computing the exact probability is much more challenging.
+\end{example}
+
 
 \subsection{Finite Sample Spaces}
 \label{section:FiniteSampleSpaces}
@@ -373,7 +411,7 @@ For this carefully crafted example, it appears that the probability of an admiss
 \end{equation*}
 This is indeed accurate for the current scenario.
 In fact, the class of admissible events for this experiment is simply the collection of all sets for which the integral $\int_A dx$ can be computed.
-In other words, if a number is chosen at random from $[0,1]$, then the probability of this number falling in measurable set $A \subset [0,1]$ is
+In other words, if a number is chosen at random from $[0,1]$, then the probability of this number falling in set $A \subset [0,1]$ is
 \begin{equation*}
 \Pr (A) = \int_{A} dx .
 \end{equation*}

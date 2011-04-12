@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
+
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:cc="http://creativecommons.org/ns#"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
@@ -12,15 +13,30 @@
    height="1052.3622047"
    id="svg1404"
    sodipodi:version="0.32"
-   inkscape:version="0.45.1"
-   sodipodi:docbase="/Users/courses/Desktop/FREDsvn/EduDocs/Probability/Figures/1Chapter"
+   inkscape:version="0.47pre3 r22311"
    sodipodi:docname="intersection.svg"
    inkscape:export-filename="/usr/home/chmbrlnd/Courses/intersection.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90"
-   inkscape:output_extension="org.inkscape.output.svg.inkscape">
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   version="1.1">
   <defs
-     id="defs1406" />
+     id="defs1406">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective15048" />
+    <inkscape:perspective
+       id="perspective14007"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+  </defs>
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -29,15 +45,16 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="0"
      inkscape:zoom="1"
-     inkscape:cx="151.02896"
-     inkscape:cy="101.02913"
+     inkscape:cx="179.52896"
+     inkscape:cy="69.620051"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:window-width="810"
      inkscape:window-height="581"
      inkscape:window-x="250"
-     inkscape:window-y="63" />
+     inkscape:window-y="63"
+     inkscape:window-maximized="0" />
   <metadata
      id="metadata1409">
     <rdf:RDF>
@@ -90,5 +107,25 @@
          id="tspan2304"
          x="149.25943"
          y="955.70709">I</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="-0.79097158"
+       y="863.21045"
+       id="text2227"><tspan
+         sodipodi:role="line"
+         id="tspan2229"
+         x="-0.79097158"
+         y="863.21045">S</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="302.09305"
+       y="863.05194"
+       id="text2231"><tspan
+         sodipodi:role="line"
+         id="tspan2233"
+         x="302.09305"
+         y="863.05194">T</tspan></text>
   </g>
 </svg>

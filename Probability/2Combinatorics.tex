@@ -117,7 +117,7 @@ These elements are displayed above.}
 \section{Permutations}
 
 Again, consider the integer set $S = \{ 1, 2, \ldots, n \}$.
-A \emph{permutation} of $S$ is an ordered arrangement of its elements, a list without repetitions. \index{Permutation}
+A \emph{permutation} of $S$ is an ordered arrangement of its elements, i.e., a list without repetitions. \index{Permutation}
 The number of permutations of $S$ can be computed as follows.
 Clearly, there are $n$ distinct possibilities for the first item in the list.
 The number of possibilities for the second item is $n-1$, namely all the integers in $S$ except the element we selected initially.
@@ -346,7 +346,7 @@ For example, the integer assignment associated with the Figure~\ref{figure:Parti
 \end{center}
 \end{figure}
 
-There is a natural bijection between an integer assignment and the graphical representation depicted above.
+There is a natural relation between an integer assignment and the graphical representation depicted above.
 To count the number of possible integer assignments, it suffices to calculate the number of ways to place the markers and the balls.
 In particular, there are $n + r - 1$ positions, $n$ balls and $r - 1$ markers.
 The number of ways to assign the markers is equal to the number of $n$-combinations of $n + r - 1$ elements,
@@ -418,14 +418,20 @@ The probability of winning the Mega Millions Grand Prize is
 Six couples, twelve people total, are out at sea on a sail boat.
 Unfortunately, the boat hits an iceberg and starts sinking slowly.
 Two Coast Guard vessels, the Ibis and the Mako, come to the rescue.
-Each passenger must decide which of the two rescue boats to board.
+Each boat can rescue six people.
 What is the probability that no two people from a same couple end up on the Mako?
 
-Suppose that all the passengers choose a rescue boat independently of one another.
-For a given couple, the probability that the two members do not end up on the Mako is $3/4$.
-Since couples act independently, the probability that no two people from a same couple are united on the Mako becomes $3^6/4^6$.
-In other words, there are a total of $4096$ possible arrangements of people on the Mako after the rescue operation, all equally likely;
-only $729$ of these arrangements are such that no two members from a same couple board the Mako.
+Suppose that rescued passengers are assigned to the Ibis and the Mako  at random.
+Then, the number of possible ways to partition these passengers between the two vessels is
+\begin{equation*}
+\binom{12}{6} = \frac{12!}{6! 6!} .
+\end{equation*}
+If no two people from a same couple end up on the Mako, then each couple is split between the two vessels.
+In these circumstances, there are two possibilities for every couple and, using the counting principle, we gather that there are $2^6$ such assignments.
+Collecting these results, we conclude that the probability that no two people from a same couple end up on the Mako is equal to
+\begin{equation*}
+\frac{2^6}{\binom{12}{6}} = \frac{2^6 6! 6!}{12!} .
+\end{equation*}
 \end{example}
 
 
