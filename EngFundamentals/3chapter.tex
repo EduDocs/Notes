@@ -739,11 +739,11 @@ where $t$ can be ignored because the processes are WSS.
 \subsection{LMMSE Filtering in Practice}
 
 While theoretical treatments of optimal filtering often assume one has well-defined random variables with known statistics, this is rarely the case in practice.
-Yet, there is a very close connection between Wiener filter and natural data driven approaches.
+Yet, there is a very close connection between Wiener filtering and natural data driven approaches.
 Consider the problem from the previous section and let $x[1],x[2],\ldots_1,x[N]$ and $z[1],z[2],\ldots,z[N]$ be realizations of the random processes.
 
 As an application, one can think of the $x[t]$ sequence as the received samples in a wireless communication system and the $z[t]$ sequence as a \emph{pilot sequence} (i.e., known to both the transmitter and receiver).
-It is assumed the transmitted sequence ihas been convolved with an unknown LTI system.
+It is assumed the transmitted sequence has been convolved with an unknown LTI system.
 This type of degradation is known as intersymbol interference (ISI) and the goal is to find a linear filter $h[0],h[1],\ldots,h[K-1]$ that removes as much ISI as possible.
 A suitable cost funciton for this goal is
 \[ J(\vecnot{h}) = \sum_{t=K}^N \lambda^{N-t} \left| z[t] - \sum_{k=0}^{K-1} h[k] x[t-k] \right|^2, \]
