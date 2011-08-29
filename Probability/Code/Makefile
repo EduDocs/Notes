@@ -18,6 +18,11 @@ random: pran.o
 prandom.o: pran.cpp
 	g++ -c pran.cpp -o pran.o
 
+numpermutation: numpermutation.o
+	g++ numpermutation.o -o numpermutation
+numpermuation.o: numpermutation.cpp
+	g++ -c numpermutation.cpp -o numpermutation.o
+
 clean:
 	rm *.o
 
