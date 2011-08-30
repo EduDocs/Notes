@@ -346,23 +346,24 @@ Let $\vecnot{v}_1, \vecnot{v}_2, \ldots$ be a convergent sequence in $V$, then
 \begin{equation*}
 \left\| T \vecnot{v}_i - T \vecnot{v}_j \right\|
 = \left\| T \left( \vecnot{v}_i - \vecnot{v}_j \right) \right\|
-= M \left\| \vecnot{v}_i - \vecnot{v}_j \right\| .
+\leq  M \left\| \vecnot{v}_i - \vecnot{v}_j \right\| .
 \end{equation*}
 This implies that $T \vecnot{v}_1, T \vecnot{v}_2, \ldots$ is a convergent sequence in $W$, and $T$ is continuous.
 
-Conversely, assume $T$ is continuous.
-Then there is a $\delta > 0$ such that $\left\| T \vecnot{u} \right\| \leq 1$ for $\left\| \vecnot{u} \right\| \leq \delta$.
-Since the norm of $\vecnot{u} = \frac{ \delta \vecnot{v} }{ \left\| \vecnot{v} \right\| }$ is equal to $\delta$, we get
+Conversely, assume $T$ is continuous and notice that $T \vecnot{0} = \vecnot{0}$.
+Therefore, for any $\epsilon > 0$, there is a $\delta>0$ such that $\| T \vecnot{v} \| < \epsilon$ for all $\| \vecnot{v} \| < \delta$.
+%Then there is a $\delta > 0$ such that $\left\| T \vecnot{u} \right\| \leq 1$ for $\left\| \vecnot{u} \right\| \leq \delta$.
+Since the norm of $\vecnot{u} = \frac{ \delta \vecnot{v} }{2 \left\| \vecnot{v} \right\| }$ is equal to $\delta/2$, we get
 \begin{equation*}
 \left\| T \vecnot{v} \right\|
-= \left\| T \frac{ \delta \vecnot{v} }{ \left\| \vecnot{v} \right\| } \right\|
-\frac{ \left\| \vecnot{v} \right\| }{ \delta }
-\leq \frac{ \left\| \vecnot{v} \right\| }{ \delta } .
+= \left\| T \frac{ \delta \vecnot{v} }{2 \left\| \vecnot{v} \right\| } \right\|
+\frac{ 2 \left\| \vecnot{v} \right\| }{ \delta }
+< \frac{2 \epsilon}{ \delta } \left\| \vecnot{v} \right\|.
 \end{equation*}
-The value $M = \frac{1}{\delta}$ serves as a bound for $T$.
+The value $M = \frac{2 \epsilon}{\delta}$ serves as an upper bound on $\|T\|$.
 \end{proof}
 
-Then, by showing that linear transformation over finite-dimensional spaces are continuous, one concludes that they are also bounded.
+Then, by showing that linear transformations over finite-dimensional spaces are continuous, one concludes that they are also bounded.
 This is accomplished in the following theorem.
 
 \begin{theorem}
@@ -387,7 +388,7 @@ Being continuous, it is also bounded, so there exists a constant $M$ such that $
 The linearity property is straightforward, its proof is omitted.
 It will suffice to show that there is an $m > 0$ such that
 \begin{equation} \label{equation:ContinuityFiniteDim}
-m \left( |s_1| + \cdots + |s_n| \right) \leq \left\| \vecnot{v} \right\| ,
+m |s_i| \leq m \left( |s_1| + \cdots + |s_n| \right) \leq \left\| \vecnot{v} \right\| ,
 \end{equation}
 since \eqref{equation:ContinuityFiniteDim} implies that $|s_i| \leq m^{-1} \left\| \vecnot{v} \right\|$.
 We first show that this holds for coefficients $\left\{ s_1, \ldots, s_n \right\}$ satisfying the condition $|s_1| + \cdots + |s_n| = 1$.
