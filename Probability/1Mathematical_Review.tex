@@ -208,7 +208,7 @@ The second law can be obtained in a similar fashion.
 
 There is yet another way to create new sets from existing ones.
 It involves the notion of an \emph{ordered pair} of objects.\index{Ordered pair}
-Given sets $S$ and $T$, the \emph{cartesian product} $S \times T$ is the set of all ordered pairs $(x, y)$ for which $x$ is an element of $S$ and $y$ is an element of $T$, $S \times T = \{ (x, y) | x \in S \text{ and } y \in T \}$.\index{Cartesian product}
+Given sets $S$ and $T$, the \emph{cartesian product} $S \times T$ is the set of all ordered pairs $(x, y)$ such that $x$ is an element of $S$ and $y$ is an element of $T$, $S \times T = \{ (x, y) | x \in S \text{ and } y \in T \}$.\index{Cartesian product}
 
 \begin{figure}[htb]
 \begin{center}
@@ -228,7 +228,7 @@ In this example, the sets $\{ 1, 2, 3 \}$ and $\{ a, b \}$ are employed to creat
 
 \section{Functions}
 
-A \emph{function} is a special type of relation that assigns exactly one value to each input.\index{Function}
+A \emph{function} is a special type of relation that assigns exactly one value to each possible input.\index{Function}
 A common representation for a function is $f(x) = y$, where $f$ denotes the rule of correspondence.
 The \emph{domain} of a function is the set over which this function is defined; that is, the collection of arguments that can be used as input.\index{Domain}
 The \emph{codomain} is the set into which all the outputs of the function are constrained to lie.\index{Codomain}
@@ -237,8 +237,8 @@ To specify these sets explicitly, the notation
 f: X \rightarrow Y
 \end{equation*}
 is frequently used, where $X$ indicates the domain and $Y$ is the codomain.
-In these notes, we adopt an intuitive point of view, with the understanding that a function maps every argument to a unique value in the codomain.
-However, a function can be defined formally as a triple $(X, Y, F)$ where $F$ is a structured subset of the Cartesian product $X \times Y$.
+In these notes, we subscribe to an intuitive viewpoint with the understanding that a function maps every argument to a unique value in the codomain.
+Nonetheless, a function can be defined formally as a triple $(X, Y, F)$ where $F$ is a structured subset of the Cartesian product $X \times Y$.
 
 \begin{example}
 Consider the function $f: \RealNumbers \rightarrow \RealNumbers$ where $f(x) = x^2$.
@@ -258,7 +258,7 @@ In words, the value of the function $\IndicatorFcn_S (\cdot)$ indicates whether 
 A value of one represents inclusion of the argument in $S$, whereas a zero signifies exclusion.
 \end{example}
 
-The \emph{image} of function is the set of all objects of the form $f(x)$, where $x$ ranges over the elements of $X$,\index{Image}
+The \emph{image} of a function is the set of all objects of the form $f(x)$, where $x$ ranges over the elements of $X$,\index{Image}
 \begin{equation*}
 \{ f(x) \in Y | x \in X \} .
 \end{equation*}
@@ -276,7 +276,7 @@ This set, $f^{-1} (\{ y \})$, is sometimes called the \emph{level set} of $y$.
 A function is \emph{injective} or \emph{one-to-one} if it preserves distinctness;\index{Injective}\index{One-to-one}
 that is, different elements from the domain never map to a same element in the codomain.
 Mathematically, the function $f: X \rightarrow Y$ is injective if $f(x_1) = f(x_2)$ implies $x_1 = x_2$ for all $x_1, x_2 \in X$.
-The function $f$ is \emph{surjective} or \emph{onto} if its image is equal to its codomain.\index{Surjective}\index{Onto}
+The function $f$ is \emph{surjective} or \emph{onto} if its image is equal to the codomain.\index{Surjective}\index{Onto}
 More specifically, a function $f: X \rightarrow Y$ is surjective if and only if, for every $y \in Y$, there exists $x \in X$ such that $f(x) = y$.
 Finally, a function that is both one-to-one and onto is called a \emph{bijection}.\index{Bijection}
 A function $f$ is bijective if and only if its inverse relation $f^{-1}$ is itself a function.
