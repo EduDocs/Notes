@@ -1,11 +1,11 @@
-all: book
+all: DigitalCommunication
 
-book: book.tex
-	latex book.tex
-	makeindex book.idx
-	latex book.tex
-	dvips -Ppdf -G0 -o book.ps book.dvi
-	ps2pdf -dEmbedAllFonts=true book.ps book.pdf
+DigitalCommunication: DigitalCommunication.tex
+	latex DigitalCommunication.tex
+	makeindex DigitalCommunication.idx
+	latex DigitalCommunication.tex
+	dvips -Ppdf -G0 -o DigitalCommunication.ps DigitalCommunication.dvi
+	ps2pdf -dEmbedAllFonts=true DigitalCommunication.ps DigitalCommunication.pdf
 
 clean:
-	rm -f *.idx *.aux *.dvi *.log *.ps book.pdf
+	rm -f *.idx *.aux *.dvi *.log *.ps DigitalCommunication.pdf

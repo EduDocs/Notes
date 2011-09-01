@@ -17,7 +17,7 @@ This is not intended to be a comprehensive treatment of the subject.
 \label{section:FourierSeries}
 
 Fourier series can be employed to express, as weighted sums of sinusoidal components, either periodic functions or functions that are time-limited.
-Suppose that the signal $s(t)$ is zero for all $|t|\geq\frac{T}{2}$ and satisfies
+Suppose that the signal $s(t)$ is zero for all $|t|\geq\frac{T}{2}$, is integrable and satisfies
 \begin{equation*}
 %\| s(t) \|^2 \triangleq
 \int_{\mathbb{R}} |s(t)|^2 dt =
@@ -110,11 +110,10 @@ The Fourier transform of $\mathrm{rect} (\alpha t)$ can be computed as follows,
 &= \frac{1}{\alpha} \mathrm{sinc}\left( \frac{f}{\alpha} \right) .
 \end{split}
 \end{equation*}
-The $\mathrm{sinc}(\cdot)$ function is defined to be
-Thus, the Fourier transform of $\mathrm{rect}(t)$ is the famous $\mathrm{sinc}(f)$ function, which plays a fundamental role in the sampling and reconstruction of information signals.
+Thus, the Fourier transform of $\mathrm{rect}(t)$ is the aforementioned $\mathrm{sinc}(f)$ function, which plays a central role in the sampling and reconstruction of information signals.
 \end{example}
 
-The Fourier transform $\hat{x}(f)$ of a square-integrable signal $x(t)$ also allows one to pose the question, ``How much signal energy is contained the frequencies between $f_0$ and $f_1$?".
+The Fourier transform $\hat{x}(f)$ of a square-integrable signal $x(t)$ also allows one to pose the question: how much signal energy is contained in the spectral band between frequencies $f_0$ and $f_1$?
 The answer, for $f_0 \leq f_1$, is given by the integral
 \[ \int_{f_0}^{f_1} \left| \hat{x}(f) \right|^2 df. \]
 This integral allows us to interpret the quantity $\left| \hat{x}(f) \right|^2$ as the \defn{Fourier analysis}{energy spectral density} of $x(t)$.
@@ -125,23 +124,20 @@ For real signals, the integral is typically computed over the range $f_0 < |f| <
 When condition~\eqref{equation:L2Condition} is not satisfied, it may be hazardous to use Fourier analysis and frequency domain representations.
 Strictly speaking, the Fourier transform of a function may not exist if the function behaves wildly.
 Casually taking the Fourier transforms of arbitrary signals should be avoided.
-Having said that, there will be instances where we discuss the Fourier transforms of functions that do not fulfill \eqref{equation:L2Condition};
-one such example appears below.
+Having said that, there will be instances where we discuss the Fourier transforms of functions that do not fulfill \eqref{equation:L2Condition}.
+In such circumstances, the argument to the Fourier transform is carefully selected to remain meaningful from an engineering viewpoint; one such example appears below.
 
 \subsection{The Dirac Delta Function}
 
-The \defn{Fourier analysis}{Dirac delta function} $\delta (t)$ can be defined in a cavalier fashion with the operational rule
+The \defn{Fourier analysis}{Dirac delta function} $\delta (t)$ can be defined in a naive fashion with the operational rule
 \begin{equation} \label{equation:DiracDelta}
 x(t) = \int_{\mathbb{R}} \delta (t - \tau) x(\tau) d\tau .
 \end{equation}
-%\begin{equation*}
-%x(0) = \int_{\mathbb{R}} \delta (t) x(t) dt
-%\end{equation*}
 %if $x(t)$ is continuous at 0.
 A more rigorous approach, based on generalized functions, is out of the scope of this class.
-So, these notes adopt a somewhat cavalier attitude towards the Fourier transform of $\delta(t)$ an rely on experience to avoid pitfalls.
-The benefit is that this approach to Fourier analysis can lead to great engineering insight.
-The downside of this approach is that the reader is left with the burden of deciding whether a signal has a proper spectral representation, or if the definition of the Fourier transform is being applied loosely.
+So, these notes adopt a somewhat cavalier attitude towards the Fourier transform of $\delta(t)$ and rely on experience to avoid pitfalls.
+The benefit of this approach to Fourier analysis is that it rapidly leads to valuable engineering insight.
+On the downside, the reader is left with the burden of deciding whether a signal has a proper spectral representation, or if the definition of the Fourier transform is being applied loosely.
 
 Starting with signal $x(t)$, we can write
 \begin{equation} \label{equation:NestedFourierRepresentation}
@@ -238,8 +234,8 @@ The autocorrelation function of a power-type signal is defined accordingly as
 R_x(\tau) \triangleq  \lim_{T\rightarrow\infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} x(t)x^*(t - \tau) dt .
 \end{equation*}
 
-The Fourier transform of a power-type signal $x(t)$ may not exist though because it may not satisfy condition \eqref{equation:L2Condition}.
-However, if truncated versions of $x(t)$, defined by
+We note that the Fourier transform of a power-type signal $x(t)$ need not exist because it may fail to satisfy condition \eqref{equation:L2Condition}.
+Nevertheless, if truncated versions of $x(t)$, defined by
 \begin{equation*}
 x_T(t) \triangleq x(t) \mathrm{rect} \left( \frac{t}{T} \right) ,
 \end{equation*}
@@ -430,6 +426,7 @@ Again, it follows that this imperfection can be eliminated completely by post-fi
 In practice, the main advantage of this observation is that one can jointly optimize both $p(t)$ and the post-filter to provide good performance while using inexpensive components.
 
 
+\newpage
 \section{Stochastic Signals}
 \label{section:StocahsticSignalsFAS}
 \index{random process}

@@ -1,21 +1,24 @@
+
 \chapter{Digital Communication}
 \label{chapter:DigitalComm}
 \index{digital communication}
 
-The term \emph{digital communication} broadly refers to the transmission of information using digital messages or bit streams.
+The advent of data transmissions over physical channels has transformed the modern communication landscape.
+The term \emph{digital communication} broadly refers to the transfer of information using digital messages or bit streams.
 There are notable advantages to transmitting data  using discrete messages.
 It allows for enhanced signal processing and quality control.
 In particular, errors caused by noise and interference can be detected and corrected systematically.
-Digital communication also makes the networking of heterogeneous systems possible, with the Internet being the most obvious such example.
-These advantages, and many more, explain the widespread adoption and constantly increasing popularity of digital communication systems.
+Furthermore, digital communication makes the networking of heterogeneous systems possible, with the Internet being the most obvious such example.
+These advantages, and many more, explain the widespread adoption and constantly increasing popularity of digital media.
 
 
 \section{System Components}
 
-A typical digital communication system can be represented by the functional block diagram depicted in Figure~\ref{figure:BlockDiagram}.
+The operation of a typical digital communication system can be represented by the functional block diagram depicted in Figure~\ref{figure:BlockDiagram}.
 It is composed of five basic components.
-The input block contains the source, which produces data (such as voice, emails, or images), and it also includes all the operations that are required to convert the original signal waveform into a format suitable for transmission.
-The transmitter takes bits from the input block and sends them over a channel using electromagnetic signals, or some alternate means.
+The input block contains the source, which produces data such as voice, emails, or images; and it also includes all the operations that are required to convert the original signal waveform into a format suitable for transmission.
+The transmitter takes bits from the input block and sends them over a channel using electromagnetic signals or some alternate means.
+It may add a protective layer to the intended message to shield it from noise and interference.
 Communication channels come in many flavors.
 For instance, a transmission can take place over an ethernet cable, a coaxial cable, or free space (wireless communication).
 There are also more esoteric channels like a hard drive platter, a compact disc, or a memory stick.
@@ -70,7 +73,7 @@ The first two operations are necessary to transform an analog waveform into a di
 \end{figure}
 
 The optional step of \emph{data compression}, or source coding, is often employed at the origin to reduce the size of the message to be transmitted.
-This, in turn, brings down the consumption of expensive resources such as power, spectral bandwidth and hard disk space.
+This, in turn, brings down the consumption of expensive physical resources such as power, spectral bandwidth and hard disk space.
 On the downside, data processing entails additional computations and delay, and the compressed data must be expanded before being accessed.
 This involves using extra processing on the receiver side as well.
 Some compression schemes reduce the quality of the data.
@@ -96,15 +99,15 @@ Instead, the reconstruction step reverses quantization step in an approximate wa
 \label{figure:BlockOutput}
 \end{figure}
 
-At the output of the system, the data must be transformed back into a format that is acceptable to the end-user.
+At the output of the system, the data must be put back into a format that is acceptable to the end-user.
 The received message must be decompressed.
 Note that for the destination to be able to recover the original data, it must understand the encoding scheme utilized by the sender.
 In other words, the decoding method must be known at the receiver.
 If the original signal is a continuous-time waveform, then an interpolator can be used to reconstruct the waveform from its sample values.
 The quantization block present at the input does not have an exact counterpart at the output.
 This deficiency follows from the fact that quantization cannot be perfectly undone because information is typically lost when a continuous-valued signal is discretized.
-The level of \emph{distortion} associated with quantization can, however, be controlled by choosing an appropriate quantizer and reconstructing the signal in a sensible way.
-In most cases, the impact of quantization is minimal.
+The level of \emph{distortion} associated with quantization can, however, be controlled by choosing an appropriate scheme and reconstructing the signal in a sensible way.
+In most cases, the impact of quantization is minimal; indeed, quantizers are often designed to induce negligible distortion.
 
 
 \subsection{The Transmitter-Receiver Pair}
@@ -136,7 +139,7 @@ In most applications, the channel acts as to transfer the data to a different pl
 However, in hard disk drives and compact discs, the information is stored simply to be accessible at a later time.
 Most communication channels cause signal degradation.
 The message may be subject to attenuation, interference and noise corruption.
-The communication channel may be unreliable; and its environment, hard to characterize.
+That is, the communication channel may be unreliable; and its environment, hard to characterize.
 Recovering the original data from a set of measurements available at the receiver is one of the many challenges of digital communication systems.
 
 \begin{figure}[htbp]
@@ -159,9 +162,10 @@ The first step consists of estimating which symbols were sent by the transmitter
 This procedure is termed \emph{demodulation}.
 These symbol estimates are then translated back into information bits by the decoder.
 Redundancy is removed from the data, and the original format of the information bits is restored.
-If the channel conditions are harsh and the local measurement too noisy, then this process fails and the corresponding data is lost.
-Scratching a compact disc repetitively will illustrate this point well.
-After substantial disc abuse, a player is no longer able to reconstruct the music.
+When channel conditions are harsh and the local measurement noisy, this process may fail and the corresponding data is lost.
+Scratching a compact disc repetitively will illustrate this point well;
+after substantial disc abuse, a player is no longer able to reconstruct the music.
+At this point, the receiver may elect to notify the sender and request a retransmission of the desired message.
 
 
 \section{Common Channels and Applications}
@@ -179,7 +183,7 @@ Below, we provide a few examples of digital communication systems that you may b
 \paragraph{Cable Modem:}
 A cable modem enables point-to-point communication over the cable television infrastructure.
 They are primarily employed to deliver broadband Internet access, taking advantage of unused bandwidth on a cable television network.
-With the advent of voice over Internet protocol (VoIP) telephony, cable modems can also be used to provide telephone service.
+With the emergence of voice over Internet protocol (VoIP) telephony, cable modems can also be used to provide telephone service.
 
 \paragraph{Wi-Fi Technology:}
 Wi-Fi is a global set of standards that allows wireless inter-networking.
@@ -188,11 +192,12 @@ Wireless access points, also called \emph{hotspots}, often provide users access 
 Wi-Fi products can be used as an enabling technology for \emph{mesh networks}, which offer connectivity to large urban communities.
 
 \paragraph{Bluetooth:}
-Bluetooth is a wireless protocol designed for short-range communication, and it is used primarily to create personal area networks.
-Bluetooth provides a means to exchange information between such devices such as mobile phones, personal computers, digital cameras, and a myriad of accessories.
+Bluetooth is a wireless protocol designed specifically for short-range communication.
+It is used primarily to create personal area networks.
+Bluetooth provides a means to exchange information between devices such as mobile phones, personal computers, digital cameras, and a myriad of small accessories.
 
 \paragraph{Hard Disk Drive:}
-A hard disk drive is a non-volatile storage device that stores digitally encoded data on rapidly rotating platters with magnetic surfaces.
+A hard disk drive is a non-volatile storage device that keeps digitally encoded data on rapidly rotating platters with magnetic surfaces.
 Today, hard drives can be found in computers, digital audio players, personal digital assistants, game consoles and other embedded computing devices.
 Data on a hard disk drive is recorded by magnetizing ferromagnetic material directionally, and is read back by detecting the magnetization of the material.
 
