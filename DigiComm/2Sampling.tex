@@ -325,7 +325,7 @@ In contrast, Figure~\ref{figure:Aliasing} exhibits a case where the sampling fre
 \end{figure}
 Aliasing in the frequency domain prevents the original signal from being retrieved.
 
-Sampling and aliasing is also important is film and video.
+Sampling and aliasing are also important in film and video.
 The illusion of a moving image in video is achieved by displaying a rapid succession of still pictures over time.
 Films are typically shot at a rate of twenty-four frames per second, whereas the minimum frame rate required to create the appearance of a moving image is about fifteen frames per second.
 The human eye acts as a lowpass filter and transforms the succession of images into a live video.
@@ -334,7 +334,7 @@ As a consequence, they must run at much higher frame-rates than normal cameras.
 
 \subsection{The Sampling Theorem}
 
-The sampling theorem is one of the most significant results in communications.
+The sampling theorem is one of the most significant results in digital communication and signal processing.
 Many digital communication systems rely on the validity of this theorem and on the design insights it provides for proper operation.
 
 The basic idea behind the sampling theorem can be summarized in a few words.
@@ -407,23 +407,27 @@ It is called the \defn{Fourier analysis}{Nyquist rate} in honor of Swedish-Ameri
 \subsection{Imperfect Sampling and Reconstruction}
 
 In practice, it is impossible to measure (i.e., sample) a signal $x(t)$ instantaneously.
-A more realistic model is that the sample value is given by the integral
-\[ \int_{\mathbb{R}} x(t) p(t-nT) dt, \]
+A more realistic model is to assume that the sample value is obtained through the integral
+\begin{equation*}
+\int_{\mathbb{R}} x(t) p(t-nT) dt ,
+\end{equation*}
 for some sampling waveform $p(t)$.
-In this case, the resulting samples are identical to the perfect sampling of the filtered waveform $y(t)=x(t)*p(-t)$.
-Therefore, the sample values are given by
-\[ y(nT) = \int_{\mathbb{R}} x(t) p(t-nT) dt. \]
+In this case, the resulting samples are identical to the perfect sampling of the filtered waveform $u(t)=x(t)*p(-t)$.
+That is, the sample values are given by
+\begin{equation*}
+u(nT) = \int_{\mathbb{R}} x(t) p(t-nT) dt .
+\end{equation*}
 It also follows that, if no aliasing occurs, the imperfection can be eliminated completely using a discrete-time filter to equalize the resulting samples.
 
 A similar imperfection occurs during reconstruction.
 In practice, it is not possible to weight each sample by the exact sinc interpolation waveform.
-Instead, the samples $x(nT)$ are weighted by some arbitrary pulse shape $p(t)$.
+Instead, the samples $u(nT)$ are weighted by a pulse shape $q(t)$.
 In this case, the reconstruction output is given by
-\[ y(t) = \sum_{n=-\infty}^{\infty} x(nT) p(t-nT). \]
-Since $p(t-nT) = \delta(t-nT) * p(t)$, we can see this instead as perfect reconstruction followed by filtering and write
-\[ y(t) = \left( \sum_{n=-\infty}^{\infty} x(nT) \delta (t-nT) \right) * p(t) = x(t) * p(t). \]
+\[ y(t) = \sum_{n=-\infty}^{\infty} u(nT) q(t-nT). \]
+Since $q(t-nT) = \delta(t-nT) * q(t)$, we can see this instead as perfect reconstruction followed by filtering and write
+\[ y(t) = \left( \sum_{n=-\infty}^{\infty} u(nT) \delta (t-nT) \right) * q(t) = u(t) * q(t). \]
 Again, it follows that this imperfection can be eliminated completely by post-filtering.
-In practice, the main advantage of this observation is that one can jointly optimize both $p(t)$ and the post-filter to provide good performance while using inexpensive components.
+In practice, the main advantage of this observation is that one can jointly optimize $p(t)$, $q(t)$ and the post-filter to provide good performance while using inexpensive components.
 
 
 \newpage
