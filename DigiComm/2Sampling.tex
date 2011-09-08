@@ -295,8 +295,10 @@ x_{\mathrm{s}}(t) = x(t) \sum_{n=-\infty}^{\infty} \delta(t-nT)
 \end{equation*}
 Looking at the sampled signal in the frequency domain, we get
 \begin{equation*}\begin{split}
-\hat{x}_{\mathrm{s}}(f) &= \hat{x}(f) \ast \mathcal{F} \left[ \sum_{n=-\infty}^{\infty} \delta(t-nT) \right] \\
-&= \hat{x}(f) \ast \frac{1}{T} \sum_{n=-\infty}^{\infty} \delta \left( f-\frac{n}{T} \right) \\
+\hat{x}_{\mathrm{s}}(f) &= \hat{x}(f) \ast \mathcal{F} \left[ \sum_{n=-\infty}^{\infty} \delta(t-nT) \right]
+= \hat{x}(f) \ast \frac{1}{T} \sum_{n=-\infty}^{\infty} \delta \left( f-\frac{n}{T} \right) \\
+&= \frac{1}{T} \sum_{n=-\infty}^{\infty} \hat{x}(f) \ast \delta \left( f-\frac{n}{T} \right)
+= \frac{1}{T} \sum_{n=-\infty}^{\infty} \int_{\RealNumbers} \hat{x}(\xi) \ast \delta \left( f - \xi - \frac{n}{T} \right) d\xi \\
 &= \frac{1}{T} \sum_{n=-\infty}^{\infty} \hat{x} \left( f - \frac{n}{T} \right) ,\end{split}\end{equation*}
 where we have used \eqref{equation:ImpulseTrainFrequency} to express the Fourier transform of an impulse train.
 When the sampling rate is fast enough, the translated copies of $\hat{x}(f)$ contained in the transform $\hat{x}_{\mathrm{s}}(f)$ do not overlap, and the original signal can be recovered using an ideal lowpass filter.
@@ -404,31 +406,145 @@ It is called the \defn{Fourier analysis}{Nyquist rate} in honor of Swedish-Ameri
 \end{proof}
 
 
+\newpage
 \subsection{Imperfect Sampling and Reconstruction}
 
 In practice, it is impossible to measure (i.e., sample) a signal $x(t)$ instantaneously.
 A more realistic model is to assume that the sample value is obtained through the integral
 \begin{equation*}
-\int_{\mathbb{R}} x(t) p(t-nT) dt ,
+u(t) = \int_{\mathbb{R}} x(\tau) p(\tau-t) d\tau ,
 \end{equation*}
 for some sampling waveform $p(t)$.
 In this case, the resulting samples are identical to the perfect sampling of the filtered waveform $u(t)=x(t)*p(-t)$.
 That is, the sample values are given by
 \begin{equation*}
-u(nT) = \int_{\mathbb{R}} x(t) p(t-nT) dt .
+u(nT) = \int_{\mathbb{R}} x(\tau) p(\tau-nT) d\tau .
 \end{equation*}
 It also follows that, if no aliasing occurs, the imperfection can be eliminated completely using a discrete-time filter to equalize the resulting samples.
 
 A similar imperfection occurs during reconstruction.
 In practice, it is not possible to weight each sample by the exact sinc interpolation waveform.
-Instead, the samples $u(nT)$ are weighted by a pulse shape $q(t)$.
+Instead, the samples $x(nT)$ are weighted by a pulse shape $q(t)$.
 In this case, the reconstruction output is given by
-\[ y(t) = \sum_{n=-\infty}^{\infty} u(nT) q(t-nT). \]
+\[ y(t) = \sum_{n=-\infty}^{\infty} x(nT) q(t-nT). \]
 Since $q(t-nT) = \delta(t-nT) * q(t)$, we can see this instead as perfect reconstruction followed by filtering and write
-\[ y(t) = \left( \sum_{n=-\infty}^{\infty} u(nT) \delta (t-nT) \right) * q(t) = u(t) * q(t). \]
+\[ y(t) = \left( \sum_{n=-\infty}^{\infty} x(nT) \delta (t-nT) \right) * q(t) = x(t) * q(t). \]
 Again, it follows that this imperfection can be eliminated completely by post-filtering.
 In practice, the main advantage of this observation is that one can jointly optimize $p(t)$, $q(t)$ and the post-filter to provide good performance while using inexpensive components.
 
+
+\section{Sampling Bandlimited Processes}
+
+We know from Theorem~\ref{theorem:SamplingTheorem} that a bandwidth-limited signal can be perfectly reconstructed from its samples provided that the sampling rate exceeds twice the bandwidth of the original signal.
+At this point, one may wonder whether it is possible to extend the sampling theorem to bandwidth-limited stochastic processes.
+This question is answered in the affirmative below.
+
+\begin{theorem} \label{theorem:SamplingRandomSignals}
+Suppose that $X(t)$ is a wide-sense stationary bandwidth-limited process with bandwidth $W$ and power spectral density $\mathcal{S}_X (f)$.
+Let $\tilde{X}(t)$ be an approximation for $X(t)$ built from the sampled values $\{ X(nT) : n \in \mathbb{Z} \}$,
+\begin{equation*}
+\tilde{X}(t) = \sum_{n=-\infty}^{\infty} X(nT) \mathrm{sinc} (2 W (t - nT)) ,
+\end{equation*}
+where $T = \frac{1}{2W}$ denotes the sampling interval.
+Then the mean-squared error between the original random process and the reconstructed version vanishes,
+\begin{equation} \label{equation:SamplingMSE}
+\left\| X(t) - \tilde{X}(t) \right\|^2
+= \mathrm{E} \left[ \left| X(t) - \sum_{n=-\infty}^{\infty}
+X(nT) \mathrm{sinc} (2 W (t - nT)) \right|^2 \right] = 0 .
+\end{equation}
+The expectation in \eqref{equation:SamplingMSE} is over all possible realizations of $X(t)$.
+\end{theorem}
+\begin{proof}
+To establish this result, we expand the mean-squared error of \eqref{equation:SamplingMSE},
+\begin{equation*}
+\begin{split}
+&\left\| X(t) - \tilde{X}(t) \right\|^2
+= \mathrm{E} \left[ \left| X(t) - \sum_{n=-\infty}^{\infty} X(nT)
+\mathrm{sinc}(2 W (t - nT)) \right|^2 \right] \\
+&= R_X(0) - \sum_{n=-\infty}^{\infty} [ R_X(t-nT) + R_X^*(t-nT) ]
+\mathrm{sinc}(2 W (t - nT)) \\
+&+ \sum_{n=-\infty}^{\infty} \sum_{m=-\infty}^{\infty} R_X((m-n)T)
+\mathrm{sinc}(2 W (t - mT)) \mathrm{sinc}(2 W (t - nT)) .
+\end{split}
+\end{equation*}
+The double summation above can be rewritten as
+\begin{equation*}
+\begin{split}
+&\sum_{n=-\infty}^{\infty} \sum_{k=-\infty}^{\infty} R_X(kT)
+\mathrm{sinc}(2 W (t - kT - nT)) \mathrm{sinc}(2 W (t - nT)) \\
+&\sum_{n=-\infty}^{\infty} \left( \sum_{k=-\infty}^{\infty} R_X(kT)
+\mathrm{sinc}(2 W (t - kT - nT)) \right) \mathrm{sinc}(2 W (t - nT)) \\
+&= \sum_{n=-\infty}^{\infty} R_X(t - nT) \mathrm{sinc}(2 W (t - nT)) ,
+\end{split}
+\end{equation*}
+where the last equality follows from the sampling theorem for deterministic signals (Theorem~\ref{theorem:SamplingTheorem}).
+Putting these results together, we get
+\begin{equation*}
+\left\| X(t) - \tilde{X}(t) \right\|^2
+= R_X(0) - \sum_{n=-\infty}^{\infty} R_X^*(t-nT) \mathrm{sinc}(2 W (t - nT)) .
+\end{equation*}
+Applying Theorem~\ref{theorem:SamplingTheorem} one more time and noticing that $R_X(0) = R_X^*(0)$, we obtain $\| X(t) - \tilde{X}(t) \|^2 = 0$, as desired.
+\end{proof}
+
+Theorem~\ref{theorem:SamplingRandomSignals} is important because it confirms that the design insights gained from analyzing deterministic signals hold for random signals as well.
+
+
+\section{Bandpass Signals and Processes}
+
+One possible application of sampling is to take a continuous-time signal and to transform it into a discrete-time signal.
+For instance, this operation gives the information coming out of a source a format more suitable for digital communications.
+This prime application of sampling served as the original motivation for our study of the subject.
+A second possible application of sampling is the processing of received waveforms at the output of communication channels.
+In digital communications, the data often assumes the form of an analog carrier signal modulated by a digital bit stream.
+Mathematically, this situation is captured by the equation
+\begin{equation*}
+y(t) = x(t) \cos (2 \pi f_{\mathrm{c}} t) .
+\end{equation*}
+The signal $y(t)$ is a special form of a \defn{Fourier analysis}{bandpass signal}.
+Its Fourier transform $\hat{y}(f)$ is non-zero only for frequencies contained in a small neighborhood of carrier frequency $f_{\mathrm{c}}$.
+That is, $\hat{y}(f) = 0$ for all frequencies such that $|f - f_{\mathrm{c}}| \geq W$.
+To apply the sampling tools derived above to the information bearing signal $x(t)$, we need to shift the corresponding spectrum to the origin.
+
+The Fourier transform of $y(t)$ is given by
+\begin{equation*}
+\hat{y}(f) = \frac{1}{2} \hat{x}(f+f_{\mathrm{c}}) + \frac{1}{2} \hat{x}(f - f_{\mathrm{c}}) .
+\end{equation*}
+Our strategy is to first eliminate $\frac{1}{2} \hat{x}(f + f_{\mathrm{c}})$ from $\hat{y}(f)$, and then to scale and shift $\frac{1}{2} \hat{x}(f + f_{\mathrm{c}})$ back to the origin.
+Define the \defn{Fourier analysis}{step function} by
+\begin{equation*}
+\mathrm{step} (t) = \frac{1}{2} + \frac{1}{2} \mathrm{sign}(t). 
+\end{equation*}
+Taking the (cavalier) Fourier transform of $\mathrm{step}(t)$, we get
+\begin{equation*}
+\begin{split}
+{\mathcal{F}} [\mathrm{step} (t)]
+&= {\mathcal{F}} \left[ \frac{1}{2} + \frac{1}{2} \mathrm{sign}(t) \right] \\
+&= \frac{1}{2} \delta (f)
+- \frac{1}{2} \int_{-\infty}^0 e^{-2 \pi i ft} dt
++ \frac{1}{2} \int_0^{\infty} e^{-2 \pi i ft} dt \\
+&= \frac{1}{2} \delta(f)  + \frac{1}{2 \pi i f}.
+\end{split}
+\end{equation*}
+Using the duality property of the Fourier transform, we get
+\begin{equation*}
+\mathcal{F}^{-1} [\mathrm{step}(f)] = \frac{1}{2} \delta(t) + \frac{i}{2 \pi t} .
+\end{equation*}
+And, by construction, we obtain $\hat{x}(f - f_{\mathrm{c}}) = 2 \mathrm{step}(f) \hat{y}(f)$.
+We can therefore recover the original lowpass signal $x(t)$ using the frequency-shift property of the Fourier transform,
+\begin{equation*}
+x(t)
+= \left[ y(t) \ast \left( \delta (t) + \frac{i}{\pi t} \right) \right]
+e^{- 2 \pi i f_{\mathrm{c}} t}
+= \left[ y(t) + i \left( y(t) \ast \frac{1}{\pi t} \right) \right] e^{- 2 \pi i f_{\mathrm{c}} t} .
+\end{equation*}
+The second component of this signal,
+\begin{equation*}
+y(t) \ast \frac{1}{\pi t} ,
+\end{equation*}
+is called the \defn{Fourier analysis}{Hilbert transform} of $y(t)$.
+Once $x(t)$ is brought back to baseband, the standard sampling theorem applies and a discrete-time version of the signal can be produced.
+
+% Bandpass processes
 
 \newpage
 \section{Stochastic Signals}
@@ -647,115 +763,4 @@ Since this process has infinite power, it is not particularly well-defined mathe
 Still, we can use the cavalier Fourier transform $\mathcal{F} [ 1 ] = \delta(t)$ to argue that the autocorrelation function of $N(t)$ should be $R_N (\tau) = \delta(\tau)$.
 In practice, this is not a problem because $N(t)$ is only used as the input to a linear filter whose output process is guaranteed to have finite power.
 
-\section{Sampling Bandlimited Processes}
 
-We know from Theorem~\ref{theorem:SamplingTheorem} that a bandwidth-limited signal can be perfectly reconstructed from its samples provided that the sampling rate exceeds twice the bandwidth of the original signal.
-At this point, one may wonder whether it is possible to extend the sampling theorem to bandwidth-limited stochastic processes.
-This question is answered in the affirmative below.
-
-\begin{theorem} \label{theorem:SamplingRandomSignals}
-Suppose that $X(t)$ is a wide-sense stationary bandwidth-limited process with bandwidth $W$ and power spectral density $\mathcal{S}_X (f)$.
-Let $\tilde{X}(t)$ be an approximation for $X(t)$ built from the sampled values $\{ X(nT) : n \in \mathbb{Z} \}$,
-\begin{equation*}
-\tilde{X}(t) = \sum_{n=-\infty}^{\infty} X(nT) \mathrm{sinc} (2 W (t - nT)) ,
-\end{equation*}
-where $T = \frac{1}{2W}$ denotes the sampling interval.
-Then the mean-squared error between the original random process and the reconstructed version vanishes,
-\begin{equation} \label{equation:SamplingMSE}
-\left\| X(t) - \tilde{X}(t) \right\|^2
-= \mathrm{E} \left[ \left| X(t) - \sum_{n=-\infty}^{\infty}
-X(nT) \mathrm{sinc} (2 W (t - nT)) \right|^2 \right] = 0 .
-\end{equation}
-The expectation in \eqref{equation:SamplingMSE} is over all possible realizations of $X(t)$.
-\end{theorem}
-\begin{proof}
-To establish this result, we expand the mean-squared error of \eqref{equation:SamplingMSE},
-\begin{equation*}
-\begin{split}
-&\left\| X(t) - \tilde{X}(t) \right\|^2
-= \mathrm{E} \left[ \left| X(t) - \sum_{n=-\infty}^{\infty} X(nT)
-\mathrm{sinc}(2 W (t - nT)) \right|^2 \right] \\
-&= R_X(0) - \sum_{n=-\infty}^{\infty} [ R_X(t-nT) + R_X^*(t-nT) ]
-\mathrm{sinc}(2 W (t - nT)) \\
-&+ \sum_{n=-\infty}^{\infty} \sum_{m=-\infty}^{\infty} R_X((m-n)T)
-\mathrm{sinc}(2 W (t - mT)) \mathrm{sinc}(2 W (t - nT)) .
-\end{split}
-\end{equation*}
-The double summation above can be rewritten as
-\begin{equation*}
-\begin{split}
-&\sum_{n=-\infty}^{\infty} \sum_{k=-\infty}^{\infty} R_X(kT)
-\mathrm{sinc}(2 W (t - kT - nT)) \mathrm{sinc}(2 W (t - nT)) \\
-&\sum_{n=-\infty}^{\infty} \left( \sum_{k=-\infty}^{\infty} R_X(kT)
-\mathrm{sinc}(2 W (t - kT - nT)) \right) \mathrm{sinc}(2 W (t - nT)) \\
-&= \sum_{n=-\infty}^{\infty} R_X(t - nT) \mathrm{sinc}(2 W (t - nT)) ,
-\end{split}
-\end{equation*}
-where the last equality follows from the sampling theorem for deterministic signals (Theorem~\ref{theorem:SamplingTheorem}).
-Putting these results together, we get
-\begin{equation*}
-\left\| X(t) - \tilde{X}(t) \right\|^2
-= R_X(0) - \sum_{n=-\infty}^{\infty} R_X^*(t-nT) \mathrm{sinc}(2 W (t - nT)) .
-\end{equation*}
-Applying Theorem~\ref{theorem:SamplingTheorem} one more time and noticing that $R_X(0) = R_X^*(0)$, we obtain $\| X(t) - \tilde{X}(t) \|^2 = 0$, as desired.
-\end{proof}
-
-Theorem~\ref{theorem:SamplingRandomSignals} is important because it confirms that the design insights gained from analyzing deterministic signals hold for random signals as well.
-
-
-\section{Bandpass Signals and Processes}
-
-One possible application of sampling is to take a continuous-time signal and to transform it into a discrete-time signal.
-For instance, this operation gives the information coming out of a source a format more suitable for digital communications.
-This prime application of sampling served as the original motivation for our study of the subject.
-A second possible application of sampling is the processing of received waveforms at the output of communication channels.
-In digital communications, the data often assumes the form of an analog carrier signal modulated by a digital bit stream.
-Mathematically, this situation is captured by the equation
-\begin{equation*}
-y(t) = x(t) \cos (2 \pi f_{\mathrm{c}} t) .
-\end{equation*}
-The signal $y(t)$ is a special form of a \defn{Fourier analysis}{bandpass signal}.
-Its Fourier transform $\hat{y}(f)$ is non-zero only for frequencies contained in a small neighborhood of carrier frequency $f_{\mathrm{c}}$.
-That is, $\hat{y}(f) = 0$ for all frequencies such that $|f - f_{\mathrm{c}}| \geq W$.
-To apply the sampling tools derived above to the information bearing signal $x(t)$, we need to shift the corresponding spectrum to the origin.
-
-The Fourier transform of $y(t)$ is given by
-\begin{equation*}
-\hat{y}(f) = \frac{1}{2} \hat{x}(f+f_{\mathrm{c}}) + \frac{1}{2} \hat{x}(f - f_{\mathrm{c}}) .
-\end{equation*}
-Our strategy is to first eliminate $\frac{1}{2} \hat{x}(f + f_{\mathrm{c}})$ from $\hat{y}(f)$, and then to scale and shift $\frac{1}{2} \hat{x}(f + f_{\mathrm{c}})$ back to the origin.
-Define the \defn{Fourier analysis}{step function} by
-\begin{equation*}
-\mathrm{step} (t) = \frac{1}{2} + \frac{1}{2} \mathrm{sign}(t). 
-\end{equation*}
-Taking the (cavalier) Fourier transform of $\mathrm{step}(t)$, we get
-\begin{equation*}
-\begin{split}
-{\mathcal{F}} [\mathrm{step} (t)]
-&= {\mathcal{F}} \left[ \frac{1}{2} + \frac{1}{2} \mathrm{sign}(t) \right] \\
-&= \frac{1}{2} \delta (f)
-- \frac{1}{2} \int_{-\infty}^0 e^{-2 \pi i ft} dt
-+ \frac{1}{2} \int_0^{\infty} e^{-2 \pi i ft} dt \\
-&= \frac{1}{2} \delta(f)  + \frac{1}{2 \pi i f}.
-\end{split}
-\end{equation*}
-Using the duality property of the Fourier transform, we get
-\begin{equation*}
-\mathcal{F}^{-1} [\mathrm{step}(f)] = \frac{1}{2} \delta(t) + \frac{i}{2 \pi t} .
-\end{equation*}
-And, by construction, we obtain $\hat{x}(f - f_{\mathrm{c}}) = 2 \mathrm{step}(f) \hat{y}(f)$.
-We can therefore recover the original lowpass signal $x(t)$ using the frequency-shift property of the Fourier transform,
-\begin{equation*}
-x(t)
-= \left[ y(t) \ast \left( \delta (t) + \frac{i}{\pi t} \right) \right]
-e^{- 2 \pi i f_{\mathrm{c}} t}
-= \left[ y(t) + i \left( y(t) \ast \frac{1}{\pi t} \right) \right] e^{- 2 \pi i f_{\mathrm{c}} t} .
-\end{equation*}
-The second component of this signal,
-\begin{equation*}
-y(t) \ast \frac{1}{\pi t} ,
-\end{equation*}
-is called the \defn{Fourier analysis}{Hilbert transform} of $y(t)$.
-Once $x(t)$ is brought back to baseband, the standard sampling theorem applies and a discrete-time version of the signal can be produced.
-
-% Bandpass processes
