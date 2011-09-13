@@ -212,8 +212,9 @@ We wish to compute the probability that at least one person picks a red ball.
 Let $B_k$ denote the event that person~$k$ draws a red ball.
 We note that the probability of interest can be written as $\Pr \left( \bigcup_{k=1}^5 B_k \right)$.
 
-We first approximate this probability using the union bound.
-The probability that a particular person picks a red ball is equal to 1/100.
+First, let us approximate this probability using the union bound.
+Clearly, the probability that the first person picks a red ball, $\Pr (B_1)$, is equal to 1/100.
+As we will see later, it turns out that $\Pr (B_k) = 1/100$ for $k=1,\ldots,5$.
 Applying \eqref{equation:UnionBound}, we get a bound on the probability that at least one person picks a red ball,
 \begin{equation*}
 \Pr \left( \bigcup_{k=1}^5 B_k \right)

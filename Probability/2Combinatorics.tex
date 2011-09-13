@@ -1,7 +1,8 @@
 \chapter[Combinatorics]{Combinatorics and Intuitive Probability}
 
 The simplest probabilistic scenario is perhaps one where the set of possible outcomes is finite and these outcomes are all equally likely.
-In such cases, computing the probability of an event amounts to counting the number of elements comprising this event and then dividing the sum by the total number of admissible outcomes.
+A subset of the set of possible outcomes is called an \emph{event}.
+Computing the probability of an event amounts to counting the number of elements comprising this event and then dividing the sum by the total number of admissible outcomes.
 
 \begin{example}
 The rolling of a fair die is an experiment with a finite number of equally likely outcomes, namely the different faces labeled one through six.
@@ -55,6 +56,22 @@ Consider an experiment consisting of flipping a coin and rolling a die.
 There are two possibilities for the coin, heads or tails, and the die has six faces.
 The number of possible outcomes for this experiment is $2 \times 6 = 12$.
 That is, there are twelve different ways to flip a coin and roll a die.
+\end{example}
+
+Using the equally likely outcome model, the above example implies that the probability of each outcome is $\frac{1}{2} \cdot \frac{1}{6} = \frac{1}{12}$.
+This is an instance of the \emph{product rule} for \emph{independent} experiments, which says the probability that two events both occur is given by the product of their individual probabilities if and only if they are independent.
+For now, we will interpet the word independent intuitively and take it to mean that the two experiments have no relation to each other.
+
+\begin{example}
+Consider two experiments and let $S_1$ be the set of outcomes for the first and $S_2$ be the set of outcomes for the second.
+Let $E_1 \subseteq S_1$ and $E_2 \subseteq S_2$ be events of interest for the two experiments.
+One can think of the two experiments together as a single experiment with outcomes $S = S_1 \times S_2$.
+In this model, the set of joint outcomes where $E_1$ and $E_2$ both occur is given by the joint event $E = E_1 \times E_2$.
+The equally likely outcome model for this joint experiment asserts that the probability that both events occur is given by
+\[ \frac{|E|}{|S|} = \frac{|E_1 \times E_2|}{|S_1 \times S_2|} = \frac{|E_1|\,|E_2|}{|S_1|\,|S_2|} = \frac{|E_1|}{|S_1|}\,\frac{|E_2|}{|S_2|}. \]
+This implies that the product rule is correct when equally-likely experiments are combined this way.
+Conversely, events are called independent only if the product rule works.
+Therefore, combining multiple experiments in this way amount is the same as assuming they are independent.
 \end{example}
 
 The counting principle can be broadened to calculating the number of elements in the cartesian product of multiple sets.
