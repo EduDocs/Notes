@@ -109,12 +109,12 @@ Above, we have used the fact that the basis elements
 \left\{ e^{2 \pi i \frac{n}{2 W} f} \mathrm{rect} \left( \frac{f}{2W} \right) : n \in \mathbb{Z} \right\}
 \end{equation*}
 are orthogonal.
-Minimizing the quantization error for individual samples turns out to also minimize the overall squared error between the original and reconstructed waveforms $x(t)$ and $x_{\mathrm{q}}(t)$.
+In some sense, minimizing the quantization error for individual samples turns out to also minimize the overall squared error between the original and reconstructed waveforms $x(t)$ and $x_{\mathrm{q}}(t)$.
 
 
 \subsection{Mean Squared Error}
 
-Since the quantizer is designed to operate on an information signal, a more relevant assessment of performance weighs in the accuracy of the quantizer over all possible realizations of the random input.
+Since the quantizer is designed to operate on an information signal, a more relevant assessment of performance weighs in the accuracy of the quantizer over all possible realizations of the random input, as opposed to a specific realization.
 An appropriate distortion measure for the quantization of a stochastic signal is provided by the \defn{quantization}{mean squared error} (MSE),
 \begin{equation} \label{equation:QuantizationMSE}
 \mathrm{E} [ d(X, X_{\mathrm{q}}) ]
@@ -197,12 +197,12 @@ Both the mean squared error and the signal-to-quantization-noise ratio are valid
 Still, they must be put in proper context, especially when comparing scenarios where the distributions of the input signals differ.
 For a fixed input process, a quantization scheme that minimizes the MSE will invariably maximize the SQNR.
 
-\begin{example}[Quantization Rule of Thumb]
+\begin{example}[Quantization Rule]
 Consider a signal whose amplitude is bounded between -1 and 1 and whose amplitude distribution has a uniform distribution over the same range.
 Suppose that $n$ bits are represent $2^n$ uniformly spaced quantization levels $q_m = -1-2^{-n} + m 2^{-n+1}$ for $m=1,\ldots,2^n$.
 The performance as a function of $n$ is typically approximated by the rule that the \textbf{SQNR increases by 6.02 dB per bit} for additional quantization bits.
 
-We can understand this by analyzing the quantizer function is
+We can understand this by analyzing the quantizer function, which is
 \[ Q(x) =
 \begin{cases}
 -1+2^{-n} & \mathrm{if} \; x < -1 \\
@@ -238,14 +238,14 @@ Therefore, the conditional amplitude distribution, given the reconstruction poin
 \subsection{Dithering}
 
 While the SQNR accurately measures the increase in noise power caused by quantization, it does not give any information about the spectral content of the quantization noise.
-For many applications it is also important that the quantization noise is white (i.e., uncorrelated in time).
+For many applications, it is also important that the quantization noise be white (i.e., uncorrelated in time).
 To see the problem with standard quantization, consider the periodic signal $x_n$ that satisfies $x_{n+N} = x_n$.
 In this case, the quantized version $y_n = Q(x_n)$ and the quantization error $e_n = y_n - x_n$ are also periodic.
 Therefore, the spectral energy of the quantization noise is concentrated in the harmonics of the fundamental frequency.
 
-Since the quantizer affects only value at a time, one might wonder how the quantization noise becomes correlated.
-The mechanism for this is that the quantization noise is correlated with input value.
-For example, one can compute this correlation for the quantizer in Example~\ref{example:UniformQuantizer} and see that
+Since the quantizer affects only one value at a time, one may wonder how the quantization noise becomes correlated.
+The mechanism for this phenomenon can be explained through the fact that the quantization noise is correlated with the input value.
+For example, one can compute this correlation for the quantizer in Example~\ref{example:UniformQuantizer} and obtain
 \begin{align*}
 \mathrm{E} \left[X \left(X - Q(X)\right) \right] 
 &= \int_0^{16} \frac{x(x - Q(x))}{16} dx \\
@@ -259,34 +259,34 @@ This means that quantizing a pure sinusoid will typically create new spurious ha
 
 The process of adding a small amount of noise before quantization is called \defn{quantization}{dithering}.
 Of course, the added noise increases the overall noise power in the system by a small amount.
-But, if the noise is chosen to be i.i.d. uniform over one quantization interval, then correlation becomes exactly zero.
+But, if the noise sequence is chosen to be independent and uniformly distributed over one quantization interval, then correlation becomes exactly zero.
 To see this, we use the quantizer $Q(x)=2\lfloor x/2 \rfloor + 1$ and let $Z$ be a uniform random variable on $[-1,1]$.
-In this case, we have
+In this case, we get
 \begin{align*}
-\mathrm{E} \left[Q(X+Z)|X=x \right]
-&= \int_{-1}^{1} \frac{1}{2} Q(x+z) dz \\
-&= \int_{-1}^{1} \frac{1}{2} \left( 2\left\lfloor \frac{x+z}{2} \right\rfloor + 1 \right) dz \\
-&= \int_{\frac{x-1}{2}}^{\frac{x+1}{2}} \left( \left\lfloor y \right\rfloor + \frac{1}{2} \right) 2 \, dy \\
-&= 1 + 2 \int_{\frac{x-1}{2}}^{\frac{x+1}{2}} \left\lfloor y \right\rfloor \, dy \\
+& \mathrm{E} \left[Q(X+Z)|X=x \right]
+= \int_{-1}^{1} \frac{1}{2} Q(x+z) dz
+= \int_{-1}^{1} \frac{1}{2} \left( 2\left\lfloor \frac{x+z}{2} \right\rfloor + 1 \right) dz \\
+&= \int_{\frac{x-1}{2}}^{\frac{x+1}{2}} \left( \left\lfloor y \right\rfloor + \frac{1}{2} \right) 2 \, dy
+= 1 + 2 \int_{\frac{x-1}{2}}^{\frac{x+1}{2}} \left\lfloor y \right\rfloor \, dy \\
 &= 1 + 2 \left( \left\lfloor \frac{x-1}{2} \right\rfloor \left( 1 - \left\{ \frac{x-1}{2} \right\} \right)
 + \left( \left\lfloor \frac{x-1}{2} \right\rfloor + 1 \right) \left\{\frac{x-1}{2}\right\} \right) \\
 &= 1 + 2 \left( \left\lfloor \frac{x-1}{2} \right\rfloor + \left\{ \frac{x-1}{2} \right\} \right) \\
-&= 1 + 2 \frac{x-1}{2} \\
-&= x,
+&= 1 + 2 \frac{x-1}{2}
+= x,
 \end{align*}
 where $\{ x \} \triangleq x-\lfloor x \rfloor$.
 Using this, we can compute
 \begin{align*}
 \mathrm{E} \left[X \left(X - Q(X+Z)\right) \right] 
 &= \int_{-\infty}^{\infty} f_{X} (x) \int_{-1}^{1} f_{Z} (z) x(x - Q(x+z)) \, dz \, dx \\
-&= \int_{-\infty}^{\infty} f_{X} (x) x(x - x) \, dx \\
-&= 0.
+&= \int_{-\infty}^{\infty} f_{X} (x) x(x - x) \, dx
+= 0.
 \end{align*}
 This implies that the quantization noise is uncorrelated with the signal.
 With a little more work, one can also show that it is white (i.e., uncorrelated with time-shifts of itself).
 
 
-\subsection{Non-Uniform Quantization Via Companding}
+\subsection{Non-Uniform Quantization via Companding}
 
 Uniform quantizers are quite robust because their performance is relatively insensitive to the input distribution.
 When the input statistics are not uniform, it is possible to design a non-uniform quantizer with the same number of levels and lower SQNR.
@@ -295,17 +295,17 @@ After reconstruction, an \textbf{expander} is used to reverse the effect of the 
 Since quantization occurs after compression, the quanitization levels are effectively remapped by the compressor.
 This whole process is called \defn{quantization}{companding}.
 
-Assuming the amplitude distribution is supported on $[-x_0 , x_0 ]$, we can define the compressor $g(x)$ be a strictly increasing function mapping $[ -x_0 , x_0 ]$ to $[ -1 , 1 ]$.
+Assuming the amplitude distribution is supported on $[-x_0 , x_0 ]$, we can define the compressor $g(x)$ to be a strictly increasing function mapping $[ -x_0 , x_0 ]$ to $[ -1 , 1 ]$.
 Then, one has $X_q = g^{-1} \left( Q \left( g(X) \right) \right)$, where $Q(\cdot)$ is a uniform quantizer with step size $\Delta$.
 When $\Delta$ is small, the step size $\Delta_x$ after compression can be approximated by
 \[ \Delta_x \approx \frac{\Delta}{g'(x)}. \]
-This allow one to approximate the quantization noise variance by
+This allows one to approximate the quantization noise variance by
 \[ E \left[ (X_q - X)^2 \right] \approx \int_{-x_0}^{x_0} f_X (x) \frac{\Delta_x^2}{12} dx = \frac{\Delta^2}{12} \int_{-x_0}^{x_0} \frac{f_X (x)}{g'(x)^2} dx. \]
 This equation for the noise variance is an instance of the Euler-Lagrange equation.
 Therefore, it can be minimized over $g(x)$ using the calculus of variations and the optimum compressor is defined by
 \[ g(x) \propto \int_{-x_0}^{x} \sqrt[3]{f_X (z)} dz - \int_{x}^{x_0} \sqrt[3]{f_X (z)} dz . \]
 
-For signals with a wide dynamic range, the SQNR depends heavily of the local average signal power.
+For signals with a wide dynamic range, the SQNR depends heavily on the local average signal power.
 Using a logarithmic compressor allows one efficiently quantize these signal so that the SQNR is independent of local signal power.
 Since larger quantization cells are used for large signal values, the quantization noise naturally scales with the signal power.
 For audio signals, the perceptual effect of noise also depends more on the SQNR than the noise power.
@@ -313,7 +313,7 @@ Therefore, logarithmic compression is natrual choice for such signals.
 
 In fact, transforms of this type have been standardized for use in the telephone system.
 The standard transform in the United States is called $\mu$-law companding and maps uniformly spaced 14-bit samples into non-uniformly spaced 8-bit samples.
-The resulting distortion is not easily undetectable by the human ear.
+The resulting distortion is not easily detectable by the human ear.
 The $\mu$-law companding algorithm maps $[-1,1]$ to $[-1,1]$ using the rule, for some $\mu >0$,
 \[ g(x) = \mathrm{sgn}(x)\frac{\ln \left( 1+ \mu |x| \right)}{\ln (1+\mu)}. \]
 
