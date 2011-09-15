@@ -197,6 +197,8 @@ Both the mean squared error and the signal-to-quantization-noise ratio are valid
 Still, they must be put in proper context, especially when comparing scenarios where the distributions of the input signals differ.
 For a fixed input process, a quantization scheme that minimizes the MSE will invariably maximize the SQNR.
 
+\newpage
+
 \begin{example}[Quantization Rule]
 Consider a signal whose amplitude is bounded between -1 and 1 and whose amplitude distribution has a uniform distribution over the same range.
 Suppose that $n$ bits are represent $2^n$ uniformly spaced quantization levels $q_m = -1-2^{-n} + m 2^{-n+1}$ for $m=1,\ldots,2^n$.
@@ -205,18 +207,18 @@ The performance as a function of $n$ is typically approximated by the rule that 
 We can understand this by analyzing the quantizer function, which is
 \[ Q(x) =
 \begin{cases}
--1+2^{-n} & \mathrm{if} \; x < -1 \\
-\frac{1}{2^{n-1}} \left( \lfloor 2^{n-1} x \rfloor - \frac{1}{2} \right) & \mathrm{if} \; - 1 \leq x < 1 \\
-1+2^{-n} & \mathrm{if} \; x \geq 1.
+-1 + 2^{-n} & \mathrm{if} \; x < -1 \\
+\frac{1}{2^{n-1}} \left( \lfloor 2^{n-1} x \rfloor + \frac{1}{2} \right) & \mathrm{if} \; - 1 \leq x < 1 \\
+1 - 2^{-n} & \mathrm{if} \; x \geq 1.
 \end{cases}
 \]
 By symmetry, the distribution of the quantization error is the same for each quantization cell so it suffices to calcluate
 \begin{align*}
-\mathrm{E} \left[ \left( X - Q(X) \right)^2 \big| Q(X)=q \right]
-&= \int_{q-2^{-n}}^{q+2^{-n}} f_{X|Q(X)=q} (x) (x-q)^2 \, dx \\
-&= \int_{-2^{-n}}^{2^{-n}} 2^{n-1} x^2 \, dx \\
-&= 2^{n-1} \frac{2^{-3n+1}}{3} \\
-&= \frac{2^{-2n}}{3}.
+\mathrm{E} & \left[ \left( X - Q(X) \right)^2 \big| Q(X)=q \right]
+= \int_{q-2^{-n}}^{q+2^{-n}} f_{X|Q(X)=q} (x) (x-q)^2 dx \\
+&= \int_{-2^{-n}}^{2^{-n}} 2^{n-1} x^2 dx
+= 2^{n-1} \frac{2^{-3n+1}}{3}
+= \frac{2^{-2n}}{3}.
 \end{align*}
 The SQNR in decibels is therefore given by
 \begin{align*}
@@ -351,7 +353,7 @@ Choosing $\Delta \geq 2\pi A f / F$ to avoid slope overload noise implies that
 \[ \sigma^2_G \geq \frac{4 \pi^2 A^2 f^2}{3  F^2} . \]
 Since the signal power in the sinusoid $x(t)$ is $A^2 / 2$, this gives
 \[ SQNR = \frac{A^2}{2\sigma^2_G} \leq \frac{3 F^2}{8 \pi^2 f^2}. \]
-Comparing the bit rate vs. noise power of this system to standard quantization shows that delta modulation is sometimes better for moderate to low SQNR.
+Comparing the bit rate versus noise power of this system to standard quantization shows that delta modulation is sometimes better for moderate to low SQNR.
 
 The differential quantization scheme described here is a particular case of a more general approach where the next sample is predicted from the previous samples and subtracted before quantzation.
 Using better prediction allows one to quantize a residual signal that has less variation.
