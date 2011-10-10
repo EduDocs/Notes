@@ -53,7 +53,7 @@ There are several additional examples.
 The notion of an \emph{expectation} can be combined with traditional functions to create alternate descriptions and other meaningful quantities. \index{Expectation}
 Suppose that $X$ is a discrete random variable.
 Let $g(\cdot)$ be a real-valued function on the range of $X$, and consider the expectation of $g(X)$.
-This expected value, $\Expect [g(X)]$, is a scalar quantity that can also provide partial information about the distribution of $X$.
+This expected value, $\Expect [g(X)]$, is a scalar that can provide partial information about the distribution of $X$.
 
 One way to determine the expected value of $g(X)$ is to first note that $Y = g(X)$ is itself a random variable.
 Thus, we can find the derived distribution of $Y$ and then apply the definition of expected value provided in \eqref{equation:DiscreteMean}.
@@ -83,23 +83,37 @@ The expectation of a constant is always the constant itself.
 \end{example}
 
 \begin{example}
-Let $S$ be a subset of the real numbers, and define the \emph{indicator function} of $S$ by \index{Indicator function}
+Brazos Extreme Events Radio creates the ``Extreme Trio'' contest.
+To participate, a person must fill out an application card.
+Three cards are drawn from the lot and each winner is awarded \$1,000.
+While a same participant can send multiple cards, he or she can only win one grand prize.
+At the time of the drawing, the radio station has accumulated a total of 100 cards.
+David, an over-enthusiastic listener, is accountable for half of these cards.
+We wish to compute the amount of money David expects to win under this promotion.
+
+Let $X$ be the number of cards drawn by the radio station written by David.
+The PMF of $X$ is given by
 \begin{equation*}
-\IndicatorFcn_S (x) = \begin{cases} 1, & x \in S\\
-0, & x \notin S . \end{cases}
+p_X(k) = \frac{\binom{50}{k} \binom{50}{3-k}}{\binom{100}{3}}
+\quad k \in \{ 0, 1, 2, 3 \}.
 \end{equation*}
-The expectation of $\IndicatorFcn_S (X)$ is equal to
+The money earned by David can be expressed as $g(k) = 1000 \min \{ k,1 \}$.
+It follows that the expected amount of money he receives is equal to
 \begin{equation*}
-\begin{split}
-\Expect \left[ \IndicatorFcn_S (X) \right]
-&= \sum_{x \in X(\Omega)} \IndicatorFcn_S (x) p_X(x) \\
-&= \sum_{x \in S \cap X(\Omega)} p_X(x)
-= \Pr (X \in S) .
-\end{split}
+\sum_{k=0}^3 \left( 1000 \min \{ k, 1 \} \right) p_X(k)
+= 1000 \cdot \frac{29}{33} .
 \end{equation*}
-That is, the expectation of the indicator function of $S$ is simply the probability that $X$ takes on a value in $S$.
-This alternate way of computing the probability of an event can sometimes be employed to solve otherwise difficult probability problems.
+Alternatively, we can define $Y = 1000 \min \{ X, 1 \}$.
+Clearly, $Y$ can only take on one of two possible values, $0$ or $1000$.
+Evaluating the PMF of $Y$, we get $p_Y(0) = p_X(0) = 4/33$ and $p_Y(1000) = 1 - p_Y(0) = 29/33$.
+The expected value of $Y$ is equal to
+\begin{equation*}
+0 \cdot p_Y(0) + 1000 \cdot p_Y(1000) = 1000 \cdot \frac{29}{33} .
+\end{equation*}
+As anticipated, both methods lead to the same answer.
+The expected amount of money won by David is roughly \$878.79.
 \end{example}
+
 
 Let random variable $Y$ be defined by applying real-valued function $g(\cdot)$ to $X$, with $Y = g(X)$.
 The mean of $Y$ is equal to the expectation of $g(X)$, and we know from our ongoing discussion that this value can be obtained by applying two different formulas.
@@ -135,37 +149,40 @@ Note that first summing over all possible values of $Y$ and then over the preima
 Hence, we have shown that computing the expectation of a function using the two methods outlined above leads to a same solution.
 
 \begin{example}
-Brazos Extreme Events Radio creates the ``Extreme Trio'' contest.
-To participate, a person must fill out an application card.
-Three cards are drawn from the lot and each winner is awarded \$1,000.
-While a same participant can send multiple cards, he or she can only win one grand prize.
-At the time of the drawing, the radio station has accumulated a total of 100 cards.
-David, an over-enthusiastic listener, is accountable for half of these cards.
-We wish to compute the amount of money David expects to win under this promotion.
-
-Let $X$ be the number of cards drawn by the radio station written by David.
-The PMF of $X$ is given by
+Let $S$ be a subset of the real numbers, and define the \emph{indicator function} of $S$ by \index{Indicator function}
 \begin{equation*}
-p_X(k) = \frac{\binom{50}{k} \binom{50}{3-k}}{\binom{100}{3}}
-\quad k \in \{ 0, 1, 2, 3 \}.
+\IndicatorFcn_S (x) = \begin{cases} 1, & x \in S\\
+0, & x \notin S . \end{cases}
 \end{equation*}
-The money earned by David can be expressed as $g(k) = 1000 \min \{ k,1 \}$.
-It follows that the expected amount of money he receives is equal to
+The expectation of $\IndicatorFcn_S (X)$ is equal to
 \begin{equation*}
-\sum_{k=0}^3 \left( 1000 \min \{ k, 1 \} \right) p_X(k)
-= 1000 \cdot \frac{29}{33} .
+\begin{split}
+\Expect \left[ \IndicatorFcn_S (X) \right]
+&= \sum_{x \in X(\Omega)} \IndicatorFcn_S (x) p_X(x) \\
+&= \sum_{x \in S \cap X(\Omega)} p_X(x)
+= \Pr (X \in S) .
+\end{split}
 \end{equation*}
-Alternatively, we can define $Y = 1000 \min \{ X, 1 \}$.
-Clearly, $Y$ can only take on one of two possible values, $0$ or $1000$.
-Evaluating the PMF of $Y$, we get $p_Y(0) = p_X(0) = 4/33$ and $p_Y(1000) = 1 - p_Y(0) = 29/33$.
-The expected value of $Y$ is equal to
-\begin{equation*}
-0 \cdot p_Y(0) + 1000 \cdot p_Y(1000) = 1000 \cdot \frac{29}{33} .
-\end{equation*}
-As anticipated, both methods lead to the same answer.
-The expected amount of money won by David is roughly \$878.79.
+That is, the expectation of the indicator function of $S$ is simply the probability that $X$ takes on a value in $S$.
 \end{example}
 
+\begin{example}
+Let $A\subseteq \Omega$ be an arbitrary event and consider the random variable $Y$ defined by
+\begin{equation*}
+Y(\omega) = \IndicatorFcn_A (\omega) = \begin{cases} 1, & \omega \in A\\
+0, & \omega \notin A. \end{cases}
+\end{equation*}
+The expected value of $Y$ is given by
+\begin{equation*}
+\begin{split}
+\Expect \left[ Y \right]
+&= \sum_{y \in \{0,1\}} y \, p_Y (y) = \Pr (\{Y = 1\}) \\
+& = \Pr ( \{ \omega \in \Omega\, | \, \IndicatorFcn_A (\omega) = 1 \} ) = \Pr (A ).
+\end{split}
+\end{equation*}
+That is, the expectation of the r.v. defined by the indicator function of $A$ is simply the probability that the event $A$ occurs.
+This alternate way of computing the probability of an event can sometimes be employed to solve otherwise difficult probability problems.
+\end{example}
 
 \subsection{The Mean}
 
@@ -226,7 +243,9 @@ Consider a two-particle system with masses $m_1 = 0.25$ and $m_2 = 0.75$, respec
 In the coordinate system illustrated below, the particles are located at positions $x_1 = 0$ and $x_2 = 1$.
 From classical mechanics, we know that their center of mass can be expressed as
 \begin{equation*}
-\frac{ m_1 x_1 + m_2 x_2 }{ m_1 + m_2 } = 0.75 .
+\frac{ m_1 x_1 + m_2 x_2 }{ m_1 + m_2 }
+ = \frac{ m_1 }{ m_1 + m_2 } x_1 + \frac{ m_2 }{ m_1 + m_2 } x_2
+ = 0.75 .
 \end{equation*}
 As anticipated, the center of mass corresponds to the mean of $X$.
 
