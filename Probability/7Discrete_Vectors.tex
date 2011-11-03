@@ -231,7 +231,7 @@ The probability that $Y$ belongs to $S$, given $X = x$, is obtained by summing t
 \Pr (Y \in S | X = x) = \sum_{y \in S} p_{Y|X} (y | x) .
 \end{equation*}
 
-\begin{example}[Hypergeometric Random Variable]
+\begin{example}[*Hypergeometric Random Variable]
 A wireless communication channel is employed to transmit a data packet that contains a total of $m$ bits.
 The first $n$ bits of this message are dedicated to the packet header, which stores very sensitive information.
 The wireless connection is unreliable; every transmitted bit is received properly with probability $1-p$ and erased with probability $p$, independently of other bits.
@@ -354,18 +354,21 @@ In this sense, conditioning on an event is a special case of a conditional proba
 A data packet is sent to a destination over an unreliable wireless communication link.
 Data is successfully decoded at the receiver with probability $p$, and the transmission fails with probability $(1-p)$, independently of previous trials.
 When initial decoding fails, a retransmission is requested immediately.
-However, if packet transmission fails $n$ consecutive times, then the data is dropped from the queue altogether, with no further transmission attempt.
-Let $X$ denote the number of trials, and let $S$ be the event that the data packet is successfully transmitted.
-We wish to compute the conditional PMF of $X$ given $S$.
+Let $X$ denote the number of trials required for success.
+
+Consider another system which drops packets.
+If packet transmission fails $n$ consecutive times, then the data is dropped from the queue altogether, with no further transmission attempt.
+Let $Y$ denote the number of trials for this system, and let $S$ be the event that the data packet is successfully transmitted.
+We wish to compute the conditional PMF of $Y$ given $S$.
 
 First, we note that a successful transmission can happen at any of $n$ possible instants.
 These outcomes being mutually exclusive, the probability of $S$ can be written as
 \begin{equation*}
-\Pr(S) = \sum_{k=1}^n (1-p)^{k-1} p = 1 - (1-p)^n .
+\Pr(S) = \Pr(\{X\leq n \}) = \sum_{k=1}^n (1-p)^{k-1} p = 1 - (1-p)^n .
 \end{equation*}
-Thus, the conditional PMF $p_{N|S} (\cdot)$ is equal to
+Thus, the conditional PMF $p_{Y|S} (\cdot)$ is equal to
 \begin{equation*}
-p_{N|S} (k) = \frac{ (1-p)^{k-1} p }{1 - (1-p)^n} ,
+p_{Y|S} (k) = p_{X|X\leq n} (k) = \frac{ (1-p)^{k-1} p }{1 - (1-p)^n} ,
 \end{equation*}
 where $k = 1, 2, \ldots n$.
 \end{example}
@@ -422,6 +425,7 @@ The conditional mean is then seen to equal
 \Expect [ C | B=10] = \sum_{k=0}^{10}
 k \binom{10}{k} p^k (1-p)^{10-k} = 10 p .
 \end{equation*}
+The same approach can be used to show that $\Expect [ C | B ] = p B$ (i.e., the conditional expectation is a random variable).
 \end{example}
 
 We can define the expectation of $X$ conditioned on event $S$ in an analogous fashion.
@@ -528,7 +532,7 @@ We can parallel the proof of Proposition~\ref{proposition:ExpectationProduct} to
 whenever $X$ and $Y$ are independent random variables and the corresponding expectations exist.
 
 
-\subsection{Sums of Independent Random Variables}
+\subsection{The Sum of Two Independent Random Variables}
 
 We turn to the question of determining the distribution of a sum of two independent random variables in terms of the marginal PMF of the summands.
 Suppose $X$ and $Y$ are independent random variables that take on integer values.
