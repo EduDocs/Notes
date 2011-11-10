@@ -202,17 +202,68 @@ Many events of practical interest are dependent.
 That is, knowledge about event $A$ may provide partial information about the realization of event $B$.
 This inter-dependence is captured by the concept of conditioning, which was first discussed in Chapter~\ref{chapter:ConditionalProbability}.
 In this section, we extend the concept of conditioning to multiple random variables.
-We study the probability of events concerning random variable $Y$ given that some information about random variable $X$ is available.
+We study the probability of events related to the random variable $Y$ given knowlege of some event $S$ or information about another random variable $X$.
+
+
+\subsection{Conditioning on Events}
+
+First, we consider the conditional PMF of a random variable $X$ conditioned on the event $S$, where $\Pr (X \in S) > 0$.
+Let $X$ be a random variable associated with a particular experiment, and let $S$ be a non-trivial event corresponding to this experiment.
+The conditional PMF of $X$ given $S$ is defined by
+\begin{equation} \label{equation:ConditionalEventPMF}
+p_{X|S} (x) = \Pr (X = x | S)
+= \frac{\Pr (\{X = x\} \cap S)}{\Pr (S)} .
+\end{equation}
+Note that the events $\{ \omega \in \Omega |  X(\omega) = x \}$ form a partition of $\Omega$ as $x$ ranges over all the values in $X (\Omega)$.
+Using the total probability theorem, we gather that
+\begin{equation*}
+\sum_{x \in X(\Omega)} \Pr ( \{X = x\} \cap S) = \Pr (S)
+\end{equation*}
+and, consequently, we get
+\begin{equation*}
+\begin{split}
+\sum_{x \in X(\Omega)} p_{X|S} (x)
+&= \sum_{x \in X(\Omega)} \frac{\Pr (\{X = x\} \cap S)}{\Pr (S)} \\
+&= \frac{\sum_{x \in X(\Omega)} \Pr (\{X = x\} \cap S)}{\Pr (S)}
+=1 .
+\end{split}
+\end{equation*}
+We conclude that $p_{X|S} (\cdot)$ is a valid PMF.
+
+\begin{example}
+A data packet is sent to a destination over an unreliable wireless communication link.
+Data is successfully decoded at the receiver with probability $p$, and the transmission fails with probability $(1-p)$, independently of previous trials.
+When initial decoding fails, a retransmission is requested immediately.
+Let $X$ denote the number of trials required for success.
+
+Consider another system which drops packets.
+If packet transmission fails $n$ consecutive times, then the data is dropped from the queue altogether, with no further transmission attempt.
+Let $Y$ denote the number of trials for this system, and let $S$ be the event that the data packet is successfully transmitted.
+We wish to compute the conditional PMF of $Y$ given $S$.
+
+First, we note that a successful transmission can happen at any of $n$ possible instants.
+These outcomes being mutually exclusive, the probability of $S$ can be written as
+\begin{equation*}
+\Pr(S) = \Pr(\{X\leq n \}) = \sum_{k=1}^n (1-p)^{k-1} p = 1 - (1-p)^n .
+\end{equation*}
+Thus, the conditional PMF $p_{Y|S} (\cdot)$ is equal to
+\begin{equation*}
+p_{Y|S} (k) = p_{X|X\leq n} (k) = \frac{ (1-p)^{k-1} p }{1 - (1-p)^n} ,
+\end{equation*}
+where $k = 1, 2, \ldots n$.
+\end{example}
+
+\subsection{Conditioning on Random Variables}
 
 Let $X$ and $Y$ be two random variables associated with a same experiment.
 The \emph{conditional probability mass function} of $Y$ given $X = x$, which we write $p_{Y|X} (\cdot | \cdot)$, is defined by \index{Conditional probability mass function}
-\begin{equation*}
+\begin{equation} \label{equation:ConditionalPMF}
 \begin{split}
 p_{Y|X} (y|x) &= \Pr ( Y = y | X = x) \\
 &= \frac{\Pr (\{Y = y\} \cap \{ X = x \})}{\Pr (X = x)} \\
 &= \frac{ p_{X,Y} (x,y) }{p_X(x)},
 \end{split}
-\end{equation*}
+\end{equation}
 provided that $p_X (x) \neq 0$.
 Note that conditioning on $X = x$ is not possible when $p_X (x)$ vanishes, as it has no relevant meaning.
 This is similar to conditional probabilities being only defined for conditional events with non-zero probabilities.
@@ -230,6 +281,19 @@ The probability that $Y$ belongs to $S$, given $X = x$, is obtained by summing t
 \begin{equation*}
 \Pr (Y \in S | X = x) = \sum_{y \in S} p_{Y|X} (y | x) .
 \end{equation*}
+
+It turns out that conditioning on an event, as described in \eqref{equation:ConditionalEventPMF}, is essentially equivalent to conditioning on the value of another random variable, as in \eqref{equation:ConditionalPMF}.
+First, we observe that $p_{X|S}$ can be written in term of a conditional PMF.
+Let $Y = \IndicatorFcn_S (\cdot)$ symbolize the indicator function of $S$, with
+\begin{equation*}
+\IndicatorFcn_S (\omega) = \begin{cases} 1, & \omega \in S\\
+0, & \omega \notin S . \end{cases}
+\end{equation*}
+Then $p_{X|S} (x) = p_{X|Y} (x | 1)$, where $p_{X|Y}$ is the conditional probability mass function (PMF) of $X$ given $Y$ and will be introduced next.
+In this sense, conditioning on an event can be seen as a special case of a conditional PMF.
+Likewise, the conditional PMF of $X$ given $Y$ can be expressed as the conditonal probability of $X$ given the event $Y=y$ using the notation
+\[ p_{X|Y} (x|y) = p_{X|Y=y} (x). \]
+
 
 \begin{example}[*Hypergeometric Random Variable]
 A wireless communication channel is employed to transmit a data packet that contains a total of $m$ bits.
@@ -313,64 +377,6 @@ p_{M} (m) &= \sum_{k = 0}^{\infty} p_{K,M} (k, m)
 Above, we have used the change of variables $k = u+m$.
 We have also rearranged the sum into a familiar form, leveraging the fact that the summation of a Poisson PMF over all possible values is equal to one.
 We can see that $M$ has a Poisson PMF with parameter $p \lambda$.
-\end{example}
-
-
-\subsection{Conditioning on Events}
-
-It is also possible to define the conditional PMF of a random variable $X$, conditioned on an event $S$ where $\Pr (X \in S) > 0$.
-Let $X$ be a random variable associated with a particular experiment, and let $S$ be a non-trivial event corresponding to this experiment.
-The conditional PMF of $X$ given $S$ is defined by
-\begin{equation} \label{equation:ConditionalEventPMF}
-p_{X|S} (x) = \Pr (X = x | S)
-= \frac{\Pr (\{X = x\} \cap S)}{\Pr (S)} .
-\end{equation}
-Note that the events $\{ \omega \in \Omega |  X(\omega) = x \}$ form a partition of $\Omega$ as $x$ ranges over all the values in $X (\Omega)$.
-Using the total probability theorem, we gather that
-\begin{equation*}
-\sum_{x \in X(\Omega)} \Pr ( \{X = x\} \cap S) = \Pr (S)
-\end{equation*}
-and, consequently, we get
-\begin{equation*}
-\begin{split}
-\sum_{x \in X(\Omega)} p_{X|S} (x)
-&= \sum_{x \in X(\Omega)} \frac{\Pr (\{X = x\} \cap S)}{\Pr (S)} \\
-&= \frac{\sum_{x \in X(\Omega)} \Pr (\{X = x\} \cap S)}{\Pr (S)}
-=1 .
-\end{split}
-\end{equation*}
-We conclude that $p_{X|S} (\cdot)$ is a valid PMF.
-
-Another interpretation of \eqref{equation:ConditionalEventPMF} is the following.
-Let $Y = \IndicatorFcn_S (\cdot)$ symbolize the indicator function of $S$, with
-\begin{equation*}
-\IndicatorFcn_S (\omega) = \begin{cases} 1, & \omega \in S\\
-0, & \omega \notin S . \end{cases}
-\end{equation*}
-Then $p_{X|S} (x) = p_{X|Y} (x | 1)$.
-In this sense, conditioning on an event is a special case of a conditional probability mass function.
-
-\begin{example}
-A data packet is sent to a destination over an unreliable wireless communication link.
-Data is successfully decoded at the receiver with probability $p$, and the transmission fails with probability $(1-p)$, independently of previous trials.
-When initial decoding fails, a retransmission is requested immediately.
-Let $X$ denote the number of trials required for success.
-
-Consider another system which drops packets.
-If packet transmission fails $n$ consecutive times, then the data is dropped from the queue altogether, with no further transmission attempt.
-Let $Y$ denote the number of trials for this system, and let $S$ be the event that the data packet is successfully transmitted.
-We wish to compute the conditional PMF of $Y$ given $S$.
-
-First, we note that a successful transmission can happen at any of $n$ possible instants.
-These outcomes being mutually exclusive, the probability of $S$ can be written as
-\begin{equation*}
-\Pr(S) = \Pr(\{X\leq n \}) = \sum_{k=1}^n (1-p)^{k-1} p = 1 - (1-p)^n .
-\end{equation*}
-Thus, the conditional PMF $p_{Y|S} (\cdot)$ is equal to
-\begin{equation*}
-p_{Y|S} (k) = p_{X|X\leq n} (k) = \frac{ (1-p)^{k-1} p }{1 - (1-p)^n} ,
-\end{equation*}
-where $k = 1, 2, \ldots n$.
 \end{example}
 
 
@@ -517,6 +523,19 @@ Assume that both $\Expect [X]$ and $\Expect[Y]$ exist, then
 where we have used the fact that $p_{X,Y} (x,y) = p_X (x) p_Y (y)$ for independent random variables.
 \end{proof}
 
+We saw in Section~\ref{section:ConditionalRandomVariables} that a random variable can also be conditioned on a specific event.
+Let $X$ be a random variable and let $S$ be a non-trivial event.
+The variable $X$ is \emph{independent} of $S$ if
+\begin{equation*}
+\Pr (\{X = x \} \cap S ) = p_X (x) \Pr (S)
+\end{equation*}
+for every $x \in X(\Omega)$.
+In particular, if $X$ is independent of event $S$ then
+\begin{equation*}
+p_{X|S} (x) = p_X (x)
+\end{equation*}
+for all $x \in X(\Omega)$.
+
 \begin{example}
 Two dice of different colors are rolled, as in Example~\ref{example:SumDice1}.
 We wish to compute the expected value of their product.
@@ -531,8 +550,23 @@ We can parallel the proof of Proposition~\ref{proposition:ExpectationProduct} to
 \end{equation}
 whenever $X$ and $Y$ are independent random variables and the corresponding expectations exist.
 
-
-\subsection{The Sum of Two Independent Random Variables}
+\begin{example}
+Let $X,Y$ be random variables and $Z=X+Y$ be their sum.
+We have already seen that the expectation satisfies $\Expect [Z] = \Expect[X] + \Expect[Y]$.
+What about the variance of $Z$?
+In this case, we find that
+\begin{align*}
+\Var [Z]
+&= \Expect \left[ \left(X+Y - \Expect[X+Y] \right)^2  \right] \\
+&= \Expect \left[ \left((X-\Expect[X]) + (Y-\Expect[Y]) \right)^2  \right] \\
+&= \Expect \left[ (X-\Expect[X])^2 + 2(X-\Expect[X])(Y-\Expect[Y]) + (Y-\Expect[Y])^2 \right] \\
+&= \Var[X] + 2 \Expect \left[(X-\Expect[X])(Y-\Expect[Y])\right] + \Var[Y] . 
+\end{align*}
+So, the variance of the sum is equal to the sum of the variance and an extra cross-term.
+But, if the random variables $X,Y$ are independent, then one finds that the cross term is
+\[ \Expect \left[(X-\Expect[X])(Y-\Expect[Y])\right] = \Expect \left[X-\Expect[X] \right] \Expect\left[Y-\Expect[Y]\right] = 0. \]
+An important consequence of this fact is that the variance of the sum equals the sum of the variance for independent random variables.
+\end{example}
 
 We turn to the question of determining the distribution of a sum of two independent random variables in terms of the marginal PMF of the summands.
 Suppose $X$ and $Y$ are independent random variables that take on integer values.
@@ -553,8 +587,99 @@ In particular, the PMF of $U = X + Y$ is the discrete convolution of $p_X (\cdot
 p_U(k) = (p_X \ast p_Y)(k)
 = \sum_{m \in \Integers } p_X(m) p_Y(k-m) .
 \end{equation}
-The discrete convolution is commutative and associative.
+It is easy to verify that discrete convolution is commutative and associative.
 
+\section{Ordinary Generating Functions}
+\label{section:OrdinaryGeneratingFunctions}
+
+In the special yet important case where $X(\Omega)$ is a subset of the non-negative integers, it is occasionally useful to employ the \emph{ordinary generating function}. \index{Ordinary generating function}
+This function bears a close resemblance to the \emph{$z$-transform} and is defined by \index{$z$-transform}
+\begin{equation} \label{equation:OrdinaryGeneratingFunction}
+G_X(z) = \Expect \left[ z^X \right] = \sum_{k=0}^{\infty} z^k p_X (k) .
+\end{equation}
+It is also called the \emph{probability-generating function} because of the following property. \index{Probability-generating function}
+The probability $\Pr (X = k) = p_X(k)$ can be recovered from the corresponding generating function $G_X (z)$ through Taylor series expansion.
+Within the radius of convergence of $G_X(z)$, we have
+\begin{equation*}
+G_X(z) = \sum_{k=0}^{\infty} \frac{1}{k!} \left( \frac{d^k G_X}{dz^k}(0) \right) z^k .
+\end{equation*}
+Comparing this equation to \eqref{equation:OrdinaryGeneratingFunction}, we conclude that
+\begin{equation*}
+p_X(k) = \frac{1}{k!} \frac{d^k G_X}{dz^k} (0) .
+\end{equation*}
+We note that, for $|z| \leq 1$, we have
+\begin{equation*}
+\left| \sum_{k=0}^{\infty} z^k p_X(k) \right|
+\leq \sum_{k=0}^{\infty} |z|^k p_X(k)
+\leq \sum_{k=0}^{\infty} p_X(k) = 1
+\end{equation*}
+and hence the radius of convergence of any probability-generating function must include one.
+
+The ordinary generating function plays an important role in dealing with sums of discrete random variables.
+As a preview of what lies ahead, we compute ordinary generating functions for Bernoulli and Binomial random variables below.
+
+\begin{example}
+Let $X$ be a Bernoulli random variable with parameter $p$.
+The ordinary generating function of $X$ is given by
+\begin{equation*}
+G_X(z) = p_X(0) + p_X(1) z
+= 1 - p + pz .
+\end{equation*}
+\end{example}
+
+\begin{example}
+Let $S$ be a binomial random variable with parameters $n$ and $p$.
+The ordinary generating function of $S$ can be computed as
+\begin{equation*}
+\begin{split}
+G_S(z) &= \sum_{k=0}^{n} z^k p_S (k)
+= \sum_{k=0}^{n} z^k \binom{n}{k} p^k (1 - p)^{n-k} \\
+&= \sum_{k=0}^{n} \binom{n}{k} (pz)^k (1 - p)^{n-k}
+= (1 - p + pz)^n .
+\end{split}
+\end{equation*}
+\end{example}
+
+We know, from Section~\ref{subsection:BinormialRandomVariables}, that one way to create a binomial random variable is to sum $n$ independent and identically distributed Bernoulli random variables, each with parameter $p$.
+Looking at the ordinary generating functions above, we notice that the $G_S(z)$ is the product of $n$ copies of $G_X(z)$.
+Intuitively, it appears that the sum of independent discrete random variables leads to the product of their ordinary generating functions, a relation that we will revisit shortly.
+
+The mean and second moment of $X$ can be computed based on its ordinary generating function,
+In particular, we have
+\begin{equation*}
+\Expect [X] = \lim_{z \uparrow 1} \frac{d G_X}{dz}(z) .
+\end{equation*}
+Similarly, the second moment of $X$ can be derived as
+\begin{equation*}
+\Expect \left[ X^2 \right]
+= \lim_{z \uparrow 1} \left( \frac{d^2 G_X}{dz^2}(z) + \frac{d G_X}{dz}(z) \right) .
+\end{equation*}
+This can be quite useful, as illustrated in the following example.
+
+\begin{example}[Poisson Random Variable]
+Suppose that $X$ has a Poisson distribution with parameter $\lambda > 0$.
+The function $G_X(s)$ can be computed using the distribution of $X$,
+\begin{equation*}
+G_X(z) = \sum_{k = 0}^\infty z^{k} \frac{e^{-\lambda}\lambda^k}{k!}
+= e^{-\lambda} \sum_{k = 0}^\infty \frac{(\lambda z)^k}{k!}
+= e^{-\lambda} e^{\lambda z} = e^{\lambda(z - 1)} .
+\end{equation*}
+The first two moments of $X$ are given by
+\begin{align*}
+\Expect [X] &= \lim_{z \uparrow 1} \frac{d G_X}{dz} (z)
+= \lim_{z \uparrow 1} \lambda e^{\lambda(z - 1)} = \lambda \\
+\Expect \left[ X^2 \right] &= \lim_{z \uparrow 1}
+\left( \frac{d^2 G_X}{dz^2} (z) + \frac{d G_X}{dz} (z) \right)
+= \lim_{z \uparrow 1} \left( \lambda^2 + \lambda \right)
+e^{\lambda (z - 1)} = \lambda^2 + \lambda .
+\end{align*}
+This provides a very efficient way to compute the mean and variance of $X$, which are both equal to $\lambda$.
+It may be helpful to compare this derivation with Example~\ref{example:PoissonMeanVariance}.
+\end{example}
+
+\subsection{The Sum of Two Independent Random Variables}
+
+Now, we revisit the distribution of the sum of two independent random variables.
 One interesting application of \eqref{equation:DiscreteProduct} occurs when dealing with sums of independent random variables.
 Suppose $X$ and $Y$ are two independent random variables that take on integer values and, again, let $U = X + Y$.
 The ordinary generating function of $U$, as defined in Section~\ref{section:OrdinaryGeneratingFunctions}, is given by
@@ -592,19 +717,6 @@ p_U (k) = \frac{ (\alpha + \beta)^k }{k!} e^{- (\alpha + \beta) },
 \end{equation*}
 This method of finding the PMF of $U$ is more concise than using the discrete convolution.
 \end{example}
-
-We saw in Section~\ref{section:ConditionalRandomVariables} that a random variable can also be conditioned on a specific event.
-Let $X$ be a random variable and let $S$ be a non-trivial event.
-The variable $X$ is \emph{independent} of $S$ if
-\begin{equation*}
-\Pr (\{X = x \} \cap S ) = p_X (x) \Pr (S)
-\end{equation*}
-for every $x \in X(\Omega)$.
-In particular, if $X$ is independent of event $S$ then
-\begin{equation*}
-p_{X|S} (x) = p_X (x)
-\end{equation*}
-for all $x \in X(\Omega)$.
 
 
 \section{Numerous Random Variables}
