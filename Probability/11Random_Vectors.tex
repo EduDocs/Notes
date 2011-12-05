@@ -340,7 +340,7 @@ and its covariance by
 \begin{equation*}
 \begin{split}
 \Sigma &= \Expect \left[ \left( \mathbf{X} - \mathbf{m} \right)
-\left(\mathbf{X} - \mathbf{m} \right)^T \right] \\
+\left(\mathbf{X} - \mathbf{m} \right)^{\mathrm{T}} \right] \\
 &= \left[ \begin{array}{cc} \Expect \left[ (X_1 - m_1)^2 \right] &
 \Expect[ (X_1 - m_1) (X_2 - m_2) ]  \\
 \Expect[ (X_2 - m_2) (X_1 - m_1) ] &
@@ -350,7 +350,7 @@ and its covariance by
 Random variables $X_1$ and $X_2$ are said to be jointly Gaussian provided that their joint PDF is of the form
 \begin{equation*}
 f_{X_1, X_2} (x_1, x_2) = \frac{1}{2 \pi |\Sigma|^{\frac{1}{2}}}
-\exp \left( - \frac{1}{2} \left( \mathbf{x} - \mathbf{m} \right)^T \Sigma^{-1} \left( \mathbf{x} - \mathbf{m} \right) \right) .
+\exp \left( - \frac{1}{2} \left( \mathbf{x} - \mathbf{m} \right)^{\mathrm{T}} \Sigma^{-1} \left( \mathbf{x} - \mathbf{m} \right) \right) .
 \end{equation*}
 Assume that the random variables $Y_1$ and $Y_2$ are generated through the matrix equation
 \begin{equation*}
@@ -372,16 +372,16 @@ Applying \eqref{equation:DerivedJointPDF}, we gather that the joint PDF of $(Y_1
 %= \frac{ f_{X_1, X_2} (x_1, x_2) }{ |A| }
 = \frac{1}{2 \pi |\Sigma|^{\frac{1}{2}} |A|}
 \exp \left( - \frac{1}{2}
-\left( \mathbf{x} - \mathbf{m} \right)^T \Sigma^{-1} \left( \mathbf{x} - \mathbf{m} \right) \right) \\
-&= \frac{1}{2 \pi |A \Sigma A|^{\frac{1}{2}}}
+\left( \mathbf{x} - \mathbf{m} \right)^{\mathrm{T}} \Sigma^{-1} \left( \mathbf{x} - \mathbf{m} \right) \right) \\
+&= \frac{1}{2 \pi |A \Sigma A^{\mathrm{T}}|^{\frac{1}{2}}}
 \exp \left( - \frac{1}{2}
-\left( A^{-1} \left( \mathbf{y} - \mathbf{b} \right) - \mathbf{m} \right)^T
+\left( A^{-1} \left( \mathbf{y} - \mathbf{b} \right) - \mathbf{m} \right)^{\mathrm{T}}
 \Sigma^{-1}
 \left( A^{-1} \left( \mathbf{y} - \mathbf{b} \right) - \mathbf{m} \right) \right) \\
-&= \frac{1}{2 \pi |A \Sigma A|^{\frac{1}{2}}}
+&= \frac{1}{2 \pi |A \Sigma A^{\mathrm{T}}|^{\frac{1}{2}}}
 \exp \left( - \frac{1}{2}
-\left( \mathbf{y} - \mathbf{b} - A \mathbf{m} \right)^T
-\left( A \Sigma A \right)^{-1}
+\left( \mathbf{y} - \mathbf{b} - A \mathbf{m} \right)^{\mathrm{T}}
+\left( A \Sigma A^{\mathrm{T}} \right)^{-1}
 \left( \mathbf{y} - \mathbf{b} - A \mathbf{m} \right) \right) .
 \end{split}
 \end{equation*}
@@ -391,8 +391,8 @@ $\Expect \left[ \mathbf{Y} \right] = A \mathbf{m} + \mathbf{b}$
 and its covariance matrix is equal to
 \begin{equation*}
 \Expect \left[ \left( \mathbf{Y} - \Expect \left[ \mathbf{Y} \right] \right)
-\left( \mathbf{Y} - \Expect \left[ \mathbf{Y} \right] \right)^T \right]
-= A \Sigma A .
+\left( \mathbf{Y} - \Expect \left[ \mathbf{Y} \right] \right)^{\mathrm{T}} \right]
+= A \Sigma A^{\mathrm{T}} .
 \end{equation*}
 In other words, a non-trivial affine transformation of a two-dimensional Gaussian vector yields another Gaussian vector.
 This admirable property generalizes to higher dimensions.
