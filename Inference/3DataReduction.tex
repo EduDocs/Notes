@@ -4,7 +4,7 @@ A function $T(\cdot)$ on $\mathbf{X}$ defines a form of processing or data reduc
 An experimenter who uses the statistic $T(\mathbf{x})$ rather than the raw observation $\mathbf{x}$, will treat as equal two samples $\mathbf{x}$ and $\mathbf{y}$ that satisfy $T(\mathbf{x}) = T(\mathbf{y})$, even though the actual sample values may be different in some ways.
 
 
-In this chapter, we are especially interested in methods of data redution that do not discard important information about the unknown parameter $\theta$, and yet successfully discard irrelevant information as far as gaining knowledge about $\theta$ is concrened.
+In this chapter, we are especially interested in methods of data reduction that do not discard important information about the unknown parameter $\theta$, and yet successfully discard irrelevant information as far as gaining knowledge about $\theta$ is concerned.
 
 
 \section{The Sufficiency Principle}
@@ -38,9 +38,11 @@ If $p(\mathbf{x}|\theta)$ is the joint PDF or PMF of $\mathbf{X}$ and $q(t|\thet
 It may be difficult to use the definition of a sufficient statistic to find a sufficient statistic for a particular model.
 To use the definition, we must guess a statistic $T(\mathbf{X})$ to be sufficient, find the PDF or PDF of $T(\mathbf{X})$, and check that the ratio of PDFs or PMFs does not depend on $\theta$.
 The first step requires a good deal of intuition and the second sometimes requires some tedious analysis.
-Fortunately, it may be possible is some cases to find a sufficent statistic by simple inspection.
+Fortunately, it may be possible is some cases to find a sufficient statistic by simple inspection.
 
-\begin{theorem}
+\newpage
+
+\begin{theorem}[Factorization Theorem]
 Let $f(\mathbf{x}|\theta)$ denote the joint PDF or PMF of a sample $\mathbf{X}$.
 A statistic $T(\mathbf{X})$ is a sufficient statistic for $\theta$ if and only if there exist functions $g(t|\theta)$ and $h(\mathbf{x})$ such that, for all sample points $\mathbf{x}$ and all parameter points $\theta$,
 \begin{equation*}
@@ -85,4 +87,102 @@ Then
 \end{equation*}
 Since the ratio does not depend on $\theta$, we conclude that $T(\mathbf{X})$ is a sufficient statistic for $\theta$.
 \end{proof}
+
+For the Gaussian problem, we have
+\begin{equation*}
+f(\mathbf{x}|\mu) = \frac{1}{(2 \pi \sigma^2)^{\frac{n}{2}}}
+\exp \left( - \frac{1}{2 \sigma^2} \sum_{i=1}^n (x_i - \overline{x})^2 \right)
+\exp \left( - \frac{n (\overline{x} - \mu)^2 }{2 \sigma^2} \right) .
+\end{equation*}
+We can therefore define
+\begin{equation*}
+h(\mathbf{x}) = \frac{1}{(2 \pi \sigma^2)^{\frac{n}{2}}}
+\exp \left( - \frac{1}{2 \sigma^2} \sum_{i=1}^n (x_i - \overline{x})^2 \right) ,
+\end{equation*}
+which does not depend on the unknown parameter $\mu$.
+The component that contains $\mu$ only depends on $\mathbf{x}$ through the function $T(\mathbf{x}) = \overline{x}$, the sample mean.
+So, we have
+\begin{equation*}
+g(t|\mu) = \exp \left( - \frac{n (t - \mu)^2 }{2 \sigma^2} \right)
+\end{equation*}
+and note that
+\begin{equation*}
+f(\mathbf{x}|\mu) = h(\mathbf{x}) g(T(\mathbf{x})|\mu) .
+\end{equation*}
+This ensures that $T(\mathbf{X})$ is a sufficient statistic for $\mu$.
+
+
+\section{Minimal Sufficient Statistics}
+
+\begin{definition} \label{definition:MinimalSufficientStatistic}
+A sufficient statistic $T(\mathbf{X})$ is called a \emph{minimal sufficient statistic} if, for all other sufficient statistic, $T'(\mathbf{X})$ $T(\mathbf{x})$ is a function of $T'(\mathbf{x})$.
+\end{definition}
+
+To say that $T(\mathbf{x})$ is a function of $T'(\mathbf{x})$ simply means that if $T'(\mathbf{x}) = T'(\mathbf{y})$, then $T(\mathbf{x}) = T(\mathbf{y})$.
+In terms of the partition sets described at the beginning of the chapter, if $\{ B_{t'}:t' \in \mathcal{T}'\}$ are the partition sets for $T'(\mathbf{x})$ and $\{ A_t : t \in \mathcal{T} \}$ are the partition sets of $T(\mathbf{x})$, then this definition states that every $B_{t'}$ is a subset of some $A_{t}$.
+Thus, the partition associated with a minimal sufficient statistic is the \emph{coarsest} possible partition for a sufficient statistic.
+
+
+Using Definition~\ref{definition:MinimalSufficientStatistic} to find a minimal sufficient statistic is impractical.
+Fortunately, the following result by Lehmann and Scheff\'{e} gives an easier way to find a minimal sufficient statistic.
+
+\begin{theorem}
+Let $f(\mathbf{x}|\theta)$ be the distribution of a sample $\mathbf{X}$.
+Suppose there exists a function $T(\mathbf{x})$ such that, for every two sample points $\mathbf{x}$ and $\mathbf{y}$, the ratio $f(\mathbf{x}|\theta)/f(\mathbf{y}|\theta)$ is constant as a function of $\theta$ if and only if $T(\mathbf{x}) = T(\mathbf{y})$.
+Then $T(\mathbf{X})$ is a minimal sufficient statistic for $\theta$.
+\end{theorem}
+\begin{proof}
+To simplify the proof, we assume $f(\mathbf{x}|\theta) > 0$ for all $\mathbf{x} \in \mathcal{X}$ and $\theta$.
+
+First, we show that $T(\mathbf{X})$ is a sufficient statistic.
+Let $\mathcal{T} = \{ t : t=T(\mathbf{x}) \text{ for some } \mathbf{x} \in \mathcal{X} \}$ be the image of $\mathcal{X}$ under $T(\mathbf{x})$.
+Define the partition sets induced by $T(\mathbf{x})$ as $A_t = \{ \mathbf{x} : T(\mathbf{x}) = t \}$.
+For each $A_t$, choose and fix one element $x_t \in A_t$.
+For every $\mathbf{x} \in \mathcal{X}$, $\mathbf{x}_{T(\mathbf{x})}$ is the fixed element that is in the same set, $A_t$, as $\mathbf{x}$.
+Since $\mathbf{x}$ and  $\mathbf{x}_{T(\mathbf{x})}$ are in the same set $A_t$, $T(\mathbf{x}) = T(\mathbf{x}_{T(\mathbf{x})})$ and, hence,
+\begin{equation*}
+\frac{ f(\mathbf{x}|\theta) }{ f \left( \mathbf{x}_{T(\mathbf{x})} | \theta \right) }
+\end{equation*}
+is a constant as a function of $\theta$.
+Thus, we can define a function on $\mathcal{X}$ by
+\begin{equation*}
+h(\mathbf{x}) = \frac{ f(\mathbf{x}|\theta) }{ f \left( \mathbf{x}_{T(\mathbf{x})} | \theta \right) }
+\end{equation*}
+and $h$ does not depend on $\theta$.
+Moreover, define a function on $\mathcal{T}$ by $g(t|\theta) = f(\mathbf{x}_t|\theta)$.
+Then, it can be seen that
+\begin{equation*}
+f(\mathbf{x}|\theta)
+= \frac{ f \left( \mathbf{x}_{T(\mathbf{x})} | \theta \right)
+f(\mathbf{x}|\theta) }
+{ f \left( \mathbf{x}_{T(\mathbf{x})} | \theta \right) }
+= g(T(\mathbf{x})|\theta) h(\mathbf{x})
+\end{equation*}
+By the Factorization Theorem, $T(\mathbf{X})$ is a sufficient statistic for $\theta$.
+
+Now, to show that $T(\mathbf{X})$ is minimal, let $T'(\mathbf{X})$ be any other sufficient statistic.
+By the Factorization Theorem, there exist function $g'$ and $h'$ such that $f(\mathbf{x}|\theta) = g'(T'(\mathbf{x})|\theta)h'(\mathbf{x})$.
+Let $\mathbf{x}$ and $\mathbf{y}$ be any two points with $T'(\mathbf{x}) = T'(\mathbf{y})$.
+Then
+\begin{equation*}
+\frac{ f(\mathbf{x}|\theta) }{ f(\mathbf{y}|\theta) }
+= \frac{ g'(T'(\mathbf{x})|\theta)h'(\mathbf{x}) }{ g'(T'(\mathbf{y})|\theta)h'(\mathbf{y}) }
+= \frac{ h'(\mathbf{x}) }{ h'(\mathbf{y}) } .
+\end{equation*}
+Since this ratio does not depend on $\theta$, the assumptions of the theorem imply that $T(\mathbf{x}) = T(\mathbf{y})$.
+Thus, $T(\mathbf{x})$ is a function of $T'(\mathbf{x})$ and $T(\mathbf{x})$ is minimal.
+\end{proof}
+
+\begin{definition}
+A statistic $S(\mathbf{X})$ whose distribution does not depend on the parameter $\theta$ is called an \emph{ancillary statistic}.
+\end{definition}
+
+In other words, an ancillary statistic is an observation on a random variable whose distribution is fixed and known, unrelated to $\theta$.
+
+\begin{definition}
+Let $f(t|\theta)$ be a family of distributions for a statistic $T(\mathbf{X})$.
+The family of probability distributions is called \emph{complete} if $\mathrm{E}_{\theta} g(T) = 0$ for all $\theta$ implies $P_{\theta} (g(T) = 0) = 1$ for all $\theta$.
+Equivalently, $T(\mathbf{X})$ is called a \emph{complete statistic}.
+\end{definition}
+
 
