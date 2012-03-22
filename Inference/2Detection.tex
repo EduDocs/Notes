@@ -74,7 +74,7 @@ Then, the probability of error simplifies to
 P_e
 &=  \nu(0) \int_{-\infty}^{\eta} \frac{1}{\sqrt{2 \pi}} e^{- \frac{y^2}{2}} dy
 + \nu(1) \int_{\eta}^{\infty} \frac{1}{\sqrt{2 \pi}} e^{- \frac{(y-1)^2}{2}} dy \\
-&= \nu(0) Q (-\eta) + \nu(1) Q (\eta + 1),
+&= \nu(0) Q (-\eta) + \nu(1) Q (\eta - 1),
 \end{split}
 \end{equation*}
 where $Q(\cdot)$ is the complementary Gaussian cumulative distribution function
@@ -260,7 +260,7 @@ Since likelihood detectors are collectively optimum, this problem can be express
 A cost structure that is frequently used is the special case where $C_{00} = C_{11} = 0$.
 In this case,
 \begin{equation*}
-R = C_{10} P_F + (C_{01} - C_{10}) P_M \nu(1) .
+R = C_{10} P_F + ( C_{01} P_M - C_{10} P_F ) \nu(1) .
 \end{equation*}
 
 
@@ -283,8 +283,8 @@ For a fixed $\lambda > 0$, we wish to maximize the function
 \begin{split}
 P_D - \lambda (P_F - \alpha)
 &= \int_{\Gamma_1} d\mu_1 - \lambda \int_{\Gamma_1} d\mu_0 + \lambda \alpha \\
-&= \int_{\Gamma_1} \left( \frac{d\mu_1}{d\mu_0}  + \lambda \right) d\mu_0
-- \lambda \alpha .
+&= \int_{\Gamma_1} \left( \frac{d\mu_1}{d\mu_0}  - \lambda \right) d\mu_0
++ \lambda \alpha .
 \end{split}
 \end{equation}
 From the form of \eqref{equation:NeymanPearsonOptimization}, we gather that a likelihood ratio test is again optimal.
@@ -458,7 +458,7 @@ In many situation, the parameter set corresponding to hyptothesis $H_0$ is a sin
 We can find a decision region based on a worst-case scenario.
 For fixed $\alpha$ and $\theta_1 \in H_1$, we have
 \begin{equation*}
-P_D (\theta_1) = \int_{\Gamma_1} (\theta_1) d \mu_1 .
+P_D (\theta_1) = \int_{\Gamma_1} d \mu_1 .
 \end{equation*}
 Under suitable regularity considitions, we can expand $P_D (\cdot)$ around $\theta_1 = \theta_0$ through Taylor series and we get
 \begin{equation*}
@@ -1204,7 +1204,7 @@ The Neyman-Pearson test with constant threshold $\gamma \in (E_{\mu_0} X_j, E_{\
 \end{align*}
 where $\Lambda_0^* (\cdot)$ is the Fenchel-Legendre transform of
 \begin{equation*}
-\Lambda_0 (\gamma) = \log E_{\mu_0} \left[ e^{\lambda X_j} \right] .
+\Lambda_0 (\lambda) = \log E_{\mu_0} \left[ e^{\lambda X_j} \right] .
 \end{equation*}
 \end{theorem}
 
@@ -1240,7 +1240,7 @@ Hence, as $0 < \nu(0) < 1$,
 \frac{1}{n} P_e^{(n)} \geq \liminf_{n \rightarrow \infty}
 \min \left\{ \frac{1}{n} \log \alpha_n^*, \frac{1}{n} \log \beta_n^* \right\} .
 \end{equation*}
-From the resutls above, we have
+From the results above, we have
 \begin{equation*}
 \lim_{n \rightarrow \infty} \frac{1}{n} \log \alpha_n^*
 = \lim_{n \rightarrow \infty} \frac{1}{n} \log \beta_n^*
@@ -1265,11 +1265,11 @@ For any $\epsilon < 1$,
 \begin{proof}
 Again, due to the optimality of Neyman-Pearson decision rules, it suffices to consider Neyman-Pearson tests, with
 \begin{align*}
-\alpha_n &= \Pr (S_n > \gamma_n | H_0) & \beta_n &= \Pr (S_n \geq \gamma_n | H_1) .
+\alpha_n &= \Pr (S_n > \gamma_n | H_0) & \beta_n &= \Pr (S_n \leq \gamma_n | H_1) .
 \end{align*}
 We note that the probability of miss is also given by
 \begin{equation*}
-\beta_n = \Pr (S_n \geq \gamma_n | H_1)
+\beta_n = \Pr (S_n \leq \gamma_n | H_1)
 = E_{\mu_1} \left[ \SetIn_{\{ S_n \leq \gamma_n \}} \right]
 = E_{\mu_0} \left[ \SetIn_{\{ S_n \leq \gamma_n \}} e^{n S_n} \right]
 \end{equation*}
