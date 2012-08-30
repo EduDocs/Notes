@@ -279,7 +279,7 @@ Reversing the arrow in a conditional statement gives the \defn{logic}{converse} 
 For example, the statement $Q \rightarrow P$ is the converse of $P \rightarrow Q$.
 This reversal may not preserve the truth of the statement though and therefore logical implications are not always reversible.
 For instance, although $(P \rightarrow Q) \wedge (Q \rightarrow R)$ implies $P \rightarrow R$, the converse is not always true.
-It can easily be shown from columns~9~\&~10 above that
+It can easily be seen from columns~9~\&~10 above that
 \begin{equation*}
 (P \rightarrow R) \rightarrow ((P \rightarrow Q) \wedge (Q \rightarrow R))
 \end{equation*}
@@ -289,7 +289,7 @@ That is, $P \rightarrow R$ certainly does not imply $(P \rightarrow Q) \wedge (Q
 A logical implication that is reversible is called a \defn{logic}{logical equivalence}.
 More precisely, $P$ is equivalent to $Q$ if the statement $P \leftrightarrow Q$ is a tautology.
 We denote the sentence ``$P$ is equivalent to $Q$'' by simply writing ``$P \Leftrightarrow Q$.''
-It is easily seen that $P \Leftrightarrow Q$ holds if and only if $P \Rightarrow Q$ and $Q \Rightarrow P$ are both true.
+The meta-statement $P \Leftrightarrow Q$ holds if and only if $P \Rightarrow Q$ and $Q \Rightarrow P$ are both true.
 Being able to recognize that two statements are equivalent will become handy.
 It is sometime possible to demonstrate a result by finding an alternative, equivalent form of the statement that is easier to prove than the original form.
 A list of important equivalences appears below.
@@ -320,7 +320,9 @@ This popular technique is called \defn{logic}{proof by contradiction}.
 It is illustrated below through a classic example.
 
 Given a conditional statement of the form $P \rightarrow Q$, we call $\neg Q \rightarrow \neg P$ the \defn{logic}{contrapositive} of the original statement.
-The equivalence $P \rightarrow Q \Leftrightarrow \neg Q \rightarrow \neg P$ is also frequently used in constructing mathematical proofs.
+The equivalence $P \rightarrow Q \Leftrightarrow \neg Q \rightarrow \neg P$ is also used extensively in constructing mathematical proofs.
+
+
 \subsection{Fallacious Arguments}
 
 A \defn{logic}{fallacy} is a component of an argument that is demonstrably flawed in its logic or form, thus rendering the argument invalid.
@@ -393,7 +395,7 @@ One way to learn to construct proofs is to read a lot of well written proofs, to
 
 \paragraph{Direct Proof:}
 
-The simplest form of proof for an implication $P \rightarrow Q$ is the \textbf{direct proof}.
+The simplest form of proof for a statement of the form $P \rightarrow Q$ is the \textbf{direct proof}.
 First assume that $P$ is true.
 Produce a series of steps, each one following from the previous ones, that eventually leads to conclusion $Q$.
 It warrants the name ``direct proof'' only to distinguish it from other, more intricate, methods of proof.
@@ -467,7 +469,7 @@ Let $P(x)$ be a logical statement about objects $x$ in the set $X$, then the ``s
 For example, the set of even integers is given by
 \[ \{ x\in \mathbb{Z} | \textrm{``}x\textrm{ is even''} \} = \{ \ldots,-4,-2,0,2,4,\ldots \}. \]
 If no element $x\in X$ satisfies the condition, then the result is the \defn{set theory}{empty set} which is denoted $\emptyset$.
-Using set-builder notation, we can also define the \defn{set theory}{natural numbers} $\mathbb{N}$ and the \defn{set theory}{rational numbers} $\mathbb{Q}$ with
+Using set-builder notation, we can also recreate the \defn{set theory}{natural numbers} $\mathbb{N}$ and the \defn{set theory}{rational numbers} $\mathbb{Q}$ with
 \begin{align*}
 \mathbb{N} & = \{ n\in \mathbb{Z} | n\geq 1 \} \\
 \mathbb{Q} & = \{ q\in \mathbb{R} | q=a/b, a\in \mathbb{Z}, b\in \mathbb{N} \}.
@@ -550,7 +552,7 @@ If $A  = \{ a,b \}$, then the set of all 3-tuples from $A$ is given by
 A^3 = \{ (a,a,a),(a,a,b),(a,b,a),(a,b,b),(b,a,a),(b,a,b),(b,b,a),(b,b,b) \}.
 \end{equation*}
 \end{example}
-The countably infinite product of $X$'s, denoted $X^\omega$, is set the set of infinite sequences $(x_1,x_2,x_3,\ldots)$ where $x_n \in X$ is arbitrary for $n\in \mathbb{N}$.
+The countably infinite product of $X$, denoted $X^\omega$, is the set of infinite sequences $(x_1,x_2,x_3,\ldots)$ where $x_n \in X$ is arbitrary for $n\in \mathbb{N}$.
 If the sequences are restricted to have only a finite number of non-zero terms, then the set is usually denoted $X^\infty$.
 
 One can also formalize relationships between elements of a set.
@@ -576,7 +578,7 @@ The set of all equivalence classes is called the \defn{set theory}{quotient set}
 
 In fact, there is a natural equivalence relation defined by any disjoint partition of a set.
 For example, let $A_{i,j}$ be the set of people in $A$ whose birthday was on the $j$-th day of the $i$-th month.
-It follows that $x\sim y$ iff there exists a single $i,j$ such that $x,y\in A_{i,j}$.
+It follows that $x\sim y$ iff there exists a unique pair $i,j$ such that $x,y \in A_{i,j}$.
 In this case, the days of year are used as equivalence classes to define the equivalence relation.
 
 \begin{example}
