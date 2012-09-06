@@ -601,7 +601,7 @@ Conditioned on either hypothesis, the logarithmic likelihood ratio of \eqref{equ
 As such, this test has a form that is suitable for standard concentration results.
 In particular, if
 \begin{equation*}
-E \left[ \log \left( \frac{d\mu_1}{d\mu_0}(y_k) \right) \Big| \theta \right] < \infty ,
+E \left[ \left| \log \left( \frac{d\mu_1}{d\mu_0}(y_k) \right) \right| \Big| \theta \right] < \infty ,
 \end{equation*}
 then the weak law of large numbers applies and \eqref{equation:LogLikelihoodRatio} converges to a constant in probability.
 The rate of convergence can be further analyzed using tools form large-deviation theory.
@@ -620,7 +620,7 @@ When the signal is absent, the distribution of each observation is $\mathcal{N}(
 If the signal is present, the observations are distributed according to $\mathcal{N}(m,\sigma^2)$ where $m > 0$.
 The logarithmic likelihood ratio for observation $y_i$ is given by
 \begin{equation*}
-\frac{d\mu_1}{d\mu_0} (y_i) = \frac{y_i m}{\sigma^2} - \frac{m^2}{2 \sigma^2}
+\log \frac{d\mu_1}{d\mu_0} (y_i) = \frac{y_i m}{\sigma^2} - \frac{m^2}{2 \sigma^2}
 \end{equation*}
 Combining the observations and assuming equal priors, the optimal decision procedure becomes a threshold test on the normalized logarithmic likelihood ratio,
 \begin{equation*}
@@ -739,7 +739,7 @@ as $n \rightarrow \infty$.
 That is, the sequence $S_n$ converges to $m$ in the mean-square sense.
 To show convegence in probability, we apply Chebyshev's inequality with $\varphi (s) = s^2$,
 \begin{equation*}
-\Pr ( S_n - m > \epsilon )
+\Pr ( | S_n - m | > \epsilon )
 \leq \frac{1}{\epsilon^2} E \left[ ( S_n - m )^2 \right]
 \rightarrow 0
 \end{equation*}
@@ -1066,7 +1066,7 @@ We define the probability law $\tilde{\upsilon}$ by tilding measure $\upsilon$ a
 We emphasize that this new probability law is normalized with
 \begin{equation*}
 \int_{-\infty}^{\infty} d \tilde{\upsilon}
-= e^{- \Lambda(\zeta)} \int_{-\infty}^{\infty} e^{\zeta z} d\mu
+= e^{- \Lambda(\zeta)} \int_{-\infty}^{\infty} e^{\zeta z} d\upsilon
 = \frac{1}{E e^{\zeta z}} E e^{\zeta z} = 1 .
 \end{equation*}
 Let $\tilde{\upsilon}_n$ be the law governing $S_n$ when $Z_i$ are independent and identically distributed random variables with distribution $\tilde{\upsilon}$.
@@ -1098,7 +1098,7 @@ It then follows that for every $0 < \epsilon < \delta$,
 \ge \Lambda (\zeta) - \epsilon | \zeta | .
 \end{equation*}
 Since this is true for any $\epsilon > 0$, we obtain \eqref{equation:CramerCenteredLower} by letting $\epsilon \rightarrow 0$.
-We can get a similar result for the inerval $(z - \delta, \delta)$ by using the transformation $X = Z - z$.
+We can get a similar result for the inerval $(z - \delta, z + \delta)$ by using the transformation $X = Z - z$.
 This gives $\Lambda_X (\lambda) = \Lambda(\lambda) - \lambda z$ and $\Lambda_X^* (s) = \Lambda^*(s+z)$.
 It follows that for every $z \in \mathbb{R}$ and $\delta > 0$,
 \begin{equation*}
@@ -1227,17 +1227,17 @@ where the infimum is over all decision tests.
 \end{theorem}
 \begin{proof}
 Neyman-Pearson decision rules being optimal for finite $n$, it suffices to consider Neyman-Pearson tests.
-Let $\alpha^n$ and $\beta^*$ be the error probabilities for the zero threshold Neyman-Pearson test.
+Let $\alpha^*$ and $\beta^*$ be the error probabilities for the zero threshold Neyman-Pearson test.
 For any other Neyman-Pearson test, either $\alpha_n \geq \alpha_n^*$ or $\beta_n \geq \beta_n^*$.
 Thus, for any test
 \begin{equation*}
-\frac{1}{n} P_e^{(n)} \geq \frac{1}{n} \log \min \{ \nu (0), \nu(1) \}
+\frac{1}{n} \log P_e^{(n)} \geq \frac{1}{n} \log \min \{ \nu (0), \nu(1) \}
 + \min \left\{ \frac{1}{n} \log \alpha_n^*, \frac{1}{n} \log \beta_n^* \right\} .
 \end{equation*}
 Hence, as $0 < \nu(0) < 1$,
 \begin{equation*}
 \inf_{\mathcal{S}} \liminf_{n \rightarrow \infty}
-\frac{1}{n} P_e^{(n)} \geq \liminf_{n \rightarrow \infty}
+\frac{1}{n} \log P_e^{(n)} \geq \liminf_{n \rightarrow \infty}
 \min \left\{ \frac{1}{n} \log \alpha_n^*, \frac{1}{n} \log \beta_n^* \right\} .
 \end{equation*}
 From the results above, we have
@@ -1277,10 +1277,10 @@ where the last equality follows by the definition of the log-likelihood ratio $X
 This identity yields the upper bound
 \begin{equation*}
 \frac{1}{n} \log \beta_n
-= \frac{1}{n} \log E_{\mu_0} \left[ \SetIn_{\{ S_n \leq \gamma_n \}} e^{n S_n} \right]
+\leq \frac{1}{n} \log E_{\mu_0} \left[ \SetIn_{\{ S_n \leq \gamma_n \}} e^{n S_n} \right]
 \leq \gamma_n
 \end{equation*}
-Suppose that $E_{\mu_0} [X_j] = \infty$.
+Suppose that $E_{\mu_0} [X_j] = - \infty$.
 By Theorem~\ref{theorem:AsymptoticHypothesisTesting}, we know that the probability of false alarm eventually becomes less than $\epsilon$ for any admissible $\gamma$.
 Therefore, by the preceeding bound, we get
 \begin{equation*}
@@ -1300,7 +1300,7 @@ for otherwise, by the weak law of large numbers, we get
 \end{equation*}
 Consequently, if $\alpha_n < \epsilon$, the weak law of large numbers implies that
 \begin{equation*}
-\liminf_{n \rightarrow \infty} \Pr (S_n \in [ E_{\mu_0} X_j, \eta, \gamma_n]) \geq 1 - \epsilon, \quad \forall \eta > 0 .
+\liminf_{n \rightarrow \infty} \Pr (S_n \in [ E_{\mu_0} X_j - \eta, \gamma_n]) \geq 1 - \epsilon, \quad \forall \eta > 0 .
 \end{equation*}
 Hence, by the identity
 \begin{equation*}

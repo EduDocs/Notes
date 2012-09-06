@@ -40,8 +40,6 @@ To use the definition, we must guess a statistic $T(\mathbf{X})$ to be sufficien
 The first step requires a good deal of intuition and the second sometimes requires some tedious analysis.
 Fortunately, it may be possible is some cases to find a sufficient statistic by simple inspection.
 
-\newpage
-
 \begin{theorem}[Factorization Theorem]
 Let $f(\mathbf{x}|\theta)$ denote the joint PDF or PMF of a sample $\mathbf{X}$.
 A statistic $T(\mathbf{X})$ is a sufficient statistic for $\theta$ if and only if there exist functions $g(t|\theta)$ and $h(\mathbf{x})$ such that, for all sample points $\mathbf{x}$ and all parameter points $\theta$,
@@ -112,10 +110,12 @@ f(\mathbf{x}|\mu) = h(\mathbf{x}) g(T(\mathbf{x})|\mu) .
 This ensures that $T(\mathbf{X})$ is a sufficient statistic for $\mu$.
 
 
+\newpage
+
 \section{Minimal Sufficient Statistics}
 
 \begin{definition} \label{definition:MinimalSufficientStatistic}
-A sufficient statistic $T(\mathbf{X})$ is called a \emph{minimal sufficient statistic} if, for all other sufficient statistic, $T'(\mathbf{X})$ $T(\mathbf{x})$ is a function of $T'(\mathbf{x})$.
+A sufficient statistic $T(\mathbf{X})$ is called a \emph{minimal sufficient statistic} if, for all other sufficient statistic, $T'(\mathbf{X})$, $T(\mathbf{x})$ is a function of $T'(\mathbf{x})$.
 \end{definition}
 
 To say that $T(\mathbf{x})$ is a function of $T'(\mathbf{x})$ simply means that if $T'(\mathbf{x}) = T'(\mathbf{y})$, then $T(\mathbf{x}) = T(\mathbf{y})$.
@@ -181,7 +181,7 @@ In other words, an ancillary statistic is an observation on a random variable wh
 
 \begin{definition}
 Let $f(t|\theta)$ be a family of distributions for a statistic $T(\mathbf{X})$.
-The family of probability distributions is called \emph{complete} if $\mathrm{E}_{\theta} g(T) = 0$ for all $\theta$ implies $P_{\theta} (g(T) = 0) = 1$ for all $\theta$.
+The family of probability distributions is called \emph{complete} if $\mathrm{E}_{\theta} [g(T)] = 0$ for all $\theta$ implies $P_{\theta} (g(T) = 0) = 1$ for all $\theta$.
 Equivalently, $T(\mathbf{X})$ is called a \emph{complete statistic}.
 \end{definition}
 
