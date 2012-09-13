@@ -289,7 +289,7 @@ The element $x$ is in $\Closure{A}$ if and only if every open set $B$ containing
 % Furthermore, if the topology of $X$ is given by a basis, then $x \in \Closure{A}$ if and only if every basis element $B$ containing $x$ intersects $A$.
 \end{theorem}
 \begin{proof}
-We prove instead the equivalent contrapositive statement: $x \notin \Closure{A}$ iff there is an open set $B$ containing $x$ that does not intersect $A$.
+We prove instead the equivalent contrapositive statement: $x \notin \Closure{A}$ if and only if there is an open set $B$ containing $x$ that does not intersect $A$.
 Clearly, if  $x \notin \Closure{A}$, then $\Closure{A}^c = X - \Closure{A}$ is an open set containing $x$ that does not intersect $A$.
 Conversely, if there is an open set $B$ containing $x$ that does not intersect $A$, then $B^c = X-B$ is a closed set containing $A$.
 The definition of closure implies that $B^c$ must also contain $\Closure{A}$.
@@ -564,7 +564,7 @@ A metrizable space $X$ is \defn{topology}{compact} if it is complete and totally
 \end{definition}
 
 The closed interval $[0,1]\subset \RealNumbers$ is compact.
-In fact, any subset of $\RealNumbers^n$ is compact iff it is closed and bounded.
+In fact, a subset of $\RealNumbers^n$ is compact if and only if it is closed and bounded.
 On the other hand, the standard metric space of real numbers is not compact because it is not totally bounded.
 
 \begin{theorem}
