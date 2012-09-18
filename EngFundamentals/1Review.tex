@@ -505,8 +505,8 @@ Since every Cauchy sequence of rationals converges to a real number, the isometr
 \end{example}
 
 \begin{definition}
-Let $A$ be a subset of a metric space $(X,d)$ and $f: X \rightarrow X$ be a function.
-The function $f$ is a \defn{metric space}{contraction} on $A$ if $d \left( f(x),f(y) \right) \leq \gamma  d(x,y)$ for all $x,y\in A$ and some $\gamma \in [0,1)$.
+Let $A$ be a subset of a metric space $(X,d)$ and $f: X \rightarrow X$ be a function such that $f(A) \subseteq A$.
+The function $f$ is a \defn{metric space}{contraction} on $A$ if there exists a constant $\gamma < 1$ such that $d \left( f(x),f(y) \right) \leq \gamma  d(x,y)$ for all $x,y\in A$.
 \end{definition}
 
 Consider the following important results in applied mathematics: Picard's theorem for differential equations, the implicit function theorem, and Bellman's principle of optimality for Markov decision processes.
@@ -515,8 +515,8 @@ They each establish the existence and uniqueness of a function and have relative
 
 \begin{theorem}[Contraction Mapping Theorem]
 Let $(X,d)$ be a complete metric space and $f$ be contraction on a closed subset $A \subseteq X$.
-Then, $f$ has a unique fixed point $x^*$ on $A$ such that $f(x^*) = x^*$.
-Moreover, the sequence $x_{n+1} = f(x_n)$ converges to $x^*$ if $x_1 \in A$ and $f(x_1) \in A$.
+Then, $f$ has a unique fixed point $x^*$ in $A$ such that $f(x^*) = x^*$.
+Moreover, the sequence $x_{n+1} = f(x_n)$ converges to $x^*$ for any point $x_1 \in A$, with $d(x^*, f^n(x_1)) \leq c \gamma^n$ for a constant $c$ depending on $x_1$.
 \end{theorem}
 \begin{proof}
 Suppose $f$ has two fixed points $y,z\in A$.
