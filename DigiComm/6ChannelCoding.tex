@@ -28,13 +28,14 @@ and this gives $\frac{1}{2t+1}$ for the repeat code.
 Credit card numbers use a check digit to detect single errors and adjacent transpositions.
 Let $\underline{x}$ be a credit card number whose digits are given by $\underline{x}=\left(x_{1},x_{2},\ldots,x_{16}\right)$,
 then
-\[ \left[\sum_{i=1}^{8}x_{2i}+\sum_{i=1}^{8}\left(2x_{2i-1}\bmod9\right)\right]\bmod10=0\]
-Consider the number 5420 1213 7904 9210.
-In this case, the first sum gives $4+0+2+3+9+4+2+0=24$ and the second sum gives: $1+4+2+2+5+0+0+2=16$.
-So, we have the overall sum $\left[24+16\right]\bmod10=0$.
-The code detects single errors because, for $i=1,\ldots,8$, changing $x_{2i}$ to $x_{2i}'$ changes the check value by $x_{2i}'-x_{2i}$ and changing $x_{2i-1}$ to $x_{2i-1}'$ changes the check value by $2(x_{2i}'-x_{2i})\bmod 9$.
+\[ \left[\sum_{i=1}^{8}x_{2i}+\sum_{i=1}^{8}\left(2x_{2i-1}\right)\# 9 \right]\bmod10=0,\]
+where $x\# 9$ is the sum of the digits in $x$ (e.g., $11\# 9=2$ and $18\# 9=9$).
+Consider the number 5420 1213 7904 9260.
+In this case, the first sum gives $4+0+2+3+9+4+2+0=24$ and the second sum gives: $1+4+2+2+5+0+9+3=26$.
+So, we have the overall sum $\left[24+26\right]\bmod10=0$.
+The code detects single errors because, for $i=1,\ldots,8$, changing $x_{2i}$ to $x_{2i}'$ changes the check value by $x_{2i}'-x_{2i}$ and changing $x_{2i-1}$ to $x_{2i-1}'$ changes the check value by $2(x_{2i}'-x_{2i})\# 9$.
 Likewise,  swapping $x_{1},x_{2}$ changes the check by
-\[ \left[(x_{1}-x_{2})+(2x_{2}\bmod9-2x_{1}\bmod9)\right]\bmod10. \]
+\[ \left[(x_{1}-x_{2})+(2x_{2}\# 9-2x_{1}\# 9)\right]\bmod10. \]
 \end{example}
 
 Coding is used in many systems and devices including:

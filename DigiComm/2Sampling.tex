@@ -313,7 +313,7 @@ When the sampling rate exceeds twice the bandwidth of the original signal, this 
 \label{figure:Sampling}
 \end{center}
 \end{figure}
-A succession of power spectral densities can be found on Figure~\ref{figure:Sampling}.
+A succession of power spectral densities can be found in Figure~\ref{figure:Sampling}.
 The top component shows the power spectral density of the original signal.
 The density of the sampled signal appears below.
 Finally, the reconstruction operation where a lowpass filter is employed to recovered the original function is illustrated at the bottom of the figure.
@@ -406,7 +406,7 @@ It is called the \defn{Fourier analysis}{Nyquist rate} in honor of Swedish-Ameri
 \end{proof}
 
 
-\newpage
+%\newpage
 \subsection{Imperfect Sampling and Reconstruction}
 
 In practice, it is impossible to measure (i.e., sample) a signal $x(t)$ instantaneously.
@@ -420,7 +420,7 @@ That is, the sample values are given by
 \begin{equation*}
 u(nT) = \int_{\mathbb{R}} x(\tau) p(\tau-nT) d\tau .
 \end{equation*}
-It also follows that, if no aliasing occurs, the imperfection can be eliminated completely using a discrete-time filter to equalize the resulting samples.
+It also follows that, if no aliasing occurs, this degradation can be eliminated completely using a discrete-time filter to equalize the resulting samples.
 
 A similar imperfection occurs during reconstruction.
 In practice, it is not possible to weight each sample by the exact sinc interpolation waveform.
@@ -433,7 +433,7 @@ Again, it follows that this imperfection can be eliminated completely by post-fi
 In practice, the main advantage of this observation is that one can jointly optimize $p(t)$, $q(t)$ and the post-filter to provide good performance while using inexpensive components.
 
 
-\section{Sampling Bandlimited Processes}
+\section{Sampling Bandlimited Processes*}
 
 We know from Theorem~\ref{theorem:SamplingTheorem} that a bandwidth-limited signal can be perfectly reconstructed from its samples provided that the sampling rate exceeds twice the bandwidth of the original signal.
 At this point, one may wonder whether it is possible to extend the sampling theorem to bandwidth-limited stochastic processes.
@@ -461,7 +461,7 @@ To establish this result, we expand the mean-squared error of \eqref{equation:Sa
 &\left\| X(t) - \tilde{X}(t) \right\|^2
 = \mathrm{E} \left[ \left| X(t) - \sum_{n=-\infty}^{\infty} X(nT)
 \mathrm{sinc}(2 W (t - nT)) \right|^2 \right] \\
-&= R_X(0) - \sum_{n=-\infty}^{\infty} [ R_X(t-nT) + R_X^*(t-nT) ]
+&= R_X(0) - \sum_{n=-\infty}^{\infty} [ R_X(t-nT) + R_X(t-nT) ]
 \mathrm{sinc}(2 W (t - nT)) \\
 &+ \sum_{n=-\infty}^{\infty} \sum_{m=-\infty}^{\infty} R_X((m-n)T)
 \mathrm{sinc}(2 W (t - mT)) \mathrm{sinc}(2 W (t - nT)) .
@@ -489,7 +489,7 @@ Applying Theorem~\ref{theorem:SamplingTheorem} one more time and noticing that $
 Theorem~\ref{theorem:SamplingRandomSignals} is important because it confirms that the design insights gained from analyzing deterministic signals hold for random signals as well.
 
 
-\section{Bandpass Signals and Processes}
+\section{Bandpass Signals and Processes*}
 
 One possible application of sampling is to take a continuous-time signal and to transform it into a discrete-time signal.
 For instance, this operation gives the information coming out of a source a format more suitable for digital communications.
@@ -546,7 +546,7 @@ Once $x(t)$ is brought back to baseband, the standard sampling theorem applies a
 
 % Bandpass processes
 
-\newpage
+%\newpage
 \section{Stochastic Signals}
 \label{section:StocahsticSignalsFAS}
 \index{random process}
@@ -746,7 +746,7 @@ This is an important result, as linear filters can be used to reduce the bandwid
 
 A stochastic process $X(t)$ is a \defn{random process}{Gaussian process} if, for any finite set of sampling times $t_1, t_2, \ldots, t_n$, the resulting random variables $X(t_1),X(t_2),\ldots,X(t_n)$ are jointly Gaussian random variables.
 The distribution of jointly Gaussian random variables is completely determined by their mean vector and correlation matrix.
-Therefore, a Gaussian process is completely determined by its mean function $m_X (t)$ and its autocorrelation function $R_XX (t_1,t_2)$.
+Therefore, a Gaussian process is completely determined by its mean function $m_X (t)$ and its autocorrelation function $R_{XX} (t_1,t_2)$.
 Of course, if the process is also wide-sense stationary, then this reduces to its mean value $m_X$ and its autocorrelation function $R_X (\tau)$.
 
 More generally, one finds that, for any finite set of energy-type signals $s_1 (t), s_2 (t), \ldots , s_n (t)$, the random variables

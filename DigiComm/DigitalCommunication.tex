@@ -11,6 +11,13 @@
 
 \usepackage[hyperindex]{hyperref}
 
+\newif\ifjfc
+\jfctrue
+%\jfcfalse
+\newif\ifhdp
+%\hdptrue
+\hdpfalse
+
 \topmargin          0.0in
 \headheight         0.25in
 \headsep            0.25in
@@ -50,7 +57,7 @@ Henry Pfister}
 
 \title{A First Course in Digital Communications}
 
-\date{Fall 2010}
+\date{Spring 2012}
 
 \maketitle
 
@@ -67,6 +74,7 @@ A copy of the license is included in the section entitled ``GNU Free Documentati
 
 \mainmatter
 
+\ifjfc
 \include{1Introduction}
 \include{2Sampling}
 \include{5Quantization}
@@ -74,13 +82,26 @@ A copy of the license is included in the section entitled ``GNU Free Documentati
 \include{3DTCommunications}
 \include{6ChannelCoding}
 \include{7Modulation}
+\fi
 
+\ifhdp
+\include{1Introduction}
+\include{2SourceCoding}
+\include{3DTCommunications}
+\include{2Sampling}
+\include{5Quantization}
+\include{6ChannelCoding}
+\include{7Modulation}
+\fi
 \appendix
 
 %\include{A0VectorSpaces}
 
 \backmatter
 
+\cleardoublepage  
+\phantomsection  
+\addcontentsline{toc}{chapter}{\indexname}  
 \printindex
 
 \end{document}

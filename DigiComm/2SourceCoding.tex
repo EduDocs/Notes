@@ -90,10 +90,27 @@ We address this issue by introducing entropy, a concept closely related to the n
 \section{Entropy}
 
 The \defn{information theory}{entropy} can be viewed as a measure of uncertainty in a random variable.
-In the context of digital communications,
-% it serves as a measure of information in that
-it provides a lower bound on the expected number of bits required to describe the output of a discrete memoryless source.
+In the context of digital communications, it provides a lower bound on the expected number of bits required to describe the output of a discrete memoryless source.
 As we will see shortly, this lower bound is tight and can be approached by practical encoders
+
+\begin{example}
+Let $X$ be a random variable drawn from the alphabet $\{x_1,x_2,x_3\}$.
+Rank the following four distributions in order of randomness:
+
+\begin{center}
+\begin{tabular}{|c||c|c|c|c|}
+\hline
+Sym. / Prob. & Source 1 & Source 2 & Source 3 & Source 4 \\
+\hline \hline
+$x_1$ & 1 & 1/3 & 1/2 & 1/4 \\
+\hline
+$x_2$ & 0 & 1/3 & 1/4 & 1/2 \\
+\hline
+$x_3$ & 0 & 1/3 & 1/4 & 1/4 \\
+\hline
+\end{tabular}
+\end{center}
+\end{example}
 
 \begin{definition}[Entropy]
 Let $X$ be a discrete random variable drawn from alphabet $\mathcal{X}$ according to probability mass function $p_X(\cdot)$.
@@ -732,7 +749,7 @@ In this case, the encoded sequence will be
 \end{equation*}
 
 
-\section{Fixed-Length Compression Codes}
+\section{Fixed-Length Compression Codes*}
 
 In the previous sections, the joint encoding of multiple source symbols was shown to perform well, with the average number of bits per symbol produced by a source approaching $\mathrm{H}[X]$.
 Below, we explore how the joint encoding of symbols together with fixed-length codes can be used to produce good compression ratios.
