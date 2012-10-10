@@ -68,12 +68,12 @@ A \vecnot{x} = \vecnot{y},
 \end{equation*}
 where $A$ is the matrix representation given by
 \begin{equation*}
-A = \left[ \begin{array}{cccc}
+A = \begin{bmatrix}
 a_{11} & a_{12} & \cdots & a_{1n} \\
 a_{21} & a_{22} & \cdots & a_{2n} \\
 \vdots & \vdots & \ddots & \vdots \\
 a_{m1} & a_{m2} & \cdots & a_{mn}
-\end{array} \right]
+\end{bmatrix}
 \end{equation*}
 and $\vecnot{x}$, $\vecnot{y}$ denote
 \begin{align*}
@@ -327,7 +327,7 @@ For any $m$ scalars $s_1, \ldots, s_m$ we have
 \end{equation*}
 Collecting the $a_{ij}$ coefficients into an $n$ by $m$ matrix $A$ shows that
 \begin{equation*}
-\left[ \begin{array}{c} t_1 \\ \vdots \\ t_n \end{array} \right] = A \left[ \begin{array}{c} s_1 \\ \vdots \\ s_m \end{array} \right].
+\begin{bmatrix} t_1 \\ \vdots \\ t_n \end{bmatrix} = A \begin{bmatrix} s_1 \\ \vdots \\ s_m \end{bmatrix} .
 \end{equation*}
 Since $n<m$, Lemma~\ref{lemma:widematrix_has_nullvector} implies that there exist scalars $s_1, \ldots, s_n$, not all $0$, such that $t_1 = t_2 = \cdots = t_m = 0$.
 For these scalars, $\sum_{j=1}^m s_j \vecnot{u}_j = 0$.
@@ -391,7 +391,7 @@ Based on this ordered basis, a vector $\vecnot{w} \in V$ can be unambiguously re
 \end{equation*}
 Equivalently, vector $\vecnot{w}$ can be described using the \emph{coordinate matrix of $\vecnot{w}$ relative to the ordered basis $\mathcal{B}$}:
 \begin{equation*}
-\vecnot{w} = \left[ \begin{array}{c} s_1 \\ \vdots \\ s_n \end{array} \right].
+\vecnot{w} = \begin{bmatrix} s_1 \\ \vdots \\ s_n \end{bmatrix} .
 \end{equation*}
 The dependence of this coordinate matrix on $\mathcal{B}$ can be specified explicitly using the notation $\left[ \vecnot{w} \right]_{\mathcal{B}}$.
 This will be particularly important when multiple coordinates systems are involved.
@@ -415,7 +415,7 @@ There are unique scalars $p_{ij}$ such that
 \end{equation*}
 Let $\vecnot{u} \in V$ and
 \begin{equation*}
-\left[ \vecnot{u} \right]_{\mathcal{B}} = \left[ \begin{array}{c} t_1 \\ \vdots \\ t_n \end{array} \right].
+\left[ \vecnot{u} \right]_{\mathcal{B}} = \begin{bmatrix} t_1 \\ \vdots \\ t_n \end{bmatrix} .
 \end{equation*}
 Then, we can write
 \begin{equation*}
@@ -454,7 +454,7 @@ for every $\vecnot{u} \in V$.
 Consider the ordered basis $\mathcal{A} = \vecnot{v}_1, \ldots, \vecnot{v}_n$ and let $Q = P^{-1}$.
 For all $\vecnot{u} \in V$, we have $\vecnot{u} = \sum_{i=1}^n s_i \vecnot{v}_i$, where
 \begin{equation*}
-\left[ \vecnot{u} \right]_{\mathcal{A}} = \left[ \begin{array}{c} s_1 \\ \vdots \\ s_n \end{array} \right].
+\left[ \vecnot{u} \right]_{\mathcal{A}} = \begin{bmatrix} s_1 \\ \vdots \\ s_n \end{bmatrix} .
 \end{equation*}
 If we define
 \begin{equation*}
@@ -478,7 +478,7 @@ then we find that
 \end{equation*}
 This shows that $\mathcal{B} = \vecnot{w}_1, \ldots, \vecnot{w}_n$ is an ordered basis for $V$ and
 \begin{equation*}
-\left[ \vecnot{u} \right]_{\mathcal{B}} = \left[ \begin{array}{c} t_1 \\ \vdots \\ t_n \end{array} \right].
+\left[ \vecnot{u} \right]_{\mathcal{B}} = \begin{bmatrix} t_1 \\ \vdots \\ t_n \end{bmatrix} .
 \end{equation*}
 The definition of $t_i$ also shows that $\left[ \vecnot{u} \right]_{\mathcal{B}} = P^{-1} \left[ \vecnot{u} \right]_{\mathcal{A}}$ and therefore $\left[ \vecnot{u} \right]_{\mathcal{A}} = P \left[ \vecnot{u} \right]_{\mathcal{B}}$.
 
@@ -543,9 +543,9 @@ is not a norm.
 \begin{example}
 The following functions are examples of norms for $F^n$,
 \begin{enumerate}
-\item the $l_1$ norm: $\left\| \vecnot{v} \right\|_1 = \sum_{i=1}^n |x_i|$
-\item the $l_p$ norm: $\left\| \vecnot{v} \right\|_p = \left( \sum_{i=1}^n |x_i|^p \right)^{\frac{1}{p}}, \quad p \in (1,\infty)$
-\item the $l_{\infty}$ norm: $\left\| \vecnot{v} \right\|_{\infty} = \max_{1,\ldots, n} \{ |x_i| \}$.
+\item the $l_1$ norm: $\left\| \vecnot{v} \right\|_1 = \sum_{i=1}^n |v_i|$
+\item the $l_p$ norm: $\left\| \vecnot{v} \right\|_p = \left( \sum_{i=1}^n |v_i|^p \right)^{\frac{1}{p}}, \quad p \in (1,\infty)$
+\item the $l_{\infty}$ norm: $\left\| \vecnot{v} \right\|_{\infty} = \max_{1,\ldots, n} \{ |v_i| \}$.
 \end{enumerate}
 \end{example}
 
@@ -1129,12 +1129,12 @@ Therefore, $\vecnot{m} \in W^{\bot}$ and the orthogonal complement contains all 
 
 Notice also that any vector $\vecnot{w}$ in the subspace spanned by $W$ can be written as $\vecnot{w} = \sum_{i} s_i \vecnot{w}_i$ with $\vecnot{w}_i \in W$ and $s_i \in F$.
 Therefore, the inner product of $\vecnot{w}$ with any $\vecnot{w}' \in W^{\bot}$ is given by
-\begin{align*}
+\begin{equation*}
 \left\langle \vecnot{w} | \vecnot{w}' \right\rangle
-&= \left\langle \sum_{i} s_i \vecnot{w}_i \Big| \vecnot{w}' \right\rangle \\
-&= \sum_{i} s_i \left\langle \vecnot{w}_i | \vecnot{w}' \right\rangle \\
-&= 0.
-\end{align*}
+= \left\langle \sum_{i} s_i \vecnot{w}_i \Big| \vecnot{w}' \right\rangle \\
+= \sum_{i} s_i \left\langle \vecnot{w}_i | \vecnot{w}' \right\rangle \\
+= 0.
+\end{equation*}
 It follows that the subspace spanned by $W$ is orthogonal to the subspace $W^{\bot}$.
 
 \subsection{Hilbert Spaces}
@@ -1437,13 +1437,11 @@ Then, $T$ is a projection if $T$ is idempotent.
 \begin{example}
 The idempotent matrix $A$ is a projection onto the first two coordinates.
 \begin{equation*}
-A = \left[
-\begin{array}{ccc}
+A = \begin{bmatrix}
 1 & 0 & 1 \\
 0 & 1 & 1 \\
 0 & 0 & 0
-\end{array}
-\right]
+\end{bmatrix}
 \end{equation*}
 \end{example}
 
