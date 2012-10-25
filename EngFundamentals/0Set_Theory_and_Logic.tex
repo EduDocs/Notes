@@ -557,7 +557,7 @@ If the sequences are restricted to have only a finite number of non-zero terms, 
 
 One can also formalize relationships between elements of a set.
 A \textbf{relation} $\sim$ between elements of the set $A$ is defined by the pairs $(x,y)\in A\times A$ for which the relation holds.
-Specifically, the relation is defined by the subset of ordered pairs $E\subseteq A\times A$ where the relation $a\sim b$ holds; so $x\sim y$ iff $(x,y)\in E$.
+Specifically, the relation is defined by the subset of ordered pairs $E\subseteq A\times A$ where the relation $a\sim b$ holds; so $x\sim y$ if and only if $(x,y)\in E$.
 A relation on $A$ is said to be:
 \begin{enumerate}
 \item Reflexive if $x\sim x$ holds for all $x\in A$
@@ -567,7 +567,7 @@ A relation on $A$ is said to be:
 
 A relation is called an \defn{set theory}{equivalence relation} if it is reflexive, symmetric, and transitive.
 For example, let $A$ be a set of people and $P(x,y)$ be the statement ``$x$ has the same birthday (month and day) as $y$.''
-Then, we can define $\sim$ such that $a\sim b$ holds iff $P(x,y)$ is true.
+Then, we can define $\sim$ such that $a\sim b$ holds if and only if $P(x,y)$ is true.
 In this case, the set $E$ is given by $E = \{ (x,y)\in A\times A | P(x,y) \}$.
 One can verify that this is an equivalence relation by checking that it is reflexive, symmetric, and transitive.
 
@@ -578,7 +578,7 @@ The set of all equivalence classes is called the \defn{set theory}{quotient set}
 
 In fact, there is a natural equivalence relation defined by any disjoint partition of a set.
 For example, let $A_{i,j}$ be the set of people in $A$ whose birthday was on the $j$-th day of the $i$-th month.
-It follows that $x\sim y$ iff there exists a unique pair $i,j$ such that $x,y \in A_{i,j}$.
+It follows that $x\sim y$ if and only if there exists a unique pair $i,j$ such that $x,y \in A_{i,j}$.
 In this case, the days of year are used as equivalence classes to define the equivalence relation.
 
 \begin{example}
