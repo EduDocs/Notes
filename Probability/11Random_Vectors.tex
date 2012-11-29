@@ -129,7 +129,7 @@ F_{X|A} (x) = \Pr (X \leq x | A)
 = \frac{ \Pr ( \{ X \leq x \} \cap A ) }{\Pr(A)} \quad x \in \RealNumbers .
 \end{equation*}
 Note that event $A$ can be defined in terms of variables $X$ and $Y$.
-For instance, we may use $A = \{ Y \geq X \}$ as our condition.
+For instance, we may use $A = \{ Y \leq X \}$ as our condition.
 Under suitable conditions, it is equally straightforward to specify the conditional PDF of $X$ given $A$,
 \begin{equation*}
 f_{X|A} (x) = \frac{d F_{X|A}}{dx} (x) \quad x \in \RealNumbers .
@@ -140,7 +140,7 @@ Let $X$ and $Y$ be continuous random variables with joint PDF
 \begin{equation*}
 f_{X,Y} (x,y) = \lambda^2 e^{-\lambda (x + y)} \quad x,y \geq 0 .
 \end{equation*}
-We wish to compute the conditional PDF of $X$ given $A = \{ X \leq Y \}$.
+We wish to compute the conditional PDF of $X$ given $A = \{ X \geq Y \}$.
 To solve this problem, we first compute the probability of the event $\{ X \leq x \} \cap A$,
 \begin{equation*}
 \begin{split}
