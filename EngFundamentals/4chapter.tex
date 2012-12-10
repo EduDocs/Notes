@@ -646,18 +646,18 @@ f \left( \vecnot{u} \right) = \left\langle \vecnot{u} | \vecnot{v} \right\rangle
 for all $\vecnot{u} \in V$.
 
 \begin{theorem}
-Let $V,W$ be Hilbert spaces and $T: V \rightarrow W$ be a continuous linear transformation.
-Then, the \defn{inner-product space}{adjoint} is the unique linear transformation $T^*$ on $V$ such that
+Let $V$ and $W$ be Hilbert spaces, and assume $T: V \rightarrow W$ is a continuous linear transformation.
+Then, the \defn{inner-product space}{adjoint} is the unique linear transformation $T^*$ on $W$ such that
 \begin{equation*}
 \left\langle T \vecnot{v} | \vecnot{w} \right\rangle
 = \left\langle \vecnot{v} | T^* \vecnot{w} \right\rangle
 \end{equation*}
-for all vectors $\vecnot{v}, \vecnot{w} \in V$.
+for all vectors $\vecnot{v} \in V$, $\vecnot{w} \in W$.
 \end{theorem}
 \begin{proof}
 Let $\vecnot{w}$ be any vector in $W$.
 Then $f(\vecnot{v}) = \left\langle T \vecnot{v} | \vecnot{w} \right\rangle$ is a continuous linear functional on $V$.
-It follows from Theorem~\ref{theorem:FunctionalInnerProduct} that there exists a unique vector $\vecnot{v}' \in V$ such that $f(\vecnot{v}) = \left\langle T \vecnot{v} | \vecnot{w} \right\rangle = \left\langle \vecnot{v} | \vecnot{v}' \right\rangle$.
+It follows from the Riesz representation theorem (Theorem~\ref{theorem:FunctionalInnerProduct}) that there exists a unique vector $\vecnot{v}' \in V$ such that $f(\vecnot{v}) = \left\langle T \vecnot{v} | \vecnot{w} \right\rangle = \left\langle \vecnot{v} | \vecnot{v}' \right\rangle$.
 Of course, the vector $\vecnot{v}'$ depends on the choice of $\vecnot{w}$.
 So, we define the adjoint mapping $T^* : W \rightarrow V$ to give the required $\vecnot{v}'$ for each $\vecnot{w}$.
 In other words,
@@ -680,7 +680,7 @@ For all $\vecnot{v} \in V$,
 &= \left\langle \vecnot{v} | s T^* \vecnot{w}_1 + T^* \vecnot{w}_2 \right\rangle .
 \end{split}
 \end{equation*}
-Since this holds for all $\vecnot{v} \in V$, Lemma~\ref{lemma:DualSpaceSeparatesPoints} tells us that $T^* \left( s \vecnot{v}_1 + \vecnot{v}_2 \right) = s T^* \vecnot{v}_1 + T^* \vecnot{v}_2$.
+Since this holds for all $\vecnot{v} \in V$, we gather from Lemma~\ref{lemma:DualSpaceSeparatesPoints} that $T^* \left( s \vecnot{v}_1 + \vecnot{v}_2 \right) = s T^* \vecnot{v}_1 + T^* \vecnot{v}_2$.
 Therefore, $T^*$ is linear.
 The uniqueness of $T^*$ is inherited from Theorem~\ref{theorem:FunctionalInnerProduct} because, for each $\vecnot{w}\in W$, the vector $T^* \vecnot{w}$ is determined uniquely as the vector $\vecnot{v}'$ such that $\left\langle T \vecnot{v} | \vecnot{w} \right\rangle = \left\langle \vecnot{v} | \vecnot{v}' \right\rangle$ for all $\vecnot{v} \in V$.
 \end{proof}
