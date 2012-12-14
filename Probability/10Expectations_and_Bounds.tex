@@ -4,7 +4,6 @@ The concept of expectation, has now been introduced in the context of discrete a
 We know from our previous discussion that expectations provide an effective way to summarize the information contained in the distribution of a random variable.
 As we will see shortly, expectations are also very valuable in establishing bounds on probabilities.
 
-\iffalse
 
 \section{Expectations Revisited}
 
@@ -25,7 +24,7 @@ and its \emph{variance} becomes \index{Variance}
 \Var [X] = \Expect \left[ (X - \Expect[X])^2 \right]
 = \int_{\RealNumbers} (\xi - \Expect[X])^2 f_X (\xi) d\xi .
 \end{equation*}
-As before, the variance of random variable $X$ can also be computed using $\Var [X] = \Expect \left[ X^2 \right] - \left( E[X] \right)^2$.
+As before, the variance of random variable $X$ can also be computed using $\Var [X] = \Expect \left[ X^2 \right] - \left( \Expect[X] \right)^2$.
 
 \begin{example}
 We wish to calculate the mean and variance of a Gaussian random variable with parameters $m$ and $\sigma^2$.
@@ -158,7 +157,6 @@ Then, by Proposition~\ref{proposition:MeanAlternative}, the expected value of $R
 Notice how we were able to compute the answer without deriving an explicit expression for $f_R (\cdot)$.
 \end{example}
 
-\fi
 
 \section{Moment Generating Functions}
 
