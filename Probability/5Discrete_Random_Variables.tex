@@ -139,10 +139,10 @@ The first and simplest random variable is the \emph{Bernoulli random variable}. 
 Let $X$ be a random variable that takes on only two possible numerical values, $X(\Omega) = \{0, 1\}$.
 Then, $X$ is a Bernoulli random variable and its PMF is given by
 \begin{equation*}
-p_X (x) = \left\{ \begin{array}{ll}
-1 - p, & \text{if }x = 0 \\
-p, & \text{if }x = 1
-\end{array} \right.
+p_X (x) = \begin{cases}
+1 - p, & x = 0 \\
+p, & x = 1 .
+\end{cases}
 \end{equation*}
 where $p \in [0, 1]$.
 
@@ -371,10 +371,10 @@ A finite random variable where all the possible outcomes are equally likely is c
 Let $X$ be a uniform random variable taking value over $X (\Omega) = \{ 1, 2, \ldots, n \}$.
 Its PMF is therefore given by
 \begin{equation*}
-p_X (k) = \left\{ \begin{array}{ll}
-1/n, & \text{if }k = 1, 2, \ldots, n \\
+p_X (k) = \begin{cases}
+1/n, & k = 1, 2, \ldots, n \\
 0, & \text{otherwise} .
-\end{array} \right.
+\end{cases}
 \end{equation*}
 We encountered specific cases of this random variable before.
 The tossing of a fair coin and the rolling of a die can both be used to construct uniform random variables.

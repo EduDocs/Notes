@@ -140,7 +140,7 @@ Let $X$ and $Y$ be continuous random variables with joint PDF
 \begin{equation*}
 f_{X,Y} (x,y) = \lambda^2 e^{-\lambda (x + y)} \quad x,y \geq 0 .
 \end{equation*}
-We wish to compute the conditional PDF of $X$ given $A = \{ X \geq Y \}$.
+We wish to compute the conditional PDF of $X$ given $A = \{ Y \leq X \}$.
 To solve this problem, we first compute the probability of the event $\{ X \leq x \} \cap A$,
 \begin{equation*}
 \begin{split}
@@ -295,12 +295,12 @@ Nevertheless, we examine the case where a simple expression for $f_{Y_1, Y_2} (\
 Consider the scenario where the functions $g_1 (\cdot, \cdot)$ and $g_2 (\cdot, \cdot)$ are totally differentiable, with Jacobian determinant
 \begin{equation*}
 \begin{split}
-&J(x_1, x_2) = \operatorname{det} \left[ \begin{array}{cc}
+&J(x_1, x_2) = \operatorname{det} \begin{bmatrix}
 \frac{\partial g_1}{\partial x_1} (x_1, x_2) &
 \frac{\partial g_1}{\partial x_2} (x_1, x_2) \\
 \frac{\partial g_2}{\partial x_1} (x_1, x_2) &
 \frac{\partial g_2}{\partial x_2} (x_1, x_2)
-\end{array} \right] \\
+\end{bmatrix} \\
 &= \frac{\partial g_1}{\partial x_1} (x_1, x_2)
 \frac{\partial g_2}{\partial x_2} (x_1, x_2)
 - \frac{\partial g_1}{\partial x_2} (x_1, x_2)
@@ -329,22 +329,22 @@ It also hints at how this equation can be modified to accommodate non-unique map
 An important application of \eqref{equation:DerivedJointPDF} pertains to the properties of Gaussian vectors.
 Suppose that $X_1$ and $X_2$ are jointly continuous random variables, and let
 \begin{equation*}
-\mathbf{X} = \left[ \begin{array}{c} X_1 \\ X_2 \end{array} \right] .
+\mathbf{X} = \begin{bmatrix} X_1 \\ X_2 \end{bmatrix} .
 \end{equation*}
 Define the mean of $\mathbf{X}$ by
 \begin{equation*}
 \mathbf{m} = \Expect [\mathbf{X}] 
-= \left[ \begin{array}{c} \Expect[ X_1 ] \\ \Expect[ X_2 ] \end{array} \right] .
+= \begin{bmatrix} \Expect[ X_1 ] \\ \Expect[ X_2 ] \end{bmatrix} .
 \end{equation*}
 and its covariance by
 \begin{equation*}
 \begin{split}
 \Sigma &= \Expect \left[ \left( \mathbf{X} - \mathbf{m} \right)
 \left(\mathbf{X} - \mathbf{m} \right)^{\mathrm{T}} \right] \\
-&= \left[ \begin{array}{cc} \Expect \left[ (X_1 - m_1)^2 \right] &
+&= \begin{bmatrix} \Expect \left[ (X_1 - m_1)^2 \right] &
 \Expect[ (X_1 - m_1) (X_2 - m_2) ]  \\
 \Expect[ (X_2 - m_2) (X_1 - m_1) ] &
-\Expect \left[ (X_2 - m_2)^2 \right] \end{array} \right] .
+\Expect \left[ (X_2 - m_2)^2 \right] \end{bmatrix} .
 \end{split}
 \end{equation*}
 Random variables $X_1$ and $X_2$ are said to be jointly Gaussian provided that their joint PDF is of the form
@@ -354,7 +354,7 @@ f_{X_1, X_2} (x_1, x_2) = \frac{1}{2 \pi |\Sigma|^{\frac{1}{2}}}
 \end{equation*}
 Assume that the random variables $Y_1$ and $Y_2$ are generated through the matrix equation
 \begin{equation*}
-\mathbf{Y} = \left[ \begin{array}{c} Y_1 \\ Y_2 \end{array} \right]
+\mathbf{Y} = \begin{bmatrix} Y_1 \\ Y_2 \end{bmatrix}
 = A \mathbf{X} + \mathbf{b} ,
 \end{equation*}
 where $A$ is a $2 \times 2$ invertible matrix and $\mathbf{b}$ is a constant vector.
@@ -362,7 +362,7 @@ In this case, $\mathbf{X} = A^{-1} \left( \mathbf{Y} - \mathbf{b} \right)$ and t
 \begin{equation*}
 J(x_1, x_2)
 = \operatorname{det}
-\left[ \begin{array}{cc} a_{11} & a_{12} \\ a_{21} & a_{22} \end{array} \right]
+\begin{bmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{bmatrix}
 = | A | .
 \end{equation*}
 Applying \eqref{equation:DerivedJointPDF}, we gather that the joint PDF of $(Y_1, Y_2)$ is expressed as

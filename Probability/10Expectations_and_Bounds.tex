@@ -474,9 +474,9 @@ Let $a$ and $b$ be two constants such that $0 < b \leq a$.
 Consider the function $h(x) = x^2$ along with the set $S = \{ x | x^2 \geq a^2 \}$.
 Furthermore, let $X$ be a discrete random variable with PMF
 \begin{equation*}
-p_X (x) = \left\{ \begin{array}{ll} 1 - \frac{b^2}{a^2}, & x = 0 \\
+p_X (x) = \begin{cases} 1 - \frac{b^2}{a^2}, & x = 0 \\
 \frac{b^2}{a^2}, & x = a \\
-0, & \text{otherwise.} \end{array} \right.
+0, & \text{otherwise}. \end{cases}
 \end{equation*}
 For this random variable, we have $\Pr (X \in S) = b^2/a^2$.
 By inspection, we also gather that the second moment of $X$ is equal to $\Expect \left[ X^2 \right] = b^2$.

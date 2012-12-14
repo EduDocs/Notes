@@ -522,10 +522,10 @@ X_n = \frac{Y_n}{n}.
 \end{equation*}
 By construction, the random variable $X_n$ has PMF
 \begin{equation*}
-p_{X_n} (y) = \left\{ \begin{array}{ll}
-(1 - p_n)^{k-1} p_n, & \text{if }y = k/n \\
+p_{X_n} (y) = \begin{cases}
+(1 - p_n)^{k-1} p_n, & y = k/n \\
 0, & \text{otherwise} .
-\end{array} \right.
+\end{cases}
 \end{equation*}
 For any $x \geq 0$, the CDF of random variable $X_n$ can be computed as
 \begin{equation*}
