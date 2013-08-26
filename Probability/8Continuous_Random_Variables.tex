@@ -288,7 +288,24 @@ F_X(x) = \begin{cases} 0, & x < a \\
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[width=8.5cm]{Figures/8chapter/uniform_pdf}
+\begin{tikzpicture}
+\begin{axis}[
+	title={Uniform Distribution},
+	xlabel={Value},
+	ylabel={Probability Density Function}]
+\addplot[darkgray] coordinates {
+	(0,0) (0,1) (1,1) (1,0) (5,0)};
+\addlegendentry{$\max = 1$}
+
+\addplot[blue] coordinates {
+	(0,0) (0,0.5) (2,0.5) (2,0) (5,0)};
+\addlegendentry{$\max = 2$}
+
+\addplot[red] coordinates {
+	(0,0) (0,0.25) (4,0.25) (4,0) (5,0)};
+\addlegendentry{$\max = 4$}
+\end{axis}
+\end{tikzpicture}
 \end{center}
 \caption{This figure shows the PDFs of uniform random variables with support intervals $[0,1]$, $[0,2]$ and $[0,4]$.}
 \end{figure}
@@ -328,7 +345,24 @@ where $m$ and $\sigma > 0$ are real parameters.
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[width=8.5cm]{Figures/8chapter/gaussian_pdf}
+\begin{tikzpicture}
+\begin{axis}[
+	title={Gaussian Distribution},
+	xlabel={Value},
+	ylabel={Probability Density Function}]
+\addplot[darkgray,domain=-5:5,samples=201]
+	{exp(-((x^2)/2))/sqrt(2*pi)};
+\addlegendentry{$\sigma^2 = 1$}
+
+\addplot[blue,domain=-5:5,samples=201]
+	{exp(-((x^2)/4))/sqrt(4*pi)};
+\addlegendentry{$\sigma^2 = 2$}
+
+\addplot[red,domain=-5:5,samples=201]
+	{exp(-((x^2)/8))/sqrt(8*pi)};
+\addlegendentry{$\sigma^2 = 4$}
+\end{axis}
+\end{tikzpicture}
 \end{center}
 \caption{The distributions of Gaussian random variables appear above for parameters $m = 0$ and $\sigma^2 \in \{ 1, 2, 4 \}$.}
 \end{figure}
@@ -488,7 +522,24 @@ The parameter $\lambda$ characterizes the rate at  which events occur.
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[width=8.5cm]{Figures/8chapter/exponential_pdf}
+\begin{tikzpicture}
+\begin{axis}[
+	title={Exponential Distribution},
+	xlabel={Value},
+	ylabel={Probability Density Function}]
+\addplot[darkgray,domain=0:3,samples=201]
+	{2*exp(-2*x)};
+\addlegendentry{$\sigma^2 = 2$}
+
+\addplot[blue,domain=0:3,samples=201]
+	{exp(-x)};
+\addlegendentry{$\sigma^2 = 1$}
+
+\addplot[red,domain=0:3,samples=201]
+	{0.5*exp(-0.5*x)};
+\addlegendentry{$\sigma^2 = 0.5$}
+\end{axis}
+\end{tikzpicture}
 \end{center}
 \caption{The distributions of exponential random variables are shown above for parameters $\lambda \in \{0.5, 1, 2 \}$.}
 \end{figure}
@@ -640,7 +691,24 @@ Many common distributions are special cases of the gamma distribution, as seen i
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[width=8.5cm]{Figures/8chapter/gamma_pdf}
+\begin{tikzpicture}
+\begin{axis}[
+	title={Gamma Distribution},
+	xlabel={Value},
+	ylabel={Probability Density Function}]
+\addplot[darkgray,domain=0:6,samples=201]
+	{0.5*exp(-0.5*x)};
+\addlegendentry{Exponential}
+
+\addplot[blue,domain=0:6,samples=201]
+	{0.25*x*exp(-0.5*x)};
+\addlegendentry{Chi-Square}
+
+\addplot[red,domain=0:6,samples=201]
+	{(8/3)*(x^3)*exp(-2*x)};
+\addlegendentry{Erlang}
+\end{axis}
+\end{tikzpicture}
 \end{center}
 \caption{Gamma distributions form a two-parameter family of PDFs and, depending on $(\alpha, \lambda)$, they can be employed to model various situations.
 The parameters used above are $(1, 0.5)$ for the exponential distribution, $(2, 0.5)$ for the chi-square distribution and $(4, 2)$ for the Erlang distribution;
@@ -693,7 +761,24 @@ Also, if $R$ is a Rayleigh random variable then $R^2$ has an exponential distrib
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[width=8.5cm]{Figures/8chapter/rayleigh_pdf}
+\begin{tikzpicture}
+\begin{axis}[
+	title={Rayleigh Distribution},
+	xlabel={Value},
+	ylabel={Probability Density Function}]
+\addplot[darkgray,domain=0:6,samples=201]
+	{x*exp(-0.5*(x^2))};
+\addlegendentry{$\sigma^2 = 1$}
+
+\addplot[blue,domain=0:6,samples=201]
+	{0.5*x*exp(-0.25*(x^2))};
+\addlegendentry{$\sigma^2 = 2$}
+
+\addplot[red,domain=0:6,samples=201]
+	{0.25*x*exp(-0.125*(x^2))};
+\addlegendentry{$\sigma^2 = 4$}
+\end{axis}
+\end{tikzpicture}
 \end{center}
 \caption{This figure plots the distributions of Rayleigh random variables for parameters $\sigma^2 \in \{ 1, 2, 4 \}$.}
 \end{figure}
@@ -760,7 +845,24 @@ The difference between two independent and identically distributed exponential r
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[width=8.5cm]{Figures/8chapter/laplace_pdf}
+\begin{tikzpicture}
+\begin{axis}[
+	title={Laplace Distribution},
+	xlabel={Value},
+	ylabel={Probability Density Function}]
+\addplot[darkgray,domain=-5:5,samples=201]
+	{exp(-2*abs(x))};
+\addlegendentry{$b = 0.5$}
+
+\addplot[blue,domain=-5:5,samples=201]
+	{0.5*exp(-abs(x))};
+\addlegendentry{$b = 1$}
+
+\addplot[red,domain=-5:5,samples=201]
+	{0.25*exp(-0.5*abs(x))};
+\addlegendentry{$b = 2$}
+\end{axis}
+\end{tikzpicture}
 \end{center}
 \caption{The PDF of a Laplace random variable can be constructed using an exponential function and its reflection spliced together.
 This figures shows Laplace PDFs for parameters $b \in \{0.5, 1, 2 \}$.}
@@ -781,7 +883,24 @@ Physicists sometimes refer to this distribution as the \emph{Lorentz distributio
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[width=8.5cm]{Figures/8chapter/cauchy_pdf}
+\begin{tikzpicture}
+\begin{axis}[
+	title={Cauchy Distribution},
+	xlabel={Value},
+	ylabel={Probability Density Function}]
+\addplot[darkgray,domain=-5:5,samples=201]
+	{0.5 / (pi * (0.25 + x^2)};
+\addlegendentry{$\gamma = 0.5$}
+
+\addplot[blue,domain=-5:5,samples=201]
+	{1 / (pi * (1 + x^2)};
+\addlegendentry{$\gamma = 1$}
+
+\addplot[red,domain=-5:5,samples=201]
+	{2 / (pi * (4 + x^2)};
+\addlegendentry{$\gamma = 2$}
+\end{axis}
+\end{tikzpicture}
 \end{center}
 \caption{Cauchy distributions are categorized as heavy-tail distributions because of their very slow decay.
 The PDFs of Cauchy random variables are plotted above for parameters $\gamma \in \{ 0.5, 1, 2 \}$.}
