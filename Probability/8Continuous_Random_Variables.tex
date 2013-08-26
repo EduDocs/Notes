@@ -67,7 +67,36 @@ Fortunately, this formula is simpler when the random variable $X$ only takes int
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[width=8.5cm]{Figures/8chapter/discrete_cdf}
+\begin{tikzpicture}
+\begin{axis}[
+    title={Discrete Random Variable},
+    xlabel={Value},
+	legend pos=south east]
+\addplot[ybar,darkgray,fill=lightgray]
+    coordinates
+    {(0, 0.135335283) (1, 0.270670566) (2, 0.270670566) (3, 0.180447044)
+    (4, 0.090223522) (5, 0.036089409) (6, 0.012029803) (7, 0.003437087)
+    (8, 0.000859272) (9, 0.000190949) (10, 0.0000381899) (11, 0.00000694361)
+	(12, 0.00000115727)};
+\addlegendentry{PDF}
+\addplot[blue] coordinates
+	{(-0.5,0) (0,0)
+	(0, 0.135335283) (1, 0.135335283)
+	(1,0.406005850) (2,0.406005850)
+	(2,0.676676416) (3,0.676676416)
+	(3,0.857123460) (4,0.857123460)
+	(4,0.947346983) (5,0.947346983)
+	(5,0.983436392) (6,0.983436392)
+	(6,0.995466194) (7,0.995466194)
+	(7,0.998903281) (8,0.998903281)
+	(8,0.999762553) (9,0.999762553)
+	(9,0.999953502) (10,0.999953502)
+	(10,0.999991692) (11,0.999991692)
+	(11, 0.999998635) (12, 0.999998635)
+	(12, 0.999999793) (12.5, 0.999999793)};
+\addlegendentry{CDF}
+\end{axis}
+\end{tikzpicture}
 \end{center}
 \caption{This figure shows the PMF of a discrete random variable, along with the corresponding CDF.
 The values of the PMF are depicted by the height of the rectangles; their cumulative sums lead to the values of the CDF.}
@@ -118,7 +147,20 @@ and therefore $X$ is a continuous random variable.
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[width=8.5cm]{Figures/8chapter/continuous_cdf}
+\begin{tikzpicture}
+\begin{axis}[
+	title={Continuous Random Variables},
+	xlabel={Value},
+	legend pos=north west]
+\addplot[blue,domain=0:6,samples=201]
+	{1 - exp(-0.25*(x^2))};
+\addlegendentry{CDF}
+
+\addplot[darkgray,domain=0:6,samples=201]
+	{0.5*x*exp(-0.25*(x^2))};
+\addlegendentry{PDF}
+\end{axis}
+\end{tikzpicture}
 \end{center}
 \caption{The CDF of a continuous random variable is differentiable.
 This figure provides one example of a continuous random variable.
@@ -136,7 +178,44 @@ Still, we emphasize that a good understanding of discrete and continuous random 
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[width=8.5cm]{Figures/8chapter/mixed_cdf}
+\begin{tikzpicture}
+\begin{axis}[
+    title={Mixed Random Variable},
+    xlabel={Value},
+    legend pos=north west]
+\addplot[blue] coordinates {
+	(-0.125,0)
+	(0.00,0) (0.01,0.007853659) (0.02,0.015705380) (0.03,0.023553225)
+	(0.04,0.031395260) (0.05,0.039229548) (0.06,0.047054157) (0.07,0.054867156)
+	(0.08,0.062666617) (0.09,0.070450616) (0.10,0.078217233) (0.11,0.085964550)
+	(0.12,0.093690657) (0.13,0.101393648) (0.14,0.109071621) (0.15,0.116722682)
+	(0.16,0.124344944) (0.17,0.131936525) (0.18,0.139495553) (0.19,0.147020163)
+	(0.20,0.154508497) (0.21,0.161958709) (0.22,0.169368960) (0.23,0.176737422)
+	(0.24,0.184062276) (0.25,0.191341716) (0.26,0.198573945) (0.27,0.205757179)
+	(0.28,0.212889646) (0.29,0.219969585) (0.30,0.219969585)
+	(0.30,0.526995250) (0.31,0.533964907) (0.32,0.540876837) (0.33,0.547729334)
+	(0.34,0.554520708) (0.35,0.561249282) (0.36,0.567913397) (0.37,0.574511409)
+	(0.38,0.581041689) (0.39,0.587502626) (0.40,0.593892626) (0.41,0.600210113)
+	(0.42,0.606453527) (0.43,0.612621328) (0.44,0.618711995) (0.45,0.624724024)
+	(0.46,0.630655933) (0.47,0.636506257) (0.48,0.642273553) (0.49,0.647956398)
+	(0.50,0.653553391) (0.51,0.659063149) (0.52,0.664484314) (0.53,0.669815547)
+	(0.54,0.675055535) (0.55,0.680202983) (0.56,0.685256621) (0.57,0.690215204)
+	(0.58,0.695077506) (0.59,0.699842329) (0.60,0.704508497) (0.61,0.709074859)
+	(0.62,0.713540287) (0.63,0.717903681) (0.64,0.722163963) (0.65,0.726320082)
+	(0.66,0.730371014) (0.67,0.734315757) (0.68,0.738153340) (0.69,0.741882815)
+	(0.70,0.741882815)
+	(0.70,0.945503262) (0.71,0.949013788) (0.72,0.952413526) (0.73,0.955701638)
+	(0.74,0.958877313) (0.75,0.961939766) (0.76,0.964888243) (0.77,0.967722015)
+	(0.78,0.970440384) (0.79,0.973042679) (0.80,0.975528258) (0.81,0.977896507)
+	(0.82,0.980146843) (0.83,0.982278709) (0.84,0.984291581) (0.85,0.986184960)
+	(0.86,0.987958381) (0.87,0.989611405) (0.88,0.991143625) (0.89,0.992554663)
+	(0.90,0.993844170) (0.91,0.995011829) (0.92,0.996057351) (0.93,0.996980478)
+	(0.94,0.997780982) (0.95,0.998458667) (0.96,0.999013364) (0.97,0.999444937)
+	(0.98,0.999753280) (0.99,0.999938316) (1,1)
+	(1.125,1)};
+\addlegendentry{CDF}
+\end{axis}
+\end{tikzpicture}
 \end{center}
 \caption{This figure shows the CDF of a mixed random variable.
 In general, mixed random variables do not have a PMF nor a PDF.
@@ -294,15 +373,15 @@ F_X(x) = \begin{cases} 0, & x < a \\
 	xlabel={Value},
 	ylabel={Probability Density Function}]
 \addplot[darkgray] coordinates {
-	(0,0) (0,1) (1,1) (1,0) (5,0)};
+	(0,0) (0,1) (1,1) (1,0) (6,0)};
 \addlegendentry{$\max = 1$}
 
 \addplot[blue] coordinates {
-	(0,0) (0,0.5) (2,0.5) (2,0) (5,0)};
+	(0,0) (0,0.5) (2,0.5) (2,0) (6,0)};
 \addlegendentry{$\max = 2$}
 
 \addplot[red] coordinates {
-	(0,0) (0,0.25) (4,0.25) (4,0) (5,0)};
+	(0,0) (0,0.25) (4,0.25) (4,0) (6,0)};
 \addlegendentry{$\max = 4$}
 \end{axis}
 \end{tikzpicture}
@@ -865,7 +944,7 @@ The difference between two independent and identically distributed exponential r
 \end{tikzpicture}
 \end{center}
 \caption{The PDF of a Laplace random variable can be constructed using an exponential function and its reflection spliced together.
-This figures shows Laplace PDFs for parameters $b \in \{0.5, 1, 2 \}$.}
+This figure shows Laplace PDFs for parameters $b \in \{0.5, 1, 2 \}$.}
 \end{figure}
 
 
