@@ -148,7 +148,20 @@ where $p \in [0, 1]$.
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[width=8.5cm]{Figures/5chapter/bernoulli_pmf}
+\begin{tikzpicture}
+\begin{axis}[
+    title={Bernoulli Random Variable},
+    xlabel={Value},
+    ylabel={Probability Mass Function},
+    ymin=0,
+    ymax=0.8,
+    ybar]
+\addplot
+    coordinates
+    {(0, 0.75) (1, 0.25) (2, 0) (3, 0) (4, 0)};
+\addlegendentry{$p = 0.25$}
+\end{axis}
+\end{tikzpicture}
 \end{center}
 \caption{The PMF of a Bernoulli random variable appears above for parameter $p = 0.25$.}
 \end{figure}
@@ -180,7 +193,22 @@ We can easily verify that $X$ fulfills the normalization axiom,
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[width=8.5cm]{Figures/5chapter/binomial_pmf}
+\begin{tikzpicture}
+\begin{axis}[
+    title={Binomial Random Variable},
+    xlabel={Value},
+    ylabel={Probability Mass Function},
+    ymin=0,
+    ymax=0.35,
+    ybar]
+\addplot
+    coordinates
+	{(0, 0.100112915) (1, 0.266967773) (2, 0.311462402) (3, 0.207641602)
+	(4, 0.086517334) (5, 0.023071289) (6, 0.003845215) (7, 0.000366211)
+	(8, 0.0000152588)};
+\addlegendentry{$p = 0.25$}
+\end{axis}
+\end{tikzpicture}
 \end{center}
 \caption{This figure shows a binomial random variable with parameters $n = 8$ and $p = 0.25$.}
 \end{figure}
@@ -228,9 +256,25 @@ It finds extensive use in networking, inventory management and queueing applicat
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[width=8.5cm]{Figures/5chapter/poisson_pmf}
-\caption{This figure shows the PMF of a Poisson random variable with parameter $\lambda = 2$.  Note that the values of the PMF are only present for $k = 0, 1, \ldots, 8$.}
+\begin{tikzpicture}
+\begin{axis}[
+    title={Poisson Random Variable},
+    xlabel={Value},
+    ylabel={Probability Mass Function},
+    ymin=0,
+    ymax=0.35,
+    ybar]
+\addplot
+    coordinates
+	{(0, 0.135335283) (1, 0.270670566) (2, 0.270670566) (3, 0.180447044)
+	(4, 0.090223522) (5, 0.036089409) (6, 0.012029803) (7, 0.003437087)
+	(8, 0.000859272)};
+% (9, 0.000190949) (10, 0.0000381899) (11, 0.00000694361) (12, 0.00000115727)};
+\addlegendentry{$\lambda = 2$}
+\end{axis}
+\end{tikzpicture}
 \end{center}
+\caption{This figure shows the PMF of a Poisson random variable with parameter $\lambda = 2$.  Note that the values of the PMF are only present for $k = 0, 1, \ldots, 8$.}
 \end{figure}
 
 \begin{example}
@@ -270,7 +314,53 @@ Thus, the sequence of binomial random variables $\{ X_n \}$ converges in distrib
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[width=8.5cm]{Figures/5chapter/convergence_pmf}
+\begin{tikzpicture}
+\begin{axis}[
+    title={Convergence to Poisson Distribution},
+    xlabel={Value},
+    ylabel={Probability Mass Function},
+    ymin=0]
+\addplot+[ybar]
+    coordinates
+	{(0, 0.018316) (1, 0.073263) (2, 0.146525) (3, 0.195367)
+	(4, 0.195367) (5, 0.156293) (6, 0.104196) (7, 0.059540)
+	(8, 0.029770) (9, 0.013231) (10, 0.005292) (11, 0.001925)
+	(12, 0.000642)};
+\addlegendentry{$\lambda = 10$}
+
+\addplot[ybar,lightgray]
+    coordinates
+	{(0,0.000320) (1,0.006400) (2,0.051200) (3,0.204800)
+	(4,0.409600) (5,0.327680) (6,0.000000) (7,0.000000)
+	(8,0.000000) (9,0.000000) (10,0.000000) (11,0.000000)
+	(12,0.000000)};
+\addlegendentry{$n = 5$}
+
+\addplot[ybar,pink]
+    coordinates
+	{(0,0.009539) (1,0.052033) (2,0.132448) (3,0.208706)
+	(4,0.227679) (5,0.182143) (6,0.110390) (7,0.051611)
+	(8,0.018768) (9,0.005308) (10,0.001158) (11,0.000191)
+	(12,0.000023)};
+\addlegendentry{$n = 15$}
+
+\addplot[ybar,magenta]
+    coordinates
+	{(0,0.012793) (1,0.060920) (2,0.139247) (3,0.203344)
+	(4,0.213027) (5,0.170422) (6,0.108204) (7,0.055942)
+	(8,0.023975) (9,0.008626) (10,0.002629) (11,0.000683)
+	(12,0.000152)};
+\addlegendentry{$n = 25$}
+
+\addplot[ybar,violet]
+    coordinates
+	{(0,0.014298) (1,0.064572) (2,0.141642) (3,0.201040)
+	(4,0.207525) (5,0.166020) (6,0.107110) (7,0.057257)
+	(8,0.025858) (9,0.010010) (10,0.003358) (11,0.000985)
+	(12,0.000254)};
+\addlegendentry{$n = 35$}
+\end{axis}
+\end{tikzpicture}
 \end{center}
 \caption{The levels of a binomial PMF with parameter $p = \lambda/n$ converge to the probabilities of a Poisson PMF with parameter $\lambda$ as $n$ increases to infinity.}
 \end{figure}
@@ -320,7 +410,22 @@ We stress that $(1-p)^{k-1} p$ simply represents the probability of obtaining a 
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[width=8.5cm]{Figures/5chapter/geometric_pmf}
+\begin{tikzpicture}
+\begin{axis}[
+	title={Geometric Random Variable},
+    xlabel={Value},
+    ylabel={Probability Mass Function},
+	ymin=0,
+	ymax=0.3,
+    ybar]
+\addplot
+	coordinates
+	{(0, 0.25) (1, 0.1875) (2, 0.140625) (3, 0.10546875) (4, 0.079101563)
+	(5, 0.059326172) (6, 0.044494629) (7, 0.033370972) (8, 0.025028229)
+	(9, 0.018771172) (10, 0.014078379) (11, 0.010558784) (12, 0.007919088)};
+\addlegendentry{$p = 0.25$}
+\end{axis}
+\end{tikzpicture}
 \end{center}
 \caption{The PMF of a geometric random variable is a decreasing function of $k$.
 It is plotted above for $p = 0.25$.
@@ -381,7 +486,21 @@ The tossing of a fair coin and the rolling of a die can both be used to construc
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[width=8.5cm]{Figures/5chapter/uniform_pmf}
+\begin{tikzpicture}
+\begin{axis}[
+	title={Uniform Random Variable},
+    xlabel={Value},
+    ylabel={Probability Mass Function},
+	ymin=0,
+	ymax=0.15,
+    ybar]
+\addplot
+	coordinates
+	{(1, 0.125) (2, 0.125) (3, 0.125) (4, 0.125)
+	(5, 0.125) (6, 0.125) (7, 0.125) (8, 0.125)};
+\addlegendentry{$n = 8$}
+\end{axis}
+\end{tikzpicture}
 \end{center}
 \caption{A uniform random variable corresponds to the situation where all the possible values of the random variable are equally likely.
 It is shown above for the case where $n = 8$.}
