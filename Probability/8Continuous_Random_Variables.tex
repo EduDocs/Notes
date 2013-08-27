@@ -80,7 +80,7 @@ Fortunately, this formula is simpler when the random variable $X$ only takes int
 	(12, 0.00000115727)};
 \addlegendentry{PDF}
 \addplot[blue] coordinates
-	{(-0.5,0) (0,0)
+	{(0,0)
 	(0, 0.135335283) (1, 0.135335283)
 	(1,0.406005850) (2,0.406005850)
 	(2,0.676676416) (3,0.676676416)
@@ -92,8 +92,7 @@ Fortunately, this formula is simpler when the random variable $X$ only takes int
 	(8,0.999762553) (9,0.999762553)
 	(9,0.999953502) (10,0.999953502)
 	(10,0.999991692) (11,0.999991692)
-	(11, 0.999998635) (12, 0.999998635)
-	(12, 0.999999793) (12.5, 0.999999793)};
+	(11, 0.999998635) (12, 0.999998635)};
 \addlegendentry{CDF}
 \end{axis}
 \end{tikzpicture}
@@ -191,7 +190,7 @@ Still, we emphasize that a good understanding of discrete and continuous random 
 	{0.25 + 0.2*(1 + (x-0.5)^3)};
 \addplot[blue,domain=1.5:2,samples=51]
 	{1 - (x-2)^2};
-\addplot[blue] coordinates {
+\addplot[blue,dashed] coordinates {
 	(0.6,0.144) (0.6,0.22)
 
 	(1,0.3) (1,0.475)
