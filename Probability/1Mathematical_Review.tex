@@ -77,8 +77,8 @@ Consider two sets, $S$ and $T$.
 \begin{figure}[htb!]
 \begin{center}
 \begin{tikzpicture}
-\node[circle,draw=black,thick,minimum size=3cm,label=135:$S$] (S) at (-0.75,0) {};
-\node[circle,draw=black,thick,minimum size=3cm,label=45:$T$] (T) at (0.75,0) {};
+\node[circle,draw=black,thick,minimum size=3cm,label=135:$S$] (S) at (-0.75cm,0) {};
+\node[circle,draw=black,thick,minimum size=3cm,label=45:$T$] (T) at (0.75cm,0) {};
 \end{tikzpicture}
 \caption{This is an abstract representation of two sets, $S$ and $T$.
 Each set contains the elements located in its shaded circle and the overlap corresponds to elements that are in both sets.}
@@ -94,8 +94,8 @@ Formally, we define the union of these two sets by $S \cup T = \{ x | x \in S \t
 \draw[fill=blue!20]
 	(-0.75cm,0) circle (1.5cm)
 	(0.75cm,0) circle (1.5cm);
-\node[circle,draw=black,thick,minimum size=3cm,label=135:$S$] (S) at (-0.75,0) {};
-\node[circle,draw=black,thick,minimum size=3cm,label=45:$T$] (T) at (0.75,0) {};
+\node[circle,draw=black,thick,minimum size=3cm,label=135:$S$] (S) at (-0.75cm,0) {};
+\node[circle,draw=black,thick,minimum size=3cm,label=45:$T$] (T) at (0.75cm,0) {};
 \coordinate [label=center:{$S \cup T$}] (Union) at (0,0);
 \end{tikzpicture}
 \caption{The union of sets $S$ and $T$ consists of all elements that are contained in $S$ or $T$.}
@@ -112,8 +112,8 @@ It is denoted by $S \cap T$, and it can be expressed mathematically as $S \cap T
 	\clip (-0.75cm,0) circle (1.5cm);
 	\fill[fill=blue!20] (0.75cm,0) circle (1.5cm);
 \end{scope}
-\node[circle,draw=black,thick,minimum size=3cm,label=135:$S$] (S) at (-0.75,0) {};
-\node[circle,draw=black,thick,minimum size=3cm,label=45:$T$] (T) at (0.75,0) {};
+\node[circle,draw=black,thick,minimum size=3cm,label=135:$S$] (S) at (-0.75cm,0) {};
+\node[circle,draw=black,thick,minimum size=3cm,label=45:$T$] (T) at (0.75cm,0) {};
 \coordinate [label=center:{$S \cap T$}] (Intersection) at (0,0);
 \end{tikzpicture}
 \caption{The intersection of sets $S$ and $T$ only contains elements that are both in $S$ and $T$.}
