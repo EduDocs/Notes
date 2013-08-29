@@ -76,11 +76,10 @@ Consider two sets, $S$ and $T$.
 
 \begin{figure}[htb!]
 \begin{center}
-\begin{psfrags}
-\psfrag{S}[c]{$S$}
-\psfrag{T}[c]{$T$}
-\includegraphics[height=3.00cm]{Figures/1Chapter/sets}
-\end{psfrags}
+\begin{tikzpicture}
+\node[circle,draw=black,thick,minimum size=3cm,label=135:$S$] (S) at (-0.75,0) {};
+\node[circle,draw=black,thick,minimum size=3cm,label=45:$T$] (T) at (0.75,0) {};
+\end{tikzpicture}
 \caption{This is an abstract representation of two sets, $S$ and $T$.
 Each set contains the elements located in its shaded circle and the overlap corresponds to elements that are in both sets.}
 \end{center}
@@ -91,12 +90,14 @@ Formally, we define the union of these two sets by $S \cup T = \{ x | x \in S \t
 
 \begin{figure}[htb!]
 \begin{center}
-\begin{psfrags}
-\psfrag{S}[c]{$S$}
-\psfrag{T}[c]{$T$}
-\psfrag{U}[c]{$S \cup T$}
-\includegraphics[height=3.03cm]{Figures/1Chapter/union}
-\end{psfrags}
+\begin{tikzpicture}
+\draw[fill=blue!20]
+	(-0.75cm,0) circle (1.5cm)
+	(0.75cm,0) circle (1.5cm);
+\node[circle,draw=black,thick,minimum size=3cm,label=135:$S$] (S) at (-0.75,0) {};
+\node[circle,draw=black,thick,minimum size=3cm,label=45:$T$] (T) at (0.75,0) {};
+\coordinate [label=center:{$S \cup T$}] (Union) at (0,0);
+\end{tikzpicture}
 \caption{The union of sets $S$ and $T$ consists of all elements that are contained in $S$ or $T$.}
 \end{center}
 \end{figure}
@@ -106,12 +107,15 @@ It is denoted by $S \cap T$, and it can be expressed mathematically as $S \cap T
 
 \begin{figure}[htb!]
 \begin{center}
-\begin{psfrags}
-\psfrag{S}[c]{$S$}
-\psfrag{T}[c]{$T$}
-\psfrag{I}[c]{$S \cap T$}
-\includegraphics[height=3.03cm]{Figures/1Chapter/intersection}
-\end{psfrags}
+\begin{tikzpicture}
+\begin{scope}
+	\clip (-0.75cm,0) circle (1.5cm);
+	\fill[fill=blue!20] (0.75cm,0) circle (1.5cm);
+\end{scope}
+\node[circle,draw=black,thick,minimum size=3cm,label=135:$S$] (S) at (-0.75,0) {};
+\node[circle,draw=black,thick,minimum size=3cm,label=45:$T$] (T) at (0.75,0) {};
+\coordinate [label=center:{$S \cap T$}] (Intersection) at (0,0);
+\end{tikzpicture}
 \caption{The intersection of sets $S$ and $T$ only contains elements that are both in $S$ and $T$.}
 \end{center}
 \end{figure}
@@ -123,8 +127,57 @@ A collection of sets is said to form a \emph{partition} of $S$ if the sets in th
 
 \begin{figure}[htb]
 \begin{center}
-\includegraphics[height=3.03cm]{Figures/1Chapter/setpartition}
-\caption{A partition of $S$ is a collection of sets that are disjoint and whose union is $S$.}
+\begin{tikzpicture}
+\begin{scope}
+	\clip (-0.5cm,-2cm) rectangle (0.5cm,2cm);
+	\draw[thick,fill=green!20] (0,0) circle (1.5cm);
+\end{scope}
+\begin{scope}
+	\clip (0,0) circle (1.5cm);
+	\draw[thick] (-0.5cm,-2cm) rectangle (0.5cm,2cm);
+\end{scope}
+\begin{scope}
+	\clip (-2.5cm,-2cm) rectangle (-1cm,2cm);
+	\draw[thick,fill=red!20] (-0.5cm,0) circle (1.5cm);
+\end{scope}
+\begin{scope}
+	\clip (-0.5cm,0) circle (1.5cm);
+	\draw[thick] (-2.5cm,-2cm) rectangle (-1cm,2cm);
+\end{scope}
+\begin{scope}
+	\clip (1cm,-2cm) rectangle (2.5cm,2cm);
+	\draw[thick,fill=blue!20] (0.5cm,0) circle (1.5cm);
+\end{scope}
+\begin{scope}
+	\clip (0.5cm,0) circle (1.5cm);
+	\draw[thick] (1cm,-2cm) rectangle (2.5cm,2cm);
+\end{scope}
+\coordinate [label=center:{$S_1$}] (S1) at (-1.5cm,0);
+\coordinate [label=center:{$S_2$}] (S2) at (0,0);
+\coordinate [label=center:{$S_3$}] (S3) at (1.5cm,0);
+
+\begin{scope}
+	\clip (5.5cm,-2cm) rectangle (6.5cm,2cm);
+	\draw[thick,fill=green!20] (6cm,0) circle (1.5cm);
+\end{scope}
+\begin{scope}
+	\clip (4cm,-2cm) rectangle (5.5cm,2cm);
+	\draw[thick,fill=red!20] (6cm,0) circle (1.5cm);
+\end{scope}
+\begin{scope}
+	\clip (6.5cm,-2cm) rectangle (8cm,2cm);
+	\draw[thick,fill=blue!20] (6cm,0) circle (1.5cm);
+\end{scope}
+\begin{scope}
+	\clip (6cm,0) circle (1.5cm);
+	\draw[thick] (5.5cm,-2cm) rectangle (6.5cm,2cm);
+\end{scope}
+\coordinate [label=center:{$S_1$}] (S1) at (5cm,0);
+\coordinate [label=center:{$S_2$}] (S2) at (6cm,0);
+\coordinate [label=center:{$S_3$}] (S3) at (7cm,0);
+\end{tikzpicture}
+\caption{A partition of $S$ is a collection of sets that are disjoint and whose union is $S$.
+Above, $S$ is partition into three disjoint subsets: $S_1$, $S_2$, and $S_3$.}
 \end{center}
 \end{figure}
 
@@ -133,12 +186,17 @@ This set is sometimes called the complement of $T$ relative to $S$, or the compl
 
 \begin{figure}[htb]
 \begin{center}
-\begin{psfrags}
-\psfrag{S}[c]{$S$}
-\psfrag{T}[c]{$T$}
-\psfrag{D}[c]{$S - T$}
-\includegraphics[height=3.03cm]{Figures/1Chapter/difference}
-\end{psfrags}
+\begin{tikzpicture}
+\begin{scope}
+	\clip (-0.75cm,0) circle (1.5cm);
+	\draw[fill=blue!20,even odd rule]
+	(0.75cm,0) circle (1.5cm)
+	(-0.75cm,0) circle (1.5cm);
+\end{scope}
+\node[circle,draw=black,thick,minimum size=3cm,label=135:$S$] (S) at (-0.75cm,0) {};
+\node[circle,draw=black,thick,minimum size=3cm,label=45:$T$] (T) at (0.75cm,0) {};
+\coordinate [label=center:{$S - T$}] (Difference) at (-1.5cm,0);
+\end{tikzpicture}
 \caption{The complement of $T$ relative to $S$ contains all the elements of $S$ that are not in $T$.}
 \end{center}
 \end{figure}
@@ -164,14 +222,30 @@ The sets thus formed are quite different.
 
 \begin{figure}[htb]
 \begin{center}
-\begin{psfrags}
-\psfrag{R}[c]{$R$}
-\psfrag{S}[c]{$S$}
-\psfrag{T}[c]{$T$}
-\psfrag{P1}[c]{$R \cup (S \cap T)$}
-\psfrag{P2}[c]{$(R \cup S) \cap T$}
-\includegraphics[height=4.55cm]{Figures/1Chapter/triple}
-\end{psfrags}
+\begin{tikzpicture}
+\begin{scope}
+	\clip (0.75cm,0) circle (1.5cm);
+	\fill[fill=blue!20] (0,-1.3cm) circle (1.5cm);
+\end{scope}
+\fill[blue!20] (-0.75cm,0) circle (1.5cm);
+\node[circle,draw=black,thick,minimum size=3cm,label=135:$R$] (R1) at (-0.75cm,0) {};
+\node[circle,draw=black,thick,minimum size=3cm,label=45:$S$] (S1) at (0.75cm,0) {};
+\node[circle,draw=black,thick,minimum size=3cm,label=315:$T$] (T1) at (0,-1.3cm) {};
+\coordinate [label={$R \cup (S \cap T)$}] (Cap1) at (0,1.75cm);
+
+\begin{scope}
+	\clip (6.75cm,0) circle (1.5cm);
+	\fill[fill=blue!20] (6,-1.3cm) circle (1.5cm);
+\end{scope}
+\begin{scope}
+	\clip (5.25cm,0) circle (1.5cm);
+	\fill[fill=blue!20] (6,-1.3cm) circle (1.5cm);
+\end{scope}
+\node[circle,draw=black,thick,minimum size=3cm,label=135:$R$] (R2) at (5.25cm,0) {};
+\node[circle,draw=black,thick,minimum size=3cm,label=45:$S$] (S2) at (6.75cm,0) {};
+\node[circle,draw=black,thick,minimum size=3cm,label=315:$T$] (T2) at (6cm,-1.3cm) {};
+\coordinate [label={$(R \cup S) \cap T$}] (Cup1) at (6,1.75cm);
+\end{tikzpicture}
 \caption{The order of set operations is important; parentheses should be employed to specify precedence.}
 \end{center}
 \end{figure}
