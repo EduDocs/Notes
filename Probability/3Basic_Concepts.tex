@@ -132,12 +132,12 @@ where the inequality follows from the nonnegativity of probability laws.
 \end{proof}
 \begin{figure}[htb!]
 \begin{center}
-\begin{psfrags}
-\psfrag{A}[c]{$A$}
-\psfrag{B}[l]{$B$}
-\psfrag{D}[l]{$B - A$}
-\includegraphics[height=3.03cm]{Figures/2Chapter/subset}
-\end{psfrags}
+\begin{tikzpicture}
+\node[circle,draw=black,thick,fill=blue!20,minimum size=3cm,label=45:$B$] (B) at (0,0) {};
+\node[circle,draw=black,thick,fill=blue!40,minimum size=2cm] (A) at (-0.5cm,0) {$A$};
+\coordinate [label=right:{$B - A$}] (Difference) at (1.25cm,-1.25cm);
+\draw[->,thick,>=stealth'] (Difference) to (0.75cm,-0.75cm);
+\end{tikzpicture}
 \caption{If event $A$ is a subset of event $B$, then the probability of $A$ is less than or equal to the probability of $B$.}
 \end{center}
 \end{figure}
@@ -163,12 +163,18 @@ Combining these two equations yields the desired result.
 \end{proof}
 \begin{figure}[htb!]
 \begin{center}
-\begin{psfrags}
-\psfrag{A}[r]{$A$}
-\psfrag{B}[l]{$B$}
-\psfrag{I}[c]{$A \cap B$}
-\includegraphics[height=3.03cm]{Figures/2Chapter/intersection}
-\end{psfrags}
+\begin{tikzpicture}
+\draw[fill=blue!20]
+    (-0.75cm,0) circle (1.5cm)
+    (0.75cm,0) circle (1.5cm);
+\begin{scope}
+    \clip (-0.75cm,0) circle (1.5cm);
+    \fill[fill=blue!40] (0.75cm,0) circle (1.5cm);
+\end{scope}
+\node[circle,draw=black,thick,minimum size=3cm,label=135:$A$] (A) at (-0.75cm,0) {};
+\node[circle,draw=black,thick,minimum size=3cm,label=45:$B$] (B) at (0.75cm,0) {};
+\coordinate [label=center:{$A \cap B$}] (Intersection) at (0,0);
+\end{tikzpicture}
 \caption{The probability of the union of $A$ and $B$ is equal to the probability of $A$ plus the probability of $B$ minus the probability of their intersection.}
 \end{center}
 \end{figure}
