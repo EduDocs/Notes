@@ -220,38 +220,48 @@ Visually, a partition divides an entire set into disjoint subsets, as exemplifie
 
 \draw[->,thick,>=stealth'] (2.25cm,0) to (3.25cm,0);
 \end{tikzpicture}
-\caption{A partition of $S$ can be formed by selecting a collection of subsets that are disjoint and whose union is $S$.}
+\caption{A partition of $\Omega$ can be formed by selecting a collection of subsets that are disjoint and whose union is $\Omega$.}
 \label{figure:SetPartitiion2}
 \end{center}
 \end{figure}
 
-
-
+\begin{theorem}[Total Probability Theorem] \label{theorem:TotalProbability} \index{Total probability theorem}
+Let $A_1, A_2, \ldots, A_n$ be a collection of events that forms a partition of the sample space $\Omega$.
+Suppose that $\Pr (A_k) > 0$ for all $k$.
+Then, for any event $B$, we can write
+\begin{equation*}
+\begin{split}
+\Pr (B) &= \Pr (A_1 \cap B) + \Pr (A_2 \cap B) + \cdots + \Pr (A_n \cap B) \\
+&= \Pr (A_1) \Pr (B | A_1) + \Pr (A_2) \Pr (B | A_2) + \cdots + \Pr (A_n) \Pr (B | A_n ) .
+\end{split}
+\end{equation*}
+\end{theorem}
+\begin{proof}
+The collection of events $A_1, A_2, \ldots, A_n$ forms a partition of the sample space $\Omega$.
+We can therefore write
+\begin{equation*}
+B = B \cap \Omega = B \cap \left( \bigcup_{k=1}^n A_k \right) .
+\end{equation*}
+Since $A_1, A_2, \ldots, A_n$ are disjoint sets, the events $A_1 \cap B, A_2 \cap B, \ldots, A_n \cap B$ are also disjoint.
+Combining these two facts, we get
+\begin{equation*}
+\begin{split}
+\Pr (B)
+&= \Pr \left( B \cap \left( \bigcup_{k=1}^n A_k \right) \right)
+= \Pr \left( \bigcup_{k=1}^n (B \cap A_k) \right) \\
+&= \sum_{k=1}^n \Pr \left( B \cap A_k \right)
+= \sum_{k=1}^n \Pr (A_k) \Pr \left( B |A_k \right) ,
+\end{split}
+\end{equation*}
+where the fourth equality follows from the third axiom of probability.
+\end{proof}
 
 \begin{figure}[htb]
 \begin{center}
 \begin{tikzpicture}
-\begin{scope}
-    \clip (-2cm,-2cm) rectangle (-0.5cm,2cm);
-    \draw[thick,fill=black!10] (0,0) circle (1.5cm);
-    \draw[thick,fill=red!20] (-1cm,-1cm) rectangle (1cm,1cm);
-\end{scope}
-\begin{scope}
-    \clip (-0.5cm,-2cm) rectangle (0.5cm,2cm);
-    \draw[thick,fill=black!10] (0,0) circle (1.5cm);
-    \draw[thick,fill=green!20] (-1cm,-1cm) rectangle (1cm,1cm);
-\end{scope}
-\begin{scope}
-    \clip (0.5cm,-2cm) rectangle (2cm,2cm);
-    \draw[thick,fill=black!10] (0,0) circle (1.5cm);
-    \draw[thick,fill=blue!20] (-1cm,-1cm) rectangle (1cm,1cm);
-\end{scope}
-\begin{scope}
-    \clip (0,0) circle (1.5cm);
-    \draw[thick] (-0.5cm,-2cm) rectangle (0.5cm,2cm);
-\end{scope}
-\coordinate [label=center:{$B$}] (B) at (0,-2cm);
-\draw[->,thick,>=stealth'] (0cm,-1.75cm) to (0cm,-0.5cm);
+\draw[thick,fill=black!10] (0,0) circle (1.5cm);
+\draw[thick,fill=yellow!20] (-1cm,-1cm) rectangle (1cm,1cm);
+\coordinate [label=center:{$B$}] (B) at (0,0);
 
 \begin{scope}
     \clip (3.5cm,-2cm) rectangle (5cm,2cm);
@@ -289,47 +299,6 @@ Visually, a partition divides an entire set into disjoint subsets, as exemplifie
 
 \draw[->,thick,>=stealth'] (2.25cm,0) to (3.25cm,0);
 \end{tikzpicture}
-\caption{A partition of $S$ can be formed by selecting a collection of subsets that are disjoint and whose union is $S$.}
-\label{figure:SetPartitiion2}
-\end{center}
-\end{figure}
-
-
-
-\begin{theorem}[Total Probability Theorem] \label{theorem:TotalProbability} \index{Total probability theorem}
-Let $A_1, A_2, \ldots, A_n$ be a collection of events that forms a partition of the sample space $\Omega$.
-Suppose that $\Pr (A_k) > 0$ for all $k$.
-Then, for any event $B$, we can write
-\begin{equation*}
-\begin{split}
-\Pr (B) &= \Pr (A_1 \cap B) + \Pr (A_2 \cap B) + \cdots + \Pr (A_n \cap B) \\
-&= \Pr (A_1) \Pr (B | A_1) + \Pr (A_2) \Pr (B | A_2) + \cdots + \Pr (A_n) \Pr (B | A_n ) .
-\end{split}
-\end{equation*}
-\end{theorem}
-\begin{proof}
-The collection of events $A_1, A_2, \ldots, A_n$ forms a partition of the sample space $\Omega$.
-We can therefore write
-\begin{equation*}
-B = B \cap \Omega = B \cap \left( \bigcup_{k=1}^n A_k \right) .
-\end{equation*}
-Since $A_1, A_2, \ldots, A_n$ are disjoint sets, the events $A_1 \cap B, A_2 \cap B, \ldots, A_n \cap B$ are also disjoint.
-Combining these two facts, we get
-\begin{equation*}
-\begin{split}
-\Pr (B)
-&= \Pr \left( B \cap \left( \bigcup_{k=1}^n A_k \right) \right)
-= \Pr \left( \bigcup_{k=1}^n (B \cap A_k) \right) \\
-&= \sum_{k=1}^n \Pr \left( B \cap A_k \right)
-= \sum_{k=1}^n \Pr (A_k) \Pr \left( B |A_k \right) ,
-\end{split}
-\end{equation*}
-where the fourth equality follows from the third axiom of probability.
-\end{proof}
-
-\begin{figure}[htb!]
-\begin{center}
-\includegraphics[height=3.034cm]{Figures/3Chapter/setpartition3}
 \caption{The total probability theorem states that the probability of event $B$ can be computed by summing $\Pr(A_i \cap B)$ over all members of the partition $A_1, A_2, \ldots, A_n$.}
 \label{figure:SetPartition3}
 \end{center}
