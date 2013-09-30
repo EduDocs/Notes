@@ -225,6 +225,77 @@ Visually, a partition divides an entire set into disjoint subsets, as exemplifie
 \end{center}
 \end{figure}
 
+
+
+
+\begin{figure}[htb]
+\begin{center}
+\begin{tikzpicture}
+\begin{scope}
+    \clip (-2cm,-2cm) rectangle (-0.5cm,2cm);
+    \draw[thick,fill=black!10] (0,0) circle (1.5cm);
+    \draw[thick,fill=red!20] (-1cm,-1cm) rectangle (1cm,1cm);
+\end{scope}
+\begin{scope}
+    \clip (-0.5cm,-2cm) rectangle (0.5cm,2cm);
+    \draw[thick,fill=black!10] (0,0) circle (1.5cm);
+    \draw[thick,fill=green!20] (-1cm,-1cm) rectangle (1cm,1cm);
+\end{scope}
+\begin{scope}
+    \clip (0.5cm,-2cm) rectangle (2cm,2cm);
+    \draw[thick,fill=black!10] (0,0) circle (1.5cm);
+    \draw[thick,fill=blue!20] (-1cm,-1cm) rectangle (1cm,1cm);
+\end{scope}
+\begin{scope}
+    \clip (0,0) circle (1.5cm);
+    \draw[thick] (-0.5cm,-2cm) rectangle (0.5cm,2cm);
+\end{scope}
+\coordinate [label=center:{$B$}] (B) at (0,-2cm);
+\draw[->,thick,>=stealth'] (0cm,-1.75cm) to (0cm,-0.5cm);
+
+\begin{scope}
+    \clip (3.5cm,-2cm) rectangle (5cm,2cm);
+    \draw[thick,fill=black!10] (5.5cm,0) circle (1.5cm);
+    \draw[thick,fill=red!20] (4.5cm,-1cm) rectangle (5.5cm,1cm);
+\end{scope}
+\begin{scope}
+    \clip (5.5cm,0) circle (1.5cm);
+    \draw[thick] (3.5cm,-2cm) rectangle (5cm,2cm);
+\end{scope}
+\begin{scope}
+    \clip (5.5cm,-2cm) rectangle (6.5cm,2cm);
+    \draw[thick,fill=black!10] (6cm,0) circle (1.5cm);
+    \draw[thick,fill=green!20] (5cm,-1cm) rectangle (7cm,1cm);
+\end{scope}
+\begin{scope}
+    \clip (6cm,0) circle (1.5cm);
+    \draw[thick] (5.5cm,-2cm) rectangle (6.5cm,2cm);
+\end{scope}
+\begin{scope}
+    \clip (7cm,-2cm) rectangle (8.5cm,2cm);
+    \draw[thick,fill=black!10] (6.5cm,0) circle (1.5cm);
+    \draw[thick,fill=blue!20] (5.5cm,-1cm) rectangle (7.5cm,1cm);
+\end{scope}
+\begin{scope}
+    \clip (6.5cm,0) circle (1.5cm);
+    \draw[thick] (7cm,-2cm) rectangle (8.5cm,2cm);
+\end{scope}
+\coordinate [label=center:{$B \cap A_1$}] (BA1) at (4cm,-1.75cm);
+\draw[->,thick,>=stealth'] (4.15cm,-1.5cm) to (4.75cm,-0.5cm);
+\coordinate [label=center:{$B \cap A_2$}] (BA2) at (6cm,-2cm);
+\draw[->,thick,>=stealth'] (6cm,-1.75cm) to (6cm,-0.5cm);
+\coordinate [label=center:{$B \cap A_3$}] (BA3) at (8cm,-1.75cm);
+\draw[->,thick,>=stealth'] (7.85cm,-1.5cm) to (7.25cm,-0.5cm);
+
+\draw[->,thick,>=stealth'] (2.25cm,0) to (3.25cm,0);
+\end{tikzpicture}
+\caption{A partition of $S$ can be formed by selecting a collection of subsets that are disjoint and whose union is $S$.}
+\label{figure:SetPartitiion2}
+\end{center}
+\end{figure}
+
+
+
 \begin{theorem}[Total Probability Theorem] \label{theorem:TotalProbability} \index{Total probability theorem}
 Let $A_1, A_2, \ldots, A_n$ be a collection of events that forms a partition of the sample space $\Omega$.
 Suppose that $\Pr (A_k) > 0$ for all $k$.
