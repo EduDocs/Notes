@@ -59,7 +59,7 @@ Coding is used in many systems and devices including:
 
 When designing and analyzing channel codes, one often uses a simple model of a communications channel known as a \defn{channel coding}{discrete memoryless channel} (DMC).
 The channel input $X$ is an element of input alphabet $\mathcal{X}$ and the channel output $Y$ is an element of the output alphabet $\mathcal{Y}$.
-The main assumption is that each channel use is indepedent and governed by the probability law
+The main assumption is that each channel use is independent and governed by the probability law
 \[ W(y|x) \triangleq \Pr\left(Y=y|X=x\right).\]
 
 [Add figure with transition diagrams]
@@ -133,7 +133,7 @@ codewords is
 \begin{example}[Hamming Code]
 The (7,4) binary Hamming Code has $n=7$, $M=16$, and $d_{min}=3$.
 The code can be defined in terms of a Venn diagram showing three partially overlapping sets.
-Each of the seven subregions represent a code bit and the three circles represent even parity costraints.
+Each of the seven subregions represent a code bit and the three circles represent even parity constraints.
 Encoding can be done by choosing $x_0,\ldots,x_3$ arbitrarily and then computing the last three parity bits.
 Any single error can be corrected by observing each bit error gives a unique pattern of parity violations.
 The codewords can be listed as follows:
@@ -222,7 +222,7 @@ We will see later that linear codes are much simpler to describe, encode, and an
 Moreover, there are very few cases where non-linear codes are better than linear codes.
 So, there is essentially no performance penalty for this simplicity.
 
-Linear codes, like linear algebra, make use of matrices and vectors of elements that can be added, subtracted, multipled, and divided.
+Linear codes, like linear algebra, make use of matrices and vectors of elements that can be added, subtracted, multiplied, and divided.
 A set of numbers which obey all the standard rules of arithmetic is an algebraic object known as a \textbf{field}.
 For example, the real and complex numbers are both fields.
 
@@ -372,7 +372,7 @@ Correcting all single errors requires $\frac{d_{min}-1}{2}=1$ or $d_{min}=3$.
 Let us try to find the longest code, for a fixed number of parity bits $m$, that corrects all single errors.
 In this case, $\underline{H}$ is  matrix with $m$ rows and we can add columns, one at a time, until it is not possible to add a column without losing the ability to correct a single error.
 How many columns can we choose?
-The maximum value is $n=2^m -1$ and the resuting optimal code is called the binary \defn{channel coding}{Hamming code} of length $n$.
+The maximum value is $n=2^m -1$ and the resulting optimal code is called the binary \defn{channel coding}{Hamming code} of length $n$.
 \end{example}
 
 \subsection{Decoding}
@@ -404,7 +404,7 @@ A syndrome decoder can be designed correct exactly one error pattern in each equ
 The best choice for correction is the most-likely error pattern in that equivalence class.
 For most channels, these vectors are chosen to be the minimum weight vector in the equivalence class.
 
-The \defn{channel coding}{standard array} is way of listing all vectors of length-$n$ that exposes the connectiion between syndromes, codewords, and error correction.
+The \defn{channel coding}{standard array} is way of listing all vectors of length-$n$ that exposes the connection between syndromes, codewords, and error correction.
 In general, it is a $2^{n-k}\times 2^k$ table that contains each length-$n$ binary vector exactly once.
 The main idea behind this table is that, when one chooses to correct a particular error pattern, the decoder is automatically defined for all received sequences equal to that error pattern plus a codeword.
 Of course, this limits one's ability choose correctable error patterns.
@@ -459,7 +459,7 @@ Looking in the syndrome table, we find that $\underline{\hat{e}}=11000$ and $\un
 \subsection{Manipulating Linear Codes}
 
 It follows from linear algebra that any $\underline{G},\underline{H}$ can be put in systematic form using elementary row operations and (possibly) a column permutation.
-For the parity-check matrix $H$, the basic idea is to use elemtary row operations to form an identity matrix in the first few columns (i.e., put it in reduced row-echelon form).
+For the parity-check matrix $H$, the basic idea is to use elementary row operations to form an identity matrix in the first few columns (i.e., put it in reduced row-echelon form).
 For the generator matrix $G$, elementary row operations are used to form an identity matrix in the last few columns.
 Sometimes an identity cannot be formed in the desired columns and a column permutation is required to complete the process.
 For this reason, two codes are called \textbf{equivalent} if and only if they differ only in the order of the code symbols.
@@ -467,7 +467,7 @@ For this reason, two codes are called \textbf{equivalent} if and only if they di
 \begin{definition}
 For a matrix, an \textbf{elementary row operation} is any one of the following operations:
 \begin{enumerate}
-\item interchaging any two rows,
+\item interchanging any two rows,
 \item scaling any row by a non-zero constant,
 \item and adding a multiple of one row to another row.
 \end{enumerate}
@@ -556,7 +556,7 @@ This code achieves an asymptotic coding gain of
 \end{example}
 
 For syndrome decoding, one can compute exactly the probability of block error (including decoding failure) by observing that the decoder only returns the correct codeword if the error vector is a coset leader.
-In this case, we can define $A_h$ be the number of coset leaders with Hamming weight $h$ and write
+In this case, we can let $A_h$ be the number of coset leaders with Hamming weight $h$ and write
 \[ P_{B} = 1-\sum_{h=0}^{n} A_h p^h (1-p)^{n-h}. \]
 
 \section{Cyclic Codes}
@@ -596,14 +596,14 @@ and the parity-check matrix to be
 0 & 0 & 0 & 1 & 1 & 0 & 1 \end{array} \right]. \]
 \end{example}
 
-The benefits of cyclic codes follow largely from a close conection to polynomial arithmetic.
+The benefits of cyclic codes follow largely from a close connection to polynomial arithmetic.
 This allows the encoding and decoding of cyclic codes to make use of efficient algorithms and hardware for polynomial arithmetic.
 Consider an $(n,k)$ cyclic code and assume each codeword vector $\underline{c}=(c_0,c_1,\ldots,c_{n-1})$ and message vector $\underline{m}=(m_0,m_1,\ldots,m_{k-1})$ is associated with a polynomial
 \[ c(x) = \sum_{i=0}^{n-1} c_i x^i \quad \quad  m(x) = \sum_{i=0}^{k-1} m_i x^i. \]
 It turns out that every $(n,k)$ cyclic code is uniquely defined by its generator polynomial $g(x)$, which allows all codewords $c(x)=m(x)g(x)$ to be generated by multiplication with some message polynomial $m(x)$.
 The generator polynomial for the code in the previous example is $g(x) = 1 + x^2 + x^3 + x^4$.
 
-Before proceeding any further, we must define a few mathematical terms asociated with polynomial arithmetic.
+Before proceeding any further, we must define a few mathematical terms associated with polynomial arithmetic.
 The \textbf{degree} of a polynomial $c(x)$, denoted $\deg\left( c(x) \right)$, is the maximum power of $x$ that appears in the polynomial.
 For the example $g(x)$, we have $\deg \left( g(x) \right) = 4$.
 In fact, for all $(n,k)$ cyclic codes, we have
@@ -611,10 +611,10 @@ $\deg \left( c(x) \right) \leq n-1$,
 $\deg \left( m(x) \right) \leq k-1$, and
 $\deg \left( g(x) \right) = n-k$.
 
-For a polynomial $a(x)$ and a divisor $d(x)$, the \textbf{remainder} $r(x)$ and \textbf{quotient} $q(x)$  are uniqely defined by $\deg\left( r(x) \right) < \deg \left(d(x) \right)$ and
+For a polynomial $a(x)$ and a divisor $d(x)$, the \textbf{remainder} $r(x)$ and \textbf{quotient} $q(x)$  are uniquely defined by $\deg\left( r(x) \right) < \deg \left(d(x) \right)$ and
 %\[ \frac{a(x)}{d(x)} = q(x) + \frac{r(x)}{d(x)}. \]
 \[ a(x) = q(x) d(x) + r(x). \]
-In discrete mathematicss, the \defn{channel coding}{modulo polynomial} operation
+In discrete mathematics, the \defn{channel coding}{modulo polynomial} operation
 \[ r(x) = a(x) \bmod d(x) \]
 is used to compactly represent the remainder $r(x)$ of division by $d(x)$.
 \begin{proposition}
