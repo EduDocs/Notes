@@ -745,7 +745,7 @@ Consider the problem from the previous section and let $x[1],x[2],\ldots_1,x[N]$
 As an application, one can think of the $x[t]$ sequence as the received samples in a wireless communication system and the $z[t]$ sequence as a \emph{pilot sequence} (i.e., known to both the transmitter and receiver).
 It is assumed the transmitted sequence has been convolved with an unknown LTI system.
 This type of degradation is known as intersymbol interference (ISI) and the goal is to find a linear filter $h[0],h[1],\ldots,h[K-1]$ that removes as much ISI as possible.
-A suitable cost funciton for this goal is
+A suitable cost function for this goal is
 \[ J(\vecnot{h}) = \sum_{t=K}^N \lambda^{N-t} \left| z[t] - \sum_{k=0}^{K-1} h[k] x[t-k] \right|^2, \]
 where the exponential weighting factor $\lambda$ emphasizes the most recently received symbols because, in reality, the channel conditions are changing with time.
 
@@ -808,7 +808,7 @@ s_1 \\ s_2 \\ \vdots \\ s_n \end{array} \right]
 The same problem can also be posed in a different manner.
 \begin{theorem}
 Let $V$ be a Hilbert space and $\vecnot{w}_1 ,\vecnot{w}_2 , \ldots, \vecnot{w}_n$ be a set of linearly independent vectors in $V$.
-The \defn{inner-product space}{dual approximation} problem is to find the vector $\vecnot{w}\in V$ of minimum-norm that satisfes $\left\langle \vecnot{w} | \vecnot{w}_i \right\rangle = c_i$ for $i=1,\ldots,n$.
+The \defn{inner-product space}{dual approximation} problem is to find the vector $\vecnot{w}\in V$ of minimum-norm that satisfies $\left\langle \vecnot{w} | \vecnot{w}_i \right\rangle = c_i$ for $i=1,\ldots,n$.
 This vector is given by
 \[ \vecnot{w} = \sum_{i=1}^n s_i \vecnot{w}_i, \]
 where the coefficients  $s_1,s_2,\ldots,s_n$ can be found by solving \eqref{eqn:DualNormalEquations} with $\left\langle \vecnot{v} | \vecnot{w}_i \right\rangle = c_i$.
