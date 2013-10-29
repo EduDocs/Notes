@@ -26,13 +26,13 @@ The probability that $Y$ falls in a specific set $S$ depends on both the functio
 \begin{equation*}
 \Pr (Y \in S) = \Pr (g(X) \in S) 
 = \Pr \left( X \in g^{-1}(S) \right)
-= \int_{g^{-1} (S)} f_X (\xi) d\xi ,
+= \int_{g^{-1} (S)} f_X (u) du ,
 \end{equation*}
-where $g^{-1} (S) = \{ \xi \in X(\Omega) | g(\xi) \in S \}$ denotes the preimage of $S$.
+where $g^{-1} (S) = \{ u \in X(\Omega) | g(u) \in S \}$ denotes the preimage of $S$.
 In particular, we can derive the CDF of $Y$ using the formula
 \begin{equation} \label{equation:DerivedCDF}
 F_Y(y) = \Pr (g(X) \leq y)
-= \int_{ \{ \xi \in X(\Omega) | g(\xi) \leq y \} } f_X(\xi) d\xi .
+= \int_{ \{ u \in X(\Omega) | g(u) \leq y \} } f_X(u) du .
 \end{equation}
 
 \begin{example} \label{example:RayleighExponentialRV}
@@ -44,12 +44,12 @@ For $y > 0$, we get
 \begin{split}
 F_Y(y) &= \Pr (Y \leq y) = \Pr \left( X^2 \leq y \right) \\
 &= \Pr (- \sqrt{y} \leq X \leq \sqrt{y})
-= \int_0^{\sqrt{y}} \xi e^{- \frac{\xi^2}{2}} d\xi \\
-&= \int_0^{y} \frac{1}{2} e^{- \frac{\zeta}{2}} d\zeta
+= \int_0^{\sqrt{y}} u e^{- \frac{u^2}{2}} du \\
+&= \int_0^{y} \frac{1}{2} e^{- \frac{v}{2}} dv
 = 1 - e^{-\frac{y}{2}} .
 \end{split}
 \end{equation*}
-In this derivation, we use the fact that $X \geq 0$ in identifying the boundaries of integration, and we apply the change of variables $\zeta = \xi^2$ in computing the integral.
+In this derivation, we use the fact that $X \geq 0$ in identifying the boundaries of integration, and we apply the change of variables $v = u^2$ in computing the integral.
 We recognize $F_Y(\cdot)$ as the CDF of an exponential random variable.
 This shows that the square of a Rayleigh random variable possesses an exponential distribution.
 \end{example}
