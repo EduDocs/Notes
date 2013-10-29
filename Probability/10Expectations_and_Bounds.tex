@@ -13,7 +13,7 @@ M_X (s) = \Expect \left[ e^{s X} \right] .
 \end{equation*}
 For continuous random variables, the moment generating function becomes
 \begin{equation*}
-M_X (s) = \int_{-\infty}^{\infty} f_X (\xi) e^{s \xi} d\xi .
+M_X (s) = \int_{-\infty}^{\infty} f_X (u) e^{s u} du .
 \end{equation*}
 The experienced reader will quickly recognize the definition of $M_X(s)$ as a variant of the \emph{Laplace Transform}, a widely used linear operator.
 The moment generating function gets its name from the following property.
@@ -34,8 +34,8 @@ In particular, we have $\frac{d M_X}{ds}(0) = \Expect [X]$ and $\frac{d^2 M_X}{d
 Let $X$ be an exponential random variable with parameter $\lambda$.
 The moment-generating function of $X$ is given by
 \begin{equation*}
-M_X (s) = \int_0^{\infty} \lambda e^{-\lambda \xi} e^{s\xi} d\xi
-= \int_0^{\infty} \lambda e^{-(\lambda-s) \xi} d\xi
+M_X (s) = \int_0^{\infty} \lambda e^{-\lambda u} e^{su} du
+= \int_0^{\infty} \lambda e^{-(\lambda-s) u} du
 = \frac{\lambda}{\lambda - s} .
 \end{equation*}
 The mean of $X$ is
@@ -95,18 +95,18 @@ The exponential function is analytic and possesses many representations.
 \begin{example}[Gaussian Random Variable]
 Let $X$ be a standard normal random variable whose PDF is given by
 \begin{equation*}
-f_X (\xi) = \frac{1}{\sqrt{2 \pi}} e^{- \frac{\xi^2}{2}}.
+f_X (u) = \frac{1}{\sqrt{2 \pi}} e^{- \frac{u^2}{2}}.
 \end{equation*}
 The moment generating function of $X$ is equal to
 \begin{equation*}
 \begin{split}
 M_X (s) &= \Expect \left[ e^{sX} \right]
-= \int_{- \infty}^{\infty} \frac{1}{\sqrt{2 \pi}} e^{- \frac{\xi^2}{2}} e^{s\xi} d\xi \\
-&= \int_{- \infty}^{\infty} \frac{1}{\sqrt{2 \pi}} e^{- \frac{\xi^2 + 2 s \xi}{2}} d\xi
+= \int_{- \infty}^{\infty} \frac{1}{\sqrt{2 \pi}} e^{- \frac{u^2}{2}} e^{su} du \\
+&= \int_{- \infty}^{\infty} \frac{1}{\sqrt{2 \pi}} e^{- \frac{u^2 + 2 s u}{2}} du
 = e^{\frac{s^2}{2}} \int_{- \infty}^{\infty}
-\frac{1}{\sqrt{2 \pi}} e^{- \frac{\xi^2 - 2 s \xi + s^2}{2}} d\xi \\
+\frac{1}{\sqrt{2 \pi}} e^{- \frac{u^2 - 2 s u + s^2}{2}} du \\
 &= e^{\frac{s^2}{2}} \int_{- \infty}^{\infty}
-\frac{1}{\sqrt{2 \pi}} e^{- \frac{(\xi - s)^2}{2}} d\xi
+\frac{1}{\sqrt{2 \pi}} e^{- \frac{(u - s)^2}{2}} du
 = e^{\frac{s^2}{2}} .
 \end{split}
 \end{equation*}
@@ -248,8 +248,8 @@ Moreover, for any such $x$ and distribution $f_X(\cdot)$, we can write $i_S \Ind
 \begin{equation*}
 \begin{split}
 i_S \Pr (X \in S) &= \Expect \left[ i_s \IndicatorFcn_S (X) \right]
-= \int_{\RealNumbers} i_S \IndicatorFcn_S (\xi) f_X(\xi) d\xi \\
-&\leq \int_{\RealNumbers} h (\xi) f_X(\xi) d\xi
+= \int_{\RealNumbers} i_S \IndicatorFcn_S (u) f_X(u) du \\
+&\leq \int_{\RealNumbers} h (u) f_X(u) du
 = \Expect [ h(X) ] .
 \end{split}
 \end{equation*}
@@ -385,14 +385,14 @@ Suppose that function $g(\cdot)$ is convex and twice differentiable, with
 for all $x \in \RealNumbers$.
 From the fundamental theorem of calculus, we have
 \begin{equation*}
-g(x) = g(a) + \int_a^x \frac{dg}{dx} (\xi) d\xi .
+g(x) = g(a) + \int_a^x \frac{dg}{dx} (u) du .
 \end{equation*}
 Futhermore, because the second derivative of $g(\cdot)$ is a non-negative function, we gather that $\frac{dg}{dx} (\cdot)$ is a monotone increasing function.
 As such, for any value of $a$, we have
 \begin{equation*}
 \begin{split}
-g(x) &= g(a) + \int_a^x \frac{dg}{dx} (\xi) d\xi \\
-&\geq g(a) + \int_a^x \frac{dg}{dx} (a) d\xi
+g(x) &= g(a) + \int_a^x \frac{dg}{dx} (u) du \\
+&\geq g(a) + \int_a^x \frac{dg}{dx} (a) du
 = g(a) + (x-a) \frac{dg}{dx} (a) .
 \end{split}
 \end{equation*}
