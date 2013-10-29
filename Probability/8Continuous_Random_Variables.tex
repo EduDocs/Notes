@@ -211,7 +211,7 @@ As mentioned above, the CDF of continuous random variable $X$ is a differentiabl
 The derivative of $F_X (\cdot)$ is called the \emph{probability density function (PDF)} of $X$, and it is denoted by $f_X(\cdot)$. \index{Probability density function (PDF)}
 If $X$ is a random variable with PDF $f_X (\cdot)$ then, by the fundamental theorem of calculus, we have
 \begin{equation*}
-F_X (x) = \int_{- \infty}^x f_X (\xi) d\xi .
+F_X (x) = \int_{- \infty}^x f_X (u) du .
 \end{equation*}
 Equivalently, we can write
 \begin{equation*}
@@ -223,14 +223,14 @@ Nevertheless, the PDF can be a very powerful tool to derive properties of contin
 
 For $x_1 < x_2$, we can combine the definition of $f_X(\cdot)$ and \eqref{equation:IntervalCDF} to obtain
 \begin{equation*}
-\Pr (x_1 < X \leq x_2) = \int_{x_1}^{x_2} f_X (\xi) d\xi .
+\Pr (x_1 < X \leq x_2) = \int_{x_1}^{x_2} f_X (u) du .
 \end{equation*}
 Furthermore, it is easily seen that for any continuous random variable
 \begin{equation*}
 \begin{split}
 \Pr (X = x_2) &= \lim_{x_1 \uparrow x_2} \Pr (x_1 < X \leq x_2)
-= \lim_{x_1 \uparrow x_2} \int_{x_1}^{x_2} f_X (\xi) d\xi \\
-&= \int_{x_2}^{x_2} f_X (\xi) d\xi = 0.
+= \lim_{x_1 \uparrow x_2} \int_{x_1}^{x_2} f_X (u) du \\
+&= \int_{x_2}^{x_2} f_X (u) du = 0.
 \end{split}
 \end{equation*}
 In other words, if $X$ is a continuous random variable, then $\Pr (X = x) = 0$ for any real number $x$.
@@ -248,13 +248,13 @@ the inclusion or exclusion of endpoints in an interval does not affect the proba
 We can derive properties for the PDF of continuous random variable $X$ based on the axioms of probability laws.
 First, the probability that $X$ is a real number is given by
 \begin{equation*}
-\Pr (-\infty < X < \infty) = \int_{-\infty}^{\infty} f_X (\xi) d\xi = 1.
+\Pr (-\infty < X < \infty) = \int_{-\infty}^{\infty} f_X (u) du = 1.
 \end{equation*}
 Thus, $f_X (x)$ must integrate to one.
 Also, because the probabilities of events are nonnegative, we must have $f_X (x) \geq 0$ everywhere.
 Finally, given an admissible set $S$, the probability that $X \in S$ can be expressed through an integral,
 \begin{equation*}
-\Pr (X \in S) = \int_S f_X (\xi) d\xi .
+\Pr (X \in S) = \int_S f_X (u) du .
 \end{equation*}
 Admissible events of the form $\{ X \in S \}$ are sets for which we know how to carry this integral.
 
@@ -266,17 +266,17 @@ the weighted sum is simply replaced by a weighted integral.
 For a continuous random variable $X$ with PDF $f_X(\cdot)$, the \emph{expectation} of $g(X)$ is defined by \index{Expectation}
 \begin{equation*}
 \Expect [g(X)]
-= \int_{\RealNumbers} g(\xi) f_X (\xi) d\xi .
+= \int_{\RealNumbers} g(u) f_X (u) du .
 \end{equation*}
 In particular, the \emph{mean} of $X$ is equal to \index{Mean}
 \begin{equation*}
 \Expect [X]
-= \int_{\RealNumbers} \xi f_X (\xi) d\xi
+= \int_{\RealNumbers} u f_X (u) du
 \end{equation*}
 and its \emph{variance} becomes \index{Variance}
 \begin{equation*}
 \Var [X] = \Expect \left[ (X - \Expect[X])^2 \right]
-= \int_{\RealNumbers} (\xi - \Expect[X])^2 f_X (\xi) d\xi .
+= \int_{\RealNumbers} (u - \Expect[X])^2 f_X (u) du .
 \end{equation*}
 As before, the variance of random variable $X$ can also be computed using $\Var [X] = \Expect \left[ X^2 \right] - \left( \Expect [X] \right)^2$.
 
@@ -295,9 +295,9 @@ We offer a proof for the special case where $X$ is a continuous random variable,
 \begin{equation*}
 \begin{split}
 \int_0^{\infty} \Pr (X > x) dx
-&= \int_0^{\infty} \int_x^{\infty} f_X(\xi) d\xi dx \\
-&= \int_0^{\infty} \int_0^{\xi} f_X(\xi) dx d\xi \\
-&= \int_0^{\infty} \xi f_X(\xi) d\xi
+&= \int_0^{\infty} \int_x^{\infty} f_X(u) du dx \\
+&= \int_0^{\infty} \int_0^{u} f_X(u) dx du \\
+&= \int_0^{\infty} u f_X(u) du
 = \Expect [X] .
 \end{split}
 \end{equation*}
@@ -434,16 +434,16 @@ The CDF of a Gaussian random variable does not admit a closed-form expression; i
 \begin{split}
 F_X (x) &= \Pr (X \leq x)
 = \frac{1}{\sqrt{2 \pi} \sigma}
-\int_{- \infty}^{x} e^{- \frac{(\xi - m)^2}{2 \sigma^2}} d\xi \\
+\int_{- \infty}^{x} e^{- \frac{(u - m)^2}{2 \sigma^2}} du \\
 &= \frac{1}{\sqrt{2 \pi}}
-\int_{- \infty}^{(x - m)/\sigma} e^{- \frac{\zeta^2}{2}} d\zeta
+\int_{- \infty}^{(x - m)/\sigma} e^{- \frac{v^2}{2}} dv
 = \Phi \left( \frac{x - m}{\sigma} \right),
 \end{split}
 \end{equation*}
 where $\Phi (\cdot)$ is termed the \emph{standard normal cumulative distribution function} and is defined by
 \begin{equation*}
 \Phi (x) = 
-\frac{1}{\sqrt{2 \pi}} \int_{-\infty}^x e^{-\frac{\zeta^2}{2}} d\zeta .
+\frac{1}{\sqrt{2 \pi}} \int_{-\infty}^x e^{-\frac{v^2}{2}} dv .
 \end{equation*}
 We emphasize that the function $\Phi (\cdot)$ is nothing more than a convenient notation for the CDF of a normal random variable.
 
@@ -467,7 +467,7 @@ By symmetry, it is easily argued that
 \begin{split}
 \Pr (Y \leq 0 | S = 1) &= \Pr (Y \geq 0 | S = -1) = \Pr (N > 1) \\
 &= \int_{1}^{\infty} \frac{1}{\sqrt{2 \pi} \sigma}
-e^{- \frac{\xi^2}{2 \sigma^2}} d\xi
+e^{- \frac{u^2}{2 \sigma^2}} du
 = 1 - \Phi \left( \frac{1}{\sigma} \right) .
 \end{split}
 \end{equation*}
@@ -479,7 +479,7 @@ The normal random variable is so frequent in applied mathematics and engineering
 The \emph{error function} is a function which is primarily encountered in the fields of statistics and partial differential equations. \index{Error function}
 It is defined by
 \begin{equation*}
-\mathrm{erf} (x) = \frac{2}{\sqrt{\pi}} \int_0^x e^{-\xi^2} d\xi .
+\mathrm{erf} (x) = \frac{2}{\sqrt{\pi}} \int_0^x e^{-u^2} du .
 \end{equation*}
 The error function is related to the standard normal cumulative distribution function by scaling and translation,
 \begin{equation*}
@@ -489,7 +489,7 @@ If $X$ is a standard normal random variable, then $\mathrm{erf} \left( x/{\sqrt{
 In engineering, it is customary to employ the \emph{$Q$-function}, which is given by \index{Q-function}
 \begin{equation} \label{equation:Qfunction}
 \begin{split}
-Q (x) &= \frac{1}{\sqrt{2 \pi}} \int_x^{\infty} e^{-\frac{\xi^2}{2}} d\xi
+Q (x) &= \frac{1}{\sqrt{2 \pi}} \int_x^{\infty} e^{-\frac{u^2}{2}} du
 = 1 - \Phi (x) \\
 &= \frac{ 1 - \mathrm{erf} \left( {x}/{\sqrt{2}} \right) }{2} .
 \end{split}
@@ -509,11 +509,11 @@ We can show that $f_X (x)$ integrates to one using a subtle argument and a chang
 We start with the square of the integrated PDF and proceed from there,
 \begin{equation*}
 \begin{split}
-\left(\int_{- \infty}^{\infty} f_X (\xi) d\xi \right)^2
-&= \int_{- \infty}^{\infty} \frac{1}{\sqrt{2 \pi}} e^{- \frac{\xi^2}{2}} d\xi
-\int_{- \infty}^{\infty} \frac{1}{\sqrt{2 \pi}} e^{- \frac{\zeta^2}{2}} d\zeta \\
+\left(\int_{- \infty}^{\infty} f_X (u) du \right)^2
+&= \int_{- \infty}^{\infty} \frac{1}{\sqrt{2 \pi}} e^{- \frac{u^2}{2}} du
+\int_{- \infty}^{\infty} \frac{1}{\sqrt{2 \pi}} e^{- \frac{v^2}{2}} dv \\
 &= \int_{- \infty}^{\infty} \int_{- \infty}^{\infty}
-\frac{1}{2 \pi} e^{- \frac{\xi^2 + \zeta^2}{2}} d\xi d\zeta
+\frac{1}{2 \pi} e^{- \frac{u^2 + v^2}{2}} du dv
 = \int_{0}^{2 \pi} \frac{1}{2 \pi} d\theta
 \int_{0}^{\infty} e^{- \frac{r^2}{2}} r dr \\
 &= \left. \left( - e^{- \frac{r^2}{2}} \right) \right|_0^{\infty} = 1.
@@ -525,41 +525,41 @@ Since the square of the desired integral is nonnegative and equal to one, we can
 We wish to calculate the mean and variance of a Gaussian random variable with parameters $m$ and $\sigma^2$.
 By definition, the PDF of this random variable can be written as
 \begin{equation*}
-f_X (\xi) = \frac{1}{\sqrt{2 \pi} \sigma} e^{-\frac{(\xi - m)^2}{2\sigma^2}}
-\quad \xi \in \RealNumbers .
+f_X (u) = \frac{1}{\sqrt{2 \pi} \sigma} e^{-\frac{(u - m)^2}{2\sigma^2}}
+\quad u \in \RealNumbers .
 \end{equation*}
 The mean of $X$ can be obtained through direct integration, with a change of variables,
 \begin{equation*}
 \begin{split}
 \Expect [X]
-&= \frac{1}{\sqrt{2 \pi} \sigma} \int_{- \infty}^{\infty} \xi e^{-\frac{(\xi-m)^2}{2\sigma^2}} d\xi \\
+&= \frac{1}{\sqrt{2 \pi} \sigma} \int_{- \infty}^{\infty} u e^{-\frac{(u-m)^2}{2\sigma^2}} du \\
 &= \frac{\sigma}{\sqrt{2 \pi}} \int_{- \infty}^{\infty}
-\left( \zeta+\frac{m}{\sigma} \right) e^{-\frac{\zeta^2}{2}} d\zeta \\
+\left( v+\frac{m}{\sigma} \right) e^{-\frac{v^2}{2}} dv \\
 &= \frac{\sigma}{\sqrt{2 \pi}} \int_{- \infty}^{\infty}
-\zeta e^{-\frac{\zeta^2}{2}} d\zeta
+v e^{-\frac{v^2}{2}} dv
 + \frac{\sigma}{\sqrt{2 \pi}} \int_{- \infty}^{\infty}
-\frac{m}{\sigma} e^{-\frac{\zeta^2}{2}} d\zeta
+\frac{m}{\sigma} e^{-\frac{v^2}{2}} dv
 = m.
 \end{split}
 \end{equation*}
-In finding a solution, we have leveraged the facts that $\zeta e^{-\frac{\zeta^2}{2}}$ is an absolutely integrable, odd function.
+In finding a solution, we have leveraged the facts that $v e^{-\frac{v^2}{2}}$ is an absolutely integrable, odd function.
 We also took advantage of the normalization condition which ensures that a Gaussian PDF integrates to one.
 To derive the variance, we again use the normalization condition.
 For a Gaussian PDF, this property implies that
 \begin{equation*}
-\int_{-\infty}^{\infty} e^{- \frac{(\xi-m)^2}{2 \sigma^2}} d\xi
+\int_{-\infty}^{\infty} e^{- \frac{(u-m)^2}{2 \sigma^2}} du
 = \sqrt{2 \pi} \sigma .
 \end{equation*}
 Differentiating both sides of this equation with respect to $\sigma$, we get
 \begin{equation*}
-\int_{-\infty}^{\infty} \frac{(\xi-m)^2}{\sigma^3}
-e^{- \frac{(\xi-m)^2}{2 \sigma^2}} d\xi
+\int_{-\infty}^{\infty} \frac{(u-m)^2}{\sigma^3}
+e^{- \frac{(u-m)^2}{2 \sigma^2}} du
 = \sqrt{2 \pi} .
 \end{equation*}
 Rearranging the terms yields
 \begin{equation*}
-\int_{-\infty}^{\infty} \frac{(\xi-m)^2}{\sqrt{2 \pi} \sigma}
-e^{- \frac{(\xi-m)^2}{2 \sigma^2}} d\xi
+\int_{-\infty}^{\infty} \frac{(u-m)^2}{\sqrt{2 \pi} \sigma}
+e^{- \frac{(u-m)^2}{2 \sigma^2}} du
 = \sigma^2 .
 \end{equation*}
 Hence, $\Var[X] = \Expect \left[ (X-m)^2 \right] = \sigma^2$.
@@ -612,8 +612,8 @@ If a request arrives at time $t_0$, what is the probability that the next packet
 The probability that the inter-arrival time $T$ is less than two minutes can be computed as
 \begin{equation*}
 \begin{split}
-\Pr ( T < 2 ) &= \int_0^2 \frac{1}{2} e^{- \frac{\xi}{2}} d\xi
-= \left. - e^{- \frac{\xi}{2}} \right|_0^2 \\
+\Pr ( T < 2 ) &= \int_0^2 \frac{1}{2} e^{- \frac{u}{2}} du
+= \left. - e^{- \frac{u}{2}} \right|_0^2 \\
 &= 1 - e^{-1} \approx 0.632 .
 \end{split}
 \end{equation*}
@@ -723,7 +723,7 @@ f_X (x) = \frac{\lambda (\lambda x)^{\alpha - 1} e^{-\lambda x}}{\Gamma (\alpha)
 \end{equation*}
 where $\Gamma(\cdot)$ denotes the gamma function defined by
 \begin{equation*}
-\Gamma (z) = \int_0^{\infty} \xi^{z-1} e^{-\xi} d\xi \quad z > 0 .
+\Gamma (z) = \int_0^{\infty} u^{z-1} e^{-u} du \quad z > 0 .
 \end{equation*}
 The two parameters $\alpha > 0$ and $\lambda > 0$ affect the shape of the ensuing distribution significantly.
 By varying these two parameters, it is possible for the gamma PDF to accurately model a wide array of empirical data.
@@ -735,11 +735,11 @@ Interestingly, this specific value for the gamma function can be evaluated by a 
 \begin{equation*}
 \begin{split}
 \left( \Gamma \left( \frac{1}{2} \right) \right)^2
-&= \int_0^{\infty} \xi^{-\frac{1}{2}} e^{-\xi} d\xi
-\int_0^{\infty} \zeta^{-\frac{1}{2}} e^{-\zeta} d\zeta \\
+&= \int_0^{\infty} u^{-\frac{1}{2}} e^{-u} du
+\int_0^{\infty} v^{-\frac{1}{2}} e^{-v} dv \\
 &= \int_0^{\infty} \int_0^{\infty}
-\xi^{-\frac{1}{2}} \zeta^{-\frac{1}{2}} e^{-(\xi + \zeta)}
-d\xi d\zeta \\
+u^{-\frac{1}{2}} v^{-\frac{1}{2}} e^{-(u + v)}
+du dv \\
 &= \int_0^{\pi / 2} \int_0^{\infty}
 \frac{1}{r^2 \sin \theta \cos \theta} e^{-r^2}
 4 r^3 \sin \theta \cos \theta dr d\theta \\
@@ -861,12 +861,12 @@ f_R (r) = \frac{r}{\sigma^2} e^{- \frac{r^2}{2 \sigma^2} } \quad r \geq 0 .
 Using this distribution, we get
 \begin{equation*}
 \begin{split}
-\Expect [R] &= \int_0^{\infty} \xi f_R(\xi) d\xi
-= \int_0^{\infty} \frac{\xi^2}{\sigma^2} e^{- \frac{\xi^2}{2 \sigma^2}} d\xi \\
-&= \left. - \xi e^{- \frac{\xi^2}{2 \sigma^2}} \right|_0^{\infty}
-+ \int_0^{\infty} e^{- \frac{\xi^2}{2 \sigma^2}} d\xi \\
+\Expect [R] &= \int_0^{\infty} u f_R(u) du
+= \int_0^{\infty} \frac{u^2}{\sigma^2} e^{- \frac{u^2}{2 \sigma^2}} du \\
+&= \left. - u e^{- \frac{u^2}{2 \sigma^2}} \right|_0^{\infty}
++ \int_0^{\infty} e^{- \frac{u^2}{2 \sigma^2}} du \\
 &= \sqrt{ 2 \pi } \sigma
-\int_0^{\infty} \frac{1}{\sqrt{2 \pi} \sigma} e^{- \frac{\zeta^2}{2 \sigma^2}} d\zeta
+\int_0^{\infty} \frac{1}{\sqrt{2 \pi} \sigma} e^{- \frac{v^2}{2 \sigma^2}} dv
 = \frac{\sqrt{2 \pi} \sigma}{2} .
 \end{split}
 \end{equation*}
@@ -875,11 +875,11 @@ Also, notice the judicious use of the fact that the integral of a standard norma
 We compute the second moment of $R$ below,
 \begin{equation*}
 \begin{split}
-\Expect \left[ R^2 \right] &= \int_0^{\infty} \xi^2 f_R(\xi) d\xi
-= \int_0^{\infty} \frac{\xi^3}{\sigma^2} e^{- \frac{\xi^2}{2 \sigma^2}} d\xi \\
-&= \left. - \xi^2 e^{- \frac{\xi^2}{2 \sigma^2}} \right|_0^{\infty}
-+ \int_0^{\infty} 2 \xi e^{- \frac{\xi^2}{2 \sigma^2}} d\xi \\
-&= \left. - 2 \sigma^2 e^{- \frac{\xi^2}{2 \sigma^2}} \right|_0^{\infty}
+\Expect \left[ R^2 \right] &= \int_0^{\infty} u^2 f_R(u) du
+= \int_0^{\infty} \frac{u^3}{\sigma^2} e^{- \frac{u^2}{2 \sigma^2}} du \\
+&= \left. - u^2 e^{- \frac{u^2}{2 \sigma^2}} \right|_0^{\infty}
++ \int_0^{\infty} 2 u e^{- \frac{u^2}{2 \sigma^2}} du \\
+&= \left. - 2 \sigma^2 e^{- \frac{u^2}{2 \sigma^2}} \right|_0^{\infty}
 = 2 \sigma^2 .
 \end{split}
 \end{equation*}
