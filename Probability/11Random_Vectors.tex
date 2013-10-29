@@ -43,21 +43,21 @@ f_{X,Y} (x,y) = \frac{\partial^2 F_{X,Y}}{\partial x \partial y} (x,y)
 Hereafter, we refer to a pair of random variables as continuous if the corresponding joint PDF exists and is defined unambiguously through \eqref{equation:JointPDF}.
 When this is the case, standard calculus asserts that the following equation holds,
 \begin{equation*}
-F_{X,Y} (x,y) = \int_{-\infty}^x \int_{-\infty}^y f_{X,Y} (\xi,\zeta) d\zeta d\xi .
+F_{X,Y} (x,y) = \int_{-\infty}^x \int_{-\infty}^y f_{X,Y} (u,v) dv du .
 \end{equation*}
 From its definition, we note that $f_{X,Y} (\cdot, \cdot)$ is a nonnegative function which integrates to one,
 \begin{equation*}
 \iint\limits_{\RealNumbers^2}
-f_{X, Y} (\xi, \zeta) d\zeta d\xi = 1.
+f_{X, Y} (u, v) dv du = 1.
 \end{equation*}
 Furthermore, for any admissible set $S \subset \RealNumbers^2$, the probability that $(X,Y) \in S$ can be evaluated through the integral formula
 \begin{equation} \label{equation:ProbabilityJointPDF}
 \begin{split}
 \Pr ((X,Y) \in S)
 &= \iint\limits_{\RealNumbers^2}
-\IndicatorFcn_{S} (\xi, \zeta) f_{X, Y} (\xi, \zeta) d\zeta d\xi \\
+\IndicatorFcn_{S} (u, v) f_{X, Y} (u, v) dv du \\
 &= \iint\limits_{S}
-f_{X, Y} (\xi, \zeta) d\zeta d\xi .
+f_{X, Y} (u, v) dv du .
 \end{split}
 \end{equation}
 In particular, if $S$ is the cartesian product of two intervals, 
@@ -69,7 +69,7 @@ then the probability that $(X,Y) \in S$ reduces to the typical integral form
 \Pr ((X,Y) \in S)
 = \Pr (a \leq X \leq b, c \leq Y \leq d)
 = \int_{a}^{b} \int_{c}^{d}
-f_{X, Y} (\xi, \zeta) d\zeta d\xi .
+f_{X, Y} (u, v) dv du .
 \end{equation*}
 
 \begin{example}
@@ -86,7 +86,7 @@ The probability that $(X, Y)$ belongs to $S$ is given by
 \begin{equation*}
 \Pr ((X,Y) \in S)
 = \iint\limits_{\RealNumbers^2}
-\frac{ \mathbf{1}_{S}(\xi, \zeta) }{\pi} d\xi d\zeta
+\frac{ \mathbf{1}_{S}(u, v) }{\pi} du dv
 = \frac{1}{4} .
 \end{equation*}
 Thus, the probability that $(X,Y)$ is contained within a circle of radius half is one fourth.
@@ -145,9 +145,9 @@ To solve this problem, we first compute the probability of the event $\{ X \leq 
 \begin{equation*}
 \begin{split}
 \Pr ( \{ X \leq x \} \cap A )
-&= \int_0^x \int_0^{\xi} f_{X,Y} (\xi, \zeta) d\zeta d\xi
-= \int_0^x \int_0^{\xi} \lambda^2 e^{-\lambda (\xi + \zeta)} d\zeta d\xi \\
-&= \int_0^x \lambda e^{- \lambda \xi} \left( 1 - e^{- \lambda \xi} \right) d\xi
+&= \int_0^x \int_0^{u} f_{X,Y} (u, v) dv du
+= \int_0^x \int_0^{u} \lambda^2 e^{-\lambda (u + v)} dv du \\
+&= \int_0^x \lambda e^{- \lambda u} \left( 1 - e^{- \lambda u} \right) du
 = \frac{ \left( 1 - e^{-\lambda x} \right)^2 }{2} .
 \end{split}
 \end{equation*}
@@ -433,13 +433,13 @@ Additionally, if $X$ and $Y$ are independent random variables, then the two even
 
 \begin{example}
 Consider a random experiment where an outcome $(\omega_1, \omega_2)$ is selected at random from the unit square.
-Let $X = \omega_1$, $Y = \omega_2$ and $U = \omega_1 + \omega_2$.
-We wish to show that $X$ and $Y$ are independent, but that $X$ and $U$ are not independent.
+Let $X = \omega_1$, $Y = \omega_2$ and $W = \omega_1 + \omega_2$.
+We wish to show that $X$ and $Y$ are independent, but that $X$ and $W$ are not independent.
 
 We begin by computing the joint CDF of $X$ and $Y$.
 For $x,y \in [0,1]$, we have
 \begin{equation*}
-F_{X,Y}(x,y) = \int_0^{x} \int_0^{y} d\zeta d\xi
+F_{X,Y}(x,y) = \int_0^{x} \int_0^{y} dv du
 = x y = F_X(x) F_Y(y) .
 \end{equation*}
 More generally, if $x, y \in \RealNumbers^2$, we get
@@ -447,28 +447,28 @@ More generally, if $x, y \in \RealNumbers^2$, we get
 \begin{split}
 F_{X,Y}(x,y)
 &= \int_{-\infty}^{x} \int_{-\infty}^{y}
-\mathbf{1}_{[0,1]^2} (\xi, \zeta) d\zeta d\xi \\
-&= \int_{-\infty}^{x} \mathbf{1}_{[0,1]} (\xi) d \xi
-\int_{-\infty}^{y} \mathbf{1}_{[0,1]} (\zeta) d\zeta
+\mathbf{1}_{[0,1]^2} (u, v) dv du \\
+&= \int_{-\infty}^{x} \mathbf{1}_{[0,1]} (u) du
+\int_{-\infty}^{y} \mathbf{1}_{[0,1]} (v) dv
 = F_X(x) F_Y(y) .
 \end{split}
 \end{equation*}
 Thus, we gather that $X$ and $Y$ are independent.
 
-Next, we show that $X$ and $U$ are not independent.
-Note that $F_U (1) = 0.5$ and $F_X (0.5) = 0.5$.
-Consider the joint CDF of $X$ and $U$ evaluated at $(0.5, 1)$,
+Next, we show that $X$ and $W$ are not independent.
+Note that $F_W (1) = 0.5$ and $F_X (0.5) = 0.5$.
+Consider the joint CDF of $X$ and $W$ evaluated at $(0.5, 1)$,
 \begin{equation*}
 \begin{split}
-F_{X,U} (0.5, 1)
-&= \int_{0}^{\frac{1}{2}} \int_{0}^{1-\xi} d\zeta d\xi
-= \int_{0}^{\frac{1}{2}} (1 - \xi) d\xi \\
+F_{X,W} (0.5, 1)
+&= \int_{0}^{\frac{1}{2}} \int_{0}^{1-x} dw dx
+= \int_{0}^{\frac{1}{2}} (1 - x) dx \\
 %&= \frac{1}{2} - \frac{1}{8} \\
 &= \frac{3}{8}
-\neq F_X (0.5) F_U(1) .
+\neq F_X (0.5) F_W(1) .
 \end{split}
 \end{equation*}
-Clearly, random variables $X$ and $U$ are not independent.
+Clearly, random variables $X$ and $W$ are not independent.
 \end{example}
 
 
@@ -476,75 +476,75 @@ Clearly, random variables $X$ and $U$ are not independent.
 
 As mentioned before, sums of independent random variables are frequently encountered in engineering.
 We therefore turn to the question of determining the distribution of a sum of independent continuous random variables in terms of the PDFs of its constituents.
-If $X$ and $Y$ are independent random variables, the distribution of their sum $U = X + Y$ can be obtained by using the \emph{convolution} operator. \index{Convolution}
+If $X$ and $Y$ are independent random variables, the distribution of their sum $W = X + Y$ can be obtained by using the \emph{convolution} operator. \index{Convolution}
 Let $f_X (\cdot)$ and $f_Y (\cdot)$ be the PDFs of $X$ and $Y$, respectively.
 The convolution of $f_X(\cdot)$ and $f_Y(\cdot)$ is the function defined by
 \begin{equation*}
 \begin{split}
-(f_X \ast f_Y) (u)
-&= \int_{-\infty}^{\infty} f_X(\xi) f_Y(u - \xi) d\xi \\
-&= \int_{-\infty}^{\infty} f_X(u - \zeta) f_Y(\zeta) d\zeta .
+(f_X \ast f_Y) (w)
+&= \int_{-\infty}^{\infty} f_X(u) f_Y(w - u) du \\
+&= \int_{-\infty}^{\infty} f_X(w - v) f_Y(v) dv .
 \end{split}
 \end{equation*}
-The PDF of the sum $U = X + Y$ is the convolution of the individual densities $f_X(\cdot)$ and $f_Y(\cdot)$,
+The PDF of the sum $W = X + Y$ is the convolution of the individual densities $f_X(\cdot)$ and $f_Y(\cdot)$,
 \begin{equation*}
-f_U (u) = (f_X \ast f_Y) (u) .
+f_W (w) = (f_X \ast f_Y) (w) .
 \end{equation*}
-To show that this is indeed the case, we first consider the CDF of $U$,
+To show that this is indeed the case, we first consider the CDF of $W$,
 \begin{equation*}
 \begin{split}
-F_U (u) &= \Pr (U \leq u) = \Pr (X + Y \leq u) \\
-&= \int_{-\infty}^{\infty} \int_{-\infty}^{u - \xi} f_{X,Y} (\xi, \zeta) d\zeta d\xi \\
-&= \int_{-\infty}^{\infty} \int_{-\infty}^{u - \xi} f_Y (\zeta) d\zeta f_X (\xi) d\xi \\
-%&= \int_{-\infty}^{\infty} \Pr (Y \leq u - \xi) f_X(\xi) d\xi \\
-&= \int_{-\infty}^{\infty} F_Y (u - \xi) f_X(\xi) d\xi .
+F_W (w) &= \Pr (W \leq w) = \Pr (X + Y \leq w) \\
+&= \int_{-\infty}^{\infty} \int_{-\infty}^{w - u} f_{X,Y} (u, v) dv du \\
+&= \int_{-\infty}^{\infty} \int_{-\infty}^{w - u} f_Y (v) dv f_X (u) du \\
+%&= \int_{-\infty}^{\infty} \Pr (Y \leq w - u) f_X(u) du \\
+&= \int_{-\infty}^{\infty} F_Y (w - u) f_X(u) du .
 \end{split}
 \end{equation*}
-Taking the derivative of $F_U (u)$ with respect to $u$, we obtain
+Taking the derivative of $F_W (w)$ with respect to $w$, we obtain
 \begin{equation*}
 \begin{split}
-\frac{d}{du} F_U (u)
-&= \frac{d}{du} \int_{-\infty}^{\infty} F_Y (u - \xi) f_X(\xi) d\xi \\
-&= \int_{-\infty}^{\infty} \frac{d}{du} F_Y (u - \xi) f_X(\xi) d\xi \\
-&= \int_{-\infty}^{\infty} f_Y (u - \xi) f_X(\xi) d\xi .
+\frac{d}{dw} F_W (w)
+&= \frac{d}{dw} \int_{-\infty}^{\infty} F_Y (w - u) f_X(u) du \\
+&= \int_{-\infty}^{\infty} \frac{d}{dw} F_Y (w - u) f_X(u) du \\
+&= \int_{-\infty}^{\infty} f_Y (w - u) f_X(u) du .
 \end{split}
 \end{equation*}
 Notice the judicious use of the fundamental theorem of calculus.
-This shows that $f_U(u) = (f_X \ast f_Y) (u)$.
+This shows that $f_W(w) = (f_X \ast f_Y) (w)$.
 
 \begin{example}[Sum of Uniform Random Variables]
 Suppose that two numbers are independently selected from the interval $[0,1]$, each with a uniform distribution.
 We wish to compute the PDF of their sum.
-Let $X$ and $Y$ be random variables describing the two choices, and let $U = X + Y$ represent their sum.
+Let $X$ and $Y$ be random variables describing the two choices, and let $W = X + Y$ represent their sum.
 The PDFs of $X$ and $Y$ are
 \begin{equation*}
-f_X(\xi) = f_Y(\xi)
-= \begin{cases} 1 & 0 \leq \xi \leq 1 \\
+f_X(u) = f_Y(u)
+= \begin{cases} 1 & 0 \leq u \leq 1 \\
 0 & \text{otherwise} . \end{cases}
 \end{equation*}
 The PDF of their sum is therefore equal to
 \begin{equation*}
-f_U(u) = \int_{-\infty}^{\infty} f_X(u - \xi) f_Y(\xi) d\xi .
+f_W(w) = \int_{-\infty}^{\infty} f_X(w - u) f_Y(u) du .
 \end{equation*}
 Since $f_Y(y) = 1$ when $0 \leq y \leq 1$ and zero otherwise, this integral becomes
 \begin{equation*}
-f_U (u) = \int_0^1 f_X(u - \xi) d\xi
-= \int_0^1 \IndicatorFcn_{[0,1]}(u - \xi) d\xi .
+f_W (w) = \int_0^1 f_X(w - u) du
+= \int_0^1 \IndicatorFcn_{[0,1]}(w - u) du .
 \end{equation*}
-The integrand above is zero unless $0 \leq u - \xi \leq 1$ (i.e., unless $u - 1 \leq \xi \leq u$).
-Thus, if $0 \leq u \leq 1$, we get
+The integrand above is zero unless $0 \leq w - u \leq 1$ (i.e., unless $w - 1 \leq u \leq w$).
+Thus, if $0 \leq w \leq 1$, we get
 \begin{equation*}
-f_U(u) = \int_0^u d\xi = u ;
+f_W(w) = \int_0^w du = w ;
 \end{equation*}
-while, if $1 < u \leq 2$, we obtain
+while, if $1 < w \leq 2$, we obtain
 \begin{equation*}
-f_U(u) = \int_{u - 1}^1 d\xi = 2 - u .
+f_W(w) = \int_{w - 1}^1 du = 2 - w .
 \end{equation*}
-If $u < 0$ or $u > 2$, the value of the PDF becomes zero.
-Collecting these results, we can write the PDF of $U$ as
+If $w < 0$ or $w > 2$, the value of the PDF becomes zero.
+Collecting these results, we can write the PDF of $W$ as
 \begin{equation*}
-f_U(u) = \begin{cases} u & 0 \leq u \leq 1, \\
-2-u & 1 < u \leq 2, \\
+f_W(w) = \begin{cases} w & 0 \leq w \leq 1, \\
+2-w & 1 < w \leq 2, \\
 0 & \text{otherwise} . \end{cases}
 \end{equation*}
 \end{example}
@@ -552,25 +552,25 @@ f_U(u) = \begin{cases} u & 0 \leq u \leq 1, \\
 \begin{example}[Sum of Exponential Random Variables]
 Two numbers are selected independently from the positive real numbers, each according to an exponential distribution with parameter $\lambda$. 
 We wish to find the PDF of their sum.
-Let $X$ and $Y$ represent these two numbers, and denote this sum by $U = X + Y$.
+Let $X$ and $Y$ represent these two numbers, and denote this sum by $W = X + Y$.
 The random variables $X$ and $Y$ have PDFs
 \begin{equation*}
-f_X (\xi) = f_Y (\xi) = \begin{cases} \lambda e^{-\lambda \xi} & \xi \geq 0 \\
+f_X (u) = f_Y (u) = \begin{cases} \lambda e^{-\lambda u} & u \geq 0 \\
 0 & \text{otherwise} . \end{cases}
 \end{equation*}
-When $u \geq 0$, we can use the convolution formula and write
+When $w \geq 0$, we can use the convolution formula and write
 \begin{equation*}
 \begin{split}
-f_U (u) &= \int_{-\infty}^{\infty} f_X(u - \xi) f_Y(\xi) d\xi \\
-&= \int_0^u \lambda e^{-\lambda(u - \xi)} \lambda e^{-\lambda \xi} d\xi \\
-&= \int_0^u \lambda^2 e^{-\lambda u} d\xi
-= \lambda^2 u e^{-\lambda u}.
+f_W (w) &= \int_{-\infty}^{\infty} f_X(w - u) f_Y(u) du \\
+&= \int_0^w \lambda e^{-\lambda(w - u)} \lambda e^{-\lambda u} du \\
+&= \int_0^w \lambda^2 e^{-\lambda w} du
+= \lambda^2 w e^{-\lambda w}.
 \end{split}
 \end{equation*}
-On the other hand, if $u < 0$ then we get $f_U(u) = 0$.
-The PDF of $U$ is given by
+On the other hand, if $w < 0$ then we get $f_W(w) = 0$.
+The PDF of $W$ is given by
 \begin{equation*}
-f_U (u) = \begin{cases} \lambda^2 u e^{-\lambda u} & u \geq 0 \\
+f_W (w) = \begin{cases} \lambda^2 w e^{-\lambda w} & w \geq 0 \\
 0 & \text{otherwise} . \end{cases}
 \end{equation*}
 This is an Erlang distribution with parameter $m = 2$ and $\lambda > 0$.
@@ -578,41 +578,41 @@ This is an Erlang distribution with parameter $m = 2$ and $\lambda > 0$.
 
 \begin{example}[Sum of Gaussian Random Variables]
 It is an interesting and important fact that the sum of two independent Gaussian random variables is itself a Gaussian random variable.
-Suppose $X$ is Gaussian with mean $m_1$ and variance $\sigma_1^2$, and similarly $Y$ is Gaussian with mean $m_2$ and variance $\sigma_2^2$, then $U = X + Y$ has a Gaussian density with mean $m_1 + m_2$ and variance $\sigma_1^2 + \sigma_2^2$.
+Suppose $X$ is Gaussian with mean $m_1$ and variance $\sigma_1^2$, and similarly $Y$ is Gaussian with mean $m_2$ and variance $\sigma_2^2$, then $W = X + Y$ has a Gaussian density with mean $m_1 + m_2$ and variance $\sigma_1^2 + \sigma_2^2$.
 We will show this property in the special case where both random variables are standard normal random variable.
 The general case can be attained in a similar manner, but the computations are somewhat tedious.
 
 Suppose $X$ and $Y$ are two independent Gaussian random variables with PDFs
 \begin{equation*}
-f_X(\xi) = f_Y(\xi) = \frac 1{\sqrt{2\pi}} e^{-\frac{\xi^2}{2}} .
+f_X(u) = f_Y(u) = \frac 1{\sqrt{2\pi}} e^{-\frac{u^2}{2}} .
 \end{equation*}
-Then, the PDF of $U = X + Y$ is given by
+Then, the PDF of $W = X + Y$ is given by
 \begin{equation*}
 \begin{split}
-f_U (u) &= (f_X \ast f_Y) (u)
+f_W (w) &= (f_X \ast f_Y) (w)
 = \frac{1}{2\pi}
-\int_{-\infty}^{\infty} e^{-\frac{(u - \xi)^2}{2}} e^{-\frac{\xi^2}{2}} d\xi \\
-&= \frac{1}{2\pi} e^{- \frac{u^2}{4}}
-\int_{-\infty}^{\infty} e^{- \left( \xi - \frac{u}{2} \right)^2} d\xi \\
-&= \frac{1}{2 \sqrt{\pi}} e^{- \frac{u^2}{4}}
+\int_{-\infty}^{\infty} e^{-\frac{(w - u)^2}{2}} e^{-\frac{u^2}{2}} du \\
+&= \frac{1}{2\pi} e^{- \frac{w^2}{4}}
+\int_{-\infty}^{\infty} e^{- \left( u - \frac{w}{2} \right)^2} du \\
+&= \frac{1}{2 \sqrt{\pi}} e^{- \frac{w^2}{4}}
 \left( \int_{-\infty}^{\infty} \frac{1}{\sqrt{\pi}}
-e^{-\left( \xi - \frac{u}{2} \right)^2} d\xi \right) .
+e^{-\left( u - \frac{w}{2} \right)^2} du \right) .
 \end{split}
 \end{equation*}
-The expression within the parentheses is equal to one since the integrant is a Gaussian PDF with $m = u/2$ and $\sigma^2 = 1/2$.
+The expression within the parentheses is equal to one since the integrant is a Gaussian PDF with $m = w/2$ and $\sigma^2 = 1/2$.
 Thus, we obtain
 \begin{equation*}
-f_U(u) = \frac{1}{\sqrt{4\pi}} e^{-\frac{u^2}{4}} ,
+f_W(w) = \frac{1}{\sqrt{4\pi}} e^{-\frac{w^2}{4}} ,
 \end{equation*}
-which verifies that $U$ is indeed Gaussian.
+which verifies that $W$ is indeed Gaussian.
 \end{example}
 
 Let $X$ and $Y$ be independent random variables.
-Consider the random variable $U = X + Y$.
-The moment generating function of $U$ is given by
+Consider the random variable $W = X + Y$.
+The moment generating function of $W$ is given by
 \begin{equation*}
 \begin{split}
-M_U (s) &= \Expect \left[ e^{sU} \right]
+M_W (s) &= \Expect \left[ e^{sW} \right]
 = \Expect \left[ e^{s(X + Y)} \right] \\
 &= \Expect \left[ e^{sX} e^{sY} \right]
 = \Expect \left[ e^{sX} \right] \Expect \left[ e^{sY} \right] \\
@@ -626,19 +626,19 @@ In this example, we revisit the problem of adding independent Gaussian variables
 Again, let $X$ and $Y$ denote the two independent Gaussian variables.
 We denote the mean and variance of $X$ by $m_1$ and $\sigma_1^2$.
 Likewise, we represent the mean and variance of $Y$ by $m_2$ and $\sigma_2^2$.
-We wish to show that the sum $U = X + Y$ is Gaussian with parameters $m_1 + m_2$ and $\sigma_1^2 + \sigma_2^2$.
+We wish to show that the sum $W = X + Y$ is Gaussian with parameters $m_1 + m_2$ and $\sigma_1^2 + \sigma_2^2$.
 
 The moment generating functions of $X$ and $Y$ are
 \begin{align*}
 M_X (s) &= e^{m_1 s + \frac{\sigma_1^2 s^2}{2}} \\
 M_Y (s) &= e^{m_2 s + \frac{\sigma_2^2 s^2}{2}}
 \end{align*}
-The moment generating function of $U = X + Y$ is therefore equal to
+The moment generating function of $W = X + Y$ is therefore equal to
 \begin{equation*}
-M_U (s) = M_X (s) M_Y (s)
+M_W (s) = M_X (s) M_Y (s)
 = \exp \left( (m_1 + m_2) s + \frac{(\sigma_1^2 + \sigma_2^2) s^2}{2} \right) ,
 \end{equation*}
-which demonstrates that $U$ is a Gaussian random variable with mean $m_1 + m_2$ and variance $\sigma_1^2 + \sigma_2^2$, as anticipated.
+which demonstrates that $W$ is a Gaussian random variable with mean $m_1 + m_2$ and variance $\sigma_1^2 + \sigma_2^2$, as anticipated.
 \end{example}
 
 
