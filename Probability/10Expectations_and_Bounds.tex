@@ -183,6 +183,31 @@ This notion is instrumental in understanding bounding techniques.
 \end{center}
 \end{figure}
 
+\begin{figure}[ht]
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    title={Upper Bound},
+    xlabel={Argument},
+    ylabel={Dominating Functions},
+    xmin=0, xmax=6,
+    xmajorgrids,
+    ymajorgrids]
+\addplot[black,domain=0:6,samples=201]
+    {exp(-0.5*(x - 2)^2)};
+\addlegendentry{$g(x)$}
+
+\addplot[blue,dashed,domain=0:6,samples=201]
+    {1.25*x*exp(-0.2*(x^2))+0.5*exp(-x/2)};
+\addlegendentry{$h(x)$}
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\caption{This figure illustrates how exponential functions can be employed to provide bounds on $\Pr (X > a)$.
+Optimizing over all admissible exponential functions, $e^{s(x-a)}$ where $s > 0$, leads to the celebrated Chernoff bound.}
+\label{figure:ChernoffBound}
+\end{figure}
 
 \subsection{The Markov Inequality}
 
