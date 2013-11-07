@@ -169,45 +169,31 @@ Then, for any continuous random variable $X$, the following inequality holds
 This is illustrated in Figure~\ref{figure:DominatingFcn}.
 In words, the weighted integral of $g(\cdot)$ is dominated by the weighted integral of $h(\cdot)$, where $f_X (\cdot)$ acts as the weighting function.
 This notion is instrumental in understanding bounding techniques.
-\begin{figure}[thb]
-\begin{center}
-\begin{psfrags}
-\psfrag{Y}[c]{$\RealNumbers$}
-\psfrag{X}[c]{$\RealNumbers$}
-\psfrag{h}[c]{$h(x)$}
-\psfrag{g}[c]{$g(x)$}
-\includegraphics[width=6.5cm]{Figures/10Chapter/DominatingFcn}
-\end{psfrags}
-\caption{If $g(x)$ and $h(x)$ are two nonnegative functions such that $g(x) \leq h(x)$ for all $x \in \RealNumbers$, then $\Expect [g (X)]$ is less than or equal to $\Expect [h(X)]$.}
-\label{figure:DominatingFcn}
-\end{center}
-\end{figure}
 
-\begin{figure}[ht]
+\begin{figure}[thb]
 \begin{center}
 \begin{tikzpicture}
 \begin{axis}[
-    title={Upper Bound},
-    xlabel={Argument},
-    ylabel={Dominating Functions},
+    title={Dominating Function},
+    xlabel={Argument ($x$)},
+    ylabel={Values of Functions},
     xmin=0, xmax=6,
     xmajorgrids,
     ymajorgrids]
-\addplot[black,domain=0:6,samples=201]
-    {exp(-0.5*(x - 2)^2)};
-\addlegendentry{$g(x)$}
-
 \addplot[blue,dashed,domain=0:6,samples=201]
-    {1.25*x*exp(-0.2*(x^2))+0.5*exp(-x/2)};
+    {3.75*x*exp(-0.2*(x^2))+1.5*exp(-x/2)};
 \addlegendentry{$h(x)$}
 
+\addplot[black,domain=0:6,samples=201]
+    {3*exp(-0.5*(x - 2)^2)};
+\addlegendentry{$g(x)$}
 \end{axis}
 \end{tikzpicture}
 \end{center}
-\caption{This figure illustrates how exponential functions can be employed to provide bounds on $\Pr (X > a)$.
-Optimizing over all admissible exponential functions, $e^{s(x-a)}$ where $s > 0$, leads to the celebrated Chernoff bound.}
-\label{figure:ChernoffBound}
+\caption{If $g(x)$ and $h(x)$ are nonnegative functions such that $g(x) \leq h(x)$ for all $x \in \RealNumbers$, then $\Expect [g (X)]$ is less than or equal to $\Expect [h(X)]$.}
+\label{figure:DominatingFcn}
 \end{figure}
+
 
 \subsection{The Markov Inequality}
 
@@ -226,21 +212,35 @@ It follows that
 \Pr (X \geq a) = \Expect \left[ \IndicatorFcn_S(X) \right] \leq \frac{\Expect [X]}{a} .
 \end{equation*}
 
+
 \begin{figure}[thb]
 \begin{center}
-\begin{psfrags}
-\psfrag{Y}[c]{$\RealNumbers$}
-\psfrag{X}[c]{$\RealNumbers$}
-\psfrag{h}[l]{$h(x) = \frac{x}{a}$}
-\psfrag{g}[l]{$g(x) = \IndicatorFcn_S (x)$}
-\psfrag{a}[c]{$a$}
-\includegraphics[width=6.5cm]{Figures/10Chapter/Markov}
-\end{psfrags}
-\caption{Suppose that we wish to find a bound for $\Pr (X \leq a)$.
-We define set $S = [a, \infty)$ and function $g(x) = \IndicatorFcn_S (x)$.
-Using dominating function $h(x) = x/a$, we conclude that $\Pr(X \geq a) \leq a^{-1} \Expect [X]$ for any nonnegative random variable $X$.}
-\label{figure:MarkovInequality}
+\begin{tikzpicture}
+\begin{axis}[
+    title={Markov Inequality},
+    xlabel={Argument ($x$)},
+    ylabel={Values of Functions},
+    xmin=0, xmax=4,
+    ymin=-0.5, ymax=5.5,
+    xmajorgrids,
+    ymajorgrids,
+	legend pos=north west]
+\addplot[blue,dashed,domain=0:4,samples=201]
+	{0.5*x};
+\addlegendentry{$x/2$}
+\addplot[black,solid] coordinates {
+    (0,0) (2,0)
+
+    (2,1) (4,1)};
+\addlegendentry{$\IndicatorFcn_{[2, \infty)} (x)$}
+\addplot[black,dotted] coordinates {
+    (2,0) (2,1)};
+\end{axis}
+\end{tikzpicture}
 \end{center}
+\caption{Define set $S = [a, \infty)$ and indicator function $g(x) = \IndicatorFcn_S (x)$.
+Using the Markov inequality with dominating function $h(x) = x/a$, we obtain $\Pr(X \geq a) \leq a^{-1} \Expect [X]$ for any nonnegative random variable $X$.}
+\label{figure:MarkovInequality}
 \end{figure}
 
 
@@ -393,32 +393,35 @@ Yet, in general, this optimal $e^{s(x-a)}$ may depend on the distribution of $X$
 \begin{center}
 \begin{tikzpicture}
 \begin{axis}[
-    title={Exponential Bounds},
-    xlabel={Argument},
-    ylabel={Dominating Functions},
+    title={Chernoff Inequality},
+    xlabel={Argument ($x$)},
+    ylabel={Values of Functions},
     xmin=0, xmax=4,
     ymin=-0.5, ymax=5.5,
     xmajorgrids,
-    ymajorgrids]
-\addplot[blue,domain=0:4,samples=201]
+    ymajorgrids,
+	legend pos=north west]
+\addplot[blue,dashed,domain=0:4,samples=201]
 	{exp(0.25*x-0.5)};
-\addplot[blue,domain=0:4,samples=201]
-	{exp(0.5*x-1)};
-\addplot[blue,domain=0:4,samples=201]
-	{exp(x-2)};
-\addplot[blue,domain=0:4,samples=201]
-	{exp(2*x-4)};
+\addlegendentry{$e^{s(x-2)}$}
 \addplot[black,solid] coordinates {
     (0,0) (2,0)
 
     (2,1) (4,1)};
-\addplot[black,dashed] coordinates {
+\addlegendentry{$\IndicatorFcn_{[2, \infty)} (x)$}
+\addplot[black,dotted] coordinates {
     (2,0) (2,1)};
+\addplot[blue,dashed,domain=0:4,samples=201]
+	{exp(0.5*x-1)};
+\addplot[blue,dashed,domain=0:4,samples=201]
+	{exp(x-2)};
+\addplot[blue,dashed,domain=0:4,samples=201]
+	{exp(2*x-4)};
 \end{axis}
 \end{tikzpicture}
 \end{center}
-\caption{This figure illustrates how exponential functions can be employed to provide bounds on $\Pr (X > a)$.
-Optimizing over all admissible exponential functions, $e^{s(x-a)}$ where $s > 0$, leads to the celebrated Chernoff bound.}
+\caption{Using dominating exponential function $e^{s(x-a)}$ with $s > 0$, we get a bound on $\Pr (X \geq a)$.
+Optimizing over all admissible exponential functions, $\left\{ e^{s(x-a)} \right\}$ where $s > 0$, leads to the celebrated Chernoff bound.}
 \label{figure:ChernoffBound}
 \end{figure}
 
