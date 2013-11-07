@@ -366,7 +366,31 @@ Yet, in general, this optimal $e^{s(x-a)}$ may depend on the distribution of $X$
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[width=8.5cm]{Figures/10chapter/chernoff_bound}
+\begin{tikzpicture}
+\begin{axis}[
+    title={Exponential Bounds},
+    xlabel={Argument},
+    ylabel={Dominating Functions},
+    xmin=0, xmax=4,
+    ymin=-0.5, ymax=5.5,
+    xmajorgrids,
+    ymajorgrids]
+\addplot[blue,domain=0:4,samples=201]
+	{exp(0.25*x-0.5)};
+\addplot[blue,domain=0:4,samples=201]
+	{exp(0.5*x-1)};
+\addplot[blue,domain=0:4,samples=201]
+	{exp(x-2)};
+\addplot[blue,domain=0:4,samples=201]
+	{exp(2*x-4)};
+\addplot[black,solid] coordinates {
+    (0,0) (2,0)
+
+    (2,1) (4,1)};
+\addplot[black,dashed] coordinates {
+    (2,0) (2,1)};
+\end{axis}
+\end{tikzpicture}
 \end{center}
 \caption{This figure illustrates how exponential functions can be employed to provide bounds on $\Pr (X > a)$.
 Optimizing over all admissible exponential functions, $e^{s(x-a)}$ where $s > 0$, leads to the celebrated Chernoff bound.}
