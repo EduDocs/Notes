@@ -221,10 +221,10 @@ For continuous random variable, the PDF of $S$ is given by the convolution of $f
 Thus, we can write
 \begin{equation*}
 \begin{split}
-f_S (x) &= \int_{-\infty}^{\infty} f_{X_1} (\xi) f_{X_2} (x - \xi) d\xi \\
+f_S (x) &= \int_{-\infty}^{\infty} f_{X_1} (u) f_{X_2} (x - u) du \\
  &= \int_{-\infty}^{\infty}
-\frac{\gamma_1}{\pi \left( \gamma_1^2 + \xi^2 \right)}
-\frac{\gamma_2}{\pi \left( \gamma_2^2 + (x - \xi)^2 \right)} d\xi .
+\frac{\gamma_1}{\pi \left( \gamma_1^2 + u^2 \right)}
+\frac{\gamma_2}{\pi \left( \gamma_2^2 + (x - u)^2 \right)} du .
 \end{split}
 \end{equation*}
 This integral is somewhat difficult to solve.
@@ -325,7 +325,7 @@ In particular, for any $x \in \RealNumbers$,
 \begin{equation*}
 \lim_{n \rightarrow \infty}
 \Pr \left( \frac{ S_n - n \Expect [X] }{ \sigma \sqrt{n} } \leq x \right)
-= \int_{- \infty}^x \frac{1}{\sqrt{2 \pi}} e^{- \frac{\xi^2}{2}} d\xi .
+= \int_{- \infty}^x \frac{1}{\sqrt{2 \pi}} e^{- \frac{u^2}{2}} du .
 \end{equation*}
 \end{theorem}
 
@@ -365,19 +365,19 @@ In doing so, notice the double use of L'H\^{o}pital's rule,
 \begin{split}
 \lim_{n \rightarrow \infty} \frac{1}{n^{-1}} \Lambda \left( s n^{-1/2} \right)
 &= \lim_{n \rightarrow \infty} \frac{1}{n^{-2}}
-\frac{d \Lambda}{ds} \left( s n^{-1/2} \right) \frac{s n^{-3/2}}{2} \\
+\frac{d \Lambda}{dn} \left( s n^{-1/2} \right) \frac{s n^{-3/2}}{2} \\
 &= \lim_{n \rightarrow \infty} \frac{s}{2 n^{-1/2}}
-\frac{d \Lambda}{ds} \left( s n^{-1/2} \right) \\
+\frac{d \Lambda}{dn} \left( s n^{-1/2} \right) \\
 &= \lim_{n \rightarrow \infty} \frac{s}{n^{-3/2}}
-\frac{d^2 \Lambda}{ds^2} \left( s n^{-1/2} \right) \frac{s n^{-3/2}}{2} \\
+\frac{d^2 \Lambda}{dn^2} \left( s n^{-1/2} \right) \frac{s n^{-3/2}}{2} \\
 &= \lim_{n \rightarrow \infty} \frac{s^2}{2}
-\frac{d^2 \Lambda}{ds^2} \left( s n^{-1/2} \right) = \frac{s^2}{2} .
+\frac{d^2 \Lambda}{dn^2} \left( s n^{-1/2} \right) = \frac{s^2}{2} .
 \end{split}
 \end{equation*}
 That is, the moment generating function of $S_n / \sqrt{n}$ converges point-wise to $e^{s^2/2}$ as $n \rightarrow \infty$.
 In fact, this implies that
 \begin{equation*}
-\Pr \left( \frac{S_n}{\sqrt{n}} \leq x \right) \rightarrow \int_{-\infty}^x \frac{1}{\sqrt{2 \pi}} e^{-\frac{\xi^2}{2}} d\xi
+\Pr \left( \frac{S_n}{\sqrt{n}} \leq x \right) \rightarrow \int_{-\infty}^x \frac{1}{\sqrt{2 \pi}} e^{-\frac{u^2}{2}} du
 \end{equation*}
 as $n \rightarrow \infty$.
 In words, $S_n / \sqrt{n}$ converges in distribution to a standard normal random variable.

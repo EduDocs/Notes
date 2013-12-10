@@ -6,6 +6,9 @@ We already know from our previous discussion that it is possible to form new ran
 In a similar manner, it is possible to generate a new random variable $Y$ by taking a well-behaved function $g(\cdot)$ of a continuous random variable $X$.
 The graphical interpretation of this notion is analog to the discrete case and appears in Figure~\ref{figure:FunctionContinuousRV}.
 
+
+
+
 \begin{figure}[ht]
 \begin{center}
 \begin{psfrags}
@@ -80,32 +83,70 @@ The supremum comes from the fact that multiple values of $x$ may lead to a same 
 Furthermore, $g(\cdot)$ may be discontinuous and $g^{-1} (y)$ may not contain any value.
 These scenarios all need to be accounted for in our expression, and this is accomplished by selecting the largest value in the set $g^{-1} ( (- \infty, y] )$.
 
-\begin{figure}[ht]
+\begin{figure}[thb]
 \begin{center}
-\begin{psfrags}
-\psfrag{x}[c]{$g^{-1} (y) = \{ x | g(x) = y \}$}
-\psfrag{y}[c]{$y$}
-\psfrag{X}[c]{$X$}
-\psfrag{Y}[c]{$Y$}
-\includegraphics[width=6.5cm]{Figures/9Chapter/MonotoneIncreasing}
-\end{psfrags}
-\caption{In this figure, $Y$ is obtained by passing random variable $X$ through a function $g(\cdot)$.
-The preimage of point $y$ contains several elements, as seen above.}
+\begin{tikzpicture}
+\begin{axis}[
+    %title={},
+    xlabel={Argument $x$},
+    ylabel={Function $y = g(x)$},
+    xmin=0, xmax=5,
+    ymin=0, ymax=8,
+    xmajorgrids,
+    ymajorgrids]
+\addplot[blue,domain=0:1.75,samples=201]
+    {0.5*(x-1.75)^3 + 4};
+\addplot[blue] coordinates {
+    (1.75,4) (3.25,4)};
+\addplot[blue,domain=3.25:5,samples=201]
+    {0.5*(x-3.25)^3 + 4};
+\addplot[black, dashed, thin] coordinates {
+    (0,4) (3.25,4)
+
+    (1.75,0) (1.75,4)
+
+    (3.25,0) (3.25,4)};
+\addplot[red, mark=*] coordinates {
+	(0,4)};
+\draw[red,fill=red] (axis cs:1.75,0) rectangle (axis cs:3.25,0.15);
+\node at (axis cs:2.5,0.75) {$g^{-1}(y)$};
+\node at (axis cs:0.25,4.5) {$y$} ;
+%\node at (axis cs:1.5,0.625) {$g^{-1}((-\infty, y])$};
+\end{axis}
+\end{tikzpicture}
 \end{center}
+\caption{In this figure, $Y$ is obtained by passing random variable $X$ through a function $g(\cdot)$.
+The preimage of point $y$ may contain several elements, as seen above.}
 \end{figure}
 
-\begin{figure}[ht]
+\begin{figure}[thb]
 \begin{center}
-\begin{psfrags}
-\psfrag{x}[c]{$g^{-1} ((-\infty, y])$}
-\psfrag{y}[c]{$y$}
-\psfrag{X}[c]{$X$}
-\psfrag{Y}[c]{$Y$}
-\includegraphics[width=6.5cm]{Figures/9Chapter/Discontinuous}
-\end{psfrags}
+\begin{tikzpicture}
+\begin{axis}[
+    %title={},
+    xlabel={Argument $x$},
+    ylabel={Function $y = g(x)$},
+    xmin=0, xmax=5,
+    ymin=0, ymax=7.5,
+    xmajorgrids,
+    ymajorgrids]
+\draw[red,fill=red] (axis cs:0,0) rectangle (axis cs:0.075,4);
+\draw[red,fill=red] (axis cs:0,0) rectangle (axis cs:3,0.1);
+\addplot[blue,domain=0:3,samples=201]
+    {0.5*(x-1.5)^3 + 1.6875};
+\addplot[blue,domain=3:5,samples=201]
+    {0.25*(x-3)^3 + 5};
+\addplot[black, dashed, thin] coordinates {
+    (0,4) (3,4)
+
+    (3,0) (3,4)};
+\node at (axis cs:1.5,0.625) {$g^{-1}((-\infty, y])$};
+\node[rotate=90] at (axis cs:0.375,2.5) {$(-\infty,y]$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
 \caption{If $g(\cdot)$ is monotone increasing and discontinuous, then $g^{-1} (y)$ can be empty; whereas $g^{-1} ((-\infty, y])$ is typically a well-defined interval.
 It is therefore advisable to define $F_Y (y)$ in terms of $g^{-1} ((-\infty, y])$.}
-\end{center}
 \end{figure}
 
 \begin{example}
