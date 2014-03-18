@@ -656,10 +656,51 @@ For instance, if there are five balls and two markers then one possible assignme
 
 \begin{figure}[htb!]
 \begin{center}
-\begin{psfrags}
-\psfrag{1}[c]{$1$}
-\includegraphics[height=5.28cm]{Figures/4Chapter/partitioning}
-\end{psfrags}
+% FIGURE GROUP = BALLS
+\begin{footnotesize}
+\begin{tikzpicture}
+\shade[draw=black, ball color=red, circular drop shadow] (0.5,1.5) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (0.5,1.5) circle (4mm) node[fill opacity=1]{1};
+\shade[draw=black, ball color=red, circular drop shadow] (1.5,1.5) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (1.5,1.5) circle (4mm) node[fill opacity=1]{1};
+\shade[draw=black, ball color=red, circular drop shadow] (2.5,1.5) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (2.5,1.5) circle (4mm) node[fill opacity=1]{1};
+\shade[draw=black, ball color=red, circular drop shadow] (1,2.5) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (1,2.5) circle (4mm) node[fill opacity=1]{1};
+\shade[draw=black, ball color=red, circular drop shadow] (2,2.5) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (2,2.5) circle (4mm) node[fill opacity=1]{1};
+
+\shade[draw=black, ball color=black, circular drop shadow] (4.5,1.5) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (4.5,1.5) circle (4mm) node[fill opacity=1]{};
+\shade[draw=black, ball color=black, circular drop shadow] (5.5,1.5) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (5.5,1.5) circle (4mm) node[fill opacity=1]{};
+
+\draw[draw=black] (0,0) circle (4mm);
+\draw[draw=black] (1,0) circle (4mm);
+\draw[draw=black] (2,0) circle (4mm);
+\draw[draw=black] (3,0) circle (4mm);
+\draw[draw=black] (4,0) circle (4mm);
+\draw[draw=black] (5,0) circle (4mm);
+\draw[draw=black] (6,0) circle (4mm);
+
+\draw[very thick, ->, >=stealth'] (3,-1) -- (3,-2);
+
+\shade[draw=black, ball color=black, circular drop shadow] (0,-3) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (0,-3) circle (4mm) node[fill opacity=1]{};
+\shade[draw=black, ball color=red, circular drop shadow] (1,-3) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (1,-3) circle (4mm) node[fill opacity=1]{1};
+\shade[draw=black, ball color=red, circular drop shadow] (2,-3) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (2,-3) circle (4mm) node[fill opacity=1]{1};
+\shade[draw=black, ball color=black, circular drop shadow] (3,-3) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (3,-3) circle (4mm) node[fill opacity=1]{};
+\shade[draw=black, ball color=red, circular drop shadow] (4,-3) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (4,-3) circle (4mm) node[fill opacity=1]{1};
+\shade[draw=black, ball color=red, circular drop shadow] (5,-3) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (5,-3) circle (4mm) node[fill opacity=1]{1};
+\shade[draw=black, ball color=red, circular drop shadow] (6,-3) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (6,-3) circle (4mm) node[fill opacity=1]{1};
+\end{tikzpicture}
+\end{footnotesize}
 \caption{The number of possible cardinality assignments for the partition of a set of $n$ elements into $r$ distinct subsets is equivalent to the number of ways to select $n$ positions out of $n + r - 1$ candidates.} 
 \label{figure:Partitioning}
 \end{center}
@@ -676,10 +717,26 @@ For example, the integer assignment associated with the Figure~\ref{figure:Parti
 
 \begin{figure}[htb!]
 \begin{center}
-\begin{psfrags}
-\psfrag{1}[c]{$1$}
-\includegraphics[height=1.53cm]{Figures/4Chapter/partitioning2}
-\end{psfrags}
+% FIGURE GROUP = BALLS
+\begin{footnotesize}
+\begin{tikzpicture}
+\draw[color=black, thick, dashed] (0,0) circle (8mm);
+
+\draw[color=black, thick, dashed] (2.3,0) ellipse (12mm and 8mm);
+\shade[draw=black, ball color=red, circular drop shadow] (1.85,0) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (1.85,0) circle (4mm) node[fill opacity=1]{1};
+\shade[draw=black, ball color=red, circular drop shadow] (2.75,0) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (2.75,0) circle (4mm) node[fill opacity=1]{1};
+
+\draw[color=black, thick, dashed] (5.4,0) ellipse (16mm and 8mm);
+\shade[draw=black, ball color=red, circular drop shadow] (4.5,0) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (4.5,0) circle (4mm) node[fill opacity=1]{1};
+\shade[draw=black, ball color=red, circular drop shadow] (5.4,0) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (5.4,0) circle (4mm) node[fill opacity=1]{1};
+\shade[draw=black, ball color=red, circular drop shadow] (6.3,0) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (6.3,0) circle (4mm) node[fill opacity=1]{1};
+\end{tikzpicture}
+\end{footnotesize}
 \caption{The assignment displayed in Figure~\ref{figure:Partitioning} corresponds to having no element in the first set, two elements in the second set and three elements in the last one.}
 \label{figure:Partitioning2}
 \end{center}
