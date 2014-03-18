@@ -8,16 +8,33 @@ From here, we proceed to define relevant notation and operations.
 
 \begin{figure}[htb]
 \begin{center}
-\begin{psfrags}
-\psfrag{1}[c]{$1$}
-\psfrag{2}[c]{$2$}
-\psfrag{3}[c]{$3$}
-\psfrag{4}[c]{$4$}
-\psfrag{5}[c]{$5$}
-\psfrag{6}[c]{$6$}
-\psfrag{7}[c]{$7$}
-\includegraphics[height=3.825cm]{Figures/1Chapter/basicset}
-\end{psfrags}
+% FIGURE GROUP = BALLS
+\begin{footnotesize}
+\begin{tikzpicture}
+\draw[color=black, thick, dashed] (0,0) ellipse (30mm and 20mm);
+
+\shade[draw=black, ball color=red, circular drop shadow] (0.75,1.25) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (0.75,1.25) circle (4mm) node[fill opacity=1]{1};
+
+\shade[draw=black, ball color=blue, circular drop shadow] (-2,0.25) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (-2,0.25) circle (4mm) node[fill opacity=1]{2};
+
+\shade[draw=black, ball color=green, circular drop shadow] (-1,1) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (-1,1) circle (4mm) node[fill opacity=1]{3};
+
+\shade[draw=black, ball color=cyan, circular drop shadow] (0,-0.25) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (0,-0.25) circle (4mm) node[fill opacity=1]{4};
+
+\shade[draw=black, ball color=magenta, circular drop shadow] (1.25,-0.75) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (1.25,-0.75) circle (4mm) node[fill opacity=1]{5};
+
+\shade[draw=black, ball color=yellow, circular drop shadow] (-1.25,-1) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (-1.25,-1) circle (4mm) node[fill opacity=1]{6};
+
+\shade[draw=black, ball color=gray, circular drop shadow] (2.25,0) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (2.25,0) circle (4mm) node[fill opacity=1]{7};
+\end{tikzpicture}
+\end{footnotesize}
 \caption{This is an illustration of a generic set and its elements.}
 \end{center}
 \end{figure}
@@ -286,16 +303,62 @@ Given sets $S$ and $T$, the \emph{cartesian product} $S \times T$ is the set of 
 
 \begin{figure}[htb]
 \begin{center}
-\begin{psfrags}
-\psfrag{1}[c]{$1$}
-\psfrag{2}[c]{$2$}
-\psfrag{3}[c]{$3$}
-\psfrag{a}[c]{$a$}
-\psfrag{b}[c]{$b$}
-\includegraphics[height=3.06cm]{Figures/1Chapter/cartesianproduct}
-\end{psfrags}
+% FIGURE GROUP = BALLS
+\begin{footnotesize}
+\begin{tikzpicture}
+\shade[draw=black, ball color=red, circular drop shadow] (0,1.25) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (0,1.25) circle (4mm) node[fill opacity=1]{1};
+
+\shade[draw=black, ball color=blue, circular drop shadow] (0,0) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (0,0) circle (4mm) node[fill opacity=1]{2};
+
+\shade[draw=black, ball color=green, circular drop shadow] (0,-1.25) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (0,-1.25) circle (4mm) node[fill opacity=1]{3};
+
+\draw[very thick] (0.85,-0.2) -- (1.25,0.2);
+\draw[very thick] (0.85,0.2) -- (1.25,-0.2);
+
+\shade[draw=black, ball color=yellow, circular drop shadow] (2,0.75) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (2,0.75) circle (4mm) node[fill opacity=1]{$\mathrm{a}$};
+
+\shade[draw=black, ball color=magenta, circular drop shadow] (2,-0.75) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (2,-0.75) circle (4mm) node[fill opacity=1]{$\mathrm{b}$};
+
+\draw[very thick, ->, >=stealth'] (3,0) -- (4,0);
+
+\shade[draw=black, ball color=red, circular drop shadow] (5,1.25) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (5,1.25) circle (4mm) node[fill opacity=1]{1};
+\shade[draw=black, ball color=yellow, circular drop shadow] (5.9,1.25) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (5.9,1.25) circle (4mm) node[fill opacity=1]{$\mathrm{a}$};
+
+\shade[draw=black, ball color=red, circular drop shadow] (5,0) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (5,0) circle (4mm) node[fill opacity=1]{1};
+\shade[draw=black, ball color=magenta, circular drop shadow] (5.9,0) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (5.9,0) circle (4mm) node[fill opacity=1]{$\mathrm{b}$};
+
+\shade[draw=black, ball color=blue, circular drop shadow] (5,-1.25) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (5,-1.25) circle (4mm) node[fill opacity=1]{2};
+\shade[draw=black, ball color=yellow, circular drop shadow] (5.9,-1.25) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (5.9,-1.25) circle (4mm) node[fill opacity=1]{$\mathrm{a}$};
+
+\shade[draw=black, ball color=blue, circular drop shadow] (7.5,1.25) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (7.5,1.25) circle (4mm) node[fill opacity=1]{2};
+\shade[draw=black, ball color=magenta, circular drop shadow] (8.4,1.25) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (8.4,1.25) circle (4mm) node[fill opacity=1]{$\mathrm{b}$};
+
+\shade[draw=black, ball color=green, circular drop shadow] (7.5,0) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (7.5,0) circle (4mm) node[fill opacity=1]{3};
+\shade[draw=black, ball color=yellow, circular drop shadow] (8.4,0) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (8.4,0) circle (4mm) node[fill opacity=1]{$\mathrm{a}$};
+
+\shade[draw=black, ball color=green, circular drop shadow] (7.5,-1.25) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (7.5,-1.25) circle (4mm) node[fill opacity=1]{3};
+\shade[draw=black, ball color=magenta, circular drop shadow] (8.4,-1.25) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (8.4,-1.25) circle (4mm) node[fill opacity=1]{$\mathrm{b}$};
+\end{tikzpicture}
+\end{footnotesize}
 \caption{Cartesian products can be used to create new sets.
-In this example, the sets $\{ 1, 2, 3 \}$ and $\{ a, b \}$ are employed to create a cartesian product with six elements.}
+In this example, the sets $\{ 1, 2, 3 \}$ and $\{ \mathrm{a}, \mathrm{b} \}$ are employed to create a cartesian product with six elements.}
 \end{center}
 \end{figure}
 
