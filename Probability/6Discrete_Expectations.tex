@@ -251,16 +251,32 @@ As anticipated, the center of mass corresponds to the mean of $X$.
 
 \begin{figure}[ht]
 \begin{center}
-\begin{psfrags}
-\psfrag{x1}[c]{$x_1$}
-\psfrag{x2}[c]{$x_2$}
-\psfrag{c}[c]{Center of Mass}
-\psfrag{r}[c]{$\mathbb{R}$}
-\includegraphics[height=1.8cm]{Figures/6Chapter/mass}
-\end{psfrags}
-\end{center}
+% FIGURE GROUP = BALLS
+\begin{footnotesize}
+\begin{tikzpicture}
+\draw[very thick, ->, >=stealth'] (-1,0) -- (6,0);
+\node at (6,-0.5) {$\RealNumbers$};
+
+\shade[draw=black, ball color=black, circular drop shadow] (0,0) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (0,0) circle (4mm) node[fill opacity=1]{};
+\node at (0,-1) {$x_1$};
+
+\shade[draw=black, ball color=black, circular drop shadow] (4,0) circle (5.769mm);
+\shade[fill=white, fill opacity=0.3] (4,0) circle (5.769mm) node[fill opacity=1]{};
+\node at (4,-1) {$x_2$};
+
+\draw[draw=black, fill=black] (3,0) circle (1mm);
+\draw[thick, ->, >=stealth'] (2.25,-0.75) -- (2.75,-0.25);
+\node at (2,-1) {Center of Mass};
+
+\draw[thick, dashed] (-1,0) -- (6,0);
+\draw[thick] (0,-0.125) -- (0,0.125);
+\draw[thick] (4,-0.125) -- (4,0.125);
+\end{tikzpicture}
+\end{footnotesize}
 \caption{The center of mass on the figure is indicated by the tip of the arrow.
 In general, the mean of a discrete random variable corresponds to the center of mass of the associated particle system}
+\end{center}
 \end{figure}
 \end{example}
 
