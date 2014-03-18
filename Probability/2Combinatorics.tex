@@ -218,12 +218,61 @@ Hence, the number of distinct subsets of $S$ is given by $2^n$.
 
 \begin{figure}[htb!]
 \begin{center}
-\begin{psfrags}
-\psfrag{1}[c]{$1$}
-\psfrag{2}[c]{$2$}
-\psfrag{3}[c]{$3$}
-\includegraphics[height=4.965cm]{Figures/4Chapter/powerset}
-\end{psfrags}
+% FIGURE GROUP = BALLS
+\begin{footnotesize}
+\begin{tikzpicture}
+\shade[draw=black, ball color=red, circular drop shadow] (0,1.25) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (0,1.25) circle (4mm) node[fill opacity=1]{1};
+
+\shade[draw=black, ball color=blue, circular drop shadow] (0,0) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (0,0) circle (4mm) node[fill opacity=1]{2};
+
+\shade[draw=black, ball color=green, circular drop shadow] (0,-1.25) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (0,-1.25) circle (4mm) node[fill opacity=1]{3};
+
+\draw[very thick, ->, >=stealth'] (1,0) -- (2,0);
+
+\draw[color=black, thick, dashed] (3.25,1.875) circle (8mm);
+
+\draw[color=black, thick, dashed] (5.25,1.875) circle (8mm);
+\shade[draw=black, ball color=red, circular drop shadow] (5.25,1.875) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (5.25,1.875) circle (4mm) node[fill opacity=1]{1};
+
+\draw[color=black, thick, dashed] (7.25,1.875) circle (8mm);
+\shade[draw=black, ball color=blue, circular drop shadow] (7.25,1.875) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (7.25,1.875) circle (4mm) node[fill opacity=1]{2};
+
+\draw[color=black, thick, dashed] (9.25,1.875) circle (8mm);
+\shade[draw=black, ball color=green, circular drop shadow] (9.25,1.875) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (9.25,1.875) circle (4mm) node[fill opacity=1]{3};
+
+\draw[color=black, thick, dashed] (3.65,0) ellipse (12mm and 8mm);
+\shade[draw=black, ball color=red, circular drop shadow] (3.2,0) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (3.2,0) circle (4mm) node[fill opacity=1]{1};
+\shade[draw=black, ball color=blue, circular drop shadow] (4.1,0) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (4.1,0) circle (4mm) node[fill opacity=1]{2};
+
+\draw[color=black, thick, dashed] (6.25,0) ellipse (12mm and 8mm);
+\shade[draw=black, ball color=red, circular drop shadow] (5.8,0) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (5.8,0) circle (4mm) node[fill opacity=1]{1};
+\shade[draw=black, ball color=green, circular drop shadow] (6.7,0) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (6.7,0) circle (4mm) node[fill opacity=1]{3};
+
+\draw[color=black, thick, dashed] (8.85,0) ellipse (12mm and 8mm);
+\shade[draw=black, ball color=blue, circular drop shadow] (8.4,0) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (8.4,0) circle (4mm) node[fill opacity=1]{2};
+\shade[draw=black, ball color=green, circular drop shadow] (9.3,0) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (9.3,0) circle (4mm) node[fill opacity=1]{3};
+
+\draw[color=black, thick, dashed] (6.25,-1.875) ellipse (16mm and 8mm);
+\shade[draw=black, ball color=red, circular drop shadow] (5.35,-1.875) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (5.35,-1.875) circle (4mm) node[fill opacity=1]{1};
+\shade[draw=black, ball color=blue, circular drop shadow] (6.25,-1.875) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (6.25,-1.875) circle (4mm) node[fill opacity=1]{2};
+\shade[draw=black, ball color=green, circular drop shadow] (7.15,-1.875) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (7.15,-1.875) circle (4mm) node[fill opacity=1]{3};
+\end{tikzpicture}
+\end{footnotesize}
 \caption{The power set of $\{ 1, 2, 3 \}$ contains eight subsets.
 These elements are displayed above.}
 \label{figure:PowerSet}
@@ -458,13 +507,60 @@ Consequently, there are fewer $2$-element subsets of $S$ than $2$-permutations o
 
 \begin{figure}[htb!]
 \begin{center}
-\begin{psfrags}
-\psfrag{1}[c]{$1$}
-\psfrag{2}[c]{$2$}
-\psfrag{3}[c]{$3$}
-\psfrag{4}[c]{$4$}
-\includegraphics[height=4.95cm]{Figures/4Chapter/combination}
-\end{psfrags}
+% FIGURE GROUP = BALLS
+\begin{footnotesize}
+\begin{tikzpicture}
+\shade[draw=black, ball color=red, circular drop shadow] (0,1.875) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (0,1.875) circle (4mm) node[fill opacity=1]{1};
+
+\shade[draw=black, ball color=blue, circular drop shadow] (0,0.625) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (0,0.625) circle (4mm) node[fill opacity=1]{2};
+
+\shade[draw=black, ball color=green, circular drop shadow] (0,-0.625) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (0,-0.625) circle (4mm) node[fill opacity=1]{3};
+
+\shade[draw=black, ball color=gray, circular drop shadow] (0,-1.875) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (0,-1.875) circle (4mm) node[fill opacity=1]{4};
+
+\draw[very thick, ->, >=stealth'] (1,0) -- (2,0);
+
+\draw[color=black, thick, dashed] (3.95,1.875) ellipse (12mm and 8mm);
+\shade[draw=black, ball color=red, circular drop shadow] (3.5,1.875) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (3.5,1.875) circle (4mm) node[fill opacity=1]{1};
+\shade[draw=black, ball color=blue, circular drop shadow] (4.4,1.875) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (4.4,1.875) circle (4mm) node[fill opacity=1]{2};
+
+\draw[color=black, thick, dashed] (3.95,0) ellipse (12mm and 8mm);
+\shade[draw=black, ball color=red, circular drop shadow] (3.5,0) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (3.5,0) circle (4mm) node[fill opacity=1]{1};
+\shade[draw=black, ball color=green, circular drop shadow] (4.4,0) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (4.4,0) circle (4mm) node[fill opacity=1]{3};
+
+\draw[color=black, thick, dashed] (3.95,-1.875) ellipse (12mm and 8mm);
+\shade[draw=black, ball color=red, circular drop shadow] (3.5,-1.875) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (3.5,-1.875) circle (4mm) node[fill opacity=1]{1};
+\shade[draw=black, ball color=gray, circular drop shadow] (4.4,-1.875) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (4.4,-1.875) circle (4mm) node[fill opacity=1]{4};
+
+\draw[color=black, thick, dashed] (6.95,1.875) ellipse (12mm and 8mm);
+\shade[draw=black, ball color=blue, circular drop shadow] (6.5,1.875) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (6.5,1.875) circle (4mm) node[fill opacity=1]{2};
+\shade[draw=black, ball color=green, circular drop shadow] (7.4,1.875) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (7.4,1.875) circle (4mm) node[fill opacity=1]{3};
+
+\draw[color=black, thick, dashed] (6.95,0) ellipse (12mm and 8mm);
+\shade[draw=black, ball color=blue, circular drop shadow] (6.5,0) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (6.5,0) circle (4mm) node[fill opacity=1]{2};
+\shade[draw=black, ball color=gray, circular drop shadow] (7.4,0) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (7.4,0) circle (4mm) node[fill opacity=1]{4};
+
+\draw[color=black, thick, dashed] (6.95,-1.875) ellipse (12mm and 8mm);
+\shade[draw=black, ball color=green, circular drop shadow] (6.5,-1.875) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (6.5,-1.875) circle (4mm) node[fill opacity=1]{3};
+\shade[draw=black, ball color=gray, circular drop shadow] (7.4,-1.875) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (7.4,-1.875) circle (4mm) node[fill opacity=1]{4};
+\end{tikzpicture}
+\end{footnotesize}
 \caption{There exist six 2-element subsets of the numbers one through four.}
 \label{figure:Combination}
 \end{center}
