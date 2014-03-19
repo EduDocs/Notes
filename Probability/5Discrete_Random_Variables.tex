@@ -567,17 +567,49 @@ In particular, if $\omega \in \Omega$ is the outcome of the experiment, then $X$
 
 \begin{figure}[htb!]
 \begin{center}
-\begin{psfrags}
-\psfrag{1}[c]{$1$}
-\psfrag{2}[c]{$2$}
-\psfrag{3}[c]{$3$}
-\psfrag{4}[c]{$4$}
-\psfrag{5}[c]{$5$}
-\psfrag{S}[l]{Sample Space}
-\psfrag{X}[c]{$X$}
-\psfrag{Y}[c]{$Y = g(X)$}
-\includegraphics[height=4.97cm]{Figures/5Chapter/fcn}
-\end{psfrags}
+% FIGURE GROUP = BALLS
+\begin{footnotesize}
+\begin{tikzpicture}
+\draw[color=black, thick, rounded corners=5] (-1.5,-2) rectangle (1.5,2);
+\node at (-1.75,1.75) {$\Omega$};
+
+\shade[draw=black, ball color=red, circular drop shadow] (0,1.375) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (0,1.375) circle (4mm) node[fill opacity=1]{1};
+
+\shade[draw=black, ball color=blue, circular drop shadow] (-0.5,-1.25) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (-0.5,-1.25) circle (4mm) node[fill opacity=1]{2};
+
+\shade[draw=black, ball color=green, circular drop shadow] (-0.75,0.125) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (-0.75,0.125) circle (4mm) node[fill opacity=1]{3};
+
+\shade[draw=black, ball color=gray, circular drop shadow] (0.75,0) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (0.75,0) circle (4mm) node[fill opacity=1]{4};
+
+\shade[draw=black, ball color=cyan, circular drop shadow] (0.5,-1.125) circle (4mm);
+\shade[fill=white, fill opacity=0.3] (0.5,-1.125) circle (4mm) node[fill opacity=1]{5};
+
+\draw[very thick, ->, >=stealth'] (2.5,-1.5) -- (6,-1.5);
+\node at (6,-2) {$\RealNumbers$};
+\node at (4.25,-1.875) {$X$};
+
+\draw[draw=black, fill=black] (4,-1.5) circle (0.75mm);
+\draw[draw=black, fill=black] (5,-1.5) circle (0.75mm);
+\draw[dashed, thick] (0.5,1.375) parabola (4,-1.5);
+\draw[dashed, thick] (1.25,0) parabola (5,-1.5);
+
+\draw[very thick, ->, >=stealth'] (7,-1.5) -- (10.5,-1.5);
+\node at (10.5,-2) {$\RealNumbers$};
+\node at (8.75,-1.875) {$Y$};
+
+\draw[draw=black, fill=black] (8,-1.5) circle (0.75mm);
+\draw[draw=black, fill=black] (9.5,-1.5) circle (0.75mm);
+\draw[dashed, thick] (4,-1.5) .. controls (5,-0.75) and (8.5,-0.75) .. (9.5,-1.5);
+\draw[dashed, thick] (5,-1.5) .. controls (6,-1.125) and (7,-1.125) .. (8,-1.5);
+
+\draw[thick, ->, >=stealth', shorten >= 1mm] (0.5,1.375) parabola (9.5,-1.5);
+\draw[thick, ->, >=stealth', shorten >= 1mm] (1.25,0) parabola (8,-1.5);
+\end{tikzpicture}
+\end{footnotesize}
 \caption{A real-valued function of a random variable is a random variable itself.
 In this figure, $Y$ is obtained by passing random variable $X$ through a function $g (\cdot)$.}
 \end{center}
