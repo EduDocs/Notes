@@ -396,11 +396,19 @@ To develop an understanding of uncountable probabilistic models, we consider the
 
 \begin{figure}[htb!]
 \begin{center}
-\begin{psfrags}
-\psfrag{0}[c]{$0$}
-\psfrag{1}[c]{$1$}
-\includegraphics[height=1.17cm]{Figures/2Chapter/uncountablespace}
-\end{psfrags}
+% FIGURE GROUP = REAL SET
+\begin{footnotesize}
+\begin{tikzpicture}
+\draw[thick, ->, >=stealth'] (-1,0) -- (5.5,0);
+\draw[draw=none, fill=blue!20] (0,0.25) rectangle (4,-0.25);
+\draw[dashed] (0,0) -- (4,0);
+\draw[very thick] (0.125,0.25) -- (0,0.25) -- (0,-0.25) -- (0.125,-0.25);
+\draw[very thick] (3.875,0.25) -- (4,0.25) -- (4,-0.25) -- (3.875,-0.25);
+\node at (0,-0.5) {0};
+\node at (4,-0.5) {1};
+\node at (5.25,-0.5) {$\RealNumbers$};
+\end{tikzpicture}
+\end{footnotesize}
 \caption{The unit interval $[0,1]$, composed of all real numbers between zero and one, is an example of an uncountable set.}
 \end{center}
 \end{figure}
@@ -412,13 +420,23 @@ For instance, it is natural to anticipate that $\Pr \left( \left( 0, 0.25 \right
 
 \begin{figure}[htb!]
 \begin{center}
-\begin{psfrags}
-\psfrag{0}[l]{$0$}
-\psfrag{0.25}[r]{$0.25$}
-\psfrag{0.75}[l]{$0.75$}
-\psfrag{1}[r]{$1$}
-\includegraphics[height=1.185cm]{Figures/2Chapter/intervals}
-\end{psfrags}
+% FIGURE GROUP = REAL SET
+\begin{footnotesize}
+\begin{tikzpicture}
+\draw[thick, ->, >=stealth'] (-1,0) -- (5.5,0);
+\begin{scope}
+    \clip (-0.125,0.25) rectangle (4.125,-0.25);
+    \draw[very thick, fill=red!20] (0.5,0) circle (0.5);
+    \draw[very thick, fill=green!20] (3.5,0) circle (0.5);
+\end{scope}
+\draw[dashed] (0,0) -- (4,0);
+\node at (0,-0.5) {0};
+\node at (1,-0.5) {0.25};
+\node at (3,-0.5) {0.75};
+\node at (4,-0.5) {1};
+\node at (5.25,-0.5) {$\RealNumbers$};
+\end{tikzpicture}
+\end{footnotesize}
 \caption{If the outcome of an experiment is uniformly distributed over $[0,1]$, then two subintervals of equal lengths should have the same probabilities.}
 \end{center}
 \end{figure}
@@ -431,11 +449,63 @@ Using the third axiom of probability, it is then possible to find the probabilit
 
 \begin{figure}[htb!]
 \begin{center}
-\begin{psfrags}
-\psfrag{0}[l]{$0$}
-\psfrag{1}[r]{$1$}
-\includegraphics[height=3.28cm]{Figures/2Chapter/lineintervals}
-\end{psfrags}
+% FIGURE GROUP = REAL SET
+\begin{footnotesize}
+\begin{tikzpicture}
+\draw[thick, ->, >=stealth'] (-1,2) -- (5.5,2);
+\begin{scope}
+    \clip (0.875,2.25) rectangle (1.5,1.75);
+    \draw[very thick, fill=gray!20] (1.5,2) circle (0.5);
+\end{scope}
+\begin{scope}
+    \clip (2.5,2.25) rectangle (3.125,1.75);
+    \draw[very thick, fill=gray!20] (2.5,2) circle (0.5);
+\end{scope}
+\draw[draw=none, fill=gray!20] (1.25,2.25) rectangle (2.75,1.75);
+\draw[dashed] (0,2) -- (4,2);
+
+\draw[thick, ->, >=stealth'] (-1,1) -- (5.5,1);
+\begin{scope}
+    \clip (0.375,1.25) rectangle (1,0.75);
+    \draw[very thick, fill=cyan!20] (1,1) circle (0.5);
+\end{scope}
+\begin{scope}
+    \clip (1.75,1.25) rectangle (2.375,0.75);
+    \draw[very thick, fill=cyan!20] (1.75,1) circle (0.5);
+\end{scope}
+\draw[draw=none, fill=cyan!20] (0.75,1.25) rectangle (2,0.75);
+\begin{scope}
+    \clip (-0.125,1.25) rectangle (4.125,0.75);
+    \draw[very thick, fill=cyan!20] (3.5,1) circle (0.5);
+\end{scope}
+\draw[dashed] (0,1) -- (4,1);
+
+\draw[thick, ->, >=stealth'] (-1,0) -- (5.5,0);
+\begin{scope}
+    \clip (-0.125,0.25) rectangle (4.125,-0.25);
+    \draw[very thick, fill=magenta!20] (0.5,0) circle (0.5);
+\end{scope}
+\begin{scope}
+    \clip (1.375,0.25) rectangle (2,-0.25);
+    \draw[very thick, fill=magenta!20] (2,0) circle (0.5);
+\end{scope}
+\begin{scope}
+    \clip (1.75,0.25) rectangle (2.375,-0.25);
+    \draw[very thick, fill=magenta!20] (1.75,0) circle (0.5);
+\end{scope}
+\begin{scope}
+    \clip (2.375,0.25) rectangle (3,-0.25);
+    \draw[very thick, fill=magenta!20] (3,0) circle (0.5);
+\end{scope}
+\begin{scope}
+    \clip (3.5,0.25) rectangle (4.125,-0.25);
+    \draw[very thick, fill=magenta!20] (3.5,0) circle (0.5);
+\end{scope}
+\draw[draw=none, fill=magenta!20] (2.75,0.25) rectangle (3.75,-0.25);
+\draw[dashed] (0,0) -- (4,0);
+\node at (5.25,-0.5) {$\RealNumbers$};
+\end{tikzpicture}
+\end{footnotesize}
 \caption{The probabilities of events that are formed through the union of disjoint intervals can be computed in a straightforward manner.}
 \end{center}
 \end{figure}
@@ -483,7 +553,13 @@ The probability of $\Omega$ is invariably equal to one, $\Pr ([0, 2 \pi)) = 1$.
 
 \begin{figure}[tbh!]
 \begin{center}
-\includegraphics[height=3.15cm]{Figures/2Chapter/wheel}
+\begin{tikzpicture}
+\draw[thick, fill=gray!20] (0,0) circle (15mm);
+\draw[thick, fill=gray!20] (0,0) circle (0.5mm);
+\draw[thick] (1,0) -- (1.5,0);
+\draw[thick, ->, >=stealth', shorten >= 1mm] (2,0) -- (1.5,0);
+\draw[->, >=stealth'] (0,1.75) arc (90:30:1.75);
+\end{tikzpicture}
 \caption{The wheel of serendipity forms an example of a random experiment for which the sample space is uncountable.}
 \end{center}
 \end{figure}
