@@ -115,7 +115,7 @@ These scenarios all need to be accounted for in our expression, and this is acco
     xlabel={Argument $x$},
     ylabel={Function $y = g(x)$},
     xmin=0, xmax=5,
-    ymin=0, ymax=8,
+    ymin=0, ymax=7.5,
     xmajorgrids,
     ymajorgrids]
 \addplot[blue,domain=0:1.75,samples=201]
@@ -130,12 +130,10 @@ These scenarios all need to be accounted for in our expression, and this is acco
     (1.75,0) (1.75,4)
 
     (3.25,0) (3.25,4)};
-\addplot[red, mark=*] coordinates {
-	(0,4)};
-\draw[red,fill=red] (axis cs:1.75,0) rectangle (axis cs:3.25,0.15);
+\addplot[red, mark=*] coordinates {(0,4)};
+\draw[red,fill=red] (axis cs:1.75,0) rectangle (axis cs:3.25,0.075);
 \node at (axis cs:2.5,0.75) {$g^{-1}(y)$};
 \node at (axis cs:0.25,4.5) {$y$} ;
-%\node at (axis cs:1.5,0.625) {$g^{-1}((-\infty, y])$};
 \end{axis}
 \end{tikzpicture}
 \end{center}
@@ -154,8 +152,8 @@ The preimage of point $y$ may contain several elements, as seen above.}
     ymin=0, ymax=7.5,
     xmajorgrids,
     ymajorgrids]
-\draw[red,fill=red] (axis cs:0,0) rectangle (axis cs:0.075,4);
-\draw[red,fill=red] (axis cs:0,0) rectangle (axis cs:3,0.1);
+\draw[red,fill=red] (axis cs:0,0) rectangle (axis cs:0.05,4);
+\draw[red,fill=red] (axis cs:0,0) rectangle (axis cs:3,0.075);
 \addplot[blue,domain=0:3,samples=201]
     {0.5*(x-1.5)^3 + 1.6875};
 \addplot[blue,domain=3:5,samples=201]
@@ -164,8 +162,8 @@ The preimage of point $y$ may contain several elements, as seen above.}
     (0,4) (3,4)
 
     (3,0) (3,4)};
-\node at (axis cs:1.5,0.625) {$g^{-1}((-\infty, y])$};
-\node[rotate=90] at (axis cs:0.375,2.5) {$(-\infty,y]$};
+\node at (axis cs:1.875,0.625) {$g^{-1}((-\infty, y])$};
+\node[rotate=90] at (axis cs:0.375,2.625) {$(-\infty,y]$};
 \end{axis}
 \end{tikzpicture}
 \end{center}
@@ -236,15 +234,31 @@ In addition, we can express the PDF of $Y = g(X)$ in terms of the PDF of $X$ and
 
 \begin{figure}[ht]
 \begin{center}
-\begin{psfrags}
-\psfrag{x1}[c]{\footnotesize $g^{-1} ((y_1, y_1 + \delta))$}
-\psfrag{x2}[c]{\footnotesize $g^{-1} ((y_2, y_2 + \delta))$}
-\psfrag{y1}[r]{\footnotesize $(y_1, y_1 + \delta)$}
-\psfrag{y2}[r]{\footnotesize $(y_2, y_2 + \delta)$}
-\psfrag{X}[c]{$X$}
-\psfrag{Y}[c]{$Y$}
-\includegraphics[width=6.5cm]{Figures/9Chapter/Differentiable}
-\end{psfrags}
+\begin{tikzpicture}
+\begin{axis}[
+    %title={},
+    xlabel={Argument $x$},
+    ylabel={Function $y = g(x)$},
+    xmin=0, xmax=5,
+    ymin=0, ymax=8,
+    xmajorgrids,
+    ymajorgrids]
+\addplot[blue,domain=0:5,samples=501]
+    {0.25*(x-1.75)^3 + 2};
+\addplot[black, dashed, thin] coordinates {
+    (0,2.25) (2.75,2.25) (2.75,0)
+
+    (0,1.75) (0.75,1.75) (0.75,0)
+
+    (0,6.25) (4.321,6.25) (4.321,0)
+
+    (0,5.75) (4.216,5.75) (4.216,0)};
+\draw[red,fill=red] (axis cs:0,1.75) rectangle (axis cs:0.05,2.25);
+\draw[red,fill=red] (axis cs:0.75,0) rectangle (axis cs:2.75,0.08);
+\draw[red,fill=red] (axis cs:0,5.75) rectangle (axis cs:0.05,6.25);
+\draw[red,fill=red] (axis cs:4.216,0) rectangle (axis cs:4.321,0.08);
+\end{axis}
+\end{tikzpicture}
 \caption{This figure provides a graphical interpretation of why the derivative of $g(\cdot)$ plays an important role in determining the value of the derived PDF $f_Y(\cdot)$.
 For an interval of width $\delta$ on the $y$-axis, the size of the corresponding interval on the $x$-axis depends heavily on the derivative of $g(\cdot)$.
 A small slope leads to a wide interval, whereas a steep slope produces a narrow interval on the $x$-axis.}
@@ -341,17 +355,29 @@ It is certainly useful to compare \eqref{equation:FunctionPDF} to its discrete e
 
 \begin{figure}[ht]
 \begin{center}
-\begin{psfrags}
-\psfrag{y}[c]{$y$}
-\psfrag{x1}[c]{$x_1$}
-\psfrag{x2}[c]{$x_2$}
-\psfrag{x3}[c]{$x_3$}
-\psfrag{x4}[c]{$x_4$}
-\psfrag{x5}[c]{$x_5$}
-\psfrag{X}[c]{$X$}
-\psfrag{Y}[c]{$Y$}
-\includegraphics[width=6.5cm]{Figures/9Chapter/DerivedPDF}
-\end{psfrags}
+\begin{tikzpicture}
+\begin{axis}[
+    %title={},
+    xlabel={Argument $x$},
+    ylabel={Function $y = g(x)$},
+    xmin=0, xmax=5,
+    ymin=0, ymax=8,
+    xmajorgrids,
+    ymajorgrids]
+\addplot[blue,domain=0:5,samples=501]
+    {2.5 + 2*sin(360*sqrt(x+0.5)) + 0.4*x};
+\addplot[red, mark=*] coordinates {(0,4)};
+\addplot[black, dashed, thin] coordinates {
+    (0,4) (3.52,4) (3.52,0)
+
+    (0.71,4) (0.71,0)
+
+    (1.54,4) (1.54,0)};
+\addplot[red, mark=*] coordinates { (0.71,0)};
+\addplot[red, mark=*] coordinates { (1.54,0)};
+\addplot[red, mark=*] coordinates { (3.52,0)};
+\end{axis}
+\end{tikzpicture}
 \caption{The PDF of $Y = g(X)$ when $X$ is a continuous random variable and $g(\cdot)$ is differentiable with a finite number of local extrema is obtained by first identifying all the values of $x$ for which $g(x) = y$, and then calculating the contribution of each of these values to $f_Y(y)$ using \eqref{equation:MonotoneFunctionPDF}.
 The end result leads to \eqref{equation:FunctionPDF}.}
 \end{center}
