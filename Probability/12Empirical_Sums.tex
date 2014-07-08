@@ -363,14 +363,14 @@ To explore the asymptotic behavior of the sequence $\{ S_n / \sqrt{n} \}$, we ta
 In doing so, notice the double use of L'H\^{o}pital's rule,
 \begin{equation*}
 \begin{split}
-\lim_{n \rightarrow \infty} \frac{1}{n^{-1}} \Lambda \left( s n^{-1/2} \right)
-&= \lim_{n \rightarrow \infty} \frac{1}{n^{-2}}
-\frac{d \Lambda}{dn} \left( s n^{-1/2} \right) \frac{s n^{-3/2}}{2} \\
-&= \lim_{n \rightarrow \infty} \frac{s}{2 n^{-1/2}}
-\frac{d \Lambda}{dn} \left( s n^{-1/2} \right) \\
-&= \lim_{n \rightarrow \infty} \frac{s}{n^{-3/2}}
-\frac{d^2 \Lambda}{dn^2} \left( s n^{-1/2} \right) \frac{s n^{-3/2}}{2} \\
-&= \lim_{n \rightarrow \infty} \frac{s^2}{2}
+\lim_{n \rightarrow \infty} \frac{\Lambda \left( s n^{-1/2} \right)}{n^{-1}}
+&= \lim_{n \rightarrow \infty}
+\frac{-\frac{d \Lambda}{dn} \left( s n^{-1/2} \right) \frac{s}{2} n^{-3/2}}{-n^{-2}} \\
+&= \frac{s}{2} \lim_{n \rightarrow \infty}
+\frac{\frac{d \Lambda}{dn} \left( s n^{-1/2} \right)}{n^{-1/2}} \\
+&= \frac{s}{2} \lim_{n \rightarrow \infty}
+\frac{-\frac{d^2 \Lambda}{dn^2} \left( s n^{-1/2} \right) \frac{s n^{-3/2}}{2}}{-\frac{1}{2}n^{-3/2}} \\
+&= \frac{s^2}{2} \lim_{n \rightarrow \infty}
 \frac{d^2 \Lambda}{dn^2} \left( s n^{-1/2} \right) = \frac{s^2}{2} .
 \end{split}
 \end{equation*}
