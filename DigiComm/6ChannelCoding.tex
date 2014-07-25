@@ -563,7 +563,7 @@ In this case, we can let $A_h$ be the number of coset leaders with Hamming weigh
 
 \subsection{Basic Properties}
 In this section, we consider a subset of linear codes which have even more algebraic structure.
-A cyclic (or circular) shift of a vector is another vector with the same elements in the same order, but starting from an different index.
+A cyclic (or circular) shift of a vector is another vector with the same elements in the same order, but starting from a different index.
 For example, the right circular shift of $(x_0,x_1,\ldots,x_{n-1})$ by 1 position gives the vector $(x_{n-1},x_0,x_1,\ldots,x_{n-2})$.
 
 \begin{definition}
@@ -670,7 +670,7 @@ The generator polynomials for $r=3,4,5$ are given by
 
 For cyclic codes, the basic encoding process $c(x)=m(x)g(x)$ does not provide systematic encoding.
 One can overcome this limitation by observing that $c(x) \bmod g(x) = 0$ for all codewords.
-Using this equation instead, one can choose the codeword have the format
+Using this equation instead, one can choose the codeword to have the format
 \[ c(x) = p(x) + x^{n-k} m(x), \]
 where the message $m(x)$ appears as the last $k$ bits in the codeword and the parity polynomial $p(x)=p_0 + p_1 x + \cdots p_{n-k-1} x^{n-k-1}$ has degree $\deg\left( p(x)\right) = n-k-1$.
 Applying the modulo $g(x)$ operation to both sides of this equation shows that
