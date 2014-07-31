@@ -21,3 +21,4 @@ GitHub is a web-based hosting service for source code management (SCM). It is bu
 -> Pull: The pull command fetches and merges changes on the remote server to the local working directory.
 -> Mergetool: Sometimes, there may be a discrepancy between the latest version of a file and its working copy on a given host. In such cases, the developer may need to take action to resolve these issues. This can be achieve through normal editing, followed by the Git add command. Alternatively, one can use the mergetool command, which initiates a visual tool.
 -> Status: The status command lists the status of working files and directories.
+
