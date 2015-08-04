@@ -55,9 +55,9 @@ Furthermore, for any admissible set $S \subset \RealNumbers^2$, the probability 
 \begin{split}
 \Pr ((X,Y) \in S)
 &= \iint\limits_{\RealNumbers^2}
-\IndicatorFcn_{S} (u, v) f_{X, Y} (u, v) dv du \\
+\IndicatorFcn_{S} (x, y) f_{X, Y} (x, y) dy dx \\
 &= \iint\limits_{S}
-f_{X, Y} (u, v) dv du .
+f_{X, Y} (x, y) dy dx .
 \end{split}
 \end{equation}
 In particular, if $S$ is the cartesian product of two intervals, 
@@ -69,7 +69,7 @@ then the probability that $(X,Y) \in S$ reduces to the typical integral form
 \Pr ((X,Y) \in S)
 = \Pr (a \leq X \leq b, c \leq Y \leq d)
 = \int_{a}^{b} \int_{c}^{d}
-f_{X, Y} (u, v) dv du .
+f_{X, Y} (x, y) dy dx .
 \end{equation*}
 
 \begin{example}
@@ -86,7 +86,7 @@ The probability that $(X, Y)$ belongs to $S$ is given by
 \begin{equation*}
 \Pr ((X,Y) \in S)
 = \iint\limits_{\RealNumbers^2}
-\frac{ \mathbf{1}_{S}(u, v) }{\pi} du dv
+\frac{\mathbf{1}_{S}(x, y)}{\pi} dx dy
 = \frac{1}{4} .
 \end{equation*}
 Thus, the probability that $(X,Y)$ is contained within a circle of radius half is one fourth.
@@ -96,7 +96,7 @@ Thus, the probability that $(X,Y)$ is contained within a circle of radius half i
 Let $X$ and $Y$ be two independent zero-mean Gaussian random variables, each with variance $\sigma^2$.
 For $(x, y) \in \RealNumbers^2$, their joint PDF is given by
 \begin{equation*}
-f_{X,Y} (x,y) = \frac{1}{2 \pi \sigma^2} e^{- \frac{ x^2 + y^2 }{2 \sigma^2} } .
+f_{X,Y} (x,y) = \frac{1}{2 \pi \sigma^2} e^{- \frac{x^2 + y^2}{2 \sigma^2} } .
 \end{equation*}
 We wish to find the probability that $(X,Y)$ falls within a circle of radius $r$ centered at the origin.
 
@@ -218,7 +218,7 @@ We wish to compute the conditional PDF of $X$ given that $Y = 0.5$.
 First, we compute the marginal PDF of $Y$ evaluated at $Y = 0.5$,
 \begin{equation*}
 f_Y (0.5) = \int_{\RealNumbers} f_{X,Y} (x, 0.5) dx
-= \int_{\frac{\sqrt{3}}{2}}^{\frac{\sqrt{3}}{2}} \frac{1}{\pi} dx
+= \int_{-\frac{\sqrt{3}}{2}}^{\frac{\sqrt{3}}{2}} \frac{1}{\pi} dx
 = \frac{\sqrt{3}}{\pi} .
 \end{equation*}
 We then apply definition \eqref{equation:ConditionalPDF} to obtain the desired conditional PDF of $X$,

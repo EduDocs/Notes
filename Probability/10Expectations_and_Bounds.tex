@@ -13,7 +13,7 @@ M_X (s) = \Expect \left[ e^{s X} \right] .
 \end{equation*}
 For continuous random variables, the moment generating function becomes
 \begin{equation*}
-M_X (s) = \int_{-\infty}^{\infty} f_X (u) e^{s u} du .
+M_X (s) = \int_{-\infty}^{\infty} f_X (x) e^{s x} dx .
 \end{equation*}
 The experienced reader will quickly recognize the definition of $M_X(s)$ as a variant of the \emph{Laplace Transform}, a widely used linear operator.
 The moment generating function gets its name from the following property.
@@ -34,8 +34,8 @@ In particular, we have $\frac{d M_X}{ds}(0) = \Expect [X]$ and $\frac{d^2 M_X}{d
 Let $X$ be an exponential random variable with parameter $\lambda$.
 The moment-generating function of $X$ is given by
 \begin{equation*}
-M_X (s) = \int_0^{\infty} \lambda e^{-\lambda u} e^{su} du
-= \int_0^{\infty} \lambda e^{-(\lambda-s) u} du
+M_X (s) = \int_0^{\infty} \lambda e^{-\lambda x} e^{sx} dx
+= \int_0^{\infty} \lambda e^{-(\lambda-s) x} dx
 = \frac{\lambda}{\lambda - s} .
 \end{equation*}
 The mean of $X$ is
@@ -95,18 +95,18 @@ The exponential function is analytic and possesses many representations.
 \begin{example}[Gaussian Random Variable]
 Let $X$ be a standard normal random variable whose PDF is given by
 \begin{equation*}
-f_X (u) = \frac{1}{\sqrt{2 \pi}} e^{- \frac{u^2}{2}}.
+f_X (x) = \frac{1}{\sqrt{2 \pi}} e^{- \frac{x^2}{2}}.
 \end{equation*}
 The moment generating function of $X$ is equal to
 \begin{equation*}
 \begin{split}
 M_X (s) &= \Expect \left[ e^{sX} \right]
-= \int_{- \infty}^{\infty} \frac{1}{\sqrt{2 \pi}} e^{- \frac{u^2}{2}} e^{su} du \\
-&= \int_{- \infty}^{\infty} \frac{1}{\sqrt{2 \pi}} e^{- \frac{u^2 + 2 s u}{2}} du
-= e^{\frac{s^2}{2}} \int_{- \infty}^{\infty}
-\frac{1}{\sqrt{2 \pi}} e^{- \frac{u^2 - 2 s u + s^2}{2}} du \\
-&= e^{\frac{s^2}{2}} \int_{- \infty}^{\infty}
-\frac{1}{\sqrt{2 \pi}} e^{- \frac{(u - s)^2}{2}} du
+= \int_{-\infty}^{\infty} \frac{1}{\sqrt{2 \pi}} e^{-\frac{x^2}{2}} e^{sx} dx \\
+&= \int_{-\infty}^{\infty} \frac{1}{\sqrt{2 \pi}} e^{-\frac{x^2 + 2sx}{2}} dx
+= e^{\frac{s^2}{2}} \int_{-\infty}^{\infty}
+\frac{1}{\sqrt{2 \pi}} e^{-\frac{x^2-2sx+s^2}{2}} dx \\
+&= e^{\frac{s^2}{2}} \int_{-\infty}^{\infty}
+\frac{1}{\sqrt{2 \pi}} e^{- \frac{(x-s)^2}{2}} dx
 = e^{\frac{s^2}{2}} .
 \end{split}
 \end{equation*}
@@ -116,8 +116,8 @@ The last equality follows from the normalization condition and the fact that the
 Let $M_X(s)$ be the moment generating function associated with a random variable $X$, and consider the random variable $Y = aX + b$ where $a$ and $b$ are constant.
 The moment generating function of $Y$ can be obtained as follows,
 \begin{equation*}
-M_Y (s) = \Expect \left[ e^{s Y} \right]
-= \Expect \left[ e^{s (aX + b)} \right]
+M_Y (s) = \Expect \left[ e^{sY} \right]
+= \Expect \left[ e^{s(aX+b)} \right]
 = e^{sb} \Expect \left[ e^{saX} \right]
 = e^{sb} M_X (as) .
 \end{equation*}
@@ -129,19 +129,19 @@ Recall that an affine function of a Gaussian random variable is also Gaussian.
 Let $Y = \sigma X + m$, then the moment generating function of $Y$ becomes
 \begin{equation*}
 M_Y (s) = \Expect \left[ e^{sY} \right]
-= \Expect \left[ e^{s(\sigma X + m)} \right]
+= \Expect \left[ e^{s(\sigma X+m)} \right]
 = e^{sm} \Expect \left[ e^{s\sigma X} \right]
 = e^{sm + \frac{s^2 \sigma^2}{2} } .
 \end{equation*}
 From this moment generating function, we get
 \begin{align*}
 \Expect [Y] &= \frac{d M_Y}{ds} (0)
-= \left. \left[ \left(m + s \sigma^2 \right)
-e^{sm + \frac{s^2 \sigma^2}{2} } \right] \right|_{s=0} = m \\
+= \left. \left[ \left(m+s \sigma^2 \right)
+e^{sm+\frac{s^2 \sigma^2}{2} } \right] \right|_{s=0} = m \\
 \begin{split}
 \Expect \left[ Y^2 \right] &= \frac{d^2 M_Y}{ds^2} (0)
-= \left.  \left[ \sigma^2 e^{sm + \frac{s^2 \sigma^2}{2} }
-+ \left(m + s \sigma^2 \right)^2  e^{sm + \frac{s^2 \sigma^2}{2} } \right]
+= \left. \left[ \sigma^2 e^{sm + \frac{s^2 \sigma^2}{2}}
++ \left(m+s \sigma^2 \right)^2  e^{sm+\frac{s^2 \sigma^2}{2}} \right]
 \right|_{s=0} \\
 &= \sigma^2 + m^2 .
 \end{split}
@@ -212,7 +212,6 @@ It follows that
 \Pr (X \geq a) = \Expect \left[ \IndicatorFcn_S(X) \right] \leq \frac{\Expect [X]}{a} .
 \end{equation*}
 
-
 \begin{figure}[thb]
 \begin{center}
 \begin{tikzpicture}
@@ -273,8 +272,8 @@ Moreover, for any such $x$ and distribution $f_X(\cdot)$, we can write $i_S \Ind
 \begin{equation*}
 \begin{split}
 i_S \Pr (X \in S) &= \Expect \left[ i_s \IndicatorFcn_S (X) \right]
-= \int_{\RealNumbers} i_S \IndicatorFcn_S (u) f_X(u) du \\
-&\leq \int_{\RealNumbers} h (u) f_X(u) du
+= \int_{\RealNumbers} i_S \IndicatorFcn_S (x) f_X(x) dx \\
+&\leq \int_{\RealNumbers} h (x) f_X(x) dx
 = \Expect [ h(X) ] .
 \end{split}
 \end{equation*}
@@ -302,7 +301,7 @@ Constant $b$ being a positive real number, we can rewrite this equation as
 Suppose that $X$ is a random variable with mean $m$ and variance $\sigma^2$.
 We wish to show that
 \begin{equation*}
-\Pr ( X - m \geq a ) \leq \frac{\sigma^2}{a^2 + \sigma^2},
+\Pr (X-m \geq a) \leq \frac{\sigma^2}{a^2 + \sigma^2},
 \end{equation*}
 where $a \geq 0$.
 
@@ -312,29 +311,29 @@ Consider the probability $\Pr (Y \geq a)$ where $a > 0$, and let $S = \{ y | y \
 Also, define the nonnegative function $h(y) = (y + b)^2$, where $b > 0$.
 Following the steps of the Chebyshev inequality, we write the infimum of $h(y)$ over $S$ as
 \begin{equation*}
-i_S = \inf_{y \in S} (y + b)^2 = (a + b)^2 .
+i_S = \inf_{y \in S} (y+b)^2 = (a+b)^2 .
 \end{equation*}
 Then, applying the Chebyshev inequality, we obtain
 \begin{equation} \label{equation:CantelliProof}
-\Pr (Y \geq a) \leq \frac{ \Expect \left[ (Y + b)^2 \right] }{(a + b)^2}
-= \frac{ \sigma^2 + b^2 }{ (a + b)^2 } .
+\Pr (Y \geq a) \leq \frac{ \Expect \left[ (Y+b)^2 \right] }{(a+b)^2}
+= \frac{\sigma^2 + b^2}{(a+b)^2} .
 \end{equation}
 This inequality holds for any $b > 0$.
 To produce a better upper bound, we minimize the right-hand side of \eqref{equation:CantelliProof} over all possible values of $b$.
 Differentiating this expression and setting the derivative equal to zero yields
 \begin{equation*}
-\frac{ 2 b }{(a + b)^2 } = \frac{ 2 \left( \sigma^2 + b^2 \right) }{(a + b)^3}
+\frac{2b}{(a+b)^2} = \frac{2 \left(\sigma^2 + b^2 \right)}{(a+b)^3}
 \end{equation*}
 or, equivalently, $b = \sigma^2 / a$.
 A second derivative test reveals that this is indeed a minimum.
 Collecting these results, we obtain
 \begin{equation*}
-\Pr (Y \geq a) \leq \frac{ \sigma^2 + b^2 }{ (a + b)^2 }
-%= \frac{ \sigma^2 + \sigma^4/a^2 }{ (a + \sigma^2/a)^2 }
-%= \frac{ \sigma^2 (a^2 + \sigma^2) }{ (a^2 + \sigma^2)^2 }
-= \frac{ \sigma^2 }{ a^2 + \sigma^2 } .
+\Pr (Y \geq a) \leq \frac{\sigma^2 + b^2}{(a+b)^2}
+%= \frac{\sigma^2 + \sigma^4/a^2}{(a + \sigma^2/a)^2}
+%= \frac{\sigma^2 (a^2 + \sigma^2)}{(a^2 + \sigma^2)^2}
+= \frac{\sigma^2}{a^2 + \sigma^2} .
 \end{equation*}
-Substituting $Y = X - m$ leads to the desired result.
+Substituting $Y=X-m$ leads to the desired result.
 \end{example}
 
 In some circumstances, a Chebyshev inequality can be tight.
@@ -381,7 +380,7 @@ This inequality is called the Chernoff bound.
 It is sometimes expressed in terms of the log-moment generating function $\Lambda (s) = \log M_X (s)$.
 In this latter case, \eqref{equation:ChernoffBound} translates into
 \begin{equation} \label{equation:LogChernoffBound}
-\log \Pr (X \geq a) \leq - \sup_{s > 0} \left\{ sa - \Lambda (s) \right\} .
+\log \Pr (X \geq a) \leq - \sup_{s>0} \left\{ sa - \Lambda (s) \right\} .
 \end{equation}
 The right-hand side of \eqref{equation:LogChernoffBound} is called the \emph{Legendre transformation} of $\Lambda (s)$. \index{Legendre transformation}
 Figure~\ref{figure:ChernoffBound} plots $e^{s(x-a)}$ for various values of $s > 0$.
