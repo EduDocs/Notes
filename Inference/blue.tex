@@ -1,0 +1,90 @@
+\section{Best Linear Unbiased Estimator}
+
+
+\subsection{Scalar Case}
+
+In this framework, $\hat{\theta} (\vec{y})$ is constrained to be linear and unbiased.
+The goal, then, is to minimize the variance of the estimator.
+The linear constraint imposes the following structure on the estimator.
+\begin{equation*}
+\hat{\theta} = \sum_{i=1}^n a_i y_i = \vec{a}^T \vec{y} ;
+\end{equation*}
+whereas the unbiased condition yields
+\begin{equation*}
+\Expect [ \hat{\theta} ]
+= \Expect \left[ \vec{a}^T \vec{y} \right]
+= \vec{a}^T \Expect [ \vec{y} ] = \theta .
+\end{equation*}
+We note that, in general, it may be impossible to satisfy this latter constraint.
+To ensure that a solution exists, we further assume that $\Expect [ \hat{y} ] = \vec{h} \theta$ for some vector $\vec{h}$.
+Under this assumption, the unbiased condition reduces to $\vec{a}^T \vec{h} = 1$.
+
+The variance of such linear, unbiased estimator is given by
+\begin{equation*}
+\begin{split}
+\Var [ \hat{\theta} ]
+&= \Expect \left[ \left( \vec{a}^T \vec{y} - \theta \right)^2 \right] \\
+&= \vec{a}^T \Expect \left[ \left( \vec{y} - \Expect [\vec{y}] \right)
+\left( \vec{y} - \Expect [\vec{y}] \right)^T \right] \vec{a} \\
+&= \vec{a}^T C \vec{a}
+\end{split}
+\end{equation*}
+where $C$ is the covariance of $\vec{y}$.
+Our optimization objective can then becomes
+\begin{equation*}
+\min_{\vec{a}} \vec{a}^T C \vec{a} \quad \text{subject to} \quad \vec{a}^T \vec{h} = 1 .
+\end{equation*}
+
+\begin{theorem}
+The best linear unbiased estimator is given by
+\begin{equation*}
+\hat{\theta} (\vec{y}) = \frac{C^{-1} \vec{h}}{\vec{h}^T C^{-1} \vec{h}} \vec{y} .
+\end{equation*}
+\end{theorem}
+\begin{proof}
+Consider the Lagrangian relaxation of this optimization problem with objective function
+\begin{equation*}
+J (\vec{a}) =
+\vec{a}^T C \vec{a} + \lambda \left( \vec{a}^T \vec{h} - 1 \right) .
+\end{equation*}
+Taking the gradient of $J(\cdot)$ with respect to $\vec{a}$, we get
+\begin{equation*}
+\frac{\partial J}{\partial \vec{a}} = 2 C \vec{a} + \lambda \vec{h} .
+\end{equation*}
+Setting the gradient equal to the zero vector yields the solution
+\begin{equation} \label{equation:ScalarBLUEGradient}
+\vec{a} = - \frac{\lambda}{2} C^{-1} \vec{h} .
+\end{equation}
+Taking the derivative with respect to $\lambda$, we recover our original constraint, which can now be expressed as
+\begin{equation*}
+1 = \vec{a}^T \vec{h} = - \frac{\lambda}{2} \vec{h}^T C^{-1} \vec{h} .
+\end{equation*}
+Isolating $\lambda$ and substituting its value in \eqref{equation:ScalarBLUEGradient}, we obtain
+\begin{equation}
+\vec{a} = \frac{C^{-1} \vec{h}}{\vec{h}^T C^{-1} \vec{h}} .
+\end{equation}
+This solution corresponds to a unique global minimum.
+This can be checked by taking the Hessian of scalar-valued function $J(\cdot)$, which is positive definite.
+\end{proof}
+
+
+\subsection{Vector Case}
+
+We can extend the best linear unbiased estimator framework to vector parameters.
+In this case, the linear constraint becomes matrix equation
+\begin{equation*}
+\hat{\theta} = A \vec{y} .
+\end{equation*}
+The unbiased condition can be expressed as
+\begin{equation*}
+\Expect [ \hat{\theta} ]
+= \Expect \left[ A \vec{y} \right]
+= A \Expect [ \vec{y} ] = \vec{\theta} .
+\end{equation*}
+As before, a linear unbiased solution may not exist in the general case and, as such, we further impose the structure $\Expect [ \vec{y} ] = H \theta$ for some matrix $H$.
+The unbiased condition then becomes $A H = I$.
+With this structure, the elements of $\hat{\theta}$ are given by $\hat{\theta}_i (\vec{y}) = \vec{a}_i^T \vec{y}$ where
+\begin{equation*}
+A = \begin{bmatrix} \vec{a}_1^T \\ 
+\vdots \\ \vec{a}_m^T \end{bmatrix} .
+\end{equation*}
