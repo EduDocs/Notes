@@ -1,22 +1,27 @@
 \documentclass[12pt,openany]{book}
 
+%%  Dimensions and URL
+\usepackage[margin=1in]{geometry}
+%\usepackage[hyperindex]{hyperref}
+
 \usepackage{amsmath,amssymb,amsthm,bm}
 \usepackage{graphics,epsfig,psfrag}
 \usepackage{makeidx}
 
-\topmargin          0in
-\headheight         0.25in
-\headsep            0.25in
-\oddsidemargin      0.5in
-\evensidemargin     0.5in
-\textheight         8.5in
-\textwidth          5.5in
-
 \newtheorem{theorem}{Theorem}
 \newtheorem{proposition}{Proposition}
 \newtheorem{lemma}{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{definition}{Definition}
 \newtheorem{example}{Example}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{problem}[theorem]{P}
+\newtheorem{solution}[theorem]{S}
+
+
+
+\newcommand{\vecnot}{\underline}
+
 
 \newcommand{\SetIn}{\ensuremath{\mathrm{1\!\!1}}}
 \newcommand{\Expect}{\ensuremath{\mathrm{E}}}
@@ -30,19 +35,25 @@
 \newcommand{\JndexSet}{\mathbb{J}}
 \newcommand{\Complement}{\mathrm{c}}
 \newcommand{\IndicatorFcn}{\mathbf{1}}
+\newcommand{\Trace}{\mathrm{tr}}
+
 
 \newcommand{\decreg}[2]{\overset{#1}{ \underset{#2}{\gtrless} }}
 
 %% Definitions
 %%
 \renewcommand{\baselinestretch}{1.25}
+\newcommand{\defn}[2]{\textbf{\textrm{#2}}\index{#1!#2}}
+
+%% Definitions
+%%
+\renewcommand{\baselinestretch}{1.25}
 
 \makeindex
-\renewcommand{\today}{Spring 2010}
 
 \begin{document}
 
-\author{Free Research and Educational Documents}
+\author{Jean-Francois Chamberlan}
 \title{
 \Huge{An Introduction to Detection and Estimation}\\[5mm]
 \Large{Class Notes for\\Engineering Students}}
@@ -66,9 +77,16 @@
 \mainmatter
 
 %\include{1Introduction}
+<<<<<<< HEAD
 \include{2Detection}
 %\include{3DataReduction}
 %\include{5ClassicalEstimation}
+=======
+%\include{2Detection}
+%\include{3DataReduction}
+%\include{5ClassicalEstimation}
+\include{engfund}
+>>>>>>> 92986e8ee076a25a89ee52c43553331b1325323b
 
 %\printindex
 
