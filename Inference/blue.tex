@@ -1,0 +1,168 @@
+\section{Best Linear Unbiased Estimator}
+
+In this section, we explore a problem formulation where an optimal solution is obtained by constraining the class of admissible estimators.
+Specifically, for a given problem, we are interested in finding the best linear, unbiased estimator (BLUE) for vector parameter $\vecnot{\theta} \in \Re^m$.
+Mathematically, the linear condition translates into the following structure on the estimator,
+\begin{equation*}
+\hat{\theta} (\vecnot{y}) = A \vecnot{y}
+\end{equation*}
+where $\vecnot{y} \in \Re^n$ is the observation vector and $A$ is the matrix to be determined.
+Within this context, estimates for the individual components of $\vecnot{\theta}$ are given by
+\begin{equation*}
+\hat{\theta}_i (\vecnot{y}) = \vecnot{a}_i^T \vecnot{y} ,
+\end{equation*}
+where $\vecnot{a}_i$ are related to matrix $A$ through the equation
+\begin{equation*}
+A = \begin{bmatrix}
+- & \vecnot{a}_1^T & - \\
+- & \vecnot{a}_2^T & - \\
+& \vdots & \\
+- & \vecnot{a}_m^T & - \\
+\end{bmatrix} .
+\end{equation*}
+
+The unbiased requirement gives
+\begin{equation*}
+\Expect \left[ \hat{\theta} (\vecnot{y}) \right]
+= \Expect \left[ A \vecnot{y} \right]
+= A \Expect [ \vecnot{y} ] = \vecnot{\theta} .
+\end{equation*}
+Yet, in a general setting, there may not exist a linear estimator that satisfies this equation.
+We circumvent this difficulty by further assuming that
+\begin{equation*}
+\Expect \left[ \vecnot{y} \right] = H \theta
+\end{equation*}
+for known rank-$p$ matrix $H \in \Re^{n \times m}$.
+For convenience, we introduce a vector notation for the column of $H$,
+\begin{equation*}
+H = \begin{bmatrix} | & | & & | \\
+\vecnot{h}_1 & \vecnot{h}_2 & \hdots & \vecnot{h}_m  \\
+| & | & & | \end{bmatrix} .
+\end{equation*}
+
+The optimization objective is to minimize the variance of estimated components, subject to $\Expect [ A \vecnot{y} ] = \vecnot{\theta}$.
+Under our current modeling assumptions, $\Expect [ A \vecnot{y} ] = A \Expect [ \vecnot{y} ] = A H \theta$ and, consequently, the unbiased condition reduces to $AH = I$.
+For parameter $\theta_i$, the variance is given by
+\begin{equation*}
+\begin{split}
+\Var \left[ \hat{\theta}_i (\vecnot{y}) \right]
+&= \Expect \left[ \left( \vecnot{a}_i^T \vecnot{y} - \theta_i \right)^2 \right] \\
+&= \vecnot{a}_i^T \Expect \left[ \left( \vecnot{y}
+- \Expect [\vecnot{y}] \right)
+\left( \vecnot{y} - \Expect [\vecnot{y}] \right)^T \right] \vecnot{a}_i \\
+&= \vecnot{a}_i^T C \vecnot{a}_i
+\end{split}
+\end{equation*}
+where $C$ is the covariance matrix of random vector $\vecnot{y}$.
+Thence, each sub-problem becomes
+\begin{equation*}
+\min_{\vecnot{a}_i} \vecnot{a}_i^T C \vecnot{a}_i \quad \text{subject to} \quad \vecnot{a}_i^T \vecnot{h}_j = \delta_{ij} ,
+\end{equation*}
+where $\delta_{ij}$ is the Kronecker delta function.
+
+
+\subsection{Scalar Case}
+\label{section:ScalarBLUE}
+
+In characterizing best linear, unbiased estimators, we begin with the scalar case.
+At this stage, we assume that $\theta$ is a scalar with estimator
+\begin{equation*}
+\hat{\theta} (\vecnot{y}) = \sum_{i=1}^n a_i y_i = \vecnot{a}^T \vecnot{y}
+\end{equation*}
+subject to condition $\vecnot{a}^T \vecnot{h} = 1$.
+This setting leads to the following result.
+
+\begin{proposition} \label{proposition:ScalarBLUE}
+The best linear, unbiased estimator for scalar parameter $\theta$ is given by
+\begin{equation} \label{equation:ScalarBLUE}
+\hat{\theta} (\vecnot{y})
+= \frac{C^{-1} \vecnot{h}}{\vecnot{h}^T C^{-1} \vecnot{h}} \vecnot{y} ,
+\end{equation}
+where $C$ is the covariance matrix of $\vecnot{y}$ and, by assumption, $\vecnot{a}^T \vecnot{h} = 1$.
+\end{proposition}
+\begin{proof}
+To obtain this result, we consider the Lagrangian relaxation of the optimization problem with objective function
+\begin{equation*}
+J (\vecnot{a}) =
+\vecnot{a}^T C \vecnot{a} + \lambda \left( \vecnot{a}^T \vecnot{h} - 1 \right) .
+\end{equation*}
+Taking the gradient of $J(\cdot)$ with respect to $\vecnot{a}$, we get
+\begin{equation*}
+\frac{\partial J}{\partial \vecnot{a}} = 2 C \vecnot{a} + \lambda \vecnot{h} .
+\end{equation*}
+For a non-degenerate scenario, setting the gradient equal to the zero vector yields the solution
+\begin{equation} \label{equation:ScalarBLUEGradient}
+\vecnot{a} = - \frac{\lambda}{2} C^{-1} \vecnot{h} .
+\end{equation}
+Taking the derivative with respect to $\lambda$, we recover our original constraint,
+\begin{equation*}
+1 = \vecnot{a}^T \vecnot{h} = - \frac{\lambda}{2} \vecnot{h}^T C^{-1} \vecnot{h} .
+\end{equation*}
+Isolating $\lambda$ and substituting its value in \eqref{equation:ScalarBLUEGradient}, we get critical point
+\begin{equation}
+\vecnot{a} = \frac{C^{-1} \vecnot{h}}{\vecnot{h}^T C^{-1} \vecnot{h}} .
+\end{equation}
+This solution corresponds to a unique global minimum.
+This can be checked by taking the Hessian of scalar-valued function $J(\cdot)$, which is positive definite.
+Altogether, this produces the best linear, unbiased estimator shown in \eqref{equation:ScalarBLUE}.
+\end{proof}
+
+
+\subsection{Vector Case}
+\label{section:VectorBLUE}
+
+In the section, we extend the best linear, unbiased estimator to vector parameters.
+
+\begin{proposition} \label{proposition:VectorBLUE}
+The best linear, unbiased estimator for vector parameter $\theta$ is given by
+\begin{equation} \label{equation:VectorBLUE}
+\hat{\vecnot{\theta}} (\vecnot{y})
+= \left( H^T C^{-1} H \right)^{-1} H^T C^{-1} \vecnot{y} .
+\end{equation}
+where $C$ is the covariance matrix of $\vecnot{y}$ and, by assumption, $A H = I$.
+\end{proposition}
+\begin{proof}
+That is, vector parameter $\vecnot{\theta}$ is estimated using a function of the form $\hat{\theta} (\vecnot{y}) = A \vecnot{y}$, subject to matrix condition $AH = I$.
+In essence, this is the same problem as the scalar BLUE of Section~\ref{section:ScalarBLUE}, except for the additional constraints on $\vecnot{a}_i$,
+\begin{equation*} \label{equation:VectorBlueUnbias}
+\vecnot{a}_i^T \vecnot{h}_j = \delta_{ij}  \quad 1 \leq i, j, \leq m .
+\end{equation*}
+That is, there are $m$ linear constrains on $\vecnot{a}_i$ rather than one.
+Still, the optimization problem decouple in $m$ separate sub-problems because vector $\vecnot{a}_i$ can assume any value, independently of other other weightings.
+We can therefore find row $\vecnot{a}_i^T$ of matrix $A$ by paralleling the steps taken above.
+
+Consider the Lagrangian function of $\vecnot{a}_i$ given by
+\begin{equation*}
+J_i (\vecnot{a}_i) = \vecnot{a}_i^T C \vecnot{a}_i
++ \sum_{j=1}^m \lambda_{ij} \left( \vecnot{a}_i^T \vecnot{h}_j - \delta_{ij} \right)
+\end{equation*}
+We then take the gradient of $J_i (\cdot)$ with respect to $\vecnot{a}_i$ and obtain
+\begin{equation*}
+\frac{\partial J_i}{\partial \vecnot{a}_i} = 2 C \vecnot{a}_i + \lambda_{ij} \vecnot{h}_j .
+\end{equation*}
+Introducing the convenient vector notation $\vecnot{\lambda}_i = (\lambda_{i1}, \ldots, \lambda_{im})$, we get the compact form
+\begin{equation*}
+\frac{\partial J_i}{\partial \vecnot{a}_i} = 2 C \vecnot{a}_i + H \vecnot{\lambda}_{i}
+\end{equation*}
+which, upon setting the gradient to the zero vector, yields
+\begin{equation*}
+\vecnot{a}_i = - \frac{1}{2} C^{-1} H \vecnot{\lambda}_i .
+\end{equation*}
+Taking the gradient with respect to $\vecnot{\lambda}_i$, we get back \eqref{equation:VectorBlueUnbias} or, equivalently, $H^T \vecnot{a}_i = \vecnot{e}_i$ where $\vecnot{e}_i$ denotes a standard basis vector.
+Combining these preliminary steps, we get
+\begin{equation*}
+\vecnot{e}_i = H^T \vecnot{a}_i = - \frac{1}{2} H^T C^{-1} H \vecnot{\lambda}_i .
+\end{equation*}
+For non-degenerate cases, this leads condition
+\begin{equation*}
+\left( H^T C^{-1} H \right)^{-1} \vecnot{e}_i
+= - \frac{1}{2} \vecnot{\lambda}_i
+\end{equation*}
+and solution
+\begin{equation*}
+\vecnot{a}_i = C^{-1} H \left( H^T C^{-1} H \right)^{-1} \vecnot{e}_i .
+\end{equation*}
+Through the properties of the quadratic form $J_i (\cdot)$ one can show that this solution is the unique global minimum.
+Stacking these equations, we get the compact form for the best linear, unbiased estimator shown in \eqref{equation:VectorBLUE}.
+\end{proof}
+
