@@ -39,6 +39,27 @@
 \makeindex
 \renewcommand{\today}{Fall 2016}
 
+% Write file to split into chapters
+\usepackage{pageslts}
+\newcounter{FirstPage}
+\setcounter{FirstPage}{1}
+\newcounter{MyChapter}
+\newwrite\ChapFile
+\immediate\openout\ChapFile=makechap.sh
+\newcommand{\splitchapter}[1]{%
+\addtocounter{CurrentPage}{-1}
+\immediate\write\ChapFile{pdfjam\space -o ugprob_ch#1.pdf \jobname.pdf\space \theFirstPage -\theCurrentPage}%
+\addtocounter{CurrentPage}{1}\setcounter{FirstPage}{\theCurrentPage}}
+
+% Redefine Chapter for this
+\makeatletter
+\let\stdchapter\chapter
+\renewcommand*\chapter{%
+  \@ifstar{\starchapter}{\@dblarg\nostarchapter}}
+\newcommand*\starchapter[1]{\stdchapter*{#1}}
+\def\nostarchapter[#1]#2{\edef\@mychapter{\thechapter}\stdchapter[{#1}]{#2}\splitchapter{\@mychapter}}
+\makeatother
+
 \begin{document}
 
 \iffalse
@@ -87,10 +108,12 @@ Henry Pfister \\ \\}
 
 %\part{}
 \include{12Empirical_Sums}
+\splitchapter{\thechapter}
 
 %\appendix
 %\include{Aappendix}
 
 \printindex
+\splitchapter{I}
 
 \end{document}
