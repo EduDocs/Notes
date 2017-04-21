@@ -94,9 +94,9 @@ Furthermore, $T$ is invertible if and only if
 
 \begin{example}
 Consider the vector space $V$ of semi-infinite real sequences $\mathbb{R}^\omega$ where $\vecnot{v} = (v_1,v_2,v_3,\ldots)\in V$ with $v_n \in \mathbb{R}$ for $n\in \mathbb{N}$.
-Let $L: V \rightarrow V$ be the left-shift linear transformation defined by
+Let $L \colon V \rightarrow V$ be the left-shift linear transformation defined by
 \[L \vecnot{v} = (v_2,v_3,v_4,\ldots) \]
-and $R: V \rightarrow V$ be the right-shift linear transformation defined by
+and $R \colon V \rightarrow V$ be the right-shift linear transformation defined by
 \[R \vecnot{v} = (0,v_1,v_2,\ldots). \]
 Notice that $L$ is onto but not one-to-one and $R$ is one-to-one but not onto.
 Therefore, neither transformation is invertible.
@@ -104,8 +104,8 @@ Therefore, neither transformation is invertible.
 
 \begin{example}
 Consider the normed vector space $V$ of semi-infinite real sequences $\mathbb{R}^\omega$ with the standard Schauder basis $\{\vecnot{e}_1,\vecnot{e}_2,\ldots\}$.
-Let $T: V \rightarrow V$ be the linear transformation that satisfies $T \vecnot{e}_i = i^{-1} \vecnot{e}_i$ for $i=1,2,\ldots$.
-Let the linear transformation $U: V \rightarrow V$ satisfy $U \vecnot{e}_i = i \vecnot{e}_i$ for $i=1,2,\ldots$.
+Let $T \colon V \rightarrow V$ be the linear transformation that satisfies $T \vecnot{e}_i = i^{-1} \vecnot{e}_i$ for $i=1,2,\ldots$.
+Let the linear transformation $U \colon V \rightarrow V$ satisfy $U \vecnot{e}_i = i \vecnot{e}_i$ for $i=1,2,\ldots$.
 It is easy to verify that $U = T^{-1}$ and $UT = TU = I$.
 \end{example}
 This example should actually bother you somewhat.
@@ -142,62 +142,7 @@ For vector spaces, the relevant structure is given by vector addition and scalar
 Since a linear transformation preserves both of these operation, it is also a \emph{vector space homomorphism}.
 Likewise, an invertible linear transformation is a \emph{vector space isomorphism}.
 
-
-\section{Linear Functionals on Vector Spaces}
-
-\begin{definition}
-Let $V$ be a vector space over a field $F$.
-A linear transformation $f$ from $V$ into the scalar field $F$ is called a \defn{vector space}{linear functional} on $V$.
-\end{definition}
-That is, $f$ is a functional on $V$ such that
-\begin{equation*}
-f \left( s \vecnot{v}_1 + \vecnot{v}_2 \right)
-= s f \left( \vecnot{v}_1 \right) + f \left( \vecnot{v}_2 \right)
-\end{equation*}
-for all $\vecnot{v}_1, \vecnot{v}_2 \in V$ and $s \in F$.
-
-\begin{example}
-Let $F$ be a field and let $s_1, \ldots, s_n$ be scalars in $F$.
-Then the functional $f$ on $F^n$ defined by
-\begin{equation*}
-f(v_1, \ldots, v_n) = s_1 v_1 + \cdots + s_n v_n
-\end{equation*}
-is a linear functional.
-It is the linear functional which is represented by the matrix
-\begin{equation*}
-\begin{bmatrix} s_1 & s_2 & \cdots & s_n \end{bmatrix}
-\end{equation*}
-relative to the standard ordered basis for $F^n$.
-Every linear functional on $F^n$ is of this form, for some scalars $s_1, \ldots, s_n$.
-\end{example}
-
-\begin{definition}
-Let $n$ be a positive integer and $F$ a field.
-If $A$ is an $n \times n$ matrix with entries in $F$, the \defn{matrix}{trace} of $A$ is the scalar
-\begin{equation*}
-\Trace(A) = A_{11} + A_{22} + \cdots + A_{nn}.
-\end{equation*}
-\end{definition}
-
-\begin{example}
-The trace function is a linear functional on the matrix space $F^{n \times n}$ since
-\begin{equation*}
-\begin{split}
-\Trace ( sA + B) &= \sum_{i=1}^n (s A_{ii} + B_{ii}) \\
-&= s \sum_{i=1}^n A_{ii} + \sum_{i=1}^n  B_{ii} \\
-&= s \; \Trace(A) + \Trace(B) .
-\end{split}
-\end{equation*}
-\end{example}
-
-\begin{example}
-Let $[a, b]$ be a closed interval on the real line and let $C([a,b])$ be the space of continuous real-valued functions on $[a,b]$.
-Then
-\begin{equation*}
-L(g) = \int_a^b g(t) dt
-\end{equation*}
-defines a linear functional $L$ on $C([a,b])$.
-\end{example}
+\section{The Dual Space}
 
 \begin{definition}
 Let $V$ be a vector space.
@@ -275,10 +220,10 @@ That is, the unique expression for $\vecnot{v}$ as a linear combination of $\vec
 \end{proof}
 
 One important use of the dual space is to define the transpose of a linear transform in a way that generalizes to infinite dimensional vector spaces.
-Let $V,W$ be vector spaces over $F$ and $T : V \rightarrow W$ be a linear transform.
-If $g \in W^*$ is a linear functional on W (i.e., $g: W \rightarrow F$), then $g(T\vecnot{v})\in V^*$ is a linear functional on $V$.
-The \defn{linear transform}{transpose} of $T$ is the mapping $U : W^* \rightarrow V^*$ defined by $f(\vecnot{v})=g(T\vecnot{v})\in V^*$ for all $g\in W^*$.
-If $V,W$ are finite-dimensional, then one can identify $V=V^*$ and $W=W^*$ via isomorphism and recover the standard transpose mapping $U: W \rightarrow V$ implied by the matrix transpose.
+Let $V,W$ be vector spaces over $F$ and $T \colon V \rightarrow W$ be a linear transform.
+If $g \in W^*$ is a linear functional on W (i.e., $g \colon W \rightarrow F$), then $g(T\vecnot{v})\in V^*$ is a linear functional on $V$.
+The \defn{linear transform}{transpose} of $T$ is the mapping $U \colon W^* \rightarrow V^*$ defined by $f(\vecnot{v})=g(T\vecnot{v})\in V^*$ for all $g\in W^*$.
+If $V,W$ are finite-dimensional, then one can identify $V=V^*$ and $W=W^*$ via isomorphism and recover the standard transpose mapping $U \colon W \rightarrow V$ implied by the matrix transpose.
 
 The details of this definition are not used in the remainder of these notes, but can be useful in understanding the subtleties of infinite dimensional spaces.
 For infinite dimensional Hilbert spaces, we will see later that the definition again simplifies because one identify $V=V^*$ via isomorphism.
@@ -294,11 +239,13 @@ The interesting case that does not simplify is that of linear transforms between
 
 \section{Operator Norms}
 
-Intuitively, the operator norm is the largest factor by which a linear transform can increase the length of a vector.
-This provides a simple ``worst-case" characterization of any linear transform.
+For any vector space of linear transforms, one can define a norm to get a normed vector space of linear transforms (e.g., consider the Frobenius norm of a matrix).
+In constrast, an operator norm is defined for linear transforms between normed spaces and it is induced by the vector norms of the underlying spaces.
+Intuitively, the induced operator norm is the largest factor by which a linear transform can increase the length of a vector.
+This defines a simple ``worst-case" expansion for any linear transform.
 
 \begin{definition}
-Let $V$ and $W$ be two normed vector spaces and let $T : V \rightarrow W$ be a linear transformation.
+Let $V$ and $W$ be two normed vector spaces and let $T \colon V \rightarrow W$ be a linear transformation.
 The induced \defn{linear transform}{operator norm} of $T$ is defined to
 \begin{equation*}
 \left\| T \right\|
@@ -308,17 +255,6 @@ The induced \defn{linear transform}{operator norm} of $T$ is defined to
 \left\| T \vecnot{v} \right\| .
 \end{equation*}
 \end{definition}
-
-Previously, we have seen that the set $L(V,W)$ of linear transformations from $V$ into $W$, with the standard addition and scalar multiplication, satisfies the conditions required to be a vector space.
-Now, we have a norm for that vector space.
-Interested readers should verify that the above definition satisfies the standard conditions required by a norm.
-
-This norm also has a new property that follows easily from the definition.
-The induced operator norm is called \textbf{submultiplicative} because $\| T \vecnot{v} \| \leq \| T \| \| \vecnot{v} \|$.
-From this, it is easy to see that it also provides a submultiplicative norm for the algebra of linear operators in that
-\begin{equation*}
-\left\| U T \vecnot{v} \right\| \leq \left\| U \right\| \left\| T \vecnot{v} \right\| \leq \left\| U \right\| \left\| T \right\| \left\| \vecnot{v} \right\| .
-\end{equation*}
 
 A common question about the operator norm is, ``How do I know the two expressions give the same result?".
 To see this, we can write
@@ -331,6 +267,35 @@ To see this, we can write
 \left\| T \vecnot{u} \right\| .
 \end{equation*}
 
+Previously, we have seen that the set $L(V,W)$ of linear transformations from $V$ into $W$, with the standard addition and scalar multiplication, satisfies the conditions required to be a vector space.
+Now, we have a norm for that vector space.
+Interested readers should verify that the above definition satisfies the first two standard conditions required by a norm.
+To verify the triangle inequality, we can write
+\begin{align*}
+\| T + U \| &= \sup_{\vecnot{v} \in V, \left\| \vecnot{v} \right\| = 1 }
+\left\| (T+U) \vecnot{v} \right\| \\
+&\leq  \sup_{\vecnot{v} \in V, \left\| \vecnot{v} \right\| = 1 }
+\left(  \left\| T \vecnot{v} \right\| + \left\| U \vecnot{v} \right\| \right) \\
+& \leq \sup_{\vecnot{v} \in V, \left\| \vecnot{v} \right\| = 1 }
+\left\| T \vecnot{v} \right\| + \sup_{\vecnot{v} \in V, \left\| \vecnot{v} \right\| = 1 }
+\left\| U \vecnot{v} \right\| \\
+&= \|T\| + \|U\|.
+\end{align*}
+
+The induced operator norm also has a new property that follows naturally from the definition.
+Notice that 
+\[ \| T \| = \sup_{ \vecnot{v} \in V - \left\{ \vecnot{0} \right\} }
+\frac{ \left\| T \vecnot{v} \right\| }{ \left\| \vecnot{v} \right\| } \geq \frac{ \left\| T \vecnot{u} \right\| }{ \left\| \vecnot{u} \right\| } \]
+for all non-zero $\vecnot{u} \in V$.
+A norm on linear transforms is called \textbf{submultiplicative} if $\| T \vecnot{u} \| \leq \| T \| \| \vecnot{u} \|$ for all $\vecnot{u}\in V$.
+Checking the special case of $\vecnot{u}=\vecnot{0}$, we find that all induced operator norms are submultiplicative.
+From this, one also gets a submultiplicative norm for the algebra of linear operators because
+\begin{equation*}
+\left\| U T \vecnot{v} \right\| \leq \left\| U \right\| \left\| T \vecnot{v} \right\| \leq \left\| U \right\| \left\| T \right\| \left\| \vecnot{v} \right\| .
+\end{equation*}
+
+
+
 \subsection{Bounded Transformations}
 
 \begin{definition}
@@ -338,7 +303,7 @@ If the norm of a linear transformation is finite, then the transformation is sai
 \end{definition}
 
 \begin{theorem}
-A linear transformation $T : V \rightarrow W$ is bounded if and only if it is continuous.
+A linear transformation $T \colon V \rightarrow W$ is bounded if and only if it is continuous.
 \end{theorem}
 \begin{proof}
 Suppose that $T$ is bounded; that is, there exists $M$ such that  $\left\| T \vecnot{v} \right\| \leq M \left\| \vecnot{v} \right\|$ for all $\vecnot{v} \in V$.
@@ -367,7 +332,7 @@ Then, by showing that linear transformations over finite-dimensional spaces are 
 This is accomplished in the following theorem.
 
 \begin{theorem}
-Let $V$ and $W$ be normed vector spaces and let $T : V \rightarrow W$ be a linear transformation.
+Let $V$ and $W$ be normed vector spaces and let $T \colon V \rightarrow W$ be a linear transformation.
 If $V$ is finite dimensional, then $T$ is continuous and bounded.
 \end{theorem}
 
@@ -397,7 +362,7 @@ Let
 S = \left\{ (s_1, \ldots, s_n) \Big| \sum_{i=1}^n |s_i| = 1 \right\}.
 \end{equation*}
 This set is closed and bounded; it is therefore compact.
-Define the function $f : S \rightarrow \RealNumbers$ by
+Define the function $f \colon S \rightarrow \RealNumbers$ by
 \begin{equation*}
 f(s_1, \ldots, s_n) = \left\| s_1 \vecnot{v}_1 + \cdots + s_n \vecnot{v}_n \right\| .
 \end{equation*}
@@ -451,7 +416,7 @@ By the previous lemma, this implies that there exists an $M$ such that $|s_1| + 
 \subsection{The Neumann Expansion}
 
 \begin{theorem}
-Let $\| \cdot \|$ be a submultiplicative operator norm and $T : V \rightarrow V$ be a linear operator with $\left\| T \right\| < 1$.
+Let $\| \cdot \|$ be a submultiplicative operator norm and $T \colon V \rightarrow V$ be a linear operator with $\left\| T \right\| < 1$.
 Then, $(I-T)^{-1}$ exists and
 \[ (I-T)^{-1} = \sum_{i=0}^{\infty} T^i. \]
 \end{theorem}
@@ -603,50 +568,15 @@ Applying Lemma~\ref{lemma:DualSpaceSeparatesPoints} shows that $\vecnot{v} = \ve
 \end{proof}
 
 An important consequence of this theorem is that the continuous dual space $V^*$ of a Hilbert space $V$ is isometrically isomorphic to the original space $V$.
-Let $R: V^* \rightarrow V$ be the implied Riesz mapping from continuous linear functionals on $V$ (i.e., $V^*$) to elements of $V$.
+Let $R \colon V^* \rightarrow V$ be the implied Riesz mapping from continuous linear functionals on $V$ (i.e., $V^*$) to elements of $V$.
 Then, $f(\vecnot{v}) = \langle \vecnot{v} | R( f ) \rangle$ for all $f \in V^*$.
 The isomorphism can be shown by verifying that $R( s f_1 + f_2 ) = \overline{s} R(f_1) + R(f_2)$ and one finds that the mapping $R$ is conjugate linear.
 The mapping is isometric because $\| f \| = \| R(f) \|$.
 Based on this isomorphism, one can treat a Hilbert space as self-dual and assume without confusion that $V=V^*$.
 
-Now, we can take a closer look at the proof of this theorem for the finite dimensional case.
-If we choose an orthonormal basis $\mathcal{B} = \vecnot{v}_1, \ldots, \vecnot{v}_n$ for $V$, the inner product of $\vecnot{w} = t_1 \vecnot{v}_1 + \cdots + t_n \vecnot{v}_n$ and $\vecnot{v} = s_1 \vecnot{v}_1 + \cdots + s_n \vecnot{v}_n$ will be
-\begin{equation*}
-\left\langle \vecnot{w} | \vecnot{v} \right\rangle = t_1 \bar{s}_1 + \cdots + t_n \bar{s}_n .
-\end{equation*}
-If $f$ is a linear functional on $V$, then $f$ has the form
-\begin{equation*}
-f \left(\vecnot{w}\right) = c_1 t_1 + \cdots + c_n t_n
-\end{equation*}
-for some fixed scalars $c_1, \ldots, c_n$ determined by the basis.
-Clearly, $f \left( \vecnot{v}_j \right) = c_j$, which implies that $\bar{s}_j = f \left( \vecnot{v}_j \right)$.
-That is, the vector $\vecnot{v}$ such that $f \left( \vecnot{w} \right) = \left\langle \vecnot{w} | \vecnot{v} \right\rangle$ is
-\begin{equation*}
-\vecnot{v} = \overline{ f \left( \vecnot{v}_1 \right) } \vecnot{v}_1 + \cdots + \overline{ f \left( \vecnot{v}_n \right) } \vecnot{v}_n .
-\end{equation*}
-
-Note that the vector $\vecnot{v}$ lies in the orthogonal complement of the nullspace of $f$.
-Let $W$ be the nullspace of $f$, then $V = W \oplus W^{\bot}$, and $f$ is completely determined by its value on $W^{\bot}$.
-In fact, if $P$ is the orthogonal projection of $V$ on $W^{\bot}$, then
-\begin{equation*}
-f \left( \vecnot{u} \right) = f \left( P \vecnot{u} \right)
-\end{equation*}
-for all $\vecnot{u} \in V$.
-Suppose that $f \neq 0$, then $f$ is of rank one and $\dim \left( W^{\bot} \right) = 1$.
-If $\vecnot{v}$ is any non-zero vector in $W^{\bot}$, it follows that
-\begin{equation*}
-P \vecnot{u} = \frac{ \left\langle \vecnot{u} | \vecnot{v} \right\rangle }{ \left\| \vecnot{v} \right\|^2 } \vecnot{v}
-\end{equation*}
-for all $\vecnot{u} \in V$.
-Thus,
-\begin{equation*}
-f \left( \vecnot{u} \right) = \left\langle \vecnot{u} | \vecnot{v} \right\rangle
-\frac{f \left( \vecnot{v} \right) }{ \left\| \vecnot{v} \right\|^2 }
-\end{equation*}
-for all $\vecnot{u} \in V$.
 
 \begin{theorem}
-Let $V$ and $W$ be Hilbert spaces, and assume $T: V \rightarrow W$ is a continuous linear transformation.
+Let $V$ and $W$ be Hilbert spaces, and assume $T \colon V \rightarrow W$ is a continuous linear transformation.
 Then, the \defn{inner-product space}{adjoint} is the unique linear transformation $T^*$ on $W$ such that
 \begin{equation*}
 \left\langle T \vecnot{v} | \vecnot{w} \right\rangle
@@ -659,7 +589,7 @@ Let $\vecnot{w}$ be any vector in $W$.
 Then $f(\vecnot{v}) = \left\langle T \vecnot{v} | \vecnot{w} \right\rangle$ is a continuous linear functional on $V$.
 It follows from the Riesz representation theorem (Theorem~\ref{theorem:FunctionalInnerProduct}) that there exists a unique vector $\vecnot{v}' \in V$ such that $f(\vecnot{v}) = \left\langle T \vecnot{v} | \vecnot{w} \right\rangle = \left\langle \vecnot{v} | \vecnot{v}' \right\rangle$.
 Of course, the vector $\vecnot{v}'$ depends on the choice of $\vecnot{w}$.
-So, we define the adjoint mapping $T^* : W \rightarrow V$ to give the required $\vecnot{v}'$ for each $\vecnot{w}$.
+So, we define the adjoint mapping $T^* \colon W \rightarrow V$ to give the required $\vecnot{v}'$ for each $\vecnot{w}$.
 In other words,
 \begin{equation*}
 \vecnot{v}' = T^* \vecnot{w} .
@@ -737,13 +667,13 @@ In any case, there exists at most one such operator $T^*$.
 
 \section{Fundamental Subspaces}
 
-There are four fundamental subspaces of a linear transformation $T : V \rightarrow W$.
+There are four fundamental subspaces of a linear transformation $T \colon V \rightarrow W$.
 We have already encountered two such spaces: The range of $T$ and the nullspace of $T$.
 Recall that the range of a linear transformation $T$ is the set of all vectors $\vecnot{w} \in W$ such that $\vecnot{w} = T \vecnot{v}$ for some $\vecnot{v} \in V$.
 The nullspace of $T$ consists of all vectors $\vecnot{v} \in V$ such that $T \vecnot{v} = \vecnot{0}$.
 
 The other two fundamental subspaces of $T$ are the \textbf{range of the adjoint $T^*$}, denoted $R_{T^*}$ and the \textbf{nullspace of the adjoint $T^*$}, denoted $N_{T^*}$.
-The various subspaces of the transformation $T : V \rightarrow W$ can be summarized as follows,
+The various subspaces of the transformation $T \colon V \rightarrow W$ can be summarized as follows,
 \begin{align*}
 R_T &\subseteq W \\
 N_T &\subseteq V \\
@@ -752,7 +682,7 @@ N_{T^*} &\subseteq W .
 \end{align*}
 
 \begin{theorem}
-Let $T : V \rightarrow W$ be a bounded linear transformation between two Hilbert spaces $V$ and $W$, and let $R_T$ and $R_{T^*}$ be closed.
+Let $T \colon V \rightarrow W$ be a bounded linear transformation between two Hilbert spaces $V$ and $W$, and let $R_T$ and $R_{T^*}$ be closed.
 Then,
 \begin{enumerate}
 \item the range $R_T$ is the orthogonal complement of $N_{T^*}$, i.e., $\left[ R_T \right]^{\bot} = N_{T^*}$;
@@ -833,7 +763,7 @@ That is, if $N_T = \left\{ \vecnot{0} \right\}$.
 
 \subsection{Least Squares}
 
-Let $T : V \rightarrow W$ be a bounded linear transformation.
+Let $T \colon V \rightarrow W$ be a bounded linear transformation.
 If the equation $T \vecnot{v} = \vecnot{w}$ has no solution, then we can find a vector $\vecnot{v}$ that minimizes
 \begin{equation*}
 \left\| T \vecnot{v} - \vecnot{w} \right\|^2.
@@ -897,7 +827,7 @@ Since $A A^H$ is invertible, this gives $\vecnot{u} = (A A^H)^{-1} \vecnot{w}$ a
 The matrix $A^H \left( A A^H \right)^{-1}$ is the right inverse of $A$ and is another example of a Moore-Penrose \defn{matrix}{pseudoinverse}.
 
 \begin{definition}
-Let $T : V \rightarrow W$ be a bounded linear transformation, where $V$ and $W$ are Hilbert spaces, and $R_T$ is closed.
+Let $T \colon V \rightarrow W$ be a bounded linear transformation, where $V$ and $W$ are Hilbert spaces, and $R_T$ is closed.
 For each $\vecnot{w} \in W$, there is a unique vector $\hat{\vecnot{v}}$ of minimum norm in the set of vectors that minimize $\left\| T \vecnot{v} - \vecnot{w} \right\|$.
 The \defn{linear transform}{pseudoinverse} $T^{\dagger}$ is the transformation mapping each $\vecnot{w}\in W$ to its unique $\hat{\vecnot{v}}$.
 \end{definition}

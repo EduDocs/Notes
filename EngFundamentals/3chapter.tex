@@ -83,13 +83,13 @@ Suppose $\vecnot{w}, \vecnot{w}' \in W$ are best approximations of $\vecnot{v}$ 
 Then $\left\| \vecnot{v} - \vecnot{w} \right\| = \left\| \vecnot{v} - \vecnot{w}' \right\|$ and \eqref{equation:OrthogonalVector} implies that $\left\| \vecnot{w} - \vecnot{w}' \right\| = 0$.
 That is, if a best approximation exists then it is unique.
 
-Assume that $W$ is closed and has a countable orthogonal basis $\vecnot{w}_1, \ldots, \vecnot{w}_n$ and let $\vecnot{w}$ be defined by \eqref{equation:OrthogonalProjectionOrthogonalVectors}.
+Assume that $W$ is closed and has a countable orthogonal basis $\vecnot{w}_1,\vecnot{w}_2, \ldots$ and let $\vecnot{w}$ be defined by \eqref{equation:OrthogonalProjectionOrthogonalVectors}.
 Then $\vecnot{v} -\vecnot{w}$ is orthogonal to $\vecnot{w}_j$ for $j \in \mathbb{N}$, i.e.,
 \begin{equation*}
 \begin{split}
 \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w}_j \right\rangle
 &= \left\langle \vecnot{v} | \vecnot{w}_j \right\rangle
-- \left\langle \sum_{i=1}^n \frac{ \left\langle \vecnot{v} | \vecnot{w}_i \right\rangle }{ \left\| \vecnot{w}_i \right\|^2 } \vecnot{w}_i \Big| \vecnot{w}_j \right\rangle \\
+- \left\langle \sum_{i=1}^\infty \frac{ \left\langle \vecnot{v} | \vecnot{w}_i \right\rangle }{ \left\| \vecnot{w}_i \right\|^2 } \vecnot{w}_i \Big| \vecnot{w}_j \right\rangle \\
 &= \left\langle \vecnot{v} | \vecnot{w}_j \right\rangle
 - \frac{ \left\langle \vecnot{v} | \vecnot{w}_j \right\rangle }{ \left\| \vecnot{w}_i \right\|^2 } \left\langle \vecnot{w}_j | \vecnot{w}_j \right\rangle
 = 0.
@@ -100,7 +100,7 @@ That is, $\vecnot{v} - \vecnot{w}$ is orthogonal to every vector in $W$ and ther
 
 \begin{definition}
 Whenever the vector $\vecnot{w}$ in Theorem~\ref{theorem:OrthogonalProjection} exists, it is called the \textbf{orthogonal projection} of $\vecnot{v}$ onto $W$.
-If every vector in $V$ has an orthogonal projection onto $W$, then the mapping $E: V \rightarrow W$, which assigns to each vector in $V$ its orthogonal projection onto $W$, is called the orthogonal projection of $V$ onto $W$.
+If every vector in $V$ has an orthogonal projection onto $W$, then the mapping $E \colon V \rightarrow W$, which assigns to each vector in $V$ its orthogonal projection onto $W$, is called the orthogonal projection of $V$ onto $W$.
 \end{definition}
 
 One can use Theorem~\ref{theorem:OrthogonalSubspaceDirectSum} to verify that this is consistent with the concept of orthogonal projection from Definition~\ref{definition:OrthogonalProjection}.
@@ -142,6 +142,74 @@ E = \left[ \begin{array}{cc} 1 & 0 \\ 0 & 0 \end{array} \right].
 %with strict inequality when $\vecnot{u} \neq \vecnot{v} - E \vecnot{v}$.
 %Thus, $\vecnot{v} - E \vecnot{v}$ is the best approximation of $\vecnot{v}$ by vectors in $W^{\bot}$.
 %\end{proof}
+
+
+\subsection{Projection Operators}
+
+\begin{definition}
+A function $F \colon X \rightarrow Y$ with $Y \subseteq X$ is \defn{linear transform}{idempotent} if $F(F(x))=F(x)$.  When $F$ is a linear transformation, this reduces to $F^2 = F \cdot F = F$.
+\end{definition}
+
+\begin{definition}
+Let $V$ be a vector space and $T \colon V \rightarrow V$ be a linear transformation.
+Then, $T$ is a projection if $T$ is idempotent.
+\end{definition}
+
+\begin{example}
+The idempotent matrix $A$ is a projection onto the first two coordinates.
+\begin{equation*}
+A = \begin{bmatrix}
+1 & 0 & 1 \\
+0 & 1 & 1 \\
+0 & 0 & 0
+\end{bmatrix}
+\end{equation*}
+\end{example}
+
+\begin{theorem}
+Let $V$ be a vector space and $T \colon V \rightarrow V$ be a projection operator.
+Then, the range $\mathcal{R}(T)$ and the $\mathcal{N}(T)$ are disjoint subspaces of $V$.
+\end{theorem}
+\begin{proof}
+For all $\vecnot{v} \in V - \{0\}$, we need to prove that $\vecnot{v}$ is not in both the range and nullspace.
+Let $\vecnot{v}\in V$ be in the range of $T$ so that there is a $\vecnot{w}\in V$ such that $T \vecnot{w} = \vecnot{v}$.
+Then, $T \vecnot{v} = T^2 \vecnot{w} = T \vecnot{w} = \vecnot{v}$ and $\vecnot{v}$ is not in the null space unless $\vecnot{v} = \vecnot{0}$.
+
+Let $\vecnot{v}$ be in the null space of $T$, then $T \vecnot{v} = \vecnot{0}$.
+But, $T \vecnot{v} = \vecnot{v}$ for all $\vecnot{v}$ in the range.
+Therefore, $\vecnot{v}$ is not in the range unless $\vecnot{v} = \vecnot{0}$.
+From this, we see that only $\vecnot{0}\in V$ is in both the range and nullspace.
+Therefore, they are disjoint subspaces.
+\end{proof}
+
+\begin{example}
+Consider the linear transform $T \colon V \rightarrow V$ defined by $T = I - P$, where $P$ is a projection.
+It is easy to verify that $T$ is a projection operator because
+\[ T^2 = (I-P)(I-P) = I - P- P + P^2 = I-P = T .\]
+Notice also that $P(I-P) \vecnot{v} = \vecnot{0}$ implies that $\mathcal{R}(T) \subseteq \mathcal{N}(P)$ and $T \vecnot{v} = \vecnot{v}$ for $\vecnot{v} \in \mathcal{N}(P)$ implies $\mathcal{N}(P) \subseteq \mathcal{R}(T)$.
+Therefore, $\mathcal{R}(T) = \mathcal{N}(P)$ and $I-P$ is a projection onto $\mathcal{N}(P)$.
+\end{example}
+
+\begin{definition}
+\label{definition:OrthogonalProjection}
+Let $V$ be an inner-product space and $P \colon V \rightarrow V$ be a projection operator.
+Then, $P$ is an \defn{linear transform}{orthogonal projection} if $\mathcal{R}(P) \bot \mathcal{N}(P)$.
+\end{definition}
+
+\begin{example}
+Let $V$ be an inner-product space and $P \colon V \rightarrow V$ be an orthogonal projection.
+Then, $\vecnot{v} = P \vecnot{v} + (I-P) \vecnot{v}$ defines a natural orthogonal decomposition of $\vecnot{v}$ because $P \vecnot{v} \in \mathcal{R}(P)$ and $(I-P) \vecnot{v} \in \mathcal{N}(P)$.
+Therefore, $\mathcal{N}(P) = \mathcal{R}(P)^{\bot}$ and $P \vecnot{v} = \vecnot{v}$ if and only if $\vecnot{v} \in \mathcal{R}(P)$.
+\end{example}
+
+\begin{theorem}
+Any idempotent Hermitian matrix $P$ defines an orthogonal projection operator.
+\end{theorem}
+\begin{proof}
+We simply must verify that the range a null space are orthogonal.
+Since $P \vecnot{u} \in \mathcal{R}(P)$ and $(I-P) \vecnot{v} \in \mathcal{N}(P)$, we can simply point out that
+\[ \langle P\vecnot{u} | (I-P)\vecnot{v} \rangle = \vecnot{v}^H (I-P)^H P \vecnot{u} = \vecnot{v}^H (P - P^H P) \vecnot{u} = \vecnot{v}^H (P - P^2) \vecnot{u} = 0. \]
+\end{proof}
 
 \begin{theorem} \label{theorem:OrthogonalSubspaceDirectSum}
 Suppose $W$ is a closed subspace of a separable Hilbert space $V$ and let $E$ denote the orthogonal projection of $V$ on $W$.
@@ -329,7 +397,7 @@ G = \left[ \begin{array}{cccc}
 \end{array} \right]
 \end{equation}
 is called the \defn{matrix}{Grammian} matrix.
-Since $G_{ji} = \left\langle \vecnot{w}_i | \vecnot{w}_j \right\rangle$, it follows that the Grammian is a Hermitian symmetric matrix, i.e., $G^H = G$.
+Since $g_{ji} = \left\langle \vecnot{w}_i | \vecnot{w}_j \right\rangle$, it follows that the Grammian is a Hermitian symmetric matrix, i.e., $G^H = G$.
 \end{definition}
 
 \begin{definition}
@@ -350,7 +418,7 @@ Then,
 \begin{equation} \label{equation:PositiveSemiDefiniteProof}
 \begin{split}
 \vecnot{v}^H G \vecnot{v} &=
-\sum_{i=1}^n \sum_{j=1}^n \bar{v}_j G_{ji} v_i
+\sum_{i=1}^n \sum_{j=1}^n \bar{v}_j g_{ji} v_i
 = \sum_{i=1}^n \sum_{j=1}^n \bar{v}_j \left\langle \vecnot{w}_i | \vecnot{w}_j \right\rangle v_i \\
 &= \sum_{i=1}^n \sum_{j=1}^n \left\langle v_i \vecnot{w}_i | v_j \vecnot{w}_j \right\rangle
 = \left\langle \sum_{i=1}^n v_i \vecnot{w}_i \Big| \sum_{j=1}^n v_j \vecnot{w}_j \right\rangle \\
@@ -393,7 +461,7 @@ If $\hat{\vecnot{v}}$ denotes the \defn{inner-product space}{least-squares} appr
 for $j = 1, \ldots, n$.
 \end{theorem}
 \begin{proof}
-Minimizing $\left\| \vecnot{e} \right\|^2$, where $\vecnot{e}$ is given by \eqref{equation:OrthogonalProjectionError} requires minimizing
+Minimizing $\left\| \vecnot{e} \right\|^2$ over $\vecnot{s}$, where $\vecnot{e}$ is given by \eqref{equation:OrthogonalProjectionError} requires minimizing
 \begin{equation*}
 \begin{split}
 J \left( \vecnot{s} \right)
@@ -521,9 +589,9 @@ It defines an orthogonal projection onto the range of $A$ (i.e., the subspace sp
 We can also consider the case of a general inner product.
 Recall that an inner product on $V$ is completely determined by the values
 \begin{equation*}
-h_{ji} = \left\langle \vecnot{e}_i | \vecnot{e}_j \right\rangle ,
+h_{ji} = \left\langle \vecnot{e}_i | \vecnot{e}_j \right\rangle
 \end{equation*}
-and that this inner product can be expressed as
+and that it can be expressed in terms of the matrix $H$ (where $[H]_{j,i} = h_{j,i}$) as
 \begin{equation*}
 \left\langle \vecnot{v} | \vecnot{w} \right\rangle
 = \vecnot{w}^H H \vecnot{v}.
@@ -835,3 +903,130 @@ In this case, the solution $\hat{\vecnot{s}}$ can be obtained in closed form and
 \[ \hat{\vecnot{s}} = A^H \left( A A^H \right)^{-1} \vecnot{v}. \]
 
 
+\section{Projection onto Convex Sets}
+
+So far, we have focused on the projection of vectors on to subspaces.
+Convex sets are generalize the closure property of subspaces to subsets of points.
+
+\begin{definition}
+Let $V$ be a vector space over $\RealNumbers$.
+The subset $A \subseteq V$ is called a \defn{vector space}{convex set} if, for all $\vecnot{a}_1,\vecnot{a}_2 \in A$ and $\lambda\in[0,1]$, we have $\lambda \vecnot{a}_1 + (1-\lambda) \vecnot{a}_2 \in A$.
+The set is \textbf{strictly convex} if, for all $\vecnot{a}_1,\vecnot{a}_2 \in \Closure{A}$ and $\lambda\in(0,1)$, we have $\lambda \vecnot{a}_1 + (1-\lambda) \vecnot{a}_2 \in \Interior{A}$.
+\end{definition}
+
+Let $V$ be a Hilbert space and $A\subseteq V$ be a closed convex set. For any $\vecnot v$, let
+\[
+f\left(\vecnot v\right)=\inf_{\vecnot u\in A}\left\Vert \vecnot u-\vecnot v\right\Vert 
+\]
+be the minimum distance between $\vecnot v$ and the set $A$. In this section, we will show that this infimum is achieved as a minimum by a unique $\vecnot u^{*}\in A$. Moreover, the mapping $P_{A}:V\rightarrow A$ is called the orthogonal projection of $\vecnot v$ onto $A$ and is defined by $\vecnot v\mapsto\vecnot u^{*}$.
+\begin{theorem}
+\label{thm:HilbertProjectionTheorem} The orthogonal projection of $\vecnot v\in V$ onto a closed convex set $A\subseteq V$ exists and is unique.
+\end{theorem}
+\begin{proof}
+Let $d=f\left(\vecnot v\right)$ be the infimal distance and consider any sequence $\vecnot u_{1},\vecnot u_{2},\ldots\in A$ that achieves the infimum so that
+\[
+\lim_{n\rightarrow\infty}\left\Vert \vecnot u_{n}-\vecnot v\right\Vert =d.
+\]
+Since $A$ is complete, the next step is showing that this sequence is Cauchy. The paralleogram law states that $\left\Vert x-y\right\Vert ^{2}=2\left\Vert x\right\Vert ^{2}+2\left\Vert y\right\Vert ^{2}-\left\Vert x+y\right\Vert ^{2}$ and applying this to $\vecnot u_{n}+\vecnot u_{m}$ gives
+\begin{align*}
+\left\Vert \vecnot u_{m}-\vecnot u_{n}\right\Vert ^{2} & =\left\Vert \left(\vecnot v-\vecnot u_{n}\right)-\left(\vecnot v-\vecnot u_{m}\right)\right\Vert ^{2}\\
+ & =2\left\Vert \vecnot v-\vecnot u_{n}\right\Vert ^{2}+2\left\Vert \vecnot v-\vecnot u_{m}\right\Vert ^{2}-\left\Vert \left(\vecnot v-\vecnot u_{n}\right)+\left(\vecnot v-\vecnot u_{m}\right)\right\Vert ^{2}\\
+ & =2\left\Vert \vecnot v-\vecnot u_{n}\right\Vert ^{2}+2\left\Vert \vecnot v-\vecnot u_{m}\right\Vert ^{2}-4\left\Vert \vecnot v-\frac{\vecnot u_{n}+\vecnot u_{m}}{2}\right\Vert ^{2}\\
+ & \leq2\left\Vert \vecnot v-\vecnot u_{n}\right\Vert ^{2}+2\left\Vert \vecnot v-\vecnot u_{m}\right\Vert ^{2}-4d^{2}
+\end{align*}
+because the convexity of $A$ implies $\frac{\vecnot u_{n}+\vecnot u_{m}}{2}\in A$ and therefore $\left\Vert \vecnot v-\frac{\vecnot u_{n}+\vecnot u_{m}}{2}\right\Vert ^{2}\geq d^{2}$. Since the limit of the RHS (as $m,n\rightarrow\infty$) equals $0$, we find that the sequence $\vecnot u_{n}$ is Cauchy and therefore the limit $\vecnot u^{*}$ must exist. Since $\vecnot u_{n}\in A$ and $A$ is closed, we also see that $\vecnot u^{*}\in A$. Therefore, the infimum is achieved as a minimum.
+
+Uniqueness can be seen by assuming instead that $\vecnot u_{m},\vecnot u_{n}$ are two elements in $A$ which are both at a distance $d$ from $\vecnot v$. Then, the above derivation shows that $\left\Vert \vecnot u_{m}-\vecnot u_{n}\right\Vert ^{2}\leq0$. Therefore, they are the same point.
+\end{proof}
+\begin{remark}
+The same result holds for norm projections in many other Banach spaces including $L^{p}$ and $\ell^{p}$ for $1<p<\infty$. In general, it is required that the Banach space be strictly convex (for uniqueness) and reflexive (for existence).
+\end{remark}
+
+Earlier in this chapter, we studied the equivalence between the orthogonality and Hilbert-space projections onto subspaces.
+The following result can be seen as a generalization of that result to Hilbert-space projections onto convex sets.
+
+\begin{lemma}
+\label{lemma:convex_proj_lt0}
+For any $\vecnot{v} \notin A$, a necessary and sufficient condition for $\vecnot{u}^* = P_A (\vecnot{v})$ is that $\langle \vecnot{v}-\vecnot{u}^*,\vecnot{u}-\vecnot{u}^* \rangle \leq 0$ for all $\vecnot{u}\in A$.
+\end{lemma}
+\begin{proof}
+Let $\vecnot{u}^* = P_A (\vecnot{v})$ be the unique projection of $\vecnot{v}$ onto $A$.
+For all $\vecnot{u} \in A$ %satisfying $\vecnot{u} \neq \vecnot{u}^*$
+and any $\alpha\in (0,1)$, observe that $\vecnot{u}'=(1-\alpha) \vecnot{u}^* + \alpha \vecnot{u} = \vecnot{u}^* + \alpha (\vecnot{u}-\vecnot{u}^*)\in A$ due to convexity.
+The optimality of $\vecnot{u}^*$ implies that
+\begin{align*}
+\| \vecnot{v}-\vecnot{u}^* \|^2
+&\leq \| \vecnot{v}- \vecnot{u}' \| \\
+&\leq \| \vecnot{v}- \vecnot{u}^* - \alpha (\vecnot{u}-\vecnot{u}^*) \|^2 \\
+&= \| \vecnot{v} - \vecnot{u}^* \|^2 + \alpha^2 \| \vecnot{u} - \vecnot{u}^* \|^2 - 2 \alpha \langle v-\vecnot{u}^*,\vecnot{u}-\vecnot{u}^* \rangle. 
+\end{align*}
+Thus, $\langle v-\vecnot{u}^*,\vecnot{u}-\vecnot{u}^* \rangle \leq \frac{\alpha}{2} \| \vecnot{u} - \vecnot{u}^* \|^2$.
+One can establish necessity by taking the limit as $\alpha \to 0$.
+For sufficiency, we assume $\langle \vecnot{v}-\vecnot{u}^*,\vecnot{u}-\vecnot{u}^* \rangle \leq 0$ and we write
+\begin{align*}
+\| \vecnot{v}-\vecnot{u} \|^2 - \| \vecnot{v} - \vecnot{u}^* \|^2
+&= \| (\vecnot{v} - \vecnot{u}^*) - (\vecnot{u} - \vecnot{u}^*) \|^2 - \|\vecnot{v} - \vecnot{u}^* \|^2 \\
+&= \| \vecnot{v}-\vecnot{u}^* \|^2 + \| \vecnot{u} -\vecnot{u}^* \| ^2 - 2 \langle v-\vecnot{u}^*,\vecnot{u}-\vecnot{u}^* \rangle - \|\vecnot{v}-\vecnot{u}^* \|^2 \\
+&\geq 0.
+\end{align*}
+Thus, $\| \vecnot{v}-\vecnot{u} \|^2 \geq \| \vecnot{v} - \vecnot{u}^* \|^2$ for all $\vecnot{u} \in A$ and $\vecnot{u}^* = P_A (\vecnot{v})$.
+\end{proof}
+
+\subsection{Minimum Distance Between Two Convex Sets}
+
+Now, consider the smallest distance between two disjoint closed convex sets $A,B\subseteq V$. In this case, a unique solution may exist but a number of things can go wrong. If the two sets are not strictly convex (e.g., consider two squares), then it is clearly possible for their to multiple pairs of points that achieve the minimum distance. Even if the two sets are strictly convex, one may find that the infimum is achieved as the points wander off to infinity. For example, consider the strictly convex hyperbolic sets $A=\left\{ (x,y)|x^{2}-y^{2}\geq1,x>0\right\} $ and $B=\left\{ (x,y)|y^{2}-x^{2}\geq1,y\geq0\right\} $. These two sets share the line $x=y>0$ as an asymptote, so their infimal distance is 0.
+
+To understand this behavior, we first note that the distance $f\left(\vecnot u,\vecnot v\right)=\left\Vert \vecnot u-\vecnot v\right\Vert $ is a convex function on the convex product set $A\times B$, one finds that any local minimum distance is a global minimum distance.we have the following results.
+\begin{theorem}
+\label{thm:MinDistTwoConvexSet} Let $V$ be a Hilbert space and consider the infimal distance
+\[
+d=\inf_{\vecnot u\in A,\vecnot v\in B}\left\Vert \vecnot u-\vecnot v\right\Vert 
+\]
+between two disjoint closed convex sets $A,B\subseteq V$.
+If the set $B$ is compact, then the infimum is achieved.
+If the set $A$ is strictly convex and the infimum is achieved, then the minimizing points $\vecnot u^{*},\vecnot v^{*}$ are unique.
+\end{theorem}
+
+\begin{proof}
+Consider any sequence $(\vecnot u_{1},\vecnot v_{1}),(\vecnot u_{2},\vecnot v_{2}),\ldots\in A\times B$ which satisfies
+\[
+\lim_{n\rightarrow\infty}\left\Vert \vecnot u_{n}-\vecnot v_{n}\right\Vert =d.
+\]
+If $B$ is compact, then there is a subsequence $\vecnot v_{n_{j}}$ that converges to some $\vecnot v^{*}\in B$. Therefore, we can set $B=\left\{ v^{*}\right\} $ and use Theorem \ref{thm:HilbertProjectionTheorem} to see that there exists a unique $\vecnot u^{*}\in A$ which achieves the smallest distance. Notice that the $\vecnot v^{*}$ is not unique in general and that $\vecnot u^{*}$ is only unique for a given $\vecnot v^{*}$.
+
+Since $\left\Vert \vecnot u-\vecnot v\right\Vert $ is a convex function on the convex product set $A\times B$, there is a (possibly empty) convex set of minimizers
+
+\[
+M=\left\{ (\vecnot u,\vecnot v)\in A\times B\;\big|\;\left\Vert \vecnot u-\vecnot v\right\Vert =d\right\} .
+\]
+Also, each component of the $(\vecnot{u},\vecnot{v})$ points in $M$ must lie on the boundary of its set because otherwise one could reduce the smallest distance by moving one point along the minimum distance line towards the boundary. Now, suppose that (i) $A$ is strictly convex and (ii) $M$ contains more than one pair of minimizers. Then, condition (ii) implies that there must be two boundary points $\vecnot u_{1},\vecnot u_{2}\in\partial A$ such that $\alpha\vecnot u_{1}+(1-\alpha)\vecnot u_{2}\in\partial A$ for $\alpha\in[0,1]$. But this contradicts condition (i) and shows that, if $A$ is strictly convex, then there is at most one pair $(\vecnot u^{*},\vecnot v^{*})\in M$ of minimizing points.
+\end{proof}
+\begin{remark}
+Finding the minimum distance between two disjoint closed convex sets $A,B\subseteq V$ is a classic problem that is solved nicely by the idea of alternating minimization. Let $\vecnot v_{0}\in B$ be an arbitrary initial point and define
+
+\begin{align*}
+\vecnot u_{n+1} & =\arg\min_{\vecnot u\in A}\left\Vert \vecnot u-\vecnot v_{n}\right\Vert \\
+\vecnot v_{n+1} & =\arg\min_{\vecnot v\in B}\left\Vert \vecnot u_{n+1}-\vecnot v\right\Vert .
+\end{align*}
+Notice that the sequence $d_{n}=\left\Vert \vecnot u_{n}-\vecnot v_{n}\right\Vert $ is non-increasing and must therefore have a limit.
+One can show that, if either set is compact (resp. bounded), then the sequence $(\vecnot u_{n},\vecnot v_{n})$ converges strongly (resp. weakly) to vectors that minimize the distance. % cite []Bauschke, Finding Best Approx. Pairs]
+Variations of this approach can even be useful when $A\cap B\neq\emptyset$.
+In this case, sequence $\vecnot v_{n}$ converges weakly to some point $\vecnot v\in A\cap B$.
+\end{remark}
+
+%\begin{theorem}[Hyperplane Separation]
+%Assume unique points minimize.
+%Then projection followed by inner_prod_lt0 gives separataion?
+%\end{theorem}
+
+\iffalse
+\subsection{Alternating Projections}
+
+Another classic result for projections in a Hilbert space is that alternating between projections onto multiple subspaces leads to a projection onto the intersection of all the subspaces.
+\begin{lemma}
+Let $V$ be a separable Hilbert space and $P_{W}$ be a projection onto the closed subspace $W\subset V$. Then, $\left\Vert P_{W}\vecnot v_{n}\right\Vert \rightarrow\left\Vert \vecnot v_{n}\right\Vert \rightarrow d$ implies that $\vecnot v_{n}\rightarrow\vecnot v\in W$. (not correct) Need to show vector is decreasing in some sense!!! For any projection-like $T$, $\vecnot v_{n}=T^{n}\vecnot v_{0}$. non-expansive. If not fixed point, then coefficients reduced in some basis (i.e., cannot wander off to new basis elements)
+\end{lemma}
+\begin{proof}
+Let $\vecnot w_{1},\vecnot w_{2},\ldots$ be a orthonormal basis for $W$ Orthogonal decomposition of projection shows that
+\end{proof}
+\fi

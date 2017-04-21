@@ -17,7 +17,7 @@ Formally, a metric space $(X,d)$ is a set $X$ and a function $d$ that is a metri
 \begin{definition}
 A \defn{metric space}{metric} on a set $X$ is a function
 \begin{equation*}
-d: X \times X \rightarrow \RealNumbers
+d \colon X \times X \rightarrow \RealNumbers
 \end{equation*}
 that satisfies the following properties,
 \begin{enumerate}
@@ -51,7 +51,7 @@ Show that $\rho$ is a metric.
 
 \begin{problem} \label{problem:StandardBoundedMetric}
 Let $X$ be a metric space with metric $d$.
-Define $\bar{d} : X \times X \rightarrow \RealNumbers$ by
+Define $\bar{d}  \colon X \times X \rightarrow \RealNumbers$ by
 \begin{equation*}
 \bar{d} (x, y)
 = \min \left\{ d (x, y), 1 \right\}.
@@ -62,7 +62,7 @@ Show that $\bar{d}$ is also a metric.
 Let $(X,d)$ be a metric space.
 Then, elements of $X$ are called \defn{metric space}{points} and the number $d(x,y)$ is called the \defn{metric space}{distance} between $x$ and $y$.
 Let $\epsilon > 0$ and consider the set $B_d(x,\epsilon) = \left\{ y \in X | d(x,y) < \epsilon \right\}$.
-This set is called the \defn{metric space}{$d$-open ball} of radius $\epsilon$ centered at $x$.
+This set is called the \defn{metric space}{$d$-open ball} (or open ball) of radius $\epsilon$ centered at $x$.
 
 \begin{problem}
 Suppose $a \in B_d(x, \epsilon)$ with $\epsilon > 0$.
@@ -74,12 +74,13 @@ This allows one to discuss limits, convergence, open sets, and closed sets.
 
 \begin{definition}
 A \defn{metric space}{sequence} of elements from a set $X$ is an infinite list $x_1,x_2,\ldots$ where $x_i \in X$ for all $i\in \mathbb{N}$.
-Formally, a sequence is equivalent to a function $f: \mathbb{N} \rightarrow X$ where $x_i = f(i)$ for all $i\in \mathbb{N}$.
+Formally, a sequence is equivalent to a function $f \colon \mathbb{N} \rightarrow X$ where $x_i = f(i)$ for all $i\in \mathbb{N}$.
 \end{definition}
 
 \begin{definition}
+\label{definition_metspace_converge}
 Consider a sequence $x_1, x_2, \ldots$ of points in a metric space $(X,d)$.
-This sequence \defn{metric space}{$d$-converges} to $x\in X$ if, for any $\epsilon >0$, there is natural number $N$ such that $d(x,x_n) < \epsilon$ for all $n>N$.
+This sequence \defn{metric space}{converges} to $x\in X$ if, for any $\epsilon >0$, there is natural number $N$ such that $d(x,x_n) < \epsilon$ for all $n>N$.
 \end{definition}
 
 \begin{definition}
@@ -90,28 +91,30 @@ d \left( x_m, x_n \right) < \epsilon.
 \end{definition}
 
 \begin{theorem}
-Every $d$-convergent sequence is a Cauchy sequence.
+Every convergent sequence is a Cauchy sequence.
 \end{theorem}
 \begin{proof}
-Since $x_1,x_2,\ldots$ $d$-converges to some $x$, there is an $N$, for any $\epsilon>0$, such that $d(x,x_n)<\epsilon /2$ for all $n>N$.
+Since $x_1,x_2,\ldots$ converges to some $x$, there is an $N$, for any $\epsilon>0$, such that $d(x,x_n)<\epsilon /2$ for all $n>N$.
 The triangle inequality for $d(x_m,x_n)$ shows that, for all $m,n>N$,
 \[ d(x_m,x_n)\leq d(x_m,x) + d(x,x_n) \leq \epsilon/2 + \epsilon/2 = \epsilon. \]
 Therefore, $x_1,x_2,\ldots$ is a Cauchy sequence.
 \end{proof}
 
+\subsection{Metric Topology}
+
 \begin{definition}
 \label{definition:metspace_dopen}
 Let $W$ be a subset of a metric space $(X,d)$.
-The set $W$ is called \defn{metric space}{$d$-open} if, for every $w\in W$, there is an $\epsilon>0$ such that $B_d (w,\epsilon) \subseteq W$.
+The set $W$ is called \defn{metric space}{open} if, for every $w\in W$, there is an $\epsilon>0$ such that $B_d (w,\epsilon) \subseteq W$.
 \end{definition}
 
 \begin{theorem}
 \label{theorem:d_open_closure}
 For any metric space $(X,d)$,
 \begin{enumerate}
-\item $\emptyset$ and $X$ are $d$-open
-\item any union of $d$-open sets is $d$-open
-\item any finite intersection of $d$-open sets if $d$-open
+\item $\emptyset$ and $X$ are open
+\item any union of open sets is open
+\item any finite intersection of open sets if open
 \end{enumerate}
 \end{theorem}
 \begin{proof}
@@ -124,28 +127,47 @@ The following example highlights the problem with allowing infinite intersection
 Let $I_n = \left(-\frac{1}{n},\frac{1}{n} \right) \subset \RealNumbers$, for $n\in \mathbb{N}$, be a sequence of open real intervals.
 The infinite intersection
 \[ \bigcap_{n\in \mathbb{N}} I_n = \{ x\in \RealNumbers | \forall n\in \mathbb{N}, x\in I_n \} = \{0 \}. \]
-But, it is easy to verify that $\{ 0 \}$ is not a $d$-open set.
+But, it is easy to verify that $\{ 0 \}$ is not an open set.
 \end{example}
 
 \begin{definition}
-A subset $W$ of a metric space $(X,d)$ is $d$-closed if its complement $W^c = X-W$ is $d$-open.
+A subset $W$ of a metric space $(X,d)$ is closed if its complement $W^c = X-W$ is open.
 \end{definition}
 
 \begin{corollary}
 For any metric space $(X,d)$,
 \begin{enumerate}
-\item $\emptyset$ and $X$ are $d$-closed
-\item any intersection of $d$-closed sets is $d$-closed
-\item any finite union of $d$-closed sets if $d$-closed
+\item $\emptyset$ and $X$ are closed
+\item any intersection of closed sets is closed
+\item any finite union of closed sets if closed
 \end{enumerate}
 \end{corollary}
 \begin{proof}[Sketch of proof]
-Using the definition of $d$-closed, one can apply De Morgan's Laws to Theorem~\ref{theorem:d_open_closure} verify this result.
+Using the definition of closed, one can apply De Morgan's Laws to Theorem~\ref{theorem:d_open_closure} verify this result.
 \end{proof}
 
 \begin{definition}
-Suppose $f: X \rightarrow Y$ is a function from the metric space $(X,d_X)$ to the metric space $(Y,d_Y)$.
-Then, $f$ is \defn{metric space}{$d$-continuous} at $x_0$ if, for any $\epsilon> 0$, there exists a $\delta >0$ such that, for all $x\in X$ satisfying $d_X(x_0,x)< \delta$, 
+For any metric space $(X,d)$ and subset $W \subseteq X$, a point $w\in W$ is in the \defn{metric space}{interior} of $W$ if there is a $\delta >0$ such that $x\in W$ if $d(x,w)<\delta$.
+\end{definition}
+
+\begin{definition}
+For any metric space $(X,d)$ and subset $W \subseteq X$, a point $w\in W$ is a \defn{metric space}{limit point} of $W$ if there is a sequence $w_1,w_2,\ldots\in W$ of distinct elements that converges to $w$.
+\end{definition}
+
+\begin{definition}
+For any metric space $(X,d)$ and subset $W \subseteq X$, a point $x\in X$ is in the \defn{metric space}{closure} of $W$ if, for every $\delta >0$, there is a $w\in W$ such that $d(x,w)<\delta$.
+\end{definition}
+
+The interior of $A$ is denoted by $\Interior{A}$ and the closure of $A$ is denoted by $\Closure{A}$.
+Using Definition~\ref{definition:metspace_dopen}, it is easy to verify that $\Interior{A}$ is open.
+One can show that closure of $W$ is equal to the union of $W$ and its limit points.
+Thus, $\Closure{A}$ is closed because a subset of a metric space is closed if and only if it contains all of its limit points.
+
+\subsection{Continuity}
+
+Let $f \colon X \rightarrow Y$ be a function between the metric spaces $(X,d_X)$ and $(Y,d_Y)$.
+\begin{definition}
+The function $f$ is \defn{metric space}{continuous} at $x_0$ if, for any $\epsilon> 0$, there exists a $\delta >0$ such that, for all $x\in X$ satisfying $d_X(x_0,x)< \delta$, 
 \[ d_Y \left( f(x_0),f(x) \right) < \epsilon .\]
 In precise mathematical notation, one has
 \begin{equation*}
@@ -156,8 +178,25 @@ In precise mathematical notation, one has
 \end{equation*}
 \end{definition}
 
+\begin{theorem}
+If $f$ is continuous at $x_0$, then $f(x_n) \to f(x_0)$ for all sequences $x_1,x_2,\ldots \in X$ such that $x_n \to x_0$.
+Conversely, if $f(x_n) \to f(x_0)$ for all sequences $x_1,x_2,\ldots  \in X$ such that $x_n \to x_0$, then $f$ is continuous at $x_0$.
+% if and only if  $f(x_n) \to f(x_0)$ for all sequences $x_1,x_2,\ldots \in X$ such that $x_n \to x_0$. 
+\end{theorem}
+\begin{proof}
+If $f$ is continuous at $x_0$, then, for any $\epsilon > 0$, there is a $\delta >0$ such that $d_Y (f(x_0),f(x)) < \epsilon$ if $d_X (x_0,x) < \delta$.
+If $x_n \to x_0$, then there is an $N\in \mathbb{N}$ such that $d_X (x_n,x_0) < \delta$ for all $n>N$.
+Thus, $d_Y (f(x_0),f(x_n)) < \epsilon$ for all $n>N$ and $f(x_n) \to f(x_0)$.
+
+For the converse, we show the contrapositive.
+If $f$ is not continuous at $x_0$, then there exists an $\epsilon >0$ such that, for all $\delta >0$, there is an $x\in X$ with $d_X (x_0,x) < \delta$ and $d_Y (f(x_0),f(x))\geq \epsilon$.
+For this $\epsilon$ and any positive sequence $\delta_n \to 0$, let $x_n$ be the promised $x$.
+Then, $x_n \to x_0$ because $d_X (x_0,x_n)<\delta_n \to 0$ but $d_Y (f(x_0),f(x_n))\geq \epsilon$.
+Thus, $f(x_n)$ does not converge to $f(x_0)$ for some sequence where $x_n \to x_0$.
+\end{proof}
+
 \begin{definition}
-A function $f : X \rightarrow Y$ is called \textbf{$d$-continuous} if, for all $x_0 \in X$, it is $d$-continuous at $x_0$.
+The function $f$ is called \defn{metric space}{continuous} if, for all $x_0 \in X$, it is continuous at $x_0$.
 In precise mathematical notation, one has
 \begin{equation*}
 \begin{split}
@@ -166,6 +205,54 @@ In precise mathematical notation, one has
 \end{split}
 \end{equation*}
 \end{definition}
+
+\begin{definition}
+The function $f$ is called \defn{metric space}{uniformly continuous} if it continuous and, for all $\epsilon > 0$, the $\delta >0$ can be chosen independently of $x_0$.
+In precise mathematical notation, one has
+\begin{equation*}
+\begin{split}
+&(\forall \, \epsilon >0) ( \exists \, \delta >0) (\forall \, x_0 \in X), \\
+&\left( (x\in X) \wedge (d_X(x_0,x)< \delta) \right) \rightarrow  d_Y \left( f(x_0),f(x) \right) < \epsilon .
+\end{split}
+\end{equation*}
+\end{definition}
+
+\begin{definition}
+A function $f  \colon X \rightarrow Y$ is called \defn{metric space}{Lipschitz continuous} on $A \subseteq X$ if there is a constant $L \in \RealNumbers$ such that $d_Y (f(x),f(y)) \leq L d_X (x,y)$ for all $x,y\in A$.
+\end{definition}
+
+Let $f_A$ denote the \textbf{restriction} of $f$ to $A\subseteq X$ defined by $f_A \colon A \to Y$ with $f_A (x) = f(x)$ for all $x\in A$.
+It is easy to verify that, if $f$ is Lipschitz continuous on $A$, then $f_A$ is uniformly continuous.
+
+\subsection{Completeness}
+\label{sec:metspace_complete}
+Suppose $(X,d)$ is a metric space.
+From Definition~\ref{definition_metspace_converge}, we know that a sequence $x_1, x_2, \ldots$ of points in $X$ converges to $x \in X$ if, for every $\delta >0$, there exists an integer $N$ such that $d(x_i,x)<\delta$ for all $i \geq N$.
+%if for every neighborhood $A$ of $x$ there exists a positive integer $N$ such that $x_i \in A$ for all $i \geq N$.
+
+It is possible for a sequence in a metric space $X$ to satisfy the Cauchy criterion, but not to converge in $X$.
+
+\begin{example}
+Let $C[-1,1]$ be the vector space of continuous functions on the interval $[-1,1]$ and consider the $L^2$ norm
+\begin{equation*}
+\left\| f(t) \right\|_2 = \left( \int_{-1}^1 |f(t)|^2 dt \right)^{\frac{1}{2}}.
+\end{equation*}
+Define the sequence of functions $f_n(t)$ given by
+\begin{equation*}
+f_n(t) = \left\{ \begin{array}{ll}
+0 & t \in \left[ -1, -\frac{1}{n} \right] \\
+\frac{nt}{2} + \frac{1}{2} & t \in \left( -\frac{1}{n}, \frac{1}{n} \right) \\
+1 & t \in \left[ \frac{1}{n}, 1 \right]
+\end{array} \right. .
+\end{equation*}
+Assuming that $m \geq n$, we get
+\begin{equation*}
+d(f_n, f_m) = \left\| f_n(t) - f_m(t) \right\|_2
+= \left( \int_{-1}^1 |f_n(t) - f_m(t)|^2 dt \right)^{\frac{1}{2}}
+= \frac{(m-n)^2}{6m^2n}.
+\end{equation*}
+This sequence satisfies the Cauchy criterion, but it does not converge to a continuous function in $C[-1,1]$.
+\end{example}
 
 \begin{definition}
 A metric space $(X,d)$ is said to be \defn{metric space}{complete} if every Cauchy sequence in $X$ converges to a limit $x \in X$.
@@ -181,23 +268,262 @@ It is well-known that this sequence converges to $e\in \mathbb{R}$, but this num
 Therefore, the rational numbers $\mathbb{Q}$ are not complete.
 \end{example}
 
+\begin{theorem}
+A closed subset $A$ of a complete metric space $X$ is itself a complete metric space.
+\end{theorem}
+
 \begin{definition}
-An \defn{metric space}{isometry} is a mapping $\phi : X \rightarrow Y$ between two metric spaces $(X,d_X)$ and $(Y,d_Y)$ that is distance preserving (i.e., it satisfies $d_X (x,x') = d_Y \left(\phi(x),\phi(x')\right)$ for all $x,x'\in X$).
+An \defn{metric space}{isometry} is a mapping $\phi  \colon X \rightarrow Y$ between two metric spaces $(X,d_X)$ and $(Y,d_Y)$ that is distance preserving (i.e., it satisfies $d_X (x,x') = d_Y \left(\phi(x),\phi(x')\right)$ for all $x,x'\in X$).
 \end{definition}
 
 \begin{definition}
-A function $f : X \rightarrow Y$ is called \textbf{uniformly $d$-continuous} if it $d$-continuous and, for all $\epsilon > 0$, the $\delta >0$ can be chosen independently of $x_0$.
-In precise mathematical notation, one has
-\begin{equation*}
-\begin{split}
-&(\forall \, \epsilon >0) ( \exists \, \delta >0) (\forall \, x_0 \in X), \\
-&\left( (x\in X) \wedge (d_X(x_0,x)< \delta) \right) \rightarrow  d_Y \left( f(x_0),f(x) \right) < \epsilon .
-\end{split}
-\end{equation*}
+A subset $A$ of a space $X$ is \defn{metric space}{dense} in $X$ if every $x\in X$ is a limit point of the set $A$.
+This is equivalent to its closure $\overline{A}$ being equal to $X$.
 \end{definition}
 
+\begin{definition}
+The \defn{metric space}{completion} of a metric space $X$ consists of a complete metric space $X'$ and an isometry $\phi  \colon X \rightarrow X'$ such that $\phi(X)$ is a dense subset of $X'$.
+Moreover, the completion is unique up to isometry.
+\end{definition}
 
-\section{General Topology}
+\begin{example}
+Consider the metric space $\mathbb{Q}$ of rational numbers equipped with the metric of absolute distance.
+The completion of this metric space is $\RealNumbers$ because the isometry is given by the identity mapping and $\mathbb{Q}$ is a dense subset of $\RealNumbers$.
+\end{example}
+
+Cauchy sequences have many applications in analysis and signal processing.
+For example, they can be used to construct the real numbers from the rational numbers.
+In fact, the same approach is used to construct the completion of any metric space.
+
+\begin{definition}
+Two Cauchy sequences $x_1, x_2, \ldots$ and $y_1, y_2, \ldots$ are equivalent if for every $\epsilon >0$ there exists an integer $N$ such that $d (x_k, y_k) \leq \epsilon$ for all $k \geq N$.
+\end{definition}
+
+\begin{example}
+Let $\mathcal{C}(\mathbb{Q})$ denote the set of all Cauchy sequences $q_1, q_2, \ldots$ of rational numbers where $\sim$ represents the equivalence relation on this set defined above.
+Then, the set of equivalence classes (or quotient set) $\mathcal{C}(\mathbb{Q}) \setminus \!\! \sim$ is in one-to-one correspondence with the real numbers.
+This construction is the standard completion of $\mathbb{Q}$.
+Since every Cauchy sequence of rationals converges to a real number, the isometry is given by mapping each equivalence class to its limit point in $\RealNumbers$.
+\end{example}
+
+\begin{definition}
+Let $A$ be a subset of a metric space $(X,d)$ and $f \colon X \rightarrow X$ be a function such that $f(A) \subseteq A$.
+The function $f$ is a \defn{metric space}{contraction} on $A$ if there exists a constant $\gamma < 1$ such that $d \left( f(x),f(y) \right) \leq \gamma  d(x,y)$ for all $x,y\in A$.
+\end{definition}
+
+Consider the following important results in applied mathematics: Picard's theorem for differential equations, the implicit function theorem, and Bellman's principle of optimality for Markov decision processes.
+What do they have in common?
+They each establish the existence and uniqueness of a function and have relatively simple proofs based on the contraction mapping theorem.
+
+\begin{theorem}[Contraction Mapping Theorem]
+Let $(X,d)$ be a complete metric space and $f$ be contraction on a closed subset $A \subseteq X$.
+Then, $f$ has a unique fixed point $x^*$ in $A$ such that $f(x^*) = x^*$ and the sequence $x_{n+1} = f(x_n)$ converges to $x^*$ for any point $x_1 \in A$.  Moreover, $x_n$ satisfies the error bounds $d(x^*,x_n) \leq \gamma^{n-1} d(x^*,x_1)$ and $d(x^*,x_{n+1}) \leq d(x_n,x_{n+1})\gamma /(1-\gamma)$.
+\end{theorem}
+\begin{proof}
+Suppose $f$ has two fixed points $y,z\in A$.
+Then, $d(y,z) = d \left(f(y),f(z) \right) \leq \gamma  d(y,z)$ and $d(y,z) = 0$ because $\gamma \in [0,1)$.
+This shows that $y=z$ and any two fixed points in $A$ must be identical.
+
+Since $d(f(x_n),f(x_{n+1})) \leq \gamma d(x_n,x_{n+1})$, induction shows that $d(x_n,x_{n+1}) \leq \gamma^{n-1} d(x_1,x_2)$.
+Using this, we can bound the distance $d(x_m,x_n)$ (for $m<n$) with
+\begin{align*}
+d(x_m,x_n)
+& \leq d(x_m,x_{m+1}) + d(x_{m+1},x_n) \\
+& \leq \sum_{i=m}^{n-1} d(x_i,x_{i+1}) 
+ \leq \sum_{i=m}^{n-1} \gamma^{i-1} d(x_1,x_2) \\
+& \leq \sum_{i=m}^\infty \gamma^{i-1} d(x_1,x_2) 
+ \leq \frac{\gamma^{m-1}}{1-\gamma} d(x_1,x_2).
+\end{align*}
+The sequence $x_n$ is Cauchy because $d(x_m,x_n)$ can be made arbitrarily small (for all $n>m$) by increasing $m$.
+As $(X,d)$ is complete, it follows that $x_n \to x^*$ for some $x^* \in X$.
+Since $f$ is Lipschitz continuous, this implies that $x^* = \lim_n x_n = \lim_n f(x_n) = f(x^*)$ the unique fixed point of $f$ in $A$.
+
+Arguments similar to the above can be used to prove the stated error bounds.
+\end{proof}
+
+\begin{figure}[t]
+\centering
+\input{cos_contract}
+\vspace{-5mm}
+\caption{\label{fig:cos_contract}Starting from $x_1 = 0.2$, the iteration in Example~\ref{exa:cos_contract} maps $x_n$ to $x_{n+1}= \cos(x_n)$.  The points are also connected to the slope-1 line to show the path.}
+\end{figure}
+
+\begin{example} \label{exa:cos_contract}
+Consider the cosine function restricted to the subset $[0,1]\subseteq \RealNumbers$.
+Since $\cos(x)$ is decreasing for $0 \leq x < \pi$, we have $\cos([0,1]) = [\cos(1),1]$ with $\cos(1) \approx 0.54$.
+The mean value theorem of calculus also tells us that $\cos(y) - \cos(x) = \cos '(t) (y-x)$ for some $t\in [x,y]$.
+Since $\cos '(t) = -\sin(t)$ and $\sin(t)$ is increasing on $[0,1]$, we find that $\sin([0,1]) = [0,\sin(1)]$ with $\sin(1) \approx 0.84$.
+
+Taking the absolute value, shows that $| \cos(y) - \cos(x) | \leq 0.85 |y-x|$.
+Therefore, $\cos(t)$ is a contraction on $[0,1]$ and the sequence $x_{n+1} = \cos(x_n)$ (e.g., see Figure~\ref{fig:cos_contract}) converges to the unique fixed point $x^* = \cos(x^*)$ for all $x_1 \in [0,1]$.
+\end{example}
+
+%\begin{example}
+%Suppose the function $f \colon \RealNumbers \rightarrow \RealNumbers$ satisfies $|f(x)| \leq a |x|$ for all $x\in X$.
+%If $X$ be a closed subset of the real numbers containing zero and $a\in[0,1)$, then $f$ is a contraction on $X$ and $x_{n+1} = f(x_n) \rightarrow 0$ for all $x_1 \in X$.
+%\end{example}
+
+
+\subsection{Compactness}
+\label{sec:metspace_compact}
+
+\begin{definition}
+A metric space $X$ is \defn{metric space}{totally bounded} if, for any $\epsilon > 0$, there exists a finite set of $B(x,\epsilon)$ balls that cover (i.e., whose union equals) $X$.
+\end{definition}
+
+\begin{definition}
+A metric space $X$ is \defn{metric space}{compact} if it is complete and totally bounded.
+\end{definition}
+
+The closed interval $[0,1]\subset \RealNumbers$ is compact.
+In fact, a subset of $\RealNumbers^n$ is compact if and only if it is closed and bounded.
+On the other hand, the standard metric space of real numbers is not compact because it is not totally bounded.
+
+\begin{theorem}
+\label{thm:CompactClosedSubsetCompact}
+A closed subset $A$ of a compact space $X$ is itself a compact space.
+\end{theorem}
+
+The following theorem highlights one of the main reasons that compact spaces are desirable in practice.
+
+\begin{theorem}
+Let $X$ be a compact space and $x_1,x_2,\ldots \in X$ be a sequence.
+Then, there is a subsequence $x_{n_1},x_{n_2},\ldots$, defined by some increasing sequence $n_1,n_2,\ldots \in \mathbb{N}$, that converges.
+\end{theorem}
+\begin{proof}
+Suppose for some $x\in X$, it holds that, for any $\epsilon > 0$, the set $B(x,\epsilon)$ contains infinitely many elements in the sequence $x_1,x_2,\ldots$.
+In this case, we can choose $n_1,n_2,\ldots$ so that $|x\! -\! x_{n_j}|\! <\! \frac{1}{j}$.
+Therefore, the subsequence converges to $x$.
+
+On the other hand, suppose the sequence has no convergent subsequence.
+Then, for every $x\in X$, there is an $\epsilon >0$ such that $B(x,\epsilon)$ does not contain infinitely many elements in the sequence.
+Since $X$ is totally bounded, we also find that, for any $\epsilon >0$, $X$ is covered by a finite set of balls of radius $\epsilon$.
+But, for each $\epsilon >0$, this gives a contradiction because all the elements in the infinite sequence must fall into a finite number balls each containing finitely many elements.
+By contradiction, this implies that there is a subsequence that converges.
+%First, we suppose the sequence has no convergent subsequence.
+%Then, we notice that the set $A = \{x_1,x_2,\ldots \}$ is closed and therefore compact by Theorem~\ref{thm:CompactClosedSubsetCompact}.
+%Since any limit point of $A$ can be used to generate a convergent subsequnce, we must also conclude that $A$ has no limit points.
+%This implies that there is an $\epsilon > 0$ such that infinitely balls aronud $x$'s does not cover $X$.
+%Therefore, $X$ is not totally bounded and we have a contradiction.
+\end{proof}
+
+Functions from compact sets to the real numbers are very important in practice.
+To keep the discussion self-contained, we first review the extreme values of sets of real numbers.
+First, we must define the \defn{topology}{extended real numbers} $\overline{\RealNumbers}$ by augmenting the real numbers to include limit points for unbounded sequences $\overline{\RealNumbers} \triangleq \RealNumbers \cup \{ \infty,-\infty\}$.
+Surprisingly, it turns out that $\overline{\RealNumbers}$ is a compact metrizable space.
+
+\begin{definition}
+The \defn{set theory}{supremum} (or least upper bound) of $X\subseteq \RealNumbers$, denoted $\sup X$, is the smallest extended real number $M \in \overline{\RealNumbers}$ such that $x\leq M$ for all $x\in X$.
+It is always well-defined and equals $-\infty$ if $X=\emptyset$.
+\end{definition}
+
+\begin{definition}
+The \defn{set theory}{maximum} of $X\subseteq \RealNumbers$, denoted $\max X$, is the largest value achieved by the set.
+It equals $\sup X$ if $\sup X \in X$ and is undefined otherwise.
+\end{definition}
+
+\begin{definition}
+The \defn{set theory}{infimum} (or greatest lower bound) of $X\subseteq \RealNumbers$, denoted $\inf X$, is the largest extended real number $m \in \overline{\RealNumbers}$ such that $x\geq m$ for all $x\in X$.
+It is always well-defined and equals $\infty$ if $X=\emptyset$.
+\end{definition}
+
+\begin{definition}
+The \defn{set theory}{minimum} of $X\subseteq \RealNumbers$, denoted $\min X$, is the smallest value achieved by the set.
+It equals $\inf X$ if $\inf X \in X$ and is undefined otherwise.
+\end{definition}
+
+\begin{lemma}
+\label{lem:SupremumSequence}
+Let $X$ be a metric space and $f \colon X\rightarrow \RealNumbers$ be a function from $X$ to the real numbers.
+Let $M = \sup f(A)$ for some non-empty $A \subseteq X$.
+Then, there exists a sequence $x_1,x_2,\ldots \in A$ such that $\lim_n f(x_n) = M$.
+\end{lemma}
+\begin{proof}
+If $M=\infty$, then $A$ has no finite upper bound and, for any $y\in \RealNumbers$, there exists an $x\in A$ such that $f(x)>y$.
+In this case, we can let $x_1$ be any element of $A$ and $x_{n+1}$ be any element of $A$ such that $f(x_{n+1}) > f(x_n) + 1$.
+
+If $M<\infty$, then $A$ has a finite upper bound and, for any $\epsilon >0$, there is an $x$ such that $M-f(x)<\epsilon$.
+Otherwise, one arrives at the contradiction $\sup f(A) < M$.
+Therefore, we can construct the sequence $x_1,x_2,\ldots$ by choosing $x_n\in A$ to be any point that satisfies $M-f(x_n)\leq \frac{1}{n}$.
+\end{proof}
+
+\begin{theorem}
+Let $X$ be a metric space and $f \colon X\rightarrow \RealNumbers$ be a continuous function from $X$ to the real numbers.
+If $A$ is a compact subset of $X$, then there exists $x\in A$ such that $f(x)=\sup f(A)$ (i.e., $f$ achieves a maximum on $A$).
+\end{theorem}
+\begin{proof}
+Using Lemma~\ref{lem:SupremumSequence}, one finds that there is a sequence $x_1,x_2,\ldots \in A$ such that $\lim_n f(x_n) = \sup f(A)$.
+Since $A$ is compact, there must also be a subsequence $x_{n_1},x_{n_2},\ldots$ that converges.
+As $A$ is closed, this subsequence must converge to some $x^* \in A$.
+Finally, the continuity of $f$ shows that
+\[\sup f(A) = \lim_n f(x_n) = \lim_k f(x_{n_k}) = f(\lim_k x_{n_k}) = f(x^*).\]
+\end{proof}
+
+\begin{corollary}
+A continuous function from a compact subset $A$, of a metric space $X$, to the real numbers achieves a minimum on $A$.
+\end{corollary}
+
+\begin{theorem}
+Any bounded non-decreasing sequence of real numbers converges to its supremum.
+\end{theorem}
+\begin{proof}
+Let $x_1,x_2,\ldots \in \RealNumbers$ be a sequence satisfying $x_{n+1} \geq x_n$ and $x_n \leq M < \infty$ for all $n\in \mathbb{N}$.
+Without loss of generality, we can take the upper bound $M$ to be the supremum $\sup \{x_1,x_2,\ldots\}$.
+This sequence converges to $M$ if, for any $\epsilon >0$, there is an $N\in \mathbb{N}$ such that $M-x_n<\epsilon$ for all $n>N$.
+
+To prove this by contradiction, we suppose that $x_n$ does not converge to $M$.
+Since $x_n$ is non-decreasing, this implies that there is an $\epsilon > 0$ such that $M - x_n \geq \epsilon$ for all $n\in \mathbb{N}$.
+But, this result contradicts $\sup f(A) = M$.
+Therefore, the sequence converges to $M$.
+\end{proof}
+
+%\begin{example}
+%\end{example}
+
+\subsection{Sequences of Functions}
+
+Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces and
+$f_n \colon X \to Y$ for $n\in \mathbb{N}$ be a sequence of functions mapping $X$ to $Y$.
+
+\index{metric space!pointwise convergence}
+\begin{definition}
+The sequence $f_n$ \textbf{converges pointwise} to $f\colon X \to Y$ if \vspace{-1mm}
+\[ \lim_{n\to \infty} f_n (x) = f(x) \vspace*{-1mm} \]
+for all $x \in X$.
+Using mathematical symbols, we can write \vspace{-1mm}
+\[ \forall x\in X, \forall \epsilon > 0, \exists N\in \mathbb{N}, \; (n>N) \to \left( d_Y \left( f_n(x),f(x) \right) < \epsilon \right). \vspace*{-1mm} \]
+\end{definition}
+
+\index{metric space!uniform convergence}
+\begin{definition}
+The sequence $f_n$ \textbf{converges uniformly} to $f \colon X \to Y$ if \vspace{-1mm}
+\[ \forall \epsilon > 0, \exists N\in \mathbb{N}, \forall x\in X,  \; (n>N) \to \left( d_Y \left( f_n(x),f(x) \right) < \epsilon \right). \vspace*{-1mm} \]
+This condition is also equivalent to \vspace{-1mm}
+\[ \lim_{n\to \infty} \sup_{x\in X} d_Y \left( f_n (x) , f(x) \right) = 0. \]
+%Using mathematical symbols, we can write
+ \end{definition}
+
+\begin{theorem}
+If each $f_n$ is continuous and $f_n$ converges uniformly to $f \colon X \to Y$, then $f$ is continuous.
+\end{theorem}
+\begin{proof}
+The goal is to show that, for all $x\in X$ and any $\epsilon > 0$, there is a $\delta>0$ such that $d_Y (f (x),f (y)) < \epsilon$ if $d_X (x,y) < \delta$.
+Since $f_n \to f$ uniformly, for any $\epsilon >0$, there is an $N\in \mathbb{N}$ such that $d_Y (f_n (x), f(x) ) < \epsilon / 3$ for all $n > N$ and all $x\in X$.
+Now, we can fix $\epsilon > 0$ use the $N$ promised above.
+Then, for any $n>N$, the continuity of $f_n$ implies that, for all $x\in X$ and any $\epsilon >0$, there is a $\delta>0$ such that $d_Y (f_n (x),f_n(y)) < \epsilon/3$ if $d_X (x,y) < \delta$.
+Thus, if $d_X (x,y) < \delta$, then
+\begin{align*}
+d_Y (f(x),f(y))
+&\leq d_Y (f(x),f_n (x)) + d_Y (f_n (x) ,f_n (y) ) + d_Y (f_n (y), f(y) ) \\
+& < \frac{\epsilon}{3} + \frac{\epsilon}{3} + \frac{\epsilon}{3} = \epsilon.
+\end{align*}
+\end{proof}
+
+\section{General Topology*}
+
+While topology originated with the study of sets of finite-dimensional real vectors, its mathematical abstraction can also be useful.
+We note that some of the terms used above, for metric spaces, are redefined below.
+Fortunately, these new definitions are compatible with the old ones when the topology is generated by a metric.
 
 \index{topology}
 \begin{definition}
@@ -245,9 +571,12 @@ This space is said to be \defn{topology}{metrizable} if there exists a metric $d
 %A metric space is a space $X$ together with a specific metric $d$ that gives the topology of $X$.
 \end{definition}
 
+We note that definitions and results in Sections~\ref{sec:metspace_complete} and~\ref{sec:metspace_compact} for metric spaces actually apply to any metrizable space.
+For example, a metrizable space is complete if and only if there the metric that induces its topology also defines a complete metric space.
+
 \begin{example}
 While most of the spaces discussed in these notes are metrizable, there is a very common notion of convergence that is not metrizable.
-The topology on the set of functions $f: [0,1]\rightarrow \RealNumbers$ where the open sets are defined by pointwise convergence is not metrizable.
+The topology on the set of functions $f \colon [0,1]\rightarrow \RealNumbers$ where the open sets are defined by pointwise convergence is not metrizable.
 \end{example}
 
 
@@ -331,14 +660,14 @@ This also implies that $\RealNumbers$, the standard metric space of real numbers
 
 \begin{definition}
 Let $X$ and $Y$ be topological spaces.
-A function $f: X \rightarrow Y$ is \defn{topology}{continuous} if for each open subset $O \subseteq Y$, the set $f^{-1} (O)$ is an open subset of $X$.
+A function $f \colon X \rightarrow Y$ is \defn{topology}{continuous} if for each open subset $O \subseteq Y$, the set $f^{-1} (O)$ is an open subset of $X$.
 \end{definition}
 
 Recall that $f^{-1}(B)$ is the set $\{ x \in X | f(x) \in B \}$.
 Continuity of a function depends not only upon the function $f$ itself, but also on the topologies specified for its domain and range!
 
 \begin{theorem} \label{theorem:ContinuityEquivalentConditions}
-Let $X$ and $Y$ be topological spaces and consider a function $f: X \rightarrow Y$.
+Let $X$ and $Y$ be topological spaces and consider a function $f \colon X \rightarrow Y$.
 The following are equivalent:
 \begin{enumerate}
 \item $f$ is continuous
@@ -380,7 +709,7 @@ That is, $f^{-1} (O)$ is open.
 
 \begin{theorem}
 Suppose $X$ and $Y$ are two metrizable spaces with metrics $d_X$ and $d_Y$.
-Consider a function $f : X \rightarrow Y$.
+Consider a function $f  \colon X \rightarrow Y$.
 The function $f$ is continuous if and only if it is $d$-continuous with respect to these metrics.
 \end{theorem}
 \begin{proof}
@@ -424,7 +753,7 @@ Notice that the ``only if'' proof holds for any topological space, while ``if'' 
 
 \begin{theorem}
 \label{theorem:topology_limitpoint_closure}
-Let $f: X \rightarrow Y$ where $X$ is a metrizable space.
+Let $f \colon X \rightarrow Y$ where $X$ is a metrizable space.
 The function $f$ is continuous if and only if for every convergent sequence $x_n \rightarrow x$ in $X$, the sequence $f(x_n)$ converges to $f(x)$.
 \end{theorem}
 \begin{proof}
@@ -440,230 +769,4 @@ By assumption, $f(x_n) \rightarrow f(x)$.
 Since $f(x_n) \in f(A)$, Theorem~\ref{theorem:topology_limitpoint_closure} implies that $f(x) \in \Closure{f(A)}$.
 Hence $f \left( \Closure{A} \right) \subseteq \Closure{f(A)}$ and $f$ is continuous.
 \end{proof}
-
-
-\subsection{Completeness}
-
-Suppose $X$ is a metrizable space.
-From Definition~\ref{definition:SequenceConvergence}, we know that a sequence $x_1, x_2, \ldots$ of points in $X$ converges to $x \in X$ if for every neighborhood $A$ of $x$ there exists a positive integer $N$ such that $x_i \in A$ for all $i \geq N$.
-
-It is possible for a sequence in a metrizable space $X$ to satisfy the Cauchy criterion, but not to converge in $X$.
-
-\begin{example}
-Let $C[-1,1]$ be the vector space of continuous functions on the interval $[-1,1]$ and consider the $L_2$ norm
-\begin{equation*}
-\left\| f(t) \right\|_2 = \left( \int_{-1}^1 |f(t)|^2 dt \right)^{\frac{1}{2}}.
-\end{equation*}
-Define the sequence of functions $f_n(t)$ given by
-\begin{equation*}
-f_n(t) = \left\{ \begin{array}{ll}
-0 & t \in \left[ -1, -\frac{1}{n} \right] \\
-\frac{nt}{2} + \frac{1}{2} & t \in \left( -\frac{1}{n}, \frac{1}{n} \right) \\
-1 & t \in \left[ \frac{1}{n}, 1 \right]
-\end{array} \right. .
-\end{equation*}
-Assuming that $m \geq n$, we get
-\begin{equation*}
-d(f_n, f_m) = \left\| f_n(t) - f_m(t) \right\|_2
-= \left( \int_{-1}^1 |f_n(t) - f_m(t)|^2 dt \right)^{\frac{1}{2}}
-= \frac{(m-n)^2}{6m^2n}.
-\end{equation*}
-This sequence satisfies the Cauchy criterion, but it does not converge to a continuous function in $C[-1,1]$.
-\end{example}
-
-\begin{definition}
-A metrizable space $X$ is said to be \defn{topology}{complete} if every Cauchy sequence in $X$ converges to a limit $x \in X$.
-\end{definition}
-
-\begin{theorem}
-A closed subset $A$ of a complete metrizable space $X$ is itself a complete metrizable space.
-\end{theorem}
-
-\begin{definition}
-The \defn{topology}{completion} of a metrizable space $X$ consists of a complete metric space $X'$ and an isometry $\phi : X \rightarrow X'$ such that $\phi(X)$ is a dense subset of $X'$.
-Moreover, the completion is unique up to isometry.
-\end{definition}
-
-\begin{example}
-Consider the metric space $\mathbb{Q}$ of rational numbers equipped with the metric of absolute distance.
-The completion of this metric space is $\RealNumbers$ because the isometry is given by the identity mapping and $\mathbb{Q}$ is a dense subset of $\RealNumbers$.
-\end{example}
-
-Cauchy sequences have many applications in analysis and signal processing.
-For example, they can be used to construct the real numbers from the rational numbers.
-In fact, the same approach is used to construct the completion of any metric space.
-
-\begin{definition}
-Two Cauchy sequences $x_1, x_2, \ldots$ and $y_1, y_2, \ldots$ are equivalent if for every $\epsilon >0$ there exists an integer $N$ such that $d (x_k, y_k) \leq \epsilon$ for all $k \geq N$.
-\end{definition}
-
-\begin{example}
-Let $\mathcal{C}(\mathbb{Q})$ denote the set of all Cauchy sequences $q_1, q_2, \ldots$ of rational numbers where $\sim$ represents the equivalence relation on this set defined above.
-Then, the set of equivalence classes (or quotient set) $\mathcal{C}(\mathbb{Q}) \setminus \!\! \sim$ is in one-to-one correspondence with the real numbers.
-This construction is the standard completion of $\mathbb{Q}$.
-Since every Cauchy sequence of rationals converges to a real number, the isometry is given by mapping each equivalence class to its limit point in $\RealNumbers$.
-\end{example}
-
-\begin{definition}
-Let $A$ be a subset of a metric space $(X,d)$ and $f: X \rightarrow X$ be a function such that $f(A) \subseteq A$.
-The function $f$ is a \defn{metric space}{contraction} on $A$ if there exists a constant $\gamma < 1$ such that $d \left( f(x),f(y) \right) \leq \gamma  d(x,y)$ for all $x,y\in A$.
-\end{definition}
-
-Consider the following important results in applied mathematics: Picard's theorem for differential equations, the implicit function theorem, and Bellman's principle of optimality for Markov decision processes.
-What do they have in common?
-They each establish the existence and uniqueness of a function and have relatively simple proofs based on the contraction mapping theorem.
-
-\begin{theorem}[Contraction Mapping Theorem]
-Let $(X,d)$ be a complete metric space and $f$ be contraction on a closed subset $A \subseteq X$.
-Then, $f$ has a unique fixed point $x^*$ in $A$ such that $f(x^*) = x^*$.
-Moreover, the sequence $x_{n+1} = f(x_n)$ converges to $x^*$ for any point $x_1 \in A$, with $d(x^*, f^n(x_1)) \leq c \gamma^n$ for a constant $c$ depending on $x_1$.
-\end{theorem}
-\begin{proof}
-Suppose $f$ has two fixed points $y,z\in A$.
-Then, $d(y,z) = d \left(f(y),f(z) \right) \leq \gamma  d(y,z)$ and $d(y,z) = 0$ because $\gamma \in [0,1)$.
-This shows that $y=z$ and any two fixed points in $A$ must be identical.
-
-Using induction, it is easy to see that $d(x_n,x_{n+1}) \leq \gamma^{n-1} d(x_1,x_2)$.
-From this, we can bound the distance between $x_m$ and $x_n$ (for $m<n$) with
-\begin{align*}
-d(x_m,x_n)
-& \leq d(x_m,x_{m+1}) + d(x_{m+1},x_n) \\
-& \leq \sum_{i=m}^{n-1} d(x_i,x_{i+1}) 
- \leq \sum_{i=m}^{n-1} \gamma^{i-1} d(x_1,x_2) \\
-& \leq \sum_{i=m}^\infty \gamma^{i-1} d(x_1,x_2) 
- \leq \frac{\gamma^{m-1}}{1-\gamma} d(x_1,x_2).
-\end{align*}
-The sequence $x_n$ is Cauchy because $d(x_m,x_n)$ can be made arbitrarily small (for all $n>m$) by increasing $m$.
-Since $(X,d)$ is complete, it must converge to a fixed point and $x^*$ is the unique fixed point in $A$.
-\end{proof}
-
-\begin{example}
-Consider the cosine function restricted to the subset $[0,1]\subseteq \RealNumbers$.
-Since $\cos(x)$ is decreasing for $0 \leq x < \pi$, we have $\cos([0,1]) = [\cos(1),1]$ with $\cos(1) \approx 0.54$.
-The mean value theorem of calculus also tells us that $\cos(y) - \cos(x) = \cos '(t) (y-x)$ for some $t\in [x,y]$.
-Since $\cos '(t) = -\sin(t)$ and $\sin(t)$ is increasing on $[0,1]$, we find that $\sin([0,1]) = [0,\sin(1)]$ with $\sin(1) \approx 0.84$.
-
-Taking the absolute value, shows that $| \cos(y) - \cos(x) | \leq 0.85 |y-x|$.
-Therefore, $\cos(t)$ is a contraction on $[0,1]$ and the sequence $x_{n+1} = \cos(x_n)$ converges to the unique fixed point $x^* = \cos(x^*)$ for all $x_1 \in [0,1]$.
-\end{example}
-
-%\begin{example}
-%Suppose the function $f: \RealNumbers \rightarrow \RealNumbers$ satisfies $|f(x)| \leq a |x|$ for all $x\in X$.
-%If $X$ be a closed subset of the real numbers containing zero and $a\in[0,1)$, then $f$ is a contraction on $X$ and $x_{n+1} = f(x_n) \rightarrow 0$ for all $x_1 \in X$.
-%\end{example}
-
-
-\subsection{Compactness}
-
-\begin{definition}
-A metrizable space $X$ is \defn{topology}{totally bounded} if, for any $\epsilon > 0$, there exists a finite set of $B(x,\epsilon)$ balls that cover (i.e., whose union equals) $X$.
-\end{definition}
-
-\begin{definition}
-A metrizable space $X$ is \defn{topology}{compact} if it is complete and totally bounded.
-\end{definition}
-
-The closed interval $[0,1]\subset \RealNumbers$ is compact.
-In fact, a subset of $\RealNumbers^n$ is compact if and only if it is closed and bounded.
-On the other hand, the standard metric space of real numbers is not compact because it is not totally bounded.
-
-\begin{theorem}
-\label{thm:CompactClosedSubsetCompact}
-A closed subset $A$ of a compact space $X$ is itself a compact space.
-\end{theorem}
-
-The following theorem highlights one of the main reasons that compact spaces are desirable in practice.
-
-\begin{theorem}
-Let $X$ be a compact space and $x_1,x_2,\ldots \in X$ be a sequence.
-Then, there is a subsequence $x_{n_1},x_{n_2},\ldots$, defined by some increasing sequence $n_1,n_2,\ldots \in \mathbb{N}$, that converges.
-\end{theorem}
-\begin{proof}
-Suppose for some $x\in X$, it holds that, for any $\epsilon > 0$, the set $B(x,\epsilon)$ contains infinitely many elements in the sequence $x_1,x_2,\ldots$.
-In this case, we can choose $n_1,n_2,\ldots$ so that $|x\! -\! x_{n_j}|\! <\! \frac{1}{j}$.
-Therefore, the subsequence converges to $x$.
-
-On the other hand, suppose the sequence has no convergent subsequence.
-Then, for every $x\in X$, there is an $\epsilon >0$ such that $B(x,\epsilon)$ does not contain infinitely many elements in the sequence.
-Since $X$ is totally bounded, we also find that, for any $\epsilon >0$, $X$ is covered by a finite set of balls of radius $\epsilon$.
-But, for each $\epsilon >0$, this gives a contradiction because all the elements in the infinite sequence must fall into a finite number balls each containing finitely many elements.
-By contradiction, this implies that there is a subsequence that converges.
-%First, we suppose the sequence has no convergent subsequence.
-%Then, we notice that the set $A = \{x_1,x_2,\ldots \}$ is closed and therefore compact by Theorem~\ref{thm:CompactClosedSubsetCompact}.
-%Since any limit point of $A$ can be used to generate a convergent subsequnce, we must also conclude that $A$ has no limit points.
-%This implies that there is an $\epsilon > 0$ such that infinitely balls aronud $x$'s does not cover $X$.
-%Therefore, $X$ is not totally bounded and we have a contradiction.
-\end{proof}
-
-Functions from compact sets to the real numbers are very important in practice.
-To keep the discussion self-contained, we first review the extreme values of sets of real numbers.
-First, we must define the \defn{topology}{extended real numbers} $\overline{\RealNumbers}$ by augmenting the real numbers to include limit points for unbounded sequences $\overline{\RealNumbers} \triangleq \RealNumbers \cup \{ \infty,-\infty\}$.
-Surprisingly, it turns out that $\overline{\RealNumbers}$ is a compact metrizable space.
-
-\begin{definition}
-The \defn{topology}{supremum} (or least upper bound) of $X\subseteq \RealNumbers$, denoted $\sup X$, is the smallest extended real number $M \in \overline{\RealNumbers}$ such that $x\leq M$ for all $x\in X$.
-It is always well-defined and equals $-\infty$ if $X=\emptyset$.
-\end{definition}
-
-\begin{definition}
-The \defn{topology}{maximum} of $X\subseteq \RealNumbers$, denoted $\max X$, is the largest value achieved by the set.
-It equals $\sup X$ if $\sup X \in X$ and is undefined otherwise.
-\end{definition}
-
-\begin{definition}
-The \defn{topology}{infimum} (or greatest lower bound) of $X\subseteq \RealNumbers$, denoted $\inf X$, is the largest extended real number $m \in \overline{\RealNumbers}$ such that $x\geq m$ for all $x\in X$.
-It is always well-defined and equals $\infty$ if $X=\emptyset$.
-\end{definition}
-
-\begin{definition}
-The \defn{topology}{minimum} of $X\subseteq \RealNumbers$, denoted $\min X$, is the smallest value achieved by the set.
-It equals $\inf X$ if $\inf X \in X$ and is undefined otherwise.
-\end{definition}
-
-\begin{lemma}
-\label{lem:SupremumSequence}
-Let $X$ be a metrizable space and $f: X\rightarrow \RealNumbers$ be a function from $X$ to the real numbers.
-Let $M = \sup f(A)$ for some non-empty $A \subseteq X$.
-Then, there exists a sequence $x_1,x_2,\ldots \in A$ such that $\lim_n f(x_n) = M$.
-\end{lemma}
-\begin{proof}
-If $M=\infty$, then $A$ has no finite upper bound and, for any $y\in \RealNumbers$, there exists an $x\in A$ such that $f(x)>y$.
-In this case, we can let $x_1$ be any element of $A$ and $x_{n+1}$ be any element of $A$ such that $f(x_{n+1}) > f(x_n) + 1$.
-
-If $M<\infty$, then $A$ has a finite upper bound and, for any $\epsilon >0$, there is an $x$ such that $M-f(x)<\epsilon$.
-Otherwise, one arrives at the contradiction $\sup f(A) < M$.
-Therefore, we can construct the sequence $x_1,x_2,\ldots$ by choosing $x_n\in A$ to be any point that satisfies $M-f(x_n)\leq \frac{1}{n}$.
-\end{proof}
-
-\begin{theorem}
-Let $X$ be a metrizable space and $f: X\rightarrow \RealNumbers$ be a continuous function from $X$ to the real numbers.
-If $A$ is a compact subset of $X$, then there exists $x\in A$ such that $f(x)=\sup f(A)$ (i.e., $f$ achieves a maximum on $A$).
-\end{theorem}
-\begin{proof}
-Using Lemma~\ref{lem:SupremumSequence}, one finds that there is a sequence $x_1,x_2,\ldots \in A$ such that $\lim_n f(x_n) = \sup f(A)$.
-Since $A$ is compact, there must also be a subsequence $x_{n_1},x_{n_2},\ldots$ that converges to some $x^* \in A$.
-Finally, the continuity of $f$ shows that
-\[\sup f(A) = \lim_n f(x_n) = \lim_k f(x_{n_k}) = f(\lim_k x_{n_k}) = f(x^*).\]
-\end{proof}
-
-\begin{corollary}
-A continuous function from a compact subset $A$, of a metrizable space $X$, to the real numbers achieves a minimum on $A$.
-\end{corollary}
-
-\begin{theorem}
-Any bounded non-decreasing sequence of real numbers converges to its supremum.
-\end{theorem}
-\begin{proof}
-Let $x_1,x_2,\ldots \in \RealNumbers$ be a sequence satisfying $x_{n+1} \geq x_n$ and $x_n \leq M < \infty$ for all $n\in \mathbb{N}$.
-Without loss of generality, we can take the upper bound $M$ to be the supremum $\sup \{x_1,x_2,\ldots\}$.
-This sequence converges to $M$ if, for any $\epsilon >0$, there is an $N\in \mathbb{N}$ such that $M-x_n<\epsilon$ for all $n>N$.
-
-Proving by contradiction, we assume that it does not converge to $M$.
-Since $x_n$ is non-decreasing, this implies that there is an $\epsilon > 0$ such that $M - x_n \geq \epsilon$ for all $n\in \mathbb{N}$.
-But, this result contradicts $\sup f(A) = M$.
-Therefore, the sequence converges to $M$.
-\end{proof}
-
-%\begin{example}
-%\end{example}
 

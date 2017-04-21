@@ -219,16 +219,20 @@ Another example of a meta-statement is ``the statement `Fred is an Aggie and Fre
 These two examples illustrate how meta-statements describe the relationship between statements.
 It is also instructive to note that implications and equivalences are the meta-statement analogs of conditionals and biconditionals.
 
-A \defn{logic}{logical implication} can be intuitively described as $P$ implies $Q$ if $Q$ must be true whenever $P$ is true.
+A \defn{logic}{logical implication} can be intuitively described as ``$P$ implies $Q$'' if $Q$ must be true whenever $P$ is true.
 That is, $Q$ cannot be false if $P$ is true.
 Necessity is the key aspect of this sentence, the fact that $P$ and $Q$ both happen to be true cannot be coincidental.
 To have $P$ implies $Q$, we need the conditional $P \rightarrow Q$ to be true under all possible circumstances.
+
+Meta-statements, such as ``$P$ implies Q'', can be defined formally when $P$ and $Q$ are both logical functions of other propositions.
+For example, consider $P=R \wedge (R \to S)$ and $Q=S$.
+Then, the truth of the statement $P \to Q$ depends only on the truth of external propositions $R$ and $S$.
 
 The notion of implication can be rigorously defined as follows, $P$ implies $Q$ if the statement $P \rightarrow Q$ is a tautology.
 We abbreviate $P$ implies $Q$ by writing $P \Rightarrow Q$.
 It is important to understand the difference between ``$P \rightarrow Q$'' and ``$P \Rightarrow Q$.''
 The former, $P \rightarrow Q$, is a compound statement that may or may not be true.
-On the other hand, $P \Rightarrow Q$ is a relation stating that the compound statement $P \rightarrow Q$ is true under all instances of $P$ and $Q$.
+On the other hand, $P \Rightarrow Q$ is a relation stating that the compound statement $P \rightarrow Q$ is true under all instances of the external propositions.
 
 While the distinction between implication and conditional may seem extraneous, we will soon see that meta-statements become extremely useful in building valid arguments.
 In particular, the following implications are used extensively in constructing proofs.
@@ -315,7 +319,7 @@ Let $P$, $Q$ and $R$ be statements.
 The first equivalence in this list, $\neg (\neg P) \Leftrightarrow P$, may appear trivial.
 However, from the point of view of constructing mathematical proofs, this equivalence is frequently employed.
 Indeed, one method to prove that statement $P$ is true is to hypothesize that $\neg P$ is true and then derive a contradiction.
-It then follows that $\neg P$ is false, which implies that $P$ is true.
+It then follows that, if $\neg P$ is false, then $P$ is true.
 This popular technique is called \defn{logic}{proof by contradiction}.
 It is illustrated below through a classic example.
 
@@ -484,7 +488,7 @@ The following standard notation is used for interval subsets of the real numbers
 
 \begin{example}[\defn{set theory}{Russell's Paradox}]
 Let $R$ be the set of all sets that do not contain themselves or $R = \{S|S\notin S\}$.
-The paradox arises from the fact that the definition implies the logical contradiction $R\in R \Leftrightarrow R\notin R$.
+The paradox arises from the fact that the definition leads to the logical contradiction $R\in R \Leftrightarrow R\notin R$.
 Axiomatic set theory eliminates this paradox by disallowing self-referencing constructions like this.
 \end{example}
 
@@ -496,7 +500,7 @@ This means that
 \end{definition}
 
 \begin{definition}
-We say that $A$ is a \defn{set theory}{subset} of $B$ (denoted $A\subseteq B$) if, for all $x$, $x\in A$ implies $x\in B$.
+We say that $A$ is a \defn{set theory}{subset} of $B$ (denoted $A\subseteq B$) if, for all $x$, if $x\in A$ then $x\in B$.
 This means that
 \[ A\subseteq B  \Leftrightarrow \forall x \left( (x\in A)\rightarrow (x\in B) \right). \]
 It is a \textbf{proper subset} (denoted $A\subset B$) if $A\subseteq B$ and $A\neq B$.
@@ -562,7 +566,7 @@ A relation on $A$ is said to be:
 \begin{enumerate}
 \item Reflexive if $x\sim x$ holds for all $x\in A$
 \item Symmetric if $x\sim y$ implies $y\sim x$ for all $x,y\in A$
-\item Transitive if $x\sim y$ and $y\sim z$ implies $x\sim z$ for all $x,y,x\in A$
+\item Transitive if $x\sim y$ and $y\sim z$, then $x\sim z$ for all $x,y,z\in A$
 \end{enumerate}
 
 A relation is called an \defn{set theory}{equivalence relation} if it is reflexive, symmetric, and transitive.
@@ -586,7 +590,7 @@ Consider the set $\mathbb{N} \times \mathbb{N} = \{ (a,b) | a,b\in\mathbb{N} \}$
 If one associates the element $(a,b)$ with the fraction $a/b$, then the entire set is associated with the set of (possibly reducible) fractions.
 Now, consider the equivalence relation $(a,b) \sim (c,d)$ if $ad=bc$.
 In this case, two ordered pairs are equivalent if their associated fractions evaluate to the same real number.
-The quotient set $\mathbb{N} \times \mathbb{N} \setminus \!\sim$ can therefore be associated with the set of reduced fractions.
+The quotient set $\mathbb{N} \setminus \!\sim$ can therefore be associated with the set of reduced fractions.
 \end{example}
 
 
@@ -599,27 +603,27 @@ Nowadays, every teacher warns their students that one must be careful because th
 
 \index{functions}
 The modern approach to defining functions is based on set theory.
-A \textbf{function} $f: X\rightarrow Y$ is a rule that assigns a single value $f(x)\in Y$ to each element $x\in X$.
-The notation $f: X \rightarrow Y$ is used to emphasize the role of the \defn{functions}{domain} $X$ and the \defn{functions}{codomain} $Y$.
+A \textbf{function} $f \colon X\rightarrow Y$ is a rule that assigns a single value $f(x)\in Y$ to each element $x\in X$.
+The notation $f \colon X \rightarrow Y$ is used to emphasize the role of the \defn{functions}{domain} $X$ and the \defn{functions}{codomain} $Y$.
 The \textbf{range} of $f$ is the subset of $Y$ which is actually achieved by $f$, $\{f(x) \in Y | x\in X \}$.
 Since the term codomain is somewhat uncommon, people often use the term range instead of codomain either intentionally (for simplicity) or unintentionally (due to confusion).
 \begin{definition}
-Formally, a \textbf{function} $f: X \rightarrow Y$ from $X$ to $Y$ is defined by a subset $F \subset X \times Y$ such that $A_x = \{ y\in Y | (x,y)\in F \}$ has exactly one element for each $x\in X$.
+Formally, a \textbf{function} $f \colon X \rightarrow Y$ from $X$ to $Y$ is defined by a subset $F \subset X \times Y$ such that $A_x = \{ y\in Y | (x,y)\in F \}$ has exactly one element for each $x\in X$.
 The \textbf{value} of $f$ at $x\in X$, denoted $f(x)$, is the unique element of $Y$ contained in $A_x$.
 \end{definition}
 
 Two functions are said to be equal if they have the same domain, codomain, and value for all elements of the domain.
 A function $f$ is called:
 \begin{enumerate}
-\item \defn{functions}{one-to-one} or \defn{functions}{injective} if $f(x)=f(x')$ implies that $x=x'$;
+\item \defn{functions}{one-to-one} or \defn{functions}{injective} if, for all $x,x'\in X$, if $f(x)=f(x')$ then $x=x'$;
 \item \defn{functions}{onto} or \defn{functions}{surjective} if its range $\{ f(x) | x\in X\}$ equals $Y$;
 \item a \defn{functions}{one-to-one correspondence} or \defn{functions}{bijective} if it is both one-to-one and onto.
 \end{enumerate}
-A bijective function $f: X\rightarrow Y$ has a unique \defn{functions}{inverse function} $f^{-1} : Y\rightarrow X$ such that $f^{-1}(f(x)) = x$ for all $x\in X$ and $f(f^{-1}(y)) = y$ for all $y\in Y$.
-In fact, any one-to-one function $f: X\rightarrow Y$ can be transformed into a bijective function $g: X \rightarrow R$ with $g(x)=f(x)$ by restricting its codomain $Y$ to its range $R$.
+A bijective function $f \colon X\rightarrow Y$ has a unique \defn{functions}{inverse function} $f^{-1} \colon Y\rightarrow X$ such that $f^{-1}(f(x)) = x$ for all $x\in X$ and $f(f^{-1}(y)) = y$ for all $y\in Y$.
+In fact, any one-to-one function $f \colon X\rightarrow Y$ can be transformed into a bijective function $g \colon X \rightarrow R$ with $g(x)=f(x)$ by restricting its codomain $Y$ to its range $R$.
 
 Functions can also be applied to sets in a natural way.
-For a function $f: X\rightarrow Y$ and subset $A\subseteq X$, the \defn{functions}{image} of $A$ under $f$ is
+For a function $f \colon X\rightarrow Y$ and subset $A\subseteq X$, the \defn{functions}{image} of $A$ under $f$ is
 \[ f(A) \triangleq \{ y\in Y | \exists x\in A \textrm{ s.t. } f(x)=y\} = \{f(x) | x\in A\}. \]
 Using this definition, we see that the range of $f$ is simply $f(X)$.
 One benefit of allowing functions to have set-valued images is that a set-valued inverse function always exists.
@@ -630,11 +634,11 @@ It is worth noting that the notation $f^{-1}(B)$ for the preimage of $B$ can be 
 In general, a function gives rise to the following property, $f(f^{-1}(B)) \subseteq B$ and $f^{-1}(f(A)) \supseteq A$.
 
 \begin{example}
-Let the function $f: \mathbb{R} \rightarrow \mathbb{R}$ be defined by $f(x)=x^2$. Let $A=[1,2]$ and $B = f(A) = [1,4]$.  Then,
+Let the function $f \colon \mathbb{R} \rightarrow \mathbb{R}$ be defined by $f(x)=x^2$. Let $A=[1,2]$ and $B = f(A) = [1,4]$.  Then,
 \[ f^{-1}(B) = f^{-1}([1,4]) = [-2,-1] \cup [1,2] \supseteq A. \]
 \end{example}
 \begin{example}
-Let the function $f: \mathbb{R} \rightarrow \mathbb{R}$ be defined by $f(x)=x^2+1$. Let $B=[0,2]$ and $A = f^{-1}(B) = [-1,1]$.  Then,
+Let the function $f \colon \mathbb{R} \rightarrow \mathbb{R}$ be defined by $f(x)=x^2+1$. Let $B=[0,2]$ and $A = f^{-1}(B) = [-1,1]$.  Then,
 \[ f(A) = f([-1,1]) = [1,2] \subseteq B. \]
 \end{example}
 
@@ -649,7 +653,7 @@ For all $f:X\rightarrow Y$, $A\subseteq X$, and $B\subseteq Y$, we have the rule
 \end{align*}
 Use these rules to show that $f^{-1}(f(A)) \supseteq A$ and $f(f^{-1}(B)) \subseteq B$.
 \end{problem}
-\noindent \textbf{S~\ref{problem:SetFunctionInverse}.}
+\noindent \textbf{Solution~\ref{problem:SetFunctionInverse}.}
 The first result follows from
 \[ x\in A \; \stackrel{(a)}{\Rightarrow} \; f(x)\in f(A) \; \stackrel{(d)}{\Rightarrow} \; x\in f^{-1}(f(A)), \]
 and the definition of subset.
@@ -658,7 +662,7 @@ The second result follows from
 and the definition of subset.
 
 \begin{problem}
-Let $f: X\rightarrow Y$, $A_i \subseteq X$ for all $i\in I$, and $B_i \subseteq Y$ for all $i\in I$.
+Let $f \colon X\rightarrow Y$, $A_i \subseteq X$ for all $i\in I$, and $B_i \subseteq Y$ for all $i\in I$.
 Show that the following expressions hold:
 \begin{align*}
 (1) & \;\;\;\:\, f \left( \bigcup_{i\in I} A_i \right) = \bigcup_{i\in I} f \left( A_i \right) &

@@ -2,7 +2,8 @@
 %\documentclass[12pt,openany,makeidx]{book}
 
 \usepackage{times}
-\usepackage{amsmath,amssymb,amsthm}
+\usepackage{amsmath,amssymb,amsthm,graphicx}
+\usepackage{tikz,pgfplots,wrapfig}
 
 \usepackage{makeidx}
 \makeindex
@@ -30,8 +31,9 @@
 \newtheorem{fact}[theorem]{Fact}
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{example}[theorem]{Example}
-\newtheorem{problem}[theorem]{P}
-\newtheorem{solution}[theorem]{S}
+\newtheorem{problem}[theorem]{Problem}
+%\newtheorem{solution}[theorem]{Solution}
+\newtheorem{remark}[theorem]{Remark}
 \else
 \newtheorem{theorem}{Theorem}
 \newtheorem{corollary}{Corollary}
@@ -39,8 +41,9 @@
 \newtheorem{fact}{Fact}
 \newtheorem{lemma}{Lemma}
 \newtheorem{example}{Example}
-\newtheorem{problem}{P}
-\newtheorem{solution}{S}
+\newtheorem{problem}{Problem}
+%\newtheorem{solution}{Solution}
+\newtheorem{remark}[theorem]{Remark}
 \fi
 
 \newcommand{\Interior}[1]{\ensuremath{{#1}^{\circ}}}
@@ -59,18 +62,40 @@
 \newcommand{\Trace}{\mathrm{tr}}
 \newcommand{\Diag}{\mathrm{diag}}
 \DeclareMathOperator{\esssup}{esssup}
+\newcommand{\dd}{\mathrm{d}}
 
 %% Definitions
 %%
 \renewcommand{\baselinestretch}{1.25}
 \newcommand{\defn}[2]{\textbf{\textrm{#2}}\index{#1!#2}}
 
+% Write file to split into chapters
+\usepackage{pageslts}
+\newcounter{FirstPage}
+\setcounter{FirstPage}{1}
+\newcounter{MyChapter}
+\newwrite\ChapFile
+\immediate\openout\ChapFile=makechap.sh
+\newcommand{\splitchapter}[1]{%
+\addtocounter{CurrentPage}{-1}
+\immediate\write\ChapFile{pdfjam\space -o notes_ch#1.pdf \jobname.pdf\space \theFirstPage -\theCurrentPage}%
+\addtocounter{CurrentPage}{1}\setcounter{FirstPage}{\theCurrentPage}}
+
+% Redefine Chapter for this
+\makeatletter
+\let\stdchapter\chapter
+\renewcommand*\chapter{%
+  \@ifstar{\starchapter}{\@dblarg\nostarchapter}}
+\newcommand*\starchapter[1]{\stdchapter*{#1}}
+\def\nostarchapter[#1]#2{\edef\@mychapter{\thechapter}\stdchapter[{#1}]{#2}\splitchapter{\@mychapter}}
+\makeatother
+
 
 \begin{document}
 
 \frontmatter 
 
-%\author{Major Contributors \\ Jean-Francois Chamberland and Henry D. Pfister} 
+\author{Major Contributors \\ Jean-Francois Chamberland and Henry D. Pfister} 
 \title{Engineering Fundamentals} 
 
 \maketitle
@@ -89,23 +114,38 @@ A copy of the license is included in the section entitled ``GNU Free Documentati
 
 \mainmatter 
 
+
 %\setcounter{chapter}{-1}
+
 \include{0Set_Theory_and_Logic}
 \include{1Review}
 \include{2chapter}
 \include{3chapter}
+\include{optimization}
 \include{4chapter}
 \include{5chapter}
 \include{6chapter}
 \include{7chapter}
-%\include{optimization}
+
+\splitchapter{\thechapter}
+
+% Undo chapter mod
+\makeatletter
+\def\nostarchapter[#1]#2{\stdchapter[{#1}]{#2}}
+\makeatother
+
 \appendix
 \include{appendix}
 %\include{solutions}
 
 \backmatter 
 
+\bibliographystyle{plalpha}
+\bibliography{book}
+
 \printindex
+
+\splitchapter{I}
 
 \end{document}
 
