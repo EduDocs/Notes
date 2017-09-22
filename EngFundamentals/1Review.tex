@@ -232,7 +232,7 @@ From Definition~\ref{definition_metspace_converge}, we know that a sequence $x_1
 
 It is possible for a sequence in a metric space $X$ to satisfy the Cauchy criterion, but not to converge in $X$.
 
-\begin{example}
+\begin{example} \label{example:ContinuousFunctionsCauchy}
 Let $C[-1,1]$ be the vector space of continuous functions on the interval $[-1,1]$ and consider the $L^2$ norm
 \begin{equation*}
 \left\| f(t) \right\|_2 = \left( \int_{-1}^1 |f(t)|^2 dt \right)^{\frac{1}{2}}.
@@ -252,6 +252,35 @@ d(f_n, f_m) = \left\| f_n(t) - f_m(t) \right\|_2
 = \frac{(m-n)^2}{6m^2n}.
 \end{equation*}
 This sequence satisfies the Cauchy criterion, but it does not converge to a continuous function in $C[-1,1]$.
+
+\begin{figure}[ht]
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    title={Continuous Functions},
+    xlabel={Argument},
+    xmin=-1, xmax=1,
+    xmajorgrids,
+    ylabel={Value $f_n(t)$},
+    ymajorgrids,
+    legend pos=north west]
+\addplot[darkgray] coordinates {
+    (-1,0) (-0.5,0) (0.5,1) (1,1)};
+\addlegendentry{$n = 2$}
+
+\addplot[blue] coordinates {
+    (-1,0) (-0.25,0) (0.25,1) (1,1)};
+\addlegendentry{$n = 4$}
+
+\addplot[red] coordinates {
+    (-1,0) (-0.125,0) (0.125,1) (1,1)};
+\addlegendentry{$n = 8$}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\caption{the sequence of continuous functions in Example~\ref{example:ContinuousFunctionsCauchy} satisfies the Cauchy criterion.
+However, this sequence does not converge to a continuous function in $C[-1,1]$.}
+\end{figure}
 \end{example}
 
 \begin{definition}
@@ -678,17 +707,22 @@ The following are equivalent:
 \begin{proof}
 $(1 \Rightarrow 2)$.
 Assume $f$ is a continuous function.
-Suppose $x \in \Closure{A}$, where $A$ is a subset of $X$.
-Let $O$ be a neighborhood of $f(x)$.
-Since $f^{-1}(O)$ is an open set of $X$ containing $x\in \Closure{A}$, it must intersect with $A$ in some point $x'$.
-It follows that $O$ intersects $f(A)$ in the point $f(x')$.
-By Theorem~\ref{theorem:ClosureConditions}, we find that $f(x) \in \Closure{ f(A) }$.
+We wish to show $f \left( \Closure{A} \right) \subseteq \Closure{ f(A) }$ for every subset $A \subseteq X$.
+To begin, suppose $A$ is fixed and let $y \in f \left( \Closure{A} \right)$.
+Then, there exists $x \in \Closure{A}$ such that $f(x) = y$.
+Let $O \subseteq Y$ be a neighborhood of $f(x)$.
+Preimage $f^{-1}(O)$ is an open set containing $x$ because $f$ is continuous.
+Since $x \in \Closure{A} \cap f^{-1}(O)$, we gather that $f^{-1}(O)$ must intersect with $A$ in some point $x'$.
+Moreover, $f(x') \in f \left( f^{-1}(O) \right) \subseteq O$ and $f(x') \in f(A)$.
+Thus, $O$ intersects with $f(A)$ in the point $f(x')$.
+Since $O$ is an arbitrary neighborhood of $f(x)$, we deduce that $f(x) \in \Closure{ f(A) }$ by Theorem~\ref{theorem:ClosureConditions}.
+Collecting these results, we get that any $y \in f \left( \Closure{A} \right)$ is also in $\Closure{ f(A) }$.
 
 $(2 \Rightarrow 3)$.
-Suppose that for every subset $A \subseteq X$, $f \left( \Closure{A} \right) \subseteq \Closure{ f(A) }$.
+For this step, we assume that $f \left( \Closure{A} \right) \subseteq \Closure{ f(A) }$ for every subset $A \subseteq X$.
 Let $C \subseteq Y$ be a closed set and let $A = f^{-1} (C)$.
-By P~\ref{problem:SetFunctionInverse}, we have $f(A) \subseteq C$.
-If $x \in \Closure{A}$, then
+Then, $f(A) = f \left( f^{-1}(C) \right) \subseteq C$.
+If $x \in \Closure{A}$, we get
 \begin{equation*}
 f(x) \in f \left( \Closure{A} \right) \subseteq \Closure{f (A)} \subseteq \Closure{C} = C.
 \end{equation*}
