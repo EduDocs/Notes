@@ -741,6 +741,61 @@ X - f^{-1}(O^c) = \{ x\in X | f(x) \notin O^c \} = \{ x \in X | f(x) \in O \} = 
 That is, $f^{-1} (O)$ is open.
 \end{proof}
 
+\begin{figure}[t]
+\centering{
+\begin{tikzpicture}
+\begin{axis}[
+    xlabel={Argument $x$},
+    ylabel={Function $f(x) = \frac{1}{1 + |x|}$},
+    xmin=-2.5, xmax=5.5,
+    ymin=0, ymax=1.25,
+    xmajorgrids,
+    ymajorgrids]
+\addplot[blue,domain=-2.5:5.5,samples=801]
+    {1 / (1 + abs(x))};
+\addplot[black] coordinates { (0,0) (0,1.25)};
+\addplot[black, dashed, thin] coordinates {
+    (-2,0) (-2,0.3333) (0,0.3333)
+
+    (-1,0) (-1,0.5) (0,0.5)
+
+    (1,0) (1,0.5) (0,0.5)
+
+    (2,0) (2,0.3333) (0,0.3333)
+
+    (3,0) (3,0.25) (0,0.25)
+
+    (4,0) (4,0.2) (0,0.2)
+
+    (5,0) (5,0.1667) (0, 0.1667)};
+
+\addplot[red, mark=*] coordinates { (0,1)};
+\addplot[red, mark=*] coordinates { (0,0.5)};
+\addplot[red, mark=*] coordinates { (0,0.3333)};
+\addplot[red, mark=*] coordinates { (0,0.25)};
+\addplot[red, mark=*] coordinates { (0,0.2)};
+\addplot[red, mark=*] coordinates { (0,0.1667)};
+\addplot[red, mark=*] coordinates { (0,0.1428)};
+\addplot[red, mark=*] coordinates { (0,0.125)};
+\addplot[red, mark=*] coordinates { (0,0.1111)};
+\addplot[red, mark=*] coordinates { (0,0.1)};
+
+\addplot[black, mark=*] coordinates { (-2,0)};
+\addplot[black, mark=*] coordinates { (-1,0)};
+\addplot[black, mark=*] coordinates { (0,0)};
+\addplot[black, mark=*] coordinates { (1,0)};
+\addplot[black, mark=*] coordinates { (2,0)};
+\addplot[black, mark=*] coordinates { (3,0)};
+\addplot[black, mark=*] coordinates { (4,0)};
+\addplot[black, mark=*] coordinates { (5,0)};
+\end{axis}
+\end{tikzpicture}}
+\caption{The function $f(x) = \frac{1}{1 + |x|}$ is continuous.
+The set of integers $\mathbb{N}$ is closed.
+Yet, the image of this set, $f(\mathbb{N})$ is not closed.
+Thus, $f \left( \overline{\mathbb{N}} \right) \neq \overline{f \left( \mathbb{N} \right)}$.}
+\end{figure}
+
 \begin{theorem}
 Suppose $X$ and $Y$ are two metrizable spaces with metrics $d_X$ and $d_Y$.
 Consider a function $f  \colon X \rightarrow Y$.
