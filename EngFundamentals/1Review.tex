@@ -261,25 +261,25 @@ This sequence satisfies the Cauchy criterion, but it does not converge to a cont
     xlabel={Argument},
     xmin=-1, xmax=1,
     xmajorgrids,
-    ylabel={Value $f_n(t)$},
+    ylabel={$f_n(t)$},
     ymajorgrids,
     legend pos=north west]
-\addplot[darkgray] coordinates {
+\addplot[darkgray,line width=1pt] coordinates {
     (-1,0) (-0.5,0) (0.5,1) (1,1)};
 \addlegendentry{$n = 2$}
 
-\addplot[blue] coordinates {
+\addplot[blue,line width=1pt] coordinates {
     (-1,0) (-0.25,0) (0.25,1) (1,1)};
 \addlegendentry{$n = 4$}
 
-\addplot[red] coordinates {
+\addplot[magenta,line width=1pt] coordinates {
     (-1,0) (-0.125,0) (0.125,1) (1,1)};
 \addlegendentry{$n = 8$}
 \end{axis}
 \end{tikzpicture}
 \end{center}
-\caption{the sequence of continuous functions in Example~\ref{example:ContinuousFunctionsCauchy} satisfies the Cauchy criterion.
-However, this sequence does not converge to a continuous function in $C[-1,1]$.}
+\caption{The sequence of continuous functions in Example~\ref{example:ContinuousFunctionsCauchy} satisfies the Cauchy criterion.
+Still, this sequence does not converge to a continuous function in $C[-1,1]$.}
 \end{figure}
 \end{example}
 
@@ -746,12 +746,12 @@ That is, $f^{-1} (O)$ is open.
 \begin{tikzpicture}
 \begin{axis}[
     xlabel={Argument $x$},
-    ylabel={Function $f(x) = \frac{1}{1 + |x|}$},
+    ylabel={$f(x) = \frac{1}{1 + |x|}$},
     xmin=-2.5, xmax=5.5,
     ymin=0, ymax=1.25,
     xmajorgrids,
     ymajorgrids]
-\addplot[blue,domain=-2.5:5.5,samples=801]
+\addplot[blue,line width=1pt,domain=-2.5:5.5,samples=801]
     {1 / (1 + abs(x))};
 \addplot[black] coordinates { (0,0) (0,1.25)};
 \addplot[black, dashed, thin] coordinates {
@@ -769,16 +769,20 @@ That is, $f^{-1} (O)$ is open.
 
     (5,0) (5,0.1667) (0, 0.1667)};
 
-\addplot[red, mark=*] coordinates { (0,1)};
-\addplot[red, mark=*] coordinates { (0,0.5)};
-\addplot[red, mark=*] coordinates { (0,0.3333)};
-\addplot[red, mark=*] coordinates { (0,0.25)};
-\addplot[red, mark=*] coordinates { (0,0.2)};
-\addplot[red, mark=*] coordinates { (0,0.1667)};
-\addplot[red, mark=*] coordinates { (0,0.1428)};
-\addplot[red, mark=*] coordinates { (0,0.125)};
-\addplot[red, mark=*] coordinates { (0,0.1111)};
-\addplot[red, mark=*] coordinates { (0,0.1)};
+\addplot[magenta, mark=*] coordinates { (0,1)};
+\addplot[magenta, mark=*] coordinates { (0,0.5)};
+\addplot[magenta, mark=*] coordinates { (0,0.3333)};
+\addplot[magenta, mark=*] coordinates { (0,0.25)};
+\addplot[magenta, mark=*] coordinates { (0,0.2)};
+\addplot[magenta, mark=*] coordinates { (0,0.1667)};
+\addplot[magenta, mark=*] coordinates { (0,0.1428)};
+\addplot[magenta, mark=*] coordinates { (0,0.125)};
+\addplot[magenta, mark=*] coordinates { (0,0.1111)};
+\addplot[magenta, mark=*] coordinates { (0,0.1)};
+\addplot[magenta, mark=*] coordinates { (0,0.0909)};
+\addplot[magenta, mark=*] coordinates { (0,0.0833)};
+\addplot[magenta, mark=*] coordinates { (0,0.0769)};
+\addplot[magenta, mark=*] coordinates { (0,0.0714)};
 
 \addplot[black, mark=*] coordinates { (-2,0)};
 \addplot[black, mark=*] coordinates { (-1,0)};
@@ -791,10 +795,43 @@ That is, $f^{-1} (O)$ is open.
 \end{axis}
 \end{tikzpicture}}
 \caption{The function $f(x) = \frac{1}{1 + |x|}$ is continuous.
-The set of integers $\mathbb{N}$ is closed.
-Yet, the image of this set, $f(\mathbb{N})$ is not closed.
-Thus, $f \left( \overline{\mathbb{N}} \right) \neq \overline{f \left( \mathbb{N} \right)}$.}
+The set of integers $\mathbb{Z}$ is closed.
+Yet, the image of this set, $f(\mathbb{Z}) = \{ 1/n : n \in \mathbb{N} \}$, is not closed.
+Thus, this is an example of a continuous function along with a set for which $f \left( \overline{\mathbb{Z}} \right) \subsetneq \overline{f \left( \mathbb{Z} \right)}$.}
 \end{figure}
+
+\begin{figure}[thb]
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    xlabel={Argument $x$},
+    ylabel={$f(x)$},
+    xmin=0, xmax=5,
+    ymin=0, ymax=7.5,
+    xmajorgrids,
+    ymajorgrids]
+\draw[magenta,fill=magenta] (axis cs:0,1.625) rectangle (axis cs:0.05,3.375);
+\draw[magenta,fill=magenta] (axis cs:1,0) rectangle (axis cs:3,0.075);
+\addplot[blue,line width=1pt,domain=0:3,samples=201]
+    {0.5*(x-1.5)^3 + 1.6875};
+\addplot[blue,line width=1pt,domain=3:5,samples=201]
+    {0.25*(x-3)^3 + 5};
+\addplot[black, dashed] coordinates {
+    (1,0) (1,1.625) (0,1.625)
+
+    (3,0) (3,3.375) (0,3.375)
+
+    (3,6) (0,6)};
+\addplot[mark=*, draw=blue,fill=white] coordinates {(3, 3.375)};
+\addplot[mark=*, draw=blue,fill=white] coordinates {(3,5)};
+\addplot[mark=*, draw=blue,fill=blue] coordinates {(3,6)};
+\node at (axis cs:1.875,0.625) {$A$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\caption{Given a function with a discontinuity and a set $A$, the image of the closure, $f \left( \Closure{A} \right)$, need not be a subset of the closure of the image, $\Closure{ f(A) }$, as seen in the example above.}
+\end{figure}
+
 
 \begin{theorem}
 Suppose $X$ and $Y$ are two metrizable spaces with metrics $d_X$ and $d_Y$.
