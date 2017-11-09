@@ -10,7 +10,7 @@ This chapter provides a brief introduction to optimization theory.
 
 \begin{definition}
 Let $f \colon X \rightarrow Y$ be a mapping from a vector space $X$ to a Banach space $(Y,\|\cdot\|)$.
-Then, if it exists, the \defn{optimization}{G\^{a}teuax differential} of $f$ at $\vecnot{x}$ in direction $\vecnot{h}$ is given by
+Then, if it exists, the \defn{optimization}{G\^{a}teaux differential} of $f$ at $\vecnot{x}$ in direction $\vecnot{h}$ is given by
 \[ \delta f (\vecnot{x};\vecnot{h}) \triangleq \lim_{t \to 0} \frac{f(\vecnot{x}+t \vecnot{h}) - f(\vecnot{x})}{t}, \]
 where the limit is with respect to the implied mapping from $\RealNumbers$ to $Y$.
 %convergence is defined with respect to the norm of $Y$.
@@ -33,7 +33,7 @@ Compute $\delta f (\vecnot{x};\vecnot{h})$ for this case by interchaging the lim
 
 \begin{definition}
 Let $f \colon X \rightarrow Y$ be a mapping from a vector space $X$ to a Banach space $(Y,\|\cdot\|)$.
-Then, $f$ is \defn{optimization}{G\^{a}teuax differentiable} at $\vecnot{x}$ if the G\^{a}teuax differential $\delta f (\vecnot{x};\vecnot{h})$ exists for all $\vecnot{h} \in X$ and is a continuous linear function of $\vecnot{h}$.
+Then, $f$ is \defn{optimization}{G\^{a}teaux differentiable} at $\vecnot{x}$ if the G\^{a}teaux differential $\delta f (\vecnot{x};\vecnot{h})$ exists for all $\vecnot{h} \in X$ and is a continuous linear function of $\vecnot{h}$.
 \end{definition}
 
 \begin{definition}
@@ -135,7 +135,7 @@ This contradicts the fact that $f(\vecnot{x}_0)$ is a global minimum value on $A
 \begin{theorem}
 \label{theorem:convex_above_tangent}
 Let $(X,\|\cdot\|)$ be a normed vector space and $f \colon X \rightarrow \RealNumbers$ be a convex functional on a convex set $A \subseteq X$.
-If $f$ is G\^{a}teuax differentiable at $\vecnot{x}_0 \in A$, then
+If $f$ is G\^{a}teaux differentiable at $\vecnot{x}_0 \in A$, then
 \[ f(\vecnot{x}) \geq f(\vecnot{x}_0) + \delta f (\vecnot{x}_0;\vecnot{x}-\vecnot{x}_0) \]
 for all $\vecnot{x}\in A$.
 If $f$ is strictly convex then the inequality is strict for $\vecnot{x}\neq \vecnot{x}_0$.
@@ -163,7 +163,7 @@ where the second inequality holds because \eqref{eq:convex_above_tangent} is a s
 
 \begin{corollary}
 Let $(X,\|\cdot\|)$ be a normed vector space and $f \colon X \rightarrow \RealNumbers$ be a convex functional on a convex set $A \subseteq X$.
-If $f$ is G\^{a}teuax differentiable at $\vecnot{x}_0 \in A$ and $\delta f (\vecnot{x}_0;\vecnot{x}-\vecnot{x}_0) = 0$ for all $\vecnot{x} \in A$, then
+If $f$ is G\^{a}teaux differentiable at $\vecnot{x}_0 \in A$ and $\delta f (\vecnot{x}_0;\vecnot{x}-\vecnot{x}_0) = 0$ for all $\vecnot{x} \in A$, then
 \[ f(\vecnot{x}_0) = \min_{\vecnot{x}\in A} f(\vecnot{x}). \]
 If $f$ is strictly convex, $\vecnot{x}_0$ is the unique minimizer over $A$.
 \end{corollary}
