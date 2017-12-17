@@ -84,9 +84,33 @@ and $\vecnot{x}$, $\vecnot{y}$ denote
 \begin{definition}
 Let $A$ be an $m \times n$ matrix over $F$ and let $B$ be an $n \times p$ matrix over $F$.
 The \defn{matrix}{matrix product} $AB$ is the $m \times p$ matrix $C$ whose $i,j$ entry is
-\begin{equation*}
+\begin{equation} \label{eq:def_matrix_product}
 c_{ij} = \sum_{r = 1}^n a_{ir} b_{rj}.
-\end{equation*}
+\end{equation}
+\end{definition}
+
+\begin{remark}
+Consider~\eqref{eq:def_matrix_product} when $j$ is fixed and $i$ is eliminated by grouping the elements of $A$ and $B$ into column vectors. For this case, \eqref{eq:def_matrix_product}~shows that the $j$-th column of $C$ is a linear combination of the columns of $A$, with coefficients $b_{1,j},b_{2,j},\ldots,b_{m,j}$.
+Similarly, one can fix $i$ and eliminate the index $j$ by grouping the elements of $A$ and $C$ into row vectors.
+Then, \eqref{eq:def_matrix_product}~shows that the $i$-th row of $C$ is a linear combination of the rows of $B$, with coefficients $b_{i,1},b_{i,2},\ldots,b_{i,n}$.
+\end{remark}
+
+\begin{definition}
+An $m\times n$ matrix $A$ over $F$ is in \defn{matrix}{row echelon form} if
+\begin{enumerate}
+\item all rows containing only zeros, if they exist, are the bottom of the matrix, and
+\item For non-zero rows, the leading coefficient (i.e., the first non-zero element from the left) is strictly to the right of the leading coefficient of the row above it.
+\end{enumerate}
+These two conditions imply that entries below the leading coefficient in a column are zero.
+A matrix is \textbf{column echelon form} if its transpose is in row echelon form.
+\end{definition}
+
+\begin{definition}
+An $m\times n$ matrix $A$ over $F$ is in \defn{matrix}{reduced row echelon form} if it is in row echelon form and
+\begin{enumerate}
+\item every leading coefficient is 1, and
+\item every leading coefficient is the only non-zero element in its column.
+\end{enumerate}
 \end{definition}
 
 \begin{definition}
@@ -98,13 +122,36 @@ AB = BA = I.
 In this case, $A$ is called \defn{matrix}{invertible} and its inverse is denoted by $A^{-1}$.
 \end{definition}
 
+\begin{definition}
+An \defn{matrix}{elementary row operation} on an $m \times n$ matrix consists of
+\begin{enumerate}
+\item multiplying a row by a non-zero scalar,
+\item swapping two rows, or
+\item adding a non-zero scalar multiple of one row to another row.
+\end{enumerate}
+An \defn{matrix}{elementary column operation} is the same but applied to the columns.
+\end{definition}
+
+\begin{lemma}
+For any $m\times n$ matrix $A$ over $F$, there is an invertible $m \times m$ matrix $P$ over $F$ such that $R=PA$ is in reduced row echelon form.
+\end{lemma}
+\begin{proof}[Sketch of Proof]
+This follows from the fact that elementary row operations (i.e., Gaussian elimination) can be used to reduce any matrix to reduced row echelon form.
+To construct the $P$ matrix, one applies Gaussian elimination to the augmented matrix $A' = [A \; I]$.
+This results in an augmented matrix $R' = [R\; P]$ in reduced row echelon form.
+It follows that $R$ is also in reduced row echelon form.
+Since elementary row operations can be implemented by (invertible) matrix multiplies on the left side, one also finds that $R' = P A'$, $R = PA$, and $P$ is invertible.
+\end{proof}
+
 \begin{lemma}
 \label{lemma:widematrix_has_nullvector}
 Let $A$ be an $m \times n$ matrix over $F$ with $m<n$.
 Then, there exists a length-$n$ column vector $\vecnot{x} \neq \vecnot{0}$ (over $F$) such that $A \vecnot{x} = \vecnot{0}$.
 \end{lemma}
 \begin{proof}
-This result follows easily from row reduction and the proof is left as an exercise for the reader.
+First, we use row reduction to compute the reduced row echelon form $R=PA$ of $A$, where $P$ is invertible.
+Then, we observe that the columns of $R$ containing leading elements can be combined in a linear combination to cancel any other column of $R$.
+This allows us to construct a vector $\vecnot{x}$ satisfying $R\vecnot{x}=\vecnot{0}$ and thus $A \vecnot{x} = P^{-1} R \vecnot{x} = \vecnot{0}$.
 \end{proof}
 
 \section{Vector Spaces}
@@ -178,7 +225,7 @@ A \defn{vector space}{subspace} of $V$ is a subset $W \subset V$ which is itself
 \end{definition}
 
 \begin{fact}
-A non-empty subset $W \subset V$ is a subspace of $V$ if and only if for every pair of vector $\vecnot{w}_1, \vecnot{w}_2 \in W$ and every scalar $s \in F$ the vector $s \vecnot{w}_1 + \vecnot{w}_2$ is again in $W$.
+A non-empty subset $W \subset V$ is a subspace of $V$ if and only if for every pair $\vecnot{w}_1, \vecnot{w}_2 \in W$ and every scalar $s \in F$ the vector $s \vecnot{w}_1 + \vecnot{w}_2$ is again in $W$.
 \end{fact}
 If $V$ is a vector space then the intersection of any collection of subspaces of $V$ is a subspace of $V$.
 
@@ -192,14 +239,14 @@ is a subspace of $F^{n \times 1}$.
 \end{example}
 
 \begin{definition}
-Let $U$ be a set of vectors in a vector space $V$.
+Let $U$ be a set (or list) of vectors in $V$.
 The \defn{vector space}{span} of $U$, denoted $\Span(U)$, is defined to be the set of all finite linear combinations of vectors in $U$.
 %The \defn{vector space}{subspace spanned} by $U$ is defined to be the intersection $W$ of all subspaces of $V$ which contain $U$.
 \end{definition}
-The subspace spanned by $U$ can also be defined equivalently as the intersection of all subspaces of $V$ which contain $U$.
-It is easy to see that all finite linear combinations of vectors in $U$ must be in all subspaces containing $U$.
-One can show the converse by considering its contrapositive: There exists a finite linear combination of vectors in $U$ and a subspace containing $U$ such that the vector is not in the subspace.
-Of course, this contradicts the definition of a vector space.
+
+The subspace spanned by $U$ can be defined equivalently as the intersection of all subspaces of $V$ that contain $U$.
+To see this, we note that the intersection of all subspaces containing $U$ is a subspace containing $U$ because the intersection of subspaces is also a subspace.
+The intersection cannot be larger than $U$, however, because $U$ is a subspace containing $U$.
 
 \begin{definition}
 Let $V$ be a vector space and $U,W$ be subspaces.
@@ -212,15 +259,17 @@ An important property of a direct sum is that any vector $\vecnot{v} \in U \oplu
 \subsection{Bases and Dimension}
 \label{section:BasesAndDimension}
 
-The dimension of a vector space is defined using the concept of a basis for the space.
+The dimension of a vector space is defined using the concept of a basis.
 
 \begin{definition}
 Let $V$ be a vector space over $F$.
-A subset $U \subset V$ is \defn{vector space}{linearly dependent} if there exist distinct vectors $\vecnot{u}_1, \ldots, \vecnot{u}_n \in U$ and scalars $s_1, \ldots, s_n \in F$, not all of which are $0$, such that
+A list of vectors $\vecnot{u}_1, \ldots, \vecnot{u}_n \in V $is called \defn{vector space}{linearly dependent} if there are scalars $s_1, \ldots, s_n \in F$, not all of which are $0$, such that
 \begin{equation*}
 \sum_{i=1}^n s_i \vecnot{u}_i = 0.
 \end{equation*}
-A set which is not linearly dependent is called \defn{vector space}{linearly independent}.
+A list that is not linearly dependent is called \defn{vector space}{linearly independent}.
+Similarly, a subset $U \subset V$ is called linearly dependent if there is a finite list $\vecnot{u}_1, \ldots, \vecnot{u}_n \in U$ of distinct vectors that is linearly dependent.
+Otherwise, it is called linearly independent.
 \end{definition}
 
 A few important consequences follow immediately from this definition.
@@ -708,21 +757,44 @@ That is, the set $T \vecnot{v}_{k+1}, \ldots, T \vecnot{v}_n$ is linearly indepe
 In turn, this implies that $n = \Rank(T) + \Nullity(T)$.
 \end{proof}
 
-\begin{corollary}
+\begin{theorem}
 If $A$ is an $m \times n$ matrix with entries in the field $F$, then
 \begin{equation*}
 \mathrm{row~rank} (A) \triangleq \dim( \mathcal{R}(A^H)) =  \dim( \mathcal{R}(A)) \triangleq \mathrm{column~rank} (A).
 \end{equation*}
-\end{corollary}
+\end{theorem}
 \begin{proof}
-First, we note that the range $\mathcal{R}(A)$ of $A$ equals the column space of $A$ and therefore $\Rank(A) = \dim \left( \mathcal{R}(A) \right)$.
-%Next, we show the null space $\mathcal{N}(A)$ of $A$ is the orthogonal complement of the row space $\mathcal{R}(A^H)$.
-Next, we use the definition of the orthogonal complement and $\mathcal{R}(A^H) = \{ A^H \vecnot{y} | \vecnot{y} \in F^m \}$ to see that
-\[ \mathcal{R}(A^H)^{\perp} \! = \! \left\{ \vecnot{x} \in F^n \, | \, \vecnot{x}^H \vecnot{z} = \vecnot{0} \; \forall \, \vecnot{z}\in \mathcal{R}(A^H \right\}
-\! = \! \left\{ \vecnot{x} \in F^n \, | \, \vecnot{x}^H A^H \vecnot{y} = 0 \; \forall \, \vecnot{y}\in F^m \right\}. \]
-This implies that $\mathcal{R}(A^H)^{\perp} =  \left\{ \vecnot{x} \in F^n \, | \, \vecnot{x}^H A^H = 0 \right\} = \mathcal{N}(A)$ and therefore that
-\[ \dim\left( \mathcal{R}(A^H) \right) = n-\dim \left( \mathcal{R}(A^H) \right)^{\bot} = n - \dim \left(\mathcal{N}(A) \right) = \dim \left( \mathcal{R}(A) \right).\]
+It is well-known that elementary row operations preserve the row space of $A$.
+One can also show that they preserve the dimension of the column space because
+\[ \Rank(A)=\Rank(P^{-1}PA)\leq \Rank(PA) \leq \Rank(A) \]
+for any invertible matrix $P$.
+By symmetry, elementary column operations preserve the column space of $A$ and the dimension of the row space.
+Using these facts, one can prove the theorem.
+
+The idea is to first use elementary row operations to write $A$ in reduced row echelon form as $B$.
+It follows that $B$ has exactly $\mathrm{row~rank} (B)=\mathrm{row~rank} (A)$ rows with non-zero elements and that $\Rank(B) = \Rank(A)$.
+Next, elementary column operations are used to write $B$ in reduced column echelon form as $C$.
+It follows that $\mathrm{row~rank} (C) = \mathrm{row~rank} (B) = \mathrm{row~rank} (A)$.
+But, $C$ has exactly $\mathrm{column~rank} (C) =\mathrm{column~rank} (B) = \Rank(A)$ non-zero columns each containing a single 1.
+Thus, $\mathrm{column~rank} (C) = \mathrm{row~rank} (C) $ implies that $\Rank(A)=\mathrm{column~rank} (C) = \mathrm{row~rank} (C) = \mathrm{row~rank} (A)$.
+%It is well-known that any elementary row operation can be represented by multiplication on the left by an invertible $m\times m$ matrix $P$.
+%Thus, these operations preserve the row space of the matrix.
+%We will now show that such operations also preserve the dimension of the column space.
+%First, we note that applying the same linear transformation to each column of $A$ can reduce the dimension of the column space.
+%This is because a set of columns that were originally linearly independent may become linearly dependent but a set of linearly-dependent columns will always remain linearly dependent.
+%Using this, we observe that \[ \Rank(A)=\Rank(P^{-1}PA)\leq \Rank(PA) \leq \Rank(A) \]
+%for any invertible matrix $P$.
 \end{proof}
+
+%\begin{proof}
+%First, we note that the range $\mathcal{R}(A)$ of $A$ equals the column space of $A$ and therefore $\Rank(A) = \dim \left( \mathcal{R}(A) \right)$.
+%%Next, we show the null space $\mathcal{N}(A)$ of $A$ is the orthogonal complement of the row space $\mathcal{R}(A^H)$.
+%Next, we use the definition of the orthogonal complement and $\mathcal{R}(A^H) = \{ A^H \vecnot{y} | \vecnot{y} \in F^m \}$ to see that
+%\[ \mathcal{R}(A^H)^{\perp} \! = \! \left\{ \vecnot{x} \in F^n \, | \, \vecnot{x}^H \vecnot{z} = \vecnot{0} \; \forall \, \vecnot{z}\in \mathcal{R}(A^H \right\}
+%\! = \! \left\{ \vecnot{x} \in F^n \, | \, \vecnot{x}^H A^H \vecnot{y} = 0 \; \forall \, \vecnot{y}\in F^m \right\}. \]
+%This implies that $\mathcal{R}(A^H)^{\perp} =  \left\{ \vecnot{x} \in F^n \, | \, \vecnot{x}^H A^H = 0 \right\} = \mathcal{N}(A)$ and therefore that
+%\[ \dim\left( \mathcal{R}(A^H) \right) = n-\dim \left( \mathcal{R}(A^H) \right)^{\bot} = n - \dim \left(\mathcal{N}(A) \right) = \dim \left( \mathcal{R}(A) \right).\]
+%\end{proof}
 
 
 \section{Norms}
@@ -998,13 +1070,13 @@ is an inner product.
 \end{example}
 
 \begin{example}
-Let $V$ and $W$ be two vector spaces over $F$ and suppose that $\langle \cdot | \cdot \rangle$ is an inner product on $W$.
+Let $V$ and $W$ be two vector spaces over $F$ and suppose that $\langle \cdot | \cdot \rangle_W$ is an inner product on $W$.
 If $T$ is a non-singular linear transformation from $V$ into $W$, then the equation
 \begin{equation*}
-p_T \left( \vecnot{v}_1, \vecnot{v}_2 \right)
-= \left\langle T \vecnot{v}_1 | T \vecnot{v}_2 \right\rangle
+\left\langle \vecnot{v}_1, \vecnot{v}_2 \right\rangle_V
+= \left\langle T \vecnot{v}_1 | T \vecnot{v}_2 \right\rangle_W
 \end{equation*}
-defines an inner product $p_T$ on $V$.
+defines an inner product on $V$.
 \end{example}
 
 \begin{example}
@@ -1021,41 +1093,42 @@ Let $V$ be a finite-dimensional space, and suppose that
 \mathcal{B} = \vecnot{w}_1, \ldots, \vecnot{w}_n
 \end{equation*}
 is an ordered basis for $V$.
-Any inner product on $V$ is completely determined by the values
+Any inner product on $V$ is determined by the values
 \begin{equation*}
-h_{ji} = \left\langle \vecnot{w}_i | \vecnot{w}_j \right\rangle
+g_{ij} = \left\langle \vecnot{w}_j | \vecnot{w}_i \right\rangle
 \end{equation*}
-it assumes on pairs of vectors in $\mathcal{B}$.
+that it takes on pairs of vectors in $\mathcal{B}$.
 \end{theorem}
 \begin{proof}
-If $\vecnot{u} = \sum_{i} s_i \vecnot{w}_i$ and $\vecnot{v} = \sum_{j} t_j \vecnot{w}_j$, then
+If $\vecnot{u} = \sum_{j} s_j \vecnot{w}_j$ and $\vecnot{v} = \sum_{i} t_i \vecnot{w}_i$, then
 \begin{equation*}
 \begin{split}
 \left\langle \vecnot{u} | \vecnot{v} \right\rangle
-&= \left\langle \sum_{i} s_i \vecnot{w}_i \Big| \vecnot{v} \right\rangle
-= \sum_{i} s_i \left\langle \vecnot{w}_i | \vecnot{v} \right\rangle \\
-&= \sum_{i} s_i \left\langle \vecnot{w}_i \Big| \sum_{j} t_j \vecnot{w}_j \right\rangle
-= \sum_{i} \sum_{j} s_i \overline{t}_j \left\langle \vecnot{w}_i | \vecnot{w}_j \right\rangle \\
-&= \sum_{i} \sum_{j} \overline{t}_j h_{ji} s_i
-= \left[ \vecnot{v} \right]_{\mathcal{B}}^H H \left[ \vecnot{u} \right]_{\mathcal{B}}
+&= \left\langle \sum_{j} s_j \vecnot{w}_j \Big| \vecnot{v} \right\rangle
+= \sum_{j} s_j \left\langle \vecnot{w}_j | \vecnot{v} \right\rangle \\
+&= \sum_{j} s_j \left\langle \vecnot{w}_j \Big| \sum_{i} t_i \vecnot{w}_i \right\rangle
+= \sum_{j} \sum_{i} s_j \overline{t}_i \left\langle \vecnot{w}_j | \vecnot{w}_i \right\rangle \\
+&= \sum_{j} \sum_{i} \overline{t}_i g_{ij} s_j
+= \left[ \vecnot{v} \right]_{\mathcal{B}}^H G \left[ \vecnot{u} \right]_{\mathcal{B}}
 \end{split}
 \end{equation*}
 where $\left[ \vecnot{u} \right]_{\mathcal{B}}$ and $\left[ \vecnot{v} \right]_{\mathcal{B}}$ are the coordinate matrices of $\vecnot{u}$, $\vecnot{v}$ in the ordered basis $\mathcal{B}$.
-The matrix $H$ is called the \emph{matrix of the inner product in the ordered basis $\mathcal{B}$}.
+The matrix $G$ is called the \emph{weight matrix} of the inner product in the ordered basis $\mathcal{B}$.
 \end{proof}
 
-It is easily verified that $H$ is a Hermitian matrix, i.e., $H = H^H$.
-Furthermore, $H$ must satisfy the additional condition
+It is easily verified that $G$ is a Hermitian matrix, i.e., $G = G^H$.
+Furthermore, $G$ must satisfy the additional condition
 \begin{equation} \label{equation:PositiveDefinite}
-\vecnot{w}^H H \vecnot{w} > 0, \quad \forall \vecnot{w} \neq \vecnot{0}.
+\vecnot{w}^H G \vecnot{w} > 0, \quad \forall \vecnot{w} \neq \vecnot{0}
 \end{equation}
-In particular, $H$ must be invertible.
+so that the induced norm is non-negative and zero only for the zero vector.
+A Hermitian matrix that satisfies this condition is called positive definite and this also implies that $G$ is invertible.
 
-Conversely if $H$ is an $n \times n$ Hermitian matrix over $F$ which satisfies~\eqref{equation:PositiveDefinite}, then $H$ is the matrix in the ordered basis $\mathcal{B}$ of an inner product on $V$.
+Conversely if $G$ is an $n \times n$ Hermitian matrix over $F$ which satisfies~\eqref{equation:PositiveDefinite}, then $G$ is the matrix in the ordered basis $\mathcal{B}$ of an inner product on $V$.
 This inner product is given by
 \begin{equation*}
-\left\langle \vecnot{u} | \vecnot{v} \right\rangle
-= \left[ \vecnot{v} \right]_{\mathcal{B}}^H H \left[ \vecnot{u} \right]_{\mathcal{B}}.
+\left\langle \vecnot{u} | \vecnot{v} \right\rangle_G
+= \left[ \vecnot{v} \right]_{\mathcal{B}}^H G \left[ \vecnot{u} \right]_{\mathcal{B}}.
 \end{equation*}
 
 \begin{problem}
@@ -1075,6 +1148,13 @@ for any $X,Y \in V$.
 Using the induced norm, this inner product provides the topology of mean-square convergence and two random variables $X,Y\in V$ are considered equal if $\| X-Y \|^2 = E \left[ |X-Y|^2 \right] = 0$ (or equivalently $\Pr (X \neq Y ) = 0$).
 \end{example}
 
+In terms of abstract mathematics, the introduction of an inner product allows one to introduce the key concept of orthogonality.
+
+\begin{definition}
+Let $\vecnot{v}$ and $\vecnot{w}$ be vectors in an inner-product space $V$.
+Then $\vecnot{v}$ is \defn{inner-product space}{orthogonal} to $\vecnot{w}$ (denoted $\vecnot{v} \bot \vecnot{w}$) if $\left\langle \vecnot{v} | \vecnot{w} \right\rangle = 0$.
+Since this relation is reflexive and $\vecnot{w}$ is also orthogonal to $\vecnot{v}$, we simply say that $\vecnot{v}$ and $\vecnot{w}$ are orthogonal.
+\end{definition}
 
 \subsection{Induced Norms}
 
@@ -1088,6 +1168,33 @@ This inner product can be used to define a norm, called the \defn{inner-product 
 \left\| \vecnot{v} \right\| = \left\langle \vecnot{v} | \vecnot{v} \right\rangle^{\frac{1}{2}}
 \end{equation*}
 for every $\vecnot{v} \in V$.
+\end{definition}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+  \coordinate (v1) at (0,0);
+  \coordinate (v2) at (4,3);
+  \coordinate (v3) at (6,0);
+  \coordinate (v4) at (4,0);
+
+  \path[draw] (3.6,0) -- (3.6,0.4) -- (4,0.4);
+  \node (v0) at (-0.25,-0.1) {$\vecnot{0}$};
+  \draw[-latex,thick] (v1) -- node[at end,above] {$\vecnot{v}$} (v2);
+  \draw[-latex,dashed,thick] (v1) -- node[at end,below] {$\vecnot{u}$} (v3);
+  \draw[-latex,thick] (v1) -- node[at end, below] {$\vecnot{w}$} (v4);
+  \draw[-latex,thick,dashed] (v4) -- node[right] {$\vecnot{v}-\vecnot{w}$} (v2);
+
+\end{tikzpicture}
+\caption{\label{fig:vector_projection}The projection of $\vecnot{v}$ onto $\vecnot{u}$ is given by $\vecnot{w}$ and $\vecnot{v}-\vecnot{w}$ is orthogonal to $\vecnot{u}$.}
+\end{figure}
+
+\begin{definition}
+Let $\vecnot{u},\vecnot{v}$ be vectors in an inner-product space $V$ with inner product $\langle \cdot | \cdot \rangle$.
+As shown in Figure~\ref{fig:vector_projection}, the \defn{inner-product space}{projection} of $\vecnot{v}$ onto $\vecnot{u}$ is defined to be
+\begin{equation*}
+\vecnot{w} = \frac{\left\langle \vecnot{v} | \vecnot{u} \right\rangle}{\|\vecnot{u}\|^2} \vecnot{u}
+\end{equation*}
 \end{definition}
 
 \begin{theorem}
@@ -1105,26 +1212,28 @@ The third inequality, $\left| \left\langle \vecnot{v} | \vecnot{w} \right\rangle
 When $\vecnot{v} = \vecnot{0}$, then clearly $\left| \left\langle \vecnot{v} | \vecnot{w} \right\rangle \right| = \left\| \vecnot{v} \right\| \left\| \vecnot{w} \right\| =0$.
 Assume $\vecnot{v} \neq \vecnot{0}$ and let
 \begin{equation*}
-\vecnot{u} = \vecnot{w} - \frac{ \left\langle \vecnot{w} | \vecnot{v} \right\rangle}{ \left\| \vecnot{v} \right\|^2 } \vecnot{v}.
+\vecnot{u} = \vecnot{w} - \frac{ \left\langle \vecnot{w} | \vecnot{v} \right\rangle}{ \left\| \vecnot{v} \right\|^2 } \vecnot{v}
 \end{equation*}
-Then $\left\langle \vecnot{u} | \vecnot{v} \right\rangle = 0$ and
-\begin{equation*}
-\begin{split}
+be the residual after projecting $\vecnot{w}$ onto $\vecnot{v}$.
+Then, $\left\langle \vecnot{u} | \vecnot{v} \right\rangle = 0$ and
+\begin{align*}
 0 &\leq \left\| \vecnot{u} \right\|^2
-= \left\langle \vecnot{w} - \frac{ \left\langle \vecnot{w} | \vecnot{v} \right\rangle}{ \left\| \vecnot{v} \right\|^2 } \vecnot{v} \Big|
-\vecnot{w} - \frac{ \left\langle \vecnot{w} | \vecnot{v} \right\rangle}{ \left\| \vecnot{v} \right\|^2 } \vecnot{v} \right\rangle \\
+= \left\langle \vecnot{u} \,\middle|\, \vecnot{w} - \frac{ \left\langle \vecnot{w} | \vecnot{v} \right\rangle}{ \left\| \vecnot{v} \right\|^2 } \vecnot{v} \right\rangle = \left\langle \vecnot{u} \,\middle|\, \vecnot{w} \right\rangle
+= \left\langle \vecnot{w} - \frac{ \left\langle \vecnot{w} | \vecnot{v} \right\rangle}{ \left\| \vecnot{v} \right\|^2 } \vecnot{v} \,\middle|\, \vecnot{w}
+ \right\rangle \\
 &= \left\langle \vecnot{w} | \vecnot{w} \right\rangle
 - \frac{ \left\langle \vecnot{w} | \vecnot{v} \right\rangle
-\left\langle \vecnot{v} | \vecnot{w} \right\rangle }
+\left\langle \vecnot{v} | \vecnot{w} \right\rangle}
 { \left\| \vecnot{v} \right\|^2 }
 = \left\| \vecnot{w} \right\|^2
-- \frac{ \left| \left\langle \vecnot{v} | \vecnot{w} \right\rangle \right|^2 }
-{ \left\| \vecnot{v} \right\|^2 } .
-\end{split}
-\end{equation*}
-Hence
-$\left| \left\langle \vecnot{v} | \vecnot{w} \right\rangle \right|^2 \leq \left\| \vecnot{v} \right\|^2 \left\| \vecnot{w} \right\|^2$.
-Notice that equality occurs iff $\vecnot{u}=\vecnot{0}$, or equivalently iff $\vecnot{w}=\vecnot{0}$ or $\vecnot{v} = s \vecnot{w}$.
+- \frac{ \left| \left\langle \vecnot{w} | \vecnot{v} \right\rangle \right|^2 }
+{ \left\| \vecnot{v} \right\|^2 } ,
+\end{align*}
+where equality holds iff $\vecnot{u}=\vecnot{0}$, or equivalently iff $\vecnot{w}=\vecnot{0}$ or $\vecnot{v} = s \vecnot{w}$.
+Hence, we find
+$\left| \left\langle \vecnot{v} | \vecnot{w} \right\rangle \right|^2 = \left| \left\langle \vecnot{w} | \vecnot{v} \right\rangle \right|^2 \leq \left\| \vecnot{v} \right\|^2 \left\| \vecnot{w} \right\|^2$.
+%with equality iff $\vecnot{v}=\vecnot{0}$, $\vecnot{w}=\vecnot{0}$, or $\vecnot{v} = s \vecnot{w}$.
+Note that the $\vecnot{v}=\vecnot{0}$ case is checked separately because it is assumed above that $\vecnot{v}\neq \vecnot{0}$.
 
 Using this result, we get
 \begin{equation*}
@@ -1164,13 +1273,7 @@ Since $\left\| \vecnot{w}_n - \vecnot{w} \right\| \rightarrow 0$, the convergenc
 \end{proof}
 
 
-\section{Orthogonal Vectors and Subspaces}
-
-\begin{definition}
-Let $\vecnot{v}$ and $\vecnot{w}$ be vectors in an inner-product space $V$.
-Then $\vecnot{v}$ is \defn{inner-product space}{orthogonal} to $\vecnot{w}$ (denoted $\vecnot{v} \bot \vecnot{w}$) if $\left\langle \vecnot{v} | \vecnot{w} \right\rangle = 0$.
-Since this relation is reflexive and $\vecnot{w}$ is also orthogonal to $\vecnot{v}$, we simply say that $\vecnot{v}$ and $\vecnot{w}$ are orthogonal.
-\end{definition}
+\section{Sets of Orthogonal Vectors}
 
 \begin{definition}
 Let $V$ be an inner-product space and $U,W$ be subspaces.
@@ -1222,10 +1325,11 @@ In particular, if $\vecnot{v} = 0$ then $s_j = 0$ for $1 \leq j \leq n$ and the 
 \end{proof}
 
 \begin{corollary}
-If $\vecnot{v} \in V$ is a linear combination of an orthogonal sequence of distinct, non-zero vectors $\vecnot{w}_1, \ldots, \vecnot{w}_n$, then $\vecnot{v}$ is the particular linear combination
+If $\vecnot{v} \in V$ is a linear combination of an orthogonal sequence of distinct, non-zero vectors $\vecnot{w}_1, \ldots, \vecnot{w}_n$, then $\vecnot{v}$ satisfies the identity
 \begin{equation*}
-\vecnot{v} = \sum_{i = 1}^n \frac{ \left\langle \vecnot{v} | \vecnot{w}_i \right\rangle } { \left\| \vecnot{w}_i \right\|^2 } \vecnot{w}_i.
+\vecnot{v} = \sum_{i = 1}^n \frac{ \left\langle \vecnot{v} | \vecnot{w}_i \right\rangle } { \left\| \vecnot{w}_i \right\|^2 } \vecnot{w}_i,
 \end{equation*}
+and equals the sum of the projections of $\vecnot{v}$ onto $\vecnot{w}_1, \ldots, \vecnot{w}_n$.
 \end{corollary}
 
 \begin{theorem}
@@ -1237,8 +1341,8 @@ Then it is possible to construct an orthogonal sequence of vectors $\vecnot{w}_1
 is a basis for the subspace spanned by $\vecnot{v}_1, \ldots, \vecnot{v}_k$.
 \end{theorem}
 \begin{proof}
-First let $\vecnot{w}_1 = \vecnot{v}_1$.
-Define the remaining vectors inductively as follows.
+First, let $\vecnot{w}_1 = \vecnot{v}_1$.
+The remaining vectors are defined inductively as part during the proof.
 Suppose the vectors
 \begin{equation*}
 \vecnot{w}_1, \ldots, \vecnot{w}_m \quad (1 \leq m < n)
@@ -1253,7 +1357,7 @@ Let
 \vecnot{w}_{m+1} = \vecnot{v}_{m+1} - \sum_{i=1}^m \frac{ \left\langle \vecnot{v}_{m+1} | \vecnot{w}_i \right\rangle } { \left\| \vecnot{w}_i \right\|^2 } \vecnot{w}_i.
 \end{equation*}
 Then $\vecnot{w}_{m+1} \neq 0$, for otherwise $\vecnot{v}_{m+1}$ is a linear combination of $\vecnot{w}_1, \ldots, \vecnot{w}_m$ and hence a linear combination of $\vecnot{v}_1, \ldots, \vecnot{v}_m$.
-Furthermore, for $j \in 1, \ldots, m$
+For $j \in \{1, \ldots, m\}$, we also have
 \begin{equation*}
 \begin{split}
 \left\langle \vecnot{w}_{m+1} | \vecnot{w}_j \right\rangle

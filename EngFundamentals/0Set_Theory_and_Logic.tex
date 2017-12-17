@@ -441,6 +441,30 @@ The contrapositive of this statement is ``If $\sqrt{2}$ cannot be expressed as a
 Above, we proved that $\sqrt{2}$ cannot be expressed as an irreducible fraction and therefore $\sqrt{2}$ is not a rational number.
 \end{example}
 
+The final proof strategy we discuss is finite induction.
+
+\begin{definition}
+Let $P(n)$ be a logical statement for each $n\in \mathbb{N}$.
+The principle of \defn{logic}{mathematical induction} states that $P(n)$ is true all $n\in \mathbb{N}$ if:
+\begin{enumerate}
+\item $P(1)$ is true, and
+\item $P(n)\to P(n+1)$ for all $n\in \mathbb{N}$.
+\end{enumerate}
+\end{definition}
+
+From a foundational perspective, this statement is essentially equivalent to the existence and uniqueness of the natural numbers.
+It is taken as an axiom in the Peano axiomatic formulation of arithmetic.
+In contrast, the Zermelo-Fraenkel axiomatic formulation of set theory defines the natural numbers as the smallest inductive set and the existence of an inductive set is taken as an axiom.
+
+\begin{example}
+Let $S_n = \sum_{i=1}^n i$.
+We wish to show that the statement $P(n)=$ ``$S_n = \frac{n^2 + n}{2}$'' is true for all $n\in \mathbb{N}$.
+For $n=1$, this is true because both expressions equal $1$.
+For $P(n+1)$, we are given $P(n)$ and can write
+\[ S_{n+1} = S_n + (n+1) = \frac{n^2 + n}{2} + n+1 = \frac{n^2 + 3n + 2}{2} = \frac{(n+1)^2+(n+1)}{2}. \]
+Thus, the result follows from mathematical induction.
+\end{example}
+
 \section{Set Theory}
 
 Set theory is generally considered to be the foundation of all modern mathematics.
@@ -486,13 +510,23 @@ The following standard notation is used for interval subsets of the real numbers
 & [a,b) \;\! \triangleq \{ x\in \mathbb{R} | a \leq x < b \}
 \end{align*}
 
+\begin{definition}
+For a finite set $A$, the \defn{set theory}{cardinality} $|A|$ equals the number of elements in $A$.
+If there is a bjiective mapping between the set $A$ and the natural numbers $\mathbb{N}$, then $|A| = \infty$ and the set is called \defn{set theory}{countably infinite}.
+If $|A| = \infty$ and the set is not countably infinite, then $A$ is called \defn{set theory}{uncountable infinite}.
+\end{definition}
+
+\begin{example}
+The set of rational numbers is countably infinite while the set of real numbers is uncountably infinite.
+\end{example}
+
 \begin{example}[\defn{set theory}{Russell's Paradox}]
 Let $R$ be the set of all sets that do not contain themselves or $R = \{S|S\notin S\}$.
 The paradox arises from the fact that the definition leads to the logical contradiction $R\in R \Leftrightarrow R\notin R$.
-Axiomatic set theory eliminates this paradox by disallowing self-referencing constructions like this.
+Axiomatic set theory eliminates this paradox by disallowing self-referential constructions like this.
 \end{example}
 
-There are also some standard relations defined between any two sets $A,B$.
+There are a few standard relationships defined between any two sets $A,B$.
 \begin{definition}
 We say that $A$ \textbf{equals} $B$ (denoted $A=B$) if, for all $x$,  $x\in A$ iff $x\in B$.
 This means that
@@ -599,7 +633,7 @@ The quotient set $\mathbb{N} \setminus \!\sim$ can therefore be associated with 
 In elementary mathematics, functions are typically described in terms of graphs and formulas.
 The drawback of this approach is that one tends to picture only ``nice'' functions.
 In fact, Cauchy himself published in 1821 an incorrect proof of the false assertion that ``a sequence of continuous functions that converges everywhere has a continuous limit function.''
-Nowadays, every teacher warns their students that one must be careful because the world is filled with not so ``nice'' functions.
+Nowadays, every teacher warns their students that one must be careful because the world is filled with ``not so nice'' functions.
 
 \index{functions}
 The modern approach to defining functions is based on set theory.

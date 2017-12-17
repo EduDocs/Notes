@@ -20,14 +20,14 @@ for all $\vecnot{w}' \in W$.
 \end{equation*}
 where $\vecnot{e}$ is the approximation error.
 
-This problem is, in general, rather difficult.
+Finding a best approximation is, in general, rather difficult\footnote{A best approximation exists if $W$ is closed and the Banach space $V$ is reflexive (i.e., it equals its double dual).  In addition, it is unique if the Banach space $V$ is strictly convex (i.e., $\|\vecnot{v} + \vecnot{w} \|<2$ for all distinct $\vecnot{v},\vecnot{w}\in V$ such that $\|\vecnot{v}\|=\|\vecnot{w}\| = 1$).}.
 However, if the norm $\| \cdot \|$ corresponds to the induced norm of an inner product, then one can use orthogonal projection and the problem is greatly simplified.
 This chapter focuses mainly on computing the best approximation of arbitrary vectors in a Hilbert space.
 \begin{theorem} \label{theorem:OrthogonalProjection}
 Suppose $W$ is a subspace of a Hilbert space $V$ and $\vecnot{v}$ is a vector in $V$.
 Then, we have the following:
 \begin{enumerate}
-\item The vector $\vecnot{w} \in W$ is the best approximation of $\vecnot{v} \in V$ by vectors in $W$ if and only if $\vecnot{v} - \vecnot{w}$ is orthogonal to every vector in $W$.
+\item The vector $\vecnot{w} \in W$ is a best approximation of $\vecnot{v} \in V$ by vectors in $W$ if and only if $\vecnot{v} - \vecnot{w}$ is orthogonal to every vector in $W$.
 \item If a best approximation of $\vecnot{v} \in V$ by vectors in $W$ exists, it is unique.
 \item If $W$ has a countable orthogonal basis $\vecnot{w}_1, \vecnot{w}_2, \ldots$ and is closed, then
 \begin{equation}
@@ -39,8 +39,7 @@ is the best approximation of $\vecnot{v}$ by vectors in $W$.
 \end{theorem}
 \begin{proof}
 Let $\vecnot{w} \in W$ and suppose $\vecnot{v} - \vecnot{w}$ is orthogonal to every vector in $W$.
-Let $\vecnot{w}' \in W$ such that $\vecnot{w}' \neq \vecnot{w}$.
-Then $\vecnot{v} - \vecnot{w}' = \left( \vecnot{v} - \vecnot{w} \right) + \left( \vecnot{w} - \vecnot{w}' \right)$ and
+For any $\vecnot{w}' \in W$, we have $\vecnot{v} - \vecnot{w}' = \left( \vecnot{v} - \vecnot{w} \right) + \left( \vecnot{w} - \vecnot{w}' \right)$ and
 \begin{equation} \label{equation:OrthogonalVector}
 \begin{split}
 \left\| \vecnot{v} - \vecnot{w}' \right\|^2
@@ -52,39 +51,56 @@ Then $\vecnot{v} - \vecnot{w}' = \left( \vecnot{v} - \vecnot{w} \right) + \left(
 &\geq \left\| \vecnot{v} - \vecnot{w} \right\|^2.
 \end{split}
 \end{equation}
-Conversely, suppose that $\left\| \vecnot{v} - \vecnot{w}' \right\| \geq \left\| \vecnot{v} - \vecnot{w} \right\|$ for every $\vecnot{w}' \in W$.
-From \eqref{equation:OrthogonalVector}, we get
-\begin{equation*}
-2 \Real \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle
-+ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 \geq 0
-\end{equation*}
-for all $\vecnot{w}' \in W$.
-Note that every vector in $W$ can be expressed as $\vecnot{w} - \vecnot{w}'$ where $\vecnot{w}' \in W$, it follows that
-\begin{equation} \label{equation:InequalityOrthogonalVectors}
-2 \Real \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w}'' \right\rangle
-+ \left\| \vecnot{w}'' \right\|^2 \geq 0
-\end{equation}
-for every $\vecnot{w}'' \in W$.
-If $\vecnot{w}'$ is in $W$ and $\vecnot{w}' \neq \vecnot{w}$ then we may take
-\begin{equation*}
-\vecnot{w}'' = - \frac{ \left\langle  \vecnot{w} - \vecnot{w}' | \vecnot{v} - \vecnot{w} \right\rangle }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 } \left( \vecnot{w} - \vecnot{w}' \right).
-\end{equation*}
-Inequality~\eqref{equation:InequalityOrthogonalVectors} then reduces to the statement
-\begin{equation*}
-- 2 \frac{ \left| \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle \right|^2 }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 }
-+ \frac{ \left| \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle \right|^2 }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 }
-\geq 0.
-\end{equation*}
-This inequality holds if and only if $\left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle = 0$.
-Therefore, $\vecnot{v} - \vecnot{w}$ is orthogonal to every vector in $W$.
-Hence the vector $\vecnot{w} \in W$ is a best approximation of $\vecnot{v} \in V$ by vectors in $W$ if and only if $\vecnot{v} - \vecnot{w}$ is orthogonal to every vector in $W$.
+
+The converse is given by, if $\left\| \vecnot{v} - \vecnot{w}' \right\| \geq \left\| \vecnot{v} - \vecnot{w} \right\|$ for every $\vecnot{w}' \in W$, then $\vecnot{v} - \vecnot{w}$ is orthogonal to every vector in $W$.
+Its contrapositive is given by, if there is a $\vecnot{w}'\in W$ such that $\langle \vecnot{v}-\vecnot{w} | \vecnot{w}' \rangle \neq 0$, then there is a $\vecnot{w}'' \in W$ such that
+ $\left\| \vecnot{v} - \vecnot{w}'' \right\| < \left\| \vecnot{v} - \vecnot{w} \right\|$.
+% $\left\| \vecnot{v} - (\vecnot{w} + \delta \vecnot{w}') \right\| < \left\| \vecnot{v} - \vecnot{w} \right\|$.
+To see this, we choose $\delta = \langle \vecnot{v}-\vecnot{w} | \vecnot{w}' \rangle / \|\vecnot{w}'\|^2$,  $\vecnot{w}''=\vecnot{w}+ \delta \vecnot{w}'$, and  write
+\begin{align*}
+\left\| \vecnot{v} - \vecnot{w}'' \right\|^2
+&= \left\| (\vecnot{v} - \vecnot{w}) - \delta \vecnot{w}' \right\|^2 \\
+&= \left\langle (\vecnot{v} -  \vecnot{w}) - \delta \vecnot{w}' \,|\, (\vecnot{v} - \vecnot{w}) - \delta \vecnot{w}' \right\rangle \\
+&= \left\| \vecnot{v} -\vecnot {w} \right\|^2 - \overline{\delta} \left\langle \vecnot{v} -  \vecnot{w} \,|\,  \vecnot{w}' \right\rangle - \delta \left\langle \vecnot{w}' \,|\, \vecnot{v} - \vecnot{w}  \right\rangle +  |\delta|^2 \left\| \vecnot{w}' \right\|^2 \\
+&= \left\| \vecnot{v} -\vecnot {w} \right\|^2 - \frac{|\langle \vecnot{v} -  \vecnot{w} \,|\,  \vecnot{w}' \rangle|^2}{\|\vecnot{w}'\|^2} - \frac{|\langle \vecnot{v} -  \vecnot{w} \,|\,  \vecnot{w}' \rangle|^2}{\|\vecnot{w}'\|^2} | + \frac{|\langle \vecnot{v} -  \vecnot{w} \,|\,  \vecnot{w}' \rangle|^2}{\|\vecnot{w}'\|^2} \\
+&= \left\| \vecnot{v} -\vecnot {w} \right\|^2 - |\delta|^2 \| \vecnot{w}'\|^2 \\
+& < \left\| \vecnot{v} -\vecnot {w} \right\|^2.
+\end{align*}
+
+% Conversely, suppose that $\left\| \vecnot{v} - \vecnot{w}' \right\| \geq \left\| \vecnot{v} - \vecnot{w} \right\|$ for every $\vecnot{w}' \in W$.
+%Then, solving \eqref{equation:OrthogonalVector} for $\left\| \vecnot{v} - \vecnot{w}' \right\| - \left\| \vecnot{v} - \vecnot{w} \right\|$ and combining the previous inequality gives
+%\begin{equation*}
+%2 \Real \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle
+%+ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 \geq 0
+%\end{equation*}
+%for all $\vecnot{w}' \in W$.
+%Note that every vector in $W$ can be expressed as $\vecnot{w} - \vecnot{w}'$ where $\vecnot{w}' \in W$, it follows that
+%\begin{equation} \label{equation:InequalityOrthogonalVectors}
+%2 \Real \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w}'' \right\rangle
+%+ \left\| \vecnot{w}'' \right\|^2 \geq 0
+%\end{equation}
+%for every $\vecnot{w}'' \in W$.
+%If $\vecnot{w}'$ is in $W$ and $\vecnot{w}' \neq \vecnot{w}$ then we may take
+%\begin{equation*}
+%\vecnot{w}'' = - \frac{ \left\langle  \vecnot{w} - \vecnot{w}' | \vecnot{v} - \vecnot{w} \right\rangle }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 } \left( \vecnot{w} - \vecnot{w}' \right).
+%\end{equation*}
+%Inequality~\eqref{equation:InequalityOrthogonalVectors} then reduces to the statement
+%\begin{equation*}
+%- 2 \frac{ \left| \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle \right|^2 }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 }
+%+ \frac{ \left| \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle \right|^2 }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 }
+%\geq 0.
+%\end{equation*}
+%This inequality holds if and only if $\left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle = 0$.
+%Therefore, $\vecnot{v} - \vecnot{w}$ is orthogonal to every vector in $W$.
+%Hence the vector $\vecnot{w} \in W$ is a best approximation of $\vecnot{v} \in V$ by vectors in $W$ if and only if $\vecnot{v} - \vecnot{w}$ is orthogonal to every vector in $W$.
 
 Suppose $\vecnot{w}, \vecnot{w}' \in W$ are best approximations of $\vecnot{v}$ by vectors in $W$.
 Then $\left\| \vecnot{v} - \vecnot{w} \right\| = \left\| \vecnot{v} - \vecnot{w}' \right\|$ and \eqref{equation:OrthogonalVector} implies that $\left\| \vecnot{w} - \vecnot{w}' \right\| = 0$.
 That is, if a best approximation exists then it is unique.
 
-Assume that $W$ is closed and has a countable orthogonal basis $\vecnot{w}_1,\vecnot{w}_2, \ldots$ and let $\vecnot{w}$ be defined by \eqref{equation:OrthogonalProjectionOrthogonalVectors}.
-Then $\vecnot{v} -\vecnot{w}$ is orthogonal to $\vecnot{w}_j$ for $j \in \mathbb{N}$, i.e.,
+Assume that $W$ is closed and $\vecnot{w}_1,\vecnot{w}_2, \ldots$ is a countable orthogonal basis .
+Let the vector $\vecnot{w}$ be defined by \eqref{equation:OrthogonalProjectionOrthogonalVectors} and observe that $\vecnot{w} \in W$ because $W$ is closed.
+In addition, we see that $\vecnot{v} -\vecnot{w}$ is orthogonal to $\vecnot{w}_j$ for $j \in \mathbb{N}$, i.e.,
 \begin{equation*}
 \begin{split}
 \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w}_j \right\rangle
@@ -95,7 +111,7 @@ Then $\vecnot{v} -\vecnot{w}$ is orthogonal to $\vecnot{w}_j$ for $j \in \mathbb
 = 0.
 \end{split}
 \end{equation*}
-That is, $\vecnot{v} - \vecnot{w}$ is orthogonal to every vector in $W$ and therefore $\vecnot{w}$ is the best approximation of $\vecnot{v}$ by vectors in $W$.
+Since $\vecnot{v} - \vecnot{w}$ is orthogonal to every vector in $W$, the first two results imply that $\vecnot{w}$ is the best approximation of $\vecnot{v}$ by vectors in $W$.
 \end{proof}
 
 \begin{definition}
@@ -152,7 +168,7 @@ A function $F \colon X \rightarrow Y$ with $Y \subseteq X$ is \defn{linear trans
 
 \begin{definition}
 Let $V$ be a vector space and $T \colon V \rightarrow V$ be a linear transformation.
-Then, $T$ is a projection if $T$ is idempotent.
+If $T$ is idempotent, then $T$ is called a \defn{linear transform}{projection}.
 \end{definition}
 
 \begin{example}
@@ -193,21 +209,22 @@ Therefore, $\mathcal{R}(T) = \mathcal{N}(P)$ and $I-P$ is a projection onto $\ma
 \begin{definition}
 \label{definition:OrthogonalProjection}
 Let $V$ be an inner-product space and $P \colon V \rightarrow V$ be a projection operator.
-Then, $P$ is an \defn{linear transform}{orthogonal projection} if $\mathcal{R}(P) \bot \mathcal{N}(P)$.
+If $\mathcal{R}(P) \bot \mathcal{N}(P)$, then $P$ is called a \defn{linear transform}{orthogonal projection} .
 \end{definition}
 
 \begin{example}
 Let $V$ be an inner-product space and $P \colon V \rightarrow V$ be an orthogonal projection.
-Then, $\vecnot{v} = P \vecnot{v} + (I-P) \vecnot{v}$ defines a natural orthogonal decomposition of $\vecnot{v}$ because $P \vecnot{v} \in \mathcal{R}(P)$ and $(I-P) \vecnot{v} \in \mathcal{N}(P)$.
-Therefore, $\mathcal{N}(P) = \mathcal{R}(P)^{\bot}$ and $P \vecnot{v} = \vecnot{v}$ if and only if $\vecnot{v} \in \mathcal{R}(P)$.
+Then, $\vecnot{v} = P \vecnot{v} + (I-P) \vecnot{v}$ defines an orthogonal decomposition of $\vecnot{v}$ because $P \vecnot{v} \in \mathcal{R}(P)$, $(I-P) \vecnot{v} \in \mathcal{N}(P)$ (e.g., $P\big((I-P)\vecnot{v}\big)=\vecnot{0}$), and $\mathcal{R}(P) \bot \mathcal{N}(P)$.
+In addition, $V = \mathcal{R}(P) \oplus \mathcal{N}(P)$ and hence $\mathcal{N}(P) = \mathcal{R}(P)^{\bot}$.
+% and $P \vecnot{v} = \vecnot{v}$ if and only if $\vecnot{v} \in \mathcal{R}(P)$.
 \end{example}
 
 \begin{theorem}
-Any idempotent Hermitian matrix $P$ defines an orthogonal projection operator.
+For $V=F^n$ with the standard inner product, an idempotent Hermitian matrix $P$ defines an orthogonal projection operator.
 \end{theorem}
 \begin{proof}
-We simply must verify that the range a null space are orthogonal.
-Since $P \vecnot{u} \in \mathcal{R}(P)$ and $(I-P) \vecnot{v} \in \mathcal{N}(P)$, we can simply point out that
+We simply must verify that the range and null space are orthogonal.
+Since $P \vecnot{u} \in \mathcal{R}(P)$ and $(I-P) \vecnot{v} \in \mathcal{N}(P)$ (e.g., $P\big((I-P)\vecnot{v}\big)=\vecnot{0}$), we observe that
 \[ \langle P\vecnot{u} | (I-P)\vecnot{v} \rangle = \vecnot{v}^H (I-P)^H P \vecnot{u} = \vecnot{v}^H (P - P^H P) \vecnot{u} = \vecnot{v}^H (P - P^2) \vecnot{u} = 0. \]
 \end{proof}
 
@@ -382,7 +399,7 @@ Equations of this form are collectively known as the \defn{inner-product space}{
 
 \begin{definition}
 The $n \times n$ matrix
-\begin{equation} \label{equation:GrammianMatrix}
+\begin{equation} \label{equation:GramianMatrix}
 G = \left[ \begin{array}{cccc}
 \left\langle \vecnot{w}_1 | \vecnot{w}_1 \right\rangle
 & \left\langle \vecnot{w}_2 | \vecnot{w}_1 \right\rangle & \cdots
@@ -396,8 +413,8 @@ G = \left[ \begin{array}{cccc}
 & \left\langle \vecnot{w}_n | \vecnot{w}_n \right\rangle
 \end{array} \right]
 \end{equation}
-is called the \defn{matrix}{Grammian} matrix.
-Since $g_{ji} = \left\langle \vecnot{w}_i | \vecnot{w}_j \right\rangle$, it follows that the Grammian is a Hermitian symmetric matrix, i.e., $G^H = G$.
+is called the \defn{matrix}{Gramian} matrix.
+Since $g_{ji} = \left\langle \vecnot{w}_i | \vecnot{w}_j \right\rangle$, it follows that the Gramian is a Hermitian symmetric matrix, i.e., $G^H = G$.
 \end{definition}
 
 \begin{definition}
@@ -409,7 +426,7 @@ An important aspect of positive-definite matrices is that they are always invert
 This follows from noting that $M\vecnot{v} = \vecnot{0}$ for $\vecnot{v}\neq\vecnot{0}$ implies that $\vecnot{v}^H M \vecnot{v} = \vecnot{0}$ and contradicts the definition of positive definite.
 
 \begin{theorem}
-A Grammian matrix $G$ is always positive-semidefinite.
+A Gramian matrix $G$ is always positive-semidefinite.
 Furthermore, it is positive-definite if and only if the sequence of vectors $\vecnot{w}_1, \ldots, \vecnot{w}_n$ is linearly independent.
 \end{theorem}
 \begin{proof}
@@ -477,10 +494,18 @@ J \left( \vecnot{s} \right)
 + \sum_{i=1}^n \sum_{j=1}^n s_i \bar{s}_j \left\langle \vecnot{w}_i | \vecnot{w}_j \right\rangle .
 \end{split}
 \end{equation*}
-Taking the gradient of $J \left( \vecnot{s} \right)$, we get
+To take the derivative with respect to  $\vecnot{s}\in \mathbb{C}^n$, we use the decomposition $\vecnot{s}=\vecnot{a}+j \vecnot{b}$, with $\vecnot{a},\vecnot{b}\in \mathbb{R}^n$, and define the differential operators
+\begin{equation*}
+\frac{\partial}{\partial\vecnot{s}} \triangleq \frac{1}{2}\left(\frac{\partial}{\partial\vecnot{a}}-j\frac{\partial}{\partial\vecnot{b}}\right)
+\quad \quad
+\frac{\partial}{\partial\vecnot{\overline{s}}} \triangleq \frac{1}{2}\left(\frac{\partial}{\partial\vecnot{a}}+j\frac{\partial}{\partial\vecnot{b}}\right),
+\end{equation*}
+where $\partial/\partial\vecnot{a} = (\partial/\partial a_1 , \ldots, \partial/\partial a_n )^T$.
+Since $J(\vecnot{s})$ is real function of $\vecnot{s}$, a stationary point of $J$ can be found by setting either derivative to $\vecnot{0}$.
+Choosing $\vecnot{\overline{s}}$, gives
 \begin{equation*}
 \begin{split}
-\nabla J \left( \vecnot{s} \right)
+\frac{\partial}{\partial\vecnot{\overline{s}}} J \left( \vecnot{s} \right)
 &= - \left[ \begin{array}{c}
 \left\langle \vecnot{v} | \vecnot{w}_1 \right\rangle \\
 \left\langle \vecnot{v} | \vecnot{w}_2 \right\rangle \\
@@ -508,10 +533,11 @@ In matrix form, this yields the familiar equation
 \begin{equation*}
 G \vecnot{s} = \vecnot{t}.
 \end{equation*}
-To ensure that this extremum is in fact a minimum, we compute the Hessian matrix
-\begin{equation*}
-\nabla^2 J \left( \vecnot{s} \right) = G .
-\end{equation*}
+To ensure that this extremum is in fact a minimum, one can compute the 2nd derivative to show that the Hessian is $G$.
+%we compute the 2nd derivative
+%\begin{equation*}
+%\frac{\partial}{\partial\vecnot{\overline{s}}} \frac{\partial}{\partial\vecnot{\overline{s}}} J \left( \vecnot{s} \right) = G .
+%\end{equation*}
 Since $G$ is a positive-semidefinite matrix, the extremum is indeed a minimum.
 
 This implies that $\left\| \vecnot{e} \right\|^2$ is minimized if and only if $G \vecnot{s} = \vecnot{t}$.
@@ -566,10 +592,10 @@ Using the definition of $A$, we obtain
 \begin{equation*}
 A^H A \vecnot{s} = A^H \vecnot{v} .
 \end{equation*}
-The matrix $A^H A$ is the Grammian $G$ defined in \eqref{equation:GrammianMatrix}.
+The matrix $A^H A$ is the Gramian $G$ defined in \eqref{equation:GramianMatrix}.
 The vector $A^H \vecnot{v}$ is the cross correlation vector $\vecnot{t}$.
 
-When the vectors $\vecnot{w}_1, \ldots, \vecnot{w}_n$ are linearly independent, the Grammian matrix is positive definite and hence invertible.
+When the vectors $\vecnot{w}_1, \ldots, \vecnot{w}_n$ are linearly independent, the Gramian matrix is positive definite and hence invertible.
 The optimal solution for the least-squares problem is therefore given by
 \begin{equation*}
 \vecnot{s} = \left( A^H A \right)^{-1} A^H \vecnot{v} = G^{-1} \vecnot{t} .
@@ -756,7 +782,7 @@ Using \eqref{equation:ExpectationInnerProduct}, we obtain
 where $j = 1, \ldots, K-1$.
 
 For this specific case where the normal equations are defined in terms of the expectation operator, these equations are called the \defn{applications}{Wiener-Hopf} equations.
-The Grammian of the Wiener-Hopf equations can be expressed in a more familiar form using the autocorrelation matrix.
+The Gramian of the Wiener-Hopf equations can be expressed in a more familiar form using the autocorrelation matrix.
 Recall that $\{ X[t] \}$ is a wide-sense stationary process.
 As such, we have
 \begin{equation*}
@@ -910,7 +936,7 @@ Convex sets are generalize the closure property of subspaces to subsets of point
 
 \begin{definition}
 Let $V$ be a vector space over $\RealNumbers$.
-The subset $A \subseteq V$ is called a \defn{vector space}{convex set} if, for all $\vecnot{a}_1,\vecnot{a}_2 \in A$ and $\lambda\in[0,1]$, we have $\lambda \vecnot{a}_1 + (1-\lambda) \vecnot{a}_2 \in A$.
+The subset $A \subseteq V$ is called a \defn{vector space}{convex set} if, for all $\vecnot{a}_1,\vecnot{a}_2 \in A$ and $\lambda\in(0,1)$, we have $\lambda \vecnot{a}_1 + (1-\lambda) \vecnot{a}_2 \in A$.
 The set is \textbf{strictly convex} if, for all $\vecnot{a}_1,\vecnot{a}_2 \in \Closure{A}$ and $\lambda\in(0,1)$, we have $\lambda \vecnot{a}_1 + (1-\lambda) \vecnot{a}_2 \in \Interior{A}$.
 \end{definition}
 
@@ -947,7 +973,7 @@ The following result can be seen as a generalization of that result to Hilbert-s
 
 \begin{lemma}
 \label{lemma:convex_proj_lt0}
-For any $\vecnot{v} \notin A$, a necessary and sufficient condition for $\vecnot{u}^* = P_A (\vecnot{v})$ is that $\langle \vecnot{v}-\vecnot{u}^*,\vecnot{u}-\vecnot{u}^* \rangle \leq 0$ for all $\vecnot{u}\in A$.
+For any $\vecnot{v} \notin A$, a necessary and sufficient condition for $\vecnot{u}^* = P_A (\vecnot{v})$ is that $\langle \vecnot{v}-\vecnot{u}^* \,|\, \vecnot{u}-\vecnot{u}^* \rangle \leq 0$ for all $\vecnot{u}\in A$.
 \end{lemma}
 \begin{proof}
 Let $\vecnot{u}^* = P_A (\vecnot{v})$ be the unique projection of $\vecnot{v}$ onto $A$.
@@ -956,17 +982,17 @@ and any $\alpha\in (0,1)$, observe that $\vecnot{u}'=(1-\alpha) \vecnot{u}^* + \
 The optimality of $\vecnot{u}^*$ implies that
 \begin{align*}
 \| \vecnot{v}-\vecnot{u}^* \|^2
-&\leq \| \vecnot{v}- \vecnot{u}' \| \\
+&\leq \| \vecnot{v}- \vecnot{u}' \|^2 \\
 &\leq \| \vecnot{v}- \vecnot{u}^* - \alpha (\vecnot{u}-\vecnot{u}^*) \|^2 \\
-&= \| \vecnot{v} - \vecnot{u}^* \|^2 + \alpha^2 \| \vecnot{u} - \vecnot{u}^* \|^2 - 2 \alpha \langle v-\vecnot{u}^*,\vecnot{u}-\vecnot{u}^* \rangle. 
+&= \| \vecnot{v} - \vecnot{u}^* \|^2 + \alpha^2 \| \vecnot{u} - \vecnot{u}^* \|^2 - 2 \alpha \langle v-\vecnot{u}^* \,|\, \vecnot{u}-\vecnot{u}^* \rangle. 
 \end{align*}
-Thus, $\langle v-\vecnot{u}^*,\vecnot{u}-\vecnot{u}^* \rangle \leq \frac{\alpha}{2} \| \vecnot{u} - \vecnot{u}^* \|^2$.
+Thus, $\langle v-\vecnot{u}^* \,|\, \vecnot{u}-\vecnot{u}^* \rangle \leq \frac{\alpha}{2} \| \vecnot{u} - \vecnot{u}^* \|^2$.
 One can establish necessity by taking the limit as $\alpha \to 0$.
 For sufficiency, we assume $\langle \vecnot{v}-\vecnot{u}^*,\vecnot{u}-\vecnot{u}^* \rangle \leq 0$ and we write
 \begin{align*}
 \| \vecnot{v}-\vecnot{u} \|^2 - \| \vecnot{v} - \vecnot{u}^* \|^2
 &= \| (\vecnot{v} - \vecnot{u}^*) - (\vecnot{u} - \vecnot{u}^*) \|^2 - \|\vecnot{v} - \vecnot{u}^* \|^2 \\
-&= \| \vecnot{v}-\vecnot{u}^* \|^2 + \| \vecnot{u} -\vecnot{u}^* \| ^2 - 2 \langle v-\vecnot{u}^*,\vecnot{u}-\vecnot{u}^* \rangle - \|\vecnot{v}-\vecnot{u}^* \|^2 \\
+&= \| \vecnot{v}-\vecnot{u}^* \|^2 + \| \vecnot{u} -\vecnot{u}^* \| ^2 - 2 \langle v-\vecnot{u}^* \,|\, \vecnot{u}-\vecnot{u}^* \rangle - \|\vecnot{v}-\vecnot{u}^* \|^2 \\
 &\geq 0.
 \end{align*}
 Thus, $\| \vecnot{v}-\vecnot{u} \|^2 \geq \| \vecnot{v} - \vecnot{u}^* \|^2$ for all $\vecnot{u} \in A$ and $\vecnot{u}^* = P_A (\vecnot{v})$.

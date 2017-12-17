@@ -233,25 +233,24 @@ From Definition~\ref{definition_metspace_converge}, we know that a sequence $x_1
 It is possible for a sequence in a metric space $X$ to satisfy the Cauchy criterion, but not to converge in $X$.
 
 \begin{example}
-Let $C[-1,1]$ be the vector space of continuous functions on the interval $[-1,1]$ and consider the $L^2$ norm
+Let $X$ be the space of continuous functions that map $[-1,1]$ to $\mathbb{R}$ and satisfy $\left\| f \right\|_2 < \infty$, where $\left\| f \right\|_2$ denotes the $L^2$ norm
 \begin{equation*}
-\left\| f(t) \right\|_2 = \left( \int_{-1}^1 |f(t)|^2 dt \right)^{\frac{1}{2}}.
+\left\| f \right\|_2 \triangleq \left( \int_{-1}^1 |f(t)|^2 dt \right)^{\frac{1}{2}}.
 \end{equation*}
-Define the sequence of functions $f_n(t)$ given by
+This set forms a metric space $(X,d)$ when equipped with the distance
+\[ d(f, g) \triangleq \left\| f - g \right\|_2
+= \left( \int_{-1}^1 |f(t) - g(t)|^2 dt \right)^{\frac{1}{2}}. \]
+Consider the sequence of functions $f_n(t)$ given by
 \begin{equation*}
-f_n(t) = \left\{ \begin{array}{ll}
+f_n(t) \triangleq \left\{ \begin{array}{ll}
 0 & t \in \left[ -1, -\frac{1}{n} \right] \\
 \frac{nt}{2} + \frac{1}{2} & t \in \left( -\frac{1}{n}, \frac{1}{n} \right) \\
-1 & t \in \left[ \frac{1}{n}, 1 \right]
-\end{array} \right. .
+1 & t \in \left[ \frac{1}{n}, 1 \right].
+\end{array} \right\}
 \end{equation*}
-Assuming that $m \geq n$, we get
-\begin{equation*}
-d(f_n, f_m) = \left\| f_n(t) - f_m(t) \right\|_2
-= \left( \int_{-1}^1 |f_n(t) - f_m(t)|^2 dt \right)^{\frac{1}{2}}
-= \frac{(m-n)^2}{6m^2n}.
-\end{equation*}
-This sequence satisfies the Cauchy criterion, but it does not converge to a continuous function in $C[-1,1]$.
+It is easy to verify that $d(f_n, f_m) = (m-n)^2/(6m^2n)$ for $m\geq n$.
+From this, one can show that the sequence is Cauchy.
+But, it does not converge to a continuous function in $X$.
 \end{example}
 
 \begin{definition}
@@ -392,8 +391,8 @@ Then, there is a subsequence $x_{n_1},x_{n_2},\ldots$, defined by some increasin
 \end{theorem}
 \begin{proof}
 Suppose for some $x\in X$, it holds that, for any $\epsilon > 0$, the set $B(x,\epsilon)$ contains infinitely many elements in the sequence $x_1,x_2,\ldots$.
-In this case, we can choose $n_1,n_2,\ldots$ so that $|x\! -\! x_{n_j}|\! <\! \frac{1}{j}$.
-Therefore, the subsequence converges to $x$.
+In this case, we can choose $n_1 < n_2 < \cdots$ so that $d(x,x_{n_j}) \! < \! \frac{1}{j}$.
+Thus, the subsequence converges to $x$.
 
 On the other hand, suppose the sequence has no convergent subsequence.
 Then, for every $x\in X$, there is an $\epsilon >0$ such that $B(x,\epsilon)$ does not contain infinitely many elements in the sequence.
@@ -468,13 +467,17 @@ Any bounded non-decreasing sequence of real numbers converges to its supremum.
 \end{theorem}
 \begin{proof}
 Let $x_1,x_2,\ldots \in \RealNumbers$ be a sequence satisfying $x_{n+1} \geq x_n$ and $x_n \leq M < \infty$ for all $n\in \mathbb{N}$.
-Without loss of generality, we can take the upper bound $M$ to be the supremum $\sup \{x_1,x_2,\ldots\}$.
-This sequence converges to $M$ if, for any $\epsilon >0$, there is an $N\in \mathbb{N}$ such that $M-x_n<\epsilon$ for all $n>N$.
+Without loss of generality, we can choose the upper bound $M$ to be the supremum $\sup \{x_1,x_2,\ldots\}$.
+Now, we will prove directly that $x_n \to M$.
 
-To prove this by contradiction, we suppose that $x_n$ does not converge to $M$.
-Since $x_n$ is non-decreasing, this implies that there is an $\epsilon > 0$ such that $M - x_n \geq \epsilon$ for all $n\in \mathbb{N}$.
-But, this result contradicts $\sup f(A) = M$.
-Therefore, the sequence converges to $M$.
+First, we note that the definition of the supremum implies that $x_n \leq M$ for all $n\in \mathbb{N}$ and, for any $\epsilon >0$, there is an $N\in \mathbb{N}$ such that $x_N > M-\epsilon$.
+Second, since $x_n$ is non-decreasing, this implies that $x_n > M-\epsilon$ for all $n>N$.
+Third, since $x_n \leq M$ by definition, it follows that $|M - x_n| = M-x_n < \epsilon$ for all $n>N$.
+We complete the proof by observing that this implies the definition of $x_n \to M$.
+%To prove this by contradiction, we suppose that $x_n$ does not converge to $M$.
+%Since $x_n$ is non-decreasing, this implies that there is an $\epsilon > 0$ such that $M - x_n \geq \epsilon$ for all $n\in \mathbb{N}$.
+%But, this result contradicts $\sup f(A) = M$.
+%Therefore, the sequence converges to $M$.
 \end{proof}
 
 %\begin{example}
