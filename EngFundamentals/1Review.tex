@@ -230,10 +230,41 @@ Suppose $(X,d)$ is a metric space.
 From Definition~\ref{definition_metspace_converge}, we know that a sequence $x_1, x_2, \ldots$ of points in $X$ converges to $x \in X$ if, for every $\delta >0$, there exists an integer $N$ such that $d(x_i,x)<\delta$ for all $i \geq N$.
 %if for every neighborhood $A$ of $x$ there exists a positive integer $N$ such that $x_i \in A$ for all $i \geq N$.
 
+\begin{figure}[ht]
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    %title={Continuous Functions},
+    xlabel={$t$},
+    xmin=-1, xmax=1,
+    xmajorgrids,
+    ylabel={$f_n(t)$},
+    ymajorgrids,
+    legend pos=north west]
+\addplot[darkgray,line width=1pt] coordinates {
+    (-1,0) (-0.5,0) (0.5,1) (1,1)};
+\addlegendentry{$n = 2$}
+
+\addplot[blue,line width=1pt] coordinates {
+    (-1,0) (-0.25,0) (0.25,1) (1,1)};
+\addlegendentry{$n = 4$}
+
+\addplot[magenta,line width=1pt] coordinates {
+    (-1,0) (-0.125,0) (0.125,1) (1,1)};
+\addlegendentry{$n = 8$}
+\end{axis}
+\end{tikzpicture}
+\vspace{-8mm}
+\end{center}
+\caption{The sequence of continuous functions in Example~\ref{example:ContinuousFunctionsCauchy} satisfies the Cauchy criterion.
+But, it does not converge to a continuous function in $C[-1,1]$.}
+\end{figure}
+
 It is possible for a sequence in a metric space $X$ to satisfy the Cauchy criterion, but not to converge in $X$.
 
 \begin{example}
-Let $X$ be the space of continuous functions that map $[-1,1]$ to $\mathbb{R}$ and satisfy $\left\| f \right\|_2 < \infty$, where $\left\| f \right\|_2$ denotes the $L^2$ norm
+\label{example:ContinuousFunctionsCauchy}
+Let $X=C[-1,1]$ be the space of continuous functions that map $[-1,1]$ to $\mathbb{R}$ and satisfy $\left\| f \right\|_2 < \infty$, where $\left\| f \right\|_2$ denotes the $L^2$ norm
 \begin{equation*}
 \left\| f \right\|_2 \triangleq \left( \int_{-1}^1 |f(t)|^2 dt \right)^{\frac{1}{2}}.
 \end{equation*}
@@ -248,9 +279,14 @@ f_n(t) \triangleq \left\{ \begin{array}{ll}
 1 & t \in \left[ \frac{1}{n}, 1 \right].
 \end{array} \right\}
 \end{equation*}
-It is easy to verify that $d(f_n, f_m) = (m-n)^2/(6m^2n)$ for $m\geq n$.
-From this, one can show that the sequence is Cauchy.
-But, it does not converge to a continuous function in $X$.
+
+Assuming that $m \geq n$, we get
+\begin{equation*}
+d(f_n, f_m) = \left\| f_n(t) - f_m(t) \right\|_2
+= \left( \int_{-1}^1 |f_n(t) - f_m(t)|^2 dt \right)^{\frac{1}{2}}
+= \frac{(m-n)^2}{6m^2n}.
+\end{equation*}
+This sequence satisfies the Cauchy criterion, but it does not converge to a continuous function in $C[-1,1]$.
 \end{example}
 
 \begin{definition}
@@ -681,17 +717,22 @@ The following are equivalent:
 \begin{proof}
 $(1 \Rightarrow 2)$.
 Assume $f$ is a continuous function.
-Suppose $x \in \Closure{A}$, where $A$ is a subset of $X$.
-Let $O$ be a neighborhood of $f(x)$.
-Since $f^{-1}(O)$ is an open set of $X$ containing $x\in \Closure{A}$, it must intersect with $A$ in some point $x'$.
-It follows that $O$ intersects $f(A)$ in the point $f(x')$.
-By Theorem~\ref{theorem:ClosureConditions}, we find that $f(x) \in \Closure{ f(A) }$.
+We wish to show $f \left( \Closure{A} \right) \subseteq \Closure{ f(A) }$ for every subset $A \subseteq X$.
+To begin, suppose $A$ is fixed and let $y \in f \left( \Closure{A} \right)$.
+Then, there exists $x \in \Closure{A}$ such that $f(x) = y$.
+Let $O \subseteq Y$ be a neighborhood of $f(x)$.
+Preimage $f^{-1}(O)$ is an open set containing $x$ because $f$ is continuous.
+Since $x \in \Closure{A} \cap f^{-1}(O)$, we gather that $f^{-1}(O)$ must intersect with $A$ in some point $x'$.
+Moreover, $f(x') \in f \left( f^{-1}(O) \right) \subseteq O$ and $f(x') \in f(A)$.
+Thus, $O$ intersects with $f(A)$ in the point $f(x')$.
+Since $O$ is an arbitrary neighborhood of $f(x)$, we deduce that $f(x) \in \Closure{ f(A) }$ by Theorem~\ref{theorem:ClosureConditions}.
+Collecting these results, we get that any $y \in f \left( \Closure{A} \right)$ is also in $\Closure{ f(A) }$.
 
 $(2 \Rightarrow 3)$.
-Suppose that for every subset $A \subseteq X$, $f \left( \Closure{A} \right) \subseteq \Closure{ f(A) }$.
+For this step, we assume that $f \left( \Closure{A} \right) \subseteq \Closure{ f(A) }$ for every subset $A \subseteq X$.
 Let $C \subseteq Y$ be a closed set and let $A = f^{-1} (C)$.
-By P~\ref{problem:SetFunctionInverse}, we have $f(A) \subseteq C$.
-If $x \in \Closure{A}$, then
+Then, $f(A) = f \left( f^{-1}(C) \right) \subseteq C$.
+If $x \in \Closure{A}$, we get
 \begin{equation*}
 f(x) \in f \left( \Closure{A} \right) \subseteq \Closure{f (A)} \subseteq \Closure{C} = C.
 \end{equation*}
@@ -709,6 +750,98 @@ X - f^{-1}(O^c) = \{ x\in X | f(x) \notin O^c \} = \{ x \in X | f(x) \in O \} = 
 \end{equation*}
 That is, $f^{-1} (O)$ is open.
 \end{proof}
+
+\begin{figure}[t]
+\centering{
+\begin{tikzpicture}
+\begin{axis}[
+    xlabel={Argument $x$},
+    ylabel={$f(x) = \frac{1}{1 + |x|}$},
+    xmin=-2.5, xmax=5.5,
+    ymin=0, ymax=1.25,
+    xmajorgrids,
+    ymajorgrids]
+\addplot[blue,line width=1pt,domain=-2.5:5.5,samples=801]
+    {1 / (1 + abs(x))};
+\addplot[black] coordinates { (0,0) (0,1.25)};
+\addplot[black, dashed, thin] coordinates {
+    (-2,0) (-2,0.3333) (0,0.3333)
+
+    (-1,0) (-1,0.5) (0,0.5)
+
+    (1,0) (1,0.5) (0,0.5)
+
+    (2,0) (2,0.3333) (0,0.3333)
+
+    (3,0) (3,0.25) (0,0.25)
+
+    (4,0) (4,0.2) (0,0.2)
+
+    (5,0) (5,0.1667) (0, 0.1667)};
+
+\addplot[magenta, mark=*] coordinates { (0,1)};
+\addplot[magenta, mark=*] coordinates { (0,0.5)};
+\addplot[magenta, mark=*] coordinates { (0,0.3333)};
+\addplot[magenta, mark=*] coordinates { (0,0.25)};
+\addplot[magenta, mark=*] coordinates { (0,0.2)};
+\addplot[magenta, mark=*] coordinates { (0,0.1667)};
+\addplot[magenta, mark=*] coordinates { (0,0.1428)};
+\addplot[magenta, mark=*] coordinates { (0,0.125)};
+\addplot[magenta, mark=*] coordinates { (0,0.1111)};
+\addplot[magenta, mark=*] coordinates { (0,0.1)};
+\addplot[magenta, mark=*] coordinates { (0,0.0909)};
+\addplot[magenta, mark=*] coordinates { (0,0.0833)};
+\addplot[magenta, mark=*] coordinates { (0,0.0769)};
+\addplot[magenta, mark=*] coordinates { (0,0.0714)};
+
+\addplot[black, mark=*] coordinates { (-2,0)};
+\addplot[black, mark=*] coordinates { (-1,0)};
+\addplot[black, mark=*] coordinates { (0,0)};
+\addplot[black, mark=*] coordinates { (1,0)};
+\addplot[black, mark=*] coordinates { (2,0)};
+\addplot[black, mark=*] coordinates { (3,0)};
+\addplot[black, mark=*] coordinates { (4,0)};
+\addplot[black, mark=*] coordinates { (5,0)};
+\end{axis}
+\end{tikzpicture}}
+\caption{The function $f(x) = \frac{1}{1 + |x|}$ is continuous.
+The set of integers $\mathbb{Z}$ is closed.
+Yet, the image of this set, $f(\mathbb{Z}) = \{ 1/n : n \in \mathbb{N} \}$, is not closed.
+Thus, this is an example of a continuous function along with a set for which $f \left( \overline{\mathbb{Z}} \right) \subsetneq \overline{f \left( \mathbb{Z} \right)}$.}
+\end{figure}
+
+\begin{figure}[thb]
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    xlabel={Argument $x$},
+    ylabel={$f(x)$},
+    xmin=0, xmax=5,
+    ymin=0, ymax=7.5,
+    xmajorgrids,
+    ymajorgrids]
+\draw[magenta,fill=magenta] (axis cs:0,1.625) rectangle (axis cs:0.05,3.375);
+\draw[magenta,fill=magenta] (axis cs:1,0) rectangle (axis cs:3,0.075);
+\addplot[blue,line width=1pt,domain=0:3,samples=201]
+    {0.5*(x-1.5)^3 + 1.6875};
+\addplot[blue,line width=1pt,domain=3:5,samples=201]
+    {0.25*(x-3)^3 + 5};
+\addplot[black, dashed] coordinates {
+    (1,0) (1,1.625) (0,1.625)
+
+    (3,0) (3,3.375) (0,3.375)
+
+    (3,6) (0,6)};
+\addplot[mark=*, draw=blue,fill=white] coordinates {(3, 3.375)};
+\addplot[mark=*, draw=blue,fill=white] coordinates {(3,5)};
+\addplot[mark=*, draw=blue,fill=blue] coordinates {(3,6)};
+\node at (axis cs:1.875,0.625) {$A$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\caption{Given a function with a discontinuity and a set $A$, the image of the closure, $f \left( \Closure{A} \right)$, need not be a subset of the closure of the image, $\Closure{ f(A) }$, as seen in the example above.}
+\end{figure}
+
 
 \begin{theorem}
 Suppose $X$ and $Y$ are two metrizable spaces with metrics $d_X$ and $d_Y$.
