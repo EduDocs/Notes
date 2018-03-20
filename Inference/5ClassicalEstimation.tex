@@ -132,6 +132,16 @@ I_X (\theta)
 In some sense, the Fisher Information is a measure of sharpness.
 A smooth curve with shallow maximum will feature a low negative expected second moment, thereby providing little information.
 A sharp curve with high peaks will have a high negative expected second derivative, thereby offering more information.
+\begin{equation*}
+\begin{split}
+\left( \frac{\partial \log f_X}{\partial \theta} (x; \theta) \right)^2
+&= \left( \frac{1}{f_X (x; \theta)} \frac{\partial f_X}{\partial \theta} (x; \theta) \right)^2 \\
+\frac{\partial^2}{\partial \theta^2} \log f_X (x; \theta)
+&= \frac{\partial}{\partial \theta} \left( \frac{1}{f_X (x; \theta)} \frac{\partial f_X}{\partial \theta} (x; \theta) \right) \\
+&= - \frac{1}{\left( f_X (x; \theta) \right)^2 } \frac{\partial f_X}{\partial \theta} (x; \theta)
++ \frac{1}{\left( f_X (x; \theta) \right)^2 } \frac{\partial^2 f_X}{\partial \theta^2} (x; \theta)
+\end{split}
+\end{equation*}
 
 The Fisher information presents two important properties of information measures.
 First, for two independent experiments, the combined Fisher information $I_{(X,Y)} (\theta)$ is the sum of the information contained in each individual experiment,
@@ -152,61 +162,85 @@ Suppose $\theta = (\theta_1, \ldots, \theta_n)$, the Fisher information matrix o
 \end{equation}
 The Fisher information matrix plays an important role in the Cramer-Rao lower bound applied to vector parameters.
 
-
+\newpage
 \section{Cram\'{e}r-Rao Lower Bound}
 
-
-First, we recall the Cauchy-Schwarz inequality
+\begin{theorem}[Cram\'{e}r-Rao Inequality] \label{theorem:CRI}
+Let $X_1, \ldots, X_n$ be a sample with distribution $dP_{\theta} (\mathbf{x}) = f(\mathbf{x}; \theta) d\mathbf{x}$.
+Suppose $W(\mathbf{X})$ is an estimator satisfying $\mathrm{Var}_{\theta} \left[ W(\mathbf{X}) \right] < \infty$ and regularity condition
 \begin{equation*}
-\left| \int g h d\mu \right| \leq \| g \|_2 \| h \|_2 .
+\frac{d}{d\theta} \mathrm{E}_{\theta} \left[ W(\mathbf{X}) \right]
+= \int_{\mathcal{X}} \frac{\partial}{\partial \theta} \left( W(\mathbf{x}) f(\mathbf{x}; \theta) \right) d\mathbf{x} .
 \end{equation*}
-When $\| h \|_2 > 0$, we can use this inequality to provide a lower bound on $\| g \|_2^2$,
-\begin{equation} \label{equation:CauchySchwarzUB}
-\| g \|_2^2 \geq \frac{ \left| \int g h d\mu \right|^2 }{ \| h \|_2^2} .
+Then,
+\begin{equation} \label{equation:CRI}
+\mathrm{Var}_{\theta} \left[ W(\mathbf{X}) \right]
+\geq \frac{\left( \frac{d}{d\theta} \mathrm{E}_{\theta} \left[ W(\mathbf{X}) \right] \right)^2}
+{\mathrm{E}_{\theta} \left[ \left( \frac{\partial}{\partial \theta} \log f(\mathbf{x}; \theta) \right)^2 \right]} .
 \end{equation}
-In the present case, we wish to find a lower bound on the variance of an unbiased estimator,
+\end{theorem}
+\begin{proof}
+The proof is an application of the Cauchy-Schwarz inequality,
 \begin{equation*}
-\mathrm{E}_{\mu_{\theta}} \left[ \left( \hat{\theta} (X) - \theta \right)^2 \right]
-= \left\| \hat{\theta} (X) - \theta \right\|_2^2 .
+\left| \int g h d\mu \right| \leq \| g \|_2 \| h \|_2 ,
 \end{equation*}
-Thus, naturally, we have $g(x) = \hat{\theta}(x) - \theta$.
-The genius of the Cramer-Rao lower bound lies in the selection of function $h (\cdot)$, the score function
+which, stated statistically, amounts to
 \begin{equation*}
-h(x) = \frac{\partial \log f_X}{\partial \theta} (x; \theta)
-= \frac{1}{f_X (x; \theta)} \frac{\partial f_X}{\partial \theta} (x; \theta) .
+\left| \mathrm{Cov}[U, V] \right|^2
+\leq \mathrm{Var}[U] \mathrm{Var}[V] .
 \end{equation*}
-For this particular choice, we get
+When $\mathrm{Var} [V] > 0$, the lower bound is obtained by rearranging this equation,
 \begin{equation*}
-\begin{split}
-\| h \|_2^2
-&= \mathrm{E}_{\mu_{\theta}} \left[ \left( \frac{\partial \log f_X}{\partial \theta} (X; \theta) \right)^2 \right] \\
-&= - \mathrm{E}_{\mu_{\theta}} \left[ \frac{\partial^2 \log f}{\partial \theta^2} (X; \theta) \right] ,
-\end{split}
+\mathrm{Var}[U] \geq
+\frac{\left| \mathrm{Cov}[U, V] \right|^2}{\mathrm{Var}[V]} .
 \end{equation*}
-where the second inequality holds under proper regularity conditions.
-We recognize $\| h \|_2^2$ as the Fisher information $I_X(\theta)$.
-The last step of the proof is to evaluate the numerator on the right-hand side of \eqref{equation:CauchySchwarzUB},
+
+Comparing \eqref{equation:CRI} and the lower bound above suggests $U = W(\mathbf{X})$ and $V = \frac{\partial}{\partial \theta} \log f(\mathbf{x}; \theta)$.
+We note that, by assumption,
 \begin{equation*}
 \begin{split}
-\int g h d\mu
-&= \int \left( \hat{\theta}(x) - \theta \right)
-\frac{1}{f_X (x; \theta)} \frac{\partial f_X}{\partial \theta} (x; \theta)
-f_X (x; \theta) dx \\
-&= \int \left( \hat{\theta}(x) - \theta \right)
-\frac{\partial f_X}{\partial \theta} (x; \theta) dx \\
-&= \int \hat{\theta}(x) \frac{\partial f_X}{\partial \theta} (x; \theta) dx
-- \theta \int \frac{\partial f_X}{\partial \theta} (x; \theta) dx \\
-&= \frac{\partial}{\partial \theta} \int \hat{\theta}(x) f_X (x; \theta) dx
-- \theta \frac{\partial}{\partial \theta} \int f_X (x; \theta) dx \\
-&= \frac{\partial}{\partial \theta} \theta - \theta \frac{\partial}{\partial \theta} 1
-= 1 .
+\frac{d}{d\theta} \mathrm{E}_{\theta} \left[ W(\mathbf{X}) \right]
+%&= \int_{\mathcal{X}} \frac{\partial}{\partial \theta} \left( W(\mathbf{x}) f(\mathbf{x}; \theta) \right) d\mathbf{x} \\
+&= \int_{\mathcal{X}} W(\mathbf{x}) \frac{\partial}{\partial \theta} f(\mathbf{x}; \theta) d\mathbf{x}
+= \int_{\mathcal{X}} W(\mathbf{x}) \frac{\frac{\partial}{\partial \theta} f(\mathbf{x}; \theta)}{f(\mathbf{x}; \theta)} f(\mathbf{x}; \theta) d\mathbf{x} \\
+&= \mathrm{E}_{\theta} \left[ W(\mathbf{X}) \frac{\frac{\partial}{\partial \theta} f(\mathbf{X}; \theta)}{f(\mathbf{X}; \theta)} \right]
+= \mathrm{E}_{\theta} \left[ W(\mathbf{X}) \frac{\partial}{\partial \theta} \log f(\mathbf{X}; \theta) \right] .
 \end{split}
 \end{equation*}
-Collecting these results, we obtain the scalar version of the Cramer-Rao lower bound,
+We need to subtract the product of the expected values for the last line to become a covariance.
+Yet,
 \begin{equation*}
-\mathrm{E}_{\mu_{\theta}} \left[ \left( \hat{\theta} (X) - \theta \right)^2 \right]
-\geq \frac{1}{I_X (\theta)} .
+\mathrm{E}_{\theta} \left[ \frac{\partial}{\partial \theta} \log f(\mathbf{X}; \theta) \right]
+= \frac{d}{d \theta} \mathrm{E}_{\theta} \left[ 1 \right] = 0 .
 \end{equation*}
+That is, $\mathrm{Cov}_{\theta} \left[ W(\mathbf{X}), \frac{\partial}{\partial \theta} \log f(\mathbf{X}; \theta) \right]$ is equal to the expectation of the product, and 
+\begin{equation*}
+\mathrm{Cov}_{\theta} \left[ W(\mathbf{X}), \frac{\partial}{\partial \theta} \log f(\mathbf{X}; \theta) \right]
+= \mathrm{E}_{\theta} \left[ W(\mathbf{X}) \frac{\partial}{\partial \theta} \log f(\mathbf{X}; \theta) \right]
+= \frac{d}{d \theta} \mathrm{E}_{\theta} \left[ W(\mathbf{X}) \right] .
+\end{equation*}
+Also, since
+$\mathrm{E}_{\theta} \left[ \frac{\partial}{\partial \theta} \log f(\mathbf{X}; \theta) \right] = 0$, we have
+\begin{equation*}
+\mathrm{Var}_{\theta} \left[ \frac{\partial}{\partial \theta} \log f(\mathbf{X}; \theta) \right]
+= \mathrm{Var}_{\theta} \left[ \left( \frac{\partial}{\partial \theta} \log f(\mathbf{X}; \theta) \right)^2 \right] .
+\end{equation*}
+Collecting these results and using the Cauchy-Schwarz inequality, we get \eqref{equation:CRI}.
+\end{proof}
+
+This inequality can be simplified for unbiased estimators of parameter $\theta$.
+\begin{corollary}
+Suppose that unbiased estimator $\hat{\theta} (\mathbf{X})$ satisfies the regularity conditions the Cram\'{e}r-Rao Inequality, with $\mathrm{E}_{\theta} \left[ \hat{\theta} (\mathbf{X}) \right] = \theta$, then
+\begin{equation} \label{equation:CRLB}
+\mathrm{Var}_{\theta} \left[ \hat{\theta}(\mathbf{X}) \right]
+\geq \frac{1}
+{\mathrm{E}_{\theta} \left[ \left( \frac{\partial}{\partial \theta} \log f(\mathbf{x}; \theta) \right)^2 \right]}
+= \frac{1}{I_{\mathbf{X}} (\theta)} .
+\end{equation}
+\end{corollary}
+
+
+
 
 
 \begin{example}
