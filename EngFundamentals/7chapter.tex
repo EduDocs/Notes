@@ -132,7 +132,7 @@ be the spectral decomposition of $A^H A$, where the columns of $V$ are orthonorm
 \begin{equation*}
 V = \left[ \begin{array}{cccc} \vecnot{v}_1 & \vecnot{v}_2 & \cdots & \vecnot{v}_n \end{array} \right], 
 \end{equation*}
-with $\lambda_1, \lambda_2, \cdots, \lambda_r > 0$ and $\lambda_{r+1} = \cdots = \lambda_{n} = 0$, where $r \leq p$.
+with $\lambda_1 \geq \lambda_2 \geq \cdots \geq \lambda_r > 0 = \lambda_{r+1} = \cdots = \lambda_{n}$ and $r \leq p$.
 For $i \leq r$, let
 \begin{equation*}
 \vecnot{u}_i = \frac{A \vecnot{v}_i}{\sqrt{\lambda_i}},
@@ -187,16 +187,16 @@ The eigenvalue decomposition of $A^H A$ is given by
 \end{array} \right]
 = V \Lambda V^H
 = \left( \frac{1}{\sqrt{2}}\left[ \begin{array}{cc}
-1 & 1 \\
-1 & -1 
+-1 & 1 \\
+1 & 1 
 \end{array} \right] \right)
 \left[ \begin{array}{cc}
-18 & 0 \\
-0 & 36
+36 & 0 \\
+0 & 18
 \end{array} \right]
 \left( \frac{1}{\sqrt{2}} \left[ \begin{array}{cc}
-1 & 1 \\
-1 & -1 
+-1 & 1 \\
+1 & 1 
 \end{array} \right] \right).
 \]
 This implies that $\Sigma_1 = \Lambda^{1/2}$ and $V_1 = V$.
@@ -207,32 +207,32 @@ Therefore, we can compute $U_1 = A V_1 \Sigma_1^{-1}$ with
 -1 & 5 
 \end{array} \right]
 \left( \frac{1}{\sqrt{2}} \left[ \begin{array}{cc}
-1 & 1 \\
-1 & -1
+-1 & 1 \\
+1 & 1
 \end{array} \right] \right)
 \left[ \begin{array}{cc}
-\frac{1}{\sqrt{18}} & 0 \\
-0 & \frac{1}{\sqrt{36}}
+\frac{1}{\sqrt{36}} & 0 \\
+0 & \frac{1}{\sqrt{18}}
 \end{array} \right]
 = \left[ \begin{array}{cc}
-\frac{1}{3} & 0 \\
-\frac{2}{3} & \frac{1}{\sqrt{2}} \\
-\frac{2}{3} & -\frac{1}{\sqrt{2}}
+0 & \frac{1}{3} \\
+\frac{1}{\sqrt{2}} & \frac{2}{3}  \\
+-\frac{1}{\sqrt{2}} & \frac{2}{3} 
 \end{array} \right]. \]
 Putting this all together, we have the compressed SVD
 \[ A = U_1 \Sigma_1 V_1 =
-\left[ \begin{array}{cc}
-\frac{1}{3} & 0 \\
-\frac{2}{3} & \frac{1}{\sqrt{2}} \\
-\frac{2}{3} & -\frac{1}{\sqrt{2}}
+= \left[ \begin{array}{cc}
+0 & \frac{1}{3} \\
+\frac{1}{\sqrt{2}} & \frac{2}{3}  \\
+-\frac{1}{\sqrt{2}} & \frac{2}{3} 
 \end{array} \right]
 \left[ \begin{array}{cc}
-\sqrt{18} & 0 \\
-0 & \sqrt{36}
+\sqrt{36} & 0 \\
+0 & \sqrt{18}
 \end{array} \right]
 \left( \frac{1}{\sqrt{2}} \left[ \begin{array}{cc}
-1 & 1 \\
-1 & -1 
+-1 & 1 \\
+1 & 1 
 \end{array} \right] \right). \]
 
 
@@ -273,8 +273,8 @@ Therefore, the projection matrices for the fundamental subspaces are given by
 \begin{align*}
 P_{\mathcal{R}(A)} &= U_1 U_1^H \\
 P_{\mathcal{R}(A^H)} &= V_1 V_1^H \\
-P_{\mathcal{N}(A)} &= V_2 V_2^H \\
-P_{\mathcal{N}(A^H)} &= U_2 U_2^H
+P_{\mathcal{N}(A)} &= V_2 V_2^H = I - V_1 V_1^H \\
+P_{\mathcal{N}(A^H)} &= U_2 U_2^H = I - U_1 U_1^H.
 \end{align*}
 
 This decomposition also provides a rank revealing decomposition of a rank-$r$ matrix

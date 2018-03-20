@@ -18,11 +18,15 @@ where the limit is with respect to the implied mapping from $\RealNumbers$ to $Y
 
 \begin{lemma}
 \label{lemma:gateaux_negative}
-Let $Y = (\RealNumbers,|\cdot|)$ and suppose that $\delta f (\vecnot{x};\vecnot{h}) < 0$ exists for some $f$, $\vecnot{x}$, and $\vecnot{h}$.  Then, there exists $t_0 > 0$ such that, for all $t\in(0,t_0)$, one has
+Let $Y = (\RealNumbers,|\cdot|)$ and suppose that $\delta f (\vecnot{x};\vecnot{h})$ exists and is negative for some $f$, $\vecnot{x}$, and $\vecnot{h}$.  Then, there exists $t_0 > 0$ such that, for all $t\in(0,t_0)$, one has
 \[ f(\vecnot{x}+t \vecnot{h}) < f (\vecnot{x}). \]
 \end{lemma}
 \begin{proof}
-This follows from applying the definition of the limit.
+The $\delta f (\vecnot{x};\vecnot{h})$ limit implies that, for any $\epsilon > 0$, there is a $t_0 > 0$ such that
+\[ f(\vecnot{x}+t \vecnot{h}) - f (\vecnot{x}) \leq \left( \delta f (\vecnot{x};\vecnot{h}) + \epsilon \right)t \]
+for all $t\in (0,t_0)$.
+If $\delta f (\vecnot{x};\vecnot{h})<0$, then one can choose $\epsilon = -\frac{1}{2}\delta f (\vecnot{x};\vecnot{h})$ to see that the RHS is negative for all $t\in (0,t_0)$.
+The stated result follows.
 \end{proof}
 
 \begin{problem}
@@ -177,7 +181,7 @@ These approaches have become so common that convex Lagrangian optimization probl
 For simplicity, we focus on the case where the domain $\mathcal{D}$ is a subset of the finite-dimensional real space $\RealNumbers^n$.
 
 Constrained non-linear optimization problems over $\mathbb{R}^n$ can be put into the following \defn{optimization}{standard form}.
-Let $f_i \colon \mathcal{D} \rightarrow \mathbb{R}$ and $h_j \colon \mathcal{D} \rightarrow \mathbb{R}$ be a real functionals on $\mathcal{D} \subseteq \mathbb{R}^n$ for $i=1,2,\ldots,m$ and $j=1,2,\ldots,p$.
+Let $f_i \colon \mathcal{D} \rightarrow \mathbb{R}$ and $h_j \colon \mathcal{D} \rightarrow \mathbb{R}$ be a real functionals on $\mathcal{D} \subseteq \mathbb{R}^n$ for $i=0,1,\ldots,m$ and $j=1,2,\ldots,p$.
 Then, the standard form is
 \begin{align*}
 \mathrm{minimize} \quad & f_0 (\vecnot{x}) \\
