@@ -51,48 +51,42 @@ For any $\vecnot{w}' \in W$, we have $\vecnot{v} - \vecnot{w}' = \left( \vecnot{
 &\geq \left\| \vecnot{v} - \vecnot{w} \right\|^2.
 \end{split}
 \end{equation}
-
-The converse is given by, if $\left\| \vecnot{v} - \vecnot{w}' \right\| \geq \left\| \vecnot{v} - \vecnot{w} \right\|$ for every $\vecnot{w}' \in W$, then $\vecnot{v} - \vecnot{w}$ is orthogonal to every vector in $W$.
-Its contrapositive is given by, if there is a $\vecnot{w}'\in W$ such that $\langle \vecnot{v}-\vecnot{w} | \vecnot{w}' \rangle \neq 0$, then there is a $\vecnot{w}'' \in W$ such that
- $\left\| \vecnot{v} - \vecnot{w}'' \right\| < \left\| \vecnot{v} - \vecnot{w} \right\|$.
-% $\left\| \vecnot{v} - (\vecnot{w} + \delta \vecnot{w}') \right\| < \left\| \vecnot{v} - \vecnot{w} \right\|$.
-To see this, we choose $\delta = \langle \vecnot{v}-\vecnot{w} | \vecnot{w}' \rangle / \|\vecnot{w}'\|^2$,  $\vecnot{w}''=\vecnot{w}+ \delta \vecnot{w}'$, and  write
-\begin{align*}
-\left\| \vecnot{v} - \vecnot{w}'' \right\|^2
-&= \left\| (\vecnot{v} - \vecnot{w}) - \delta \vecnot{w}' \right\|^2 \\
-&= \left\langle (\vecnot{v} -  \vecnot{w}) - \delta \vecnot{w}' \,|\, (\vecnot{v} - \vecnot{w}) - \delta \vecnot{w}' \right\rangle \\
-&= \left\| \vecnot{v} -\vecnot {w} \right\|^2 - \overline{\delta} \left\langle \vecnot{v} -  \vecnot{w} \,|\,  \vecnot{w}' \right\rangle - \delta \left\langle \vecnot{w}' \,|\, \vecnot{v} - \vecnot{w}  \right\rangle +  |\delta|^2 \left\| \vecnot{w}' \right\|^2 \\
-&= \left\| \vecnot{v} -\vecnot {w} \right\|^2 - \frac{|\langle \vecnot{v} -  \vecnot{w} \,|\,  \vecnot{w}' \rangle|^2}{\|\vecnot{w}'\|^2} - \frac{|\langle \vecnot{v} -  \vecnot{w} \,|\,  \vecnot{w}' \rangle|^2}{\|\vecnot{w}'\|^2} | + \frac{|\langle \vecnot{v} -  \vecnot{w} \,|\,  \vecnot{w}' \rangle|^2}{\|\vecnot{w}'\|^2} \\
-&= \left\| \vecnot{v} -\vecnot {w} \right\|^2 - |\delta|^2 \| \vecnot{w}'\|^2 \\
-& < \left\| \vecnot{v} -\vecnot {w} \right\|^2.
-\end{align*}
-
-% Conversely, suppose that $\left\| \vecnot{v} - \vecnot{w}' \right\| \geq \left\| \vecnot{v} - \vecnot{w} \right\|$ for every $\vecnot{w}' \in W$.
-%Then, solving \eqref{equation:OrthogonalVector} for $\left\| \vecnot{v} - \vecnot{w}' \right\| - \left\| \vecnot{v} - \vecnot{w} \right\|$ and combining the previous inequality gives
-%\begin{equation*}
-%2 \Real \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle
-%+ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 \geq 0
-%\end{equation*}
-%for all $\vecnot{w}' \in W$.
-%Note that every vector in $W$ can be expressed as $\vecnot{w} - \vecnot{w}'$ where $\vecnot{w}' \in W$, it follows that
-%\begin{equation} \label{equation:InequalityOrthogonalVectors}
-%2 \Real \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w}'' \right\rangle
-%+ \left\| \vecnot{w}'' \right\|^2 \geq 0
-%\end{equation}
-%for every $\vecnot{w}'' \in W$.
-%If $\vecnot{w}'$ is in $W$ and $\vecnot{w}' \neq \vecnot{w}$ then we may take
-%\begin{equation*}
-%\vecnot{w}'' = - \frac{ \left\langle  \vecnot{w} - \vecnot{w}' | \vecnot{v} - \vecnot{w} \right\rangle }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 } \left( \vecnot{w} - \vecnot{w}' \right).
-%\end{equation*}
-%Inequality~\eqref{equation:InequalityOrthogonalVectors} then reduces to the statement
-%\begin{equation*}
-%- 2 \frac{ \left| \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle \right|^2 }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 }
-%+ \frac{ \left| \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle \right|^2 }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 }
-%\geq 0.
-%\end{equation*}
-%This inequality holds if and only if $\left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle = 0$.
-%Therefore, $\vecnot{v} - \vecnot{w}$ is orthogonal to every vector in $W$.
-%Hence the vector $\vecnot{w} \in W$ is a best approximation of $\vecnot{v} \in V$ by vectors in $W$ if and only if $\vecnot{v} - \vecnot{w}$ is orthogonal to every vector in $W$.
+Conversely, suppose that $\left\| \vecnot{v} - \vecnot{w}' \right\| \geq \left\| \vecnot{v} - \vecnot{w} \right\|$ for every $\vecnot{w}' \in W$.
+From \eqref{equation:OrthogonalVector}, we get
+\begin{equation*}
+2 \Real \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle
++ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 \geq 0
+\end{equation*}
+for all $\vecnot{w}' \in W$.
+Note that every vector in $W$ can be expressed as $\vecnot{w} - \vecnot{w}'$ where $\vecnot{w}' \in W$, it follows that
+\begin{equation} \label{equation:InequalityOrthogonalVectors}
+2 \Real \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w}'' \right\rangle
++ \left\| \vecnot{w}'' \right\|^2 \geq 0
+\end{equation}
+for every $\vecnot{w}'' \in W$.
+If $\vecnot{w}'$ is in $W$ and $\vecnot{w}' \neq \vecnot{w}$, then we may take
+\begin{equation*}
+\vecnot{w}'' = - \frac{ \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 } \left( \vecnot{w} - \vecnot{w}' \right).
+\end{equation*}
+Inequality~\eqref{equation:InequalityOrthogonalVectors} then reduces to the statement
+\begin{equation}
+\begin{split}
+0 &\leq
+2 \Real \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w}'' \right\rangle
++ \left\| \vecnot{w}'' \right\|^2 \\
+&= 2 \Real \left\langle \vecnot{v} - \vecnot{w} \bigg| - \frac{ \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 } \left( \vecnot{w} - \vecnot{w}' \right) \right\rangle \\
+&\quad + \left\| - \frac{ \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 } \left( \vecnot{w} - \vecnot{w}' \right) \right\|^2 \\
+&= - 2 \Real \frac{ \left\langle \vecnot{w} - \vecnot{w}' | \vecnot{v} - \vecnot{w} \right\rangle }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 }
+\left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle
++ \frac{\left| \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle \right|^2}{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 } \\
+&= - 2 \frac{ \left| \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle \right|^2 }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 }
++ \frac{ \left| \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle \right|^2 }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 }
+= - \frac{ \left| \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle \right|^2 }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 } .
+\end{split}
+\end{equation}
+This inequality holds if and only if $\left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle = 0$.
+Therefore, $\vecnot{v} - \vecnot{w}$ is orthogonal to every vector in $W$.
+Hence the vector $\vecnot{w} \in W$ is a best approximation of $\vecnot{v} \in V$ by vectors in $W$ if and only if $\vecnot{v} - \vecnot{w}$ is orthogonal to every vector in $W$.
 
 Suppose $\vecnot{w}, \vecnot{w}' \in W$ are best approximations of $\vecnot{v}$ by vectors in $W$.
 Then $\left\| \vecnot{v} - \vecnot{w} \right\| = \left\| \vecnot{v} - \vecnot{w}' \right\|$ and \eqref{equation:OrthogonalVector} implies that $\left\| \vecnot{w} - \vecnot{w}' \right\| = 0$.
