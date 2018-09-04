@@ -18,7 +18,7 @@ Mathematical logic is the framework upon which rigorous proofs are built.
 It is the study of the principles and criteria of valid inference and demonstrations.
 
 Logicians have analyzed set theory in great details, formulating a collection of axioms that affords a broad enough and strong enough foundation to mathematical reasoning.
-The standard form of axiomatic set theory is the Zermelo-Fraenkel set theory, together with the axiom of choice.
+The standard form of axiomatic set theory is denoted ZFC and it consists of the Zermelo-Fraenkel (ZF) axioms combined with the axiom of choice (C).
 Each of the axioms included in this theory expresses a property of sets that is widely accepted by mathematicians.
 It is unfortunately true that careless use of set theory can lead to contradictions.
 Avoiding such contradictions was one of the original motivations for the axiomatization of set theory.
@@ -365,7 +365,7 @@ Therefore, Yao Ming scores a lot of points.
 Consider the statements ``Socrates is a person'' and ``Every person is mortal''.
 In propositional logic, there is no formal way to combine these statements to deduce that ``Socrates is mortal''.
 In the first statement, the noun ``Socrates'' is called the subject and the phrase ``is a person'' is called the \defn{logic}{predicate}.
-Likewise, in predicate logic, the statement $P(x)=``x$ is a person'' is called a predicate and $x$ is called a \defn{logic}{free variable}.
+Likewise, in predicate logic, the statement $P(x)=``x$ is a person'' is called a predicate and $x$ is called a \defn{logic}{free variable} because its value is not fixed in the statement $P(x)$.
 
 Let $U$ be a specific collection of elements and let $P(x)$ be a statement that can be applied to any $x\in U$.
 In first-order predicate logic, quantifiers are applied to predicates in order to make statements about collections of elements.
@@ -388,6 +388,7 @@ These definitions also imply two new inference rules,
 \exists x\in U, P(x) &\Rightarrow P(x_0),
 \end{align*}
 where $x_0 \in U$ is chosen so that $P(x_0)$ is true and $\Rightarrow$ indicates that these statements hold for all sets $U$ and predicates $P$.
+In quantified statements, such as $\exists x\in U, P(x)$, the variable $x$ is called a \textbf{bound variable} because its value cannot be chosen freely.
 
 Based on the meaning of these quantifiers, one can infer the logical implications
 \begin{gather*}
@@ -413,9 +414,9 @@ There are 8 possible quantifiers for a 2-variable predicate and they can be arra
   \forall y, \forall x, P(x,y) & \Rightarrow & \exists y, \forall x, P(x,y) & \Rightarrow & \forall x, \exists y, P(x,y) & \Rightarrow & \exists x, \exists y, P(x,y)
   \end{array}
 \]
-All of these implications follow from the single variable inference rule $\forall x, P(x) \Rightarrow \exists x, P(x)$ except for two: $\exists x, \forall y, P(x,y) \Rightarrow \forall y, \exists x, P(x,y)$ and its symmetric pair.
+All of these implications follow from $\forall x \forall y = \forall y \forall x$, $\exists x \exists y = \exists y \exists x$, and the single variable inference rule $\forall x, P(x) \Rightarrow \exists x, P(x)$ except for two: $\exists x, \forall y, P(x,y) \Rightarrow \forall y, \exists x, P(x,y)$ and its symmetric pair.
 
-To understand this rule, consider an example where $x$ is in a set $I$ of images and $y$ is in a set $C$ of colors.
+To understand this last implication, consider an example where $x$ is in a set $I$ of images and $y$ is in a set $C$ of colors.
 Then, $\exists x, \forall y, P(x,y)$ means ``there is an image that contains all the colors'' (e.g., an image of a rainbow) and $\forall y, \exists x, P(x,y)$ means ``for each color there is an image containing that color''.
 The first statement implies the second because, in the second, the rainbow image satisfies the $\exists x$ quantifier for all $y$.
 To see that the implication is not an equivalence, consider a set of pictures where each image contains exactly one color and there is one such image for each color.
@@ -513,7 +514,7 @@ The principle of \defn{logic}{mathematical induction} states that $P(n)$ is true
 
 From a foundational perspective, this statement is essentially equivalent to the existence and uniqueness of the natural numbers.
 It is taken as an axiom in the Peano axiomatic formulation of arithmetic.
-In contrast, the Zermelo-Fraenkel axiomatic formulation of set theory defines the natural numbers as the smallest inductive set and the existence of an inductive set is taken as an axiom.
+In contrast, the ZF axiomatic formulation of set theory defines the natural numbers as the smallest inductive set and the existence of an inductive set is taken as an axiom.
 
 \begin{example}
 Let $S_n = \sum_{i=1}^n i$.
@@ -593,7 +594,7 @@ Thus, another reasonable conclusion is that Russell's paradox shows that the set
 
 Another common question is whether there are sets that contains themselves.
 In naive set theory, the answer is yes and some examples are the ``set of all sets'' and the ``set of all abstract ideas''.
-On the other hand, in the Zermelo-Fraenkel axiomatic formulation of set theory, it is a theorem that no set contains itself.
+On the other hand, in the ZF axiomatic formulation of set theory, it is a theorem that no set contains itself.
 
 There are a few standard relationships defined between any two sets $A,B$.
 \begin{definition}
@@ -696,6 +697,11 @@ In this case, two ordered pairs are equivalent if their associated fractions eva
 The quotient set $\mathbb{N} \setminus \!\sim$ can therefore be associated with the set of reduced fractions.
 \end{example}
 
+Unfortunately, this section will not end on a happy note by saying that the ZFC axiomatic formulation of set theory is consistent.
+Instead, we observe that Kurt G\"{o}del's Incompleteness Theorems imply that, if ZFC is consistent, then this cannot be proven using statements in ZFC and, moreover, it cannot be complete.
+On the other hand, if ZFC is inconsistent, then it contains a paradox and one can prove anything using statements in ZFC.
+Since ZFC manages to avoid all known paradoxes and no contradictions have been so far, it is still the most popular formal system in which to define mathematics.
+
 
 \section{Functions}
 
@@ -737,11 +743,11 @@ It is worth noting that the notation $f^{-1}(B)$ for the preimage of $B$ can be 
 In general, a function gives rise to the following property, $f(f^{-1}(B)) \subseteq B$ and $f^{-1}(f(A)) \supseteq A$.
 
 \begin{example}
-Let the function $f \colon \mathbb{R} \rightarrow \mathbb{R}$ be defined by $f(x)=x^2$. Let $A=[1,2]$ and $B = f(A) = [1,4]$.  Then,
+Let the function $f \colon \mathbb{R} \rightarrow \mathbb{R}$ be defined by $f(x)=x^2$. Let $A=[1,2]$ and notice that $B = f(A) = [1,4]$.  Then,
 \[ f^{-1}(B) = f^{-1}([1,4]) = [-2,-1] \cup [1,2] \supseteq A. \]
 \end{example}
 \begin{example}
-Let the function $f \colon \mathbb{R} \rightarrow \mathbb{R}$ be defined by $f(x)=x^2+1$. Let $B=[0,2]$ and $A = f^{-1}(B) = [-1,1]$.  Then,
+Let the function $f \colon \mathbb{R} \rightarrow \mathbb{R}$ be defined by $f(x)=x^2+1$. Let $B=[0,2]$ and notice that $A = f^{-1}(B) = [-1,1]$.  Then,
 \[ f(A) = f([-1,1]) = [1,2] \subseteq B. \]
 \end{example}
 
