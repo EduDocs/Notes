@@ -104,8 +104,13 @@ Then, \eqref{eq:def_matrix_product}~shows that the $i$-th row of $C$ is a linear
 \end{remark}
 
 \begin{definition}
+Consider an $m \times n$ matrix $A$ with elements $a_{ij} \in F$.
+The \defn{matrix}{transpose} of $A$ is the $n \times m$ matrix $B = A^T$ with elements defined by $b_{ij} = a_{ji}$.
+\end{definition}
+
+\begin{definition}
 Consider a complex $m \times n$ matrix $A$ with elements $a_{ij} \in \mathbb{C}$.
-The \defn{matrix}{Hermitian transpose} of $A$ is the $n \times m$ matrix $B = A^H$ with elements defined by $b_{ij} = \overline{a_{ji}}$ where $\overline{a}$ denotes the complex conjugate of $a$.
+Its \defn{matrix}{Hermitian transpose} $B = A^H$ is the $n \times m$ matrix with elements defined $b_{ij} = \overline{a_{ji}}$, where $\overline{a}$ denotes the complex conjugate of $a$.
 \end{definition}
 
 \begin{problem}
@@ -785,7 +790,7 @@ In turn, this implies that $n = \Rank(T) + \Nullity(T)$.
 \begin{theorem}
 If $A$ is an $m \times n$ matrix with entries in the field $F$, then
 \begin{equation*}
-\mathrm{row~rank} (A) \triangleq \dim( \mathcal{R}(A^H)) =  \dim( \mathcal{R}(A)) \triangleq \Rank (A).
+\mathrm{row~rank} (A) \triangleq \dim( \mathcal{R}(A^T)) =  \dim( \mathcal{R}(A)) \triangleq \Rank (A).
 \end{equation*}
 \end{theorem}
 \begin{proof}
@@ -794,35 +799,20 @@ Let $R=PA$ be the reduced row echelon form of $A$, where $P$ is invertible.
 Let $r$ be the number of non-zero rows in $R$ and observe that $\mathrm{row~rank} (A) = r$ because the rows of $R$ form a basis for the row space of $A$.
 Next, we write $A=P^{-1}R$ and observe that each column of $A$ is a linear combination of the first $r$ columns in $P^{-1}$.
 Thus, the column space of $A$ is spanned by $r$ vectors and $\Rank (A) \leq \mathrm{row~rank} (A)$.
-Applying this to both $A$ and $A^H$ gives
-\[ \Rank (A) \leq \mathrm{row~rank} (A) = \Rank (A^H) \leq \mathrm{row~rank} (A^H) = \Rank (A),    \]
+Applying this to both $A$ and $A^T$ gives
+\[ \Rank (A) \leq \mathrm{row~rank} (A) = \Rank (A^T) \leq \mathrm{row~rank} (A^T) = \Rank (A),    \]
 which completes the proof.
-%It is well-known that any elementary row operation can be represented by multiplication on the left by an invertible $m\times m$ matrix $P$.
-%Thus, these operations preserve the row space of the matrix.
-%We will now show that such operations also preserve the dimension of the column space.
-%First, we note that applying the same linear transformation to each column of $A$ can reduce the dimension of the column space.
-%This is because a set of columns that were originally linearly independent may become linearly dependent but a set of linearly-dependent columns will always remain linearly dependent.
-%Using this, we observe that \[ \Rank(A)=\Rank(P^{-1}PA)\leq \Rank(PA) \leq \Rank(A) \]
-%for any invertible matrix $P$.
 \end{proof}
+When $F=\mathbb{C}$, the space $\mathcal{R}(A^H)$ has many nice properties and can also be called the row space of $A$.
+Regardless, it holds that $\Rank(A) = \Rank(A^T) = \Rank(A^H)$.
 
-%First, we note that the range $\mathcal{R}(A)$ of $A$ equals the column space of $A$ and therefore $\Rank(A) = \dim \left( \mathcal{R}(A) \right)$.
-%%Next, we show the null space $\mathcal{N}(A)$ of $A$ is the orthogonal complement of the row space $\mathcal{R}(A^H)$.
-%Next, we use the definition of the orthogonal complement and $\mathcal{R}(A^H) = \{ A^H \vecnot{y} | \vecnot{y} \in F^m \}$ to see that
-%\begin{equation*}
-%\begin{split}
-%\mathcal{R}(A^H)^{\perp} 
-%&= \left\{ \vecnot{x} \in F^n \, | \, \vecnot{x}^H \vecnot{z} = \vecnot{0} \; \forall \, \vecnot{z}\in \mathcal{R}(A^H) \right\} \\
-%= \left\{ \vecnot{x} \in F^n \, | \, \vecnot{x}^H A^H \vecnot{y} = 0 \; \forall \, \vecnot{y}\in F^m \right\}.
-%\end{split}
-%\end{equation*}
-%This implies that $\mathcal{R}(A^H)^{\perp} =  \left\{ \vecnot{x} \in F^n \, | \, \vecnot{x}^H A^H = 0 \right\} = \mathcal{N}(A)$ and therefore that
-%\[ \dim\left( \mathcal{R}(A^H) \right) = n-\dim \left( \mathcal{R}(A^H) \right)^{\bot} = n - \dim \left(\mathcal{N}(A) \right) = \dim \left( \mathcal{R}(A) \right).\]
 
 
 \section{Norms}
+
 Let $V$ be a vector space over the real numbers or the complex numbers.
 
+\begin{definition}
 A \defn{vector space}{norm} on vector space $V$ is a real-valued function $\left\| \cdot \right\| \colon V \rightarrow \RealNumbers$ that satisfies the following properties.
 \begin{enumerate}
 \item $\left\| \vecnot{v} \right\| \geq 0 \quad \forall \vecnot{v} \in V$;
@@ -831,9 +821,10 @@ equality holds if and only if $\vecnot{v} = \vecnot{0}$
 \item $\left\| \vecnot{v} + \vecnot{w} \right\| \leq
 \left\| \vecnot{v} \right\| + \left\| \vecnot{w} \right\| \quad \forall \vecnot{v}, \vecnot{w} \in V$.
 \end{enumerate}
+\end{definition}
 
-The concept of a norm is closely related to the concept of a metric.
-For instance, a metric can be defined in terms of a norm.
+The concept of a norm is closely related to that of a metric.
+For instance, a metric can be defined from any norm.
 Let $\left\| \vecnot{v} \right\|$ be a norm on vector space $V$, then
 \begin{equation*}
 d \left( \vecnot{v}, \vecnot{w} \right)
@@ -856,9 +847,7 @@ Recall that the standard bounded metric introduced in Problem~\ref{problem:Stand
 = \min \left\{ d \left( \vecnot{v}, \vecnot{w} \right), 1 \right\}.
 \end{equation*}
 Define the function $f \colon \RealNumbers^n \rightarrow \RealNumbers$ by
-\begin{equation*}
-f \left( \vecnot{v} \right) = \bar{d} \left( \vecnot{v}, \vecnot{0} \right).
-\end{equation*}
+$f \left( \vecnot{v} \right) = \bar{d} \left( \vecnot{v}, \vecnot{0} \right)$.
 Is the function $f$ a norm?
 
 By the properties of a metric, we have
@@ -877,7 +866,7 @@ is not a norm.
 \end{example}
 
 \begin{example}
-The following functions are examples of norms for $F^n$,
+The following functions are examples of norms for $\mathbb{R}^n$ and $\mathbb{C}^n$:
 \begin{enumerate}
 \item the $l^1$ norm: $\left\| \vecnot{v} \right\|_1 = \sum_{i=1}^n |v_i|$
 \item the $l^p$ norm: $\left\| \vecnot{v} \right\|_p = \left( \sum_{i=1}^n |v_i|^p \right)^{\frac{1}{p}}, \quad p \in (1,\infty)$
@@ -988,12 +977,17 @@ Since $g$ is continuous, we find that $W = g^{-1}(U) = f(U)$ is closed because $
 \end{proof}
 
 \begin{example}
-Let $V = L_p ( [a,b] )$, for $1\leq p <\infty$, be the set of real Lebesgue-integrable functions on $[a,b]$.
+Let $V = L^p ( [a,b] )$, for $1\leq p <\infty$, be the set of real Lebesgue-integrable functions on $[a,b]$.
 We say that $f \in V$ is continuous if the equivalence class generated by equality almost everywhere contains a continuous function.
 It is easy to verify that the subset $W \subset V$ of continuous functions is a subspace.
 It is not closed, however, because sequences in $W$ may converge to discontinuous functions.
-More generally, the span of any infinite set of linearly independent vectors only includes finite linear combinations and is therefore not closed.
-%In fact, the set of continuous function is dense in $L_p ([a,b])$ so that $\Closure{W} = V$.
+In fact, the set of continuous function is dense in $L^p ([a,b])$ so that $\Closure{W} = V$.
+\end{example}
+\begin{example}
+By definition, the span of an infinite set of vectors only includes finite linear combinations.
+However, a sequence of finite linear combinations, like 
+\[ \vecnot{v}_n = \sum_{i=1}^n \frac{1}{i^2} \vecnot{e}_i, \]  can converge to an infinite linear combination.
+Thus, the span of any infinite set of linearly independent vectors is not closed.
 \end{example}
 
 
