@@ -18,7 +18,7 @@ Mathematical logic is the framework upon which rigorous proofs are built.
 It is the study of the principles and criteria of valid inference and demonstrations.
 
 Logicians have analyzed set theory in great details, formulating a collection of axioms that affords a broad enough and strong enough foundation to mathematical reasoning.
-The standard form of axiomatic set theory is the Zermelo-Fraenkel set theory, together with the axiom of choice.
+The standard form of axiomatic set theory is denoted ZFC and it consists of the Zermelo-Fraenkel (ZF) axioms combined with the axiom of choice (C).
 Each of the axioms included in this theory expresses a property of sets that is widely accepted by mathematicians.
 It is unfortunately true that careless use of set theory can lead to contradictions.
 Avoiding such contradictions was one of the original motivations for the axiomatization of set theory.
@@ -93,10 +93,12 @@ F & T \\
 \end{tabular} .
 \end{center}
 
+
+%It is defined to be false if and only if $P$ is true and $Q$ is false.
+%Thus, its truth table is given by
+
 The next method of combining mathematical statements is slightly more subtle than the preceding ones.
-It is connected to the notion of logical implication.
-The \defn{logic}{conditional} from $P$ to $Q$, denoted $P \rightarrow Q$, is mathematically true if it is not the case that $P$ is true and $Q$ is false.
-The precise definition of $P \rightarrow Q$ is given in the truth table
+The \defn{logic}{conditional connective} $P \rightarrow Q$ is a logical statement that is read ``if $P$ then $Q$" and defined by the truth table
 \begin{center}
 \begin{tabular}{|c|c|c|}
 \hline
@@ -109,12 +111,17 @@ F & F & T \\
 \hline
 \end{tabular} .
 \end{center}
-This table should match your intuition when $P$ is true.
+In this statement, $P$ is called the \textbf{antecedent} and $Q$ is called the \textbf{consequent}.
+The truth table should match your intuition when $P$ is true.
 When $P$ is false, students often think the resulting truth value should be undefined.
-Although it may seem strange at first glance, this truth table is universally accepted by mathematicians.
+Although the given definition may seem strange at first glance, this truth table is universally accepted by mathematicians.
+
 To motivate this definition, one can think of $P \rightarrow Q$ as a promise that $Q$ is true whenever $P$ is true.
 When $P$ is false, the promise is kept by default.
-This definition allows one to combine many statements together and detect broken promises without being distracted by uninformative statements.
+For example, suppose your friend promises ``if it is sunny tomorrow, I will ride my bike".
+We will call this a true statement if they keep their promise.
+If it rains and they don't ride their bike, most people would agree that they have still kept their promise.
+Therefore, this definition allows one to combine many statements together and detect broken promises without being distracted by uninformative statements.
 
 Logicians draw a firm distinction between the \defn{logic}{conditional connective} and the \defn{logic}{implication relation}.
 They use the phrase ``if $P$ then $Q$'' for the conditional connective and the phrase ``$P$ implies $Q$'' for the implication relation.
@@ -198,7 +205,7 @@ F & F & F & T \\
 \end{tabular} .
 \end{center}
 
-Of course, most statement we encounter are neither tautologies nor contradictions.
+Of course, most statements we encounter are neither tautologies nor contradictions.
 For example, \eqref{equation:LogicStatement} is not necessarily either true or false.
 Its truth value depends on the values of $P$, $Q$ and $R$.
 Try to see whether the statement
@@ -219,12 +226,13 @@ Another example of a meta-statement is ``the statement `Fred is an Aggie and Fre
 These two examples illustrate how meta-statements describe the relationship between statements.
 It is also instructive to note that implications and equivalences are the meta-statement analogs of conditionals and biconditionals.
 
-A \defn{logic}{logical implication} can be intuitively described as ``$P$ implies $Q$'' if $Q$ must be true whenever $P$ is true.
-That is, $Q$ cannot be false if $P$ is true.
-Necessity is the key aspect of this sentence, the fact that $P$ and $Q$ both happen to be true cannot be coincidental.
-To have $P$ implies $Q$, we need the conditional $P \rightarrow Q$ to be true under all possible circumstances.
+Consider two compound statements $P$ and $Q$ that depend on other logical statements (e.g., $P = (R \to S) \wedge (S \to T)$ and $Q = R \to T$).
+A \defn{logic}{logical implication} from $P$ to $Q$, read as ``$P$ implies $Q$'',  asserts that $Q$ must be true whenever $P$ is true (i.e., for all possible truth values of the dependent statements $R,S,T$).
+Necessity is the key aspect of this sentence; the fact that $P$ and $Q$ both happen to be true cannot be coincidental.
+%$P \Rightarrow Q$ is read as ``$P$ implies $Q$'' and this means that $Q$ cannot be false if $P$ is true.
+To state that $P$ implies $Q$, denoted by $P \Rightarrow Q$, one needs the conditional $P \rightarrow Q$ to be true under all possible circumstances.
 
-Meta-statements, such as ``$P$ implies Q'', can be defined formally when $P$ and $Q$ are both logical functions of other propositions.
+Meta-statements, such as ``$P$ implies Q'', can be defined formally only when $P$ and $Q$ are both logical functions of other propositions.
 For example, consider $P=R \wedge (R \to S)$ and $Q=S$.
 Then, the truth of the statement $P \to Q$ depends only on the truth of external propositions $R$ and $S$.
 
@@ -316,16 +324,23 @@ Let $P$, $Q$ and $R$ be statements.
 \end{enumerate}
 \end{fact}
 
-The first equivalence in this list, $\neg (\neg P) \Leftrightarrow P$, may appear trivial.
-However, from the point of view of constructing mathematical proofs, this equivalence is frequently employed.
-Indeed, one method to prove that statement $P$ is true is to hypothesize that $\neg P$ is true and then derive a contradiction.
-It then follows that, if $\neg P$ is false, then $P$ is true.
-This popular technique is called \defn{logic}{proof by contradiction}.
-It is illustrated below through a classic example.
+%The first equivalence in this list, $\neg (\neg P) \Leftrightarrow P$, may appear trivial.
+%However, from the point of view of constructing mathematical proofs, this equivalence is frequently employed.
+%Indeed, one method to prove that statement $P$ is true is to hypothesize that $\neg P$ is true and then derive a contradiction.
+%It then follows that, if $\neg P$ is false, then $P$ is true.
+%This popular technique is called \defn{logic}{proof by contradiction}.
+%It is illustrated below through a classic example.
 
 Given a conditional statement of the form $P \rightarrow Q$, we call $\neg Q \rightarrow \neg P$ the \defn{logic}{contrapositive} of the original statement.
-The equivalence $P \rightarrow Q \Leftrightarrow \neg Q \rightarrow \neg P$ is also used extensively in constructing mathematical proofs.
+The equivalence $P \rightarrow Q \Leftrightarrow \neg Q \rightarrow \neg P$ noted above is used extensively in constructing mathematical proofs.
 
+One must be careful not to allow contradictions in logical arguments because, starting from a contradiction, anything can be proven true.
+For example, one can verify that $P \wedge \neg P \Rightarrow Q$ is a valid logical equivalence.
+But, $Q$ doesn't appear on the LHS.
+Thus, a contradiction in your assumptions can lead to a ``correct'' proof for an arbitrary statement.
+
+Fortunately, propositional logic has an axiomatic formulation that is consistent, complete, and decidable.
+In this context, the term \defn{logic}{consistent} means that the logical implications generated by the axioms do not contain a contradiction, the term \defn{logic}{complete} means that any valid logical implication can be generated by applying the axioms, and the term \defn{logic}{decidable} means there is a terminating method that always determines whether a postulated implication is valid or invalid.
 
 \subsection{Fallacious Arguments}
 
@@ -350,24 +365,76 @@ Therefore, Yao Ming scores a lot of points.
 
 \subsection{Quantifiers}
 
-Quantifiers are of paramount importance in rigorous proofs.
-They are employed to make statements about collections of elements.
-Universal quantification is used to formalize the notion that a statement is true for all possible values of a collection.
-The \defn{logic}{universal quantifier} is typically denoted by $\forall$ and it is informally read ``for all.''
-Let $U$ be a specific collection of elements, and let $P(x)$ be a statement that applies to $x$.
-Then the statement $\forall x \in U, P(x)$ is true if $P(x)$ is true for all values of $x$ in $U$.
-The other type of quantifier often encountered in mathematical proofs is the \defn{logic}{existential quantifier}, denoted $\exists$.
-The statement $\exists x \in U, P(x)$ is true if $P(x)$ is true for at least one value of $x$ in $U$.
-Based on the meanings of the quantifiers, we have the following equivalences
-\begin{gather*}
-\neg \left( \left( \forall x \in U \right) P(x) \right)
-\Leftrightarrow \left( \exists x \in U \right) \left( \neg P(x) \right) \\
-\neg \left( \left( \exists x \in U \right) P(x) \right)
-\Leftrightarrow \left( \forall x \in U \right) \left( \neg P(x) \right) .
-\end{gather*}
+Consider the statements ``Socrates is a person'' and ``Every person is mortal''.
+In propositional logic, there is no formal way to combine these statements to deduce that ``Socrates is mortal''.
+In the first statement, the noun ``Socrates'' is called the subject and the phrase ``is a person'' is called the \defn{logic}{predicate}.
+Likewise, in predicate logic, the statement $P(x)=``x$ is a person'' is called a predicate and $x$ is called a \defn{logic}{free variable} because its value is not fixed in the statement $P(x)$.
 
-In mathematics, a \textbf{free variable} is a notation for a place or places in an expression into which some definite substitution may take place, or with respect to which some operation (e.g. quantification) may take place. 
-A \textbf{bound variable} is a variable for which we have no ability to choose the value.
+Let $U$ be a specific collection of elements and let $P(x)$ be a statement that can be applied to any $x\in U$.
+In first-order predicate logic, quantifiers are applied to predicates in order to make statements about collections of elements.
+Later, we will see that quantifiers are of paramount importance in rigorous proofs.
+
+The \defn{logic}{universal quantifier} is typically denoted by $\forall$ and it is informally read ``for all.''
+It follows that the statement ``$\forall x \in U, P(x)$'' is true if $P(x)$ is true for all values of $x$ in $U$.
+It can be seen as shorthand for an iterated conjunction because
+\[ \forall x \in U, P(x) \Leftrightarrow \bigwedge_{x\in U} P(x), \]
+where $\Leftrightarrow$ indicates that these statements are equivalent for all sets $U$ and predicates $P$.
+If $U=\emptyset$ is the empty set, then $\forall x \in U, P(x)$ is vacuously true by convention because there are no elements in $U$ to test with $P(x)$.
+
+Returning to the motivating example, let us also define $Q(x)=$``$x$ is mortal''.
+With these definitions, we can write the statement ``Every person is mortal'' as $\forall x, ( P(x) \to Q(x) )$.
+In logic, this usage implies that $x$ ranges over the universal set.
+In engineering mathematics, however, the range of free variables is typically stated explicitly.
+ 
+The other type of quantifier often seen in mathematical proofs is the \defn{logic}{existential quantifier}, denoted $\exists$.
+The statement ``$\exists x \in U, P(x)$'' is true if $P(x)$ is true for at least one value of $x$ in $U$.
+It can be seen as shorthand for an iterated disjunction because
+\[ \exists x \in U, P(x) \Leftrightarrow \bigvee_{x\in U} P(x), \]
+From these definitions, it follows naturally that $\forall x\in U, P(x) \Rightarrow \exists x\in U, P(x)$.
+If $U=\emptyset$ is the empty set, then $\exists x \in U, P(x)$ is false by convention because there are no elements in $U$.
+
+
+Based on the meaning of these quantifiers, one can infer the logical implications
+\begin{gather*}
+\neg \left( \forall x \in U, P(x) \right)
+\Leftrightarrow \exists x \in U, \neg P(x) \\
+\neg \left( \exists x \in U,  P(x) \right)
+\Leftrightarrow \forall x \in U,  \neg P(x) .
+\end{gather*}
+Using the connection to conjunction and disjunction, these rules are actually equivalent to De Morgan's law for iterated conjunctions and disjunctions.
+
+% Proof P->Q by contradiction: Suppose P AND NOT Q
+% Suppose "exist x, NOT P(x) AND forall x, P(x)"
+% exist x, NOT P(x) => NOT P(x0)
+% forall x, P(x) => P(x0)
+% Contradiction implies P->Q
+
+One can also define predicates with multiple free variables such as $P(x,y)=$``$x$ contains $y$''.
+Once again, these statements are assumed to be true or false for every choice of $x,y$.
+There are 8 possible quantifiers for a 2-variable predicate and they can be arranged according to their natural implications:
+\[ \begin{array}{ccccccc}
+  \forall x, \forall y, P(x,y) & \Rightarrow & \exists x, \forall y, P(x,y) & \Rightarrow & \forall y, \exists x, P(x,y) & \Rightarrow & \exists y, \exists x, P(x,y) \\
+  \Updownarrow &&&&&& \Updownarrow \\
+  \forall y, \forall x, P(x,y) & \Rightarrow & \exists y, \forall x, P(x,y) & \Rightarrow & \forall x, \exists y, P(x,y) & \Rightarrow & \exists x, \exists y, P(x,y)
+  \end{array}
+\]
+All of these implications follow from $\forall x \forall y = \forall y \forall x$, $\exists x \exists y = \exists y \exists x$, and the single variable inference rule $\forall x, P(x) \Rightarrow \exists x, P(x)$ except for two: $\exists x, \forall y, P(x,y) \Rightarrow \forall y, \exists x, P(x,y)$ and its symmetric pair.
+
+To understand this last implication, consider an example where $x$ is in a set $I$ of images and $y$ is in a set $C$ of colors.
+Then, $\exists x, \forall y, P(x,y)$ means ``there is an image that contains all the colors'' (e.g., an image of a rainbow) and $\forall y, \exists x, P(x,y)$ means ``for each color there is an image containing that color''.
+The first statement implies the second because, in the second, the rainbow image satisfies the $\exists x$ quantifier for all $y$.
+To see that the implication is not an equivalence, consider a set of pictures where each image contains exactly one color and there is one such image for each color.
+In this case, it is true that ``for each color there is an image containing that color'' but it is not true that `there is an image that contains all the colors''.
+
+In quantified statements, such as $\exists x\in U, P(x)$, the variable $x$ is called a \textbf{bound variable} because its value cannot be chosen freely.
+Similarly, in the statement $\exists y \in U, P(x,y)$, $x$ is a free variable and $y$ is a bound variable.
+
+Finally, we note that first-order predicate logic has a axiomatic formulation that is consistent, complete, and semidecidable.
+In this context, \defn{logic}{semidecidable} means that there is an algorithm that, if it terminates, correctly determines the truth of any postulated implication.
+But, it is only guaranteed to terminate for true postulates.
+
+%In mathematics, a \textbf{free variable} is a notation for a place or places in an expression into which some definite substitution may take place, or with respect to which some operation (e.g. quantification) may take place. 
+%A \textbf{bound variable} is a variable for which we have no ability to choose the value.
 
 
 \section{Strategies for Proofs}
@@ -454,7 +521,7 @@ The principle of \defn{logic}{mathematical induction} states that $P(n)$ is true
 
 From a foundational perspective, this statement is essentially equivalent to the existence and uniqueness of the natural numbers.
 It is taken as an axiom in the Peano axiomatic formulation of arithmetic.
-In contrast, the Zermelo-Fraenkel axiomatic formulation of set theory defines the natural numbers as the smallest inductive set and the existence of an inductive set is taken as an axiom.
+In contrast, the ZF axiomatic formulation of set theory defines the natural numbers as the smallest inductive set and the existence of an inductive set is taken as an axiom.
 
 \begin{example}
 Let $S_n = \sum_{i=1}^n i$.
@@ -475,13 +542,15 @@ These paradoxes can be resolved by putting set theory in a firm axiomatic framew
 Instead, we adopt what is called \defn{set theory}{naive set theory} which rigorously defines the operations of set theory without worrying about possible contradictions.
 This approach is sufficient for most of mathematics and also acts as a stepping-stone to more formal treatments.
 
-A \defn{set theory}{set} is any collection of objects, mathematical or otherwise.
-For example, we can think of the set of all books published in 2007.
+A \defn{set theory}{set} is taken to be any collection of objects, mathematical or otherwise.
+For example, one can think of ``the set of all books published in 2007''.
 The objects in a set are referred to as \defn{set theory}{elements} or members of the set.
 The logical statement ``$a$ is a member of the set $A$'' is written
 \[ a \in A. \]
 Likewise, its logical negation ``$a$ is not a member of the set $A$'' is written $a \notin A$.
 Therefore, exactly one of these two statements is true.
+In naive set theory, one assumes the existence of any set that can be described in words.
+Later, we will see that this can be problematic when one considers objects like the ``set of all sets''.
 
 One may present a set by listing its elements.
 For example, $A= \{ a,e,i,o,u \}$ is the set of standard English vowels.
@@ -522,9 +591,17 @@ The set of rational numbers is countably infinite while the set of real numbers 
 
 \begin{example}[\defn{set theory}{Russell's Paradox}]
 Let $R$ be the set of all sets that do not contain themselves or $R = \{S|S\notin S\}$.
-The paradox arises from the fact that the definition leads to the logical contradiction $R\in R \Leftrightarrow R\notin R$.
-Axiomatic set theory eliminates this paradox by disallowing self-referential constructions like this.
+Such a set is said to exist in naive set theory (though it may empty) simply because it can be described in words.
+The paradox arises from the fact that the definition leads to the logical contradiction $R\in R \leftrightarrow R\notin R$.
 \end{example}
+
+What this proves is that \emph{naive set theory is not consistent} because it allows constructions that lead to contradictions.
+Axiomatic set theory eliminates this paradox by disallowing self-referential and other problematic constructions.
+Thus, another reasonable conclusion is that Russell's paradox shows that the set $R$ cannot exist in any consistent theory of sets.
+
+Another common question is whether there are sets that contains themselves.
+In naive set theory, the answer is yes and some examples are the ``set of all sets'' and the ``set of all abstract ideas''.
+On the other hand, in the ZF axiomatic formulation of set theory, it is a theorem that no set contains itself.
 
 There are a few standard relationships defined between any two sets $A,B$.
 \begin{definition}
@@ -556,7 +633,7 @@ Two sets are said to be \defn{set theory}{disjoint} if $A\cap B = \emptyset$.
 \end{definition}
 
 \begin{definition}
-The \defn{set theory}{set difference} between $A$ and $B$ (denoted $A-B$ or $A \setminus \!B$) is the set of elements in $A$ but not in $B$
+The \defn{set theory}{set difference} between $A$ and $B$ (denoted $A-B$ or $A \setminus \!B$) is the set of elements in $A$ but not in $B$.
 This means that
 \[ x\in A-B \Leftrightarrow (x\in A)\wedge (x\notin B). \]
 If there is some implied universal set $U$, then the \defn{set theory}{complement} (denoted $A^c$) is defined by $A^c = U-A$
@@ -627,6 +704,11 @@ In this case, two ordered pairs are equivalent if their associated fractions eva
 The quotient set $\mathbb{N} \setminus \!\sim$ can therefore be associated with the set of reduced fractions.
 \end{example}
 
+Unfortunately, this section will not end on a happy note by saying that the ZFC axiomatic formulation of set theory is consistent.
+Instead, we observe that Kurt G\"{o}del's Incompleteness Theorems imply that, if ZFC is consistent, then this cannot be proven using statements in ZFC and, moreover, it cannot be complete.
+On the other hand, if ZFC is inconsistent, then it contains a paradox and one can prove anything using statements in ZFC.
+Since ZFC manages to avoid all known paradoxes and no contradictions have been so far, it is still the most popular formal system in which to define mathematics.
+
 
 \section{Functions}
 
@@ -668,11 +750,11 @@ It is worth noting that the notation $f^{-1}(B)$ for the preimage of $B$ can be 
 In general, a function gives rise to the following property, $f(f^{-1}(B)) \subseteq B$ and $f^{-1}(f(A)) \supseteq A$.
 
 \begin{example}
-Let the function $f \colon \mathbb{R} \rightarrow \mathbb{R}$ be defined by $f(x)=x^2$. Let $A=[1,2]$ and $B = f(A) = [1,4]$.  Then,
+Let the function $f \colon \mathbb{R} \rightarrow \mathbb{R}$ be defined by $f(x)=x^2$. Let $A=[1,2]$ and notice that $B = f(A) = [1,4]$.  Then,
 \[ f^{-1}(B) = f^{-1}([1,4]) = [-2,-1] \cup [1,2] \supseteq A. \]
 \end{example}
 \begin{example}
-Let the function $f \colon \mathbb{R} \rightarrow \mathbb{R}$ be defined by $f(x)=x^2+1$. Let $B=[0,2]$ and $A = f^{-1}(B) = [-1,1]$.  Then,
+Let the function $f \colon \mathbb{R} \rightarrow \mathbb{R}$ be defined by $f(x)=x^2+1$. Let $B=[0,2]$ and notice that $A = f^{-1}(B) = [-1,1]$.  Then,
 \[ f(A) = f([-1,1]) = [1,2] \subseteq B. \]
 \end{example}
 

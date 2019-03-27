@@ -66,20 +66,24 @@ A shorthand notation for~\eqref{equation:SystemOfEquations} is the matrix equati
 \begin{equation*}
 A \vecnot{x} = \vecnot{y},
 \end{equation*}
-where $A$ is the matrix representation given by
+where
+$\vecnot{x} = (x_1, \ldots, x_n)^T$, 
+$\vecnot{y} = (y_1, \ldots, y_m)^T$, and
+$A$ is the matrix given by
 \begin{equation*}
 A = \begin{bmatrix}
 a_{11} & a_{12} & \cdots & a_{1n} \\
 a_{21} & a_{22} & \cdots & a_{2n} \\
 \vdots & \vdots & \ddots & \vdots \\
 a_{m1} & a_{m2} & \cdots & a_{mn}
-\end{bmatrix}
+\end{bmatrix}.
 \end{equation*}
-and $\vecnot{x}$, $\vecnot{y}$ denote
-\begin{align*}
-\vecnot{x} &= (x_1, \ldots, x_n)^T \\
-\vecnot{y} &= (y_1, \ldots, y_m)^T .
-\end{align*}
+We also use $[A]_{i,j}$ to denote the entry of $A$ in the $i$-th row and $j$-th column (i.e., $a_{ij}$) and $[\vecnot{x}_i ]$ to denote the $i$-th entry in $\vecnot{x}$ (i.e., $x_i$).
+%The vectors $\vecnot{x}$ and %$\vecnot{y}$ denoted by
+%\begin{align*}
+%\vecnot{x} &= (x_1, \ldots, x_n)^T \\
+%\vecnot{y} &= (y_1, \ldots, y_m)^T .
+%\end{align*}
 
 \begin{definition}
 Let $A$ be an $m \times n$ matrix over $F$ and let $B$ be an $n \times p$ matrix over $F$.
@@ -90,10 +94,28 @@ c_{ij} = \sum_{r = 1}^n a_{ir} b_{rj}.
 \end{definition}
 
 \begin{remark}
-Consider~\eqref{eq:def_matrix_product} when $j$ is fixed and $i$ is eliminated by grouping the elements of $A$ and $B$ into column vectors. For this case, \eqref{eq:def_matrix_product}~shows that the $j$-th column of $C$ is a linear combination of the columns of $A$, with coefficients $b_{1,j},b_{2,j},\ldots,b_{m,j}$.
-Similarly, one can fix $i$ and eliminate the index $j$ by grouping the elements of $A$ and $C$ into row vectors.
-Then, \eqref{eq:def_matrix_product}~shows that the $i$-th row of $C$ is a linear combination of the rows of $B$, with coefficients $b_{i,1},b_{i,2},\ldots,b_{i,n}$.
+Consider~\eqref{eq:def_matrix_product} when $j$ is fixed and $i$ is eliminated by grouping the elements of $C$ and $A$ into column vectors $\vecnot{c}_1,\ldots,\vecnot{c}_{p}$ and $\vecnot{a}_1,\ldots,\vecnot{a}_n$. For this case, \eqref{eq:def_matrix_product}~shows that the $j$-th column of $C$ is a linear combination of the columns of $A$,
+\[ \vecnot{c}_{j} = \sum_{r = 1}^n \vecnot{a}_r b_{rj}, \]
+%with coefficients $b_{1,j},b_{2,j},\ldots,b_{m,j}$.
+Similarly, one can fix $i$ and eliminate the index $j$ by grouping the elements of $C$ and $B$ into row vectors  $\vecnot{c}_1,\ldots,\vecnot{c}_{m}$ and $\vecnot{b}_1,\ldots,\vecnot{b}_n$.
+Then, \eqref{eq:def_matrix_product}~shows that the $i$-th row of $C$ is a linear combination of the rows of $B$,
+\[ \vecnot{c}_{i} = \sum_{r = 1}^n a_{ir} \vecnot{b}_r. \]
+% with coefficients $b_{i,1},b_{i,2},\ldots,b_{i,n}$.
 \end{remark}
+
+\begin{definition}
+Consider an $m \times n$ matrix $A$ with elements $a_{ij} \in F$.
+The \defn{matrix}{transpose} of $A$ is the $n \times m$ matrix $B = A^T$ with elements defined by $b_{ij} = a_{ji}$.
+\end{definition}
+
+\begin{definition}
+Consider a complex $m \times n$ matrix $A$ with elements $a_{ij} \in \mathbb{C}$.
+Its \defn{matrix}{Hermitian transpose} $B = A^H$ is the $n \times m$ matrix with elements defined $b_{ij} = \overline{a_{ji}}$, where $\overline{a}$ denotes the complex conjugate of $a$.
+\end{definition}
+
+\begin{problem}
+For matrices $A \in \mathbb{C}^{m\times p}$ and $B \in \mathbb{C}^{p \times n}$, show $(AB)^H = B^H A^H$.
+\end{problem}
 
 \begin{definition}
 An $m\times n$ matrix $A$ over $F$ is in \defn{matrix}{row echelon form} if
@@ -121,6 +143,10 @@ AB = BA = I.
 \end{equation*}
 In this case, $A$ is called \defn{matrix}{invertible} and its inverse is denoted by $A^{-1}$.
 \end{definition}
+
+\begin{problem}
+For a matrix $A\in \mathbb{C}^{n\times n}$, show that $(A^H)^{-1} = (A^{-1})^H$ if $A^{-1}$ exists.
+\end{problem}
 
 \begin{definition}
 An \defn{matrix}{elementary row operation} on an $m \times n$ matrix consists of
@@ -189,20 +215,24 @@ The product of a scalar $s \in F$ and vector $\vecnot{v}$ is defined by
 \begin{equation*}
 s \vecnot{v} = (s v_1, \ldots, s v_n).
 \end{equation*}
-The set of $n$-tuples, denoted by $F^n$, together with the vector addition and scalar product defined above forms a vector space.
+The set of $n$-tuples, denoted by $F^n$, with the vector addition and scalar product defined above forms a vector space.
+This is the standard vector space for $F^n$.
 \end{example}
 
 \begin{example}
-Let $X$ be a non-empty set and let $F$ be a field.
-Consider the set $V$ of all functions from $X$ into $F$.
-The sum of two vectors $f,g \in V$ is the function from $X$ into $F$ defined by
+Let $X$ be a non-empty set and let $Y$ be a vector space over $F$.
+Consider the set $V$ of all functions from $X$ into $Y$.
+The sum of two vectors $f,g \in V$ is the function from $X$ into $Y$ defined by
 \begin{equation*}
-(f + g)(x) = f(x) + g(x) \quad \forall x \in X.
+(f + g)(x) = f(x) + g(x) \quad \forall x \in X,
 \end{equation*}
+where the RHS uses vector addition from $Y$.
 The product of scalar $s \in F$ and the function $f \in V$ is the function $sf$ defined by
 \begin{equation*}
-(sf)(x) = s f(x) \; \forall x \in X.
+(sf)(x) = s f(x) \; \forall x \in X,
 \end{equation*}
+where the RHS uses scalar multiplication from $Y$.
+This is the standard vector space of functions from a set $X$ to a vector space $Y$.
 \end{example}
 
 \begin{definition}
@@ -211,11 +241,6 @@ A vector $\vecnot{w} \in V$ is said to be a \defn{vector space}{linear combinati
 \vecnot{w} = \sum_{i=1}^n s_i \vecnot{v}_i.
 \end{equation*}
 \end{definition}
-
-\begin{definition}
-Consider a complex $n \times n$ matrix $A$ with elements $a_{ij}$.
-The \defn{matrix}{Hermitian transpose} $B = A^H$ of $A$ has elements defined by $b_{ij} = \overline{a_{ji}}$ where $\overline{a}$ denotes the complex conjugate of $a$.
-\end{definition}.
 
 \subsection{Subspaces}
 
@@ -305,7 +330,7 @@ Result (ii) for each vector follows from (i) for the same vector because, for ex
 
 \begin{definition}
 Let $V$ be a vector space over $F$.
-Let $\mathcal{B} = \left\{ \vecnot{v}_{\alpha} | \alpha \in A \right\}$ be a subset of linearly independent vectors from $V$, such that every $\vecnot{v} \in V$ has a unique decomposition as a finite linear combination of vectors from $\mathcal{B}$.
+Let $\mathcal{B} = \left\{ \vecnot{v}_{\alpha} | \alpha \in A \right\}$ be a subset of linearly independent vectors from $V$ such that every $\vecnot{v} \in V$ has a unique decomposition as a finite linear combination of vectors from $\mathcal{B}$.
 Then, the set $\mathcal{B}$ is a \defn{vector space}{Hamel basis} for $V$.
 The space $V$ is \defn{vector space}{finite-dimensional} if it has a finite basis.
 \end{definition}
@@ -352,17 +377,17 @@ Since $A$ is invertible,
 \begin{equation*}
 A \vecnot{v} = \vecnot{0} \implies I \vecnot{v} = A^{-1} \vecnot{0} \implies \vecnot{v} = \vecnot{0}.
 \end{equation*}
-That is, $\{ \vecnot{a}_1, \ldots, \vecnot{a}_n \}$ is a linearly independent set.
-For any column vector $\vecnot{w} \in F^n$, let $\vecnot{v} = A^{-1} \vecnot{w}$.
+Thus, $\{ \vecnot{a}_1, \ldots, \vecnot{a}_n \}$ is a linearly independent set.
+Next, for any column vector $\vecnot{w} \in F^n$, let $\vecnot{v} = A^{-1} \vecnot{w}$.
 It follows that $\vecnot{w} = A \vecnot{v}$ and, as a consequence, $\{ \vecnot{a}_1, \ldots, \vecnot{a}_n \}$ is a basis for $F^n$.
 \end{example}
 
-\begin{theorem}
-Let $V$ be a vector space which is spanned by a finite set of vectors $W = \left\{ \vecnot{w}_1, \ldots, \vecnot{w}_n \right\}$.
-Then, any linearly independent set of vectors in $V$ is finite and contains no more than $n$ elements.
+\begin{theorem} \label{thm:unique_dim}
+Let $V$ be a finite-dimensional  vector space that is spanned by a finite set of vectors $W = \left\{ \vecnot{w}_1, \ldots, \vecnot{w}_n \right\}$.
+If $U = \left\{ \vecnot{u}_1, \ldots, \vecnot{u}_m \right\} \subset V$ is a linearly independent set of vectors, then $m\leq n$.
 \end{theorem}
 \begin{proof}
-Assume that $U = \left\{ \vecnot{u}_1, \ldots, \vecnot{u}_m \right\} \subset V$ with $m > n$.
+Suppose that $U = \left\{ \vecnot{u}_1, \ldots, \vecnot{u}_m \right\} \subset V$ is linearly independent and $m > n$.
 Since $W$ spans $V$, there exists scalars $a_{ij}$ such that
 \begin{equation*}
 \vecnot{u}_j = \sum_{i=1}^n a_{ij} \vecnot{w}_i.
@@ -378,14 +403,18 @@ Collecting the $a_{ij}$ coefficients into an $n$ by $m$ matrix $A$ shows that
 \begin{equation*}
 \begin{bmatrix} t_1 \\ \vdots \\ t_n \end{bmatrix} = A \begin{bmatrix} s_1 \\ \vdots \\ s_m \end{bmatrix} .
 \end{equation*}
-Since $n<m$, Lemma~\ref{lemma:widematrix_has_nullvector} implies that there exist scalars $s_1, \ldots, s_n$, not all $0$, such that $t_1 = t_2 = \cdots = t_m = 0$.
-For these scalars, $\sum_{j=1}^m s_j \vecnot{u}_j = 0$.
-That is, the set $U$ is linearly dependent.
+Since $A\in F^{n\times m}$ with $n<m$, Lemma~\ref{lemma:widematrix_has_nullvector} implies there are scalars $s_1, \ldots, s_n$, not all $0$, such that $t_1 = t_2 = \cdots = t_m = 0$.
+For these scalars, $\sum_{j=1}^m s_j \vecnot{u}_j = \vecnot{0}$.
+Thus, the set $U$ is linearly dependent.
+and the contradiction implies $m\geq n$.
 \end{proof}
 
-If $V$ is a finite-dimensional vector space, then any two bases of $V$ have the same number of elements.
+Now, suppose that $V$ is a finite-dimensional vector space with bases $U=\{\vecnot{u}_1, \ldots, \vecnot{u}_n\}$ and $W =\{\vecnot{w}_1, \ldots, \vecnot{w}_m\}$ where $m \neq n$.
+Then, without loss of generality, we can assume $m > n$ and apply Theorem~\ref{thm:unique_dim} to see that $W$ must be linearly dependent.
+Since a basis must be linearly independent, this gives a contradiction and implies that $m = n$.
+Hence, if $V$ is a finite-dimensional vector space, then any two bases of $V$ have the same number of elements.
 Therefore, the dimension of a finite-dimensional vector space is uniquely defined.
-While this may seem intuitively obvious to many readers, the previous theorem shows that this intuition from $\mathbb{R}^n$ does not break down for other fields and vector spaces.
+Thus, our intuition about dimension from $\mathbb{R}^n$ does not break down for other vector spaces and fields.
 
 \begin{definition}
 The \defn{vector space}{dimension} of a finite-dimensional vector space is defined as the number of elements in any basis for $V$.
@@ -428,26 +457,27 @@ Ordering this set (e.g., $\vecnot{v}_1, \ldots, \vecnot{v}_n$) allows the first 
 
 
 \begin{definition}
-If $V$ is a finite-dimensional vector space, an \defn{vector space}{ordered basis} for $V$ is a finite sequence of vectors which is linearly independent and spans $V$.
-\end{definition}
-
-\begin{definition}
-For an ordered basis $\mathcal{B}=(\vecnot{v}_1, \ldots, \vecnot{v}_n )$, 
+If $V$ is a finite-dimensional vector space, an \defn{vector space}{ordered basis} for $V$ is a finite list of vectors that is linearly independent and spans $V$.
 \end{definition}
 
 In particular, if the sequence $\vecnot{v}_1, \ldots, \vecnot{v}_n$ is an ordered basis for $V$, then the set $\left\{ \vecnot{v}_1, \ldots, \vecnot{v}_n \right\}$ is a basis for $V$.
-The ordered basis $\mathcal{B}$ is the set $\left\{ \vecnot{v}_1, \ldots, \vecnot{v}_n \right\}$, together with the specific ordering of the vectors.
-For any $\vecnot{w} \in V$, coordinate matrix 
-Based on this ordered basis, a vector $\vecnot{w} \in V$ can be unambiguously represented as an $n$-tuple $(s_1, \ldots, s_n)$ 
+The ordered basis $\mathcal{B}$, denoted by $\left( \vecnot{v}_1, \ldots, \vecnot{v}_n \right)$, defines the set and a specific ordering of the vectors.
+Based on this ordered basis, a vector $\vecnot{v} \in V$ can be unambiguously represented as an $n$-tuple $(s_1, \ldots, s_n)\in F^n$ such that 
 \begin{equation*}
-\vecnot{w} = (s_1, \ldots, s_n) = \sum_{i=1}^n s_i \vecnot{v}_i.
+\vecnot{v} = \sum_{i=1}^n s_i \vecnot{v}_i.
 \end{equation*}
-Equivalently, vector $\vecnot{w}$ can be described using the \emph{coordinate matrix of $\vecnot{w}$ relative to the ordered basis $\mathcal{B}$}:
-\begin{equation*}
-\vecnot{w} = \begin{bmatrix} s_1 \\ \vdots \\ s_n \end{bmatrix} .
-\end{equation*}
-The dependence of this coordinate matrix on $\mathcal{B}$ can be specified explicitly using the notation $\left[ \vecnot{w} \right]_{\mathcal{B}}$.
-This will be particularly important when multiple coordinates systems are involved.
+
+\begin{definition}
+For a finite-dimensional vector space $V$ with ordered basis $\mathcal{B}=(\vecnot{v}_1, \ldots, \vecnot{v}_n )$, the \defn{vector space}{coordinate vector} of $\vecnot{v} \in V$ is denoted by $\left[ \vecnot{v} \right]_{\mathcal{B}}$ and equals the unique vector $\vecnot{s} = F^n$ such that
+\[ \vecnot{v} = \sum_{i=1}^n s_i \vecnot{v}_i. \]  
+\end{definition}
+
+%Equivalently, vector $\vecnot{w}$ can be described using the \emph{coordinate matrix of $\vecnot{w}$ relative to the ordered basis $\mathcal{B}$}:
+%\begin{equation*}
+%\vecnot{w} = \begin{bmatrix} s_1 \\ %\vdots \\ s_n \end{bmatrix} .
+%\end{equation*}
+The dependence of the coordinate vector $\left[ \vecnot{v} \right]_{\mathcal{B}}$ on the basis is explicitly specified using the subscript.
+This can be particularly useful when multiple coordinates systems are involved.
 
 \begin{example}
 The canonical example of an ordered basis is the standard basis for $F^n$ introduced in Section~\ref{section:BasesAndDimensions}.
@@ -598,31 +628,33 @@ Otherwise, it is called \defn{linear transform}{non-singular}.
 
 \begin{theorem} \label{theorem:UniqueLinearTransformation}
 Let $V,W$ be vector spaces over $F$ and $\mathcal{B} = \{ \vecnot{v}_{\alpha} | \alpha \in A \}$ be a Hamel basis for $V$.
-For each mapping $G \colon \mathcal{B} \rightarrow W$, there is a unique linear transformation $T \colon V \rightarrow W$ such that $T \vecnot{v}_{\alpha} = G \left( \vecnot{v}_{\alpha} \right)$.
+For each mapping $G \colon \mathcal{B} \rightarrow W$, there is a unique linear transformation $T \colon V \rightarrow W$ such that $T \vecnot{v}_{\alpha} = G \left( \vecnot{v}_{\alpha} \right)$ for all $\alpha \in A$.
 \end{theorem}
 \begin{proof}
-Since $\mathcal{B}$ is a Hamel basis for $V$, every vector $\vecnot{v} \in V$ has a unique expansion
+Since $\mathcal{B}$ is a Hamel basis for $V$, every vector $\vecnot{w} \in V$ has a unique expansion
 \begin{equation*}
-\vecnot{v} = \sum_{\alpha \in A} s_{\alpha} \vecnot{v}_{\alpha},
+\vecnot{w} = \sum_{\alpha \in A} s_{\alpha} (\vecnot{w}) \, \vecnot{v}_{\alpha},
 \end{equation*}
-where $s_{\alpha} \neq 0$ for only a finite subset of $A$.
-Using this expansion and the mapping $G$ for basis vectors, we define the mapping $T$, for each $\vecnot{v}$, as
+where $s_\alpha (\vecnot{w})$ is the unique $\alpha$ coefficient for $\vecnot{w}$ and $s_{\alpha} (\vecnot{w}) \neq 0$ only for a finite subset of $A$.
+Using the unique expansion and vector space properties, one can show that
+\[ s_\alpha (t \vecnot{w}_1 + \vecnot{w}_2) = t s_\alpha (\vecnot{w}_1) + s_\alpha (\vecnot{w}_2). \]
+Next, we define the mapping $T \colon V\to W$ in terms of $s_\alpha(\cdot)$ and $G(\cdot)$ with
 \begin{equation*}
-T \vecnot{v} = \sum_{\alpha \in A} s_{\alpha} G \left( \vecnot{v}_{\alpha} \right).
+T \vecnot{w} = \sum_{\alpha \in A} s_{\alpha} (\vecnot{w}) \, G \! \left( \vecnot{v}_{\alpha} \right).
 \end{equation*}
-Using the unique decomposition of vectors, it is easy to verify that this mapping is linear.
+Using the linearity of $s_\alpha(\cdot)$, it is easy to verify that $T$ is a linear transform.
 
-To show that it is unique, we assume that there is another linear mapping $U \colon V \rightarrow W$ such that $U \vecnot{v}_{\alpha} = G \left( \vecnot{v}_{\alpha} \right)$.
-In this case, the linearity guarantees that
+To show that $T$ is unique, we let $U \colon V \rightarrow W$ be any other linear mapping satisfying $U \vecnot{v}_{\alpha} = G \left( \vecnot{v}_{\alpha} \right)$ for all $\alpha \in A$.
+In this case, the linearity of $U$ guarantees that
 \begin{equation*}
-U \vecnot{v} = U \left( \sum_{\alpha \in A} s_{\alpha} \vecnot{v}_{\alpha} \right)
-=  \sum_{\alpha \in A} s_{\alpha} U \left( \vecnot{v}_{\alpha} \right) 
-=  \sum_{\alpha \in A} s_{\alpha} G \left( \vecnot{v}_{\alpha} \right).
+U \vecnot{w} = U \! \left( \sum_{\alpha \in A} s_{\alpha} (\vecnot{w}) \, \vecnot{v}_{\alpha} \right)
+=  \sum_{\alpha \in A} s_{\alpha} (\vecnot{w}) \, U \! \left( \vecnot{v}_{\alpha} \right) 
+=  \sum_{\alpha \in A} s_{\alpha}(\vecnot{w}) \, G \! \left( \vecnot{v}_{\alpha} \right).
 \end{equation*}
-This implies that $U \vecnot{v} = T \vecnot{v}$ for all $\vecnot{v} \in V$ and therefore that $U = T$.
+From this, we see that $U \vecnot{w} = T \vecnot{w}$ for all $\vecnot{w} \in V$ and therefore that $U = T$.
 \end{proof}
 
-This theorem illuminates a very important structural element of linear transformations: they are uniquely defined by where they map the basis vectors of their domain.
+This theorem illuminates a very important structural element of linear transformations: they are uniquely defined by where they map an set of basis vectors for their domain.
 
 \iffalse
 \begin{theorem} \label{theorem:UniqueLinearTransformation}
@@ -758,49 +790,29 @@ In turn, this implies that $n = \Rank(T) + \Nullity(T)$.
 \begin{theorem}
 If $A$ is an $m \times n$ matrix with entries in the field $F$, then
 \begin{equation*}
-\mathrm{row~rank} (A) \triangleq \dim( \mathcal{R}(A^H)) =  \dim( \mathcal{R}(A)) \triangleq \mathrm{column~rank} (A).
+\mathrm{row~rank} (A) \triangleq \dim( \mathcal{R}(A^T)) =  \dim( \mathcal{R}(A)) \triangleq \Rank (A).
 \end{equation*}
 \end{theorem}
 \begin{proof}
-It is well-known that elementary row operations preserve the row space of $A$.
-One can also show that they preserve the dimension of the column space because
-\[ \Rank(A)=\Rank(P^{-1}PA)\leq \Rank(PA) \leq \Rank(A) \]
-for any invertible matrix $P$.
-By symmetry, elementary column operations preserve the column space of $A$ and the dimension of the row space.
-Using these facts, one can prove the theorem.
-
-The idea is to first use elementary row operations to write $A$ in reduced row echelon form as $B$.
-It follows that $B$ has exactly $\mathrm{row~rank} (B)=\mathrm{row~rank} (A)$ rows with non-zero elements and that $\Rank(B) = \Rank(A)$.
-Next, elementary column operations are used to write $B$ in reduced column echelon form as $C$.
-It follows that $\mathrm{row~rank} (C) = \mathrm{row~rank} (B) = \mathrm{row~rank} (A)$.
-But, $C$ has exactly $\mathrm{column~rank} (C) =\mathrm{column~rank} (B) = \Rank(A)$ non-zero columns each containing a single 1.
-Thus, $\mathrm{column~rank} (C) = \mathrm{row~rank} (C) $ implies that $\Rank(A)=\mathrm{column~rank} (C) = \mathrm{row~rank} (C) = \mathrm{row~rank} (A)$.
-%It is well-known that any elementary row operation can be represented by multiplication on the left by an invertible $m\times m$ matrix $P$.
-%Thus, these operations preserve the row space of the matrix.
-%We will now show that such operations also preserve the dimension of the column space.
-%First, we note that applying the same linear transformation to each column of $A$ can reduce the dimension of the column space.
-%This is because a set of columns that were originally linearly independent may become linearly dependent but a set of linearly-dependent columns will always remain linearly dependent.
-%Using this, we observe that \[ \Rank(A)=\Rank(P^{-1}PA)\leq \Rank(PA) \leq \Rank(A) \]
-%for any invertible matrix $P$.
+%It is easy to verify that elementary row operations preserve the row space of $A$.
+Let $R=PA$ be the reduced row echelon form of $A$, where $P$ is invertible.
+Let $r$ be the number of non-zero rows in $R$ and observe that $\mathrm{row~rank} (A) = r$ because the rows of $R$ form a basis for the row space of $A$.
+Next, we write $A=P^{-1}R$ and observe that each column of $A$ is a linear combination of the first $r$ columns in $P^{-1}$.
+Thus, the column space of $A$ is spanned by $r$ vectors and $\Rank (A) \leq \mathrm{row~rank} (A)$.
+Applying this to both $A$ and $A^T$ gives
+\[ \Rank (A) \leq \mathrm{row~rank} (A) = \Rank (A^T) \leq \mathrm{row~rank} (A^T) = \Rank (A),    \]
+which completes the proof.
 \end{proof}
+When $F=\mathbb{C}$, the space $\mathcal{R}(A^H)$ has many nice properties and can also be called the row space of $A$.
+Regardless, it holds that $\Rank(A) = \Rank(A^T) = \Rank(A^H)$.
 
-%First, we note that the range $\mathcal{R}(A)$ of $A$ equals the column space of $A$ and therefore $\Rank(A) = \dim \left( \mathcal{R}(A) \right)$.
-%%Next, we show the null space $\mathcal{N}(A)$ of $A$ is the orthogonal complement of the row space $\mathcal{R}(A^H)$.
-%Next, we use the definition of the orthogonal complement and $\mathcal{R}(A^H) = \{ A^H \vecnot{y} | \vecnot{y} \in F^m \}$ to see that
-%\begin{equation*}
-%\begin{split}
-%\mathcal{R}(A^H)^{\perp} 
-%&= \left\{ \vecnot{x} \in F^n \, | \, \vecnot{x}^H \vecnot{z} = \vecnot{0} \; \forall \, \vecnot{z}\in \mathcal{R}(A^H) \right\} \\
-%= \left\{ \vecnot{x} \in F^n \, | \, \vecnot{x}^H A^H \vecnot{y} = 0 \; \forall \, \vecnot{y}\in F^m \right\}.
-%\end{split}
-%\end{equation*}
-%This implies that $\mathcal{R}(A^H)^{\perp} =  \left\{ \vecnot{x} \in F^n \, | \, \vecnot{x}^H A^H = 0 \right\} = \mathcal{N}(A)$ and therefore that
-%\[ \dim\left( \mathcal{R}(A^H) \right) = n-\dim \left( \mathcal{R}(A^H) \right)^{\bot} = n - \dim \left(\mathcal{N}(A) \right) = \dim \left( \mathcal{R}(A) \right).\]
 
 
 \section{Norms}
+
 Let $V$ be a vector space over the real numbers or the complex numbers.
 
+\begin{definition}
 A \defn{vector space}{norm} on vector space $V$ is a real-valued function $\left\| \cdot \right\| \colon V \rightarrow \RealNumbers$ that satisfies the following properties.
 \begin{enumerate}
 \item $\left\| \vecnot{v} \right\| \geq 0 \quad \forall \vecnot{v} \in V$;
@@ -809,9 +821,10 @@ equality holds if and only if $\vecnot{v} = \vecnot{0}$
 \item $\left\| \vecnot{v} + \vecnot{w} \right\| \leq
 \left\| \vecnot{v} \right\| + \left\| \vecnot{w} \right\| \quad \forall \vecnot{v}, \vecnot{w} \in V$.
 \end{enumerate}
+\end{definition}
 
-The concept of a norm is closely related to the concept of a metric.
-For instance, a metric can be defined in terms of a norm.
+The concept of a norm is closely related to that of a metric.
+For instance, a metric can be defined from any norm.
 Let $\left\| \vecnot{v} \right\|$ be a norm on vector space $V$, then
 \begin{equation*}
 d \left( \vecnot{v}, \vecnot{w} \right)
@@ -834,9 +847,7 @@ Recall that the standard bounded metric introduced in Problem~\ref{problem:Stand
 = \min \left\{ d \left( \vecnot{v}, \vecnot{w} \right), 1 \right\}.
 \end{equation*}
 Define the function $f \colon \RealNumbers^n \rightarrow \RealNumbers$ by
-\begin{equation*}
-f \left( \vecnot{v} \right) = \bar{d} \left( \vecnot{v}, \vecnot{0} \right).
-\end{equation*}
+$f \left( \vecnot{v} \right) = \bar{d} \left( \vecnot{v}, \vecnot{0} \right)$.
 Is the function $f$ a norm?
 
 By the properties of a metric, we have
@@ -855,7 +866,7 @@ is not a norm.
 \end{example}
 
 \begin{example}
-The following functions are examples of norms for $F^n$,
+The following functions are examples of norms for $\mathbb{R}^n$ and $\mathbb{C}^n$:
 \begin{enumerate}
 \item the $l^1$ norm: $\left\| \vecnot{v} \right\|_1 = \sum_{i=1}^n |v_i|$
 \item the $l^p$ norm: $\left\| \vecnot{v} \right\|_p = \left( \sum_{i=1}^n |v_i|^p \right)^{\frac{1}{p}}, \quad p \in (1,\infty)$
@@ -966,12 +977,17 @@ Since $g$ is continuous, we find that $W = g^{-1}(U) = f(U)$ is closed because $
 \end{proof}
 
 \begin{example}
-Let $V = L_p ( [a,b] )$, for $1\leq p <\infty$, be the set of real Lebesgue-integrable functions on $[a,b]$.
+Let $V = L^p ( [a,b] )$, for $1\leq p <\infty$, be the set of real Lebesgue-integrable functions on $[a,b]$.
 We say that $f \in V$ is continuous if the equivalence class generated by equality almost everywhere contains a continuous function.
 It is easy to verify that the subset $W \subset V$ of continuous functions is a subspace.
 It is not closed, however, because sequences in $W$ may converge to discontinuous functions.
-More generally, the span of any infinite set of linearly independent vectors only includes finite linear combinations and is therefore not closed.
-%In fact, the set of continuous function is dense in $L_p ([a,b])$ so that $\Closure{W} = V$.
+In fact, the set of continuous function is dense in $L^p ([a,b])$ so that $\Closure{W} = V$.
+\end{example}
+\begin{example}
+By definition, the span of an infinite set of vectors only includes finite linear combinations.
+However, a sequence of finite linear combinations, like 
+\[ \vecnot{v}_n = \sum_{i=1}^n \frac{1}{i^2} \vecnot{e}_i, \]  can converge to an infinite linear combination.
+Thus, the span of any infinite set of linearly independent vectors is not closed.
 \end{example}
 
 
