@@ -608,15 +608,15 @@ The parameter $\lambda$ characterizes the rate at  which events occur.
 	ymajorgrids]
 \addplot[darkgray,domain=0:3,samples=201]
 	{2*exp(-2*x)};
-\addlegendentry{$\sigma^2 = 2$}
+\addlegendentry{$\lambda = 2$}
 
 \addplot[blue,domain=0:3,samples=201]
 	{exp(-x)};
-\addlegendentry{$\sigma^2 = 1$}
+\addlegendentry{$\lambda = 1$}
 
 \addplot[red,domain=0:3,samples=201]
 	{0.5*exp(-0.5*x)};
-\addlegendentry{$\sigma^2 = 0.5$}
+\addlegendentry{$\lambda = 0.5$}
 \end{axis}
 \end{tikzpicture}
 \end{center}

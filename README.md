@@ -2,6 +2,7 @@ Notes
 =====
 
 Educational documents on various topics.
+  * [Undergraduate Probability I](./UndergraduateProbabilityI.pdf)
 
 = Git =
 
