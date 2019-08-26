@@ -188,7 +188,7 @@ In precise mathematical notation, one has
 \end{equation*}
 \end{definition}
 
-\begin{theorem}
+\begin{theorem} \label{thm:cont_fun_limit}
 If $f$ is continuous at $x_0$, then $f(x_n) \to f(x_0)$ for all sequences $x_1,x_2,\ldots \in X$ such that $x_n \to x_0$.
 Conversely, if $f(x_n) \to f(x_0)$ for all sequences $x_1,x_2,\ldots  \in X$ such that $x_n \to x_0$, then $f$ is continuous at $x_0$.
 % if and only if  $f(x_n) \to f(x_0)$ for all sequences $x_1,x_2,\ldots \in X$ such that $x_n \to x_0$. 
@@ -204,6 +204,14 @@ For this $\epsilon$ and any positive sequence $\delta_n \to 0$, let $x_n$ be the
 Then, $x_n \to x_0$ because $d_X (x_0,x_n)<\delta_n \to 0$ but $d_Y (f(x_0),f(x_n))\geq \epsilon$.
 Thus, $f(x_n)$ does not converge to $f(x_0)$ for some sequence where $x_n \to x_0$.
 \end{proof}
+
+\begin{definition}
+\boldmath
+The \defn{metric space}{limit}~\textbf{of $f$ at $x_0$},
+\unboldmath
+$\lim_{x \to x_0} f(x)$, exists and equals $f(x_0)$ if $f(x_n) \to f(x_0)$ for all sequences $x_n \in X$ such that $x_n \to x_0$.
+Thus, Theorem~\ref{thm:cont_fun_limit} implies that the limit of $f$ exists at $x_0$ if and only if $f$ is continuous at $x_0$.
+\end{definition}
 
 \begin{definition}
 The function $f$ is called \defn{metric space}{continuous} if, for all $x_0 \in X$, it is continuous at $x_0$.
@@ -426,7 +434,7 @@ A metric space $(X,d)$ is \defn{metric space}{totally bounded} if, for any $\eps
 \end{definition}
 
 \begin{definition}
-A metric space $(X,d)$ is \defn{metric space}{compact} if it is complete~and~totally~bounded.
+A metric space is \defn{metric space}{compact} if it is complete~and~totally~bounded.
 \end{definition}
 
 The closed interval $[0,1]\subset \RealNumbers$ is compact.

@@ -282,19 +282,19 @@ To verify the triangle inequality, we can write
 &= \|T\| + \|U\|.
 \end{align*}
 
-The induced operator norm also has a new property that follows naturally from the definition.
+The induced operator norm also has another property that follows naturally from its definition.
 Notice that 
 \[ \| T \| = \sup_{ \vecnot{v} \in V - \left\{ \vecnot{0} \right\} }
 \frac{ \left\| T \vecnot{v} \right\| }{ \left\| \vecnot{v} \right\| } \geq \frac{ \left\| T \vecnot{u} \right\| }{ \left\| \vecnot{u} \right\| } \]
 for all non-zero $\vecnot{u} \in V$.
-A norm on linear transforms is called \textbf{submultiplicative} if $\| T \vecnot{u} \| \leq \| T \| \| \vecnot{u} \|$ for all $\vecnot{u}\in V$.
-Checking the special case of $\vecnot{u}=\vecnot{0}$, we find that all induced operator norms are submultiplicative.
-From this, one also gets a submultiplicative norm for the algebra of linear operators because
+Checking the special case of $\vecnot{u}=\vecnot{0}$ separately, one can show the \textbf{induced operator-norm inequality} $\| T \vecnot{u} \| \leq \| T \| \| \vecnot{u} \|$ for all $\vecnot{u}\in V$.
+
+For the space $L(V,V)$ of linear operators on $V$, a norm is called \textbf{submultiplicative} if $\| T U \| \leq \|T\| \|U\|$ for all $T,U \in L(V,V)$.
+The induced operator-norm inequality shows that all induced operator norms are submultiplicative because
 \begin{equation*}
 \left\| U T \vecnot{v} \right\| \leq \left\| U \right\| \left\| T \vecnot{v} \right\| \leq \left\| U \right\| \left\| T \right\| \left\| \vecnot{v} \right\| .
 \end{equation*}
-
-
+This also defines a submultiplicative norm for the algebra of linear operators on $V$.
 
 \subsection{Bounded Transformations}
 

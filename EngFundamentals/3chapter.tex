@@ -51,6 +51,9 @@ For any $\vecnot{w}' \in W$, we have $\vecnot{v} - \vecnot{w}' = \left( \vecnot{
 &\geq \left\| \vecnot{v} - \vecnot{w} \right\|^2.
 \end{split}
 \end{equation}
+% For the converse, we need to show that best approx implies orthogonality
+% Thus, we assume best approx and suppose that some vector w'' is not orthogonal to the error (wolog ||w''||=1)
+% Projecting the error onto w'' shows that ||v-w+w''|| < ||v-w|| and gives a contradiction
 Conversely, suppose that $\left\| \vecnot{v} - \vecnot{w}' \right\| \geq \left\| \vecnot{v} - \vecnot{w} \right\|$ for every $\vecnot{w}' \in W$.
 From \eqref{equation:OrthogonalVector}, we get
 \begin{equation*}
@@ -926,7 +929,7 @@ In this case, the solution $\hat{\vecnot{s}}$ can be obtained in closed form and
 \section{Projection onto Convex Sets}
 
 So far, we have focused on the projection of vectors on to subspaces.
-Convex sets are generalize the closure property of subspaces to subsets of points.
+Convex sets relax the closure property of a subspace to convex combinations of subsets of points.
 
 \begin{definition}
 Let $V$ be a vector space over $\RealNumbers$.
@@ -947,7 +950,7 @@ Let $d=f\left(\vecnot v\right)$ be the infimal distance and consider any sequenc
 \[
 \lim_{n\rightarrow\infty}\left\Vert \vecnot u_{n}-\vecnot v\right\Vert =d.
 \]
-Since $A$ is complete, the next step is showing that this sequence is Cauchy. The paralleogram law states that $\left\Vert x-y\right\Vert ^{2}=2\left\Vert x\right\Vert ^{2}+2\left\Vert y\right\Vert ^{2}-\left\Vert x+y\right\Vert ^{2}$ and applying this to $\vecnot u_{n}+\vecnot u_{m}$ gives
+Since $A$ is complete, the next step is showing that this sequence is Cauchy. The paralleogram law states that $\left\Vert x-y\right\Vert ^{2}=2\left\Vert x\right\Vert ^{2}+2\left\Vert y\right\Vert ^{2}-\left\Vert x+y\right\Vert ^{2}$ and applying this to $\vecnot{x}=\vecnot{v}-\vecnot u_{n}$ and $\vecnot{y}=\vecnot{v}-\vecnot u_{m}$ gives
 \begin{align*}
 \left\Vert \vecnot u_{m}-\vecnot u_{n}\right\Vert ^{2} & =\left\Vert \left(\vecnot v-\vecnot u_{n}\right)-\left(\vecnot v-\vecnot u_{m}\right)\right\Vert ^{2}\\
  & =2\left\Vert \vecnot v-\vecnot u_{n}\right\Vert ^{2}+2\left\Vert \vecnot v-\vecnot u_{m}\right\Vert ^{2}-\left\Vert \left(\vecnot v-\vecnot u_{n}\right)+\left(\vecnot v-\vecnot u_{m}\right)\right\Vert ^{2}\\
