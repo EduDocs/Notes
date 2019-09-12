@@ -11,9 +11,9 @@ To gain better insight into metric spaces, we need to review the notion of a met
 \section{Metric Spaces}
 
 \index{metric space}
-A \textbf{metric space} is a set that has a well-defined ``distance'' between any two elements of the set.
-Mathematically, the notion of a metric space abstracts a few basic properties of Euclidean space.
-Formally, a metric space $(X,d)$ is a set $X$ and a function $d$ that is a metric on $X$.
+A \textbf{metric space} is a set that has a well-defined ``distance'' between any two elements.
+Mathematically, a metric space abstracts a few basic properties of Euclidean space.
+Formally, a metric space $(X,d)$ is a set $X$ and a function $d$ called a metric.
 \begin{definition}
 A \defn{metric space}{metric} on a set $X$ is a function
 \begin{equation*}
@@ -108,8 +108,13 @@ Therefore, $x_1,x_2,\ldots$ is a Cauchy sequence.
 
 \begin{example}
 Let $(X,d)$ be the metric space  of rational numbers defined by $X=\mathbb{Q}$ and $d(x,y)=|x-y|$.
-The sequence $x_n = \left( 1 + \frac{1}{n} \right)^n \in \mathbb{Q} $ is Cauchy but it does not converge in $(X,d)$ because its limit point is the real number $e \notin \mathbb{Q}$.
+The sequence $x_1 = 2$, $x_{n+1} = \frac{1}{2}x_n + \frac{1}{x_n}$ satisfies $x_n \in \mathbb{Q} $ and, using $x_{n+1} - \sqrt{2} = \frac{1}{2x_n}(x_n-\sqrt{2})^2$, one can show it is Cauchy. But, it does not converge in $(X,d)$ because its limit point is the irrational number $\sqrt{2} \notin \mathbb{Q}$.
 \end{example}
+
+%\begin{example}
+%Let $(X,d)$ be the metric space  of rational numbers defined by $X=\mathbb{Q}$ and $d(x,y)=|x-y|$.
+%The sequence $x_n = \left( 1 + \frac{1}{n} \right)^n \in \mathbb{Q} $ is Cauchy but it does not converge in $(X,d)$ because its limit point is the real number $e \notin \mathbb{Q}$.
+%\end{example}
 
 \subsection{Metric Topology}
 
@@ -156,6 +161,14 @@ For any metric space $(X,d)$,
 \begin{proof}[Sketch of proof]
 Using the definition of closed, one can apply De Morgan's Laws to Theorem~\ref{theorem:d_open_closure} verify this result.
 \end{proof}
+
+Actually, the sets $\emptyset$ and $X$ are both open and closed.
+Such sets are called \textbf{clopen}.
+For a non-trivial example, consider the standard metric space of rational numbers and choose $W = \{x\in \mathbb{Q}\,|\, x< \sqrt{2}\}$.
+This set is open because, for all $x\in W$, we have $B(x,\sqrt{2}-x)\subseteq W$.
+Since $\sqrt{2}\notin \mathbb{Q}$, it follows that $U = \{x\in \mathbb{Q}\,|\, x\geq \sqrt{2}\}=\{x\in \mathbb{Q}\,|\, x> \sqrt{2}\}$ which is open by the same argument.
+But $\Complement{U} = W$, so $W$ is also closed.
+
 
 \begin{definition}
 For any metric space $(X,d)$ and subset $W \subseteq X$, a point $w\in W$ is in the \defn{metric space}{interior} of $W$ if there is a $\delta >0$ such that, for all $x\in X$ with $d(x,w)<\delta$, it follows that $x\in W$.
@@ -225,7 +238,7 @@ In precise mathematical notation, one has
 \end{definition}
 
 \begin{definition}
-The function $f$ is called \defn{metric space}{uniformly continuous} if it continuous and, for all $\epsilon > 0$, the $\delta >0$ can be chosen independently of $x_0$.
+The function $f$ is called \defn{metric space}{uniformly continuous} if it is continuous and, for all $\epsilon > 0$, the $\delta >0$ can be chosen independently of $x_0$.
 In precise mathematical notation, one has
 \begin{equation*}
 \begin{split}
@@ -307,32 +320,42 @@ f_n(t) \triangleq \left\{ \begin{array}{ll}
 \end{array} \right\}
 \end{equation*}
 
-Assuming that $m \geq n$, we get
+Assuming that $m \geq n$, a bit of calculus shows that
 \begin{equation*}
 d(f_n, f_m) = \left\| f_n(t) - f_m(t) \right\|_2
 = \left( \int_{-1}^1 |f_n(t) - f_m(t)|^2 dt \right)^{\frac{1}{2}}
 = \frac{(m-n)^2}{6m^2n}.
 \end{equation*}
-This sequence satisfies the Cauchy criterion, but it does not converge to a continuous function in $C[-1,1]$.
+Since $m\geq n$, this distance is upper bounded by $\frac{1}{6n}$ and the sequence satisfies the Cauchy criterion.
+But, it does not converge to a continuous function in $C[-1,1]$.
 \end{example}
 
 \begin{definition}
-A metric space $(X,d)$ is said to be \defn{metric space}{complete} if every Cauchy sequence in $X$ converges to a limit $x \in X$.
+A metric space $(X,d)$ is said to be \defn{metric space}{complete} if every Cauchy sequence in $(X,d)$ converges to a limit $x \in X$.
 \end{definition}
 
-\begin{example}
-Any closed subset of $\mathbb{R}^n$ (or $\mathbb{C}^n$) is complete.
-\end{example}
+The standard metric space of real numbers with absolute distance is a complete metric space.
+This fact and other foundational properties of the real numbers can be derived formally using the techniques described below.
+However, a formal construction of the real numbers will not be provided in these notes.
+
+%\begin{example}
+%Any closed subset of $\mathbb{R}^n$ (or $\mathbb{C}^n$) is complete.
+%\end{example}
 
 \begin{example}
-Consider the sequence $x_n \in \mathbb{Q}$ defined by $x_n = \left( 1 + \frac{1}{n} \right)^n$.
-It is well-known that this sequence converges to $e\in \mathbb{R}$, but this number is not rational.
-Therefore, the rational numbers $\mathbb{Q}$ are not complete.
+Consider the sequence $x_1 = 2$, $x_{n+1} = \frac{1}{2}x_n + \frac{1}{x_n}$ and observe that $x_n \in \mathbb{Q}$ for all $n\in \mathbb{N}$.
+We saw earlier that $x_n$ is a Cauchy sequence with limit point $\sqrt{2} \in \mathbb{R}$.
+But, $\sqrt{2}$ is irrational and thus the rational numbers $\mathbb{Q}$ are not complete.
 \end{example}
 
 \begin{theorem}
 A closed subset $A$ of a complete metric space $X$ is itself a complete metric space.
 \end{theorem}
+\begin{proof}
+Any Cauchy sequence $x_1,x_2,\ldots \in A$ is also a Cauchy sequence in $X$.
+This implies that $x_n \to x \in X$ and it follows that $x \in \Closure{A}$.
+Since $A$ is closed, $x\in A$.
+\end{proof}
 
 \begin{definition}
 An \defn{metric space}{isometry} is a mapping $\phi  \colon X \rightarrow Y$ between two metric spaces $(X,d_X)$ and $(Y,d_Y)$ that is distance preserving (i.e., it satisfies $d_X (x,x') = d_Y \left(\phi(x),\phi(x')\right)$ for all $x,x'\in X$).
@@ -373,7 +396,7 @@ Let $A$ be a subset of a metric space $(X,d)$ and $f \colon X \rightarrow X$ be 
 Then, $f$ is a \defn{metric space}{contraction} on $A$ if $f(A) \subseteq A$ and there exists a constant $\gamma < 1$ such that $d \left( f(x),f(y) \right) \leq \gamma  d(x,y)$ for all $x,y\in A$.
 \end{definition}
 
-Consider the following important results in applied mathematics: Picard's theorem for differential equations, the implicit function theorem, and Bellman's principle of optimality for Markov decision processes.
+Consider the following important results in applied mathematics: Picard's uniqueness theorem for differential equations, the implicit function theorem, and the existence of stationary optimal policies for Markov decision processes.
 What do they have in common?
 They each establish the existence and uniqueness of a function and have relatively simple proofs based on the contraction mapping theorem.
 
@@ -455,16 +478,16 @@ Then, there is a subsequence $x_{n_1},x_{n_2},\ldots$, defined by some increasin
 \begin{proof}
 We proceed by recursively constructing subsequences $z^{(k)}_n$ starting from $z^{(0)}_n = x_n$.
 Since $X$ is totally bounded, let $C_k \subset X$ be the centers of a finite set of balls with radius $2^{-k}$ that cover $X$ (i.e., $\cup_{x\in C_k} B(x,2^{-k}) = X$).
-Then, one of these balls (say centered at $x'$) must contain infinitely many elements in $z^{(k-1)}_n$ (i.e., $\exists x' \in C_k, \,|\{n\in \mathbb{N}\,|\,z^{(k-1)}_n \in B(x',2^{-k})\}|=\infty$.
+Then, one of these balls (say centered at $x'$) must contain infinitely many elements in $z^{(k-1)}_n$ (i.e., $\exists x' \in C_k, \,|\{n\in \mathbb{N}\,|\,z^{(k-1)}_n \in B(x',2^{-k})\}|=\infty$).
 Next, we extract the subsequence contained in this ball by choosing $z^{(k)}_n$ to be the subsequence of $z^{(k-1)}_n$ contained in $B(x',2^{-k})$.
 From the triangle inequality, it follows that $d(y,y')<2(2^{-k})$ for all $y,y'\in B(x',2^{-k})$.
 Thus, $d(z^{(k')}_m,z^{(k)}_n) < 2^{-k+1}$ for all $m>n\geq 1$ and $k'\geq k \geq 1$.
 
 Let $I(k,n)$ be the index in the original sequence associated with $z^{(k)}_n$.
-Since each stage only removes elements from the previous subsequence and relabels, it follows that $I(k+1,k+1) > I(k,k)$.
+Since each stage only removes elements from the previous subsequence and relabels, it follows that $I(k+1,k+1) \geq I(k,k+1) > I(k,k)$.
 This implies that the sequence $y_k = z^{(k)}_k = x_{I(k,k)}$ is a subsequence of $x_n$ and
 $d(y_m,y_k) \leq 2^{-k+1}$ for all $m>k$ and $k\geq1$.
-Thus, for any $\epsilon >0$, one can choose $N(\epsilon) = \lceil \log_2 \frac{1}{\epsilon} \rceil + 1$ to verify that $y_k$ is a Cauchy sequence.
+Thus, for any $\epsilon >0$, choosing $N = \lceil \log_2 \frac{1}{\epsilon} \rceil + 1$ shows that $y_k$ is a Cauchy sequence.
 Since $X$ is complete, it follows that $y_k$ converges to some $y\in X$.
 \iffalse
 There is a subsequence that converges  if and only if there is an $x\in X$ such that, for all $\epsilon>0$, the ball $B(x,\epsilon)$ contains infinitely many elements in the sequence (i.e., $|\{n\in \mathbb{N}\,|\,x_n \in B(x,\epsilon)\}|=\infty$).

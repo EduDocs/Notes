@@ -8,7 +8,6 @@
 \usepackage{enumerate}
 \usepackage{stfloats}
 \usepackage{bbm}
-%\usepackage{movie15}
 \usepackage{pdfpages}
 \usepackage{framed}
 
@@ -620,8 +619,9 @@ F & F & F & F & T & F & T & F & T & T \\
   \item For set $A$, the \textcolor{blue}{cardinality} $|A|$ is the number of elements in $A$
   \[ |\{ a,e,i,o,u \}| = 5 \]
   \item If there is a one-to-one correspondence between $A$ and the natural numbers $\mathbb{N}$, then $A$ is called \textcolor{blue}{countably infinite} and  $|A| = \infty$
+  \item Ex. Set of \textcolor{blue}{rational numbers $\mathbb{Q} \triangleq \{ q \in \mathbb{R} \,|\, \exists n \in \mathbb{N}, nq \in \mathbb{Z} \}$} is countably infinite (e.g., list rationals $m/n$ with $|m|\leq n^2$)
   \item If $|A| = \infty$ but not countably infinite, then $A$ is \textcolor{blue}{uncountably infinite}
-  \item Ex. Set of \textcolor{blue}{rational numbers $\mathbb{Q} \triangleq \{ q \in \mathbb{R} \,|\, \exists z \in \mathbb{Z}, qz \in \mathbb{Z} \}$} is countably infinite but set of real numbers is uncountably infinite
+  \item Ex. The set of real numbers is uncountably infinite by Cantor's diagonal argument
   
 \end{itemize}
 \end{itemize}
@@ -751,7 +751,7 @@ F & F & F & F & T & F & T & F & T & T \\
 \begin{example}[Russell's Paradox]
 Let $R = \{S|S\notin S\}$ be the set of all sets that do not contain themselves.
 This set exists in naive set theory (though it may empty) because it is described by the above sentence.
-The paradox arises from the fact that this definition leads to the logical contradiction: $R\in R \leftrightarrow R\notin R$.
+The paradox arises from the fact that this definition leads to the logical contradiction: $R\notin R \leftrightarrow R\in R$.
 \end{example}
 
 \vspace{5mm}
@@ -798,9 +798,9 @@ A \textcolor{blue}{relation} $\sim$ between elements of $A$ is defined by the su
   \item Ex. let $A$ be a set of people and $P(x,y)$ be the statement: \\ \textcolor{blue}{``$x$ has the same birthday (month and day) as $y$''}
   \item Define \textcolor{blue}{relation $\sim$} such that \textcolor{blue}{$a\sim b$} holds iff $P(x,y)$ is true
   %\item For this, $E = \{ (x,y)\in A\times A | P(x,y) \}$
-  \item Partitions $A$ into disjoint \textcolor{blue}{equivalence classes}: $[a] = \left\{x\in A | x \sim a\right\}$
-  \item In example, equivalence classes identify each day of the year
-  \item Set of equivalence classes called the \textcolor{blue}{quotient set}: $A \setminus \!\sim \;= \{ [a] | a\in A \}$
+  \item Partitions $A$ into disjoint \textcolor{blue}{equivalence classes}: $[a] \triangleq \left\{x\in A | x \sim a\right\}$
+  \item This example has an equivalence class for each possible day in a year
+  \item Set of equivalence classes called the \textcolor{blue}{quotient set}: $A \setminus \!\sim \;\triangleq \{ [a] | a\in A \}$
 
 \end{itemize}
 \end{itemize}
@@ -812,7 +812,7 @@ A \textcolor{blue}{relation} $\sim$ between elements of $A$ is defined by the su
 
 \begin{definition}
 A \textcolor{blue}{function} $f \colon X \rightarrow Y$ from $X$ to $Y$ is defined by a subset $F \subset X \times Y$ such that $A_x = \{ y\in Y | (x,y)\in F \}$ has exactly one element for each $x\in X$.
-The \textcolor{blue}{value} of $f$ at $x\in X$ , \textcolor{blue}{denoted $f(x)$}, is the unique in $A_x$.
+The \textcolor{blue}{value} of $f$ at $x\in X$, \textcolor{blue}{denoted $f(x)$}, is unique element in $A_x$.
 \end{definition}
 \vspace{-4mm}
 
@@ -869,12 +869,12 @@ The \textcolor{blue}{value} of $f$ at $x\in X$ , \textcolor{blue}{denoted $f(x)$
 
 \begin{frame}{Applying Functions to Sets}
 
-\vspace{3mm}
+\vspace{4mm}
 \begin{definition}
 For $f \colon X\rightarrow Y$ and subset $A\subseteq X$, the \textcolor{blue}{image} of $A$ under $f$ is \vspace{-2mm}
 \[ f(A) \triangleq \{ y\in Y | \exists x\in A \textrm{ s.t. } f(x)=y\} = \{f(x) | x\in A\}. \]
 \end{definition}
-\vspace{1mm}
+\vspace{0mm}
 \begin{definition}
 The \textcolor{blue}{inverse image} or \textcolor{blue}{preimage} of a subset $B\subseteq Y$ is \vspace{-2mm}
 \[ f^{-1}(B) \triangleq \{ x\in X | f(x)\in B\}. \]

@@ -503,8 +503,8 @@ That is to say, $\sqrt{2}$ is irrational.
 
 \begin{example}
 Consider the following statement, which is related to Example~\ref{example:SquareRoot2}.
-``If $\sqrt{2}$ is rational, then it can be expressed as an irreducible fraction.''
-The contrapositive of this statement is ``If $\sqrt{2}$ cannot be expressed as an irreducible fraction, then it is not rational.''
+``If $\sqrt{2}$ is rational, then $\sqrt{2}$ can be expressed as an irreducible fraction.''
+The contrapositive of this statement is ``If $\sqrt{2}$ cannot be expressed as an irreducible fraction, then $\sqrt{2}$ is not rational.''
 Above, we proved that $\sqrt{2}$ cannot be expressed as an irreducible fraction and therefore $\sqrt{2}$ is not a rational number.
 \end{example}
 
@@ -532,8 +532,11 @@ For $P(n+1)$, we are given $P(n)$ and can write
 Thus, the result follows from mathematical induction.
 \end{example}
 
-\section{Set Theory}
+More general forms of finite induction are also quite common but they can reduced to the original form.
+For example, let $Q(m)$ be a predicate for $m\in \mathbb{N}$ and define $P(n) =$``$\forall m\in S_n, Q(m)$'' for a sequence nested finite sets $S_1 \subset S_2 \subset \cdots \subseteq \mathbb{N}$.
+Defining $S_\infty = \cup_{n\in \mathbb{N}} S_n$, we see that ``$\forall n\in\mathbb{N}, P(n)$''$\Leftrightarrow$``$\forall m\in S_\infty, Q(m)$'' follows from $P(1)=$``$\forall m\in S_1, Q(m)$'' and ``$P(n)\to P(n+1)$''$\Leftrightarrow$``$\forall m\in S_n, Q(m) \rightarrow \forall {m} \in S_{n+1}, Q(m)$''.
 
+\section{Set Theory}
 Set theory is generally considered to be the foundation of all modern mathematics.
 This means that most mathematical objects (numbers, relations, functions, etc.) are defined in terms of sets.
 Unfortunately for engineers, set theory is not quite as simple as it seems.
