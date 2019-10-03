@@ -233,19 +233,19 @@ Subset $W$ of $(X,d)$ is \textcolor{blue}{closed} if its complement $W^c = X-W$ 
 \end{theorem}
 
 \begin{center}
-\scalebox{0.7}{%}
+\scalebox{0.7}{%
 \begin{tikzpicture}[scale=0.8]
 \draw[very thick] (-0.5,-1.5) rectangle (3.5,2) node[below left=0.2cm and 0.2cm] {$X$};
 \draw [thick,dashed,fill=blue!10] plot [smooth cycle] coordinates {(0,0) (1,1) (3,1) (2,0) (2,-1)} node[above left=0.65cm and 0.15cm] {open};
 \end{tikzpicture}}
 \hspace{5mm}
-\scalebox{0.7}{%}
+\scalebox{0.7}{%
 \begin{tikzpicture}[scale=0.8]
 \draw[very thick] (-0.5,-1.5) rectangle (3.5,2) node[below left=0.2cm and 0.2cm] {$X$};
 \draw [thick,fill=blue!10] plot [smooth cycle] coordinates {(0.5,0) (1,1.5) (2.5,1) (2.5,0) (1.5,-1)} node[above left=0.75cm and -0.6cm] {closed};
 \end{tikzpicture}}
 \hspace{5mm}
-\scalebox{0.7}{%}
+\scalebox{0.7}{%
 \begin{tikzpicture}[scale=0.8]
 \draw[very thick] (-0.5,-1.5) rectangle (3.5,2) node[below left=0.2cm and 0.2cm] {$X$};
 %\clip (1,1) circle(0.5);
@@ -257,6 +257,7 @@ Subset $W$ of $(X,d)$ is \textcolor{blue}{closed} if its complement $W^c = X-W$ 
 
 \end{frame}
 
+
 \begin{frame}{Interior, Limit points, and Closure}
 
 For a metric space $(X,d)$ and subset $W \subseteq X$:
@@ -266,7 +267,7 @@ A point $w\in W$ is in the \textcolor{blue}{interior} of $W$ (denoted $\Interior
 \end{definition}
 
 \begin{definition}
-A point $w\in W$ is a \textcolor{blue}{limit point} of $W$ if there is a sequence of distinct elements, $w_1,w_2,\ldots\in W$, that converges to $w$.
+A point $w\in X$ is a \textcolor{blue}{limit point} of $W$ if there is a sequence of distinct elements, $w_1,w_2,\ldots\in W$, that converges to $w$.
 \end{definition}
 
 \begin{definition}

@@ -60,7 +60,7 @@ a_{21} x_1 & + & a_{22} x_2 & + & \cdots & + & a_{2n} x_n & = & y_2 \\
 a_{m1} x_1 & + & a_{m2} x_2 & + & \cdots & + & a_{mn} x_n & = & y_m
 \end{array}
 \end{equation}
-where $\{ y_i : 1 \leq i \leq n \} \subset F$ and $\{ a_{ij} : 1 \leq i \leq m, 1 \leq j \leq n \} \subset F$.
+where $y_1,\ldots,y_n \in F$ and $a_{ij} \in F$ for $1 \leq i \leq m$ and $1 \leq j \leq n$.
 These conditions form a \emph{system of $m$ linear equations in $n$ unknowns}.
 A shorthand notation for~\eqref{equation:SystemOfEquations} is the matrix equation
 \begin{equation*}
@@ -330,10 +330,12 @@ Result (ii) for each vector follows from (i) for the same vector because, for ex
 
 \begin{definition}
 Let $V$ be a vector space over $F$.
-Let $\mathcal{B} = \left\{ \vecnot{v}_{\alpha} | \alpha \in A \right\}$ be a subset of linearly independent vectors from $V$ such that every $\vecnot{v} \in V$ has a unique decomposition as a finite linear combination of vectors from $\mathcal{B}$.
+Let $\mathcal{B} = \left\{ \vecnot{v}_{\alpha} | \alpha \in A \right\}$ be a subset of linearly independent vectors from $V$ such that every $\vecnot{v} \in V$ can be written as a finite linear combination of vectors from $\mathcal{B}$.
 Then, the set $\mathcal{B}$ is a \defn{vector space}{Hamel basis} for $V$.
 The space $V$ is \defn{vector space}{finite-dimensional} if it has a finite basis.
 \end{definition}
+
+Using this definition, we note that a basis decomposition $\vecnot{v} = \sum_{i=1}^n s_i \vecnot{v}_{\alpha_i}$ must be unique because the difference between any two distinct decompositions produces a finite linear dependency in the basis and, hence, a contradiction.
 
 \begin{theorem}
 Every vector space has a Hamel basis.
@@ -365,22 +367,27 @@ Accordingly, the set $U$ is a basis for $F^{n \times 1}$.
 This basis is termed the \defn{vector space}{standard basis} of $F^n$.
 \end{example}
 
-\begin{example}
-Let $A$ be an invertible matrix over $F$.
-Then, the columns of $A$, denoted by $\vecnot{a}_1, \ldots, \vecnot{a}_n$, form a basis for the space of column vectors $F^{n \times 1}$.
-This can be seen as follows.
+\begin{lemma}
+Let $A\in F^{n \times n}$ be an invertible matrix.
+Then, the columns of $A$ form a basis for $F^n$.
+Similarly, the rows of $A$ will also form a basis for $F^n$
+\end{lemma}
+\begin{proof}
 If $\vecnot{v} = (v_1, \ldots, v_n)^T$ is a column vector, then
 \begin{equation*}
-A \vecnot{v} = \sum_{i=1}^n v_i \vecnot{a}_i.
+A \vecnot{v} = \sum_{i=1}^n v_i \vecnot{a}_i,
 \end{equation*}
+where the columns of $A$ are denoted by $\vecnot{a}_1, \ldots, \vecnot{a}_n$.
 Since $A$ is invertible,
 \begin{equation*}
 A \vecnot{v} = \vecnot{0} \implies I \vecnot{v} = A^{-1} \vecnot{0} \implies \vecnot{v} = \vecnot{0}.
 \end{equation*}
 Thus, $\{ \vecnot{a}_1, \ldots, \vecnot{a}_n \}$ is a linearly independent set.
 Next, for any column vector $\vecnot{w} \in F^n$, let $\vecnot{v} = A^{-1} \vecnot{w}$.
-It follows that $\vecnot{w} = A \vecnot{v}$ and, as a consequence, $\{ \vecnot{a}_1, \ldots, \vecnot{a}_n \}$ is a basis for $F^n$.
-\end{example}
+It follows that $\vecnot{w} = A \vecnot{v}$ and, thus, $\{ \vecnot{a}_1, \ldots, \vecnot{a}_n \}$ is a basis for $F^n$.
+If $A$ is invertible, then $(A^T)^{-1}$ exists.
+Thus, the same holds for the rows.
+\end{proof}
 
 \begin{theorem} \label{thm:unique_dim}
 Let $V$ be a finite-dimensional  vector space that is spanned by a finite set of vectors $W = \left\{ \vecnot{w}_1, \ldots, \vecnot{w}_n \right\}$.
@@ -427,22 +434,36 @@ Alternatively, it can be argue that the empty set $\emptyset$ spans $\left\{ \ve
 Though this is only a minor point.
 
 \begin{theorem}
-Let $A$ be an $n \times n$ matrix over $F$ and suppose that the columns of $A$, denoted by $\vecnot{a}_1, \ldots, \vecnot{a}_n$, form a linearly independent set of vectors in $F^{n \times 1}$.
+Let $A$ be an $n \times n$ matrix over $F$ whose columns, denoted by $\vecnot{a}_1, \ldots, \vecnot{a}_n$, form a linearly independent set of vectors in $F^{n}$.
 Then $A$ is invertible.
 \end{theorem}
 \begin{proof}
-Suppose that $W$ is the subspace of $F^{n \times 1}$ spanned by $\vecnot{a}_1, \ldots, \vecnot{a}_n$.
-Since $\vecnot{a}_1, \ldots, \vecnot{a}_n$ are linearly independent, $\dim(W) = n = \dim(F^{n \times 1})$.
-It follows that $W = V$ and, as a consequence, there exist scalars $b_{ij} \in F$ such that
+Let $W$ be the subspace of $V=F^n$ spanned by $\vecnot{a}_1, \ldots, \vecnot{a}_n$.
+Since $\vecnot{a}_1, \ldots, \vecnot{a}_n$ are linearly independent, $\dim(W) = n = \dim(V)$.
+Now, suppose $W \neq V$.
+Since $W \subseteq V$, that implies there is a vector $\vecnot{v} \in V$ such that $\vecnot{v} \notin W$.
+It follows that $\dim(V) > \dim(W)$ but this contradicts $\dim(V) = \dim(W)$.
+Thus, $W=V$.
+
+Since $W = V$, one can write the standard basis vectors  $\vecnot{e}_1,\ldots,\vecnot{e}_n \in F^n$ in terms of the columns of $A$.
+In particular, there exist scalars $b_{ij} \in F$ such that
 \begin{equation*}
-\vecnot{e}_j = \sum_{i=1}^n b_{ij} \vecnot{a}_i, \quad 1 \leq j \leq n
+\vecnot{e}_j = \sum_{i=1}^n b_{ij} \vecnot{a}_i, \quad 1 \leq j \leq n.
 \end{equation*}
-where $\left\{ \vecnot{e}_1, \ldots, \vecnot{e}_n \right\}$ is the standard basis for $F^{n \times 1}$.
-Then, for the matrix $B$ with entries $b_{ij}$, we have
-\begin{equation*}
-AB = I.
-\end{equation*}
-Note also that if the rows of $A$ form a linearly independent set of vectors in $F^{1 \times n}$ then $A$ is invertible.
+Then, for the matrix $B$ with entries $b_{ij}$, we have $AB = I$
+%\begin{equation*}
+%AB = I.
+%\end{equation*}
+
+Next, suppose that the columns of $B$ are linearly dependent.
+Then, there is a non-zero $\vecnot{v} \in F^n$ such that $B\vecnot{v} = \vecnot{0}$.
+But, that gives the contradiction that $A(B\vecnot{v}) = \vecnot{0}$ and $(AB)\vecnot{v} = I \vecnot{v} = \vecnot{v}$.
+Thus, the columns of $B$ are linearly independent.
+
+Using the first argument again, one finds that there is a matrix $C$ such that $BC = I$.
+This also implies that $A = AI = A(BC) = (AB)C = IC = C$.
+Thus, $A^{-1}$ exists and equals $B$.
+%If this is applied to $A^T$, one gets the same result if the rows of $A$ form a linearly independent set of vectors in $F^n$.
 \end{proof}
 
 
@@ -654,7 +675,7 @@ U \vecnot{w} = U \! \left( \sum_{\alpha \in A} s_{\alpha} (\vecnot{w}) \, \vecno
 From this, we see that $U \vecnot{w} = T \vecnot{w}$ for all $\vecnot{w} \in V$ and therefore that $U = T$.
 \end{proof}
 
-This theorem illuminates a very important structural element of linear transformations: they are uniquely defined by where they map an set of basis vectors for their domain.
+This theorem illuminates a very important structural element of linear transformations: they are uniquely defined by where they map a set of basis vectors for their domain.
 
 \iffalse
 \begin{theorem} \label{theorem:UniqueLinearTransformation}
