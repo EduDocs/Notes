@@ -3,6 +3,14 @@
 \usetheme{default}
 \setbeamertemplate{navigation symbols}{\textcolor{blue}{\insertframenumber ~/ \inserttotalframenumber}}
 
+\usepackage{xstring}
+\usepackage{pgfpages}
+\makeatletter
+\IfSubStr{\@classoptionslist}{handout}
+  {\pgfpagesuselayout{2 on 1}[letterpaper,border shrink=5mm]}
+  {}
+\makeatother
+
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{stmaryrd}
 \usepackage{enumerate}
@@ -104,7 +112,7 @@
 \date{September 4th -- 16th, 2019}
 \maketitle
 
-\begin{frame}{Introduction}
+\begin{frame}{2.1: Introduction}
 
 \begin{itemize}
 \setlength\itemsep{3mm}
@@ -137,7 +145,7 @@
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Useful Abstractions}
+\begin{frame}{2.1: Useful Abstractions}
 
 %\vspace*{-2mm}
 \hfill
@@ -178,7 +186,7 @@
 \end{frame}
 
 
-\begin{frame}{Convergence: Examples and Counterexamples}
+\begin{frame}{2.1: Convergence: Examples and Counterexamples}
 
 \begin{definition}
 A sequence $x_1,x_2,\ldots$ in $(X,d)$ is a \textcolor{blue}{Cauchy sequence} if, for any $\epsilon >0$, there is a natural number $N$ (depending on $\epsilon$) such that, for all $m,n > N$,\vspace{-2mm}
@@ -210,7 +218,7 @@ d \left( x_m, x_n \right) < \epsilon
 \end{frame}
 
   
-\begin{frame}{Metric Topology}
+\begin{frame}{2.1.1: Metric Topology}
 
 A topology is a collection of ``open'' sets satisfying certain properties
 
@@ -258,7 +266,7 @@ Subset $W$ of $(X,d)$ is \textcolor{blue}{closed} if its complement $W^c = X-W$ 
 \end{frame}
 
 
-\begin{frame}{Interior, Limit points, and Closure}
+\begin{frame}{2.1.1: Interior, Limit points, and Closure}
 
 For a metric space $(X,d)$ and subset $W \subseteq X$:
 
@@ -288,7 +296,7 @@ A point $x\in X$ is in the \textcolor{blue}{closure} of $W$ (denoted $\Closure{W
 \end{frame}
 
 
-\begin{frame}{Continuity}
+\begin{frame}{2.1.2: Continuity}
 
 Let $f \colon X \rightarrow Y$ be a function between metric spaces $(X,d_X)$ and $(Y,d_Y)$:
 
@@ -317,7 +325,7 @@ A function $f  \colon X \rightarrow Y$ is called \textcolor{blue}{Lipschitz cont
 \end{frame}
 
 
-\begin{frame}{Completeness}
+\begin{frame}{2.1.3: Completeness}
 
 \begin{definition}<1->
 A metric space $(X,d)$ is said to be \textcolor{blue}{complete} if every Cauchy sequence in $(X,d)$ converges to a limit $x \in X$.
@@ -342,7 +350,7 @@ This can be shown using Cauchy sequences of rational numbers because $\mathbb{Q}
 \end{frame}
 
 
-\begin{frame}{Contraction Mapping Theorem}
+\begin{frame}{2.1.3: Contraction Mapping Theorem}
 
 \begin{definition}<1->
 Let $A$ be a subset of a metric space $(X,d)$ and $f \colon X \rightarrow X$ be a function.
@@ -361,7 +369,7 @@ Then, $f$ has a unique fixed point $x^*$ in $A$ such that $f(x^*) = x^*$ and $x_
 
 \end{frame}
 
-\begin{frame}{Applications of the Contraction Mapping Theorem}
+\begin{frame}{2.1.3: Applications of the Contraction Mapping Theorem}
 
 The following important results in applied mathematics have relatively simple proofs based on the contraction mapping theorem.
 \vspace{2mm}
@@ -393,7 +401,7 @@ The following important results in applied mathematics have relatively simple pr
 
 \end{frame}
 
-\begin{frame}{Contraction Mapping Example}
+\begin{frame}{2.1.3: Contraction Mapping Example}
 
 \begin{minipage}{0.45\textwidth}
 Starting from $x_1 = 0.2$, define $x_{n+1}= \cos(x_n)$ and plot the points $(x_n,x_{n+1})$.  Each point is connected to the slope-1 line to emphasize the path taken.
@@ -422,7 +430,7 @@ Starting from $x_1 = 0.2$, define $x_{n+1}= \cos(x_n)$ and plot the points $(x_n
 
 
 
-\begin{frame}{Compactness}
+\begin{frame}{2.1.4: Compactness}
 
 \begin{definition}<1->
 A metric space $(X,d)$ is \textcolor{blue}{totally bounded} if, for any $\epsilon > 0$, there exists a finite set of $B_d (x,\epsilon)$ balls that cover (i.e., whose union equals) $X$.
@@ -450,7 +458,7 @@ A closed subset $A$ of a compact space $X$ is itself a compact space.
 
 \end{frame}
 
-\begin{frame}{Compactness and Sequences}
+\begin{frame}{2.1.4: Compactness and Sequences}
 
 \begin{definition}<1->
 Let $x_1,x_2,\ldots \in X$ be a sequence and $n_1,n_2,\ldots\in \mathbb{N}$ be
@@ -473,7 +481,7 @@ Then, subsequence $x_2,x_4,x_6,\ldots$ converges to 1.
 
 \end{frame}
 
-\begin{frame}{Properties of Real Numbers}
+\begin{frame}{2.1.4: Properties of Real Numbers}
 
 \begin{itemize}
 \setlength\itemsep{3mm}
@@ -505,7 +513,7 @@ Then, there exists a sequence $x_1,x_2,\ldots \in A$ such that $\lim_n f(x_n) = 
 \end{frame}
 
 
-\begin{frame}{More Properties of Real Numbers}
+\begin{frame}{2.1.4: More Properties of Real Numbers}
 
 \begin{definition}<1->
 The \textcolor{blue}{maximum} of $X\subseteq \RealNumbers$, denoted \textcolor{blue}{$\max X$}, is the largest value achieved by the set.
@@ -532,7 +540,7 @@ Any bounded non-decreasing sequence of real numbers converges to its supremum.
 \end{frame}  
 
 
-\begin{frame}{Sequences of Functions}
+\begin{frame}{2.1.5: Sequences of Functions}
 
 Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces and
 $f_n \colon X \to Y$ for $n\in \mathbb{N}$ be a sequence of functions mapping $X$ to $Y$.
@@ -554,7 +562,7 @@ If each $f_n$ is continuous and $f_n$ converges uniformly to $f \colon X \to Y$,
 
 \end{frame}
 
-\begin{frame}{Two Important Results}
+\begin{frame}{2.1.5: Two Important Results}
 
 \begin{theorem}
 Let $X$ be a metric space and $f \colon X\rightarrow \RealNumbers$ be a continuous function from $X$ to $\mathbb{R}$.
@@ -565,112 +573,12 @@ If $A$ is a compact subset of $X$, then there exists $x\in A$ such that $f(x)=\s
 
 \begin{theorem}
 Let $(X,d)$ be a compact metric space and $C(X)$ be the set of continuous functions mapping $X$ to $\mathbb{R}$.
-This set of functions, with the metric \vspace{-1.5mm} \[d_\infty (f,g)=\max_{x\in X} |f(x)-g(x)|, \vspace*{-1.5mm}\] defines a complete metric space.
+This set of functions, with the metric \vspace{-1.5mm} \[d_\infty (f,g) \triangleq \sup_{x\in X} |f(x)-g(x)| = \max_{x\in X} |f(x)-g(x)|, \vspace*{-1.5mm}\] defines a complete metric space.
 \end{theorem}
 
 Note: For $f,g\in C(X)$, $d_\infty$ metrizes uniform convergence because \vspace{-1.5mm} \[ \text{``}\max_{x\in X} |f(x)-g(x)| < \epsilon \text{''} \Leftrightarrow \text{``} \forall x\in X, |f(x) - g(x)| < \epsilon \text{''}. \]
 
 \end{frame}
-
-%\begin{frame}{Quantifiers}
-%
-%\vspace{3mm}
-%\hspace*{55mm}
-%\input{myfigs/mlp2}
-%\vspace{-22mm}
-%
-%\begin{itemize}
-%\item<1-> Neural network
-%
-%\begin{itemize}
-%	\item function $f_\theta$ from $\mathcal{X}=\mathbb{R}^n$ to $\mathcal{Y} = \mathbb{R}^d$ \vspace{1mm}
-%	%\item \textcolor{snowymint}{function $f_\theta$} from \textcolor{sail}{$\mathcal{X}=\mathbb{R}^n$} to \textcolor{}{$\mathcal{Y} = \mathbb{R}^d$} \vspace{1mm}
-%	%\item $z^{\ell+1} = \sigma ( W_{\ell} z^{\ell} )$
-%	\item weights represented by $\theta \in \mathbb{R}^p$ \vspace{1mm}
-%\end{itemize}
-%
-%\vspace{1mm}
-%
-%\item<2-> Training set  
-%
-%\begin{itemize}
-%	\item Set of tuples $(x,y) \in \mathcal{X} \times \mathcal{Y}$ \vspace{1mm}
-%	\item For classification into $d$ classes, let $y\in \mathcal{Y}$ be a one-hot vector \vspace{1mm}
-%	\item Entire training set denoted $\mathcal{D} \subset \mathcal{X} \times \mathcal{Y}$ \vspace{1mm}
-%\end{itemize}
-%
-%\only<3->{\vspace{-2.5mm}
-%\hspace*{62mm}
-%%\includegraphics[width=1.75in]{webfigs/vgg56noshort.png}
-%\vspace{-36mm}}
-%
-%\item<3-> Loss function  
-%
-%\begin{itemize}
-%\vspace{1mm}
-%	\item Cross entropy: $L (y,\hat{y}) \triangleq - \sum_{i=1}^d y_i \ln \hat{y}_i$ \vspace{1mm}
-%	\item Loss for entire training set is
-%	\\[-2mm] \[ \hspace*{-32mm} \mathcal{L}_{\mathcal{D}} (\theta) \triangleq \frac{1}{|\mathcal{D}|}\sum_{(x,y) \in \mathcal{D}} L (y,f_\theta (x)) \]
-%	\item note: assume $f_\theta (x) \in \mathbb{R}^d$ non-negative and sums to 1 
-%\end{itemize}
-%
-%
-%\end{itemize}
-%
-%\let\thefootnote\relax\footnotetext{\hspace*{-4mm}  {\tiny Loss landscape taken from \url{https://www.cs.umd.edu/~tomg/img/landscapes/noshort.png} \cite{Li-nips18}}}
-%
-%\end{frame}
-%
-%\begin{frame}{Neural Network Training}
-%
-%\vspace{4mm}
-%
-%\hspace*{62mm}
-%%\includegraphics[width=2in]{myfigs/gradient.pdf}
-%\vspace{-46mm}
-%
-%\begin{itemize}
-%
-%\item<1-> Loss $\mathcal{L}_\mathcal{D} (\theta)$ \textcolor{blue}{landscape} 
-%
-%\begin{itemize}
-%    \item Adjust $\theta \in \mathbb{R}^p$ to minimize loss \vspace{1mm} 
-%    \item Gradient vector $\nabla \mathcal{L}_\mathcal{D} (\theta)$ gives \\ $\theta$ direction of maximum increase \vspace{1mm}
-%
-%\end{itemize}
-%
-%\vspace{2mm}
-%
-%%\only<2->{\hspace*{65mm}
-%%\includegraphics[width=2.0in]{webfigs/gradient_descent.jpg}
-%%\vspace{-34mm}}
-%
-%\item<2-> Gradient descent (GD) and SGD
-%
-%\begin{itemize}
-%	%\item Full differential: $\frac{d}{dt} \theta_t = - \nabla \mathcal{L} (\theta_t )$  \vspace{1mm}
-%	\item full-batch: $\theta_{t + 1} = \theta_t-\eta \, \nabla \mathcal{L}_\mathcal{D} (\theta_t )$  \vspace{1mm}
-%	\item \textcolor{blue}{mini-batch}: subset $\mathcal{S}_t \! \subset \! \mathcal{D}$ with $|\mathcal{S}_t|=m$ \\[-2mm] \[ \hspace*{-35mm} \theta_{t + 1} = \theta_t-\eta \, \nabla \mathcal{L}_{\mathcal{S}_t} (\theta_t ) \]  \vspace{1mm}
-%\end{itemize}
-%
-%\vspace{-5.5mm}
-%
-%\item<3-> Generalization
-%
-%\begin{itemize}
-%	\item The test set $\mathcal{T} \subset \mathcal{X} \times \mathcal{Y}$ contains held-out training data \vspace{1mm}
-%	
-%	\item Actual goal is to \textcolor{red}{minimize $\mathcal{L}_\mathcal{T}(\theta)$ without knowing $\mathcal{T}$!} \vspace{1mm}
-%	
-%\end{itemize}
-%
-%\end{itemize}
-%
-%%\let\thefootnote\relax\footnotetext{\hspace*{-4mm} {\tiny Figure: \url{https://reconsider.news/2018/05/09/ai-researchers-allege-machine-learning-alchemy/}} }
-%
-%\end{frame}
-
-
 
 \backupbegin
 

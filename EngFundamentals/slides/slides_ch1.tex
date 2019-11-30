@@ -3,6 +3,14 @@
 \usetheme{default}
 \setbeamertemplate{navigation symbols}{\textcolor{blue}{\insertframenumber ~/ \inserttotalframenumber}}
 
+\usepackage{xstring}
+\usepackage{pgfpages}
+\makeatletter
+\IfSubStr{\@classoptionslist}{handout}
+  {\pgfpagesuselayout{2 on 1}[letterpaper,border shrink=5mm]}
+  {}
+\makeatother
+
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{stmaryrd}
 \usepackage{enumerate}
@@ -104,7 +112,7 @@
 \date{August 28th, 2019 \\ September 2nd, 2019}
 \maketitle
 
-\begin{frame} \frametitle{Introduction}
+\begin{frame} \frametitle{1.1: Introduction}
 
 \begin{itemize}
 \item \textcolor{blue}{Statement} (or proposition)
@@ -139,7 +147,7 @@
 
 \end{frame}
 
-\begin{frame} \frametitle{Basic Definitions}
+\begin{frame} \frametitle{1.1: Basic Definitions}
 
 \begin{itemize}
 
@@ -208,7 +216,7 @@
 
 \end{frame}
 
-\begin{frame} \frametitle{Conditional Statements (1)}
+\begin{frame} \frametitle{1.2: Conditional Statements (1)}
 
 \begin{itemize}
 
@@ -252,7 +260,7 @@ If it rains and they don't ride their bike, most people would agree that they ha
 
 \end{frame}
 
-\begin{frame} \frametitle{Conditional Statements (2)}
+\begin{frame} \frametitle{1.2: Conditional Statements (2)}
 
 \begin{itemize}
 
@@ -297,7 +305,7 @@ If it rains and they don't ride their bike, most people would agree that they ha
 \end{frame}
 
   
-\begin{frame} \frametitle{Compound Statements}
+\begin{frame} \frametitle{1.2: Compound Statements}
   
 
 \begin{itemize}
@@ -330,7 +338,7 @@ F & F & F & F & T & F & T & F & T & T \\
 \end{frame}
 
 
-\begin{frame} \frametitle{Meta Statements}
+\begin{frame} \frametitle{1.2: Meta Statements}
   
 
 \begin{itemize}
@@ -376,7 +384,7 @@ F & F & F & F & T & F & T & F & T & T \\
 \end{frame}
 
 
-\begin{frame}{Quantifiers}
+\begin{frame}{1.2.2: Quantifiers}
 
 \begin{itemize}
 \setlength\itemsep{3mm}
@@ -412,7 +420,7 @@ F & F & F & F & T & F & T & F & T & T \\
 
 \end{frame}
 
-\begin{frame}{Multiple Quantifiers}
+\begin{frame}{1.2.2: Multiple Quantifiers}
 
 
 
@@ -499,7 +507,7 @@ F & F & F & F & T & F & T & F & T & T \\
 
 \end{frame}
 
-\begin{frame}{Strategies for Proofs}
+\begin{frame}{1.3: Strategies for Proofs}
 
 \begin{itemize}
 \setlength\itemsep{3mm}
@@ -531,7 +539,7 @@ F & F & F & F & T & F & T & F & T & T \\
 
 \end{frame} 
 
-\begin{frame}{Set Theory}
+\begin{frame}{1.4: Set Theory}
 
 \begin{itemize}
 \setlength\itemsep{3mm}
@@ -556,7 +564,7 @@ F & F & F & F & T & F & T & F & T & T \\
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Using Set Theory}
+\begin{frame}{1.4: Using Set Theory}
 
 \begin{itemize}
 \setlength\itemsep{3mm}
@@ -601,7 +609,7 @@ F & F & F & F & T & F & T & F & T & T \\
 \end{frame}
 \fi
 
-\begin{frame}{Set Properties}
+\begin{frame}{1.4: Set Properties}
 
 \begin{itemize}
 \setlength\itemsep{3mm}
@@ -638,7 +646,7 @@ F & F & F & F & T & F & T & F & T & T \\
 
 \setlength{\parskip}{5mm}
 
-\begin{frame}{Venn Diagrams*}
+\begin{frame}{1.4: Venn Diagrams*}
 
 % Sets A , B
 \begin{tikzpicture}
@@ -679,7 +687,7 @@ F & F & F & F & T & F & T & F & T & T \\
     
 \end{frame}
 
-\begin{frame}{Relationships and Operations Between Sets*}
+\begin{frame}{1.4: Relationships and Operations Between Sets*}
 
 \begin{itemize}
 \setlength\itemsep{3mm}
@@ -713,7 +721,7 @@ F & F & F & F & T & F & T & F & T & T \\
 \end{frame}
 
 
-\begin{frame}{De Morgan, Infinite Unions, and Tuples}
+\begin{frame}{1.4: De Morgan, Infinite Unions, and Tuples}
 
 \begin{itemize}
 \setlength\itemsep{3mm}
@@ -746,7 +754,7 @@ F & F & F & F & T & F & T & F & T & T \\
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Foundations of Set Theory}
+\begin{frame}{1.4: Foundations of Set Theory}
 
 \begin{example}[Russell's Paradox]
 Let $R = \{S|S\notin S\}$ be the set of all sets that do not contain themselves.
@@ -772,7 +780,7 @@ The paradox arises from the fact that this definition leads to the logical contr
 \end{frame}
 
 
-\begin{frame}{Abstract Relations}
+\begin{frame}{1.4: Abstract Relations}
 
 \vspace{3mm}
 \begin{definition}
@@ -806,7 +814,7 @@ A \textcolor{blue}{relation} $\sim$ between elements of $A$ is defined by the su
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Functions}
+\begin{frame}{1.5: Functions}
 
 \vspace{3mm}
 
@@ -838,7 +846,7 @@ The \textcolor{blue}{value} of $f$ at $x\in X$, \textcolor{blue}{denoted $f(x)$}
 \end{itemize}
 \end{frame}  
 
-\begin{frame}{Properties of Functions}
+\begin{frame}{1.5: Properties of Functions}
 
 \begin{itemize}
 \setlength\itemsep{3mm}
@@ -860,14 +868,14 @@ The \textcolor{blue}{value} of $f$ at $x\in X$, \textcolor{blue}{denoted $f(x)$}
 \begin{itemize}
   \setlength\itemsep{1.5mm}
   \item A bijective function has a unique \textcolor{blue}{inverse function} $f^{-1} \colon Y\rightarrow X$ satisfying: $\forall x\in X, f^{-1}(f(x)) = x$ and $\forall y\in Y, f(f^{-1}(y)) = y$
-  \item Any one-to-one function $f \colon X\rightarrow Y$ defines a bijective function $g \colon X \rightarrow R$ with $g(x)=f(x)$ by choosing range $R$ to be codomain
+  \item Any one-to-one function $f \colon X\rightarrow Y$ defines a bijective function $g \colon X \rightarrow R$ where $R$ is the range of $f$ and $g(x)=f(x)$ for all $x\in X$
 
 \end{itemize}
 
 \end{itemize}
 \end{frame}    
 
-\begin{frame}{Applying Functions to Sets}
+\begin{frame}{1.5: Applying Functions to Sets}
 
 \vspace{4mm}
 \begin{definition}
@@ -897,106 +905,6 @@ The \textcolor{blue}{inverse image} or \textcolor{blue}{preimage} of a subset $B
 
 \end{frame}  
   
-%\begin{frame}{Quantifiers}
-%
-%\vspace{3mm}
-%\hspace*{55mm}
-%\input{myfigs/mlp2}
-%\vspace{-22mm}
-%
-%\begin{itemize}
-%\item<1-> Neural network
-%
-%\begin{itemize}
-%	\item function $f_\theta$ from $\mathcal{X}=\mathbb{R}^n$ to $\mathcal{Y} = \mathbb{R}^d$ \vspace{1mm}
-%	%\item \textcolor{snowymint}{function $f_\theta$} from \textcolor{sail}{$\mathcal{X}=\mathbb{R}^n$} to \textcolor{}{$\mathcal{Y} = \mathbb{R}^d$} \vspace{1mm}
-%	%\item $z^{\ell+1} = \sigma ( W_{\ell} z^{\ell} )$
-%	\item weights represented by $\theta \in \mathbb{R}^p$ \vspace{1mm}
-%\end{itemize}
-%
-%\vspace{1mm}
-%
-%\item<2-> Training set  
-%
-%\begin{itemize}
-%	\item Set of tuples $(x,y) \in \mathcal{X} \times \mathcal{Y}$ \vspace{1mm}
-%	\item For classification into $d$ classes, let $y\in \mathcal{Y}$ be a one-hot vector \vspace{1mm}
-%	\item Entire training set denoted $\mathcal{D} \subset \mathcal{X} \times \mathcal{Y}$ \vspace{1mm}
-%\end{itemize}
-%
-%\only<3->{\vspace{-2.5mm}
-%\hspace*{62mm}
-%%\includegraphics[width=1.75in]{webfigs/vgg56noshort.png}
-%\vspace{-36mm}}
-%
-%\item<3-> Loss function  
-%
-%\begin{itemize}
-%\vspace{1mm}
-%	\item Cross entropy: $L (y,\hat{y}) \triangleq - \sum_{i=1}^d y_i \ln \hat{y}_i$ \vspace{1mm}
-%	\item Loss for entire training set is
-%	\\[-2mm] \[ \hspace*{-32mm} \mathcal{L}_{\mathcal{D}} (\theta) \triangleq \frac{1}{|\mathcal{D}|}\sum_{(x,y) \in \mathcal{D}} L (y,f_\theta (x)) \]
-%	\item note: assume $f_\theta (x) \in \mathbb{R}^d$ non-negative and sums to 1 
-%\end{itemize}
-%
-%
-%\end{itemize}
-%
-%\let\thefootnote\relax\footnotetext{\hspace*{-4mm}  {\tiny Loss landscape taken from \url{https://www.cs.umd.edu/~tomg/img/landscapes/noshort.png} \cite{Li-nips18}}}
-%
-%\end{frame}
-%
-%\begin{frame}{Neural Network Training}
-%
-%\vspace{4mm}
-%
-%\hspace*{62mm}
-%%\includegraphics[width=2in]{myfigs/gradient.pdf}
-%\vspace{-46mm}
-%
-%\begin{itemize}
-%
-%\item<1-> Loss $\mathcal{L}_\mathcal{D} (\theta)$ \textcolor{blue}{landscape} 
-%
-%\begin{itemize}
-%    \item Adjust $\theta \in \mathbb{R}^p$ to minimize loss \vspace{1mm} 
-%    \item Gradient vector $\nabla \mathcal{L}_\mathcal{D} (\theta)$ gives \\ $\theta$ direction of maximum increase \vspace{1mm}
-%
-%\end{itemize}
-%
-%\vspace{2mm}
-%
-%%\only<2->{\hspace*{65mm}
-%%\includegraphics[width=2.0in]{webfigs/gradient_descent.jpg}
-%%\vspace{-34mm}}
-%
-%\item<2-> Gradient descent (GD) and SGD
-%
-%\begin{itemize}
-%	%\item Full differential: $\frac{d}{dt} \theta_t = - \nabla \mathcal{L} (\theta_t )$  \vspace{1mm}
-%	\item full-batch: $\theta_{t + 1} = \theta_t-\eta \, \nabla \mathcal{L}_\mathcal{D} (\theta_t )$  \vspace{1mm}
-%	\item \textcolor{blue}{mini-batch}: subset $\mathcal{S}_t \! \subset \! \mathcal{D}$ with $|\mathcal{S}_t|=m$ \\[-2mm] \[ \hspace*{-35mm} \theta_{t + 1} = \theta_t-\eta \, \nabla \mathcal{L}_{\mathcal{S}_t} (\theta_t ) \]  \vspace{1mm}
-%\end{itemize}
-%
-%\vspace{-5.5mm}
-%
-%\item<3-> Generalization
-%
-%\begin{itemize}
-%	\item The test set $\mathcal{T} \subset \mathcal{X} \times \mathcal{Y}$ contains held-out training data \vspace{1mm}
-%	
-%	\item Actual goal is to \textcolor{red}{minimize $\mathcal{L}_\mathcal{T}(\theta)$ without knowing $\mathcal{T}$!} \vspace{1mm}
-%	
-%\end{itemize}
-%
-%\end{itemize}
-%
-%%\let\thefootnote\relax\footnotetext{\hspace*{-4mm} {\tiny Figure: \url{https://reconsider.news/2018/05/09/ai-researchers-allege-machine-learning-alchemy/}} }
-%
-%\end{frame}
-
-
-
 \backupbegin
 
 %\begin{frame}

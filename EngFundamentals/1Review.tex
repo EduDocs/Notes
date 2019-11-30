@@ -186,6 +186,7 @@ The interior of $A$ is denoted by $\Interior{A}$ and the closure of $A$ is denot
 Using Definition~\ref{definition:metspace_dopen}, it is easy to verify that $\Interior{A}$ is open.
 One can show that closure of $W$ is equal to the union of $W$ and its limit points.
 Thus, $\Closure{A}$ is closed because a subset of a metric space is closed if and only if it contains all of its limit points.
+Finally, the \defn{metric space}{boundary} $\partial A$ of a set $A$ is defined by $\partial A \triangleq \Closure{A} \setminus \Interior{A}$.
 
 \subsection{Continuity}
 
@@ -557,7 +558,7 @@ Using Lemma~\ref{lem:SupremumSequence}, one finds that there is a sequence $x_1,
 Since $A$ is compact, there must also be a subsequence $x_{n_1},x_{n_2},\ldots$ that converges.
 As $A$ is closed, this subsequence must converge to some $x^* \in A$.
 Finally, the continuity of $f$ shows that
-\[\sup f(A) = \lim_n f(x_n) = \lim_k f(x_{n_k}) = f(\lim_k x_{n_k}) = f(x^*).\]
+\[\sup f(A) = \lim_n f(x_n) = \lim_k f(x_{n_k}) = f(\lim_k x_{n_k}) = f(x^*). \qedhere \]
 \end{proof}
 
 \begin{corollary}
@@ -576,15 +577,38 @@ Now, we will prove directly that $x_n \to M$.
 First, we note that the definition of the supremum implies that $x_n \leq M$ for all $n\in \mathbb{N}$ and, for any $\epsilon >0$, there is an $N\in \mathbb{N}$ such that $x_N > M-\epsilon$.
 Second, since $x_n$ is non-decreasing, this implies that $x_n > M-\epsilon$ for all $n>N$.
 Third, since $x_n \leq M$ by definition, it follows that $|M - x_n| = M-x_n < \epsilon$ for all $n>N$.
-We complete the proof by observing that this implies the definition of $x_n \to M$.
+Thus, the constructed $N$ satisfies all elements in the definition of $x_n \to M$.
 %To prove this by contradiction, we suppose that $x_n$ does not converge to $M$.
 %Since $x_n$ is non-decreasing, this implies that there is an $\epsilon > 0$ such that $M - x_n \geq \epsilon$ for all $n\in \mathbb{N}$.
 %But, this result contradicts $\sup f(A) = M$.
 %Therefore, the sequence converges to $M$.
 \end{proof}
 
-%\begin{example}
-%\end{example}
+
+\begin{lemma} \label{lem:sum_convergence}
+Let $y_n \in \RealNumbers$ be a real sequence and $x_n = \sum_{i=1}^n y_i$ be its sequence of partial sums.
+Then, $\sum_{i=1}^\infty y_i \triangleq \lim_{n\to \infty} x_n$ exists if and only if the tail of the sum is negligible:
+\[ \forall \epsilon > 0, \, \exists N \in \mathbb{N}, \, \forall m,n>N, \, \left| \sum_{i=n+1}^m y_i \right| < \epsilon. \]
+\end{lemma}
+\begin{proof}
+Since $\RealNumbers$ is complete, $\lim_{n\to\infty} x_n$ exists if and only if $x_n$ is a Cauchy sequence.
+Thus, $x_n$ converges if and only if ``$\forall \epsilon>0, \exists N\in \mathbb{N}, \forall m,n>N, |x_m - x_n|< \epsilon$''.
+Thus, the result follows from the fact that $|x_m - x_n| = \left| \sum_{i=n+1}^m y_i \right|$.
+\end{proof}
+
+\begin{lemma} \label{lem:abs_sum_convergence}
+Let $y_n \in \RealNumbers$ be a real sequence.
+If $\sum_{i=1}^\infty |y_i| = M < \infty$, then $x_n = \sum_{i=1}^n y_i$ satisfies $x_n \to x$ with $|x|<M$.
+\end{lemma}
+\begin{proof}
+Let $w_n = \sum_{i=1}^n |y_i|$ and observe that the following inequality holds,
+\[|x_m - x_n| = \left| \sum_{i=n+1}^m y_i \right| \leq \sum_{i=n+1}^m |y_i| = | w_m - w_n|. \]
+Since $w_n$ converges, it is Cauchy and %``$\forall \epsilon>0, \exists N\in \mathbb{N}, \forall m,n>N, |w_m - w_n|< \epsilon$''.
+the inequality implies that $x_m$ is Cauchy.
+Thus, $x_n$ converges to some $x\in \RealNumbers$ and $|x| < M$ follows from  $|x_n| \leq w_n \leq M$.
+%$\left| \sum_{i=1}^\infty y_i \right| \leq \sum_{i=1}^\infty |y_i|$.
+\end{proof}
+
 
 \subsection{Sequences of Functions}
 

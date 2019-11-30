@@ -83,6 +83,19 @@ If $V$ is a vector space over the field $F$, a \defn{linear transform}{linear op
 \end{definition}
 
 \begin{definition}
+An \defn{linear transform}{algebra} over a field $F$ is a vector space $V$ over $F$ that has a bilinear \defn{linear transform}{vector product} $``\cdot" \colon V \times V \to V$ satisfying
+$(s\vecnot{u})\cdot(t\vecnot{v})=(st)(\vecnot{u}\cdot \vecnot{v})$ and
+\[ (s\vecnot{u} + \vecnot{v})\cdot (t \vecnot{w} + \vecnot{x}) = st ( \vecnot{u}\cdot \vecnot{w}) + s (\vecnot{u}\cdot \vecnot{x}) + t (\vecnot{v}\cdot \vecnot{w}) + (\vecnot{v}\cdot \vecnot{x}), \]
+for all $s,t\in F$ and $\vecnot{u},\vecnot{v},\vecnot{w},\vecnot{x} \in V$.
+If $V$ is a Banach space and the norm of the vector product satisfies $\| \vecnot{u} \cdot \vecnot{v} \| \leq \|\vecnot{u}\| \vecnot{v}\|$, then it is called a \defn{linear transform}{Banach algebra}.
+\end{definition}
+
+\begin{example}
+The set $L(V,V)$ of linear operators on $V$ forms an algebra when the vector product is defined by functional composition $UT(\vecnot{v})=U(T(\vecnot{v}))$.
+If $V$ is a Banach space and $L(V,V)$ is equipped with the induced operator norm, then it forms a Banach algebra.
+\end{example}
+
+\begin{definition}
 A linear transformation $T$ from $V$ into $W$ is called \defn{linear transform}{invertible} if there exists a function $U$ from $W$ to $V$ such that $UT$ is the identity function on $V$ and $TU$ is the identity function on $W$.
 If $T$ is invertible, the function $U$ is unique and is denoted by $T^{-1}$.
 Furthermore, $T$ is invertible if and only if
@@ -667,7 +680,7 @@ In any case, there exists at most one such operator $T^*$.
 
 \section{Fundamental Subspaces}
 
-There are four fundamental subspaces of a linear transformation $T \colon V \rightarrow W$.
+There are four fundamental subspaces of a linear transformation $T \colon V \rightarrow W$ when $V$ and $W$ are Hilbert spaces.
 We have already encountered two such spaces: The range of $T$ and the nullspace of $T$.
 Recall that the range of a linear transformation $T$ is the set of all vectors $\vecnot{w} \in W$ such that $\vecnot{w} = T \vecnot{v}$ for some $\vecnot{v} \in V$.
 The nullspace of $T$ consists of all vectors $\vecnot{v} \in V$ such that $T \vecnot{v} = \vecnot{0}$.
@@ -682,7 +695,7 @@ N_{T^*} &\subseteq W .
 \end{align*}
 
 \begin{theorem}
-Let $T \colon V \rightarrow W$ be a bounded linear transformation between two Hilbert spaces $V$ and $W$, and let $R_T$ and $R_{T^*}$ be closed.
+Let $V$ and $W$ be Hilbert spaces and $T \colon V \rightarrow W$ be a bounded linear transformation from $V$ to $W$ such that $R_T$ and $R_{T^*}$ are both closed.
 Then,
 \begin{enumerate}
 \item the range $R_T$ is the orthogonal complement of $N_{T^*}$, i.e., $\left[ R_T \right]^{\bot} = N_{T^*}$;
@@ -720,7 +733,7 @@ Using a similar argument, one can show that $\left[ R_{T^*} \right]^{\bot} = N_T
 \section{Pseudoinverses}
 
 \begin{theorem}
-Let $T$ be a bounded linear transformation from $V$ to $W$.
+Let $V$ and $W$ be Hilbert spaces and $T$ be a bounded linear transformation from $V$ to $W$ where $R_T$ is closed.
 The equation $T\vecnot{v} = \vecnot{w}$ has a solution if and only if $\left\langle \vecnot{w} | \vecnot{u} \right\rangle = 0$ for every vector $\vecnot{u} \in N_{T^*}$, i.e.,
 \begin{equation*}
 \vecnot{w} \in R_T \Leftrightarrow \vecnot{w} \perp N_{T^*} .
@@ -729,7 +742,7 @@ In matrix notation, $A \vecnot{v} = \vecnot{w}$ has a solution if and only if $\
 \end{theorem}
 \begin{proof}
 Assume that $T \vecnot{v} = \vecnot{w}$, and let $\vecnot{u} \in N_{T^*}$.
-Then
+Since $T$ is bounded, the adjoint $T^*$ exists and
 \begin{equation*}
 \left\langle \vecnot{w} | \vecnot{u} \right\rangle
 = \left\langle T \vecnot{v} | \vecnot{u} \right\rangle
@@ -739,7 +752,7 @@ Then
 \end{equation*}
 
 To prove the reverse implication, suppose that $\left\langle \vecnot{w} | \vecnot{u} \right\rangle = 0$ when $\vecnot{u} \in N_{T^*}$ and $T \vecnot{v} = \vecnot{w}$ has no solution.
-Since $\vecnot{w} \notin R_T$, then
+Since $\vecnot{w} \notin R_T$ and $R_T$ is closed, it follows that
 \begin{equation*}
 \vecnot{w}_o = \vecnot{w} - P_{R_T} \vecnot{w} = \vecnot{w} - \vecnot{w}_r
 \neq \vecnot{0}.
@@ -752,9 +765,17 @@ But
 = \left\langle \vecnot{w}_o | \vecnot{w}_o \right\rangle
 > 0,
 \end{equation*}
-which contradict the assumption that $\left\langle \vecnot{w} | \vecnot{u} \right\rangle = 0$ when $\vecnot{u} \in N_{T^*}$.
+which contradicts the assumption that $\left\langle \vecnot{w} | \vecnot{u} \right\rangle = 0$ when $\vecnot{u} \in N_{T^*}$.
 We must conclude that $T \vecnot{v} = \vecnot{w}$ has a solution.
 \end{proof}
+
+%\begin{remark}
+%This result is related to Fredholm alternative because, for a given $\vecnot{w} \in W$ and $T\colon V \to W$ with closed range, exactly one of these statements is true:
+%\begin{itemize}
+%\item There exists $\vecnot{v} \in V$ such that $T \vecnot{v} = \vecnot{w}$, or
+%\item There exists $\vecnot{u} \in W$ such that $T^* \vecnot{u} = \vecnot{0}$ and $\langle \vecnot{w} | \vecnot{u} \rangle \neq 0$.
+%\end{itemize}
+%\end{remark}
 
 \begin{fact}
 The solution to $T \vecnot{v} = \vecnot{w}$ (if it exists) is unique if and only if the only solution to $T \vecnot{v} = \vecnot{0}$ is $\vecnot{v} = \vecnot{0}$.

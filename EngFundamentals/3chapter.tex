@@ -5,7 +5,7 @@
 Suppose $W$ is a subspace of a Banach space $V$.
 For any $\vecnot{v} \in V$, consider the problem of finding a vector $\vecnot{w} \in W$ such that $\left\| \vecnot{v} - \vecnot{w} \right\|$ is as small as possible.
 \begin{definition}
-The vector $\vecnot{w} \in W$ is a \defn{Banach space}{best approximation} of $\vecnot{v} \in V$ by vectors in $W$ if
+The vector $\vecnot{w} \in W$ is a \defn{vector space}{best approximation} of $\vecnot{v} \in V$ by vectors in $W$ if
 \begin{equation*}
 \left\| \vecnot{v} - \vecnot{w} \right\| \leq \left\| \vecnot{v} - \vecnot{w}' \right\|
 \end{equation*}
@@ -34,7 +34,7 @@ Then, we have the following:
 \label{equation:OrthogonalProjectionOrthogonalVectors}
 \vecnot{w} = \sum_{i=1}^\infty \frac{ \left\langle \vecnot{v} | \vecnot{w}_i \right\rangle }{ \left\| \vecnot{w}_i \right\|^2 } \vecnot{w}_i
 \end{equation}
-is the best approximation of $\vecnot{v}$ by vectors in $W$.
+exists and equals the best approximation of $\vecnot{v}$ by vectors in $W$.
 \end{enumerate}
 \end{theorem}
 \begin{proof}
@@ -51,64 +51,78 @@ For any $\vecnot{w}' \in W$, we have $\vecnot{v} - \vecnot{w}' = \left( \vecnot{
 &\geq \left\| \vecnot{v} - \vecnot{w} \right\|^2.
 \end{split}
 \end{equation}
-% For the converse, we need to show that best approx implies orthogonality
-% Thus, we assume best approx and suppose that some vector w'' is not orthogonal to the error (wolog ||w''||=1)
-% Projecting the error onto w'' shows that ||v-w+w''|| < ||v-w|| and gives a contradiction
-Conversely, suppose that $\left\| \vecnot{v} - \vecnot{w}' \right\| \geq \left\| \vecnot{v} - \vecnot{w} \right\|$ for every $\vecnot{w}' \in W$.
-From \eqref{equation:OrthogonalVector}, we get
-\begin{equation*}
-2 \Real \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle
-+ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 \geq 0
-\end{equation*}
-for all $\vecnot{w}' \in W$.
-Note that every vector in $W$ can be expressed as $\vecnot{w} - \vecnot{w}'$ where $\vecnot{w}' \in W$, it follows that
-\begin{equation} \label{equation:InequalityOrthogonalVectors}
-2 \Real \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w}'' \right\rangle
-+ \left\| \vecnot{w}'' \right\|^2 \geq 0
-\end{equation}
-for every $\vecnot{w}'' \in W$.
-If $\vecnot{w}'$ is in $W$ and $\vecnot{w}' \neq \vecnot{w}$, then we may take
-\begin{equation*}
-\vecnot{w}'' = - \frac{ \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 } \left( \vecnot{w} - \vecnot{w}' \right).
-\end{equation*}
-Inequality~\eqref{equation:InequalityOrthogonalVectors} then reduces to the statement
-\begin{equation}
-\begin{split}
-0 &\leq
-2 \Real \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w}'' \right\rangle
-+ \left\| \vecnot{w}'' \right\|^2 \\
-&= 2 \Real \left\langle \vecnot{v} - \vecnot{w} \bigg| - \frac{ \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 } \left( \vecnot{w} - \vecnot{w}' \right) \right\rangle \\
-&\quad + \left\| - \frac{ \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 } \left( \vecnot{w} - \vecnot{w}' \right) \right\|^2 \\
-&= - 2 \Real \frac{ \left\langle \vecnot{w} - \vecnot{w}' | \vecnot{v} - \vecnot{w} \right\rangle }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 }
-\left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle
-+ \frac{\left| \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle \right|^2}{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 } \\
-&= - 2 \frac{ \left| \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle \right|^2 }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 }
-+ \frac{ \left| \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle \right|^2 }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 }
-= - \frac{ \left| \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle \right|^2 }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 } .
-\end{split}
-\end{equation}
-This inequality holds if and only if $\left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle = 0$.
-Therefore, $\vecnot{v} - \vecnot{w}$ is orthogonal to every vector in $W$.
-Hence the vector $\vecnot{w} \in W$ is a best approximation of $\vecnot{v} \in V$ by vectors in $W$ if and only if $\vecnot{v} - \vecnot{w}$ is orthogonal to every vector in $W$.
+For the converse, we note that,
+%To show the converse, we prove the contrapositive of the converse: if $\vecnot{v}-\vecnot{w}$ is not orthogonal to all vectors in $W$, then $\vecnot{w}$ is not a best approximation of $\vecnot{v}$ by vectors in $W$.
+if $\vecnot{v}-\vecnot{w}$ is not orthogonal to all vectors in $W$, then there must be some $\vecnot{u} \in W$ such that $\langle \vecnot{v}-\vecnot{w} | \vecnot{u} \rangle \neq 0$.
+Then, we let $\vecnot{w}''$ be the projection of $\vecnot{v}-\vecnot{w}$ onto $\vecnot{u}$.
+Next, we define $\vecnot{w}' = \vecnot{w}+\vecnot{w}''$ and observe that $\vecnot{w}' \in W$.
+Thus, Lemma~\ref{lem:proj_loss} implies
+\[ \| \vecnot{v}-\vecnot{w'} \| ^2 = \| \vecnot{v}-\vecnot{w} - \vecnot{w}'' \| ^2 = \|\vecnot{v}-\vecnot{w}\|^2 - \frac{|\langle \vecnot{v}-\vecnot{w} | \vecnot{u} \rangle|^2}{\|\vecnot{u}\|^2} < \| \vecnot{v}-\vecnot{w}\|^2. \]
+Thus, $\vecnot{w}$ is not a best approximation of $\vecnot{v}$ by vectors in $W$.
 
-Suppose $\vecnot{w}, \vecnot{w}' \in W$ are best approximations of $\vecnot{v}$ by vectors in $W$.
+%Conversely, suppose that $\left\| \vecnot{v} - \vecnot{w}' \right\| \geq \left\| \vecnot{v} - \vecnot{w} \right\|$ for every $\vecnot{w}' \in W$.
+%From \eqref{equation:OrthogonalVector}, we get
+%\begin{equation*}
+%2 \Real \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle
+%+ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 \geq 0
+%\end{equation*}
+%for all $\vecnot{w}' \in W$.
+%Note that every vector in $W$ can be expressed as $\vecnot{w} - \vecnot{w}'$ where $\vecnot{w}' \in W$, it follows that
+%\begin{equation} \label{equation:InequalityOrthogonalVectors}
+%2 \Real \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w}'' \right\rangle
+%+ \left\| \vecnot{w}'' \right\|^2 \geq 0
+%\end{equation}
+%for every $\vecnot{w}'' \in W$.
+%If $\vecnot{w}'$ is in $W$ and $\vecnot{w}' \neq \vecnot{w}$, then we may take
+%\begin{equation*}
+%\vecnot{w}'' = - \frac{ \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 } \left( \vecnot{w} - \vecnot{w}' \right).
+%\end{equation*}
+%Inequality~\eqref{equation:InequalityOrthogonalVectors} then reduces to the statement
+%\begin{equation}
+%\begin{split}
+%0 &\leq
+%2 \Real \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w}'' \right\rangle
+%+ \left\| \vecnot{w}'' \right\|^2 \\
+%&= 2 \Real \left\langle \vecnot{v} - \vecnot{w} \bigg| - \frac{ \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 } \left( \vecnot{w} - \vecnot{w}' \right) \right\rangle \\
+%&\quad + \left\| - \frac{ \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 } \left( \vecnot{w} - \vecnot{w}' \right) \right\|^2 \\
+%&= - 2 \Real \frac{ \left\langle \vecnot{w} - \vecnot{w}' | \vecnot{v} - \vecnot{w} \right\rangle }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 }
+%\left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle
+%+ \frac{\left| \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle \right|^2}{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 } \\
+%&= - 2 \frac{ \left| \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle \right|^2 }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 }
+%+ \frac{ \left| \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle \right|^2 }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 }
+%= - \frac{ \left| \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle \right|^2 }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 } .
+%\end{split}
+%\end{equation}
+%This inequality holds if and only if $\left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle = 0$.
+%Therefore, $\vecnot{v} - \vecnot{w}$ is orthogonal to every vector in $W$.
+%Hence the vector $\vecnot{w} \in W$ is a best approximation of $\vecnot{v} \in V$ by vectors in $W$ if and only if $\vecnot{v} - \vecnot{w}$ is orthogonal to every vector in $W$.
+
+For uniqueness, suppose $\vecnot{w}, \vecnot{w}' \in W$ are best approximations of $\vecnot{v}$ by vectors in $W$.
 Then $\left\| \vecnot{v} - \vecnot{w} \right\| = \left\| \vecnot{v} - \vecnot{w}' \right\|$ and \eqref{equation:OrthogonalVector} implies that $\left\| \vecnot{w} - \vecnot{w}' \right\| = 0$.
 That is, if a best approximation exists then it is unique.
 
-Assume that $W$ is closed and $\vecnot{w}_1,\vecnot{w}_2, \ldots$ is a countable orthogonal basis .
-Let the vector $\vecnot{w}$ be defined by \eqref{equation:OrthogonalProjectionOrthogonalVectors} and observe that $\vecnot{w} \in W$ because $W$ is closed.
-In addition, we see that $\vecnot{v} -\vecnot{w}$ is orthogonal to $\vecnot{w}_j$ for $j \in \mathbb{N}$, i.e.,
+Finally, assume $W$ is closed and $\vecnot{w}_1,\vecnot{w}_2, \ldots$ is a countable orthogonal basis.
+Then, for~\eqref{equation:OrthogonalProjectionOrthogonalVectors}, let the sequence of partial sums be $\vecnot{u}_n \triangleq \sum_{i=1}^n \vecnot{w}_i \left\langle \vecnot{v} | \vecnot{w}_i \right\rangle / \left\| \vecnot{w}_i \right\|^2$.
+Next, observe that $\vecnot{v} -\vecnot{u}_n$ is orthogonal to $\vecnot{w}_j$ for $j \in \{1,\ldots,n\}$, i.e.,
 \begin{equation*}
 \begin{split}
-\left\langle \vecnot{v} - \vecnot{w} | \vecnot{w}_j \right\rangle
+\left\langle \vecnot{v} - \vecnot{u_n} | \vecnot{w}_j \right\rangle
 &= \left\langle \vecnot{v} | \vecnot{w}_j \right\rangle
-- \left\langle \sum_{i=1}^\infty \frac{ \left\langle \vecnot{v} | \vecnot{w}_i \right\rangle }{ \left\| \vecnot{w}_i \right\|^2 } \vecnot{w}_i \Big| \vecnot{w}_j \right\rangle \\
+- \left\langle \sum_{i=1}^n \frac{ \left\langle \vecnot{v} | \vecnot{w}_i \right\rangle }{ \left\| \vecnot{w}_i \right\|^2 } \vecnot{w}_i \middle| \vecnot{w}_j \right\rangle \\
 &= \left\langle \vecnot{v} | \vecnot{w}_j \right\rangle
 - \frac{ \left\langle \vecnot{v} | \vecnot{w}_j \right\rangle }{ \left\| \vecnot{w}_i \right\|^2 } \left\langle \vecnot{w}_j | \vecnot{w}_j \right\rangle
 = 0.
 \end{split}
 \end{equation*}
-Since $\vecnot{v} - \vecnot{w}$ is orthogonal to every vector in $W$, the first two results imply that $\vecnot{w}$ is the best approximation of $\vecnot{v}$ by vectors in $W$.
+Since $\vecnot{v} - \vecnot{u}_n$ is orthogonal to every vector in $W_n = \Span \{\vecnot{w}_1,\ldots,\vecnot{w}_n\}$, we see that $\vecnot{u}_n$ is the best approximation of $\vecnot{v}$ by vectors in $W_n$.
+
+The orthogonality of $\vecnot{w}_1,\ldots,\vecnot{w}_n$ implies $\|\vecnot{v}\|^2 = \| \vecnot{v} - \vecnot{u}_n \|^2 + \|\vecnot{u}_n\|^2.$
+From this, we see that $\| \vecnot{u}_n \|^2 = \sum_{i=1}^n \left|\langle \vecnot{v} | \vecnot{w}_i \rangle \right|^2 / \|\vecnot{w}_i\|^2$ is an increasing real sequence upper bounded by $\|\vecnot{v}\|^2$.
+It follows that the RHS converges to a finite limit.
+Thus, we can apply Lemma~\ref{lem:hilbert_sum_convergence} to show convergence $\vecnot{u}_n \to \vecnot{w}$.
+Since $W$ is closed, it follows that $\vecnot{w} \in W$.
+By construction, $\vecnot{v} -\vecnot{w}$ is orthogonal to $\vecnot{w}_j$ for $j \in \mathbb{N}$ and, thus, every vector in $W$.
+Hence, $\vecnot{w}$ is the best approximation of $\vecnot{v}$ by vectors in $W$.
 \end{proof}
 
 \begin{definition}
@@ -117,6 +131,33 @@ If every vector in $V$ has an orthogonal projection onto $W$, then the mapping $
 \end{definition}
 
 One can use Theorem~\ref{theorem:OrthogonalSubspaceDirectSum} to verify that this is consistent with the concept of orthogonal projection from Definition~\ref{definition:OrthogonalProjection}.
+Theorem~\ref{theorem:OrthogonalProjection} also implies the following result, known as Bessel's inequality.
+
+\begin{corollary}
+Let $\vecnot{v}_1, \vecnot{v}_2, \ldots$ be a countable orthogonal set of distinct non-zero vectors in an inner-product space $V$.
+If $\vecnot{v} \in V$ then
+\begin{equation*}
+\sum_{i=1}^\infty \frac{ \left| \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle \right|^2 }{ \left\| \vecnot{v}_i \right\|^2 }
+\leq \left\| \vecnot{v} \right\|^2.
+\end{equation*}
+Moreover, equality holds if and only if
+\begin{equation*}
+\vecnot{v} = \sum_{i=1}^\infty \frac{ \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle }{ \left\| \vecnot{v}_i \right\|^2 } \vecnot{v}_i.
+\end{equation*}
+\end{corollary}
+\begin{proof}
+Let the projection of $\vecnot{v}$ onto the closure of the span of $\vecnot{v}_1,\vecnot{v}_2,\ldots$ be
+\begin{equation*}
+\vecnot{w} = \sum_{i=1}^\infty \frac{ \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle }{ \left\| \vecnot{v}_i \right\|^2 } \vecnot{v}_i.
+\end{equation*}
+Then, the error $\vecnot{u} = \vecnot{v} - \vecnot{w}$ satisfies  $\left\langle \vecnot{u} | \vecnot{w} \right\rangle = 0$ and $\left\| \vecnot{u} \right\|^2 = \left\| \vecnot{v} \right\|^2 - \left\| \vecnot{w} \right\|^2$.
+Noting that $\| \vecnot{u} \|^2 \geq 0$ and 
+\begin{equation*}
+\left\| \vecnot{w} \right\|^2
+= \sum_{i=1}^\infty \frac{ \left| \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle \right|^2 }{ \left\| \vecnot{v}_i \right\|^2 },
+\end{equation*}
+we see that $\| \vecnot{w} \|^2 \leq \| \vecnot{v} \|^2$ with equality iff $\vecnot{u} = \vecnot{0}$.
+\end{proof}
 
 
 \begin{problem}
@@ -281,7 +322,7 @@ Again, let $\vecnot{v} \in V$ and recall that (by Theorem~\ref{theorem:Orthogona
 Therefore, the equation $\vecnot{v} = E \vecnot{v} + \left( \vecnot{v} - E \vecnot{v} \right)$ gives a unique decomposition of $\vecnot{v}$ into $E \vecnot{v} \in W$ and $\vecnot{v} - E \vecnot{v} \in W^{\bot}$.
 This unique decomposition implies that $V$ is the direct sum of $W$ and $W^{\bot}$.
 Lastly, one finds from the definition of $W^{\bot}$ that
-\[W \cap W^{\bot} = \left\{ \vecnot{u} \in W | \langle \vecnot{u} | \vecnot{w} \rangle =0 \; \forall \; \vecnot{w}\in W \right\}  \subseteq \left\{ \vecnot{u} \in W | \langle \vecnot{u} | \vecnot{u} \rangle =0 \right\}  = \{ \vecnot{0} \} .\]
+\[W \cap W^{\bot} = \left\{ \vecnot{u} \in W | \langle \vecnot{u} | \vecnot{w} \rangle =0 \; \forall \; \vecnot{w}\in W \right\}  \subseteq \left\{ \vecnot{u} \in W | \langle \vecnot{u} | \vecnot{u} \rangle =0 \right\}  = \{ \vecnot{0} \} . \qedhere \]
 \end{proof}
 
 \begin{corollary}
@@ -294,42 +335,21 @@ One can also verify that $I-E$ is an idempotent linear transformation of $V$ wit
 From Definition \ref{definition:OrthogonalProjection}, we see that $I-E$ is an orthogonal projection.
 \end{proof}
 
-Theorem~\ref{theorem:OrthogonalSubspaceDirectSum} also implies the following result, known as Bessel's inequality.
+\begin{example}
+Let $V = \ComplexNumbers^n$ be the standard $n$-dimensional complex Hilbert space.
+Let $U \in \ComplexNumbers^{n\times m}$ be a matrix whose columns $\vecnot{u}_1,\ldots,\vecnot{u}_m$ form an orthonormal set in $V$.
+Then, the best approximation of $\vecnot{v}\in V$ by vectors in $\mathcal{R}(U)$ (as  defined by~\eqref{equation:OrthogonalProjectionOrthogonalVectors}) can also be written as
+\[ \vecnot{w} = U U^H \vecnot{v} = \sum_{i=1}^m \vecnot{u}_i (\vecnot{u}_i^H \vecnot{v}). \]
+\end{example}
 
-\begin{corollary}
-Let $\vecnot{v}_1, \vecnot{v}_2, \ldots$ be a countable orthogonal set of distinct non-zero vectors in an inner-product space $V$.
-If $\vecnot{v} \in V$ then
-\begin{equation*}
-\sum_{i=1}^\infty \frac{ \left| \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle \right|^2 }{ \left\| \vecnot{v}_i \right\|^2 }
-\leq \left\| \vecnot{v} \right\|^2.
-\end{equation*}
-Moreover, equality holds if and only if
-\begin{equation*}
-\vecnot{v} = \sum_{i=1}^\infty \frac{ \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle }{ \left\| \vecnot{v}_i \right\|^2 } \vecnot{v}_i.
-\end{equation*}
-\end{corollary}
-\begin{proof}
-Define
-\begin{equation*}
-\vecnot{w} = \sum_{i=1}^\infty \frac{ \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle }{ \left\| \vecnot{v}_i \right\|^2 } \vecnot{v}_i.
-\end{equation*}
-Then $\vecnot{v} = \vecnot{w} + \vecnot{u}$, where $\left\langle \vecnot{w} | \vecnot{u} \right\rangle = 0$ and $\left\| \vecnot{v} \right\|^2 = \left\| \vecnot{w} \right\|^2 + \left\| \vecnot{u} \right\|^2$.
-Noting that
-\begin{equation*}
-\left\| \vecnot{w} \right\|^2
-= \sum_{i=1}^\infty \frac{ \left| \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle \right|^2 }{ \left\| \vecnot{v}_i \right\|^2 },
-\end{equation*}
-we obtain the desired result, with equality iff $\vecnot{u} = \vecnot{0}$.
-\end{proof}
-
-If $\vecnot{v}_1, \vecnot{v}_2, \ldots$ is an orthonormal set, Bessel's inequality states that
-\begin{equation*}
-\sum_{i=1}^\infty \left| \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle \right|^2 \leq \left\| \vecnot{v} \right\|^2.
-\end{equation*}
-It follows that the vector $\vecnot{v}$ is in the closure of the subspace spanned by $\vecnot{v}_1, \vecnot{v}_2, \ldots$ if an only if
-\begin{equation*}
-\vecnot{v} = \sum_{i=1}^\infty \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle \vecnot{v}_i.
-\end{equation*}
+%If $\vecnot{v}_1, \vecnot{v}_2, \ldots$ is an orthonormal set, Bessel's inequality states that
+%\begin{equation*}
+%\sum_{i=1}^\infty \left| \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle \right|^2 \leq \left\| \vecnot{v} \right\|^2.
+%\end{equation*}
+%It follows that the vector $\vecnot{v}$ is in the closure of the subspace spanned by $\vecnot{v}_1, \vecnot{v}_2, \ldots$ if an only if
+%\begin{equation*}
+%\vecnot{v} = \sum_{i=1}^\infty \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle \vecnot{v}_i.
+%\end{equation*}
 
 
 \section{Computing Approximations in Hilbert Spaces}
@@ -634,7 +654,7 @@ When the vectors $\vecnot{w}_1, \ldots, \vecnot{w}_n$ are linearly independent, 
 Let $\hat{\vecnot{v}} \in W$ be the best approximation of $\vecnot{v}$ by vectors in $W$.
 Again, we can write
 \begin{equation*}
-\vecnot{v} = \hat{\vecnot{v}} + \vecnot{e}
+\vecnot{v} = \hat{\vecnot{v}} + \vecnot{e},
 \end{equation*}
 where $\vecnot{e} \in W^{\bot}$ is the minimum achievable error.
 The squared norm of the minimum error is given implicitly by
@@ -702,11 +722,11 @@ The line that minimizes the sums of the squares of the \emph{vertical} distances
 \end{equation*}
 
 
-\subsection{Linear Minimum Mean-Squared Estimation}
+\subsection{Linear Minimum Mean-Squared Error Estimation}
 
 Let $Y, X_1, \ldots, X_n$ be a set of zero-mean random variables.
-The goal of the linear minimum mean-squared estimation (LMMSE) problem is to find coefficients $s_1, \ldots, s_n$ such that
-\[ \hat{Y} = s_1 X_1 + \cdots + s_n X_n. \]
+The goal of the linear minimum mean-squared error (LMMSE) estimation  problem is to find coefficients $s_1, \ldots, s_n$ such that
+\[ \hat{Y} = s_1 X_1 + \cdots + s_n X_n \]
 minimizes the MSE $\Expect[|Y-\hat{Y}|^2]$.
 Using the inner product defined by
 \begin{equation} \label{equation:ExpectationInnerProduct}
@@ -870,7 +890,7 @@ For example, an underdetermined system of linear equations has an infinite numbe
 But, in practice, it often makes sense to prefer the minimum-norm solution over other solutions.
 Finding this solution is very similar to finding the best approximation.
 
-Let $V$ be a Hilbert space and $\vecnot{w}_1 ,\vecnot{w}_2 , \ldots, \vecnot{w}_n$ be a set of linearly independent vectors in $W$.
+Let $V$ be a Hilbert space and $\vecnot{w}_1 ,\vecnot{w}_2 , \ldots, \vecnot{w}_n$ be a set of linearly independent vectors in $V$.
 For any $\vecnot{v} \in V$, consider finding the scalars $s_1,s_2,\ldots,s_n$ that minimize
 \[ \left\| \vecnot{v} - \sum_{i=1}^n s_i \vecnot{w}_i \right\|. \]
 The answer is clearly given by the best approximation of $\vecnot{v}$ by vectors in the span of $\vecnot{w}_1 ,\vecnot{w}_2 , \ldots, \vecnot{w}_n$.
@@ -928,25 +948,49 @@ In this case, the solution $\hat{\vecnot{s}}$ can be obtained in closed form and
 
 \section{Projection onto Convex Sets}
 
-So far, we have focused on the projection of vectors on to subspaces.
+So far, we have focused on the projection of vectors onto subspaces.
 Convex sets relax the closure property of a subspace to convex combinations of subsets of points.
 
 \begin{definition}
-Let $V$ be a vector space over $\RealNumbers$.
+Let $V$ be a vector space.
 The subset $A \subseteq V$ is called a \defn{vector space}{convex set} if, for all $\vecnot{a}_1,\vecnot{a}_2 \in A$ and $\lambda\in(0,1)$, we have $\lambda \vecnot{a}_1 + (1-\lambda) \vecnot{a}_2 \in A$.
 The set is \textbf{strictly convex} if, for all $\vecnot{a}_1,\vecnot{a}_2 \in \Closure{A}$ and $\lambda\in(0,1)$, we have $\lambda \vecnot{a}_1 + (1-\lambda) \vecnot{a}_2 \in \Interior{A}$.
 \end{definition}
 
-Let $V$ be a Hilbert space and $A\subseteq V$ be a closed convex set. For any $\vecnot v$, let
+\begin{definition}
+Let $V$ be a Hilbert space and $A\subseteq V$ be a closed convex set. The \textbf{orthogonal projection} of $\vecnot{v} \in V$ onto $A$ is the mapping $P_A \colon V \to A$ defined by
 \[
-f\left(\vecnot v\right)=\inf_{\vecnot u\in A}\left\Vert \vecnot u-\vecnot v\right\Vert 
+P_A (\vecnot{v}) \triangleq \arg \min_{\vecnot u\in A}\left\Vert \vecnot u-\vecnot v\right\Vert. 
 \]
-be the minimum distance between $\vecnot v$ and the set $A$. In this section, we will show that this infimum is achieved as a minimum by a unique $\vecnot u^{*}\in A$. Moreover, the mapping $P_{A}:V\rightarrow A$ is called the orthogonal projection of $\vecnot v$ onto $A$ and is defined by $\vecnot v\mapsto\vecnot u^{*}$.
+\end{definition}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}[yscale=0.9,bullet/.style={circle,fill,inner sep=1.00pt,node contents={}}]
+ \draw[-latex] (0,0) node[bullet,label=left:{$P_A(\vecnot{v}) \!=\! \vecnot{u}^*$},alias=PC]  -- (15:2.8) node[midway,sloped,above=0.25mm] {$\vecnot{v}\!-\! P_A(\vecnot{v})$}
+    node[bullet,label=above right:$\vecnot{v}$,alias=v];
+\draw[-latex] (PC) -- ++ (-135:3.15) node[pos=0.55,below=0.25mm,sloped]{$\vecnot{u}\!-\! P_A(\vecnot{v})$}     node[bullet,label=below left:$\vecnot{u}$];
+\fill[black,fill,opacity=0.1] (PC) to[out=105,in=0] ++ (-2,1) to[out=180,in=105] ++ (-1.5,-3)
+ node[above right,opacity=1]{$A$} to[out=-75,in=180] ++ (1.25,-1) to[out=0,in=-75] node[sloped, inner xsep=10mm, inner ysep=0, opacity=1, fill=black, pos=0.999] {} cycle;
+\end{tikzpicture}
+\caption{Orthogonal projection of $\vecnot{v}$ onto closed convex set $A$. \label{fig:pocs}}
+\end{figure}
+
+\begin{remark}
+If $A$ is compact, then the existence of the minimum (for any norm) is given by topology because $\| \vecnot{v} - \vecnot{u} \|$ is continuous in $\vecnot{u}$.
+Similarly, if both $\vecnot{u}$ and $\vecnot{u}'$ achieve the minimum distance $d$, then the convexity of the norm implies that the line segment between them also achieves the minimum distance. 
+This implies that the closed ball of radius $d$ in $V$ contains a line segment on its boundary but one can use the Cauchy-Schwarz inequality to show this is impossible.
+\end{remark}
+
+The following theorem instead uses straightforward Hilbert-space methods to establish the same result for all closed convex $A$.
+
 \begin{theorem}
-\label{thm:HilbertProjectionTheorem} The orthogonal projection of $\vecnot v\in V$ onto a closed convex set $A\subseteq V$ exists and is unique.
+\label{theorem:HilbertProjectionTheorem} For Hilbert space $V$, the orthogonal projection of $\vecnot v \in V$ onto a closed convex set $A\subseteq V$ exists and is unique.
 \end{theorem}
 \begin{proof}
-Let $d=f\left(\vecnot v\right)$ be the infimal distance and consider any sequence $\vecnot u_{1},\vecnot u_{2},\ldots\in A$ that achieves the infimum so that
+
+Let $d=\inf_{\vecnot u\in A}\left\Vert \vecnot u-\vecnot v\right\Vert$ be the infimal distance between $\vecnot v$ and the set $A$.
+Next, consider any sequence $\vecnot u_{1},\vecnot u_{2},\ldots\in A$ that achieves the infimum so that
 \[
 \lim_{n\rightarrow\infty}\left\Vert \vecnot u_{n}-\vecnot v\right\Vert =d.
 \]
@@ -961,17 +1005,20 @@ because the convexity of $A$ implies $\frac{\vecnot u_{n}+\vecnot u_{m}}{2}\in A
 
 Uniqueness can be seen by assuming instead that $\vecnot u_{m},\vecnot u_{n}$ are two elements in $A$ which are both at a distance $d$ from $\vecnot v$. Then, the above derivation shows that $\left\Vert \vecnot u_{m}-\vecnot u_{n}\right\Vert ^{2}\leq0$. Therefore, they are the same point.
 \end{proof}
+
 \begin{remark}
 The same result holds for norm projections in many other Banach spaces including $L^{p}$ and $\ell^{p}$ for $1<p<\infty$. In general, it is required that the Banach space be strictly convex (for uniqueness) and reflexive (for existence).
 \end{remark}
 
+
+
 Earlier in this chapter, we studied the equivalence between the orthogonality and Hilbert-space projections onto subspaces.
 The following result can be seen as a generalization of that result to Hilbert-space projections onto convex sets.
 
-\begin{lemma}
-\label{lemma:convex_proj_lt0}
-For any $\vecnot{v} \notin A$, a necessary and sufficient condition for $\vecnot{u}^* = P_A (\vecnot{v})$ is that $\langle \vecnot{v}-\vecnot{u}^* \,|\, \vecnot{u}-\vecnot{u}^* \rangle \leq 0$ for all $\vecnot{u}\in A$.
-\end{lemma}
+\begin{theorem}
+\label{theorem:convex_proj_lt0}
+For any $\vecnot{v} \notin A$, a necessary and sufficient condition for $\vecnot{u}^* = P_A (\vecnot{v})$ is that $\Real \langle \vecnot{v}-\vecnot{u}^* \,|\, \vecnot{u}-\vecnot{u}^* \rangle \leq 0$ for all $\vecnot{u}\in A$.
+\end{theorem}
 \begin{proof}
 Let $\vecnot{u}^* = P_A (\vecnot{v})$ be the unique projection of $\vecnot{v}$ onto $A$.
 For all $\vecnot{u} \in A$ %satisfying $\vecnot{u} \neq \vecnot{u}^*$
@@ -981,41 +1028,140 @@ The optimality of $\vecnot{u}^*$ implies that
 \| \vecnot{v}-\vecnot{u}^* \|^2
 &\leq \| \vecnot{v}- \vecnot{u}' \|^2 \\
 &\leq \| \vecnot{v}- \vecnot{u}^* - \alpha (\vecnot{u}-\vecnot{u}^*) \|^2 \\
-&= \| \vecnot{v} - \vecnot{u}^* \|^2 + \alpha^2 \| \vecnot{u} - \vecnot{u}^* \|^2 - 2 \alpha \langle v-\vecnot{u}^* \,|\, \vecnot{u}-\vecnot{u}^* \rangle. 
+&= \| \vecnot{v} - \vecnot{u}^* \|^2 + \alpha^2 \| \vecnot{u} - \vecnot{u}^* \|^2 - 2 \alpha \Real \langle v-\vecnot{u}^* \,|\, \vecnot{u}-\vecnot{u}^* \rangle. 
 \end{align*}
-Thus, $\langle v-\vecnot{u}^* \,|\, \vecnot{u}-\vecnot{u}^* \rangle \leq \frac{\alpha}{2} \| \vecnot{u} - \vecnot{u}^* \|^2$.
+Thus, $\Real \langle v-\vecnot{u}^* \,|\, \vecnot{u}-\vecnot{u}^* \rangle \leq \frac{\alpha}{2} \| \vecnot{u} - \vecnot{u}^* \|^2$.
 One can establish necessity by taking the limit as $\alpha \to 0$.
-For sufficiency, we assume $\langle \vecnot{v}-\vecnot{u}^*,\vecnot{u}-\vecnot{u}^* \rangle \leq 0$ and we write
+For sufficiency, we assume $\Real \langle \vecnot{v}-\vecnot{u}^* | \vecnot{u}-\vecnot{u}^* \rangle \leq 0$ and we write
 \begin{align*}
-\| \vecnot{v}-\vecnot{u} \|^2 - \| \vecnot{v} - \vecnot{u}^* \|^2
-&= \| (\vecnot{v} - \vecnot{u}^*) - (\vecnot{u} - \vecnot{u}^*) \|^2 - \|\vecnot{v} - \vecnot{u}^* \|^2 \\
-&= \| \vecnot{v}-\vecnot{u}^* \|^2 + \| \vecnot{u} -\vecnot{u}^* \| ^2 - 2 \langle v-\vecnot{u}^* \,|\, \vecnot{u}-\vecnot{u}^* \rangle - \|\vecnot{v}-\vecnot{u}^* \|^2 \\
+\| \vecnot{v}-\vecnot{u} \|^2 &- \| \vecnot{v} - \vecnot{u}^* \|^2
+= \| (\vecnot{v} - \vecnot{u}^*) - (\vecnot{u} - \vecnot{u}^*) \|^2 - \|\vecnot{v} - \vecnot{u}^* \|^2 \\
+&= \| \vecnot{v}-\vecnot{u}^* \|^2 + \| \vecnot{u} -\vecnot{u}^* \| ^2 - 2 \Real \langle v-\vecnot{u}^* \,|\, \vecnot{u}-\vecnot{u}^* \rangle - \|\vecnot{v}-\vecnot{u}^* \|^2 \\
 &\geq 0.
 \end{align*}
 Thus, $\| \vecnot{v}-\vecnot{u} \|^2 \geq \| \vecnot{v} - \vecnot{u}^* \|^2$ for all $\vecnot{u} \in A$ and $\vecnot{u}^* = P_A (\vecnot{v})$.
 \end{proof}
 
+\subsection{Projection Properties and Examples}
+
+Let $A$ be a closed convex subset of a Hilbert space $V$ over $\RealNumbers$.
+By drawing a simple picture (e.g., see Figure~\ref{fig:pocs}), one can see that projecting $\vecnot{v}$ onto $A$ is an operation that is translation invariant.
+Specifically, this means that translating the set $A$ and the vector $\vecnot v$ by the same vector $\vecnot v_{0}$ results in an output that is also translated by $\vecnot v_{0}$.
+Mathematically, this means that, for all $\vecnot v,\vecnot v_{0}\in V$, the projection onto $V$ satisfies
+\begin{align*}
+P_{A+\vecnot v_{0}}(\vecnot v+\vecnot v_{0}) & =\arg\min_{\vecnot u\in A+\vecnot v_{0}}\left\Vert \vecnot u-\vecnot v-\vecnot v_{0}\right\Vert \nonumber \\
+ & =\vecnot v_{0}+\arg\min_{\vecnot u'\in A}\left\Vert (\vecnot u'+\vecnot v_{0})-\vecnot v-\vecnot v_{0}\right\Vert \nonumber \\
+ & =\vecnot v_{0}+\arg\min_{\vecnot u'\in A}\left\Vert \vecnot u'-\vecnot v\right\Vert \nonumber \\
+ & =\vecnot v_{0}+P_{A}(\vecnot v).\label{eq:proj_trans}
+\end{align*}
+This also leads to the following trick. If a projection is easy when the set is centered, then one can: (i) translate the problem so that the set is centered, (ii) project onto the centered set, and (iii) translate back. 
+
+Using the best approximation theorem, it is easy to verify that the orthogonal projection of $\vecnot v\in V$ onto a one-dimensional subspace $W=\text{span}(\vecnot w)$ is given by
+\[
+P_{W}(\vecnot v)=\frac{\left\langle \vecnot v|\vecnot w\right\rangle }{\left\Vert \vecnot w\right\Vert ^{2}}\vecnot w.
+\]
+
+A \defn{vector space}{hyperplane} is a closed subspace of $U \subset V$ that satisfies a single linear equality of the form $\left\langle \vecnot v|\vecnot w\right\rangle =0$ for all $\vecnot{v}\in U$.
+Such a subspace is said to have co-dimension one (e.g., if $\dim(V)=n$, then $\dim(U) = n-1$). Equivalently, $U$ can be seen as the orthogonal complement of a one-dimensional subspace (e.g., $U=W^{\perp}$).
+Thus, we can write
+\[
+P_{U}(\vecnot v)=P_{W^{\perp}}(\vecnot v)=\vecnot v-\frac{\left\langle \vecnot v|\vecnot w\right\rangle }{\left\Vert \vecnot w\right\Vert ^{2}}\vecnot w.
+\]
+
+Similarly, a linear equality such as $\langle\vecnot v|\vecnot w\rangle=c$, where $\vecnot v_{0}$ is any vector in $V$ satisfying $\langle\vecnot v_{0}|\vecnot w\rangle=c$,  defines an \defn{vector space}{affine hyperplane}.
+This is the shifted subspace $U+\vecnot v_{0}$ of co-dimension one because 
+\[
+\langle\vecnot v|\vecnot w\rangle=\langle\vecnot u+\vecnot v_{0}|\vecnot w\rangle=\langle\vecnot u|\vecnot w\rangle+\langle\vecnot v_{0}|\vecnot w\rangle=0+c=c.
+\]
+Thus, we can project onto $U+\vecnot{v_{0}}$ by translating, projecting, and then translating back. This gives
+\begin{equation*}
+P_{U+\vecnot v_{0}}(\vecnot v)=\left((\vecnot v-\vecnot v_{0})-\frac{\left\langle \vecnot v-\vecnot v_{0}|\vecnot w\right\rangle }{\left\Vert \vecnot w\right\Vert ^{2}}\vecnot w\right)+\vecnot v_{0}=\vecnot v-\frac{\left\langle \vecnot v|\vecnot w\right\rangle -c}{\left\Vert \vecnot w\right\Vert ^{2}}\vecnot w,\label{eq:proj_lin_eq}
+\end{equation*}
+which does not depend on the choice of $\vecnot v_{0}$.
+
+Next, let $H$ be the subset of $\vecnot v\in V$ satisfying the linear inequality $\langle\vecnot v|\vecnot w\rangle\geq c$. Then, $H$ is a closed convex set known as a \defn{inner-product space}{half space}. For any $\vecnot v\in H$, we have $P_{H}(\vecnot v)=\vecnot v$ and, for any $\vecnot v\notin H$, we have $P_{H}(\vecnot v)=P_{U+\vecnot v_{0}}(\vecnot v)$ because the closest point must lie on the separating hyperplane and achieve the inequality with equality. For any $\vecnot v\in H$, one can put these together to see that
+\begin{equation}
+P_{H}(\vecnot v)=\begin{cases}
+\vecnot v & \text{if }\langle\vecnot v|\vecnot w\rangle\geq c\\
+\vecnot v-\frac{\left\langle \vecnot v|\vecnot w\right\rangle -c}{\left\Vert \vecnot w\right\Vert ^{2}}\vecnot w & \text{if }\langle\vecnot v|\vecnot w\rangle<c.
+\end{cases}\label{eq:proj_ineq}
+\end{equation}
+
+\begin{theorem} \label{theorem:convex_point_set_hyperplane}
+Let $V$ be a Hilbert space over $\RealNumbers$ and $A\subset V$ be a closed convex set.
+For any $\vecnot{v} \notin A$, there is an affine hyperplane $U' = \{ \vecnot{u} \in V \,|\, \langle \vecnot{u} | \vecnot{w} \rangle = c \}$ (defined by $\vecnot{w} \in V$ and $c\in \RealNumbers$) such that $\langle \vecnot{v} | \vecnot{w} \rangle < c$ and $\langle \vecnot{u} | \vecnot{w} \rangle \geq c$ for all $\vecnot{u} \in A$.
+\end{theorem}
+
+\begin{proof}
+Let $\vecnot{u}^* = P_A (\vecnot{v})$ be the orthogonal projection of $\vecnot{v}$ onto $A$ and define $\vecnot{w} = \vecnot{u}^* - \vecnot{v}$ and $c= \langle \vecnot{u}^* | \vecnot{w} \rangle$.
+From Theorem~\ref{theorem:convex_proj_lt0}, we see that $\langle \vecnot{v}-\vecnot{u}^* | \vecnot{u}-\vecnot{u}^* \rangle \leq 0$ for all $\vecnot{u} \in A$.
+Thus, for all $\vecnot{u}\in A$, we have
+\begin{align*}
+\langle \vecnot{u} | \vecnot{w} \rangle
+&= \langle \vecnot{w} | \vecnot{u} \rangle
+= \langle \vecnot{u}^* - \vecnot{v} | \vecnot{u} \rangle
+= - \langle \vecnot{v} - \vecnot{u}^* | \vecnot{u} \rangle \\
+&\stackrel{(a)}{\geq} - \langle \vecnot{v} - \vecnot{u}^* | \vecnot{u}^* \rangle
+= \langle \vecnot{u}^* - \vecnot{v} | \vecnot{u}^* \rangle
+\\
+&= \langle \vecnot{w} | \vecnot{u}^* \rangle
+= \langle \vecnot{u}^* | \vecnot{w} \rangle
+= c,
+\end{align*}
+where $(a)$ follows from $\langle \vecnot{v}-\vecnot{u}^* | \vecnot{u}-\vecnot{u}^* \rangle \leq 0$ for all $\vecnot{u} \in A$.
+For $\langle \vecnot{v} | \vecnot{w} \rangle$, we observe that together, $\vecnot{u}^* \in A$ and $\vecnot{v} \notin A$, imply that
+\begin{align*}
+0 &< \| \vecnot{u}^* - \vecnot{v} \|^2
+= \langle \vecnot{u}^* - \vecnot{v} | \vecnot{u}^* - \vecnot{v} \rangle \\
+&= \langle \vecnot{u}^* | \vecnot{u}^* - \vecnot{v} \rangle - \langle  \vecnot{v} | \vecnot{u}^* - \vecnot{v} \rangle
+= c - \langle  \vecnot{v} | \vecnot{u}^* - \vecnot{v} \rangle,
+\end{align*}
+which shows that $\langle \vecnot{v} | \vecnot{w} \rangle < c$ and completes the proof.
+\end{proof}
+
+\begin{theorem}
+Let $V$ be Hilbert space over $\RealNumbers$ and $A \subset V$ be a closed convex set.
+Then, $A$ equals the intersection of a set of half spaces.
+\end{theorem}
+
+\begin{proof}
+Let $\mathcal{H}$ be the set of all half spaces in $V$ and let $\mathcal{G} = \{ H\in \mathcal{H} \,|\, A \subseteq H \}$  be the subset of half spaces containing $A$.
+For example, consider the half spaces defined by tangent planes passing through points on the boundary of $A$.
+Let $B= \cap_{H\in \mathcal{G}} H$ be the intersection of all the half spaces in $\mathcal{G}$.
+Since each half space contains $A$, it is clear that $A\subseteq B$.
+To show that $A = B$, we will show that $(x\notin A) \to (x\notin B)$.
+If $x \notin A$, then Theorem~\ref{theorem:convex_point_set_hyperplane} shows that there is an affine hyperplane that separates $x$ from $A$ and an associated half space $G$ that contains $A$ but not $x$.
+Since $G$ contains $A$, it follows that $G \in \mathcal{G}$.
+But, $x \notin G$ implies $x \notin B$ because $B$ is the intersection of the half spaces in $\mathcal{G}$. 
+This completes the proof.
+\end{proof}
+
 \subsection{Minimum Distance Between Two Convex Sets}
 
-Now, consider the smallest distance between two disjoint closed convex sets $A,B\subseteq V$. In this case, a unique solution may exist but a number of things can go wrong. If the two sets are not strictly convex (e.g., consider two squares), then it is clearly possible for their to multiple pairs of points that achieve the minimum distance. Even if the two sets are strictly convex, one may find that the infimum is achieved as the points wander off to infinity. For example, consider the strictly convex hyperbolic sets $A=\left\{ (x,y)|x^{2}-y^{2}\geq1,x>0\right\} $ and $B=\left\{ (x,y)|y^{2}-x^{2}\geq1,y\geq0\right\} $. These two sets share the line $x=y>0$ as an asymptote, so their infimal distance is 0.
+Now, consider the smallest distance between two disjoint closed convex sets $A,B\subseteq V$. In this case, a unique solution may exist but a some things can go wrong. If the two sets are not strictly convex (e.g., consider two squares), then it is clearly possible for their to multiple pairs of points that achieve the minimum distance. Even if the two sets are strictly convex, one may find that the infimum is achieved as the points wander off to infinity. For example, consider the strictly convex hyperbolic sets $A=\left\{ (x,y)|x^{2}-y^{2}\geq1,x>0\right\} $ and $B=\left\{ (x,y)|y^{2}-x^{2}\geq1,y\geq0\right\} $. These two sets share the line $x=y>0$ as an asymptote, so their infimal distance is 0.
 
-To understand this behavior, we first note that the distance $f\left(\vecnot u,\vecnot v\right)=\left\Vert \vecnot u-\vecnot v\right\Vert $ is a convex function on the convex product set $A\times B$, one finds that any local minimum distance is a global minimum distance.we have the following results.
+To understand this behavior, we first note that the distance $f\left(\vecnot u,\vecnot v\right)=\left\Vert \vecnot u-\vecnot v\right\Vert $ is a convex function on the convex product set $A\times B$.
+It follows that any local minimum value is a global minimum value distance.
 \begin{theorem}
 \label{thm:MinDistTwoConvexSet} Let $V$ be a Hilbert space and consider the infimal distance
 \[
 d=\inf_{\vecnot u\in A,\vecnot v\in B}\left\Vert \vecnot u-\vecnot v\right\Vert 
 \]
 between two disjoint closed convex sets $A,B\subseteq V$.
-If the set $B$ is compact, then the infimum is achieved.
-If the set $A$ is strictly convex and the infimum is achieved, then the minimizing points $\vecnot u^{*},\vecnot v^{*}$ are unique.
+If either set is compact, then the infimum is achieved.
+If the infimum is achieved and either set is strictly convex, then the minimizing points $\vecnot u^{*},\vecnot v^{*}$ are unique.
 \end{theorem}
 
 \begin{proof}
-Consider any sequence $(\vecnot u_{1},\vecnot v_{1}),(\vecnot u_{2},\vecnot v_{2}),\ldots\in A\times B$ which satisfies
+Consider any sequence $(\vecnot u_{1},\vecnot v_{1}),(\vecnot u_{2},\vecnot v_{2}),\ldots\in A\times B$ that satisfies
 \[
 \lim_{n\rightarrow\infty}\left\Vert \vecnot u_{n}-\vecnot v_{n}\right\Vert =d.
 \]
-If $B$ is compact, then there is a subsequence $\vecnot v_{n_{j}}$ that converges to some $\vecnot v^{*}\in B$. Therefore, we can set $B=\left\{ v^{*}\right\} $ and use Theorem \ref{thm:HilbertProjectionTheorem} to see that there exists a unique $\vecnot u^{*}\in A$ which achieves the smallest distance. Notice that the $\vecnot v^{*}$ is not unique in general and that $\vecnot u^{*}$ is only unique for a given $\vecnot v^{*}$.
+If $B$ is compact, then there is a subsequence $\vecnot v_{n_{j}}$ that converges to some $\vecnot v^{*}\in B$.
+Since $\| P_A (\vecnot{v}_n)-\vecnot v_{n} \| \leq \|\vecnot u_{n}-\vecnot v_{n}\| $, we can replace $\vecnot u_{n_{j}}$ by $P_A (\vecnot{v}_{n_j})$ and still achieve the infimum.
+The continuity of $P_A$ also shows that $u_{n_{j}} \to \vecnot{u}^* = P_A (\vecnot{v}^*)$ and this implies $\| \vecnot{u}^* - \vecnot{v}^* \| = d$.
+Also, $P_B (\vecnot{u}^*) = \vecnot{v}^*$ because $\vecnot{v}^*$ is the unique closest point in $B$ to $\vecnot{u}^*$.
+Notice that $\vecnot v^{*}$ may not be unique (due to the subsequence construction) and, thus, the pair $(\vecnot{u}^*,\vecnot{v}^*)$ is not unique in general.
 
 Since $\left\Vert \vecnot u-\vecnot v\right\Vert $ is a convex function on the convex product set $A\times B$, there is a (possibly empty) convex set of minimizers
 
@@ -1024,23 +1170,31 @@ M=\left\{ (\vecnot u,\vecnot v)\in A\times B\;\big|\;\left\Vert \vecnot u-\vecno
 \]
 Also, each component of the $(\vecnot{u},\vecnot{v})$ points in $M$ must lie on the boundary of its set because otherwise one could reduce the smallest distance by moving one point along the minimum distance line towards the boundary. Now, suppose that (i) $A$ is strictly convex and (ii) $M$ contains more than one pair of minimizers. Then, condition (ii) implies that there must be two boundary points $\vecnot u_{1},\vecnot u_{2}\in\partial A$ such that $\alpha\vecnot u_{1}+(1-\alpha)\vecnot u_{2}\in\partial A$ for $\alpha\in[0,1]$. But this contradicts condition (i) and shows that, if $A$ is strictly convex, then there is at most one pair $(\vecnot u^{*},\vecnot v^{*})\in M$ of minimizing points.
 \end{proof}
+
 \begin{remark}
 Finding the minimum distance between two disjoint closed convex sets $A,B\subseteq V$ is a classic problem that is solved nicely by the idea of alternating minimization. Let $\vecnot v_{0}\in B$ be an arbitrary initial point and define
-
 \begin{align*}
 \vecnot u_{n+1} & =\arg\min_{\vecnot u\in A}\left\Vert \vecnot u-\vecnot v_{n}\right\Vert \\
 \vecnot v_{n+1} & =\arg\min_{\vecnot v\in B}\left\Vert \vecnot u_{n+1}-\vecnot v\right\Vert .
 \end{align*}
 Notice that the sequence $d_{n}=\left\Vert \vecnot u_{n}-\vecnot v_{n}\right\Vert $ is non-increasing and must therefore have a limit.
-One can show that, if either set is compact (resp. bounded), then the sequence $(\vecnot u_{n},\vecnot v_{n})$ converges strongly (resp. weakly) to vectors that minimize the distance. % cite []Bauschke, Finding Best Approx. Pairs]
-Variations of this approach can even be useful when $A\cap B\neq\emptyset$.
-In this case, sequence $\vecnot v_{n}$ converges weakly to some point $\vecnot v\in A\cap B$.
+By adapting the previous proof, one can show that, if either set is compact, then the sequence $(\vecnot u_{n},\vecnot v_{n})$ converges to a pair of vectors that minimize the distance. % cite []Bauschke, Finding Best Approx. Pairs]
+%Variations of this approach can even be useful when $A\cap B\neq\emptyset$.
+%In this case, sequence $\vecnot v_{n}$ converges weakly to some point $\vecnot v\in A\cap B$.
 \end{remark}
 
-%\begin{theorem}[Hyperplane Separation]
-%Assume unique points minimize.
-%Then projection followed by inner_prod_lt0 gives separataion?
-%\end{theorem}
+\begin{theorem}
+Let $V$ be a Hilbert space over $\RealNumbers$ and $A,B$ be disjoint closed convex subsets of $V$.
+If either set is compact, then there is an affine hyperplane $\{ \vecnot{a} \in V \,|\, \langle \vecnot{a} | \vecnot{w} \rangle = c \}$ (defined by $\vecnot{w} \in V$ and $c\in \RealNumbers$) such that $\langle \vecnot{u} | \vecnot{w} \rangle > c$ for all $\vecnot{u} \in A$ and $\langle \vecnot{u} | \vecnot{w} \rangle < c$ for all $\vecnot{u} \in B$.
+\end{theorem}
+\begin{proof}
+Applying Theorem~\ref{thm:MinDistTwoConvexSet} gives a pair of points $(\vecnot{u}^*,\vecnot{v}^*) \in A \times B$ that minimize the distance and satisfy $\vecnot{u}^* = P_A (\vecnot{v}^*)$ and $\vecnot{v}^* = P_B (\vecnot{u}^*)$.
+Applying Theorem~\ref{theorem:convex_point_set_hyperplane} to $P_A (\vecnot{v}^*)$ shows that $\langle \vecnot{u} | \vecnot{u}^* - \vecnot{v}^* \rangle \geq \langle \vecnot{u}^* | \vecnot{u}^* - \vecnot{v}^* \rangle$ for all $\vecnot{u} \in A$.
+Similarly, applying Theorem~\ref{theorem:convex_point_set_hyperplane} to $P_B (\vecnot{u}^*)$ shows that $\langle \vecnot{v} | \vecnot{v}^* - \vecnot{u}^* \rangle \geq \langle \vecnot{v}^* | \vecnot{v}^* - \vecnot{u}^* \rangle$ for all $\vecnot{v} \in B$.
+Negating this gives $\langle \vecnot{v} | \vecnot{u}^* - \vecnot{v}^* \rangle \leq \langle \vecnot{v}^* | \vecnot{u}^* - \vecnot{v}^* \rangle$.
+Now, we observe that  $\langle \vecnot{u}^* | \vecnot{u}^* - \vecnot{v}^* \rangle - \langle \vecnot{v}^* | \vecnot{u}^* - \vecnot{v}^* \rangle = \| \vecnot{u}^* - \vecnot{v}^* \|^2 > 0$ because $\vecnot{u}^* \neq \vecnot{v}^*$.
+Thus, we can choose $\vecnot{w} = \vecnot{u}^* - \vecnot{v}^*$ and $c=\frac{1}{2}(\langle \vecnot{u}^* | \vecnot{u}^* - \vecnot{v}^* \rangle + \langle \vecnot{v}^* | \vecnot{u}^* - \vecnot{v}^* \rangle)$  to guarantee that $\langle \vecnot{u} | \vecnot{w} \rangle > c$ for all $\vecnot{u} \in A$ and $\langle \vecnot{u} | \vecnot{w} \rangle < c$ for all $\vecnot{u} \in B$.
+\end{proof}
 
 \iffalse
 \subsection{Alternating Projections}
