@@ -1,4 +1,4 @@
-\chapter{Representation and Approximation}
+.\chapter{Representation and Approximation}
 
 \section{Best Approximation}
 \index{inner-product space!best approximation}
@@ -431,12 +431,12 @@ G = \left[ \begin{array}{cccc}
 \end{array} \right]
 \end{equation}
 is called the \defn{matrix}{Gramian} matrix.
-Since $g_{ji} = \left\langle \vecnot{w}_i | \vecnot{w}_j \right\rangle$, it follows that the Gramian is a Hermitian symmetric matrix, i.e., $G^H = G$.
+Since $g_{ij} = \left\langle \vecnot{w}_j | \vecnot{w}_i \right\rangle$, it follows that the Gramian is a Hermitian symmetric matrix, i.e., $G^H = G$.
 \end{definition}
 
 \begin{definition}
-A matrix $M\in F^{n \times n}$ is \defn{matrix}{positive-semidefinite} if $\vecnot{v}^H M \vecnot{v} \geq 0$ for all $\vecnot{v} \in F^n$.
-A matrix $M\in F^{n \times n}$ is \defn{matrix}{positive-definite} if $\vecnot{v}^H M \vecnot{v} > 0$ for all $\vecnot{v} \in F^n - \left\{ \vecnot{0} \right\}$.
+A matrix $M\in F^{n \times n}$ is \defn{matrix}{positive-semidefinite} if $M^H \!=\! M$ and $\vecnot{v}^H M \vecnot{v} \geq 0$ for all $\vecnot{v} \in F^n - \left\{ \vecnot{0} \right\}$.
+If the inequality is strict, $M$ is \defn{matrix}{positive-definite}.
 \end{definition}
 
 An important aspect of positive-definite matrices is that they are always invertible.
@@ -444,18 +444,18 @@ This follows from noting that $M\vecnot{v} = \vecnot{0}$ for $\vecnot{v}\neq\vec
 
 \begin{theorem}
 A Gramian matrix $G$ is always positive-semidefinite.
-Furthermore, it is positive-definite if and only if the sequence of vectors $\vecnot{w}_1, \ldots, \vecnot{w}_n$ is linearly independent.
+It is positive-definite if and only if the vectors $\vecnot{w}_1, \ldots, \vecnot{w}_n$ are linearly independent.
 \end{theorem}
 \begin{proof}
-Let $\vecnot{v} = \left( v_1, \ldots, v_n \right)^T \in F^n$.
-Then,
+Since $g_{ij} = \left\langle \vecnot{w}_j | \vecnot{w}_i \right\rangle$, the conjugation property of the inner product implies $G^H = G$.
+Using $\vecnot{v} = \left( v_1, \ldots, v_n \right)^T \in F^n$, we can write
 \begin{equation} \label{equation:PositiveSemiDefiniteProof}
 \begin{split}
 \vecnot{v}^H G \vecnot{v} &=
-\sum_{i=1}^n \sum_{j=1}^n \bar{v}_j g_{ji} v_i
-= \sum_{i=1}^n \sum_{j=1}^n \bar{v}_j \left\langle \vecnot{w}_i | \vecnot{w}_j \right\rangle v_i \\
-&= \sum_{i=1}^n \sum_{j=1}^n \left\langle v_i \vecnot{w}_i | v_j \vecnot{w}_j \right\rangle
-= \left\langle \sum_{i=1}^n v_i \vecnot{w}_i \Big| \sum_{j=1}^n v_j \vecnot{w}_j \right\rangle \\
+\sum_{i=1}^n \sum_{j=1}^n \bar{v}_i g_{ij} v_j
+= \sum_{i=1}^n \sum_{j=1}^n \bar{v}_i \left\langle \vecnot{w}_j | \vecnot{w}_i \right\rangle v_j \\
+&= \sum_{i=1}^n \sum_{j=1}^n \left\langle v_j \vecnot{w}_j | v_i \vecnot{w}_i \right\rangle
+= \left\langle \sum_{j=1}^n v_j \vecnot{w}_j \Big| \sum_{i=1}^n v_i \vecnot{w}_i \right\rangle \\
 &= \left\| \sum_{i=1}^n v_i \vecnot{w}_i \right\|^2
 \geq 0.
 \end{split}
@@ -475,7 +475,7 @@ Conversely, if $G$ is positive-definite then $\vecnot{v}^H G \vecnot{v} > 0$ and
 \left\| \sum_{i=1}^n v_i \vecnot{w}_i \right\| > 0
 \end{equation*}
 for all $\vecnot{v} \in F^n - \left\{ \vecnot{0} \right\}$.
-Therefore, the sequence of vectors $\vecnot{w}_1, \ldots, \vecnot{w}_n$ is linearly independent.
+Thus, the vectors $\vecnot{w}_1, \ldots, \vecnot{w}_n$ are linearly independent.
 \end{proof}
 
 
@@ -949,13 +949,17 @@ In this case, the solution $\hat{\vecnot{s}}$ can be obtained in closed form and
 \section{Projection onto Convex Sets}
 
 So far, we have focused on the projection of vectors onto subspaces.
-Convex sets relax the closure property of a subspace to convex combinations of subsets of points.
+In this section, similar results are obtained for the projection of vectors onto convex sets.
 
 \begin{definition}
 Let $V$ be a vector space.
 The subset $A \subseteq V$ is called a \defn{vector space}{convex set} if, for all $\vecnot{a}_1,\vecnot{a}_2 \in A$ and $\lambda\in(0,1)$, we have $\lambda \vecnot{a}_1 + (1-\lambda) \vecnot{a}_2 \in A$.
 The set is \textbf{strictly convex} if, for all $\vecnot{a}_1,\vecnot{a}_2 \in \Closure{A}$ and $\lambda\in(0,1)$, we have $\lambda \vecnot{a}_1 + (1-\lambda) \vecnot{a}_2 \in \Interior{A}$.
 \end{definition}
+
+\begin{problem}
+Show that the intersection of convex sets is convex.
+\end{problem}
 
 \begin{definition}
 Let $V$ be a Hilbert space and $A\subseteq V$ be a closed convex set. The \textbf{orthogonal projection} of $\vecnot{v} \in V$ onto $A$ is the mapping $P_A \colon V \to A$ defined by
@@ -982,7 +986,7 @@ Similarly, if both $\vecnot{u}$ and $\vecnot{u}'$ achieve the minimum distance $
 This implies that the closed ball of radius $d$ in $V$ contains a line segment on its boundary but one can use the Cauchy-Schwarz inequality to show this is impossible.
 \end{remark}
 
-The following theorem instead uses straightforward Hilbert-space methods to establish the same result for all closed convex $A$.
+The following theorem instead uses vector space methods to establish the same result for all closed convex $A$.
 
 \begin{theorem}
 \label{theorem:HilbertProjectionTheorem} For Hilbert space $V$, the orthogonal projection of $\vecnot v \in V$ onto a closed convex set $A\subseteq V$ exists and is unique.
@@ -994,7 +998,7 @@ Next, consider any sequence $\vecnot u_{1},\vecnot u_{2},\ldots\in A$ that achie
 \[
 \lim_{n\rightarrow\infty}\left\Vert \vecnot u_{n}-\vecnot v\right\Vert =d.
 \]
-Since $A$ is complete, the next step is showing that this sequence is Cauchy. The paralleogram law states that $\left\Vert x-y\right\Vert ^{2}=2\left\Vert x\right\Vert ^{2}+2\left\Vert y\right\Vert ^{2}-\left\Vert x+y\right\Vert ^{2}$ and applying this to $\vecnot{x}=\vecnot{v}-\vecnot u_{n}$ and $\vecnot{y}=\vecnot{v}-\vecnot u_{m}$ gives
+Since $A$ is complete, the next step is showing that this sequence is Cauchy. The parallelogram law states that $\left\Vert x-y\right\Vert ^{2}=2\left\Vert x\right\Vert ^{2}+2\left\Vert y\right\Vert ^{2}-\left\Vert x+y\right\Vert ^{2}$ and applying this to $\vecnot{x}=\vecnot{v}-\vecnot u_{n}$ and $\vecnot{y}=\vecnot{v}-\vecnot u_{m}$ gives
 \begin{align*}
 \left\Vert \vecnot u_{m}-\vecnot u_{n}\right\Vert ^{2} & =\left\Vert \left(\vecnot v-\vecnot u_{n}\right)-\left(\vecnot v-\vecnot u_{m}\right)\right\Vert ^{2}\\
  & =2\left\Vert \vecnot v-\vecnot u_{n}\right\Vert ^{2}+2\left\Vert \vecnot v-\vecnot u_{m}\right\Vert ^{2}-\left\Vert \left(\vecnot v-\vecnot u_{n}\right)+\left(\vecnot v-\vecnot u_{m}\right)\right\Vert ^{2}\\
