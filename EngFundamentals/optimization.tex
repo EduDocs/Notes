@@ -101,7 +101,7 @@ $$ f'(\vecnot{x})(\vecnot{h}) = \langle\vecnot{h} | \nabla f (\vecnot{x}) \rangl
 In the setting of the previous example, show that, if $\nabla f (\vecnot{x}) \neq \vecnot{0}$, then $f\big(\vecnot{x}-\delta \nabla f(\vecnot{x})\big) < f(\vecnot{x})$ for some $\delta >0$.
 \end{problem}
 
-\begin{theorem}
+\begin{theorem} \label{theorem:frechet2gateaux}
 Let $f \colon X \rightarrow Y$ be a mapping from a Banach space $(X,\|\cdot\|_X)$ to a Banach space $(Y,\|\cdot\|_Y)$.
 If $f$ is Fr\'{e}chet differentiable at $\vecnot{x}$ with derivative $f'$, then $f$ is G\^{a}teaux differentiable at $\vecnot{x}$ with G\^{a}teaux differential $\delta f (\vecnot{x};\vecnot{h}) = f'(\vecnot{x}) (\vecnot{h})$.
 \end{theorem}
@@ -157,36 +157,44 @@ Since $(f'(\vecnot{x}) (\vecnot{h}) + \phi(\vecnot{h})) \to \vecnot{0}$ as $\vec
 Thus, $\lim_{\vecnot{h} \to \vecnot{0}} \| \rho (\vecnot{h}) \|_Z / \|\vecnot{h}\|_X = 0$ and the Fr\'{e}chet derivative of $g(f(\vecnot{x}))$ exists and satisfies the chain rule.
 \end{proof}
 
-\iffalse
-\begin{theorem}
+%\iffalse
+\begin{theorem} \label{theorem:mean_value_inequality}
 Let $X,Y$ be Banach spaces and $f \colon X \rightarrow Y$ be a function.
-For $\vecnot{x}_1,\vecnot{x}_2 \in X$, let $\vecnot{h} = \frac{ \vecnot{x}_2 - \vecnot{x}_1}{\| \vecnot{x}_2 - \vecnot{x}_1 \|}$ and $M = \sup_{s \in [0,1]} \| \delta f \big( (1-s)\vecnot{x}_1+s\vecnot{x}_2; \vecnot{h}\big)\|$.
-Then, $\|f(\vecnot{z})-f(\vecnot{x})\| \leq M \| \vecnot{z} - \vecnot{x}\|$.
+For $\vecnot{x}_1,\vecnot{x}_2 \in X$, let $\vecnot{h} = \vecnot{x}_2 - \vecnot{x}_1$ and assume the G\^{a}teaux differential $\delta f \big( (1-s)\vecnot{x}_1+s\vecnot{x}_2; \vecnot{h}\big)$ exists for all $s\in [0,1]$.
+Then, $\|f(\vecnot{x}_2)-f(\vecnot{x}_1)\| \leq M \| \vecnot{x}_2 - \vecnot{x}_1 \|$, where
+\[ M = \frac{\sup_{s \in [0,1]} \| \delta f \big( (1-s)\vecnot{x}_1+s\vecnot{x}_2; \vecnot{h}\big)\|}{\| \vecnot{x}_2 - \vecnot{x}_1 \|}. \]
 \end{theorem}
 \begin{proof}
-Suppose $\|f(\vecnot{z})-f(\vecnot{x})\| > M \| \vecnot{z} - \vecnot{x}\|$.
-Then, for $\vecnot{w} = \frac{1}{2}(\vecnot{x}+\vecnot{z})$, observe that
-\[ \|f(\vecnot{z})-f(\vecnot{x})\| =  \|f(\vecnot{z})-f(\vecnot{w}) + f(\vecnot{w})-f(\vecnot{x})\| \leq 
- \|f(\vecnot{z})-f(\vecnot{w})\| + \|f(\vecnot{w})-f(\vecnot{x})\|. \] 
- 
+For $\vecnot{w}_1 = \frac{1}{2}(\vecnot{x}_1+\vecnot{x}_2)$, observe that
 \begin{align*}
-&= \frac{d}{ds} \|f\big((1-s)\vecnot{x}_1 + s \vecnot{x}_2 ) \| \\
-&= \lim_{t\to 0} \frac{1}{t} \left( \|f\big((1-s)\vecnot{x}_1 + s \vecnot{x}_2 + t (\vecnot{x}_2 - \vecnot{x}_1) \big) \| - \|f\big((1-s)\vecnot{x}_1 + s \vecnot{x}_2 ) \|\right).
+\frac{\|f(\vecnot{x}_2)-f(\vecnot{x}_1)\|}{\| \vecnot{x}_2 - \vecnot{x}_1 \|} &=  \frac{\|f(\vecnot{x_2})-f(\vecnot{w}_1) + f(\vecnot{w}_1)-f(\vecnot{x}_1)\|}{\| \vecnot{x}_2 - \vecnot{x}_1 \|} \\
+&\leq 
+ \frac{\|f(\vecnot{x}_2)-f(\vecnot{w}_1)\| + \|f(\vecnot{w}_1)-f(\vecnot{x}_1)\|}{\| \vecnot{x}_2 - \vecnot{x}_1 \|} \\
+&=  \frac{\|f(\vecnot{x}_2)-f(\vecnot{w}_1)\|}{2 \| \vecnot{x}_2 - \vecnot{w}_1 \|} +  \frac{\|f(\vecnot{w}_1)-f(\vecnot{x}_1)\|}{2 \| \vecnot{w}_1 - \vecnot{x}_1 \|}.
 \end{align*}
-
+Suppose that $\|f(\vecnot{x}_2)-f(\vecnot{x}_1)\| > M \| \vecnot{x}_2 - \vecnot{x}_1\|$.
+Then, there is an $\epsilon > 0$ such that one or both of the following conditions must hold:
+\[ \frac{\|f(\vecnot{x}_2)-f(\vecnot{w}_1)\|}{\| \vecnot{x}_2 - \vecnot{w}_1 \|} \geq M + \epsilon  \quad \text{and} \quad \frac{\|f(\vecnot{w}_1)-f(\vecnot{x}_1)\|}{\| \vecnot{w}_1 - \vecnot{x}_1 \|} \geq M + \epsilon. \]
+Repeating indefinitely and choosing a satisfying subinterval at each step, one gets a sequence $\vecnot{w}_n$ of midpoints that converges to $\vecnot{x}=  (1-s)\vecnot{x}_1+s\vecnot{x}_2 $ for some $s\in [0,1]$.
+Since the G\^{a}teaux differential $\delta f (\vecnot{x};\vecnot{h})$ exists by assumption, it follows that
+\[ M + \epsilon \leq \frac{\|f(\vecnot{w}_n)-f(\vecnot{x})\|}{\| \vecnot{w}_n - \vecnot{x} \|} = \left\| \frac{f(\vecnot{x}\pm 2^{-n} \vecnot{h})-f(\vecnot{x})}{2^n \| \vecnot{x}_2 - \vecnot{x}_1 \|} \right\| \to \frac{\| \delta f (\vecnot{x};\vecnot{h}) \|}{\| \vecnot{x}_2 - \vecnot{x}_1 \|}. \] 
+This contradicts the definition of $M$ and, thus, $\|f(\vecnot{x}_2)-f(\vecnot{x}_1)\| \leq M \| \vecnot{x}_2 - \vecnot{x}_1\|$.
 \end{proof}
-Add norm of integral bound
 
-Use mean value inequality to prove
-
-\begin{lemma}
+\begin{corollary}
 Let $X,Y$ be Banach spaces and $f \colon X \rightarrow Y$ be a function.
 If the Fr\'{e}chet derivative $f'(\vecnot{x})$ exists and satisfies $\| f'(\vecnot{x})\| \leq L$ for all $\vecnot{x}$ in a convex set $A\subseteq X$, then $f$ is Lipschitz continuous on $A$ with Lipschitz constant $L$.
-\end{lemma}
+\end{corollary}
 
 \begin{proof}
+Assume $\| f'(\vecnot{x})\| \leq L$ for all $\vecnot{x}$ in a convex set $A\subseteq X$.
+Then, for any $\vecnot{x}_1 , \vecnot{x}_2 \in A$, let $\vecnot{h} = \vecnot{x}_2 - \vecnot{x}_1$ and notice that Theorem~\ref{theorem:frechet2gateaux} implies that
+\[ \| \delta f \big( (1-s)\vecnot{x}_1+s\vecnot{x}_2; \vecnot{h}\big) \|  = \| f'\big( (1-s)\vecnot{x}_1+s\vecnot{x}_2 \big)(\vecnot{h}) \| \leq \| f'(\vecnot{x})\| \|\vecnot{h} \|, \] 
+for all $s\in [0,1]$.
+Applying Theorem~\ref{theorem:mean_value_inequality}, we see that $\|f(\vecnot{x}_2)-f(\vecnot{x}_1)\| \leq M \| \vecnot{x}_2 - \vecnot{x}_1\|$ with $M \leq \| f'(\vecnot{x})\| \leq L$.
+This completes the proof.
 \end{proof}
-\fi
+%\fi
 
 \iffalse
 \begin{theorem}
@@ -286,7 +294,20 @@ An equivalent condition is that equality in the triangle inequality (i.e., $\| \
 \begin{example}
 Let $(X,\|\cdot\|)$ be a normed vector space.
 Then, the norm $\| \cdot \| \colon X \rightarrow \mathbb{R}$ is a convex functional on $X$.
-Try proving this as an exercise.
+Proving this is a good introductory exercise.
+\end{example}
+
+\begin{example}
+Let $X$ be an an inner-product space. For $\vecnot{x},\vecnot{y} \in X$ and $\lambda \in (0,1)$,
+\begin{align*}
+\|\lambda \vecnot x + (1-\lambda) \vecnot y \|^2
+&= \lambda^2 \| \vecnot x\|^2 + 2\lambda(1-\lambda) \Real \langle \vecnot x |  \vecnot y \rangle + (1-\lambda)^2 \|\vecnot y\|^2 \\
+&= \lambda \| \vecnot x\|^2 + (1-\lambda)\|\vecnot y\|^2 - \lambda (1-\lambda) (\|\vecnot x\|^2+\|\vecnot y\|^2-2 \Real \langle x | y \rangle)\\
+&= \lambda \| \vecnot x\|^2 + (1-\lambda)\|\vecnot y\|^2 - \lambda (1-\lambda) \|\vecnot x - \vecnot y\|^2 \\
+&\leq \lambda \| \vecnot x\|^2 + (1-\lambda)\|\vecnot y\|^2,
+\end{align*}
+with equality iff $\vecnot{x}=\vecnot{y}$.
+Thus, the square of the induced norm $\| \cdot \|^2$ is a strictly convex functional on $X$.
 \end{example}
 
 \begin{theorem}

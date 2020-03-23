@@ -299,7 +299,7 @@ Then, the best approximation of $\vecnot{v}\in V$ by vectors in $\mathcal{R}(U)$
 \vecnot{w} = \sum_{i=1}^m \frac{ \left\langle \vecnot{v} | \vecnot{u}_i \right\rangle }{ \left\| \vecnot{u}_i \right\|^2 } \vecnot{u}_i,
 \end{equation*}
 can also be written as
-\[ \vecnot{w} = U U^H \vecnot{v} = \sum_{i=1}^m \vecnot{u}_i (\vecnot{u}_i^H \vecnot{v}). \]
+\[ {\color{blue}\vecnot{w} = U U^H \vecnot{v}} = \sum_{i=1}^m \vecnot{u}_i (\vecnot{u}_i^H \vecnot{v}). \]
 
 \end{frame}
 
@@ -369,8 +369,8 @@ Since $g_{ij} = \left\langle \vecnot{w}_j | \vecnot{w}_i \right\rangle$, we see 
 \end{definition}
 
 \begin{definition}<2->
-A matrix $M\in F^{n \times n}$ is \textcolor{blue}{positive-semidefinite} if $\vecnot{v}^H M \vecnot{v} \geq 0$ for all $\vecnot{v} \in F^n$.
-A matrix $M\in F^{n \times n}$ is \textcolor{blue}{positive-definite} if $\vecnot{v}^H M \vecnot{v} > 0$ for all $\vecnot{v} \in F^n - \left\{ \vecnot{0} \right\}$.
+A matrix $M\in F^{n \times n}$ is \textcolor{blue}{positive-semidefinite} if $M=M^H$ and $\vecnot{v}^H M \vecnot{v} \geq 0$ for all $\vecnot{v} \in F^n - \left\{ \vecnot{0} \right\}$.
+If the inequality is strict, then it is \textcolor{blue}{positive-definite}.
 \end{definition}
 
 
@@ -437,12 +437,12 @@ It defines an orthogonal projection onto the range of $A$ (i.e., the subspace sp
 
 \begin{frame}{4.3.3: Weighted Least-Squares Solution of a Linear System}
 
-For the standard inner product with induced Euclidean norm $\| \cdot \|_E$ and any invertible $B$, consider the weighted least-squares problem
+For the standard Euclidean norm $\| \vecnot{v} \|_E = \sqrt{\vecnot{v}^H \vecnot{v}}$ and any invertible $B$, consider the weighted least-squares problem
 \[ \min_{\hat{\vecnot{v}}\in W} \| B(\vecnot{v} - \hat{ \vecnot{v}}) \|_E = \min_\vecnot{s} \| B( \vecnot{v} - A \vecnot{s}) \|_E \]
-But, $\| B \vecnot{v} \|_E$ equals the induced norm of the non-standard inner product
-\[ \left\langle \vecnot{u} | \vecnot{v} \right\rangle  \triangleq \vecnot{v}^H B^H B \vecnot{v}. \]
+But, $\| B \vecnot{v} \|_E$ equals the induced norm $\| \vecnot{v} \|$ for the weighted inner product
+\[ \left\langle \vecnot{u} | \vecnot{v} \right\rangle  \triangleq \vecnot{v}^H B^H B \vecnot{u}. \]
 
-For the non-standard inner product, the normal equations look the same
+For the weighted inner product, the normal equations look the same
 \[ \left\langle \vecnot{v} - \hat{\vecnot{v}} | \vecnot{w}_j \right\rangle
 = \left\langle \vecnot{v} - A \vecnot{s} | \vecnot{w}_j \right\rangle
 = 0, \quad j \in [n]. \]
@@ -648,7 +648,7 @@ Observe $A^T A \colon \RealNumbers^n \to \RealNumbers^n$ is invertible if non-si
 
 \begin{frame}{Interlude: Alternative for Linear Systems}
 
-A ``Theorem of the Alternative'' asserts that two logical statements are mutually exclusive. The following is a famous example.
+A ``Theorem of the Alternative'' asserts that exactly one of two logical statements is true. The following is a famous example.
 
 \begin{theorem}
 For a matrix $A \in \mathbb{R}^{m\times n}$ and a vector $\vecnot{b}\in \mathbb{R}^m$, exactly one of the following statements is true:
@@ -718,18 +718,22 @@ Idea is to find orthonormal bases for $\RealNumbers^n$ and $\RealNumbers^m$ in w
 \begin{itemize}
 \setlength\itemsep{3mm}
 
-\item Let $\vecnot{v}_1, \ldots, \vecnot{v}_r$ be orthonormal eigenvectors of $A^H A$ with positive eigenvalues $\sigma_1^2,\ldots,\sigma_r^2$.
-Then, \[\vecnot{v}_i^H (A^H A \vecnot{v}_i) = \sigma_i^2 \vecnot{v}_i^H \vecnot{v}_i = \sigma_i^2 \]
+\item<1-> Let $\vecnot{v}_1, \ldots, \vecnot{v}_r$ be orthonormal eigenvectors of $A^H A$ with positive eigenvalues $\sigma_1^2,\ldots,\sigma_r^2$.
+Then, \[\|A \vecnot{v}_i\| ^2 = \vecnot{v}_i^H (A^H A \vecnot{v}_i) =  \vecnot{v}_i^H (\sigma_i^2\vecnot{v}_i) = \sigma_i^2 \]
 
-\item This implies that $\|A \vecnot{v}_i\| = \sigma_i$.
-So $\vecnot{u}_i = \frac{1}{\sigma_i} A\vecnot{v}_i$ has $\| \vecnot{u}_i \| \!=\! 1$ and
-\[A A^H \vecnot{u}_i = \frac{1}{\sigma_i} A A^H A \vecnot{v}_i = \frac{1}{\sigma_i} \sigma_i^2 A \vecnot{v}_i = \sigma_i^2 \vecnot{u}_i \]
+\item<2-> This implies that $\|A \vecnot{v}_i\| = \sigma_i$.
+So $\vecnot{u}_i = \frac{1}{\sigma_i} A\vecnot{v}_i$ has $\| \vecnot{u}_i \| \!=\! 1$ and \vspace{-1mm}
+\begin{align*}
+A A^H \vecnot{u}_i &= \frac{1}{\sigma_i} A A^H A \vecnot{v}_i = \frac{1}{\sigma_i} \sigma_i^2 A \vecnot{v}_i = \vecnot{u}_i
+\\
+\vecnot{u}_j^H \vecnot{u}_i &= \left(\frac{1}{\sigma_j} A \vecnot{v}_j \right)^H \left(\frac{1}{\sigma_i} A \vecnot{v}_i \right) =\frac{1}{\sigma_i \sigma_j} \vecnot{v}_j^H (A^H A) \vecnot{v}_i = \delta_{i,j}  \vspace{-1mm}
+\end{align*}
 
 
-\item For $U_1 = [\vecnot{u}_1,\ldots,\vecnot{u}_r]
+\item<3-> For $U_1 = [\vecnot{u}_1,\ldots,\vecnot{u}_r]
 $ and $V_1 = [\vecnot{v}_1,\ldots,\vecnot{v}_r]$, this gives $A V_1 = U_1 \Sigma_1$ where $\Sigma_1$ is a $r \times r$ diagonal matrix with diagonal entries $\sigma_1,\ldots,\sigma_r$
 
-\item Solving for $A$ gives the \textcolor{blue}{compact SVD} \vspace{-1mm} \[ \color{blue} A = U_1 \Sigma V_1^H, \vspace{-1mm}\]
+\item<4-> Solving for $A$ gives the \textcolor{blue}{compact SVD} \vspace{-1mm} \[ \color{blue} A = U_1 \Sigma V_1^H, \vspace{-1mm}\]
 where the \textcolor{blue}{columns of $U_1, V_1$ are orthonormal bases for $\mathcal{R}(A), \mathcal{R}(A^H)$}
 
 \end{itemize}
@@ -752,7 +756,7 @@ $ and $U = [\vecnot{u}_1,\ldots,\vecnot{u}_m]$, $A V = U \Sigma$ where $\Sigma \
 
 \end{frame}
 
-\begin{frame}{6.5: The Four Fundamental Subspaces: The Pseudo-Inverse}
+\begin{frame}{6.5: The Four Fundamental Subspaces: Pseudo-Inverse}
 
 \hspace*{-4mm}
 \includegraphics[width=114mm]{strang_fig4}
@@ -863,6 +867,8 @@ From the compact SVD $A = U_1 \Sigma_1 V_1^H$, one finds that $A^+ = V_1
 \Sigma_1)} V_1^H \big)^H  = {V_1 V_1^H} = A^+ A$ \qedhere
 \end{enumerate}
 \end{proof}
+
+\visible<2->{Thus, $A A^+$ and $A^+ A$ are projection matrices onto $\mathcal{R}(A)$ and $\mathcal{R}(A^H)$.}
 
 \end{frame}
 
