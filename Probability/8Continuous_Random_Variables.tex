@@ -10,7 +10,7 @@ While this extra flexibility is useful and desirable, it comes at a certain cost
 A continuous random variable cannot be characterized by a probability mass function.
 This predicament emerges from the limitations of the third axiom of probability laws, which only applies to countable collections of disjoint events.
 
-Below, we provide a definition for continuous random variables.
+Below, we offer a description of continuous random variables.
 Furthermore, we extend and apply the concepts and methods initially developed for discrete random variables to the class of continuous random variables.
 In particular, we develop a continuous counterpart to the probability mass function.
 
@@ -118,7 +118,7 @@ where $\lfloor \cdot \rfloor$ denotes the standard floor function.
 For integer $k \geq 1$, the PMF of geometric random variable $X$ can be recovered from the CDF as follows,
 \begin{equation*}
 \begin{split}
-p_X (k) &= F_X (x) - \lim_{u \uparrow x} F_X (u) = F_X (k) - F_X (k-1) \\
+p_X (k) &= F_X (k) - \lim_{u \uparrow k} F_X (u) = F_X (k) - F_X (k-1) \\
 &= \left( 1 - (1-p)^k \right) - \left( 1 - (1-p)^{k-1} \right) \\
 %&= (1 - p)^{k-1} - (1-p) (1-p)^{k-1} \\
 &= (1 - p)^{k-1} p .
@@ -129,8 +129,10 @@ p_X (k) &= F_X (x) - \lim_{u \uparrow x} F_X (u) = F_X (k) - F_X (k-1) \\
 
 \subsection{Continuous Random Variables}
 
-Having introduced the general notion of a CDF, we can safely provide a more precise definition for continuous random variables.
-Let $X$ be a random variable with CDF $F_X (\cdot)$, then $X$ is said to be a \emph{continuous random variable} if $F_X (\cdot)$ is continuous and differentiable. \index{Continuous random variable}
+Having introduced the general notion of a CDF, we turn our attention to characteristics of continuous random variables.
+Let $X$ be a random variable with CDF $F_X (\cdot)$.
+Furthermore, supposed that $F_X (\cdot)$ is a continuous function, and that it is differentiable almost everywhere (except perhaps at discrete locations).
+Then, $X$ is said to be a \emph{continuous random variable}. \index{Continuous random variable}
 
 \begin{example}
 Suppose that $X$ is a random variable with CDF given by
