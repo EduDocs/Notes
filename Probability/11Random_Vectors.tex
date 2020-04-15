@@ -98,26 +98,26 @@ For $(x, y) \in \RealNumbers^2$, their joint PDF is given by
 \begin{equation*}
 f_{X,Y} (x,y) = \frac{1}{2 \pi \sigma^2} e^{- \frac{x^2 + y^2}{2 \sigma^2} } .
 \end{equation*}
-We wish to find the probability that $(X,Y)$ falls within a circle of radius $r$ centered at the origin.
+We wish to find the probability that $(X,Y)$ falls within a circle of radius $s > 0$ centered at the origin.
 
 We can compute this probability using integral formula \eqref{equation:ProbabilityJointPDF} applied to this particular problem.
-Let $R = \sqrt{X^2 + Y^2}$ and assume $r > 0$, then
+Let $R = \sqrt{X^2 + Y^2}$ and assume $s > 0$, then
 \begin{equation*}
 \begin{split}
-\Pr (R \leq r) &= \iint\limits_{R \leq r} f_{X,Y} (x,y) dx dy
-= \iint\limits_{R \leq r} \frac{1}{2 \pi \sigma^2}
-e^{- \frac{ x^2 + y^2 }{2 \sigma^2} } (x,y) dx dy \\
-&= \int_0^r \int_0^{2\pi} \frac{1}{2 \pi \sigma^2}
+\Pr (R \leq s) &= \iint\limits_{R \leq s} f_{X,Y} (x,y) dx dy
+= \iint\limits_{R \leq s} \frac{1}{2 \pi \sigma^2}
+e^{- \frac{ x^2 + y^2 }{2 \sigma^2} } dx dy \\
+&= \int_0^s \int_0^{2\pi} \frac{1}{2 \pi \sigma^2}
 e^{- \frac{ r^2 }{2 \sigma^2} } r d\theta dr
-= 1 - e^{- \frac{ r^2 }{2 \sigma^2} } .
+= 1 - e^{- \frac{ s^2 }{2 \sigma^2} } .
 \end{split}
 \end{equation*}
-The probability that $(X, Y)$ is contained within a circle of radius $r$ is $1 - e^{- \frac{ r^2 }{2 \sigma^2} }$.
+The probability that $(X, Y)$ is contained within a circle of radius $s>0$ is $1 - e^{- \frac{ s^2 }{2 \sigma^2} }$.
 Recognizing that $R$ is a continuous random variable, we can write its PDF as
 \begin{equation*}
-f_R (r) = \frac{r}{\sigma^2} e^{- \frac{r^2}{2 \sigma^2} } \quad r \geq 0 .
+f_R (s) = \frac{s}{\sigma^2} e^{- \frac{s^2}{2 \sigma^2} } \quad s \geq 0 .
 \end{equation*}
-From this equation, we gather That $R$ possesses a Rayleigh distribution with parameter $\sigma^2$.
+From this equation, we gather that $R$ possesses a Rayleigh distribution with parameter $\sigma^2$.
 \end{example}
 
 
