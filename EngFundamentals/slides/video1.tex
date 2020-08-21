@@ -1,0 +1,557 @@
+\documentclass[10pt,english,aspectratio=169]{beamer}
+
+\usetheme{default}
+
+\usepackage{xstring}
+\usepackage{pgfpages}
+%\makeatletter
+%\IfSubStr{\@classoptionslist}{handout}
+%  {\pgfpagesuselayout{2 on 1}[letterpaper,border shrink=5mm]}
+%  {}
+%\makeatother
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{stmaryrd}
+\usepackage{enumerate}
+\usepackage{stfloats}
+\usepackage{bbm}
+\usepackage{pdfpages}
+\usepackage{framed}
+
+\usepackage[most]{tcolorbox}
+\tcbset{highlight math style={enhanced,
+  colframe=white,colback=yellow!15,arc=8pt,boxrule=1pt,
+  }}
+  
+\usepackage{tikz,pgf,pgfplots,tikzsymbols}
+\usepackage{algorithm,algorithmic}
+\usepgflibrary{shapes}
+\usetikzlibrary{%
+  arrows,%
+  arrows.meta,
+  shapes.misc,% wg. rounded rectangle
+  shapes.arrows,%
+  shapes,%
+  calc,%
+  chains,%
+  matrix,%
+  positioning,% wg. " of "
+  scopes,%
+  decorations.pathmorphing,% /pgf/decoration/random steps | erste Graphik
+  shadows,%
+  backgrounds,%
+  fit,%
+  petri,%
+  quotes
+}
+
+\setbeamersize{text margin left=10mm,text margin right=35mm}
+
+\pgfplotsset{compat=1.12}
+
+%\usetheme{Frankfurt}
+%\usecolortheme{ldpc}
+\useinnertheme{rounded}
+\usecolortheme{whale}
+\usecolortheme{orchid}
+
+\newcommand{\ul}[1]{\underline{#1}}
+\renewcommand{\Pr}{\mathbb{P}}
+
+%% Setup slides and notes
+\makeatletter
+\IfSubStr{\@classoptionslist}{handout}
+  {\def\slidesonly{}}{\def\slidesnotes{}}
+\makeatother
+
+%\setbeameroption{show notes on second screen=right} % Both
+\ifdefined\notesonly
+  \setbeameroption{show only notes} % Only notes
+\fi
+\ifdefined\slidesnotes
+  \setbeameroption{show notes on second screen=right} % Both
+\fi
+\ifdefined\slidesonly
+  \setbeameroption{hide notes} % Only slides
+\fi
+%\setbeamertemplate{note page}{\pagecolor{yellow!5}\vfill\insertnote\vfill}
+
+\newcommand{\getpdfpages}[2]{\begingroup
+  \setbeamercolor{background canvas}{bg=}
+  \addtocounter{framenumber}{1}
+  \includepdf[pages={#1},%
+  pagecommand={%
+    \expandafter\def\expandafter\insertshorttitle\expandafter{%
+      \insertshorttitle\hfill\insertframenumber\,/\,\inserttotalframenumber}}%
+  ]{#2}
+  \endgroup}
+
+\newcommand{\backupbegin}{
+   \newcounter{finalframe}
+   \setcounter{finalframe}{\value{framenumber}}
+}
+\newcommand{\backupend}{
+   \setcounter{framenumber}{\value{finalframe}}
+}
+
+ \setbeamercolor{bibliography entry author}{fg=black}
+ \setbeamercolor{bibliography entry title}{fg=black}
+ \setbeamercolor{bibliography entry location}{fg=black}
+ \setbeamercolor{bibliography entry note}{fg=black}
+ 
+ \setbeamerfont{bibliography item}{size=\footnotesize}
+ \setbeamerfont{bibliography entry author}{size=\footnotesize}
+ \setbeamerfont{bibliography entry title}{size=\footnotesize}
+ \setbeamerfont{bibliography entry location}{size=\footnotesize}
+ \setbeamerfont{bibliography entry note}{size=\footnotesize}
+ \setbeamertemplate{bibliography item}{\insertbiblabel}
+ 
+\newlength\tikzwidth
+\newlength\tikzheight
+
+
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\mbb}[1]{\mathbb{#1}}
+\newcommand{\expt}{\mbb{E}}
+\newcommand{\dd}{\mathrm{d}}
+
+\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;}
+\def\greencheck{{\color{green}\checkmark}}
+\def\scalecheck{\resizebox{\widthof{\checkmark}*\ratio{\widthof{x}}{\widthof{\normalsize x}}}{!}{\checkmark}}
+\def\xmark{\tikz [x=1.4ex,y=1.4ex,line width=.2ex, red] \draw (0,0) -- (1,1) (0,1) -- (1,0);}
+\def\redx{{\color{red}\xmark}}
+
+\renewcommand{\footnotesep}{-2pt}
+
+\newif\ifslow
+\slowtrue
+
+\newcommand{\vecnot}[1]{#1}
+
+\begin{document}
+
+\ifslow
+
+\title{ECE 586: Vector Space Methods \\ Lecture 1 Flip Video: Propositional Logic}
+\author{Henry D. Pfister \\ Duke University}
+\date{}
+%\date{August 18th, 2020}
+%\maketitle
+
+\setbeamertemplate{navigation symbols}{}
+
+\begin{frame}[plain]
+	\titlepage
+	
+	\note{
+		\vspace{8mm}
+		\begin{enumerate}
+			\setlength\itemsep{3mm}
+			\color{red}
+			\item Welcome to the first video lecture for ECE 586, Vector Space Methods. \\[2mm]
+			Today, we'll discuss the first course topic, propositional logic.
+		\end{enumerate}
+	}
+\end{frame}
+
+\addtocounter{framenumber}{-1}
+\setbeamertemplate{navigation symbols}{\textcolor{blue}{\footnotesize \insertframenumber ~/ \inserttotalframenumber}}
+
+
+\begin{frame}<1-7> \frametitle{1: Logic}
+
+\begin{itemize}
+\item<1-> \textcolor{blue}{Statement} (or proposition)
+
+\begin{itemize}
+  \setlength\itemsep{1mm}
+  \item \textcolor{blue}{An assertion that is true or false, but not both}
+  
+  \item<2-> Ex. ``This video was recorded for a course at Duke University'' \greencheck
+  
+  \item<3-> Ex. ``The real number $\sqrt{2}$ is rational'' \redx
+  
+  \item<4-> Ex. ``Wash your hands before dinner'' \textcolor{red}{not a statement!}
+
+\end{itemize}
+
+\vspace{1mm}
+
+\item<5-> Combining statements
+
+\begin{itemize}
+  \setlength\itemsep{1mm}
+  \item One can also \textcolor{blue}{form new statements from old ones} using English expressions: and; or; not; if, then; if and only if
+  \item<6-> Ex. ``Duke is located in Durham, NC \textcolor{red}{or} all real numbers are rational''
+  
+  \item<7-> Note: symbols \textcolor{blue}{$P,Q,R,\ldots$} used to denote abstract statements 
+
+\end{itemize}
+
+\end{itemize}
+
+\note{
+	\vspace{4mm}
+	\begin{enumerate}[<alert@+>]
+	\footnotesize
+	\setlength\itemsep{2mm}
+	\item Statements (or propositions) are the fundamental elements of logic.  They are assertions that can be true or false but not both.
+	\item Read. is a logical statement and it is true.
+	\item Read. is also a logical statement but it is false.
+	\item Lastly, the sentence (read) is not a logical statement.  In English, it is called a directive sentence.
+	\item Read. Many of you should be familiar with the first three from digital logic.
+	\item For example. consider the statement (read). Is this statement true or false?  I will give you a few seconds to decide...  It is true because the logical OR is true if either component statement is true.
+	\item In the following slides, we will use $P,Q,R$ to denote abstract statements.
+ \end{enumerate}
+}
+
+
+\end{frame}
+
+
+
+\begin{frame}<1-4> \frametitle{1.1: Basic Definitions}
+
+\begin{itemize}
+
+\item<1-> Conjunction of $P,Q$ (i.e., $P$ AND $Q$)
+
+\begin{itemize}
+  \setlength\itemsep{1mm}
+  \item Binary operation on logical propositions (\textcolor{red}{denoted $P \wedge Q$}) that:\\ \hspace{2mm} \textcolor{blue}{is true only if both statements are true, and is false otherwise}
+\end{itemize}
+
+\vspace{0.5mm}
+
+\item<2-> Disjunction of $P,Q$ (i.e., $P$ OR $Q$)
+
+\begin{itemize}
+  \setlength\itemsep{1mm}
+  \item Binary operation on logical propositions (\textcolor{red}{denoted $P \vee Q$}) that: \\ \hspace{2mm} \textcolor{blue}{is true if either statement is true, and false otherwise}
+\end{itemize}
+
+\vspace{0.5mm}
+
+\item<3-> Negation of $P$ (i.e., NOT $P$)
+
+\begin{itemize}
+  \setlength\itemsep{1mm}
+  \item Unary operation on a logical proposition (\textcolor{red}{denoted $\neg P$}) that: \\ \hspace{2mm} \textcolor{blue}{is true if the statement is false, and is true otherwise}
+\end{itemize}
+
+\vspace{0.5mm}
+\item<4-> Truth Tables \\
+  \begin{center}
+  \begin{tabular}{|c|c|c|}
+  \hline
+  $P$ & $Q$ & $P \wedge Q$ \\
+  \hline
+  T & T & T \\
+  T & F & F \\
+  F & T & F \\
+  F & F & F \\
+  \hline
+  \end{tabular}
+  \hspace{3mm}
+  \begin{tabular}{|c|c|c|}
+  \hline
+  $P$ & $Q$ & $P \vee Q$ \\
+  \hline
+  T & T & T \\
+  T & F & T \\
+  F & T & T \\
+  F & F & F \\
+  \hline
+  \end{tabular}
+  \hspace{3mm}
+  \begin{tabular}{|c|c|}
+  \hline
+  $P$ & $\neg P$ \\
+  \hline
+  T & F \\
+  F & T \\
+  \hline
+  \end{tabular}
+  \end{center}
+  
+  
+\end{itemize}
+
+\note{
+	\vspace{4mm}
+	\begin{enumerate}[<alert@+>]
+	\footnotesize
+	\setlength\itemsep{2mm}
+	\item For logical propositions $P$ and $Q$, the logical AND is true if both statements are true and false otherwise.  In formal logic, this operation is called "the conjuction of $P$ and $Q$" and denoted by the upward pointing operator shown.
+	\item For logical propositions $P$ and $Q$, the logical OR is true if either statement is true and false otherwise.  In formal logic, this operation is called "the disjuction of $P$ and $Q$" and denoted by the downward pointing operator shown.
+	\item The negation of the logical proposition $P$ (i.e., NOT $P$) is true only if $P$ is false.  It is denoted by the denoted by the symbol shown.
+	\item All basic logical operations can be described by truth tables and these tables are shown for the above operations. (explain) \\ [2mm] For example, in the first table, we list all possible truth values for $P$ AND $Q$ along with the corresponding value for $P$ OR $Q$.  The second table starts the same way but lists the corresponding value for $P$ OR $Q$.
+ \end{enumerate}
+}
+
+\end{frame}
+
+
+
+
+\begin{frame}<1-4> \frametitle{1.2: Conditional Statements (1)}
+
+\begin{itemize}
+
+\item<1-> Conditional Connective \textcolor{red}{$P \rightarrow Q$} (i.e., if $P$, then $Q$)
+
+\begin{itemize}
+  \setlength\itemsep{2mm}
+  \item Binary operation on logical propositions that:\\ \hspace{2mm} \textcolor{blue}{is false if $P$ is true and $Q$ is false, and is true otherwise} \\
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+$P$ & $Q$ & $P \rightarrow Q$ \\
+\hline
+T & T & T \\
+T & F & F \\
+F & T & T \\
+F & F & T \\
+\hline
+\end{tabular}
+\end{center}
+
+\item $P$ is called the \textcolor{blue}{antecedent} and $Q$ is called the \textcolor{blue}{consequent}
+
+\end{itemize}
+\vspace{1mm}
+
+\item<2-> Meaning
+
+\begin{itemize}
+\setlength\itemsep{1.5mm}
+\item When $P$ is false, some people guess the truth value should be undefined. But, the values shown above are \textcolor{blue}{universally accepted} in logic
+
+\item<3-> Intuitively, one can think of $P \rightarrow Q$ as a \textcolor{blue}{promise that $Q$ is true whenever $P$ is true}. When $P$ is false, the promise is kept by default
+
+\item<4-> Ex. Suppose a friend promises \textcolor{blue}{``if it is sunny tomorrow, I will ride my bike"}.  We say their statement is \textcolor{blue}{true if they keep their promise}.
+So, if it rains and they don't ride their bike, then most people would agree they've kept their promise.
+
+\end{itemize}
+\end{itemize}
+
+\note{
+	\vspace{4mm}
+	\begin{enumerate}[<alert@+>]
+	\footnotesize
+	\setlength\itemsep{2mm}
+	\item Now, we will discuss the conditional connective ``if $P$ then $Q$''.  While you are all familiar with if/then statements, the formal definition of the conditional connective is probably new for many of you. \\ [2mm]  The statement ``if $P$, then $Q$'' is a compound logical statement that is either true or false (depending on the truth values of $P$ and $Q$).  This statement is represented in shorthand by a single arrow from $P$ to $Q$ and the truth table is shown here.  Notice the statement is true unless $P$ is true and $Q$ is false. (read)
+	\item The truth table for the conditional connective may seem odd at first.  (read)
+	\item Now, let's consider an intuitive description of the conditional connective. (read)
+	\item read.
+ \end{enumerate}
+}
+
+\end{frame}
+
+
+
+\begin{frame}<1-4> \frametitle{1.2: Conditional Statements (2)}
+
+\begin{itemize}
+
+\item<1-> Biconditional \textcolor{red}{$P \leftrightarrow Q$} (i.e., $P$ if and only if $Q$)
+
+\begin{itemize}
+  \setlength\itemsep{1.5mm}
+  \item Binary operation on logical propositions that is:\\ \hspace{2mm} \textcolor{blue}{true if $P$ and $Q$ have the same truth value, and false otherwise} \vspace{1mm} \\
+   
+  \begin{center}
+  \begin{tabular}{|c|c|c|}
+  \hline
+  $P$ & $Q$ & $P \leftrightarrow Q$ \\
+  \hline
+  T & T & T \\
+  T & F & F \\
+  F & T & F \\
+  F & F & T \\
+  \hline
+  \end{tabular}
+  \end{center} 
+  \vspace{1mm}
+
+  \item<2-> Identical truth values as: $(P \rightarrow Q) \wedge (Q \rightarrow P)$
+  
+  \item<3-> Ex.``John graduates this term if and only if he passes this class''
+  
+\end{itemize}
+
+\vspace{1mm}
+
+\item<4-> Variations of the conditional connective $P \rightarrow Q$
+
+\begin{itemize}
+  \setlength\itemsep{2mm}
+  \item The \textcolor{blue}{converse} of $P \rightarrow Q$ is the statement $Q \rightarrow P$
+  \item The \textcolor{blue}{contrapositive} of $P \rightarrow Q$ is the statement $\neg Q \rightarrow \neg P$
+\end{itemize}
+
+\end{itemize}
+
+\note{
+	\vspace{4mm}
+	\begin{enumerate}[<alert@+>]
+	\footnotesize
+	\setlength\itemsep{2mm}
+	\item Now, we consider the biconditional ``$P$ if and only if $Q$'' which is true only if $P$ and $Q$ have the same truth value.  \\ [2mm]  The statement ``$P$ if and only if $Q$'' is a compound logical statement that is either true or false (depending on the truth values of $P$ and $Q$).  This statement is represented in shorthand by a bidirectional arrow between $P$ and $Q$ and the truth table is shown here.
+	\item Notice that this is identical to the logical AND of ``if $P$ then $Q$'' with ``if $Q$, then $P$''
+	\item For example, consider the statement (read).  This statement is true if John graduates and passes this class or if John does not graduate and he fails this class.
+	\item There are also some named variations of the conditional connective. (read)
+ \end{enumerate}
+}
+
+\end{frame}
+
+
+
+
+  
+\begin{frame}<1-2> \frametitle{1.2: Compound Statements}
+  
+
+\begin{itemize}
+\setlength\itemsep{2mm}
+\item<1-> It is also useful to consider \textcolor{blue}{compound logical statements} like $$(P \rightarrow R) \wedge (Q \vee \neg R)$$
+
+\item<2-> In general, there is a mechanical way to compute the truth table: \\
+\begin{center}
+\begin{tabular}{|c|c|c|ccccccc|}
+\hline
+$P$ & $Q$ & $R$
+& $(P$ & $\rightarrow$ & $R)$ & $\wedge$ & $(Q$ & $\vee$ & $\neg R)$ \\
+\hline
+T & T & T & T & T & T & T & T & T & F \\
+T & T & F & T & F & F & F & T & T & T \\
+T & F & T & T & T & T & F & F & F & F \\
+T & F & F & T & F & F & F & F & T & T \\
+F & T & T & F & T & T & T & T & T & F \\
+F & T & F & F & T & F & T & T & T & T \\
+F & F & T & F & T & T & F & F & F & F \\
+F & F & F & F & T & F & T & F & T & T \\
+& & & 1 & 5 & 2 & 7 & 3 & 6 & 4 \\
+\hline
+\end{tabular} .
+\end{center}
+
+\end{itemize}
+
+\note{
+	\vspace{4mm}
+	\begin{enumerate}[<alert@+>]
+	\footnotesize
+	\setlength\itemsep{2mm}
+	\item Read. The logical AND of ``if $P$ then $R$'' with ``$Q$ OR not $R$''
+	\item For compound statements of this type, there is an straightforward (if tedious) method to compute the truth table. \\ [2mm] First, one lists all involved statements in the first columns and enumerates all possibilities.  Then, one writes the formula at the top and creates a column for each statement and operation. Finally, one works from left to right and fills any column whose values are determined by previously filled entries.  In this example, the order of filling is shown at the bottom of the table. \\ [2mm] For example, after the four fixed values have been copied, the result of the conditional connective can be written underneath its right-arrow notation.
+ \end{enumerate}
+}
+
+\end{frame}
+
+
+\begin{frame}<1-5> \frametitle{1.2: Meta Statements}
+
+\begin{itemize}
+\setlength\itemsep{2mm}
+\item<1-> A meta statement is a logical statement about logical statements
+
+
+\item<2-> Ex. A \textcolor{blue}{tautology} is a compound statement (e.g., $R(P,Q)$) that \vspace{1mm}
+\begin{itemize}
+ \setlength\itemsep{1.5mm}
+ \item \textcolor{blue}{is true for every valuation of its propositional variables}
+ \item Ex. $R(P,Q) = P \vee \neg P \vee Q$ is a tautology
+\end{itemize}
+
+\vspace{1mm}
+
+\item<3-> Ex. A \textcolor{blue}{contradiction} is a compound statement (e.g., $R(P,Q)$) that \vspace{1mm}
+\begin{itemize}
+  \setlength\itemsep{1.5mm}
+ \item  \textcolor{blue}{is false for every valuation of its propositional variables}
+ \item Ex. $R(P,Q) = P \wedge \neg P \wedge Q$ is a contradiction
+\end{itemize}
+
+\vspace{1mm}
+
+\item<4-> An \textcolor{blue}{implication $R \Rightarrow S$} is a meta statement (e.g., for $R(P,Q),S(P,Q)$) \vspace{1mm}
+\begin{itemize}
+  \setlength\itemsep{1.5mm}
+ \item that states $R(P,Q) \rightarrow S(P,Q)$ is always true (i.e., \textcolor{blue}{$R \rightarrow S$ is a tautology})
+ \item Ex. $(P \rightarrow Q) \wedge P \Rightarrow Q$ because $(P \rightarrow Q) \wedge P \rightarrow Q$ is a tautology
+\end{itemize}
+
+\item<5-> An \textcolor{blue}{equivalence $R \Leftrightarrow S$} is a meta statement (e.g., for $R(P,Q),S(P,Q)$) \vspace{1mm}
+\begin{itemize}
+  \setlength\itemsep{1.5mm}
+ \item that states $R(P,Q) \leftrightarrow S(P,Q)$ is always true (i.e., \textcolor{blue}{$R \leftrightarrow S$ is a tautology})
+ \item Ex. $P \rightarrow Q \Leftrightarrow \neg P \vee Q$ because $(P \rightarrow Q) \leftrightarrow (\neg P \vee Q)$ is a tautology
+\end{itemize}
+
+\end{itemize}
+
+\note{
+	\vspace{4mm}
+	\begin{enumerate}[<alert@+>]
+	\footnotesize
+	\setlength\itemsep{2mm}
+	\item Read.  In particular, it is typically a statement about a compound statement that depends on multiple statements (say $P$ and $Q$).
+	\item Read. Since either $P$ or $\neg P$ must be true, their logical OR must be true and this statement is always true.  It is also independent of $Q$.
+	\item Read. Similar to the previous example, either $P$ or $\neg P$ must be false and, thus, their logical AND must also be false.  So, this statement is always false.  It is also independent of $Q$.
+	\item Read. Logical implications provide logical arguments that are true for all statements.  Thus, they are important bulding block for logical proofs.
+	\item Read. Logical equivalences are logical identities.  They show two compound statements always have identical truth values.
+	\end{enumerate}
+}
+
+\end{frame}
+
+\begin{frame} \frametitle{Next Steps}
+
+\begin{itemize}
+\setlength\itemsep{5mm}
+\item To continue studying after this video -- \vspace{2mm}
+
+\begin{itemize}
+ \setlength\itemsep{3mm}
+ \item Try the suggested reading: Course Notes EF 1-1.2.2
+ \item Or the optional reading: PAF 1.1-2.6
+ \item Also, look at the problems in Assignment 1
+\end{itemize}
+\end{itemize}
+
+\note{
+	\vspace{8mm}
+	\begin{enumerate}
+		\setlength\itemsep{3mm}
+		\color{red}
+		\item Here are some options to continue learning this material. (read) \\ [2mm]  That's it for today.  So, I'll see you next time.
+	\end{enumerate}
+}
+
+\end{frame}
+
+  
+\backupbegin
+
+%\begin{frame}
+%\frametitle{Backup Slides}
+%\begin{itemize}
+%\item Slide numbers not included in denominator!
+%\end{itemize}
+%\end{frame}
+
+%\begin{frame}[allowframebreaks]
+%\frametitle{References}
+%\bibliographystyle{alpha}
+%\footnotesize
+%\bibliography{IEEEabrv,WCLabrv,WCLbib,WCLnewbib}
+%\end{frame}
+
+\backupend
+
+\end{document}

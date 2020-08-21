@@ -1,0 +1,497 @@
+\documentclass[10pt,english,aspectratio=169]{beamer}
+
+\usetheme{default}
+
+\usepackage{xstring}
+\usepackage{pgfpages}
+%\makeatletter
+%\IfSubStr{\@classoptionslist}{handout}
+%  {\pgfpagesuselayout{2 on 1}[letterpaper,border shrink=5mm]}
+%  {}
+%\makeatother
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{stmaryrd}
+\usepackage{enumerate}
+\usepackage{stfloats}
+\usepackage{bbm}
+\usepackage{pdfpages}
+\usepackage{framed}
+
+\usepackage[most]{tcolorbox}
+\tcbset{highlight math style={enhanced,
+  colframe=white,colback=yellow!15,arc=8pt,boxrule=1pt,
+  }}
+  
+\usepackage{tikz,pgf,pgfplots,tikzsymbols}
+\usepackage{algorithm,algorithmic}
+\usepgflibrary{shapes}
+\usetikzlibrary{%
+  arrows,%
+  arrows.meta,
+  shapes.misc,% wg. rounded rectangle
+  shapes.arrows,%
+  shapes,%
+  calc,%
+  chains,%
+  matrix,%
+  positioning,% wg. " of "
+  scopes,%
+  decorations.pathmorphing,% /pgf/decoration/random steps | erste Graphik
+  shadows,%
+  backgrounds,%
+  fit,%
+  petri,%
+  quotes
+}
+
+\setbeamersize{text margin left=10mm,text margin right=35mm}
+
+\pgfplotsset{compat=1.12}
+
+%\usetheme{Frankfurt}
+%\usecolortheme{ldpc}
+\useinnertheme{rounded}
+\usecolortheme{whale}
+\usecolortheme{orchid}
+
+\newcommand{\ul}[1]{\underline{#1}}
+\renewcommand{\Pr}{\mathbb{P}}
+
+%% Setup slides and notes
+\makeatletter
+\IfSubStr{\@classoptionslist}{handout}
+  {\def\slidesonly{}}{\def\slidesnotes{}}
+\makeatother
+
+%\setbeameroption{show notes on second screen=right} % Both
+\ifdefined\notesonly
+  \setbeameroption{show only notes} % Only notes
+\fi
+\ifdefined\slidesnotes
+  \setbeameroption{show notes on second screen=right} % Both
+\fi
+\ifdefined\slidesonly
+  \setbeameroption{hide notes} % Only slides
+\fi
+%\setbeamertemplate{note page}{\pagecolor{yellow!5}\vfill\insertnote\vfill}
+
+\newcommand{\getpdfpages}[2]{\begingroup
+  \setbeamercolor{background canvas}{bg=}
+  \addtocounter{framenumber}{1}
+  \includepdf[pages={#1},%
+  pagecommand={%
+    \expandafter\def\expandafter\insertshorttitle\expandafter{%
+      \insertshorttitle\hfill\insertframenumber\,/\,\inserttotalframenumber}}%
+  ]{#2}
+  \endgroup}
+
+\newcommand{\backupbegin}{
+   \newcounter{finalframe}
+   \setcounter{finalframe}{\value{framenumber}}
+}
+\newcommand{\backupend}{
+   \setcounter{framenumber}{\value{finalframe}}
+}
+
+ \setbeamercolor{bibliography entry author}{fg=black}
+ \setbeamercolor{bibliography entry title}{fg=black}
+ \setbeamercolor{bibliography entry location}{fg=black}
+ \setbeamercolor{bibliography entry note}{fg=black}
+ 
+ \setbeamerfont{bibliography item}{size=\footnotesize}
+ \setbeamerfont{bibliography entry author}{size=\footnotesize}
+ \setbeamerfont{bibliography entry title}{size=\footnotesize}
+ \setbeamerfont{bibliography entry location}{size=\footnotesize}
+ \setbeamerfont{bibliography entry note}{size=\footnotesize}
+ \setbeamertemplate{bibliography item}{\insertbiblabel}
+ 
+\newlength\tikzwidth
+\newlength\tikzheight
+
+
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\mbb}[1]{\mathbb{#1}}
+\newcommand{\expt}{\mbb{E}}
+\newcommand{\dd}{\mathrm{d}}
+
+\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;}
+\def\greencheck{{\color{green}\checkmark}}
+\def\scalecheck{\resizebox{\widthof{\checkmark}*\ratio{\widthof{x}}{\widthof{\normalsize x}}}{!}{\checkmark}}
+\def\xmark{\tikz [x=1.4ex,y=1.4ex,line width=.2ex, red] \draw (0,0) -- (1,1) (0,1) -- (1,0);}
+\def\redx{{\color{red}\xmark}}
+
+\renewcommand{\footnotesep}{-2pt}
+
+\newif\ifslow
+\slowtrue
+
+\newcommand{\vecnot}[1]{#1}
+
+\begin{document}
+
+\ifslow
+
+\title{ECE 586: Vector Space Methods \\ Course Introduction Video}
+\author{Henry D. Pfister \\ Duke University}
+\date{}
+%\date{August 18th, 2020}
+%\maketitle
+
+\setbeamertemplate{navigation symbols}{}
+
+\begin{frame}[plain]
+	\titlepage
+	
+	\note{
+		\vspace{8mm}
+		\begin{enumerate}
+			\setlength\itemsep{3mm}
+			\color{red}
+			\item Hi, I'm Henry Pfister and this is the course introduction video for ECE 586, Vector Space Methods. \\[2mm]
+			For everyone who is new to Duke, let me start by saying welcome... It's nice to have you watching. \\[2mm]
+			To give you a little background on myself, I went to college in San Diego, CA  and then I taught at Texas A\&M University for 8 years before joining Duke in 2014. \\[2mm]
+			Today, I will give you a brief introduction to the material covered in this course.
+		\end{enumerate}
+	}
+\end{frame}
+
+\addtocounter{framenumber}{-1}
+\setbeamertemplate{navigation symbols}{\textcolor{blue}{\footnotesize \insertframenumber ~/ \inserttotalframenumber}}
+
+\begin{frame} \frametitle{Overview}
+
+\begin{itemize}
+  \setlength\itemsep{4mm}
+  \item Engineering uses science and mathematics to \textcolor{blue}{invent, design, and build} things that solve problems and achieve practical goals
+  
+  \item From a mathematical perspective, engineering models the world using \textcolor{blue}{vectors} and analyzes it using logic, linear algebra, and optimization
+  
+  \item This class is essentially an applied math class designed for graduate engineers in \textcolor{blue}{data science, signal processing, and quantum computing}
+  
+  \item Its goal is to \textcolor{blue}{refresh and extend your undergraduate knowledge} of linear systems, vector spaces, matrices, and optimization
+
+\end{itemize}
+
+
+	\note{
+		\vspace{8mm}
+		\begin{enumerate}
+			\setlength\itemsep{3mm}
+			\color{red}
+			\item Read bullets
+		\end{enumerate}
+	}
+		  
+\end{frame}
+
+
+\begin{frame} \frametitle{Major Topics}
+
+\begin{itemize}
+  \setlength\itemsep{4mm}
+  \item Logic and Set Theory
+  \item Metric Spaces and Topology
+  \begin{itemize}
+	  \item Practical applications include the analysis of iterative algorithms
+  \end{itemize}  
+  \item Linear Algebra: Normed and Inner-Product Spaces
+  \begin{itemize}
+	  \item Practical applications include spaces of functions and Markov chains
+  \end{itemize}    
+  \item Approximation and Projection
+  \begin{itemize}
+	  \item Practical applications include function approximation and machine learning
+  \end{itemize}     
+  \item The Four Fundamental Subspaces and Singular Value Decomposition
+  \begin{itemize}
+	  \item Practical applications include dimensionality reduction
+  \end{itemize} 
+  \item Optimization in Vector Spaces
+  \begin{itemize}
+	  \item Practical applications duality bounds in convex optimization
+  \end{itemize} 
+\end{itemize}
+
+	\note{
+		\vspace{8mm}
+		\begin{enumerate}
+			\setlength\itemsep{3mm}
+			\color{red}
+			\item Here we see the major topics that will be covered in this course. (read) \\ [2mm]  Don't worry if don't know some of the words here.  By the end of the course, they will all be familiar to you. \\ [2mm] Next, I'll present 3 example problems that this course will cover in detail.
+		\end{enumerate}
+	}
+	
+\end{frame}
+
+
+
+\begin{frame}<1-7> \frametitle{Example Problem 1}
+
+\begin{itemize}
+\item<1-> Approximation Error in Linear Systems \vspace{1mm}
+
+\begin{itemize}
+  \setlength\itemsep{3mm}
+  \item<1-> Suppose you know a vector $\vecnot{b}$ satisfies \textcolor{blue}{$A \vecnot{x} = \vecnot{b}$} for an invertible matrix $A$
+  
+  \item<2-> To compute $\vecnot{x}$, you could multiply by $A^{-1}$ to get \textcolor{blue}{$A^{-1} \vecnot{b} = A^{-1} (A \vecnot{x}) = \vecnot{x}\!\!\!\!\!\!\!\!\!$}
+  
+  \item<3-> But, what if \textcolor{blue}{$A$ is not known perfectly}?
+  
+  \item<4-> Let's assume we know $\hat{A} = A + E$ where the \textcolor{blue}{error matrix $E$ is ``small''}
+  
+  \item<5-> Now, we can compute $\hat{\vecnot{x}} = \hat{A}^{-1} \vecnot{b}$. \textcolor{blue}{But, what can we say about $\vecnot{x}-\hat{\vecnot{x}}\;$?} \vspace{3mm}
+
+\end{itemize}
+
+\item <6-> The mathematical study of ``closeness'' is called \textcolor{blue}{Topology} \vspace{1mm}
+
+\begin{itemize}
+  \setlength\itemsep{3mm}
+  \item<6-> To answer the above question, one can define distances between objects
+  \item<7-> Using these distances, we can define a constant $c(\hat{A})$ such that
+  \[ \text{distance}(\vecnot{x},\hat{\vecnot{x}}) \leq c(\hat{A}) \; \text{distance}(A,\hat{A}) = c(\hat{A}) \; \text{length}(E)  \]
+\end{itemize}
+  
+\end{itemize}
+
+\note{
+	\vspace{2mm}
+	\begin{enumerate}[<alert@+>]
+	\scriptsize
+	\setlength\itemsep{2mm}
+	\item Read.  To be concrete, try picturing 3 dimensional real vectors and a 3 by 3 matrix.
+	\item Read.  For this example, I'm assuming everyone is familiar with matrix inversion.  If that concept is rusty for you, don't worry.  It will be reviewed later and all concepts used in this class will be defined precisely.
+	\item Read.  This happen frequently in real-world practical problems and I want you think about that for a second. (wait)
+	\item Read. The key question here is how should we define ``small''.  In this course, that question will be considered in some detail.
+	\item Read. Given $\hat{A}$, we can compute an estimate $\hat{x}$.  But, we really need to understand the difference between our estimate $\hat{x}$ and the true value $x$.
+	\item Read. In particular, the idea is to define distances between vectors and distances between matrices.  From that, we can also define lengths of these objects.
+	\item Read. We can think of the distance between $A$ and $\hat{A}$ as the length of the error matrix $E$.  Thus, the final expression shows the distance between $x$ and $\hat{x}$ will shrink to zero as the length of $E$ shrinks to zero.  Bounds like this allow system designers to understand how much error can be tolerated. 
+ \end{enumerate}
+}
+  
+\end{frame}
+
+\begin{frame}<1-6> \frametitle{Example Problem 2}
+
+\begin{itemize}
+\item<1-> Approximation of Functions by Simpler Functions \vspace{1mm}
+
+\begin{itemize}
+  \setlength\itemsep{3mm}
+  \item<1-> Suppose you want to find a 3rd-order polynomial that gives a \\ \textcolor{blue}{``good'' approximation} of a function \textcolor{blue}{$f(x)$} on the interval $[0,1]$.
+  
+  \item<2-> A key question is, ``What do we mean by good?'' max error? avg error?
+  
+  \item<3-> A standard approach is to minimize the \textcolor{blue}{mean squared error} and this gives
+  \[ \min_{a_0,a_1,a_2,a_3} \int_0^1 \left[ f(x) - (a_0+a_1 x+ a_2 x^2+a_3 x^3) \right]^2 dx \]
+  
+  \item<4-> Given $f(x)$ and the ability to integrate, one \textcolor{blue}{can solve this via brute force}
+  
+  \item<5-> This course will show there is also an \textcolor{blue}{simple intuitive approach}
+
+\vspace{3mm}
+
+\end{itemize}
+
+\item <6-> Solution via Orthogonality and Linear Algebra \vspace{1mm}
+
+\begin{itemize}
+  \setlength\itemsep{3mm}
+  \item<6-> Compute $a_0,a_1,a_2,a_3$ using 4 linear equations ($k=0,1,2,3$) given by
+  \[ \int_0^1 (a_0+a_1 x+ a_2 x^2+a_3 x^3) x^k dx = \int_0^1 f(x)x^k dx. \]
+\end{itemize}
+  
+\end{itemize}
+
+\note{
+	\vspace{2mm}
+	\begin{enumerate}[<alert@+>]
+	\footnotesize
+	\setlength\itemsep{2mm}
+	\item Read.
+	\item Read.  Like the last example, one has to decide how measure the error (or closeness).  For example, any function that lies inside the dashed red lines has a maximum error of less than 0.1.
+	\item Read.  This choice may be based on mathematical convenience because it has a simple solution.
+	\item Read.  If you do this, you'll see that things simplify nicely.  The resulting polynomial is plotted in green.
+	\item Read.  We'll also explore the geometric reason why this problem simplifies.
+	\item Read.  Looking at this equation, we notice that the left-hand side doesn't involve $f(x)$ whereas the right-hand side depends on $f(x)$.  The resulting linear system is defined by a matrix (given by the left-hand side) whose inverse can be precomputed and a vector (given by the right-hand side) that summarizes the function $f$.  
+ \end{enumerate}
+}
+
+\begin{tikzpicture}[overlay,remember picture,shift={(11.8,1.05)}]
+  \begin{axis}[small,width=1.8in,height=1.6in,xmin=0,xmax=1,ymin=0,ymax=1,grid=both]
+    \only<1->{\addplot[blue,domain=0:1,thick,samples=200,-] { (0.5+0.4*(1-x)*cos(deg(8*x)))^2 };}
+    \only<2->{\addplot[red,domain=0:1,dashed,samples=200] { (0.5+0.4*(1-x)*cos(deg(8*x)))^2 - 0.1};}
+    \only<2->{\addplot[red,domain=0:1,dashed,samples=200] { (0.5+0.4*(1-x)*cos(deg(8*x)))^2 + 0.1};}
+    \only<4->{\addplot[green!50!black,domain=0:1,thick,samples=200] { 0.957379 - 5.55126 * x + 10.9672 * x^2 - 6.21221 * x^3 };}
+  \end{axis}
+\end{tikzpicture}
+  
+\end{frame}
+
+
+\begin{frame}<1-6> \frametitle{Example Problem 3}
+
+\begin{itemize}
+\item<1-> Convex Optimization \vspace{1mm}
+
+\begin{itemize}
+  \setlength\itemsep{3mm}
+  \item<1-> Consider a real function \textcolor{red}{$f(x)$} on the real interval $[a,b]$
+
+  
+  \item<2-> A \textcolor{green!50!black}{chord} of $f$ is a line connecting $(x,f(x))$ and $(y,f(y))$
+  
+  \item<3-> $f(x)$ is \textcolor{blue}{convex} if all chords lie above the function, i.e. for $\lambda \in [0,1]$, \[ f(\lambda x +(1-\lambda) y) \leq \lambda f(x) + (1-\lambda) f(y) \] 
+   
+  \item<4-> Convexity implies all local minima have the same \textcolor{purple!50!blue}{minimum value}  \vspace{-1mm}
+  
+  \item<5->[] \begin{tcolorbox}[colback=yellow!15] Q: Can we compute a simple lower bound on the minimum value?   \end{tcolorbox}
+
+\vspace{2mm}
+
+\end{itemize}
+
+\item <6-> Solution via Tangent Line \vspace{1mm}
+
+\begin{itemize}
+  \setlength\itemsep{3mm}
+  \item<6-> Yes, a convex function also \textcolor{blue}{lies above any tangent line} and
+  \[ \min_{x\in [a,b]} f(x) \geq \min_{x\in [a,b]} \left[ f(x_0)+(x-x_0) f'(x_0) \right] \quad\quad\quad\quad \textcolor{white}{.}\]
+\end{itemize}
+  
+\end{itemize}
+
+
+\begin{tikzpicture}[overlay,remember picture,shift={(10.5,0.35)}]
+  \begin{axis}[axis x line=center, axis y line=center, small,width=1.8in,height=1.5in,xmin=-1,xmax=2,ymin=-1.6,ymax=1]
+    \only<1->{\addplot[red,smooth,thick,-] coordinates  {(-0.8,0.7) (0.2,-1.3) (1.2,-0.8) (2.2,0.7)};}
+    \only<2->{\addplot[mark=*, thick, green!50!black] coordinates {(0,-1)(1.5,-0.425)};}
+    \only<4-5>{\addplot[mark=*, thick, purple!50!blue] coordinates {(0.36,-1.35)};}
+    \only<6->{\addplot[mark=*, thick, purple!50!blue] coordinates {(-1,-1.55)(2,-1.15)};}
+  \end{axis}
+\end{tikzpicture}
+
+
+\note{
+	\vspace{4mm}
+	\begin{enumerate}[<alert@+>]
+	\scriptsize
+	\setlength\itemsep{2mm}
+	\item Read.  We will use the displayed figure as a running example. 
+	\item Read.  The chord with $x=0$ and $y=1.5$ is shown in the figure.
+	\item Read.  From this definition, we see that the example function is indeed convex.  Mathematically, the left-hand side is the function value evaluated at a point between $x$ and $y$ determined by $\lambda$ and the right-hand side is height of the chord at the same point.
+	\item Read.  Try drawing on your paper a function with two distinct local minima and then checking if this function is convex. (wait)
+	\item Read.  Picture simple functions that can be used to lower bound $f(x)$.
+	\item Read.  Pictorially, we observe that $f(x)$ lies above all of its tangent lines.  Now, consider the function of any tangent line (e.g., defined by the function value and derivative at a single point).  One can minimize this new function to get a lower bound. \\ [2mm] Convexity is an important subject in advanced mathematics because these definitions and properties extend naturally to functions mapping multidimensional vectors to real numbers. 
+
+ \end{enumerate}
+}
+  
+\end{frame}
+
+
+\begin{frame}<1-3> \frametitle{Course Overview and Philosophy}
+
+\begin{itemize}
+\item<1-> First Theme: Standard definitions and vocabulary \vspace{1mm}
+
+\begin{itemize}
+  \setlength\itemsep{1.5mm}
+  \item Engineering has many subfields where new ideas are described using \textcolor{blue}{abstract mathematics}
+  
+  \item A key goal of this course is to \textcolor{blue}{teach the vocabulary} necessary to read \\ and understand papers and textbooks in these subfields \vspace{2mm}
+\end{itemize}
+
+\item<2-> Second Theme: Standard theorems and their proof \vspace{1mm}
+
+\begin{itemize}
+  \setlength\itemsep{1.5mm}
+  \item Our focus is on \textcolor{blue}{mathematical foundations} of engineering analysis
+  \item Proofs \textcolor{blue}{illustrate mathematical reasoning} and show why results are true
+  \item Emphasis is on general techniques that \textcolor{blue}{extend to advanced problems}  \vspace{2mm}
+  %\item New research results are ideally supported both by empirical evidence (i.e., simulation results) and mathematical proofs that allow readers to verify the stated claims % , such as neural networks trained by stochastic gradient descent do not get trapped in local minima,
+
+\end{itemize}
+\item<3->  Assignments \vspace{1mm}
+
+\begin{itemize}
+  \setlength\itemsep{2mm}
+  \item Written homework \textcolor{blue}{builds knowledge} of definitions and techniques
+  \item Computer assignments \textcolor{blue}{demonstrate practical applications}
+  \item These are like training for a sport; each workout provides a small gain but \textcolor{blue}{consistent effort leads to significant improvement} over time
+
+\end{itemize}
+\end{itemize}
+
+\note{
+	\vspace{4mm}
+	\begin{enumerate}[<alert@+>]
+	\setlength\itemsep{3mm}
+	\item Read.
+	\item Read.
+	\item Read.  Although some material in this class is challenging, in the past, almost all of the students are able to become proficient in almost all of the topics.
+ \end{enumerate}
+}
+
+\end{frame}
+
+
+\begin{frame}<1-2> \frametitle{Learning Strategies}
+
+\begin{itemize}
+\item<1-> Course Elements \vspace{1mm}
+
+\begin{itemize}
+  \setlength\itemsep{2mm}
+  \item Syllabus: Lists lecture/video topics by date along with HW
+  \item Course Notes: Detailed description of the course content
+  \item Flip Videos: Slide-based introduction to course notes \smash{\Smiley[1.4][yellow]}
+  \item Lectures: Q/A about videos/notes + group work on example problems \vspace{4mm}
+\end{itemize}
+
+\item<2-> My Recommendations \vspace{1mm}
+
+\begin{itemize}
+  \setlength\itemsep{2mm}
+  \item \textcolor{blue}{Watch the flip video first and then read the matching course notes}
+  \item Afterward, try the homework while referring to the course notes as needed
+  \item If you're stuck $>\!30$min on a question, ask for a hint (via piazza or e-mail)
+  \item Visit office hours to get additional help as needed
+  \item \textcolor{red}{Make sure to watch the video before the class meeting!}
+\end{itemize}
+
+\end{itemize}
+  
+\note{
+	\vspace{4mm}
+	\begin{enumerate}[<alert@+>]
+	\setlength\itemsep{3mm}
+	\item Read.
+	\item Read.  Thanks for your attention.  I look forward to seeing everybody during the first class meeting.
+ \end{enumerate}
+}  
+
+\end{frame}
+
+  
+\backupbegin
+
+%\begin{frame}
+%\frametitle{Backup Slides}
+%\begin{itemize}
+%\item Slide numbers not included in denominator!
+%\end{itemize}
+%\end{frame}
+
+%\begin{frame}[allowframebreaks]
+%\frametitle{References}
+%\bibliographystyle{alpha}
+%\footnotesize
+%\bibliography{IEEEabrv,WCLabrv,WCLbib,WCLnewbib}
+%\end{frame}
+
+\backupend
+
+\end{document}

@@ -1,0 +1,478 @@
+\documentclass[10pt,english,aspectratio=169]{beamer}
+
+\usetheme{default}
+
+\usepackage{xstring}
+\usepackage{pgfpages}
+%\makeatletter
+%\IfSubStr{\@classoptionslist}{handout}
+%  {\pgfpagesuselayout{2 on 1}[letterpaper,border shrink=5mm]}
+%  {}
+%\makeatother
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{stmaryrd}
+\usepackage{enumerate}
+\usepackage{stfloats}
+\usepackage{bbm}
+\usepackage{pdfpages}
+\usepackage{framed}
+
+\usepackage[most]{tcolorbox}
+\tcbset{highlight math style={enhanced,
+  colframe=white,colback=yellow!15,arc=8pt,boxrule=1pt,
+  }}
+  
+\usepackage{tikz,pgf,pgfplots}
+\usepackage{algorithm,algorithmic}
+\usepgflibrary{shapes}
+\usetikzlibrary{%
+  arrows,%
+  arrows.meta,
+  shapes.misc,% wg. rounded rectangle
+  shapes.arrows,%
+  shapes,%
+  calc,%
+  chains,%
+  matrix,%
+  positioning,% wg. " of "
+  scopes,%
+  decorations.pathmorphing,% /pgf/decoration/random steps | erste Graphik
+  shadows,%
+  backgrounds,%
+  fit,%
+  petri,%
+  quotes
+}
+
+\setbeamersize{text margin left=10mm,text margin right=35mm}
+
+\pgfplotsset{compat=1.12}
+
+%\usetheme{Frankfurt}
+%\usecolortheme{ldpc}
+\useinnertheme{rounded}
+\usecolortheme{whale}
+\usecolortheme{orchid}
+
+\newcommand{\ul}[1]{\underline{#1}}
+\renewcommand{\Pr}{\mathbb{P}}
+
+%% Setup slides and notes
+\makeatletter
+\IfSubStr{\@classoptionslist}{handout}
+  {\def\slidesonly{}}{\def\slidesnotes{}}
+\makeatother
+
+%\setbeameroption{show notes on second screen=right} % Both
+\ifdefined\notesonly
+  \setbeameroption{show only notes} % Only notes
+\fi
+\ifdefined\slidesnotes
+  \setbeameroption{show notes on second screen=right} % Both
+\fi
+\ifdefined\slidesonly
+  \setbeameroption{hide notes} % Only slides
+\fi
+%\setbeamertemplate{note page}{\pagecolor{yellow!5}\vfill\insertnote\vfill}
+
+\newcommand{\getpdfpages}[2]{\begingroup
+  \setbeamercolor{background canvas}{bg=}
+  \addtocounter{framenumber}{1}
+  \includepdf[pages={#1},%
+  pagecommand={%
+    \expandafter\def\expandafter\insertshorttitle\expandafter{%
+      \insertshorttitle\hfill\insertframenumber\,/\,\inserttotalframenumber}}%
+  ]{#2}
+  \endgroup}
+
+\newcommand{\backupbegin}{
+   \newcounter{finalframe}
+   \setcounter{finalframe}{\value{framenumber}}
+}
+\newcommand{\backupend}{
+   \setcounter{framenumber}{\value{finalframe}}
+}
+
+ \setbeamercolor{bibliography entry author}{fg=black}
+ \setbeamercolor{bibliography entry title}{fg=black}
+ \setbeamercolor{bibliography entry location}{fg=black}
+ \setbeamercolor{bibliography entry note}{fg=black}
+ 
+ \setbeamerfont{bibliography item}{size=\footnotesize}
+ \setbeamerfont{bibliography entry author}{size=\footnotesize}
+ \setbeamerfont{bibliography entry title}{size=\footnotesize}
+ \setbeamerfont{bibliography entry location}{size=\footnotesize}
+ \setbeamerfont{bibliography entry note}{size=\footnotesize}
+ \setbeamertemplate{bibliography item}{\insertbiblabel}
+ 
+\newlength\tikzwidth
+\newlength\tikzheight
+
+
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\mbb}[1]{\mathbb{#1}}
+\newcommand{\expt}{\mbb{E}}
+\newcommand{\dd}{\mathrm{d}}
+
+\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;}
+\def\greencheck{{\color{green}\checkmark}}
+\def\scalecheck{\resizebox{\widthof{\checkmark}*\ratio{\widthof{x}}{\widthof{\normalsize x}}}{!}{\checkmark}}
+\def\xmark{\tikz [x=1.4ex,y=1.4ex,line width=.2ex, red] \draw (0,0) -- (1,1) (0,1) -- (1,0);}
+\def\redx{{\color{red}\xmark}}
+
+\renewcommand{\footnotesep}{-2pt}
+
+\newif\ifslow
+\slowtrue
+
+\newcommand{\vecnot}[1]{#1}
+
+\begin{document}
+
+\ifslow
+
+\title{ECE 586: Vector Space Methods \\ Lecture 2 Flip Video: Predicate Logic}
+\author{Henry D. Pfister \\ Duke University}
+\date{}
+%\date{August 20th, 2020}
+%\maketitle
+
+\setbeamertemplate{navigation symbols}{}
+
+\begin{frame}[plain]
+	\titlepage
+	
+	\note{
+		\vspace{8mm}
+		\begin{enumerate}
+			\setlength\itemsep{3mm}
+			\color{red}
+			\item Welcome to the second video lecture for ECE 586, Vector Space Methods. \\[2mm]
+			Today, we'll conclude our unit on logic with a discussion of predicate logic.
+		\end{enumerate}
+	}
+\end{frame}
+
+\addtocounter{framenumber}{-1}
+\setbeamertemplate{navigation symbols}{\textcolor{blue}{\footnotesize \insertframenumber ~/ \inserttotalframenumber}}
+
+
+
+
+
+
+\begin{frame}<1-3> \frametitle{1.2.2: Propositions and Predicates}
+
+\begin{itemize}
+\setlength\itemsep{4mm}
+\item<1-> The logic we have discussed so far is called \textcolor{blue}{propositional logic}
+
+\item<2-> Propositional logic has some limitations  \vspace{1mm}
+\begin{itemize}
+ \setlength\itemsep{1.5mm}
+ \item Ex. If ``Socrates is a person'' and ``Every person is mortal''
+ \item Then, we also know that ``Socrates is mortal'' but, in propositional logic, there is \textcolor{blue}{no way to formally deduce this} by combining the statements 
+\end{itemize}
+
+\item<3-> To overcome this, we use \textcolor{blue}{predicate logic} \vspace{1mm}
+\begin{itemize}
+ \setlength\itemsep{1.5mm}
+ \item Let $U$ be a collection of elements and $P(x)$ be a statement that can be applied to any $x\in U$
+ \item Ex. $P(x)$ = ``$x$ has 4 tires'' for the collection $U$ of all vehicles
+ \item Statement $P(x)$ is called a \textcolor{blue}{predicate} and $x$ is called a \textcolor{blue}{free variable}
+\end{itemize}
+\end{itemize}
+
+\note{
+	\vspace{4mm}
+	\begin{enumerate}[<alert@+>]
+	\footnotesize
+	\setlength\itemsep{2mm}
+	\item Read.
+	\item Read. Thus, propositional logic cannot be used to efficiently reason about properties of large sets of objects.
+	\item Read. Predicate logic allows one to apply statements to sets of objects.
+	\end{enumerate}
+}
+
+\end{frame}
+
+
+\begin{frame}<1-4> \frametitle{1.2.2: Quantifiers}
+
+\begin{itemize}
+\setlength\itemsep{2mm}
+\item<1-> Quantifiers \textcolor{blue}{allow statements about collections of elements} \vspace{0.5mm}
+\begin{itemize}
+ \setlength\itemsep{1.5mm}
+ \item Universal quantifier: $\forall x\!\in\! U, P(x)$ = ``All vehicles have 4 tires''
+ \item Existential quantifier: $\exists x\!\in\! U, P(x)$ =``There is a vehicle with 4 tires''
+ \item Natural implication: $\forall x \!\in\!U, P(x) \,\Rightarrow\, \exists x\!\in\! U, P(x)$ \vspace{0.5mm}
+\end{itemize}
+
+\item<2-> Negation \vspace{1mm}
+\begin{itemize}
+ \setlength\itemsep{1.5mm}
+ \item Notice \textcolor{blue}{exactly one of these is true}: $\forall x\!\in\! U, P(x)$ or $\exists x\!\in\! U, \neg P(x)$
+ \item<3-> Thus, they are logical negations of each other and we get \vspace{-1.5mm}
+ \begin{align*}
+   \neg \left(\forall x\!\in\! U, P(x) \right) &\Leftrightarrow \left( \exists x\!\in\! U, \neg P(x) \right) \\
+   \neg \left(\exists x\!\in\! U, P(x) \right) &\Leftrightarrow \left( \forall x\!\in\! U, \neg P(x) \right) \\[-9mm]
+ \end{align*}   
+\end{itemize}
+
+\item<4-> Examples \vspace{0.5mm}
+\begin{itemize}
+ \setlength\itemsep{1.5mm}
+ \item ``Not all vehicles have 4 tires'' $\Leftrightarrow$ ``There is a vehicle that does not have 4~tires''$\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!$
+ \item ``There does not exist a vehicle with 4 tires'' $\Leftrightarrow$ ``All vehicles do not have 4 tires''\hspace*{-15mm}
+  
+\end{itemize}
+
+
+
+\end{itemize}
+
+\note{
+	\vspace{2mm}
+	\begin{enumerate}[<alert@+>]
+	\footnotesize
+	\setlength\itemsep{2mm}
+	\item Read 0. For example, continuing with the same $P(x)$ (read 1-2). Notice that quantified predicates are really propositional statements that no longer depend on the free variable. \\ [2mm] Read 3.  Here we use the notation for implication because this statement holds for any collection $U$ and predicate $P$.
+	\item Read. Continuing the example, this means exactly one of these is true: ``all vehicles have 4 tires'' or ``there exists a vehicle that does not have 4 tires''. \\ [2mm]
+	\item Read... two rules that hold based on the English terms ``for all'' and ``there exist''.  Here, we use the notation for equivalence because these statements hold for any collection $U$ and predicate $P$.   \\ [2mm] Now, for the example $U$ and $P(x)$, consider rephrasing the 4 associated statements as English sentences.  I'll give you a few seconds to pause the video and try this.
+	\item Read.
+	\end{enumerate}
+}
+
+\end{frame}
+
+
+
+\begin{frame}<1-6> \frametitle{1.2.2: Multiple Quantifiers}
+
+
+
+\begin{itemize}
+\setlength\itemsep{6mm}
+\item<1-> Now, consider the predicate $P(x,y)$ with two free variables, $x,y$ \vspace{1mm}
+\begin{itemize}
+ \setlength\itemsep{1.5mm}
+ \item Ex. Let $I$ be a collection of images and $C$ be a collection of colors. \\ Define predicate $P(x,y)=$``$x$ contains $y$'' for $x\in I$ and $y\in C$ 
+ \item<2-> \textcolor{red}{``$\forall x\!\in\! I, \forall y\!\in\! C, P(x,y)$''} = ``All images in $I$ contain all colors in $C$''
+ \item<3-> \textcolor{red}{``$\forall x\!\in\! I, \exists y \!\in\! C, P(x,y)$''} = ``All images in $I$ contain a color in $C$''
+ \item<4-> In ``$\exists y \in U, P(x,y)$'', $x$ is a \textcolor{blue}{free variable} and $y$ is a \textcolor{blue}{bound variable}
+ \item<5-> Apply one at a time: $\forall x\!\in\! I, \forall y\!\in\! C, P(x,y) \Leftrightarrow \forall x\!\in\! I, \left(\forall y\!\in\! C, P(x,y)\right)$
+\end{itemize}
+
+\item<6-> Negation \vspace{1mm}
+\begin{itemize}
+ \setlength\itemsep{1.5mm}
+ \item $\neg (\forall x\!\in\! I, \forall y\!\in\! C, P(x,y))) \,\Leftrightarrow\, \exists x\!\in\! I, \exists y\!\in\! C, \neg P(x,y)$
+ \item $\neg (\exists x\!\in\! I, \forall y\!\in\! C, P(x,y)) \,\Leftrightarrow\, \forall x\!\in\! I, \exists y\!\in\! C, \neg P(x,y)$
+\end{itemize}  
+
+\end{itemize}
+
+
+\note{
+	\vspace{2mm}
+	\begin{enumerate}[<alert@+>]
+	\footnotesize
+	\setlength\itemsep{2mm}
+	\item Read.
+	\item Read.
+	\item Read.
+	\item Read. An expression like this doesn't have a truth value until a specific $x$ is chosen or a quantifier is added.
+	\item Multiple quantifiers can be applied one at a time and each changes a free variable into a bound variable.
+	\item Read. These rules follow from the single-quantifier case because quantifiers can be applied one at a time.
+	\end{enumerate}
+}
+
+\end{frame}
+
+\begin{frame}<1-6> \frametitle{1.2.2: Relationships Between Multiple Quantifiers}
+
+\begin{itemize}
+\setlength\itemsep{5mm}
+\item<1-> Implications and Equivalences \vspace{1mm}
+\begin{itemize}
+ \setlength\itemsep{1.5mm}
+ \item<1-> $\forall x\!\in\! I, \forall y\!\in\! C, P(x,y)  \,\Leftrightarrow\, \forall y\!\in\! C, \forall x\!\in\! I, P(x,y)$
+ \item<2-> $\exists x\!\in\! I, \exists y\!\in\! C, P(x,y) \,\Leftrightarrow\, \exists y\!\in\! C, \exists x\!\in\! I, P(x,y)$
+ \item<3-> $\forall x\!\in\! I, \forall y\!\in\! C, P(x,y) \,\Rightarrow\, \exists x\!\in\! I, \forall y\!\in\! C, P(x,y)$
+ \item<4-> \textcolor{red}{$\exists x\!\in\! I, \forall y\!\in\! C, P(x,y) \,\Rightarrow\, \forall y\!\in\! C, \exists x\!\in\! I, P(x,y)$}
+ \item<5-> There are 8 possible choices for the order and quantifiers
+    
+\end{itemize}
+
+ \item<6-> These results and their symmetric pairs can be visualized with \\[-3mm] {\small \color{blue} \[ \begin{array}{ccccccc}
+   \forall x, \forall y, P(x,y) & \Rightarrow & \exists x, \forall y, P(x,y) & \Rightarrow & \forall y, \exists x, P(x,y) & \Rightarrow & \exists y, \exists x, P(x,y) \\
+   \Updownarrow &&&&&& \Updownarrow \\
+   \forall y, \forall x, P(x,y) & \Rightarrow & \exists y, \forall x, P(x,y) & \Rightarrow & \forall x, \exists y, P(x,y) & \Rightarrow & \exists x, \exists y, P(x,y)
+   \end{array} \]}
+
+\end{itemize}
+
+
+%\item<3-> The last implication is more subtle \vspace{1mm}
+%\begin{itemize}
+%
+% \setlength\itemsep{1.5mm}
+% \item Ex. $\exists x, \forall y, P(x,y)$ means ``there is an image that contains all the colors'' (e.g., an image of a rainbow)
+% \item Ex. $\forall y, \exists x, P(x,y)$ means ``for each color there is an image containing that color''.
+% \item The first implies the second because the rainbow image satisfies the $\exists x \forall y$
+% \item The implication is not an equivalence, consider a set of pictures where each image contains exactly one color and there is one such image for each color.
+%In this case, it is true that ``for each color there is an image containing that color'' but it is not true that `there is an image that contains all the colors''. 
+%\end{itemize}
+%\end{itemize}
+
+\note{
+	\vspace{2mm}
+	\begin{enumerate}[<alert@+>]
+	\footnotesize
+	\setlength\itemsep{2mm}
+	\item Read.  Switching the order of the universal quantifiers doesn't matter.
+	\item Read.  Switching the order of the existential quantifiers doesn't matter.
+	\item Read.  Changing a universal quantifier to an existential quantifier only weakens the statement.
+	\item Read. This implication is more subtle; consider the example $P(x,y)$.  The statement $\exists x, \forall y$ requires an image for each color.  Thus, a rainbow suffices because it can be chosen for each color. \\ [2mm]  More generally, if there is a single $x_0$ such that $P(x_0,y)$ holds for all $y$, then for all $y$, we can choose that $x=x_0$ so that $P(x,y)$ holds.
+	\item Read. First, choose which variable to quantify. Then, for the two variables, choose ``for all'' or `'exists''.
+	\item Read.
+	\end{enumerate}
+}
+
+\end{frame}
+
+
+\begin{frame}<1-3> \frametitle{Axiomatic Formulations}
+
+\begin{itemize}
+\setlength\itemsep{3mm}
+\item<1-> \textcolor{red}{``Ex falso quodlibet''} is Latin for \textcolor{red}{``from falsehood, anything''} \vspace{1mm}
+\begin{itemize}
+ \setlength\itemsep{1.5mm}
+ \item Observe that $P \wedge \neg P \rightarrow Q$ is true regardless of $Q$
+ \item Thus, logicians are careful to avoid contradictions
+ \item Fortunately, propositional logic has an axiomatic formulation that is consistent, complete, and decidable
+\end{itemize} 
+
+\item<2-> What do these words mean in logic? \vspace{1mm}
+\begin{itemize} 
+ \setlength\itemsep{1.5mm}
+ \item \textcolor{blue}{Consistent}: implications of axioms do not contain a contradiction
+ \item \textcolor{blue}{Complete}: all valid implications follow from the axioms
+ \item \textcolor{blue}{Decidable}: algorithm can determine if any implication is valid or not
+\end{itemize}
+
+\item<3-> First-Order Predicate Logic \vspace{1mm}
+\begin{itemize} 
+ \setlength\itemsep{1.5mm}
+ \item Axiomatic formulation is consistent, complete, and semidecidable
+ \item \textcolor{blue}{Semidecidable}:  algorithm determines the truth of any postulated implication, if it terminates.  But, termination is guaranteed only if postulate is true
+\end{itemize}
+\end{itemize}
+
+\note{
+	\vspace{2mm}
+	\begin{enumerate}[<alert@+>]
+	\footnotesize
+	\setlength\itemsep{2mm}
+	\item Read 0-1. Thus, if a logical system accepts both $P$ and $\neg P$ as true, then one can this argument to prove any $Q$. Read 2-3.
+	\item Read 0-4.  Axiomatic formulations of mathematics allow one to enumerate all statements that follow from applying some set of axioms.  I do want to emphasize that this is not a class on mathematical logic and we will not discuss axiomatic formulations for more than these few minutes in the entire class.  Propositional logic is decidable because any finite implication can tested by building a truth table including all the variables it uses.
+	\item Read.  I should mention here that first-order essentially means that the axioms allow quantifiers over variables but they do not allow quantifiers over predicates.  For example, statements starting with ``for all predicates $P(x)$'' are not valid statements in first-order predicate logic.
+	\end{enumerate}
+}
+
+\end{frame}
+
+\begin{frame}<1-6> \frametitle{1.3: Strategies for Proofs}
+
+\begin{itemize}
+\setlength\itemsep{2.5mm}
+\item<1-> Background \vspace{1mm}
+\begin{itemize} 
+ \setlength\itemsep{1.25mm}
+ \item Intuition identifies what might be true and why
+ \item Rigorous proofs verify and communicate that intuition
+ \item A \textcolor{blue}{proof} is a sequence of verifiable steps from assumptions to conclusion
+ \item Definitions map between words and symbols (e.g., $P(x)=$``$x$ is even'') 
+\end{itemize}
+
+\item<2-> Types of Proofs for $P \rightarrow Q$  \vspace{1mm}
+\begin{itemize} 
+ \setlength\itemsep{1.25mm}
+ \item<2-> \textcolor{blue}{Direct}: Assume $P$ true and give steps that lead to $Q$
+ \item<3-> \textcolor{blue}{Contrapositive}: Proof of the equivalent statement $\neg Q \rightarrow \neg P$
+ \item<4-> \textcolor{blue}{Contradiction}: Using $\neg (P \rightarrow Q) \Leftrightarrow P \wedge \neg Q$, one supposes that both $P$ and $\neg Q$ are true and then gives steps leading to a contradiction
+ \item<5-> \textcolor{blue}{Induction}: For predicate $P(n)$, prove $Q=$``$\forall n\in\mathbb{N}, P(n)$'' by establishing the premise $P=$``$P(1) \wedge (\forall n\in \mathbb{N}, P(n) \rightarrow P(n\!+\!1))$''
+\end{itemize}
+
+\item<6-> Whiteboard Examples \vspace{1mm}
+\begin{itemize} 
+ \setlength\itemsep{1.25mm}
+ \item Prove $\sqrt{2}$ is irrational by showing contrapositive via contradiction
+ \item For $P(n)=$``$\sum_{i=1}^n i = \frac{n^2 + n}{2}$'', prove ``$\forall n\in \mathbb{N}, P(n)$'' via induction
+\end{itemize}
+\end{itemize}
+
+\note{
+	\vspace{2mm}
+	\begin{enumerate}[<alert@+>]
+	\footnotesize
+	\setlength\itemsep{2mm}
+	\item An important of abstract mathematics is reading and understanding proofs. \\ [2mm] Read.  You are in graduate school taking this class because you already have good engineering intuition about what is true and why.  One goal of this class is improve your skill at communicating that intuition in mathematical proofs.
+	\item Read.
+	\item Read.  One can verify this equivalence using a truth table. Sometimes the contrapositive statement can be easier to verify.
+	\item Read. Proof by contradiction is sometimes more natural because one starts by assuming both $P$ and $\neq Q$ are ture.
+	\item Read. Induction is a powerful way to rapidly verify infinitely many statements.  \\ [2mm] Many of you may be familiar with some or all of these approaches.  In this class, you will gain more experience with these techniques.
+	\item Read.  These examples will be presented in the live session.
+	\end{enumerate}
+}
+
+\end{frame} 
+
+\begin{frame} \frametitle{Next Steps}
+
+\begin{itemize}
+\setlength\itemsep{5mm}
+\item To continue studying after this video -- \vspace{2mm}
+
+\begin{itemize}
+ \setlength\itemsep{3mm}
+ \item Try the suggested reading: Course Notes EF 1.2.3-1.3
+ \item Or the optional reading: PAF 1.1-2.6
+ \item Also, look at the problems in Assignment 1
+\end{itemize}
+\end{itemize}
+
+\note{
+	\vspace{8mm}
+	\begin{enumerate}
+		\setlength\itemsep{3mm}
+		\color{red}
+		\item Here are some options to continue learning this material. (read) \\ [2mm] That's it for today.  So, I'll see you next time.
+	\end{enumerate}
+}
+
+\end{frame}
+
+  
+\backupbegin
+
+%\begin{frame}
+%\frametitle{Backup Slides}
+%\begin{itemize}
+%\item Slide numbers not included in denominator!
+%\end{itemize}
+%\end{frame}
+
+%\begin{frame}[allowframebreaks]
+%\frametitle{References}
+%\bibliographystyle{alpha}
+%\footnotesize
+%\bibliography{IEEEabrv,WCLabrv,WCLbib,WCLnewbib}
+%\end{frame}
+
+\backupend
+
+\end{document}
