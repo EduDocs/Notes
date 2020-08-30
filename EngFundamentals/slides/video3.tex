@@ -1,0 +1,547 @@
+\documentclass[10pt,english,aspectratio=169]{beamer}
+
+\usetheme{default}
+
+\usepackage{xstring}
+\usepackage{pgfpages}
+%\makeatletter
+%\IfSubStr{\@classoptionslist}{handout}
+%  {\pgfpagesuselayout{2 on 1}[letterpaper,border shrink=5mm]}
+%  {}
+%\makeatother
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{stmaryrd}
+\usepackage{enumerate}
+\usepackage{stfloats}
+\usepackage{bbm}
+\usepackage{pdfpages}
+\usepackage{framed}
+
+\usepackage[most]{tcolorbox}
+\tcbset{highlight math style={enhanced,
+  colframe=white,colback=yellow!15,arc=8pt,boxrule=1pt,
+  }}
+  
+\usepackage{tikz,pgf,pgfplots}
+\usepackage{algorithm,algorithmic}
+\usepgflibrary{shapes}
+\usetikzlibrary{%
+  arrows,%
+  arrows.meta,
+  shapes.misc,% wg. rounded rectangle
+  shapes.arrows,%
+  shapes,%
+  calc,%
+  chains,%
+  matrix,%
+  positioning,% wg. " of "
+  scopes,%
+  decorations.pathmorphing,% /pgf/decoration/random steps | erste Graphik
+  shadows,%
+  backgrounds,%
+  fit,%
+  petri,%
+  quotes
+}
+
+\setbeamersize{text margin left=10mm,text margin right=35mm}
+
+\pgfplotsset{compat=1.12}
+
+%\usetheme{Frankfurt}
+%\usecolortheme{ldpc}
+\useinnertheme{rounded}
+\usecolortheme{whale}
+\usecolortheme{orchid}
+
+\newcommand{\ul}[1]{\underline{#1}}
+\renewcommand{\Pr}{\mathbb{P}}
+
+%% Setup slides and notes
+\makeatletter
+\IfSubStr{\@classoptionslist}{handout}
+  {\def\slidesonly{}}{\def\slidesnotes{}}
+\makeatother
+
+%\setbeameroption{show notes on second screen=right} % Both
+\ifdefined\notesonly
+  \setbeameroption{show only notes} % Only notes
+\fi
+\ifdefined\slidesnotes
+  \setbeameroption{show notes on second screen=right} % Both
+\fi
+\ifdefined\slidesonly
+  \setbeameroption{hide notes} % Only slides
+\fi
+%\setbeamertemplate{note page}{\pagecolor{yellow!5}\vfill\insertnote\vfill}
+
+\newcommand{\getpdfpages}[2]{\begingroup
+  \setbeamercolor{background canvas}{bg=}
+  \addtocounter{framenumber}{1}
+  \includepdf[pages={#1},%
+  pagecommand={%
+    \expandafter\def\expandafter\insertshorttitle\expandafter{%
+      \insertshorttitle\hfill\insertframenumber\,/\,\inserttotalframenumber}}%
+  ]{#2}
+  \endgroup}
+
+\newcommand{\backupbegin}{
+   \newcounter{finalframe}
+   \setcounter{finalframe}{\value{framenumber}}
+}
+\newcommand{\backupend}{
+   \setcounter{framenumber}{\value{finalframe}}
+}
+
+ \setbeamercolor{bibliography entry author}{fg=black}
+ \setbeamercolor{bibliography entry title}{fg=black}
+ \setbeamercolor{bibliography entry location}{fg=black}
+ \setbeamercolor{bibliography entry note}{fg=black}
+ 
+ \setbeamerfont{bibliography item}{size=\footnotesize}
+ \setbeamerfont{bibliography entry author}{size=\footnotesize}
+ \setbeamerfont{bibliography entry title}{size=\footnotesize}
+ \setbeamerfont{bibliography entry location}{size=\footnotesize}
+ \setbeamerfont{bibliography entry note}{size=\footnotesize}
+ \setbeamertemplate{bibliography item}{\insertbiblabel}
+ 
+\newlength\tikzwidth
+\newlength\tikzheight
+
+
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\mbb}[1]{\mathbb{#1}}
+\newcommand{\expt}{\mbb{E}}
+\newcommand{\dd}{\mathrm{d}}
+
+\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;}
+\def\greencheck{{\color{green}\checkmark}}
+\def\scalecheck{\resizebox{\widthof{\checkmark}*\ratio{\widthof{x}}{\widthof{\normalsize x}}}{!}{\checkmark}}
+\def\xmark{\tikz [x=1.4ex,y=1.4ex,line width=.2ex, red] \draw (0,0) -- (1,1) (0,1) -- (1,0);}
+\def\redx{{\color{red}\xmark}}
+
+\renewcommand{\footnotesep}{-2pt}
+
+\newif\ifslow
+\slowtrue
+
+\newcommand{\vecnot}[1]{#1}
+
+\begin{document}
+
+\ifslow
+
+\title{ECE 586: Vector Space Methods \\ Lecture 3 Flip Video: Set Theory}
+\author{Henry D. Pfister \\ Duke University}
+\date{}
+%\date{August 20th, 2020}
+%\maketitle
+
+\setbeamertemplate{navigation symbols}{}
+
+\begin{frame}[plain]
+	\titlepage
+	
+	\note{
+		\vspace{8mm}
+		\begin{enumerate}
+			\setlength\itemsep{3mm}
+			\color{red}
+			\item Welcome to the third video lecture for ECE 586, Vector Space Methods. \\[2mm]
+			Today, we'll discuss set theory.
+		\end{enumerate}
+	}
+\end{frame}
+
+\addtocounter{framenumber}{-1}
+\setbeamertemplate{navigation symbols}{\textcolor{blue}{\footnotesize \insertframenumber ~/ \inserttotalframenumber}}
+
+
+\begin{frame}<1-9> \frametitle{1.4: Set Theory}
+
+\begin{itemize}
+\setlength\itemsep{3mm}
+\item<1-> is the \textcolor{blue}{foundation} (along with logic) of all modern mathematics \vspace{1mm}
+\begin{itemize} 
+  \setlength\itemsep{1.5mm}
+  \item<2-> Numbers, relations, functions, \ldots are all defined using set theory
+  \item<3-> But, it's not as simple as one would hope because \textcolor{blue}{naive approaches are inconsistent} (i.e., for some $P$, the definitions imply $P$ and $\neg P$)
+  \item<4-> Axiomatic approaches avoid contradictions but are overly complicated
+  \item<5-> Thus, we use \textcolor{blue}{naive set theory}, which defines the operations of set theory without worrying about paradoxes. This is sufficient for engineering math.
+\end{itemize}
+
+\item<6-> Naive Set Theory \vspace{1mm}
+\begin{itemize} 
+  \setlength\itemsep{1.5mm}
+  \item<6-> \textcolor{blue}{Set defined as ``any collection of objects, mathematical or otherwise''}
+  \item<6-> Ex. Consider ``the set of all books published in 2007''
+  \item<7-> Objects in a set are called \textcolor{blue}{elements} or \textcolor{blue}{members} of the set
+  \item<8-> Logical statement: ``$a$ is a member of the set $A$'' is written \textcolor{blue}{$a \in A$}
+  \item<9-> Its negation: ``$a$ is not a member of the set $A$'' is written \textcolor{blue}{$a \notin A$}
+\end{itemize}
+\end{itemize}
+
+\note{
+	\vspace{2mm}
+	\begin{enumerate}[<alert@+>]
+	\footnotesize
+	\setlength\itemsep{2mm}
+	\item Read.
+	\end{enumerate}
+}
+
+\end{frame}
+
+\begin{frame}<1-7> \frametitle{1.4: Using Set Theory}
+
+\begin{itemize}
+\setlength\itemsep{2.5mm}
+\item<1-> Defining Sets \vspace{1mm}
+\begin{itemize} 
+  \setlength\itemsep{1.5mm}
+  \item<1-> One can \textcolor{blue}{present a set by listing elements}: standard English vowels \[A= \{ a,e,i,o,u \} \]
+  \item<2-> Element \textcolor{blue}{order is irrelevant}: $\{ i,o,u,a,e \}$ is the same as $A$ \\ Repeated elements have no effect: $\{ a,e,i,o,u,e,o \}$ same as $A$
+  \item<3-> A \textcolor{blue}{singleton} is a set containing exactly one element such as $\{a\}$
+  \item<4-> Standard sets: Integers $\mathbb{Z}$, Real numbers $\mathbb{R}$, and Complex numbers $\mathbb{C}$
+  %\item It is possible to construct each of these sets in a rigorous manner. Instead, we assume their meaning is intuitively clear
+\end{itemize}
+
+\item<5-> Building new sets from old \vspace{1mm}
+\begin{itemize} 
+  \setlength\itemsep{1mm}
+  \item \textcolor{blue}{Set-builder notation}: For logical predicate $P(x)$ defined on $x\in X$,\\  ``$A$ is the set of elements in $X$ such that $P(x)$ is true'' is denoted by
+\[ A = \{ x\in X | P(x) \} \]
+  \item<6-> If no $x\in X$ satisfies $P(x)$, then result is the \textcolor{blue}{empty set $\emptyset$}
+  \item<7-> Ex. natural numbers $\mathbb{N}$ and positive prime integers $P$:
+\begin{align*}
+  \mathbb{N} &= \{ x\in \mathbb{Z} | x\geq 1 \} = \{ 1,2,3,4,\ldots \} \\
+  P &= \{ x\in \mathbb{Z} | x\geq 1 \textrm{ and ``}x\textrm{ is prime''} \} = \{ 2,3,5,7,11,\ldots \}
+\end{align*}
+\end{itemize}
+\end{itemize}
+
+\note{
+	\vspace{2mm}
+	\begin{enumerate}[<alert@+>]
+	\footnotesize
+	\setlength\itemsep{2mm}
+	\item Read.
+	\end{enumerate}
+}
+
+\end{frame}
+
+
+\iffalse
+\begin{frame}{Intervals?}
+
+\begin{itemize}
+\setlength\itemsep{3mm}
+\item<1-> Defining Sets \vspace{1mm}
+\begin{itemize} 
+  \setlength\itemsep{1.5mm}
+
+
+\end{itemize}
+\end{itemize}
+\end{frame}
+\fi
+
+\begin{frame}<1-5> \frametitle{1.4: Set Properties}
+
+\begin{itemize}
+\setlength\itemsep{3mm}
+%\item<1-> Standard notation for real-interval subsets:
+%\begin{align*}
+%\textrm{Open interval:} \; &  (a,b) \triangleq \{ x\in \mathbb{R} | a<x<b \} \\
+%\textrm{Closed interval:} \; & [a,b] \;\;\!\! \triangleq \{ x\in \mathbb{R} | a \leq x \leq b \} \\
+%\textrm{Half-open intervals:} \; & (a,b] \;\! \triangleq \{ x\in \mathbb{R} | a < x \leq b \} \\
+%& [a,b) \;\! \triangleq \{ x\in \mathbb{R} | a \leq x < b \}
+%\end{align*}
+
+\item<1-> Cardinality \vspace{1mm}
+\begin{itemize} 
+  \setlength\itemsep{2mm}
+  \item<1-> For set $A$, the \textcolor{blue}{cardinality} $|A|$ is the number of elements in $A$
+  \[ |\{ a,e,i,o,u \}| = 5 \]
+  \item<2-> If there is a one-to-one correspondence between $A$ and the natural numbers $\mathbb{N}$, then $A$ is called \textcolor{blue}{countably infinite} and  $|A| = \infty$
+  \item<3-> Ex. Set of \textcolor{blue}{rational numbers $\mathbb{Q} \triangleq \{ q \in \mathbb{R} \,|\, \exists n \in \mathbb{N}, nq \in \mathbb{Z} \}$} is countably infinite (e.g., list rationals $m/n$ with $|m|\leq n^2$)
+  \item<4-> If $|A| = \infty$ but not countably infinite, then $A$ is \textcolor{blue}{uncountably infinite}
+  \item<5-> Ex. Real numbers are uncountably infinite by Cantor's diagonal argument \\ (not covered in this class but worth googling if you haven't seen it)
+  
+\end{itemize}
+\end{itemize}
+
+\note{
+	\vspace{2mm}
+	\begin{enumerate}[<alert@+>]
+	\footnotesize
+	\setlength\itemsep{2mm}
+	\item Read.
+	\end{enumerate}
+}
+
+\end{frame}
+
+% Definition of circles
+\def\firstcircle{(0,0) circle (1.5cm)}
+\def\secondcircle{(0:2cm) circle (1.5cm)}
+
+\colorlet{circle edge}{blue!50}
+\colorlet{circle area}{blue!20}
+
+\tikzset{filled/.style={fill=circle area, draw=circle edge, thick},outline/.style={draw=circle edge, thick}}
+
+\setlength{\parskip}{5mm}
+
+\begin{frame} \frametitle{1.4: Venn Diagrams}
+
+% Set A or B
+\begin{tikzpicture}
+    \draw[filled] \firstcircle node {$A$}
+                  \secondcircle node {$B$};
+    \node[anchor=south] at (current bounding box.north) {$A \cup B$};
+\end{tikzpicture}
+\hfill
+% Set A and B
+\begin{tikzpicture}
+    \begin{scope}
+        \clip \firstcircle;
+        \fill[filled] \secondcircle;
+    \end{scope}
+    \draw[outline] \firstcircle node {$A$};
+    \draw[outline] \secondcircle node {$B$};
+    \node[anchor=south] at (current bounding box.north) {$A \cap B$};
+\end{tikzpicture}
+
+% Set A^c = U - A
+\begin{tikzpicture}
+	\draw[filled, even odd rule] (-1.55,-1.75) rectangle (3.25,1.75) \firstcircle node {$A$}; 
+    \node at (2.1,1.3) {$A^c = U-A$};
+    \node[blue] at (2.75,-1.2) {$U$};
+\end{tikzpicture}
+\hfill
+% Set A but not B
+\begin{tikzpicture}
+    \begin{scope}
+        \clip \firstcircle;
+        \draw[filled, even odd rule] \firstcircle node {$A$}
+                                     \secondcircle;
+    \end{scope}
+    \draw[outline] \firstcircle
+                   \secondcircle node {$B$};
+    \node[anchor=south] at (current bounding box.north) {$A - B$};
+\end{tikzpicture}
+
+\note{
+	\vspace{2mm}
+	\begin{enumerate}[<alert@+>]
+	\footnotesize
+	\setlength\itemsep{2mm}
+	\item Here, we see Venn diagrams for some standard set operations.  The sets $A$ and $B$ are represented by overlapping circles.  Starting at the top left graphic, we see the union of $A$ and $B$ which contains all elements in either $A$ or $B$.  \\ [2mm] Looking at the top right graphic, we see the intersection of $A$ and $B$ which contains elements that are in both $A$ and $B$.   \\ [2mm]  Moving to the bottom right graphic, we see the set difference $A-B$ which contains all elements that are in $A$ and not in $B$.   \\ [2mm]   Finally, in the bottom left graphic, we see the complement of $A$ which contains all elements in the universal set $U$ except those in $A$.
+	\end{enumerate}
+}
+    
+\end{frame}
+
+\begin{frame}<1-4> \frametitle{1.4: From Logic to Set Theory}
+
+\begin{itemize}
+\setlength\itemsep{3mm}
+\item<1-> Operations on sets $A,B$ \vspace{1mm}
+\begin{itemize} 
+  \setlength\itemsep{1.5mm}
+  \item<1-> \textcolor{blue}{Union} of $A$ and $B$ ($A\cup B$): set of elements in either $A$ or $B$
+%This means that $A \cup B = \{ x\in A \textrm{ or } x\in B \}$ is also defined by
+\[ x\in A\cup B \Leftrightarrow (x\in A)\vee (x\in B) \]
+  \item<2-> \textcolor{blue}{Intersection} of $A$ and $B$ ($A\cap B$): set of elements in both $A$ and $B$
+%This means that $A\cap B = \{x\in A | x\in B \}$ is also defined by
+\[ x\in A\cap B \Leftrightarrow (x\in A)\wedge (x\in B) \]
+  \item<3-> \textcolor{blue}{Set difference} $A-B$ (or $A \setminus \!B$): set of elements in $A$ but not in $B$
+%This means that
+\[ x\in A-B \Leftrightarrow (x\in A)\wedge (x\notin B) \]
+  \item<4-> \textcolor{blue}{Complement} $A^c$ for implied universal set $U$ is defined by $A^c = U-A$
+  \[ x\in A^c \Leftrightarrow x \notin A \]
+\end{itemize}
+
+
+\end{itemize}
+
+\note{
+	\vspace{2mm}
+	\begin{enumerate}[<alert@+>]
+	\footnotesize
+	\setlength\itemsep{2mm}
+	\item Read.  Logically, that means (read).  Here and below, we use the notation for equivalence because this biconditional holds for all $x$, $A$, and $B$.
+	\item Read.  Logically, that means (read).
+	\item Read.  Logically, that means (read).
+	\item Read.  Logically, that means (read).
+	
+	\end{enumerate}
+}
+
+\end{frame}
+
+\begin{frame}<1-4> \frametitle{1.4: Relationships Between Sets}
+
+\begin{itemize}
+\setlength\itemsep{3mm}
+\item<1-> Relationships between sets $A,B$ \vspace{1mm}
+\begin{itemize} 
+  \setlength\itemsep{1.5mm}
+  \item<1-> $A$ \textcolor{blue}{equals} $B$ (denoted $A=B$) if both sets have the same elements
+\[ ``A=B" \Leftrightarrow \forall x \left( (x\in A)\leftrightarrow (x\in B) \right) \]
+  \item<2-> $A$ is a \textcolor{blue}{subset} of $B$ (denoted $A\subseteq B$) if all elements in $A$ are also in $B$
+\[ ``A\subseteq B"  \Leftrightarrow \forall x \left( (x\in A)\rightarrow (x\in B) \right) \]
+  \item<3-> $A$ is a \textcolor{blue}{proper subset} of $B$ (denoted $A\subset B$) if $A\subseteq B$ and $A\neq B$ \vspace{2mm}
+  \item<4-> Two sets are called \textcolor{blue}{disjoint} if $A\cap B = \emptyset$
+\end{itemize}
+
+\end{itemize}
+
+\note{
+	\vspace{2mm}
+	\begin{enumerate}[<alert@+>]
+	\footnotesize
+	\setlength\itemsep{2mm}
+	\item Read.  The ``for all $x$'' refers to all $x$ in the implied universal set.  However, for this operation, we could also write `for all $x\in A$'' without changing the meaning.
+	\item Read.  The ``for all $x$'' refers to all $x$ in the implied universal set.  Again, writing ``for all $x\in A$'' wouldn't change the meaning.
+	\item Read.  In this case, there must be some element in $B$ that is not in $A$.
+	\item Read.
+	
+	\end{enumerate}
+}
+
+\end{frame}
+
+
+\begin{frame}<1-3> \frametitle{1.4: De Morgan, Infinite Operations, and Negation}
+
+\begin{itemize}
+\setlength\itemsep{3mm}
+\item<1-> De Morgan's $\neg (P \vee Q) = \neg P \wedge \neg Q$ with $P/Q=``x\in A/B"$ implies: $\!\!\!\!\!\!\!\!\!\!\!\!$
+\begin{align*}
+(A \cup B)^c & = A^c \cap B^c
+%\\ (A \cap B)^c & = A^c \cup B^c,
+\end{align*}
+
+\item<2-> Infinite unions and intersections are defined by:
+  \begin{align*}
+  \bigcup_{\alpha \in I} S_{\alpha}
+  &\triangleq \{ x | x \in S_{\alpha} \text{ for some } \alpha \in I \} \\
+  \bigcap_{\alpha \in I} S_{\alpha}
+  &\triangleq \{ x | x \in S_{\alpha} \text{ for all } \alpha \in I \} 
+  \end{align*}  
+  
+\item<3-> De Morgan's identity still applies:
+  \begin{align*}
+  ``x \in \bigcup_{\alpha \in I} S_{\alpha}" &\Leftrightarrow ``\exists \alpha \in I, x\in S_\alpha" \\
+  ``x \in \left(\bigcup_{\alpha \in I} S_{\alpha}\right)^c" &\Leftrightarrow ``\forall \alpha \in I, x \notin S_\alpha" \Leftrightarrow ``x \in \bigcap_{\alpha \in I} S^c_{\alpha}"
+  \end{align*}  
+  
+\end{itemize}
+
+\note{
+	\vspace{0mm}
+	\begin{enumerate}[<alert@+>]
+	\footnotesize
+	\setlength\itemsep{2mm}
+	\item Read.  This is because membership in the complement of a set is logically the same as negation of membership in that set.
+	\item Now, we see that infinite unions and intersections have rather intuitive and direct definitions. \\ [2mm] Let $S_\alpha$ denote a collection of sets indexed by $\alpha \in I$.  The first equation says the infinite union of the collection contains $x$ if there is some $\alpha \in I$ such that $x\in S_\alpha$.  This matches our intuition that the union contains all elements in all the sets. \\ [2mm] Similarly, the second equation says the infinite intersection of the collection contains $x$ only if $x \in S_\alpha$ for all $\alpha \in I$.  This matches our intuition that the intersection contains an element iff it is in all the sets.
+	\item Now, we can apply De Morgan's identity by translating to logic, negating, and mapping back to set theory.  First, we see that $x$ is in the infinite union iff $\exists \alpha \in I, x\in S_\alpha$.  Since the logical negation of this statement is $\forall \alpha \in I, x \notin S_\alpha$, it follows that $x$ is in the complement of the infinite union iff it is in the infinite intersection of the complements of the sets in the collection.
+	
+	\end{enumerate}
+}
+
+\end{frame}
+
+
+\begin{frame}{1.4: Foundations of Set Theory}
+
+\begin{example}[Russell's Paradox]
+Let $R = \{S|S\notin S\}$ be the set of all sets that do not contain themselves.
+This set exists in naive set theory (though it may empty) simply because it is described by the above sentence.
+The paradox arises from the fact that this definition leads to the logical contradiction: $R\notin R \leftrightarrow R\in R$.
+\end{example}
+
+\vspace{-3mm}
+
+\begin{itemize}
+\setlength\itemsep{3mm}
+\item<2-> Sets that contain themselves in naive set theory? \vspace{2mm}
+ 
+\item<3-> What does Russell's paradox show? \vspace{1mm}
+\begin{itemize} 
+  \setlength\itemsep{1.5mm}
+  \item It shows that \textcolor{blue}{naive set theory is not consistent} because it allows constructions leading to contradictions
+  \item It is avoided in axiomatic formulations by restricting constructions
+  \item It also implies that $R$ cannot exist in any consistent set theory
+  %\item Are their sets that contains themselves? In naive set theory, the answer is yes.  Some examples are the ``set of all sets'' and the ``set of all abstract ideas''
+  %\item ZF axiomatic formulation has theorem: ``no set contains itself''
+\end{itemize}
+
+\item<4-> This class will use naive set theory but avoid problematic statements
+
+\end{itemize}
+
+\note{
+	\vspace{4mm}
+	\begin{enumerate}[<alert@+>]
+		\footnotesize
+		\setlength\itemsep{3mm}
+		\item Naive set theory allows one to define any set described by a sentence.  Russell's paradox is a famous example that exposed a major problem with naive set theory.   (read) . In particular, the set-builder construction implies that, if a set does not contain itself, then it must be in $R$.  Alternatively, it must be in $R$.
+		\item In naive set theory, there are sets that contains themselves.  For example, consider the ``set of all sets'' or the ``set of abstract ideas''.  But, this is not allowed in axiomatic set theory.
+		\item Read.  
+		\item Read.  
+	\end{enumerate}
+}
+
+\end{frame}
+
+
+\begin{frame} \frametitle{Next Steps}
+
+\begin{itemize}
+\setlength\itemsep{5mm}
+\item To continue studying after this video -- \vspace{2mm}
+
+\begin{itemize}
+ \setlength\itemsep{3mm}
+ \item Try the suggested reading: Course Notes EF 1.4
+ \item Or the optional reading: PAF 3.1-3.5
+ \item Also, look at the problems in Assignment 2
+\end{itemize}
+\end{itemize}
+
+\note{
+	\vspace{8mm}
+	\begin{enumerate}
+		\setlength\itemsep{3mm}
+		\color{red}
+		\item Here are some options to continue learning this material. (read) \\ [2mm]  That's it for today.  So, I'll see you next time.
+	\end{enumerate}
+}
+
+\end{frame}
+
+  
+\backupbegin
+
+%\begin{frame}
+%\frametitle{Backup Slides}
+%\begin{itemize}
+%\item Slide numbers not included in denominator!
+%\end{itemize}
+%\end{frame}
+
+%\begin{frame}[allowframebreaks]
+%\frametitle{References}
+%\bibliographystyle{alpha}
+%\footnotesize
+%\bibliography{IEEEabrv,WCLabrv,WCLbib,WCLnewbib}
+%\end{frame}
+
+\backupend
+
+\end{document}

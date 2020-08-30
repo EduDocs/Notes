@@ -249,7 +249,7 @@
 
 
 
-\begin{frame}<1-6> \frametitle{1.2.2: Multiple Quantifiers}
+\begin{frame}<1-5> \frametitle{1.2.2: Multiple Quantifiers}
 
 
 
@@ -262,12 +262,12 @@
  \item<2-> \textcolor{red}{``$\forall x\!\in\! I, \forall y\!\in\! C, P(x,y)$''} = ``All images in $I$ contain all colors in $C$''
  \item<3-> \textcolor{red}{``$\forall x\!\in\! I, \exists y \!\in\! C, P(x,y)$''} = ``All images in $I$ contain a color in $C$''
  \item<4-> In ``$\exists y \in U, P(x,y)$'', $x$ is a \textcolor{blue}{free variable} and $y$ is a \textcolor{blue}{bound variable}
- \item<5-> Apply one at a time: $\forall x\!\in\! I, \forall y\!\in\! C, P(x,y) \Leftrightarrow \forall x\!\in\! I, \left(\forall y\!\in\! C, P(x,y)\right)$
 \end{itemize}
 
-\item<6-> Negation \vspace{1mm}
+\item<5-> Negation \vspace{1mm}
 \begin{itemize}
  \setlength\itemsep{1.5mm}
+ \item Apply one at a time: $\forall x\!\in\! I, \forall y\!\in\! C, P(x,y) \Leftrightarrow \forall x\!\in\! I, \left(\forall y\!\in\! C, P(x,y)\right)$
  \item $\neg (\forall x\!\in\! I, \forall y\!\in\! C, P(x,y))) \,\Leftrightarrow\, \exists x\!\in\! I, \exists y\!\in\! C, \neg P(x,y)$
  \item $\neg (\exists x\!\in\! I, \forall y\!\in\! C, P(x,y)) \,\Leftrightarrow\, \forall x\!\in\! I, \exists y\!\in\! C, \neg P(x,y)$
 \end{itemize}  
