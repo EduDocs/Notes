@@ -55,12 +55,12 @@ The conjunction (or logical AND) of $P$ and $Q$, denoted by $P \wedge Q$, is pre
 \begin{center}
 \begin{tabular}{|c|c|c|}
 \hline
-$P$ & $Q$ & $P \wedge Q$ \\
+$P$ & $Q$ & $P \wedge Q$ \tabularnewline
 \hline
-T & T & T \\
-T & F & F \\
-F & T & F \\
-F & F & F \\
+T & T & T \tabularnewline
+T & F & F \tabularnewline
+F & T & F \tabularnewline
+F & F & F \tabularnewline
 \hline
 \end{tabular} .
 \end{center}
@@ -70,12 +70,12 @@ The disjunction (or logical OR) of $P$ and $Q$, denoted $P \vee Q$, is defined b
 \begin{center}
 \begin{tabular}{|c|c|c|}
 \hline
-$P$ & $Q$ & $P \vee Q$ \\
+$P$ & $Q$ & $P \vee Q$ \tabularnewline
 \hline
-T & T & T \\
-T & F & T \\
-F & T & T \\
-F & F & F \\
+T & T & T \tabularnewline
+T & F & T \tabularnewline
+F & T & T \tabularnewline
+F & F & F \tabularnewline
 \hline
 \end{tabular} .
 \end{center}
@@ -85,10 +85,10 @@ The negation (or logical NOT) of $P$, denoted $\neg P$, is given by
 \begin{center}
 \begin{tabular}{|c|c|}
 \hline
-$P$ & $\neg P$ \\
+$P$ & $\neg P$ \tabularnewline
 \hline
-T & F \\
-F & T \\
+T & F \tabularnewline
+F & T \tabularnewline
 \hline
 \end{tabular} .
 \end{center}
@@ -102,12 +102,12 @@ The \defn{logic}{conditional connective} $P \rightarrow Q$ is a logical statemen
 \begin{center}
 \begin{tabular}{|c|c|c|}
 \hline
-$P$ & $Q$ & $P \rightarrow Q$ \\
+$P$ & $Q$ & $P \rightarrow Q$ \tabularnewline
 \hline
-T & T & T \\
-T & F & F \\
-F & T & T \\
-F & F & T \\
+T & T & T \tabularnewline
+T & F & F \tabularnewline
+F & T & T \tabularnewline
+F & F & T \tabularnewline
 \hline
 \end{tabular} .
 \end{center}
@@ -134,12 +134,12 @@ The biconditional from $P$ to $Q$, denoted $P \leftrightarrow Q$, is precisely d
 \begin{center}
 \begin{tabular}{|c|c|c|}
 \hline
-$P$ & $Q$ & $P \leftrightarrow Q$ \\
+$P$ & $Q$ & $P \leftrightarrow Q$ \tabularnewline
 \hline
-T & T & T \\
-T & F & F \\
-F & T & F \\
-F & F & T \\
+T & T & T \tabularnewline
+T & F & F \tabularnewline
+F & T & F \tabularnewline
+F & F & T \tabularnewline
 \hline
 \end{tabular} .
 \end{center}
@@ -156,20 +156,20 @@ We wish to make a truth table for the following statement,
 \end{equation}
 We can form the true table for this statement, using simple steps, as follows
 \begin{center}
-\begin{tabular}{|c|c|c|ccccccc|}
+\begin{tabular}{|c|c|c|c:c:c:c:c:c:c|}
 \hline
 $P$ & $Q$ & $R$
-& $(P$ & $\rightarrow$ & $R)$ & $\wedge$ & $(Q$ & $\vee$ & $\neg R)$ \\
+& $(P$ & $\rightarrow$ & $R)$ & $\wedge$ & $(Q$ & $\vee$ & $\neg R)$ \tabularnewline
 \hline
-T & T & T & T & T & T & T & T & T & F \\
-T & T & F & T & F & F & F & T & T & T \\
-T & F & T & T & T & T & F & F & F & F \\
-T & F & F & T & F & F & F & F & T & T \\
-F & T & T & F & T & T & T & T & T & F \\
-F & T & F & F & T & F & T & T & T & T \\
-F & F & T & F & T & T & F & F & F & F \\
-F & F & F & F & T & F & T & F & T & T \\
-& & & 1 & 5 & 2 & 7 & 3 & 6 & 4 \\
+T & T & T & T & T & T & T & T & T & F \tabularnewline
+T & T & F & T & F & F & F & T & T & T \tabularnewline
+T & F & T & T & T & T & F & F & F & F \tabularnewline
+T & F & F & T & F & F & F & F & T & T \tabularnewline
+F & T & T & F & T & T & T & T & T & F \tabularnewline
+F & T & F & F & T & F & T & T & T & T \tabularnewline
+F & F & T & F & T & T & F & F & F & F \tabularnewline
+F & F & F & F & T & F & T & F & T & T \tabularnewline
+& & & 1 & 5 & 2 & 7 & 3 & 6 & 4 \tabularnewline
 \hline
 \end{tabular} .
 \end{center}
@@ -179,13 +179,13 @@ We conclude this section with a brief mention of two important concepts.
 A \defn{logic}{tautology} is a statement that is true in every valuation of its propositional variables, independent of the truth values assigned to these variables.
 The proverbial tautology is $P \vee \neg P$,
 \begin{center}
-\begin{tabular}{|c|ccc|}
+\begin{tabular}{|c|c:c:c|}
 \hline
-$P$ & $P$ & $\vee$ & $\neg P$ \\
+$P$ & $P$ & $\vee$ & $\neg P$ \tabularnewline
 \hline
-T & T & T & F \\
-F & F & T & T \\
-& 1 & 3 & 2 \\
+T & T & T & F \tabularnewline
+F & F & T & T \tabularnewline
+& 1 & 3 & 2 \tabularnewline
 \hline
 \end{tabular} .
 \end{center}
@@ -194,13 +194,13 @@ For instance, the statement ``The Aggies won their last football game or the Agg
 The negation of a tautology is a \defn{logic}{contradiction}, a statement that is necessarily false regardless of the truth values of its propositional variables.
 The statement $P \wedge \neg P$ is a contradiction, and its truth table is
 \begin{center}
-\begin{tabular}{|c|ccc|}
+\begin{tabular}{|c|c:c:c|}
 \hline
-$P$ & $P$ & $\wedge$ & $\neg P$ \\
+$P$ & $P$ & $\wedge$ & $\neg P$ \tabularnewline
 \hline
-T & T & F & F \\
-F & F & F & T \\
-& 1 & 3 & 2 \\
+T & T & F & F \tabularnewline
+F & F & F & T \tabularnewline
+& 1 & 3 & 2 \tabularnewline
 \hline
 \end{tabular} .
 \end{center}
@@ -266,20 +266,20 @@ To demonstrate this assertion, we need to show that
 is a tautology.
 This is accomplished in the truth table below
 \begin{center}
-\begin{tabular}{|c|c|c|ccccccccccc|}
+\begin{tabular}{|c|c|c|c:c:c:c:c:c:c:c:c:c:c|}
 \hline
 $P$ & $Q$ & $R$
-& $((P$ & $\rightarrow$ & $Q)$ & $\wedge$ & $(Q$ & $\rightarrow$ & $R))$ & $\rightarrow$ & $(P$ & $\rightarrow$ & $R)$ \\
+& $((P$ & $\rightarrow$ & $Q)$ & $\wedge$ & $(Q$ & $\rightarrow$ & $R))$ & $\rightarrow$ & $(P$ & $\rightarrow$ & $R)$ \tabularnewline
 \hline
-T & T & T & T & T & T & T & T & T & T & T & T & T & T \\
-T & T & F & T & T & T & F & T & F & F & T & T & F & F \\
-T & F & T & T & F & F & F & F & T & T & T & T & T & T \\
-T & F & F & T & F & F & F & F & T & F & T & T & F & F \\
-F & T & T & F & T & T & T & T & T & T & T & F & T & T \\
-F & T & F & F & T & T & F & T & F & F & T & F & T & F \\
-F & F & T & F & T & F & T & F & T & T & T & F & T & T \\
-F & F & F & F & T & F & T & F & T & F & T & F & T & F \\
-& & & 1 & 7 & 2 & 10 & 3 & 8 & 4 & 11 & 5 & 9 & 6 \\
+T & T & T & T & T & T & T & T & T & T & T & T & T & T \tabularnewline
+T & T & F & T & T & T & F & T & F & F & T & T & F & F \tabularnewline
+T & F & T & T & F & F & F & F & T & T & T & T & T & T \tabularnewline
+T & F & F & T & F & F & F & F & T & F & T & T & F & F \tabularnewline
+F & T & T & F & T & T & T & T & T & T & T & F & T & T \tabularnewline
+F & T & F & F & T & T & F & T & F & F & T & F & T & F \tabularnewline
+F & F & T & F & T & F & T & F & T & T & T & F & T & T \tabularnewline
+F & F & F & F & T & F & T & F & T & F & T & F & T & F \tabularnewline
+& & & 1 & 7 & 2 & 10 & 3 & 8 & 4 & 11 & 5 & 9 & 6 \tabularnewline
 \hline
 \end{tabular} .
 \end{center}
