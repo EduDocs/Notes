@@ -18,7 +18,7 @@ Instead of interpreting a multivariate derivative as a matrix,  we will view the
 This transform maps the input perturbation $\vecnot{h}$ to a local approximation of the output perturbation.
 Since both are finite dimensional in our example, the linear transform $T$ is represented by the Jacobian matrix and we have $$f'(\vecnot{x})(\vecnot{h}) = T \vecnot{h} = J(\vecnot{x})\cdot \vecnot{h}.$$ 
 
-Mathematically, such definitions require the structure of a Banach space because one needs the linear structure to compute differences, the norm topology to define limits, and completeness to guarantee that the limits exists under mild conditions.
+Mathematically, such definitions require the structure of a Banach space because one needs the linear structure to compute differences, the norm topology to define limits, and completeness to guarantee that limits exist under mild conditions.
 
 \begin{definition}
 Let $f \colon X \rightarrow Y$ be a mapping from a vector space $X$ over $\RealNumbers$ to a Banach space $(Y,\|\cdot\|)$.
@@ -82,10 +82,10 @@ A function $f\colon \RealNumbers^n \to \RealNumbers^m$ with $f = (f_1,f_2,\ldots
 exists and is continuous in $\vecnot{x}$ at $\vecnot{x}=\vecnot{x}_0$.
 A necessary and sufficient condition for this is that each partial derivative is continuous in $\vecnot{x}$ at $\vecnot{x}=\vecnot{x}_0$.
 
-If $m=1$, then the Jacobian is also called the \defn{optimization}{gradient} of the function
-\[ f'(\vecnot{x}) = \nabla f(\vecnot{x}) \triangleq \left[ \begin{array}{cccc} \frac{\partial  f}{\partial  x_1} (\vecnot{x}) & \frac{\partial  f}{\partial  x_2} (\vecnot{x}) & \cdots & \frac{\partial  f}{\partial  x_n} (\vecnot{x}) \end{array} \right]. \]
-It is worth noting that there is no universal agreement about the orientation of the gradient vector (i.e., row versus column vector).
-This is because derivatives are properly understood as linear transforms and either orientation can be used to define the correct linear transform. 
+If $m=1$, then the Jacobian is closely related to the \defn{optimization}{gradient} of the function
+\[ \nabla f(\vecnot{x}) \triangleq f'(\vecnot{x})^H =  \left[ \begin{array}{cccc} \frac{\partial  f}{\partial  x_1} (\vecnot{x}) & \frac{\partial  f}{\partial  x_2} (\vecnot{x}) & \cdots & \frac{\partial  f}{\partial  x_n} (\vecnot{x}) \end{array} \right]^H . \]
+It is worth noting that the orientation of the gradient vector (i.e., row versus column vector) is sometimes defined differently.
+This is because derivatives can be understood as linear transforms and either orientation can be used to define the correct linear transform. 
 \end{example}
 
 \begin{example}
@@ -181,20 +181,37 @@ Since the G\^{a}teaux differential $\delta f (\vecnot{x};\vecnot{h})$ exists by 
 This contradicts the definition of $M$ and, thus, $\|f(\vecnot{x}_2)-f(\vecnot{x}_1)\| \leq M \| \vecnot{x}_2 - \vecnot{x}_1\|$.
 \end{proof}
 
-\begin{corollary}
+\begin{lemma}
 Let $X,Y$ be Banach spaces and $f \colon X \rightarrow Y$ be a function.
 If the Fr\'{e}chet derivative $f'(\vecnot{x})$ exists and satisfies $\| f'(\vecnot{x})\| \leq L$ for all $\vecnot{x}$ in a convex set $A\subseteq X$, then $f$ is Lipschitz continuous on $A$ with Lipschitz constant $L$.
-\end{corollary}
+\end{lemma}
 
 \begin{proof}
 Assume $\| f'(\vecnot{x})\| \leq L$ for all $\vecnot{x}$ in a convex set $A\subseteq X$.
 Then, for any $\vecnot{x}_1 , \vecnot{x}_2 \in A$, let $\vecnot{h} = \vecnot{x}_2 - \vecnot{x}_1$ and notice that Theorem~\ref{theorem:frechet2gateaux} implies that
-\[ \| \delta f \big( (1-s)\vecnot{x}_1+s\vecnot{x}_2; \vecnot{h}\big) \|  = \| f'\big( (1-s)\vecnot{x}_1+s\vecnot{x}_2 \big)(\vecnot{h}) \| \leq \| f'(\vecnot{x})\| \|\vecnot{h} \|, \] 
+\[ \| \delta f \big( \vecnot{x}_1+s\vecnot{h}; \vecnot{h}\big) \|  = \| f'\big( \vecnot{x}_1+s\vecnot{h} \big)(\vecnot{h}) \| \leq \| f'(\vecnot{x}_1 + s \vecnot{h})\| \|\vecnot{h} \|, \] 
 for all $s\in [0,1]$.
 Applying Theorem~\ref{theorem:mean_value_inequality}, we see that $\|f(\vecnot{x}_2)-f(\vecnot{x}_1)\| \leq M \| \vecnot{x}_2 - \vecnot{x}_1\|$ with $M \leq \| f'(\vecnot{x})\| \leq L$.
 This completes the proof.
 \end{proof}
 %\fi
+
+\begin{lemma}
+Let $f \colon X \rightarrow \RealNumbers$ map the Hilbert space $X$ to the real numbers.
+If $\nabla f(\vecnot{x})$ exists and satisfies $ \| \nabla f(\vecnot{y}) - \nabla f(\vecnot{x}) \| \leq L \| \vecnot{y} - \vecnot{x} \|$, then
+\[ \big| f(\vecnot{y}) - f(\vecnot{x}) - \langle\vecnot{y}-\vecnot{x} | \nabla f (\vecnot{x}) \rangle \big| \leq \frac{1}{2} L \| \vecnot{y}-\vecnot{x} \|^2. \]
+\end{lemma}
+
+\begin{proof}
+Let $\vecnot{h} = \vecnot{y}-\vecnot{x}$ and $\phi(t) = f(\vecnot{x} + t \vecnot{h})$. Then, $\phi'(t) = \langle \vecnot{h} | \nabla f(\vecnot{x} + t \vecnot{h}) \rangle$ and 
+\begin{align*}
+\big| f(\vecnot{y}) -  f(\vecnot{x}) - \langle \vecnot{h} | \nabla f(\vecnot{x}) \rangle \big| &= \left| \int_{0}^1 \left( \phi'(t) - \phi'(0) \right) \mathrm{d}t \right| \\
+&=  \left| \int_{0}^1 \langle \vecnot{h} | \nabla f(\vecnot{x} + t \vecnot{h}) - \nabla f(\vecnot{x}) \rangle \, \mathrm{d}t \right| \\
+&\leq \left| \int_{0}^1  \| \vecnot{h} \| \, \| \nabla f(\vecnot{x} + t \vecnot{h}) - \nabla f(\vecnot{x}) \| \, \mathrm{d}t \right| \\
+&\leq \int_{0}^1 \|\vecnot{h} \| L \| t \vecnot{h} \| \, \mathrm{d}t \\
+&= \frac{1}{2} L \| \vecnot{h} \|^2. \qedhere
+\end{align*}
+\end{proof}
 
 \iffalse
 \begin{theorem}
