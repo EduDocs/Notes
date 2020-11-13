@@ -169,24 +169,54 @@ This set is open because, for all $x\in W$, we have $B(x,\sqrt{2}-x)\subseteq W$
 Since $\sqrt{2}\notin \mathbb{Q}$, it follows that $U = \{x\in \mathbb{Q}\,|\, x\geq \sqrt{2}\}=\{x\in \mathbb{Q}\,|\, x> \sqrt{2}\}$ which is open by the same argument.
 But $\Complement{U} = W$, so $W$ is also closed.
 
-
 \begin{definition}
-For any metric space $(X,d)$ and subset $W \subseteq X$, a point $w\in W$ is in the \defn{metric space}{interior} of $W$ if there is a $\delta >0$ such that, for all $x\in X$ with $d(x,w)<\delta$, it follows that $x\in W$.
+For any metric space $(X,d)$ and subset $W \subseteq X$, a point $x\in X$ is a \defn{metric space}{limit point} of $W$ if there is a sequence $w_1,w_2,\ldots\in W$ of distinct elements that converges to $x$.
+Equivalently, $x$ is a limit point of $W$ if, for all $\delta >0$, the set $\{ w\in W | d(x,w)<\delta \}$ contains some point besides $x$.
 \end{definition}
 
-\begin{definition}
-For any metric space $(X,d)$ and subset $W \subseteq X$, a point $w\in X$ is a \defn{metric space}{limit point} of $W$ if there is a sequence $w_1,w_2,\ldots\in W$ of distinct elements that converges to $w$.
-\end{definition}
+\begin{problem}
+Prove that the two definitions of a limit point are equivalent.
+\end{problem}
+
+By this definition (which is standard), an \defn{metric space}{isolated point} $w\in W$ is not a limit point because there is no sequence of distinct elements that converges to it.
+Instead, for any sequence that converges to an isolated point $w$, there must be an $N\in \mathbb{N}$ such that $w_n = w$ for all $n>N$. 
+
+\begin{theorem}
+For any metric space $(X,d)$, a subset $W \subseteq X$ is closed if and only if it contains all of its limit points.
+\end{theorem}
+
+\begin{proof}
+Assume $W$ is closed and suppose $x \notin W$ (i.e., $x \in W^c$) is a limit point of $W$.
+Since $W^c$ is open, there is a $\delta > 0$ such that $B(x,\delta) \subseteq W^c$ and no sequence in $W$ can approach $x$. This contradicts the supposition that $x \notin W$ is a limit point and implies all limit points must be in $W$.
+On the other hand, if $W$ contains all its limit points, then no $x \notin W$ (i.e., $x\in W^c$) can be a limit point.
+Negating the second definition of a limit point and applying it to any $x \in W^c$, we see that there is a $\delta > 0$ such that $\{ w\in W | d(x,w)<\delta \}$ is empty.
+Thus, $B_d (x,\delta) \subseteq W^c$ and this implies that $W^c$ is open.
+Thus, $W$ is closed.
+\end{proof}
+
+It follows that, for a closed subset $W \subseteq X$, any sequence $w_n \in W$ that converges must converge to a point $w \in W$.
 
 \begin{definition}
-For any metric space $(X,d)$ and subset $W \subseteq X$, a point $x\in X$ is in the \defn{metric space}{closure} of $W$ if, for all $\delta >0$, there is a $w\in W$ such that $d(x,w)<\delta$.
+For any metric space $(X,d)$ and subset $W \subseteq X$, a point $w\in W$ is in the \defn{metric space}{interior} of $W$ if and only if there is a $\delta >0$ such that, for all $x\in X$ with $d(x,w)<\delta$, it follows that $x\in W$.
 \end{definition}
+
+\begin{problem}
+Prove that the interior of a set is open.
+\end{problem}
+
+\begin{definition}
+For any metric space $(X,d)$ and subset $W \subseteq X$, a point $x\in X$ is in the \defn{metric space}{closure} of $W$ if and only if, for all $\delta >0$, there is a $w\in W$ such that $d(x,w)<\delta$.
+\end{definition}
+
+\begin{problem}
+Prove that the closure of a set contains all its limit points and, thus, is open.
+\end{problem}
 
 The interior of $A$ is denoted by $\Interior{A}$ and the closure of $A$ is denoted by $\Closure{A}$.
-Using Definition~\ref{definition:metspace_dopen}, it is easy to verify that $\Interior{A}$ is open.
-One can show that closure of $W$ is equal to the union of $W$ and its limit points.
-Thus, $\Closure{A}$ is closed because a subset of a metric space is closed if and only if it contains all of its limit points.
-Finally, the \defn{metric space}{boundary} $\partial A$ of a set $A$ is defined by $\partial A \triangleq \Closure{A} \setminus \Interior{A}$.
+%Using Definition~\ref{definition:metspace_dopen}, it is easy to verify that $\Interior{A}$ is open.
+%The definition of the closure of $W$ shows that it contains all of its limit points and, thus, is closed.
+%Thus, $\Closure{A}$ is closed because a subset of a metric space is closed if and only if it contains all of its limit points.
+The \defn{metric space}{boundary} $\partial A$ of a set $A$ is defined by $\partial A \triangleq \Closure{A} \setminus \Interior{A}$.
 
 \subsection{Continuity}
 

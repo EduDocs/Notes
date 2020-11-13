@@ -1,0 +1,819 @@
+\documentclass[10pt,english,aspectratio=169,handout]{beamer}
+
+\usetheme{default}
+
+\usepackage{xstring}
+\usepackage{pgfpages}
+%\makeatletter
+%\IfSubStr{\@classoptionslist}{handout}
+%  {\pgfpagesuselayout{2 on 1}[letterpaper,border shrink=5mm]}
+%  {}
+%\makeatother
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{stmaryrd}
+\usepackage{enumerate}
+\usepackage{stfloats}
+\usepackage{bbm}
+\usepackage{pdfpages}
+\usepackage{framed}
+
+\usepackage[most]{tcolorbox}
+\tcbset{highlight math style={enhanced,
+  colframe=white,colback=yellow!15,arc=8pt,boxrule=1pt,
+  }}
+  
+\usepackage{tikz,pgf,pgfplots}
+\usepackage{algorithm,algorithmic}
+\usepgflibrary{shapes}
+\usetikzlibrary{%
+  arrows,%
+  arrows.meta,
+  shapes.misc,% wg. rounded rectangle
+  shapes.arrows,%
+  shapes,%
+  calc,%
+  chains,%
+  matrix,%
+  positioning,% wg. " of "
+  scopes,%
+  decorations.pathmorphing,% /pgf/decoration/random steps | erste Graphik
+  shadows,%
+  backgrounds,%
+  fit,%
+  petri,%
+  quotes
+}
+
+\setbeamersize{text margin left=10mm,text margin right=35mm}
+
+\pgfplotsset{compat=1.12}
+
+%\usetheme{Frankfurt}
+%\usecolortheme{ldpc}
+\useinnertheme{rounded}
+\usecolortheme{whale}
+\usecolortheme{orchid}
+
+\newcommand{\ul}[1]{\underline{#1}}
+\renewcommand{\Pr}{\mathbb{P}}
+
+%% Setup slides and notes
+\makeatletter
+\IfSubStr{\@classoptionslist}{handout}
+  {\def\slidesonly{}}{\def\slidesnotes{}}
+\makeatother
+
+%\setbeameroption{show notes on second screen=right} % Both
+\ifdefined\notesonly
+  \setbeameroption{show only notes} % Only notes
+\fi
+\ifdefined\slidesnotes
+  \setbeameroption{show notes on second screen=right} % Both
+\fi
+\ifdefined\slidesonly
+  \setbeameroption{hide notes} % Only slides
+\fi
+%\setbeamertemplate{note page}{\pagecolor{yellow!5}\vfill\insertnote\vfill}
+
+\newcommand{\getpdfpages}[2]{\begingroup
+  \setbeamercolor{background canvas}{bg=}
+  \addtocounter{framenumber}{1}
+  \includepdf[pages={#1},%
+  pagecommand={%
+    \expandafter\def\expandafter\insertshorttitle\expandafter{%
+      \insertshorttitle\hfill\insertframenumber\,/\,\inserttotalframenumber}}%
+  ]{#2}
+  \endgroup}
+
+\newcommand{\backupbegin}{
+   \newcounter{finalframe}
+   \setcounter{finalframe}{\value{framenumber}}
+}
+\newcommand{\backupend}{
+   \setcounter{framenumber}{\value{finalframe}}
+}
+
+ \setbeamercolor{bibliography entry author}{fg=black}
+ \setbeamercolor{bibliography entry title}{fg=black}
+ \setbeamercolor{bibliography entry location}{fg=black}
+ \setbeamercolor{bibliography entry note}{fg=black}
+ 
+ \setbeamerfont{bibliography item}{size=\footnotesize}
+ \setbeamerfont{bibliography entry author}{size=\footnotesize}
+ \setbeamerfont{bibliography entry title}{size=\footnotesize}
+ \setbeamerfont{bibliography entry location}{size=\footnotesize}
+ \setbeamerfont{bibliography entry note}{size=\footnotesize}
+ \setbeamertemplate{bibliography item}{\insertbiblabel}
+ 
+\newlength\tikzwidth
+\newlength\tikzheight
+
+
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\mbb}[1]{\mathbb{#1}}
+%\newcommand{\expt}{\mbb{E}}
+%\newcommand{\dd}{\mathrm{d}}
+\input{macros}
+
+\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;}
+\def\greencheck{{\color{green}\checkmark}}
+\def\scalecheck{\resizebox{\widthof{\checkmark}*\ratio{\widthof{x}}{\widthof{\normalsize x}}}{!}{\checkmark}}
+\def\xmark{\tikz [x=1.4ex,y=1.4ex,line width=.2ex, red] \draw (0,0) -- (1,1) (0,1) -- (1,0);}
+\def\redx{{\color{red}\xmark}}
+
+\renewcommand{\footnotesep}{-2pt}
+
+
+\begin{document}
+
+
+
+\title{ECE 586: Vector Space Methods \\ Lecture 5 Flip Video: Metric Spaces and Topology}
+\author{Henry D. Pfister \\ Duke University}
+\date{}
+%\date{August 20th, 2020}
+%\maketitle
+
+\setbeamertemplate{navigation symbols}{}
+
+\begin{frame}[plain]
+	\titlepage
+	
+	\note{
+		\vspace{8mm}
+		\begin{enumerate}
+			\setlength\itemsep{3mm}
+			\color{red}
+			\item Welcome to the fifth video lecture for ECE 586, Vector Space Methods. \\[2mm]
+			Today, we'll discuss metric spaces and topology.
+		\end{enumerate}
+	}
+\end{frame}
+
+\addtocounter{framenumber}{-1}
+\setbeamertemplate{navigation symbols}{\textcolor{blue}{\footnotesize \insertframenumber ~/ \inserttotalframenumber}}
+
+\begin{frame}<1-6> \frametitle{2.1: Introduction}
+
+\begin{itemize}
+\setlength\itemsep{3mm}
+\item<1-> What is topology and why do we study it? \vspace{1mm}
+\begin{itemize} 
+  \setlength\itemsep{1.5mm}
+  \item<1-> \textcolor{blue}{Study of geometric properties preserved by continuous deformations}
+  \item<2-> Why? Engineers approximate real things by mathematical objects
+  \item<2-> Q1: Can a matrix $A$ be approximated closely by a lower rank matrix?
+  \item<2-> Q2: Can a function $f(x)$ be approximated well by a degree-2 polynomial?
+  \item<3-> In engineering, a topology is typically defined using a metric
+\end{itemize}
+
+\vspace{1mm}
+
+\item<4-> Metric Spaces \vspace{1mm}
+\begin{itemize} 
+  \setlength\itemsep{1.5mm}
+  \item<4-> A \textcolor{blue}{metric space} $(X,d)$ is a set $X$ along with a metric $d(x,y)\!\!$
+  \item<4-> $d(x,y)$ is called the \textcolor{blue}{distance} between the \textcolor{blue}{points} $x$ and $y$
+  \item<5-> A \textcolor{blue}{metric} on a set $X$ is a function \textcolor{blue}{$d \colon X \times X \rightarrow \mathbb{R} $} such that: \vspace{1mm}
+  \begin{itemize}
+  \setlength\itemsep{1.5mm}
+  \item<5->[1.] $d(x,y) \geq 0 \quad \forall x, y \in X$; with equality iff $x = y$ \hfill (non-negativity)~~~~~~~~~
+  \item<5->[2.] $d(x,y) = d(y,x) \quad \forall x, y \in X$ \hfill (symmetry)~~~~~~~~~
+  \item<6->[3.] $d(x,y) + d(y,z) \geq d(x,z) \quad \forall x, y, z \in X$ \hfill (triangle inequality)~~~~~~~~~
+  \end{itemize}
+\end{itemize}
+\end{itemize}
+
+\begin{tikzpicture}[overlay,remember picture,shift={(12.5,1.5)}]
+\uncover<4->{%
+	\draw[fill=blue!10] (-1,-1) rectangle (2.2,1.2); 
+    \node at (1.7,0.6) {$X$};
+    \node[circle,label={$x$},fill=black,minimum size=3pt, inner sep=0pt] (a) at (-0.55,0.3) {};
+    \node[circle,label={$z$},fill=black,minimum size=3pt, inner sep=0pt] (c) at (1.7,-0.4) {};
+    \draw (a) -- (c) node[blue,midway,above,sloped] {$d(x,z)$};
+}
+\uncover<6->{%
+    \node[circle,label=below:{$y$},fill=black,minimum size=3pt, inner sep=0pt] (b) at (0.05,-0.45) {};
+    \draw (a) -- (b) node[blue,midway,below,sloped] {$d(x,y)$};
+    \draw (b) -- (c) node[blue,midway,below,sloped] {$d(y,z)$};
+}
+\end{tikzpicture}
+
+\note{
+	\vspace{2mm}
+	\begin{enumerate}[<alert@+>]
+		\footnotesize
+		\setlength\itemsep{3mm}
+		\item Read.  It allow one to define abstract notions of proximity and distance.
+		\item Why do we study it? Read. Here are two questions that it can help answer. 
+		\item Read.  Thus, this course will focus on metric spaces.
+		\item Read.  This definition provides is a useful abstraction of spaces with some notion of distance between any two points.
+		\item Read.  These rules can be seen as an abstraction of Euclidean space whose notion of distance retains some key properties of Euclidean distance.
+		\item Read. For example, suppose $x$ is where you work, $z$ is where you live, and $y$ is where you buy groceries.  Then, the triangle inequality abstracts the idea that stopping by the store on your way home cannot make your trip home shorter.
+	\end{enumerate}
+}
+
+\end{frame}
+
+
+\begin{frame}<1-3> \frametitle{2.1: Standard Examples of Metric Spaces}
+
+\begin{itemize}
+\setlength\itemsep{6mm}
+\item<1-> Real numbers $X=\mathbb{R}$ with \textcolor{blue}{absolute distance} $d(x,y)=|x-y|$ \vspace{1mm}
+\begin{itemize} 
+  \setlength\itemsep{1.5mm}
+  \item Foundation for real analysis: 1. and 2. are easy; 3. follows from \[ |x-z| = |(x-y) + (y-z)| \leq |x-y| + |y-z| \]
+\end{itemize}
+
+\item<2-> $X=\mathbb{R}^n$ with \textcolor{blue}{Euclidean metric $d(\vecnot{x},\vecnot{y})=\sqrt{(x_1-y_1)^2 + \ldots + (x_n-y_n)^2}\!\!\!\!\!\!$}\vspace{1mm}
+\begin{itemize} 
+  \setlength\itemsep{1.5mm}
+  \item Properties 1. and 2. are easy; 3. is a bit harder and will be shown later
+\end{itemize}
+
+\item<3-> Continuous functions $f \colon [a,b] \to \mathbb{R}$ with metric \textcolor{blue}{$d(f,g) = \displaystyle{\max_{x\in [a,b]}} | f(x) - g(x) |\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!$}\vspace{0.5mm}
+\begin{itemize} 
+  \setlength\itemsep{1.5mm}
+  \item Properties 1. and 2. \textcolor{blue}{inherited} from absolute distance; 3. follows from
+  \begin{align*}
+    \max_{x\in [a,b]} | f(x) - h(x) |
+    &= \max_{x\in [a,b]} | f(x) - g(x) + g(x) - h(x) |  \\
+    &\leq \max_{x\in [a,b]} \left[ |f(x) - g(x)| + |g(x) - h(x)| \right] \\
+    &\leq \max_{x\in [a,b]} |f(x) - g(x)| + \max_{x\in [a,b]} |g(x) - h(x)| = d(f,g) + d(g,h)
+  \end{align*}
+\end{itemize}
+
+%\item<3-> Real vectors $X=\mathbb{R}^n$ with metric \textcolor{blue}{$d(\vecnot{x},\vecnot{y}) \triangleq \max \{|x_1 - y_1|,\ldots,|x_n - y_n|\}$} \vspace{1mm}
+%\begin{itemize} 
+%  \setlength\itemsep{1.5mm}
+%  \item Properties \textcolor{blue}{inherited} from absolute distance: 1. and 2. easy; 3. from
+%  \begin{align*}
+%    \max \{|x_1 - z_1|,\ldots,|x_n - z_n|\}
+%    &= \max \{|x_1 - y_1 + y_1 - z_1|,\ldots,|x_n - y_n + y_n -z_n|\} \\ 
+%    &\leq \max \{|x_1 - y_1| + |y_1 - z_1|,\ldots,|x_n - y_n| + |y_n -z_n|\} \\
+%    &\leq \max \{|x_1 - y_1|,\ldots,|x_n - y_n|\} + \max \{|y_1 - z_1|,\ldots,|y_n -z_n|\}
+%  \end{align*}
+%\end{itemize}
+
+\end{itemize}
+
+\note{
+	\vspace{2mm}
+	\begin{enumerate}[<alert@+>]
+		\footnotesize
+		\setlength\itemsep{3mm}
+		\item First, consider the (read).  This example is the standard (read). 1 holds because the absolute value of a number is non-negative and equals zero iff that number is zero.  2 holds because swapping $x,y$ doesn't change the absolute value. Read.
+		\item Next, consider the example of real $n$-dimensional vectors (read).
+		\item Finally, consider the set of (read).  For this metric, many of the properties are inherited from the absolute distance inside the maximum.  In particular, properties 1 and 2 follow naturally.  For the triangle inequality, we observe that: \\ [2mm] (i) the absolute difference between $f(x)$ and $h(x)$ is unchanged by adding and subtracting $g(x)$ inside the absolute value, \\ [2mm] (ii) the absolute value of the sum of two numbers is upper bounded the sum of their absolute values, \\ [2mm] (iii) the maximum of the sum of two functions is only increased by maximizing them separately.
+	\end{enumerate}
+}
+
+\end{frame}
+
+\begin{frame}<1-3> \frametitle{2.1: Important Concepts in Metric Spaces}
+
+\begin{itemize}
+\setlength\itemsep{5mm}
+\item<1-> \textcolor{red}{``Set of points with distance less than $\epsilon$ from a point $x$''} \vspace{1mm}
+\begin{itemize} 
+  \setlength\itemsep{1.5mm}
+  \item This is called the \textcolor{blue}{open ball} of radius $\epsilon$ centered at $x$ and given by \vspace{-1mm} \[\color{blue} B_d(x,\epsilon) \triangleq \left\{ y \in X | d(x,y) < \epsilon \right\} \vspace{-5mm} \]
+  \item $P=$``For all $a\!\in\! B_d (x,\epsilon)$, there is $\delta\!>\!0$ s.t. $B_d (a,\delta) \subseteq B_d (x,\epsilon)$''
+\end{itemize}
+
+\item<2-> \textcolor{red}{``Infinite list $x_1,x_2,x_3,\ldots$ of points in $X$''} \vspace{1mm}
+\begin{itemize} 
+  \setlength\itemsep{1.5mm}
+  \item A \textcolor{blue}{sequence} $x_i \in X$ for $i\in \mathbb{N}$ equivalent to $x_i = f(i)$ for $f:\mathbb{N}\to X$
+  \item Ex. For $X=\mathbb{R}$ and $d(x,y)=|x-y|$, let \textcolor{blue}{$x_n = \left(1+\frac{1}{n}\right)^n$} for $n\in \mathbb{N}$
+\end{itemize}
+
+\item<3-> \textcolor{red}{``A sequence of points that approaches another point''} \vspace{1mm}
+\begin{itemize} 
+  \setlength\itemsep{1.5mm}
+  \item A sequence $x_n$ \textcolor{blue}{converges} to $x\in X$ (denoted \textcolor{blue}{$x_n \to x$})  if, for any $\epsilon >0$, there is natural number $M$ such that $d(x,x_n) < \epsilon$ for all $n>M$
+\end{itemize}
+  
+\end{itemize}
+
+\begin{tikzpicture}[overlay,remember picture,shift={(11.5,0)}]
+\uncover<1>{%
+\draw[very thick] (0,0) rectangle (3,2.75) node[below left=0.2cm and 0.2cm] {$X$};
+\draw[thick,dashed,blue,fill=blue!10] (0.7,1.6) circle (0.6) node[above=0.55cm] {$B_d(x,\epsilon)$};
+\node [label=below:{$x$},draw,fill=black,circle,inner sep=0pt,minimum size=3pt] at (0.7,1.6) {};
+\draw[-latex] (0.7,1.6) -- node[above] {$\epsilon$} (0.1,1.6);
+}
+\uncover<2->{%
+\draw[very thick] (0,0) rectangle (3,2.75) node[below left=0.2cm and 0.2cm] {$X$};
+\foreach \i/\x/\y in {1/27/6,2/22/11,3/18.5/13.5,4/15/15} {%
+\node [label=below:{$x_\i$},draw,fill=black,circle,inner sep=0pt,minimum size=3pt] (x\i) at (\x/10,\y/10) {};
+1.25,1.25) {}; }
+\node at (1.1,1.56) {\ldots};
+}
+\uncover<3->{%
+\node [label=below:{\textcolor{blue}{$x$}},draw,fill=blue,circle,inner sep=0pt,minimum size=3pt] (x) at (0.7,1.6) {};
+}
+\end{tikzpicture}
+
+\note{
+	\vspace{8mm}
+	\begin{enumerate}[<alert@+>]
+		\footnotesize
+		\setlength\itemsep{3mm}
+		\item First, let us consider the (read).  This is illustrated in the figure.  Also, the statement denoted $P$ (rea) says that all points in the open ball of radius $\epsilon$ also have an open ball around them of radius $\delta < \epsilon$ that lies entirely inside the original ball.  You will be asked to prove this in the homework.
+		\item Next, consider an (read).  Formally, we say that (read). It is well-known that this sequence converges to he constant $e$. A sequence is also illustrated in figure.
+		\item Finally, consider (read).  Formally, we say that (read). In the figure, one can imagine the example sequence converging to the point $x$.
+	\end{enumerate}
+}
+
+\end{frame}
+
+
+\begin{frame}<1-5> \frametitle{2.1: Convergence: Examples and Counterexamples}
+
+\begin{definition}<1->
+A sequence $x_1,x_2,\ldots$ in $(X,d)$ is a \textcolor{blue}{Cauchy sequence} if, for any $\epsilon >0$, there is a natural number $N$ (which may depend on $\epsilon$) such that, for all $m,n > N$,\vspace{-2mm}
+\begin{equation*}
+d \left( x_m, x_n \right) < \epsilon
+\end{equation*}
+\end{definition}
+
+\begin{itemize}
+\setlength\itemsep{3mm}
+\item<2-> Theorem: Every convergent sequence is a Cauchy sequence \vspace{1mm}
+\begin{itemize} 
+  \setlength\itemsep{1.5mm}
+  \item Proof will be given in the lecture \pause
+\end{itemize}
+\item<3-> Converse? \uncover<4->{No, there is a counterexample} \vspace{1mm}
+\begin{itemize} 
+  \setlength\itemsep{1.5mm}
+  \item<4-> Metric space $(X,d)$ with rationals $X=\mathbb{Q}$ and $d(x,y)=|x-y|$
+  \item<4-> Sequence $x_1 = 2$ and $x_{n+1} = f(x_n) \triangleq \frac{1}{2} x_n + 1/x_n \in \mathbb{Q} $
+  \item<4-> One can show: $x_n$ is a Cauchy sequence and $|x_n - \sqrt{2}|\to 0$
+\end{itemize}
+\item<5-> But, according to the definitions, \textcolor{blue}{$x_n$ does not converge!}  \vspace{1mm}
+\begin{itemize} 
+  \setlength\itemsep{1.5mm}
+  \item Because convergence requires that the limit is in $X$ but $\sqrt{2} \notin \mathbb{Q}$
+\end{itemize}
+\end{itemize}
+
+\note{
+	\vspace{4mm}
+	\begin{enumerate}[<alert@+>]
+		\footnotesize
+		\setlength\itemsep{3mm}
+		\item Read.  For the real numbers, you've probably seen this definition before in a calculus class.
+		\item Read.  This means that the tail of a convergent sequence must only contain points that are close to each other.
+		\item What about the converse? In calculus and real analysis, it is also common to prove convergence by showing a sequence in Cauchy.
+		\item But this doesn't work in all metric spaces! Read.  Later we will see that the converse is true for complete metric spaces.
+		\item Read.  Thus, this counterexample follows from the irrationality of $\sqrt{2}$.
+	\end{enumerate}
+}
+
+\end{frame}
+
+  
+\begin{frame}<1-3> \frametitle{2.1.1: Metric Topology}
+
+\begin{definition}<1->
+Let $W$ be a subset of a metric space $(X,d)$.
+The set $W$ is called \textcolor{blue}{open} if, for every $w_0 \in W$, there is an $\epsilon>0$ such that $B_d (w_0,\epsilon) \subseteq W$.
+\end{definition}
+
+\begin{definition}<2->
+A subset $W$ of $(X,d)$ is \textcolor{blue}{closed} if its complement $W^c = X-W$ is open.
+\end{definition}
+
+\begin{theorem}<3->
+%For any metric space $(X,d)$,
+\begin{enumerate}
+\item $\emptyset$ and $X$ are open sets
+\item any union of open sets is open
+\item any finite intersection of open sets is open
+\end{enumerate}
+\end{theorem}
+
+\begin{center}
+\scalebox{0.7}{%
+\begin{tikzpicture}[scale=0.8]
+\draw[very thick] (-0.5,-1.5) rectangle (3.5,2) node[below left=0.2cm and 0.2cm] {$X$};
+\draw [thick,dashed,fill=blue!10] plot [smooth cycle] coordinates {(0,0) (1,1) (3,1) (2,0) (2,-1)} node[above left=0.65cm and 0.15cm] {open};
+\end{tikzpicture}}
+\hspace{5mm}
+\scalebox{0.7}{%
+\begin{tikzpicture}[scale=0.8]
+\draw[very thick] (-0.5,-1.5) rectangle (3.5,2) node[below left=0.2cm and 0.2cm] {$X$};
+\draw [thick,fill=blue!10] plot [smooth cycle] coordinates {(0.5,0) (1,1.5) (2.5,1) (2.5,0) (1.5,-1)} node[above left=0.75cm and -0.6cm] {closed};
+\end{tikzpicture}}
+\hspace{5mm}
+\scalebox{0.7}{%
+\begin{tikzpicture}[scale=0.8]
+\draw[very thick] (-0.5,-1.5) rectangle (3.5,2) node[below left=0.2cm and 0.2cm] {$X$};
+%\clip (1,1) circle(0.5);
+\fill[blue!10,even odd rule] plot [smooth cycle] coordinates {(0.5,0) (1,1.5) (2.5,1) (2.5,0) (1.5,-1)} (1.5,0.5) circle (0.5);
+\draw[thick,dashed] (1.5,0.5) circle (0.5);
+\draw [thick] plot [smooth cycle] coordinates {(0.5,0) (1,1.5) (2.5,1) (2.5,0) (1.5,-1)} node[above left=0.35cm and -0.6cm] {neither};
+\end{tikzpicture}}
+\end{center}  
+
+\note{
+	\vspace{4mm}
+	\begin{enumerate}[<alert@+>]
+		\footnotesize
+		\setlength\itemsep{3mm}
+		\item In mathematics, a topology is a collection of ``open'' sets satisfying certain properties. It's likely that many of you have been exposed informally to the idea of open and closed sets (e.g., intervals of real numbers).  In this class, we will make these notions precise for metric spaces.   Read.
+		\item Read.
+		\item Based on these definitions, one can prove the following theorem. Read. These results will be proven in class or in homework problems.
+	\end{enumerate}
+}
+
+\end{frame}
+
+
+\begin{frame}<1-6> \frametitle{2.1.1: Interior, Limit points, and Closure}
+
+For a metric space $(X,d)$ and subset $W \subseteq X$:
+
+\begin{definition}<1->
+A point $w_0 \in W$ is in the \textcolor{blue}{interior} of $W$ (denoted $\Interior{W}$) if: \\ ~~there is a $\delta >0$ such that $B_d (w_0,\delta) \subseteq W$. %if $d(x,w)<\delta$, then $x\in W$.
+\end{definition}
+
+\begin{definition}<2->
+A point $w\in X$ is a \textcolor{blue}{limit point} of $W$ if there is: \\  ~~a sequence of distinct elements, $w_1,w_2,\ldots\in W$, that converges to $w$.
+\end{definition}
+
+\begin{definition}<3->
+A point $x_0\in X$ is in the \textcolor{blue}{closure} of $W$ (denoted $\Closure{W}$) if: \\ ~~for all $\delta >0$, there is a $w_0\in W$ such that $d(x_0,w_0)<\delta$.
+\end{definition}
+
+\begin{itemize}
+  \setlength\itemsep{1.5mm}
+  \item<4-> The interior $\Interior{W}$ is open (see definition)
+  \item<5-> $W$ is closed if and only if it contains all of its limit points
+  \item<6-> Closure $\Closure{W}$ equals union of $W$ and all its limit points (thus is closed)
+\end{itemize}
+
+\note{
+	\vspace{4mm}
+	\begin{enumerate}[<alert@+>]
+		\footnotesize
+		\setlength\itemsep{2mm}
+		\item Sometimes it is useful to consider only the points in a set that are not part of a boundary.  This is called the interior of set and for a... Read.  This implies that $w_0$ surrounded by an open ball in $W$.
+		\item It is also useful to consider points that can approached by non-trivial sequences from a set. These points are called limit points.  Formally, ... Read.  
+		\item It can also be useful to consider a set along with all additional points lying on its boundary.  The resulting set is called the closure and, formally, ... Read.  This implies that $x_0$ is arbitrarily close to points in $W$.
+		\item These sets have a few nice properties.  First, one can show that the interior is open.
+		\item One can also show that (read).
+		\item Lastly, one can show that the (read).
+	\end{enumerate}
+}
+
+
+\end{frame}
+
+
+\begin{frame}{2.1.2: Continuity}
+
+Let $f \colon X \rightarrow Y$ be a function between metric spaces $(X,d_X)$ and $(Y,d_Y)$:
+
+\begin{definition}
+The function $f$ is \textcolor{blue}{continuous at $x_0 \in X$} if, for any $\epsilon> 0$, there exists a $\delta >0$ such that, for all $x\in X$ satisfying $d_X(x_0,x)< \delta$, we find $d_Y \left( f(x_0),f(x) \right) < \epsilon$
+\end{definition}
+
+\begin{theorem}<2-> 
+If $f$ is continuous at $x_0$, then $f(x_n) \to f(x_0)$ for all sequences $x_1,x_2,\ldots \in X$ such that $x_n \to x_0$.
+Conversely, if $f(x_n) \to f(x_0)$ for all sequences $x_1,x_2,\ldots  \in X$ such that $x_n \to x_0$, then $f$ is continuous at $x_0$.
+\end{theorem}
+
+\begin{itemize}
+\setlength\itemsep{1.5mm}
+\item<3-> $f$ is called \textcolor{blue}{continuous} if it is continuous at all $x_0 \in X$
+\item<3-> $f$ is \textcolor{blue}{uniformly continuous} if $\delta$ can be chosen independently of $x_0$
+\end{itemize}
+
+\begin{definition}<4->
+A function $f  \colon X \rightarrow Y$ is called \textcolor{blue}{Lipschitz continuous} on $A \subseteq X$ if there is a constant $L \in \RealNumbers$ such that $d_Y (f(x),f(y)) \leq L \, d_X (x,y)$ for all $x,y\in A$.
+\end{definition}
+
+\note{
+	\vspace{4mm}
+	\begin{enumerate}[<alert@+>]
+		\footnotesize
+		\setlength\itemsep{3mm}
+		\item For real functions, I'm guessing that most of you have already seen the definition of continuity in a calculus class. Now, we consider functions between metric spaces and discuss the natural extension of that concept.  Read.
+		\item A very nice result in topology is that continuity has an equivalent definition based on convergence.  In practice, this viewpoint is often more useful.  Read.
+		\item Read.  In particular, the definition of continuous chooses $x_0$ before $\delta$.  Thus, the value of $\delta$ is allowed to depend on $x_0$.  If that dependence can be removed, then the function is uniformly continuous.
+		\item Finally, in engineering mathematics, most functions satisfy a strong form of continuity known.  Read.  For example, this holds if the function's derivative exists and                                                             is bounded on $A$.
+	\end{enumerate}
+}
+
+
+\end{frame}
+
+\begin{frame} \frametitle{Next Steps}
+
+\begin{itemize}
+\setlength\itemsep{5mm}
+\item To continue studying after this video -- \vspace{2mm}
+
+\begin{itemize}
+ \setlength\itemsep{3mm}
+ \item Try the suggested reading: Course Notes EF 2.1-2.1.2
+ \item Or the optional reading: MMA 2.1
+ \item Also, look at the problems in Assignment 3
+\end{itemize}
+\end{itemize}
+
+\note{
+	\vspace{8mm}
+	\begin{enumerate}
+		\setlength\itemsep{3mm}
+		\color{red}
+		\item Here are some options to continue learning this material. (read) \\ [2mm]  That's it for today.  So, I'll see you next time.
+	\end{enumerate}
+}
+
+\end{frame}
+
+
+\end{document}
+
+\begin{frame}{2.1.3: Completeness}
+
+\begin{definition}<1->
+A metric space $(X,d)$ is said to be \textcolor{blue}{complete} if every Cauchy sequence in $(X,d)$ converges to a limit $x \in X$.
+\end{definition}
+
+\begin{example}<1->
+Consider the sequence $x_n \in \mathbb{Q}$ defined by $x_1 = 2$ and $\smash{x_{n+1} = \frac{1}{2}x_n + 1/x_n}$.
+We have seen that this sequence satisfies $|x_n - \sqrt{2}|\to 0$ but $\sqrt{2}$ is not rational.
+Thus, the standard metric space of rationals is not complete.
+\end{example}
+
+\begin{definition}<2->
+A subset $A$ of a metric space $(X,d)$ is \textcolor{blue}{dense} in $X$ if every $x\in X$ is a limit point of the set $A$.
+This is equivalent to the closure $\overline{A}$ being equal to $X$.
+\end{definition}
+
+\begin{alertblock}{Key Point}<3->
+The standard metric space of real numbers is a complete metric space.
+This can be shown using Cauchy sequences of rational numbers because $\mathbb{Q}$ is dense in $\mathbb{R}$.  Note: proof not discussed but available on website.
+\end{alertblock}
+
+\end{frame}
+
+
+\begin{frame}{2.1.3: Contraction Mapping Theorem}
+
+\begin{definition}<1->
+Let $A$ be a subset of a metric space $(X,d)$ and $f \colon X \rightarrow X$ be a function.
+Then, $f$ is a \textcolor{blue}{contraction} on $A$ if $f(A) \subseteq A$ and there exists a constant $\gamma < 1$ such that $d \left( f(x),f(y) \right) \leq \gamma  d(x,y)$ for all $x,y\in A$.
+\end{definition}
+
+\begin{example}
+Consider metric space $X=[0,1]$ with absolute distance.
+Define $f\colon X \to X$ by $f(x) = 1-\frac{1}{2}x$ and observe $|f(x)-f(y)| = \frac{1}{2}|x-y|$.
+\end{example}
+
+\begin{theorem}[Contraction Mapping Theorem]<2->
+Let $(X,d)$ be a complete metric space and $f$ be contraction on a closed subset $A \subseteq X$.
+Then, $f$ has a unique fixed point $x^*$ in $A$ such that $f(x^*) = x^*$ and $x_{n+1} = f(x_n)$ converges to $x^*$ from any initial $x_1 \in A$.  Moreover, $x_n$ satisfies the error bounds: \\[1mm] \hspace{3mm} $d(x^*,x_n) \leq \gamma^{n-1} d(x^*,x_1)$ and $d(x^*,x_{n+1}) \leq d(x_n,x_{n+1})\gamma /(1-\gamma)$.
+\end{theorem}
+
+\end{frame}
+
+\begin{frame}{2.1.3: Applications of the Contraction Mapping Theorem}
+
+The following important results in applied mathematics have relatively simple proofs based on the contraction mapping theorem.
+\vspace{2mm}
+
+\begin{itemize}
+\setlength\itemsep{3mm}
+\item<1-> Picard's uniqueness theorem for differential equations \vspace{1mm}
+\begin{itemize} 
+  \setlength\itemsep{1.5mm}
+  \item Differential equation $y'(t) = f(t,y(t))$ for $t\in [a,b]$ with $y(a)=y_0$ 
+  \item  Assume $f(t,y)$ is Lipschitz continuous in $y$ for $t\in [a,b]$
+  \item Then, solution $y(t)$ exists and is unique for $t\in [a,b]$
+\end{itemize}
+\item<2-> Implicit function theorem \vspace{1mm}
+\begin{itemize} 
+  \setlength\itemsep{1.5mm}
+  \item Let $f\colon \mathbb{R}^n \times \mathbb{R}^{m} \to \mathbb{R}^m$ be continuously differentiable on open $A$
+  \item Let $g\colon \mathbb{R}^n \to \mathbb{R}^{m}$ be defined implicitly by $f(x,g(x))=0$
+  \item For $x_0\in A$, assume $f(x_0,y_0)=0$ and $y$-Jacobian invertible at $(x_0,y_0)$
+  \item Then, $g(x)$ exists and is unique in some neighborhood of $x_0$
+\end{itemize}
+\item<3-> Dynamic Programming for a Markov Decision Process (MDP) \vspace{1mm}
+\begin{itemize} 
+  \setlength\itemsep{1.5mm}
+  \item State-action $(s,a)$ defines probability $p(s'|s,a)$ and reward $R(s,a)$
+  \item Finite state + discounted reward $\Rightarrow$ stationary optimal policy
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{2.1.3: Contraction Mapping Example}
+
+\begin{minipage}{0.45\textwidth}
+Starting from $x_1 = 0.2$, define $x_{n+1}= \cos(x_n)$ and plot the points $(x_n,x_{n+1})$.  Each point is connected to the slope-1 line to emphasize the path taken.
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\scalebox{0.75}{\input{../cos_contract}}
+\end{minipage}
+\vspace{1mm}
+
+\begin{itemize}
+\setlength\itemsep{1.5mm}
+\item<1-> Let $X=[0,1]$ and define $f\colon X\to X$ via $f(x)=\cos(x)$
+
+\item<2-> $\cos([0,1]) = [\cos(1),1]$ because $\cos(x)$ decreasing on $[0,\pi]$
+
+\item<3-> Mean value theorem: $f(y)-f(x) = f'(t) (y-x)$ for some $t\in [x,y]$
+
+\item<4-> $f'(t) = -\sin(t)$ and $\sin([0,1]) = [0,\sin(1)]$ with $\sin(1) \approx 0.84$
+
+\item<5-> $| \cos(y) - \cos(x) \,| \leq 0.85 \, |y-x|$ $\;\Rightarrow$ \textcolor{blue}{$f(x)$ is a contraction on $[0,1]$}
+
+\item<6-> $x_{n+1} \!= \cos(x_n)$  converges to \textcolor{blue}{unique fixed point $x^* \!= \cos(x^*) \!\approx\! 0.739$}
+\end{itemize}
+
+\end{frame}  
+
+
+
+\begin{frame}{2.1.4: Compactness}
+
+\begin{definition}<1->
+A metric space $(X,d)$ is \textcolor{blue}{totally bounded} if, for any $\epsilon > 0$, there exists a finite set of $B_d (x,\epsilon)$ balls that cover (i.e., whose union equals) $X$.
+\end{definition}
+
+\begin{definition}<2->
+A metric space is \textcolor{blue}{compact} if it is complete~and~totally~bounded.
+\end{definition}
+
+\begin{itemize}
+\setlength\itemsep{3mm}
+\item<3-> Examples \vspace{1mm}
+\begin{itemize} 
+  \setlength\itemsep{1.5mm}
+  \item The closed interval $[0,1]\subset \RealNumbers$ is compact
+  \item A subset of Euclidean $\RealNumbers^n$ is compact iff it is closed and bounded
+  \item But, the standard metric space of real numbers is not compact because it is not totally bounded.
+\end{itemize}
+
+\end{itemize}
+
+\begin{theorem}<4>
+A closed subset $A$ of a compact space $X$ is itself a compact space.
+\end{theorem}
+
+\end{frame}
+
+\begin{frame}{2.1.4: Compactness and Sequences}
+
+\begin{definition}<1->
+Let $x_1,x_2,\ldots \in X$ be a sequence and $n_1,n_2,\ldots\in \mathbb{N}$ be
+a strictly increasing sequence.
+Then, $x_{n_1},x_{n_2},\ldots$ is called \textcolor{blue}{subsequence}.
+\end{definition}
+
+\begin{theorem}<2->
+A sequence in a compact metric space has a subsequence that converges.
+\end{theorem}
+
+\begin{example}<3->
+For the compact metric space $X=[-2,2]\subset \mathbb{R}$ with absolute distance, let $x_n = (-1)^n + \frac{1}{n}$.
+Then, subsequence $x_2,x_4,x_6,\ldots$ converges to 1.
+\end{example}
+
+\begin{itemize}
+\item<3-> Sketch proof on whiteboard in pictures
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{2.1.4: Properties of Real Numbers}
+
+\begin{itemize}
+\setlength\itemsep{3mm}
+\item<1-> Let us consider extreme values for sets of real numbers \vspace{1mm}
+
+\begin{itemize} 
+  \setlength\itemsep{1.5mm}
+  \item Extended Real Numbers: $\overline{\RealNumbers} \triangleq \RealNumbers \cup \{ \infty,-\infty\}$
+  \item Defines \textcolor{blue}{compact metric space} with metric $d_{\overline{\RealNumbers}} (x,y) \triangleq |\frac{x}{1+|x|} - \frac{y}{1+|y|}|$
+  \item ``$x_n \to \infty$'' equivalent to ``$\forall M>0, \, \exists N\in \mathbb{N}, \, \forall n>N, \, x_n > M$''
+\end{itemize}
+\end{itemize}
+
+\begin{definition}<2->
+The \textcolor{blue}{supremum} (or least upper bound) of $X\subseteq \RealNumbers$, denoted \textcolor{blue}{$\sup X$}, is the smallest extended real number $M \in \overline{\RealNumbers}$ such that $x\leq M$ for all $x\in X$.
+%It is always well-defined and equals $-\infty$ if $X=\emptyset$.
+\end{definition}
+
+\begin{lemma}[supremum sequence]<3->
+Let $X$ be a metric space and $f \colon X\rightarrow \RealNumbers$ be a function from $X$ to the real numbers.
+Let $M = \sup f(A)$ for some non-empty $A \subseteq X$.
+Then, there exists a sequence $x_1,x_2,\ldots \in A$ such that $\lim_n f(x_n) = M$.
+\end{lemma}
+
+\begin{itemize}
+\item<4-> Sketch proof on whiteboard
+\end{itemize}
+  
+\end{frame}
+
+
+\begin{frame}{2.1.4: More Properties of Real Numbers}
+
+\begin{definition}<1->
+The \textcolor{blue}{maximum} of $X\subseteq \RealNumbers$, denoted \textcolor{blue}{$\max X$}, is the largest value achieved by the set.
+It equals the supremum if $\sup X \in X$ and is \textcolor{red}{undefined} otherwise.
+\end{definition}
+
+\begin{example}<2->
+$X = [1,2) \subset \mathbb{R}$ has $\sup X = 2$ and $\max X$ undefined. \\[1mm]
+For $f(x)=\frac{1}{2-x}$, $f(X) = [1,\infty)$ and $\sup f(X) = \infty$.
+\end{example}
+
+\begin{itemize}
+\item<3-> \textcolor{blue}{infimum}: $\inf X = - \left(\sup \, -\!X\right)$, where $-\!X = \{x\in \mathbb{R}\,|-\!x\in X\}$
+\item<3-> \textcolor{blue}{minimum}: $\min X = - \left(\max \, -\!X \right)$, if it exists
+\item<3-> supremum and infimum always well-defined but may equal $\pm \infty$
+\end{itemize}
+
+
+
+\begin{theorem}<4->
+Any bounded non-decreasing sequence of real numbers converges to its supremum.
+\end{theorem}
+
+\end{frame}  
+
+
+\begin{frame}{2.1.5: Sequences of Functions}
+
+Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces and
+$f_n \colon X \to Y$ for $n\in \mathbb{N}$ be a sequence of functions mapping $X$ to $Y$.
+
+\begin{definition}
+The sequence $f_n$ \textcolor{blue}{converges pointwise} to $f\colon X \to Y$ if, for all $x \in X$, \vspace{-1.5mm}
+\[ \lim_{n\to \infty} f_n (x) = f(x) \vspace*{-0.5mm} \]
+
+\end{definition}
+
+\begin{definition}
+The sequence $f_n$ \textcolor{blue}{converges uniformly} to $f \colon X \to Y$ if \vspace{-1.5mm}
+\[ \forall \epsilon > 0, \, \exists N\in \mathbb{N}, \, \forall n>N, \, \forall x\in X, \, d_Y \left( f_n(x),f(x) \right) < \epsilon. \vspace*{-0.5mm} \]
+\end{definition}
+
+\begin{theorem}
+If each $f_n$ is continuous and $f_n$ converges uniformly to $f \colon X \to Y$, then $f$ is continuous.
+\end{theorem}
+
+\end{frame}
+
+\begin{frame}{2.1.5: Two Important Results}
+
+\begin{theorem}
+Let $X$ be a metric space and $f \colon X\rightarrow \RealNumbers$ be a continuous function from $X$ to $\mathbb{R}$.
+If $A$ is a compact subset of $X$, then there exists $x\in A$ such that $f(x)=\sup f(A)$ (i.e., $f$ achieves a maximum on $A$).
+\end{theorem}
+
+\vspace{3mm}
+
+\begin{theorem}
+Let $(X,d)$ be a compact metric space and $C(X)$ be the set of continuous functions mapping $X$ to $\mathbb{R}$.
+This set of functions, with the metric \vspace{-1.5mm} \[d_\infty (f,g) \triangleq \sup_{x\in X} |f(x)-g(x)| = \max_{x\in X} |f(x)-g(x)|, \vspace*{-1.5mm}\] defines a complete metric space.
+\end{theorem}
+
+Note: For $f,g\in C(X)$, $d_\infty$ metrizes uniform convergence because \vspace{-1.5mm} \[ \text{``}\max_{x\in X} |f(x)-g(x)| < \epsilon \text{''} \Leftrightarrow \text{``} \forall x\in X, |f(x) - g(x)| < \epsilon \text{''}. \]
+
+\end{frame}
+
+
+  
+\backupbegin
+
+%\begin{frame}
+%\frametitle{Backup Slides}
+%\begin{itemize}
+%\item Slide numbers not included in denominator!
+%\end{itemize}
+%\end{frame}
+
+%\begin{frame}[allowframebreaks]
+%\frametitle{References}
+%\bibliographystyle{alpha}
+%\footnotesize
+%\bibliography{IEEEabrv,WCLabrv,WCLbib,WCLnewbib}
+%\end{frame}
+
+\backupend
+
+\end{document}
