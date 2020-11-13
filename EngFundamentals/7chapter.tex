@@ -20,7 +20,7 @@ Since every matrix has at least one eigenvector, we let $\vecnot{u}$ be an eigen
 Using the Gram-Schmidt procedure, it is possible to construct an orthonormal basis $\mathcal{B} = \vecnot{x}_1, \ldots, \vecnot{x}_n$ for $\ComplexNumbers^n$, with $\vecnot{x}_1 = \vecnot{u}$.
 Define the matrix $U_n$ by
 \begin{equation*}
-U_n = \left[ \begin{array}{ccc} \vecnot{x}_1 & \cdots & \vecnot{x}_n \end{array} \right] .
+U_n = \begin{bmatrix} \vecnot{x}_1 & \cdots & \vecnot{x}_n \end{bmatrix} .
 \end{equation*}
 Since $\mathcal{B}$ is a basis for $\ComplexNumbers^n$, every column of the matrix $AU_n$ can be expressed as a linear combination of vectors in $\mathcal{B}$, say,
 \begin{equation*}
@@ -30,35 +30,35 @@ A \vecnot{x}_i = \sum_{j=1}^n s_{j,i} \vecnot{x}_j
 Note that $A \vecnot{x}_1 = \lambda_1 \vecnot{x}_1$ for some $\lambda_1$ since $\vecnot{x}_1 = \vecnot{u}$, an eigenvector of $A$.
 We can then write
 \begin{equation*}
-A U_n = \left[ \begin{array}{ccc} A \vecnot{x}_1 & \cdots & A \vecnot{x}_n \end{array} \right]
-= U_n \left[ \begin{array}{cccc} \lambda_1 & s_{1,2} & \ldots & s_{1,n} \\
+A U_n = \begin{bmatrix} A \vecnot{x}_1 & \cdots & A \vecnot{x}_n \end{bmatrix}
+= U_n \begin{bmatrix} \lambda_1 & s_{1,2} & \ldots & s_{1,n} \\
 0 & s_{2,2} & \cdots & s_{2,n} \\
 \vdots & \vdots & \ddots & \vdots \\
-0 & s_{n,2} & \cdots & s_{n,n} \end{array} \right]
-= U_n \left[ \begin{array}{cc} \lambda_1 & \vecnot{s}^T \\
-\vecnot{0} & A_{n-1} \end{array} \right] ,
+0 & s_{n,2} & \cdots & s_{n,n} \end{bmatrix}
+= U_n \begin{bmatrix} \lambda_1 & \vecnot{s}^T \\
+\vecnot{0} & A_{n-1} \end{bmatrix} ,
 \end{equation*}
 where we have used the convenient notation
 \begin{equation*}
-A_{n-1} = \left[ \begin{array}{ccc} s_{2,2} & \cdots & \vecnot{s}_{2,n} \\
+A_{n-1} = \begin{bmatrix} s_{2,2} & \cdots & \vecnot{s}_{2,n} \\
 \vdots & \ddots & \vdots \\
-s_{n,2} & \cdots & s_{n,n} \end{array} \right]
+s_{n,2} & \cdots & s_{n,n} \end{bmatrix}
 \end{equation*}
 and $\vecnot{s}^T = (s_{1,2}, \ldots, s_{1,n})$.
 By the inductive hypothesis, we can write $A_{n-1} = U_{n-1} T_{n-1} U_{n-1}^H$ where $T_{n-1}$ is upper triangular and $U_{n-1}$ is unitary.
 It follows that
 \begin{equation*}
 \begin{split}
-A U_n &= U_n \left[ \begin{array}{cc} \lambda_1 & \vecnot{s}^T \\
-\vecnot{0} & A_{n-1} \end{array} \right]
-= U_n \left[ \begin{array}{cc} \lambda_1 & \vecnot{s}^T \\
-\vecnot{0} & U_{n-1} T_{n-1} U_{n-1}^H \end{array} \right] \\
-&= U_n \left[ \begin{array}{cc} 1 & \vecnot{0}^T \\
-\vecnot{0} & U_{n-1} \end{array} \right]
-\left[ \begin{array}{cc} \lambda_1 & \vecnot{s}^T U_{n-1} \\
-\vecnot{0} & T_{n-1} \end{array} \right]
-\left[ \begin{array}{cc} 1 & \vecnot{0}^T \\
-\vecnot{0} & U_{n-1}^H \end{array} \right] .
+A U_n &= U_n \begin{bmatrix} \lambda_1 & \vecnot{s}^T \\
+\vecnot{0} & A_{n-1} \end{bmatrix}
+= U_n \begin{bmatrix} \lambda_1 & \vecnot{s}^T \\
+\vecnot{0} & U_{n-1} T_{n-1} U_{n-1}^H \end{bmatrix} \\
+&= U_n \begin{bmatrix} 1 & \vecnot{0}^T \\
+\vecnot{0} & U_{n-1} \end{bmatrix}
+\begin{bmatrix} \lambda_1 & \vecnot{s}^T U_{n-1} \\
+\vecnot{0} & T_{n-1} \end{bmatrix}
+\begin{bmatrix} 1 & \vecnot{0}^T \\
+\vecnot{0} & U_{n-1}^H \end{bmatrix} .
 \end{split}
 \end{equation*}
 Let $U$ be the matrix given by

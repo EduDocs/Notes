@@ -24,9 +24,9 @@ y_j = \frac{1}{l_{jj}} \left( b_j - \sum_{i=1}^{j-1} l_{ji} y_i \right), \;\;\; 
 \begin{example}
 Consider the system
 \begin{equation*}
-\left[ \begin{array}{ccc} 1 & 0 & 0 \\ 1 & 1 & 0 \\ 1 & 2 & 1 \end{array} \right]
-\left[ \begin{array}{c} y_1 \\ y_2 \\ y_3 \end{array} \right]
- = \left[ \begin{array}{c} 1 \\ 2 \\ 9 \end{array} \right].
+\begin{bmatrix} 1 & 0 & 0 \\ 1 & 1 & 0 \\ 1 & 2 & 1 \end{bmatrix}
+\begin{bmatrix} y_1 \\ y_2 \\ y_3 \end{bmatrix}
+= \begin{bmatrix} 1 \\ 2 \\ 9 \end{bmatrix} .
 \end{equation*}
 Applying the above recursion gives
 \begin{align*}
@@ -45,9 +45,9 @@ x_j = \frac{1}{u_{jj}} \left( y_j - \sum_{i=j+1}^{n} u_{ji} x_i \right), \;\;\; 
 \begin{example}
 Consider the system
 \begin{equation*}
-\left[ \begin{array}{ccc} 1 & 1 & 1 \\ 0 & 1 & 3 \\ 0 & 0 & 2 \end{array} \right]
-\left[ \begin{array}{c} x_1 \\ x_2 \\ x_3 \end{array} \right]
- = \left[ \begin{array}{c} 1 \\ 1 \\ 6 \end{array} \right].
+\begin{bmatrix} 1 & 1 & 1 \\ 0 & 1 & 3 \\ 0 & 0 & 2 \end{bmatrix}
+\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix}
+= \begin{bmatrix} 1 \\ 1 \\ 6 \end{bmatrix} .
 \end{equation*}
 Applying the above recursion gives
 \begin{align*}
@@ -104,29 +104,29 @@ Any square matrix $A \in F^{n \times n}$ can be factored as $A = LU$, where $L$ 
 The following example uses elementary row operations to cancel, in each column, all elements below the main diagonal.
 These elementary row operations are represented using left multiplication by a unit lower-triangular matrix.
 \begin{align*}
-\left[ \begin{array}{ccc} 1 & 1 & 1 \\ 1 & 2 & 4 \\ 1 & 3 & 9 \end{array} \right] 
-= & \left[ \begin{array}{ccc} 1 & 1 & 1 \\ 1 & 2 & 4 \\ 1 & 3 & 9 \end{array} \right] \\
-\left[ \begin{array}{ccc} 1 & 0 & 0 \\ -1 & 1 & 0 \\ -1 & 0 & 1 \end{array} \right]
-\left[ \begin{array}{ccc} 1 & 1 & 1 \\ 1 & 2 & 4 \\ 1 & 3 & 9 \end{array} \right]
-= & \left[ \begin{array}{ccc} 1 & 1 & 1 \\ 0 & 1 & 3 \\ 0 & 2 & 8 \end{array} \right] \\
-\left[ \begin{array}{ccc} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & -2 & 1 \end{array} \right]
-\left[ \begin{array}{ccc} 1 & 0 & 0 \\ -1 & 1 & 0 \\ -1 & 0 & 1 \end{array} \right]
-\left[ \begin{array}{ccc} 1 & 1 & 1 \\ 1 & 2 & 4 \\ 1 & 3 & 9 \end{array} \right]
-= & \left[ \begin{array}{ccc} 1 & 1 & 1 \\ 0 & 1 & 3 \\ 0 & 0 & 2 \end{array} \right]
+\begin{bmatrix} 1 & 1 & 1 \\ 1 & 2 & 4 \\ 1 & 3 & 9 \end{bmatrix}
+= & \begin{bmatrix} 1 & 1 & 1 \\ 1 & 2 & 4 \\ 1 & 3 & 9 \end{bmatrix} \\
+\begin{bmatrix} 1 & 0 & 0 \\ -1 & 1 & 0 \\ -1 & 0 & 1 \end{bmatrix}
+\begin{bmatrix} 1 & 1 & 1 \\ 1 & 2 & 4 \\ 1 & 3 & 9 \end{bmatrix}
+= & \begin{bmatrix} 1 & 1 & 1 \\ 0 & 1 & 3 \\ 0 & 2 & 8 \end{bmatrix} \\
+\begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & -2 & 1 \end{bmatrix}
+\begin{bmatrix} 1 & 0 & 0 \\ -1 & 1 & 0 \\ -1 & 0 & 1 \end{bmatrix}
+\begin{bmatrix} 1 & 1 & 1 \\ 1 & 2 & 4 \\ 1 & 3 & 9 \end{bmatrix}
+= & \begin{bmatrix} 1 & 1 & 1 \\ 0 & 1 & 3 \\ 0 & 0 & 2 \end{bmatrix}
 \end{align*}
 This allows one to write
 \begin{align*}
-\left[ \begin{array}{ccc} 1 & 1 & 1 \\ 1 & 2 & 4 \\ 1 & 3 & 9 \end{array} \right]
-& = \left[ \begin{array}{ccc} 1 & 0 & 0 \\ -1 & 1 & 0 \\ -1 & 0 & 1 \end{array} \right]^{-1}
-\left[ \begin{array}{ccc} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & -2 & 1 \end{array} \right]^{-1}
-\left[ \begin{array}{ccc} 1 & 1 & 1 \\ 0 & 1 & 3 \\ 0 & 0 & 2 \end{array} \right] \\
-\left[ \begin{array}{ccc} 1 & 1 & 1 \\ 1 & 2 & 4 \\ 1 & 3 & 9 \end{array} \right]
-& = \left[ \begin{array}{ccc} 1 & 0 & 0 \\ 1 & 1 & 0 \\ 1 & 0 & 1 \end{array} \right]
-\left[ \begin{array}{ccc} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 2 & 1 \end{array} \right]
-\left[ \begin{array}{ccc} 1 & 1 & 1 \\ 0 & 1 & 3 \\ 0 & 0 & 2 \end{array} \right] \\
-\left[ \begin{array}{ccc} 1 & 1 & 1 \\ 1 & 2 & 4 \\ 1 & 3 & 9 \end{array} \right]
-& = \left[ \begin{array}{ccc} 1 & 0 & 0 \\ 1 & 1 & 0 \\ 1 & 2 & 1 \end{array} \right]
-\left[ \begin{array}{ccc} 1 & 1 & 1 \\ 0 & 1 & 3 \\ 0 & 0 & 2 \end{array} \right] \\
+\begin{bmatrix} 1 & 1 & 1 \\ 1 & 2 & 4 \\ 1 & 3 & 9 \end{bmatrix}
+& = \begin{bmatrix} 1 & 0 & 0 \\ -1 & 1 & 0 \\ -1 & 0 & 1 \end{bmatrix}^{-1}
+\begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & -2 & 1 \end{bmatrix}^{-1}
+\begin{bmatrix} 1 & 1 & 1 \\ 0 & 1 & 3 \\ 0 & 0 & 2 \end{bmatrix} \\
+\begin{bmatrix} 1 & 1 & 1 \\ 1 & 2 & 4 \\ 1 & 3 & 9 \end{bmatrix}
+& = \begin{bmatrix} 1 & 0 & 0 \\ 1 & 1 & 0 \\ 1 & 0 & 1 \end{bmatrix}
+\begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 2 & 1 \end{bmatrix}
+\begin{bmatrix} 1 & 1 & 1 \\ 0 & 1 & 3 \\ 0 & 0 & 2 \end{bmatrix} \\
+\begin{bmatrix} 1 & 1 & 1 \\ 1 & 2 & 4 \\ 1 & 3 & 9 \end{bmatrix}
+& = \begin{bmatrix} 1 & 0 & 0 \\ 1 & 1 & 0 \\ 1 & 2 & 1 \end{bmatrix}
+\begin{bmatrix} 1 & 1 & 1 \\ 0 & 1 & 3 \\ 0 & 0 & 2 \end{bmatrix} \\
 \end{align*}
 
 LU decomposition can also be used to efficiently compute the determinant of $A$.
@@ -146,9 +146,9 @@ Moreover, $I + \alpha E_{ij}$, where $E_{ij} \triangleq \vecnot{e}_i \vecnot{e}_
 For example, elementary row operations are used to cancel the $(2,1)$ matrix entry in
 \begin{equation*}
 (I - E_{2,1}) A
-= \left[ \begin{array}{ccc} 1 & 0 & 0 \\ -1 & 1 & 0 \\ 0 & 0 & 1 \end{array} \right]
-\left[ \begin{array}{ccc} 1 & 1 & 1 \\ 1 & 2 & 4 \\ 1 & 3 & 9 \end{array} \right]
-= \left[ \begin{array}{ccc} 1 & 1 & 1 \\ 0 & 1 & 3 \\ 1 & 3 & 9 \end{array} \right].
+= \begin{bmatrix} 1 & 0 & 0 \\ -1 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}
+\begin{bmatrix} 1 & 1 & 1 \\ 1 & 2 & 4 \\ 1 & 3 & 9 \end{bmatrix}
+= \begin{bmatrix} 1 & 1 & 1 \\ 0 & 1 & 3 \\ 1 & 3 & 9 \end{bmatrix} .
 \end{equation*}
 \end{example}
 
