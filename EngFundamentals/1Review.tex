@@ -1,5 +1,42 @@
 \chapter{Metric Spaces and Topology}
 
+
+We begin this chapter with a discussion of key mathematical concepts and motivate how they can be generalized to address important challenges.
+We assume that the intended reader has experience with the real numbers, convergent sequences, and continuous functions.
+Specifically, the reader should be familiar with the following notions.
+\begin{itemize}
+\item \textbf{Convergence:}
+Suppose $x_1, x_2, \ldots$ is a sequence of real numbers.
+This sequence converges to $x$ if, for any $\epsilon > 0$, there exists a natural number $N$ such that $| x_n - x | < \epsilon$ for all $n > N$.
+\item \textbf{Continuity:}
+Suppose $f : \RealNumbers \mapsto \RealNumbers$ is a real-valued function over the real numbers.
+This function is continuous at $x_0$ if, for any $\epsilon > 0$, there exists a $\delta > 0$ such that $| f(x) - f(x_0) | < \epsilon$ for all $x \in \RealNumbers$ satisfying $|x - x_0| < \delta$.
+\end{itemize}
+One scenario where convergence plays an important role is in the design of iterative methods applied to optimization objectives.
+Therein, convergence properties can ensure that the iterative process leads to a well-defined answer.
+Likewise, continuity is a cornerstone of calculus, differential equations, and probability.
+These related concepts give rise to many practical mathematical tools like gradient descent and Newton's method.
+
+These definitions are clearly empowering when dealing with the real numbers.
+Yet, we are interested in exploring spaces that contain objects such as time series, images, feature vectors, polynomial, matrices, and functions.
+This raises an important question: How can we extend convergence and continuity to more intricate spaces?
+This step is key in better understanding the structure of the abstract spaces and, also, in designing algorithms and methods attuned to these spaces.
+
+A first step in developing a more general theory is to identify what makes these definitions work for the real numbers.
+Based on the insights we gain, we can then extract key attributes and see how they can help define similar notions for abstract spaces.
+We begin with some pertinent questions.
+First off, what are the real numbers and why do we use them all the times, as opposed to, say, the rational numbers?
+Second, in the definition of convergence above, we need to know the limit of the sequence to show convergence.
+However, when we design an iterative algorithm, we most likely do not know its limit; else we would not need to use an iteration process to get there.
+Is there a notion of convergent sequence for which we do not need to pocess and explicit characterization of its limit beforehand?
+Finally, both definitions above rely on proximity, respectively $|x_n - x|$ and $|f(x) - f(x_0)|$.
+We have a pretty good grasp of the distance between two points on the real line.
+How can we define distances between points in more general spaces?
+These are the questions we seek to address in this chapter, in the hope of leveraging our familiarity with real numbers into understanding more general spaces.
+
+
+\section{Metric Spaces}
+
 From an engineering perspective, the most important way to construct a topology on a set is to define the topology in terms of a metric on the set.
 This approach underlies our intuitive understanding of open and closed sets on the real line.
 Generally speaking, a metric captures the notion of a distance between two elements of a set.
@@ -7,8 +44,6 @@ Topologies that are defined through metrics possess a number of properties that 
 Identifying these common properties permits the unified treatment of different spaces that are useful in solving engineering problems.
 To gain better insight into metric spaces, we need to review the notion of a metric and to introduce a definition for topology.
 
-
-\section{Metric Spaces}
 
 \index{metric space}
 A \textbf{metric space} is a set that has a well-defined ``distance'' between any two elements.
@@ -170,7 +205,7 @@ Since $\sqrt{2}\notin \mathbb{Q}$, it follows that $U = \{x\in \mathbb{Q}\,|\, x
 But $\Complement{U} = W$, so $W$ is also closed.
 
 \begin{definition}
-For any metric space $(X,d)$ and subset $W \subseteq X$, a point $x\in X$ is a \defn{metric space}{limit point} of $W$ if there is a sequence $w_1,w_2,\ldots\in W$ of distinct elements that converges to $x$.
+For any metric space $(X,d)$ and subset $W \subseteq X$, a point $x\in X$ is a \defn{metric space}{limit point} of $W$ if there is a sequence $w_1,w_2,\ldots\in W \setminus \{ x \}$ of distinct elements that converges to $x$.
 Equivalently, $x$ is a limit point of $W$ if, for all $\delta >0$, the set $\{ w\in W | d(x,w)<\delta \}$ contains some point besides $x$.
 \end{definition}
 
