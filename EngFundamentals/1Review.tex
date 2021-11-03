@@ -565,14 +565,14 @@ It equals $\inf X$ if $\inf X \in X$ and is undefined otherwise.
 
 \begin{lemma}
 \label{lem:SupremumSequence}
-Let $X$ be a metric space and $f \colon X\rightarrow \RealNumbers$ be a function from $X$ to the real numbers.
+Let $X$ be a set and $f \colon X\rightarrow \RealNumbers$ be a function from $X$ to the real numbers.
 Let $M = \sup f(A)$ for some non-empty $A \subseteq X$.
 Then, there exists a sequence $x_1,x_2,\ldots \in A$ such that $\lim_n f(x_n) = M$.
 \end{lemma}
 \begin{proof}
 If $M=\infty$, then $f(A)$ has no finite upper bound and, for any $y\in \RealNumbers$, there exists an $x\in A$ such that $f(x)>y$.
 In this case, we can let $x_1$ be any element of $A$ and $x_{n+1}$ be any element of $A$ such that $f(x_{n+1}) > f(x_n) + 1$.
-In the metric space $(\overline{\RealNumbers},d_{\overline{\RealNumbers}})$, this implies that $d_{\overline{\RealNumbers}}(x_n,\infty) = |\frac{f(x_n)}{1+|f(x_n)|} - 1| \to 0$ and thus $f(x_n) \to \infty$.
+In the metric space $(\overline{\RealNumbers},d_{\overline{\RealNumbers}})$, this implies that $d_{\overline{\RealNumbers}}(f(x_n),\infty) = |\frac{f(x_n)}{1+|f(x_n)|} - 1| \to 0$ and thus $f(x_n) \to \infty$.
 
 If $M<\infty$, then $f(A)$ has a finite upper bound and, for any $\epsilon >0$, there is an $x$ such that $M-f(x)<\epsilon$.
 Otherwise, one arrives at the contradiction $\sup f(A) < M$.

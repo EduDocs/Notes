@@ -1,4 +1,5 @@
 \documentclass[10pt,english,aspectratio=169]{beamer}
+% Use notes or hide notes or show only notes or handout
 
 \usetheme{default}
 
@@ -69,20 +70,8 @@
 
 %% Setup slides and notes
 \makeatletter
-\IfSubStr{\@classoptionslist}{handout}
-  {\def\slidesonly{}}{\def\slidesnotes{}}
+\IfSubStr{\@classoptionslist}{notes} { \IfSubStr{\@classoptionslist}{hide} {}{\IfSubStr{\@classoptionslist}{only} {}{\setbeameroption{show notes on second screen=right}}} }{}
 \makeatother
-
-%\setbeameroption{show notes on second screen=right} % Both
-\ifdefined\notesonly
-  \setbeameroption{show only notes} % Only notes
-\fi
-\ifdefined\slidesnotes
-  \setbeameroption{show notes on second screen=right} % Both
-\fi
-\ifdefined\slidesonly
-  \setbeameroption{hide notes} % Only slides
-\fi
 %\setbeamertemplate{note page}{\pagecolor{yellow!5}\vfill\insertnote\vfill}
 
 \newcommand{\getpdfpages}[2]{\begingroup
@@ -256,7 +245,7 @@ For prime $p$, set $\{0,1,\ldots,p-1\}$ with add. and mult. modulo $p$ is a fiel
 	\begin{enumerate}[<alert@+>]
 		\footnotesize
 		\setlength\itemsep{3mm}
-		\item Read.
+		\item Read.  The last example is a field with a finite number of elements.  Such fields are be useful in communications and computing. 
 	\end{enumerate}
 }
 
@@ -297,7 +286,7 @@ a_{m1} & a_{m2} & \cdots & a_{mn}
 		\footnotesize
 		\setlength\itemsep{3mm}
 		\item Read.
-		\item Read.  Thus, matrices can be used to define systems of linear equations.  They can also be used to define other mathematical operations.
+		\item Read.  Thus, matrices can be used to define systems of linear equations.  They are also used to represent linear transformations.
 	\end{enumerate}
 }
 
@@ -400,7 +389,7 @@ $B$ is \textcolor{blue}{reduced column echelon form} if $B^T$ is in reduced row 
 		\footnotesize
 		\setlength\itemsep{3mm}
 		\item Read.
-		\item Read.
+		\item Read.  This form allows on to easily find vectors in the null space of the matrix.
 	\end{enumerate}
 }
 
@@ -432,8 +421,19 @@ For any $m\times n$ matrix $A$ over $F$, there is an invertible $m \times m$ mat
 \begin{proof}[Sketch of Proof]<3->
 To construct $P$, one applies Gaussian elimination to the augmented matrix $A' = [A \;\; I]$.
 The resulting augmented matrix $R' = [R \;\; P]$ (and, thus $R$) is in reduced row echelon form.
-Since elementary row operations defined by (invertible) matrix multiplies on the left side, one also finds that $R' = P A'$, $R = PA$, and $P$ is invertible.
+Since elementary row operations are defined by (invertible) matrix multiplies on the left side, one also finds that $R' = P A'$, $R = PA$, and $P$ is invertible.
 \end{proof}
+
+\note{
+	\vspace{2mm}
+	\begin{enumerate}[<alert@+>]
+		\footnotesize
+		\setlength\itemsep{3mm}
+		\item Read.
+		\item Read.
+		\item Read.
+	\end{enumerate}
+}
 
 \end{frame}
 
@@ -455,6 +455,19 @@ Then, there exists a length-$n$ column vector $\vecnot{x} \neq \vecnot{0}$ (over
 \item<5-> Thus, one can construct a vector $\vecnot{x}$ satisfying $R\vecnot{x}=\vecnot{0}$ and thus $A \vecnot{x} = P^{-1} R \vecnot{x} = \vecnot{0}$. \hfill \qedhere
 \end{itemize}
 \end{proof}
+
+\note{
+	\vspace{2mm}
+	\begin{enumerate}[<alert@+>]
+		\footnotesize
+		\setlength\itemsep{3mm}
+		\item Read.
+		\item Read.
+		\item Read.
+		\item Read.
+		\item Read.
+	\end{enumerate}
+}
 
 \end{frame}
 

@@ -32,7 +32,7 @@ Then, we have the following:
 \item If $W$ has a countable orthogonal basis $\vecnot{w}_1, \vecnot{w}_2, \ldots$ and is closed, then
 \begin{equation}
 \label{equation:OrthogonalProjectionOrthogonalVectors}
-\vecnot{w} = \sum_{i=1}^\infty \frac{ \left\langle \vecnot{v} | \vecnot{w}_i \right\rangle }{ \left\| \vecnot{w}_i \right\|^2 } \vecnot{w}_i
+\vecnot{w} = \sum_{i=1}^{\dim (W)} \frac{ \left\langle \vecnot{v} | \vecnot{w}_i \right\rangle }{ \left\| \vecnot{w}_i \right\|^2 } \vecnot{w}_i
 \end{equation}
 exists and equals the best approximation of $\vecnot{v}$ by vectors in $W$.
 \end{enumerate}
@@ -115,7 +115,9 @@ Next, observe that $\vecnot{v} -\vecnot{u}_n$ is orthogonal to $\vecnot{w}_j$ fo
 \end{split}
 \end{equation*}
 Since $\vecnot{v} - \vecnot{u}_n$ is orthogonal to every vector in $W_n = \Span \{\vecnot{w}_1,\ldots,\vecnot{w}_n\}$, we see that $\vecnot{u}_n$ is the best approximation of $\vecnot{v}$ by vectors in $W_n$.
+If $\dim(W) < \infty$, then this completes the proof.
 
+If $\dim(W) = \infty$, then we must argue that the limit of $\vecnot{u}_n$ exists and lies in $W$.
 The orthogonality of $\vecnot{w}_1,\ldots,\vecnot{w}_n$ implies $\|\vecnot{v}\|^2 = \| \vecnot{v} - \vecnot{u}_n \|^2 + \|\vecnot{u}_n\|^2.$
 From this, we see that $\| \vecnot{u}_n \|^2 = \sum_{i=1}^n \left|\langle \vecnot{v} | \vecnot{w}_i \rangle \right|^2 / \|\vecnot{w}_i\|^2$ is an increasing real sequence upper bounded by $\|\vecnot{v}\|^2$.
 It follows that the RHS converges to a finite limit.
@@ -134,27 +136,27 @@ One can use Theorem~\ref{theorem:OrthogonalSubspaceDirectSum} to verify that thi
 Theorem~\ref{theorem:OrthogonalProjection} also implies the following result, known as Bessel's inequality.
 
 \begin{corollary}
-Let $\vecnot{v}_1, \vecnot{v}_2, \ldots$ be a countable orthogonal set of distinct non-zero vectors in an inner-product space $V$.
-If $\vecnot{v} \in V$ then
+Let $\vecnot{v}_1, \vecnot{v}_2, \ldots$ be a countable orthogonal set of distinct non-zero vectors in an inner-product space $V$ and let $W = \Span(\{ \vecnot{v}_1, \vecnot{v}_2, \ldots\})$.
+If $\vecnot{v} \in V$, then
 \begin{equation*}
-\sum_{i=1}^\infty \frac{ \left| \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle \right|^2 }{ \left\| \vecnot{v}_i \right\|^2 }
+\sum_{i=1}^{\dim (W)} \frac{ \left| \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle \right|^2 }{ \left\| \vecnot{v}_i \right\|^2 }
 \leq \left\| \vecnot{v} \right\|^2.
 \end{equation*}
 Moreover, equality holds if and only if
 \begin{equation*}
-\vecnot{v} = \sum_{i=1}^\infty \frac{ \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle }{ \left\| \vecnot{v}_i \right\|^2 } \vecnot{v}_i.
+\vecnot{v} = \sum_{i=1}^{\dim (W)} \frac{ \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle }{ \left\| \vecnot{v}_i \right\|^2 } \vecnot{v}_i.
 \end{equation*}
 \end{corollary}
 \begin{proof}
-Let the projection of $\vecnot{v}$ onto the closure of the span of $\vecnot{v}_1,\vecnot{v}_2,\ldots$ be
+Let the projection of $\vecnot{v}$ onto the closure of the span of $\vecnot{v}_1,\vecnot{v}_2,\ldots$ (i.e., $\Closure{W}$) be
 \begin{equation*}
-\vecnot{w} = \sum_{i=1}^\infty \frac{ \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle }{ \left\| \vecnot{v}_i \right\|^2 } \vecnot{v}_i.
+\vecnot{w} = \sum_{i=1}^{\dim (W)} \frac{ \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle }{ \left\| \vecnot{v}_i \right\|^2 } \vecnot{v}_i.
 \end{equation*}
 Then, the error $\vecnot{u} = \vecnot{v} - \vecnot{w}$ satisfies  $\left\langle \vecnot{u} | \vecnot{w} \right\rangle = 0$ and $\left\| \vecnot{u} \right\|^2 = \left\| \vecnot{v} \right\|^2 - \left\| \vecnot{w} \right\|^2$.
 Noting that $\| \vecnot{u} \|^2 \geq 0$ and 
 \begin{equation*}
 \left\| \vecnot{w} \right\|^2
-= \sum_{i=1}^\infty \frac{ \left| \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle \right|^2 }{ \left\| \vecnot{v}_i \right\|^2 },
+= \sum_{i=1}^{\dim (W)} \frac{ \left| \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle \right|^2 }{ \left\| \vecnot{v}_i \right\|^2 },
 \end{equation*}
 we see that $\| \vecnot{w} \|^2 \leq \| \vecnot{v} \|^2$ with equality iff $\vecnot{u} = \vecnot{0}$.
 \end{proof}
@@ -283,8 +285,8 @@ To show that $E$ is a linear transformation, let $\vecnot{w}_1 , \vecnot{w}_2 , 
 Using part 3 of Theorem~\ref{theorem:OrthogonalProjection}, we find that
 \begin{align*}
 E \left( s_1 \vecnot{v}_1 + \vecnot{v}_2 \right)
-& = \sum_{i=1}^\infty \langle  s_1 \vecnot{v}_1 + \vecnot{v}_2 | \vecnot{w}_i \rangle \vecnot{w}_i \\
-& = s_1 \sum_{i=1}^\infty \langle  \vecnot{v}_1 | \vecnot{w}_i \rangle \vecnot{w}_i + \sum_{i=1}^\infty \langle  \vecnot{v}_2 | \vecnot{w}_i \rangle \vecnot{w}_i \\
+& = \sum_{i=1}^{\dim (W)} \langle  s_1 \vecnot{v}_1 + \vecnot{v}_2 | \vecnot{w}_i \rangle \vecnot{w}_i \\
+& = s_1 \sum_{i=1}^{\dim (W)} \langle  \vecnot{v}_1 | \vecnot{w}_i \rangle \vecnot{w}_i + \sum_{i=1}^{\dim (W)} \langle  \vecnot{v}_2 | \vecnot{w}_i \rangle \vecnot{w}_i \\
 & = s_1 E \vecnot{v}_1 + E \vecnot{v}_2.
 \end{align*}
 Therefore, $E$ is a linear transformation.
@@ -1121,6 +1123,34 @@ For $\langle \vecnot{v} | \vecnot{w} \rangle$, we observe that together, $\vecno
 = c - \langle  \vecnot{v} | \vecnot{u}^* - \vecnot{v} \rangle,
 \end{align*}
 which shows that $\langle \vecnot{v} | \vecnot{w} \rangle < c$ and completes the proof.
+\end{proof}
+
+% Farkas
+\begin{corollary}[Farkas' Lemma]
+Let $B \in \mathbb{R}^{m \times n}$ be a matrix and $\vecnot{v} \in \mathbb{R}^m$ be a vector.
+Then, exactly one of the following two conditions hold:
+\begin{enumerate}
+\item There exists $\vecnot{s} \in \mathbb{R}^n$ such that $B \vecnot{s} = \vecnot{v}$ and $\vecnot{s} \geq \vecnot{0}$.
+\item There exists $\vecnot{w} \in \mathbb{R}^m$ such that $\vecnot{w}^T B \geq \vecnot{0}$ and $\vecnot{w}^T \vecnot{v} < 0$.
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+Consider the closed convex set $A = \{B \vecnot{s} \, | \, \vecnot{s} \geq \vecnot{0} \}$, where $\vecnot{s} \geq \vecnot{0}$ denotes $s_i \geq 0$ for $i=1,\ldots,n$.
+If $\vecnot{v} \in A$, then we see that the first condition holds.
+
+If $\vecnot{v} \notin A$, then we apply Theorem~\ref{theorem:convex_point_set_hyperplane} using the standard Hilbert space $\mathbb{R}^m$ to see that there exists $\vecnot{w} \in \mathbb{R}^m$ and $c\in \mathbb{R}$ such that $\vecnot{w}^T \vecnot{v} < c$ and $\vecnot{w}^T \vecnot{u} \geq c$ for all $\vecnot{u} \in A$.
+Next, we observe that $A$ is a cone (i.e., for all $\alpha \geq 0$ and $\vecnot{u} \in A$, we have $\alpha \vecnot{u} \in A$).
+Thus, if there is any $\vecnot{u} \in A$ such that $\vecnot{w}^T \vecnot{u} < 0$,
+then $\vecnot{w}^T \vecnot{u}$ can take any non-positive value for some $\vecnot{u} \in A$.
+This gives a contradiction and shows that $\vecnot{w}^T \vecnot{u} \geq 0$ for all $\vecnot{u} \in A$.
+Since $\vecnot{0} \in A$, $c>0$ would also give a contradiction and it follows that $c \leq 0$ and $\vecnot{w}^T \vecnot{v} < 0$.
+
+This establishes that either the first or second condition must hold.
+But, if they both hold, then we get the contradiction
+\[ 0 > \vecnot{w}^T \vecnot{v} = \vecnot{w}^T (B \vecnot{s}) = (\vecnot{w}^T B) \vecnot{s} \geq 0, \]
+where the last step holds because $\vecnot{w}^T B \geq \vecnot{0}$ and $\vecnot{s} \geq \vecnot{0}$.
+Thus, exactly one holds.
 \end{proof}
 
 \begin{theorem}
