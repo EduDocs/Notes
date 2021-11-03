@@ -123,12 +123,12 @@ Let $T$ be a linear operator on a finite-dimensional vector space $V$.
 The operator $T$ is \defn{eigenvalues}{diagonalizable} if there exists a basis $\mathcal{B}$ for $V$ such that each basis vector is an eigenvector of $T$,
 \begin{equation*}
 \left[ T \right]_{\mathcal{B}}
-= \left[ \begin{array}{cccc}
+= \begin{bmatrix}
 \lambda_1 & 0 & \cdots & 0 \\
 0 & \lambda_2 & \cdots & 0 \\
 \vdots & \vdots & \ddots & \vdots \\
 0 & 0 & \cdots & \lambda_n
-\end{array} \right]
+\end{bmatrix}
 \end{equation*}
 \end{definition}
 
@@ -150,31 +150,31 @@ A \vecnot{v}_j = \lambda_j \vecnot{v}_j, \quad j = 1, \ldots, n.
 In matrix form, we have
 \begin{equation*}
 \begin{split}
-A \left[ \begin{array}{ccc} \vecnot{v}_1 & \cdots & \vecnot{v}_n \end{array} \right]
-&= \left[ \begin{array}{ccc} A \vecnot{v}_1 & \cdots & A \vecnot{v}_n \end{array} \right] \\
-&= \left[ \begin{array}{ccc} \lambda_1 \vecnot{v}_1 & \cdots & \lambda_n \vecnot{v}_n \end{array} \right] .
+A \begin{bmatrix} \vecnot{v}_1 & \cdots & \vecnot{v}_n \end{bmatrix}
+&= \begin{bmatrix} A \vecnot{v}_1 & \cdots & A \vecnot{v}_n \end{bmatrix} \\
+&= \begin{bmatrix} \lambda_1 \vecnot{v}_1 & \cdots & \lambda_n \vecnot{v}_n \end{bmatrix} .
 \end{split}
 \end{equation*}
 We can rewrite the last matrix on the right as
 \begin{equation*}
-\left[ \begin{array}{ccc} \lambda_1 \vecnot{v}_1 & \cdots & \lambda_n \vecnot{v}_n \end{array} \right]
-= \left[ \begin{array}{ccc} \vecnot{v}_1 & \cdots & \vecnot{v}_n \end{array} \right]
-\left[ \begin{array}{ccc}
+\begin{bmatrix} \lambda_1 \vecnot{v}_1 & \cdots & \lambda_n \vecnot{v}_n \end{bmatrix}
+= \begin{bmatrix} \vecnot{v}_1 & \cdots & \vecnot{v}_n \end{bmatrix}
+\begin{bmatrix}
 \lambda_1 & \cdots & 0 \\
 \vdots & \ddots & \vdots \\
 0 & \cdots & \lambda_n
-\end{array} \right]
+\end{bmatrix}
 = S \Lambda .
 \end{equation*}
 where
 \begin{equation*}
-S = \left[ \begin{array}{ccc} \vecnot{v}_1 & \cdots & \vecnot{v}_n \end{array} \right]
+S = \begin{bmatrix} \vecnot{v}_1 & \cdots & \vecnot{v}_n \end{bmatrix}
 \quad \text{and} \quad
-\Lambda = \left[ \begin{array}{ccc}
+\Lambda = \begin{bmatrix}
 \lambda_1 & \cdots & 0 \\
 \vdots & \ddots & \vdots \\
 0 & \cdots & \lambda_n
-\end{array} \right] ,
+\end{bmatrix} ,
 \end{equation*}
 Combining these two equations, we obtain the equality
 \begin{equation*}
@@ -268,11 +268,11 @@ A^n = S \Lambda^n S^{-1}.
 \end{equation*}
 Note that $\Lambda^n$ is obtained in a straightforward manner as
 \begin{equation*}
-\Lambda^n = \left[ \begin{array}{ccc}
+\Lambda^n = \begin{bmatrix}
 \lambda_1^n & \cdots & 0 \\
 \vdots & \ddots & \vdots \\
 0 & \cdots & \lambda_n^n
-\end{array} \right] .
+\end{bmatrix} .
 \end{equation*}
 This observation drastically simplifies the computation of the matrix exponential $e^A$,
 \begin{equation*}
@@ -282,11 +282,11 @@ e^A = \sum_{i=0}^{\infty} \frac{A^i}{i!}
 \end{equation*}
 where
 \begin{equation*}
-e^{\Lambda} = \left[ \begin{array}{ccc}
+e^{\Lambda} = \begin{bmatrix}
 e^{\lambda_1} & \cdots & 0 \\
 \vdots & \ddots & \vdots \\
 0 & \cdots & e^{\lambda_n}
-\end{array} \right] .
+\end{bmatrix} .
 \end{equation*}
 
 \begin{theorem}
@@ -322,8 +322,8 @@ If $A$ has $n$ linearly independent eigenvectors $\vecnot{v}_1, \ldots, \vecnot{
 Consider
 \begin{equation*}
 \begin{split}
-S^{-1} A S &= S^{-1} \left[ \begin{array}{ccc} A \vecnot{v}_1 & \cdots & A \vecnot{v}_n \end{array} \right] \\
-&= S^{-1} \left[ \begin{array}{ccc} \lambda_1 \vecnot{v}_1 & \cdots & \lambda_n \vecnot{v}_n \end{array} \right] \\
+S^{-1} A S &= S^{-1} \begin{bmatrix} A \vecnot{v}_1 & \cdots & A \vecnot{v}_n \end{bmatrix} \\
+&= S^{-1} \begin{bmatrix} \lambda_1 \vecnot{v}_1 & \cdots & \lambda_n \vecnot{v}_n \end{bmatrix} \\
 &= S^{-1} S \Lambda = \Lambda .
 \end{split}
 \end{equation*}
@@ -341,20 +341,20 @@ A = T J T^{-1} ,
 \end{equation*}
 where $T$ is an invertible matrix and $J$ is the block-diagonal matrix
 \begin{equation*}
-J = \left[ \begin{array}{ccc}
+J = \begin{bmatrix}
 J_{m_1}(\lambda_1) & \cdots & 0 \\
 \vdots & \ddots & \vdots \\
 0 & \cdots & J_{m_l}(\lambda_l)
-\end{array} \right] .
+\end{bmatrix} .
 \end{equation*}
 The $J_m (\lambda)$ are $m\times m$ matrices called Jordan blocks, and they have the form
 \begin{equation*}
-J_m (\lambda) = \left[ \begin{array}{ccccc}
+J_m (\lambda) = \begin{bmatrix}
 \lambda & 1 & 0 &\cdots & 0 \\
 0 & \lambda & 1 & \cdots & 0 \\
 \vdots & \vdots & \vdots & \ddots & \vdots \\
 0 & 0 & 0 & \cdots & \lambda
-\end{array} \right] .
+\end{bmatrix} .
 \end{equation*}
 It is important to note that the eigenvalues $\lambda_1, \ldots, \lambda_l$ are not necessarily distinct (i.e., multiple Jordan blocks may have the same eigenvalue).
 The Jordan matrix $J$ associated with any matrix $A$ is unique up to the order of the Jordan blocks.
@@ -391,7 +391,7 @@ By correctly ordering the basis $W_1$ as columns of $T$, one finds that $T^{-1} 
 \begin{example}
 Consider the matrix
 \begin{equation*}
-\left[ \begin{array}{cccc} 4 & 0 & 1 & 0 \\ 2 & 2 & 3 & 0 \\ -1 & 0 & 2 & 0 \\ 4 & 0 & 1 & 2 \end{array} \right].
+\begin{bmatrix} 4 & 0 & 1 & 0 \\ 2 & 2 & 3 & 0 \\ -1 & 0 & 2 & 0 \\ 4 & 0 & 1 & 2 \end{bmatrix} .
 \end{equation*}
 First, we find the characteristic polynomial
 \[ \chi_A (t) = \det (t I - A) = t^4 - 10 t^3 + 37 t^2 -60 t + 36 = (t-2)^2 (t-3)^2. \]
@@ -406,25 +406,26 @@ Since the eigenvalue $\lambda_1$ has algebraic multiplicity 2 and geometric mult
 In particular, we need a vector $\vecnot{w}$ which satisfies $(A - \lambda_1 I) \vecnot{w} = \vecnot{v}^{(1)}_1$.
 This gives
 \begin{equation*}
-\left[ \begin{array}{cccc} 1 & 0 & 1 & 0 \\ 2 & -1 & 3 & 0 \\ -1 & 0 & -1 & 0 \\ 4 & 0 & 1 & -1 \end{array} \right]
-\left[ \begin{array}{c} w_1 \\ w_2 \\ w_3 \\ w_4 \end{array} \right]
-= \left[ \begin{array}{c} 1 \\ -1 \\ -1 \\ 3 \end{array} \right].
+\begin{bmatrix} 1 & 0 & 1 & 0 \\ 2 & -1 & 3 & 0 \\ -1 & 0 & -1 & 0 \\ 4 & 0 & 1 & -1 \end{bmatrix}
+\begin{bmatrix} w_1 \\ w_2 \\ w_3 \\ w_4 \end{bmatrix}
+= \begin{bmatrix} 1 \\ -1 \\ -1 \\ 3 \end{bmatrix} .
 \end{equation*}
 Using the pseudoinverse of $(A-\lambda_1 I)$, one finds that $\vecnot{w} = \left[ \frac{11}{12} \; \frac{37}{12} \; \frac{1}{12} \; \frac{9}{12} \right]$.
 Using this, we construct the Jordan normal form by noting that
 \begin{align*}
-\left[ \begin{array}{cccc} 4 & 0 & 1 & 0 \\ 2 & 2 & 3 & 0 \\ -1 & 0 & 2 & 0 \\ 4 & 0 & 1 & 2 \end{array} \right]
-\left[ \begin{array}{cccc} \vecnot{v}_1^{(1)} & \vecnot{w} & \vecnot{v}_1^{(2)} & \vecnot{v}_2^{(2)} \end{array} \right]
-& = \left[ \begin{array}{cccc} 3 \vecnot{v}_1^{(1)} & \vecnot{v}_1^{(1)}+3 \vecnot{w} & 2 \vecnot{v}_1^{(2)} & 2 \vecnot{v}_2^{(2)} \end{array} \right] \\
-& = \left[ \begin{array}{cccc} \vecnot{v}_1^{(1)} & \vecnot{w} & \vecnot{v}_1^{(2)} & \vecnot{v}_2^{(2)} \end{array} \right]
-\left[ \begin{array}{cccc} 3 & 1 & 0 & 0 \\ 0 & 3 & 0 & 0 \\ 0 & 0 & 2 & 0 \\ 0 & 0 & 0 & 2 \end{array} \right].
+\begin{bmatrix} 4 & 0 & 1 & 0 \\ 2 & 2 & 3 & 0 \\ -1 & 0 & 2 & 0 \\ 4 & 0 & 1 & 2 \end{bmatrix}
+\begin{bmatrix} \vecnot{v}_1^{(1)} & \vecnot{w} & \vecnot{v}_1^{(2)} & \vecnot{v}_2^{(2)} \end{bmatrix}
+& = \begin{bmatrix} 3 \vecnot{v}_1^{(1)} & \vecnot{v}_1^{(1)}+3 \vecnot{w} & 2 \vecnot{v}_1^{(2)} & 2 \vecnot{v}_2^{(2)} \end{bmatrix} \\
+&= \begin{bmatrix} \vecnot{v}_1^{(1)} & \vecnot{w} & \vecnot{v}_1^{(2)} & \vecnot{v}_2^{(2)} \end{bmatrix}
+\begin{bmatrix} 3 & 1 & 0 & 0 \\ 0 & 3 & 0 & 0 \\ 0 & 0 & 2 & 0 \\ 0 & 0 & 0 & 2 \end{bmatrix} .
 \end{align*}
 This implies that $A = T J T^{-1}$ with
 \begin{equation*}
-T = \left[ \begin{array}{cccc} \vecnot{v}_1^{(1)} & \vecnot{w} & \vecnot{v}_1^{(2)} & \vecnot{v}_2^{(2)} \end{array} \right]
- = \left[ \begin{array}{cccc} 1 & \frac{11}{12} & 0 & 0 \\ -1 & \frac{37}{12} & 1 & 0 \\ -1 & \frac{1}{12} & 0 & 0 \\ 3 & \frac{9}{12} & 0 & 1 \end{array} \right].
+T = \begin{bmatrix} \vecnot{v}_1^{(1)} & \vecnot{w} & \vecnot{v}_1^{(2)} & \vecnot{v}_2^{(2)} \end{bmatrix}
+ = \begin{bmatrix} 1 & \frac{11}{12} & 0 & 0 \\ -1 & \frac{37}{12} & 1 & 0 \\ -1 & \frac{1}{12} & 0 & 0 \\ 3 & \frac{9}{12} & 0 & 1 \end{bmatrix} .
 \end{equation*}
 \end{example}
+
 
 \section{Applications of Jordan Normal Form}
 

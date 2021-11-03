@@ -1069,6 +1069,22 @@ Then, the H\"{o}lder inequality states that
 
 \section{Inner Products}
 
+An \emph{inner product space} is a vector space with an \emph{inner product}, defined below.
+Such spaces have an inherent structure that admits the rigorous development of geometrical notions such as the length of a vector and the angle between two vectors.
+They offer a means to define the projection of a vector onto another vector, and the orthogonality of a pair of vectors.
+In some sense, inner product spaces generalize Euclidean spaces with their dot products.
+Importantly, an inner product naturally induces a norm and, hence, a metric.
+Consequently, they are necessarily equipped with a metric topology, open sets, and a definition of convergence.
+
+In practice, one often encounters inner product space that are finite dimensional.
+Therein, vectors can be expressed as linear combinations of elements within a Hamel basis. 
+Yet, an inner product space can also be of infinite dimension.
+\emph{Hilbert spaces} are complete inner product spaces, which makes them suitable to discuss Cauchy sequences of vectors and their limits.
+Furthermore, when an inner product space is \emph{Hausdorff separable}, then it will have a countable Schauder basis.
+Intuitively, a separable Hilbert space with its Schauder basis can be handled mathematically in a way similar to a finite-dimensional inner product space.
+For this reason, our treatment of infinite dimensional inner product spaces is largely restricted to \emph{separable Hilbert spaces}.
+More general spaces require a higher level of mathematical sophistication, beyond this treatement.
+
 \begin{definition} \label{definition:InnerProduct}
 Let $F$ be the field of real numbers or the field of complex numbers, and assume $V$ is a vector space over $F$.
 An \defn{inner-product space}{inner product} on $V$ is a function which assigns to each ordered pair of vectors $\vecnot{v}, \vecnot{w} \in V$ a scalar $\left\langle \vecnot{v} | \vecnot{w} \right\rangle \in F$ in such a way that for all $\vecnot{u}, \vecnot{v}, \vecnot{w} \in V$ and any scalar $s \in F$
@@ -1084,12 +1100,13 @@ An \defn{inner-product space}{inner product} on $V$ is a function which assigns 
 \end{enumerate}
 \end{definition}
 
-Note that the conditions of Definition~\ref{definition:InnerProduct} imply that
+We emphasize that the conditions of Definition~\ref{definition:InnerProduct} imply
 \begin{equation*}
 \left\langle \vecnot{u} | s \vecnot{v} + \vecnot{w} \right\rangle
 = \overline{s} \left\langle \vecnot{u} | \vecnot{v} \right\rangle
 + \left\langle \vecnot{u} | \vecnot{w} \right\rangle .
 \end{equation*}
+Thus, an inner product is linear in the first argument and conjugate linear in the second argument.
 
 \index{inner-product space}
 \begin{definition}
@@ -1300,7 +1317,7 @@ Then, $\langle \vecnot{w}-\vecnot{u} | \vecnot{u} \rangle = 0$ and
 \begin{proof}
 First, we observe that
 \[ \langle \vecnot{w} - \vecnot{u} | \vecnot{v} \rangle = \langle \vecnot{w} | \vecnot{v} \rangle - \langle \vecnot{u} | \vecnot{v} \rangle = \langle \vecnot{w} | \vecnot{v} \rangle - \frac{\left\langle \vecnot{w} | \vecnot{v} \right\rangle}{\|\vecnot{v}\|^2} \langle \vecnot{v} | \vecnot{v} \rangle = 0. \]
-Since $\vecnot{u} = s \vecnot{v}$ for some scalar $s$, it follows that $\langle \vecnot{w}-\vecnot{u} | \vecnot{u} \rangle = \overline{s} \langle \vecnot{w}-\vecnot{u} | \vecnot{v} \rangle =  0$.
+Since $\vecnot{u} = s \vecnot{v}$ for some scalar $s$, we gather that $\langle \vecnot{w}-\vecnot{u} | \vecnot{u} \rangle = \langle \vecnot{w}-\vecnot{u} | s \vecnot{v} \rangle = \overline{s} \langle \vecnot{w}-\vecnot{u} | \vecnot{v} \rangle = 0$.
 Using $\langle \vecnot{w}-\vecnot{u} | \vecnot{u} \rangle = 0$, we can write
 \begin{align*}
 \|\vecnot{w}\|^2 &= \|(\vecnot{w}-\vecnot{u})+\vecnot{u}\|^2
@@ -1308,7 +1325,11 @@ Using $\langle \vecnot{w}-\vecnot{u} | \vecnot{u} \rangle = 0$, we can write
 &= \|\vecnot{w}-\vecnot{u}\|^2 + 2 \Real \langle \vecnot{w}-\vecnot{u} | \vecnot{u} \rangle + \|\vecnot{u}\|^2
 = \|\vecnot{w}-\vecnot{u}\|^2 + \|\vecnot{u}\|^2.
 \end{align*}
-The proof is completed by noting that $\|\vecnot{u}\|^2 = |\langle \vecnot{w} | \vecnot{v} \rangle|^2 / \|\vecnot{v}\|^2$.
+The proof is completed by noting that
+$\|\vecnot{u}\|^2
+= \frac{|\langle \vecnot{w} | \vecnot{v} \rangle|^2}{\|\vecnot{v}\|^4}
+\langle \vecnot{v} | \vecnot{v} \rangle
+= \frac{|\langle \vecnot{w} | \vecnot{v} \rangle|^2}{\|\vecnot{v}\|^2}$.
 \end{proof}
 
 \begin{theorem}
@@ -1321,8 +1342,8 @@ If $V$ is an inner-product space and $\| \cdot \|$ is its associated induced nor
 \end{enumerate}
 \end{theorem}
 \begin{proof}
-The first two items follow immediately from the definitions involved.
-The third inequality, $\left| \left\langle \vecnot{v} | \vecnot{w} \right\rangle \right| \leq \left\| \vecnot{v} \right\| \left\| \vecnot{w} \right\|$, is called the \defn{inner-product space}{Cauchy-Schwarz inequality}.
+The first two properties follow immediately from the definitions involved.
+The third property, $\left| \left\langle \vecnot{v} | \vecnot{w} \right\rangle \right| \leq \left\| \vecnot{v} \right\| \left\| \vecnot{w} \right\|$, is called the \defn{inner-product space}{Cauchy-Schwarz inequality}.
 When $\vecnot{v} = \vecnot{0}$, then clearly $\left| \left\langle \vecnot{v} | \vecnot{w} \right\rangle \right| = \left\| \vecnot{v} \right\| \left\| \vecnot{w} \right\| =0$.
 Assume $\vecnot{v} \neq \vecnot{0}$ and let
 \begin{equation*}
@@ -1332,7 +1353,7 @@ be the projection $\vecnot{w}$ onto $\vecnot{v}$.
 By Lemma~\ref{lem:proj_loss},
 we have
 %$\left\langle \vecnot{w} - \vecnot{u} | \vecnot{v} \right\rangle = 0$ and
-\begin{align*}
+\begin{align} \label{equation:DifferenceProjection}
 0 &\leq \left\| \vecnot{w} - \vecnot{u} \right\|^2
 %= \left\langle \vecnot{u} \,\middle|\, \vecnot{w} - \frac{ \left\langle \vecnot{w} | \vecnot{v} \right\rangle}{ \left\| \vecnot{v} \right\|^2 } \vecnot{v} \right\rangle = \left\langle \vecnot{u} \,\middle|\, \vecnot{w} \right\rangle
 %= \left\langle \vecnot{w} - \frac{ \left\langle \vecnot{w} | \vecnot{v} \right\rangle}{ \left\| \vecnot{v} \right\|^2 } \vecnot{v} \,\middle|\, \vecnot{w}
@@ -1344,13 +1365,15 @@ we have
 = \left\| \vecnot{w} \right\|^2
 - \frac{ \left| \left\langle \vecnot{w} | \vecnot{v} \right\rangle \right|^2 }
 { \left\| \vecnot{v} \right\|^2 } ,
-\end{align*}
+\end{align}
 where equality holds iff $\vecnot{w}-\vecnot{u}=\vecnot{0}$, or equivalently iff $\vecnot{w}=\vecnot{0}$ or $\vecnot{v} = s \vecnot{w}$.
-Hence, we find that
-$\left| \left\langle \vecnot{v} | \vecnot{w} \right\rangle \right|^2 = \left| \left\langle \vecnot{w} | \vecnot{v} \right\rangle \right|^2 \leq \left\| \vecnot{v} \right\|^2 \left\| \vecnot{w} \right\|^2$.
+Rearranging \eqref{equation:DifferenceProjection} by isolating the inner product component and cross-multiplying, we find that
+\begin{equation*}
+\left| \left\langle \vecnot{v} | \vecnot{w} \right\rangle \right|^2 = \left| \left\langle \vecnot{w} | \vecnot{v} \right\rangle \right|^2 \leq \left\| \vecnot{v} \right\|^2 \left\| \vecnot{w} \right\|^2 .
+\end{equation*}
 %with equality iff $\vecnot{v}=\vecnot{0}$, $\vecnot{w}=\vecnot{0}$, or $\vecnot{v} = s \vecnot{w}$.
 %Note that the $\vecnot{v}=\vecnot{0}$ case is checked separately because it is assumed above that $\vecnot{v}\neq \vecnot{0}$.
-Using this result, it follows that
+Using this result, we get the fourth property
 \begin{equation*}
 \begin{split}
 \left\| \vecnot{v} + \vecnot{w} \right\|^2

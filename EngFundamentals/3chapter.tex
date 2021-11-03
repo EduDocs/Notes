@@ -172,7 +172,7 @@ Find
 \item $W^{\bot}$
 \item an orthonormal basis in which $E$ is represented by the matrix
 \begin{equation*}
-E = \left[ \begin{array}{cc} 1 & 0 \\ 0 & 0 \end{array} \right].
+E = \begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix} .
 \end{equation*}
 \end{enumerate}
 \end{problem}
@@ -377,7 +377,7 @@ or, equivalently,
 for $j = 1, \ldots, n$.
 These conditions yield a system of $n$ linear equations in $n$ unknowns, which can be written in the matrix form
 \begin{equation*}
-\left[ \begin{array}{cccc}
+\begin{bmatrix}
 \left\langle \vecnot{w}_1 | \vecnot{w}_1 \right\rangle
 & \left\langle \vecnot{w}_2 | \vecnot{w}_1 \right\rangle & \cdots
 & \left\langle \vecnot{w}_n | \vecnot{w}_1 \right\rangle \\
@@ -388,13 +388,11 @@ These conditions yield a system of $n$ linear equations in $n$ unknowns, which c
 \left\langle \vecnot{w}_1 | \vecnot{w}_n \right\rangle
 & \left\langle \vecnot{w}_2 | \vecnot{w}_n \right\rangle & \cdots
 & \left\langle \vecnot{w}_n | \vecnot{w}_n \right\rangle
-\end{array} \right]
-\left[ \begin{array}{c}
-s_1 \\ s_2 \\ \vdots \\ s_n \end{array} \right]
-= \left[ \begin{array}{c}
-\left\langle \vecnot{v} | \vecnot{w}_1 \right\rangle \\
+\end{bmatrix}
+\begin{bmatrix} s_1 \\ s_2 \\ \vdots \\ s_n \end{bmatrix}
+= \begin{bmatrix} \left\langle \vecnot{v} | \vecnot{w}_1 \right\rangle \\
 \left\langle \vecnot{v} | \vecnot{w}_2 \right\rangle \\ \vdots \\
-\left\langle \vecnot{v} | \vecnot{w}_n \right\rangle \end{array} \right] .
+\left\langle \vecnot{v} | \vecnot{w}_n \right\rangle \end{bmatrix} .
 \end{equation*}
 We can rewrite this matrix equation as
 \begin{equation*}
@@ -419,7 +417,7 @@ Equations of this form are collectively known as the \defn{inner-product space}{
 \begin{definition}
 The $n \times n$ matrix
 \begin{equation} \label{equation:GramianMatrix}
-G = \left[ \begin{array}{cccc}
+G = \begin{bmatrix}
 \left\langle \vecnot{w}_1 | \vecnot{w}_1 \right\rangle
 & \left\langle \vecnot{w}_2 | \vecnot{w}_1 \right\rangle & \cdots
 & \left\langle \vecnot{w}_n | \vecnot{w}_1 \right\rangle \\
@@ -430,7 +428,7 @@ G = \left[ \begin{array}{cccc}
 \left\langle \vecnot{w}_1 | \vecnot{w}_n \right\rangle
 & \left\langle \vecnot{w}_2 | \vecnot{w}_n \right\rangle & \cdots
 & \left\langle \vecnot{w}_n | \vecnot{w}_n \right\rangle
-\end{array} \right]
+\end{bmatrix}
 \end{equation}
 is called the \defn{matrix}{Gramian} matrix.
 Since $g_{ij} = \left\langle \vecnot{w}_j | \vecnot{w}_i \right\rangle$, it follows that the Gramian is a Hermitian symmetric matrix, i.e., $G^H = G$.
@@ -525,13 +523,13 @@ Choosing $\vecnot{\overline{s}}$, gives
 \begin{equation*}
 \begin{split}
 \frac{\partial}{\partial\vecnot{\overline{s}}} J \left( \vecnot{s} \right)
-&= - \left[ \begin{array}{c}
+&= - \begin{bmatrix}
 \left\langle \vecnot{v} | \vecnot{w}_1 \right\rangle \\
 \left\langle \vecnot{v} | \vecnot{w}_2 \right\rangle \\
 \vdots \\
 \left\langle \vecnot{v} | \vecnot{w}_n \right\rangle
-\end{array} \right]
-+ \left[ \begin{array}{cccc}
+\end{bmatrix}
++ \begin{bmatrix}
 \left\langle \vecnot{w}_1 | \vecnot{w}_1 \right\rangle &
 \left\langle \vecnot{w}_2 | \vecnot{w}_1 \right\rangle & \hdots &
 \left\langle \vecnot{w}_n | \vecnot{w}_1 \right\rangle \\
@@ -542,9 +540,8 @@ Choosing $\vecnot{\overline{s}}$, gives
 \left\langle \vecnot{w}_1 | \vecnot{w}_n \right\rangle &
 \left\langle \vecnot{w}_2 | \vecnot{w}_n \right\rangle & \hdots &
 \left\langle \vecnot{w}_n | \vecnot{w}_n \right\rangle \\
-\end{array} \right]
-\left[ \begin{array}{c} s_1 \\ s_2 \\ \vdots \\ s_n
-\end{array} \right] \\
+\end{bmatrix}
+\begin{bmatrix} s_1 \\ s_2 \\ \vdots \\ s_n \end{bmatrix} \\
 &= \vecnot{0} .
 \end{split}
 \end{equation*}
@@ -576,7 +573,7 @@ Then, the approximation vector is given by
 \begin{equation*}
 \hat{\vecnot{v}} = \sum_{i=1}^n s_i \vecnot{w}_i
 %= \left[ \vecnot{w}_1 \cdots \vecnot{w}_n \right]
-%\left[ \begin{array}{c} s_1 \\ \vdots \\ s_n \end{array} \right] .
+%\begin{bmatrix} s_1 \\ \vdots \\ s_n \end{bmatrix} .
 \end{equation*}
 In matrix form, we have
 \begin{equation*}
@@ -605,7 +602,7 @@ for $j = 1, \ldots, n$.
 
 When $\| \cdot \|$ is the norm induced by the standard inner product, these conditions can be expressed as
 \begin{equation*}
-\left[ \begin{array}{c} \vecnot{w}_1^H \\ \vdots \\ \vecnot{w}_n^H \end{array} \right] \left( \vecnot{v} - A \vecnot{s} \right) = \vecnot{0} .
+\begin{bmatrix} \vecnot{w}_1^H \\ \vdots \\ \vecnot{w}_n^H \end{bmatrix} \left( \vecnot{v} - A \vecnot{s} \right) = \vecnot{0} .
 \end{equation*}
 Using the definition of $A$, we obtain
 \begin{equation*}
@@ -698,14 +695,13 @@ y_i \approx a x_i + b
 for $i = 1, \ldots, n$.
 Definite the error component $e_i$ by $e_i = y_i - a x_i - b$, then
 \begin{equation*}
-\left[ \begin{array}{c} y_1 \\ \vdots \\ y_n \end{array} \right]
-= a \left[ \begin{array}{c} x_1 \\ \vdots \\ x_n \end{array} \right]
-+ b \left[ \begin{array}{c} 1 \\ \vdots \\ 1 \end{array} \right]
-+ \left[ \begin{array}{c} e_1 \\ \vdots \\ e_n \end{array} \right]
-= \left[ \begin{array}{cc} x_1 & 1 \\
-\vdots & \vdots \\ x_n & 1 \end{array} \right]
-\left[ \begin{array}{c} a \\ b \end{array} \right]
-+ \left[ \begin{array}{c} e_1 \\ \vdots \\ e_n \end{array} \right] .
+\begin{bmatrix} y_1 \\ \vdots \\ y_n \end{bmatrix}
+= a \begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix}
++ b \begin{bmatrix} 1 \\ \vdots \\ 1 \end{bmatrix}
++ \begin{bmatrix} e_1 \\ \vdots \\ e_n \end{bmatrix}
+= \begin{bmatrix} x_1 & 1 \\ \vdots & \vdots \\ x_n & 1 \end{bmatrix}
+\begin{bmatrix} a \\ b \end{bmatrix}
++ \begin{bmatrix} e_1 \\ \vdots \\ e_n \end{bmatrix} .
 \end{equation*}
 In vector form, we can rewrite this equation as
 \begin{equation*}
@@ -713,8 +709,8 @@ In vector form, we can rewrite this equation as
 \end{equation*}
 where $\vecnot{y} = \left( y_1, \ldots, y_n \right)^T$, $\vecnot{s} = (a, b)^T$, $\vecnot{e} = \left( e_1, \ldots, e_n \right)^T$, and
 \begin{equation*}
-A = \left[ \begin{array}{cc} x_1 & 1 \\
-\vdots & \vdots \\ x_n & 1 \end{array} \right] .
+A = \begin{bmatrix} x_1 & 1 \\
+\vdots & \vdots \\ x_n & 1 \end{bmatrix} .
 \end{equation*}
 This equation has a form analog to the matrix representation of a least-squares problems.
 Consider the goal of minimizing $\left\| \vecnot{e} \right\|^2$.
@@ -740,7 +736,7 @@ G \vecnot{s} = \vecnot{t},
 \end{equation*}
 where
 \begin{equation*}
-G = \left[ \begin{array}{cccc}
+G = \begin{bmatrix}
 \Expect \left[ X_1 \overline{X}_1 \right]
 & \Expect \left[ X_2 \overline{X}_1 \right] & \cdots
 & \Expect \left[ X_n \overline{X}_1 \right] \\
@@ -751,14 +747,14 @@ G = \left[ \begin{array}{cccc}
 \Expect \left[ X_1 \overline{X}_n \right]
 & \Expect \left[ X_2 \overline{X}_n \right] & \cdots
 & \Expect \left[ X_n \overline{X}_n \right] \\
-\end{array} \right]
+\end{bmatrix}
 \end{equation*}
 and
 \begin{equation*}
-\vecnot{t} = \left[ \begin{array}{c}
+\vecnot{t} = \begin{bmatrix}
 \Expect \left[ Y \overline{X}_1 \right] \\
 \Expect \left[ Y \overline{X}_2 \right] \\ \vdots \\
-\Expect \left[ Y \overline{X}_n \right] \end{array} \right] .
+\Expect \left[ Y \overline{X}_n \right] \end{bmatrix} .
 \end{equation*}
 If the matrix $G$ is invertible, the minimum mean-squared error is given by
 \begin{equation*}
@@ -773,8 +769,8 @@ Suppose that the sequence of zero-mean random variables $\left\{ X[t] \right\}$ 
 \begin{equation*}
 \begin{split}
 Y[t] &= \sum_{k=0}^{K-1} h[k] X[t - k] \\
-&= \left[ \begin{array}{ccc} X[t] & \hdots & X[t-K+1] \end{array} \right]
-\left[ \begin{array}{c} h[0] \\ \vdots \\ h[K-1] \end{array} \right]
+&= \begin{bmatrix} X[t] & \hdots & X[t-K+1] \end{bmatrix}
+\begin{bmatrix} h[0] \\ \vdots \\ h[K-1] \end{bmatrix}
 = \left( \vecnot{X}[t] \right)^T \vecnot{h} .
 \end{split}
 \end{equation*}
@@ -815,22 +811,22 @@ R_{zx}(j) = \Expect \left[ Z[t] \overline{X}[t-j] \right]
 \end{equation*}
 Using this notation, we can rewrite \eqref{equation:WienerHopfConditions} as
 \begin{equation*}
-R_{zx} = \left[ \begin{array}{c}
-R_{zx} (0) \\ R_{zx} (1) \\ \vdots \\ R_{zx} (K-1) \end{array} \right]
+R_{zx} = \begin{bmatrix}
+R_{zx} (0) \\ R_{zx} (1) \\ \vdots \\ R_{zx} (K-1) \end{bmatrix}
 = R_{xx}
-\left[ \begin{array}{c}
+\begin{bmatrix}
 h [0] \\
 h [1] \\ \vdots \\
-h [K-1] \end{array} \right]
+h [K-1] \end{bmatrix}
 \end{equation*}
 where the $K \times K$ autocorrelation matrix is given by
 \begin{equation*}
-R_{xx} = \left[ \begin{array}{cccc}
+R_{xx} = \begin{bmatrix}
 R_{xx} [0] & \overline{R}_{xx}[1] & \cdots & \overline{R}_{xx}[K-1] \\
 R_{xx} [1] & R_{xx}[0] & \cdots & \overline{R}_{xx}[K-2] \\
 \vdots & \vdots & \ddots & \vdots \\
 R_{xx} [K-1] & R_{xx}[K-2] & \cdots & R_{xx}[0]
-\end{array} \right] .
+\end{bmatrix} .
 \end{equation*}
 Note that the matrix $R_{xx}$ is Toeplitz, i.e., all the elements on a diagonal are equal.
 Assuming that $R_{xx}$ is invertible, the optimal filter taps are then given by
@@ -862,11 +858,11 @@ A suitable cost function for this goal is
 \[ J(\vecnot{h}) = \sum_{t=K}^N \lambda^{N-t} \left| z[t] - \sum_{k=0}^{K-1} h[k] x[t-k] \right|^2, \]
 where the exponential weighting factor $\lambda$ emphasizes the most recently received symbols because, in reality, the channel conditions are changing with time.
 
-Using the vector $\vecnot{z} = [ \begin{array}{cccc} z[K] & z[K+1] & \cdots & z[N] \end{array} ]$ and the matrix
-\[ A = \left[ \begin{array}{cccc} x[K] & x[K-1] & \cdots & x[1] \\ x[K+1] & x[K] & \cdots & x[2] \\ \vdots & \vdots & \ddots & \vdots \\ x[N] & x[N-1] & \cdots & x[N-K+1] \end{array} \right], \]
+Using the vector $\vecnot{z} = \begin{bmatrix} z[K] & z[K+1] & \cdots & z[N] \end{bmatrix}$ and the matrix
+\[ A = \begin{bmatrix} x[K] & x[K-1] & \cdots & x[1] \\ x[K+1] & x[K] & \cdots & x[2] \\ \vdots & \vdots & \ddots & \vdots \\ x[N] & x[N-1] & \cdots & x[N-K+1] \end{bmatrix} , \]
 we can rewrite this cost function as
 \[ J(\vecnot{h}) = (A\vecnot{h}-\vecnot{z})^H \Lambda (A\vecnot{h}-\vecnot{z}), \]
-where $\Lambda$ is a diagonal matrix whose diagonal contains $ [ \begin{array}{ccccc} \lambda^{N-K} & \lambda^{N-K+1} & \cdots & \lambda^1 & \lambda^0 \end{array} ]$.
+where $\Lambda$ is a diagonal matrix whose diagonal contains $\begin{bmatrix} \lambda^{N-K} & \lambda^{N-K+1} & \cdots & \lambda^1 & \lambda^0 \end{bmatrix}$.
 Using the orthogonality principle, one finds that the optimal solution is given by the normal equation
 \[ A^H \Lambda A \vecnot{h} = A^H \Lambda \vecnot{z}. \]
 
@@ -879,7 +875,9 @@ and
 Another benefit of this approach is that, as each new sample arrives, the solution $\vecnot{h}$ can be updated with low complexity.
 Consider the matrix $G_N = A^H \Lambda A$ and vector $\vecnot{b}_N = A^H \Lambda \vecnot{z}$ as a function of $N$.
 Then, $G_{N+1} = \lambda G_N + \vecnot{u}^H \vecnot{u}$ and $\vecnot{t}_{N+1} = \lambda \vecnot{b}_N + z[N+1] \vecnot{u}^H$, where
-\[ \vecnot{u} = \left[ \begin{array}{cccc} x[N+1] & x[N] & \cdots & x[N-K+2] \end{array} \right]. \]
+\begin{equation}
+\vecnot{u} = \begin{bmatrix} x[N+1] & x[N] & \cdots & x[N-K+2] \end{bmatrix} .
+\end{equation}
 The updated solution vector $\vecnot{h}_{N+1} = G_{N+1}^{-1} \vecnot{b}_{N+1}$ can be computed efficiently using the Sherman-Morrison matrix inversion formula.
 
 
@@ -898,7 +896,7 @@ For any $\vecnot{v} \in V$, consider finding the scalars $s_1,s_2,\ldots,s_n$ th
 The answer is clearly given by the best approximation of $\vecnot{v}$ by vectors in the span of $\vecnot{w}_1 ,\vecnot{w}_2 , \ldots, \vecnot{w}_n$.
 The orthogonality principle tells us that $s_1,s_2,\ldots,s_n$ must satisfy
 \begin{equation} \label{eqn:DualNormalEquations}
-\left[ \begin{array}{cccc}
+\begin{bmatrix}
 \left\langle \vecnot{w}_1 | \vecnot{w}_1 \right\rangle
 & \left\langle \vecnot{w}_2 | \vecnot{w}_1 \right\rangle & \cdots
 & \left\langle \vecnot{w}_n | \vecnot{w}_1 \right\rangle \\
@@ -909,13 +907,12 @@ The orthogonality principle tells us that $s_1,s_2,\ldots,s_n$ must satisfy
 \left\langle \vecnot{w}_1 | \vecnot{w}_n \right\rangle
 & \left\langle \vecnot{w}_2 | \vecnot{w}_n \right\rangle & \cdots
 & \left\langle \vecnot{w}_n | \vecnot{w}_n \right\rangle
-\end{array} \right]
-\left[ \begin{array}{c}
-s_1 \\ s_2 \\ \vdots \\ s_n \end{array} \right]
-= \left[ \begin{array}{c}
+\end{bmatrix}
+\begin{bmatrix} s_1 \\ s_2 \\ \vdots \\ s_n \end{bmatrix}
+= \begin{bmatrix}
 \left\langle \vecnot{v} | \vecnot{w}_1 \right\rangle \\
 \left\langle \vecnot{v} | \vecnot{w}_2 \right\rangle \\ \vdots \\
-\left\langle \vecnot{v} | \vecnot{w}_n \right\rangle \end{array} \right] .
+\left\langle \vecnot{v} | \vecnot{w}_n \right\rangle \end{bmatrix} .
 \end{equation}
 
 The same problem can also be posed in a different manner.

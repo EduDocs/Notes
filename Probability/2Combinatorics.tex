@@ -139,11 +139,16 @@ For now, we will interpet the word independent intuitively and take it to mean t
 \begin{example}
 Consider two experiments and let $S_1$ be the set of outcomes for the first and $S_2$ be the set of outcomes for the second.
 Let $E_1 \subseteq S_1$ and $E_2 \subseteq S_2$ be events of interest for the two experiments.
-One can think of the two experiments together as a single experiment with outcomes $S = S_1 \times S_2$.
+One can think of the two experiments together as a single experiment with outcomes contained in $S = S_1 \times S_2$.
 In this model, the set of joint outcomes where $E_1$ and $E_2$ both occur is given by the joint event $E = E_1 \times E_2$.
 The equally likely outcome model for this joint experiment asserts that the probability that both events occur is given by
-\[ \frac{|E|}{|S|} = \frac{|E_1 \times E_2|}{|S_1 \times S_2|} = \frac{|E_1|\,|E_2|}{|S_1|\,|S_2|} = \frac{|E_1|}{|S_1|}\,\frac{|E_2|}{|S_2|}. \]
-This implies that the product rule is correct when equally-likely experiments are combined this way.
+\begin{equation*}
+\frac{|E|}{|S|} = \frac{|E_1 \times E_2|}{|S_1 \times S_2|}
+= \frac{|E_1|\,|E_2|}{|S_1|\,|S_2|}
+= \frac{|E_1|}{|S_1|}\,\frac{|E_2|}{|S_2|},
+\end{equation*}
+where $|T|$ represents the cardinality of set $T$, i.e., the number of elements in $T$.
+This implies that the product rule remains accurate when equally-likely experiments are combined this way.
 Conversely, events are called independent only if the product rule works.
 Therefore, combining multiple experiments in this way is the same as assuming they are independent.
 \end{example}
