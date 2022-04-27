@@ -1,4 +1,6 @@
 \documentclass[10pt,english,aspectratio=169]{beamer}
+% Use notes or hide notes or show only notes or handout
+
 
 \usetheme{default}
 
@@ -60,20 +62,8 @@
 
 %% Setup slides and notes
 \makeatletter
-\IfSubStr{\@classoptionslist}{handout}
-  {\def\slidesonly{}}{\def\slidesnotes{}}
+\IfSubStr{\@classoptionslist}{notes} { \IfSubStr{\@classoptionslist}{hide} {}{\IfSubStr{\@classoptionslist}{only} {}{\setbeameroption{show notes on second screen=right}}} }{}
 \makeatother
-
-%\setbeameroption{show notes on second screen=right} % Both
-\ifdefined\notesonly
-  \setbeameroption{show only notes} % Only notes
-\fi
-\ifdefined\slidesnotes
-  \setbeameroption{show notes on second screen=right} % Both
-\fi
-\ifdefined\slidesonly
-  \setbeameroption{hide notes} % Only slides
-\fi
 %\setbeamertemplate{note page}{\pagecolor{yellow!5}\vfill\insertnote\vfill}
 
 \newcommand{\getpdfpages}[2]{\begingroup
@@ -410,7 +400,7 @@
 \item<6-> Whiteboard Examples \vspace{1mm}
 \begin{itemize} 
  \setlength\itemsep{1.25mm}
- \item Prove $\sqrt{2}$ is irrational by showing contrapositive via contradiction
+ \item Euclid's proof Prove ``if $x^2 = 2$, then $x$ is not rational" (i.e., $x=\pm\sqrt{2}$) via contradiction
  \item For $P(n)=$``$\sum_{i=1}^n i = \frac{n^2 + n}{2}$'', prove ``$\forall n\in \mathbb{N}, P(n)$'' via induction
 \end{itemize}
 \end{itemize}

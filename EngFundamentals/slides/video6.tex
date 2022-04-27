@@ -1,4 +1,6 @@
 \documentclass[10pt,english,aspectratio=169]{beamer}
+% Use notes or hide notes or show only notes or handout
+
 
 \usetheme{default}
 
@@ -69,20 +71,8 @@
 
 %% Setup slides and notes
 \makeatletter
-\IfSubStr{\@classoptionslist}{handout}
-  {\def\slidesonly{}}{\def\slidesnotes{}}
+\IfSubStr{\@classoptionslist}{notes} { \IfSubStr{\@classoptionslist}{hide} {}{\IfSubStr{\@classoptionslist}{only} {}{\setbeameroption{show notes on second screen=right}}} }{}
 \makeatother
-
-%\setbeameroption{show notes on second screen=right} % Both
-\ifdefined\notesonly
-  \setbeameroption{show only notes} % Only notes
-\fi
-\ifdefined\slidesnotes
-  \setbeameroption{show notes on second screen=right} % Both
-\fi
-\ifdefined\slidesonly
-  \setbeameroption{hide notes} % Only slides
-\fi
 %\setbeamertemplate{note page}{\pagecolor{yellow!5}\vfill\insertnote\vfill}
 
 \newcommand{\getpdfpages}[2]{\begingroup

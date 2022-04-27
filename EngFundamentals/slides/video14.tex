@@ -1,4 +1,5 @@
-\documentclass[10pt,english,aspectratio=169,handout]{beamer}
+\documentclass[10pt,english,aspectratio=169]{beamer}
+% Use notes or hide notes or show only notes or handout
 
 \usetheme{default}
 
@@ -69,20 +70,8 @@
 
 %% Setup slides and notes
 \makeatletter
-\IfSubStr{\@classoptionslist}{handout}
-  {\def\slidesonly{}}{\def\slidesnotes{}}
+\IfSubStr{\@classoptionslist}{notes} { \IfSubStr{\@classoptionslist}{hide} {}{\IfSubStr{\@classoptionslist}{only} {}{\setbeameroption{show notes on second screen=right}}} }{}
 \makeatother
-
-%\setbeameroption{show notes on second screen=right} % Both
-\ifdefined\notesonly
-  \setbeameroption{show only notes} % Only notes
-\fi
-\ifdefined\slidesnotes
-  \setbeameroption{show notes on second screen=right} % Both
-\fi
-\ifdefined\slidesonly
-  \setbeameroption{hide notes} % Only slides
-\fi
 %\setbeamertemplate{note page}{\pagecolor{yellow!5}\vfill\insertnote\vfill}
 
 \newcommand{\getpdfpages}[2]{\begingroup
@@ -239,6 +228,49 @@ For the space $L(V,V)$ of linear operators on $V$, a norm is called \textcolor{b
 
 
 \end{frame}
+
+
+\begin{frame} \frametitle{Continuity of Linear Transforms}
+
+\vspace{-1mm}
+
+\begin{definition}<1->
+A linear transform is called \textcolor{blue}{bounded} if its induced operator norm is finite.
+\end{definition}
+
+\vspace{-1mm}
+
+\begin{theorem}<2->
+A linear transformation $T \colon V \rightarrow W$ is bounded if and only if it is continuous.
+\end{theorem}
+
+\vspace{-1mm}
+
+\begin{proof}<3->
+Suppose that $T$ is bounded; that is, there exists $M$ such that  $\left\| T \vecnot{v} \right\| \leq M \left\| \vecnot{v} \right\|$ for all $\vecnot{v} \in V$.
+Let $\vecnot{v}_1, \vecnot{v}_2, \ldots$ be a convergent sequence in $V$, then \vspace{-2mm}
+\begin{equation*}
+\left\| T \vecnot{v}_i - T \vecnot{v}_j \right\|
+= \left\| T \left( \vecnot{v}_i - \vecnot{v}_j \right) \right\|
+\leq  M \left\| \vecnot{v}_i - \vecnot{v}_j \right\| . \vspace{-1mm}
+\end{equation*}
+This implies $T \vecnot{v}_1, T \vecnot{v}_2, \ldots$ is convergent in $W$ and, thus, $T$ is continuous. \vspace{1mm}
+
+Conversely, assume $T$ is continuous and notice that $T \vecnot{0} = \vecnot{0}$.
+Then, for any $\epsilon > 0$, there is a $\delta>0$ such that $\| T \vecnot{v} \| < \epsilon$ for all $\| \vecnot{v} \| < \delta$.
+It follows that \vspace{-2mm}
+\begin{equation*}
+\left\| T \vecnot{u} \right\|
+= \left\| T \frac{ \delta \vecnot{u} }{2 \left\| \vecnot{u} \right\| } \right\|
+\frac{ 2 \left\| \vecnot{u} \right\| }{ \delta }
+< \frac{2 \epsilon}{ \delta } \left\| \vecnot{u} \right\|. \vspace{-3mm}
+\end{equation*}
+Thus, $M = \frac{2 \epsilon}{\delta}$ serves as an upper bound on $\|T\|$.
+\vspace{-1mm}
+\end{proof}
+
+\end{frame}
+
 
 \begin{frame}<1-2> \frametitle{6.3.3: Matrix Norms}
 

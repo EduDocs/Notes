@@ -392,6 +392,7 @@ If $f$ is strictly convex, $\vecnot{x}_0$ is the unique minimizer over $A$.
 \end{corollary}
 
 \section{Constrained Optimization}
+\label{sec:constrained_optimization}
 
 Lagrangian optimization is an indispensable tool in engineering and physics that allows one to solve constrained non-linear optimization problems.
 For convex problems, there are now efficient algorithms that can handle thousands of variables and constraints.
@@ -463,7 +464,7 @@ Two standard minimization forms of an LP are given by:\\ \begin{minipage}{0.49\t
 The Lagrangian is used to transform constrained optimization problems into unconstrained optimization problems.
 One can think of it as introducing a cost $\lambda_i \geq 0$ associated with violating the $i$-th inequality constraint and a variable $\nu_j$ used to enforce the $j$-th equality constraint.
 
-\begin{definition}
+\begin{definition} \label{def:lagrangian}
 The \defn{optimization}{Lagrangian} $L \colon \mathcal{D} \times \mathbb{R}^m \times \mathbb{R}^p \rightarrow \mathbb{R}$ associated with optimization problem is
 \[ L(\vecnot{x},\vecnot{\lambda},\vecnot{\nu}) = f_0(\vecnot{x}) + \sum_{i=1}^m \lambda_i f_i(\vecnot{x}) + \sum_{j=1}^p \nu_j h_j(\vecnot{x}), \]
 where $\lambda_i$ is the \defn{optimization}{Lagrange multiplier} associated with the $i$-th inequality constraint and $\nu_j$ is the Lagrange multiplier associated with the $j$-th equality constraint.
@@ -473,35 +474,43 @@ where $\lambda_i$ is the \defn{optimization}{Lagrange multiplier} associated wit
 A point $\vecnot{x}^*$ is called \defn{optimization}{locally optimal} if there is an $\epsilon_0 >0$ such that, for all $\epsilon< \epsilon_0$, it holds that $f_0 (\vecnot{x}) \geq f_0 (\vecnot{x}^*)$ for all $\vecnot{x} \in \mathcal{F}$ satisfying $\| \vecnot{x} - \vecnot{x}^* \| < \epsilon$.
 The $i$-th inequality constraint is \defn{optimization}{active} at $\vecnot{x}^*$ if $f_i (\vecnot{x}^*)=0$.
 Otherwise, it is inactive.
+Let $A = \{ i\in \{1,\ldots,m\} \, | \, f_i (\vecnot{x}^*)=0 \}$ be the set of active constraints at $\vecnot{x}^*$.
+\end{definition}
+
+\begin{definition}[Mangasarian-Fromovitz]
+A standard constrained optimization problem satisfies the MF constraint qualification at $\vecnot{x}^*$ if the functions $f_i$ and $h_j$ are all continuously differentiable at $\vecnot{x}^*$ and there exists a vector $\vecnot{w}\in \mathbb{R}^n$ satisfying $\nabla f_i (\vecnot{x}^*)^T \vecnot{w} < 0$ for $i\in A$ and $\nabla g_j (\vecnot{x}^*)^T \vecnot{w} = 0$ for $j = 1,\ldots,p$.
+If the constraints $g_j$ are not all affine, then one additionally needs that the vectors $\nabla g_1 (\vecnot{x}^*),\ldots,\nabla g_p (\vecnot{x}^*) \in \mathbb{R}^n$ form a linearly independent set.
 \end{definition}
 
 \begin{theorem}[Karush-Kuhn-Tucker]
 \label{theorem:KKT}
-Assume the functions $f_i$ and $h_j$ are continuously differentiable and let $A = \{ i\in [m] \, | \, f_i (\vecnot{x}^*)=0 \}$ be the set of active constraints at $\vecnot{x}^*$.
-Then, $\vecnot{x}^*$ is locally optimal only if $\vecnot{\lambda}^* \geq 0$ and $\vecnot{\nu}^*$ exist such that
+If $\vecnot{x}^*$ is a constrained local optimum that satisfies the MF constraint qualification, then there exist $\vecnot{\lambda}^* \geq 0$ and $\vecnot{\nu}^*$ such that
+%If $\vecnot{x}^*$ is locally optimal and all functions $f_i,h_j$ are continuously differentiable at $\vecnot{x}^*$, then there exist $\vecnot{\lambda}^* \geq 0$ and $\vecnot{\nu}^*$ such that
 \begin{align}
-\label{eq:KKT1} \nabla f_0 (\vecnot{x}^*) + \sum_{i\in A} \lambda_i^* \nabla f_i (\vecnot{x}^*) + \sum_{j=1}^p \nu_j^* \nabla h_j (\vecnot{x}^*) &= \vecnot{0}
+\label{eq:KKT1} \nabla f_0 (\vecnot{x}^*) + \sum_{i\in A} \lambda_i^* \nabla f_i (\vecnot{x}^*) + \sum_{j=1}^p \nu_j^* \nabla h_j (\vecnot{x}^*) &= \vecnot{0}.
 % \\ \label{eq:KKT2} \lambda_i^* f_i(\vecnot{x}^*) &= 0 .
 \end{align}
 \end{theorem}
 
 This theorem provides a necessary condition for a point $\vecnot{x}^*$ to be locally optimal for a constrained optimization problem.
-Before considering its proof, it is useful to discuss the geometric picture upon which it is based.
-First, we note that the negative gradient $-\nabla f_0 (\vecnot{x}^*)$ gives the direction of steepest descent for the objective function.
+Before considering its proof, it is useful to discuss the geometric picture underlying its contrapositive statement: if \eqref{eq:KKT1} does not hold for all $\vecnot{\lambda}^* \geq 0$ and $\vecnot{\nu}^* \in \mathbb{R}^p$, then $\vecnot{x}^*$ is not locally optimal.
 
 Now, consider what happens if we evaluate the function at $\vecnot{x}(t) = \vecnot{x}^* + t \vecnot{y}$ for some direction $\vecnot{y}$ and a sufficiently small $t>0$.
 For any continuously differentiable function $f$, the definition of the derivative implies that
-\[ f(\vecnot{x}(t)) = f(\vecnot{x}^*)+t \vecnot{y}^H \nabla f(\vecnot{x}^*)+ o(t), \]
+\[ f(\vecnot{x}(t)) = f(\vecnot{x}^*)+t \nabla f(\vecnot{x}^*)^T \vecnot{y} + o(t), \]
 where $o(t) \to 0$ as $t \to 0$.
 If the problem is unconstrained (e.g., $m=p=0$), then $\nabla f_0 (\vecnot{x}^*)$ must be $\vecnot{0}$.
-Otherwise, one is guaranteed to reduce the function by choosing $\vecnot{y}=-\nabla f_0 (\vecnot{x}^*)$ (e.g., see Lemma~\ref{lemma:gateaux_negative}).
+This is because the negative gradient $-\nabla f_0 (\vecnot{x}^*)$ gives the direction of steepest descent for the objective function and one is guaranteed to reduce the function by choosing $\vecnot{y}=-\nabla f_0 (\vecnot{x}^*)$ (e.g., see Lemma~\ref{lemma:gateaux_negative}).
 If there are constraints, however, then $\vecnot{x}(t)$ may be infeasible.
-For the $j$-th equality constraint, the definition of the derivative implies that, for sufficiently small $t$, $\vecnot{x}(t)$ will be infeasible if $|\vecnot{y}^H \nabla h_j (\vecnot{x}^*)| > 0$.
-Thus, we certainly need $\vecnot{y}^H \nabla h_j (\vecnot{x}^*) = 0$ for all $j$.
+For the $j$-th equality constraint, the definition of the derivative implies that, for sufficiently small $t$, $\vecnot{x}(t)$ will be infeasible if $|\nabla h_j (\vecnot{x}^*)^T \vecnot{y} | > 0$.
+Thus, we certainly need $\nabla h_j (\vecnot{x}^*)^T \vecnot{y}  = 0$ for all $j$.
 
-If the $i$-th inequality constraint is active (i.e., $f_i (\vecnot{x}^*)=0$), then the definition of the derivative implies that, for sufficiently small $t$, $\vecnot{x}(t)$ will be infeasible if $\vecnot{y}^H \nabla f_i (\vecnot{x}^*) > 0$.
-Thus, we certainly need $\vecnot{y}^H \nabla f_i (\vecnot{x}^*) \leq 0$ for all $i\in A$. 
+
+If the $i$-th inequality constraint is active (i.e., $f_i (\vecnot{x}^*)=0$), then the definition of the derivative implies that, for sufficiently small $t$, $\vecnot{x}(t)$ will be infeasible if $\nabla f_i (\vecnot{x}^*)^T \vecnot{y}  > 0$.
+Thus, we certainly need $\nabla f_i (\vecnot{x}^*)^T \vecnot{y}  \leq 0$ for all $i\in A$. 
 If the constraint is inactive (i.e., $f_i (\vecnot{x}^*)<0$), then due to continuity it will remain satisfied for sufficiently small $t$.
+%Let $A = \{ i\in \{1,\ldots,m\} \, | \, f_i (\vecnot{x}^*)=0 \}$ be the set of active inequality constraints at $\vecnot{x}^*$.
+ 
 
 \begin{figure}[t]
   \begin{center}
@@ -510,7 +519,7 @@ If the constraint is inactive (i.e., $f_i (\vecnot{x}^*)<0$), then due to contin
   \caption{A contour plot of the function $f_0 (x_1,x_2) = (x_1 - 1)^2 + (x_2 - 1)^2 - x_1 x_2 /2$ whose minimum occurs at $(4/3,4/3)$ (i.e., the center of the blue ellipse).  The red line indicates the inequality constraint $f_1 (x_1,x_2)= 1.85 + (x_1 - 2.25)^2 / 2 - x_2 \leq 0$. The picture shows that the constrained minimum occurs at the intersection of the contour tangent line and the active constraint line.}
 \end{figure}
 
-The geometric picture implied by Theorem~\ref{theorem:KKT} is that of a game where one would like to decrease the objective $f_0 (\vecnot{x}^*)$ by choosing $\vecnot{y}$ such that $\vecnot{y}^H \nabla f_0 (\vecnot{x}^*) < 0$ but there are  constraints on the set of allowable $\vecnot{y}$'s.
+The geometric picture implied by Theorem~\ref{theorem:KKT} is that of a game where one would like to decrease the objective $f_0 (\vecnot{x}^*)$ by choosing $\vecnot{y}$ such that $\nabla f_0 (\vecnot{x}^*)^T \vecnot{y}  < 0$ but there are  constraints on the set of allowable $\vecnot{y}$'s.
 Let $H = \Span ( \{ \nabla h_j (\vecnot{x}^*) \})$ be the subspace of directions that violate the equality constraints at $\vecnot{x}^*$.
 Similarly, let the cone of directions that violate the active inequality constraints is given by
 \[ F = \left\{ \sum_{i\in A} \lambda_i \nabla f_i (\vecnot{x}^*) \, \middle| \, \lambda_i \geq 0, i \in A   \right\}. \]
@@ -518,7 +527,7 @@ Thus, one can only pick directions $\vecnot{y}$ that are orthogonal to all vecto
 
 Let the matrix $P$ define the orthogonal projection of $\mathbb{R}^n$ onto $H^\perp$.
 Using this, we can translate the equation~\eqref{eq:KKT1} into the statement
-\[ -P \nabla f_0 (\vecnot{x}^*) \in P F \]  or ``the projection of the descent direction lies in the projection of the cone of directions that violate the inequality constraints''.
+\[ -P \nabla f_0 (\vecnot{x}^*) \in P F \]  or ``the projection, onto $H^\perp$, of the descent direction  lies in the projection, onto $H^\perp$, of the cone of directions that violate the inequality constraints''.
 The reason for this is that we can absorb the $\nabla h_j$ terms into the $\nabla f_i$ terms by defining
 \[ \vecnot{f}^{(i)} = \nabla f_i (\vecnot{x}^*) + \sum_{j=1}^p \nu_{j,i} \nabla h_j (\vecnot{x}^*) = P \nabla f_i (\vecnot{x}^*) \]
 so that $\vecnot{f}^{(i)} \in H^{\perp}$ for $i=0,1,\ldots,m$.
@@ -526,35 +535,43 @@ Then, the cone $PF$ is defined by
 \[ PF = \left\{ \sum_{i\in A} \lambda_i \vecnot{f}^{(i)} \, \middle| \, \lambda_i \geq 0, i\in A \right\}. \]
 
 If $-P \nabla f_0 (\vecnot{x}^*) \notin P F$, then we project $-P \nabla f_0 (\vecnot{x}^*)$ onto $PF$ to get a non-zero residual $\vecnot{y}$.
-The resulting vector gives a direction where the objective function decreases and the constraints remain \emph{almost} satisfied.
+The resulting vector gives a direction where the objective function decreases linearly in $t$ and the constraint violations are $o(t)$.
 The challenge in making this proof precise is that, unless the equality constraints are affine, they may not be exactly satisfied for $t>0$.
 In standard proofs of this result, this difficulty is overcome by using the implicit function theorem to construct an $\vecnot{x} (t)$ that starts in the direction of $\vecnot{y}$ but is perturbed slightly to remain feasible.
 
 \begin{proof}
-For simplicity, we prove only the case where $h_j (\vecnot{x}) = \vecnot{a}_j^H \vecnot{x} - \vecnot{b}$ is affine and $PF$ does contain a line (i.e., $\{\alpha \vecnot{z}\,|\, \alpha \in \mathbb{R}\}$ for some $\vecnot{z}$).  First, we define 
+For simplicity, we prove only the case where $h_j (\vecnot{x}) = \vecnot{a}_j^T \vecnot{x} - \vecnot{b}$ is affine.
+%and $PF$ does contain a line (i.e., $\{\alpha \vecnot{z}\,|\, \alpha \in \mathbb{R}\}$ for some $\vecnot{z}$).
+First, we define 
 \[ \vecnot{y} (\vecnot{\lambda},\vecnot{\nu}) = -\nabla f_0 (\vecnot{x}^*) - \sum_{i=1}^m \lambda_i \nabla f_i (\vecnot{x}^*) - \sum_{j=1}^p \nu_j \underbrace{\nabla h_j (\vecnot{x}^*)}_{\vecnot{a}_j}. \]
 The vector $\vecnot{y} (\vecnot{\lambda},\vecnot{\nu})$ can be seen as the residual of the descent direction for the objective function after the constraint gradients have been used to cancel some parts.
-Next, we let $\vecnot{\nu}^* (\vecnot{\lambda}) = \arg \min_{\vecnot{\nu}\in \mathbb{R}^p} \| \vecnot{y} (\vecnot{\lambda},\vecnot{\nu}) \|_2$
-and apply the best approximation theorem to see that
-\[ \vecnot{y} (\vecnot{\lambda},\vecnot{\nu}^* (\vecnot{\lambda})) = P \vecnot{y} (\vecnot{\lambda},\vecnot{\nu}), \]
-where $P$ is orthogonal projection onto $H^\perp$ and $H = \Span ( \{ \vecnot{a}_j \} )$.
+Next, we let $\vecnot{\nu}^* (\vecnot{\lambda}) = \arg \min_{\vecnot{\nu}\in \mathbb{R}^p} \| \vecnot{y} (\vecnot{\lambda},\vecnot{\nu}) \|$
+and apply the best approximation theorem (for the standard inner product space) to see that
+\[ \vecnot{y} (\vecnot{\lambda},\vecnot{\nu}^* (\vecnot{\lambda})) = P \vecnot{y} (\vecnot{\lambda},\vecnot{0}), \]
+where the matrix $P$ defines an orthogonal projection onto $H^\perp$ and $H = \Span ( \{ \vecnot{a}_j \} )$.
 This ensures that each $h_j ( \vecnot{x}^* + t \vecnot{y} (\vecnot{\lambda},\vecnot{\nu}^* (\vecnot{\lambda})) )=0$ for all $\vecnot{\lambda}\in \mathbb{R}^m$ and $t\in \mathbb{R}$.
 
-Continuing, we define $\vecnot{y}^* = \arg \min_{\vecnot{\lambda} \in \mathbb{R}^m, \vecnot{\lambda} \geq \vecnot{0}} \| \vecnot{y} (\vecnot{\lambda},\vecnot{\nu}^* (\vecnot{\lambda})) \|_2 $.
-This implies that $\vecnot{y}^*$ is the error vector for the projection of $-P\nabla f_0 (\vecnot{x}^*)$ onto the convex set $PF$.
-The projection itself is given by $\vecnot{z}=-P\nabla f_0 - \vecnot{y}^*$ and Lemma~\ref{lemma:convex_proj_lt0} shows that $\left( \vecnot{y}^* \right)^H \left( \vecnot{z} \right) \geq 0$.
-Using this, we see that
-\[ \left( \vecnot{y}^* \right)^H \left(-P \nabla f_0 (\vecnot{x}^*) \right)
-= \left(\vecnot{y}^* \right)^H \left(\vecnot{z}+\vecnot{y}^* \right)
- \geq \| \vecnot{y}^* \|_2^2.
-\]
-If~\eqref{eq:KKT1} cannot be satisfied by some $\vecnot{\lambda} \geq \vecnot{0}$ and $\vecnot{\nu}$, then $\vecnot{y}^* \neq \vecnot{0}$ and $\| \vecnot{y}^* \|_2 > 0$.
-This shows that $\vecnot{y}^*$ points in a direction that decreases the value of the objective function.
+Continuing, we let $S = \{ \vecnot{\lambda} \in \mathbb{R}^m \, | \, \vecnot{\lambda} \geq \vecnot{0}, \lambda_i = 0, i \notin A \}$ and compute \[\vecnot{y}^* = \arg \min_{\vecnot{\lambda} \in S} \| \vecnot{y} (\vecnot{\lambda},\vecnot{\nu}^* (\vecnot{\lambda})) \|. \]
+This optimization uses the gradients of the active constraints to cancel as much of the residual descent direction as possible.
+Thus, $\vecnot{y}^* \neq \vecnot{0}$ implies there is a descent direction that does not violate the constraints.
+Looking at the formulas for $\vecnot{y} (\vecnot{\lambda},\vecnot{\nu})$ and $\vecnot{y} (\vecnot{\lambda},\vecnot{\nu}^* (\vecnot{\lambda}))$, we can also interpret $\vecnot{y}^*$ as the error vector for the projection of $\vecnot{v} = -P\nabla f_0 (\vecnot{x}^*)$ onto the convex set $PF$, which is the closed convex cone of perturbations that preserve the equality constraints but locally violate the inequality constraints.
+Then, $\vecnot{u}^* = \vecnot{v} - \vecnot{y}^*$ equals the projection itself and we observe that Theorem~\ref{theorem:convex_proj_lt0} implies $(\vecnot{u} - \vecnot{u}^*)^T (\vecnot{v} - \vecnot{u}^*) \leq 0$ for all $\vecnot{u} \in PF$.
+Since $\vecnot{0} \in PF$, we can choose $\vecnot{u} = \vecnot{0}$ to see that $(\vecnot{u}^*)^T (\vecnot{v} - \vecnot{u}^*) \geq 0$.
+Using this, we can write
+\begin{align*}
+-(P\nabla f_0 (\vecnot{x}^*))^T \vecnot{y}^*
+&= \vecnot{v}^T ( \vecnot{v} - \vecnot{u}^*) \\
+&= (\vecnot{v} - \vecnot{u}^*)^T (\vecnot{v} - \vecnot{u}^*) + (\vecnot{u}^*)^T (\vecnot{v} - \vecnot{u}^*) \\
+&\geq \|\vecnot{y}^*\|^2.
+\end{align*}
+If~\eqref{eq:KKT1} cannot be satisfied by some $\vecnot{\lambda} \in S$ and $\vecnot{\nu} \in \mathbb{R}^p$, then $\vecnot{y}^* \neq \vecnot{0}$ and $\| \vecnot{y}^* \| > 0$.
+Thus, a perturbation in the $\vecnot{y}^*$ direction will decrease the value of the objective function while essentially preserving feasibility.
 
-But, the $\vecnot{y}^*$ direction is only guaranteed to preserve feasibility to first order (i.e., $(\vecnot{y}^*)^H P \nabla f_i (\vecnot{x}^*) \leq 0$).
-To fix this, one can add to $\vecnot{y}^*$ a sufficiently small vector $\vecnot{w}$ satisfying $\vecnot{w}^H P \nabla f_i (\vecnot{x}^*) < 0$ for all $i=1,2,\ldots,m$.
-Such a $\vecnot{w}$ lies in the ``interior of the polar cone of $PF$'' and will exist as long as $PF$ does not contain a line.
-With this modification, the definition of the derivative implies that, for sufficiently small $t$, $\vecnot{x}(t) = \vecnot{x}^* + t (\vecnot{y}^* + \vecnot{w})$ will be a feasible vector satisfying $f_0 (\vecnot{x}(t)) < f_0 (\vecnot{x}^*)$.
+But, the $\vecnot{y}^*$ direction is only guaranteed to preserve feasibility to first order (i.e., $(P \nabla f_i (\vecnot{x}^*))^T \vecnot{y}^*  \leq 0$) for $i = 1,\ldots,m$.
+To fix this, first one needs to augment $\vecnot{y}^*$ with a small amount of some vector $\vecnot{w}$ satisfying $(P \nabla f_i (\vecnot{x}^*))^T \vecnot{w} < 0$ for all $i = 1,\ldots,m$.
+Such a vector is guaranteed by the constraint qualification.
+%Such a $\vecnot{w}$ lies in the ``interior of the polar cone of $PF$'' and will exist as long as $PF$ does not contain a line.
+Then, we can choose some $\delta>0$ such that $(P\nabla f_0 (\vecnot{x}^*))^T (\vecnot{y}^*+\delta \vecnot{w}) \leq -\frac{1}{2} \|\vecnot{y}^* \|$. With this modification, the definition of the derivative implies that, for sufficiently small $t$, $\vecnot{x}(t) = \vecnot{x}^* + t (\vecnot{y}^* + \delta \vecnot{w})$ will be a feasible vector satisfying $f_0 (\vecnot{x}(t)) < f_0 (\vecnot{x}^*)$.
 \end{proof}
 
 \subsection{Lagrangian Duality}
@@ -608,27 +625,35 @@ If $d^* = p^*$, then one says that \defn{optimization}{strong duality} holds for
 \end{definition}
 
 \begin{theorem}
-If strong duality holds for an optimization problem, then the KKT conditions are sufficient for optimality? 
+Let $\vecnot{x}^*$ be a primal optimal point and $(\vecnot{\lambda}^*,\vecnot{\nu}^*)$ be a dual optimal point.
+If strong duality holds, $\vecnot{x}^* \in \Interior{D}$, and all $f_i$ and $g_j$ functions are differentiable at $\vecnot{x}^*$, then we get the KKT conditions of complementary slackness, $\lambda_i^* f_i (\vecnot{x}^*) = 0$ for $i = 1,\ldots,m$, and stationarity \eqref{eq:KKT1}.
 \end{theorem}
 \begin{proof}
-If x,u,v satisfy KKT, then 
+By weak duality, we have
+\[ d^* = g(\vecnot{\lambda}^*,\vecnot{\nu}^*) \leq f_0 (\vecnot{x}^*) = p^*. \]
+Since $\vecnot{x}^*$ is feasible, combining $d^* = p^*$ with the proof of weak duality shows that
+\[ \inf_{\vecnot{x}\in \mathcal{D}} L(\vecnot{x},\vecnot{\lambda}^*,\vecnot{\nu}^*) = L(\vecnot{x}^*,\vecnot{\lambda}^*,\vecnot{\nu}^*) \]
+and $\lambda_i^* = 0$ if the $i$-th inequality constraint is inactive (i.e., $f_i(\vecnot{x}^*) < 0$).
+Thus, we also observe that complementary slackness condition $\lambda_i^* f_i (\vecnot{x}^*) = 0$ holds for $i = 1,\ldots,m$.
+Since $\vecnot{x}^* \in \Interior{D}$, it follows that $\vecnot{x}^*$ is a locally optimal point of $L(\vecnot{x},\vecnot{\lambda}^*,\vecnot{\nu}^*)$.
+Thus, $\vecnot{x}^*$ must be a stationary point of $L(\vecnot{x},\vecnot{\lambda}^*,\vecnot{\nu}^*)$ and taking the $\vecnot{x}$-derivative gives~\eqref{eq:KKT1}.
 \end{proof}
 
 \begin{example}
 For the first LP in Definition~\ref{def:standard_lp}, the Lagrangian is given by
-\[ L(\vecnot{x},\vecnot{\lambda},\vecnot{\nu}) = \vecnot{c}^T \vecnot{x} + \vecnot{\nu}^T (A\vecnot{x}-\vecnot{b}) - \vecnot{\lambda}^T \vecnot{x}, \]
-where the $\vecnot{\lambda}$ term is negative because the constraint is $\lambda \succeq \vecnot{0}$.
+	\[ L(\vecnot{x},\vecnot{\lambda},\vecnot{\nu}) = \vecnot{c}^T \vecnot{x} + \vecnot{\nu}^T (\vecnot{b} - A\vecnot{x}) - \vecnot{\lambda}^T \vecnot{x}, \]
+	where the $\vecnot{\lambda}$ term is negative because the constraint is $\vecnot{x} \succeq \vecnot{0}$.
 Thus, the Lagrangian dual function is given by
 \begin{equation*}
 g(\vecnot{\lambda},\vecnot{\nu})
 = \inf_{\vecnot{x}\in \mathcal{D}} L(\vecnot{x},\vecnot{\lambda},\vecnot{\nu})
-= \begin{cases} -\vecnot{b}^T \vecnot{\nu} & \text{if }A^T \vecnot{\nu} - \vecnot{\lambda} + \vecnot{c} = \vecnot{0} \\
+	= \begin{cases} \vecnot{b}^T \vecnot{\nu} & \text{if } \vecnot{c} - A^T \vecnot{\nu} - \vecnot{\lambda} = \vecnot{0} \\
 -\infty & \text{otherwise}. \end{cases}
 \end{equation*}
 Solving the implicit constraint and using the fact that $\vecnot{\lambda} \succeq \vecnot{0}$, one gets the dual LP problem
 \begin{align*}
-\mathrm{maximize} \quad & -\vecnot{b}^T \vecnot{\nu} \\
-\mathrm{subject\,to} \quad & A^T \vecnot{\nu} + c \succeq \vecnot{0}.
+\mathrm{maximize} \quad & \vecnot{b}^T \vecnot{\nu} \\
+	\mathrm{subject\,to} \quad & A^T \vecnot{\nu} \preceq \vecnot{c}.
 \end{align*}
 Strong duality for linear programs says that, if the original LP has an optimal solution (i.e., it is neither unbounded nor infeasible), then the dual LP has an optimal solution of the same value.
 \end{example}
@@ -636,7 +661,7 @@ Strong duality for linear programs says that, if the original LP has an optimal 
 \subsection{Convex Optimization}
 
 \begin{definition} \label{def:convex_opt}
-An optimization problem in standard form is called \defn{optimization}{convex} if the function $f_i$ is convex for $i=0,1,\ldots,m$, the function $h_j$ is affine (i.e., $h_j(\vecnot{x}) = \vecnot{a}_j^T \vecnot{x} - b_j)$ for $j=1,2,\ldots,p$, and $\mathcal{D}=\RealNumbers^n$. 
+An optimization problem in standard form is called \defn{optimization}{convex} if all $f_i$ functions are convex, all the $h_j$ functions are affine (i.e., $h_j(\vecnot{x}) = \vecnot{a}_j^T \vecnot{x} - b_j)$, and $\mathcal{D}=\RealNumbers^n$. 
 \end{definition}
 
 \begin{problem}
@@ -649,7 +674,8 @@ There are a number of stronger conditions that also imply strong duality for con
 \defn{optimization}{Slater's condition} is stated below as a theorem and its proof can be found in~\cite[Sec.~5.3.2]{Boyd-2004}.
  
 \begin{theorem}[Slater's Condition]
-If a convex optimization problem has a point $\vecnot{x}_0$ where $f_i(\vecnot{x}_0) < 0$ for $i=1,\ldots,m$ and $h_j (\vecnot{x}_0) = 0$ for $j=1,\ldots,p$, then strong duality holds for the problem.
+If a convex optimization problem has a point $\vecnot{x}_0$ where $f_i(\vecnot{x}_0) < 0$ for $i=1,\ldots,m$ and $h_j (\vecnot{x}_0) = 0$ for $j=1,\ldots,p$, then the MF constraint qualification strong duality holds for the problem.
+If all $f_i$ functions are differentiable, then 
 \end{theorem}
 
 

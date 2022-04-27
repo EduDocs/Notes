@@ -1,4 +1,5 @@
-\documentclass[10pt,english,aspectratio=169,handout]{beamer}
+\documentclass[10pt,english,aspectratio=169]{beamer}
+% Use notes or hide notes or show only notes or handout
 
 \usetheme{default}
 
@@ -69,21 +70,8 @@
 
 %% Setup slides and notes
 \makeatletter
-\IfSubStr{\@classoptionslist}{handout}
-  {\def\slidesonly{}}{\def\slidesnotes{}}
+\IfSubStr{\@classoptionslist}{notes} { \IfSubStr{\@classoptionslist}{hide} {}{\IfSubStr{\@classoptionslist}{only} {}{\setbeameroption{show notes on second screen=right}}} }{}
 \makeatother
-
-%\setbeameroption{show notes on second screen=right} % Both
-\ifdefined\notesonly
-  \setbeameroption{show only notes} % Only notes
-\fi
-\ifdefined\slidesnotes
-  \setbeameroption{show notes on second screen=right} % Both
-\fi
-\ifdefined\slidesonly
-  \setbeameroption{hide notes} % Only slides
-\fi
-%\setbeamertemplate{note page}{\pagecolor{yellow!5}\vfill\insertnote\vfill}
 
 \newcommand{\getpdfpages}[2]{\begingroup
   \setbeamercolor{background canvas}{bg=}
@@ -154,8 +142,8 @@
 		\begin{enumerate}
 			\setlength\itemsep{3mm}
 			\color{red}
-			\item Welcome to the sixth video lecture for ECE 586, Vector Space Methods. \\[2mm]
-			Today, we'll discuss complete metric spaces and the contraction mapping theorem.
+			\item Welcome to the seventh video lecture for ECE 586, Vector Space Methods. \\[2mm]
+			Today, we'll discuss the idea of compactness and its applications.
 		\end{enumerate}
 	}
 \end{frame}
@@ -164,10 +152,11 @@
 \setbeamertemplate{navigation symbols}{\textcolor{blue}{\footnotesize \insertframenumber ~/ \inserttotalframenumber}}
 
 
-\begin{frame}{2.1.4: Compactness}
+\begin{frame}<1-4>
+\frametitle{2.1.4: Compactness}
 
 \begin{definition}<1->
-A metric space $(X,d)$ is \textcolor{blue}{totally bounded} if, for any $\epsilon > 0$, there exists a finite set of $B_d (x,\epsilon)$ balls that cover (i.e., whose union equals) $X$.
+A metric space $(X,d)$ is \textcolor{blue}{totally bounded} if, for any $\epsilon > 0$, there exists a finite set of radius-$\epsilon$ balls that cover $X$ (i.e., $\cup_{x\in S} B_d (x,\epsilon) = X$).
 \end{definition}
 
 \begin{definition}<2->
@@ -179,7 +168,7 @@ A metric space is \textcolor{blue}{compact} if it is complete~and~totally~bounde
 \item<3-> Examples \vspace{1mm}
 \begin{itemize} 
   \setlength\itemsep{1.5mm}
-  \item The closed interval $[0,1]\subset \RealNumbers$ is compact
+  \item The closed real interval $[0,1]\subset \RealNumbers$ is compact
   \item A subset of Euclidean $\RealNumbers^n$ is compact iff it is closed and bounded
   \item But, the standard metric space of real numbers is not compact because it is not totally bounded.
 \end{itemize}
@@ -190,9 +179,23 @@ A metric space is \textcolor{blue}{compact} if it is complete~and~totally~bounde
 A closed subset $A$ of a compact space $X$ is itself a compact space.
 \end{theorem}
 
+\note{
+	\vspace{2mm}
+	\begin{enumerate}[<alert@+>]
+		\footnotesize
+		\setlength\itemsep{3mm}
+		\item Compactness is a very useful property in analysis that identifies when an arbitrary metric space behaves (in some sense) like a closed and bounded subset of real numbers. \\[3mm]
+		Read
+		\item Read.
+		\item Read.  This is because $N$ balls of radius $\epsilon$ can cover a width of at most $N\epsilon$.
+		\item Read.
+	\end{enumerate}
+}
+
 \end{frame}
 
-\begin{frame}{2.1.4: Compactness and Sequences}
+\begin{frame}<1-3>
+\frametitle{2.1.4: Compactness and Sequences}
 
 \begin{definition}<1->
 Let $x_1,x_2,\ldots \in X$ be a sequence and $n_1,n_2,\ldots\in \mathbb{N}$ be
@@ -213,29 +216,41 @@ Then, subsequence $x_2,x_4,x_6,\ldots$ converges to 1.
 \item<3-> Sketch proof on whiteboard in pictures
 \end{itemize}
 
+\note{
+	\vspace{2mm}
+	\begin{enumerate}[<alert@+>]
+		\footnotesize
+		\setlength\itemsep{3mm}
+		\item Read.
+		\item Read. This property is used somewhat regularly in analysis.
+		\item Read. This is because $-1$ to an even power equals 1 and $1/n$ vanishes.  Now, I want you to think the subsequence $x_1,x_3,x_5,\ldots$.  Does this converge? \\[2mm] In the live session, we will sketch a proof of the theorem.
+	\end{enumerate}
+}
+
 \end{frame}
 
-\begin{frame}{2.1.4: Properties of Real Numbers}
+\begin{frame}<1-4>
+\frametitle{2.1.4: Properties of Real Numbers}
 
 \begin{itemize}
 \setlength\itemsep{3mm}
-\item<1-> Let us consider extreme values for sets of real numbers \vspace{1mm}
+\item<1-> Let us include the natural boundary values for the real numbers \vspace{1mm}
 
 \begin{itemize} 
   \setlength\itemsep{1.5mm}
   \item Extended Real Numbers: $\overline{\RealNumbers} \triangleq \RealNumbers \cup \{ \infty,-\infty\}$
-  \item Defines \textcolor{blue}{compact metric space} with metric $d_{\overline{\RealNumbers}} (x,y) \triangleq |\frac{x}{1+|x|} - \frac{y}{1+|y|}|$
+  \item This is a \textcolor{blue}{compact metric space} with metric $d_{\overline{\RealNumbers}} (x,y) \triangleq |\frac{x}{1+|x|} - \frac{y}{1+|y|}|$
   \item ``$x_n \to \infty$'' equivalent to ``$\forall M>0, \, \exists N\in \mathbb{N}, \, \forall n>N, \, x_n > M$''
 \end{itemize}
 \end{itemize}
 
 \begin{definition}<2->
-The \textcolor{blue}{supremum} (or least upper bound) of $X\subseteq \RealNumbers$, denoted \textcolor{blue}{$\sup X$}, is the smallest extended real number $M \in \overline{\RealNumbers}$ such that $x\leq M$ for all $x\in X$.
+The \textcolor{blue}{supremum} (or least upper bound) of $X\subseteq \RealNumbers$ is denoted \textcolor{blue}{$\sup X$} and equals the smallest extended real number $M \in \overline{\RealNumbers}$ such that $x\leq M$ for all $x\in X$.
 %It is always well-defined and equals $-\infty$ if $X=\emptyset$.
 \end{definition}
 
 \begin{lemma}[supremum sequence]<3->
-Let $X$ be a metric space and $f \colon X\rightarrow \RealNumbers$ be a function from $X$ to the real numbers.
+Let $X$ be a metric space and $f \colon X\rightarrow \RealNumbers$ be a function mapping $X$ to the real numbers.
 Let $M = \sup f(A)$ for some non-empty $A \subseteq X$.
 Then, there exists a sequence $x_1,x_2,\ldots \in A$ such that $\lim_n f(x_n) = M$.
 \end{lemma}
@@ -243,15 +258,28 @@ Then, there exists a sequence $x_1,x_2,\ldots \in A$ such that $\lim_n f(x_n) = 
 \begin{itemize}
 \item<4-> Sketch proof on whiteboard
 \end{itemize}
-  
+
+\note{
+	\vspace{2mm}
+	\begin{enumerate}[<alert@+>]
+		\footnotesize
+		\setlength\itemsep{3mm}
+		\item Read.  With this metric, the extended real numbers are the completion of the standard real numbers.
+		\item Read. 
+		\item Read. This is an important concept in analysis that allows one to exploit compactness.
+		\item In the live session, we will sketch a proof of this.
+	\end{enumerate}
+}
+
 \end{frame}
 
 
-\begin{frame}{2.1.4: More Properties of Real Numbers}
+\begin{frame}<1-4>
+\frametitle{2.1.4: More Properties of Real Numbers}
 
 \begin{definition}<1->
-The \textcolor{blue}{maximum} of $X\subseteq \RealNumbers$, denoted \textcolor{blue}{$\max X$}, is the largest value achieved by the set.
-It equals the supremum if $\sup X \in X$ and is \textcolor{red}{undefined} otherwise.
+The \textcolor{blue}{maximum} of $X\subseteq \RealNumbers$, denoted \textcolor{blue}{$\max X$}, is the largest value contained in the set.
+It equals the supremum if $\sup X \in X$ and it is \textcolor{red}{undefined} otherwise.
 \end{definition}
 
 \begin{example}<2->
@@ -265,52 +293,86 @@ For $f(x)=\frac{1}{2-x}$, $f(X) = [1,\infty)$ and $\sup f(X) = \infty$.
 \item<3-> supremum and infimum always well-defined but may equal $\pm \infty$
 \end{itemize}
 
-
-
 \begin{theorem}<4->
-Any bounded non-decreasing sequence of real numbers converges to its supremum.
+A bounded non-decreasing sequence of real numbers converges to its supremum.
 \end{theorem}
+
+\note{
+	\vspace{2mm}
+	\begin{enumerate}[<alert@+>]
+		\footnotesize
+		\setlength\itemsep{3mm}
+		\item Read.
+		\item Read.
+		\item The infimum and minimum are the natural minimal quantities associated with the supremum and maximum. \\[2mm] Read. 
+		\item Read. This result says that a non-decreasing sequence must converge if it is bounded.
+	\end{enumerate}
+}
 
 \end{frame}  
 
 
-\begin{frame}{2.1.5: Sequences of Functions}
+\begin{frame}<1-3>
+\frametitle{2.1.5: Sequences of Functions}
 
 Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces and
 $f_n \colon X \to Y$ for $n\in \mathbb{N}$ be a sequence of functions mapping $X$ to $Y$.
 
-\begin{definition}
+\begin{definition}<1->
 The sequence $f_n$ \textcolor{blue}{converges pointwise} to $f\colon X \to Y$ if, for all $x \in X$, \vspace{-1.5mm}
 \[ \lim_{n\to \infty} f_n (x) = f(x) \vspace*{-0.5mm} \]
 
 \end{definition}
 
-\begin{definition}
+\begin{definition}<2->
 The sequence $f_n$ \textcolor{blue}{converges uniformly} to $f \colon X \to Y$ if \vspace{-1.5mm}
 \[ \forall \epsilon > 0, \, \exists N\in \mathbb{N}, \, \forall n>N, \, \forall x\in X, \, d_Y \left( f_n(x),f(x) \right) < \epsilon. \vspace*{-0.5mm} \]
 \end{definition}
 
-\begin{theorem}
+\begin{theorem}<3->
 If each $f_n$ is continuous and $f_n$ converges uniformly to $f \colon X \to Y$, then $f$ is continuous.
 \end{theorem}
 
+\note{
+	\vspace{2mm}
+	\begin{enumerate}[<alert@+>]
+		\footnotesize
+		\setlength\itemsep{3mm}
+		\item Read.  This is the standard notion of convergence for sequences of functions.
+		\item Read. This is a stronger notion of convergence that can be quite useful. 
+		\item In particular, we have the following theorem... Read. \\[2mm]  This is the standard mechanism by which a sequence of continuous functions converges to a continuous function.
+	\end{enumerate}
+}
+
 \end{frame}
 
-\begin{frame}{2.1.5: Two Important Results}
+\begin{frame}<1-3>
+\frametitle{2.1.5: Two Important Results}
 
-\begin{theorem}
+\begin{theorem}<1->
 Let $X$ be a metric space and $f \colon X\rightarrow \RealNumbers$ be a continuous function from $X$ to $\mathbb{R}$.
 If $A$ is a compact subset of $X$, then there exists $x\in A$ such that $f(x)=\sup f(A)$ (i.e., $f$ achieves a maximum on $A$).
 \end{theorem}
 
 \vspace{3mm}
 
-\begin{theorem}
+\begin{theorem}<2->
 Let $(X,d)$ be a compact metric space and $C(X)$ be the set of continuous functions mapping $X$ to $\mathbb{R}$.
 This set of functions, with the metric \vspace{-1.5mm} \[d_\infty (f,g) \triangleq \sup_{x\in X} |f(x)-g(x)| = \max_{x\in X} |f(x)-g(x)|, \vspace*{-1.5mm}\] defines a complete metric space.
 \end{theorem}
 
-Note: For $f,g\in C(X)$, $d_\infty$ metrizes uniform convergence because \vspace{-1.5mm} \[ \text{``}\max_{x\in X} |f(x)-g(x)| < \epsilon \text{''} \Leftrightarrow \text{``} \forall x\in X, |f(x) - g(x)| < \epsilon \text{''}. \]
+\uncover<3->{Note: For $f,g\in C(X)$, $d_\infty$ metrizes uniform convergence because \vspace{-1.5mm} \[ \text{``}\max_{x\in X} |f(x)-g(x)| < \epsilon \text{''} \Leftrightarrow \text{``} \forall x\in X, |f(x) - g(x)| < \epsilon \text{''}. \]}
+
+\note{
+	\vspace{2mm}
+	\begin{enumerate}[<alert@+>]
+		\footnotesize
+		\setlength\itemsep{3mm}
+		\item Read. This result is often summarized as ``A continuous function on a compact set achieves a maximum value''.
+		\item The previous result allows one to define a complete metric space of functions... Read.
+		\item We say that a metric ``metrizes'' a type of convergence if convergence under that metric is equivalent to that type of convergence.
+	\end{enumerate}
+}
 
 \end{frame}
 
