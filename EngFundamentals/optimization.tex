@@ -11,14 +11,17 @@ This chapter provides a brief introduction to mathematical optimization theory.
 In this chapter, we assume that readers are familiar with derivatives as defined in undergraduate multivariable calculus.
 To gain insight, we first recall the standard interpretation of the derivative as a local linear approximation of a function.
 For a function $f\colon \RealNumbers^n \to \RealNumbers^m$, this interpretation gives 
-\[ f(\vecnot{x} + \vecnot{h}) = f(\vecnot{x}) + J(\vecnot{x}) \cdot \vecnot{h} + \text{higher order terms}, \]
+\[ f(\vecnot{x} + \vecnot{h}) = f(\vecnot{x}) + J(\vecnot{x}) \; \vecnot{h} + \text{higher order terms}, \]
 where $J(\vecnot{x})\in \RealNumbers^{m\times n}$ is the Jacobian matrix of $f$ at $\vecnot{x}$.
 
 Instead of interpreting a multivariate derivative as a matrix,  we will view the derivative $f'(x)$ as a linear transform $T$ from the domain to codomain.
 This transform maps the input perturbation $\vecnot{h}$ to a local approximation of the output perturbation.
-Since both are finite dimensional in our example, the linear transform $T$ is represented by the Jacobian matrix and we have $$f'(\vecnot{x})(\vecnot{h}) = T \vecnot{h} = J(\vecnot{x})\cdot \vecnot{h}.$$ 
-
-Mathematically, such definitions require the structure of a Banach space because one needs the linear structure to compute differences, the norm topology to define limits, and completeness to guarantee that limits exist under mild conditions.
+Since both are finite dimensional in our example, the linear transform $T$ is represented by the Jacobian matrix and we have
+\begin{equation*}
+f'(\vecnot{x})(\vecnot{h}) = T \vecnot{h} = J(\vecnot{x}) \; \vecnot{h} .
+\end{equation*}
+Mathematically, such definitions require the structure of a Banach space because one needs the linear structure to compute differences, and the norm topology to define limits.
+Completeness guarantees that limits exist under mild conditions.
 
 \begin{definition}
 Let $f \colon X \rightarrow Y$ be a mapping from a vector space $X$ over $\RealNumbers$ to a Banach space $(Y,\|\cdot\|)$.
@@ -28,10 +31,15 @@ where the limit is with respect to the implied mapping from $t\in \RealNumbers$ 
 %convergence is defined with respect to the norm of $Y$.
 \end{definition}
 
+When this directional derivative exits, we can write the approximation
+\begin{equation*}
+f(\vecnot{x} + t \vecnot{h}) \approx f(\vecnot{x}) + t \delta f (\vecnot{x}; \vecnot{h}) .
+\end{equation*}
+In fact, we can get a tighter characterization that is especially meaningful in the context of optimization.
+
 \begin{lemma}
 \label{lemma:gateaux_negative}
-Let $Y = (\RealNumbers,|\cdot|)$ and suppose that $\delta f (\vecnot{x};\vecnot{h})$ exists and is negative for some $f$, $\vecnot{x}$, and $\vecnot{h}$.  Then, there exists $t_0 > 0$ such that, for all $t\in(0,t_0)$, one has
-\[ f(\vecnot{x}+t \vecnot{h}) < f (\vecnot{x}). \]
+Let $Y = (\RealNumbers,|\cdot|)$ and suppose that $\delta f (\vecnot{x};\vecnot{h})$ exists and is negative for some $f$, $\vecnot{x}$, and $\vecnot{h}$.  Then, there exists $t_0 > 0$ such that $f(\vecnot{x}+t \vecnot{h}) < f (\vecnot{x})$ for all $t\in(0,t_0)$.
 \end{lemma}
 \begin{proof}
 The $\delta f (\vecnot{x};\vecnot{h})$ limit implies that, for any $\epsilon > 0$, there is a $t_0 > 0$ such that
