@@ -139,16 +139,16 @@ where $\vecnot{e} = \vecnot{v}-\vecnot{w}$ is the approximation error.
 
 \begin{frame}{Vector Projection Revisited}
 
-Let $\vecnot{u},\vecnot{v}$ be vectors in an inner-product space $V$ with inner product $\langle \cdot | \cdot \rangle$.
+Let $\vecnot{u},\vecnot{v}$ be vectors in an inner-product space $V$ with inner product $\tinner{ \cdot }{ \cdot }$.
 
 \begin{lemma}<1->
-If $\langle \vecnot{w} | \vecnot{v} \rangle = 0$, then $\| \vecnot{w} \!+\! \vecnot{v} \|^2 = \| \vecnot{w} \|^2 \!+\! 2\, \text{Re} \{ \langle \vecnot{w} | \vecnot{v} \rangle  \} \!+\! \| \vecnot{v} \|^2 = \| \vecnot{w} \|^2 \!+\! \| \vecnot{v} \|^2$.
+If $\tinner{ \vecnot{w} }{ \vecnot{v} } = 0$, then $\| \vecnot{w} \!+\! \vecnot{v} \|^2 = \| \vecnot{w} \|^2 \!+\! 2\, \text{Re} \{ \tinner{ \vecnot{w} }{ \vecnot{v} }  \} \!+\! \| \vecnot{v} \|^2 = \| \vecnot{w} \|^2 \!+\! \| \vecnot{v} \|^2$.
 \end{lemma}
 
 \begin{definition}[Vector Projection]<1->
 The \textcolor{blue}{projection} of $\vecnot{w}$ onto $\vecnot{v}$ is defined to be \\[-3mm]
 \begin{tabular}{>{\centering}m{2in} m{2in}}
-$ \vecnot{u} = \displaystyle\frac{\left\langle \vecnot{w} | \vecnot{v} \right\rangle}{\|\vecnot{v}\|^2} \vecnot{v} $ &
+$ \vecnot{u} = \displaystyle\frac{\inner{ \vecnot{w} }{ \vecnot{v} }}{\|\vecnot{v}\|^2} \vecnot{v} $ &
 \begin{tikzpicture}[scale=0.5]
   \coordinate (v1) at (0,0);
   \coordinate (v2) at (4,3);
@@ -170,10 +170,10 @@ $ \vecnot{u} = \displaystyle\frac{\left\langle \vecnot{w} | \vecnot{v} \right\ra
 
 \begin{lemma}
 Let $\vecnot{u}$ be the projection of $\vecnot{w}$ onto $\vecnot{v}$.
-If $\langle \vecnot{w} | \vecnot{v} \rangle \neq 0$, then $\| \vecnot{w} - \vecnot{u} \| < \| \vecnot{w} \|$.
+If $\tinner{ \vecnot{w} }{ \vecnot{v} } \neq 0$, then $\| \vecnot{w} - \vecnot{u} \| < \| \vecnot{w} \|$.
 \end{lemma}
 \begin{proof}
-$\langle \vecnot{w} - \vecnot{u} | \vecnot{u} \rangle = 0$ implies $\| \vecnot{w} \|^2 = \| (\vecnot{w}-\vecnot{u}) + \vecnot{u} \|^2 = \| \vecnot{w} -\vecnot{u} \|^2 + \| \vecnot{u} \|^2$.
+$\tinner{ \vecnot{w} - \vecnot{u} }{ \vecnot{u} } = 0$ implies $\| \vecnot{w} \|^2 = \| (\vecnot{w}-\vecnot{u}) + \vecnot{u} \|^2 = \| \vecnot{w} -\vecnot{u} \|^2 + \| \vecnot{u} \|^2$.
 \end{proof}
 
 \end{frame}
@@ -193,7 +193,7 @@ Then,
 \item If a best approximation of $\vecnot{v} \in V$ by vectors in $W$ exists, it is unique.
 \item If $W$ is a closed subspace with a countable orthogonal basis $\vecnot{w}_1, \vecnot{w}_2, \ldots$, then the best approximation of $\vecnot{v}$ by vectors in $W$ is \vspace{-1.5mm}
 \begin{equation*}
-\vecnot{w} = \sum_{i=1}^\infty \frac{ \left\langle \vecnot{v} | \vecnot{w}_i \right\rangle }{ \left\| \vecnot{w}_i \right\|^2 } \vecnot{w}_i . \vspace{-1mm}
+\vecnot{w} = \sum_{i=1}^\infty \frac{ \inner{ \vecnot{v} }{ \vecnot{w}_i } }{ \left\| \vecnot{w}_i \right\|^2 } \vecnot{w}_i . \vspace{-1mm}
 \end{equation*}
 Note: the implied linear mapping $E\colon V \to W$ defined by $E(\vecnot{v}) = \vecnot{w}$ is called the \textcolor{blue}{orthogonal projection} of $V$ onto $W$.
 \end{enumerate}
@@ -277,7 +277,7 @@ Then, $\vecnot{v} = P \vecnot{v} + (I-P) \vecnot{v}$ gives an orthogonal decompo
 For $V=F^n$ with standard inner product, $P$ is an orthogonal projection matrix if it is idempotent and Hermitian (i.e. $P^2=P$ and $P^H = P$).
 \end{theorem}
 \begin{proof}<3->
-Since $\mathcal{R}(P) = \{ P\vecnot{u} | \vecnot{u}\in V \}$ and $\mathcal{N}(P) = \{ \vecnot{v}\in V | P\vecnot{v}=\vecnot{0} \}$, the general condition is $\langle P\vecnot{u} | (I-P)\vecnot{v} \rangle =0$ for all $\vecnot{u},\vecnot{v}\in V$.
+Since $\mathcal{R}(P) = \{ P\vecnot{u} | \vecnot{u}\in V \}$ and $\mathcal{N}(P) = \{ \vecnot{v}\in V | P\vecnot{v}=\vecnot{0} \}$, the general condition is $\tinner{ P\vecnot{u} }{ (I-P)\vecnot{v} } =0$ for all $\vecnot{u},\vecnot{v}\in V$.
 Simplifying this gives \vspace{-2mm}
 \[ \vecnot{v}^H (I-P)^H P \vecnot{u} = \vecnot{v}^H (P - P^H P) \vecnot{u} = \vecnot{v}^H (P - P^2) \vecnot{u} = 0.  \qedhere\]
 \end{proof}
@@ -296,7 +296,7 @@ Let $V = \ComplexNumbers^n$ be the standard $n$-dimensional complex Hilbert spac
 
 Then, the best approximation of $\vecnot{v}\in V$ by vectors in $\mathcal{R}(U)$, given by
 \begin{equation*}
-\vecnot{w} = \sum_{i=1}^m \frac{ \left\langle \vecnot{v} | \vecnot{u}_i \right\rangle }{ \left\| \vecnot{u}_i \right\|^2 } \vecnot{u}_i,
+\vecnot{w} = \sum_{i=1}^m \frac{ \inner{ \vecnot{v} }{ \vecnot{u}_i } }{ \left\| \vecnot{u}_i \right\|^2 } \vecnot{u}_i,
 \end{equation*}
 can also be written as
 \[ {\color{blue}\vecnot{w} = U U^H \vecnot{v}} = \sum_{i=1}^m \vecnot{u}_i (\vecnot{u}_i^H \vecnot{v}). \]
@@ -313,36 +313,36 @@ Let $W$ be a subspace of a Hilbert space $V$ that is spanned by the linearly ind
 The projection theorem shows that $\hat{\vecnot{v}} \in W$ is the best approximation of $\vecnot{v} \in V$ if and only if $(\vecnot{v} - \hat{\vecnot{v}}) \bot \vecnot{w}_j$ for $j=1,\ldots,n$.
 This implies that
 \begin{equation*}
-\left\langle \vecnot{v} - \hat{\vecnot{v}} | \vecnot{w}_j \right\rangle
-= \left\langle \vecnot{v} - \sum_{i=1}^n s_i \vecnot{w}_i \Big| \vecnot{w}_j \right\rangle
+\inner{ \vecnot{v} - \hat{\vecnot{v}} }{ \vecnot{w}_j }
+= \inner{ \vecnot{v} - \sum_{i=1}^n s_i \vecnot{w}_i }{ \vecnot{w}_j }
 = 0
 \end{equation*}
 or, equivalently, the \textcolor{blue}{normal equations}
 \begin{equation*}
-\sum_{i=1}^n s_i \left\langle \vecnot{w}_i | \vecnot{w}_j \right\rangle
-= \left\langle \vecnot{v} | \vecnot{w}_j \right\rangle.
+\sum_{i=1}^n s_i \inner{ \vecnot{w}_i }{ \vecnot{w}_j }
+= \inner{ \vecnot{v} }{ \vecnot{w}_j }.
 \end{equation*}
 
 The gives a system of $n$ linear equations in $n$ unknowns defined by
 \begin{equation*}
 \underbrace{\left[ \begin{array}{cccc}
-\left\langle \vecnot{w}_1 | \vecnot{w}_1 \right\rangle
-& \left\langle \vecnot{w}_2 | \vecnot{w}_1 \right\rangle & \cdots
-& \left\langle \vecnot{w}_n | \vecnot{w}_1 \right\rangle \\
-\left\langle \vecnot{w}_1 | \vecnot{w}_2 \right\rangle
-& \left\langle \vecnot{w}_2 | \vecnot{w}_2 \right\rangle & \cdots
-& \left\langle \vecnot{w}_n | \vecnot{w}_2 \right\rangle \\
+\inner{ \vecnot{w}_1 }{ \vecnot{w}_1 }
+& \inner{ \vecnot{w}_2 }{ \vecnot{w}_1 } & \cdots
+& \inner{ \vecnot{w}_n }{ \vecnot{w}_1 } \\
+\inner{ \vecnot{w}_1 }{ \vecnot{w}_2 }
+& \inner{ \vecnot{w}_2 }{ \vecnot{w}_2 } & \cdots
+& \inner{ \vecnot{w}_n }{ \vecnot{w}_2 } \\
 \vdots & \vdots & \ddots & \vdots \\
-\left\langle \vecnot{w}_1 | \vecnot{w}_n \right\rangle
-& \left\langle \vecnot{w}_2 | \vecnot{w}_n \right\rangle & \cdots
-& \left\langle \vecnot{w}_n | \vecnot{w}_n \right\rangle
+\inner{ \vecnot{w}_1 }{ \vecnot{w}_n }
+& \inner{ \vecnot{w}_2 }{ \vecnot{w}_n } & \cdots
+& \inner{ \vecnot{w}_n }{ \vecnot{w}_n }
 \end{array} \right]}_G
 \underbrace{\left[ \begin{array}{c}
 s_1 \\ s_2 \\ \vdots \\ s_n \end{array} \right]}_\vecnot{s}
 = \underbrace{\left[ \begin{array}{c}
-\left\langle \vecnot{v} | \vecnot{w}_1 \right\rangle \\
-\left\langle \vecnot{v} | \vecnot{w}_2 \right\rangle \\ \vdots \\
-\left\langle \vecnot{v} | \vecnot{w}_n \right\rangle \end{array} \right]}_\vecnot{t} .
+\inner{ \vecnot{v} }{ \vecnot{w}_1 } \\
+\inner{ \vecnot{v} }{ \vecnot{w}_2 } \\ \vdots \\
+\inner{ \vecnot{v} }{ \vecnot{w}_n } \end{array} \right]}_\vecnot{t} .
 \end{equation*}
 
 \end{frame}
@@ -353,19 +353,19 @@ s_1 \\ s_2 \\ \vdots \\ s_n \end{array} \right]}_\vecnot{s}
 For $\vecnot{w}_1,\ldots,\vecnot{w}_n$, the $n \times n$ \textcolor{blue}{Gramian matrix} is defined to be \vspace{-1.5mm}
 \begin{equation*}
 G = \left[ \begin{array}{cccc}
-\left\langle \vecnot{w}_1 | \vecnot{w}_1 \right\rangle
-& \left\langle \vecnot{w}_2 | \vecnot{w}_1 \right\rangle & \cdots
-& \left\langle \vecnot{w}_n | \vecnot{w}_1 \right\rangle \\
-\left\langle \vecnot{w}_1 | \vecnot{w}_2 \right\rangle
-& \left\langle \vecnot{w}_2 | \vecnot{w}_2 \right\rangle & \cdots
-& \left\langle \vecnot{w}_n | \vecnot{w}_2 \right\rangle \\
+\inner{ \vecnot{w}_1 }{ \vecnot{w}_1 }
+& \inner{ \vecnot{w}_2 }{ \vecnot{w}_1 } & \cdots
+& \inner{ \vecnot{w}_n }{ \vecnot{w}_1 } \\
+\inner{ \vecnot{w}_1 }{ \vecnot{w}_2 }
+& \inner{ \vecnot{w}_2 }{ \vecnot{w}_2 } & \cdots
+& \inner{ \vecnot{w}_n }{ \vecnot{w}_2 } \\
 \vdots & \vdots & \ddots & \vdots \\
-\left\langle \vecnot{w}_1 | \vecnot{w}_n \right\rangle
-& \left\langle \vecnot{w}_2 | \vecnot{w}_n \right\rangle & \cdots
-& \left\langle \vecnot{w}_n | \vecnot{w}_n \right\rangle
+\inner{ \vecnot{w}_1 }{ \vecnot{w}_n }
+& \inner{ \vecnot{w}_2 }{ \vecnot{w}_n } & \cdots
+& \inner{ \vecnot{w}_n }{ \vecnot{w}_n }
 \end{array} \right] \vspace{-1mm}
 \end{equation*}
-Since $g_{ij} = \left\langle \vecnot{w}_j | \vecnot{w}_i \right\rangle$, we see $G$ is Hermitian symmetric (i.e. $G^H = G$).
+Since $g_{ij} = \inner{ \vecnot{w}_j }{ \vecnot{w}_i }$, we see $G$ is Hermitian symmetric (i.e. $G^H = G$).
 \end{definition}
 
 \begin{definition}<2->
@@ -398,8 +398,8 @@ Also, the best approximation of $\vecnot{v}$ by vectors in $W$ is found by solvi
 
 \visible<2->{%
 For the induced norm, any solution must satisfy the normal equations
-\[ \left\langle \vecnot{v} - \hat{\vecnot{v}} | \vecnot{w}_j \right\rangle
-= \left\langle \vecnot{v} - A \vecnot{s} | \vecnot{w}_j \right\rangle
+\[ \inner{ \vecnot{v} - \hat{\vecnot{v}} }{ \vecnot{w}_j }
+= \inner{ \vecnot{v} - A \vecnot{s} }{ \vecnot{w}_j }
 = 0, \quad j \in [n]. \]
 }
 
@@ -440,11 +440,11 @@ It defines an orthogonal projection onto the range of $A$ (i.e., the subspace sp
 For the standard Euclidean norm $\| \vecnot{v} \|_E = \sqrt{\vecnot{v}^H \vecnot{v}}$ and any invertible $B$, consider the weighted least-squares problem
 \[ \min_{\hat{\vecnot{v}}\in W} \| B(\vecnot{v} - \hat{ \vecnot{v}}) \|_E = \min_\vecnot{s} \| B( \vecnot{v} - A \vecnot{s}) \|_E \]
 But, $\| B \vecnot{v} \|_E$ equals the induced norm $\| \vecnot{v} \|$ for the weighted inner product
-\[ \left\langle \vecnot{u} | \vecnot{v} \right\rangle  \triangleq \vecnot{v}^H B^H B \vecnot{u}. \]
+\[ \inner{ \vecnot{u} }{ \vecnot{v} }  \triangleq \vecnot{v}^H B^H B \vecnot{u}. \]
 
 For the weighted inner product, the normal equations look the same
-\[ \left\langle \vecnot{v} - \hat{\vecnot{v}} | \vecnot{w}_j \right\rangle
-= \left\langle \vecnot{v} - A \vecnot{s} | \vecnot{w}_j \right\rangle
+\[ \inner{ \vecnot{v} - \hat{\vecnot{v}} }{ \vecnot{w}_j }
+= \inner{ \vecnot{v} - A \vecnot{s} }{ \vecnot{w}_j }
 = 0, \quad j \in [n]. \]
 but they solve a different problem and they reduce to
 \begin{equation*}
@@ -465,9 +465,9 @@ The squared norm of the minimum error is given implicitly by
 \begin{equation*}
 \left\| \vecnot{v} \right\|^2
 = \left\| \hat{\vecnot{v}} + \vecnot{e} \right\|^2
-= \left\langle \hat{\vecnot{v}} + \vecnot{e} | \hat{\vecnot{v}} + \vecnot{e} \right\rangle
-= \left\langle \hat{\vecnot{v}} | \hat{\vecnot{v}} \right\rangle
-+ \left\langle \vecnot{e} | \vecnot{e} \right\rangle
+= \inner{ \hat{\vecnot{v}} + \vecnot{e} }{ \hat{\vecnot{v}} + \vecnot{e} }
+= \inner{ \hat{\vecnot{v}} }{ \hat{\vecnot{v}} }
++ \inner{ \vecnot{e} }{ \vecnot{e} }
 = \left\| \hat{\vecnot{v}} \right\|^2 + \left\| \vecnot{e} \right\|^2 .
 \end{equation*}
 For the weighted problem, let $H=B^H B$ and write
@@ -496,7 +496,7 @@ Linear minimum mean-squared error (LMMSE) estimation finds $s_1, \ldots, s_n$ su
 minimizes the mean squared-error $\Expect[|Y-\hat{Y}|^2]$.
 Using the inner product
 \begin{equation*}
-\left\langle X | Y \right\rangle = \Expect \left[ X \overline{Y} \right],
+\inner{ X }{ Y } = \Expect \left[ X \overline{Y} \right],
 \end{equation*}
 the normal equations for the LMMSE estimate $\hat{Y}$ are $G \vecnot{s} = \vecnot{t}$, where
 \begin{equation*}
@@ -536,31 +536,31 @@ Let $V$ be a Hilbert space and $\vecnot{w}_1 ,\vecnot{w}_2 , \ldots, \vecnot{w}_
 For any $\vecnot{v} \in V$, the best approximation of $\vecnot{v}$ in $W$ can be found by solving
 \begin{equation} \label{eqn:DualNormalEquations}
 \left[ \begin{array}{cccc}
-\left\langle \vecnot{w}_1 | \vecnot{w}_1 \right\rangle
-& \left\langle \vecnot{w}_2 | \vecnot{w}_1 \right\rangle & \cdots
-& \left\langle \vecnot{w}_n | \vecnot{w}_1 \right\rangle \\
-\left\langle \vecnot{w}_1 | \vecnot{w}_2 \right\rangle
-& \left\langle \vecnot{w}_2 | \vecnot{w}_2 \right\rangle & \cdots
-& \left\langle \vecnot{w}_n | \vecnot{w}_2 \right\rangle \\
+\inner{ \vecnot{w}_1 }{ \vecnot{w}_1 }
+& \inner{ \vecnot{w}_2 }{ \vecnot{w}_1 } & \cdots
+& \inner{ \vecnot{w}_n }{ \vecnot{w}_1 } \\
+\inner{ \vecnot{w}_1 }{ \vecnot{w}_2 }
+& \inner{ \vecnot{w}_2 }{ \vecnot{w}_2 } & \cdots
+& \inner{ \vecnot{w}_n }{ \vecnot{w}_2 } \\
 \vdots & \vdots & \ddots & \vdots \\
-\left\langle \vecnot{w}_1 | \vecnot{w}_n \right\rangle
-& \left\langle \vecnot{w}_2 | \vecnot{w}_n \right\rangle & \cdots
-& \left\langle \vecnot{w}_n | \vecnot{w}_n \right\rangle
+\inner{ \vecnot{w}_1 }{ \vecnot{w}_n }
+& \inner{ \vecnot{w}_2 }{ \vecnot{w}_n } & \cdots
+& \inner{ \vecnot{w}_n }{ \vecnot{w}_n }
 \end{array} \right]
 \left[ \begin{array}{c}
 s_1 \\ s_2 \\ \vdots \\ s_n \end{array} \right]
 = \left[ \begin{array}{c}
-\left\langle \vecnot{v} | \vecnot{w}_1 \right\rangle \\
-\left\langle \vecnot{v} | \vecnot{w}_2 \right\rangle \\ \vdots \\
-\left\langle \vecnot{v} | \vecnot{w}_n \right\rangle \end{array} \right] .
+\inner{ \vecnot{v} }{ \vecnot{w}_1 } \\
+\inner{ \vecnot{v} }{ \vecnot{w}_2 } \\ \vdots \\
+\inner{ \vecnot{v} }{ \vecnot{w}_n } \end{array} \right] .
 \end{equation}
 
 \begin{theorem}
 Let $V$ be a Hilbert space and $\vecnot{w}_1 ,\vecnot{w}_2 , \ldots, \vecnot{w}_n$ be a basis for $W\subseteq V$.
-The \textcolor{blue}{dual approximation} problem is to find the minimum-norm vector $\vecnot{w}\in V$ satisfying $\left\langle \vecnot{w} | \vecnot{w}_i \right\rangle = c_i$ for $i=1,\ldots,n$.
+The \textcolor{blue}{dual approximation} problem is to find the minimum-norm vector $\vecnot{w}\in V$ satisfying $\inner{ \vecnot{w} }{ \vecnot{w}_i } = c_i$ for $i=1,\ldots,n$.
 Then, the solution $\vecnot{w}$ satisfies \vspace{-1.5mm}
 \[ \vecnot{w} = \sum_{i=1}^n s_i \vecnot{w}_i \in W, \vspace{-1.5mm} \]
-where $s_1,s_2,\ldots,s_n$ can be found by solving \eqref{eqn:DualNormalEquations} with $\left\langle \vecnot{v} | \vecnot{w}_i \right\rangle = c_i$.
+where $s_1,s_2,\ldots,s_n$ can be found by solving \eqref{eqn:DualNormalEquations} with $\inner{ \vecnot{v} }{ \vecnot{w}_i } = c_i$.
 \end{theorem}
 
 \end{frame}

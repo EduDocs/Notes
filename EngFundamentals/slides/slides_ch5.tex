@@ -259,7 +259,7 @@ The orthogonal projection of $\vecnot v\in V$ onto a closed convex set $A\subset
 \end{theorem}
 
 \begin{theorem}<2->
-For any $\vecnot{v} \notin A$, a necessary and sufficient condition for $\vecnot{u}^* = P_A (\vecnot{v})$ is that $\langle \vecnot{v}-\vecnot{u}^* \,|\, \vecnot{u}-\vecnot{u}^* \rangle \leq 0$ for all $\vecnot{u}\in A$.
+For any $\vecnot{v} \notin A$, a necessary and sufficient condition for $\vecnot{u}^* = P_A (\vecnot{v})$ is that $\tinner{ \vecnot{v}-\vecnot{u}^* \,}{\, \vecnot{u}-\vecnot{u}^* } \leq 0$ for all $\vecnot{u}\in A$.
 \end{theorem}
 
 \visible<3->{Prove theorem on whiteboard for compact $A$ via convex optimization}
@@ -291,16 +291,16 @@ The sequence $\vecnot v_{n}$ converges to $P_{U\cap W}\vecnot v_{0}$, its projec
 
 The orthogonal projection of $\vecnot v\in V$ onto a 1D subspace $W=\text{span}(\vecnot w)$ is \vspace{-0.5mm}
 \[
-P_{W}(\vecnot v)=\frac{\left\langle \vecnot v|\vecnot w\right\rangle }{\left\Vert \vecnot w\right\Vert ^{2}}\vecnot w.
+P_{W}(\vecnot v)=\frac{\inner{ \vecnot v}{\vecnot w} }{\left\Vert \vecnot w\right\Vert ^{2}}\vecnot w.
 \]
 \vspace{-0.5mm}
 \hrule
 \vspace{1.75mm}
 
 \visible<2->{%
-A subspace $U \subset V$ with \textcolor{blue}{co-dimension one} (i.e., $\dim(U)=\dim(V)-1$) is a subset of $V$ that \textcolor{blue}{satisfies a single linear equality} of the form $\left\langle \vecnot v|\vecnot w\right\rangle =0$. Thus, $U=W^\perp$ for a 1D subspace $W$ and \vspace{-0.5mm}
+A subspace $U \subset V$ with \textcolor{blue}{co-dimension one} (i.e., $\dim(U)=\dim(V)-1$) is a subset of $V$ that \textcolor{blue}{satisfies a single linear equality} of the form $\inner{ \vecnot v}{\vecnot w} =0$. Thus, $U=W^\perp$ for a 1D subspace $W$ and \vspace{-0.5mm}
 \[
-P_{U}(\vecnot v)=P_{W^{\perp}}(\vecnot v)=\vecnot v-\frac{\left\langle \vecnot v|\vecnot w\right\rangle }{\left\Vert \vecnot w\right\Vert ^{2}}\vecnot w.
+P_{U}(\vecnot v)=P_{W^{\perp}}(\vecnot v)=\vecnot v-\frac{\inner{ \vecnot v}{\vecnot w} }{\left\Vert \vecnot w\right\Vert ^{2}}\vecnot w.
 \]
 \vspace{-1mm}
 \hrule
@@ -308,9 +308,9 @@ P_{U}(\vecnot v)=P_{W^{\perp}}(\vecnot v)=\vecnot v-\frac{\left\langle \vecnot v
 }
 
 \visible<3->{%
-From the linear equality $\langle\vecnot v|\vecnot w\rangle=c$, one gets \textcolor{blue}{a shifted subspace $U+\vecnot v_{0}$} ($\vecnot v_{0}$ is any vector in $V$ satisfying $\langle\vecnot v_{0}|\vecnot w\rangle=c$) with co-dimension one: \vspace{-0.5mm}
+From the linear equality $\tinner{\vecnot v}{\vecnot w}=c$, one gets \textcolor{blue}{a shifted subspace $U+\vecnot v_{0}$} ($\vecnot v_{0}$ is any vector in $V$ satisfying $\tinner{\vecnot v_{0}}{\vecnot w}=c$) with co-dimension one: \vspace{-0.5mm}
 \[
-\langle\vecnot v|\vecnot w\rangle=\langle\vecnot u+\vecnot v_{0}|\vecnot w\rangle=\langle\vecnot u|\vecnot w\rangle+\langle\vecnot v_{0}|\vecnot w\rangle=0+c=c.
+\tinner{\vecnot v}{\vecnot w}=\tinner{\vecnot u+\vecnot v_{0}}{\vecnot w}=\tinner{\vecnot u}{\vecnot w}+\tinner{\vecnot v_{0}}{\vecnot w}=0+c=c.
 \]
 \vspace{-2.5mm}
 \hrule
@@ -320,7 +320,7 @@ From the linear equality $\langle\vecnot v|\vecnot w\rangle=c$, one gets \textco
 \visible<4->{%
 One can project onto $U+\vecnot{v_{0}}$ by shifting, projecting, and shifting back: \vspace{-0.75mm}
 \begin{equation*}
-P_{U+\vecnot v_{0}}(\vecnot v)=\left((\vecnot v-\vecnot v_{0})-\frac{\left\langle \vecnot v-\vecnot v_{0}|\vecnot w\right\rangle }{\left\Vert \vecnot w\right\Vert ^{2}}\vecnot w\right)+\vecnot v_{0}=\vecnot v-\frac{\left\langle \vecnot v|\vecnot w\right\rangle -c}{\left\Vert \vecnot w\right\Vert ^{2}}\vecnot w,
+P_{U+\vecnot v_{0}}(\vecnot v)=\left((\vecnot v-\vecnot v_{0})-\frac{\inner{ \vecnot v-\vecnot v_{0}}{\vecnot w} }{\left\Vert \vecnot w\right\Vert ^{2}}\vecnot w\right)+\vecnot v_{0}=\vecnot v-\frac{\inner{ \vecnot v}{\vecnot w} -c}{\left\Vert \vecnot w\right\Vert ^{2}}\vecnot w,
 \end{equation*}
 }
 
@@ -351,7 +351,7 @@ where $\sigma(i)=(i\bmod m)+1$.
 
 Using the projection formula, this gives  \vspace{-0.5mm}
 \begin{equation*}
-\vecnot v_{i+1}=\vecnot v_{i}- s \frac{\langle\vecnot v_{i}|\vecnot a_{\sigma(i)}\rangle-b_{\sigma(i)}}{\text{\ensuremath{\|}}\vecnot a_{\sigma(i)}\|^{2}}\vecnot a_{\sigma(i)},
+\vecnot v_{i+1}=\vecnot v_{i}- s \frac{\tinner{\vecnot v_{i}}{\vecnot a_{\sigma(i)}}-b_{\sigma(i)}}{\text{\ensuremath{\|}}\vecnot a_{\sigma(i)}\|^{2}}\vecnot a_{\sigma(i)},
 \end{equation*}
 where $s\in(0,1]$ is the step-size and $\vecnot a_{j}$ is the $j$-th row of the matrix $A$. 
 
@@ -385,7 +385,7 @@ For finite-dimensional $V$, there is some $\vecnot v\in\cap_{i=1}^{m}C_{i}$ such
 
 \vspace{2mm}
 
-For $\vecnot{w} \in V$, let $H = \{ \vecnot{v} \in V \,|\, \langle\vecnot v|\vecnot w\rangle\geq c \}$ be a closed convex \textcolor{blue}{half space}.
+For $\vecnot{w} \in V$, let $H = \{ \vecnot{v} \in V \,|\, \tinner{\vecnot v}{\vecnot w}\geq c \}$ be a closed convex \textcolor{blue}{half space}.
 
 \begin{itemize}
 \item For $\vecnot v\in H$, the projection satisfies $P_{H}(\vecnot v)=\vecnot v$ 
@@ -395,8 +395,8 @@ For $\vecnot{w} \in V$, let $H = \{ \vecnot{v} \in V \,|\, \langle\vecnot v|\vec
 It follows that \vspace{-2.5mm}
 \begin{equation*}
 P_{H}(\vecnot v)=\begin{cases}
-\vecnot v & \text{if }\langle\vecnot v|\vecnot w\rangle\geq c\\
-\vecnot v-\frac{\left\langle \vecnot v|\vecnot w\right\rangle -c}{\left\Vert \vecnot w\right\Vert ^{2}}\vecnot w & \text{if }\langle\vecnot v|\vecnot w\rangle<c
+\vecnot v & \text{if }\tinner{\vecnot v}{\vecnot w}\geq c\\
+\vecnot v-\frac{\inner{ \vecnot v}{\vecnot w} -c}{\left\Vert \vecnot w\right\Vert ^{2}}\vecnot w & \text{if }\tinner{\vecnot v}{\vecnot w}<c
 \end{cases}\label{eq:proj_ineq}
 \end{equation*}
 

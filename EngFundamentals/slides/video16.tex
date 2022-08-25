@@ -311,9 +311,9 @@ This is because derivatives can be understood as linear transforms and either or
 Let $X$ be a Hilbert space over $\RealNumbers$ and $f\colon X \to \RealNumbers$ be a real functional.
 If the Fr\'{e}chet derivative $f'(\vecnot{x})$ exists, then it is a continuous linear functional on $X$.
 Thus, the Riesz representation theorem guarantees that there is a vector $\vecnot{u} \in X$ such that
-$ f'(\vecnot{x})(\vecnot{h}) = \langle\vecnot{h} | \vecnot{u} \rangle $ for all $\vecnot{h}\in X$.
+$ f'(\vecnot{x})(\vecnot{h}) = \tinner{\vecnot{h} }{ \vecnot{u} } $ for all $\vecnot{h}\in X$.
 This vector is called the gradient $\nabla f(\vecnot{x})$ and it follows that \vspace{-1mm}
-$$ f'(\vecnot{x})(\vecnot{h}) = \langle\vecnot{h} | \nabla f (\vecnot{x}) \rangle \text{ for all } \vecnot{h}\in X. $$
+$$ f'(\vecnot{x})(\vecnot{h}) = \tinner{\vecnot{h} }{ \nabla f (\vecnot{x}) } \text{ for all } \vecnot{h}\in X. $$
 \end{example}
 
 \end{frame}
@@ -341,7 +341,7 @@ Starting from $\vecnot{x}_1 \in X$, \textcolor{blue}{gradient descent} defines t
 \[ \vecnot{x}_{n+1} = \vecnot{x}_n - \delta_n \nabla f(\vecnot{x}_n), \]
 where $\delta_n$ is the step size for the $n$-th step.
 % and the gradient $\nabla f (\vecnot{x})$ is uniquely defined by \vspace{-1.5mm}
-%\[\langle \vecnot{h} | \nabla f(\vecnot{x}) \rangle = f'(\vecnot{x})(\vecnot{h}) \text{ for all } \vecnot{h} \in X. \]
+%\[\tinner{ \vecnot{h} }{ \nabla f(\vecnot{x}) } = f'(\vecnot{x})(\vecnot{h}) \text{ for all } \vecnot{h} \in X. \]
 \end{definition}
 
 \end{frame}
@@ -351,14 +351,14 @@ where $\delta_n$ is the step size for the $n$-th step.
 \begin{lemma}
 Let $f \colon X \rightarrow \RealNumbers$ map the Hilbert space $X$ to the real numbers.
 If $\nabla f(\vecnot{x})$ exists and satisfies $ \| \nabla f(\vecnot{y}) - \nabla f(\vecnot{x}) \| \leq L \| \vecnot{y} - \vecnot{x} \|$, then \vspace{-3mm}
-\[ \big| f(\vecnot{y}) - f(\vecnot{x}) - \langle\vecnot{y}-\vecnot{x} | \nabla f (\vecnot{x}) \rangle \big| \leq \frac{1}{2} L \| \vecnot{y}-\vecnot{x} \|^2. \]
+\[ \big| f(\vecnot{y}) - f(\vecnot{x}) - \tinner{\vecnot{y}-\vecnot{x} }{ \nabla f (\vecnot{x}) } \big| \leq \frac{1}{2} L \| \vecnot{y}-\vecnot{x} \|^2. \]
 \end{lemma}
 \vspace{-1mm}
 \begin{proof}<2->
-Let $\vecnot{h} = \vecnot{y}-\vecnot{x}$ and $\phi(t) = f(\vecnot{x} + t \vecnot{h})$. Then, $\phi'(t) = \langle \vecnot{h} | \nabla f(\vecnot{x} + t \vecnot{h}) \rangle$ and \vspace{-2.5mm}
+Let $\vecnot{h} = \vecnot{y}-\vecnot{x}$ and $\phi(t) = f(\vecnot{x} + t \vecnot{h})$. Then, $\phi'(t) = \tinner{ \vecnot{h} }{ \nabla f(\vecnot{x} + t \vecnot{h}) }$ and \vspace{-2.5mm}
 \begin{align*}
-\big| f(\vecnot{y}) -  f(\vecnot{x}) - \langle \vecnot{h} | \nabla f(\vecnot{x}) \rangle \big|  &= \left| \scaleobj{0.85}{\int_{0}^1} \left( \phi'(t) - \phi'(0) \right) \mathrm{d}t \right| \\
-\uncover<3->{&=  \left| \scaleobj{0.85}{\int_{0}^1} \langle \vecnot{h} | \nabla f(\vecnot{x} + t \vecnot{h}) - \nabla f(\vecnot{x}) \rangle \, \mathrm{d}t \right| \\}
+\big| f(\vecnot{y}) -  f(\vecnot{x}) - \tinner{ \vecnot{h} }{ \nabla f(\vecnot{x}) } \big|  &= \left| \scaleobj{0.85}{\int_{0}^1} \left( \phi'(t) - \phi'(0) \right) \mathrm{d}t \right| \\
+\uncover<3->{&=  \left| \scaleobj{0.85}{\int_{0}^1} \tinner{ \vecnot{h} }{ \nabla f(\vecnot{x} + t \vecnot{h}) - \nabla f(\vecnot{x}) } \, \mathrm{d}t \right| \\}
 \uncover<4->{&\leq \left| \scaleobj{0.85}{\int_{0}^1}  \| \vecnot{h} \| \, \| \nabla f(\vecnot{x} + t \vecnot{h}) - \nabla f(\vecnot{x}) \| \, \mathrm{d}t \right| \\}
 \uncover<5->{&\leq \scaleobj{0.85}{\int_{0}^1} \|\vecnot{h} \| L \| t \vecnot{h} \| \, \mathrm{d}t = \frac{1}{2} L \| \vecnot{h} \|^2. }
 \end{align*}

@@ -165,36 +165,36 @@ Let $W$ be a subspace of a Hilbert space $V$ that is spanned by the linearly ind
 The projection theorem shows that $\hat{\vecnot{v}} \in W$ is the best approximation of $\vecnot{v} \in V$ if and only if $(\vecnot{v} - \hat{\vecnot{v}}) \bot \vecnot{w}_j$ for $j=1,\ldots,n$.
 This implies that \vspace{-1mm}
 \begin{equation*}
-\left\langle \vecnot{v} - \hat{\vecnot{v}} | \vecnot{w}_j \right\rangle
-= \left\langle \vecnot{v} - \sum_{i=1}^n s_i \vecnot{w}_i \Big| \vecnot{w}_j \right\rangle
+\inner{ \vecnot{v} - \hat{\vecnot{v}} }{ \vecnot{w}_j }
+= \inner{ \vecnot{v} - \sum_{i=1}^n s_i \vecnot{w}_i }{ \vecnot{w}_j }
 = 0 \vspace{-1mm}
 \end{equation*}
 or, equivalently, the \textcolor{blue}{normal equations} \vspace{-1mm}
 \begin{equation*}
-\sum_{i=1}^n s_i \left\langle \vecnot{w}_i | \vecnot{w}_j \right\rangle
-= \left\langle \vecnot{v} | \vecnot{w}_j \right\rangle. \vspace{-1mm}
+\sum_{i=1}^n s_i \inner{ \vecnot{w}_i }{ \vecnot{w}_j }
+= \inner{ \vecnot{v} }{ \vecnot{w}_j }. \vspace{-1mm}
 \end{equation*}
 
 The gives a system of $n$ linear equations in $n$ unknowns defined by \vspace{-1mm}
 \begin{equation*}
 \underbrace{\left[ \begin{array}{cccc}
-\left\langle \vecnot{w}_1 | \vecnot{w}_1 \right\rangle
-& \left\langle \vecnot{w}_2 | \vecnot{w}_1 \right\rangle & \cdots
-& \left\langle \vecnot{w}_n | \vecnot{w}_1 \right\rangle \\
-\left\langle \vecnot{w}_1 | \vecnot{w}_2 \right\rangle
-& \left\langle \vecnot{w}_2 | \vecnot{w}_2 \right\rangle & \cdots
-& \left\langle \vecnot{w}_n | \vecnot{w}_2 \right\rangle \\
+\inner{ \vecnot{w}_1 }{ \vecnot{w}_1 }
+& \inner{ \vecnot{w}_2 }{ \vecnot{w}_1 } & \cdots
+& \inner{ \vecnot{w}_n }{ \vecnot{w}_1 } \\
+\inner{ \vecnot{w}_1 }{ \vecnot{w}_2 }
+& \inner{ \vecnot{w}_2 }{ \vecnot{w}_2 } & \cdots
+& \inner{ \vecnot{w}_n }{ \vecnot{w}_2 } \\
 \vdots & \vdots & \ddots & \vdots \\
-\left\langle \vecnot{w}_1 | \vecnot{w}_n \right\rangle
-& \left\langle \vecnot{w}_2 | \vecnot{w}_n \right\rangle & \cdots
-& \left\langle \vecnot{w}_n | \vecnot{w}_n \right\rangle
+\inner{ \vecnot{w}_1 }{ \vecnot{w}_n }
+& \inner{ \vecnot{w}_2 }{ \vecnot{w}_n } & \cdots
+& \inner{ \vecnot{w}_n }{ \vecnot{w}_n }
 \end{array} \right]}_G
 \underbrace{\left[ \begin{array}{c}
 s_1 \\ s_2 \\ \vdots \\ s_n \end{array} \right]}_\vecnot{s}
 = \underbrace{\left[ \begin{array}{c}
-\left\langle \vecnot{v} | \vecnot{w}_1 \right\rangle \\
-\left\langle \vecnot{v} | \vecnot{w}_2 \right\rangle \\ \vdots \\
-\left\langle \vecnot{v} | \vecnot{w}_n \right\rangle \end{array} \right]}_\vecnot{t} .
+\inner{ \vecnot{v} }{ \vecnot{w}_1 } \\
+\inner{ \vecnot{v} }{ \vecnot{w}_2 } \\ \vdots \\
+\inner{ \vecnot{v} }{ \vecnot{w}_n } \end{array} \right]}_\vecnot{t} .
 \end{equation*}
 
 \end{frame}
@@ -207,19 +207,19 @@ s_1 \\ s_2 \\ \vdots \\ s_n \end{array} \right]}_\vecnot{s}
 For $\vecnot{w}_1,\ldots,\vecnot{w}_n$, the $n \times n$ \textcolor{blue}{Gramian matrix} is defined to be \vspace{-2mm}
 \begin{equation*}
 G = \left[ \begin{array}{cccc}
-\left\langle \vecnot{w}_1 | \vecnot{w}_1 \right\rangle
-& \left\langle \vecnot{w}_2 | \vecnot{w}_1 \right\rangle & \cdots
-& \left\langle \vecnot{w}_n | \vecnot{w}_1 \right\rangle \\
-\left\langle \vecnot{w}_1 | \vecnot{w}_2 \right\rangle
-& \left\langle \vecnot{w}_2 | \vecnot{w}_2 \right\rangle & \cdots
-& \left\langle \vecnot{w}_n | \vecnot{w}_2 \right\rangle \\
+\inner{ \vecnot{w}_1 }{ \vecnot{w}_1 }
+& \inner{ \vecnot{w}_2 }{ \vecnot{w}_1 } & \cdots
+& \inner{ \vecnot{w}_n }{ \vecnot{w}_1 } \\
+\inner{ \vecnot{w}_1 }{ \vecnot{w}_2 }
+& \inner{ \vecnot{w}_2 }{ \vecnot{w}_2 } & \cdots
+& \inner{ \vecnot{w}_n }{ \vecnot{w}_2 } \\
 \vdots & \vdots & \ddots & \vdots \\
-\left\langle \vecnot{w}_1 | \vecnot{w}_n \right\rangle
-& \left\langle \vecnot{w}_2 | \vecnot{w}_n \right\rangle & \cdots
-& \left\langle \vecnot{w}_n | \vecnot{w}_n \right\rangle
+\inner{ \vecnot{w}_1 }{ \vecnot{w}_n }
+& \inner{ \vecnot{w}_2 }{ \vecnot{w}_n } & \cdots
+& \inner{ \vecnot{w}_n }{ \vecnot{w}_n }
 \end{array} \right] \vspace{-1mm}
 \end{equation*}
-Since $g_{ij} = \smash{\left\langle \vecnot{w}_j | \vecnot{w}_i \right\rangle}$, we see $G$ is Hermitian symmetric (i.e. $G^H = G$).
+Since $g_{ij} = \smash{\inner{ \vecnot{w}_j }{ \vecnot{w}_i }}$, we see $G$ is Hermitian symmetric (i.e. $G^H = G$).
 \end{definition}
 
 \vspace{-1mm}
@@ -256,8 +256,8 @@ Also, the best approximation of $\vecnot{v}$ by vectors in $W$ is found by solvi
 
 \visible<2->{%
 For the induced norm, any solution must satisfy the normal equations
-\[ \left\langle \vecnot{v} - \hat{\vecnot{v}} | \vecnot{w}_j \right\rangle
-= \left\langle \vecnot{v} - A \vecnot{s} | \vecnot{w}_j \right\rangle
+\[ \inner{ \vecnot{v} - \hat{\vecnot{v}} }{ \vecnot{w}_j }
+= \inner{ \vecnot{v} - A \vecnot{s} }{ \vecnot{w}_j }
 = 0, \quad j \in [n]. \]
 }
 
@@ -298,11 +298,11 @@ It defines an orthogonal projection onto the range of $A$ (i.e., the subspace sp
 For the standard Euclidean norm $\| \vecnot{v} \|_E = \sqrt{\vecnot{v}^H \vecnot{v}}$ and any invertible $B$, consider the weighted least-squares problem
 \[ \min_{\hat{\vecnot{v}}\in W} \| B(\vecnot{v} - \hat{ \vecnot{v}}) \|_E = \min_\vecnot{s} \| B( \vecnot{v} - A \vecnot{s}) \|_E \]
 But, $\| B \vecnot{v} \|_E$ equals the induced norm $\| \vecnot{v} \|$ for the weighted inner product
-\[ \left\langle \vecnot{u} | \vecnot{v} \right\rangle  \triangleq \vecnot{v}^H B^H B \vecnot{u}. \]
+\[ \inner{ \vecnot{u} }{ \vecnot{v} }  \triangleq \vecnot{v}^H B^H B \vecnot{u}. \]
 
 For the weighted inner product, the normal equations look the same
-\[ \left\langle \vecnot{v} - \hat{\vecnot{v}} | \vecnot{w}_j \right\rangle
-= \left\langle \vecnot{v} - A \vecnot{s} | \vecnot{w}_j \right\rangle
+\[ \inner{ \vecnot{v} - \hat{\vecnot{v}} }{ \vecnot{w}_j }
+= \inner{ \vecnot{v} - A \vecnot{s} }{ \vecnot{w}_j }
 = 0, \quad j \in [n]. \]
 but they solve a different problem and they reduce to
 \begin{equation*}
@@ -323,9 +323,9 @@ The squared norm of the minimum error is given implicitly by
 \begin{equation*}
 \left\| \vecnot{v} \right\|^2
 = \left\| \hat{\vecnot{v}} + \vecnot{e} \right\|^2
-= \left\langle \hat{\vecnot{v}} + \vecnot{e} | \hat{\vecnot{v}} + \vecnot{e} \right\rangle
-= \left\langle \hat{\vecnot{v}} | \hat{\vecnot{v}} \right\rangle
-+ \left\langle \vecnot{e} | \vecnot{e} \right\rangle
+= \inner{ \hat{\vecnot{v}} + \vecnot{e} }{ \hat{\vecnot{v}} + \vecnot{e} }
+= \inner{ \hat{\vecnot{v}} }{ \hat{\vecnot{v}} }
++ \inner{ \vecnot{e} }{ \vecnot{e} }
 = \left\| \hat{\vecnot{v}} \right\|^2 + \left\| \vecnot{e} \right\|^2 .
 \end{equation*}
 For the weighted problem, let $H=B^H B$ and write
@@ -354,7 +354,7 @@ Linear minimum mean-squared error (LMMSE) estimation finds $s_1, \ldots, s_n$ su
 minimizes the mean squared-error $\Expect[|Y-\hat{Y}|^2]$.
 Using the inner product
 \begin{equation*}
-\left\langle X | Y \right\rangle = \Expect \left[ X \overline{Y} \right],
+\inner{ X }{ Y } = \Expect \left[ X \overline{Y} \right],
 \end{equation*}
 the normal equations for the LMMSE estimate $\hat{Y}$ are $G \vecnot{s} = \vecnot{t}$, where
 \begin{equation*}
@@ -396,33 +396,33 @@ Let $V$ be a Hilbert space and $\vecnot{w}_1 ,\vecnot{w}_2 , \ldots, \vecnot{w}_
 For any $\vecnot{v} \in V$, the best approximation of $\vecnot{v}$ in $W$ can be found by solving
 \begin{equation} \label{eqn:DualNormalEquations}
 \left[ \begin{array}{cccc}
-\left\langle \vecnot{w}_1 | \vecnot{w}_1 \right\rangle
-& \left\langle \vecnot{w}_2 | \vecnot{w}_1 \right\rangle & \cdots
-& \left\langle \vecnot{w}_n | \vecnot{w}_1 \right\rangle \\
-\left\langle \vecnot{w}_1 | \vecnot{w}_2 \right\rangle
-& \left\langle \vecnot{w}_2 | \vecnot{w}_2 \right\rangle & \cdots
-& \left\langle \vecnot{w}_n | \vecnot{w}_2 \right\rangle \\
+\inner{ \vecnot{w}_1 }{ \vecnot{w}_1 }
+& \inner{ \vecnot{w}_2 }{ \vecnot{w}_1 } & \cdots
+& \inner{ \vecnot{w}_n }{ \vecnot{w}_1 } \\
+\inner{ \vecnot{w}_1 }{ \vecnot{w}_2 }
+& \inner{ \vecnot{w}_2 }{ \vecnot{w}_2 } & \cdots
+& \inner{ \vecnot{w}_n }{ \vecnot{w}_2 } \\
 \vdots & \vdots & \ddots & \vdots \\
-\left\langle \vecnot{w}_1 | \vecnot{w}_n \right\rangle
-& \left\langle \vecnot{w}_2 | \vecnot{w}_n \right\rangle & \cdots
-& \left\langle \vecnot{w}_n | \vecnot{w}_n \right\rangle
+\inner{ \vecnot{w}_1 }{ \vecnot{w}_n }
+& \inner{ \vecnot{w}_2 }{ \vecnot{w}_n } & \cdots
+& \inner{ \vecnot{w}_n }{ \vecnot{w}_n }
 \end{array} \right]
 \left[ \begin{array}{c}
 s_1 \\ s_2 \\ \vdots \\ s_n \end{array} \right]
 = \left[ \begin{array}{c}
-\left\langle \vecnot{v} | \vecnot{w}_1 \right\rangle \\
-\left\langle \vecnot{v} | \vecnot{w}_2 \right\rangle \\ \vdots \\
-\left\langle \vecnot{v} | \vecnot{w}_n \right\rangle \end{array} \right] .
+\inner{ \vecnot{v} }{ \vecnot{w}_1 } \\
+\inner{ \vecnot{v} }{ \vecnot{w}_2 } \\ \vdots \\
+\inner{ \vecnot{v} }{ \vecnot{w}_n } \end{array} \right] .
 \end{equation}
 
 \vspace{-1mm}
 
 \begin{theorem}
 Let $V$ be a Hilbert space and $\vecnot{w}_1 ,\vecnot{w}_2 , \ldots, \vecnot{w}_n$ be a basis for $W\subseteq V$.
-The \textcolor{blue}{dual approximation} problem is to find the minimum-norm vector $\vecnot{w}\in V$ satisfying $\left\langle \vecnot{w} | \vecnot{w}_i \right\rangle = c_i$ for $i=1,\ldots,n$.
+The \textcolor{blue}{dual approximation} problem is to find the minimum-norm vector $\vecnot{w}\in V$ satisfying $\inner{ \vecnot{w} }{ \vecnot{w}_i } = c_i$ for $i=1,\ldots,n$.
 Then, the solution $\vecnot{w}$ satisfies \vspace{-3mm}
 \[ \vecnot{w} = \sum_{i=1}^n s_i \vecnot{w}_i \in W, \vspace{-2.75mm} \]
-where $s_1,s_2,\ldots,s_n$ can be found by solving \eqref{eqn:DualNormalEquations} with $\left\langle \vecnot{v} | \vecnot{w}_i \right\rangle = c_i$.
+where $s_1,s_2,\ldots,s_n$ can be found by solving \eqref{eqn:DualNormalEquations} with $\inner{ \vecnot{v} }{ \vecnot{w}_i } = c_i$.
 \end{theorem}
 
 \end{frame}
@@ -484,301 +484,3 @@ Thus, the solution $\hat{\vecnot{s}}$ can be obtained in closed form and is give
 \end{document}
 
 
-\begin{frame}{6.5: The Four Fundamental Subspaces}
-
-Consider a linear transform mapping $\RealNumbers^n \to \RealNumbers^m$ represented by $A\in \RealNumbers^{m\times n}$
-
-\begin{itemize}
-\setlength\itemsep{1mm}
-
-\item<1-> The four fundamental subspaces are: $\mathcal{R}(A)$, $\mathcal{N}(A)$, $\mathcal{R}(A^T)$, $\mathcal{N}(A^T)$
-
-\item<1-> Recall $A^T \in \RealNumbers^{n\times m}$ maps $\RealNumbers^m \to \RealNumbers^n$ and \textcolor{blue}{$\mathcal{R}(A^T)$ is the row space of $A$}
-
-\vspace{3mm}
-
-\item<2-> Notice that $\vecnot{x} \in \RealNumbers^n$ is in the \textcolor{blue}{null space of $A$} \emph{if and only if} \vspace{-1mm}
-\[ A \vecnot{x} = \begin{bmatrix} -- \text{row 1} -- \\ -- \text{row 2} -- \\ \vdots \\ -- \text{row m} -- \end{bmatrix} \vecnot{x} = \begin{bmatrix} 0 \\ 0 \\ \vdots \\ 0 \end{bmatrix} \]
-\emph{if and only if} \textcolor{blue}{all rows orthogonal to $\vecnot{x}$} under standard inner product
-
-\vspace{3mm}
-
-\item<3-> Thus, the \textcolor{blue}{null space of $A$} is \textcolor{red}{orthogonal} to the \textcolor{blue}{column space of $A^T$} 
-
-\item<4-> Symmetry: \textcolor{blue}{null space of $A^T$} is \textcolor{red}{orthogonal} to the \textcolor{blue}{column space of $A$} 
-
-\vspace{2mm}
-
-\item<5-> In our notation, this means that $\mathcal{N}(A) \bot \mathcal{R}(A^T)$ and $\mathcal{N}(A^T) \bot \mathcal{R}(A)$
-
-\end{itemize}
-\end{frame}
-
-\begin{frame}{6.5: The Four Fundamental Subspaces: Linear Equations}
-
-\hspace*{-1mm}
-\includegraphics[width=108mm]{strang_fig1.png}
-
-\vspace{-3mm}
-$r \triangleq \dim(\mathcal{R}(A))$ implies \textcolor{blue}{$\dim ( \mathcal{N}(A)) = n\!-\!r$} and \textcolor{blue}{$\dim ( \mathcal{N}(A^T)) = m\!-\!r$}
-
-\let\thefootnote\relax\footnotetext{\hspace*{-4mm} {\tiny Figure from ``The Fundamental Theorem of Linear Algebra'' by Gilbert Strang, The American Mathematical Monthly, Nov. 1993 }}
-
-\end{frame}
-
-\begin{frame}{6.5: The Four Fundamental Subspaces: Least Squares}
-
-\hspace*{-4mm}
-\includegraphics[width=114mm]{strang_fig2}
-
-Observe $A^T A \colon \RealNumbers^n \to \RealNumbers^n$ is invertible if non-singular (i.e., if $n=r$)
-
-\let\thefootnote\relax\footnotetext{\hspace*{-4mm} {\tiny Figure from ``The Fundamental Theorem of Linear Algebra'' by Gilbert Strang, The American Mathematical Monthly, Nov. 1993 }}
-
-\end{frame}
-
-\begin{frame}{Interlude: Alternative for Linear Systems}
-
-A ``Theorem of the Alternative'' asserts that exactly one of two logical statements is true. The following is a famous example.
-
-\begin{theorem}
-For a matrix $A \in \mathbb{R}^{m\times n}$ and a vector $\vecnot{b}\in \mathbb{R}^m$, exactly one of the following statements is true:
-\begin{itemize}
-\item There exists an $\vecnot{x}\in \mathbb{R}^n$ such that $A\vecnot{x} = \vecnot{b}$
-\item There exists a $\vecnot{y} \in \mathbb{R}^m$ such that $A^T \vecnot{y} = \vecnot{0}$ and $\vecnot{y}^T \vecnot{b} \neq 0$.
-\end{itemize} 
-\end{theorem}
-
-\begin{proof}<2->
-\begin{itemize}
-\item In the first case, $\vecnot{b} \in \mathcal{R}(A)$ and the four fundamental subspaces imply that $\vecnot{y}^T \vecnot{b} = 0$ (i.e., $\vecnot{y} \perp \vecnot{b}$) if $A^T \vecnot{y} = \vecnot{0}$ (i.e., $\vecnot{y}\in \mathcal{N}(A^T)$).
-\item In the second case, $\vecnot{y} \in \mathcal{N}(A^T)$ implies $\vecnot{y} \perp \mathcal{R}(A)$.
-So, $\vecnot{y}^T \vecnot{b} \neq 0$ implies $\vecnot{b} \notin \mathcal{R}(A)$. \qedhere
-\end{itemize}
-\end{proof}
-
-%\visible<3->{Choosing $m=n$, one can also add ``for all $\vecnot{b}\in W$'' to the first statement and ``there exists $\vecnot{b}\in W$'' to the second statement.}
-
-\end{frame}
-
-
-\begin{frame}{8: Eigenvalue Decomposition}
-
-\begin{definition}<1->
-Let $V$ be a vector space over $F$ and let $T\colon V \to V$ be a linear operator.
-An \textcolor{blue}{eigenvalue} of $T$ is a scalar $\lambda \in F$ such that there exists a non-zero vector $\vecnot{v} \in V$ with $T \vecnot{v} = \lambda \vecnot{v}$.
-Any vector $\vecnot{v}$ such that $T \vecnot{v} = \lambda \vecnot{v}$ is called an \textcolor{blue}{eigenvector} of $T$ associated with the eigenvalue value $\lambda$.
-\end{definition}
-
-\begin{definition}<2->
-The square matrix $B$ is \textcolor{blue}{diagonalizable} if there is an invertible matrix $S$ (whose columns are eigenvectors) such that $S^{-1} B S = \Lambda$ is diagonal.
-\end{definition}
-
-%\begin{lemma}
-%Let $A$ be a Hermitian matrix (i.e., $A^H = A$).
-%Then, all eigenvalues of $A$ are real and eigenvectors with different eigenvalues are orthogonal.
-%\end{lemma}
-
-%\begin{proof}
-%First, we notice that $A = A^H$ implies $\vecnot{v}^H A \vecnot{v}$ is real because \vspace{-1mm}
-%\[ \overline{s} = \left( \vecnot{v}^H A \vecnot{v} \right)^H = \vecnot{v}^H A^H \vecnot{v} = \vecnot{v}^H A \vecnot{v} = s. \vspace{-1mm} \]
-%If $A \vecnot{v} = \lambda_1 \vecnot{v}$, left multiplication by $\vecnot{v}^H$ shows $\vecnot{v}^H A \vecnot{v} = \lambda_1 \vecnot{v}^H \vecnot{v} = \lambda_1 \| \vecnot{v} \|$.
-%Thus, $\lambda_1$ is real.
-%Next, assume that $A \vecnot{w} = \lambda_2 \vecnot{w}$ and $\lambda_2 \neq \lambda_1$ so that \vspace{-1mm}
-%\[ \lambda_1 \lambda_2 \vecnot{w}^H \vecnot{v} = \vecnot{w}^H A^H A \vecnot{v} = \vecnot{w} A^2 \vecnot{v} = \lambda_1^2 \vecnot{w}^H \vecnot{v}. \]
-%We also assume, without loss of generality, that $\lambda_1 \neq 0$.
-%Therefore, if $\lambda_2 \neq \lambda_1$, then $\vecnot{w}^H \vecnot{v} = 0$ and the eigenvectors are orthogonal.
-%\end{proof}
-
-\begin{theorem}<3->
-Any Hermitian matrix $B$ can be diagonalized by a unitary matrix $U$ so that $U^H B U = \Lambda$ is a real-valued diagonal matrix.
-\end{theorem}
-
-\vspace{2mm}
-
-\visible<4->{
-Matrices $A^H A$ and $A A^H$ are always Hermitian and positive semidefinite}
-
-\end{frame}
-
-
-\begin{frame}{9: Singular Value Decomposition (SVD)}
-
-Idea is to find orthonormal bases for $\RealNumbers^n$ and $\RealNumbers^m$ in which $A$ is diagonal
-
-\begin{itemize}
-\setlength\itemsep{3mm}
-
-\item<1-> Let $\vecnot{v}_1, \ldots, \vecnot{v}_r$ be orthonormal eigenvectors of $A^H A$ with positive eigenvalues $\sigma_1^2,\ldots,\sigma_r^2$.
-Then, \[\|A \vecnot{v}_i\| ^2 = \vecnot{v}_i^H (A^H A \vecnot{v}_i) =  \vecnot{v}_i^H (\sigma_i^2\vecnot{v}_i) = \sigma_i^2 \]
-
-\item<2-> This implies that $\|A \vecnot{v}_i\| = \sigma_i$.
-So $\vecnot{u}_i = \frac{1}{\sigma_i} A\vecnot{v}_i$ has $\| \vecnot{u}_i \| \!=\! 1$ and \vspace{-1mm}
-\begin{align*}
-A A^H \vecnot{u}_i &= \frac{1}{\sigma_i} A A^H A \vecnot{v}_i = \frac{1}{\sigma_i} \sigma_i^2 A \vecnot{v}_i = \vecnot{u}_i
-\\
-\vecnot{u}_j^H \vecnot{u}_i &= \left(\frac{1}{\sigma_j} A \vecnot{v}_j \right)^H \left(\frac{1}{\sigma_i} A \vecnot{v}_i \right) =\frac{1}{\sigma_i \sigma_j} \vecnot{v}_j^H (A^H A) \vecnot{v}_i = \delta_{i,j}  \vspace{-1mm}
-\end{align*}
-
-
-\item<3-> For $U_1 = [\vecnot{u}_1,\ldots,\vecnot{u}_r]
-$ and $V_1 = [\vecnot{v}_1,\ldots,\vecnot{v}_r]$, this gives $A V_1 = U_1 \Sigma_1$ where $\Sigma_1$ is a $r \times r$ diagonal matrix with diagonal entries $\sigma_1,\ldots,\sigma_r$
-
-\item<4-> Solving for $A$ gives the \textcolor{blue}{compact SVD} \vspace{-1mm} \[ \color{blue} A = U_1 \Sigma V_1^H, \vspace{-1mm}\]
-where the \textcolor{blue}{columns of $U_1, V_1$ are orthonormal bases for $\mathcal{R}(A), \mathcal{R}(A^H)$}
-
-\end{itemize}
-
-
-\end{frame}
-
-\begin{frame}{9: The Four Fundamental Subspaces: Orthogonal Bases}
-
-\vspace{-1mm}
-\hspace*{-1mm}
-\includegraphics[width=102mm]{strang_fig3}
-
-\vspace{-3mm}
-For $V = [\vecnot{v}_1,\ldots,\vecnot{v}_n]
-$ and $U = [\vecnot{u}_1,\ldots,\vecnot{u}_m]$, $A V = U \Sigma$ where $\Sigma \in \RealNumbers^{m \times n}$ has diagonal $\sigma_1,\ldots,\sigma_r$.  Thus, $A = U \Sigma V^H$.
-
-
-\let\thefootnote\relax\footnotetext{\hspace*{-4mm} {\tiny Figure from ``The Fundamental Theorem of Linear Algebra'' by Gilbert Strang, The American Mathematical Monthly, Nov. 1993 }}
-
-\end{frame}
-
-\begin{frame}{6.5: The Four Fundamental Subspaces: Pseudo-Inverse}
-
-\hspace*{-4mm}
-\includegraphics[width=114mm]{strang_fig4}
-
-\let\thefootnote\relax\footnotetext{\hspace*{-4mm} {\tiny Figure from ``The Fundamental Theorem of Linear Algebra'' by Gilbert Strang, The American Mathematical Monthly, Nov. 1993 }}
-
-\end{frame}
-
-\begin{frame}{9.2: Singular Value Decomposition Example}
-
-\visible<1->{%
-Consider the matrix 
-\[ A = \left[ \begin{array}{cc}
-1 & 1 \\
-5 & -1 \\
--1 & 5 
-\end{array} \right]. \]}
-
-\visible<2->{%
-An eigenvalue decomposition of $A^H A$ is given by
-\[ \!\!\!\!\!\!\!\!\!\!\!\! A^H A \!=\! \left[ \begin{array}{cc}
-27 & -9 \\
--9 & 27
-\end{array} \right]
-\!=\! V \Lambda V^H
-\!=\! \left( \frac{1}{\sqrt{2}}\left[ \begin{array}{cc}
--1 & 1 \\
-1 & 1 
-\end{array} \right] \right)
-\left[ \begin{array}{cc}
-36 & 0 \\
-0 & 18
-\end{array} \right]
-\left( \frac{1}{\sqrt{2}} \left[ \begin{array}{cc}
--1 & 1 \\
-1 & 1 
-\end{array} \right] \right)
-\]}
-
-\visible<3->{%
-This implies $\Sigma_1 = \Lambda^{1/2}$ and $V_1 = V$.
-Thus, we find $U_1 = A V_1 \Sigma_1^{-1}$ with
-\[ U_1 = \left[ \begin{array}{cc}
-1 & 1 \\
-5 & -1 \\
--1 & 5 
-\end{array} \right]
-\left( \frac{1}{\sqrt{2}} \left[ \begin{array}{cc}
--1 & 1 \\
-1 & 1
-\end{array} \right] \right)
-\left[ \begin{array}{cc}
-\frac{1}{\sqrt{36}} & 0 \\
-0 & \frac{1}{\sqrt{18}}
-\end{array} \right]
-= \left[ \begin{array}{cc}
-0 & \frac{1}{3} \\
-\frac{1}{\sqrt{2}} & \frac{2}{3}  \\
--\frac{1}{\sqrt{2}} & \frac{2}{3} 
-\end{array} \right] \]}
-
-\vspace{-1mm}
-
-\visible<4->{%
-Putting this all together, we have the compressed SVD
-\[ A = U_1 \Sigma_1 V_1^H 
-= \left[ \begin{array}{cc}
-0 & \frac{1}{3} \\
-\frac{1}{\sqrt{2}} & \frac{2}{3}  \\
--\frac{1}{\sqrt{2}} & \frac{2}{3} 
-\end{array} \right]
-\left[ \begin{array}{cc}
-\sqrt{36} & 0 \\
-0 & \sqrt{18}
-\end{array} \right]
-\left( \frac{1}{\sqrt{2}} \left[ \begin{array}{cc}
--1 & 1 \\
-1 & 1 
-\end{array} \right] \right). \]}
-
-\end{frame}
-
-\begin{frame}{Moore--Penrose Pseudo Inverse}
-
-For a matrix $A \in \ComplexNumbers^{m\times n}$, the matrix $A^+ \in \ComplexNumbers^{n\times m}$ is the pseudo-inverse iff:
-\begin{enumerate}
-\item $A A^+ A = A$ (implies $A A^+$ is idempotent)
-\item $A^+ A A^+ = A^+$ (implies $A^+ A$ is idempotent)
-\item $(A A^+)^H = A A^+$ (implies $A A^+$ is Hermitian)
-\item $(A^+ A)^H = A^+ A$ (implies $A^+ A$ is Hermitian)
-\end{enumerate}
-
-\begin{lemma}
-From the compact SVD $A = U_1 \Sigma_1 V_1^H$, one finds that $A^+ = V_1
-\Sigma_1^{-1} U_1^H$.
-\end{lemma}
-
-\begin{proof}<2->
-\begin{enumerate}
-\item $A A^+ A = U_1 {\color{blue}(\Sigma_1 V_1^H  V_1
-\Sigma_1^{-1} U_1^H  U_1)} \Sigma_1 V_1^H = A $
-\item $A^+ A A^+ =  V_1
-{\color{blue}(\Sigma_1^{-1} U_1^H U_1 \Sigma_1 V_1^H  V_1)}
-\Sigma_1^{-1} U_1^H  = A^+$
-\item $(A A^+)^H = \big(U_1 {\color{blue}(\Sigma_1 V_1^H V_1
-\Sigma_1^{-1})} U_1^H \big)^H  = {U_1 U_1^H} = A A^+$
-\item $(A^+ A)^H = \big(V_1 {\color{blue}(\Sigma_1^{-1} U_1^H U_1
-\Sigma_1)} V_1^H \big)^H  = {V_1 V_1^H} = A^+ A$ \qedhere
-\end{enumerate}
-\end{proof}
-
-\visible<2->{Thus, $A A^+$ and $A^+ A$ are projection matrices onto $\mathcal{R}(A)$ and $\mathcal{R}(A^H)$.}
-
-\end{frame}
-
-\backupbegin
-
-%\begin{frame}
-%\frametitle{Backup Slides}
-%\begin{itemize}
-%\item Slide numbers not included in denominator!
-%\end{itemize}
-%\end{frame}
-
-%\begin{frame}[allowframebreaks]
-%\frametitle{References}
-%\bibliographystyle{alpha}
-%\footnotesize
-%\bibliography{IEEEabrv,WCLabrv,WCLbib,WCLnewbib}
-%\end{frame}
-
-\backupend
-
-\end{document}
