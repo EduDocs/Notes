@@ -28,6 +28,7 @@
   }}
   
 \usepackage{tikz,pgf,pgfplots}
+\usepackage{tikz-3dplot}
 \usepackage{algorithm,algorithmic}
 \usepgflibrary{shapes}
 \usetikzlibrary{%
@@ -125,10 +126,15 @@
 
 \renewcommand{\footnotesep}{-2pt}
 
+\usetikzlibrary{3d}\makeatletter \tikzoption{canvas is xy plane at z}[]{%
+   \def\tikz@plane@origin{\pgfpointxyz{0}{0}{#1}}%
+   \def\tikz@plane@x{\pgfpointxyz{1}{0}{#1}}%
+   \def\tikz@plane@y{\pgfpointxyz{0}{1}{#1}}%
+   \tikz@canvas@is@plane } \makeatother
 
 \begin{document}
 
-\title{ECE 586: Vector Space Methods \\ Lecture 22: Projection onto Convex Sets}
+\title{ECE 586: Vector Space Methods \\ Lecture 22: Alternating Projection}
 \author{Henry D. Pfister \\ Duke University}
 \date{}
 %\date{August 20th, 2020}
@@ -158,254 +164,172 @@
 
 
 
-\begin{frame}{5.3: Convexity}
 
-\vspace{-1mm}
-
-\begin{minipage}{0.75\textwidth}
-Convexity is a useful property defined for sets, spaces, and functionals that simplifies analysis and optimization.
-
-\begin{definition}[convex set]
-Let $V$ be a vector space over $\RealNumbers$.
-The subset $A \subseteq V$ is called a \textcolor{blue}{convex set} if, for all $\vecnot{a}_1,\vecnot{a}_2 \in A$ and $\lambda\in(0,1)$, we have $\lambda \vecnot{a}_1 + (1-\lambda) \vecnot{a}_2 \in A$.
-It is \textcolor{blue}{strictly convex} if, for all $\vecnot{a}_1,\vecnot{a}_2 \in \Closure{A}$ and $\lambda\in(0,1)$,
-%we have
-$\lambda \vecnot{a}_1 + (1-\lambda) \vecnot{a}_2 \in \Interior{A}$.
-\end{definition}
-\end{minipage}
-\hfill
-\begin{minipage}{0.22\textwidth}
-\begin{tikzpicture}[rotate=270,scale=0.75]
-    \draw[rotate=-45,fill=gray!30] (-1.8,-1.8) ellipse (30pt and 45pt);
-    \draw[thick] (-3.2,-0.6) -- (-2.0,0.4);
-    \fill (-3.2,-0.6) circle[radius=1.5pt];
-    \fill (-2.0,0.4) circle[radius=1.5pt];
-    
-    \draw[fill=gray!30] (0,0) to [out=140,in=90] (-1,-1)
-    to [out=-90,in=240] (0.8,-0.6)
-    to [out=60,in=-60] (1.2,1.2)
-    to [out=120,in=90] (0.3,0.7)
-    to [out=-90,in=20] (0.3,0)
-    to [out=200,in=-40] (0,0);
-    \draw[thick] (-0.5,-0.5) -- (0.7,0.7);
-    \fill (-0.5,-0.5) circle[radius=1.5pt];
-    \fill (0.7,0.7) circle[radius=1.5pt];
-\end{tikzpicture}
-\end{minipage}
-
-\begin{definition}[convex function]<2->
-\begin{minipage}{0.70\textwidth}
-Let $V$ be a vector space, $A \subseteq V$ be a convex set, and $f \colon V \rightarrow \RealNumbers$ be a functional.
-The functional $f$ is called \textcolor{blue}{convex} on $A$ if, for all $\vecnot{a}_1,\vecnot{a}_2 \in A$ and $\lambda\in(0,1)$, \vspace{-1mm}
-\[ f( \lambda \vecnot{a}_1 + (1-\lambda) \vecnot{a}_2 ) \leq \lambda f( \vecnot{a}_1 ) + (1-\lambda) f ( \vecnot{a}_2 ). \vspace{-1mm} \]
-It is \textcolor{blue}{strictly convex} if equality implies $\vecnot{a}_1 = \vecnot{a}_2$.
-\end{minipage}\hspace{-3mm}
-\begin{minipage}{0.29\textwidth}
-\begin{tikzpicture}
-  \begin{axis}[axis x line=center,
-    axis y line=center, small,width=1.8in,height=1.5in,xmin=-1,xmax=2,ymin=-1.5,ymax=1]
-     \addplot[mark=*, thick, black] coordinates {(0,-1)(1.2,-0.8)};
-     \addplot[red,smooth,thick,-] coordinates  {
-    (-0.8,0.7) (0.2,-1.3) (1.2,-0.8) (2.2,0.7)};
-  \end{axis}
-\end{tikzpicture}
-\end{minipage}
-\end{definition}
-
-\end{frame}
-
-\begin{frame}{5.3: Convex Optimization}
-
-\begin{definition}
-Let $(X,\|\cdot\|)$ be a normed vector space.
-Then, a real functional $f \colon X \rightarrow \RealNumbers$ achieves a \textcolor{blue}{local minimum value} at $\vecnot{x}_0 \in X$ if: \\ \hspace{3mm}  there is an $\epsilon > 0$ such that, for all $\vecnot{x}\in X$ satisfying $\| \vecnot{x} - \vecnot{x}_0 \| < \epsilon$, we have  $f(\vecnot{x}) \geq f(\vecnot{x}_0)$.
-If this lower bound holds for all $x\in X$, then the local minimum is also a \textcolor{blue}{global minimum value}.
-\end{definition}
-
-\vspace{2mm}
-
-\begin{theorem}<2->
-Let $(X,\|\cdot\|)$ be a normed vector space, $A \subseteq X$ be a convex set, and $f \colon X \rightarrow \RealNumbers$ be a convex functional on $A$.
-Then, \textcolor{blue}{any local minimum value of $f$ on $A$ is a global minimum value on $A$}.
-If the functional is strictly convex on $A$ and achieves a local minimum value on $A$, then there is a unique point $\vecnot{x}_0 \in A$ that achieves the global minimum value on $A$.
-\end{theorem}
-
-\vspace{1mm}
-
-\visible<2->{Prove theorem in live session and discuss convexity of induced norm}
-
-\end{frame}
-
-\begin{frame}{5.3: Convex Optimization and Derivatives}
-
-\begin{minipage}{0.55\textwidth}
-Let $(X,\|\cdot\|)$ be a normed vector space and $f \colon X \rightarrow \RealNumbers$ be a convex functional on a convex set $A \subseteq X$.
-\end{minipage}
-\begin{minipage}{0.44\textwidth}\hspace{3mm}
-\begin{tikzpicture}
-  \begin{axis}[axis x line=center,
-    axis y line=center, small,width=2in,height=1.25in,xmin=-1,xmax=2,ymin=-1.6,ymax=1]
-     \addplot[mark=none, thick, black] coordinates {(-0.8,-1.6)(2.2,-0.98)};
-     \addplot[red,smooth,thick,-] coordinates  {
-    (-0.8,0.7) (0.2,-1.3) (1.2,-0.8) (2.2,0.7)};
-    \addplot[mark=*] coordinates {(0.42,-1.35)};
-  \end{axis}
-\end{tikzpicture}
-\end{minipage}
-
-\begin{theorem}
-If $f$ has a directional derivative  at $\vecnot{x}_0 \in A$ in the direction $\vecnot{x}-\vecnot{x}_0$, then \vspace{-1mm}
-\[ f(\vecnot{x}) \geq f(\vecnot{x}_0) + f'(\vecnot{x}_0)(\vecnot{x}-\vecnot{x}_0) \vspace{-1mm} \]
-for all $\vecnot{x}\in A$.
-If $f$ is strictly convex then the inequality is strict for $\vecnot{x}\neq \vecnot{x}_0$.
-\end{theorem}
-
-\vspace{1mm}
-
-\begin{corollary}<2->
-If $f$ has directional derivatives in all directions at $\vecnot{x}_0 \in A$ and they all equal zero, then \vspace{-2mm}
-\[ f(\vecnot{x}_0) = \min_{\vecnot{x}\in A} f(\vecnot{x}). \vspace{-2mm} \]
-If $f$ is strictly convex, then $\vecnot{x}_0$ is the unique minimizer over $A$.
-\end{corollary}
-
-\visible<2->{Prove corollary in live session}
-
-\end{frame}
-
-
-\begin{frame}{4.6: Projection onto Convex Sets}
-
-\begin{minipage}{0.44\textwidth}
-\begin{tikzpicture}[yscale=0.9,bullet/.style={circle,fill,inner sep=1.00pt,node contents={}}]
- \draw[-latex] (0,0) node[bullet,label=left:{$P_A(\vecnot{v}) \!=\! \vecnot{u}^*$},alias=PC]  -- (15:2.2) node[midway,sloped,above=0.25mm] {$\vecnot{v}\!-\! P_A(\vecnot{v})$}
-    node[bullet,label=above right:$\vecnot{v}$,alias=v];
-\draw[-latex] (PC) -- ++ (-115:2.65) node[pos=0.57,above=0.25mm,sloped]{$\vecnot{u}\!-\! P_A(\vecnot{v})$}     node[bullet,label=below left:$\vecnot{u}$];
-\fill[black,fill,opacity=0.1] (PC) to[out=105,in=0] ++ (-0.75,1) to[out=180,in=105] ++ (-1.5,-3)
- node[above right,opacity=1]{$A$} to[out=-75,in=180] ++ (1.25,-1) to[out=0,in=-75] node[sloped, inner xsep=10mm, inner ysep=0, opacity=1, fill=black, pos=0.999] {} cycle;
-\end{tikzpicture}
-\end{minipage}
-\begin{minipage}{0.55\textwidth}
-\hspace{3mm} The projection of vectors onto subspaces can be generalized to convex sets\\[-2mm]
-
-For Hilbert space $V$ and closed convex set $A\subseteq V$, let $P_{A}:V\rightarrow A$ denote the orthogonal projection of $\vecnot{v}\in V$ onto $A$: \vspace{-1mm}
-\[
-P_A (\vecnot{v}) \triangleq \arg \min_{\vecnot u\in A}\left\Vert \vecnot u-\vecnot v\right\Vert \vspace{-1mm} 
-\]
-\end{minipage}
-
-\begin{theorem}<1->
-The orthogonal projection of $\vecnot v\in V$ onto a closed convex set $A\subseteq V$ exists and is unique.
-\end{theorem}
-
-\begin{theorem}<2->
-For any $\vecnot{v} \notin A$, we have $\vecnot{u}^* = P_A (\vecnot{v})$ iff $\langle \vecnot{v}-\vecnot{u}^* \,|\, \vecnot{u}-\vecnot{u}^* \rangle \leq 0$ for all $\vecnot{u}\in A$.
-\end{theorem}
-
-\visible<3->{Prove theorem in live session for compact $A$ via convex optimization}
-\end{frame}
-
-\begin{frame} \frametitle{Next Steps}
-
-\begin{itemize}
-\setlength\itemsep{5mm}
-\item To continue studying after this video -- \vspace{2mm}
-
-\begin{itemize}
- \setlength\itemsep{3mm}
- 
- \item Try the required reading:  Course Notes EF 4.6, 5.2 - 5.3
-
- \item Also, look at the problems in Assignments 8 and 9
-\end{itemize}
-\end{itemize}
-
-\note{
-	\vspace{8mm}
-	\begin{enumerate}
-		\setlength\itemsep{3mm}
-		\color{red}
-		\item Here are some options to continue learning this material. (read) \\ [2mm]  That's it for today.  So, I'll see you next time.
-	\end{enumerate}
-}
-
-\end{frame}
-
-\end{document}
 
 
 \begin{frame}{Alternating Projection for Subspaces}
 
-Suppose $P_{U}$ and $P_{W}$ are orthogonal projections onto closed subspaces $U$ and $W$ of a Hilbert space $V$. For an arbitrary $\vecnot v_{0}\in V$, what is the behavior of the alternating projection 
+Let \textcolor{blue}{$P_{U}$ and $P_{W}$ be orthogonal projections onto closed subspaces $U$ and $W$} of a Hilbert space $V$. For an arbitrary $\vecnot v_{0}\in V$, what is the behavior of the vector sequence $\vecnot{v}_n$ generated by \textcolor{blue}{alternating projection}:
 \begin{equation*}
 \vecnot v_{n+1}=\begin{cases}
 P_{U}\vecnot v_{n} & \text{if }n\text{ is even}\\
 P_{W}\vecnot v_{n} & \text{if }n\text{ is odd}.
 \end{cases}
 \end{equation*}
-Since $P_{U}\vecnot v=\vecnot v$ (resp. $P_{W}\vecnot v=\vecnot v$) if and only if $\vecnot v\in U$ (resp. $\vecnot v\in W$), it is easy to see that any vector $\vecnot v\in U\cap W$ is a fixed point of this recursion. Letting $P_{U\cap W}$ denote the orthogonal projection onto $U\cap W$, one might guess that $\vecnot v_{n}$ converges to $P_{U\cap W}\vecnot v_{0}$ and indeed it does.
+Since $P_{U}\vecnot v=\vecnot v$ (resp. $P_{W}\vecnot v=\vecnot v$) if and only if $\vecnot v\in U$ (resp. $\vecnot v\in W$), it is easy to see that any vector $\vecnot v\in U\cap W$ is a fixed point of this recursion.
 
-\vspace{5mm}
+\vspace{3mm}
+
+Letting $P_{U\cap W}$ denote the orthogonal projection onto $U\cap W$, one can show that the \textcolor{blue}{sequence $\vecnot v_{n}$ converges to $P_{U\cap W}\vecnot v_{0}$}.
+
+\vspace{2mm}
 
 \begin{theorem}
 The sequence $\vecnot v_{n}$ converges to $P_{U\cap W}\vecnot v_{0}$, its projection onto $U\cap W$.
 \end{theorem}
 
+\begin{tikzpicture}[overlay,remember picture,shift={(11.8,0.5)},scale=0.6]
+  \begin{axis}[font=\large,width=2.5in,height=2.5in,axis lines=middle,xmin=-3.5,xmax=3.5,ymin=-3.5,ymax=3.5,grid=both]
+	\addplot[red,mark=none,domain=-3.5:3.5,very thick] {x};
+	\addplot[blue,mark=none,domain=-3.5:3.5,very thick] {x/2};
+	\node[label={180:{\textcolor{red}{$U$}}}] at (axis cs:2.95,2.95) {};
+	\node[label={270:{\textcolor{blue}{$W$}}}] at (axis cs:2.75,1.375) {};
+	\end{axis}
+\end{tikzpicture}
+
 \end{frame}
 
 % Farkas Lemma Alternative?
 
-\begin{frame}{Projection onto Affine Spaces}
+\begin{frame}{4.6: Projection onto Hyperplane Subspaces}
+
+\vspace{-5mm}
 
 The orthogonal projection of $\vecnot v\in V$ onto a 1D subspace $W=\text{span}(\vecnot w)$ is \vspace{-0.5mm}
 \[
 P_{W}(\vecnot v)=\frac{\left\langle \vecnot v|\vecnot w\right\rangle }{\left\Vert \vecnot w\right\Vert ^{2}}\vecnot w.
 \]
-\vspace{-0.5mm}
-\hrule
-\vspace{1.75mm}
+%\vspace{-0.5mm}
+%\hrule
+%\vspace{1.75mm}
+
+\vspace{2mm}
 
 \visible<2->{%
-A subspace $U \subset V$ with \textcolor{blue}{co-dimension one} (i.e., $\dim(U)=\dim(V)-1$) is a subset of $V$ that \textcolor{blue}{satisfies a single linear equality} of the form $\left\langle \vecnot v|\vecnot w\right\rangle =0$. Thus, $U=W^\perp$ for a 1D subspace $W$ and \vspace{-0.5mm}
+A subset of $V$ that \textcolor{blue}{satisfies a single linear equality} of the form $\left\langle \vecnot v|\vecnot w\right\rangle =0$
+is a subspace $U \subset V$ with \textcolor{blue}{co-dimension one} (i.e., $\dim(U)=\dim(V)-1$).
+Also, $U=W^\perp$ for a 1D subspace $W$ and $U$ is a \textcolor{blue}{hyperplane} containing $\vecnot{0}$. Thus, \vspace{0.5mm}
 \[
 P_{U}(\vecnot v)=P_{W^{\perp}}(\vecnot v)=\vecnot v-\frac{\left\langle \vecnot v|\vecnot w\right\rangle }{\left\Vert \vecnot w\right\Vert ^{2}}\vecnot w.
 \]
-\vspace{-1mm}
-\hrule
-\vspace{1.75mm}
+%\vspace{-1mm}
+%\hrule
+%\vspace{1.75mm}
 }
 
-\visible<3->{%
-From the linear equality $\langle\vecnot v|\vecnot w\rangle=c$, one gets \textcolor{blue}{a shifted subspace $U+\vecnot v_{0}$} ($\vecnot v_{0}$ is any vector in $V$ satisfying $\langle\vecnot v_{0}|\vecnot w\rangle=c$) with co-dimension one: \vspace{-0.5mm}
+\tdplotsetmaincoords{105}{-30}
+\begin{tikzpicture}[tdplot_main_coords,overlay,remember picture,shift={(10.9,-5.5)},scale=0.65]
+%\begin{tikzpicture}[,font=\sffamily]
+ \tdplotsetrotatedcoords{00}{30}{0}
+ \begin{scope}[tdplot_rotated_coords]
+  \begin{scope}[canvas is xy plane at z=0]
+   \fill[red,fill opacity=0.3] (-2,-3) rectangle (2,3); 
+   \draw[red,thick] (-2,0) -- (2,0);
+   \draw[red,thick] (0,-3) -- (0,3);
+   \path (-150:2) coordinate (H) (-1.5,0) coordinate(X);
+   \pgflowlevelsynccm
+   %\draw[very thick,-stealth,gray] (0,0) -- (-30:1.5);
+  \end{scope} 
+  \draw[stealth-] (H) -- ++ (-1,0,0.2) node[pos=1.6]{\textcolor{red}{$U=W^\perp$}};
+  %\draw[stealth-] (X) -- ++ (0,1,0.2) node[pos=1.3]{$X$};
+  \draw[very thick,-stealth] (0,0,0) coordinate (O) -- (0,0,3) node[right]{$\vecnot{w}$};
+ \end{scope}
+ \pgfmathsetmacro{\Radius}{1.5}
+ \draw[-stealth]  (O)-- (2.5*\Radius,0,0) node[pos=1.15] {$x_1$};
+ \draw[-stealth] (O) -- (0,3.5*\Radius,0) node[pos=1.15] {$x_2$};
+ \draw[-stealth] (O) -- (0,0,2.5*\Radius) node[pos=1.05] {$x_3$};
+\end{tikzpicture} 
+
+\end{frame}
+
+
+\begin{frame}{4.6: Projection onto Hyperplanes}
+
+\vspace{-5mm}
+
+\visible<1->{%
+The linear equation $\langle\vecnot v|\vecnot w\rangle=c$ defines \textcolor{blue}{a shifted subspace $U+\vecnot v_{0}$} (for any $\vecnot v_{0} \in V$ satisfying $\langle\vecnot v_{0}|\vecnot w\rangle=c$) with co-dimension one (i.e., a \textcolor{blue}{hyperplane}): \vspace{-0.5mm}
 \[
 \langle\vecnot v|\vecnot w\rangle=\langle\vecnot u+\vecnot v_{0}|\vecnot w\rangle=\langle\vecnot u|\vecnot w\rangle+\langle\vecnot v_{0}|\vecnot w\rangle=0+c=c.
 \]
-\vspace{-2.5mm}
-\hrule
-\vspace{1.75mm}
+%\vspace{-2.5mm}
+%\hrule
+%\vspace{1.75mm}
 }
 
-\visible<4->{%
+\vspace{-2mm}
+
+\visible<2->{%
 One can project onto $U+\vecnot{v_{0}}$ by shifting, projecting, and shifting back: \vspace{-0.75mm}
-\begin{equation*}
-P_{U+\vecnot v_{0}}(\vecnot v)=\left((\vecnot v-\vecnot v_{0})-\frac{\left\langle \vecnot v-\vecnot v_{0}|\vecnot w\right\rangle }{\left\Vert \vecnot w\right\Vert ^{2}}\vecnot w\right)+\vecnot v_{0}=\vecnot v-\frac{\left\langle \vecnot v|\vecnot w\right\rangle -c}{\left\Vert \vecnot w\right\Vert ^{2}}\vecnot w,
-\end{equation*}
+\begin{align*}
+P_{U+\vecnot v_{0}}(\vecnot v)&=\left((\vecnot v-\vecnot v_{0})-\frac{\left\langle \vecnot v-\vecnot v_{0}|\vecnot w\right\rangle }{\left\Vert \vecnot w\right\Vert ^{2}}\vecnot w\right)+\vecnot v_{0}\\
+&=\vecnot v-\frac{\left\langle \vecnot v|\vecnot w\right\rangle -c}{\left\Vert \vecnot w\right\Vert ^{2}}\vecnot w,
+\end{align*}
 }
+\vspace{-10mm}
+
+\tdplotsetmaincoords{105}{-30}
+\begin{tikzpicture}[tdplot_main_coords,overlay,remember picture,shift={(12.1,-3.5)},scale=0.65]
+%\begin{tikzpicture}[,font=\sffamily]
+ \tdplotsetrotatedcoords{00}{30}{0}
+ \begin{scope}[tdplot_rotated_coords]
+  \begin{scope}[canvas is xy plane at z=1.4]
+   \fill[red,fill opacity=0.3] (-2,-3) rectangle (2,3); 
+   \draw[red,thick] (-2,0) -- (2,0);
+   \draw[red,thick] (0,-3) -- (0,3);
+   \path (-150:2) coordinate (H) (-1.5,0) coordinate(X);
+   \pgflowlevelsynccm
+   %\draw[very thick,-stealth,gray] (0,0) -- (-30:1.5);
+  \end{scope} 
+  \draw[stealth-] (H) -- ++ (-1,0,0.2) node[pos=1.6]{\textcolor{red}{$U\!+\!\frac{1}{2}\vecnot{w}$}};
+  %\draw[stealth-] (X) -- ++ (0,1,0.2) node[pos=1.3]{$X$};
+  \draw[very thick,-stealth] (0,0,0) coordinate (O) -- (0,0,3) node[right]{$\vecnot{w}$};
+ \end{scope}
+ \pgfmathsetmacro{\Radius}{1.5}
+ \draw[-stealth]  (O)-- (2.5*\Radius,0,0) node[pos=1.15] {$x_1$};
+ \draw[-stealth] (O) -- (0,3.5*\Radius,0) node[pos=1.15] {$x_2$};
+ \draw[-stealth] (O) -- (0,0,2.5*\Radius) node[pos=1.05] {$x_3$};
+\end{tikzpicture} 
 
 \end{frame}
 
-\begin{frame}{Solving Linear Equations via Alternating Projection}
 
-Let $A\in\mathbb{R}^{m\times n}$ and $\vecnot b\in\mathbb{R}^{m}$ be define a set of $m$ linear equations in $n$ variables with at least one solution. The goal is to use alternating projection find a solution $\vecnot x^{*}$ such that $A\vecnot x^{*}=\vecnot b$. If $\vecnot b=\vecnot 0$, then the set of solutions is a subspace equal to the null space of $A$,
+\begin{frame}{4.6: Solving Linear Equations via Alternating Projection}
+
+\vspace{-10mm}
+
+Let $A\in\mathbb{R}^{m\times n}$ and $\vecnot b\in\mathbb{R}^{m}$ be define a set of $m$ linear equations in $n$ variables \textcolor{blue}{with at least one solution}.
+
+\vspace{3mm}
+
+The goal is to use alternating projection find a solution $\vecnot x^{*}$ such that $A\vecnot x^{*}=\vecnot b$. If $\vecnot b=\vecnot 0$, then the set of solutions is a subspace equal to the null space of $A$,
 \[
 \mathcal{N}(A)=\left\{ \vecnot x\in\mathbb{R}^{n}\,|\,A\vecnot x=\vecnot 0\right\} =\bigcap_{i=1}^{m}\left\{ \vecnot x\in\mathbb{R}^{n}\,|\,{\textstyle \sum_{j=0}^{n}}a_{i,j}x_{j}=b_i = 0\right\} .
 \]
-The result follows because $\mathcal{N}(A)$ is the intersection of $m$ subspaces of dimension $n-1$. But, what if $\vecnot b\neq\vecnot 0$?
+The result follows because $\mathcal{N}(A)$ is the intersection of $m$ hyperplane subspaces (i.e., subspaces of dimension $n-1$). But, what if $\vecnot b\neq\vecnot 0$?
+
+\begin{tikzpicture}[overlay,remember picture,shift={(11.0,-1.75)},scale=0.75]
+  \begin{axis}[font=\large,width=2.5in,height=2.5in,axis lines=middle,xmin=-3.5,xmax=3.5,ymin=-3.5,ymax=3.5,grid=both]
+	\addplot[red,mark=none,domain=-3.5:3.5,very thick] {x/2};
+	\addplot[blue,mark=none,domain=-3.5:3.5,very thick] {1.5*x};
+	\end{axis}
+\end{tikzpicture}
 
 \end{frame}
 
-\begin{frame}{Kaczmarz's Algorithm}
+\begin{frame}{4.6: Kaczmarz's Algorithm}
 
-The idea is to iteratively project a candidate vector onto linear equality constraints. For a matrix $A\in\mathbb{R}^{m\times n}$ and vector $\vecnot b\in\mathbb{R}^{m}$, the algorithm starts from $\vecnot{v}_0 = \vecnot{0}$ and defines $\vecnot v_{i+1}$ to be the projection of $\vecnot v_{i}$ onto the set \vspace{-0.5mm}
+The idea is to \textcolor{blue}{iteratively project a candidate vector onto linear equality constraints}. For a matrix $A\in\mathbb{R}^{m\times n}$ and vector $\vecnot b\in\mathbb{R}^{m}$, the algorithm starts from $\vecnot{v}_0 = \vecnot{0}$ and defines $\vecnot v_{i+1}$ to be the projection of $\vecnot v_{i}$ onto the set \vspace{-0.5mm}
 \[
 W_{i}=\left\{ \vecnot v\in\mathbb{R}^{n}\,\middle|\:\sum_{k=1}^{n}a_{\sigma(i),k}v_{k}=b_{\sigma(i)}\right\} ,
 \]
@@ -416,20 +340,20 @@ where $\sigma(i)=(i\bmod m)+1$.
 
 \vspace{3mm}
 
-Using the projection formula, this gives  \vspace{-0.5mm}
+Using the previously derived projection formula, this gives  \vspace{-0.5mm}
 \begin{equation*}
-\vecnot v_{i+1}=\vecnot v_{i}- s \frac{\langle\vecnot v_{i}|\vecnot a_{\sigma(i)}\rangle-b_{\sigma(i)}}{\text{\ensuremath{\|}}\vecnot a_{\sigma(i)}\|^{2}}\vecnot a_{\sigma(i)},
+\vecnot v_{i+1}= (1-s) \vecnot{v}_i + s \, P_{W_{\sigma(i)}} (\vecnot{v}_i) = \vecnot v_{i}- s \frac{\langle\vecnot v_{i}|\vecnot a_{\sigma(i)}\rangle-b_{\sigma(i)}}{\text{\ensuremath{\|}}\vecnot a_{\sigma(i)}\|^{2}}\vecnot a_{\sigma(i)},
 \end{equation*}
-where $s\in(0,1]$ is the step-size and $\vecnot a_{j}$ is the $j$-th row of the matrix $A$. 
+where \textcolor{blue}{$s\in(0,1]$ is the step-size} and $\vecnot a_{j}$ is the $j$-th row of the matrix $A$. 
 
 \vspace{5mm}
-Note: The true projection uses $s=1$ but $s<1$ may be better if $\vecnot{b} \notin \mathcal{R}(A)$. 
+Note: The true projection uses $s=1$ but $s<1$ may work better if $\vecnot{b} \notin \mathcal{R}(A)$. 
 \end{frame}
 
-\begin{frame}{Alternating Projection onto Convex Sets}
+\begin{frame}{4.6: Alternating Projection onto Convex Sets}
 
 Let $C_{1},C_{2},\ldots,C_{m}$ be closed convex subsets in a Hilbert space $V$.
-The alternating projection algorithm finds a point in their intersection. Starting from any $\vecnot v_{0}\in V$, the alternating projection algorithm computes 
+The \textcolor{blue}{alternating projection algorithm finds a point in their intersection}. Starting from any $\vecnot v_{0}\in V$, the alternating projection algorithm computes 
 \begin{align*}
 \vecnot v_{i+1} & = (1-s) \vecnot{v}_i + s\, P_{C_{\sigma(i)}}(\vecnot v_{i}),
 \end{align*}
@@ -446,9 +370,14 @@ Ideally, alternating projection would give $\vecnot{v}_i \to P_C (\vecnot{v}_0)$
 For finite-dimensional $V$, there is some $\vecnot v\in\cap_{i=1}^{m}C_{i}$ such that $\vecnot{v}_i \to \vecnot{v}$.
 \end{theorem}
 
+\vspace{-1.1in}
+\hspace*{4.6in}
+\includegraphics[width=1.25in]{figures/ch4_pocs}
+%\vspace{0.5in}
+
 \end{frame}
 
-\begin{frame}{Orthogonal Projection onto Half Spaces}
+\begin{frame}{4.6: Orthogonal Projection onto Half Spaces}
 
 \vspace{2mm}
 
@@ -458,6 +387,8 @@ For $\vecnot{w} \in V$, let $H = \{ \vecnot{v} \in V \,|\, \langle\vecnot v|\vec
 \item For $\vecnot v\in H$, the projection satisfies $P_{H}(\vecnot v)=\vecnot v$ 
 \item For $\vecnot v\notin H$, the projection satisfies $P_{H}(\vecnot v)=P_{U+\vecnot v_{0}}(\vecnot v)$ because \\ the closest point in $H$ achieves the inequality with equality
 \end{itemize}
+
+\vspace{2mm}
 
 It follows that \vspace{-2.5mm}
 \begin{equation*}
@@ -481,7 +412,43 @@ x_{1}+2x_{3} & \geq2\\
 }
 \vspace{-3mm}
 
+\vspace{-1.1in}
+\hspace*{3.7in}
+\includegraphics[width=2.2in]{figures/ch4_halfspace}
+%\vspace{0.5in}
+
 \end{frame}
+
+\begin{frame} \frametitle{Next Steps}
+
+\begin{itemize}
+\setlength\itemsep{5mm}
+\item To continue studying after this video -- \vspace{2mm}
+
+\begin{itemize}
+ \setlength\itemsep{3mm}
+ 
+ \item Try the required reading:  Course Notes EF 4.6
+ 
+ \item Look at the Mini-Project Handout on Alternating Projection
+
+ \item Also, look at the related problems in Assignments 8 and 9
+\end{itemize}
+\end{itemize}
+
+\note{
+	\vspace{8mm}
+	\begin{enumerate}
+		\setlength\itemsep{3mm}
+		\color{red}
+		\item Here are some options to continue learning this material. (read) \\ [2mm]  That's it for today.  So, I'll see you next time.
+	\end{enumerate}
+}
+
+\end{frame}
+
+\end{document}
+
 
 \begin{frame}{Unconstrained Linear Optimization}
 

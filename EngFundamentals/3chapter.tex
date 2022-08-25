@@ -917,30 +917,34 @@ The orthogonality principle tells us that $s_1,s_2,\ldots,s_n$ must satisfy
 
 The same problem can also be posed in a different manner.
 \begin{theorem}
+\label{thm:dual_approx}
 Let $V$ be a Hilbert space and $\vecnot{w}_1 ,\vecnot{w}_2 , \ldots, \vecnot{w}_n$ be a set of linearly independent vectors in $V$.
 The \defn{inner-product space}{dual approximation} problem is to find the vector $\vecnot{w}\in V$ of minimum-norm that satisfies $\left\langle \vecnot{w} | \vecnot{w}_i \right\rangle = c_i$ for $i=1,\ldots,n$.
-This vector is given by
+This vector is defined uniquely by
 \[ \vecnot{w} = \sum_{i=1}^n s_i \vecnot{w}_i, \]
-where the coefficients  $s_1,s_2,\ldots,s_n$ can be found by solving \eqref{eqn:DualNormalEquations} with $\left\langle \vecnot{v} | \vecnot{w}_i \right\rangle = c_i$.
+where $s_1,s_2,\ldots,s_n$ can be found by solving \eqref{eqn:DualNormalEquations} with the assumption $\left\langle \vecnot{v} | \vecnot{w}_i \right\rangle = c_i$.
 \end{theorem}
 \begin{proof}
 Let $W = \Span(\vecnot{w}_1 ,\vecnot{w}_2 , \ldots, \vecnot{w}_n)$ and notice that the subset
 \[ A = \{ \vecnot{u} \in V | \left\langle \vecnot{u} | \vecnot{w}_i \right\rangle = c_i\; \forall\; i=1,\ldots,n \} \]
-is simply the orthogonal complement $W^{\bot}$ translated by any vector $\vecnot{v}\in A$.
-Therefore, the vector achieving $\min_{\vecnot{u}\in A} \| \vecnot{u} \|$ is the error vector in the best approximation of some $\vecnot{v}\in A$ by vectors in $W^{\bot}$.
-Using the unique decomposition $\vecnot{v} = \hat{\vecnot{v}} + \vecnot{w}$ implied by the orthogonal decomposition $V = W^{\bot} \oplus W$, one finds that the error vector $\vecnot{w}$ must lie in $W$.
-Moreover, the normal equations, given by modifying \eqref{eqn:DualNormalEquations}, show that the error vector $\vecnot{w}$ is the unique vector in $W$ that satisfies $\left\langle \vecnot{w} | \vecnot{w}_i \right\rangle = c_i$ for $i=1,\ldots,n$.
+is simply the orthogonal complement $W^{\bot}$ translated by some fixed vector $\vecnot{v}\in A$.
+This is because, for all $\vecnot{x} \in W^{\perp}$, we have $\left\langle \vecnot{x} | \vecnot{w}_i \right\rangle = 0$ and $\left\langle \vecnot{v} - \vecnot{x} | \vecnot{w}_i \right\rangle = c_i$.
+Thus, there is a one-to-one correspondence between $\vecnot{u} \in A$ and $\vecnot{x}\in W^\perp$ given by $\vecnot{u} = \vecnot{v}-\vecnot{x}$ and this implies
+\[ \min_{\vecnot{u}\in A} \| \vecnot{u} \|  = \min_{\vecnot{x}\in W^{\perp}} \| \vecnot{v} - \vecnot{x} \|. \]
+Since the optimizer $\vecnot{x}^*$ of the RHS expression is the orthogonal projection of $\vecnot{v}$ onto $W^\perp$, the resulting error vector $\vecnot{v}-\vecnot{x}^*$ must be contained in $(W^\perp)^\perp = W$.
+With this knowledge, we let $\vecnot{w} = \vecnot{v}-\vecnot{x}^*$ and use~\eqref{eqn:DualNormalEquations} to solve for $s_1,\ldots,s_n$ because we know the RHS satisfies $\left\langle \vecnot{v} | \vecnot{w}_i \right\rangle = c_i$.
+Since $\vecnot{w}_1,\ldots,\vecnot{w}_n$ are linearly independent, the Gramian is full rank and this linear system has a unique solution.
 \end{proof}
 
 \subsection{Underdetermined Linear Systems}
 
-Let $A \in \ComplexNumbers^{m\times n}$ with $m<n$ be the matrix representation of an underdetermined system of linear equations and $\vecnot{v} \in \ComplexNumbers^m$ be any column vector.
+Let $A \in \ComplexNumbers^{m\times n}$ with $m<n$ be the matrix representation of an underdetermined system of linearly independent equations and $\vecnot{v} \in \ComplexNumbers^m$ be any column vector.
 Then, the dual approximation theorem can be applied to solve the problem
 \[ \min_{\vecnot{s} : A\vecnot{s} = \vecnot{v}} \| \vecnot{s} \| . \]
-To see this as a dual approximation, we can rewrite the constraint as $(A^H)^H \vecnot{s} = \vecnot{v}$.
-Then, the theorem concludes that the minimum norm solution lies in $\mathcal{R}(A^H)$ (i.e., the column space of $A^H$).
+To see this as a dual approximation, we can rewrite the constraint as $(A^H)^H \vecnot{s} = \vecnot{v}$ so that the columns of $A^H$ define the vectors $\vecnot{w}_1,\ldots,\vecnot{w}_n$ in Theorem~\ref{thm:dual_approx}.
+Then, the theorem concludes that the minimum-norm solution lies in $\mathcal{R}(A^H)$ (i.e., the column space of $A^H$).
 Using this, one can define $\hat{\vecnot{s}} = A^H \vecnot{t}$ and see that $A (A^H \vecnot{t}) = \vecnot{v}$.
-If the rows of $A$ are linearly independent, then the columns of $A^H$ are linearly independent and $(A A^H)^{-1}$ exists.
+If the rows of $A$ are linearly independent, then the columns of $A^H$ are linearly independent and $(A A^H)^{-1}$ exists because the Gramian $A A^H$ is positive definite.
 In this case, the solution $\hat{\vecnot{s}}$ can be obtained in closed form and is given by
 \[ \hat{\vecnot{s}} = A^H \left( A A^H \right)^{-1} \vecnot{v}. \]
 

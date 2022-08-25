@@ -1087,24 +1087,24 @@ More general spaces require a higher level of mathematical sophistication, beyon
 
 \begin{definition} \label{definition:InnerProduct}
 Let $F$ be the field of real numbers or the field of complex numbers, and assume $V$ is a vector space over $F$.
-An \defn{inner-product space}{inner product} on $V$ is a function which assigns to each ordered pair of vectors $\vecnot{v}, \vecnot{w} \in V$ a scalar $\left\langle \vecnot{v} | \vecnot{w} \right\rangle \in F$ in such a way that for all $\vecnot{u}, \vecnot{v}, \vecnot{w} \in V$ and any scalar $s \in F$
+An \defn{inner-product space}{inner product} on $V$ is a function which assigns to each ordered pair of vectors $\vecnot{v}, \vecnot{w} \in V$ a scalar $\inner{ \vecnot{v} }{ \vecnot{w} } \in F$ in such a way that for all $\vecnot{u}, \vecnot{v}, \vecnot{w} \in V$ and any scalar $s \in F$
 \begin{enumerate}
-\item $\left\langle \vecnot{u} + \vecnot{v} | \vecnot{w} \right\rangle
-= \left\langle \vecnot{u} | \vecnot{w} \right\rangle
-+ \left\langle \vecnot{v} | \vecnot{w} \right\rangle$
-\item $\left\langle s \vecnot{v} | \vecnot{w} \right\rangle
-= s \left\langle \vecnot{v} | \vecnot{w} \right\rangle$
-\item $\left\langle \vecnot{v} | \vecnot{w} \right\rangle
-= \overline{ \left\langle \vecnot{w} | \vecnot{v} \right\rangle }$, where the overbar denotes complex conjugation;
-\item $\left\langle \vecnot{v} | \vecnot{v} \right\rangle \geq 0$ with equality iff $\vecnot{v} = \vecnot{0}$.
+\item $\inner{ \vecnot{u} + \vecnot{v} }{ \vecnot{w} }
+= \inner{ \vecnot{u} }{ \vecnot{w} }
++ \inner{ \vecnot{v} }{ \vecnot{w} }$
+\item $\inner{ s \vecnot{v} }{ \vecnot{w} }
+= s \inner{ \vecnot{v} }{ \vecnot{w} }$
+\item $\inner{ \vecnot{v} }{ \vecnot{w} }
+= \overline{ \inner{ \vecnot{w} }{ \vecnot{v} } }$, where the overbar denotes complex conjugation;
+\item $\inner{ \vecnot{v} }{ \vecnot{v} } \geq 0$ with equality iff $\vecnot{v} = \vecnot{0}$.
 \end{enumerate}
 \end{definition}
 
 We emphasize that the conditions of Definition~\ref{definition:InnerProduct} imply
 \begin{equation*}
-\left\langle \vecnot{u} | s \vecnot{v} + \vecnot{w} \right\rangle
-= \overline{s} \left\langle \vecnot{u} | \vecnot{v} \right\rangle
-+ \left\langle \vecnot{u} | \vecnot{w} \right\rangle .
+\inner{ \vecnot{u} }{ s \vecnot{v} + \vecnot{w} }
+= \overline{s} \inner{ \vecnot{u} }{ \vecnot{v} }
++ \inner{ \vecnot{u} }{ \vecnot{w} } .
 \end{equation*}
 Thus, an inner product is linear in the first argument and conjugate linear in the second argument.
 
@@ -1116,25 +1116,25 @@ A real or complex vector space equipped with an inner product is called an \text
 \begin{example} \label{example:StandardInnerProduct}
 Consider the inner product on $F^n$ defined by
 \begin{equation*}
-\left\langle \vecnot{v} | \vecnot{w} \right\rangle
-= \left\langle (v_1, \ldots, v_n) | (w_1, \ldots, w_n) \right\rangle
+\inner{ \vecnot{v} }{ \vecnot{w} }
+= \inner{ (v_1, \ldots, v_n) }{ (w_1, \ldots, w_n) }
 = \sum_{j=1}^n v_j \overline{w}_j.
 \end{equation*}
 This inner product is called the \defn{inner-product space}{standard inner product}.
 When $F = \RealNumbers$, the standard inner product can also be written as
 \begin{equation*}
-\left\langle \vecnot{v} | \vecnot{w} \right\rangle
+\inner{ \vecnot{v} }{ \vecnot{w} }
 = \sum_{j=1}^n v_j w_j.
 \end{equation*}
 In this context it is often called the dot product, denoted by $\vecnot{v} \cdot \vecnot{w}$.
-In either case, it can also be written in terms of the Hermitian transpose as $ \left\langle \vecnot{v} | \vecnot{w} \right\rangle = \vecnot{w}^H \vecnot{v} $.
+In either case, it can also be written in terms of the Hermitian transpose as $ \inner{ \vecnot{v} }{ \vecnot{w} } = \vecnot{w}^H \vecnot{v} $.
 
 \end{example}
 
 \begin{problem} \label{problem:InnerProductForm}
 For $\vecnot{v} = (v_1, v_2)$ and $\vecnot{w} = (w_1, w_2)$  in $\RealNumbers^2$, show that
 \begin{equation*}
-\left\langle \vecnot{v} | \vecnot{w} \right\rangle
+\inner{ \vecnot{v} }{ \vecnot{w} }
 = v_1 w_1 - v_2 w_1 - v_1 w_2 + 4 v_2 w_2
 \end{equation*}
 is an inner product.
@@ -1143,48 +1143,48 @@ is an inner product.
 For all $\vecnot{u}, \vecnot{v}, \vecnot{w} \in V$ and all scalars $s$
 \begin{equation*}
 \begin{split}
-\left\langle \vecnot{u} + \vecnot{v} | \vecnot{w} \right\rangle
+\inner{ \vecnot{u} + \vecnot{v} }{ \vecnot{w} }
 &= (u_1 + v_1) w_1 - (u_2 + v_2) w_1 - (u_1 + v_1) w_2 + 4 (u_2 + v_2) w_2 \\
 &= u_1 w_1 - u_2 w_1 - u_1 w_2 + 4 u_2 w_2
 + v_1 w_1 - v_2 w_1 - v_1 w_2 + 4 v_2 w_2 \\
-&= \left\langle \vecnot{u} | \vecnot{w} \right\rangle
-+ \left\langle \vecnot{v} | \vecnot{w} \right\rangle.
+&= \inner{ \vecnot{u} }{ \vecnot{w} }
++ \inner{ \vecnot{v} }{ \vecnot{w} }.
 \end{split}
 \end{equation*}
 Also, we have
 \begin{equation*}
-\left\langle s \vecnot{v} | \vecnot{w} \right\rangle
+\inner{ s \vecnot{v} }{ \vecnot{w} }
 = s v_1 w_1 - s v_2 w_1 - s v_1 w_2 + 4 s v_2 w_2
-= s \left\langle \vecnot{v} | \vecnot{w} \right\rangle.
+= s \inner{ \vecnot{v} }{ \vecnot{w} }.
 \end{equation*}
-Since $V = \RealNumbers^2$, we have $\left\langle \vecnot{v} | \vecnot{w} \right\rangle = \overline{ \left\langle \vecnot{w} | \vecnot{v} \right\rangle }$.
+Since $V = \RealNumbers^2$, we have $\inner{ \vecnot{v} }{ \vecnot{w} } = \overline{ \inner{ \vecnot{w} }{ \vecnot{v} } }$.
 Furthermore,
 \begin{equation*}
-\left\langle \vecnot{v} | \vecnot{v} \right\rangle
+\inner{ \vecnot{v} }{ \vecnot{v} }
 = v_1^2 - 2 v_1 v_2 + 4 v_2^2
 = ( v_1 - v_2 )^2 + 3 v_2^2
 \geq 0
 \quad \text{with equality iff } \vecnot{v} = \vecnot{0}.
 \end{equation*}
-That is, $\left\langle \vecnot{v} | \vecnot{v} \right\rangle$ is an inner product.
+That is, $\inner{ \vecnot{v} }{ \vecnot{v} }$ is an inner product.
 
 
 \begin{example}
 Let $V$ be the vector space of all continuous complex-valued functions on the unit interval $[0,1]$.
 Then,
 \begin{equation*}
-\left\langle f | g \right\rangle
+\inner{ f }{ g }
 = \int_0^1 f(t) \overline{g(t)} dt
 \end{equation*}
 is an inner product.
 \end{example}
 
 \begin{example}
-Let $V$ and $W$ be two vector spaces over $F$ and suppose that $\langle \cdot | \cdot \rangle_W$ is an inner product on $W$.
+Let $V$ and $W$ be two vector spaces over $F$ and suppose that $\tinner{ \cdot }{ \cdot }_W$ is an inner product on $W$.
 If $T$ is a non-singular linear transformation from $V$ into $W$, then the equation
 \begin{equation*}
-\left\langle \vecnot{v}_1, \vecnot{v}_2 \right\rangle_V
-= \left\langle T \vecnot{v}_1 | T \vecnot{v}_2 \right\rangle_W
+\inner{ \vecnot{v}_1 }{ \vecnot{v}_2 }_V
+= \inner{ T \vecnot{v}_1 }{ T \vecnot{v}_2 }_W
 \end{equation*}
 defines an inner product on $V$.
 \end{example}
@@ -1192,7 +1192,7 @@ defines an inner product on $V$.
 \begin{example}
 Let $V=F^{m\times n}$ be the space of $m\times n$ matrices over $F$ and define the inner product for matrices $A,B \in V$ to be
 \begin{equation*}
-\left\langle A | B \right\rangle \triangleq \Trace \left(B^H A \right) = \sum_{i=1}^n \sum_{j=1}^m \overline{b}_{j,i} a_{j,i}.
+\inner{ A }{ B } \triangleq \Trace \left(B^H A \right) = \sum_{i=1}^n \sum_{j=1}^m \overline{b}_{j,i} a_{j,i}.
 \end{equation*}
 This also equals $\Trace \left(A B^H\right)$ and both are identical to writing the entries of the matrices as length-$mn$ vectors and then applying the standard inner product.
 \end{example}
@@ -1205,7 +1205,7 @@ Let $V$ be a finite-dimensional space, and suppose that
 is an ordered basis for $V$.
 Any inner product on $V$ is determined by the values
 \begin{equation*}
-g_{ij} = \left\langle \vecnot{w}_j | \vecnot{w}_i \right\rangle
+g_{ij} = \inner{ \vecnot{w}_j }{ \vecnot{w}_i }
 \end{equation*}
 that it takes on pairs of vectors in $\mathcal{B}$.
 \end{theorem}
@@ -1213,11 +1213,11 @@ that it takes on pairs of vectors in $\mathcal{B}$.
 If $\vecnot{u} = \sum_{j} s_j \vecnot{w}_j$ and $\vecnot{v} = \sum_{i} t_i \vecnot{w}_i$, then
 \begin{equation*}
 \begin{split}
-\left\langle \vecnot{u} | \vecnot{v} \right\rangle
-&= \left\langle \sum_{j} s_j \vecnot{w}_j \Big| \vecnot{v} \right\rangle
-= \sum_{j} s_j \left\langle \vecnot{w}_j | \vecnot{v} \right\rangle \\
-&= \sum_{j} s_j \left\langle \vecnot{w}_j \Big| \sum_{i} t_i \vecnot{w}_i \right\rangle
-= \sum_{j} \sum_{i} s_j \overline{t}_i \left\langle \vecnot{w}_j | \vecnot{w}_i \right\rangle \\
+\inner{ \vecnot{u} }{ \vecnot{v} }
+&= \inner{ \sum_{j} s_j \vecnot{w}_j }{ \vecnot{v} }
+= \sum_{j} s_j \inner{ \vecnot{w}_j }{ \vecnot{v} } \\
+&= \sum_{j} s_j \inner{ \vecnot{w}_j }{ \sum_{i} t_i \vecnot{w}_i }
+= \sum_{j} \sum_{i} s_j \overline{t}_i \inner{ \vecnot{w}_j }{ \vecnot{w}_i } \\
 &= \sum_{j} \sum_{i} \overline{t}_i g_{ij} s_j
 = \left[ \vecnot{v} \right]_{\mathcal{B}}^H G \left[ \vecnot{u} \right]_{\mathcal{B}}
 \end{split}
@@ -1237,7 +1237,7 @@ A Hermitian matrix that satisfies this condition is called positive definite and
 Conversely if $G$ is an $n \times n$ Hermitian matrix over $F$ which satisfies~\eqref{equation:PositiveDefinite}, then $G$ is the matrix in the ordered basis $\mathcal{B}$ of an inner product on $V$.
 This inner product is given by
 \begin{equation*}
-\left\langle \vecnot{u} | \vecnot{v} \right\rangle_G
+\inner{ \vecnot{u} }{ \vecnot{v} }_G
 = \left[ \vecnot{v} \right]_{\mathcal{B}}^H G \left[ \vecnot{u} \right]_{\mathcal{B}}.
 \end{equation*}
 
@@ -1252,7 +1252,7 @@ Consider any set $W$ of real-valued random variables, defined on a common probab
 It turns out that $V = \Span (W)$ is a vector space over $\RealNumbers$.
 In fact, one can define the inner product
 \begin{equation*}
-\left\langle X | Y \right\rangle = \Expect \left[ XY \right] ,
+\inner{ X }{ Y } = \Expect \left[ XY \right] ,
 \end{equation*}
 for any $X,Y \in V$.
 Using the induced norm, this inner product provides the topology of mean-square convergence and two random variables $X,Y\in V$ are considered equal if $\| X-Y \|^2 = E \left[ |X-Y|^2 \right] = 0$ (or equivalently $\Pr (X \neq Y ) = 0$).
@@ -1262,7 +1262,7 @@ In terms of abstract mathematics, the introduction of an inner product allows on
 
 \begin{definition}
 Let $\vecnot{v}$ and $\vecnot{w}$ be vectors in an inner-product space $V$.
-Then $\vecnot{v}$ is \defn{inner-product space}{orthogonal} to $\vecnot{w}$ (denoted $\vecnot{v} \bot \vecnot{w}$) if $\left\langle \vecnot{v} | \vecnot{w} \right\rangle = 0$.
+Then $\vecnot{v}$ is \defn{inner-product space}{orthogonal} to $\vecnot{w}$ (denoted $\vecnot{v} \bot \vecnot{w}$) if $\inner{ \vecnot{v} }{ \vecnot{w} } = 0$.
 Since this relation is reflexive and $\vecnot{w}$ is also orthogonal to $\vecnot{v}$, we simply say that $\vecnot{v}$ and $\vecnot{w}$ are orthogonal.
 \end{definition}
 
@@ -1274,10 +1274,10 @@ A finite-dimensional real inner-product space is often referred to as a \defn{in
 A complex inner-product space is sometimes called a unitary space.
 
 \begin{definition}
-Let $V$ be an inner-product space with inner product $\langle \cdot | \cdot \rangle$.
+Let $V$ be an inner-product space with inner product $\tinner{ \cdot }{ \cdot }$.
 This inner product can be used to define a norm, called the \defn{inner-product space}{induced norm}, where
 \begin{equation*}
-\left\| \vecnot{v} \right\| = \left\langle \vecnot{v} | \vecnot{v} \right\rangle^{\frac{1}{2}}
+\left\| \vecnot{v} \right\| = \inner{ \vecnot{v} }{ \vecnot{v} }^{\frac{1}{2}}
 \end{equation*}
 for every $\vecnot{v} \in V$.
 \end{definition}
@@ -1302,34 +1302,34 @@ for every $\vecnot{v} \in V$.
 \end{figure}
 
 \begin{definition}
-Let $\vecnot{w},\vecnot{v}$ be vectors in an inner-product space $V$ with inner product $\langle \cdot | \cdot \rangle$.
+Let $\vecnot{w},\vecnot{v}$ be vectors in an inner-product space $V$ with inner product $\tinner{ \cdot }{ \cdot }$.
 As shown in Figure~\ref{fig:vector_projection}, the \defn{inner-product space}{projection} of $\vecnot{w}$ onto $\vecnot{v}$ is defined to be
 \begin{equation*}
-\vecnot{u} = \frac{\left\langle \vecnot{w} | \vecnot{v} \right\rangle}{\|\vecnot{v}\|^2} \vecnot{v}
+\vecnot{u} = \frac{\inner{ \vecnot{w} }{ \vecnot{v} }}{\|\vecnot{v}\|^2} \vecnot{v}
 \end{equation*}
 \end{definition}
 
 \begin{lemma} \label{lem:proj_loss}
 Let $\vecnot{u}$ be the projection of $\vecnot{w}$ onto $\vecnot{v}$.
-Then, $\langle \vecnot{w}-\vecnot{u} | \vecnot{u} \rangle = 0$ and
-\[ \|\vecnot{w}-\vecnot{u}\|^2 =  \|\vecnot{w}\|^2 - \| \vecnot{u} \|^2 = \|\vecnot{w}\|^2 - \frac{|\langle \vecnot{w} | \vecnot{v} \rangle|^2}{\|\vecnot{v}\|^2}. \]
+Then, $\tinner{ \vecnot{w}-\vecnot{u} }{ \vecnot{u} } = 0$ and
+\[ \|\vecnot{w}-\vecnot{u}\|^2 =  \|\vecnot{w}\|^2 - \| \vecnot{u} \|^2 = \|\vecnot{w}\|^2 - \frac{|\tinner{ \vecnot{w} }{ \vecnot{v} }|^2}{\|\vecnot{v}\|^2}. \]
 \end{lemma}
 \begin{proof}
 First, we observe that
-\[ \langle \vecnot{w} - \vecnot{u} | \vecnot{v} \rangle = \langle \vecnot{w} | \vecnot{v} \rangle - \langle \vecnot{u} | \vecnot{v} \rangle = \langle \vecnot{w} | \vecnot{v} \rangle - \frac{\left\langle \vecnot{w} | \vecnot{v} \right\rangle}{\|\vecnot{v}\|^2} \langle \vecnot{v} | \vecnot{v} \rangle = 0. \]
-Since $\vecnot{u} = s \vecnot{v}$ for some scalar $s$, we gather that $\langle \vecnot{w}-\vecnot{u} | \vecnot{u} \rangle = \langle \vecnot{w}-\vecnot{u} | s \vecnot{v} \rangle = \overline{s} \langle \vecnot{w}-\vecnot{u} | \vecnot{v} \rangle = 0$.
-Using $\langle \vecnot{w}-\vecnot{u} | \vecnot{u} \rangle = 0$, we can write
+\[ \tinner{ \vecnot{w} - \vecnot{u} }{ \vecnot{v} } = \tinner{ \vecnot{w} }{ \vecnot{v} } - \tinner{ \vecnot{u} }{ \vecnot{v} } = \tinner{ \vecnot{w} }{ \vecnot{v} } - \frac{\inner{ \vecnot{w} }{ \vecnot{v} }}{\|\vecnot{v}\|^2} \tinner{ \vecnot{v} }{ \vecnot{v} } = 0. \]
+Since $\vecnot{u} = s \vecnot{v}$ for some scalar $s$, we gather that $\tinner{ \vecnot{w}-\vecnot{u} }{ \vecnot{u} } = \tinner{ \vecnot{w}-\vecnot{u} }{ s \vecnot{v} } = \overline{s} \tinner{ \vecnot{w}-\vecnot{u} }{ \vecnot{v} } = 0$.
+Using $\tinner{ \vecnot{w}-\vecnot{u} }{ \vecnot{u} } = 0$, we can write
 \begin{align*}
 \|\vecnot{w}\|^2 &= \|(\vecnot{w}-\vecnot{u})+\vecnot{u}\|^2
-= \langle (\vecnot{w}-\vecnot{u})+\vecnot{u}|(\vecnot{w}-\vecnot{u})+\vecnot{u}\rangle \\
-&= \|\vecnot{w}-\vecnot{u}\|^2 + 2 \Real \langle \vecnot{w}-\vecnot{u} | \vecnot{u} \rangle + \|\vecnot{u}\|^2
+= \tinner{ (\vecnot{w}-\vecnot{u})+\vecnot{u}}{(\vecnot{w}-\vecnot{u})+\vecnot{u}} \\
+&= \|\vecnot{w}-\vecnot{u}\|^2 + 2 \Real \tinner{ \vecnot{w}-\vecnot{u} }{ \vecnot{u} } + \|\vecnot{u}\|^2
 = \|\vecnot{w}-\vecnot{u}\|^2 + \|\vecnot{u}\|^2.
 \end{align*}
 The proof is completed by noting that
 $\|\vecnot{u}\|^2
-= \frac{|\langle \vecnot{w} | \vecnot{v} \rangle|^2}{\|\vecnot{v}\|^4}
-\langle \vecnot{v} | \vecnot{v} \rangle
-= \frac{|\langle \vecnot{w} | \vecnot{v} \rangle|^2}{\|\vecnot{v}\|^2}$.
+= \frac{|\tinner{ \vecnot{w} }{ \vecnot{v} }|^2}{\|\vecnot{v}\|^4}
+\tinner{ \vecnot{v} }{ \vecnot{v} }
+= \frac{|\tinner{ \vecnot{w} }{ \vecnot{v} }|^2}{\|\vecnot{v}\|^2}$.
 \end{proof}
 
 \begin{theorem}
@@ -1337,39 +1337,38 @@ If $V$ is an inner-product space and $\| \cdot \|$ is its associated induced nor
 \begin{enumerate}
 \item $\left\| s \vecnot{v} \right\| = |s| \left\| \vecnot{v} \right\|$
 \item $\left\| \vecnot{v} \right\| > 0$ for $\vecnot{v} \neq \vecnot{0}$
-\item $\left| \left\langle \vecnot{v} | \vecnot{w} \right\rangle \right| \leq \left\| \vecnot{v} \right\| \left\| \vecnot{w} \right\|$ with equality iff $\vecnot{v} = \vecnot{0}$, $\vecnot{w}=\vecnot{0}$, or $\vecnot{v} = s \vecnot{w}$
+\item $\left| \inner{ \vecnot{v} }{ \vecnot{w} } \right| \leq \left\| \vecnot{v} \right\| \left\| \vecnot{w} \right\|$ with equality iff $\vecnot{v} = \vecnot{0}$, $\vecnot{w}=\vecnot{0}$, or $\vecnot{v} = s \vecnot{w}$
 \item $\left\| \vecnot{v} + \vecnot{w} \right\| \leq \left\| \vecnot{v} \right\| + \left\| \vecnot{w} \right\|$ with equality iff $\vecnot{v} = \vecnot{0}$, $\vecnot{w}=\vecnot{0}$, or $\vecnot{v} = s \vecnot{w}$.
 \end{enumerate}
 \end{theorem}
 \begin{proof}
 The first two properties follow immediately from the definitions involved.
-The third property, $\left| \left\langle \vecnot{v} | \vecnot{w} \right\rangle \right| \leq \left\| \vecnot{v} \right\| \left\| \vecnot{w} \right\|$, is called the \defn{inner-product space}{Cauchy-Schwarz inequality}.
-When $\vecnot{v} = \vecnot{0}$, then clearly $\left| \left\langle \vecnot{v} | \vecnot{w} \right\rangle \right| = \left\| \vecnot{v} \right\| \left\| \vecnot{w} \right\| =0$.
+The third property, $\left| \inner{ \vecnot{v} }{ \vecnot{w} } \right| \leq \left\| \vecnot{v} \right\| \left\| \vecnot{w} \right\|$, is called the \defn{inner-product space}{Cauchy-Schwarz inequality}.
+When $\vecnot{v} = \vecnot{0}$, then clearly $\left| \inner{ \vecnot{v} }{ \vecnot{w} } \right| = \left\| \vecnot{v} \right\| \left\| \vecnot{w} \right\| =0$.
 Assume $\vecnot{v} \neq \vecnot{0}$ and let
 \begin{equation*}
-\vecnot{u} = \frac{ \left\langle \vecnot{w} | \vecnot{v} \right\rangle}{ \left\| \vecnot{v} \right\|^2 } \vecnot{v}
+\vecnot{u} = \frac{ \inner{ \vecnot{w} }{ \vecnot{v} }}{ \left\| \vecnot{v} \right\|^2 } \vecnot{v}
 \end{equation*}
 be the projection $\vecnot{w}$ onto $\vecnot{v}$.
 By Lemma~\ref{lem:proj_loss},
 we have
-%$\left\langle \vecnot{w} - \vecnot{u} | \vecnot{v} \right\rangle = 0$ and
+%$\inner{ \vecnot{w} - \vecnot{u} }{ \vecnot{v} } = 0$ and
 \begin{align} \label{equation:DifferenceProjection}
 0 &\leq \left\| \vecnot{w} - \vecnot{u} \right\|^2
-%= \left\langle \vecnot{u} \,\middle|\, \vecnot{w} - \frac{ \left\langle \vecnot{w} | \vecnot{v} \right\rangle}{ \left\| \vecnot{v} \right\|^2 } \vecnot{v} \right\rangle = \left\langle \vecnot{u} \,\middle|\, \vecnot{w} \right\rangle
-%= \left\langle \vecnot{w} - \frac{ \left\langle \vecnot{w} | \vecnot{v} \right\rangle}{ \left\| \vecnot{v} \right\|^2 } \vecnot{v} \,\middle|\, \vecnot{w}
-% \right\rangle \\
-%&= \left\langle \vecnot{w} | \vecnot{w} \right\rangle
-%- \frac{ \left\langle \vecnot{w} | \vecnot{v} \right\rangle
-%\left\langle \vecnot{v} | \vecnot{w} \right\rangle}
+%= \inner{ \vecnot{u} }{ \vecnot{w} - \frac{ \inner{ \vecnot{w} }{ \vecnot{v} }}{ \left\| \vecnot{v} \right\|^2 } \vecnot{v} } = \inner{ \vecnot{u} }{ \vecnot{w} }
+%= \inner{ \vecnot{w} - \frac{ \inner{ \vecnot{w} }{ \vecnot{v} }}{ \left\| \vecnot{v} \right\|^2 } \vecnot{v} | \vecnot{w} } \\
+%&= \inner{ \vecnot{w} }{ \vecnot{w} }
+%- \frac{ \inner{ \vecnot{w} }{ \vecnot{v} }
+%\inner{ \vecnot{v} }{ \vecnot{w} }}
 %{ \left\| \vecnot{v} \right\|^2 }
 = \left\| \vecnot{w} \right\|^2
-- \frac{ \left| \left\langle \vecnot{w} | \vecnot{v} \right\rangle \right|^2 }
+- \frac{ \left| \inner{ \vecnot{w} }{ \vecnot{v} } \right|^2 }
 { \left\| \vecnot{v} \right\|^2 } ,
 \end{align}
 where equality holds iff $\vecnot{w}-\vecnot{u}=\vecnot{0}$, or equivalently iff $\vecnot{w}=\vecnot{0}$ or $\vecnot{v} = s \vecnot{w}$.
 Rearranging \eqref{equation:DifferenceProjection} by isolating the inner product component and cross-multiplying, we find that
 \begin{equation*}
-\left| \left\langle \vecnot{v} | \vecnot{w} \right\rangle \right|^2 = \left| \left\langle \vecnot{w} | \vecnot{v} \right\rangle \right|^2 \leq \left\| \vecnot{v} \right\|^2 \left\| \vecnot{w} \right\|^2 .
+\left| \inner{ \vecnot{v} }{ \vecnot{w} } \right|^2 = \left| \inner{ \vecnot{w} }{ \vecnot{v} } \right|^2 \leq \left\| \vecnot{v} \right\|^2 \left\| \vecnot{w} \right\|^2 .
 \end{equation*}
 %with equality iff $\vecnot{v}=\vecnot{0}$, $\vecnot{w}=\vecnot{0}$, or $\vecnot{v} = s \vecnot{w}$.
 %Note that the $\vecnot{v}=\vecnot{0}$ case is checked separately because it is assumed above that $\vecnot{v}\neq \vecnot{0}$.
@@ -1377,8 +1376,8 @@ Using this result, we get the fourth property
 \begin{equation*}
 \begin{split}
 \left\| \vecnot{v} + \vecnot{w} \right\|^2
-&= \left\| \vecnot{v} \right\|^2 + \left\langle \vecnot{v} | \vecnot{w} \right\rangle + \left\langle \vecnot{w} | \vecnot{v} \right\rangle + \left\| \vecnot{w} \right\|^2 \\
-&= \left\| \vecnot{v} \right\|^2 + 2 \Real \left\langle \vecnot{v} | \vecnot{w} \right\rangle + \left\| \vecnot{w} \right\|^2 \\
+&= \left\| \vecnot{v} \right\|^2 + \inner{ \vecnot{v} }{ \vecnot{w} } + \inner{ \vecnot{w} }{ \vecnot{v} } + \left\| \vecnot{w} \right\|^2 \\
+&= \left\| \vecnot{v} \right\|^2 + 2 \Real \inner{ \vecnot{v} }{ \vecnot{w} } + \left\| \vecnot{w} \right\|^2 \\
 &\leq \left\| \vecnot{v} \right\|^2 + 2 \left\| \vecnot{v} \right\| \left\| \vecnot{w} \right\| + \left\| \vecnot{w} \right\|^2 ,
 \end{split}
 \end{equation*}
@@ -1386,9 +1385,9 @@ with equality iff Cauchy-Schwarz holds with equality.
 Thus, $\left\| \vecnot{v} + \vecnot{w} \right\| \leq \left\| \vecnot{v} \right\| + \left\| \vecnot{w} \right\|$ with equality iff $\vecnot{v} = \vecnot{0}$, $\vecnot{w}=\vecnot{0}$, or $\vecnot{v} = s \vecnot{w}$ (i.e., $\vecnot{v}$ and $\vecnot{w}$ are linearly dependent).
 \end{proof}
 
-%Its proof shows that if $\vecnot{v}$ is non-zero, then $\left| \left\langle \vecnot{v} | \vecnot{w} \right\rangle \right| < \left\| \vecnot{v} \right\| \left\| \vecnot{w} \right\|$ unless
+%Its proof shows that if $\vecnot{v}$ is non-zero, then $\left| \inner{ \vecnot{v} }{ \vecnot{w} } \right| < \left\| \vecnot{v} \right\| \left\| \vecnot{w} \right\|$ unless
 %\begin{equation*}
-%\vecnot{w} = \frac{ \left\langle \vecnot{w} | \vecnot{v} \right\rangle }
+%\vecnot{w} = \frac{ \inner{ \vecnot{w} }{ \vecnot{v} } }
 %{ \left\| \vecnot{v} \right\| } \vecnot{v} .
 %\end{equation*}
 %That is, equality holds if and only if $\vecnot{v}$ and $\vecnot{w}$ are linearly dependent.
@@ -1396,18 +1395,18 @@ Thus, $\left\| \vecnot{v} + \vecnot{w} \right\| \leq \left\| \vecnot{v} \right\|
 \begin{theorem}
 \label{theorem:InnerProductContinuous}
 Consider the vector space $\RealNumbers^n$ with the standard inner product. % of Example~\ref{example:StandardInnerProduct}.
-Then, the function $f \colon V \rightarrow F$ defined by $f \left( \vecnot{w} \right) = \left\langle \vecnot{w} | \vecnot{v} \right\rangle$ is continuous.
+Then, the function $f \colon V \rightarrow F$ defined by $f \left( \vecnot{w} \right) = \inner{ \vecnot{w} }{ \vecnot{v} }$ is continuous.
 \end{theorem}
 \begin{proof}
 Let $\vecnot{w}_1, \vecnot{w}_2, \ldots$ be a sequence in $V$ converging to $\vecnot{w}$.
 Then,
 \begin{equation*}
-\left| \left\langle \vecnot{w}_n | \vecnot{v} \right\rangle
-- \left\langle \vecnot{w} | \vecnot{v} \right\rangle \right|
-= \left| \left\langle \vecnot{w}_n - \vecnot{w} | \vecnot{v} \right\rangle \right|
+\left| \inner{ \vecnot{w}_n }{ \vecnot{v} }
+- \inner{ \vecnot{w} }{ \vecnot{v} } \right|
+= \left| \inner{ \vecnot{w}_n - \vecnot{w} }{ \vecnot{v} } \right|
 \leq \left\| \vecnot{w}_n - \vecnot{w} \right\| \left\| \vecnot{v} \right\|.
 \end{equation*}
-Since $\left\| \vecnot{w}_n - \vecnot{w} \right\| \rightarrow 0$, the convergence of $\left\langle \vecnot{w}_n, \vecnot{v} \right\rangle$ is established.
+Since $\left\| \vecnot{w}_n - \vecnot{w} \right\| \rightarrow 0$, the convergence of $\inner{ \vecnot{w}_n }{ \vecnot{v} }$ is established.
 \end{proof}
 
 
@@ -1429,7 +1428,7 @@ The standard basis of $\RealNumbers^n$ is an orthonormal set with respect to the
 \begin{example}
 Let $V$ be the vector space (over $\ComplexNumbers$) of continuous complex-valued functions on the interval $0 \leq x \leq 1$ with the inner product
 \begin{equation*}
-\left\langle f | g \right\rangle = \int_0^1 f(x) \overline{g(x)} dx.
+\inner{ f }{ g } = \int_0^1 f(x) \overline{g(x)} dx.
 \end{equation*}
 Let $f_n(x) = \sqrt{2} \cos 2 \pi n x$ and $g_n (x) = \sqrt{2} \sin 2 \pi n x$.
 Then $\{ 1, f_1, g_1, f_2, g_2, \ldots \}$ is a countably infinite orthonormal set that is a Schauder basis for this vector space.
@@ -1444,18 +1443,18 @@ Suppose $\vecnot{w}_1, \ldots, \vecnot{w}_n$ are distinct vectors in $W$ and con
 \begin{equation*}
 \vecnot{v} = s_1 \vecnot{w}_1 + \cdots + s_n \vecnot{w}_n.
 \end{equation*}
-The inner product $\left\langle \vecnot{v} | \vecnot{w}_i \right\rangle$ is given by
+The inner product $\inner{ \vecnot{v} }{ \vecnot{w}_i }$ is given by
 \begin{equation*}
 \begin{split}
-\left\langle \vecnot{v} | \vecnot{w}_i \right\rangle
-&= \left\langle \sum_j s_j \vecnot{w}_j | \vecnot{w}_i \right\rangle
-= \sum_j s_j \left\langle \vecnot{w}_j | \vecnot{w}_i \right\rangle
-= s_i \left\langle \vecnot{w}_i | \vecnot{w}_i \right\rangle .
+\inner{ \vecnot{v} }{ \vecnot{w}_i }
+&= \inner{ \sum_j s_j \vecnot{w}_j }{ \vecnot{w}_i }
+= \sum_j s_j \inner{ \vecnot{w}_j }{ \vecnot{w}_i }
+= s_i \inner{ \vecnot{w}_i }{ \vecnot{w}_i } .
 \end{split}
 \end{equation*}
-Since $\left\langle \vecnot{w}_i | \vecnot{w}_i \right\rangle \neq 0$, it follows that
+Since $\inner{ \vecnot{w}_i }{ \vecnot{w}_i } \neq 0$, it follows that
 \begin{equation*}
-s_i = \frac{ \left\langle \vecnot{v} | \vecnot{w}_i \right\rangle }
+s_i = \frac{ \inner{ \vecnot{v} }{ \vecnot{w}_i } }
 { \left\| \vecnot{w}_i \right\|^2 }
 \quad 1 \leq i \leq n.
 \end{equation*}
@@ -1465,7 +1464,7 @@ In particular, if $\vecnot{v} = 0$ then $s_j = 0$ for $1 \leq j \leq n$ and the 
 \begin{corollary}
 If $\vecnot{v} \in V$ is a linear combination of an orthogonal sequence of distinct, non-zero vectors $\vecnot{w}_1, \ldots, \vecnot{w}_n$, then $\vecnot{v}$ satisfies the identity
 \begin{equation*}
-\vecnot{v} = \sum_{i = 1}^n \frac{ \left\langle \vecnot{v} | \vecnot{w}_i \right\rangle } { \left\| \vecnot{w}_i \right\|^2 } \vecnot{w}_i,
+\vecnot{v} = \sum_{i = 1}^n \frac{ \inner{ \vecnot{v} }{ \vecnot{w}_i } } { \left\| \vecnot{w}_i \right\|^2 } \vecnot{w}_i,
 \end{equation*}
 and equals the sum of the projections of $\vecnot{v}$ onto $\vecnot{w}_1, \ldots, \vecnot{w}_n$.
 \end{corollary}
@@ -1492,19 +1491,19 @@ have been chosen so that for every $k$
 is an orthogonal basis for the subspace spanned by $\vecnot{v}_1, \ldots, \vecnot{v}_k$.
 Let
 \begin{equation*}
-\vecnot{w}_{m+1} = \vecnot{v}_{m+1} - \sum_{i=1}^m \frac{ \left\langle \vecnot{v}_{m+1} | \vecnot{w}_i \right\rangle } { \left\| \vecnot{w}_i \right\|^2 } \vecnot{w}_i.
+\vecnot{w}_{m+1} = \vecnot{v}_{m+1} - \sum_{i=1}^m \frac{ \inner{ \vecnot{v}_{m+1} }{ \vecnot{w}_i } } { \left\| \vecnot{w}_i \right\|^2 } \vecnot{w}_i.
 \end{equation*}
 Then $\vecnot{w}_{m+1} \neq 0$, for otherwise $\vecnot{v}_{m+1}$ is a linear combination of $\vecnot{w}_1, \ldots, \vecnot{w}_m$ and hence a linear combination of $\vecnot{v}_1, \ldots, \vecnot{v}_m$.
 For $j \in \{1, \ldots, m\}$, we also have
 \begin{equation*}
 \begin{split}
-\left\langle \vecnot{w}_{m+1} | \vecnot{w}_j \right\rangle
-&= \left\langle \vecnot{v}_{m+1} | \vecnot{w}_j \right\rangle
-- \sum_{i=1}^m \frac{ \left\langle \vecnot{v}_{m+1} | \vecnot{w}_i \right\rangle } { \left\| \vecnot{w}_i \right\|^2 }
-\left\langle \vecnot{w}_i | \vecnot{w}_j \right\rangle \\
-&= \left\langle \vecnot{v}_{m+1} | \vecnot{w}_j \right\rangle
-- \frac{ \left\langle \vecnot{v}_{m+1} | \vecnot{w}_j \right\rangle } { \left\| \vecnot{w}_j \right\|^2 }
-\left\langle \vecnot{w}_j | \vecnot{w}_j \right\rangle \\
+\inner{ \vecnot{w}_{m+1} }{ \vecnot{w}_j }
+&= \inner{ \vecnot{v}_{m+1} }{ \vecnot{w}_j }
+- \sum_{i=1}^m \frac{ \inner{ \vecnot{v}_{m+1} }{ \vecnot{w}_i } } { \left\| \vecnot{w}_i \right\|^2 }
+\inner{ \vecnot{w}_i }{ \vecnot{w}_j } \\
+&= \inner{ \vecnot{v}_{m+1} }{ \vecnot{w}_j }
+- \frac{ \inner{ \vecnot{v}_{m+1} }{ \vecnot{w}_j } } { \left\| \vecnot{w}_j \right\|^2 }
+\inner{ \vecnot{w}_j }{ \vecnot{w}_j } \\
 &= 0.
 \end{split}
 \end{equation*}
@@ -1543,11 +1542,11 @@ Applying the Gram-Schmidt process to $\vecnot{v}_1, \vecnot{v}_2, \vecnot{v}_3$,
 \begin{align*}
 \vecnot{w}_1 &= (2,2,1) \\
 \vecnot{w}_2 &= (3,6,0)
-- \frac{ \left\langle (3,6,0) | (2,2,1) \right\rangle }{ 9 } (2,2,1) \\
+- \frac{ \inner{ (3,6,0) }{ (2,2,1) } }{ 9 } (2,2,1) \\
 &= (3,6,0) - 2 (2,2,1) = (-1,2,-2) \\
 \vecnot{w}_3 &= (6,3,9)
-- \frac{ \left\langle (6,3,9) | (2,2,1) \right\rangle }{ 9 } (2,2,1)
-- \frac{ \left\langle (6,3,9) | (-1,2,-2) \right\rangle }{ 9 } (-1,2,-2) \\
+- \frac{ \inner{ (6,3,9) }{ (2,2,1) } }{ 9 } (2,2,1)
+- \frac{ \inner{ (6,3,9) }{ (-1,2,-2) } }{ 9 } (-1,2,-2) \\
 &= (6,3,9) - 3 (2,2,1) + 2 (-1,2,-2) = (-2,1,2) .
 \end{align*}
 It is easily verified that $\vecnot{w}_1, \vecnot{w}_2, \vecnot{w}_3$ is an orthogonal set of vectors.
@@ -1557,7 +1556,7 @@ It is easily verified that $\vecnot{w}_1, \vecnot{w}_2, \vecnot{w}_3$ is an orth
 Let $V$ be an inner-product space and $W$ be any set of vectors in $V$.
 The \defn{inner-product space}{orthogonal complement} of $W$ denoted by $W^{\bot}$ is the set of all vectors in $V$ that are orthogonal to every vector in $W$ or
 \begin{equation*}
-W^{\bot} = \left\{ \vecnot{v} \in V \big| \langle \vecnot{v} | \vecnot{w} \rangle = 0 \; \forall \; \vecnot{w}\in W \right\}. 
+W^{\bot} = \left\{ \vecnot{v} \in V \big| \tinner{ \vecnot{v} }{ \vecnot{w} } = 0 \; \forall \; \vecnot{w}\in W \right\}. 
 \end{equation*}
 \end{definition}
 
@@ -1570,15 +1569,15 @@ Show that $W^{\bot}$ is a closed subspace of $V$ and that any vector in the subs
 Let $\vecnot{m}_1, \vecnot{m}_2 \in W^{\bot}$ and $s \in F$.
 For any vector $\vecnot{w} \in W$, we have
 \begin{equation*}
-\left\langle \vecnot{m}_1 | \vecnot{w} \right\rangle
-= \left\langle \vecnot{m}_2 | \vecnot{w} \right\rangle
+\inner{ \vecnot{m}_1 }{ \vecnot{w} }
+= \inner{ \vecnot{m}_2 }{ \vecnot{w} }
 = 0.
 \end{equation*}
 This implies
 \begin{equation*}
-\left\langle s \vecnot{m}_1 + \vecnot{m}_2 | \vecnot{w} \right\rangle
-= s \left\langle \vecnot{m}_1 | \vecnot{w} \right\rangle
-+ \left\langle \vecnot{m}_2 | \vecnot{w} \right\rangle
+\inner{ s \vecnot{m}_1 + \vecnot{m}_2 }{ \vecnot{w} }
+= s \inner{ \vecnot{m}_1 }{ \vecnot{w} }
++ \inner{ \vecnot{m}_2 }{ \vecnot{w} }
 = 0.
 \end{equation*}
 That is, $s \vecnot{m}_1 + \vecnot{m}_2 \in W^{\bot}$.
@@ -1586,15 +1585,15 @@ Hence, $W^{\bot}$ is a subspace of $V$.
 
 To see that $W^{\bot}$ is closed, we let $\vecnot{m}$ be any point in the closure of $W^{\bot}$ and $\vecnot{m}_1,\vecnot{m}_2,\ldots \in W^{\bot}$ be a sequence that converges to $\vecnot{m}$.
 The continuity of the inner product, from Theorem~\ref{theorem:InnerProductContinuous}, implies that, for all $\vecnot{w}\in W$,
-\[ \left\langle \vecnot{m} | \vecnot{w} \right\rangle =  \left\langle \lim_{n\rightarrow\infty} \vecnot{m}_n | \vecnot{w}  \right\rangle  =  \lim_{n\rightarrow\infty}  \left\langle \vecnot{m}_n | \vecnot{w}  \right\rangle = 0. \]
+\[ \inner{ \vecnot{m} }{ \vecnot{w} } =  \inner{ \lim_{n\rightarrow\infty} \vecnot{m}_n }{ \vecnot{w}  }  =  \lim_{n\rightarrow\infty}  \inner{ \vecnot{m}_n }{ \vecnot{w}  } = 0. \]
 Therefore, $\vecnot{m} \in W^{\bot}$ and the orthogonal complement contains all of its limit points.
 
 Notice also that any vector $\vecnot{w}$ in the subspace spanned by $W$ can be written as $\vecnot{w} = \sum_{i} s_i \vecnot{w}_i$ with $\vecnot{w}_i \in W$ and $s_i \in F$.
 Therefore, the inner product of $\vecnot{w}$ with any $\vecnot{w}' \in W^{\bot}$ is given by
 \begin{equation*}
-\left\langle \vecnot{w} | \vecnot{w}' \right\rangle
-= \left\langle \sum_{i} s_i \vecnot{w}_i \Big| \vecnot{w}' \right\rangle \\
-= \sum_{i} s_i \left\langle \vecnot{w}_i | \vecnot{w}' \right\rangle \\
+\inner{ \vecnot{w} }{ \vecnot{w}' }
+= \inner{ \sum_{i} s_i \vecnot{w}_i }{ \vecnot{w}' } \\
+= \sum_{i} s_i \inner{ \vecnot{w}_i }{ \vecnot{w}' } \\
 = 0.
 \end{equation*}
 It follows that the subspace spanned by $W$ is orthogonal to the subspace $W^{\bot}$.
@@ -1610,14 +1609,14 @@ Then, the following conditions are equivalent:
 \begin{enumerate}
 \item[(i)] The columns of $U$ form an orthonormal basis (i.e.,  $U^H U = I$),
 \item[(ii)] the rows of $U$ form an orthonormal basis (i.e.,  $U U^H = I$),
-\item[(iii)] $U$ preserves inner products (i.e., $\langle U \vecnot{v} | U \vecnot{w} \rangle = \langle \vecnot{v} | \vecnot{w} \rangle$ for all $\vecnot{u},\vecnot{v}\in V$), and
+\item[(iii)] $U$ preserves inner products (i.e., $\tinner{ U \vecnot{v} }{ U \vecnot{w} } = \tinner{ \vecnot{v} }{ \vecnot{w} }$ for all $\vecnot{u},\vecnot{v}\in V$), and
 \item[(iv)] $U$ is an isometry (i.e., $\| U \vecnot{v} \| = \| \vecnot{v}\|$ for all $\vecnot{v} \in V$).
 \end{enumerate}
 \end{theorem}
 \begin{proof}
 If {\it(i)} holds, then $U$ is invertible because its columns are linearly independent.
 Thus, $U^H U = I$ implies $U^H = U^{-1}$ and {\it(ii)} follows.
-Likewise, {\it(iii)} holds because $\langle U \vecnot{v} | U \vecnot{w} \rangle = \vecnot{w}^H U^H U \vecnot{v} = \vecnot{w}^H \vecnot{v} = \langle \vecnot{v} | \vecnot{w} \rangle$ for all $\vecnot{u},\vecnot{v}\in V$.
+Likewise, {\it(iii)} holds because $\tinner{ U \vecnot{v} }{ U \vecnot{w} } = \vecnot{w}^H U^H U \vecnot{v} = \vecnot{w}^H \vecnot{v} = \tinner{ \vecnot{v} }{ \vecnot{w} }$ for all $\vecnot{u},\vecnot{v}\in V$.
 Choosing $\vecnot{w}=\vecnot{v}$ gives {\it(iv)}.
 Lastly, if $\| U \vecnot{v} \| = \| \vecnot{v}\|$ for all $\vecnot{v} \in V$, then
 $\vecnot{v}^H (U^H U - I) \vecnot{v} = \| U \vecnot{v} \|^2 - \| \vecnot{v} \|^2 = 0$ for all $\vecnot{v} \in V$.
@@ -1631,7 +1630,7 @@ A complete inner-product space is called a \defn{inner-product space}{Hilbert sp
 \end{definition}
 
 \begin{definition}
-Recall that a subset $\left\{ \vecnot{v}_{\alpha} | \alpha \in A \right\}$ of a Hilbert space $V$ is said to be orthonormal if $\left\| \vecnot{v}_{\alpha} \right\| = 1$ for every $\alpha \in A$ and $\left\langle \vecnot{v}_{\alpha} | \vecnot{v}_{\beta} \right\rangle = 0$ for all $\alpha \neq \beta$.
+Recall that a subset $\left\{ \vecnot{v}_{\alpha} | \alpha \in A \right\}$ of a Hilbert space $V$ is said to be orthonormal if $\left\| \vecnot{v}_{\alpha} \right\| = 1$ for every $\alpha \in A$ and $\inner{ \vecnot{v}_{\alpha} }{ \vecnot{v}_{\beta} } = 0$ for all $\alpha \neq \beta$.
 If the subspace spanned by the family $\left\{ \vecnot{v}_{\alpha} | \alpha \in A \right\}$ is dense in $V$, we call this set an \defn{inner-product space}{orthonormal basis}.
 \end{definition}
 
@@ -1645,7 +1644,7 @@ Then, each element $\vecnot{v} \in V$ has a unique representation as
 \begin{equation*}
 \vecnot{v} = \sum_{\alpha \in A} s_{\alpha} \vecnot{v}_{\alpha}.
 \end{equation*}
-Using orthogonality to compute $\left\langle \vecnot{v} | \vecnot{v} \right\rangle$, one gets the \defn{inner-product space}{Parseval identity}
+Using orthogonality to compute $\inner{ \vecnot{v} }{ \vecnot{v} }$, one gets the \defn{inner-product space}{Parseval identity}
 \begin{equation*}
 \left\| \vecnot{v} \right\|^2 = \sum_{\alpha \in A} | s_{\alpha} |^2.
 \end{equation*}
@@ -1745,26 +1744,26 @@ defines a linear functional $L$ on $C([a,b])$.
 
 \begin{theorem}[Riesz] \label{theorem:riesz_finite}
 Let $V$ be a finite-dimensional Hilbert space and $f$ be a linear functional on $V$.
-Then, there exists a unique vector $\vecnot{v} \in V$ such that $f \left( \vecnot{w} \right) = \left\langle \vecnot{w} | \vecnot{v} \right\rangle$ for all $\vecnot{w} \in V$.
+Then, there exists a unique vector $\vecnot{v} \in V$ such that $f \left( \vecnot{w} \right) = \inner{ \vecnot{w} }{ \vecnot{v} }$ for all $\vecnot{w} \in V$.
 \end{theorem}
 
 \begin{proof}
 %Now, we can take a closer look at the proof of this theorem for the finite dimensional case.
 If we choose an orthonormal basis $\mathcal{B} = \vecnot{v}_1, \ldots, \vecnot{v}_n$ for $V$, then the inner product of $\vecnot{w} = t_1 \vecnot{v}_1 + \cdots + t_n \vecnot{v}_n$ and $\vecnot{v} = s_1 \vecnot{v}_1 + \cdots + s_n \vecnot{v}_n$ will be
 \begin{equation*}
-\left\langle \vecnot{w} | \vecnot{v} \right\rangle = t_1 \bar{s}_1 + \cdots + t_n \bar{s}_n .
+\inner{ \vecnot{w} }{ \vecnot{v} } = t_1 \bar{s}_1 + \cdots + t_n \bar{s}_n .
 \end{equation*}
 If $f$ is a linear functional on $V$, then $f$ has the form
 \begin{equation*}
 f \left(\vecnot{w}\right) = f(t_1 \vecnot{v}_1 + \cdots + t_n \vecnot{v}_n) = t_1 f \left( \vecnot{v}_1 \right) + \cdots + t_n f \left( \vecnot{v}_n \right).
 \end{equation*}
-Thus, we can choose $\bar{s}_j = f \left( \vecnot{v}_j \right)$ to get $ \left\langle \vecnot{w} | \vecnot{v} \right\rangle = f \left( \vecnot{w} \right)$ and this gives
+Thus, we can choose $\bar{s}_j = f \left( \vecnot{v}_j \right)$ to get $ \inner{ \vecnot{w} }{ \vecnot{v} } = f \left( \vecnot{w} \right)$ and this gives
 \begin{equation*}
 \vecnot{v} = \overline{ f \left( \vecnot{v}_1 \right) } \vecnot{v}_1 + \cdots + \overline{ f \left( \vecnot{v}_n \right) } \vecnot{v}_n .
 \end{equation*}
 
-Let $\vecnot{v}'$ be any vector that satisfies $f \left( \vecnot{w} \right) = \left\langle \vecnot{w} | \vecnot{v}' \right\rangle$ for all $\vecnot{w}\in V$.
-Then, we see that $\left\langle \vecnot{w} | \vecnot{v} - \vecnot{v}' \right\rangle = 0$
+Let $\vecnot{v}'$ be any vector that satisfies $f \left( \vecnot{w} \right) = \inner{ \vecnot{w} }{ \vecnot{v}' }$ for all $\vecnot{w}\in V$.
+Then, we see that $\inner{ \vecnot{w} }{ \vecnot{v} - \vecnot{v}' } = 0$
 for all $\vecnot{w}\in V$.
 This implies that $\vecnot{v}-\vecnot{v}' = \vecnot{0}$.
 
@@ -1773,7 +1772,7 @@ This implies that $\vecnot{v}-\vecnot{v}' = \vecnot{0}$.
 Thus, the vector $\vecnot{v}$ is unique.
  for some fixed scalars $c_1, \ldots, c_n$ determined by the basis.
 Clearly, $f \left( \vecnot{v}_j \right) = c_j$, which implies that $\bar{s}_j = f \left( \vecnot{v}_j \right)$.
-That is, the vector $\vecnot{v}$ such that $f \left( \vecnot{w} \right) = \left\langle \vecnot{w} | \vecnot{v} \right\rangle$ is
+That is, the vector $\vecnot{v}$ such that $f \left( \vecnot{w} \right) = \inner{ \vecnot{w} }{ \vecnot{v} }$ is
 
 Note that the vector $\vecnot{v}$ lies in the orthogonal complement of the nullspace of $f$.
 Let $W$ be the nullspace of $f$, then $V = W \oplus W^{\bot}$, and $f$ is completely determined by its value on $W^{\bot}$.
@@ -1785,12 +1784,12 @@ for all $\vecnot{u} \in V$.
 Suppose that $f \neq 0$, then $f$ is of rank one and $\dim \left( W^{\bot} \right) = 1$.
 If $\vecnot{v}$ is any non-zero vector in $W^{\bot}$, it follows that
 \begin{equation*}
-P \vecnot{u} = \frac{ \left\langle \vecnot{u} | \vecnot{v} \right\rangle }{ \left\| \vecnot{v} \right\|^2 } \vecnot{v}
+P \vecnot{u} = \frac{ \inner{ \vecnot{u} }{ \vecnot{v} } }{ \left\| \vecnot{v} \right\|^2 } \vecnot{v}
 \end{equation*}
 for all $\vecnot{u} \in V$.
 Thus,
 \begin{equation*}
-f \left( \vecnot{u} \right) = \left\langle \vecnot{u} | \vecnot{v} \right\rangle
+f \left( \vecnot{u} \right) = \inner{ \vecnot{u} }{ \vecnot{v} }
 \frac{f \left( \vecnot{v} \right) }{ \left\| \vecnot{v} \right\|^2 }
 \end{equation*}
 for all $\vecnot{u} \in V$.

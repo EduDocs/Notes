@@ -128,7 +128,7 @@
 
 \begin{document}
 
-\title{ECE 586: Vector Space Methods \\ Lecture 20: Four Fundamental Subspaces}
+\title{ECE 586: Vector Space Methods \\ Lecture 20: Singular Value Decomposition}
 \author{Henry D. Pfister \\ Duke University}
 \date{}
 %\date{August 20th, 2020}
@@ -156,152 +156,6 @@
 
 
 
-\begin{frame}{6.5: The Four Fundamental Subspaces: Basic Idea}
-
-Consider a linear transform mapping $\mathbb{R}^n \to \mathbb{R}^m$ represented by $A\in \mathbb{R}^{m\times n}$
-\vspace{1mm}
-
-\begin{itemize}
-\setlength\itemsep{2.5mm}
-
-\item<1-> This $\vecnot{x} \mapsto A \vecnot{x}$ mapping defines \textcolor{blue}{four fundamental subspaces:} \vspace{1.5mm}
-\begin{itemize}
-\setlength\itemsep{1mm}
-\item The \textcolor{blue}{column space} or range of $A$: $\mathcal{R}(A)$
-\item The \textcolor{blue}{row space} or range of $A^T$: $\mathcal{R}(A^T)$
-\item The null space: $\mathcal{N}(A)$
-\item The null space of $A^T$: $\mathcal{N}(A^T)$
-\end{itemize}
-
-\vspace{0mm}
-
-\item<2-> Notice that $\vecnot{x} \in \mathbb{R}^n$ is in the \textcolor{blue}{null space of $A$} \emph{if and only if} \vspace{-1mm}
-\[ A \vecnot{x} = \begin{bmatrix} -- \text{row 1} -- \\ -- \text{row 2} -- \\ \vdots \\ -- \text{row m} -- \end{bmatrix} \begin{bmatrix}x_1 \\ x_2 \\ \vdots \\ x_n \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \\ \vdots \\ 0 \end{bmatrix} \]
-i.e., \textcolor{blue}{all rows of $A$ orthogonal to $\vecnot{x}$} or $\vecnot{x} \in \mathcal{R}(A^T)^\perp$
- 
-\item<3-> \textcolor{blue}{null space $\mathcal{N}(A)$} is the \textcolor{red}{orthogonal complement $\mathcal{R}(A^T)^\perp$ of row space}
-
-\end{itemize}
-
-\begin{tikzpicture}[overlay,remember picture,shift={(11.5,2.75)}]
-  \node at (0,0) {\includegraphics[width=45mm]{strang_fig1.png}};
-\end{tikzpicture}
-
-\end{frame}
-
-
-\begin{frame}{6.5: The Four Fundamental Subspaces: General Case}
-
-\begin{itemize}
-\setlength\itemsep{3mm}
-
-\item<1-> So, \textcolor{blue}{null space of $A$} is the \textcolor{red}{orthogonal complement} of \textcolor{blue}{column space of $A^T$} 
-
-\item<2-> Applying the same result to $A^T$ (which maps $\mathbb{R}^m \to \mathbb{R}^n$) shows \\[1.5mm] \hspace{2mm}
- \textcolor{blue}{null space of $A^T$} is the \textcolor{red}{orthogonal complement} of \textcolor{blue}{column space of $A$} 
-
-\item<3-> This means that \textcolor{red}{$\mathcal{N}(A) = \mathcal{R}(A^T)^\perp$} and \textcolor{red}{$\mathcal{N}(A^T) = \mathcal{R}(A)^\perp$}
-\end{itemize}
-
-\begin{definition}<4> [Adjoint]
-Let $V$ and $W$ be Hilbert spaces, and assume $T \colon V \rightarrow W$ is a continuous linear transformation (i.e., $\| T \|_{\mathrm{op}} < \infty$).
-Then, the \textcolor{blue}{adjoint $T^*$} is the unique linear transformation mapping $W$ to $V$ such that \vspace{-2mm}
-\begin{equation*}
-\left\langle T \vecnot{v} | \vecnot{w} \right\rangle_W
-= \left\langle \vecnot{v} | T^* \vecnot{w} \right\rangle_V \quad\quad \text{for all }\vecnot{v} \in V, \vecnot{w} \in W
-\end{equation*}
-
-\vspace{-3mm}
-\end{definition}
-
-The following 3 conditions are equivalent:
-\begin{itemize}
-\setlength\itemsep{1mm}
-\item For all $\vecnot{w} \in W$, we have $\left\langle \vecnot{v} | T^* \vecnot{w} \right\rangle_V = 0$
-\item $\vecnot{v} \in \mathcal{R}(T^*)^\perp$
-\item $\vecnot{v} \in \mathcal{N}(T)$ because $\left\langle \vecnot{v} | T^* \vecnot{w} \right\rangle_V = \left\langle T \vecnot{v} | \vecnot{w} \right\rangle_W = 0$ for all $\vecnot{w} \in W$
-
-\end{itemize}
-
-\end{frame}
-
-
-\begin{frame}{6.5: The Four Fundamental Subspaces: Linear Equations}
-
-\hspace*{-1mm}
-\includegraphics[width=100mm]{strang_fig1.png}
-
-\vspace{-3mm}
-$r \triangleq \dim(\mathcal{R}(A))$ implies \textcolor{blue}{$\dim ( \mathcal{N}(A)) = n\!-\!r$} and \textcolor{blue}{$\dim ( \mathcal{N}(A^T)) = m\!-\!r$}
-
-\let\thefootnote\relax\footnotetext{\hspace*{-4mm} {\tiny Figure from ``The Fundamental Theorem of Linear Algebra'' by Gilbert Strang, The American Mathematical Monthly, Nov. 1993 }}
-
-\end{frame}
-
-\begin{frame}{6.5: The Four Fundamental Subspaces: Least Squares}
-
-\hspace*{-4mm}
-\includegraphics[width=105mm]{strang_fig2}
-
-Observe $A^T A \colon \RealNumbers^n \to \RealNumbers^n$ is invertible if non-singular (i.e., if $n=r$)
-
-\let\thefootnote\relax\footnotetext{\hspace*{-4mm} {\tiny Figure from ``The Fundamental Theorem of Linear Algebra'' by Gilbert Strang, The American Mathematical Monthly, Nov. 1993 }}
-
-\end{frame}
-
-\begin{frame}{Interlude: Alternative for Linear Systems}
-
-A ``Theorem of the Alternative'' asserts that exactly one of two logical statements is true. The following is a famous example.
-
-\begin{theorem}
-For a matrix $A \in \mathbb{R}^{m\times n}$ and a vector $\vecnot{b}\in \mathbb{R}^m$, exactly one of the following statements is true:
-\begin{itemize}
-\item There exists an $\vecnot{x}\in \mathbb{R}^n$ such that $A\vecnot{x} = \vecnot{b}$
-\item There exists a $\vecnot{y} \in \mathbb{R}^m$ such that $A^T \vecnot{y} = \vecnot{0}$ and $\vecnot{y}^T \vecnot{b} \neq 0$.
-\end{itemize} 
-\end{theorem}
-
-\begin{proof}<2->
-\begin{itemize}
-\item In the first case, $\vecnot{b} \in \mathcal{R}(A)$ and the four fundamental subspaces imply that $\vecnot{y}^T \vecnot{b} = 0$ (i.e., $\vecnot{y} \perp \vecnot{b}$) if $A^T \vecnot{y} = \vecnot{0}$ (i.e., $\vecnot{y}\in \mathcal{N}(A^T)$).
-\item In the second case, $\vecnot{y} \in \mathcal{N}(A^T)$ implies $\vecnot{y} \perp \mathcal{R}(A)$.
-So, $\vecnot{y}^T \vecnot{b} \neq 0$ implies $\vecnot{b} \notin \mathcal{R}(A)$. \qedhere
-\end{itemize}
-\end{proof}
-
-%\visible<3->{Choosing $m=n$, one can also add ``for all $\vecnot{b}\in W$'' to the first statement and ``there exists $\vecnot{b}\in W$'' to the second statement.}
-
-\end{frame}
-
-\begin{frame} \frametitle{Next Steps}
-
-\begin{itemize}
-\setlength\itemsep{5mm}
-\item To continue studying after this video -- \vspace{2mm}
-
-\begin{itemize}
- \setlength\itemsep{3mm}
-  
- \item Try the required reading from website: \\[1mm] \hspace{5mm} The Fundamental Theorem of Linear Algebra by Gilbert Strang
- 
- \item Or the recommended reading:  Course Notes EF 6.5 - 6.6.1
-
- \item Also, look at the problems in Assignments 7 and 8
-\end{itemize}
-\end{itemize}
-
-\note{
-	\vspace{8mm}
-	\begin{enumerate}
-		\setlength\itemsep{3mm}
-		\color{red}
-		\item Here are some options to continue learning this material. (read) \\ [2mm]  That's it for today.  So, I'll see you next time.
-	\end{enumerate}
-}
-
-\end{frame}
-
-\end{document}
 
 
 \begin{frame}{8: Eigenvalue Decomposition}
@@ -344,12 +198,32 @@ Matrices $A^H A$ and $A A^H$ are always Hermitian and positive semidefinite}
 \end{frame}
 
 
+\begin{frame}{9: Singular Value Decomposition: Definition}
 
+\begin{definition}
+The \textcolor{blue}{singular value decomposition (SVD)} of a rank-$r$ matrix $A \in \ComplexNumbers^{m \times n}$ is \vspace{-1mm}
+\begin{equation*}
+A = U \Sigma V^H
+= \left[ \begin{array}{cc} U_1 & U_2 \end{array} \right]
+\left[ \begin{array}{cc} \Sigma_1 & 0 \\ 0 & 0 \end{array} \right]
+\left[ \begin{array}{c} V_1^H \\ V_2^H \end{array} \right]
+= U_1 \Sigma_1 V_1^H,
+\end{equation*}
+where (i) $U \in \ComplexNumbers^{m \times m}$ and $V \in \ComplexNumbers^{n \times n}$ are unitary and (ii) $U_1 \in \ComplexNumbers^{m \times r}$, $U_2 \in \ComplexNumbers^{m \times m-r}$, $V_1 \in \ComplexNumbers^{n \times r}$, and $V_2 \in \ComplexNumbers^{n \times n-r}$ have orthonormal columns.
+\\ The diagonal matrix $\Sigma_1 \in \RealNumbers^{r \times r}$ contains the non-zero singular values \vspace{-2mm}
+\[ \sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_r > 0. \]
+\end{definition}
 
+\vspace{1mm}
 
-\begin{frame}{9: Singular Value Decomposition (SVD)}
+The factorization $A = U \Sigma V^H$ is called the \textcolor{blue}{full SVD} of the matrix $A$ while the factorization $A = U_1 \Sigma_1 V_1$ is called the \textcolor{blue}{compact SVD} of $A$.
+\\[1mm] The compact SVD of a rank-$r$ matrix retains only the $r$ columns of $U,V$ associated with non-zero singular values.
 
-Idea is to find orthonormal bases for $\RealNumbers^n$ and $\RealNumbers^m$ in which $A$ is diagonal
+\end{frame}
+
+\begin{frame}{9: Singular Value Decomposition: Construction}
+
+Idea to find orthonormal changes of basis $U,V$ so that $U^H A V$ is diagonal
 
 \begin{itemize}
 \setlength\itemsep{3mm}
@@ -360,16 +234,18 @@ Then, \[\|A \vecnot{v}_i\| ^2 = \vecnot{v}_i^H (A^H A \vecnot{v}_i) =  \vecnot{v
 \item<2-> This implies that $\|A \vecnot{v}_i\| = \sigma_i$.
 So $\vecnot{u}_i = \frac{1}{\sigma_i} A\vecnot{v}_i$ has $\| \vecnot{u}_i \| \!=\! 1$ and \vspace{-1mm}
 \begin{align*}
-A A^H \vecnot{u}_i &= \frac{1}{\sigma_i} A A^H A \vecnot{v}_i = \frac{1}{\sigma_i} \sigma_i^2 A \vecnot{v}_i = \vecnot{u}_i
+A A^H \vecnot{u}_i &= \frac{1}{\sigma_i} A A^H A \vecnot{v}_i = \frac{1}{\sigma_i} \sigma_i^2 A \vecnot{v}_i = \sigma_i^2 \vecnot{u}_i
 \\
 \vecnot{u}_j^H \vecnot{u}_i &= \left(\frac{1}{\sigma_j} A \vecnot{v}_j \right)^H \left(\frac{1}{\sigma_i} A \vecnot{v}_i \right) =\frac{1}{\sigma_i \sigma_j} \vecnot{v}_j^H (A^H A) \vecnot{v}_i = \delta_{i,j}  \vspace{-1mm}
 \end{align*}
 
 
 \item<3-> For $U_1 = [\vecnot{u}_1,\ldots,\vecnot{u}_r]
-$ and $V_1 = [\vecnot{v}_1,\ldots,\vecnot{v}_r]$, this gives $A V_1 = U_1 \Sigma_1$ where $\Sigma_1$ is a $r \times r$ diagonal matrix with diagonal entries $\sigma_1,\ldots,\sigma_r$
+$ and $V_1 = [\vecnot{v}_1,\ldots,\vecnot{v}_r]$, this gives $A V_1 = U_1 \Sigma_1$ where $\Sigma_1$ is a $r \times r$ diagonal matrix with diagonal entries $\sigma_1,\ldots,\sigma_r\!\!\!\!$
 
-\item<4-> Solving for $A$ gives the \textcolor{blue}{compact SVD} \vspace{-1mm} \[ \color{blue} A = U_1 \Sigma V_1^H, \vspace{-1mm}\]
+\item<4-> If cols of $V_2$ are an orthonormal basis for $\mathcal{N}(A)$,
+then $A[V_1 \; V_2]=U_1 [\Sigma_1 \; 0].\!\!\!\!\!\!\!\!\!\!\!$
+Thus, right multiplication by $V^H = [V_1^H \; V_2^H]$ gives the \textcolor{blue}{compact SVD} \vspace{-0.5mm} \[ \color{blue} A = U_1 \Sigma_1 V_1^H, \vspace{-1.5mm}\]
 where the \textcolor{blue}{columns of $U_1, V_1$ are orthonormal bases for $\mathcal{R}(A), \mathcal{R}(A^H)$}
 
 \end{itemize}
@@ -381,7 +257,7 @@ where the \textcolor{blue}{columns of $U_1, V_1$ are orthonormal bases for $\mat
 
 \vspace{-1mm}
 \hspace*{-1mm}
-\includegraphics[width=95mm]{strang_fig3}
+\includegraphics[width=92mm]{strang_fig3}
 
 \vspace{-3mm}
 For $V = [\vecnot{v}_1,\ldots,\vecnot{v}_n]
@@ -407,7 +283,7 @@ $ and $U = [\vecnot{u}_1,\ldots,\vecnot{u}_m]$, $A V = U \Sigma$ where $\Sigma \
 \begin{frame}{9.2: Singular Value Decomposition Example}
 
 \visible<1->{%
-Consider the matrix 
+Consider the matrix \vspace{-2mm}
 \[ A = \left[ \begin{array}{cc}
 1 & 1 \\
 5 & -1 \\
@@ -437,7 +313,7 @@ An eigenvalue decomposition of $A^H A$ is given by
 
 \visible<3->{%
 This implies $\Sigma_1 = \Lambda^{1/2}$ and $V_1 = V$.
-Thus, we find $U_1 = A V_1 \Sigma_1^{-1}$ with
+Thus, we find $U_1 = A V_1 \Sigma_1^{-1}$ with \vspace{-1mm}
 \[ U_1 = \left[ \begin{array}{cc}
 1 & 1 \\
 5 & -1 \\
@@ -457,10 +333,10 @@ Thus, we find $U_1 = A V_1 \Sigma_1^{-1}$ with
 -\frac{1}{\sqrt{2}} & \frac{2}{3} 
 \end{array} \right] \]}
 
-\vspace{-1mm}
+\vspace{-1.5mm}
 
 \visible<4->{%
-Putting this all together, we have the compressed SVD
+Putting this all together, we have the compressed SVD \vspace{-1mm}
 \[ A = U_1 \Sigma_1 V_1^H 
 = \left[ \begin{array}{cc}
 0 & \frac{1}{3} \\
@@ -510,6 +386,92 @@ From the compact SVD $A = U_1 \Sigma_1 V_1^H$, one finds that $A^+ = V_1
 \visible<2->{Thus, $A A^+$ and $A^+ A$ are projection matrices onto $\mathcal{R}(A)$ and $\mathcal{R}(A^H)$.}
 
 \end{frame}
+
+\begin{frame} \frametitle{Approximation Property of the SVD}
+
+\begin{definition}
+Let $A \in \mathbb{C}^{m\times n}$ have SVD $A=U \Sigma V^H$ where $\vecnot{u}_1,\ldots,\vecnot{u}_m$ and $\vecnot{v}_1,\ldots,\vecnot{v}_n$ are the columns of $U$ and $V$.
+Then, the \textcolor{blue}{$k$-truncated SVD expansion of $A$} is \vspace{-2mm}
+\[ \mathcal{T}_k (A) \triangleq \sum_{i=1}^k \sigma_i \; \vecnot{u}_i \, \vecnot{v}_i^H \]
+\end{definition}
+
+\vspace{2mm}
+
+\begin{theorem}
+In terms of the Frobenius norm $\| A \|_F^2 \triangleq \sum_{ij} |a_{ij}|^2$, the best rank-$k$ approximation of $A \in \mathbb{C}^{m\times n}$ is given by the $k$-truncated SVD expansion: \vspace{-2mm}
+\[ \min_{B \in \mathbb{C}^{m\times n}: \, \text{rank}(B)=k} \| A - B \|_F  = \| A - \mathcal{T}_k (A) \|_F \]
+\end{theorem}
+
+\vspace{2mm}
+
+The Frobenius norm is induced by inner product $\langle A | B \rangle \triangleq \text{Tr} (B^H A)$ on $\mathbb{C}^{m \times n}$  
+\end{frame}
+
+\begin{frame} \frametitle{Principal Component Analysis (PCA)}
+
+\textbf{Problem:} For a given set of $N$ data points $\vecnot x_{1},\vecnot x_{2},\ldots,\vecnot x_{N}\in\mathbb{R}^{n}$, what $p$-dimensional affine subspace $W\subset\mathbb{R}^{n}$ minimizes the approximation error \vspace{-1.5mm}
+\[
+\sum_{i=1}^{N}\|\vecnot x_{i}-P_{W}(\vecnot x_{i})\|^{2}.
+\]
+
+\vspace{-1.5mm}
+
+\textbf{Solution:} Using $\vecnot w_{0}=\frac{1}{N}\sum_{i=1}^{N}\vecnot x_{i}$, we define the mean-corrected data matrix \vspace{-1.5mm}
+\[ A=[\vecnot x_{1}-\vecnot w_{0},\ldots,\vecnot x_{N}-\vecnot w_{0}]. \]
+
+\vspace{-1mm}
+
+Then, the problem can solved using the SVD $A=U\Sigma V^{T}$ .
+In particular, one can define $U_{p}\triangleq[\vecnot u_{1},\ldots,\vecnot u_{p}]$ and choose $W = \textrm{span}(U_p) + \vecnot{w}_0$ so that \vspace{-1.5mm}
+\[ P_{W}(\vecnot x)=U_{p}U_{p}^{T}(\vecnot x-\vecnot w_{0})+\vecnot w_{0} . \]
+
+\vspace{-1mm}
+
+For dimension reduction, one stores $\vecnot y_{i}=U_{p}^{T}\vecnot x_{i}\in\mathbb{R}^{p}$ instead of $\vecnot x_{i}\in\mathbb{R}^{n}$.
+
+\vspace{4mm}
+
+Note: This solution essentially replaces $A$ by the $p$-truncated SVD $\mathcal{T}_p (A)$
+
+%\vspace{2mm}
+%
+% Recall that an \emph{affine subspace} $W=\text{span}\{\vecnot w_{1},\ldots,\vecnot w_{p}\}+\vecnot w_{0}$ is defined by linearly independent vectors $\vecnot w_{0},\ldots,\vecnot w_{p}$ where adding $\vecnot w_{0}$ has the effect of translating the subspace $\text{span}\{\vecnot w_{1},\ldots,\vecnot w_{p}\}.$ For such an affine subspace, we define $B\in\mathbb{R}^{n\times p}$ by $B=[\vecnot w_{1},\ldots,\vecnot w_{p}]$ and the projection onto $W$ is defined by $P_{W}(\vecnot x)=B(B^{T}B)^{-1}B^{T}(\vecnot x-\vecnot w_{0})+\vecnot w_{0}$.
+ 
+
+
+\end{frame}
+
+\begin{frame} \frametitle{Next Steps}
+
+\begin{itemize}
+\setlength\itemsep{5mm}
+\item To continue studying after this video -- \vspace{2mm}
+
+\begin{itemize}
+ \setlength\itemsep{3mm}
+ 
+ \item Try the required reading from website: \\[1mm] \hspace{5mm} The Fundamental Theorem of Linear Algebra by Gilbert Strang
+ 
+ \item Or the recommended reading:  Course Notes EF 6.5 - 6.6.1, 9.1 - 9.3
+
+ \item Also, look at the problems in Assignments 7 and 8
+\end{itemize}
+\end{itemize}
+
+\note{
+	\vspace{8mm}
+	\begin{enumerate}
+		\setlength\itemsep{3mm}
+		\color{red}
+		\item Here are some options to continue learning this material. (read) \\ [2mm]  That's it for today.  So, I'll see you next time.
+	\end{enumerate}
+}
+
+\end{frame}
+
+\end{document}
+
+
 
 \backupbegin
 
