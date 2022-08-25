@@ -1,54 +1,54 @@
 \chapter{Metric Spaces and Topology}
 
-
-We begin this chapter with a discussion of key mathematical concepts and motivate how they can be generalized to address important challenges.
+We initiate this chapter with a brief discussion of key mathematical concepts and motivate how they can be generalized to address important challenges.
 We assume that the intended reader has experience with the real numbers, convergent sequences, and continuous functions.
 Specifically, the reader should be familiar with the following notions.
 \begin{itemize}
 \item \textbf{Convergence:}
 Suppose $x_1, x_2, \ldots$ is a sequence of real numbers.
-This sequence converges to $x$ if, for any $\epsilon > 0$, there exists a natural number $N$ such that $| x_n - x | < \epsilon$ for all $n > N$.
+This sequence converges to a point $x$ if, for any $\epsilon > 0$, there exists a number $N$ such that $| x_n - x | < \epsilon$ for all $n > N$.
 \item \textbf{Continuity:}
 Suppose $f : \RealNumbers \mapsto \RealNumbers$ is a real-valued function over the real numbers.
 This function is continuous at $x_0$ if, for any $\epsilon > 0$, there exists a $\delta > 0$ such that $| f(x) - f(x_0) | < \epsilon$ for all $x \in \RealNumbers$ satisfying $|x - x_0| < \delta$.
 \end{itemize}
-One scenario where convergence plays an important role is in the design of iterative methods applied to optimization objectives.
+One scenario where convergence plays an important role is in the design of iterative methods applied to optimization.
 Therein, convergence properties can ensure that the iterative process leads to a well-defined answer.
 Likewise, continuity is a cornerstone of calculus, differential equations, and probability.
 These related concepts give rise to many practical mathematical tools like gradient descent and Newton's method.
 
-These definitions are clearly empowering when dealing with the real numbers.
-Yet, we are interested in exploring spaces that contain objects such as time series, images, feature vectors, polynomial, matrices, and functions.
-This raises an important question: How can we extend convergence and continuity to more intricate spaces?
-This step is key in better understanding the structure of the abstract spaces and, also, in designing algorithms and methods attuned to these spaces.
+The definitions above are empowering when dealing with the real numbers.
+Yet, we are interested in exploring spaces that contain objects such as vectors, time series, images, arrays of data, polynomials, matrices, and functions.
+This brings up an important question: How can we extend the notions of convergence and continuity to more general spaces?
+Answering this question is key in better understanding the structure of abstract spaces and, also, in designing algorithms and iterative methods attuned to a rich class of problems.
 
-A first step in developing a more general theory is to identify what makes these definitions work for the real numbers.
-Based on the insights we gain, we can then extract key attributes and see how they can help define similar notions for abstract spaces.
-We begin with some pertinent questions.
-First off, what are the real numbers and why do we use them all the times, as opposed to, say, the rational numbers?
+A first step in developing a more powerful theory is to identify what makes these definitions work for the real numbers.
+Based on the insights we gain from familiar examples, we can then extract key attributes and build intuition on how we can define similar concepts for abstract spaces.
+We begin with pertinent questions.
+First off, what are the real numbers and why do we use them all the time, as opposed to, say, the rational numbers?
 Second, in the definition of convergence above, we need to know the limit of the sequence to show convergence.
 However, when we design an iterative algorithm, we most likely do not know its limit; else we would not need to use an iteration process to get there.
-Is there a notion of convergent sequence for which we do not need to pocess and explicit characterization of its limit beforehand?
-Finally, both definitions above rely on proximity, respectively $|x_n - x|$ and $|f(x) - f(x_0)|$.
+Is there a notion of convergent sequence for which we do not need to pocess an explicit characterization of its limit beforehand?
+Interestingly, both definitions rely on proximity, respectively $|x_n - x|$ and $|f(x) - f(x_0)|$.
 We have a pretty good grasp of the distance between two points on the real line.
-How can we define distances between points in more general spaces?
-These are the questions we seek to address in this chapter, in the hope of leveraging our familiarity with real numbers into understanding more general spaces.
+How can we define the distance between two points in more general setting?
+These are the questions we seek to address below, in the hope of leveraging our familiarity with real numbers into understanding more general spaces.
 
 
 \section{Metric Spaces}
 
-From an engineering perspective, the most important way to construct a topology on a set is to define the topology in terms of a metric on the set.
+From an applied perspective, the quintessential way to construct a topology on a space is to define the open sets in terms of a metric.
 This approach underlies our intuitive understanding of open and closed sets on the real line.
 Generally speaking, a metric captures the notion of a distance between two elements of a set.
 Topologies that are defined through metrics possess a number of properties that make them suitable for analysis.
-Identifying these common properties permits the unified treatment of different spaces that are useful in solving engineering problems.
-To gain better insight into metric spaces, we need to review the notion of a metric and to introduce a definition for topology.
-
+Identifying these common properties permits the unified treatment of different spaces that are useful in solving practical problems.
+To gain better insight into metric spaces, we review the notion of a metric and we introduce a formal definition for topology.
 
 \index{metric space}
-A \textbf{metric space} is a set that has a well-defined ``distance'' between any two elements.
-Mathematically, a metric space abstracts a few basic properties of Euclidean space.
+A \textbf{metric space} is a set with a well-defined \emph{distance} between any two elements.
+In some sense, such a space abstracts a few basic properties of Euclidean space.
 Formally, a metric space $(X,d)$ is a set $X$ and a function $d$ called a metric.
+The function $d(\cdot, \cdot)$ must fulfill the following properties.
+
 \begin{definition}
 A \defn{metric space}{metric} on a set $X$ is a function
 \begin{equation*}
@@ -63,17 +63,22 @@ that satisfies the following properties,
 \end{definition}
 
 \begin{example}
-The set of real numbers equipped with the metric of absolute distance $d(x,y)=\left| x-y \right|$ defines the standard metric space of real numbers $\RealNumbers$.
+The collection of real numbers equipped with the metric of absolute distance, $d(x,y) = |x-y|$, defines the standard metric space for the real numbers $\RealNumbers$.
 \end{example}
 
 \begin{example}
-Given $\vecnot{x} = (x_1, \ldots, x_n), \vecnot{y} = (y_1, \ldots, y_n) \in \RealNumbers^n$, the \defn{metric space}{Euclidean metric} $d$ on $\RealNumbers^n$ is defined by the equation
+The set of vectors in $\RealNumbers^n$ can also be endowed with a metric.
+Suppoe $\vecnot{x} = (x_1, \ldots, x_n)$ and $\vecnot{y} = (y_1, \ldots, y_n)$ are elements in $\RealNumbers^n$.
+The \defn{metric space}{Euclidean metric} $d$ on $\RealNumbers^n$ is defined by
 \begin{equation*}
 d \left( \vecnot{x}, \vecnot{y} \right)
 = \sqrt{ (x_1 - y_1)^2 + \cdots + (x_n - y_n)^2 }.
 \end{equation*}
-As implied by its name, the function $d$ defined above is a metric.
+As implied by its name, the function $d(\cdot, \cdot)$ given above possesses all the properties of a metric.
 \end{example}
+
+It may be beneficial to also look at metrics that are less common.
+The following two problems introduce alternate distances between points.
 
 \begin{problem}
 Let $\vecnot{x} = (x_1, \ldots, x_n), \vecnot{y} = (y_1, \ldots, y_n) \in \RealNumbers^n$ and consider the function $\rho$ given by
@@ -93,6 +98,9 @@ Define $\bar{d}  \colon X \times X \rightarrow \RealNumbers$ by
 \end{equation*}
 Show that $\bar{d}$ is also a metric.
 \end{problem}
+
+
+\subsection{Convergence}
 
 Let $(X,d)$ be a metric space.
 Then, elements of $X$ are called \defn{metric space}{points} and the number $d(x,y)$ is called the \defn{metric space}{distance} between $x$ and $y$.

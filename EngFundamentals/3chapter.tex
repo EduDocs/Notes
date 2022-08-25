@@ -1,4 +1,4 @@
-.\chapter{Representation and Approximation}
+\chapter{Representation and Approximation}
 
 \section{Best Approximation}
 \index{inner-product space!best approximation}
@@ -725,7 +725,7 @@ The line that minimizes the sums of the squares of the \emph{vertical} distances
 Let $Y, X_1, \ldots, X_n$ be a set of zero-mean random variables.
 The goal of the linear minimum mean-squared error (LMMSE) estimation  problem is to find coefficients $s_1, \ldots, s_n$ such that
 \[ \hat{Y} = s_1 X_1 + \cdots + s_n X_n \]
-minimizes the MSE $\Expect[|Y-\hat{Y}|^2]$.
+minimizes the MSE $\Expect \big[ |Y-\hat{Y}|^2 \big]$.
 Using the inner product defined by
 \begin{equation} \label{equation:ExpectationInnerProduct}
 \left\langle X | Y \right\rangle = \Expect \left[ X \overline{Y} \right],
@@ -758,7 +758,8 @@ and
 \end{equation*}
 If the matrix $G$ is invertible, the minimum mean-squared error is given by
 \begin{equation*}
-\left\| Y - \hat{Y} \right\|^2 = \Expect \left[ Y \overline{Y} \right]
+\big\| Y - \hat{Y} \big\|^2
+= \Expect \left[ Y \overline{Y} \right]
 - \vecnot{t}^H G^{-1} \vecnot{t} .
 \end{equation*}
 
@@ -769,7 +770,7 @@ Suppose that the sequence of zero-mean random variables $\left\{ X[t] \right\}$ 
 \begin{equation*}
 \begin{split}
 Y[t] &= \sum_{k=0}^{K-1} h[k] X[t - k] \\
-&= \begin{bmatrix} X[t] & \hdots & X[t-K+1] \end{bmatrix}
+&= \begin{bmatrix} X[t] & \cdots & X[t-K+1] \end{bmatrix}
 \begin{bmatrix} h[0] \\ \vdots \\ h[K-1] \end{bmatrix}
 = \left( \vecnot{X}[t] \right)^T \vecnot{h} .
 \end{split}
@@ -777,7 +778,8 @@ Y[t] &= \sum_{k=0}^{K-1} h[k] X[t - k] \\
 The goal is to design this filter in such a way that its output is as close as possible to a desired sequence $\left\{ Z[t] \right\}$.
 In particular, we want to minimize the mean-squared error
 \begin{equation*}
-\left\| Z[t] - Y[t] \right\|^2 = \Expect \left[ \left| Z[t] - Y[t] \right|^2 \right].
+\left\| Z[t] - Y[t] \right\|^2
+= \Expect \left[ \left| Z[t] - Y[t] \right|^2 \right].
 \end{equation*}
 
 By the orthogonality principle, the mean-squared error is minimized when the error is orthogonal to the data; that is, for $j = 0, 1, \ldots, K-1$, we have
@@ -845,11 +847,12 @@ The minimum mean-squared error is given by
 \end{equation*}
 where $t$ can be ignored because the processes are WSS.
 
+
 \subsection{LMMSE Filtering in Practice}
 
 While theoretical treatments of optimal filtering often assume one has well-defined random variables with known statistics, this is rarely the case in practice.
 Yet, there is a very close connection between Wiener filtering and natural data driven approaches.
-Consider the problem from the previous section and let $x[1],x[2],\ldots_1,x[N]$ and $z[1],z[2],\ldots,z[N]$ be realizations of the random processes.
+Consider the problem from the previous section and let $x[1], x[2], \ldots, x[N]$ and $z[1], z[2], \ldots, z[N]$ be realizations of the random processes.
 
 As an application, one can think of the $x[t]$ sequence as the received samples in a wireless communication system and the $z[t]$ sequence as a \emph{pilot sequence} (i.e., known to both the transmitter and receiver).
 It is assumed the transmitted sequence has been convolved with an unknown LTI system.
@@ -862,7 +865,7 @@ Using the vector $\vecnot{z} = \begin{bmatrix} z[K] & z[K+1] & \cdots & z[N] \en
 \[ A = \begin{bmatrix} x[K] & x[K-1] & \cdots & x[1] \\ x[K+1] & x[K] & \cdots & x[2] \\ \vdots & \vdots & \ddots & \vdots \\ x[N] & x[N-1] & \cdots & x[N-K+1] \end{bmatrix} , \]
 we can rewrite this cost function as
 \[ J(\vecnot{h}) = (A\vecnot{h}-\vecnot{z})^H \Lambda (A\vecnot{h}-\vecnot{z}), \]
-where $\Lambda$ is a diagonal matrix whose diagonal contains $\begin{bmatrix} \lambda^{N-K} & \lambda^{N-K+1} & \cdots & \lambda^1 & \lambda^0 \end{bmatrix}$.
+where $\Lambda$ is a diagonal matrix with diagonal entries $\begin{bmatrix} \lambda^{N-K} & \lambda^{N-K+1} & \cdots & \lambda^0 \end{bmatrix}$.
 Using the orthogonality principle, one finds that the optimal solution is given by the normal equation
 \[ A^H \Lambda A \vecnot{h} = A^H \Lambda \vecnot{z}. \]
 
@@ -920,9 +923,11 @@ The same problem can also be posed in a different manner.
 \label{thm:dual_approx}
 Let $V$ be a Hilbert space and $\vecnot{w}_1 ,\vecnot{w}_2 , \ldots, \vecnot{w}_n$ be a set of linearly independent vectors in $V$.
 The \defn{inner-product space}{dual approximation} problem is to find the vector $\vecnot{w}\in V$ of minimum-norm that satisfies $\left\langle \vecnot{w} | \vecnot{w}_i \right\rangle = c_i$ for $i=1,\ldots,n$.
-This vector is defined uniquely by
-\[ \vecnot{w} = \sum_{i=1}^n s_i \vecnot{w}_i, \]
-where $s_1,s_2,\ldots,s_n$ can be found by solving \eqref{eqn:DualNormalEquations} with the assumption $\left\langle \vecnot{v} | \vecnot{w}_i \right\rangle = c_i$.
+This vector is given by
+\begin{equation} \label{equation:DualApproximation}
+\vecnot{w} = \sum_{i=1}^n s_i \vecnot{w}_i,
+\end{equation}
+where the coefficients  $s_1,s_2,\ldots,s_n$ can be found by solving \eqref{eqn:DualNormalEquations} with $\left\langle \vecnot{v} | \vecnot{w}_i \right\rangle = c_i$.
 \end{theorem}
 \begin{proof}
 Let $W = \Span(\vecnot{w}_1 ,\vecnot{w}_2 , \ldots, \vecnot{w}_n)$ and notice that the subset
@@ -942,9 +947,9 @@ Let $A \in \ComplexNumbers^{m\times n}$ with $m<n$ be the matrix representation 
 Then, the dual approximation theorem can be applied to solve the problem
 \[ \min_{\vecnot{s} : A\vecnot{s} = \vecnot{v}} \| \vecnot{s} \| . \]
 To see this as a dual approximation, we can rewrite the constraint as $(A^H)^H \vecnot{s} = \vecnot{v}$ so that the columns of $A^H$ define the vectors $\vecnot{w}_1,\ldots,\vecnot{w}_n$ in Theorem~\ref{thm:dual_approx}.
-Then, the theorem concludes that the minimum-norm solution lies in $\mathcal{R}(A^H)$ (i.e., the column space of $A^H$).
-Using this, one can define $\hat{\vecnot{s}} = A^H \vecnot{t}$ and see that $A (A^H \vecnot{t}) = \vecnot{v}$.
-If the rows of $A$ are linearly independent, then the columns of $A^H$ are linearly independent and $(A A^H)^{-1}$ exists because the Gramian $A A^H$ is positive definite.
+Then, the theorem concludes that the minimum norm solution lies in $\mathcal{R}(A^H)$ (i.e., the column space of $A^H$).
+Using \eqref{equation:DualApproximation}, one gathers that $\hat{\vecnot{s}} = A^H \vecnot{t}$ for some $\vecnot{t}$ with $A (A^H \vecnot{t}) = \vecnot{v}$.
+If the rows of $A$ are linearly independent, then the columns of $A^H$ are linearly independent and $(A A^H)^{-1}$ exists.
 In this case, the solution $\hat{\vecnot{s}}$ can be obtained in closed form and is given by
 \[ \hat{\vecnot{s}} = A^H \left( A A^H \right)^{-1} \vecnot{v}. \]
 
