@@ -172,7 +172,7 @@ Therefore, the two spaces can be identified with each other so that $V=V^*$ for 
 
 %If $\vecnot{v} \in V$, then we can define a functional $f_{\vecnot{v}}$ by
 %\begin{equation*}
-%f_{\vecnot{v}} \left( \vecnot{w} \right) = \left\langle \vecnot{w} | \vecnot{v} \right\rangle.
+%f_{\vecnot{v}} \left( \vecnot{w} \right) = \inner{ \vecnot{w} }{ \vecnot{v} }.
 %\end{equation*}
 %That is, the inner product with a fixed vector is a linear functional.
 %Conversely, if $V$ is a Hilbert space, then any continuous linear functional can be expressed as an inner product.
@@ -509,23 +509,23 @@ Let $V$ be an inner-product space, and let $\vecnot{v}$ be some fixed vector in 
 Define the function $f_{\vecnot{v}}$ from $V$ into $F$ by
 \begin{equation*}
 f_{\vecnot{v}} \left( \vecnot{w} \right)
-= \left\langle \vecnot{w} | \vecnot{v} \right\rangle .
+= \inner{ \vecnot{w} }{ \vecnot{v} } .
 \end{equation*}
 Clearly, $f_{\vecnot{v}}$ is a linear functional on $V$.
 If $V$ is a Hilbert space, then every continuous linear functional on $V$ arises in this way from some vector $\vecnot{v}$.
 This result is known as the \defn{inner-product space}{Riesz representation theorem}.
 
 \begin{lemma} \label{lemma:DualSpaceSeparatesPoints}
-If $\langle \vecnot{v} | \vecnot{w} \rangle = \langle \vecnot{u} | \vecnot{w} \rangle$ for all $\vecnot{w} \in V$, then $\vecnot{v} = \vecnot{u}$.
+If $\tinner{ \vecnot{v} }{ \vecnot{w} } = \tinner{ \vecnot{u} }{ \vecnot{w} }$ for all $\vecnot{w} \in V$, then $\vecnot{v} = \vecnot{u}$.
 \end{lemma}
 \begin{proof}
-Then, $\langle \vecnot{v} - \vecnot{u} | \vecnot{w} \rangle = 0$ for all $\vecnot{w} \in V$.
-Therefore, $\langle \vecnot{v} - \vecnot{u} | \vecnot{v} - \vecnot{u} \rangle = 0$ and this implies $\vecnot{v} - \vecnot{u} = \vecnot{0}$.
+Then, $\tinner{ \vecnot{v} - \vecnot{u} }{ \vecnot{w} } = 0$ for all $\vecnot{w} \in V$.
+Therefore, $\tinner{ \vecnot{v} - \vecnot{u} }{ \vecnot{v} - \vecnot{u} } = 0$ and this implies $\vecnot{v} - \vecnot{u} = \vecnot{0}$.
 \end{proof}
 
 \begin{theorem}[Riesz] \label{theorem:FunctionalInnerProduct}
 Let $V$ be a Hilbert space and $f$ be a continuous linear functional on $V$.
-Then, there exists a unique vector $\vecnot{v} \in V$ such that $f \left( \vecnot{w} \right) = \left\langle \vecnot{w} | \vecnot{v} \right\rangle$ for all $\vecnot{w} \in V$.
+Then, there exists a unique vector $\vecnot{v} \in V$ such that $f \left( \vecnot{w} \right) = \inner{ \vecnot{w} }{ \vecnot{v} }$ for all $\vecnot{w} \in V$.
 \end{theorem}
 \begin{proof}
 While the result holds in any Hilbert space, this proof assumes $V$ is separable for simplicity.
@@ -542,16 +542,11 @@ M \left\| \vecnot{x}_n \right\| &\geq \left| f \left( \vecnot{x}_n \right) \righ
 = \sum_{i=1}^n \left| f \left( \vecnot{v}_i \right) \right|^2
 = \sum_{i=1}^n f \left( \vecnot{v}_i \right)
 \overline{ f \left( \vecnot{v}_i \right) } \\
-&= \sum_{i=1}^n \left\langle \overline{ f \left( \vecnot{v}_i \right) } \vecnot{v}_i
-\Big| \overline{ f \left( \vecnot{v}_i \right) } \vecnot{v}_i \right\rangle
+&= \sum_{i=1}^n \inner{ \overline{ f \left( \vecnot{v}_i \right) } \vecnot{v}_i }{ \overline{ f \left( \vecnot{v}_i \right) } \vecnot{v}_i }
 = \sum_{i=1}^n \sum_{j=1}^n
-\left\langle \overline{ f \left( \vecnot{v}_j \right) } \vecnot{v}_j
-\Big| \overline{ f \left( \vecnot{v}_i \right) } \vecnot{v}_i \right\rangle \\
-&= \left\langle \sum_{j=1}^n
-\overline{ f \left( \vecnot{v}_j \right) } \vecnot{v}_j
-\bigg| \sum_{i=1}^n
-\overline{ f \left( \vecnot{v}_i \right) } \vecnot{v}_i \right\rangle
-= \left\langle \vecnot{x}_n | \vecnot{x}_n \right\rangle
+\inner{ \overline{ f \left( \vecnot{v}_j \right) } \vecnot{v}_j }{ \overline{ f \left( \vecnot{v}_i \right) } \vecnot{v}_i } \\
+&= \inner{ \sum_{j=1}^n \overline{ f \left( \vecnot{v}_j \right) } \vecnot{v}_j }{ \sum_{i=1}^n \overline{ f \left( \vecnot{v}_i \right) } \vecnot{v}_i }
+= \inner{ \vecnot{x}_n }{ \vecnot{x}_n }
 = \left\| \vecnot{x}_n \right\|^2 .
 \end{split}
 \end{equation*}
@@ -563,26 +558,25 @@ Hence, $\lim_{n \rightarrow \infty} \sum_{i=1}^n \left| f \left( \vecnot{v}_i \r
 is in $V$ because it is the limit point of a Cauchy sequence.
 Let $f_{\vecnot{v}}$ be the functional defined by
 \begin{equation*}
-f_{\vecnot{v}} \left( \vecnot{w} \right) = \left\langle \vecnot{w} | \vecnot{v} \right\rangle .
+f_{\vecnot{v}} \left( \vecnot{w} \right) = \inner{ \vecnot{w} }{ \vecnot{v} } .
 \end{equation*}
 By the Cauchy-Schwarz, we can verify that
 \[ \| f_{\vecnot{v}} \| \triangleq \sup_{\vecnot{u}\in V - \{ \vecnot{0} \}} \frac{f_{\vecnot{v}} (\vecnot{u})}{\| \vecnot{u} \|} = \| \vecnot{v} \|. \]
 Since $f$ is continuous, it follows that $\| f \| < \infty$ and $\| \vecnot{v} \| < \infty$.
-%The Cauchy-Schwarz inequality shows that $\langle \vecnot{w} | \vecnot{v} \rangle \leq \| \vecnot{w} \| \| \vecnot{v} \|$ so that $f$ is continuous (and therefore linear) because $\| \vecnot{v} \| < \infty$.
+%The Cauchy-Schwarz inequality shows that $\tinner{ \vecnot{w} }{ \vecnot{v} } \leq \| \vecnot{w} \| \| \vecnot{v} \|$ so that $f$ is continuous (and therefore linear) because $\| \vecnot{v} \| < \infty$.
 Then, 
 \begin{equation*}
-f_{\vecnot{v}} \left( \vecnot{v}_j \right) = \left\langle \vecnot{v}_j \Big| 
-\sum_{i=1}^\infty \overline{f \left( \vecnot{v}_i \right)} \vecnot{v}_i \right\rangle
+f_{\vecnot{v}} \left( \vecnot{v}_j \right) = \inner{ \vecnot{v}_j }{ \sum_{i=1}^\infty \overline{f \left( \vecnot{v}_i \right)} \vecnot{v}_i }
 = f \left( \vecnot{v}_j \right) .
 \end{equation*}
 Since this is true for each $\vecnot{v}_j$, it follows that $f = f_{\vecnot{v}}$.
-Now, consider any $\vecnot{v}' \in V$ such that $\left\langle \vecnot{w} | \vecnot{v} \right\rangle = \left\langle \vecnot{w} | \vecnot{v}' \right\rangle$ for all $\vecnot{w} \in W$.
+Now, consider any $\vecnot{v}' \in V$ such that $\inner{ \vecnot{w} }{ \vecnot{v} } = \inner{ \vecnot{w} }{ \vecnot{v}' }$ for all $\vecnot{w} \in W$.
 Applying Lemma~\ref{lemma:DualSpaceSeparatesPoints} shows that $\vecnot{v} = \vecnot{v}'$ and we conclude that $\vecnot{v}$ is unique.
 \end{proof}
 
 An important consequence of this theorem is that the continuous dual space $V^*$ of a Hilbert space $V$ is isometrically isomorphic to the original space $V$.
 Let $R \colon V^* \rightarrow V$ be the implied Riesz mapping from continuous linear functionals on $V$ (i.e., $V^*$) to elements of $V$.
-Then, $f(\vecnot{v}) = \langle \vecnot{v} | R( f ) \rangle$ for all $f \in V^*$.
+Then, $f(\vecnot{v}) = \tinner{ \vecnot{v} }{ R( f ) }$ for all $f \in V^*$.
 The isomorphism can be shown by verifying that $R( s f_1 + f_2 ) = \overline{s} R(f_1) + R(f_2)$ and one finds that the mapping $R$ is conjugate linear.
 The mapping is isometric because $\| f \| = \| R(f) \|$.
 Based on this isomorphism, one can treat a Hilbert space as self-dual and assume without confusion that $V=V^*$.
@@ -592,15 +586,15 @@ Based on this isomorphism, one can treat a Hilbert space as self-dual and assume
 Let $V$ and $W$ be Hilbert spaces, and assume $T \colon V \rightarrow W$ is a continuous linear transformation.
 Then, the \defn{inner-product space}{adjoint} is the unique linear transformation $T^*$ on $W$ such that
 \begin{equation*}
-\left\langle T \vecnot{v} | \vecnot{w} \right\rangle
-= \left\langle \vecnot{v} | T^* \vecnot{w} \right\rangle
+\inner{ T \vecnot{v} }{ \vecnot{w} }
+= \inner{ \vecnot{v} }{ T^* \vecnot{w} }
 \end{equation*}
 for all vectors $\vecnot{v} \in V$, $\vecnot{w} \in W$.
 \end{theorem}
 \begin{proof}
 Let $\vecnot{w}$ be any vector in $W$.
-Then $f(\vecnot{v}) = \left\langle T \vecnot{v} | \vecnot{w} \right\rangle$ is a continuous linear functional on $V$.
-It follows from the Riesz representation theorem (Theorem~\ref{theorem:FunctionalInnerProduct}) that there exists a unique vector $\vecnot{v}' \in V$ such that $f(\vecnot{v}) = \left\langle T \vecnot{v} | \vecnot{w} \right\rangle = \left\langle \vecnot{v} | \vecnot{v}' \right\rangle$.
+Then $f(\vecnot{v}) = \inner{ T \vecnot{v} }{ \vecnot{w} }$ is a continuous linear functional on $V$.
+It follows from the Riesz representation theorem (Theorem~\ref{theorem:FunctionalInnerProduct}) that there exists a unique vector $\vecnot{v}' \in V$ such that $f(\vecnot{v}) = \inner{ T \vecnot{v} }{ \vecnot{w} } = \inner{ \vecnot{v} }{ \vecnot{v}' }$.
 Of course, the vector $\vecnot{v}'$ depends on the choice of $\vecnot{w}$.
 So, we define the adjoint mapping $T^* \colon W \rightarrow V$ to give the required $\vecnot{v}'$ for each $\vecnot{w}$.
 In other words,
@@ -612,20 +606,20 @@ Let $\vecnot{w}_1, \vecnot{w}_2$ be in $W$ and $s$ be a scalar.
 For all $\vecnot{v} \in V$,
 \begin{equation*}
 \begin{split}
-\left\langle \vecnot{v} | T^* \left( s \vecnot{w}_1 + \vecnot{w}_2 \right) \right\rangle
-&= \left\langle T \vecnot{v} | \left( s \vecnot{w}_1 + \vecnot{w}_2 \right) \right\rangle \\
-&= \bar{s} \left\langle T \vecnot{v} | \vecnot{w}_1 \right\rangle
-+ \left\langle T \vecnot{v} | \vecnot{w}_2 \right\rangle \\
-&= \bar{s} \left\langle \vecnot{v} | T^* \vecnot{w}_1 \right\rangle
-+ \left\langle \vecnot{v} | T^* \vecnot{w}_2 \right\rangle \\
-&= \left\langle \vecnot{v} | s T^* \vecnot{w}_1 \right\rangle
-+ \left\langle \vecnot{v} | T^* \vecnot{w}_2 \right\rangle \\
-&= \left\langle \vecnot{v} | s T^* \vecnot{w}_1 + T^* \vecnot{w}_2 \right\rangle .
+\inner{ \vecnot{v} }{ T^* \left( s \vecnot{w}_1 + \vecnot{w}_2 \right) }
+&= \inner{ T \vecnot{v} }{ \left( s \vecnot{w}_1 + \vecnot{w}_2 \right) } \\
+&= \bar{s} \inner{ T \vecnot{v} }{ \vecnot{w}_1 }
++ \inner{ T \vecnot{v} }{ \vecnot{w}_2 } \\
+&= \bar{s} \inner{ \vecnot{v} }{ T^* \vecnot{w}_1 }
++ \inner{ \vecnot{v} }{ T^* \vecnot{w}_2 } \\
+&= \inner{ \vecnot{v} }{ s T^* \vecnot{w}_1 }
++ \inner{ \vecnot{v} }{ T^* \vecnot{w}_2 } \\
+&= \inner{ \vecnot{v} }{ s T^* \vecnot{w}_1 + T^* \vecnot{w}_2 } .
 \end{split}
 \end{equation*}
 Since this holds for all $\vecnot{v} \in V$, we gather from Lemma~\ref{lemma:DualSpaceSeparatesPoints} that $T^* \left( s \vecnot{v}_1 + \vecnot{v}_2 \right) = s T^* \vecnot{v}_1 + T^* \vecnot{v}_2$.
 Therefore, $T^*$ is linear.
-The uniqueness of $T^*$ is inherited from Theorem~\ref{theorem:FunctionalInnerProduct} because, for each $\vecnot{w}\in W$, the vector $T^* \vecnot{w}$ is determined uniquely as the vector $\vecnot{v}'$ such that $\left\langle T \vecnot{v} | \vecnot{w} \right\rangle = \left\langle \vecnot{v} | \vecnot{v}' \right\rangle$ for all $\vecnot{v} \in V$.
+The uniqueness of $T^*$ is inherited from Theorem~\ref{theorem:FunctionalInnerProduct} because, for each $\vecnot{w}\in W$, the vector $T^* \vecnot{w}$ is determined uniquely as the vector $\vecnot{v}'$ such that $\inner{ T \vecnot{v} }{ \vecnot{w} } = \inner{ \vecnot{v} }{ \vecnot{v}' }$ for all $\vecnot{v} \in V$.
 \end{proof}
 
 \begin{theorem}
@@ -635,12 +629,12 @@ Let $V$ be a finite-dimensional inner-product space and let
 \end{equation*}
 be an orthonormal basis for $V$.
 Let $T$ be a linear operator on $V$ and let $A$ be the matrix representation of $T$ in the ordered basis $\mathcal{B}$.
-Then $A_{kj} = \left\langle T \vecnot{v}_j | \vecnot{v}_k \right\rangle$.
+Then $A_{kj} = \inner{ T \vecnot{v}_j }{ \vecnot{v}_k }$.
 \end{theorem}
 \begin{proof}
 Since $\mathcal{B}$ is an orthonormal basis, we have
 \begin{equation*}
-\vecnot{v} = \sum_{k=1}^n \left\langle \vecnot{v} | \vecnot{v}_k \right\rangle \vecnot{v}_k .
+\vecnot{v} = \sum_{k=1}^n \inner{ \vecnot{v} }{ \vecnot{v}_k } \vecnot{v}_k .
 \end{equation*}
 The matrix $A$ is defined by
 \begin{equation*}
@@ -648,9 +642,9 @@ T \vecnot{v}_j = \sum_{k=1}^n A_{kj} \vecnot{v}_k
 \end{equation*}
 and since
 \begin{equation*}
-T \vecnot{v}_j = \sum_{k=1}^n \left\langle T \vecnot{v}_j | \vecnot{v}_k \right\rangle \vecnot{v}_k ,
+T \vecnot{v}_j = \sum_{k=1}^n \inner{ T \vecnot{v}_j }{ \vecnot{v}_k } \vecnot{v}_k ,
 \end{equation*}
-we conclude that $A_{kj} = \left\langle T \vecnot{v}_j | \vecnot{v}_k \right\rangle$.
+we conclude that $A_{kj} = \inner{ T \vecnot{v}_j }{ \vecnot{v}_k }$.
 \end{proof}
 
 \begin{corollary}
@@ -661,14 +655,14 @@ In any orthonormal basis for $V$, the matrix for $T^*$ is the conjugate transpos
 Let $\mathcal{B} = \vecnot{v}_1, \ldots, \vecnot{v}_n$ be an orthonormal basis for $V$, let $A = [T]_{\mathcal{B}}$ and $B = [T^*]_{\mathcal{B}}$.
 According to the previous theorem,
 \begin{align*}
-A_{kj} &= \left\langle T \vecnot{v}_j | \vecnot{v}_k \right\rangle \\
-B_{kj} &= \left\langle T^* \vecnot{v}_j | \vecnot{v}_k \right\rangle
+A_{kj} &= \inner{ T \vecnot{v}_j }{ \vecnot{v}_k } \\
+B_{kj} &= \inner{ T^* \vecnot{v}_j }{ \vecnot{v}_k }
 \end{align*}
 By the definition of $T^*$, we then have
 \begin{equation*}
-B_{kj} = \left\langle T^* \vecnot{v}_j | \vecnot{v}_k \right\rangle
-= \overline{\left\langle \vecnot{v}_k | T^* \vecnot{v}_j \right\rangle}
-= \overline{\left\langle T \vecnot{v}_k | \vecnot{v}_j \right\rangle}
+B_{kj} = \inner{ T^* \vecnot{v}_j }{ \vecnot{v}_k }
+= \overline{\inner{ \vecnot{v}_k }{ T^* \vecnot{v}_j }}
+= \overline{\inner{ T \vecnot{v}_k }{ \vecnot{v}_j }}
 = \overline{A_{jk}} .
 \end{equation*}
 \end{proof}
@@ -711,9 +705,9 @@ Complementing these equalities, we get
 Let $\vecnot{w} \in R_T$, then there exists $\vecnot{v} \in V$ such that $T \vecnot{v} = \vecnot{w}$.
 Assume that $\vecnot{n} \in N_{T^*}$, then
 \begin{equation*}
-\left\langle \vecnot{w} | \vecnot{n} \right\rangle
-= \left\langle T \vecnot{v} | \vecnot{n} \right\rangle
-= \left\langle \vecnot{v} | T^* \vecnot{n} \right\rangle
+\inner{ \vecnot{w} }{ \vecnot{n} }
+= \inner{ T \vecnot{v} }{ \vecnot{n} }
+= \inner{ \vecnot{v} }{ T^* \vecnot{n} }
 = 0 .
 \end{equation*}
 That is, $\vecnot{w}$ and $\vecnot{n}$ are orthogonal vectors.
@@ -721,9 +715,9 @@ It follows that $N_{T^*} \subseteq \left[ R_T \right]^{\bot}$.
 Now, let $\vecnot{w} \in \left[ R_T \right]^{\bot}$.
 Then, for every $\vecnot{v} \in V$, we have
 \begin{equation*}
-\left\langle T \vecnot{v} | \vecnot{w} \right\rangle = 0.
+\inner{ T \vecnot{v} }{ \vecnot{w} } = 0.
 \end{equation*}
-This implies that $\left\langle \vecnot{v} | T^* \vecnot{w} \right\rangle = 0$, by the definition of the adjoint.
+This implies that $\inner{ \vecnot{v} }{ T^* \vecnot{w} } = 0$, by the definition of the adjoint.
 Since this is true for every $\vecnot{v} \in V$, we get $T^* \vecnot{w} = \vecnot{0}$, so $\vecnot{w} \in N_{T^*}$.
 Then $\left[ R_T \right]^{\bot} \subseteq N_{T^*}$, which combined with our previous result yields $\left[ R_T \right]^{\bot} = N_{T^*}$.
 Using a similar argument, one can show that $\left[ R_{T^*} \right]^{\bot} = N_T$.
@@ -734,7 +728,7 @@ Using a similar argument, one can show that $\left[ R_{T^*} \right]^{\bot} = N_T
 
 \begin{theorem}
 Let $V$ and $W$ be Hilbert spaces and $T$ be a bounded linear transformation from $V$ to $W$ where $R_T$ is closed.
-The equation $T\vecnot{v} = \vecnot{w}$ has a solution if and only if $\left\langle \vecnot{w} | \vecnot{u} \right\rangle = 0$ for every vector $\vecnot{u} \in N_{T^*}$, i.e.,
+The equation $T\vecnot{v} = \vecnot{w}$ has a solution if and only if $\inner{ \vecnot{w} }{ \vecnot{u} } = 0$ for every vector $\vecnot{u} \in N_{T^*}$, i.e.,
 \begin{equation*}
 \vecnot{w} \in R_T \Leftrightarrow \vecnot{w} \perp N_{T^*} .
 \end{equation*}
@@ -744,28 +738,28 @@ In matrix notation, $A \vecnot{v} = \vecnot{w}$ has a solution if and only if $\
 Assume that $T \vecnot{v} = \vecnot{w}$, and let $\vecnot{u} \in N_{T^*}$.
 Since $T$ is bounded, the adjoint $T^*$ exists and
 \begin{equation*}
-\left\langle \vecnot{w} | \vecnot{u} \right\rangle
-= \left\langle T \vecnot{v} | \vecnot{u} \right\rangle
-= \left\langle \vecnot{v} | T^* \vecnot{u} \right\rangle
-= \left\langle \vecnot{v} | \vecnot{0} \right\rangle
+\inner{ \vecnot{w} }{ \vecnot{u} }
+= \inner{ T \vecnot{v} }{ \vecnot{u} }
+= \inner{ \vecnot{v} }{ T^* \vecnot{u} }
+= \inner{ \vecnot{v} }{ \vecnot{0} }
 = 0 .
 \end{equation*}
 
-To prove the reverse implication, suppose that $\left\langle \vecnot{w} | \vecnot{u} \right\rangle = 0$ when $\vecnot{u} \in N_{T^*}$ and $T \vecnot{v} = \vecnot{w}$ has no solution.
+To prove the reverse implication, suppose that $\inner{ \vecnot{w} }{ \vecnot{u} } = 0$ when $\vecnot{u} \in N_{T^*}$ and $T \vecnot{v} = \vecnot{w}$ has no solution.
 Since $\vecnot{w} \notin R_T$ and $R_T$ is closed, it follows that
 \begin{equation*}
 \vecnot{w}_o = \vecnot{w} - P_{R_T} \vecnot{w} = \vecnot{w} - \vecnot{w}_r
 \neq \vecnot{0}.
 \end{equation*}
-%This implies that $\langle \vecnot{w} | \vecnot{w}_o \rangle = \left\langle T \vecnot{v} | \vecnot{w}_o \right\rangle = 0$ for all $\vecnot{v} \in V$, which implies that $\vecnot{w}_o \in N_{T^*}$.
+%This implies that $\tinner{ \vecnot{w} }{ \vecnot{w}_o } = \inner{ T \vecnot{v} }{ \vecnot{w}_o } = 0$ for all $\vecnot{v} \in V$, which implies that $\vecnot{w}_o \in N_{T^*}$.
 But
 \begin{equation*}
-\left\langle \vecnot{w} | \vecnot{w}_o \right\rangle
-= \left\langle \vecnot{w}_r + \vecnot{w}_o  | \vecnot{w}_o \right\rangle
-= \left\langle \vecnot{w}_o | \vecnot{w}_o \right\rangle
+\inner{ \vecnot{w} }{ \vecnot{w}_o }
+= \inner{ \vecnot{w}_r + \vecnot{w}_o  }{ \vecnot{w}_o }
+= \inner{ \vecnot{w}_o }{ \vecnot{w}_o }
 > 0,
 \end{equation*}
-which contradicts the assumption that $\left\langle \vecnot{w} | \vecnot{u} \right\rangle = 0$ when $\vecnot{u} \in N_{T^*}$.
+which contradicts the assumption that $\inner{ \vecnot{w} }{ \vecnot{u} } = 0$ when $\vecnot{u} \in N_{T^*}$.
 We must conclude that $T \vecnot{v} = \vecnot{w}$ has a solution.
 \end{proof}
 
@@ -773,7 +767,7 @@ We must conclude that $T \vecnot{v} = \vecnot{w}$ has a solution.
 %This result is related to Fredholm alternative because, for a given $\vecnot{w} \in W$ and $T\colon V \to W$ with closed range, exactly one of these statements is true:
 %\begin{itemize}
 %\item There exists $\vecnot{v} \in V$ such that $T \vecnot{v} = \vecnot{w}$, or
-%\item There exists $\vecnot{u} \in W$ such that $T^* \vecnot{u} = \vecnot{0}$ and $\langle \vecnot{w} | \vecnot{u} \rangle \neq 0$.
+%\item There exists $\vecnot{u} \in W$ such that $T^* \vecnot{u} = \vecnot{0}$ and $\tinner{ \vecnot{w} }{ \vecnot{u} } \neq 0$.
 %\end{itemize}
 %\end{remark}
 

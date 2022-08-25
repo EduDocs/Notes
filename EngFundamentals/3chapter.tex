@@ -32,7 +32,7 @@ Then, we have the following:
 \item If $W$ has a countable orthogonal basis $\vecnot{w}_1, \vecnot{w}_2, \ldots$ and is closed, then
 \begin{equation}
 \label{equation:OrthogonalProjectionOrthogonalVectors}
-\vecnot{w} = \sum_{i=1}^{\dim (W)} \frac{ \left\langle \vecnot{v} | \vecnot{w}_i \right\rangle }{ \left\| \vecnot{w}_i \right\|^2 } \vecnot{w}_i
+\vecnot{w} = \sum_{i=1}^{\dim (W)} \frac{ \inner{ \vecnot{v} }{ \vecnot{w}_i } }{ \left\| \vecnot{w}_i \right\|^2 } \vecnot{w}_i
 \end{equation}
 exists and equals the best approximation of $\vecnot{v}$ by vectors in $W$.
 \end{enumerate}
@@ -44,7 +44,7 @@ For any $\vecnot{w}' \in W$, we have $\vecnot{v} - \vecnot{w}' = \left( \vecnot{
 \begin{split}
 \left\| \vecnot{v} - \vecnot{w}' \right\|^2
 &= \left\| \vecnot{v} - \vecnot{w} \right\|^2
-+ 2 \Real \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle
++ 2 \Real \inner{ \vecnot{v} - \vecnot{w} }{ \vecnot{w} - \vecnot{w}' }
 + \left\| \vecnot{w} - \vecnot{w}' \right\|^2 \\
 &= \left\| \vecnot{v} - \vecnot{w} \right\|^2
 + \left\| \vecnot{w} - \vecnot{w}' \right\|^2 \\
@@ -53,47 +53,47 @@ For any $\vecnot{w}' \in W$, we have $\vecnot{v} - \vecnot{w}' = \left( \vecnot{
 \end{equation}
 For the converse, we note that,
 %To show the converse, we prove the contrapositive of the converse: if $\vecnot{v}-\vecnot{w}$ is not orthogonal to all vectors in $W$, then $\vecnot{w}$ is not a best approximation of $\vecnot{v}$ by vectors in $W$.
-if $\vecnot{v}-\vecnot{w}$ is not orthogonal to all vectors in $W$, then there must be some $\vecnot{u} \in W$ such that $\langle \vecnot{v}-\vecnot{w} | \vecnot{u} \rangle \neq 0$.
+if $\vecnot{v}-\vecnot{w}$ is not orthogonal to all vectors in $W$, then there must be some $\vecnot{u} \in W$ such that $\tinner{ \vecnot{v}-\vecnot{w} }{ \vecnot{u} } \neq 0$.
 Then, we let $\vecnot{w}''$ be the projection of $\vecnot{v}-\vecnot{w}$ onto $\vecnot{u}$.
 Next, we define $\vecnot{w}' = \vecnot{w}+\vecnot{w}''$ and observe that $\vecnot{w}' \in W$.
 Thus, Lemma~\ref{lem:proj_loss} implies
-\[ \| \vecnot{v}-\vecnot{w'} \| ^2 = \| \vecnot{v}-\vecnot{w} - \vecnot{w}'' \| ^2 = \|\vecnot{v}-\vecnot{w}\|^2 - \frac{|\langle \vecnot{v}-\vecnot{w} | \vecnot{u} \rangle|^2}{\|\vecnot{u}\|^2} < \| \vecnot{v}-\vecnot{w}\|^2. \]
+\[ \| \vecnot{v}-\vecnot{w'} \| ^2 = \| \vecnot{v}-\vecnot{w} - \vecnot{w}'' \| ^2 = \|\vecnot{v}-\vecnot{w}\|^2 - \frac{|\tinner{ \vecnot{v}-\vecnot{w} }{ \vecnot{u} }|^2}{\|\vecnot{u}\|^2} < \| \vecnot{v}-\vecnot{w}\|^2. \]
 Thus, $\vecnot{w}$ is not a best approximation of $\vecnot{v}$ by vectors in $W$.
 
 %Conversely, suppose that $\left\| \vecnot{v} - \vecnot{w}' \right\| \geq \left\| \vecnot{v} - \vecnot{w} \right\|$ for every $\vecnot{w}' \in W$.
 %From \eqref{equation:OrthogonalVector}, we get
 %\begin{equation*}
-%2 \Real \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle
+%2 \Real \inner{ \vecnot{v} - \vecnot{w} }{ \vecnot{w} - \vecnot{w}' }
 %+ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 \geq 0
 %\end{equation*}
 %for all $\vecnot{w}' \in W$.
 %Note that every vector in $W$ can be expressed as $\vecnot{w} - \vecnot{w}'$ where $\vecnot{w}' \in W$, it follows that
 %\begin{equation} \label{equation:InequalityOrthogonalVectors}
-%2 \Real \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w}'' \right\rangle
+%2 \Real \inner{ \vecnot{v} - \vecnot{w} }{ \vecnot{w}'' }
 %+ \left\| \vecnot{w}'' \right\|^2 \geq 0
 %\end{equation}
 %for every $\vecnot{w}'' \in W$.
 %If $\vecnot{w}'$ is in $W$ and $\vecnot{w}' \neq \vecnot{w}$, then we may take
 %\begin{equation*}
-%\vecnot{w}'' = - \frac{ \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 } \left( \vecnot{w} - \vecnot{w}' \right).
+%\vecnot{w}'' = - \frac{ \inner{ \vecnot{v} - \vecnot{w} }{ \vecnot{w} - \vecnot{w}' } }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 } \left( \vecnot{w} - \vecnot{w}' \right).
 %\end{equation*}
 %Inequality~\eqref{equation:InequalityOrthogonalVectors} then reduces to the statement
 %\begin{equation}
 %\begin{split}
 %0 &\leq
-%2 \Real \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w}'' \right\rangle
+%2 \Real \inner{ \vecnot{v} - \vecnot{w} }{ \vecnot{w}'' }
 %+ \left\| \vecnot{w}'' \right\|^2 \\
-%&= 2 \Real \left\langle \vecnot{v} - \vecnot{w} \bigg| - \frac{ \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 } \left( \vecnot{w} - \vecnot{w}' \right) \right\rangle \\
-%&\quad + \left\| - \frac{ \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 } \left( \vecnot{w} - \vecnot{w}' \right) \right\|^2 \\
-%&= - 2 \Real \frac{ \left\langle \vecnot{w} - \vecnot{w}' | \vecnot{v} - \vecnot{w} \right\rangle }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 }
-%\left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle
-%+ \frac{\left| \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle \right|^2}{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 } \\
-%&= - 2 \frac{ \left| \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle \right|^2 }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 }
-%+ \frac{ \left| \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle \right|^2 }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 }
-%= - \frac{ \left| \left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle \right|^2 }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 } .
+%&= 2 \Real \inner{ \vecnot{v} - \vecnot{w} }{ - \frac{ \inner{ \vecnot{v} - \vecnot{w} }{ \vecnot{w} - \vecnot{w}' } }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 } \left( \vecnot{w} - \vecnot{w}' \right) } \\
+%&\quad + \left\| - \frac{ \inner{ \vecnot{v} - \vecnot{w} }{ \vecnot{w} - \vecnot{w}' } }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 } \left( \vecnot{w} - \vecnot{w}' \right) \right\|^2 \\
+%&= - 2 \Real \frac{ \inner{ \vecnot{w} - \vecnot{w}' }{ \vecnot{v} - \vecnot{w} } }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 }
+%\inner{ \vecnot{v} - \vecnot{w} }{ \vecnot{w} - \vecnot{w}' }
+%+ \frac{\left| \inner{ \vecnot{v} - \vecnot{w} }{ \vecnot{w} - \vecnot{w}' } \right|^2}{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 } \\
+%&= - 2 \frac{ \left| \inner{ \vecnot{v} - \vecnot{w} }{ \vecnot{w} - \vecnot{w}' } \right|^2 }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 }
+%+ \frac{ \left| \inner{ \vecnot{v} - \vecnot{w} }{ \vecnot{w} - \vecnot{w}' } \right|^2 }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 }
+%= - \frac{ \left| \inner{ \vecnot{v} - \vecnot{w} }{ \vecnot{w} - \vecnot{w}' } \right|^2 }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 } .
 %\end{split}
 %\end{equation}
-%This inequality holds if and only if $\left\langle \vecnot{v} - \vecnot{w} | \vecnot{w} - \vecnot{w}' \right\rangle = 0$.
+%This inequality holds if and only if $\inner{ \vecnot{v} - \vecnot{w} }{ \vecnot{w} - \vecnot{w}' } = 0$.
 %Therefore, $\vecnot{v} - \vecnot{w}$ is orthogonal to every vector in $W$.
 %Hence the vector $\vecnot{w} \in W$ is a best approximation of $\vecnot{v} \in V$ by vectors in $W$ if and only if $\vecnot{v} - \vecnot{w}$ is orthogonal to every vector in $W$.
 
@@ -102,15 +102,15 @@ Then $\left\| \vecnot{v} - \vecnot{w} \right\| = \left\| \vecnot{v} - \vecnot{w}
 That is, if a best approximation exists then it is unique.
 
 Finally, assume $W$ is closed and $\vecnot{w}_1,\vecnot{w}_2, \ldots$ is a countable orthogonal basis.
-Then, for~\eqref{equation:OrthogonalProjectionOrthogonalVectors}, let the sequence of partial sums be $\vecnot{u}_n \triangleq \sum_{i=1}^n \vecnot{w}_i \left\langle \vecnot{v} | \vecnot{w}_i \right\rangle / \left\| \vecnot{w}_i \right\|^2$.
+Then, for~\eqref{equation:OrthogonalProjectionOrthogonalVectors}, let the sequence of partial sums be $\vecnot{u}_n \triangleq \sum_{i=1}^n \vecnot{w}_i \inner{ \vecnot{v} }{ \vecnot{w}_i } / \left\| \vecnot{w}_i \right\|^2$.
 Next, observe that $\vecnot{v} -\vecnot{u}_n$ is orthogonal to $\vecnot{w}_j$ for $j \in \{1,\ldots,n\}$, i.e.,
 \begin{equation*}
 \begin{split}
-\left\langle \vecnot{v} - \vecnot{u_n} | \vecnot{w}_j \right\rangle
-&= \left\langle \vecnot{v} | \vecnot{w}_j \right\rangle
-- \left\langle \sum_{i=1}^n \frac{ \left\langle \vecnot{v} | \vecnot{w}_i \right\rangle }{ \left\| \vecnot{w}_i \right\|^2 } \vecnot{w}_i \middle| \vecnot{w}_j \right\rangle \\
-&= \left\langle \vecnot{v} | \vecnot{w}_j \right\rangle
-- \frac{ \left\langle \vecnot{v} | \vecnot{w}_j \right\rangle }{ \left\| \vecnot{w}_i \right\|^2 } \left\langle \vecnot{w}_j | \vecnot{w}_j \right\rangle
+\inner{ \vecnot{v} - \vecnot{u_n} }{ \vecnot{w}_j }
+&= \inner{ \vecnot{v} }{ \vecnot{w}_j }
+- \inner{ \sum_{i=1}^n \frac{ \inner{ \vecnot{v} }{ \vecnot{w}_i } }{ \left\| \vecnot{w}_i \right\|^2 } \vecnot{w}_i }{ \vecnot{w}_j } \\
+&= \inner{ \vecnot{v} }{ \vecnot{w}_j }
+- \frac{ \inner{ \vecnot{v} }{ \vecnot{w}_j } }{ \left\| \vecnot{w}_i \right\|^2 } \inner{ \vecnot{w}_j }{ \vecnot{w}_j }
 = 0.
 \end{split}
 \end{equation*}
@@ -119,7 +119,7 @@ If $\dim(W) < \infty$, then this completes the proof.
 
 If $\dim(W) = \infty$, then we must argue that the limit of $\vecnot{u}_n$ exists and lies in $W$.
 The orthogonality of $\vecnot{w}_1,\ldots,\vecnot{w}_n$ implies $\|\vecnot{v}\|^2 = \| \vecnot{v} - \vecnot{u}_n \|^2 + \|\vecnot{u}_n\|^2.$
-From this, we see that $\| \vecnot{u}_n \|^2 = \sum_{i=1}^n \left|\langle \vecnot{v} | \vecnot{w}_i \rangle \right|^2 / \|\vecnot{w}_i\|^2$ is an increasing real sequence upper bounded by $\|\vecnot{v}\|^2$.
+From this, we see that $\| \vecnot{u}_n \|^2 = \sum_{i=1}^n \left|\tinner{ \vecnot{v} }{ \vecnot{w}_i } \right|^2 / \|\vecnot{w}_i\|^2$ is an increasing real sequence upper bounded by $\|\vecnot{v}\|^2$.
 It follows that the RHS converges to a finite limit.
 Thus, we can apply Lemma~\ref{lem:hilbert_sum_convergence} to show convergence $\vecnot{u}_n \to \vecnot{w}$.
 Since $W$ is closed, it follows that $\vecnot{w} \in W$.
@@ -139,24 +139,24 @@ Theorem~\ref{theorem:OrthogonalProjection} also implies the following result, kn
 Let $\vecnot{v}_1, \vecnot{v}_2, \ldots$ be a countable orthogonal set of distinct non-zero vectors in an inner-product space $V$ and let $W = \Span(\{ \vecnot{v}_1, \vecnot{v}_2, \ldots\})$.
 If $\vecnot{v} \in V$, then
 \begin{equation*}
-\sum_{i=1}^{\dim (W)} \frac{ \left| \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle \right|^2 }{ \left\| \vecnot{v}_i \right\|^2 }
+\sum_{i=1}^{\dim (W)} \frac{ \left| \inner{ \vecnot{v} }{ \vecnot{v}_i } \right|^2 }{ \left\| \vecnot{v}_i \right\|^2 }
 \leq \left\| \vecnot{v} \right\|^2.
 \end{equation*}
 Moreover, equality holds if and only if
 \begin{equation*}
-\vecnot{v} = \sum_{i=1}^{\dim (W)} \frac{ \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle }{ \left\| \vecnot{v}_i \right\|^2 } \vecnot{v}_i.
+\vecnot{v} = \sum_{i=1}^{\dim (W)} \frac{ \inner{ \vecnot{v} }{ \vecnot{v}_i } }{ \left\| \vecnot{v}_i \right\|^2 } \vecnot{v}_i.
 \end{equation*}
 \end{corollary}
 \begin{proof}
 Let the projection of $\vecnot{v}$ onto the closure of the span of $\vecnot{v}_1,\vecnot{v}_2,\ldots$ (i.e., $\Closure{W}$) be
 \begin{equation*}
-\vecnot{w} = \sum_{i=1}^{\dim (W)} \frac{ \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle }{ \left\| \vecnot{v}_i \right\|^2 } \vecnot{v}_i.
+\vecnot{w} = \sum_{i=1}^{\dim (W)} \frac{ \inner{ \vecnot{v} }{ \vecnot{v}_i } }{ \left\| \vecnot{v}_i \right\|^2 } \vecnot{v}_i.
 \end{equation*}
-Then, the error $\vecnot{u} = \vecnot{v} - \vecnot{w}$ satisfies  $\left\langle \vecnot{u} | \vecnot{w} \right\rangle = 0$ and $\left\| \vecnot{u} \right\|^2 = \left\| \vecnot{v} \right\|^2 - \left\| \vecnot{w} \right\|^2$.
+Then, the error $\vecnot{u} = \vecnot{v} - \vecnot{w}$ satisfies  $\inner{ \vecnot{u} }{ \vecnot{w} } = 0$ and $\left\| \vecnot{u} \right\|^2 = \left\| \vecnot{v} \right\|^2 - \left\| \vecnot{w} \right\|^2$.
 Noting that $\| \vecnot{u} \|^2 \geq 0$ and 
 \begin{equation*}
 \left\| \vecnot{w} \right\|^2
-= \sum_{i=1}^{\dim (W)} \frac{ \left| \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle \right|^2 }{ \left\| \vecnot{v}_i \right\|^2 },
+= \sum_{i=1}^{\dim (W)} \frac{ \left| \inner{ \vecnot{v} }{ \vecnot{v}_i } \right|^2 }{ \left\| \vecnot{v}_i \right\|^2 },
 \end{equation*}
 we see that $\| \vecnot{w} \|^2 \leq \| \vecnot{v} \|^2$ with equality iff $\vecnot{u} = \vecnot{0}$.
 \end{proof}
@@ -265,7 +265,7 @@ For $V=F^n$ with the standard inner product, an idempotent Hermitian matrix $P$ 
 \begin{proof}
 We simply must verify that the range and null space are orthogonal.
 Since $P \vecnot{u} \in \mathcal{R}(P)$ and $(I-P) \vecnot{v} \in \mathcal{N}(P)$ (e.g., $P\big((I-P)\vecnot{v}\big)=\vecnot{0}$), we observe that
-\[ \langle P\vecnot{u} | (I-P)\vecnot{v} \rangle = \vecnot{v}^H (I-P)^H P \vecnot{u} = \vecnot{v}^H (P - P^H P) \vecnot{u} = \vecnot{v}^H (P - P^2) \vecnot{u} = 0. \]
+\[ \tinner{ P\vecnot{u} }{ (I-P)\vecnot{v} } = \vecnot{v}^H (I-P)^H P \vecnot{u} = \vecnot{v}^H (P - P^H P) \vecnot{u} = \vecnot{v}^H (P - P^2) \vecnot{u} = 0. \]
 \end{proof}
 
 \begin{theorem} \label{theorem:OrthogonalSubspaceDirectSum}
@@ -285,12 +285,12 @@ To show that $E$ is a linear transformation, let $\vecnot{w}_1 , \vecnot{w}_2 , 
 Using part 3 of Theorem~\ref{theorem:OrthogonalProjection}, we find that
 \begin{align*}
 E \left( s_1 \vecnot{v}_1 + \vecnot{v}_2 \right)
-& = \sum_{i=1}^{\dim (W)} \langle  s_1 \vecnot{v}_1 + \vecnot{v}_2 | \vecnot{w}_i \rangle \vecnot{w}_i \\
-& = s_1 \sum_{i=1}^{\dim (W)} \langle  \vecnot{v}_1 | \vecnot{w}_i \rangle \vecnot{w}_i + \sum_{i=1}^{\dim (W)} \langle  \vecnot{v}_2 | \vecnot{w}_i \rangle \vecnot{w}_i \\
+& = \sum_{i=1}^{\dim (W)} \tinner{  s_1 \vecnot{v}_1 + \vecnot{v}_2 }{ \vecnot{w}_i } \vecnot{w}_i \\
+& = s_1 \sum_{i=1}^{\dim (W)} \tinner{  \vecnot{v}_1 }{ \vecnot{w}_i } \vecnot{w}_i + \sum_{i=1}^{\dim (W)} \tinner{  \vecnot{v}_2 }{ \vecnot{w}_i } \vecnot{w}_i \\
 & = s_1 E \vecnot{v}_1 + E \vecnot{v}_2.
 \end{align*}
 Therefore, $E$ is a linear transformation.
-It also follows that $E \vecnot{w}' = \vecnot{0}$ iff $\vecnot{w}' \in W^{\bot}$ because $W^{\bot}$ can be defined by the fact that $\langle \vecnot{w}' | \vecnot{w}_i \rangle = 0$ for $i\in \mathbb{N}$.
+It also follows that $E \vecnot{w}' = \vecnot{0}$ iff $\vecnot{w}' \in W^{\bot}$ because $W^{\bot}$ can be defined by the fact that $\tinner{ \vecnot{w}' }{ \vecnot{w}_i } = 0$ for $i\in \mathbb{N}$.
 
 \iffalse
 To show that $E$ is a linear transformation, consider vectors $\vecnot{v}_1, \vecnot{v}_2 \in V$ and scalar $s \in F$.
@@ -324,7 +324,7 @@ Again, let $\vecnot{v} \in V$ and recall that (by Theorem~\ref{theorem:Orthogona
 Therefore, the equation $\vecnot{v} = E \vecnot{v} + \left( \vecnot{v} - E \vecnot{v} \right)$ gives a unique decomposition of $\vecnot{v}$ into $E \vecnot{v} \in W$ and $\vecnot{v} - E \vecnot{v} \in W^{\bot}$.
 This unique decomposition implies that $V$ is the direct sum of $W$ and $W^{\bot}$.
 Lastly, one finds from the definition of $W^{\bot}$ that
-\[W \cap W^{\bot} = \left\{ \vecnot{u} \in W | \langle \vecnot{u} | \vecnot{w} \rangle =0 \; \forall \; \vecnot{w}\in W \right\}  \subseteq \left\{ \vecnot{u} \in W | \langle \vecnot{u} | \vecnot{u} \rangle =0 \right\}  = \{ \vecnot{0} \} . \qedhere \]
+\[W \cap W^{\bot} = \left\{ \vecnot{u} \in W | \tinner{ \vecnot{u} }{ \vecnot{w} } =0 \; \forall \; \vecnot{w}\in W \right\}  \subseteq \left\{ \vecnot{u} \in W | \tinner{ \vecnot{u} }{ \vecnot{u} } =0 \right\}  = \{ \vecnot{0} \} . \qedhere \]
 \end{proof}
 
 \begin{corollary}
@@ -346,11 +346,11 @@ Then, the best approximation of $\vecnot{v}\in V$ by vectors in $\mathcal{R}(U)$
 
 %If $\vecnot{v}_1, \vecnot{v}_2, \ldots$ is an orthonormal set, Bessel's inequality states that
 %\begin{equation*}
-%\sum_{i=1}^\infty \left| \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle \right|^2 \leq \left\| \vecnot{v} \right\|^2.
+%\sum_{i=1}^\infty \left| \inner{ \vecnot{v} }{ \vecnot{v}_i } \right|^2 \leq \left\| \vecnot{v} \right\|^2.
 %\end{equation*}
 %It follows that the vector $\vecnot{v}$ is in the closure of the subspace spanned by $\vecnot{v}_1, \vecnot{v}_2, \ldots$ if an only if
 %\begin{equation*}
-%\vecnot{v} = \sum_{i=1}^\infty \left\langle \vecnot{v} | \vecnot{v}_i \right\rangle \vecnot{v}_i.
+%\vecnot{v} = \sum_{i=1}^\infty \inner{ \vecnot{v} }{ \vecnot{v}_i } \vecnot{v}_i.
 %\end{equation*}
 
 
@@ -365,34 +365,34 @@ It is nevertheless possible to obtain a similar expression for the best approxim
 Theorem~\ref{theorem:OrthogonalProjection} asserts that $\hat{\vecnot{v}} \in W$ is a best approximation of $\vecnot{v} \in V$ by vectors in $W$ if and only if $\vecnot{v} - \hat{\vecnot{v}}$ is orthogonal to every vector in $W$.
 This implies that
 \begin{equation*}
-\left\langle \vecnot{v} - \hat{\vecnot{v}} | \vecnot{w}_j \right\rangle
-= \left\langle \vecnot{v} - \sum_{i=1}^n s_i \vecnot{w}_i \Big| \vecnot{w}_j \right\rangle
+\inner{ \vecnot{v} - \hat{\vecnot{v}} }{ \vecnot{w}_j }
+= \inner{ \vecnot{v} - \sum_{i=1}^n s_i \vecnot{w}_i }{ \vecnot{w}_j }
 = 0
 \end{equation*}
 or, equivalently,
 \begin{equation*}
-\sum_{i=1}^n s_i \left\langle \vecnot{w}_i | \vecnot{w}_j \right\rangle
-= \left\langle \vecnot{v} | \vecnot{w}_j \right\rangle
+\sum_{i=1}^n s_i \inner{ \vecnot{w}_i }{ \vecnot{w}_j }
+= \inner{ \vecnot{v} }{ \vecnot{w}_j }
 \end{equation*}
 for $j = 1, \ldots, n$.
 These conditions yield a system of $n$ linear equations in $n$ unknowns, which can be written in the matrix form
 \begin{equation*}
 \begin{bmatrix}
-\left\langle \vecnot{w}_1 | \vecnot{w}_1 \right\rangle
-& \left\langle \vecnot{w}_2 | \vecnot{w}_1 \right\rangle & \cdots
-& \left\langle \vecnot{w}_n | \vecnot{w}_1 \right\rangle \\
-\left\langle \vecnot{w}_1 | \vecnot{w}_2 \right\rangle
-& \left\langle \vecnot{w}_2 | \vecnot{w}_2 \right\rangle & \cdots
-& \left\langle \vecnot{w}_n | \vecnot{w}_2 \right\rangle \\
+\inner{ \vecnot{w}_1 }{ \vecnot{w}_1 }
+& \inner{ \vecnot{w}_2 }{ \vecnot{w}_1 } & \cdots
+& \inner{ \vecnot{w}_n }{ \vecnot{w}_1 } \\
+\inner{ \vecnot{w}_1 }{ \vecnot{w}_2 }
+& \inner{ \vecnot{w}_2 }{ \vecnot{w}_2 } & \cdots
+& \inner{ \vecnot{w}_n }{ \vecnot{w}_2 } \\
 \vdots & \vdots & \ddots & \vdots \\
-\left\langle \vecnot{w}_1 | \vecnot{w}_n \right\rangle
-& \left\langle \vecnot{w}_2 | \vecnot{w}_n \right\rangle & \cdots
-& \left\langle \vecnot{w}_n | \vecnot{w}_n \right\rangle
+\inner{ \vecnot{w}_1 }{ \vecnot{w}_n }
+& \inner{ \vecnot{w}_2 }{ \vecnot{w}_n } & \cdots
+& \inner{ \vecnot{w}_n }{ \vecnot{w}_n }
 \end{bmatrix}
 \begin{bmatrix} s_1 \\ s_2 \\ \vdots \\ s_n \end{bmatrix}
-= \begin{bmatrix} \left\langle \vecnot{v} | \vecnot{w}_1 \right\rangle \\
-\left\langle \vecnot{v} | \vecnot{w}_2 \right\rangle \\ \vdots \\
-\left\langle \vecnot{v} | \vecnot{w}_n \right\rangle \end{bmatrix} .
+= \begin{bmatrix} \inner{ \vecnot{v} }{ \vecnot{w}_1 } \\
+\inner{ \vecnot{v} }{ \vecnot{w}_2 } \\ \vdots \\
+\inner{ \vecnot{v} }{ \vecnot{w}_n } \end{bmatrix} .
 \end{equation*}
 We can rewrite this matrix equation as
 \begin{equation*}
@@ -402,9 +402,9 @@ where
 \begin{equation*}
 \vecnot{t}^T = 
 \left(
-\left\langle \vecnot{v} | \vecnot{w}_1 \right\rangle,
-\left\langle \vecnot{v} | \vecnot{w}_2 \right\rangle, \ldots,
-\left\langle \vecnot{v} | \vecnot{w}_n \right\rangle \right)
+\inner{ \vecnot{v} }{ \vecnot{w}_1 },
+\inner{ \vecnot{v} }{ \vecnot{w}_2 }, \ldots,
+\inner{ \vecnot{v} }{ \vecnot{w}_n } \right)
 \end{equation*}
 is the \textbf{cross-correlation vector}, and
 \begin{equation*}
@@ -418,20 +418,20 @@ Equations of this form are collectively known as the \defn{inner-product space}{
 The $n \times n$ matrix
 \begin{equation} \label{equation:GramianMatrix}
 G = \begin{bmatrix}
-\left\langle \vecnot{w}_1 | \vecnot{w}_1 \right\rangle
-& \left\langle \vecnot{w}_2 | \vecnot{w}_1 \right\rangle & \cdots
-& \left\langle \vecnot{w}_n | \vecnot{w}_1 \right\rangle \\
-\left\langle \vecnot{w}_1 | \vecnot{w}_2 \right\rangle
-& \left\langle \vecnot{w}_2 | \vecnot{w}_2 \right\rangle & \cdots
-& \left\langle \vecnot{w}_n | \vecnot{w}_2 \right\rangle \\
+\inner{ \vecnot{w}_1 }{ \vecnot{w}_1 }
+& \inner{ \vecnot{w}_2 }{ \vecnot{w}_1 } & \cdots
+& \inner{ \vecnot{w}_n }{ \vecnot{w}_1 } \\
+\inner{ \vecnot{w}_1 }{ \vecnot{w}_2 }
+& \inner{ \vecnot{w}_2 }{ \vecnot{w}_2 } & \cdots
+& \inner{ \vecnot{w}_n }{ \vecnot{w}_2 } \\
 \vdots & \vdots & \ddots & \vdots \\
-\left\langle \vecnot{w}_1 | \vecnot{w}_n \right\rangle
-& \left\langle \vecnot{w}_2 | \vecnot{w}_n \right\rangle & \cdots
-& \left\langle \vecnot{w}_n | \vecnot{w}_n \right\rangle
+\inner{ \vecnot{w}_1 }{ \vecnot{w}_n }
+& \inner{ \vecnot{w}_2 }{ \vecnot{w}_n } & \cdots
+& \inner{ \vecnot{w}_n }{ \vecnot{w}_n }
 \end{bmatrix}
 \end{equation}
 is called the \defn{matrix}{Gramian} matrix.
-Since $g_{ij} = \left\langle \vecnot{w}_j | \vecnot{w}_i \right\rangle$, it follows that the Gramian is a Hermitian symmetric matrix, i.e., $G^H = G$.
+Since $g_{ij} = \inner{ \vecnot{w}_j }{ \vecnot{w}_i }$, it follows that the Gramian is a Hermitian symmetric matrix, i.e., $G^H = G$.
 \end{definition}
 
 \begin{definition}
@@ -447,15 +447,15 @@ A Gramian matrix $G$ is always positive-semidefinite.
 It is positive-definite if and only if the vectors $\vecnot{w}_1, \ldots, \vecnot{w}_n$ are linearly independent.
 \end{theorem}
 \begin{proof}
-Since $g_{ij} = \left\langle \vecnot{w}_j | \vecnot{w}_i \right\rangle$, the conjugation property of the inner product implies $G^H = G$.
+Since $g_{ij} = \inner{ \vecnot{w}_j }{ \vecnot{w}_i }$, the conjugation property of the inner product implies $G^H = G$.
 Using $\vecnot{v} = \left( v_1, \ldots, v_n \right)^T \in F^n$, we can write
 \begin{equation} \label{equation:PositiveSemiDefiniteProof}
 \begin{split}
 \vecnot{v}^H G \vecnot{v} &=
 \sum_{i=1}^n \sum_{j=1}^n \bar{v}_i g_{ij} v_j
-= \sum_{i=1}^n \sum_{j=1}^n \bar{v}_i \left\langle \vecnot{w}_j | \vecnot{w}_i \right\rangle v_j \\
-&= \sum_{i=1}^n \sum_{j=1}^n \left\langle v_j \vecnot{w}_j | v_i \vecnot{w}_i \right\rangle
-= \left\langle \sum_{j=1}^n v_j \vecnot{w}_j \Big| \sum_{i=1}^n v_i \vecnot{w}_i \right\rangle \\
+= \sum_{i=1}^n \sum_{j=1}^n \bar{v}_i \inner{ \vecnot{w}_j }{ \vecnot{w}_i } v_j \\
+&= \sum_{i=1}^n \sum_{j=1}^n \inner{ v_j \vecnot{w}_j }{ v_i \vecnot{w}_i }
+= \inner{ \sum_{j=1}^n v_j \vecnot{w}_j }{ \sum_{i=1}^n v_i \vecnot{w}_i } \\
 &= \left\| \sum_{i=1}^n v_i \vecnot{w}_i \right\|^2
 \geq 0.
 \end{split}
@@ -490,7 +490,7 @@ For any vector $\vecnot{v} \in V$, the norm of the error vector
 is minimized when the error vector $\vecnot{e}$ is orthogonal to every vector in $W$.
 If $\hat{\vecnot{v}}$ denotes the \defn{inner-product space}{least-squares} approximation of $\vecnot{v}$ then
 \begin{equation*}
-\left\langle \vecnot{v} - \hat{\vecnot{v}} | \vecnot{w}_j \right\rangle = 0
+\inner{ \vecnot{v} - \hat{\vecnot{v}} }{ \vecnot{w}_j } = 0
 \end{equation*}
 for $j = 1, \ldots, n$.
 \end{theorem}
@@ -499,16 +499,15 @@ Minimizing $\left\| \vecnot{e} \right\|^2$ over $\vecnot{s}$, where $\vecnot{e}$
 \begin{equation*}
 \begin{split}
 J \left( \vecnot{s} \right)
-&= \left\langle \vecnot{v} - \sum_{i=1}^n s_i \vecnot{w}_i \Big|
-\vecnot{v} - \sum_{j=1}^n s_j \vecnot{w}_j \right\rangle \\
-&= \left\langle \vecnot{v} | \vecnot{v} \right\rangle
-- \sum_{i=1}^n \left\langle s_i \vecnot{w}_i | \vecnot{v} \right\rangle
-- \sum_{j=1}^n \left\langle \vecnot{v} | s_j \vecnot{w}_j \right\rangle
-+ \sum_{i=1}^n \sum_{j=1}^n \left\langle s_i \vecnot{w}_i | s_j \vecnot{w}_j \right\rangle \\
-&= \left\langle \vecnot{v} | \vecnot{v} \right\rangle
-- \sum_{i=1}^n s_i \left\langle \vecnot{w}_i | \vecnot{v} \right\rangle
-- \sum_{j=1}^n \bar{s}_j \left\langle \vecnot{v} | \vecnot{w}_j \right\rangle
-+ \sum_{i=1}^n \sum_{j=1}^n s_i \bar{s}_j \left\langle \vecnot{w}_i | \vecnot{w}_j \right\rangle .
+&= \inner{ \vecnot{v} - \sum_{i=1}^n s_i \vecnot{w}_i }{ \vecnot{v} - \sum_{j=1}^n s_j \vecnot{w}_j } \\
+&= \inner{ \vecnot{v} }{ \vecnot{v} }
+- \sum_{i=1}^n \inner{ s_i \vecnot{w}_i }{ \vecnot{v} }
+- \sum_{j=1}^n \inner{ \vecnot{v} }{ s_j \vecnot{w}_j }
++ \sum_{i=1}^n \sum_{j=1}^n \inner{ s_i \vecnot{w}_i }{ s_j \vecnot{w}_j } \\
+&= \inner{ \vecnot{v} }{ \vecnot{v} }
+- \sum_{i=1}^n s_i \inner{ \vecnot{w}_i }{ \vecnot{v} }
+- \sum_{j=1}^n \bar{s}_j \inner{ \vecnot{v} }{ \vecnot{w}_j }
++ \sum_{i=1}^n \sum_{j=1}^n s_i \bar{s}_j \inner{ \vecnot{w}_i }{ \vecnot{w}_j } .
 \end{split}
 \end{equation*}
 To take the derivative with respect to  $\vecnot{s}\in \mathbb{C}^n$, we use the decomposition $\vecnot{s}=\vecnot{a}+j \vecnot{b}$, with $\vecnot{a},\vecnot{b}\in \mathbb{R}^n$, and define the differential operators
@@ -524,22 +523,22 @@ Choosing $\vecnot{\overline{s}}$, gives
 \begin{split}
 \frac{\partial}{\partial\vecnot{\overline{s}}} J \left( \vecnot{s} \right)
 &= - \begin{bmatrix}
-\left\langle \vecnot{v} | \vecnot{w}_1 \right\rangle \\
-\left\langle \vecnot{v} | \vecnot{w}_2 \right\rangle \\
+\inner{ \vecnot{v} }{ \vecnot{w}_1 } \\
+\inner{ \vecnot{v} }{ \vecnot{w}_2 } \\
 \vdots \\
-\left\langle \vecnot{v} | \vecnot{w}_n \right\rangle
+\inner{ \vecnot{v} }{ \vecnot{w}_n }
 \end{bmatrix}
 + \begin{bmatrix}
-\left\langle \vecnot{w}_1 | \vecnot{w}_1 \right\rangle &
-\left\langle \vecnot{w}_2 | \vecnot{w}_1 \right\rangle & \hdots &
-\left\langle \vecnot{w}_n | \vecnot{w}_1 \right\rangle \\
-\left\langle \vecnot{w}_1 | \vecnot{w}_2 \right\rangle &
-\left\langle \vecnot{w}_2 | \vecnot{w}_2 \right\rangle & \hdots &
-\left\langle \vecnot{w}_n | \vecnot{w}_2 \right\rangle \\
+\inner{ \vecnot{w}_1 }{ \vecnot{w}_1 } &
+\inner{ \vecnot{w}_2 }{ \vecnot{w}_1 } & \hdots &
+\inner{ \vecnot{w}_n }{ \vecnot{w}_1 } \\
+\inner{ \vecnot{w}_1 }{ \vecnot{w}_2 } &
+\inner{ \vecnot{w}_2 }{ \vecnot{w}_2 } & \hdots &
+\inner{ \vecnot{w}_n }{ \vecnot{w}_2 } \\
 \vdots & \vdots & \ddots & \vdots \\
-\left\langle \vecnot{w}_1 | \vecnot{w}_n \right\rangle &
-\left\langle \vecnot{w}_2 | \vecnot{w}_n \right\rangle & \hdots &
-\left\langle \vecnot{w}_n | \vecnot{w}_n \right\rangle \\
+\inner{ \vecnot{w}_1 }{ \vecnot{w}_n } &
+\inner{ \vecnot{w}_2 }{ \vecnot{w}_n } & \hdots &
+\inner{ \vecnot{w}_n }{ \vecnot{w}_n } \\
 \end{bmatrix}
 \begin{bmatrix} s_1 \\ s_2 \\ \vdots \\ s_n \end{bmatrix} \\
 &= \vecnot{0} .
@@ -590,9 +589,9 @@ Determine $\vecnot{s} \in F^n$ such that
 is minimized.
 Note that this occurs when the error vector is orthogonal to every vector in $W$, i.e.,
 \begin{equation*}
-\left\langle \vecnot{e} | \vecnot{w}_j \right\rangle
-= \left\langle \vecnot{v} - \hat{\vecnot{v}} | \vecnot{w}_j \right\rangle
-= \left\langle \vecnot{v} - A \vecnot{s} | \vecnot{w}_j \right\rangle
+\inner{ \vecnot{e} }{ \vecnot{w}_j }
+= \inner{ \vecnot{v} - \hat{\vecnot{v}} }{ \vecnot{w}_j }
+= \inner{ \vecnot{v} - A \vecnot{s} }{ \vecnot{w}_j }
 = 0
 \end{equation*}
 for $j = 1, \ldots, n$.
@@ -631,11 +630,11 @@ It defines an orthogonal projection onto the range of $A$ (i.e., the subspace sp
 We can also consider the case of a general inner product.
 Recall that an inner product on $V$ is completely determined by the values
 \begin{equation*}
-h_{ji} = \left\langle \vecnot{e}_i | \vecnot{e}_j \right\rangle
+h_{ji} = \inner{ \vecnot{e}_i }{ \vecnot{e}_j }
 \end{equation*}
 and that it can be expressed in terms of the matrix $H$ (where $[H]_{j,i} = h_{j,i}$) as
 \begin{equation*}
-\left\langle \vecnot{v} | \vecnot{w} \right\rangle
+\inner{ \vecnot{v} }{ \vecnot{w} }
 = \vecnot{w}^H H \vecnot{v}.
 \end{equation*}
 Minimizing $\left\| \vecnot{e} \right\|^2 = \left\| \vecnot{v} - A \vecnot{s} \right\|^2$ and using the orthogonality principle lead to the matrix equation
@@ -660,9 +659,9 @@ The squared norm of the minimum error is given implicitly by
 \begin{equation*}
 \left\| \vecnot{v} \right\|^2
 = \left\| \hat{\vecnot{v}} + \vecnot{e} \right\|^2
-= \left\langle \hat{\vecnot{v}} + \vecnot{e} | \hat{\vecnot{v}} + \vecnot{e} \right\rangle
-= \left\langle \hat{\vecnot{v}} | \hat{\vecnot{v}} \right\rangle
-+ \left\langle \vecnot{e} | \vecnot{e} \right\rangle
+= \inner{ \hat{\vecnot{v}} + \vecnot{e} }{ \hat{\vecnot{v}} + \vecnot{e} }
+= \inner{ \hat{\vecnot{v}} }{ \hat{\vecnot{v}} }
++ \inner{ \vecnot{e} }{ \vecnot{e} }
 = \left\| \hat{\vecnot{v}} \right\|^2 + \left\| \vecnot{e} \right\|^2 .
 \end{equation*}
 We can then find an explicit expression for the approximation error,
@@ -728,7 +727,7 @@ The goal of the linear minimum mean-squared error (LMMSE) estimation  problem is
 minimizes the MSE $\Expect \big[ |Y-\hat{Y}|^2 \big]$.
 Using the inner product defined by
 \begin{equation} \label{equation:ExpectationInnerProduct}
-\left\langle X | Y \right\rangle = \Expect \left[ X \overline{Y} \right],
+\inner{ X }{ Y } = \Expect \left[ X \overline{Y} \right],
 \end{equation}
 we can compute the linear minimum mean-squared estimate $\hat{Y}$ using
 \begin{equation*}
@@ -784,12 +783,12 @@ In particular, we want to minimize the mean-squared error
 
 By the orthogonality principle, the mean-squared error is minimized when the error is orthogonal to the data; that is, for $j = 0, 1, \ldots, K-1$, we have
 \begin{equation*}
-\left\langle Z[t] - \sum_{k=0}^{K-1} h[k] X[t - k] \Big| X[t - j] \right\rangle = 0,
+\inner{ Z[t] - \sum_{k=0}^{K-1} h[k] X[t - k] }{ X[t - j] } = 0,
 \end{equation*}
 or, equivalently, we can write
 \begin{equation*}
-\left\langle Z[t] | X[t - j] \right\rangle
-= \sum_{k=0}^{K-1} h[k] \left\langle X[t - k] | X[t - j] \right\rangle .
+\inner{ Z[t] }{ X[t - j] }
+= \sum_{k=0}^{K-1} h[k] \inner{ X[t - k] }{ X[t - j] } .
 \end{equation*}
 Using \eqref{equation:ExpectationInnerProduct}, we obtain
 \begin{equation} \label{equation:WienerHopfConditions}
@@ -804,12 +803,12 @@ Recall that $\{ X[t] \}$ is a wide-sense stationary process.
 As such, we have
 \begin{equation*}
 R_{xx} (j-k) = R_{xx} (j, k) = \Expect \left[ X[t-k] \overline{X}[t-j] \right]
-= \left\langle X[t-k] | X[t-j] \right\rangle .
+= \inner{ X[t-k] }{ X[t-j] } .
 \end{equation*}
 Also define
 \begin{equation*}
 R_{zx}(j) = \Expect \left[ Z[t] \overline{X}[t-j] \right]
-= \left\langle Z[t] | X[t-j] \right\rangle .
+= \inner{ Z[t] }{ X[t-j] } .
 \end{equation*}
 Using this notation, we can rewrite \eqref{equation:WienerHopfConditions} as
 \begin{equation*}
@@ -900,44 +899,44 @@ The answer is clearly given by the best approximation of $\vecnot{v}$ by vectors
 The orthogonality principle tells us that $s_1,s_2,\ldots,s_n$ must satisfy
 \begin{equation} \label{eqn:DualNormalEquations}
 \begin{bmatrix}
-\left\langle \vecnot{w}_1 | \vecnot{w}_1 \right\rangle
-& \left\langle \vecnot{w}_2 | \vecnot{w}_1 \right\rangle & \cdots
-& \left\langle \vecnot{w}_n | \vecnot{w}_1 \right\rangle \\
-\left\langle \vecnot{w}_1 | \vecnot{w}_2 \right\rangle
-& \left\langle \vecnot{w}_2 | \vecnot{w}_2 \right\rangle & \cdots
-& \left\langle \vecnot{w}_n | \vecnot{w}_2 \right\rangle \\
+\inner{ \vecnot{w}_1 }{ \vecnot{w}_1 }
+& \inner{ \vecnot{w}_2 }{ \vecnot{w}_1 } & \cdots
+& \inner{ \vecnot{w}_n }{ \vecnot{w}_1 } \\
+\inner{ \vecnot{w}_1 }{ \vecnot{w}_2 }
+& \inner{ \vecnot{w}_2 }{ \vecnot{w}_2 } & \cdots
+& \inner{ \vecnot{w}_n }{ \vecnot{w}_2 } \\
 \vdots & \vdots & \ddots & \vdots \\
-\left\langle \vecnot{w}_1 | \vecnot{w}_n \right\rangle
-& \left\langle \vecnot{w}_2 | \vecnot{w}_n \right\rangle & \cdots
-& \left\langle \vecnot{w}_n | \vecnot{w}_n \right\rangle
+\inner{ \vecnot{w}_1 }{ \vecnot{w}_n }
+& \inner{ \vecnot{w}_2 }{ \vecnot{w}_n } & \cdots
+& \inner{ \vecnot{w}_n }{ \vecnot{w}_n }
 \end{bmatrix}
 \begin{bmatrix} s_1 \\ s_2 \\ \vdots \\ s_n \end{bmatrix}
 = \begin{bmatrix}
-\left\langle \vecnot{v} | \vecnot{w}_1 \right\rangle \\
-\left\langle \vecnot{v} | \vecnot{w}_2 \right\rangle \\ \vdots \\
-\left\langle \vecnot{v} | \vecnot{w}_n \right\rangle \end{bmatrix} .
+\inner{ \vecnot{v} }{ \vecnot{w}_1 } \\
+\inner{ \vecnot{v} }{ \vecnot{w}_2 } \\ \vdots \\
+\inner{ \vecnot{v} }{ \vecnot{w}_n } \end{bmatrix} .
 \end{equation}
 
 The same problem can also be posed in a different manner.
 \begin{theorem}
 \label{thm:dual_approx}
 Let $V$ be a Hilbert space and $\vecnot{w}_1 ,\vecnot{w}_2 , \ldots, \vecnot{w}_n$ be a set of linearly independent vectors in $V$.
-The \defn{inner-product space}{dual approximation} problem is to find the vector $\vecnot{w}\in V$ of minimum-norm that satisfies $\left\langle \vecnot{w} | \vecnot{w}_i \right\rangle = c_i$ for $i=1,\ldots,n$.
+The \defn{inner-product space}{dual approximation} problem is to find the vector $\vecnot{w}\in V$ of minimum-norm that satisfies $\inner{ \vecnot{w} }{ \vecnot{w}_i } = c_i$ for $i=1,\ldots,n$.
 This vector is given by
 \begin{equation} \label{equation:DualApproximation}
 \vecnot{w} = \sum_{i=1}^n s_i \vecnot{w}_i,
 \end{equation}
-where the coefficients  $s_1,s_2,\ldots,s_n$ can be found by solving \eqref{eqn:DualNormalEquations} with $\left\langle \vecnot{v} | \vecnot{w}_i \right\rangle = c_i$.
+where the coefficients  $s_1,s_2,\ldots,s_n$ can be found by solving \eqref{eqn:DualNormalEquations} with $\inner{ \vecnot{v} }{ \vecnot{w}_i } = c_i$.
 \end{theorem}
 \begin{proof}
 Let $W = \Span(\vecnot{w}_1 ,\vecnot{w}_2 , \ldots, \vecnot{w}_n)$ and notice that the subset
-\[ A = \{ \vecnot{u} \in V | \left\langle \vecnot{u} | \vecnot{w}_i \right\rangle = c_i\; \forall\; i=1,\ldots,n \} \]
+\[ A = \{ \vecnot{u} \in V | \inner{ \vecnot{u} }{ \vecnot{w}_i } = c_i\; \forall\; i=1,\ldots,n \} \]
 is simply the orthogonal complement $W^{\bot}$ translated by some fixed vector $\vecnot{v}\in A$.
-This is because, for all $\vecnot{x} \in W^{\perp}$, we have $\left\langle \vecnot{x} | \vecnot{w}_i \right\rangle = 0$ and $\left\langle \vecnot{v} - \vecnot{x} | \vecnot{w}_i \right\rangle = c_i$.
+This is because, for all $\vecnot{x} \in W^{\perp}$, we have $\inner{ \vecnot{x} }{ \vecnot{w}_i } = 0$ and $\inner{ \vecnot{v} - \vecnot{x} }{ \vecnot{w}_i } = c_i$.
 Thus, there is a one-to-one correspondence between $\vecnot{u} \in A$ and $\vecnot{x}\in W^\perp$ given by $\vecnot{u} = \vecnot{v}-\vecnot{x}$ and this implies
 \[ \min_{\vecnot{u}\in A} \| \vecnot{u} \|  = \min_{\vecnot{x}\in W^{\perp}} \| \vecnot{v} - \vecnot{x} \|. \]
 Since the optimizer $\vecnot{x}^*$ of the RHS expression is the orthogonal projection of $\vecnot{v}$ onto $W^\perp$, the resulting error vector $\vecnot{v}-\vecnot{x}^*$ must be contained in $(W^\perp)^\perp = W$.
-With this knowledge, we let $\vecnot{w} = \vecnot{v}-\vecnot{x}^*$ and use~\eqref{eqn:DualNormalEquations} to solve for $s_1,\ldots,s_n$ because we know the RHS satisfies $\left\langle \vecnot{v} | \vecnot{w}_i \right\rangle = c_i$.
+With this knowledge, we let $\vecnot{w} = \vecnot{v}-\vecnot{x}^*$ and use~\eqref{eqn:DualNormalEquations} to solve for $s_1,\ldots,s_n$ because we know the RHS satisfies $\inner{ \vecnot{v} }{ \vecnot{w}_i } = c_i$.
 Since $\vecnot{w}_1,\ldots,\vecnot{w}_n$ are linearly independent, the Gramian is full rank and this linear system has a unique solution.
 \end{proof}
 
@@ -1029,7 +1028,7 @@ The following result can be seen as a generalization of that result to Hilbert-s
 
 \begin{theorem}
 \label{theorem:convex_proj_lt0}
-For any $\vecnot{v} \notin A$, a necessary and sufficient condition for $\vecnot{u}^* = P_A (\vecnot{v})$ is that $\Real \langle \vecnot{v}-\vecnot{u}^* \,|\, \vecnot{u}-\vecnot{u}^* \rangle \leq 0$ for all $\vecnot{u}\in A$.
+For any $\vecnot{v} \notin A$, a necessary and sufficient condition for $\vecnot{u}^* = P_A (\vecnot{v})$ is that $\Real \tinner{ \vecnot{v}-\vecnot{u}^* \,}{\, \vecnot{u}-\vecnot{u}^* } \leq 0$ for all $\vecnot{u}\in A$.
 \end{theorem}
 \begin{proof}
 Let $\vecnot{u}^* = P_A (\vecnot{v})$ be the unique projection of $\vecnot{v}$ onto $A$.
@@ -1040,15 +1039,15 @@ The optimality of $\vecnot{u}^*$ implies that
 \| \vecnot{v}-\vecnot{u}^* \|^2
 &\leq \| \vecnot{v}- \vecnot{u}' \|^2 \\
 &\leq \| \vecnot{v}- \vecnot{u}^* - \alpha (\vecnot{u}-\vecnot{u}^*) \|^2 \\
-&= \| \vecnot{v} - \vecnot{u}^* \|^2 + \alpha^2 \| \vecnot{u} - \vecnot{u}^* \|^2 - 2 \alpha \Real \langle v-\vecnot{u}^* \,|\, \vecnot{u}-\vecnot{u}^* \rangle. 
+&= \| \vecnot{v} - \vecnot{u}^* \|^2 + \alpha^2 \| \vecnot{u} - \vecnot{u}^* \|^2 - 2 \alpha \Real \tinner{ v-\vecnot{u}^* \,}{\, \vecnot{u}-\vecnot{u}^* }. 
 \end{align*}
-Thus, $\Real \langle v-\vecnot{u}^* \,|\, \vecnot{u}-\vecnot{u}^* \rangle \leq \frac{\alpha}{2} \| \vecnot{u} - \vecnot{u}^* \|^2$.
+Thus, $\Real \tinner{ v-\vecnot{u}^* \,}{\, \vecnot{u}-\vecnot{u}^* } \leq \frac{\alpha}{2} \| \vecnot{u} - \vecnot{u}^* \|^2$.
 One can establish necessity by taking the limit as $\alpha \to 0$.
-For sufficiency, we assume $\Real \langle \vecnot{v}-\vecnot{u}^* | \vecnot{u}-\vecnot{u}^* \rangle \leq 0$ and we write
+For sufficiency, we assume $\Real \tinner{ \vecnot{v}-\vecnot{u}^* }{ \vecnot{u}-\vecnot{u}^* } \leq 0$ and we write
 \begin{align*}
 \| \vecnot{v}-\vecnot{u} \|^2 &- \| \vecnot{v} - \vecnot{u}^* \|^2
 = \| (\vecnot{v} - \vecnot{u}^*) - (\vecnot{u} - \vecnot{u}^*) \|^2 - \|\vecnot{v} - \vecnot{u}^* \|^2 \\
-&= \| \vecnot{v}-\vecnot{u}^* \|^2 + \| \vecnot{u} -\vecnot{u}^* \| ^2 - 2 \Real \langle v-\vecnot{u}^* \,|\, \vecnot{u}-\vecnot{u}^* \rangle - \|\vecnot{v}-\vecnot{u}^* \|^2 \\
+&= \| \vecnot{v}-\vecnot{u}^* \|^2 + \| \vecnot{u} -\vecnot{u}^* \| ^2 - 2 \Real \tinner{ v-\vecnot{u}^* \,}{\, \vecnot{u}-\vecnot{u}^* } - \|\vecnot{v}-\vecnot{u}^* \|^2 \\
 &\geq 0.
 \end{align*}
 Thus, $\| \vecnot{v}-\vecnot{u} \|^2 \geq \| \vecnot{v} - \vecnot{u}^* \|^2$ for all $\vecnot{u} \in A$ and $\vecnot{u}^* = P_A (\vecnot{v})$.
@@ -1070,65 +1069,65 @@ This also leads to the following trick. If a projection is easy when the set is 
 
 Using the best approximation theorem, it is easy to verify that the orthogonal projection of $\vecnot v\in V$ onto a one-dimensional subspace $W=\text{span}(\vecnot w)$ is given by
 \[
-P_{W}(\vecnot v)=\frac{\left\langle \vecnot v|\vecnot w\right\rangle }{\left\Vert \vecnot w\right\Vert ^{2}}\vecnot w.
+P_{W}(\vecnot v)=\frac{\inner{ \vecnot v}{\vecnot w} }{\left\Vert \vecnot w\right\Vert ^{2}}\vecnot w.
 \]
 
-A \defn{vector space}{hyperplane} is a closed subspace of $U \subset V$ that satisfies a single linear equality of the form $\left\langle \vecnot v|\vecnot w\right\rangle =0$ for all $\vecnot{v}\in U$.
+A \defn{vector space}{hyperplane} is a closed subspace of $U \subset V$ that satisfies a single linear equality of the form $\inner{ \vecnot v}{\vecnot w} =0$ for all $\vecnot{v}\in U$.
 Such a subspace is said to have co-dimension one (e.g., if $\dim(V)=n$, then $\dim(U) = n-1$). Equivalently, $U$ can be seen as the orthogonal complement of a one-dimensional subspace (e.g., $U=W^{\perp}$).
 Thus, we can write
 \[
-P_{U}(\vecnot v)=P_{W^{\perp}}(\vecnot v)=\vecnot v-\frac{\left\langle \vecnot v|\vecnot w\right\rangle }{\left\Vert \vecnot w\right\Vert ^{2}}\vecnot w.
+P_{U}(\vecnot v)=P_{W^{\perp}}(\vecnot v)=\vecnot v-\frac{\inner{ \vecnot v}{\vecnot w} }{\left\Vert \vecnot w\right\Vert ^{2}}\vecnot w.
 \]
 
-Similarly, a linear equality such as $\langle\vecnot v|\vecnot w\rangle=c$, where $\vecnot v_{0}$ is any vector in $V$ satisfying $\langle\vecnot v_{0}|\vecnot w\rangle=c$,  defines an \defn{vector space}{affine hyperplane}.
+Similarly, a linear equality such as $\tinner{\vecnot v}{\vecnot w}=c$, where $\vecnot v_{0}$ is any vector in $V$ satisfying $\tinner{\vecnot v_{0}}{\vecnot w}=c$,  defines an \defn{vector space}{affine hyperplane}.
 This is the shifted subspace $U+\vecnot v_{0}$ of co-dimension one because 
 \[
-\langle\vecnot v|\vecnot w\rangle=\langle\vecnot u+\vecnot v_{0}|\vecnot w\rangle=\langle\vecnot u|\vecnot w\rangle+\langle\vecnot v_{0}|\vecnot w\rangle=0+c=c.
+\tinner{\vecnot v}{\vecnot w}=\tinner{\vecnot u+\vecnot v_{0}}{\vecnot w}=\tinner{\vecnot u}{\vecnot w}+\tinner{\vecnot v_{0}}{\vecnot w}=0+c=c.
 \]
 Thus, we can project onto $U+\vecnot{v_{0}}$ by translating, projecting, and then translating back. This gives
 \begin{equation*}
-P_{U+\vecnot v_{0}}(\vecnot v)=\left((\vecnot v-\vecnot v_{0})-\frac{\left\langle \vecnot v-\vecnot v_{0}|\vecnot w\right\rangle }{\left\Vert \vecnot w\right\Vert ^{2}}\vecnot w\right)+\vecnot v_{0}=\vecnot v-\frac{\left\langle \vecnot v|\vecnot w\right\rangle -c}{\left\Vert \vecnot w\right\Vert ^{2}}\vecnot w,\label{eq:proj_lin_eq}
+P_{U+\vecnot v_{0}}(\vecnot v)=\left((\vecnot v-\vecnot v_{0})-\frac{\inner{ \vecnot v-\vecnot v_{0}}{\vecnot w} }{\left\Vert \vecnot w\right\Vert ^{2}}\vecnot w\right)+\vecnot v_{0}=\vecnot v-\frac{\inner{ \vecnot v}{\vecnot w} -c}{\left\Vert \vecnot w\right\Vert ^{2}}\vecnot w,\label{eq:proj_lin_eq}
 \end{equation*}
 which does not depend on the choice of $\vecnot v_{0}$.
 
-Next, let $H$ be the subset of $\vecnot v\in V$ satisfying the linear inequality $\langle\vecnot v|\vecnot w\rangle\geq c$. Then, $H$ is a closed convex set known as a \defn{inner-product space}{half space}. For any $\vecnot v\in H$, we have $P_{H}(\vecnot v)=\vecnot v$ and, for any $\vecnot v\notin H$, we have $P_{H}(\vecnot v)=P_{U+\vecnot v_{0}}(\vecnot v)$ because the closest point must lie on the separating hyperplane and achieve the inequality with equality. For any $\vecnot v\in H$, one can put these together to see that
+Next, let $H$ be the subset of $\vecnot v\in V$ satisfying the linear inequality $\tinner{\vecnot v}{\vecnot w}\geq c$. Then, $H$ is a closed convex set known as a \defn{inner-product space}{half space}. For any $\vecnot v\in H$, we have $P_{H}(\vecnot v)=\vecnot v$ and, for any $\vecnot v\notin H$, we have $P_{H}(\vecnot v)=P_{U+\vecnot v_{0}}(\vecnot v)$ because the closest point must lie on the separating hyperplane and achieve the inequality with equality. For any $\vecnot v\in H$, one can put these together to see that
 \begin{equation}
 P_{H}(\vecnot v)=\begin{cases}
-\vecnot v & \text{if }\langle\vecnot v|\vecnot w\rangle\geq c\\
-\vecnot v-\frac{\left\langle \vecnot v|\vecnot w\right\rangle -c}{\left\Vert \vecnot w\right\Vert ^{2}}\vecnot w & \text{if }\langle\vecnot v|\vecnot w\rangle<c.
+\vecnot v & \text{if }\tinner{\vecnot v}{\vecnot w}\geq c\\
+\vecnot v-\frac{\inner{ \vecnot v}{\vecnot w} -c}{\left\Vert \vecnot w\right\Vert ^{2}}\vecnot w & \text{if }\tinner{\vecnot v}{\vecnot w}<c.
 \end{cases}\label{eq:proj_ineq}
 \end{equation}
 
 \begin{theorem} \label{theorem:convex_point_set_hyperplane}
 Let $V$ be a Hilbert space over $\RealNumbers$ and $A\subset V$ be a closed convex set.
-For any $\vecnot{v} \notin A$, there is an affine hyperplane $U' = \{ \vecnot{u} \in V \,|\, \langle \vecnot{u} | \vecnot{w} \rangle = c \}$ (defined by $\vecnot{w} \in V$ and $c\in \RealNumbers$) such that $\langle \vecnot{v} | \vecnot{w} \rangle < c$ and $\langle \vecnot{u} | \vecnot{w} \rangle \geq c$ for all $\vecnot{u} \in A$.
+For any $\vecnot{v} \notin A$, there is an affine hyperplane $U' = \{ \vecnot{u} \in V \,|\, \tinner{ \vecnot{u} }{ \vecnot{w} } = c \}$ (defined by $\vecnot{w} \in V$ and $c\in \RealNumbers$) such that $\tinner{ \vecnot{v} }{ \vecnot{w} } < c$ and $\tinner{ \vecnot{u} }{ \vecnot{w} } \geq c$ for all $\vecnot{u} \in A$.
 \end{theorem}
 
 \begin{proof}
-Let $\vecnot{u}^* = P_A (\vecnot{v})$ be the orthogonal projection of $\vecnot{v}$ onto $A$ and define $\vecnot{w} = \vecnot{u}^* - \vecnot{v}$ and $c= \langle \vecnot{u}^* | \vecnot{w} \rangle$.
-From Theorem~\ref{theorem:convex_proj_lt0}, we see that $\langle \vecnot{v}-\vecnot{u}^* | \vecnot{u}-\vecnot{u}^* \rangle \leq 0$ for all $\vecnot{u} \in A$.
+Let $\vecnot{u}^* = P_A (\vecnot{v})$ be the orthogonal projection of $\vecnot{v}$ onto $A$ and define $\vecnot{w} = \vecnot{u}^* - \vecnot{v}$ and $c= \tinner{ \vecnot{u}^* }{ \vecnot{w} }$.
+From Theorem~\ref{theorem:convex_proj_lt0}, we see that $\tinner{ \vecnot{v}-\vecnot{u}^* }{ \vecnot{u}-\vecnot{u}^* } \leq 0$ for all $\vecnot{u} \in A$.
 Thus, for all $\vecnot{u}\in A$, we have
 \begin{align*}
-\langle \vecnot{u} | \vecnot{w} \rangle
-&= \langle \vecnot{w} | \vecnot{u} \rangle
-= \langle \vecnot{u}^* - \vecnot{v} | \vecnot{u} \rangle
-= - \langle \vecnot{v} - \vecnot{u}^* | \vecnot{u} \rangle \\
-&\stackrel{(a)}{\geq} - \langle \vecnot{v} - \vecnot{u}^* | \vecnot{u}^* \rangle
-= \langle \vecnot{u}^* - \vecnot{v} | \vecnot{u}^* \rangle
+\tinner{ \vecnot{u} }{ \vecnot{w} }
+&= \tinner{ \vecnot{w} }{ \vecnot{u} }
+= \tinner{ \vecnot{u}^* - \vecnot{v} }{ \vecnot{u} }
+= - \tinner{ \vecnot{v} - \vecnot{u}^* }{ \vecnot{u} } \\
+&\stackrel{(a)}{\geq} - \tinner{ \vecnot{v} - \vecnot{u}^* }{ \vecnot{u}^* }
+= \tinner{ \vecnot{u}^* - \vecnot{v} }{ \vecnot{u}^* }
 \\
-&= \langle \vecnot{w} | \vecnot{u}^* \rangle
-= \langle \vecnot{u}^* | \vecnot{w} \rangle
+&= \tinner{ \vecnot{w} }{ \vecnot{u}^* }
+= \tinner{ \vecnot{u}^* }{ \vecnot{w} }
 = c,
 \end{align*}
-where $(a)$ follows from $\langle \vecnot{v}-\vecnot{u}^* | \vecnot{u}-\vecnot{u}^* \rangle \leq 0$ for all $\vecnot{u} \in A$.
-For $\langle \vecnot{v} | \vecnot{w} \rangle$, we observe that together, $\vecnot{u}^* \in A$ and $\vecnot{v} \notin A$, imply that
+where $(a)$ follows from $\tinner{ \vecnot{v}-\vecnot{u}^* }{ \vecnot{u}-\vecnot{u}^* } \leq 0$ for all $\vecnot{u} \in A$.
+For $\tinner{ \vecnot{v} }{ \vecnot{w} }$, we observe that together, $\vecnot{u}^* \in A$ and $\vecnot{v} \notin A$, imply that
 \begin{align*}
 0 &< \| \vecnot{u}^* - \vecnot{v} \|^2
-= \langle \vecnot{u}^* - \vecnot{v} | \vecnot{u}^* - \vecnot{v} \rangle \\
-&= \langle \vecnot{u}^* | \vecnot{u}^* - \vecnot{v} \rangle - \langle  \vecnot{v} | \vecnot{u}^* - \vecnot{v} \rangle
-= c - \langle  \vecnot{v} | \vecnot{u}^* - \vecnot{v} \rangle,
+= \tinner{ \vecnot{u}^* - \vecnot{v} }{ \vecnot{u}^* - \vecnot{v} } \\
+&= \tinner{ \vecnot{u}^* }{ \vecnot{u}^* - \vecnot{v} } - \tinner{  \vecnot{v} }{ \vecnot{u}^* - \vecnot{v} }
+= c - \tinner{  \vecnot{v} }{ \vecnot{u}^* - \vecnot{v} },
 \end{align*}
-which shows that $\langle \vecnot{v} | \vecnot{w} \rangle < c$ and completes the proof.
+which shows that $\tinner{ \vecnot{v} }{ \vecnot{w} } < c$ and completes the proof.
 \end{proof}
 
 % Farkas
@@ -1225,15 +1224,15 @@ By adapting the previous proof, one can show that, if either set is compact, the
 
 \begin{theorem}
 Let $V$ be a Hilbert space over $\RealNumbers$ and $A,B$ be disjoint closed convex subsets of $V$.
-If either set is compact, then there is an affine hyperplane $\{ \vecnot{a} \in V \,|\, \langle \vecnot{a} | \vecnot{w} \rangle = c \}$ (defined by $\vecnot{w} \in V$ and $c\in \RealNumbers$) such that $\langle \vecnot{u} | \vecnot{w} \rangle > c$ for all $\vecnot{u} \in A$ and $\langle \vecnot{u} | \vecnot{w} \rangle < c$ for all $\vecnot{u} \in B$.
+If either set is compact, then there is an affine hyperplane $\{ \vecnot{a} \in V \,|\, \tinner{ \vecnot{a} }{ \vecnot{w} } = c \}$ (defined by $\vecnot{w} \in V$ and $c\in \RealNumbers$) such that $\tinner{ \vecnot{u} }{ \vecnot{w} } > c$ for all $\vecnot{u} \in A$ and $\tinner{ \vecnot{u} }{ \vecnot{w} } < c$ for all $\vecnot{u} \in B$.
 \end{theorem}
 \begin{proof}
 Applying Theorem~\ref{thm:MinDistTwoConvexSet} gives a pair of points $(\vecnot{u}^*,\vecnot{v}^*) \in A \times B$ that minimize the distance and satisfy $\vecnot{u}^* = P_A (\vecnot{v}^*)$ and $\vecnot{v}^* = P_B (\vecnot{u}^*)$.
-Applying Theorem~\ref{theorem:convex_point_set_hyperplane} to $P_A (\vecnot{v}^*)$ shows that $\langle \vecnot{u} | \vecnot{u}^* - \vecnot{v}^* \rangle \geq \langle \vecnot{u}^* | \vecnot{u}^* - \vecnot{v}^* \rangle$ for all $\vecnot{u} \in A$.
-Similarly, applying Theorem~\ref{theorem:convex_point_set_hyperplane} to $P_B (\vecnot{u}^*)$ shows that $\langle \vecnot{v} | \vecnot{v}^* - \vecnot{u}^* \rangle \geq \langle \vecnot{v}^* | \vecnot{v}^* - \vecnot{u}^* \rangle$ for all $\vecnot{v} \in B$.
-Negating this gives $\langle \vecnot{v} | \vecnot{u}^* - \vecnot{v}^* \rangle \leq \langle \vecnot{v}^* | \vecnot{u}^* - \vecnot{v}^* \rangle$.
-Now, we observe that  $\langle \vecnot{u}^* | \vecnot{u}^* - \vecnot{v}^* \rangle - \langle \vecnot{v}^* | \vecnot{u}^* - \vecnot{v}^* \rangle = \| \vecnot{u}^* - \vecnot{v}^* \|^2 > 0$ because $\vecnot{u}^* \neq \vecnot{v}^*$.
-Thus, we can choose $\vecnot{w} = \vecnot{u}^* - \vecnot{v}^*$ and $c=\frac{1}{2}(\langle \vecnot{u}^* | \vecnot{u}^* - \vecnot{v}^* \rangle + \langle \vecnot{v}^* | \vecnot{u}^* - \vecnot{v}^* \rangle)$  to guarantee that $\langle \vecnot{u} | \vecnot{w} \rangle > c$ for all $\vecnot{u} \in A$ and $\langle \vecnot{u} | \vecnot{w} \rangle < c$ for all $\vecnot{u} \in B$.
+Applying Theorem~\ref{theorem:convex_point_set_hyperplane} to $P_A (\vecnot{v}^*)$ shows that $\tinner{ \vecnot{u} }{ \vecnot{u}^* - \vecnot{v}^* } \geq \tinner{ \vecnot{u}^* }{ \vecnot{u}^* - \vecnot{v}^* }$ for all $\vecnot{u} \in A$.
+Similarly, applying Theorem~\ref{theorem:convex_point_set_hyperplane} to $P_B (\vecnot{u}^*)$ shows that $\tinner{ \vecnot{v} }{ \vecnot{v}^* - \vecnot{u}^* } \geq \tinner{ \vecnot{v}^* }{ \vecnot{v}^* - \vecnot{u}^* }$ for all $\vecnot{v} \in B$.
+Negating this gives $\tinner{ \vecnot{v} }{ \vecnot{u}^* - \vecnot{v}^* } \leq \tinner{ \vecnot{v}^* }{ \vecnot{u}^* - \vecnot{v}^* }$.
+Now, we observe that  $\tinner{ \vecnot{u}^* }{ \vecnot{u}^* - \vecnot{v}^* } - \tinner{ \vecnot{v}^* }{ \vecnot{u}^* - \vecnot{v}^* } = \| \vecnot{u}^* - \vecnot{v}^* \|^2 > 0$ because $\vecnot{u}^* \neq \vecnot{v}^*$.
+Thus, we can choose $\vecnot{w} = \vecnot{u}^* - \vecnot{v}^*$ and $c=\frac{1}{2}(\tinner{ \vecnot{u}^* }{ \vecnot{u}^* - \vecnot{v}^* } + \tinner{ \vecnot{v}^* }{ \vecnot{u}^* - \vecnot{v}^* })$  to guarantee that $\tinner{ \vecnot{u} }{ \vecnot{w} } > c$ for all $\vecnot{u} \in A$ and $\tinner{ \vecnot{u} }{ \vecnot{w} } < c$ for all $\vecnot{u} \in B$.
 \end{proof}
 
 \iffalse
