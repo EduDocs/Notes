@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Check arguments
+if [ $# -ne 1 ]
+then
+  echo "Usage: makevideo NUMBER"
+  exit 65
+fi
+
+sed 's/,english,/,english,notes,/g' video$1.tex > temp.tex
+pdflatex --shell-escape temp
+pdflatex --shell-escape temp
+cp temp.pdf video$1_sn.pdf
+
+sed 's/,english,/,english,handout,/g' video$1.tex > temp.tex
+pdflatex --shell-escape temp
+pdflatex --shell-escape temp
+cp temp.pdf video$1_h.pdf
+cp temp.pdf video$1.pdf
+
+sed 's/,english,/,english,hide notes,/g' video$1.tex > temp.tex
+pdflatex --shell-escape temp
+pdflatex --shell-escape temp
+cp temp.pdf video$1_s.pdf
+

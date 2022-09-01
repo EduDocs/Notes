@@ -390,8 +390,12 @@ The other type of quantifier often seen in mathematical proofs is the \defn{logi
 The statement ``$\exists x \in U, P(x)$'' is true if $P(x)$ is true for at least one value of $x$ in $U$.
 It can be seen as shorthand for an iterated disjunction because
 \[ \exists x \in U, P(x) \Leftrightarrow \bigvee_{x\in U} P(x), \]
-From these definitions, it follows naturally that $\forall x\in U, P(x) \Rightarrow \exists x\in U, P(x)$.
 If $U=\emptyset$ is the empty set, then $\exists x \in U, P(x)$ is false by convention because there are no elements in $U$.
+
+The idea of \defn{logic}{universal instantiation} is that, if a statement $P(x)$ is true for all $x\in U$, then there must exist some $x_0 \in U$ such that $P(x_0)$ is true.
+However, this implicitly assumes that $U$ is not empty.
+In fact, universal instantiation does not hold when $U$ is empty.
+If $U$ is not empty though, then universal instantiation implies that $\forall x\in U, P(x) \Rightarrow \exists x\in U, P(x)$.
 
 
 Based on the meaning of these quantifiers, one can infer the logical implications
@@ -411,7 +415,8 @@ Using the connection to conjunction and disjunction, these rules are actually eq
 
 One can also define predicates with multiple free variables such as $P(x,y)=$``$x$ contains $y$''.
 Once again, these statements are assumed to be true or false for every choice of $x,y$.
-There are 8 possible quantifiers for a 2-variable predicate and they can be arranged according to their natural implications:
+There are 8 possible quantifiers for a 2-variable predicate and they can be arranged according based on some natural implications.
+Assuming that the universe $U$ is not empty, one finds that
 \[ \begin{array}{ccccccc}
   \forall x, \forall y, P(x,y) & \Rightarrow & \exists x, \forall y, P(x,y) & \Rightarrow & \forall y, \exists x, P(x,y) & \Rightarrow & \exists y, \exists x, P(x,y) \\
   \Updownarrow &&&&&& \Updownarrow \\
