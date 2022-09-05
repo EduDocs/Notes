@@ -168,7 +168,7 @@
 \item<3-> To overcome this, we use \textcolor{blue}{predicate logic} \vspace{1mm}
 \begin{itemize}
  \setlength\itemsep{1.5mm}
- \item Let $U$ be a collection of elements and $P(x)$ be a statement that can be applied to any $x\in U$
+ \item Let $U$ (``the universe'') be a collection of elements and $P(x)$ be a statement that can be applied to any $x\in U$
  \item Ex. $P(x)$ = ``$x$ has 4 tires'' for the collection $U$ of all vehicles
  \item Statement $P(x)$ is called a \textcolor{blue}{predicate} and $x$ is called a \textcolor{blue}{free variable}
 \end{itemize}
@@ -197,14 +197,14 @@
  \setlength\itemsep{1.5mm}
  \item Universal quantifier: $\forall x\!\in\! U, P(x)$ = ``All vehicles have 4 tires''
  \item Existential quantifier: $\exists x\!\in\! U, P(x)$ =``There is a vehicle with 4 tires''
- \item Natural implication: $\forall x \!\in\!U, P(x) \,\Rightarrow\, \exists x\!\in\! U, P(x)$ \vspace{0.5mm}
+ \item Universal instantiation: if $U$ not empty, then $\forall x \!\in\!U, P(x) \,\Rightarrow\, \exists x\!\in\! U, P(x)\!\!\!\!\!$ \vspace{0.5mm}
 \end{itemize}
 
 \item<2-> Negation \vspace{1mm}
 \begin{itemize}
  \setlength\itemsep{1.5mm}
  \item Notice \textcolor{blue}{exactly one of these is true}: $\forall x\!\in\! U, P(x)$ or $\exists x\!\in\! U, \neg P(x)$
- \item<3-> Thus, they are logical negations of each other and we get \vspace{-1.5mm}
+ \item<3-> Thus, they are logical negations of each other and we observe that \vspace{-1.5mm}
  \begin{align*}
    \neg \left(\forall x\!\in\! U, P(x) \right) &\Leftrightarrow \left( \exists x\!\in\! U, \neg P(x) \right) \\
    \neg \left(\exists x\!\in\! U, P(x) \right) &\Leftrightarrow \left( \forall x\!\in\! U, \neg P(x) \right) \\[-9mm]
@@ -285,12 +285,12 @@
 
 \begin{itemize}
 \setlength\itemsep{5mm}
-\item<1-> Implications and Equivalences \vspace{1mm}
+\item<1-> Implications and Equivalences (assuming $I$ and $C$ are not empty) \vspace{1mm}
 \begin{itemize}
  \setlength\itemsep{1.5mm}
  \item<1-> $\forall x\!\in\! I, \forall y\!\in\! C, P(x,y)  \,\Leftrightarrow\, \forall y\!\in\! C, \forall x\!\in\! I, P(x,y)$
  \item<2-> $\exists x\!\in\! I, \exists y\!\in\! C, P(x,y) \,\Leftrightarrow\, \exists y\!\in\! C, \exists x\!\in\! I, P(x,y)$
- \item<3-> $\forall x\!\in\! I, \forall y\!\in\! C, P(x,y) \,\Rightarrow\, \exists x\!\in\! I, \forall y\!\in\! C, P(x,y)$
+ \item<3-> $\forall x\!\in\! I, \forall y\!\in\! C, P(x,y) \,\Rightarrow\, \exists x\!\in\! I, \forall y\!\in\! C, P(x,y)$~~~(since $I$ is not empty)
  \item<4-> \textcolor{red}{$\exists x\!\in\! I, \forall y\!\in\! C, P(x,y) \,\Rightarrow\, \forall y\!\in\! C, \exists x\!\in\! I, P(x,y)$}
  \item<5-> There are 8 possible choices for the order and quantifiers
     
@@ -351,7 +351,7 @@
  \setlength\itemsep{1.5mm}
  \item \textcolor{blue}{Consistent}: implications of axioms do not contain a contradiction
  \item \textcolor{blue}{Complete}: all valid implications follow from the axioms
- \item \textcolor{blue}{Decidable}: algorithm can determine if any implication is valid or not
+ \item \textcolor{blue}{Decidable}: terminating algorithm determines if any implication is valid or not$\!\!\!\!\!\!\!$
 \end{itemize}
 
 \item<3-> First-Order Predicate Logic \vspace{1mm}
@@ -400,7 +400,7 @@
 \item<6-> Whiteboard Examples \vspace{1mm}
 \begin{itemize} 
  \setlength\itemsep{1.25mm}
- \item Euclid's proof Prove ``if $x^2 = 2$, then $x$ is not rational" (i.e., $x=\pm\sqrt{2}$) via contradiction
+ \item Euclid's proof: ``if $x^2 = 2$ and $x$ real, then $x$ is not rational" via contradiction$\!\!\!\!\!\!\!$
  \item For $P(n)=$``$\sum_{i=1}^n i = \frac{n^2 + n}{2}$'', prove ``$\forall n\in \mathbb{N}, P(n)$'' via induction
 \end{itemize}
 \end{itemize}
