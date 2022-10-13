@@ -464,44 +464,48 @@ A point $x_0\in X$ is in the \textcolor{blue}{closure} of $W$ (denoted $\Closure
 
 \end{frame}
 
-
-\begin{frame}{2.1.2: Continuity}
-
-Let $f \colon X \rightarrow Y$ be a function between metric spaces $(X,d_X)$ and $(Y,d_Y)$:
-
-\begin{definition}
-The function $f$ is \textcolor{blue}{continuous at $x_0 \in X$} if, for any $\epsilon> 0$, there exists a $\delta >0$ such that, for all $x\in X$ satisfying $d_X(x_0,x)< \delta$, we find $d_Y \left( f(x_0),f(x) \right) < \epsilon$
-\end{definition}
-
-\begin{theorem}<2-> 
-If $f$ is continuous at $x_0$, then $f(x_n) \to f(x_0)$ for all sequences $x_1,x_2,\ldots \in X$ such that $x_n \to x_0$.
-Conversely, if $f(x_n) \to f(x_0)$ for all sequences $x_1,x_2,\ldots  \in X$ such that $x_n \to x_0$, then $f$ is continuous at $x_0$.
-\end{theorem}
+\begin{frame} \frametitle{A Few More Things}
 
 \begin{itemize}
-\setlength\itemsep{1.5mm}
-\item<3-> $f$ is called \textcolor{blue}{continuous} if it is continuous at all $x_0 \in X$
-\item<3-> $f$ is \textcolor{blue}{uniformly continuous} if $\delta$ can be chosen independently of $x_0$
+  \setlength{\itemsep}{4mm}
+  \item Example: Standard metric space of real numbers $\mathbb{R}$ \vspace{1mm}
+  \begin{itemize}
+    \setlength{\itemsep}{2mm}
+    \item<1-> Any open set can be written as disjoint union of open intervals (i.e., balls)
+    \item Not true in higher dimension because union of balls may not be a ball
+    \item What about closed sets?
+  \end{itemize}
+  
+  \item<2-> The Boundary \vspace{1mm}
+  \begin{itemize}
+    \setlength{\itemsep}{2mm}
+    \item For $W \subseteq X$, the \textcolor{blue}{boundary} $\partial W$ is the closure minus the interior $\Closure{W} \setminus \Interior{W}\!\!\!$
+    \item Thus, the closure is the union of the set and its boundary
+    \item In the example, the boundary equals the dashed lines
+    \item Alternatively, a point $x\in X$ is on the boundary of $W$ if, for all $\delta>0$, $B(x,\delta)$ contains a point in $W$ and a point not in $W$
+
+  \end{itemize}
 \end{itemize}
 
-\begin{definition}<4->
-A function $f  \colon X \rightarrow Y$ is called \textcolor{blue}{Lipschitz continuous} on $A \subseteq X$ if there is a constant $L \in \RealNumbers$ such that $d_Y (f(x),f(y)) \leq L \, d_X (x,y)$ for all $x,y\in A$.
-\end{definition}
-
-\note{
-	\vspace{4mm}
-	\begin{enumerate}[<alert@+>]
-		\footnotesize
-		\setlength\itemsep{3mm}
-		\item For real functions, I'm guessing that most of you have already seen the definition of continuity in a calculus class. Now, we consider functions between metric spaces and discuss the natural extension of that concept.  Read.
-		\item A very nice result in topology is that continuity has an equivalent definition based on convergence.  In practice, this viewpoint is often more useful.  Read.
-		\item Read.  In particular, the definition of continuous chooses $x_0$ before $\delta$.  Thus, the value of $\delta$ is allowed to depend on $x_0$.  If that dependence can be removed, then the function is uniformly continuous.
-		\item Finally, in engineering mathematics, most functions satisfy a strong form of continuity known.  Read.  For example, this holds if the function's derivative exists and                                                             is bounded on $A$.
-	\end{enumerate}
+\begin{tikzpicture}[overlay,remember picture,shift={(12.5,0.25)}]
+\begin{scope}[scale=0.6]
+\uncover<2->{%
+\draw[very thick] (-0.5,-1.5) rectangle (3.5,2) node[below left=0.1cm and 0.1cm] {\small $X$};
+\fill[blue!10,even odd rule] plot [smooth cycle] coordinates {(0.5,0) (1,1.5) (2.5,1) (2.5,0) (1.5,-1)} (1.5,0.5) circle (0.5);
+\draw[thick] (1.5,0.5) +(-80:0.5) arc (-80:80:0.5);
+%\draw[thick] (1.5,0.5) arc (-20:40:0.5);
+%\path[thick,dashed] (1.5,0.5) coordinate (A) (1.5,0.5) coordinate (B) (60:0.5) coordinate (C) (120:0.5) coordinate (D);
+\draw[thick,dashed] (1.5,0.5) circle (0.5);
+\draw [thick,dashed] plot [smooth cycle] coordinates {(0.5,0) (1,1.5) (2.5,1) (2.5,0) (1.5,-1)} node[above left=0.1cm and -0.3cm] {\small $W$};
+%\path[draw,thick] (0.5,0) --  (1,1.5) --  (2.5,1);
 }
+\end{scope}
 
+\end{tikzpicture}
 
 \end{frame}
+
+
 
 \begin{frame} \frametitle{Next Steps}
 

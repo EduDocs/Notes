@@ -128,7 +128,7 @@
 
 
 
-\title{ECE 586: Vector Space Methods \\ Lecture 6 Flip Video: Complete Metric Spaces}
+\title{ECE 586: Vector Space Methods \\ Lecture 6 Flip Video: Real Numbers and Continuity}
 \author{Henry D. Pfister \\ Duke University}
 \date{}
 %\date{August 20th, 2020}
@@ -154,205 +154,263 @@
 \setbeamertemplate{navigation symbols}{\textcolor{blue}{\footnotesize \insertframenumber ~/ \inserttotalframenumber}}
 
 
+\begin{frame}<1-4>
+\frametitle{2.1.4: Properties of Real Numbers}
 
-\begin{frame}<1-3> \frametitle{2.1.3: Completeness}
-
-\begin{definition}<1->
-A metric space $(X,d)$ is said to be \textcolor{blue}{complete} if every Cauchy sequence in $(X,d)$ converges to a limit $x \in X$.
-\end{definition}
-
-\begin{example}<2->
-Consider the sequence $x_n \in \mathbb{Q}$ defined by $x_1 = 2$ and $\smash{x_{n+1} = \frac{1}{2}x_n + 1/x_n}$.
-For this sequence, one can show that $|x_n - \sqrt{2}|\to 0$. Since $\sqrt{2}$ is not rational, however, this shows the standard \textcolor{red}{metric space of rationals is not complete}.
-\end{example}
-
-\begin{alertblock}{Key Point}<3->
-The standard metric space of real numbers is a complete metric space.
-This can be proven by starting with Zermelo-Fraenkel (ZF) set theory and associating the real numbers with Cauchy sequences of rational numbers.  The proof of this is not covered in this class but is available on the website.
-\end{alertblock}
-
-\note{
-	\vspace{2mm}
-	\begin{enumerate}[<alert@+>]
-		\footnotesize
-		\setlength\itemsep{3mm}
-		\item Read.  Completeness is very useful property for analysis and, thus, researchers prefer to setup problems in complete spaces if possible.
-		\item Read.
-		\item I should note that (read)
-	\end{enumerate}
-}
-
-\end{frame}
-
-
-\begin{frame}<1-4> \frametitle{2.1.3: Dense Subsets}
-
-\begin{definition}<1->
-A subset $A$ of a metric space $(X,d)$ is \textcolor{blue}{dense} in $X$ if every $x\in X$ is a limit point of the set $A$.
-This is equivalent to the closure $\overline{A}$ being equal to $X$.
-\end{definition}
-
-\begin{example}<2->
-The rational numbers are a dense subset of the real numbers because every real number is the limit of a sequence of rational numbers.
-\end{example}
-
-\begin{definition}<3->
-The \textcolor{blue}{completion} of a metric space $(X,d_X)$ consists of a complete metric space $(Y,d_Y)$ and an isometry $\phi  \colon X \rightarrow Y$ such that $\phi(X)$ is a dense subset of $Y$.
-Moreover, the completion is unique up to isometry.
-\end{definition}
-
-\begin{alertblock}{Remark}<4->
-One can always complete a metric space $(X,d)$ by considering Cauchy sequences of elements in $X$.
-\end{alertblock}
-
-\note{
-	\vspace{2mm}
-	\begin{enumerate}[<alert@+>]
-		\footnotesize
-		\setlength\itemsep{3mm}
-		\item Read.  
-		\item Read.  Later, we will see that having a countably dense subset can be useful when proving things.
-		\item Read.  For example, think of $X$ as the rational numbers, $Y$ as the real numbers, and $\phi$ as he mapping that embeds the rational numbers io the real numbers.  I should also note that an isometry is a function between metric spaces that preserves pairise distances.
-		\item For example, if a metric space is not complete, then some of its natural limit points have been left out.  This can be repaired by creating new points associated with Cauchy sequences that don't converge.
-	\end{enumerate}
-}
-
-\end{frame}
-
-
-\begin{frame}<1-3> \frametitle{2.1.3: A Space of Continuous Functions}
-
-\begin{example}
-Let $X=C[-1,1]$ be the space of continuous functions that map $[-1,1]$ to $\mathbb{R}$ and satisfy $\left\| f \right\|_2 < \infty$, where $\left\| f \right\|_2$ denotes the $L^2$ norm \vspace{-3mm}
-\begin{equation*}
-\left\| f \right\|_2 \triangleq \left( \int_{-1}^1 |f(t)|^2 dt \right)^{1/2} \vspace{-2mm}
-\end{equation*}
-This set forms a metric space $(X,d)$ when equipped with the distance \vspace{-3mm}
-\[ d(f, g) \triangleq \left\| f - g \right\|_2
-= \left( \int_{-1}^1 |f(t) - g(t)|^2 dt \right)^{1/2} \vspace{-2mm} \]
-Now, consider the sequence of functions $f_n(t)$ given by \vspace{-2mm}
-\begin{equation*}
-f_n(t) \triangleq \left\{ \begin{array}{ll}
-0 & t \in \left[ -1, -\frac{1}{n} \right] \\
-\frac{nt}{2} + \frac{1}{2} & t \in \left( -\frac{1}{n}, \frac{1}{n} \right) \\
-1 & t \in \left[ \frac{1}{n}, 1 \right] 
-\end{array} \right\} \vspace{-1mm}
-\end{equation*}
-
-\uncover<3->{One can show that \textcolor{red}{this is a Cauchy sequence in $(X,d)$} \\
-But, \textcolor{red}{it does not converge} to a continuous function in $C[-1,1]$}
-\end{example}
-
-\uncover<2->{%
-\begin{tikzpicture}[overlay,remember picture,shift={(10.75,1.5)}]
-\draw[fill=brown!30,rounded corners] (-1.3,-0.9) rectangle (4.1,3.15);
-\begin{axis}[
-    %title={Continuous Functions},
-    axis background/.style={fill=white},
-	small,
-	font=\small,
-    width=53mm,
-    xlabel={$t$},
-    xlabel near ticks,
-    xmin=-1, xmax=1,
-    xmajorgrids,
-    ylabel={$f_n(t)$},
-    ylabel near ticks,
-    ymajorgrids,
-    legend style={font=\tiny},
-    legend pos=north west]
-
-\addplot[darkgray,line width=1pt] coordinates {
-    (-1,0) (-0.5,0) (0.5,1) (1,1)};
-\addlegendentry{$n = 2$}
-
-\addplot[blue,line width=1pt] coordinates {
-    (-1,0) (-0.25,0) (0.25,1) (1,1)};
-\addlegendentry{$n = 4$}
-
-\addplot[magenta,line width=1pt] coordinates {
-    (-1,0) (-0.125,0) (0.125,1) (1,1)};
-\addlegendentry{$n = 8$}
-\end{axis}
-\end{tikzpicture}
-}
-
-\note{
-	\vspace{2mm}
-	\begin{enumerate}[<alert@+>]
-		\footnotesize
-		\setlength\itemsep{3mm}
-		\item Read.
-		\item This figure shows the first few functions in the sequence and we see it's a sequence of continuous functions converging to the step function.  The key problem is that the limit function is not continuous and therefore not in the set $X$.
-		\item Analytically, (read).
-	\end{enumerate}
-}
-
-\end{frame}
-
-
-
-
-\begin{frame}<1-2> \frametitle{2.1.3: Contractions on Metric Spaces}
-
-\begin{definition}<1->
-Let $A$ be a subset of a metric space $(X,d)$ and $f \colon X \rightarrow X$ be a function.
-Then, $f$ is a \textcolor{blue}{contraction} on $A$ if $f(A) \subseteq A$ and there exists a constant $\gamma < 1$ such that $d \left( f(x),f(y) \right) \leq \gamma  d(x,y)$ for all $x,y\in A$.
-\end{definition}
-
-\begin{example}<2->
-\begin{minipage}{0.52\textwidth}
-Consider the metric space $X=[0,1]$ with absolute distance.
-Define $f\colon X \to X$ with $f(x) = 1-\frac{1}{2}x$ and observe that \vspace{-2mm} \[d\big(f(x),f(y)\big)=|f(x)-f(y)| = \frac{1}{2}|x-y| \] \\[-2mm]
-\end{minipage}
-\hfill
-\begin{minipage}{0.43\textwidth}
-\begin{tikzpicture}%[overlay,remember picture,shift={(12.5,-0.5)}]
-\begin{axis}[
-	small,
-	font=\small,
-    width=50mm,
-    xlabel={$x$},
-    xlabel near ticks,
-    xmin=0, xmax=1,
-    xmajorgrids,
-    ylabel={$f(x)$},
-    ylabel near ticks,
-    ymin=0,
-    ymax=1,
-    ymajorgrids,
-    legend style={font=\tiny},
-    legend pos=north west]
-
-    \addplot[blue,thick] { 1 - x/2 };
-\end{axis}
-\end{tikzpicture}
-\end{minipage}
-\end{example}
-
-\note{
-	\vspace{2mm}
-	\begin{enumerate}[<alert@+>]
-		\footnotesize
-		\setlength\itemsep{3mm}
-		\item Read.
-		\item Read. Thus, $f$ is a contraction on $X$ with contraction coefficient $\frac{1}{2}$.  The figure shows the graph of $f$.
-	\end{enumerate}
-}
-
-\end{frame}
-
-
-\begin{frame}{2.1.3: Contraction Mapping Theorem}
-
-\begin{theorem}[Contraction Mapping Theorem]<1->
-Let $(X,d)$ be a complete metric space and $f$ be contraction on a closed subset $A \subseteq X$.
-Then, 
 \begin{itemize}
 \setlength\itemsep{3mm}
-  \item $f$ has a unique fixed point $x^* \in A$ such that $f(x^*) = x^*$ and the sequence $x_{n+1} = f(x_n)$ converges to $x^*$ from any initial $x_1 \in A$
-  \item Also, $x_n$ satisfies the error bounds (for contraction coefficient $\gamma$): \vspace{-2mm} \begin{align*} d(x^*,x_n) &\leq \gamma^{n-1} d(x^*,x_1) \\ d(x^*,x_{n+1}) &\leq d(x_n,x_{n+1})\gamma /(1-\gamma) \end{align*}
+\item<1-> Let us include the natural boundary values for the real numbers \vspace{1mm}
+
+\begin{itemize} 
+  \setlength\itemsep{1.5mm}
+  \item Extended Real Numbers: $\overline{\RealNumbers} \triangleq \RealNumbers \cup \{ \infty,-\infty\}$
+  \item This is a \textcolor{blue}{metric space} with metric $d_{\overline{\RealNumbers}} (x,y) \triangleq |\frac{x}{1+|x|} - \frac{y}{1+|y|}|$
+  \item ``$x_n \to \infty$'' equivalent to ``$\forall M>0, \, \exists N\in \mathbb{N}, \, \forall n>N, \, x_n > M$''
 \end{itemize}
+\end{itemize}
+
+\begin{definition}<2->
+The \textcolor{blue}{supremum} (or least upper bound) of $X\subseteq \RealNumbers$ is denoted \textcolor{blue}{$\sup X$} and equals the smallest extended real number $M \in \overline{\RealNumbers}$ such that $x\leq M$ for all $x\in X$.
+%It is always well-defined and equals $-\infty$ if $X=\emptyset$.
+\end{definition}
+
+\begin{lemma}[supremum sequence]<3->
+Let $X$ be a metric space and $f \colon X\rightarrow \RealNumbers$ be a function mapping $X$ to the real numbers.
+Let $M = \sup f(A)$ for some non-empty $A \subseteq X$.
+Then, there exists a sequence $x_1,x_2,\ldots \in A$ such that $\lim_n f(x_n) = M$.
+\end{lemma}
+
+\begin{itemize}
+\item<4-> Sketch proof on whiteboard
+\end{itemize}
+
+\note{
+	\vspace{2mm}
+	\begin{enumerate}[<alert@+>]
+		\footnotesize
+		\setlength\itemsep{3mm}
+		\item Read.  With this metric, the extended real numbers are the completion of the standard real numbers.
+		\item Read. 
+		\item Read. This is an important concept in analysis that allows one to exploit compactness.
+		\item In the live session, we will sketch a proof of this.
+	\end{enumerate}
+}
+
+\end{frame}
+
+
+\begin{frame}<1-4>
+\frametitle{2.1.4: More Properties of Real Numbers}
+
+\begin{definition}<1->
+The \textcolor{blue}{maximum} of $X\subseteq \RealNumbers$, denoted \textcolor{blue}{$\max X$}, is the largest value contained in the set.
+It equals the supremum if $\sup X \in X$ and it is \textcolor{red}{undefined} otherwise.
+\end{definition}
+
+\begin{example}<2->
+$X = [1,2) \subset \mathbb{R}$ has $\sup X = 2$ and $\max X$ undefined. \\[1mm]
+For $f(x)=\frac{1}{2-x}$, $f(X) = [1,\infty)$ and $\sup f(X) = \infty$.
+\end{example}
+
+\begin{itemize}
+\item<3-> \textcolor{blue}{infimum}: $\inf X = - \left(\sup \, -\!X\right)$, where $-\!X = \{x\in \mathbb{R}\,|-\!x\in X\}$
+\item<3-> \textcolor{blue}{minimum}: $\min X = - \left(\max \, -\!X \right)$, if it exists
+\item<3-> supremum and infimum always well-defined but may equal $\pm \infty$
+\end{itemize}
+
+\begin{theorem}<4->
+A bounded non-decreasing sequence in $\mathbb{R}$ converges to its supremum.
+\end{theorem}
+
+\uncover<4->{Sketch proof and application to sums on whiteboard}
+
+\note{
+	\vspace{2mm}
+	\begin{enumerate}[<alert@+>]
+		\footnotesize
+		\setlength\itemsep{3mm}
+		\item Read.
+		\item Read.
+		\item The infimum and minimum are the natural minimal quantities associated with the supremum and maximum. \\[2mm] Read. 
+		\item Read. This result says that a non-decreasing sequence must converge if it is bounded.
+	\end{enumerate}
+}
+
+\end{frame}  
+
+
+
+\begin{frame}<1-3>
+\frametitle{2.1.2: Continuity}
+
+Let $f \colon X \rightarrow Y$ be a function between metric spaces $(X,d_X)$ and $(Y,d_Y)$:
+
+\begin{definition}
+The function $f$ is \textcolor{blue}{continuous at $x_0 \in X$} if, for any $\epsilon> 0$, there exists a $\delta >0$ such that, for all $x\in X$ satisfying $d_X(x_0,x)< \delta$, we find $d_Y \left( f(x_0),f(x) \right) < \epsilon$
+\end{definition}
+
+\begin{theorem}<2-> 
+If $f$ is continuous at $x_0$, then $f(x_n) \to f(x_0)$ for all sequences $x_1,x_2,\ldots \in X$ such that $x_n \to x_0$.
+Conversely, if $f(x_n) \to f(x_0)$ for all sequences $x_1,x_2,\ldots  \in X$ such that $x_n \to x_0$, then $f$ is continuous at $x_0$.
+\end{theorem}
+
+\begin{itemize}
+\setlength\itemsep{1.5mm}
+\item<3-> $f$ is called \textcolor{blue}{continuous} if it is continuous at all $x_0 \in X$
+\item<3-> $f$ is \textcolor{blue}{uniformly continuous} if $\delta$ can be chosen independently of $x_0$
+\end{itemize}
+
+\note{
+	\vspace{4mm}
+	\begin{enumerate}[<alert@+>]
+		\footnotesize
+		\setlength\itemsep{3mm}
+		\item For real functions, I'm guessing that most of you have already seen the definition of continuity in a calculus class. Now, we consider functions between metric spaces and discuss the natural extension of that concept.  Read.
+		\item A very nice result in topology is that continuity has an equivalent definition based on convergence.  In practice, this viewpoint is often more useful.  Read.
+		\item Read.  In particular, the definition of continuous chooses $x_0$ before $\delta$.  Thus, the value of $\delta$ is allowed to depend on $x_0$.  If that dependence can be removed, then the function is uniformly continuous.
+	\end{enumerate}
+}
+
+
+\end{frame}
+
+\begin{frame}<1-4>
+\frametitle{Continuous vs. Uniformly Continuous}
+
+\vspace{1mm}
+Let $X = (0,1]$ and $Y=[1,\infty)$ be subsets of the standard metric space $\mathbb{R}$
+\vspace{1mm}
+
+\begin{itemize}
+\setlength\itemsep{3mm}
+\item<1-> Let $f:X \to Y$ be defined by $f(x) = \frac{1}{x}$ \vspace{1mm}
+
+\begin{itemize} 
+  \setlength\itemsep{1.5mm}
+  \item<1-> Is this function continuous?  What could go wrong?
+  \item<2-> For all $x_0 \in X$ and $\epsilon>0$, we can choose $\delta = \frac{\epsilon x_0^2}{1+\epsilon x_0}$ and observe that \vspace{-2mm}
+  \[ \left| \frac{1}{x}-\frac{1}{x_0} \right| = \left| \frac{x_0 - x}{x \, x_0} \right| < \frac{\frac{\epsilon x_0^2}{1+\epsilon x_0}}{x_0 \big( x_0 - \frac{\epsilon x_0^2}{1+\epsilon x_0} \big)} = \frac{\epsilon}{(1+\epsilon x_0)( 1 - \frac{\epsilon x_0}{1+\epsilon x_0})} = \epsilon\] \vspace{-0.5mm}
+  
+  \item<3-> It is uniformly continuous? Where could something go wrong?
+  
+  \item<4-> Negating the definition of uniformly continuous gives \vspace{-2mm} \[\!\!\!\!\!\!\!\exists \epsilon >0, \forall \delta >0, \exists x_0 \in X, \exists x\in X \text{ s.t. } |x-x_0|<\delta, |f(x)-f(x_0)|\geq \epsilon \]
+  If $\epsilon = 1$, $x_0 = \min\big\{ \frac{1}{2},\frac{\delta}{2} \big\}$, $x=2 x_0$, then $| x - x_0 | = x_0 \leq \frac{\delta}{2}$ and \vspace{-1mm}
+    \[ \left| \frac{1}{x}-\frac{1}{x_0} \right| = \left| \frac{x_0 - x}{x \, x_0} \right| = \frac{x_0}{x \, x_0} = \frac{1}{x} = \max\left\{1,\frac{1}{\delta}\right\} \geq 1 \]
+
+\end{itemize}
+
+\end{itemize}
+
+\begin{tikzpicture}[overlay,remember picture,shift={(11.75,1.0)}]
+\uncover<1->{%
+  \begin{axis}[
+    height=1.5in,
+    width=1.75in,
+    axis lines = left,
+    grid=major,
+    ymax=10,
+    xmin=0,
+    xlabel = \(x\),
+    title = {$f(x)=\frac{1}{x}$},
+    %ylabel = {\(f(x)\)},
+  ]
+  \addplot [
+    very thick,
+    domain=0.01:1, 
+    samples=50, 
+    color=blue,
+  ]
+  {1/x};
+  \end{axis}
+}
+\end{tikzpicture}
+
+\end{frame}
+
+
+\begin{frame}<1-4>
+\frametitle{Uniformly Continuous vs. Lipschitz Continuous}
+
+\begin{definition}<1->
+A function $f  \colon X \rightarrow Y$ is called \textcolor{blue}{Lipschitz continuous} on $A \subseteq X$ if there is a constant $L \in \RealNumbers$ such that $d_Y (f(x),f(y)) \leq L \, d_X (x,y)$ for all $x,y\in A$.
+\end{definition}
+\vspace{2mm}
+
+\uncover<2->{Let $X = [0,1]$ and $Y=[0,1]$ be subsets of the standard metric space $\mathbb{R}$}\vspace{1.5mm}
+
+\begin{itemize}
+\setlength\itemsep{3mm}
+\item<2-> Let $f:X \to Y$ be defined by $f(x) = \sqrt{x}$ \vspace{1mm}
+
+\begin{itemize} 
+  \setlength\itemsep{1.5mm}
+  \item<2-> Is this function Lipschitz continuous?  What could go wrong?
+  \item<3-> Lower bound the Lipschitz constant via $x\mapsto z^2$,$y\mapsto z^2+z$: \vspace{-0.5mm}
+  \[ \!\!\!\!\!\!\!\!\!\!\!\!\!\! L \geq \sup_{\substack{x,y\in X \\ x\neq y}} \frac{|\sqrt{y} - \sqrt{x}|}{|y-x|} \geq \sup_{z\in (0,\frac{1}{2}]} \frac{\sqrt{z^2 + z}-\sqrt{z^2}}{(z^2+z)-z^2} \geq \sup_{z\in (0,\frac{1}{2}]}  \frac{1}{\sqrt{z}} - 1 \]
+  %\item<3-> For any $\delta>0$, with $x = \delta^2$ and $y=x+\delta$, we have $|y-x|=\delta$ and
+  %\[ \!\!\!\!\!\!\! \left| \frac{\sqrt{y}-\sqrt{x}}{y-x} \right| = \frac{\sqrt{\delta^2+\delta}-\sqrt{\delta^2}}{\delta} > \frac{ \sqrt{\delta}- \delta}{\delta} = \frac{1}{\sqrt{\delta}} - 1 \] 
+  \vspace{2mm}
+  
+  \item<4-> Exercise: Is this function uniformly continuous? (Try $\delta=\epsilon^2$)
+  
+  \end{itemize}
+\end{itemize}
+
+\begin{tikzpicture}[overlay,remember picture,shift={(11.70,0.85)}]
+\uncover<2->{%
+  \begin{axis}[
+    height=1.5in,
+    width=1.75in,
+    axis lines = left,
+    grid=major,
+    xlabel = \(x\),
+    title = {$f(x)=\sqrt{x}$},
+    %ylabel = {\(f(x)\)},
+  ]
+  \addplot [
+    very thick,
+    domain=0:1, 
+    samples=50, 
+    color=blue,
+  ]
+  {(x)^(0.5)};
+  \end{axis}
+}
+\end{tikzpicture}
+
+  
+\note{
+	\vspace{4mm}
+	\begin{enumerate}[<alert@+>]
+		\footnotesize
+		\setlength\itemsep{3mm}
+
+		\item In engineering mathematics, most functions satisfy a strong form of continuity known as... read.  For example, this holds if the function's derivative exists and is bounded on $A$.
+	\end{enumerate}
+}
+
+\end{frame}  
+  
+
+\begin{frame}<1-3>
+\frametitle{2.1.5: Sequences of Functions}
+
+Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces and
+$f_n \colon X \to Y$ for $n\in \mathbb{N}$ be a sequence of functions mapping $X$ to $Y$.
+
+\begin{definition}<1->
+The sequence $f_n$ \textcolor{blue}{converges pointwise} to $f\colon X \to Y$ if, for all $x \in X$, \vspace{-1.5mm}
+\[ \lim_{n\to \infty} f_n (x) = f(x) \vspace*{-0.5mm} \]
+
+\end{definition}
+
+\begin{definition}<2->
+The sequence $f_n$ \textcolor{blue}{converges uniformly} to $f \colon X \to Y$ if \vspace{-1.5mm}
+\[ \forall \epsilon > 0, \, \exists N\in \mathbb{N}, \, \forall n>N, \, \forall x\in X, \, d_Y \left( f_n(x),f(x) \right) < \epsilon. \vspace*{-0.5mm} \]
+\end{definition}
+
+\begin{theorem}<3->
+If each $f_n$ is continuous and $f_n$ converges uniformly to $f \colon X \to Y$, then $f$ is continuous.
 \end{theorem}
 
 \note{
@@ -360,99 +418,14 @@ Then,
 	\begin{enumerate}[<alert@+>]
 		\footnotesize
 		\setlength\itemsep{3mm}
-		\color{red}
-		\item First, we look at the figure.  It illustrates a function $f$ that is a contraction on the closed subset $A$ (which is outlined in blue). Because of this, the image of $A$ under $f$ (which is outlined in purple) lies inside of $A$.  Likewise, the image of the set $f(A)$ under $f$ (which is outlined in red) lies inside the set $f(A)$.  \\ [2mm] Now, look at the theorem. Read \\ [2mm] If this process were continued, the image of $A$ under the $n$-fold composition of $f$ ith itself would shrink to the fixed point $x^*$.  
-	\end{enumerate}
-}
-
-  \includegraphics[width=\textwidth]{figures/ch2_contraction_mapping}
-
-\end{frame}
-
-\begin{frame}<1-3> \frametitle{2.1.3: Applications of the Contraction Mapping Theorem}
-
-Several important results in applied mathematics have relatively simple proofs based on the contraction mapping theorem:
-\vspace{1mm}
-
-\begin{itemize}
-\setlength\itemsep{3mm}
-\item<1-> \textcolor{blue}{Picard's uniqueness theorem for differential equations} \vspace{1mm}
-\begin{itemize} 
-  \setlength\itemsep{1.5mm}
-  \item Differential equation $y'(t) = f(t,y(t))$ for $t\in [a,b]$ with $y(a)=y_0$ 
-  \item  Assume $f(t,y)$ is Lipschitz continuous in $y$ for $t\in [a,b]$
-  \item Then, the solution $y(t)$ exists and is unique for $t\in [a,b]$
-\end{itemize}
-\item<2-> \textcolor{blue}{Implicit function theorem} \vspace{1mm}
-\begin{itemize} 
-  \setlength\itemsep{1.5mm}
-  \item Let $f\colon \mathbb{R}^n \times \mathbb{R}^{m} \to \mathbb{R}^m$ be continuously differentiable on an open set $A$
-  \item Let $g\colon \mathbb{R}^n \to \mathbb{R}^{m}$ be defined implicitly by $f(x,g(x))=0$
-  \item For $x_0\in A$, assume $f(x_0,y_0)=0$ and $y$-Jacobian invertible at $(x_0,y_0)$
-  \item Then, $g(x)$ exists and is unique in some neighborhood of $x_0$
-\end{itemize}
-\item<3-> \textcolor{blue}{Dynamic Programming for a Markov Decision Process (MDP)} \vspace{1mm}
-\begin{itemize} 
-  \setlength\itemsep{1.5mm}
-  \item State-action $(s,a)$ defines probability $p(s'|s,a)$ and reward $R(s,a)$
-  \item Finite state + discounted reward $\Rightarrow$ unique stationary optimal policy
-\end{itemize}
-\end{itemize}
-
-\note{
-	\vspace{2mm}
-	\begin{enumerate}[<alert@+>]
-		\footnotesize
-		\setlength\itemsep{3mm}
-		\item Read.  There is an optional homework problem that outlines this proof for a special case of this theorem.  
-		\item Read.  which provides a method prove the local uniqueness of a function that is defined implicitly.
-		\item Read.  This is related to reinforcement learning and other methods by which computers can learn to play video games.
+		\item Read.  This is the standard notion of convergence for sequences of functions.
+		\item Read. This is a stronger notion of convergence that can be quite useful. 
+		\item In particular, we have the following theorem... Read. \\[2mm]  This is the standard mechanism by which a sequence of continuous functions converges to a continuous function.
 	\end{enumerate}
 }
 
 \end{frame}
 
-\begin{frame}<1-6> \frametitle{2.1.3: Concrete Example of the Contraction Mapping Theorem}
-
-\vspace{1mm}
-\begin{minipage}{0.45\textwidth}
-Starting from $x_1 = 0.2$, define the sequence $x_{n+1}= \cos(x_n)$ and plot the x-y pairs $(x_n,x_{n+1})$.  Each point is connected to the ``$y\!=\!x$'' line to emphasize the sequential path.
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\scalebox{0.72}{\input{../cos_contract}}
-\end{minipage}
-\vspace{0mm}
-
-\begin{itemize}
-\setlength\itemsep{1.25mm}
-\item<1-> Let $X=[0,1]$ and define $f\colon X\to X$ via $f(x)=\cos(x)$
-
-\item<2-> $\cos([0,1]) = [\cos(1),1]$ because $\cos(x)$ decreasing on $[0,\pi]$
-
-\item<3-> Mean value theorem: $f(y)-f(x) = f'(t) (y-x)$ for some $t\in [x,y]$
-
-\item<4-> $f'(t) = -\sin(t)$ and $\sin([0,1]) = [0,\sin(1)]$ with $\sin(1) \approx 0.84$
-
-\item<5-> $| \cos(y) - \cos(x) \,| \leq 0.85 \, |y-x|$ $\;\Rightarrow$ \textcolor{blue}{$f(x)$ is a contraction on $[0,1]$}
-
-\item<6-> $x_{n+1} \!= \cos(x_n)$  converges to \textcolor{blue}{unique fixed point $x^* \!= \cos(x^*) \!\approx\! 0.739$}
-\end{itemize}
-
-\note{
-	\vspace{2mm}
-	\begin{enumerate}[<alert@+>]
-		\footnotesize
-		\setlength\itemsep{3mm}
-		\item Read.  $cos(x)$ is plotted in red and, for the definition to make sense, one first needs to check that $cos(x) \in [0,1]$ whenever $x\in [0,1]$.
-		\item The red curve above proves this numerically. Analytically, we see that (read).
-		\item To show that $cos(x)$ is a contraction, we use the (read).
-		\item Next, we note that the derivative (read).
-		\item This implies that (read)
-		\item Thus, the contraction mapping theorem implies that the sequence
-	\end{enumerate}
-}
-
-\end{frame}  
 
 \begin{frame} \frametitle{Next Steps}
 
@@ -462,7 +435,7 @@ Starting from $x_1 = 0.2$, define the sequence $x_{n+1}= \cos(x_n)$ and plot the
 
 \begin{itemize}
  \setlength\itemsep{3mm}
- \item Try the suggested reading: Course Notes EF 2.1.3
+ \item Try the suggested reading: Course Notes EF 2.1.3, 2.1.5 - 2.1.6
  \item Or the optional reading: MMA 2.1
  \item Also, look at the problems in Assignment 3
 \end{itemize}

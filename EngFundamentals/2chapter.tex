@@ -122,7 +122,7 @@ For matrices $A \in \mathbb{C}^{m\times p}$ and $B \in \mathbb{C}^{p \times n}$,
 An $m\times n$ matrix $A$ over $F$ is in \defn{matrix}{row echelon form} if
 \begin{enumerate}
 \item all rows containing only zeros, if they exist, are the bottom of the matrix, and
-\item For non-zero rows, the leading coefficient (i.e., the first non-zero element from the left) is strictly to the right of the leading coefficient of the row above it.
+\item For rows with non-zero entries, the leading coefficient (i.e., the first non-zero element from the left) is strictly to the right of the leading coefficient of the row above it.
 \end{enumerate}
 These two conditions imply that entries below the leading coefficient in a column are zero.
 A matrix is \textbf{column echelon form} if its transpose is in row echelon form.
@@ -154,7 +154,7 @@ An \defn{matrix}{elementary row operation} on an $m \times n$ matrix consists of
 \begin{enumerate}
 \item multiplying a row by a non-zero scalar,
 \item swapping two rows, or
-\item adding a non-zero scalar multiple of one row to another row.
+\item adding a scalar multiple of one row to another row.
 \end{enumerate}
 An \defn{matrix}{elementary column operation} is the same but applied to the columns.
 \end{definition}

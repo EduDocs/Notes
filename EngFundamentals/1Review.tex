@@ -338,6 +338,136 @@ Show that $f$ is Lipschitz continuous with $L=1$.
 % d(y,x_0) <= d(x,y) + d(x,x_0)
 % |f(x)-f(y)| <= d(x,y)
 
+\subsection{Properties of the Real Numbers}
+
+First, we review notions of extreme values for sets of real numbers.
+To do this, we will define the \defn{topology}{extended real numbers} $\overline{\RealNumbers}$ by augmenting the real numbers to include limit points for unbounded sequences $\overline{\RealNumbers} \triangleq \RealNumbers \cup \{ \infty,-\infty\}$.
+Using the metric $d_{\overline{\RealNumbers}} (x,y) \triangleq |\frac{x}{1+|x|} - \frac{y}{1+|y|}|$, this set is a metric space.
+Later, we will see that it is actually a compact metric space.
+The main difference from $\RealNumbers$ is that, for  $x_n \in \overline{\RealNumbers}$, the statement  $x_n \to \infty$ is well defined and equivalent to $\forall M>0, \, \exists N\in \mathbb{N}, \, \forall n>N, \, x_n > M$.
+\begin{definition}
+The \defn{set theory}{supremum} (or least upper bound) of $X\subseteq \RealNumbers$, denoted $\sup X$, is the smallest extended real number $M \in \overline{\RealNumbers}$ such that $x\leq M$ for all $x\in X$.
+It is always well-defined and equals $-\infty$ if $X=\emptyset$.
+\end{definition}
+
+\begin{definition}
+The \defn{set theory}{maximum} of $X\subseteq \RealNumbers$, denoted $\max X$, is the largest value achieved by the set.
+It equals $\sup X$ if $\sup X \in X$ and is undefined otherwise.
+\end{definition}
+
+\begin{definition}
+The \defn{set theory}{infimum} (or greatest lower bound) of $X\subseteq \RealNumbers$, denoted $\inf X$, is the largest extended real number $m \in \overline{\RealNumbers}$ such that $x\geq m$ for all $x\in X$.
+It is always well-defined and equals $\infty$ if $X=\emptyset$.
+\end{definition}
+
+\begin{definition}
+The \defn{set theory}{minimum} of $X\subseteq \RealNumbers$, denoted $\min X$, is the smallest value achieved by the set.
+It equals $\inf X$ if $\inf X \in X$ and is undefined otherwise.
+\end{definition}
+
+\begin{lemma}
+\label{lem:SupremumSequence}
+Let $X$ be a set and $f \colon X\rightarrow \RealNumbers$ be a function from $X$ to the real numbers.
+Let $M = \sup f(A)$ for some non-empty $A \subseteq X$.
+Then, there exists a sequence $x_1,x_2,\ldots \in A$ such that $\lim_n f(x_n) = M$.
+\end{lemma}
+\begin{proof}
+If $M=\infty$, then $f(A)$ has no finite upper bound and, for any $y\in \RealNumbers$, there exists an $x\in A$ such that $f(x)>y$.
+In this case, we can let $x_1$ be any element of $A$ and $x_{n+1}$ be any element of $A$ such that $f(x_{n+1}) > f(x_n) + 1$.
+In the metric space $(\overline{\RealNumbers},d_{\overline{\RealNumbers}})$, this implies that $d_{\overline{\RealNumbers}}(f(x_n),\infty) = |\frac{f(x_n)}{1+|f(x_n)|} - 1| \to 0$ and thus $f(x_n) \to \infty$.
+
+If $M<\infty$, then $f(A)$ has a finite upper bound and, for any $\epsilon >0$, there is an $x$ such that $M-f(x)<\epsilon$.
+Otherwise, one arrives at the contradiction $\sup f(A) < M$.
+Therefore, we can construct the sequence $x_1,x_2,\ldots$ by choosing $x_n\in A$ to be any point that satisfies $M-f(x_n)\leq \frac{1}{n}$.
+\end{proof}
+
+\begin{theorem}
+Any bounded non-decreasing sequence of real numbers converges to its supremum.
+\end{theorem}
+\begin{proof}
+Let $x_1,x_2,\ldots \in \RealNumbers$ be a sequence satisfying $x_{n+1} \geq x_n$ and $x_n \leq M < \infty$ for all $n\in \mathbb{N}$.
+Without loss of generality, we can choose the upper bound $M$ to be the supremum $\sup \{x_1,x_2,\ldots\}$.
+Now, we will prove directly that $x_n \to M$.
+
+First, we note that the definition of the supremum implies that $x_n \leq M$ for all $n\in \mathbb{N}$ and, for any $\epsilon >0$, there is an $N\in \mathbb{N}$ such that $x_N > M-\epsilon$.
+Since $x_n$ is non-decreasing, this implies that $x_n > M-\epsilon$ for all $n>N$.
+Next, it follows from $x_n \leq M$ that $|M - x_n| = M-x_n < \epsilon$ for all $n>N$.
+Thus, the constructed $N$ satisfies all elements in the definition of $x_n \to M$.
+%To prove this by contradiction, we suppose that $x_n$ does not converge to $M$.
+%Since $x_n$ is non-decreasing, this implies that there is an $\epsilon > 0$ such that $M - x_n \geq \epsilon$ for all $n\in \mathbb{N}$.
+%But, this result contradicts $\sup f(A) = M$.
+%Therefore, the sequence converges to $M$.
+\end{proof}
+
+
+\begin{lemma} \label{lem:abs_sum_convergence}
+Let $y_n \in \RealNumbers$ be a real sequence.
+If $\sum_{i=1}^\infty |y_i| = M < \infty$, then $x_n = \sum_{i=1}^n y_i$ satisfies $x_n \to x$ with $|x|<M$.
+\end{lemma}
+\begin{proof}
+Let $w_n = \sum_{i=1}^n |y_i|$ and observe that the following inequality holds,
+\[|x_m - x_n| = \left| \sum_{i=n+1}^m y_i \right| \leq \sum_{i=n+1}^m |y_i| = | w_m - w_n|. \]
+Since $w_n$ converges, it is Cauchy and %``$\forall \epsilon>0, \exists N\in \mathbb{N}, \forall m,n>N, |w_m - w_n|< \epsilon$''.
+the inequality implies that $x_m$ is Cauchy.
+Thus, $x_n$ converges to some $x\in \RealNumbers$ and $|x| < M$ follows from  $|x_n| \leq w_n \leq M$.
+%$\left| \sum_{i=1}^\infty y_i \right| \leq \sum_{i=1}^\infty |y_i|$.
+\end{proof}
+
+
+
+\begin{lemma} \label{lem:sum_convergence}
+Let $y_n \in \RealNumbers$ be a real sequence and $x_n = \sum_{i=1}^n y_i$ be its sequence of partial sums.
+Then, $\sum_{i=1}^\infty y_i \triangleq \lim_{n\to \infty} x_n$ exists if and only if the tail of the sum is negligible:
+\[ \forall \epsilon > 0, \, \exists N \in \mathbb{N}, \, \forall m,n>N, \, \left| \sum_{i=n+1}^m y_i \right| < \epsilon. \]
+\end{lemma}
+\begin{proof}
+Since $\RealNumbers$ is complete, $\lim_{n\to\infty} x_n$ exists if and only if $x_n$ is a Cauchy sequence.
+Thus, $x_n$ converges if and only if ``$\forall \epsilon>0, \exists N\in \mathbb{N}, \forall m,n>N, |x_m - x_n|< \epsilon$''.
+Thus, the result follows from the fact that $|x_m - x_n| = \left| \sum_{i=n+1}^m y_i \right|$.
+\end{proof}
+
+
+
+\subsection{Sequences of Functions}
+
+Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces and
+$f_n \colon X \to Y$ for $n\in \mathbb{N}$ be a sequence of functions mapping $X$ to $Y$.
+
+\index{metric space!pointwise convergence}
+\begin{definition}
+The sequence $f_n$ \textbf{converges pointwise} to $f\colon X \to Y$ if \vspace{-1mm}
+\[ \lim_{n\to \infty} f_n (x) = f(x) \vspace*{-1mm} \]
+for all $x \in X$.
+Using mathematical symbols, we can write \vspace{-1mm}
+\[ \forall x\in X, \, \forall \epsilon > 0, \, \exists N\in \mathbb{N}, \, \forall n \in \{ n' \in \mathbb{N}\,|\, n'>N \}, \, d_Y \left( f_n(x),f(x) \right) < \epsilon. \vspace*{-1mm} \]
+\end{definition}
+
+\index{metric space!uniform convergence}
+\begin{definition}
+The sequence $f_n$ \textbf{converges uniformly} to $f \colon X \to Y$ if \vspace{-1mm}
+\[ \forall \epsilon > 0, \, \exists N\in \mathbb{N}, \, \forall n \in \{ n' \in \mathbb{N}\,|\, n'>N \}, \, \forall x\in X, \, d_Y \left( f_n(x),f(x) \right) < \epsilon. \vspace*{-1mm} \]
+This condition is also equivalent to \vspace{-1mm}
+\[ \lim_{n\to \infty} \sup_{x\in X} d_Y \left( f_n (x) , f(x) \right) = 0. \]
+%Using mathematical symbols, we can write
+ \end{definition}
+
+\begin{theorem}
+If each $f_n$ is continuous and $f_n$ converges uniformly to $f \colon X \to Y$, then $f$ is continuous.
+\end{theorem}
+\begin{proof}
+The goal is to show that, for all $x\in X$ and any $\epsilon > 0$, there is a $\delta>0$ such that $d_Y (f (x),f (y)) < \epsilon$ if $d_X (x,y) < \delta$.
+Since $f_n \to f$ uniformly, for any $\epsilon >0$, there is an $N\in \mathbb{N}$ such that $d_Y (f_n (x), f(x) ) < \epsilon / 3$ for all $n > N$ and all $x\in X$.
+Now, we can fix $\epsilon > 0$ use the $N$ promised above.
+Then, for any $n>N$, the continuity of $f_n$ implies that, for all $x\in X$ and any $\epsilon >0$, there is a $\delta>0$ such that $d_Y (f_n (x),f_n(y)) < \epsilon/3$ if $d_X (x,y) < \delta$.
+Thus, if $d_X (x,y) < \delta$, then
+\begin{align*}
+d_Y (f(x),f(y))
+&\leq d_Y (f(x),f_n (x)) + d_Y (f_n (x) ,f_n (y) ) + d_Y (f_n (y), f(y) ) \\
+& < \frac{\epsilon}{3} + \frac{\epsilon}{3} + \frac{\epsilon}{3} = \epsilon.
+\end{align*}
+\end{proof}
+
+
 \subsection{Completeness}
 \label{sec:metspace_complete}
 Suppose $(X,d)$ is a metric space.
@@ -482,22 +612,24 @@ Then, $f$ has a unique fixed point $x^*$ in $A$ such that $f(x^*) = x^*$ and the
 Suppose $f$ has two fixed points $y,z\in A$.
 Then, $d(y,z) = d \left(f(y),f(z) \right) \leq \gamma  d(y,z)$ and $d(y,z) = 0$ because $\gamma \in [0,1)$.
 This shows that $y=z$ and any two fixed points in $A$ must be identical.
+If $x^*$ is a fixed point, then $d(x^*,x_{n+1}) = d(f(x^*),f(x_{n})) \leq \gamma d(x^*,x_n)$ and, by induction, one gets the first error bound.
 
 Since $d(f(x_n),f(x_{n+1})) \leq \gamma d(x_n,x_{n+1})$, induction shows that $d(x_n,x_{n+1}) \leq \gamma^{n-1} d(x_1,x_2)$.
 Using this, we can bound the distance $d(x_m,x_n)$ (for $m<n$) with
-\begin{align*}
+\begin{align}
 d(x_m,x_n)
-& \leq d(x_m,x_{m+1}) + d(x_{m+1},x_n) \\
+& \leq d(x_m,x_{m+1}) + d(x_{m+1},x_n) \nonumber \\
 & \leq \sum_{i=m}^{n-1} d(x_i,x_{i+1}) 
- \leq \sum_{i=m}^{n-1} \gamma^{i-1} d(x_1,x_2) \\
+ \leq \sum_{i=m}^{n-1} \gamma^{i-1} d(x_1,x_2) \nonumber \\
 & \leq \sum_{i=m}^\infty \gamma^{i-1} d(x_1,x_2) 
- \leq \frac{\gamma^{m-1}}{1-\gamma} d(x_1,x_2).
-\end{align*}
+ \leq \frac{\gamma^{m-1}}{1-\gamma} d(x_1,x_2). \label{eq:contraction_error}
+\end{align}
 The sequence $x_n$ is Cauchy because $d(x_m,x_n)$ can be made arbitrarily small (for all $n>m$) by increasing $m$.
 As $(X,d)$ is complete, it follows that $x_n \to x^*$ for some $x^* \in X$.
 Since $f$ is Lipschitz continuous, this implies that $x^* = \lim_n x_n = \lim_n f(x_n) = f(x^*)$ the unique fixed point of $f$ in $A$.
-
-Arguments similar to the above can be used to prove the stated error bounds.
+Since $x_n \to x^*$, we can use essentially the same argument to get the second error bound
+\[  d(x_{n+1},x^*) \leq \sum_{i=n+1}^{\infty} d(x_i,x_{i+1}) 
+ \leq \sum_{i=n+1}^{\infty} \gamma^{i-n} d(x_n,x_{n+1}) = \frac{\gamma}{1-\gamma} d(x_n,x_{n+1}).\!  \qedhere \]
 \end{proof}
 
 \begin{figure}[t]
@@ -582,45 +714,6 @@ By contradiction, this implies that there is a subsequence that converges.
 \end{proof}
 
 Functions from compact sets to the real numbers are very important in practice.
-To keep the discussion self-contained, we first review the extreme values of sets of real numbers.
-First, we must define the \defn{topology}{extended real numbers} $\overline{\RealNumbers}$ by augmenting the real numbers to include limit points for unbounded sequences $\overline{\RealNumbers} \triangleq \RealNumbers \cup \{ \infty,-\infty\}$.
-Using the metric $d_{\overline{\RealNumbers}} (x,y) \triangleq |\frac{x}{1+|x|} - \frac{y}{1+|y|}|$, this set becomes a compact metric space.
-The main difference from $\RealNumbers$ is that, for  $x_n \in \overline{\RealNumbers}$, the statement  $x_n \to \infty$ is well defined and equivalent to $\forall M>0, \, \exists N\in \mathbb{N}, \, \forall n>N, \, x_n > M$.
-\begin{definition}
-The \defn{set theory}{supremum} (or least upper bound) of $X\subseteq \RealNumbers$, denoted $\sup X$, is the smallest extended real number $M \in \overline{\RealNumbers}$ such that $x\leq M$ for all $x\in X$.
-It is always well-defined and equals $-\infty$ if $X=\emptyset$.
-\end{definition}
-
-\begin{definition}
-The \defn{set theory}{maximum} of $X\subseteq \RealNumbers$, denoted $\max X$, is the largest value achieved by the set.
-It equals $\sup X$ if $\sup X \in X$ and is undefined otherwise.
-\end{definition}
-
-\begin{definition}
-The \defn{set theory}{infimum} (or greatest lower bound) of $X\subseteq \RealNumbers$, denoted $\inf X$, is the largest extended real number $m \in \overline{\RealNumbers}$ such that $x\geq m$ for all $x\in X$.
-It is always well-defined and equals $\infty$ if $X=\emptyset$.
-\end{definition}
-
-\begin{definition}
-The \defn{set theory}{minimum} of $X\subseteq \RealNumbers$, denoted $\min X$, is the smallest value achieved by the set.
-It equals $\inf X$ if $\inf X \in X$ and is undefined otherwise.
-\end{definition}
-
-\begin{lemma}
-\label{lem:SupremumSequence}
-Let $X$ be a set and $f \colon X\rightarrow \RealNumbers$ be a function from $X$ to the real numbers.
-Let $M = \sup f(A)$ for some non-empty $A \subseteq X$.
-Then, there exists a sequence $x_1,x_2,\ldots \in A$ such that $\lim_n f(x_n) = M$.
-\end{lemma}
-\begin{proof}
-If $M=\infty$, then $f(A)$ has no finite upper bound and, for any $y\in \RealNumbers$, there exists an $x\in A$ such that $f(x)>y$.
-In this case, we can let $x_1$ be any element of $A$ and $x_{n+1}$ be any element of $A$ such that $f(x_{n+1}) > f(x_n) + 1$.
-In the metric space $(\overline{\RealNumbers},d_{\overline{\RealNumbers}})$, this implies that $d_{\overline{\RealNumbers}}(f(x_n),\infty) = |\frac{f(x_n)}{1+|f(x_n)|} - 1| \to 0$ and thus $f(x_n) \to \infty$.
-
-If $M<\infty$, then $f(A)$ has a finite upper bound and, for any $\epsilon >0$, there is an $x$ such that $M-f(x)<\epsilon$.
-Otherwise, one arrives at the contradiction $\sup f(A) < M$.
-Therefore, we can construct the sequence $x_1,x_2,\ldots$ by choosing $x_n\in A$ to be any point that satisfies $M-f(x_n)\leq \frac{1}{n}$.
-\end{proof}
 
 \begin{theorem}
 Let $X$ be a metric space and $f \colon X\rightarrow \RealNumbers$ be a continuous function from $X$ to the real numbers.
@@ -639,88 +732,7 @@ Let $(X,d)$ be a metric space.
 Then, a continuous function from a compact subset $A\subseteq X$ to the real numbers achieves a minimum on $A$.
 \end{corollary}
 
-\begin{theorem}
-Any bounded non-decreasing sequence of real numbers converges to its supremum.
-\end{theorem}
-\begin{proof}
-Let $x_1,x_2,\ldots \in \RealNumbers$ be a sequence satisfying $x_{n+1} \geq x_n$ and $x_n \leq M < \infty$ for all $n\in \mathbb{N}$.
-Without loss of generality, we can choose the upper bound $M$ to be the supremum $\sup \{x_1,x_2,\ldots\}$.
-Now, we will prove directly that $x_n \to M$.
 
-First, we note that the definition of the supremum implies that $x_n \leq M$ for all $n\in \mathbb{N}$ and, for any $\epsilon >0$, there is an $N\in \mathbb{N}$ such that $x_N > M-\epsilon$.
-Second, since $x_n$ is non-decreasing, this implies that $x_n > M-\epsilon$ for all $n>N$.
-Third, since $x_n \leq M$ by definition, it follows that $|M - x_n| = M-x_n < \epsilon$ for all $n>N$.
-Thus, the constructed $N$ satisfies all elements in the definition of $x_n \to M$.
-%To prove this by contradiction, we suppose that $x_n$ does not converge to $M$.
-%Since $x_n$ is non-decreasing, this implies that there is an $\epsilon > 0$ such that $M - x_n \geq \epsilon$ for all $n\in \mathbb{N}$.
-%But, this result contradicts $\sup f(A) = M$.
-%Therefore, the sequence converges to $M$.
-\end{proof}
-
-
-\begin{lemma} \label{lem:sum_convergence}
-Let $y_n \in \RealNumbers$ be a real sequence and $x_n = \sum_{i=1}^n y_i$ be its sequence of partial sums.
-Then, $\sum_{i=1}^\infty y_i \triangleq \lim_{n\to \infty} x_n$ exists if and only if the tail of the sum is negligible:
-\[ \forall \epsilon > 0, \, \exists N \in \mathbb{N}, \, \forall m,n>N, \, \left| \sum_{i=n+1}^m y_i \right| < \epsilon. \]
-\end{lemma}
-\begin{proof}
-Since $\RealNumbers$ is complete, $\lim_{n\to\infty} x_n$ exists if and only if $x_n$ is a Cauchy sequence.
-Thus, $x_n$ converges if and only if ``$\forall \epsilon>0, \exists N\in \mathbb{N}, \forall m,n>N, |x_m - x_n|< \epsilon$''.
-Thus, the result follows from the fact that $|x_m - x_n| = \left| \sum_{i=n+1}^m y_i \right|$.
-\end{proof}
-
-\begin{lemma} \label{lem:abs_sum_convergence}
-Let $y_n \in \RealNumbers$ be a real sequence.
-If $\sum_{i=1}^\infty |y_i| = M < \infty$, then $x_n = \sum_{i=1}^n y_i$ satisfies $x_n \to x$ with $|x|<M$.
-\end{lemma}
-\begin{proof}
-Let $w_n = \sum_{i=1}^n |y_i|$ and observe that the following inequality holds,
-\[|x_m - x_n| = \left| \sum_{i=n+1}^m y_i \right| \leq \sum_{i=n+1}^m |y_i| = | w_m - w_n|. \]
-Since $w_n$ converges, it is Cauchy and %``$\forall \epsilon>0, \exists N\in \mathbb{N}, \forall m,n>N, |w_m - w_n|< \epsilon$''.
-the inequality implies that $x_m$ is Cauchy.
-Thus, $x_n$ converges to some $x\in \RealNumbers$ and $|x| < M$ follows from  $|x_n| \leq w_n \leq M$.
-%$\left| \sum_{i=1}^\infty y_i \right| \leq \sum_{i=1}^\infty |y_i|$.
-\end{proof}
-
-
-\subsection{Sequences of Functions}
-
-Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces and
-$f_n \colon X \to Y$ for $n\in \mathbb{N}$ be a sequence of functions mapping $X$ to $Y$.
-
-\index{metric space!pointwise convergence}
-\begin{definition}
-The sequence $f_n$ \textbf{converges pointwise} to $f\colon X \to Y$ if \vspace{-1mm}
-\[ \lim_{n\to \infty} f_n (x) = f(x) \vspace*{-1mm} \]
-for all $x \in X$.
-Using mathematical symbols, we can write \vspace{-1mm}
-\[ \forall x\in X, \, \forall \epsilon > 0, \, \exists N\in \mathbb{N}, \, \forall n \in \{ n' \in \mathbb{N}\,|\, n'>N \}, \, d_Y \left( f_n(x),f(x) \right) < \epsilon. \vspace*{-1mm} \]
-\end{definition}
-
-\index{metric space!uniform convergence}
-\begin{definition}
-The sequence $f_n$ \textbf{converges uniformly} to $f \colon X \to Y$ if \vspace{-1mm}
-\[ \forall \epsilon > 0, \, \exists N\in \mathbb{N}, \, \forall n \in \{ n' \in \mathbb{N}\,|\, n'>N \}, \, \forall x\in X, \, d_Y \left( f_n(x),f(x) \right) < \epsilon. \vspace*{-1mm} \]
-This condition is also equivalent to \vspace{-1mm}
-\[ \lim_{n\to \infty} \sup_{x\in X} d_Y \left( f_n (x) , f(x) \right) = 0. \]
-%Using mathematical symbols, we can write
- \end{definition}
-
-\begin{theorem}
-If each $f_n$ is continuous and $f_n$ converges uniformly to $f \colon X \to Y$, then $f$ is continuous.
-\end{theorem}
-\begin{proof}
-The goal is to show that, for all $x\in X$ and any $\epsilon > 0$, there is a $\delta>0$ such that $d_Y (f (x),f (y)) < \epsilon$ if $d_X (x,y) < \delta$.
-Since $f_n \to f$ uniformly, for any $\epsilon >0$, there is an $N\in \mathbb{N}$ such that $d_Y (f_n (x), f(x) ) < \epsilon / 3$ for all $n > N$ and all $x\in X$.
-Now, we can fix $\epsilon > 0$ use the $N$ promised above.
-Then, for any $n>N$, the continuity of $f_n$ implies that, for all $x\in X$ and any $\epsilon >0$, there is a $\delta>0$ such that $d_Y (f_n (x),f_n(y)) < \epsilon/3$ if $d_X (x,y) < \delta$.
-Thus, if $d_X (x,y) < \delta$, then
-\begin{align*}
-d_Y (f(x),f(y))
-&\leq d_Y (f(x),f_n (x)) + d_Y (f_n (x) ,f_n (y) ) + d_Y (f_n (y), f(y) ) \\
-& < \frac{\epsilon}{3} + \frac{\epsilon}{3} + \frac{\epsilon}{3} = \epsilon.
-\end{align*}
-\end{proof}
 
 \section{General Topology*}
 

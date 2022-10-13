@@ -159,14 +159,14 @@
   \begin{itemize}
   \setlength\itemsep{1.5mm}
   \item This chapter will review and extend your knowledge of linear algebra
-  \item Using abstraction allows application to many different areas
+  \item Abstraction allows the application of similar ideas to many different areas
   \item Your prior experience with real vector spaces makes this possible 
   \end{itemize}
 \item<2-> Abstraction \vspace{1mm}
   \begin{itemize}
   \setlength\itemsep{1.5mm}
-  \item Metric spaces abstract notions of distance and closeness
-  \item Fields abstract standard arithmetic of scalars ($+,-,\times,/$)
+  \item Metric spaces provide abstract notions of distance and closeness
+  \item Fields provide abstract notions for arithmetic of scalars ($+,-,\times,/$)
   \item Vector spaces abstract the additive properties of real vectors
   \end{itemize}
 \end{itemize}
@@ -187,8 +187,8 @@
 
 Consider a set $F$ with binary operations: ``addition" and ``multiplication"
 \begin{itemize}
-\item For every pair of elements $s, t \in F$, we have $(s + t) \in F$
-\item For every pair of elements $s, t \in F$, we have $s t \in F$
+\item For every pair of elements $s, t \in F$, we require $(s + t) \in F$
+\item For every pair of elements $s, t \in F$, we require $s t \in F$
 \end{itemize}
 \vspace{1.5mm}
 \uncover<2->{%
@@ -212,13 +212,13 @@ $F$ forms a \textcolor{blue}{field} if the two operations satisfy:
 		\footnotesize
 		\setlength\itemsep{3mm}
 		\item Read.  Multiplication is denoted by placing element next to each other.
-		\item A field satisfies all the standard multiplicative and additive properties of the real numbers.  They are listed for your review but you do not need to memorize them.
+		\item A field satisfies all the standard multiplicative and additive properties of the real numbers.  They are listed here for your review but you do not need to memorize them.
 	\end{enumerate}
 }
 
 \end{frame}
 
-\begin{frame}<1> \frametitle{3.1: Example Fields}
+\begin{frame}<1> \frametitle{3.1: Examples of Arithmetic Fields}
 
 \begin{example}
 The rational numbers with standard addition and multiplication form a field.
@@ -253,7 +253,7 @@ For prime $p$, set $\{0,1,\ldots,p-1\}$ with add. and mult. modulo $p$ is a fiel
 
 \begin{frame}<1-2> \frametitle{3.2: Matrices}
 
-Consider finding $n$ scalars $x_1, \ldots, x_n \in F$ that satisfy the conditions \vspace{-0.5mm}
+Consider finding $n$ scalars $x_1, \ldots, x_n \in F$ that satisfy these conditions \vspace{-0.5mm}
 \begin{equation*} \begin{array}{ccccccccc}
 a_{11} x_1 & + & a_{12} x_2 & + & \cdots & + & a_{1n} x_n & = & y_1 \\
 a_{21} x_1 & + & a_{22} x_2 & + & \cdots & + & a_{2n} x_n & = & y_2 \\
@@ -306,10 +306,10 @@ c_{ij} = \sum_{r = 1}^n a_{ir} b_{rj}. \vspace{-0.25mm}
 
 
 \begin{example}<2->
-When $j$ is fixed, one can eliminate $i$ by grouping the elements of $C$ and $A$ into column vectors $\vecnot{c}_1,\ldots,\vecnot{c}_{p}$ and $\vecnot{a}_1,\ldots,\vecnot{a}_n$. For this case, we see that the $j$-th column of $C$ is a linear combination of the columns of $A$, \vspace{-3mm}
+When $j$ is fixed, one can eliminate $i$ by grouping the elements of $C$ and $A$ into column vectors $\vecnot{c}_1,\ldots,\vecnot{c}_{p}$ and $\vecnot{a}_1,\ldots,\vecnot{a}_n$. In this case, we see that the $j$-th column of $C$ is a linear combination of the columns of $A$, \vspace{-3mm}
 \[ \vecnot{c}_{j} = \sum_{r = 1}^n \vecnot{a}_r b_{rj}, \vspace*{-2.5mm} \]
 
-Also, grouping $C$ and $B$ into row vectors  $\vecnot{c}_1,\ldots,\vecnot{c}_{m}$ and $\vecnot{b}_1,\ldots,\vecnot{b}_n$ gives \vspace{-3mm}
+Likewise, grouping $C$ and $B$ into row vectors  $\vecnot{c}_1,\ldots,\vecnot{c}_{m}$ and $\vecnot{b}_1,\ldots,\vecnot{b}_n$ gives \vspace{-3mm}
 \[ \vecnot{c}_{i} = \sum_{r = 1}^n a_{ir} \vecnot{b}_r. \vspace{-0.25mm} \]
 % with coefficients $b_{i,1},b_{i,2},\ldots,b_{i,n}$.
 \end{example}
@@ -333,7 +333,7 @@ Also, grouping $C$ and $B$ into row vectors  $\vecnot{c}_1,\ldots,\vecnot{c}_{m}
 		\footnotesize
 		\setlength\itemsep{3mm}
 		\item Read.  This is standard matrix multiplication, which you should have all seen before.
-		\item If we interpret matrices as collection of row (or columns) vectors, then matrix multiplication also has other interpretations.
+		\item Thus, if we interpret matrices as collection of row (or column) vectors, then matrix multiplication also has other interpretations.
 	\end{enumerate}
 }
 
@@ -344,17 +344,17 @@ Also, grouping $C$ and $B$ into row vectors  $\vecnot{c}_1,\ldots,\vecnot{c}_{m}
 \begin{frame}<1-2> \frametitle{3.2: Echelon Forms}
 
 \begin{definition}<1->
-An matrix $A \in F^{m\times n}$ is in \textcolor{blue}{row echelon form} if:
+A matrix $A \in F^{m\times n}$ is in \textcolor{blue}{row echelon form} if:
 \begin{enumerate}
-\item Any rows containing only zeros are below all non-zero rows, and
-\item For non-zero rows, the leading coefficient (i.e., the first non-zero element from the left) is strictly to the right of the leading coefficient of the row above it.
+\item Any all-zero row is below all rows with non-zero entries, and
+\item For all rows with non-zero entries, the leading coefficient (i.e., the first non-zero element from the left) is strictly to the right of the leading coefficient of the row above it.
 \end{enumerate}
-Thus, the entries below the leading coefficient in a column are zero.
+Thus, the entries below the leading coefficient in a column are zero. \\
 $A$ is in \textcolor{blue}{column echelon form} if $A^T$ is in row echelon form.
 \end{definition}
 
 \begin{definition}<2->
-A matrix $B \in F^{m\times n}$ is in \textcolor{blue}{reduced row echelon form} if it is:
+A matrix $B \in F^{m\times n}$ is in \textcolor{blue}{reduced row echelon form} (RREF) if it is:
 \begin{enumerate}
 \item in row echelon form with every leading coefficient equal to 1, and
 \item every leading coefficient is the only non-zero element in its column.
@@ -389,7 +389,7 @@ $B$ is \textcolor{blue}{reduced column echelon form} if $B^T$ is in reduced row 
 		\footnotesize
 		\setlength\itemsep{3mm}
 		\item Read.
-		\item Read.  This form allows on to easily find vectors in the null space of the matrix.
+		\item Read.  This form allows one to easily find vectors in the null space of the matrix.
 	\end{enumerate}
 }
 
@@ -405,23 +405,56 @@ An \textcolor{blue}{elementary row operation} on an $m \times n$ matrix consists
 \setlength\itemsep{0.5mm}
 \item multiplying a row by a non-zero scalar,
 \item swapping two rows, or
-\item adding a non-zero scalar multiple of one row to another row.
+\item adding a scalar multiple of one row to another row.
 \end{enumerate}
 An \textcolor{blue}{elementary column operation} is the same but applied to the columns.
 \end{definition}
 
-\vspace{-0.5mm}
 
-\begin{lemma}<2->
+\begin{definition}<2->
+A square matrix $A \in F^{m\times m}$ is \textcolor{blue}{invertible} if there is a square matrix $B \in F^{m\times m}$ such that $AB=BA=I$, where $I$ is the $m\!\times\! m$ identity.  In that case, $A^{-1}=B$.
+\end{definition}
+
+\vspace{1mm}
+\begin{itemize}
+  \item<3-> Elementary row operations on $A\in F^{m\times n}$ \vspace{1mm}
+  \begin{itemize}
+    \setlength{\itemsep}{1.5mm}
+    \item <3-> Are realized, for an invertible matrix $E \in F^{m\times m}$, by matrix mult as $EA$
+    \item <3-> Can be used in a sequence to induce RREF (e.g., Gaussian elimination)
+  \end{itemize}
+\end{itemize}
+
+\note{
+	\vspace{2mm}
+	\begin{enumerate}[<alert@+>]
+		\footnotesize
+		\setlength\itemsep{3mm}
+		\item Read.
+		\item Read.
+		\item Read.
+	\end{enumerate}
+}
+
+\end{frame}
+
+
+\begin{frame}<1-5> \frametitle{3.2: Elementary Row Operations}
+
+
+\begin{lemma}<1->
 For any $m\times n$ matrix $A$ over $F$, there is an invertible $m \times m$ matrix $P$ over $F$ such that $R=PA$ is in reduced row echelon form.
 \end{lemma}
 
-\vspace{-0.5mm}
+\vspace{3mm}
 
-\begin{proof}[Sketch of Proof]<3->
-To construct $P$, one applies Gaussian elimination to the augmented matrix $A' = [A \;\; I]$.
-The resulting augmented matrix $R' = [R \;\; P]$ (and, thus $R$) is in reduced row echelon form.
-Since elementary row operations are defined by (invertible) matrix multiplies on the left side, one also finds that $R' = P A'$, $R = PA$, and $P$ is invertible.
+\begin{proof}[Sketch of Proof]<2->
+\begin{itemize}
+\item<2-> For $A\in F^{m \times n}$, define the augmented matrix $A' = [A \;\; I]$
+\item<3-> Use elementary row operations to transform $A'$ into RREF as $R'$
+\item<4-> Elementary row operations imply that $R' = P A'$ for some invertible $P$
+\item<5-> Then, $R' = [R \;\; P]$ where $R=PA$ is in RREF \qedhere
+\end{itemize}
 \end{proof}
 
 \note{
@@ -437,7 +470,9 @@ Since elementary row operations are defined by (invertible) matrix multiplies on
 
 \end{frame}
 
-\begin{frame}<1-5> \frametitle{3.2: Foundation of Dimension}
+
+
+\begin{frame}<1-4> \frametitle{3.2: Foundation of Dimension}
 
 \begin{lemma}<1->
 Let $A$ be an $m \times n$ matrix over $F$ with $m<n$.
@@ -446,15 +481,18 @@ Then, there exists a length-$n$ column vector $\vecnot{x} \neq \vecnot{0}$ (over
 
 \begin{proof}<2->
 \begin{itemize}
-\item<2-> Apply steps below to concrete example during live meeting.
+\item<2-> Use row reduction to compute the reduced row echelon form $R=PA$ of $A$, where $P$ is invertible by previous lemma.
 
-\item<3-> Use row reduction to compute the reduced row echelon form $R=PA$ of $A$, where $P$ is invertible by previous lemma.
+\item<3-> Observe that the columns of $R$ containing leading elements can be combined in a linear combination to cancel any other column of $R$.
 
-\item<4-> Observe that the columns of $R$ containing leading elements can be combined in a linear combination to cancel any other column of $R$.
-
-\item<5-> Thus, one can construct a vector $\vecnot{x}$ satisfying $R\vecnot{x}=\vecnot{0}$ and thus $A \vecnot{x} = P^{-1} R \vecnot{x} = \vecnot{0}$. \hfill \qedhere
+\item<4-> Thus, one can construct a vector $\vecnot{x}$ satisfying $R\vecnot{x}=\vecnot{0}$ and observe that $A \vecnot{x} = P^{-1} R \vecnot{x} = \vecnot{0}$. \hfill \qedhere
 \end{itemize}
 \end{proof}
+
+\vspace{2mm}
+
+\uncover<4->{A concrete example of this process will be given in class.}
+
 
 \note{
 	\vspace{2mm}

@@ -416,7 +416,7 @@ Using the connection to conjunction and disjunction, these rules are actually eq
 One can also define predicates with multiple free variables such as $P(x,y)=$``$x$ contains $y$''.
 Once again, these statements are assumed to be true or false for every choice of $x,y$.
 There are 8 possible quantifiers for a 2-variable predicate and they can be arranged according based on some natural implications.
-Assuming that the universe $U$ is not empty, one finds that
+Assuming that $x,y$ are taken from non-empty sets, one finds that
 \[ \begin{array}{ccccccc}
   \forall x, \forall y, P(x,y) & \Rightarrow & \exists x, \forall y, P(x,y) & \Rightarrow & \forall y, \exists x, P(x,y) & \Rightarrow & \exists y, \exists x, P(x,y) \\
   \Updownarrow &&&&&& \Updownarrow \\
@@ -697,7 +697,7 @@ One can verify that this is an equivalence relation by checking that it is refle
 One important characteristic of an equivalence relation is that it partitions the entire set $A$ into disjoint \defn{set theory}{equivalence classes}.
 The equivalence class associated with $a\in A$ is given by  $[a] = \left\{x\in A | x \sim a\right\}$.
 In the birthday example, there is a natural equivalence class associated with each day of the year.
-The set of all equivalence classes is called the \defn{set theory}{quotient set} and is denoted $A / \!\! \sim = \{ [a] | a\in A \}$.
+The set of all equivalence classes is called the \defn{set theory}{quotient set} and is denoted $A / \!\! \sim \, \triangleq \{ \,[a]\, | a\in A \}$.
 
 In fact, there is a natural equivalence relation defined by any disjoint partition of a set.
 For example, let $A_{i,j}$ be the set of people in $A$ whose birthday was on the $j$-th day of the $i$-th month.
