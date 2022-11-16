@@ -1,0 +1,106 @@
+\documentclass[10pt,english]{article}
+
+\usepackage{amsfonts,url}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+
+% Paper setup
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.25in
+\topmargin=-0.5in
+\headheight=0.0in
+\headsep=0.5in
+\textheight=9.0in
+\footskip=0.5in
+
+\input{macros}
+
+\begin{document}
+
+\title{ECE 586: Vector Space Methods \\ Lecture 8: Frequently Asked Questions}
+\author{Henry D. Pfister \\ Duke University}
+\date{September 15th, 2020}
+
+\maketitle
+
+Here we give a list of questions, and their answers, that were submitted by students after watching the flip video.
+
+\section{Compactness}
+
+\paragraph{I am not very clear with the difference between the supremum and the maximum and the infimum and the minimum. Could you give some examples where they are equal and some where they are not?}
+The supremum is simply the smallest value that upper bounds all values in a set $X$. Sometimes (e.g. when the set $X$ is compact),this coincides with the maximum. An example where maximum and supremum are \textit{not} the same is the interval [0,1), where 1 is the supremum, but the maximum is undefined.
+
+
+
+\paragraph{Will one subsequence that converges suffice for a sequence to be compact? What if one subsequence converges while the other goes to infinity?}
+If one subsequence converges while another goes to infinity, then you have still found a convergent subsequence.
+The behavior of the rest of the sequence doesn't matter.
+
+For a \textit{set} $A$ (in a metric space) to be compact, it suffices to show that \textit{every} sequence in the set $A$ has a convergent \textit{subsequence}.
+This property is referred to as ``sequential compactness" and is equivalent to ``compactness" in a metric space (in general topology, they are not always equivalent).
+The equivalence between sequential compactness and compactness (defined on Slide 1) is known as the Bolzano-Weierstrass Theorem.
+
+
+
+\paragraph{Do only compact subsets of $\mathbb{R}$ have well-defined maximums?}
+No - an example is $(-\infty,0]$, which is not compact, but has a maximum of 0.
+
+
+\paragraph{In the definition of a totally bounded metric space, do we need to specify what happens with the parts of the balls that are outside the metric space? Like if the metric space were a square, would the extra parts of the balls be chopped out or do we need to specify that they are in some undefined space?}
+
+No, there's no need to worry about that -- you can say a set $X$ is totally bounded if you can find a finite set of balls whose union \textit{includes} the set $X$.
+Also, the definition of an open ball naturally does not include any points outside the space.
+Many pictures do not illustrate this correctly.
+
+
+
+
+
+\paragraph{I don't understand the concept of totally bounded, what's the meaning of cover?}
+
+The word cover can interpreted as in ``your hand covered the picture so I couldn't see it''.
+Thus, if each ball were a little cutout of paper and you could stack them on $X$ so that you couldn't see $X$, then they would cover it.
+
+``$X$ is totally bounded'' means you can find a finite set of balls (of finite radius) that ``cover" $X$.
+A set of balls ``covering" $X$ means that the union of these balls contains $X$ (in this case it will equal $X$).
+
+\paragraph{We know a metric space is compact if it is complete and totally bounded. Can we change the 'if' to 'iff'?}
+This is the definition of compact -- in a definition, we typically use if and iff interchangeably.
+
+
+\paragraph{What's the difference between bounded and totally bounded?}
+See the above questions for a definition of totally bounded.
+A bounded metric space $(X,d)$ simply means that, for all elements $a,b \in X$, we have that $d(a,b)<M$, where $M>0$ is a finite value.
+Note that totally bounded implies bounded.
+This intuitively makes sense because, if you can cover $X$ with $N$ balls of radius $r$, then the triangle inequality can be used to show that the maximum distance between any two points is at most $2rN$.
+
+
+\paragraph{Does a subsequence need to have infinite length? If not, in the theorem part, how do a sequence with infinite length has a subsequence that converges?}
+Yes, a subsequence of $x_n$ must be infinite because it is defined by  $y_i = x_{n_i}$ for $i\in \mathbb{N}$ where $n_1 , n_2 , n_3, \ldots \in \mathbb{N}$ is an infinite sequence of increasing natural numbers.
+
+
+\paragraph{I'm not sure I understand what compactness gains us. What would be an example of a non-compact metric space? And is there any intuition as to why this metric space might not have a subsequence that converges?}
+A useful property of compact spaces is the first theorem in Slide 6 -- if you have a continuous function over a compact set, you are guaranteed that the maximum is achieved in the set.
+
+An example of a non-compact metric space is $\mathbb{R}$ (with absolute distance).
+In that space the sequence $x_n = n$ does not have a subsequence that converges.
+
+
+\paragraph{In the realm of engineering, will most of the metric spaces be compact that we deal with?}
+
+I would say yes.
+But, in some sense, this is a mathematical choice made by you.
+In engineering, you will most commonly deal with real numbers and real vectors.
+If it makes sense to have strict bounds on the values of these real numbers (e.g., $X = [-M,M]$), then the associated sets will be compact.
+If this does not make sense, then they won't be naturally compact.
+Still, you can decide things using the extended real numbers in order to make them compact.
+
+For example, let $X=[0,1]$ and $p \in X$ denote the success probability for a binary random experiment.
+Using the absolute distance metric, $X$ is compact.
+Sometimes it is also useful to parametrize the binary experiment in terms of its log-likelihood ratio $\ell = f(p) \triangleq \ln \frac{p}{1-p}$.
+Then, it is natural to define $\ell \in \overline{\mathbb{R}}$ using the extended real numbers because $p=0$ can be associated with $\ell = -\infty$ and $p=1$ can be associated with $\ell = \infty$.
+This set becomes a compact metric space if we choose the metric $d(\ell_1,\ell_2) = |f^{-1}(\ell_1) - f^{-1} (\ell_2) |$ which simply computes the absolute distance between the associated probabilities.
+
+\end{document}

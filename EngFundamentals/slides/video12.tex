@@ -273,17 +273,45 @@ Using the notation $\vecnot{\pi}^{(t)}=(\pi_{1}^{(t)},\ldots,\pi_{n}^{(t)})$ wit
 
 \begin{frame} \frametitle{Simulating a Markov Chain}
 
-Let the random variable $U$ be uniformly distributed on the interval $[0,1)$.
-To simulate a discrete random variable $X\in[n]$, one can use $U$ to simulate $X$ by assigning subintervals of $[0,1)$ to each of the $n$ possibilities for $X$. \\ [4mm]
+Let $X \in [n]$ be a rv with pmf $\Pr (X=i) = p_i$ and cdf $F_X (j) = \sum_{i=1}^j p_i $
+\vspace{4mm}
 
-Let $F_{X}(x)=\sum_{i=1}^{x}\Pr(X=i)$ for $x\in[n]$ be the cumulative distribution function of $X$. Then, one can set $X=x$ if $U\in[F_{X}(x-1),F_{X}(x))$ (with $F_{X}(0)=0$ by convention). This works because 
-\[
-\Pr \Big( U\in \big[F_{X}(x-1),F_{X}(x) \big) \Big)=F_{X}(x)-F_{X}(x-1)=\Pr(X=x).
-\]
-\\
+\begin{itemize}
+\setlength{\itemsep}{2mm}
+\item<2-> \textcolor{blue}{Goal:} Generate a sample of $X$ using a uniform rv $U \in [0,1)$
+\end{itemize}
 
-\uncover<2->{Using this, one can simulate a Markov chain by using pseudo-random numbers to generate realizations of the process.
-If $X_t = x$, then $X_{t+1} = x'$ is generated according to $\Pr(X_{t+1}=x'|X_t = x)$ using the above method.}
+\uncover<3->{%
+\begin{center}
+\includegraphics[width=0.95\textwidth]{figures/markov_sample}
+\end{center}
+}
+\vspace{-3mm}
+
+\begin{itemize}
+\setlength{\itemsep}{2mm}
+\item<4-> \textcolor{blue}{Idea:} Find unique $p_j$ interval that contains $U$ and then return $j$
+
+\item<5-> Then, $X$ equals the unique $j$ satisfying $U \in [F_X (j-1),F_X (j))$
+
+\vspace{2mm}
+
+\item<6-> Using this, one can simulate a Markov chain.  If $X_t = x$, then $X_{t+1} = x'$ is generated according to $\Pr(X_{t+1}=x'|X_t = x)$ using the above method
+\end{itemize}
+
+%Let $X \in [n]$ be a random variable with pmf $\Pr (X=i) = p_i$
+%
+%Let the random variable $U$ be uniformly distributed on the interval $[0,1)$.
+%To simulate a discrete random variable $X\in[n]$, one can use $U$ to simulate $X$ by assigning subintervals of $[0,1)$ to each of the $n$ possibilities for $X$. \\ [4mm]
+%
+%Let $F_{X}(x)=\sum_{i=1}^{x}\Pr(X=i)$ for $x\in[n]$ be the cumulative distribution function of $X$. Then, one can set $X=x$ if $U\in[F_{X}(x-1),F_{X}(x))$ (with $F_{X}(0)=0$ by convention). This works because 
+%\[
+%\Pr \Big( U\in \big[F_{X}(x-1),F_{X}(x) \big) \Big)=F_{X}(x)-F_{X}(x-1)=\Pr(X=x).
+%\]
+%\\
+%
+%\uncover<2->{Using this, one can simulate a Markov chain by using pseudo-random numbers to generate realizations of the process.
+%If $X_t = x$, then $X_{t+1} = x'$ is generated according to $\Pr(X_{t+1}=x'|X_t = x)$ using the above method.}
 
 \note{
 	\vspace{2mm}
@@ -301,21 +329,31 @@ If $X_t = x$, then $X_{t+1} = x'$ is generated according to $\Pr(X_{t+1}=x'|X_t 
 
 \begin{definition}For a Markov chain starting from state $i$, the first \textcolor{blue}{hitting time} of state $j$ is a random variable $T_{i,j}$ with distribution \vspace{-2mm}
 \[
-\Pr\left(T_{i,j}=m\right)=\Pr\left(X_{m+1}=j,X_{m}\neq j,X_{m-1}\neq j,\ldots,X_{2}\neq j\,\middle|\,X_{1}=i\right)
+\Pr\left(T_{i,j}=m\right)=\Pr\left(X_{m+1}=j,X_{m}\neq j,X_{m-1}\neq j,\ldots,X_{2}\neq j\,\middle|\,X_{1}=i\right).
 \]
-and, by convention, $\Pr\big(T_{i,j}=0\big)=\delta_{i,j}$ where $\delta_{i,j}$ is Kronecker delta function. If state $j$ is not reachable from state $i$, then $T_{i,j} = \infty$ by convention.
+By convention, $\Pr\big(T_{i,j}=0\big)=\delta_{i,j}$ where $\delta_{i,j}$ is Kronecker delta function and,  if state $j$ is not reachable from state $i$, then $T_{i,j} = \infty$.
+Alternatively, we have
+\vspace{-2mm}
+\[
+\Pr\left(T_{i,j} \leq m\right)=\Pr\left(\exists t \in \{1,2,\ldots,m+1\}, X_{t}=j \,\middle|\,X_{1}=i\right).
+\]
 \end{definition}
+
+\vspace{1mm}
+
 
 \begin{definition}<2->
-If the process can become stuck in state $j$ (i.e., $P_{j,j} = 1$), then state $j$ is called \textcolor{blue}{absorbing}.
+If $X_t$ can get stuck in state $j$ (i.e., $P_{j,j} = 1$), then state $j$ is called \textcolor{blue}{absorbing}.
 \end{definition}
 
+
 \begin{exampleblock}{Lemma}<3->
-If state $j$ is absorbing, then the distribution of the hitting time $T_{i,j}$ satisfies \vspace{-2mm}
+If $j$ is an absorbing state, then getting to state $j$ means staying in state $j$ and \vspace{-1.75mm}
 \[
-\Pr\left(T_{i,j}\leq m\right)=\Pr\left(X_{m+1}=j\,\middle|\,X_{1}=i\right)=\left[P^{m}\right]_{i,j}.
+\Pr\left(T_{i,j} \leq m\right)= \Pr\left(X_{m+1} = j \,\middle|\,X_{1}=i\right)=\left[P^{m}\right]_{i,j}.
 \]
 \end{exampleblock}
+
 
 \note{
 	\vspace{2mm}
@@ -324,11 +362,35 @@ If state $j$ is absorbing, then the distribution of the hitting time $T_{i,j}$ s
 		\setlength\itemsep{3mm}
 		\item Read.
 		\item Read.
-		\item Read.
 	\end{enumerate}
 }
 
 \end{frame}
+
+
+%\begin{frame}<1> \frametitle{Hitting Time Calculation}
+%
+%\begin{exampleblock}{Lemma}<1->
+%If state $j$ is absorbing, then the distribution of the hitting time $T_{i,j}$ satisfies \vspace{-2mm}
+%\[
+%\Pr\left(T_{i,j}\leq m\right)=\Pr\left(X_{m+1}=j\,\middle|\,X_{1}=i\right)=\left[P^{m}\right]_{i,j}.
+%\]
+%\end{exampleblock}
+%
+%\note{
+%	\vspace{2mm}
+%	\begin{enumerate}[<alert@+>]
+%		\footnotesize
+%		\setlength\itemsep{3mm}
+%		\item Read.
+%		\item Read.
+%		\item Read.
+%	\end{enumerate}
+%}
+%
+%\end{frame}
+
+
 
 \begin{frame}<1-5> \frametitle{Stationary Probabilities of Recurrent Markov Chains}
 

@@ -1,0 +1,110 @@
+\documentclass[10pt,english]{article}
+
+\usepackage{amsmath,amsfonts,url}
+
+% Paper setup
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.25in
+\topmargin=-0.5in
+\headheight=0.0in
+\headsep=0.5in
+\textheight=9.0in
+\footskip=0.5in
+
+\input{macros}
+
+\begin{document}
+
+\title{ECE 586: Vector Space Methods \\ Lecture 1: Frequently Asked Questions}
+\author{Henry D. Pfister \\ Duke University}
+\date{August 29, 2020}
+
+\maketitle
+
+Here we give a list of questions, and their answers, that were submitted by students after watching the flip video.
+
+\section{Propositional Logic}
+
+
+\paragraph{Is it true that the negation of a tautology is contradiction and vice versa? Are tautology, contradiction, implication, equivalence all meta statements?}
+
+Yes and Yes.
+
+\paragraph{Are we going to talk about how specific properties of logical statements (i.e. the contrapositive being equivalent to original statement) can be used to prove theorems? Could we get a bit more of an in-depth explanation on logical meta statements?}
+
+We're going to see and use these more in the next two lectures and homework.  But, we will also conitnue to use them throughout the class.
+Also, the term ``meta'' is used to indicate something that refers to itself or that lives at higher level (e.g., a meta language would be a language used to describe other languages).
+I use the term to indicate that these are logical statement about logical statements.
+Thus the statement ``$P(Q,R) = (Q \wedge R) \vee (Q \wedge \neg R)$ is a tautology'' can be called a meta statement.
+
+\paragraph{For the examples of implication and equivalence in slide 6, are there faster ways of determining the truth of a meta statement or should we always use truth tables?}
+
+After one has verified some simple rules using truth tables, one can prove additional statement via logical arguments.  For example, consider the statement $P(Q,R,S,T,U) = Q \vee \neg Q \vee ( (R \to S) \wedge (T \to U) ) \to R$.
+Using a truth table to check if this is a tautology is quite inefficient.  Instead, one can argue that $Q \vee \neg Q \vee V$ is true for any $Q,V$.
+
+\paragraph{If we use natural language to describe implication, is it similar to 'if..., then...'?}
+
+Before this class, you might naturally say certain things either way.  After this class, you will have learned to be more precise.  For example, in a inductive proof of $P(n)$, we need to show that $P(1)$ is true and that, if $P(n)$ is true, then $P(n+1)$ is true.  It would be impossible to prove that $P(n)$ implies $P(n+1)$ (i.e., $P(n) \Rightarrow P(n+1)$) because that would suggest that $P(n) \rightarrow P(n+1)$ holds for all $P$.
+
+\paragraph{Are meta-statements used in system design (i.e. digital logic) or are they purely for describing existing systems?}
+
+As far as I know, this term is not used in digital logic.  The primary  distinction is between logical identities and particular logical arguments.  See the above question.
+
+\paragraph{Are compound statements functions of abstract statements? Are meta statements functions of compound statements?}
+
+Yes, compound statements are essentially boolean (i.e., true/false) functions of boolean variables (e.g., $P(Q,R) = Q \vee R$). No, using this mindset, meta statements are essentially quantified statements about boolean functions.  For example, ``$P$ is a tautology'' could be expressed as $\forall x,y\in \{T,F\}, P(x,y)$ and this is a false statement.
+
+\paragraph{Is there a symbol for XOR?}
+
+Of course, mathematicians commonly use $\oplus$ for modulo-2 addition which is equivalent to XOR.  But, in the logical formalism we are using (e.g., see PAF), there is no explicitly defined symbol for XOR.  Instead, for $P$ and $Q$, one can write $(P \wedge \neg Q) \vee (\neg P \wedge Q)$.
+
+\paragraph{Do forms of meta statements (such as implication or equivalence) have to use the meta statement operators when mixed with individual (non-meta) statements? In other words, assuming P is a simple statement and S is a meta statement, does it make sense to write $P \Rightarrow S(Q,R)$ or does $P \rightarrow S(Q,R)$ suffice?}
+
+I'm not sure I understand this question.  I would call $S(Q,R)$ a compound statement.  The statement ``$S(Q,R)$ is a tautology'' would be a meta statement.  In your last example, the statements $P \Rightarrow S(Q,R)$ and $P \rightarrow S(Q,R)$ are quite different.  The first asserts that the second holds for all values of $P,Q,R$ whereas the second is just a logical statement that depends on the truth values of $P,Q,R$.
+
+\paragraph{Some assertions may be true under some certain conditions while false under other conditions. For example, mercury is in the form of liquid. This assertion is true when the temperature is low enough, however it does not specify this condition. Is it still a statement or is it a false statement?}
+
+In some cases, logical phrases are constructed with some implicit background assumptions that would make them true or false.  Informally, such phrases are often taken as statements. Formally, one should make this dependence explicit using predicates: $P(x)=$``mercury is a liquid at $x$ degrees Kelvin''.  My preferred answer is that this is a statement that depends on a free variable $x$.  
+
+Also, propositional logic is a formal reasoning system where one has both atomic statements $P,Q,\ldots$ and compound statements $S(P,Q,\ldots), R(P,Q,\ldots)$.  In some sense, it is not concerned with whether or not the atomic statements are true or false but only how their truth values interact through the compound statements.  For example, suppose $P=$``my favorite color is blue'', $Q=$``the sun is shining'', and $R(P,Q) = Q \rightarrow P$.  Then, one can prove that $R \Leftrightarrow \neg Q \vee P$ regardless of what $P$ and $Q$ mean.
+
+
+\paragraph{Some assertions are subjective, like ``Tom is a tall boy''. Since there is no uniform standard of how tall is tall, this assertion is quite subjective and ambiguous. Is it right to say such assertions are not statements?}
+
+In general, we are interested in logical statements about mathematical systems with precise rules.  When used in an example sentence, I would say this is a statement by implicitly assuming the property of being tall is defined somewhere for all people (e.g., $P(x)=$``$x$ is tall'').  Otherwise, there's no end to the fuzziness.  For example, there are many Tom's in the world and one could also complain that we don't know which Tom is being discussed.  Or, if the cutoff for tall is set to 6 feet, then this condition is essentially unresolvable for someone whose height is very close to 6 feet (e.g., does hair count?). Thus, when a property is used in a logical statement it should be defined precisely somewhere (and thus we sometimes assume it is).
+
+\paragraph{A statement is an assertion that is either true or false. In this case, is it right to say a paradox is not a statement?}
+
+To really consider the question, one has to define the term paradox precisely.
+Also, to reason about complicated things that give rise to paradoxes, one must augment first-order logic with additional axioms such as Frege's set theory or Peano arithmetic.
+
+In general, paradoxes in more complicated systems consist of apparently reasonable definitions followed by unreasonable or inconsistent implications.  For example, Frege's naive set theory seemed quite reasonable until Russell's Paradox was discovered (see 3rd lecture).  This paradox showed that Frege's axioms were inconsistent.  Alternatively,  the Banach-Tarski paradox is actually a surprising theorem that shows the axiom of choice allows one to change the volume of a sphere using operations that should intuitively preserve its volume.
+
+
+\paragraph{Does every statement consist of an antecedent and a consequent?}
+
+No, the antecedent and consequent are terms used for $P$ and $Q$ in the conditional connective $P \rightarrow Q$.
+
+\paragraph{I feel confused about the meta-statement, $P \Leftrightarrow Q$ "11 is odd is equivalent to 11 is prime", which is definitely false. How can we prove that the statement is false?}
+
+Indeed, hidden in this question are a few mistaken assumptions and subtleties of language that make it quite confusing.  First off, the given statement is not a meta statement.  In fact, for these values of $P,Q$, the statement $P$ if and only if $Q$ (i.e., $P \leftrightarrow Q$) is true because both $P$ and $Q$ are true.
+
+The problem is that many people might interpret the English sentence as $\forall n\in \mathbb{N}, P(n) \leftrightarrow Q(n)$ where $P(n)=``n$ is odd'' and $Q(n)=``n$ is prime''.  Again, this is not a meta statement.  It is quantified logical statement that happens to be false.  To prove that it's false, we simple need to find one counterexample: $P(9)$ is true but $Q(9)$ is false.
+
+
+
+\paragraph{Are biconditional statements the same as the XOR operation?}
+
+No, it is the logical negation:  NOT (P XOR Q) is equivalent to $P \leftrightarrow Q$.
+
+\paragraph{Can you go provide more intuitive examples of how if then statements are true if the first statement is false?}
+
+I like thinking of them as a promise: ``If statement $P$ is true, then statement $Q$ is true''.  The conditional connective statement is true if the promise is kept. But, if statement $P$ is false, then nothing is promised.
+
+\paragraph{Can you provide examples of tautologies or contradictions that do not involve one statement and its negation?}
+
+Here is a non-trivial tautology for 3 propositions: \[ \neg( \neg (P \leftrightarrow Q)  \leftrightarrow \neg (Q \leftrightarrow R) ) \leftrightarrow \neg (R \leftrightarrow P) \]
+
+    
+\end{document}

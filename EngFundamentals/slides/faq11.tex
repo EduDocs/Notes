@@ -1,0 +1,101 @@
+\documentclass[10pt,english]{article}
+
+\usepackage{amsfonts,url}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+% Paper setup
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.25in
+\topmargin=-0.5in
+\headheight=0.0in
+\headsep=0.5in
+\textheight=9.0in
+\footskip=0.5in
+
+\input{macros}
+
+\begin{document}
+
+\title{ECE 586: Vector Space Methods \\ Lecture 11: Frequently Asked Questions}
+\author{Henry D. Pfister \\ Duke University}
+\date{September 25, 2020}
+
+\maketitle
+
+Here we give a list of questions, and their answers, that were submitted by students after watching the flip video.
+
+\section{Linear Transformations}
+
+\paragraph{For addition of vector spaces, if my understanding is correct, they need to have the same dimension and number of vectors right?}
+
+To add 2 subsets $U, W$ of a vector space $V$, their elements must have the same dimension (since $U+W \triangleq \{\vecnot{u}+\vecnot{w}| \vecnot{u}\in U, \vecnot{w}\in W\}$, so you need to be able to perform $\vecnot{u}+\vecnot{w}$).
+But, $U$ and $W$ need not have the same number of elements -- the definition of the addition of $U$ and $W$ says that you need to perform the sum for all possible pairs $(\vecnot{u},\vecnot{w})$ in $U\times W$.
+
+Also, the slides don't actually consider adding vector spaces.
+Instead, they define the sum of \emph{subsets of vector spaces}.
+In this case, the vectors are compatible because they live in the same vector space and vector addition is already defined by that space.
+
+
+
+
+\paragraph{If we use a matrix to represent null space, is it a matrix filled with zeros?}
+There seems to be some confusion about what the nullspace really means.
+Importantly, for a transformation $T: V \rightarrow W$, \textbf{the nullspace is a subset of V.} It is precisely the set of things in $V$ that get ``killed" by T (i.e. $N(T) \triangleq \{\vecnot{x}\in V| T(\vecnot{x}) = 0\}$).
+
+Keeping this in mind, a matrix $B$ representing the null space of a matrix $A$ would probably contain the basis vectors of the null space as rows or columns.
+
+\paragraph{Are vectors in ordered basis orthogonal to each other?}
+
+Not necessarily, no.
+Also, we don't yet have a notion of the dot product or orthogonality.
+
+\paragraph{Can you please point out again what is the essential properties to prove the subspace?}
+
+A subspace $X$ has 2 properties that you should keep in mind:
+\begin{itemize}
+    \item It is closed under scalar multiplication, i.e. if $\vecnot{x}\in X$, then $\forall s\in F, s\vecnot{x} \in X$ (where $F$ is a field).
+    \item It is closed under vector addition, i.e. if $\vecnot{x},\vecnot{y} \in X $, then $\vecnot{x}+\vecnot{y} \in X$.
+\end{itemize}
+
+\paragraph{In slide 5, the rank and nullity are all defined on T and V. What do they do with the space W?}
+Before understanding rank and nullity, it is important to understand range and nullspace.
+Specifically, for a transformation $T:V \rightarrow W$, 
+\begin{itemize}
+    \item The range $R(T)$ \textbf{is a subset of $W$}, and rank($T$) = $\dim(R(T))$
+    \item The nullspace $N(T)$ \textbf{is a subset of $V$}, and nullity($T$) = $\dim(N(T))$
+\end{itemize}
+
+\paragraph{On slide 1, does the term disjoint mean every vector in the two subspaces are linearly independent?}
+Disjoint just means that the intersection of the sets contains only the \vecnot{0} vector. You can check that this implies that, if we have 2 disjoint subspaces $X,Y$, then any $\vecnot{x}\in X$ cannot be a linear combination of elements in $Y$ (else, $\vecnot{x}$ would be in $Y$, which is a contradiction since $X$ and $Y$ are disjoint by assumption).
+
+\paragraph{I am used to the term "orthonormal basis" which means, to my knowledge, essentially the same thing as the definition given for ordered basis.  Is there a key difference here I am missing?}
+
+``Orthonormal" requires you to define an inner product $\tinner{ u }{ v }$.
+A basis $\{v_1,...,v_n\}$ is orthonormal if \[\tinner{ v_i }{ v_j} = \begin{cases} 0,~~ \text{if}~ i\neq j\\ 1, ~~ \text{if}~i=j.\end{cases} \]
+
+\paragraph{Is there a unique coordinate vector for any vector within the space, or are there multiple solutions?}
+
+An ordered basis $\mathcal{A}=\{v_1,...,v_n\}$ is linearly independent by definition. Now let's assume there are 2 distinct coordinate vectors for $\vecnot{x}$ relative to $\mathcal{A}$, $(a_1,...,a_n)$ and $(b_1,...,b_n)$.
+Then, we can write:
+\begin{align}
+    a_1\vecnot{v}_1 + ... + a_n\vecnot{v}_n = b_1\vecnot{v}_1 + ... + b_n \vecnot{v}_n \Rightarrow (a_1-b_1)\vecnot{v}_1 + ... + (a_n-b_n)\vecnot{v}_n = \vecnot{0}
+\end{align}
+By linear independence of $\{v_1,...,v_n\}$, we get $a_i-b_i = 0 \Rightarrow a_i = b_i,~\forall i \in \{1,...,n\}$. Hence the coordinate vector of $\vecnot{x}$ relative to $\mathcal{A}$ is unique.
+
+\paragraph{What applications are there for linear transformations?}
+Common applications include linear regression, neural networks (a sequence of linear operations interspersed with nonlinearities), and Markov chains (e.g., described by a transition probability matrix $P$ which transforms state probability vector after $n$ steps to the state probability vector after $n+1$ steps).
+
+\paragraph{Other than orthogonal complement, are there any other typical examples of useful direct sum decompositions?}
+
+``Orthogonality" requires you to define an inner product $\tinner{ u }{ v }$, which we don't have yet.
+Also, disjoint subspaces need not be orthogonal.
+
+\paragraph{Does the vector space have to be a direct sum in order for the unique decomposition of a vector to work?}
+
+Yes, if you want unique decomposition for all vectors.
+If two subspaces contain the same vector $\vecnot{x}$, then that vector can be represented either as $\vecnot{x} + \vecnot{0}$ or as $\vecnot{0} + \vecnot{x}$.
+Thus, we cannot uniquely determine which parts are in which subspace.
+
+\end{document}

@@ -1,0 +1,88 @@
+\documentclass[10pt,english]{article}
+
+\usepackage{amsfonts,url,tikz,amsmath}
+
+% Paper setup
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.25in
+\topmargin=-0.5in
+\headheight=0.0in
+\headsep=0.5in
+\textheight=9.0in
+\footskip=0.5in
+
+\input{macros}
+
+\begin{document}
+
+\title{ECE 586: Vector Space Methods \\ Lecture 12: Frequently Asked Questions}
+\author{Henry D. Pfister \\ Duke University}
+%\date{August 29, 2020}
+
+\maketitle
+
+\section{Markov Chains}
+
+\paragraph{If a FSMC has an absorbing state, can it also have a recurrent state?}
+
+Yes.  In fact, an absorbing state is also a recurrent state.  The entire Markov chain, however, cannot be recurrent because that requires that all states are communicating.  Note: the mini-project pdf has been updated to define these terms more clearly.
+
+\paragraph{Also can there be more than one absorbing state?} Yes, consider the Markov chain with transition probability matrix
+$$P=\begin{bmatrix} 0 & 0.5 & 0.5 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}.$$
+
+\paragraph{Do probabilities of future variables depend on past outcomes or is this baked into the probabilities from the beginning?}
+
+There are two kind of probabilities in a time-invariant Markov chain: (1) Transition probability $P_{i,j} =P(X_{t+1}=j|X_{t}=i)$ defines the probability when transiting from state $i$ to state $j$ in one time step; (2) State distribution $\underline{\pi}^{(t)}=[P(X_t=1), \cdots, P(X_t=n)]$ define the probabilities for all states at time $t$. It can be shown that $\underline{\pi}^{(t)}=\underline{\pi}^{(1)}P^{t-1}$. So the state distribution of a future time step depends on the initial state distribution $\underline{\pi}^{(1)}$. Also, for a time-invariant Markov process that is irreducible and aperiodic, the state distribution converges to a unique stationary distribution $\underline{\pi}$ as $t \rightarrow \infty$. This stationary distribution $\underline{\pi}$ is independent of the starting distribution $\underline{\pi}^{(1)}$.
+
+\paragraph{On slide 6, in the Theorem, if $P_{i,j}$ changes with time $t$, will every state be recurrent and the Markov chain have a unique stationary distribution?}
+
+No, the theorem holds for a time-invariant Markov process that is irreducible and aperiodic.
+If $P_{i,j}$ changes with time, then the Markov chain is not time invariant and things are more complicated.
+For example, how would you define stationary distribution in this case?
+
+\paragraph{Can the transition matrix for a Markov chain change with time? For example, every time you enter a state, the probability that you will return to that state decreases? Perhaps this would mean that a state ``converges" to an absorbing state?}
+
+Yes, a time-varying Markov chain has a transition matrix changes with time in predetermined manner.
+The example you describe seems to require more complicated changes and infinitely many transition matrices (in order for convergence to make sense).
+This is not too common.
+
+\paragraph{If a Markov chain has both an absorbing state and a recurrent state, will the probability of being in the recurrent state always converge? I'm thinking of the chutes and ladders example, where it is theoretically possible to be stuck in an infinite loop.}
+
+The first question is a complicated question but the basic answer is no.
+If a Markov chain is not periodic, then the matrix $P^m$ will converge as $m$ increases.
+But, this doesn't mean the state will bounce between all the recurrent states.
+Consider the Markov chain defined by
+$$P=\begin{bmatrix} 0 & 0.5 & 0 & 0.5 & 0 \\ 0 & 0.75 & 0.25 & 0 & 0 \\ 0 & 0.25 & 0.75 & 0 & 0 \\ 0 & 0 & 0 & 0.1 & 0.9 \\ 0 & 0 & 0 & 0.9 & 0.1 \end{bmatrix}.$$
+If it starts in state 1, then it randomly chooses between states 2,3 and states 4,5.
+After that, it stays in these subgroups forever.
+
+For chutes and ladders, an infinite loop is possible but very improbable (formally it has probability 0).
+In fact, the probability of the game taking more than $m$ turns is upper bounded by $\gamma^m$ for some $\gamma \in (0,1)$ (i.e., it has an exponential tail).
+
+
+\paragraph{Are there Markov chains with continuous random variables?}
+
+Yes, but their analysis can be more complicated.
+For a simple example, consider a sequence of real random variables $X_1,X_2,\ldots$ with pdfs satisfying
+$$ f_{X_{t+1}|X_1,X_2,\ldots,X_{t}} (x_{t+1}|x_1,x_2,\ldots,x_{t}) = f_{X_{t+1}|X_{t}} (x_{t+1}|x_{t}) = \frac{1}{\sqrt{2\pi}} e^{-\frac{1}{2}|x_{t+1}-x_{t}/2|^2} $$
+for all $t\in \mathbb{N}$ and all $x_1,x_2,\ldots,x_{t+1} \in \mathbb{R}$.
+Such a sequence also satisfies $X_{t+1} = \frac{1}{2}X_{t} + Z_{t+1}$ where $Z_{t+1}$ is a standard Gaussian random variable.
+
+
+\paragraph{How neatly will this extend to continuous state spaces?}
+
+This class actually provides the tools to understand if/when finite things extend nicely to infinite things.
+In particular, if the state space is a compact metric space and the transition probability $f_{X_{t+1} | X_t} (x_{t+1}|x_t)$ is continuous and strictly positive, then things work out quite nicely.
+In fact, the proof at the end of the mini-project pdf can be extended to that case.
+Of course, one must be careful when defining things like recurrence because individual points will always probability 0.
+
+
+\paragraph{Does one usually simulate a Markov process using uniformly distributed random variables? Could we get better performance by using my specific distributions?}
+
+Yes.
+In fact, almost all ``other distributions'' are simulated on computers via transformation of uniform random variables.
+Thus, it's unlikely you'll improve the performance.
+
+
+\end{document}

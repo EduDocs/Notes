@@ -1,0 +1,82 @@
+\documentclass[10pt,english]{article}
+
+\usepackage{amsfonts,url,tikz,amsmath}
+
+% Paper setup
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.25in
+\topmargin=-0.5in
+\headheight=0.0in
+\headsep=0.5in
+\textheight=9.0in
+\footskip=0.5in
+
+\input{macros}
+
+\begin{document}
+
+\title{ECE 586: Vector Space Methods \\ Lecture 19: Frequently Asked Questions}
+\author{Henry D. Pfister \\ Duke University}
+%\date{August 29, 2020}
+
+\maketitle
+
+\section{Four Fundamental Subspaces}
+
+\paragraph{Why do we have the normal equations in Slide 1?}
+
+The equations on slide 1 are not the normal equations for best approximation.
+%, which state that the approximation error must be orthogonal to basis elements of the space used for approximation.
+Instead, the matrix equation on slide 1 states the condition for $\vecnot{x} \in \mathcal{N}(A)$ and then observes that this is identical to the condition for $\vecnot{x} \in \mathcal{R}(A^T)^\perp$.
+
+\paragraph{It seems as though all of our discussion of the four fundamental subspaces pertains to the case where our linear transform can be represented as a matrix - at least up until we start talking about the adjoint operator. Does the idea of the four fundamental subspaces extend to more general linear operators?}
+
+Yes, $\mathcal{N}(A)=\mathcal{R}(A^*)^\perp$ and $\mathcal{N}(A^*)=\mathcal{R}(A)^\perp$ both hold for any linear transform between any two Hilbert spaces.
+The other two conditions are found by taking the orthogonal complement of these conditions.
+But, in infinite dimensional spaces, the RHS of each equation then equals the closure of the range.
+
+
+\paragraph{In the required reading "The Fundamental Theorem of Linear Algebra", it mentioned that the SVD chooses good bases for the fundamental subspaces. What does it mean by good? Because it's orthonormal and acts diagonally?}
+
+Yes, if you want to understand a linear transform, then finding an orthonormal bases where it acts diagonally is a good start.
+
+\paragraph{Can you give an example of “Theorem of the Alternative"?}
+
+Consider the case of $\vecnot{b} = [1,\,2,\,1]$, $\vecnot{y} = [1,\,-1,\,0]$, and
+\[ A = \begin{bmatrix} 1 & 1 & 1 \\ 1 & 1 & 1 \\ 1 & 2 & 3 \end{bmatrix}. \]
+It is easy to verify that this choice satisfies the second alternative condition.
+Thus, there cannot be a vector $\vecnot{x}$ such that $A \vecnot{x} = \vecnot{b}$.
+To verify this, observe that any vector $\vecnot{y} \in \mathcal{R}(A)$ must have the first two element equal (e.g., $y_1 = y_2$) but $\vecnot{b}$ does not have this property.
+
+
+\paragraph{On slide 1 of lecture 20, why a linear transform mapping $\mathbb{R}^n \to \mathbb{R}^m$ is represented by m by n matrix (instead of transpose)}
+
+For the matrix-vector product $A \vecnot{x}$ with an $m \times n$ matrix, the vector $\vecnot{x}$ has length $n$ and the resulting vector has length $m$.
+Thus, it maps $\mathbb{R}^n \to \mathbb{R}^m$.
+
+\paragraph{I don't understand the three conditions for the adjoint.  Could you illustrate more proof about them on lecture?}
+
+The adjoint property is $\tinner{ T \vecnot{v} }{ \vecnot{w} }_W = \tinner{ \vecnot{v} }{ T^* \vecnot{w} }_V$ for all $\vecnot{v} \in V$ and $\vecnot{w} \in W$.
+The three conditions are not for the adjoint but for the general proof of the four fundamental subspaces (see next question).
+
+ 
+\paragraph{On slide 2 of lecture 20, why the 3 conditions are equivalent? And how can we use these properties?}
+
+The second condition is equivalent to the first, because the inner product condition specifies that $\vecnot{v}$ is orthogonal to $T^* \vecnot{w}$ for all $\vecnot{w}$ and this enumerates all vectors in $\mathcal{R}(T^*)$.
+The third condition is equivalent to the first via the adjoint property.
+Thus, all three conditions are equivalent.
+
+%\paragraph{What is the relation between the SVD and the fundamental subspaces?  I am having some trouble conceptualizing them together}
+
+
+
+\paragraph{Is a positive definite matrix required to be symmetric (Hermitian)? Or it only needs to satisfy x*Ax > 0?}
+
+In this class and almost all references, this definition does require the matrix to be Hermitian symmetric.
+But, other rare references use this term for some asymmetric matrices.
+
+
+
+
+\end{document}

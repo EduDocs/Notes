@@ -1079,11 +1079,11 @@ Consequently, they are necessarily equipped with a metric topology, open sets, a
 In practice, one often encounters inner product space that are finite dimensional.
 Therein, vectors can be expressed as linear combinations of elements within a Hamel basis. 
 Yet, an inner product space can also be of infinite dimension.
-\emph{Hilbert spaces} are complete inner product spaces, which makes them suitable to discuss Cauchy sequences of vectors and their limits.
-Furthermore, when an inner product space is \emph{Hausdorff separable}, then it will have a countable Schauder basis.
+\indxdef{vector space}{Hilbert spaces} are complete inner product spaces, which makes them suitable to discuss Cauchy sequences of vectors and their limits.
+Furthermore, when an inner product space is \indxdef{topology}{separable} (in the induced metric topology), then it will have a countable \index{vector space}{Schauder} basis.
 Intuitively, a separable Hilbert space with its Schauder basis can be handled mathematically in a way similar to a finite-dimensional inner product space.
-For this reason, our treatment of infinite dimensional inner product spaces is largely restricted to \emph{separable Hilbert spaces}.
-More general spaces require a higher level of mathematical sophistication, beyond this treatement.
+For this reason, our treatment of infinite-dimensional inner product spaces is largely restricted to \emph{separable Hilbert spaces}.
+More general spaces require a higher level of mathematical sophistication, beyond this treatment.
 
 \begin{definition} \label{definition:InnerProduct}
 Let $F$ be the field of real numbers or the field of complex numbers, and assume $V$ is a vector space over $F$.
@@ -1226,7 +1226,7 @@ where $\left[ \vecnot{u} \right]_{\mathcal{B}}$ and $\left[ \vecnot{v} \right]_{
 The matrix $G$ is called the \emph{weight matrix} of the inner product in the ordered basis $\mathcal{B}$.
 \end{proof}
 
-It is easily verified that $G$ is a Hermitian matrix, i.e., $G = G^H$.
+Since $g_{ij} = \inner{ \vecnot{w}_j }{ \vecnot{w}_i } = \overline{\inner{ \vecnot{w}_i }{ \vecnot{w}_j }} = \overline{g_{ji}}$, we see that $G$ is a Hermitian matrix, i.e., $G = G^H$.
 Furthermore, $G$ must satisfy the additional condition
 \begin{equation} \label{equation:PositiveDefinite}
 \vecnot{w}^H G \vecnot{w} > 0, \quad \forall \vecnot{w} \neq \vecnot{0}
@@ -1234,13 +1234,15 @@ Furthermore, $G$ must satisfy the additional condition
 so that the induced norm is non-negative and zero only for the zero vector.
 A Hermitian matrix that satisfies this condition is called positive definite and this also implies that $G$ is invertible.
 
-Conversely if $G$ is an $n \times n$ Hermitian matrix over $F$ which satisfies~\eqref{equation:PositiveDefinite}, then $G$ is the matrix in the ordered basis $\mathcal{B}$ of an inner product on $V$.
-This inner product is given by
+Conversely, if $G$ is an $n \times n$ Hermitian matrix over $F$ which satisfies~\eqref{equation:PositiveDefinite}, then
+% it the inner product
+%$G$ is the matrix in the ordered basis $\mathcal{B}$ of an inner product on $V$.
+%This inner product is given by
 \begin{equation*}
 \inner{ \vecnot{u} }{ \vecnot{v} }_G
-= \left[ \vecnot{v} \right]_{\mathcal{B}}^H G \left[ \vecnot{u} \right]_{\mathcal{B}}.
+= \left[ \vecnot{v} \right]_{\mathcal{B}}^H G \left[ \vecnot{u} \right]_{\mathcal{B}}
 \end{equation*}
-
+is a well-defined inner product on $V$.
 \begin{problem}
 Let $V$ be a vector space over $F$.
 Show that the sum of two inner products on $V$ is an inner product on $V$.
@@ -1368,21 +1370,22 @@ we have
 where equality holds iff $\vecnot{w}-\vecnot{u}=\vecnot{0}$, or equivalently iff $\vecnot{w}=\vecnot{0}$ or $\vecnot{v} = s \vecnot{w}$.
 Rearranging \eqref{equation:DifferenceProjection} by isolating the inner product component and cross-multiplying, we find that
 \begin{equation*}
-\left| \inner{ \vecnot{v} }{ \vecnot{w} } \right|^2 = \left| \inner{ \vecnot{w} }{ \vecnot{v} } \right|^2 \leq \left\| \vecnot{v} \right\|^2 \left\| \vecnot{w} \right\|^2 .
+\left| \inner{ \vecnot{v} }{ \vecnot{w} } \right|^2 = \left| \inner{ \vecnot{w} }{ \vecnot{v} } \right|^2 \leq \left\| \vecnot{v} \right\|^2 \left\| \vecnot{w} \right\|^2,
 \end{equation*}
-%with equality iff $\vecnot{v}=\vecnot{0}$, $\vecnot{w}=\vecnot{0}$, or $\vecnot{v} = s \vecnot{w}$.
+with equality iff $\vecnot{v}=\vecnot{0}$, $\vecnot{w}=\vecnot{0}$, or $\vecnot{v} = s \vecnot{w}$.
 %Note that the $\vecnot{v}=\vecnot{0}$ case is checked separately because it is assumed above that $\vecnot{v}\neq \vecnot{0}$.
-Using this result, we get the fourth property
+Using this, we get the fourth property
 \begin{equation*}
 \begin{split}
 \left\| \vecnot{v} + \vecnot{w} \right\|^2
 &= \left\| \vecnot{v} \right\|^2 + \inner{ \vecnot{v} }{ \vecnot{w} } + \inner{ \vecnot{w} }{ \vecnot{v} } + \left\| \vecnot{w} \right\|^2 \\
 &= \left\| \vecnot{v} \right\|^2 + 2 \Real \inner{ \vecnot{v} }{ \vecnot{w} } + \left\| \vecnot{w} \right\|^2 \\
+&\leq \left\| \vecnot{v} \right\|^2 + 2 |\inner{ \vecnot{v} }{ \vecnot{w} }| + \left\| \vecnot{w} \right\|^2 \\
 &\leq \left\| \vecnot{v} \right\|^2 + 2 \left\| \vecnot{v} \right\| \left\| \vecnot{w} \right\| + \left\| \vecnot{w} \right\|^2 ,
 \end{split}
 \end{equation*}
-with equality iff Cauchy-Schwarz holds with equality.
-Thus, $\left\| \vecnot{v} + \vecnot{w} \right\| \leq \left\| \vecnot{v} \right\| + \left\| \vecnot{w} \right\|$ with equality iff $\vecnot{v} = \vecnot{0}$, $\vecnot{w}=\vecnot{0}$, or $\vecnot{v} = s \vecnot{w}$ (i.e., $\vecnot{v}$ and $\vecnot{w}$ are linearly dependent).
+where the first inequality holds with equality iff $\Real \inner{ \vecnot{v} }{ \vecnot{w} } = | \inner{ \vecnot{v} }{ \vecnot{w} }|$ (i.e., $\inner{\vecnot{v}}{\vecnot{w}}$ is real and non-negative) and the second inequality (i.e., Cauchy-Schwarz) holds with equality.
+Thus, $\left\| \vecnot{v} + \vecnot{w} \right\| \leq \left\| \vecnot{v} \right\| + \left\| \vecnot{w} \right\|$ with equality iff $\vecnot{v} = \vecnot{0}$, $\vecnot{w}=\vecnot{0}$, or $\vecnot{v} = s \vecnot{w}$ for real $s\geq 0$.
 \end{proof}
 
 %Its proof shows that if $\vecnot{v}$ is non-zero, then $\left| \inner{ \vecnot{v} }{ \vecnot{w} } \right| < \left\| \vecnot{v} \right\| \left\| \vecnot{w} \right\|$ unless

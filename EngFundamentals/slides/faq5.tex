@@ -1,0 +1,132 @@
+\documentclass[10pt,english]{article}
+
+\usepackage{amsfonts,url,tikz}
+
+% Paper setup
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.25in
+\topmargin=-0.5in
+\headheight=0.0in
+\headsep=0.5in
+\textheight=9.0in
+\footskip=0.5in
+
+\newcommand{\vecnot}[1]{\underline{#1}}
+
+\begin{document}
+
+\title{ECE 586: Vector Space Methods \\ Lecture 5: Frequently Asked Questions}
+\author{Henry D. Pfister \\ Duke University}
+\date{September 10, 2020}
+
+\maketitle
+
+\section{Metric Spaces}
+
+\paragraph{Is set $X$ treated as the universal set $U$ when referring to metric spaces in this section? Or could set $X$ actually be a subset of another metric space?}
+
+This is a good question.
+The notion of the universal set is used in two ways.
+Quantifiers without explicit sets (e.g., $\forall x$ and $\exists x$) are taken to refer to the universal set $U$.
+Also, set complements (e.g.,  $A^c = U - A$) require a universal set.
+
+If a problem setup only refers to one metric space $X$, then one should assume $U=X$.
+If a problem has a metric space $(X,d)$ and a subset $W \subseteq X$, then $(W,d)$ is also a metric space and is called a subspace of $X$.
+When discussing the complement of a subset $A \subseteq W$, one should specify clearly whether the complement is relative to $X$ (i.e., $A^c = X-A$) or relative to $W$ (i.e., $A^c = W-A$).
+
+
+\paragraph{Euclidean space with the metric of Euclidean distance is a metric space -- what is another type of metric space used in math or physics?} % Similar question: \paragraph{I feel that the concept of metric spaces is abstract for me, so could you give me some examples of when and how to apply it in engineering?}
+
+Any well-defined set and metric defines a metric space. Examples includes: (1) The real numbers $\mathbb{R}$ with the distance function $d(x,y) = \vert x-y\vert$ given by the absolute difference; (2) real vectors $\mathbb{R}^n$ with the Manhattan metric $d(x,y) = \sum_{i=1}^n |x_i - y_i|$; (3) the space of continuous functions $f\colon [-1,1] \to \mathbb{R}$ with the ``uniform metric'' $d(f,g) = \max_{[-1,1]} | f(x)-g(x)|$;
+%
+% Normed vector space is a metric space by defining $d(\underline{x}, \underline{y}) = \Vert \underline{x}\ - \underline{y} \Vert $ (see section 3.3 and 3.5 in notes for more about vector spaces and norms); (3) Banach space is a complete normed vector space (section 3.5 in notes); (4) Hilbert spaces is a complete inner-product space (section 3.7.1 in notes);
+% 
+and (4) metric space defined on sets of strings with the metric of Levenshtein distance, which is defined as the minimal number of character deletions, insertions, or substitutions required to transform string \texttt{u} into string \texttt{v}.
+  
+More examples can be found on Wikipedia. \url{https://en.wikipedia.org/wiki/Metric_space#Examples_of_metric_spaces}
+
+\paragraph{Are there equivalent distance metric terminologies for statistical distributions?}
+
+Yes, that's a very good question.
+To build a metric space of probability distributions over $X$, one typically starts with a separable complete metric space $(X,d)$ for the set $X$.
+Let $\mathcal{P}(X)$ denote the set of probability distributions on $X$.
+For $\mu,\nu \in \mathcal{P}(X)$, let $\Gamma(\mu,\nu)$ be the set of joint distributions on $X \times X$ whose marginals match $\mu$ and $\nu$.
+Then, the 1-Wasserstein metric is defined to be
+\[ d_W (\mu, \nu) = \inf_{\gamma \in \mathcal{P}(X\times X)} \int_{X\times X} d(x,y) d\gamma(x,y).  \]
+This equals the expected distance between pairs $(x,y) \in X \times X$ drawn according to the optimizer $\gamma^*$.
+
+If we think of a distribution on $X$ as defining the shape of a pile of sand whose height is a function of $X$, then one can compare two distributions by asking how hard it is to reshape one pile into the other.
+If one measures difficulty by the average distance traveled by each grain of sand, then the 1-Wasserstein metric equals the difficulty of the easiest transportation plan.
+
+\section{Convergence}
+
+\paragraph{Could you explain more about Cauchy Sequences? Maybe using examples or visualizations that could help us understand.}
+
+A sequence is Cauchy if, for each $N\in \mathbb{N}$, there is an open ball $B(y_N,\delta_N)$ such that $\forall n> N, x_n \in B(y_N,\delta_N) $ and $\delta_N \to 0$.
+Thus, all points in the tail of the sequence become arbitrarily close together.
+
+
+\paragraph{On page 4, why does convergence require the limit is in $X$?}
+
+For a single metric space $(X,d)$, there are no other points defined except the those in $X$.
+For example, the metric space of rational numbers with absolute distance can be defined without any reference to the real numbers.
+The distance is always rational.
+Convergence can be defined using ``for all rational $\epsilon>0$''.
+In this case, there is no notion of an irrational number to which one could converge.
+From this perspective, the irrational numbers only exist as Cauchy sequences of rational numbers that do not converge to a rational number.
+
+\section{Metric Topology}
+
+\paragraph{About the open set definition. Do all points in open sets have a neighboring point within $\epsilon$? Or is it that there is a whole set of points within epsilon (a ball of points)? If it is the ball of points how does an open set have any limits, does epsilon converge down to zero?}
+
+For every point $w_0$ in the open set $W$, there is a whole set of points (i.e., all the points within the open ball of radius $\epsilon$ around $w_0$, $B_d(w_0, \epsilon)$) in the open set $W$.
+
+Consider $w_0 \in W$ very close to the ``boundary", let the distance between $w_0$ and the ``boundary" be $d > 0$, then there always exists an $\epsilon < d$ so that all the points in the open ball $B_d(w_0, \epsilon)$ are also in $W$. As $w_0$ approaches the ``boundary" of $W$, $d$ converges to zero and thus $\epsilon < d$ converges to zero. So, $\epsilon$ can be extremely small but will never be 0.
+
+%Now consider $w_1$ exactly at the ``boundary", the open ball $B_d(w_1, \epsilon)$ indicates that there exists some points that are not in the open set $W$. So $w_1$ at the ``boundary" of the open set is not in open set $W$.
+%
+%For the simple example, the interval $(0, 1) \in \mathbb{R}$ is an open set and interval $[0, 1] \in \mathbb{R}$ is a closed set.
+
+
+
+\paragraph{Why is the empty set an open set? In my opinion, the definition of ``$\emptyset$ is open" is equivalent to an ``if xxx, then xxx" statement. The ``if" statement is always false since no element can be found in an empty set, so logically ``if xxx, then xxx" is true, so the empty set is open. Is this argument correct?}
+
+The empty set is open because it satisfies the definition of an open set (i.e., that all points in the set have open balls around them that are also in the set).
+Indeed, it does satisfy this condition vacuously because there are no points in the set.
+
+This is different than the statement `if xxx, then xxx" (which I interpret as $P\to P$).
+The statement $P\to P$ is tautology and holds for all $P$ whereas the definition of an open set does not hold for all sets.
+It just happens to hold for the empty set.
+
+
+\paragraph{As far as set types go: open, closed, or neither; which of these types tends to be found the most frequently, or is the most useful in engineering contexts? Or, are they each found pretty uniformly?}
+
+The sets used to define spaces are typically closed because this is more convenient.
+When proving things like continuity, one often works with open sets.
+But, in many problems, you will encounter sets that are neither.
+
+\paragraph{For any metric space $(X, d)$, are empty set $\emptyset$ and $X$ both open and closed? Is it contradictory that a set can be both open and closed? If so, besides $X$ and $\emptyset$, is there any other set that is both open and closed?}
+
+Yes, the empty set $\emptyset$ and $X$ both open and closed. This is called a clopen set. See Wikipedia for other examples of clopen set. \url{https://en.wikipedia.org/wiki/Clopen_set}
+
+
+\paragraph{Could you please provide some examples of whether the set is open or closed?}
+
+See the Lecture Notebook for this lecture on Sakai.
+
+\paragraph{There is a theorem saying any finite intersection of open sets is open. Could you give an example of an infinite intersection of open sets which is closed?}
+
+Infinite intersection of open sets can be open or closed. $\bigcap_{n=1}^{\infty}\left(-\frac{1}{n}, \frac{1}{n}\right) = \{0\}$ is an example of infinite intersection of open sets resulting in closed set. $\bigcap_{n=1}^{\infty}(n, n+1) = \emptyset$ is an open set with infinite intersection of open sets.
+
+
+\paragraph{For limit points and closure, it would help me understand if you could have an example to visualize.}
+
+See the Lecture Notebook for this lecture on Sakai.
+
+\paragraph{What is the relation between a limit point and convergence?}
+
+A limit point is defined for a subset $W \subseteq X$. If the sequence of distinct elements $w_1, w_2, \cdots \in W$ converges to $w$, then $w$ is a limit point of $W$. The point $w$ can either be in the interior of $W$ or a boundary point of $W$. Note that $w$ is not necessarily in $W$. If a limit point $w$ is a boundary point of $W$ and $W$ is an open set, then $w \notin W$.
+
+
+\end{document}

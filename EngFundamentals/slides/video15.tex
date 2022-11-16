@@ -249,16 +249,13 @@ The matrix $G$ is called the \textcolor{blue}{weight matrix} of the inner produc
 \begin{frame}{3.6: Properties of the Inner Product (2)}
 
 \begin{itemize}
-\item<1-> From $\left[ \vecnot{v} \right]_{\mathcal{B}}^H G \left[ \vecnot{u} \right]_{\mathcal{B}} = \inner{ \vecnot{u} }{ \vecnot{v} }
-= \overline{ \inner{ \vecnot{v} }{ \vecnot{u} } } = \left( \left[ \vecnot{u} \right]_{\mathcal{B}}^H G \left[ \vecnot{v} \right]_{\mathcal{B}} \right)^H$, we see that
-
+\item<1-> Since $g_{ij} = \inner{ \vecnot{w}_j }{ \vecnot{w}_i } = \overline{\inner{ \vecnot{w}_i }{ \vecnot{w}_j }} = \overline{g_{ji}}$, we see that
 \begin{itemize}
-\item the weight matrix $G$ of an inner product is Hermitian: $G = G^H$.
+\item The weight matrix $G$ of an inner product is Hermitian: $G = G^H$
 \end{itemize}
 
 \vspace{1mm}
-\item<2-> Using $\inner{ \vecnot{v} }{ \vecnot{v} } \geq 0$, we see that $\inner{ \vecnot{v} }{ \vecnot{v} } = \vecnot{w}^H G \vecnot{w} > 0$ for all $\vecnot{w} \neq \vecnot{0}$
-
+\item<2-> Using $\inner{ \vecnot{v} }{ \vecnot{v} } \geq 0$, we see that $\inner{ \vecnot{v} }{ \vecnot{v} } = \vecnot{w}^H G \vecnot{w} > 0$ for all $\vecnot{w} \neq \vecnot{0}$ \vspace{0.5mm}
 \begin{itemize}
 \item A Hermitian matrix satisfying this is called  \textcolor{blue}{positive definite} 
 
@@ -268,7 +265,7 @@ The matrix $G$ is called the \textcolor{blue}{weight matrix} of the inner produc
 \vspace{1mm}
 \item<3-> If $G$ is an $n \times n$ matrix that is Hermitian and positive definite, then:
 \begin{itemize}
-\item $G$ is the weight matrix (in ordered basis $\mathcal{B}$) of the inner product
+\item The following expression is a well-defined inner product on $V$:
 \begin{equation*}
 \inner{ \vecnot{u} }{ \vecnot{v} }_G
 = \left[ \vecnot{v} \right]_{\mathcal{B}}^H G \left[ \vecnot{u} \right]_{\mathcal{B}}.
@@ -544,8 +541,8 @@ A complete inner-product space is called a \textcolor{blue}{Hilbert space}.
 \end{definition}
 
 \begin{example}<2->
-Consider the Banach space $\ell^2$ of infinite real/complex sequences with Euclidean norm $\|\vecnot{v}\| = \left( \sum_{i=1}^\infty |v_i|^2 \right)^{1/2} < \infty$.
-The set $\ell^2$ is a Hilbert space under the standard inner product because it induces the Euclidean norm.
+Consider the Banach space $\ell^2$ of infinite real/complex sequences with norm $\|\vecnot{v}\| = \left( \sum_{i=1}^\infty |v_i|^2 \right)^{1/2} < \infty$.
+The set $\ell^2$ with the standard inner product is a Hilbert space  because that norm is induced by the inner product.
 \end{example}
 
 \begin{theorem}<3->
@@ -597,7 +594,7 @@ Then, the following conditions are equivalent:
 {\it(iv)}$\Rightarrow${\it(i)}:
 $\vecnot{v}^H (U^H U \!-\! I) \vecnot{v} \!=\! \| U \vecnot{v} \|^2 \!-\! \| \vecnot{v} \|^2 \!=\! 0$
 %because $\| U \vecnot{v} \| \!=\! \| \vecnot{v}\|$
-and, as $U^H U \!-\! I$ is Hermitian, all eigenvalues are 0 and $U^H U - I = 0$.
+and, since $U^H U \!-\! I$ is Hermitian, all eigenvalues must be 0 so that $U^H U - I = 0$.
 \end{proof}
 
 \end{frame}

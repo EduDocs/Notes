@@ -1,0 +1,134 @@
+\documentclass[10pt,english]{article}
+
+\usepackage{amsfonts,url,tikz,amsmath}
+
+% Paper setup
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.25in
+\topmargin=-0.5in
+\headheight=0.0in
+\headsep=0.5in
+\textheight=9.0in
+\footskip=0.5in
+
+\input{macros}
+
+\begin{document}
+
+\title{ECE 586: Vector Space Methods \\ Lecture 15: Frequently Asked Questions}
+\author{Henry D. Pfister \\ Duke University}
+%\date{August 29, 2020}
+
+\maketitle
+
+\section{Inner-Product Spaces}
+\paragraph{Is inner product space a kind of space spanned by inner products?}
+
+No, it is a vector space spanned by vectors.
+But, it has an additional product operation between vectors called an inner product.
+This operation generalizes the dot product that is defined between real vectors.
+
+\paragraph{Is the notion of a complete space used in the Hilbert space definition the same as that in Chapter 2?}
+Yes.
+The inner product has an induced norm which itself generates an induced metric.
+Thus, an inner product space is complete if it is complete when viewed as a metric space using the induced metric.
+
+\paragraph{For the theorem of Hilbert space, I don't quite understand its concept as to what it actually means.}
+
+It is just a shorthand name for a complete inner product space.
+
+\paragraph{It looks like you can create a norm from the definition of an inner product, and then you can create a metric from the definition of a norm. Would it be fair to say that the inner product is the most general definition, while metric is the most specific?}
+
+I actually think of generality going the other direction because all inner product spaces are normed spaces and all normed spaces are metric spaces.
+But, not all metric spaces can be converted into normed spaces and not all normed spaces can be converted into inner product spaces.
+
+\paragraph{Is the zero vector considered orthogonal to all other vectors, including itself?}
+Yes.
+
+
+\paragraph{Does the induced norm (defined by inner product) of a vector equal to its L2 norm?}
+Not necessarily.
+For the standard inner product space $\mathbb{R}^n$, the induced norm equals the $\ell^2$ norm.
+But, one can define other inner products where this is not true.
+For example, the inner product
+\[ \tinner{ \vecnot{u} }{ \vecnot{v} }_a = \sum_{i=1}^n \frac{1}{i} u_i v_i \]
+gives rise to the induced norm
+\[ \| \vecnot{u} \|_a = \left( \sum_{i=1}^n \frac{1}{i^2} \|u_i \|^2 \right)^{1/2} \]
+which does not equal the $\ell^2$ norm.
+But, it is a weighted $\ell^2$ norm.
+On the other hand, any separable Hilbert space $H$ has a linear isomorphism $T\colon H \to \ell^2$ that maps the space to $\ell^2$.
+
+
+\paragraph{On slide 6,how do we get the term $2\mathrm{Re}\tinner{ \underline{v}}{\underline{w} }$?} 
+\begin{equation*}
+	\begin{aligned}
+		\tinner{ (\underline{w} - \underline{u}) + \underline{u}}{(\underline{w} - \underline{u}) + \underline{u} } &= 
+		\tinner{\underline{w} - \underline{u} }{ \underline{w} - \underline{u} } + \tinner{ \underline{w} - \underline{u} }{ \underline{u} } + \tinner{ \underline{u} }{ \underline{w} - \underline{u} } + \tinner{\underline{u} }{ \underline{u} } \\
+		& = \| \underline{w} - \underline{u} \|^2 +  \tinner{ \underline{w} - \underline{u} }{ \underline{u} } + \overline{\tinner{ \underline{w} - \underline{u} }{ \underline{u} }} + \| \underline{u} \|^2 \\ 
+		& = \| \underline{w} - \underline{u} \|^2 + 2\mathrm{Re}\tinner{ \underline{v}}{\underline{w} } + \| \underline{u} \|^2
+		\end{aligned}
+\end{equation*}
+Notice the fact that the sum of a complex number and its conjugate is two times the real part.
+
+
+\paragraph{How should one think of the inner product in applications? Say, if we are going to the use SVD decomposition, does inner product play a role?}
+
+The standard inner product characterizes the angle between two vectors via \[ \cos \theta = \frac{\tinner{ \vecnot{u} }{ \vecnot{v} }}{\|u\| \|v \|}. \]
+A general inner product can be thought of similarly but this angle becomes more of an abstract notion.
+Still, if the angle is 90 degrees, then the vectors are orthogonal.
+In practice, least-squares problems using general inner products can be seen as weighted least squares using the standard inner product.
+
+Later, we will see that the SVD effectively diagonalizes a rectangular matrix $A$ by finding natural orthonormal bases for the range of $A$ and the range of $A^H$.
+When determining orthgonality, it uses the standard inner product.
+However, there are weighted versions of the SVD where the idea is the same but the orthogonality of the basis vectors is determined by general inner products.
+
+
+
+
+
+\section{Sets of Orthogonal Vectors}
+
+\paragraph{Per slide 8, the standard basis is orthonormal because all standard basis vectors are linearly independent to each other, and because for each such vector only one coordinate is equal to 1 so they are also normalized. Then, is linear independence sufficient for orthogonality?}
+
+No, the standard basis is orthonormal under the standard inner product because inner product between all pairs of distinct vectors is 0 and the induced norm of all vectors is 1.
+There are other inner products on $\mathbb{R}^n$ where this set is neither orthogonal nor normalized.
+
+Also, orthogonality implies linear independence.
+But, linear independence does not imply orthogonality. Consider $\underline{v} = (1,1)$ and $\underline{w} = (1, 0) \in \mathbb{R}^2$, $\underline{v}$ and $\underline{w}$ are linearly independent but not orthogonal under the standard inner product.
+
+\section{Linear Functionals and the Riesz Theorem}
+
+\paragraph{On the Linear Functionals slide, can the linear transformation $f$ be represented as a matrix?} Yes, if the space is $n$-dimensional, then a linear functional can be represented by a length-$n$ vector. Take example 3.8.2 in the lecture notes as an example.
+
+\paragraph{Why are Hilbert spaces the natural setting for quantum mechanics?}
+
+First, let's note that the most fundamental connection between vector spaces and physics is superposition.
+Historically, superposition comes from classical field and wave theory.
+Also, the idea of wave-particle duality was important in the historical development of quantum mechanics.
+Later, quantum field theories were derived by quantizing classical field theories in a way that preserves superposition.
+
+Vector spaces are a natural choice for mathematical theories of physics that obey superposition.
+Inner product spaces are natural for theories that preserve quantities related to the $\ell^2$ norm (e.g., the wave equation preserves energy and the Schr\"{o}dinger equation preserves total probability of all states).
+Finally, completeness is mathematically important if your theory relies on differential equations like the wave equation and the Schr\"{o}dinger equation.
+
+
+\paragraph{Looking at the Riesz theorem in terms of quantum mechanics, would it be correct to say that the probability to find a quantum system in some state can be described as the square of a linear transform?}
+
+There are a variety settings where this is true.
+For a quantum system with a finite number of states, a linear functional could be used to extract the probability amplitude of any state.  Then, the absolute value squared would give the probability of finding the system in that state for measurement that could distinguish that state from other states.
+
+It is worth noting that the theory of orthogonal projection, which we study next, probably provides a better framework for understanding measurement of quantum systems.
+ 
+\paragraph{I've seen the Gram-Schmidt (GS) process mentioned at least once in almost every linear algebra related course I've taken, but my question is if it's actually used in practice, or if it's just a neat trick?}
+
+The idea behind GS is used regularly throughout mathematics.
+For example, it provides a proof that any matrix $A \in \mathbb{R}^{m\times n}$ has a QR decomposition $A=QR$ where $Q$ is an orthogonal matrix $Q\in \mathbb{R}^{m\times m}$ (whose columns are the normalized GS vectors) and $R$ is an upper right triangular matrix.
+The $i$-th column of $R$ contains the coefficients for the GS vectors needed to reconstruct the $i$-th column of $A$.
+The QR decomposition is used regularly in practice but the exact GS computation method has some numerical issues.
+Therefore, it is usually computed using a more numerically stable method.
+
+
+
+
+\end{document}

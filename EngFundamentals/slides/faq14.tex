@@ -1,0 +1,110 @@
+\documentclass[10pt,english]{article}
+
+\usepackage{amsfonts,url}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+% Paper setup
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.25in
+\topmargin=-0.5in
+\headheight=0.0in
+\headsep=0.5in
+\textheight=9.0in
+\footskip=0.5in
+
+\input{macros}
+
+\begin{document}
+
+\title{ECE 586: Vector Space Methods \\ Lecture 14: Frequently Asked Questions}
+\author{Henry D. Pfister \\ Duke University}
+\date{\today}
+
+\maketitle
+
+Here we give a list of questions, and their answers, that were submitted by students after watching the flip video or reviewing the lecture slides.
+
+\section{Matrix and Operator Norms}
+
+\paragraph{For the second point of proof on page 5, why does this convergence hold?}
+This holds from a proof that, in a complete metric space, absolute convergence (i.e. the convergence of the absolute sum $\sum_{i=0}^\infty ||\vecnot{v}_i|| = c <\infty $) implies convergence of the sum $ \sum_{i=0}^\infty \vecnot{v}_i$. The gist of the proof is that convergence of the real sum $b_n \triangleq \sum_{i=0}^n ||\vecnot{v}_i|| $ implies that $b_n$ is a Cauchy sequence. You then do a bit of manipulation to show that the sequence $\vecnot{u}_n = \sum_{i=0}^n \vecnot{v}_i$ is also Cauchy.
+Thus, by completeness, $\vecnot{u}_n$ also converges.
+For more details, see the section
+``Proof that any absolutely convergent series in a Banach space is convergent" in 
+\href{https://en.wikipedia.org/wiki/Absolute_convergence}{\textbf{web link}}.
+
+\paragraph{For the matrix norm, how is $\| \cdot \|_p$ defined?}
+Suppose $\vecnot{v}$ is a $n$-dimensional vector, then its vector $p$-norm is defined by
+$$\| \vecnot{v} \|_p \triangleq \left[\sum_{i=1}^n |v_i|^p \right]^{\frac1p}.$$
+The matrix $p$-norm is defined by 
+$$\| A \|_p \triangleq \max_{\|\vecnot{v}\|_p = 1} \|A \vecnot{v} \|_p \, , $$
+where the norms on the RHS are vector $p$-norms.
+
+\paragraph{In course notes EF 6.3 (the induced operator norm definition), the norm pipes/brackets ($||\cdot||$) surrounding $Tv$ and $v$ do not have a subscript. However, the prelecture slide 1 uses the vector space symbols as subscripts to the norm pipes/brackets (i.e. $|| . ||_{W}$ or $|| . ||_{V}$). What does that subscript signify and is it necessary for clarifying the expression?}
+The subscript identifies which norm to use.
+When there is no subscript, it means it should be obvious to the reader what norm is being used. For example we know that the vector $\vecnot{v}$ is in $V$, so when we write $\| \vecnot{v} \|$ we implicitly mean $\|\vecnot{v}\|_V$.
+We also know $T \vecnot{v} \in W$, so when we write $\|T\vecnot{v}\|$, we implicitly mean $\|T\vecnot{v}\|_W$.
+
+\paragraph{Could you explain the proof for the Neumann expansion with slightly more detail again?}
+See Section 6.3.2 of the lecture notes.
+
+\paragraph{Why the $\ell^2$ norm for matrices is defined based on the max eigenvalues?}
+Because this gives a simple analytic expression.  See proof in section 6.3.3 of the lecture notes.
+
+\paragraph{In Slide 3, how to derive these matrix norms? Why the $\ell^{\infty}$ norm is the same as $\ell^1$ norm swapping i and j indices?}
+
+For proofs of these equalities, see \href{https://www.cs.utexas.edu/users/flame/Notes/NotesOnNorms.pdf}{\textbf{web link}}, in the section starting with ``Specifically, the matrix p-norm $\vert\vert{\bf A}\vert\vert _p$ can be based on the vector p-norm $\vert\vert{\bf x}\vert\vert _p$, as defined in the following for  $p=1, 2, \infty$."
+
+\paragraph{What is the relation of metric space and vector space, could you maybe give a Venn diagram of them?}
+A metric space defines the topology of a set and a vector space defines the linear structure of a set.
+%The Venn diagram you mention is pretty straightforward, see \href{https://cacoo.com/wp-app/uploads/2018/09/Cacoo-Venn-Diagram-Blog-680x450.png}{\textbf{this picture}}.
+In general, metric spaces are not automatically vector spaces, and vector spaces are not automatically metric spaces.
+But, a normed vector space also defines a canonical metric space structure on the same set via the induced metric.
+
+In general, a metric space $(X,d)$ is simply a space of elements $X$ which is endowed with a metric $d(\cdot,\cdot)$ (you are already familiar with the properties of $d$).  Vector spaces need not have a metric in general, but they do need to have operations of scalar multiplication (over a field $F$), and vector addition, and these operations need to satisfy a list of properties.
+
+\paragraph{Why is the induced operator norm considered induced?}
+It is considered induced because it is defined in terms of the vector norms over the spaces $V$ and $W$ -- if we change which vector norms we are using over $V$ and $W$, then the induced norm of the operator will change as well.
+
+
+\paragraph{Can one conceive of valid operator norms that are not the standard induced operator norm? And if so, do they all end up being equivalent in some manner?}
+
+Yes, the Frobenius norm $\| A \|_F \triangleq \left( \sum_{i,j} |a_{ij}|^2 \right)^{1/2}$ is used fairly often but it is not induced by any vector norm.
+
+\paragraph{What would be a real-world application for operator norm? I guess I heard about Neumann series. Are Neumann series and Neumann expansion related?}
+
+Yes, they are two different names for the same thing.
+
+\paragraph{What is the significance of the Neumann expansion? Is this just a tool used in proofs? Could you demonstrate an example of Neumann expansion?}
+
+It is a fundamental relationship that is useful both in theory an practice.
+For example, it was recently used to motivate a new class of neural networks that solve linear inverse problems: \href{https://arxiv.org/pdf/1901.03707.pdf}{\textbf{web link}}.
+
+\paragraph{In the different $p$-norms, can $p$ be some fractional real value such as 1.5? Is there any point in doing so?}
+
+Yes, any $p\geq 1$ works in general and thus $p$ does not have to be an integer.
+There are various reasons for using arbitrary $p$ values.
+Consider a problem where you have a long vector $\vecnot{v}$ and you know the $p$-norm for all $p\in [1,\infty]$ but you don't know the vector.
+Then, the number of entries $v_i$ satisfying $|v_i| \geq t$ satisfies the upper bound $$\left| \{i\in [n]\,|\, |v_i|\geq t \} \right| \leq \frac{1}{t^p} \sum_{i=1}^n |v_i|^p = \frac{1}{t^p} \| \vecnot{v} \|_p^p . $$
+Moreover, this upper bound can sometimes give a good estimate when minimized over $p\in [1,\infty]$.
+
+\paragraph{Will we review eigenvalues and eigenvectors and how to calculate them with linear algebra instead?}
+
+We will discuss eigenvalues and eigenvectors in more detail later in the class but we will not discuss numerical methods for computing them.
+See EF Chapter 8 for more information.
+
+\paragraph{Are matrix norms classified as a subset of operator norms?}
+Yes, a matrix norm is an operator norm.
+But, if the vector space is infinite dimensional, then the induced operator norm is usually not called a matrix norm.
+This is true even if the operator can be represented as an infinite-dimensional matrix.
+
+\paragraph{Is the idea of a contraction on a vector space related to the operator norm?}
+
+A contraction on a closed subset $A$ of a normed vector space $V$ can be defined using the induced metric $d(\vecnot{u},\vecnot{w}) = \| \vecnot{u} - \vecnot{w} \|$.
+In particular, $f \colon V \to V$ is a contraction on $A$ if $f(A) \subseteq A$ and $\| f(\vecnot{u}) - f(\vecnot{v}) \| \leq \gamma \| \vecnot{u} - \vecnot{v} \|$ for some $\gamma \in [0,1)$.
+
+If $f$ is differentiable with Jacobian $J(\vecnot{v})$, then the second condition is essentially equivalent to the condition that the induced operator norm $\|J(\vecnot{v}) \|_{\mathrm{op}} \leq \gamma < 1$ for all $\vecnot{v} \in A$.
+
+\end{document}

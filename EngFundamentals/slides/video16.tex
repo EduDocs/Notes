@@ -203,17 +203,50 @@ $$f'(\vecnot{x})(\vecnot{h}) = T \vecnot{h} = J(\vecnot{x}) \vecnot{h}$$
 \end{itemize}
 \end{frame}
 
+\begin{frame}{Gradient Descent in $\mathbb{R}^n$}
+
+\vspace{15mm}
+
+\hspace*{65mm}
+\includegraphics[width=2.5in]{figures/gradient.pdf}
+\vspace{-71mm}
+
+\begin{itemize}
+
+\item<1-> Consider a cost function $f\colon \mathbb{R}^n \to \mathbb{R}$ \vspace{1mm}
+
+\begin{itemize}
+    \item Can we adjust $\vecnot{x} \in \mathbb{R}^n$ to minimize the cost? \vspace{1mm} 
+    \item The \textcolor{blue}{gradient vector} $\nabla f (\vecnot{x}) \triangleq f'(\vecnot{x})^T$ equals \\ the direction of maximum increase \vspace{0mm} \[ \hspace*{-50mm} \nabla f(\vecnot{x}) = \left( \frac{\partial  f}{\partial  x_1} (\vecnot{x}), \, \frac{\partial  f}{\partial  x_2} (\vecnot{x}), \, \cdots, \, \frac{\partial  f}{\partial  x_n} (\vecnot{x}) \right)^T \]
+
+\end{itemize}
+
+\vspace{1mm}
+
+\item<2-> Gradient descent \vspace{1mm}
+
+\begin{itemize}
+	\item Discrete time (step size $\delta_n$) \vspace{2mm}
+	\[ \hspace*{-50mm} \vecnot{x}_{n+1} = \vecnot{x}_{n}-\delta_n \, \nabla f(\vecnot{x}_{n}) \vspace{1mm} \]
+	\item Continuous time: \vspace{2mm} \[ \hspace*{-50mm} \frac{d}{dt} \vecnot{x}(t) = - \nabla f \big( \vecnot{x}(t) \big)  \vspace{1mm} \]
+	\item Standard method for training machine learning \\  models like neural networks
+\end{itemize}
+
+
+\end{itemize}
+
+\end{frame}
 
 \begin{frame}{Derivatives in Banach Spaces}
 
 In abstract math, derivatives are usually introduced using Banach spaces: \vspace{1mm}
 \begin{itemize}
 \setlength\itemsep{3mm}
-\item<1-> For a function $f \colon X \rightarrow Y$, the idea of the derivative requires a linear structure (to define differences) and a topology (to define convergence) on both $X$ and $Y$ \vspace{1mm}
+\item<1-> For a function $f \colon X \rightarrow Y$, the concept of a derivative requires a linear structure (to define differences) and a topology (to define convergence) on both $X$ and $Y$ \vspace{1mm}
 
-\item<2-> If $X=\RealNumbers^n$ and $Y=\RealNumbers^m$, then the derivative is a linear transform from $X$ to $Y$ represented by the Jacobian matrix $f'(\vecnot{x}) \in \RealNumbers^{m\times n}$ \vspace{1mm}
+\item<2-> If $X=\RealNumbers^n$ and $Y=\RealNumbers^m$, then the derivative of $f$ is a linear transform from $X$ to $Y$ represented by the Jacobian matrix $f'(\vecnot{x}) \in \RealNumbers^{m\times n}$ \vspace{1mm}
 
-\item<3-> Thus, we generally assume $f \colon X \rightarrow Y$ be a mapping from the Banach space $(X,\|\cdot\|_X)$ to the Banach space $(Y,\|\cdot\|_Y)$ \vspace{1mm}
+\item<3-> Thus, we generally assume that $f \colon X \rightarrow Y$ is a mapping from the Banach space $(X,\|\cdot\|_X)$ to the Banach space $(Y,\|\cdot\|_Y)$ \vspace{1mm}
 
 \item<4-> For directional derivatives, one needs even less structure and it suffices to let $X$ be only a vector space.
 
@@ -260,7 +293,7 @@ If $f$ is Fr\'{e}chet differentiable at $\vecnot{x}$ and $g$ is Fr\'{e}chet diff
 
 \begin{frame}{Directional Derivatives}
 
-Directional derivatives differ from standard derivatives in that the perturbation is an argument provided up front.
+Directional derivatives differ from standard derivatives in that the perturbation vector is provided as a argument.
 For $f\colon \RealNumbers^n \to \RealNumbers^m$, this means that the directional derivative is not a linear transform but just a vector in $\mathbb{R}^m$.
 
 \vspace{2mm}
@@ -300,10 +333,10 @@ Then, $f$ is \textcolor{blue}{G\^{a}teaux differentiable} at $\vecnot{x}$ if the
 \end{frame}
 
 
-\begin{frame}{On the Gradient}
+\begin{frame}{On the Gradient in Hilbert Space}
 
 For $f\colon \RealNumbers^n \to \RealNumbers^m$ with $m=1$, the Jacobian is related to the \textcolor{blue}{gradient}
-\[ \nabla f(\vecnot{x}) \triangleq f'(\vecnot{x})^H  = \left[ \begin{array}{cccc} \frac{\partial  f}{\partial  x_1} (\vecnot{x}) & \frac{\partial  f}{\partial  x_2} (\vecnot{x}) & \cdots & \frac{\partial  f}{\partial  x_n} (\vecnot{x}) \end{array} \right]^H. \]
+\[ \nabla f(\vecnot{x}) \triangleq f'(\vecnot{x})^T  = \left[ \begin{array}{cccc} \frac{\partial  f}{\partial  x_1} (\vecnot{x}) & \frac{\partial  f}{\partial  x_2} (\vecnot{x}) & \cdots & \frac{\partial  f}{\partial  x_n} (\vecnot{x}) \end{array} \right]^T. \]
 It is worth noting that the orientation of the gradient vector (i.e., row versus column vector) is sometimes defined differently.
 This is because derivatives can be understood as linear transforms and either orientation can be used to define the correct linear transform. 
 

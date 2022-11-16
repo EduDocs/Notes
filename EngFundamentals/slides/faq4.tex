@@ -1,0 +1,61 @@
+\documentclass[10pt,english]{article}
+
+\usepackage{amsfonts,url}
+\usepackage{amsmath}
+\usepackage{amssymb}
+% Paper setup
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.25in
+\topmargin=-0.5in
+\headheight=0.0in
+\headsep=0.5in
+\textheight=9.0in
+\footskip=0.5in
+
+\newcommand{\vecnot}[1]{\underline{#1}}
+
+\begin{document}
+
+\title{ECE 586: Vector Space Methods \\ Lecture 4: Frequently Asked Questions}
+\author{Henry D. Pfister \\ Duke University}
+\date{September 3, 2020}
+
+\maketitle
+
+Here we give a list of questions, and their answers, that were submitted by students after watching the flip video.
+
+\section{Relations and Functions}
+
+\paragraph{Do we always mean that the relation between x, y is reflexive, symmetric and transitive when we use $\sim?$}
+
+In general, the symbol $\sim$ is often used for equivalence relations but not always.  Thus, one should say specifically that $\sim$ is an \textit{equivalence} relation in order for it to have those properties.
+
+\paragraph{Could you talk more about the inverse image and its use?}
+For a function $f: X \rightarrow Y$, the inverse image of a set $B \subseteq Y$ is the set of all $x$ such that $f(x) \in B$ -- more compactly, $f^{-1}(B) \triangleq \{x\in X| f(x) \in B\}$.  In advanced math classes, it is used to define a number of things.  For example, a function $f: X \to Y$ is continuous if and only if the inverse image of any open set in $Y$ is open in $X$.  In advanced probability, random variables are functions $X: \Omega \to \mathbb{R}$ and it is used to compute the probability $\Pr (X \in A) = \mathbb{P}(X^{-1}(A))$ where $\mathbb{P}$ gives the probability for subsets of the sample space $\Omega$.
+
+\paragraph{What is one example in which a function is not surjective?}
+
+Consider the function $f(x) = x^2 + 1$, and define the domain to be $X \triangleq \mathbb{R}$ and the codomain to be $Y \triangleq [0,\infty)$. The function is not surjective since its range is $[1,\infty)$, which is not the same as $Y$.
+
+\paragraph{How can $A$ and $B$ be disjoint, but $f(B)$ is a subset of $f(A)$?}
+
+Perhaps a concrete example would help to clarify this: Consider $B= [-2,-1]$ and $A = [0,4]$ and the function $f(x) = x^2$.
+Note that $f(B) = [1,4]$ and $f(A) = [0,16]$, so $f(B)$ is a subset of $f(A)$ even though $A$ and $B$ are disjoint.
+
+
+\paragraph{The name ``equivalence relation" implies that such relations are similar in function to the "=" relation we commonly use.  Are equivalence relations always used in such a way, or is the category more broad than that?}
+
+Equivalence relations can be understood as an abstraction of equality. Let's say we define 2 integers as being equivalent if they have the same remainder after division by 3. If that's the case, then 4 and 19 are equivalent by my definition of equivalence (they both have remainder 1 by division by 3). Note that 4 and 19 are not equal, but they are equivalent per our specific definition of equivalence.
+
+\paragraph{Can we have some more examples in our tutorial? }
+
+If you're looking for examples of relations, then I suggest Chapter 5 of the textbook Proofs and Fundamentals (PAF) whose link is available on the course website.  If your question is more general, then you can inquire about a particular subject and we can suggest resources with more examples.
+
+\paragraph{When can we access the slides shown in this video?}
+
+The slides used to make the video (modulo small corrections) are always posted to the website when the video is posted.  If you're having trouble finding or accessing these, please e-mail me.
+
+    
+    
+\end{document}

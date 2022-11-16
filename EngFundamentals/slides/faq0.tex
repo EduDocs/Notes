@@ -1,0 +1,116 @@
+\documentclass[10pt,english]{article}
+
+\usepackage{amsmath,url}
+
+% Paper setup
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.25in
+\topmargin=-0.5in
+\headheight=0.0in
+\headsep=0.5in
+\textheight=9.0in
+\footskip=0.5in
+
+\input{macros}
+
+\begin{document}
+
+\title{ECE 586: Vector Space Methods \\ Lecture 0: Frequently Asked Questions}
+\author{Henry D. Pfister \\ Duke University}
+\date{August 21, 2020}
+
+\maketitle
+
+Here we give a list of questions, and their answers, that were submitted by students after watching the flip video.
+
+\section{Course Introduction}
+
+\paragraph{Could you please briefly explain what is brute force?}
+
+Brute force means using a method that doesn't exploit the structure of a problem.  For finite optimization, one can try all possibilities and then choose the best.  For differentiable optimization, one can take derivatives and enumerate all points whose gradient is zero.  Then, one can try all of them and pick the best.
+
+\paragraph{What is the form of exams? Are class notes allowed to bring to the exams?}
+
+The exams will be in-person and you will be allowed one page of notes for each midterm and two pages for the final.
+Calculators are not needed and not allowed.
+
+%Since the exams will be take-home regardless of how I assign them, I am planning to allow open course notes and homework solutions.  I'm currently figuring out how to proctor.  Here are some of the options that I'm considering:
+%(1) Honor system -- You time yourself for a fixed amount of time and use only allowable resources (e.g., course notes and homework solutions but no internet)
+%(2) Honor system + video proctoring -- Same as above but you record yourself (on some website) at the same time
+%For either, I may also introduce a small post-exam oral section where I ask you about your solutions.
+%My primary goal is encourage people to study and to have fair evaluation.  This semester, the exam portion of the grade is quite reduced from previous years.
+
+
+\paragraph{What are ways of refreshing some of the fundamentals (like matrices)?}
+ 
+Matrices will be formally defined when we start linear algebra but used informally before that (e.g., like in the video).  For students who need more review, I suggest that you read 3.1-3.2 of the notes, the wikipedia page
+\begin{center}
+\url{https://en.wikipedia.org/wiki/Matrix_(mathematics)},
+\end{center}
+and the review in
+\begin{center}
+ \url{https://www.ohio.edu/mechanical-faculty/williams/html/PDF/MatricesLinearAlgebra.pdf}.
+\end{center}
+
+
+\paragraph{In example problem 2, if we know f(x), why would we get a different a0,a1,a2,a3 (as the green line) other than the blue line itself?}
+
+This is because the actual function (green line) is not a 3rd degree polynomial (i.e., there is no 3rd degree polynomial that equals f(x) on this interval).
+
+
+\paragraph{Can you explain more about the definition of convex and why it is not possible that f(x) is convex but has two local minima?}
+
+The actual statement is that a convex function can't have two local minima with different values.  Suppose you draw a chord connecting these two minima.  If the function is convex, the chord must stay above the function.
+But, in that case, the larger minima is not a local minima because one can start there and decrease the function linearly by following the chord toward the lower minima.  For a more formal definition of convex, see Chapter 5 of the notes.
+
+
+\paragraph{Is there any order we need to follow when creating a truth table? like Biconditional first, followed by Conditional.}
+
+We use the following order of operations for logic: negations are done first and then none of the other operations take precedence.  Thus parentheses are required for well-formed statements.  Because of this, you can fill an entry in the truth table with any value that is currently computable.
+
+\paragraph{Why do we need to put an upper bound on on the distance between x and x'? Why not directly have an equality with c(A')*length(E)?}
+
+For scalar this may be possible.  But, for vectors and matrices, it might not be possible to write this as an equality in this form (i.e., constant times length(E)).
+
+\paragraph{Can you introduce the projects mentioned in syllabus of this course? Is this individual work? Would it be programming-based?}
+
+The course mini-projects are individual programming-based assignments and last year they were on:
+Markov Chains
+Least Squares Solutions
+Principal Component Analysis
+Alternating Projections
+
+
+\paragraph{In what ways do you utilize vector spaces in your own research?}
+
+That a very good question.  Here are two examples I can give:
+
+My work on error-correcting codes make uses of linear codes.  The codewords in these codes form a subspace of a vector space and this mathematical structure makes it much easier to use and analyze them. To get an idea, take a look at:
+\begin{center}
+\url{http://pfister.ee.duke.edu/courses/ece590_gmi/coding_intro.pdf}
+\end{center}
+
+One result, for which the paper received an award, was based on a deep result about Fourier analysis on Boolean functions (i.e., functions mapping binary variables to a binary output).  It is quite surprising that one would use real number math to analyze these but it's quite powerful.  Here is the easiest (but still not easy) tutorial on the Fourier analysis of Boolean functions.  Notice that vector spaces appear on page 2 :-)
+\begin{center}
+\url{https://theoryofcomputing.org/articles/gs001/gs001.pdf}
+\end{center}
+
+\paragraph{What will the computer-based assignments involve? Will any specific software be needed?}
+
+The idea is to write code that implements techniques that we've discussed.  I recommend Python and will support with templates and suggestions for an online IDE but almost any language is fine if you ask first
+
+Should we read all the reference material?
+No, not unless you read *really* fast.  I suggest watching the videos and reading the course notes.  If something is confusing and you need a reference, check relevant reference materials (see website for a longer list than the syllabus).  If you can solve the homework without additional references, you're doing fine.
+
+\paragraph{Are students in groups expected to work on homework problems together, or are we expected to work together on problems that are strictly not in the homework?}
+
+My suggestion is always read and consider the problems by yourself first in order to build your own problem solving skills.  You shouldn't expect to solve them all (say 50\% is fine).  Then, it makes sense to meet in a group and discuss everyone's solutions.  Maybe this gives you all but one or two.  Finally, you can use office hours, piazza, or e-mail to get help with whatever you have left.  To be clear, if another student describes their solution to you on an iPad and then you understand it and write it down yourself, that is fine.  On the other hand, copying someone's solution is against the rules.
+
+
+\paragraph{How can I modify an assignment that I have submitted?}
+I have started allowing 1 resubmission on Sakai and I think gradescope also allows this.
+
+
+    
+\end{document}

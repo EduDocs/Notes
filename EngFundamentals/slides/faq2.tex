@@ -1,0 +1,66 @@
+\documentclass[10pt,english]{article}
+
+\usepackage{amsmath,amsfonts,url}
+
+% Paper setup
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.25in
+\topmargin=-0.5in
+\headheight=0.0in
+\headsep=0.5in
+\textheight=9.0in
+\footskip=0.5in
+
+\input{macros}
+
+\begin{document}
+
+\title{ECE 586: Vector Space Methods \\ Lecture 2: Frequently Asked Questions}
+\author{Henry D. Pfister \\ Duke University}
+\date{August 29, 2020}
+
+\maketitle
+
+Here we give a list of questions, and their answers, that were submitted by students after watching the flip video.
+
+\section{Predicate Logic}
+
+\paragraph{Is there a way to systematically move from something we want to prove into statements? My concern is mostly in generating statement P and gathering the necessary info to prove Q.}
+
+In a proof, one is almost always trying show $P \rightarrow Q$ for some known $P$ and $Q$.  The problem is that the $P$ and $Q$ are given to you in English and there may be many implicit definitions and assumptions that are not given.  The first step is to try and write down all the English statements (explicit and implicit) as mathematical statements.  For example, ``$n$ is odd'' as ``$\exists k \in \mathbb{Z}, n = 2k+1$''.  This reason for this is that you can search connections between these statements and apply standard operations.  For example, using this $k$, you can write $n^2 = 4k^2 + 4k + 1$.
+   
+\paragraph{How can we decide between proof strategies? Are there cases where one strategy would not viable but others would}
+
+This is a very good question and there is no precise answer.  There are some guidelines though.  If your trying to prove $P \to Q$ and it feels like a standard math or physics derivation, then a direct proof often works.  But, if $\neg Q$ provides a better starting point (e.g., negation turns $Q = R \vee S \vee T$ implies $R,S,T$ are all true), then it is worth trying the contrapositive.  For example, try proving ``if $3k+1$ is even, $k$ is odd''.  Finally, when trying to prove that something does not have a well-defined property these methods often fail.  For example, $P(x)=``x$ is rational'' has a simple definition while $\neg P(x)$ does not.  Thus, when trying to prove $\neg P(\sqrt{2})$, it's generally easier to use a proof by contradiction and suppose $P(\sqrt{2})$ because that provides a good starting point.
+
+\paragraph{Could you elaborate more on consistent and complete?}
+
+Suppose you are given a set of axioms (think of these as transformation rules) that include first-order logic and generate new statements from old statements. Peano arithmetic is such an example.  If these rules are inconsistent, then they can generate both the statement $P$ and $\neg P$ for some $P$.  Otherwise, they are consistent.
+
+Completeness means that every valid statement can either be proved by the axioms or it can be disproved.  G\"{o}del showed that any consistent first-order logic system that includes Peano arithmetic cannot be complete.  Thus, it must contain a statement $P$ where neither $P$ nor $\neg P$ are provable.  
+
+    
+\paragraph{On the 4th slide, shouldn't the two middle implications be equivalences instead? Because only the order is changed.}
+
+No. Using the example, consider $C=I$ and $P(x,y) = ``x=y"$.  This describes a set of pictures each containing one color with one picture for each color.  In this case, we have $\forall y\in C, \exists x\in I, P(x,y)$ but it does not satisfy $\exists x\in I, \forall y\in C, P(x,y)$.  On the other hand, a single picture containing all the colors (e.g., a rainbow) satisfies both statements.
+
+    
+\paragraph{For proof via contradiction, is the contradiction acting as a counterexample to disprove $P \to Q$?}
+
+No, you start by supposing $\neg(P \to Q) \Leftrightarrow P \wedge \neg Q$.  If together these give a contradiction (i.e., counterexample), then the supposition was false and it follows that $P \to Q$ is true.
+
+\paragraph{Do the given implications and equivalences for $P(x, y) = ``x$ contains $y$'' hold for all possible predicates $P(x, y)$ or just ``$x$ contains $y$''?}
+
+They hold for all predicates and the given $P(x,y)$ was just a concrete example.
+    
+\paragraph{Can you give an example of a multiple quantifier where one is a free variable and the other is a bound variable?}
+
+For the statement $P(x,y)$, a single quantifier gives a statement $\exists x, P(x,y)$ where $x$ is bound and $y$ is free.
+
+\paragraph{What are some common mistakes you see people commit when trying to employ inductive proofs?}
+
+People sometimes just verify the few steps: $P(1)$, $P(1) \to P(2)$, $P(2) \to P(3)$, $\ldots$ but never consider general $n$.  Also, inductive proofs based on $P(n) \wedge P(n+1) \to P(n+2)$ require two base cases (e.g.,  $P(1)$ and $P(2)$) and sometimes only one is provided.
+    
+    
+\end{document}

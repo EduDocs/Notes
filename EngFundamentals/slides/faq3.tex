@@ -1,0 +1,170 @@
+\documentclass[10pt,english]{article}
+
+\usepackage{amsfonts,url}
+
+% Paper setup
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.25in
+\topmargin=-0.5in
+\headheight=0.0in
+\headsep=0.5in
+\textheight=9.0in
+\footskip=0.5in
+
+\newcommand{\vecnot}[1]{\underline{#1}}
+
+\begin{document}
+
+\title{ECE 586: Vector Space Methods \\ Lecture 3: Frequently Asked Questions}
+\author{Henry D. Pfister \\ Duke University}
+\date{September 5th, 2020}
+
+\maketitle
+
+% Here we give a list of questions, and their answers, that were submitted by students after watching the flip video.
+
+\section{Set Theory}
+
+\paragraph{Could you explain more in depth how we go from the logic expression to the set expression in De Morgan's Identity in Slide 7?}
+
+Consider two logical statements $P$: $x \in A$ and $Q$: $x \in B$. Note that the negation of $P$ indicates $x \notin A$ which is identical as $x \in A^c$. So, the logical statement $P \vee Q$ is equivalent to $x \in A \cup B$ and the negation of $P \vee Q$ is equivalent to $x \in (A \cup B)^c$. Applying De Morgan's identity to $P \vee Q$ results in $\neg (P \vee Q) \Leftrightarrow \neg P \wedge \neg Q$. Here, $\neg P \wedge \neg Q$ is equivalent to $x \in A^c \cap B^c$. Thus, $(A \cup B)^c = A^c \cap B^c$.
+
+\paragraph{When can you use the word ``size'' instead of ``cardinality''?}
+
+The cardinality of a set is also called its size, when no confusion with other notions of size is possible. (From Wikipedia)
+
+\paragraph{I still don't know how to set up a one-to-one correspondence between rational numbers and the natural numbers. Could you give a specific example? Thanks!}
+
+First, let's consider a matrix $A_{i,j}$ where $i,j \in \mathbb{N}$.
+For such a matrix, one could make a 2D grid (e.g., picture graph paper) and write $A_{i,j}$ in the box associated with row $i$ and column $j$.
+If we let $A_{i,j}$ equal the rational number $(j-1)/i$, then any countable enumeration of the entries in $A_{i,j}$ would give a countable enumeration of the non-negative rational numbers.
+
+For an infinite matrix like this, there are many enumeration orders that work but also some that do not.
+For example, enumerating row by row does not work because the first row (i.e., the natural numbers) is infinite and we'd never get to any rational numbers with denominators greater than 1.
+Instead, for $n=1,2,\ldots$ in that order, we could enumerate all $i,j$ such that $|i|+|j|=n$. 
+Using this order, any entry of the matrix (e.g., any fixed non-negative rational number) will eventually be enumerated.
+This idea can be generalized to show that the Cartesian product of finitely-many countable sets is also countable.
+
+\paragraph{How do countable and uncountable sets differ from an application's perspective? Are they relevant, or is it only relevant from a purely mathematical perspective of the proof building?}
+
+In applications, one can really only compute with mathematical objects that are ``essentially finite''.
+I consider an object $A$ to be ``essentially finite'' if $A \in X$ for a metric space $(X,d)$ and there is a sequence $A_n \in X$ of finite objects such that $A_n \to A$.
+This means that $A$ can be approximated arbitrarily well by finite objects.
+As an example, consider approximating a continuous function $f\colon [-1,1] \to \mathbb{R}$ by a sequence $f_n$ of piecewise linear functions with $n$ pieces.
+ 
+In proofs, it does not come up too often but here is an example that exposes some differences between finite dimensional real vectors, countably infinite vectors (e.g., indexed by $\mathbb{N}$), and uncountably infinite real vectors (e.g., indexed by $[0,1]$).
+Here, it is worth noting that all of these can be viewed as real functions $f\colon X \to \mathbb{R}$.
+For $n$-dimensional vectors, we have $X =  \{1,2,\ldots,N\}$.
+For countably infinite vectors, we have $X=\mathbb{N}$.
+Finally, the last case corresponds to $X=[0,1]$.
+
+Later in this class, we will see that any sequence $x_n \in \mathbb{R}$ which is bounded (i.e. $|x_n| < M \in \mathbb{R}$) must have a subsequence that converges.
+This is called the Bolzano-Weierstrass Theorem.
+For sequences of $n$-dimensional real vectors with bounded length, one can use induction to prove the analogous result by applying the original theorem multiple times.
+For $i=1,2,\dots,n$, the $i$-th use extracts the subsequence (of the previous subsequence) where the $i$-th component converges.
+Induction is sometimes called ``finite induction'' because it only proves $P(n)$ for all finite $n$.
+It does not prove ``$\lim_{n\to\infty} P(n)$'' (assuming this limiting statement even makes sense).
+
+Still, using a more complicated argument, one can extend the Bolzano-Weierstrass Theorem to countably infinite vectors.
+But, that's it.
+The Bolzano-Weierstrass Theorem is not true for all sequences $f_n$ of functions mapping $[0,1]$ to $\mathbb{R}$. 
+
+\paragraph{Can you explain the infinite unions/intersections in more detail?}
+
+For many things in math, the infinite case is much more complicated than the finite case.
+For unions and intersections of sets, this is not true.
+There is a single concept that works for the intersection (or union) of uncountably many sets.
+
+Consider a collection of sets $\{ S_\alpha | \alpha\in I\}$ where $I$ is any set (finite, countable, or uncountable).
+An element $x$ is in $\cup_{\alpha \in I} S_\alpha$ iff it is in any set in the collection (i.e., $\exists \alpha \in I, x\in S_\alpha$).
+Similarly, an element $x$ is in $\cap_{\alpha \in I} S_\alpha$ iff it is in all sets in the collection (i.e., $\forall \alpha \in I, x\in S_\alpha$).
+
+
+\paragraph{DeMorgan's Law with infinite unions/intersections is a little confusing. Is there am intuitive way to understand the infinite intersection of the complements of a collection of sets?}
+
+Try reading the above answer and the following example.
+Let $I = \{n\in \mathbb{N}| n > 1\}$ be the set of natural numbers greater than 1.
+For $\alpha \in I$, let $S_\alpha = \alpha I = \{ \alpha n | n \in I \}$ be the set of natural numbers divisible by $\alpha$ with $n/\alpha > 1$.
+Then, $A = \cup_{\alpha \in I} S_\alpha$ is the set of ``composite'' numbers (i.e., $n\in S_d$ iff $P(n,d)=$``there exists a $d\in I$ such that $d \neq n$ and $d$ divides $n$'').
+
+This implies that $A^c$ is the set of ``not composite'' (also known as ``prime'') numbers and De Morgan's law implies that $A^c = \cap_{\alpha \in I} S_{\alpha}^c$.
+Since $n \in S_d^c$ iff $\neg P(n,d)=$``for all $d \in I$, $d=n$ or $d$ does not divide $n$'', we see that $\cap_{\alpha \in I} S_{\alpha}^c$ is the subset of $I$ that is not divisible by any number but itself.
+This shows two standard definitions of a prime number are equivalent: ``a number greater than 1 that is not composite'' and ``a number greater than 1 that is divisible only by 1 and itself''.
+
+It is important to note that De Morgan's law for set complements only makes sense if the complement of each set in the collection is well-defined.
+This occurs whenever all sets are subsets of some common universal set (e.g., $\mathbb{N}$ is the above example).
+
+
+\paragraph{What would be an example of an axiom in axiomatic set theory?}
+
+The axioms of set theory are detailed in Section 3.5 of Proof and Fundamentals (PAF).
+I suggest reading this to get the flavor but the course will not cover or test this material.
+
+\paragraph{For the sake of this class, I understand that naive set theory is going to be the only type of set theory utilized, however, are there engineering applications of axiomatic set theory? If so, what distinguishes these applications from other applications that utilize naive set theory?}
+
+The primary use of set theory (both in engineering and mathematics) is as a language that is used to communicate and verify modern mathematics.
+The difference between naive and axiomatic set theory has do with how formally that language is defined.
+
+In naive set theory, one doesn't formally define the language.
+Instead, one learns how to use it by example.
+Similarly, some people can program in C++ without knowing how to write a parser and compiler for C++.
+The latter requires a formal definition of the language.
+In axiomatic set theory (say ZFC), one formally defines all valid statements in the language of set theory.
+The big catch is that G\"{o}del's second incompleteness theorem shows that ZFC cannot prove itself consistent unless it is not.
+Still, there are other more complicated statements that support the idea that ZFC is consistent even if this is not provable.
+
+\section{Russell's Paradox}
+
+\paragraph{Could you give an example of a set following Russell's Paradox? I know it is a contradiction but, would an example exist or can you just reach the paradox through logic?}
+
+Paradoxes of this type are rooted in self-referential statements that cannot be satisfied.
+Thus, the best I can hope to do is to restate it:
+
+Every set either contains itself or it does not.
+Let the first case be called sets of type 1 and the second be called sets of type 2.
+Most sets we consider do not contain themselves.
+But, one would expect that some do (e.g., ``the set of all sets'' should contain itself).
+Now, consider the set of all type 2 sets and call this $R$.
+If $R$ is type 2 (i.e., it does not contain itself), then (by construction of $R$) it should be a member of $R$.
+Thus, $R$ should contain itself.
+Similarly, if $R$ is type 1 (i.e., it does contain itself), then it is not type 2 and it should not be in $R$.  
+Thus, $R$ should not contain itself.
+
+\paragraph{Can we just disallow the Russell's paradox to make naive set theory consistent?}
+
+The term naive set theory is used rather imprecisely in this class because we do not delve into axioms.
+To be specific, it can refer to Frege's axioms which include an axiom that is now called naive comprehension.
+This axiom allows the construction of Russell's set and generates a contradiction.
+Thus, Frege's axioms are not consistent.
+It is worth noting that there are other paradoxes in naive set theories but Russell's is probably the simplest to describe.
+
+Later versions of axiomatic set theory (e.g., ZF = Zermelo-Fraenkel) repair this by disallowing naive comprehension and adding more complicated axioms that essentially disallow all known paradoxes.
+The big catch is that G\"{o}del's second incompleteness theorem shows that ZF cannot prove itself consistent unless it is not.
+
+\paragraph{During class we resolved an edge case of infinite intersection by using the notion of consistency.  But, I thought we are using naive set theory in this class, which is inherently inconsistent. Will this trick of maintaining consistency work for the rest of topics covered in this class even though we are still using naive set theory?}
+
+We use naive set theory in this class because we do not study axiomatic set theory.
+On the other hand, we do not make any statements (other than constructing Russell's set) than couldn't be formalized using the Zermelo-Fraenkel (ZF) Axioms.
+Thus, the rest of the class is as consistent as ZF.
+Unfortunately, G\"{o}del's second incompleteness theorem shows that ZF cannot prove itself consistent.
+
+The consistency we considered in class was for associative binary operations (e.g., union, intersection, addition, multiplication, etc...) applied to collections of elements.
+In this case, we implicitly used the ZF axioms to prove that consistency (with respect breaking the calculation into different pieces) requires that the operation applied to the empty set must equal the identity of the binary operation.
+There is no foundational issue here because we used a strong theory (e.g., ZF) to prove a simple statement that is not self-referential.
+
+
+\paragraph{How is the codomain Y determined? For example, consider function: $f(x) = x^2$. Is the codomain the set of all non-negative numbers or $\mathbb{R}$.}
+
+Here, the function is not properly defined because there is no initial statement $f\colon X \to Y$ that defines the domain and codomain.
+
+\paragraph{Do we have to form groups for projects by ourselves?}
+
+No, the mini-projects (which are really just longer computer assignments) are assigned individually.
+You are welcome to discuss ideas with other students but you must write the code and report yourself.
+
+\paragraph{The video screen blocks part of the slide so I can't see the full sentence.}
+
+That happens very rarely by mistake.  In that case, please look at the pdf slides on the website to see the hidden surprise ;-)
+
+\end{document}
