@@ -33,10 +33,10 @@ The following are equivalent:
 \end{enumerate}
 \end{theorem}
 \begin{proof}
-First, we show the first and third are equivalent.
-If $\lambda$ is an eigenvalue of $A$, then there exists a vector $\vecnot{v} \in V$ such that $A \vecnot{v} = \lambda \vecnot{v}$.
+First, we show the first and second are equivalent.
+If $\lambda$ is an eigenvalue of $A$, then there exists a non-zero vector $\vecnot{v} \in V$ such that $A \vecnot{v} = \lambda \vecnot{v}$.
 Therefore, $(A-\lambda I)\vecnot{v} = 0$ and $(A - \lambda I)$ is singular.
-Likewise, if $(A-\lambda I)\vecnot{v} = 0$ for some $\vecnot{v} \in V$ and $\lambda \in F$, then $A \vecnot{v} = \lambda \vecnot{v}$.
+Likewise, if $(A-\lambda I)\vecnot{v} = 0$ for some non-zero $\vecnot{v} \in V$ and $\lambda \in F$, then $A \vecnot{v} = \lambda \vecnot{v}$.
 To show the second and third are equivalent, we note that the determinant of a matrix is zero iff it is singular.
 \end{proof}
 
@@ -73,7 +73,7 @@ So, multiplying both sides by a product of these matrices gives
 \begin{align*}
 \prod_{j=1,j\neq m}^k (A-\lambda_j I) \sum_{i=1}^k c_j \vecnot{v}_i
 &= \left( \prod_{j=1,j\neq m}^k (A-\lambda_j I) \right) c_m \vecnot{v}_m \\
-&= c_m \prod_{j=1,j\neq m}^k (\lambda_m - \lambda_j) = \vecnot{0}.
+&= c_m \vecnot{v}_m \prod_{j=1,j\neq m}^k (\lambda_m - \lambda_j) = \vecnot{0}.
 \end{align*}
 Since all eigenvalues are distinct, we must conclude that $c_m = 0$.
 Since the choice of $m$ was arbitrary, it follows that $c_1,c_2,\ldots,c_k$ are all zero.

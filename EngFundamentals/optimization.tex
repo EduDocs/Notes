@@ -479,8 +479,8 @@ Let $A = \{ i\in \{1,\ldots,m\} \, | \, f_i (\vecnot{x}^*)=0 \}$ be the set of a
 \end{definition}
 
 \begin{definition}[Mangasarian-Fromovitz]
-A standard constrained optimization problem satisfies the MF constraint qualification at $\vecnot{x}^*$ if the functions $f_i$ and $h_j$ are all continuously differentiable at $\vecnot{x}^*$ and there exists a vector $\vecnot{w}\in \mathbb{R}^n$ satisfying $\nabla f_i (\vecnot{x}^*)^T \vecnot{w} < 0$ for $i\in A$ and $\nabla g_j (\vecnot{x}^*)^T \vecnot{w} = 0$ for $j = 1,\ldots,p$.
-If the constraints $g_j$ are not all affine, then one additionally needs that the vectors $\nabla g_1 (\vecnot{x}^*),\ldots,\nabla g_p (\vecnot{x}^*) \in \mathbb{R}^n$ form a linearly independent set.
+A standard constrained optimization problem satisfies the MF constraint qualification at $\vecnot{x}^*$ if the functions $f_i$ and $h_j$ are all continuously differentiable at $\vecnot{x}^*$ and there exists a vector $\vecnot{w}\in \mathbb{R}^n$ satisfying $\nabla f_i (\vecnot{x}^*)^T \vecnot{w} < 0$ for $i\in A$ and $\nabla h_j (\vecnot{x}^*)^T \vecnot{w} = 0$ for $j = 1,\ldots,p$.
+If the constraints $h_j$ are not all affine, then one additionally needs that the vectors $\nabla h_1 (\vecnot{x}^*),\ldots,\nabla h_p (\vecnot{x}^*) \in \mathbb{R}^n$ form a linearly independent set.
 \end{definition}
 
 \begin{theorem}[Karush-Kuhn-Tucker]
@@ -629,7 +629,7 @@ If $d^* = p^*$, then one says \defn{optimization}{strong duality} holds for the 
 
 \begin{theorem}
 Let $\vecnot{x}^*$ be a primal optimal point and $(\vecnot{\lambda}^*,\vecnot{\nu}^*)$ be a dual optimal point.
-If strong duality holds, $\vecnot{x}^* \in \Interior{\mathcal{D}}$, and all $f_i$ and $g_j$ functions are differentiable at $\vecnot{x}^*$, then we get the KKT conditions of complementary slackness, $\lambda_i^* f_i (\vecnot{x}^*) = 0$ for $i = 1,\ldots,m$, and stationarity \eqref{eq:KKT1}.
+If strong duality holds, $\vecnot{x}^* \in \Interior{\mathcal{D}}$, and all $f_i$ and $h_j$ functions are differentiable at $\vecnot{x}^*$, then we get the KKT conditions of complementary slackness, $\lambda_i^* f_i (\vecnot{x}^*) = 0$ for $i = 1,\ldots,m$, and stationarity \eqref{eq:KKT1}.
 \end{theorem}
 \begin{proof}
 By weak duality, we have
