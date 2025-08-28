@@ -23,6 +23,18 @@ f'(\vecnot{x})(\vecnot{h}) = T \vecnot{h} = J(\vecnot{x}) \; \vecnot{h} .
 Mathematically, such definitions require the structure of a Banach space because one needs the linear structure to compute differences, and the norm topology to define limits.
 Completeness guarantees that limits exist under mild conditions.
 
+In Chapter~\ref{chap:metric_spaces}, limits are discussed primarily for sequences but Definition~\ref{def:cont_limit} does extend this to cases where points approach other points.
+By treating Banach spaces as metric spaces, we arrive at the following induced definition of such limits.
+
+\begin{definition}
+  For Banach spaces $X,Y$ with $f\colon X \to Y$ and $x,z \in X$, we define $\lim_{x\to z} f(x)$ as follows.
+  For $y\in Y$, we say that $\lim_{x\to z} f(x) = y$ (i.e., the limit as $x \to z$ of $f(x)$ equals $y$) if $f(x_n) \to y$ for all sequences $x_n \in X$ such that $x_n \to y$.
+  If there is no such $y\in Y$, then we say the limit does not exist.
+  
+  The proof of Theorem~\ref{thm:cont_fun_limit} shows that this is equivalent to: for any $\epsilon> 0$, there is a $\delta >0$ such that, for all $x\in X$ satisfying $\|x - z\|< \delta$, we have $\| y - f(x) \| < \epsilon$.
+\end{definition}
+
+
 \begin{definition}
 Let $f \colon X \rightarrow Y$ be a mapping from a vector space $X$ over $\RealNumbers$ to a Banach space $(Y,\|\cdot\|)$.
 Then, if it exists, the \defn{optimization}{G\^{a}teaux differential} (or directional derivative) of $f$ at $\vecnot{x}$ in direction $\vecnot{h}$ is given by
@@ -31,7 +43,8 @@ where the limit is with respect to the implied mapping from $t\in \RealNumbers$ 
 %convergence is defined with respect to the norm of $Y$.
 \end{definition}
 
-When this directional derivative exits, we can write the approximation
+
+When this directional derivative exists, we can write the approximation
 \begin{equation*}
 f(\vecnot{x} + t \vecnot{h}) \approx f(\vecnot{x}) + t \delta f (\vecnot{x}; \vecnot{h}) .
 \end{equation*}

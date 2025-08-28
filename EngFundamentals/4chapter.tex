@@ -349,78 +349,24 @@ Let $V$ and $W$ be normed vector spaces and let $T \colon V \rightarrow W$ be a 
 If $V$ is finite dimensional, then $T$ is continuous and bounded.
 \end{theorem}
 
-\begin{lemma}
-Let $V$ be a finite-dimensional normed vector space, and let
-\begin{equation*}
-\mathcal{B} = \vecnot{v}_1, \ldots, \vecnot{v}_n
-\end{equation*}
-be a basis for $V$.
-Then, for $\vecnot{v} \in V$, each coefficient $s_i$ in the expansion
-\begin{equation*}
-\vecnot{v} = s_1 \vecnot{v}_1 + \cdots + s_n \vecnot{v}_n
-\end{equation*}
-is a continuous linear function of $\vecnot{v}$.
-Being continuous, it is also bounded, so there exists a constant $M$ such that $|s_i| \leq M \left\| \vecnot{v} \right\|$.
-\end{lemma}
-\begin{proof}[Proof of Lemma]
-The linearity property is straightforward, its proof is omitted.
-It will suffice to show that there is an $m > 0$ such that
-\begin{equation} \label{equation:ContinuityFiniteDim}
-m |s_i| \leq m \left( |s_1| + \cdots + |s_n| \right) \leq \left\| \vecnot{v} \right\| ,
-\end{equation}
-since \eqref{equation:ContinuityFiniteDim} implies that $|s_i| \leq m^{-1} \left\| \vecnot{v} \right\|$.
-We first show that this holds for coefficients $\left\{ s_1, \ldots, s_n \right\}$ satisfying the condition $|s_1| + \cdots + |s_n| = 1$.
-Let
-\begin{equation*}
-S = \left\{ (s_1, \ldots, s_n) \Big| \sum_{i=1}^n |s_i| = 1 \right\}.
-\end{equation*}
-This set is closed and bounded; it is therefore compact.
-Define the function $f \colon S \rightarrow \RealNumbers$ by
-\begin{equation*}
-f(s_1, \ldots, s_n) = \left\| s_1 \vecnot{v}_1 + \cdots + s_n \vecnot{v}_n \right\| .
-\end{equation*}
-It can be shown that $f$ is continuous, and it is clear that $f > 0$ over $S$.
-Let
-\begin{equation*}
-m = \min_{(s_1, \ldots, s_n) \in S} f(s_1, \ldots, s_n) .
-\end{equation*}
-Since $f$ is continuous and $S$ is compact, this minimum exists and is attained by some point $(s_1', \ldots, s_n') \in S$.
-Note that $m > 0$ for otherwise $\vecnot{v}_1, \ldots, \vecnot{v}_n$ are linearly dependent, contradicting the fact that $\mathcal{B}$ is a basis.
-Thus $m$ so defined satisfies \eqref{equation:ContinuityFiniteDim}.
-
-For general sets of coefficients $\{ s_i \}$, let $c = |s_1| + \cdots + |s_n|$.
-If $c = 0$, the result is trivial.
-If $c > 0$, then write
-\begin{equation*}
-\begin{split}
-\left\| s_1 \vecnot{v}_1 + \cdots + s_n \vecnot{v}_n \right\|
-&= c \left\| \frac{s_1}{c} \vecnot{v}_1 + \cdots + \frac{s_n}{c} \vecnot{v}_n \right\| \\
-&= c f \left( \frac{s_1}{c}, \ldots, \frac{s_n}{c} \right) \\
-&\geq c m = m \left( |s_1| + \cdots + |s_n| \right) .
-\end{split}
-\end{equation*}
-This is the desired result.
-\end{proof}
-
-We are now ready to prove the theorem.
-\begin{proof}[Proof of Theorem]
+\begin{proof}
 Let $\mathcal{B} = \vecnot{v}_1, \ldots, \vecnot{v}_n$ be a basis for $V$.
 Let $\vecnot{v} \in V$ be expressed in terms of this basis as
 \begin{equation*}
 \vecnot{v} = s_1 \vecnot{v}_1 + \cdots + s_n \vecnot{v}_n .
 \end{equation*}
-Let $C = \max_{1 \leq i \leq n} \left\| T \vecnot{v}_i \right\|$.
+Let $C = \max_{1 \leq i \leq n} \left\| T \vecnot{v}_i \right\|_W$.
 Then,
 \begin{equation*}
 \begin{split}
-\left\| T \vecnot{v} \right\| &= \left\| T \left( s_1 \vecnot{v}_1 + \cdots + s_n \vecnot{v}_n \right) \right\| \\
-& \leq |s_1| \left\| T \vecnot{v}_1 \right\| + \cdots + |s_n| \left\| T \vecnot{v}_n \right\| \\
+\left\| T \vecnot{v} \right\|_W &= \left\| T \left( s_1 \vecnot{v}_1 + \cdots + s_n \vecnot{v}_n \right) \right\|_W \\
+& \leq |s_1| \left\| T \vecnot{v}_1 \right\|_W + \cdots + |s_n| \left\| T \vecnot{v}_n \right\|_W \\
 &\leq C \left( |s_1| + \cdots + |s_n| \right) .
 \end{split}
 \end{equation*}
-By the previous lemma, this implies that there exists an $M$ such that $|s_1| + \cdots + |s_n| \leq M \left\| \vecnot{v} \right\|$, so that
+By Lemma~\ref{lemma:FiniteDimNormsEquiv}, there is a real $m$ such that  $|s_1| + \cdots + |s_n| \leq \frac{1}{m} \left\| \vecnot{v} \right\|_V$ and
 \begin{equation*}
-\left\| T \vecnot{v} \right\| \leq C M \left\| \vecnot{v} \right\| .
+\left\| T \vecnot{v} \right\|_W \leq \frac{C}{m} \left\| \vecnot{v} \right\|_V . \qedhere
 \end{equation*}
 \end{proof}
 

@@ -254,19 +254,40 @@ If $\mathcal{R}(P) \bot \mathcal{N}(P)$, then $P$ is called a \defn{linear trans
 
 \begin{example}
 Let $V$ be an inner-product space and $P \colon V \rightarrow V$ be an orthogonal projection.
-Then, $\vecnot{v} = P \vecnot{v} + (I-P) \vecnot{v}$ defines an orthogonal decomposition of $\vecnot{v}$ because $P \vecnot{v} \in \mathcal{R}(P)$, $(I-P) \vecnot{v} \in \mathcal{N}(P)$ (e.g., $P\big((I-P)\vecnot{v}\big)=\vecnot{0}$), and $\mathcal{R}(P) \bot \mathcal{N}(P)$.
+Since $P\vecnot{v}=\vecnot{0}$ iff $(I-P)\vecnot{v} = \vecnot{v}$ and $I-P$ is a projection, we have $\mathcal{N}(P) = \mathcal{R}(I-P)$.
+Then, $\vecnot{v} = P \vecnot{v} + (I-P) \vecnot{v}$ defines an orthogonal decomposition of $\vecnot{v}$ because $P \vecnot{v} \in \mathcal{R}(P)$ is orthogonal to $(I-P) \vecnot{v} \in \mathcal{N}(P)$.
 In addition, $V = \mathcal{R}(P) \oplus \mathcal{N}(P)$ and hence $\mathcal{N}(P) = \mathcal{R}(P)^{\bot}$.
-% and $P \vecnot{v} = \vecnot{v}$ if and only if $\vecnot{v} \in \mathcal{R}(P)$.
 \end{example}
 
 \begin{theorem}
-For $V=F^n$ with the standard inner product, an idempotent Hermitian matrix $P$ defines an orthogonal projection operator.
+For $V=F^n$ with the standard inner product, a projection matrix $P$ is an orthogonal projection matrix if and only if it is Hermitian (i.e. $P^H = P$).
 \end{theorem}
+
 \begin{proof}
-We simply must verify that the range and null space are orthogonal.
-Since $P \vecnot{u} \in \mathcal{R}(P)$ and $(I-P) \vecnot{v} \in \mathcal{N}(P)$ (e.g., $P\big((I-P)\vecnot{v}\big)=\vecnot{0}$), we observe that
-\[ \tinner{ P\vecnot{u} }{ (I-P)\vecnot{v} } = \vecnot{v}^H (I-P)^H P \vecnot{u} = \vecnot{v}^H (P - P^H P) \vecnot{u} = \vecnot{v}^H (P - P^2) \vecnot{u} = 0. \]
+First, we observe that
+\begin{equation*}
+\tinner{ P\vecnot{u} }{ (I-P)\vecnot{v} } = \vecnot{v}^H (I-P)^H P \vecnot{u} = \vecnot{v}^H (P - P^H P) \vecnot{u}.
+\end{equation*}
+Then, if $P=P^H$, we have $P = P^2 = P^H P$ and the RHS above is zero.
+Thus, the LHS is zero and we have $\mathcal{R}(P) \perp \mathcal{N}(P)$.
+Conversely, if $\mathcal{R}(P) \perp \mathcal{N}(P)$, then
+\[ \tinner{P\vecnot{u}}{\vecnot{v}} = \tinner{P\vecnot{u}}{P\vecnot{v}+(I-P)\vecnot{v}} = \tinner{P\vecnot{u}}{P\vecnot{v}} + \tinner{P\vecnot{u}}{(I-P)\vecnot{v}} = \tinner{P \vecnot{u}}{P \vecnot{v}}. \]
+By symmetry, we also have $\tinner{\vecnot{u}}{P \vecnot{v}} = \tinner{P\vecnot{u}}{P \vecnot{v}}$
+and together these imply that
+\[  \vecnot{v}^H P \vecnot{u} = \tinner{P \vecnot{u}}{\vecnot{v}} = \tinner{\vecnot{u}}{P\vecnot{v}} = \vecnot{v}^H P^H \vecnot{u} \]
+for all $\vecnot{u},\vecnot{v} \in V$.
+Thus, $P = P^H$.
 \end{proof}
+
+
+%\begin{theorem}
+%For $V=F^n$ with the standard inner product, an idempotent Hermitian matrix $P$ defines an orthogonal projection operator.
+%\end{theorem}
+%\begin{proof}
+%We simply must verify that the range and null space are orthogonal.
+%Since $P \vecnot{u} \in \mathcal{R}(P)$ and $(I-P) \vecnot{v} \in \mathcal{N}(P)$ (e.g., $P\big((I-P)\vecnot{v}\big)=\vecnot{0}$), we observe that
+%\[ \tinner{ P\vecnot{u} }{ (I-P)\vecnot{v} } = \vecnot{v}^H (I-P)^H P \vecnot{u} = \vecnot{v}^H (P - P^H P) \vecnot{u} = \vecnot{v}^H (P - P^2) \vecnot{u} = 0. \]
+%\end{proof}
 
 \begin{theorem} \label{theorem:OrthogonalSubspaceDirectSum}
 Suppose $W$ is a closed subspace of a separable Hilbert space $V$ and let $E$ denote the orthogonal projection of $V$ on $W$.
