@@ -256,7 +256,7 @@
 		\setlength\itemsep{3mm}
 		\item First, consider the (read).  This example is the standard (read). 1 holds because the absolute value of a number is non-negative and equals zero iff that number is zero.  2 holds because swapping $x,y$ doesn't change the absolute value. Read.
 		\item Next, consider the example of real $n$-dimensional vectors (read).
-		\item Finally, consider the set of (read).  For this metric, many of the properties are inherited from the absolute distance inside the maximum.  In particular, properties 1 and 2 follow naturally.  For the triangle inequality, we observe that: \\ [2mm] (i) the absolute difference between $f(x)$ and $h(x)$ is unchanged by adding and subtracting $g(x)$ inside the absolute value, \\ [2mm] (ii) the absolute value of the sum of two numbers is upper bounded the sum of their absolute values, \\ [2mm] (iii) the maximum of the sum of two functions is only increased by maximizing them separately.
+		\item Finally, consider the set of (read).  For this metric, many of the properties are inherited from the absolute distance inside the maximum.  In particular, properties 1 and 2 follow naturally.  For the triangle inequality, we observe that: \\ [2mm] (a) the absolute difference between $f(x)$ and $h(x)$ is unchanged by adding and subtracting $g(x)$ inside the absolute value, \\ [2mm] (b) the absolute value of the sum of two numbers is upper bounded the sum of their absolute values, \\ [2mm] (c) the maximum of the sum of two functions is only increased by maximizing them separately.
 	\end{enumerate}
 }
 
@@ -312,8 +312,8 @@
 	\begin{enumerate}[<alert@+>]
 		\footnotesize
 		\setlength\itemsep{3mm}
-		\item First, let us consider the (read).  This is illustrated in the figure.  Also, the statement denoted $P$ (rea) says that all points in the open ball of radius $\epsilon$ also have an open ball around them of radius $\delta < \epsilon$ that lies entirely inside the original ball.  You will be asked to prove this in the homework.
-		\item Next, consider an (read).  Formally, we say that (read). It is well-known that this sequence converges to he constant $e$. A sequence is also illustrated in figure.
+		\item First, let us consider the (read).  This is illustrated in the figure.  Also, the statement denoted $P$ (read) says that all points in the open ball of radius $\epsilon$ also have an open ball around them of radius $\delta < \epsilon$ that lies entirely inside the original ball.  You will be asked to prove this in the homework.
+		\item Next, consider an (read).  Formally, we say that (read). It is well-known that this sequence converges to the constant $e$. A sequence is also illustrated in figure.
 		\item Finally, consider (read).  Formally, we say that (read). In the figure, one can imagine the example sequence converging to the point $x$.
 	\end{enumerate}
 }
@@ -359,8 +359,8 @@ d \left( x_m, x_n \right) < \epsilon
 		\item Read.  For the real numbers, you've probably seen this definition before in a calculus class.
 		\item Read.  This means that the tail of a convergent sequence must only contain points that are close to each other.
 		\item What about the converse? In calculus and real analysis, it is also common to prove convergence by showing a sequence in Cauchy.
-		\item But this doesn't work in all metric spaces! Read.  Later we will see that the converse is true for complete metric spaces.
-		\item Read.  Thus, this counterexample follows from the irrationality of $\sqrt{2}$.
+		\item But this doesn't work in all metric spaces! Read.
+		\item Read.  Thus, this counterexample follows from the irrationality of $\sqrt{2}$.  Later, we will see that the converse is true for complete metric spaces.
 	\end{enumerate}
 }
 
@@ -433,7 +433,7 @@ A point $w_0 \in W$ is in the \textcolor{blue}{interior} of $W$ (denoted $\Inter
 \end{definition}
 
 \begin{definition}<2->
-A point $w\in X$ is a \textcolor{blue}{limit point} of $W$ if there is: \\  ~~a sequence of distinct elements, $w_1,w_2,\ldots\in W$, that converges to $w$.
+A point $x_0 \in X$ is a \textcolor{blue}{limit point} of $W$ if there is: \\  ~~a sequence of distinct elements, $w_1,w_2,\ldots\in W$, that converges to $x_0$.
 \end{definition}
 
 \begin{definition}<3->
@@ -452,7 +452,7 @@ A point $x_0\in X$ is in the \textcolor{blue}{closure} of $W$ (denoted $\Closure
 	\begin{enumerate}[<alert@+>]
 		\footnotesize
 		\setlength\itemsep{2mm}
-		\item Sometimes it is useful to consider only the points in a set that are not part of a boundary.  This is called the interior of set and for a... Read.  This implies that $w_0$ surrounded by an open ball in $W$.
+		\item Sometimes it is useful to consider only the points in a set that are not part of a boundary.  This is called the interior of the set and for a... Read.  This implies that $w_0$ surrounded by an open ball in $W$.
 		\item It is also useful to consider points that can approached by non-trivial sequences from a set. These points are called limit points.  Formally, ... Read.  
 		\item It can also be useful to consider a set along with all additional points lying on its boundary.  The resulting set is called the closure and, formally, ... Read.  This implies that $x_0$ is arbitrarily close to points in $W$.
 		\item These sets have a few nice properties.  First, one can show that the interior is open.
@@ -464,25 +464,25 @@ A point $x_0\in X$ is in the \textcolor{blue}{closure} of $W$ (denoted $\Closure
 
 \end{frame}
 
-\begin{frame} \frametitle{A Few More Things}
+\begin{frame}<1-2> \frametitle{A Few More Things}
 
 \begin{itemize}
   \setlength{\itemsep}{4mm}
-  \item Example: Standard metric space of real numbers $\mathbb{R}$ \vspace{1mm}
+  \item Consider the standard metric space of real numbers $\mathbb{R}$ \vspace{1mm}
   \begin{itemize}
     \setlength{\itemsep}{2mm}
-    \item<1-> Any open set can be written as disjoint union of open intervals (i.e., balls)
-    \item Not true in higher dimension because union of balls may not be a ball
-    \item What about closed sets?
+    \item<1-> Any open set can be written as countable disjoint union of open intervals
+    \item But, what about closed sets?
+    \item In higher dimensions, this fails for any connected set that is not a ball
   \end{itemize}
   
   \item<2-> The Boundary \vspace{1mm}
   \begin{itemize}
     \setlength{\itemsep}{2mm}
-    \item For $W \subseteq X$, the \textcolor{blue}{boundary} $\partial W$ is the closure minus the interior $\Closure{W} \setminus \Interior{W}\!\!\!$
+    \item For $W \subseteq X$, the \textcolor{blue}{boundary} $\partial W$ is the closure minus the interior $\Closure{W} - \Interior{W}\!\!\!$
     \item Thus, the closure is the union of the set and its boundary
-    \item In the example, the boundary equals the dashed lines
-    \item Alternatively, a point $x\in X$ is on the boundary of $W$ if, for all $\delta>0$, $B(x,\delta)$ contains a point in $W$ and a point not in $W$
+    \item In the figure, the boundary is the union of the dashed and solid lines
+    \item Alternatively, a point $x\in X$ is on the \textcolor{blue}{boundary} of $W$ if, for all $\delta>0$, $B_d (x,\delta)$ contains a point in $W$ and a point not in $W$
 
   \end{itemize}
 \end{itemize}
@@ -502,6 +502,16 @@ A point $x_0\in X$ is in the \textcolor{blue}{closure} of $W$ (denoted $\Closure
 \end{scope}
 
 \end{tikzpicture}
+
+\note{
+	\vspace{4mm}
+	\begin{enumerate}[<alert@+>]
+		\footnotesize
+		\setlength\itemsep{3mm}
+		\item Read to 2nd bullet. For closed sets, De Morgan's law implies that any closed set can be written as the countable disjoint intersection of closed intervals. But, exotic sets like the Cantor set show that they cannot be written as the countable union of closed sets. Read. This is because the disjoint union of multiple open balls cannot be connected.
+		\item Read. Thus, boundary points are either in the set and arbitrarily close to points outside the set or outside the set and arbitrarily close to points inside the set.
+	\end{enumerate}
+}
 
 \end{frame}
 
@@ -531,265 +541,6 @@ A point $x_0\in X$ is in the \textcolor{blue}{closure} of $W$ (denoted $\Closure
 }
 
 \end{frame}
-
-
-\end{document}
-
-\begin{frame}{2.1.3: Completeness}
-
-\begin{definition}<1->
-A metric space $(X,d)$ is said to be \textcolor{blue}{complete} if every Cauchy sequence in $(X,d)$ converges to a limit $x \in X$.
-\end{definition}
-
-\begin{example}<1->
-Consider the sequence $x_n \in \mathbb{Q}$ defined by $x_1 = 2$ and $\smash{x_{n+1} = \frac{1}{2}x_n + 1/x_n}$.
-We have seen that this sequence satisfies $|x_n - \sqrt{2}|\to 0$ but $\sqrt{2}$ is not rational.
-Thus, the standard metric space of rationals is not complete.
-\end{example}
-
-\begin{definition}<2->
-A subset $A$ of a metric space $(X,d)$ is \textcolor{blue}{dense} in $X$ if every $x\in X$ is a limit point of the set $A$.
-This is equivalent to the closure $\overline{A}$ being equal to $X$.
-\end{definition}
-
-\begin{alertblock}{Key Point}<3->
-The standard metric space of real numbers is a complete metric space.
-This can be shown using Cauchy sequences of rational numbers because $\mathbb{Q}$ is dense in $\mathbb{R}$.  Note: proof not discussed but available on website.
-\end{alertblock}
-
-\end{frame}
-
-
-\begin{frame}{2.1.3: Contraction Mapping Theorem}
-
-\begin{definition}<1->
-Let $A$ be a subset of a metric space $(X,d)$ and $f \colon X \rightarrow X$ be a function.
-Then, $f$ is a \textcolor{blue}{contraction} on $A$ if $f(A) \subseteq A$ and there exists a constant $\gamma < 1$ such that $d \left( f(x),f(y) \right) \leq \gamma  d(x,y)$ for all $x,y\in A$.
-\end{definition}
-
-\begin{example}
-Consider metric space $X=[0,1]$ with absolute distance.
-Define $f\colon X \to X$ by $f(x) = 1-\frac{1}{2}x$ and observe $|f(x)-f(y)| = \frac{1}{2}|x-y|$.
-\end{example}
-
-\begin{theorem}[Contraction Mapping Theorem]<2->
-Let $(X,d)$ be a complete metric space and $f$ be contraction on a closed subset $A \subseteq X$.
-Then, $f$ has a unique fixed point $x^*$ in $A$ such that $f(x^*) = x^*$ and $x_{n+1} = f(x_n)$ converges to $x^*$ from any initial $x_1 \in A$.  Moreover, $x_n$ satisfies the error bounds: \\[1mm] \hspace{3mm} $d(x^*,x_n) \leq \gamma^{n-1} d(x^*,x_1)$ and $d(x^*,x_{n+1}) \leq d(x_n,x_{n+1})\gamma /(1-\gamma)$.
-\end{theorem}
-
-\end{frame}
-
-\begin{frame}{2.1.3: Applications of the Contraction Mapping Theorem}
-
-The following important results in applied mathematics have relatively simple proofs based on the contraction mapping theorem.
-\vspace{2mm}
-
-\begin{itemize}
-\setlength\itemsep{3mm}
-\item<1-> Picard's uniqueness theorem for differential equations \vspace{1mm}
-\begin{itemize} 
-  \setlength\itemsep{1.5mm}
-  \item Differential equation $y'(t) = f(t,y(t))$ for $t\in [a,b]$ with $y(a)=y_0$ 
-  \item  Assume $f(t,y)$ is Lipschitz continuous in $y$ for $t\in [a,b]$
-  \item Then, solution $y(t)$ exists and is unique for $t\in [a,b]$
-\end{itemize}
-\item<2-> Implicit function theorem \vspace{1mm}
-\begin{itemize} 
-  \setlength\itemsep{1.5mm}
-  \item Let $f\colon \mathbb{R}^n \times \mathbb{R}^{m} \to \mathbb{R}^m$ be continuously differentiable on open $A$
-  \item Let $g\colon \mathbb{R}^n \to \mathbb{R}^{m}$ be defined implicitly by $f(x,g(x))=0$
-  \item For $x_0\in A$, assume $f(x_0,y_0)=0$ and $y$-Jacobian invertible at $(x_0,y_0)$
-  \item Then, $g(x)$ exists and is unique in some neighborhood of $x_0$
-\end{itemize}
-\item<3-> Dynamic Programming for a Markov Decision Process (MDP) \vspace{1mm}
-\begin{itemize} 
-  \setlength\itemsep{1.5mm}
-  \item State-action $(s,a)$ defines probability $p(s'|s,a)$ and reward $R(s,a)$
-  \item Finite state + discounted reward $\Rightarrow$ stationary optimal policy
-\end{itemize}
-\end{itemize}
-
-\end{frame}
-
-\begin{frame}{2.1.3: Contraction Mapping Example}
-
-\begin{minipage}{0.45\textwidth}
-Starting from $x_1 = 0.2$, define $x_{n+1}= \cos(x_n)$ and plot the points $(x_n,x_{n+1})$.  Each point is connected to the slope-1 line to emphasize the path taken.
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\scalebox{0.75}{\input{../cos_contract}}
-\end{minipage}
-\vspace{1mm}
-
-\begin{itemize}
-\setlength\itemsep{1.5mm}
-\item<1-> Let $X=[0,1]$ and define $f\colon X\to X$ via $f(x)=\cos(x)$
-
-\item<2-> $\cos([0,1]) = [\cos(1),1]$ because $\cos(x)$ decreasing on $[0,\pi]$
-
-\item<3-> Mean value theorem: $f(y)-f(x) = f'(t) (y-x)$ for some $t\in [x,y]$
-
-\item<4-> $f'(t) = -\sin(t)$ and $\sin([0,1]) = [0,\sin(1)]$ with $\sin(1) \approx 0.84$
-
-\item<5-> $| \cos(y) - \cos(x) \,| \leq 0.85 \, |y-x|$ $\;\Rightarrow$ \textcolor{blue}{$f(x)$ is a contraction on $[0,1]$}
-
-\item<6-> $x_{n+1} \!= \cos(x_n)$  converges to \textcolor{blue}{unique fixed point $x^* \!= \cos(x^*) \!\approx\! 0.739$}
-\end{itemize}
-
-\end{frame}  
-
-
-
-\begin{frame}{2.1.4: Compactness}
-
-\begin{definition}<1->
-A metric space $(X,d)$ is \textcolor{blue}{totally bounded} if, for any $\epsilon > 0$, there exists a finite set of $B_d (x,\epsilon)$ balls that cover (i.e., whose union equals) $X$.
-\end{definition}
-
-\begin{definition}<2->
-A metric space is \textcolor{blue}{compact} if it is complete~and~totally~bounded.
-\end{definition}
-
-\begin{itemize}
-\setlength\itemsep{3mm}
-\item<3-> Examples \vspace{1mm}
-\begin{itemize} 
-  \setlength\itemsep{1.5mm}
-  \item The closed interval $[0,1]\subset \RealNumbers$ is compact
-  \item A subset of Euclidean $\RealNumbers^n$ is compact iff it is closed and bounded
-  \item But, the standard metric space of real numbers is not compact because it is not totally bounded.
-\end{itemize}
-
-\end{itemize}
-
-\begin{theorem}<4>
-A closed subset $A$ of a compact space $X$ is itself a compact space.
-\end{theorem}
-
-\end{frame}
-
-\begin{frame}{2.1.4: Compactness and Sequences}
-
-\begin{definition}<1->
-Let $x_1,x_2,\ldots \in X$ be a sequence and $n_1,n_2,\ldots\in \mathbb{N}$ be
-a strictly increasing sequence.
-Then, $x_{n_1},x_{n_2},\ldots$ is called \textcolor{blue}{subsequence}.
-\end{definition}
-
-\begin{theorem}<2->
-A sequence in a compact metric space has a subsequence that converges.
-\end{theorem}
-
-\begin{example}<3->
-For the compact metric space $X=[-2,2]\subset \mathbb{R}$ with absolute distance, let $x_n = (-1)^n + \frac{1}{n}$.
-Then, subsequence $x_2,x_4,x_6,\ldots$ converges to 1.
-\end{example}
-
-\begin{itemize}
-\item<3-> Sketch proof on whiteboard in pictures
-\end{itemize}
-
-\end{frame}
-
-\begin{frame}{2.1.4: Properties of Real Numbers}
-
-\begin{itemize}
-\setlength\itemsep{3mm}
-\item<1-> Let us consider extreme values for sets of real numbers \vspace{1mm}
-
-\begin{itemize} 
-  \setlength\itemsep{1.5mm}
-  \item Extended Real Numbers: $\overline{\RealNumbers} \triangleq \RealNumbers \cup \{ \infty,-\infty\}$
-  \item Defines \textcolor{blue}{compact metric space} with metric $d_{\overline{\RealNumbers}} (x,y) \triangleq |\frac{x}{1+|x|} - \frac{y}{1+|y|}|$
-  \item ``$x_n \to \infty$'' equivalent to ``$\forall M>0, \, \exists N\in \mathbb{N}, \, \forall n>N, \, x_n > M$''
-\end{itemize}
-\end{itemize}
-
-\begin{definition}<2->
-The \textcolor{blue}{supremum} (or least upper bound) of $X\subseteq \RealNumbers$, denoted \textcolor{blue}{$\sup X$}, is the smallest extended real number $M \in \overline{\RealNumbers}$ such that $x\leq M$ for all $x\in X$.
-%It is always well-defined and equals $-\infty$ if $X=\emptyset$.
-\end{definition}
-
-\begin{lemma}[supremum sequence]<3->
-Let $X$ be a metric space and $f \colon X\rightarrow \RealNumbers$ be a function from $X$ to the real numbers.
-Let $M = \sup f(A)$ for some non-empty $A \subseteq X$.
-Then, there exists a sequence $x_1,x_2,\ldots \in A$ such that $\lim_n f(x_n) = M$.
-\end{lemma}
-
-\begin{itemize}
-\item<4-> Sketch proof on whiteboard
-\end{itemize}
-  
-\end{frame}
-
-
-\begin{frame}{2.1.4: More Properties of Real Numbers}
-
-\begin{definition}<1->
-The \textcolor{blue}{maximum} of $X\subseteq \RealNumbers$, denoted \textcolor{blue}{$\max X$}, is the largest value achieved by the set.
-It equals the supremum if $\sup X \in X$ and is \textcolor{red}{undefined} otherwise.
-\end{definition}
-
-\begin{example}<2->
-$X = [1,2) \subset \mathbb{R}$ has $\sup X = 2$ and $\max X$ undefined. \\[1mm]
-For $f(x)=\frac{1}{2-x}$, $f(X) = [1,\infty)$ and $\sup f(X) = \infty$.
-\end{example}
-
-\begin{itemize}
-\item<3-> \textcolor{blue}{infimum}: $\inf X = - \left(\sup \, -\!X\right)$, where $-\!X = \{x\in \mathbb{R}\,|-\!x\in X\}$
-\item<3-> \textcolor{blue}{minimum}: $\min X = - \left(\max \, -\!X \right)$, if it exists
-\item<3-> supremum and infimum always well-defined but may equal $\pm \infty$
-\end{itemize}
-
-
-
-\begin{theorem}<4->
-Any bounded non-decreasing sequence of real numbers converges to its supremum.
-\end{theorem}
-
-\end{frame}  
-
-
-\begin{frame}{2.1.5: Sequences of Functions}
-
-Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces and
-$f_n \colon X \to Y$ for $n\in \mathbb{N}$ be a sequence of functions mapping $X$ to $Y$.
-
-\begin{definition}
-The sequence $f_n$ \textcolor{blue}{converges pointwise} to $f\colon X \to Y$ if, for all $x \in X$, \vspace{-1.5mm}
-\[ \lim_{n\to \infty} f_n (x) = f(x) \vspace*{-0.5mm} \]
-
-\end{definition}
-
-\begin{definition}
-The sequence $f_n$ \textcolor{blue}{converges uniformly} to $f \colon X \to Y$ if \vspace{-1.5mm}
-\[ \forall \epsilon > 0, \, \exists N\in \mathbb{N}, \, \forall n>N, \, \forall x\in X, \, d_Y \left( f_n(x),f(x) \right) < \epsilon. \vspace*{-0.5mm} \]
-\end{definition}
-
-\begin{theorem}
-If each $f_n$ is continuous and $f_n$ converges uniformly to $f \colon X \to Y$, then $f$ is continuous.
-\end{theorem}
-
-\end{frame}
-
-\begin{frame}{2.1.5: Two Important Results}
-
-\begin{theorem}
-Let $X$ be a metric space and $f \colon X\rightarrow \RealNumbers$ be a continuous function from $X$ to $\mathbb{R}$.
-If $A$ is a compact subset of $X$, then there exists $x\in A$ such that $f(x)=\sup f(A)$ (i.e., $f$ achieves a maximum on $A$).
-\end{theorem}
-
-\vspace{3mm}
-
-\begin{theorem}
-Let $(X,d)$ be a compact metric space and $C(X)$ be the set of continuous functions mapping $X$ to $\mathbb{R}$.
-This set of functions, with the metric \vspace{-1.5mm} \[d_\infty (f,g) \triangleq \sup_{x\in X} |f(x)-g(x)| = \max_{x\in X} |f(x)-g(x)|, \vspace*{-1.5mm}\] defines a complete metric space.
-\end{theorem}
-
-Note: For $f,g\in C(X)$, $d_\infty$ metrizes uniform convergence because \vspace{-1.5mm} \[ \text{``}\max_{x\in X} |f(x)-g(x)| < \epsilon \text{''} \Leftrightarrow \text{``} \forall x\in X, |f(x) - g(x)| < \epsilon \text{''}. \]
-
-\end{frame}
-
 
   
 \backupbegin

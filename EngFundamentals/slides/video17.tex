@@ -325,14 +325,15 @@ Then, the range $\mathcal{R}(T)$ and the $\mathcal{N}(T)$ are disjoint subspaces
 \end{theorem}
 
 \begin{proof}
-For a non-zero $\vecnot{v} \in \mathcal{R}(T)$, there is a non-zero $\vecnot{w} \in V$ such that $\vecnot{v} = T\vecnot{w}$.  Thus, $T\vecnot{v} = T^2  \vecnot{w} = T \vecnot{w} = \vecnot{v} \neq \vecnot{0}$.  But, if $\vecnot{v} \in \mathcal{N}(T)$ was also true, then one would get the contradiction $T\vecnot{v} = \vecnot{0}$.
+For any non-zero $\vecnot{v} \in \mathcal{R}(T)$, there is a non-zero $\vecnot{w} \in V$ such that $\vecnot{v} = T\vecnot{w}$.  Thus, $T\vecnot{v} = T^2  \vecnot{w} = T \vecnot{w} = \vecnot{v}$ and $T$ projects onto $\mathcal{R}(T)$. Since $\vecnot{v} \neq \vecnot{0}$, we have $\vecnot{v} \notin \mathcal{N}(T)$.
+Thus, a non-zero vector cannot be in both subspaces. 
 \end{proof}
 
 \begin{example}<2->
 Consider the linear transform $T \colon V \rightarrow V$ defined by $T = I - P$, where $P$ is a projection.
 It is easy to verify that $T$ is a projection operator because \vspace{-2mm}
 \[ T^2 = (I-P)(I-P) = I - P- P + P^2 = I-P = T .\]
-In fact, $T$ is a projection onto $\mathcal{R}(T) = \mathcal{N}(P)$ because $P \vecnot{v} = \vecnot{0}$ (i.e., $\vecnot{v} \in \mathcal{N}(P)$) if and only if  $(I-P)\vecnot{v} = \vecnot{v}$ (i.e., $\vecnot{v} \in \mathcal{R}(T)$).
+In fact, $T$ is a projection onto $\mathcal{R}(T) = \mathcal{R}(I-P) = \mathcal{N}(P)$ because $P \vecnot{v} = \vecnot{0}$ (i.e., $\vecnot{v} \in \mathcal{N}(P)$) if and only if  $(I-P)\vecnot{v} = \vecnot{v}$ (i.e., $\vecnot{v} \in \mathcal{R}(T)$).
 \end{example}
 
 \end{frame}
@@ -346,25 +347,29 @@ Let $V$ be an inner-product space and $P \colon V \rightarrow V$ be a (linear) p
 If $\smash{\mathcal{R}(P) \bot \mathcal{N}(P)}$, then $P$ is called an \textcolor{blue}{orthogonal projection}.
 \end{definition}
 
-\vspace{-1mm}
+\vspace{-1.5mm}
 
 \begin{example}<1->
-Let $V$ be an inner-product space $P \colon V \rightarrow V$ be an orthogonal projection.
-Then, $\vecnot{v} = P \vecnot{v} + (I-P) \vecnot{v}$ gives an orthogonal decomposition of $\vecnot{v}$ because $P \vecnot{v} \in \mathcal{R}(P)$, $(I-P) \vecnot{v} \in \mathcal{N}(P)$, and $\mathcal{R}(P) \bot \mathcal{N}(P)$.
+Let $P \colon V \rightarrow V$ be an orthogonal projection.
+Since $P\vecnot{v}=\vecnot{0}$ iff $(I-P)\vecnot{v} = \vecnot{v}$, $\mathcal{N}(P) = \mathcal{R}(I-P)$.
+Thus, $P \vecnot{v} \in \mathcal{R}(P)$ is orthogonal to $(I-P) \vecnot{v} \in \mathcal{N}(P)$.
 \end{example}
 
-\vspace{-1mm}
+\vspace{-1.5mm}
 
 \begin{theorem}<2->
-For $V=F^n$ with standard inner product, $P$ is an orthogonal projection matrix if it is idempotent and Hermitian (i.e. $P^2=P$ and $P^H = P$).
+For $V=F^n$ with the standard inner product, a projection matrix $P$ is an orthogonal projection matrix if and only if it is Hermitian (i.e. $P^H = P$).
 \end{theorem}
 
-\vspace{-1mm}
+\vspace{-1.5mm}
 
 \begin{proof}<3->
-Since $\mathcal{R}(P) = \{ P\vecnot{u} | \vecnot{u}\in V \}$ and $\mathcal{N}(P) = \{ \vecnot{v}\in V | P\vecnot{v}=\vecnot{0} \}$, the general condition is $\tinner{ P\vecnot{u} }{ (I-P)\vecnot{v} } =0$ for all $\vecnot{u},\vecnot{v}\in V$.
-Simplifying this gives \vspace{-2mm}
-\[ \vecnot{v}^H (I-P)^H P \vecnot{u} = \vecnot{v}^H (P - P^H P) \vecnot{u} = \vecnot{v}^H (P - P^2) \vecnot{u} = 0.  \qedhere\]
+
+If $P=P^H$, then $P = P^2 = P^H P$ and $\mathcal{R}(P) \perp \mathcal{N}(P)$ follows from\vspace{-3mm}
+\[ \tinner{ P\vecnot{u} }{ (I-P)\vecnot{v} } = \vecnot{v}^H (I-P)^H P \vecnot{u} = \vecnot{v}^H (P - P^H P) \vecnot{u} = 0. \vspace*{-2.0mm} \]
+If $\mathcal{R}(P) \perp \mathcal{N}(P)$, then $P=P^H$ because  $\tinner{P\vecnot{u}}{\vecnot{v}} = \tinner{\vecnot{u}}{P\vecnot{v}}$ for all $\vecnot{u},\vecnot{v}$ by \vspace{-3mm}
+\[ \tinner{P\vecnot{u}}{\vecnot{v}} = \tinner{P\vecnot{u}}{P\vecnot{v}+(I-P)\vecnot{v}} = \tinner{P\vecnot{u}}{P\vecnot{v}} + \tinner{P\vecnot{u}}{(I-P)\vecnot{v}} = \tinner{P \vecnot{u}}{P \vecnot{v}}. \qedhere \]
+\vspace*{-7mm}  
 \end{proof}
 
 \end{frame}

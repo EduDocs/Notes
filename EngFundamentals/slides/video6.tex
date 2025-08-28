@@ -145,7 +145,7 @@
 			\setlength\itemsep{3mm}
 			\color{red}
 			\item Welcome to the sixth video lecture for ECE 586, Vector Space Methods. \\[2mm]
-			Today, we'll discuss complete metric spaces and the contraction mapping theorem.
+			Today, we'll discuss properties of real numbers and continuity of functions.
 		\end{enumerate}
 	}
 \end{frame}
@@ -159,13 +159,13 @@
 
 \begin{itemize}
 \setlength\itemsep{3mm}
-\item<1-> Let us include the natural boundary values for the real numbers \vspace{1mm}
+\item<1-> Suppose we include the natural boundary values for the real numbers \vspace{1mm}
 
 \begin{itemize} 
   \setlength\itemsep{1.5mm}
-  \item Extended Real Numbers: $\overline{\RealNumbers} \triangleq \RealNumbers \cup \{ \infty,-\infty\}$
-  \item This is a \textcolor{blue}{metric space} with metric $d_{\overline{\RealNumbers}} (x,y) \triangleq |\frac{x}{1+|x|} - \frac{y}{1+|y|}|$
-  \item ``$x_n \to \infty$'' equivalent to ``$\forall M>0, \, \exists N\in \mathbb{N}, \, \forall n>N, \, x_n > M$''
+  \item This gives the \textcolor{blue}{extended real numbers} $\overline{\RealNumbers} \triangleq \RealNumbers \cup \{ \infty,-\infty\}$
+  \item $\overline{\RealNumbers}$ forms a \textcolor{blue}{metric space} with metric $d_{\overline{\RealNumbers}} (x,y) \triangleq |\frac{x}{1+|x|} - \frac{y}{1+|y|}|$
+  \item ``$x_n \to \infty$'' is equivalent to ``$\forall M>0, \, \exists N\in \mathbb{N}, \, \forall n>N, \, x_n > M$''
 \end{itemize}
 \end{itemize}
 
@@ -181,7 +181,7 @@ Then, there exists a sequence $x_1,x_2,\ldots \in A$ such that $\lim_n f(x_n) = 
 \end{lemma}
 
 \begin{itemize}
-\item<4-> Sketch proof on whiteboard
+\item<4-> Sketch proof on the board
 \end{itemize}
 
 \note{
@@ -189,9 +189,9 @@ Then, there exists a sequence $x_1,x_2,\ldots \in A$ such that $\lim_n f(x_n) = 
 	\begin{enumerate}[<alert@+>]
 		\footnotesize
 		\setlength\itemsep{3mm}
-		\item Read.  With this metric, the extended real numbers are the completion of the standard real numbers.
+		\item Read to metric.  Using this metric, one can verify that... Read. This implies that all elements in the tail of the sequence are larger than any fixed real number. %With this metric, the extended real numbers are the completion of the standard real numbers. 
 		\item Read. 
-		\item Read. This is an important concept in analysis that allows one to exploit compactness.
+		\item Read. This is an important concept in analysis that will later allow us to exploit compactness.
 		\item In the live session, we will sketch a proof of this.
 	\end{enumerate}
 }
@@ -222,7 +222,7 @@ For $f(x)=\frac{1}{2-x}$, $f(X) = [1,\infty)$ and $\sup f(X) = \infty$.
 A bounded non-decreasing sequence in $\mathbb{R}$ converges to its supremum.
 \end{theorem}
 
-\uncover<4->{Sketch proof and application to sums on whiteboard}
+\uncover<4->{Sketch proof and application to sums on the board}
 
 \note{
 	\vspace{2mm}
@@ -325,6 +325,18 @@ Let $X = (0,1]$ and $Y=[1,\infty)$ be subsets of the standard metric space $\mat
 }
 \end{tikzpicture}
 
+\note{
+	\vspace{4mm}
+	\begin{enumerate}[<alert@+>]
+		\footnotesize
+		\setlength\itemsep{3mm}
+		\item Read. It's pretty clear that this function is problematic for small values of $x$ because it becomes unbounded as $x$ tends to $0$.
+		\item Read. But, you can check the math and see that $f$ is continuous all the same.
+		\item Read. Small values of $x$ are again problematic and $f$ becomes less and less continuous as $x$ tends to $0$. This will imply that $f$ is not uniformly continuous.
+		\item Read. Now, you can check the math to see that $f$ is not uniformly continuous.
+	\end{enumerate}
+}
+
 \end{frame}
 
 
@@ -385,7 +397,10 @@ A function $f  \colon X \rightarrow Y$ is called \textcolor{blue}{Lipschitz cont
 		\footnotesize
 		\setlength\itemsep{3mm}
 
-		\item In engineering mathematics, most functions satisfy a strong form of continuity known as... read.  For example, this holds if the function's derivative exists and is bounded on $A$.
+		\item In engineering mathematics, most functions satisfy a strong form of continuity known as... Read.  For example, this holds if the function's derivative exists and is bounded on $A$.
+		\item As an example, ... Read. Again, something is happening at $x=0$.
+		\item We can... Read. Since the last expression equals $\infty$, this function is not Lipschitz continuous. Actually, this conclusion follows immediately from the fact that its 1st derivative is infinite at $x=0$.
+		\item As an exercise, take a moment now to decide if you think this function is uniformly continuous.
 	\end{enumerate}
 }
 
@@ -410,7 +425,7 @@ The sequence $f_n$ \textcolor{blue}{converges uniformly} to $f \colon X \to Y$ i
 \end{definition}
 
 \begin{theorem}<3->
-If each $f_n$ is continuous and $f_n$ converges uniformly to $f \colon X \to Y$, then $f$ is continuous.
+If each $f_n$ is continuous and the sequence $f_n$ converges uniformly to $f \colon X \to Y$, then the limit function $f$ is continuous.
 \end{theorem}
 
 \note{
@@ -435,7 +450,7 @@ If each $f_n$ is continuous and $f_n$ converges uniformly to $f \colon X \to Y$,
 
 \begin{itemize}
  \setlength\itemsep{3mm}
- \item Try the suggested reading: Course Notes EF 2.1.3, 2.1.5 - 2.1.6
+ \item Try the suggested reading: Course Notes EF 2.1.3 - 2.1.5
  \item Or the optional reading: MMA 2.1
  \item Also, look at the problems in Assignment 3
 \end{itemize}
