@@ -1,4 +1,5 @@
 \chapter{Metric Spaces and Topology}
+\label{chap:metric_spaces}
 
 We initiate this chapter with a brief discussion of key mathematical concepts and motivate how they can be generalized to address important challenges.
 We assume that the intended reader has experience with the real numbers, convergent sequences, and continuous functions.
@@ -264,8 +265,9 @@ The \defn{metric space}{boundary} $\partial A$ of a set $A$ is defined by $\part
 \subsection{Continuity}
 
 Let $f \colon X \rightarrow Y$ be a function between the metric spaces $(X,d_X)$ and $(Y,d_Y)$.
-\begin{definition}
-The function $f$ is \defn{metric space}{continuous} at $x_0$ if, for any $\epsilon> 0$, there exists a $\delta >0$ such that, for all $x\in X$ satisfying $d_X(x_0,x)< \delta$, 
+
+\begin{definition} \label{def:continuous_x0}
+The function $f$ is \defn{metric space}{continuous} at $x_0$ if, for any $\epsilon> 0$, there exists a $\delta >0$ such that, for all $x\in X$ satisfying $d_X(x_0,x)< \delta$, we have 
 \[ d_Y \left( f(x_0),f(x) \right) < \epsilon .\]
 In precise mathematical notation, one has
 \begin{equation*}
@@ -292,13 +294,27 @@ Then, $x_n \to x_0$ because $d_X (x_0,x_n)<\delta_n \to 0$ but $d_Y (f(x_0),f(x_
 Thus, $f(x_n)$ does not converge to $f(x_0)$ for some sequence where $x_n \to x_0$.
 \end{proof}
 
-\begin{definition}
+\begin{definition} \label{def:cont_limit}
 \boldmath
 The \defn{metric space}{limit}~\textbf{of $f$ at $x_0$},
 \unboldmath
-$\lim_{x \to x_0} f(x)$, exists and equals $f(x_0)$ if $f(x_n) \to f(x_0)$ for all sequences $x_n \in X$ such that $x_n \to x_0$.
-Thus, Theorem~\ref{thm:cont_fun_limit} implies that the limit of $f$ exists at $x_0$ if and only if $f$ is continuous at $x_0$.
+$\lim_{x \to x_0} f(x)$, exists and equals $y\in Y$ if $f(x_n) \to y$ for all sequences $x_n \in X$ such that $x_n \to x_0$.
+Thus, Theorem~\ref{thm:cont_fun_limit} implies that $\lim_{x\to x_0} f(x)=f(x_0)$ if and only if $f$ is continuous at $x_0$.
 \end{definition}
+
+%\begin{definition}
+%For $x,x_0 \in X$, we say the limit as $x\to x_0$ of $f(x)$ exists if there is a $y\in Y$ such that, for any $\epsilon> 0$, there exists a $\delta >0$ where, for all $x\in X$ satisfying $d_X(x_0,x)< \delta$, we have
+%\[ d_Y \left( y,f(x) \right) < \epsilon .\]
+%In this case, we say the limit equals $y$ and write $\lim_{x\to x_0} f(x)=y$.
+%\end{definition}
+
+\begin{remark}
+Comparing this with the definition of continuous, we see that $\lim_{x\to x_0} f(x)=y$ can be defined equivalently as:
+for any $\epsilon> 0$, there exists a $\delta >0$ such that, for all $x\in X$ satisfying $d_X(x_0,x)< \delta$, we have
+\[ d_Y \left( y,f(x) \right) < \epsilon .\]
+\end{remark}
+
+
 
 \begin{definition}
 The function $f$ is called \defn{metric space}{continuous} if, for all $x_0 \in X$, it is continuous at $x_0$.
@@ -340,10 +356,14 @@ Show that $f$ is Lipschitz continuous with $L=1$.
 
 \subsection{Properties of the Real Numbers}
 
-First, we review notions of extreme values for sets of real numbers.
-To do this, we will define the \defn{topology}{extended real numbers} $\overline{\RealNumbers}$ by augmenting the real numbers to include limit points for unbounded sequences $\overline{\RealNumbers} \triangleq \RealNumbers \cup \{ \infty,-\infty\}$.
-Using the metric $d_{\overline{\RealNumbers}} (x,y) \triangleq |\frac{x}{1+|x|} - \frac{y}{1+|y|}|$, this set is a metric space.
-Later, we will see that it is actually a compact metric space.
+In this section, we review some important properties of the real numbers.
+To proceed, we will use some facts now that are only proven later.
+For example, we will use the fact that ``every Cauchy sequence of real numbers converges to a real number''.
+This property, known as completeness, is the focus on Section~\ref{sec:metspace_complete} and can be established by formally constructing the real numbers as limit points of sequences of rational numbers.
+
+To discuss notions of extreme values for sets of real numbers, we also define the \defn{topology}{extended real numbers} $\overline{\RealNumbers}$ by augmenting the real numbers to include limit points for unbounded sequences $\overline{\RealNumbers} \triangleq \RealNumbers \cup \{ \infty,-\infty\}$.
+Using the metric $d_{\overline{\RealNumbers}} (x,y) \triangleq |\frac{x}{1+|x|} - \frac{y}{1+|y|}|$ with $\frac{x}{1+|x|}|_{x = \pm \infty} \triangleq \pm 1$, this defines the standard metric space of extended real numbers.
+Later, we will see that this is actually a compact metric space.
 The main difference from $\RealNumbers$ is that, for  $x_n \in \overline{\RealNumbers}$, the statement  $x_n \to \infty$ is well defined and equivalent to $\forall M>0, \, \exists N\in \mathbb{N}, \, \forall n>N, \, x_n > M$.
 \begin{definition}
 The \defn{set theory}{supremum} (or least upper bound) of $X\subseteq \RealNumbers$, denoted $\sup X$, is the smallest extended real number $M \in \overline{\RealNumbers}$ such that $x\leq M$ for all $x\in X$.
@@ -382,10 +402,10 @@ Therefore, we can construct the sequence $x_1,x_2,\ldots$ by choosing $x_n\in A$
 \end{proof}
 
 \begin{theorem}
-Any bounded non-decreasing sequence of real numbers converges to its supremum.
+In the standard metric space of real numbers, any non-decreasing sequence with a finite upper bound converges to its supremum.
 \end{theorem}
 \begin{proof}
-Let $x_1,x_2,\ldots \in \RealNumbers$ be a sequence satisfying $x_{n+1} \geq x_n$ and $x_n \leq M < \infty$ for all $n\in \mathbb{N}$.
+Let $x_1,x_2,\ldots \in \RealNumbers$ be a sequence satisfying $x_{n+1} \geq x_n$ (i.e., non-decreasing) and $x_n \leq M < \infty$ for all $n\in \mathbb{N}$ (i.e., with a finite upper bound).
 Without loss of generality, we can choose the upper bound $M$ to be the supremum $\sup \{x_1,x_2,\ldots\}$.
 Now, we will prove directly that $x_n \to M$.
 
@@ -421,7 +441,9 @@ Then, $\sum_{i=1}^\infty y_i \triangleq \lim_{n\to \infty} x_n$ exists if and on
 \[ \forall \epsilon > 0, \, \exists N \in \mathbb{N}, \, \forall m,n>N, \, \left| \sum_{i=n+1}^m y_i \right| < \epsilon. \]
 \end{lemma}
 \begin{proof}
-Since $\RealNumbers$ is complete, $\lim_{n\to\infty} x_n$ exists if and only if $x_n$ is a Cauchy sequence.
+In a metric space, convergent sequences must be Cauchy.
+For the real numbers, all Cauchy sequences converge.
+Thus, $\lim_{n\to\infty} x_n$ exists if and only if $x_n$ is a Cauchy sequence.
 Thus, $x_n$ converges if and only if ``$\forall \epsilon>0, \exists N\in \mathbb{N}, \forall m,n>N, |x_m - x_n|< \epsilon$''.
 Thus, the result follows from the fact that $|x_m - x_n| = \left| \sum_{i=n+1}^m y_i \right|$.
 \end{proof}
@@ -1039,7 +1061,7 @@ It follows that $d_Y \left( f(x_1), f(x_2) \right) < \epsilon$ for all $x_2 \in 
 
 Conversely, let $O_y$ be an open set in $Y$ and suppose that the function $f$ is $d$-continuous with respect to $d_X$ and $d_Y$.
 For any $x \in f^{-1} (O_y)$, there exists a $d$-open ball $B_{d_Y} (f(x), \epsilon)$ of radius $\epsilon>0$ centered at $f(x)$ that is entirely contained in $O_y$.
-By the definition of $d$-continuous, there exits a $d$-open ball $B_{d_X} (x, \delta)$ of radius $\delta>0$ centered at $x$ such that $f \left( B_{d_X} (x,\delta) \right) \subset B_{d_Y} \left( f(x), \epsilon \right)$.
+By the definition of $d$-continuous, there exists a $d$-open ball $B_{d_X} (x, \delta)$ of radius $\delta>0$ centered at $x$ such that $f \left( B_{d_X} (x,\delta) \right) \subset B_{d_Y} \left( f(x), \epsilon \right)$.
 Therefore, every $x \in f^{-1}(O_y)$ has a neighborhood in the same set, and that implies $f^{-1} (O_y)$ is open.
 \end{proof}
 
