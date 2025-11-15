@@ -1,9 +1,24 @@
-\chapter{Representation and Approximation}
+\chapter{Approximation and Representation}
+
+Consider a Banach space $V$ and a closed subspace $W \subseteq V$.
+For a given a vector $\vecnot{v} \in V$, we seek an element of $W$ that provides a best approximation to $\vecnot{v}$.
+As illustrated in Fig.~\ref{fig:AR-Banach1}, the fundamental problem is to identify a vector $\vecnot{w} \in W$ that minimizes the distance $\| \vecnot{v} - \vecnot{w}$.
+
+\begin{figure}[hbt]
+\centering{\input{Figures/AR-Banach1}}
+\caption{In a Banach space, a best approximation  of a vector $\vecnot{v} \in V$ by vectors in $W$ is the element $\vecnot{w} \in W$ that is closest to $\vecnot{v}$ in norm.
+In this example, complete vector space $V=\mathbb{R}^3$ is endowed with the $\ell_1$-norm  $\| \cdot \|_1$; the subset $W$ corresponds to the $xz$-plane; the vector $\vecnot{v}$ is the point in blue; and its best approximation $\vecnot{w}$ is shown in red.
+The octahedron represents the iconic $\ell_1$-norm.}
+\label{fig:AR-Banach1}
+\end{figure}
+
 
 \section{Best Approximation}
 \index{inner-product space!best approximation}
-Suppose $W$ is a subspace of a Banach space $V$.
-For any $\vecnot{v} \in V$, consider the problem of finding a vector $\vecnot{w} \in W$ such that $\left\| \vecnot{v} - \vecnot{w} \right\|$ is as small as possible.
+
+We now formalize the notion of best approximation.
+For vector $\vecnot{v} \in V$ and subspace $W \subseteq V$, we wish to characterize the vectors in $W$ that lie nearest to $\vecnot{v}$ according to the norm on $V$.
+
 \begin{definition}
 The vector $\vecnot{w} \in W$ is a \defn{vector space}{best approximation} of $\vecnot{v} \in V$ by vectors in $W$ if
 \begin{equation*}
@@ -11,34 +26,37 @@ The vector $\vecnot{w} \in W$ is a \defn{vector space}{best approximation} of $\
 \end{equation*}
 for all $\vecnot{w}' \in W$.
 \end{definition}
-\noindent If $W$ is spanned by the vectors $\vecnot{w}_1, \ldots, \vecnot{w}_n \in V$, then we can write
-\begin{equation*}
-\begin{split}
-\vecnot{v} &= \vecnot{w} + \vecnot{e} \\
-&= s_1 \vecnot{w}_1 + \cdots + s_n \vecnot{w}_n + \vecnot{e},
-\end{split}
-\end{equation*}
-where $\vecnot{e}$ is the approximation error.
 
-Finding a best approximation is, in general, rather difficult\footnote{A best approximation exists if $W$ is closed and the Banach space $V$ is reflexive (i.e., it equals its double dual).  In addition, it is unique if the Banach space $V$ is strictly convex (i.e., $\|\vecnot{v} + \vecnot{w} \|<2$ for all distinct $\vecnot{v},\vecnot{w}\in V$ such that $\|\vecnot{v}\|=\|\vecnot{w}\| = 1$).}.
-However, if the norm $\| \cdot \|$ corresponds to the induced norm of an inner product, then one can use orthogonal projection and the problem is greatly simplified.
-This chapter focuses mainly on computing the best approximation of arbitrary vectors in a Hilbert space.
+
+Finding a best approximation is, in general, a challenging problem\footnote{A best approximation exists if Banach space $V$ is reflexive and $W$ is closed. In addition, it is unique if the Banach space $V$ is strictly convex.}.
+In contrast, when the norm is induced by an inner product, the geometry becomes far more structured: a best approximation can be obtained through orthogonal projection.
+In what follows, we focus on separable Hilbert spaces, where these projections are well defined and can be expressed in terms of countable orthonormal bases.
+
+\begin{figure}[hbt]
+\centering{\input{Figures/AR-Hilbert1}}
+\caption{In a separable Hilbert space, a best approximation of a vector $\vecnot{v} \in V$ by vectors in $W$ is the element $\vecnot{w} \in W$ that is closest to $\vecnot{v}$ in the norm induced by the inner product.
+In this example, the Hilbert space $V=\mathbb{R}^3$ is endowed with the Euclidean norm induced by the standard inner product.
+As before, the subset $W$ is the $xz$-plane; the vector $\vecnot{v}$ is the point in blue; and its best approximation $\vecnot{w}$ appears in red.
+Points equidistant from $\vecnot{v}$ lie on a sphere.}
+\label{fig:AR-Banach1}
+\end{figure}
+
 \begin{theorem} \label{theorem:OrthogonalProjection}
 Suppose $W$ is a subspace of a Hilbert space $V$ and $\vecnot{v}$ is a vector in $V$.
 Then, we have the following:
 \begin{enumerate}
 \item The vector $\vecnot{w} \in W$ is a best approximation of $\vecnot{v} \in V$ by vectors in $W$ if and only if $\vecnot{v} - \vecnot{w}$ is orthogonal to every vector in $W$.
 \item If a best approximation of $\vecnot{v} \in V$ by vectors in $W$ exists, it is unique.
-\item If $W$ has a countable orthogonal basis $\vecnot{w}_1, \vecnot{w}_2, \ldots$ and is closed, then
+\item If $W$ is closed and has a countable orthogonal basis $\mathcal{A} = \vecnot{w}_1, \vecnot{w}_2, \ldots$, then
 \begin{equation}
 \label{equation:OrthogonalProjectionOrthogonalVectors}
-\vecnot{w} = \sum_{i=1}^{\dim (W)} \frac{ \inner{ \vecnot{v} }{ \vecnot{w}_i } }{ \left\| \vecnot{w}_i \right\|^2 } \vecnot{w}_i
+\vecnot{w} = \sum_{\vecnot{w}_i \in \mathcal{A}} \frac{ \inner{ \vecnot{v} }{\vecnot{w}_i} }{ \left\| \vecnot{w}_i \right\|^2 } \vecnot{w}_i
 \end{equation}
 exists and equals the best approximation of $\vecnot{v}$ by vectors in $W$.
 \end{enumerate}
 \end{theorem}
 \begin{proof}
-Let $\vecnot{w} \in W$ and suppose $\vecnot{v} - \vecnot{w}$ is orthogonal to every vector in $W$.
+Let $\vecnot{w} \in W \subseteq V$ and suppose $\vecnot{v} - \vecnot{w}$ is orthogonal to every vector in $W$.
 For any $\vecnot{w}' \in W$, we have $\vecnot{v} - \vecnot{w}' = \left( \vecnot{v} - \vecnot{w} \right) + \left( \vecnot{w} - \vecnot{w}' \right)$ and
 \begin{equation} \label{equation:OrthogonalVector}
 \begin{split}
@@ -51,12 +69,11 @@ For any $\vecnot{w}' \in W$, we have $\vecnot{v} - \vecnot{w}' = \left( \vecnot{
 &\geq \left\| \vecnot{v} - \vecnot{w} \right\|^2.
 \end{split}
 \end{equation}
-For the converse, we note that,
-%To show the converse, we prove the contrapositive of the converse: if $\vecnot{v}-\vecnot{w}$ is not orthogonal to all vectors in $W$, then $\vecnot{w}$ is not a best approximation of $\vecnot{v}$ by vectors in $W$.
-if $\vecnot{v}-\vecnot{w}$ is not orthogonal to all vectors in $W$, then there must be some $\vecnot{u} \in W$ such that $\tinner{ \vecnot{v}-\vecnot{w} }{ \vecnot{u} } \neq 0$.
-Then, we let $\vecnot{w}''$ be the projection of $\vecnot{v}-\vecnot{w}$ onto $\vecnot{u}$.
-Next, we define $\vecnot{w}' = \vecnot{w}+\vecnot{w}''$ and observe that $\vecnot{w}' \in W$.
-Thus, Lemma~\ref{lem:proj_loss} implies
+Therefore, $\vecnot{w}$ is a best approximation of $\vecnot{v}$.
+For the converse, we stress that, if $\vecnot{v}-\vecnot{w}$ is not orthogonal to all vectors in $W$, then there must be some $\vecnot{u} \in W$ such that $\tinner{ \vecnot{v}-\vecnot{w} }{ \vecnot{u} } \neq 0$.
+With $\vecnot{u}$ fixed, let $\vecnot{w}''$ be the projection of $\vecnot{v}-\vecnot{w}$ onto $\vecnot{u}$ and note that $\vecnot{w}'' \in W$.
+Define $\vecnot{w}' = \vecnot{w}+\vecnot{w}'' \in W$.
+Then, Lemma~\ref{lem:proj_loss} implies
 \[ \| \vecnot{v}-\vecnot{w'} \| ^2 = \| \vecnot{v}-\vecnot{w} - \vecnot{w}'' \| ^2 = \|\vecnot{v}-\vecnot{w}\|^2 - \frac{|\tinner{ \vecnot{v}-\vecnot{w} }{ \vecnot{u} }|^2}{\|\vecnot{u}\|^2} < \| \vecnot{v}-\vecnot{w}\|^2. \]
 Thus, $\vecnot{w}$ is not a best approximation of $\vecnot{v}$ by vectors in $W$.
 
@@ -101,9 +118,9 @@ For uniqueness, suppose $\vecnot{w}, \vecnot{w}' \in W$ are best approximations 
 Then $\left\| \vecnot{v} - \vecnot{w} \right\| = \left\| \vecnot{v} - \vecnot{w}' \right\|$ and \eqref{equation:OrthogonalVector} implies that $\left\| \vecnot{w} - \vecnot{w}' \right\| = 0$.
 That is, if a best approximation exists then it is unique.
 
-Finally, assume $W$ is closed and $\vecnot{w}_1,\vecnot{w}_2, \ldots$ is a countable orthogonal basis.
-Then, for~\eqref{equation:OrthogonalProjectionOrthogonalVectors}, let the sequence of partial sums be $\vecnot{u}_n \triangleq \sum_{i=1}^n \vecnot{w}_i \inner{ \vecnot{v} }{ \vecnot{w}_i } / \left\| \vecnot{w}_i \right\|^2$.
-Next, observe that $\vecnot{v} -\vecnot{u}_n$ is orthogonal to $\vecnot{w}_j$ for $j \in \{1,\ldots,n\}$, i.e.,
+For the third part, assume $W$ is closed and $\mathcal{A} = \vecnot{w}_1,\vecnot{w}_2, \ldots$ is a countable orthogonal basis.
+To establish~\eqref{equation:OrthogonalProjectionOrthogonalVectors}, consider the sequence of partial sums defined by $\vecnot{u}_n \triangleq \sum_{i=1}^n \vecnot{w}_i \inner{ \vecnot{v} }{ \vecnot{w}_i } / \left\| \vecnot{w}_i \right\|^2$.
+Observe that $\vecnot{v} -\vecnot{u}_n$ is orthogonal to $\vecnot{w}_j$ for $j \in \{1,\ldots,n\}$, i.e.,
 \begin{equation*}
 \begin{split}
 \inner{ \vecnot{v} - \vecnot{u_n} }{ \vecnot{w}_j }
@@ -115,15 +132,15 @@ Next, observe that $\vecnot{v} -\vecnot{u}_n$ is orthogonal to $\vecnot{w}_j$ fo
 \end{split}
 \end{equation*}
 Since $\vecnot{v} - \vecnot{u}_n$ is orthogonal to every vector in $W_n = \Span \{\vecnot{w}_1,\ldots,\vecnot{w}_n\}$, we see that $\vecnot{u}_n$ is the best approximation of $\vecnot{v}$ by vectors in $W_n$.
-If $\dim(W) < \infty$, then this completes the proof.
+When $\dim(W) < \infty$, this completes the proof.
 
 If $\dim(W) = \infty$, then we must argue that the limit of $\vecnot{u}_n$ exists and lies in $W$.
 The orthogonality of $\vecnot{w}_1,\ldots,\vecnot{w}_n$ implies $\|\vecnot{v}\|^2 = \| \vecnot{v} - \vecnot{u}_n \|^2 + \|\vecnot{u}_n\|^2.$
 From this, we see that $\| \vecnot{u}_n \|^2 = \sum_{i=1}^n \left|\tinner{ \vecnot{v} }{ \vecnot{w}_i } \right|^2 / \|\vecnot{w}_i\|^2$ is an increasing real sequence upper bounded by $\|\vecnot{v}\|^2$.
 It follows that the RHS converges to a finite limit.
 Thus, we can apply Lemma~\ref{lem:hilbert_sum_convergence} to show convergence $\vecnot{u}_n \to \vecnot{w}$.
-Since $W$ is closed, it follows that $\vecnot{w} \in W$.
-By construction, $\vecnot{v} -\vecnot{w}$ is orthogonal to $\vecnot{w}_j$ for $j \in \mathbb{N}$ and, thus, every vector in $W$.
+Since $W$ is closed, we gather that $\vecnot{w} \in W$.
+By construction, $\vecnot{v} -\vecnot{w}$ is orthogonal to $\vecnot{w}_j$ for $j \in \mathbb{N}$ and, therefore, to every vector in $W$.
 Hence, $\vecnot{w}$ is the best approximation of $\vecnot{v}$ by vectors in $W$.
 \end{proof}
 

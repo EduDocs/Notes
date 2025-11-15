@@ -1,0 +1,41 @@
+\tdplotsetmaincoords{70}{110}
+\begin{tikzpicture}[tdplot_main_coords,font=\small, >=stealth', line width=1pt]
+
+% Coordinate System
+\draw[gray, ->] (-3.5,0,0) -- (4,0,0) node[left] {$x$};
+\draw[gray, ->] (0,-1.5,0) -- (0,4,0) node[below] {$y$};
+\draw[gray, ->] (0,0,-2) -- (0,0,3) node[left] {$z$};
+
+% Red Plane
+\draw[red,line width=0.75pt,densely dotted] (0.5,0,1) -- (1.5,0,1);
+\draw[red,line width=0.75pt,densely dotted] (1,0,0.75) -- (1,0,1.25);
+\fill[red] (1, 0, 1) circle (2pt) node[above left] {$\vecnot{w}$};
+\fill[red, opacity=0.2] (-2.5,0,-1.25) -- (3,0,-1.25) -- (3,0,2.25) -- (-2.5,0,2.25) -- cycle;
+
+% Sphere center
+\def\x{1}       % shift in x
+\def\y{2}   % shift in y
+\def\z{1}       % shift in z
+
+% Little crosshair at the center
+\draw[blue,line width=0.75pt,densely dotted] (\x-0.5,\y,\z) -- (\x+0.5,\y,\z);
+\draw[blue,line width=0.75pt,densely dotted] (\x,\y,\z-0.25) -- (\x,\y,\z+0.25);
+\draw[blue,line width=0.75pt,densely dotted] (\x,\y-0.25,\z) -- (\x,\y+0.25,\z);
+\fill[blue] (\x, \y, \z) circle (2pt) node[above right] {$\vecnot{v}$};
+
+\foreach \theta in {-180,-170,...,180} {
+  \draw[blue, opacity=0.2, line width=0.75] 
+    plot[domain=0:360, samples=60, variable=\phi]
+      ({\x + 2*cos(\theta)*cos(\phi)},
+       {\y + 2*cos(\theta)*sin(\phi)},
+       {\z + 2*sin(\theta)});
+}
+\foreach \phi in {0,10,...,350} {
+  \draw[blue, opacity=0.2, line width=0.75]
+    plot[domain=-90:90, samples=60, variable=\theta]
+      ({\x + 2*cos(\theta)*cos(\phi)},
+       {\y + 2*cos(\theta)*sin(\phi)},
+       {\z + 2*sin(\theta)});
+}
+
+\end{tikzpicture}
