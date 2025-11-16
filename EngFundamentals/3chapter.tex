@@ -27,7 +27,6 @@ The vector $\vecnot{w} \in W$ is a \defn{vector space}{best approximation} of $\
 for all $\vecnot{w}' \in W$.
 \end{definition}
 
-
 Finding a best approximation is, in general, a challenging problem\footnote{A best approximation exists if Banach space $V$ is reflexive and $W$ is closed. In addition, it is unique if the Banach space $V$ is strictly convex.}.
 In contrast, when the norm is induced by an inner product, the geometry becomes far more structured: a best approximation can be obtained through orthogonal projection.
 In what follows, we focus on separable Hilbert spaces, where these projections are well defined and can be expressed in terms of countable orthonormal bases.
@@ -38,7 +37,7 @@ In what follows, we focus on separable Hilbert spaces, where these projections a
 In this example, the Hilbert space $V=\mathbb{R}^3$ is endowed with the Euclidean norm induced by the standard inner product.
 As before, the subset $W$ is the $xz$-plane; the vector $\vecnot{v}$ is the point in blue; and its best approximation $\vecnot{w}$ appears in red.
 Points equidistant from $\vecnot{v}$ lie on a sphere.}
-\label{fig:AR-Banach1}
+\label{fig:AR-Hilbert1}
 \end{figure}
 
 \begin{theorem} \label{theorem:OrthogonalProjection}
@@ -77,43 +76,6 @@ Then, Lemma~\ref{lem:proj_loss} implies
 \[ \| \vecnot{v}-\vecnot{w'} \| ^2 = \| \vecnot{v}-\vecnot{w} - \vecnot{w}'' \| ^2 = \|\vecnot{v}-\vecnot{w}\|^2 - \frac{|\tinner{ \vecnot{v}-\vecnot{w} }{ \vecnot{u} }|^2}{\|\vecnot{u}\|^2} < \| \vecnot{v}-\vecnot{w}\|^2. \]
 Thus, $\vecnot{w}$ is not a best approximation of $\vecnot{v}$ by vectors in $W$.
 
-%Conversely, suppose that $\left\| \vecnot{v} - \vecnot{w}' \right\| \geq \left\| \vecnot{v} - \vecnot{w} \right\|$ for every $\vecnot{w}' \in W$.
-%From \eqref{equation:OrthogonalVector}, we get
-%\begin{equation*}
-%2 \Real \inner{ \vecnot{v} - \vecnot{w} }{ \vecnot{w} - \vecnot{w}' }
-%+ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 \geq 0
-%\end{equation*}
-%for all $\vecnot{w}' \in W$.
-%Note that every vector in $W$ can be expressed as $\vecnot{w} - \vecnot{w}'$ where $\vecnot{w}' \in W$, it follows that
-%\begin{equation} \label{equation:InequalityOrthogonalVectors}
-%2 \Real \inner{ \vecnot{v} - \vecnot{w} }{ \vecnot{w}'' }
-%+ \left\| \vecnot{w}'' \right\|^2 \geq 0
-%\end{equation}
-%for every $\vecnot{w}'' \in W$.
-%If $\vecnot{w}'$ is in $W$ and $\vecnot{w}' \neq \vecnot{w}$, then we may take
-%\begin{equation*}
-%\vecnot{w}'' = - \frac{ \inner{ \vecnot{v} - \vecnot{w} }{ \vecnot{w} - \vecnot{w}' } }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 } \left( \vecnot{w} - \vecnot{w}' \right).
-%\end{equation*}
-%Inequality~\eqref{equation:InequalityOrthogonalVectors} then reduces to the statement
-%\begin{equation}
-%\begin{split}
-%0 &\leq
-%2 \Real \inner{ \vecnot{v} - \vecnot{w} }{ \vecnot{w}'' }
-%+ \left\| \vecnot{w}'' \right\|^2 \\
-%&= 2 \Real \inner{ \vecnot{v} - \vecnot{w} }{ - \frac{ \inner{ \vecnot{v} - \vecnot{w} }{ \vecnot{w} - \vecnot{w}' } }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 } \left( \vecnot{w} - \vecnot{w}' \right) } \\
-%&\quad + \left\| - \frac{ \inner{ \vecnot{v} - \vecnot{w} }{ \vecnot{w} - \vecnot{w}' } }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 } \left( \vecnot{w} - \vecnot{w}' \right) \right\|^2 \\
-%&= - 2 \Real \frac{ \inner{ \vecnot{w} - \vecnot{w}' }{ \vecnot{v} - \vecnot{w} } }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 }
-%\inner{ \vecnot{v} - \vecnot{w} }{ \vecnot{w} - \vecnot{w}' }
-%+ \frac{\left| \inner{ \vecnot{v} - \vecnot{w} }{ \vecnot{w} - \vecnot{w}' } \right|^2}{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 } \\
-%&= - 2 \frac{ \left| \inner{ \vecnot{v} - \vecnot{w} }{ \vecnot{w} - \vecnot{w}' } \right|^2 }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 }
-%+ \frac{ \left| \inner{ \vecnot{v} - \vecnot{w} }{ \vecnot{w} - \vecnot{w}' } \right|^2 }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 }
-%= - \frac{ \left| \inner{ \vecnot{v} - \vecnot{w} }{ \vecnot{w} - \vecnot{w}' } \right|^2 }{ \left\| \vecnot{w} - \vecnot{w}' \right\|^2 } .
-%\end{split}
-%\end{equation}
-%This inequality holds if and only if $\inner{ \vecnot{v} - \vecnot{w} }{ \vecnot{w} - \vecnot{w}' } = 0$.
-%Therefore, $\vecnot{v} - \vecnot{w}$ is orthogonal to every vector in $W$.
-%Hence the vector $\vecnot{w} \in W$ is a best approximation of $\vecnot{v} \in V$ by vectors in $W$ if and only if $\vecnot{v} - \vecnot{w}$ is orthogonal to every vector in $W$.
-
 For uniqueness, suppose $\vecnot{w}, \vecnot{w}' \in W$ are best approximations of $\vecnot{v}$ by vectors in $W$.
 Then $\left\| \vecnot{v} - \vecnot{w} \right\| = \left\| \vecnot{v} - \vecnot{w}' \right\|$ and \eqref{equation:OrthogonalVector} implies that $\left\| \vecnot{w} - \vecnot{w}' \right\| = 0$.
 That is, if a best approximation exists then it is unique.
@@ -150,34 +112,43 @@ If every vector in $V$ has an orthogonal projection onto $W$, then the mapping $
 \end{definition}
 
 One can use Theorem~\ref{theorem:OrthogonalSubspaceDirectSum} to verify that this is consistent with the concept of orthogonal projection from Definition~\ref{definition:OrthogonalProjection}.
+An illustrative diagram of an orthogonal projection appears in Fig,~\ref{fig:AR-Projection1}.
 Theorem~\ref{theorem:OrthogonalProjection} also implies the following result, known as Bessel's inequality.
 
+\begin{figure}[hbt]
+\centering{\input{Figures/AR-Projection1}}
+\caption{This diagram illustrates the projection of vector $\vecnot{v} \in V$ onto subspace $W \subseteq V$, where $\hat{\vecnot{v}} = E \vecnot{v}$.
+Note that $\vecnot{v} - \hat{\vecnot{v}}$ is orthogonal to any vector in $W$ and, as such, $\hat{\vecnot{v}}$ is the best approximation of $\vecnot{v}$ by vectors in $W$.
+In this specific example, $V=\mathbb{R}^3$ and the subset $W$ is the $xy$-plane.
+The vector $\vecnot{v}$ is the point in black; and its projection onto $W$ appears in blue.}
+\label{fig:AR-Projection1}
+\end{figure}
+
 \begin{corollary}
-Let $\vecnot{v}_1, \vecnot{v}_2, \ldots$ be a countable orthogonal set of distinct non-zero vectors in an inner-product space $V$ and let $W = \Span(\{ \vecnot{v}_1, \vecnot{v}_2, \ldots\})$.
+Let $\mathcal{A} = \vecnot{w}_1, \vecnot{w}_2, \ldots$ be a countable orthogonal set of distinct non-zero vectors in an inner-product space $V$ and define $W = \Span(\vecnot{w}_1, \vecnot{w}_2, \ldots)$.
 If $\vecnot{v} \in V$, then
 \begin{equation*}
-\sum_{i=1}^{\dim (W)} \frac{ \left| \inner{ \vecnot{v} }{ \vecnot{v}_i } \right|^2 }{ \left\| \vecnot{v}_i \right\|^2 }
+\sum_{\vecnot{w}_i \in \mathcal{A}} \frac{ \left| \inner{ \vecnot{v} }{ \vecnot{w}_i } \right|^2 }{ \left\| \vecnot{w}_i \right\|^2 }
 \leq \left\| \vecnot{v} \right\|^2.
 \end{equation*}
 Moreover, equality holds if and only if
 \begin{equation*}
-\vecnot{v} = \sum_{i=1}^{\dim (W)} \frac{ \inner{ \vecnot{v} }{ \vecnot{v}_i } }{ \left\| \vecnot{v}_i \right\|^2 } \vecnot{v}_i.
+\vecnot{v} = \sum_{\vecnot{w}_i \in \mathcal{A}} \frac{ \inner{ \vecnot{v} }{ \vecnot{w}_i } }{ \left\| \vecnot{w}_i \right\|^2 } \vecnot{w}_i .
 \end{equation*}
 \end{corollary}
 \begin{proof}
-Let the projection of $\vecnot{v}$ onto the closure of the span of $\vecnot{v}_1,\vecnot{v}_2,\ldots$ (i.e., $\Closure{W}$) be
+Let the projection of $\vecnot{v}$ onto the closure of the span of $\vecnot{w}_1,\vecnot{w}_2,\ldots$ (i.e., $\Closure{W}$) be
 \begin{equation*}
-\vecnot{w} = \sum_{i=1}^{\dim (W)} \frac{ \inner{ \vecnot{v} }{ \vecnot{v}_i } }{ \left\| \vecnot{v}_i \right\|^2 } \vecnot{v}_i.
+\vecnot{w} = \sum_{\vecnot{w}_i \in \mathcal{A}} \frac{ \inner{ \vecnot{v} }{ \vecnot{w}_i } }{ \left\| \vecnot{w}_i \right\|^2 } \vecnot{w}_i  .
 \end{equation*}
-Then, the error $\vecnot{u} = \vecnot{v} - \vecnot{w}$ satisfies  $\inner{ \vecnot{u} }{ \vecnot{w} } = 0$ and $\left\| \vecnot{u} \right\|^2 = \left\| \vecnot{v} \right\|^2 - \left\| \vecnot{w} \right\|^2$.
+By construction, the error vector $\vecnot{u} = \vecnot{v} - \vecnot{w}$ satisfies  $\inner{ \vecnot{u} }{ \vecnot{w} } = 0$ and, hence, $\left\| \vecnot{u} \right\|^2 = \left\| \vecnot{v} \right\|^2 - \left\| \vecnot{w} \right\|^2$.
 Noting that $\| \vecnot{u} \|^2 \geq 0$ and 
 \begin{equation*}
 \left\| \vecnot{w} \right\|^2
-= \sum_{i=1}^{\dim (W)} \frac{ \left| \inner{ \vecnot{v} }{ \vecnot{v}_i } \right|^2 }{ \left\| \vecnot{v}_i \right\|^2 },
+= \sum_{\vecnot{w}_i \in \mathcal{A}} \frac{ \left| \inner{ \vecnot{v} }{ \vecnot{w}_i } \right|^2 }{ \left\| \vecnot{w}_i \right\|^2 },
 \end{equation*}
-we see that $\| \vecnot{w} \|^2 \leq \| \vecnot{v} \|^2$ with equality iff $\vecnot{u} = \vecnot{0}$.
+we see that $\| \vecnot{w} \|^2 \leq \| \vecnot{v} \|^2$ with equality if and only if $\vecnot{u} = \vecnot{0}$.
 \end{proof}
-
 
 \begin{problem}
 Let $W$ be the subspace of $\RealNumbers^2$ spanned by the vector $(1,2)$.
@@ -219,54 +190,66 @@ E = \begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix} .
 
 \subsection{Projection Operators}
 
+Projection operators arise naturally in linear algebra when one seeks to isolate the portion of a vector that lies in a designated subspace while suppressing the remainder.
+At an abstract level, they can be viewed as idempotent maps, meaning that once the transformation has been applied, applying it again produces no further change.
+This perspective connects geometric projection, algebraic decompositions of vector spaces, and the special role of orthogonal projections in Hilbert spaces, where geometric structure and best-approximation theory align most cleanly.
+We explore these connections further below.
+	
 \begin{definition}
-A function $F \colon X \rightarrow Y$ with $Y \subseteq X$ is \defn{linear transform}{idempotent} if $F(F(x))=F(x)$.  When $F$ is a linear transformation, this reduces to $F^2 = F \cdot F = F$.
+A function $F \colon X \rightarrow Y$ with $Y \subseteq X$ is \defn{linear transform}{idempotent} if $F(F(x))=F(x)$ for all $x \in X$.
+ When $F$ is a linear transformation, this reduces to $F^2 = F$.
 \end{definition}
 
 \begin{definition}
-Let $V$ be a vector space and $T \colon V \rightarrow V$ be a linear transformation.
+Consider a vector space $V$ and let $T \colon V \rightarrow V$ be a linear transformation.
 If $T$ is idempotent, then $T$ is called a \defn{linear transform}{projection}.
 \end{definition}
 
 \begin{example}
-The idempotent matrix $A$ is a projection onto the first two coordinates.
+Matrix $A$ is idempotent and therefore a projection,
 \begin{equation*}
 A = \begin{bmatrix}
 1 & 0 & 1 \\
 0 & 1 & 1 \\
 0 & 0 & 0
-\end{bmatrix}
+\end{bmatrix} .
 \end{equation*}
+This transformation projects onto the subspace spanned by the first two standard basis elements, $W = \Span (\vecnot{e}_1, \vecnot{e}_2)$.
 \end{example}
 
+We can explore the structure of linear projections further.
+
 \begin{theorem}
-Let $V$ be a vector space and $T \colon V \rightarrow V$ be a projection operator.
-Then, the range $\mathcal{R}(T)$ and the $\mathcal{N}(T)$ are disjoint subspaces of $V$.
+Consider a vector space $V$ and let $T \colon V \rightarrow V$ be a projection operator.
+The range $\mathcal{R}(T)$ and the $\mathcal{N}(T)$ are disjoint subspaces of $V$.
 \end{theorem}
 \begin{proof}
-For all $\vecnot{v} \in V - \{0\}$, we need to prove that $\vecnot{v}$ is not in both the range and nullspace.
-Let $\vecnot{v}\in V$ be in the range of $T$ so that there is a $\vecnot{w}\in V$ such that $T \vecnot{w} = \vecnot{v}$.
-Then, $T \vecnot{v} = T^2 \vecnot{w} = T \vecnot{w} = \vecnot{v}$ and $\vecnot{v}$ is not in the null space unless $\vecnot{v} = \vecnot{0}$.
-
-Let $\vecnot{v}$ be in the null space of $T$, then $T \vecnot{v} = \vecnot{0}$.
-But, $T \vecnot{v} = \vecnot{v}$ for all $\vecnot{v}$ in the range.
-Therefore, $\vecnot{v}$ is not in the range unless $\vecnot{v} = \vecnot{0}$.
-From this, we see that only $\vecnot{0}\in V$ is in both the range and nullspace.
-Therefore, they are disjoint subspaces.
+We need to show that, for any $\vecnot{v} \in V - \{0\}$, vector $\vecnot{v}$ cannot be in both the range and nullspace of $T$.
+Assume $\vecnot{v}\in V$ is in the range of $T$, then there exists a $\vecnot{w} \in V$ such that $T \vecnot{w} = \vecnot{v}$.
+Then, we can write $T \vecnot{v} = T^2 \vecnot{w} = T \vecnot{w} = \vecnot{v}$ and, hence, $\vecnot{v}$ is not in $\mathcal{N}(T)$ unless $\vecnot{v} = \vecnot{0}$.
+Conversely, suppose $\vecnot{v}$ is in the nullspace of $T$, then $T \vecnot{v} = \vecnot{0}$.
+Yet, $T \vecnot{v} = \vecnot{v}$ for all $\vecnot{v}$ in the range of $T$.
+Therefore, $\vecnot{v}$ cannot be in the range of $T$ unless $\vecnot{v} = \vecnot{0}$.
+Thus, we conclude that only $\vecnot{0} \in V$ is in both the range and nullspace of $T$.
+That is, $\mathcal{R}(T)$ and $\mathcal{N}(T)$ are disjoint subspaces.
 \end{proof}
 
 \begin{example}
 Consider the linear transform $T \colon V \rightarrow V$ defined by $T = I - P$, where $P$ is a projection.
-It is easy to verify that $T$ is a projection operator because
+We can verify that $T$ is a projection operator because
 \[ T^2 = (I-P)(I-P) = I - P- P + P^2 = I-P = T .\]
-Notice also that $P(I-P) \vecnot{v} = \vecnot{0}$ implies that $\mathcal{R}(T) \subseteq \mathcal{N}(P)$ and $T \vecnot{v} = \vecnot{v}$ for $\vecnot{v} \in \mathcal{N}(P)$ implies $\mathcal{N}(P) \subseteq \mathcal{R}(T)$.
-Therefore, $\mathcal{R}(T) = \mathcal{N}(P)$ and $I-P$ is a projection onto $\mathcal{N}(P)$.
+Notice that $PT \vecnot{v} = P(I-P) \vecnot{v} = \vecnot{0}$ implies $\mathcal{R}(T) \subseteq \mathcal{N}(P)$.
+Also, $T \vecnot{v} = \vecnot{v}$ for any $\vecnot{v} \in \mathcal{N}(P)$ implies $\mathcal{N}(P) \subseteq \mathcal{R}(T)$.
+Therefore, we gather that $\mathcal{R}(T) = \mathcal{N}(P)$, and transformation $I-P$ is a projection onto $\mathcal{N}(P)$.
 \end{example}
+
+
+\subsection{Orthogonal Projections}
 
 \begin{definition}
 \label{definition:OrthogonalProjection}
-Let $V$ be an inner-product space and $P \colon V \rightarrow V$ be a projection operator.
-If $\mathcal{R}(P) \bot \mathcal{N}(P)$, then $P$ is called a \defn{linear transform}{orthogonal projection} .
+Suppose $V$ is an inner-product space and let $P \colon V \rightarrow V$ be a projection operator.
+If $\mathcal{R}(P) \bot \mathcal{N}(P)$, then $P$ is called an \defn{linear transform}{orthogonal projection} .
 \end{definition}
 
 \begin{example}
