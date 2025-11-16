@@ -2,12 +2,12 @@
 
 Consider a Banach space $V$ and a closed subspace $W \subseteq V$.
 For a given a vector $\vecnot{v} \in V$, we seek an element of $W$ that provides a best approximation to $\vecnot{v}$.
-As illustrated in Fig.~\ref{fig:AR-Banach1}, the fundamental problem is to identify a vector $\vecnot{w} \in W$ that minimizes the distance $\| \vecnot{v} - \vecnot{w}$.
+As illustrated in Fig.~\ref{fig:AR-Banach1}, the fundamental problem is to identify a vector $\vecnot{w} \in W$ that minimizes the distance $\| \vecnot{v} - \vecnot{w} \|$.
 
 \begin{figure}[hbt]
 \centering{\input{Figures/AR-Banach1}}
 \caption{In a Banach space, a best approximation  of a vector $\vecnot{v} \in V$ by vectors in $W$ is the element $\vecnot{w} \in W$ that is closest to $\vecnot{v}$ in norm.
-In this example, complete vector space $V=\mathbb{R}^3$ is endowed with the $\ell_1$-norm  $\| \cdot \|_1$; the subset $W$ corresponds to the $xz$-plane; the vector $\vecnot{v}$ is the point in blue; and its best approximation $\vecnot{w}$ is shown in red.
+In this example, complete vector space $V=\mathbb{R}^3$ is endowed with the $\ell_1$-norm; the subset $W$ corresponds to the $xz$-plane; the vector $\vecnot{v}$ is the point in blue; and its best approximation $\vecnot{w}$ is shown in red.
 The octahedron represents the iconic $\ell_1$-norm.}
 \label{fig:AR-Banach1}
 \end{figure}
@@ -906,18 +906,23 @@ The updated solution vector $\vecnot{h}_{N+1} = G_{N+1}^{-1} \vecnot{b}_{N+1}$ c
 
 \section{Dual Approximation}
 
-\subsection{Minimum-Norm Solutions}
-
 In many cases, one is interested in finding the minimum-norm vector that satisfies some feasibility constraints.
-For example, an underdetermined system of linear equations has an infinite number of solutions.
-But, in practice, it often makes sense to prefer the minimum-norm solution over other solutions.
+For instance, an underdetermined system of linear equations has an infinite number of solutions, but it often makes sense to prefer the minimum-norm solution over other solutions.
 Finding this solution is very similar to finding the best approximation.
 
-Let $V$ be a Hilbert space and $\vecnot{w}_1 ,\vecnot{w}_2 , \ldots, \vecnot{w}_n$ be a set of linearly independent vectors in $V$.
-For any $\vecnot{v} \in V$, consider finding the scalars $s_1,s_2,\ldots,s_n$ that minimize
-\[ \left\| \vecnot{v} - \sum_{i=1}^n s_i \vecnot{w}_i \right\|. \]
-The answer is clearly given by the best approximation of $\vecnot{v}$ by vectors in the span of $\vecnot{w}_1 ,\vecnot{w}_2 , \ldots, \vecnot{w}_n$.
-The orthogonality principle tells us that $s_1,s_2,\ldots,s_n$ must satisfy
+
+\subsection{Minimum-Norm Solutions}
+
+Consider a Hilbert space $V$, and let $\vecnot{w}_1 ,\vecnot{w}_2 , \ldots, \vecnot{w}_n$ be a set of linearly independent vectors in $V$.
+Let subset $W = \Span ( \vecnot{w}_1 ,\vecnot{w}_2 , \ldots, \vecnot{w}_n )$, and denote the Gramian matrix by $G$.
+Denote the orthogonal complement of $W$ by $W^{\bot}$.
+
+For a $\vecnot{v} \in V$, consider finding the scalars $s_1,s_2,\ldots,s_n$ that minimize
+\begin{equation*}
+\left\| \vecnot{v} - \sum_{i=1}^n s_i \vecnot{w}_i \right\| .
+\end{equation*}
+The answer is given by the best approximation of $\vecnot{v}$ by vectors in $W$.
+And, the orthogonality principle tells us that $s_1,s_2,\ldots,s_n$ must satisfy the normal equation
 \begin{equation} \label{eqn:DualNormalEquations}
 \begin{bmatrix}
 \inner{ \vecnot{w}_1 }{ \vecnot{w}_1 }
@@ -937,41 +942,99 @@ The orthogonality principle tells us that $s_1,s_2,\ldots,s_n$ must satisfy
 \inner{ \vecnot{v} }{ \vecnot{w}_2 } \\ \vdots \\
 \inner{ \vecnot{v} }{ \vecnot{w}_n } \end{bmatrix} .
 \end{equation}
+or, in compact notation, $G \vecnot{s} = \vecnot{t}$.
+The same question can be posed in a slightly different manner.
 
-The same problem can also be posed in a different manner.
 \begin{theorem}
 \label{thm:dual_approx}
-Let $V$ be a Hilbert space and $\vecnot{w}_1 ,\vecnot{w}_2 , \ldots, \vecnot{w}_n$ be a set of linearly independent vectors in $V$.
-The \defn{inner-product space}{dual approximation} problem is to find the vector $\vecnot{w}\in V$ of minimum-norm that satisfies $\inner{ \vecnot{w} }{ \vecnot{w}_i } = c_i$ for $i=1,\ldots,n$.
+Consider a Hilbert Space $V$ and let $\vecnot{w}_1 ,\vecnot{w}_2 , \ldots, \vecnot{w}_n \in V$ be a set of linearly independent vectors with $W = \Span (\vecnot{w}_1 ,\vecnot{w}_2 , \ldots, \vecnot{w}_n)$.
+The \defn{inner-product space}{dual approximation} problem is to find the vector $\vecnot{w}\in V$ of minimum-norm that satisfies $\inner{ \vecnot{w} }{ \vecnot{w}_i } = c_i$ for $i=1, 2, \ldots, n$.
 This vector is given by
 \begin{equation} \label{equation:DualApproximation}
 \vecnot{w} = \sum_{i=1}^n s_i \vecnot{w}_i,
 \end{equation}
-where the coefficients  $s_1,s_2,\ldots,s_n$ can be found by solving \eqref{eqn:DualNormalEquations} with $\inner{ \vecnot{v} }{ \vecnot{w}_i } = c_i$.
+where the coefficients  $s_1, s_2, \ldots, s_n$ can be found by solving \eqref{eqn:DualNormalEquations} but substituting the RHS by $\vecnot{c}$.
+In compact form, $\vecnot{s} = G^{-1} \vecnot{c}$, which then yields the optimal $\vecnot{w}$ through \eqref{equation:DualApproximation}.
 \end{theorem}
 \begin{proof}
-Let $W = \Span(\vecnot{w}_1 ,\vecnot{w}_2 , \ldots, \vecnot{w}_n)$ and notice that the subset
-\[ A = \{ \vecnot{u} \in V | \inner{ \vecnot{u} }{ \vecnot{w}_i } = c_i\; \forall\; i=1,\ldots,n \} \]
-is simply the orthogonal complement $W^{\bot}$ translated by some fixed vector $\vecnot{v}\in A$.
-This is because, for all $\vecnot{x} \in W^{\perp}$, we have $\inner{ \vecnot{x} }{ \vecnot{w}_i } = 0$ and $\inner{ \vecnot{v} - \vecnot{x} }{ \vecnot{w}_i } = c_i$.
-Thus, there is a one-to-one correspondence between $\vecnot{u} \in A$ and $\vecnot{x}\in W^\perp$ given by $\vecnot{u} = \vecnot{v}-\vecnot{x}$ and this implies
-\[ \min_{\vecnot{u}\in A} \| \vecnot{u} \|  = \min_{\vecnot{x}\in W^{\perp}} \| \vecnot{v} - \vecnot{x} \|. \]
-Since the optimizer $\vecnot{x}^*$ of the RHS expression is the orthogonal projection of $\vecnot{v}$ onto $W^\perp$, the resulting error vector $\vecnot{v}-\vecnot{x}^*$ must be contained in $(W^\perp)^\perp = W$.
-With this knowledge, we let $\vecnot{w} = \vecnot{v}-\vecnot{x}^*$ and use~\eqref{eqn:DualNormalEquations} to solve for $s_1,\ldots,s_n$ because we know the RHS satisfies $\inner{ \vecnot{v} }{ \vecnot{w}_i } = c_i$.
-Since $\vecnot{w}_1,\ldots,\vecnot{w}_n$ are linearly independent, the Gramian is full rank and this linear system has a unique solution.
+To begin, we note that the subset
+\[ S = \{ \vecnot{u} \in V | \inner{ \vecnot{u} }{ \vecnot{w}_i } = c_i\; \forall\; i=1, 2, \ldots, n \} \]
+is the orthogonal complement $W^{\bot}$ translated by some fixed vector $\vecnot{v}$ that fulfills the condition
+$\inner{ \vecnot{v} }{ \vecnot{w}_i } = c_i$ for $i=1, 2, \ldots, n$.
+This is because, for any $\vecnot{x} \in W^{\perp}$, we have
+\begin{equation*}
+\inner{ \vecnot{v} - \vecnot{x} }{ \vecnot{w}_i }
+= \underbrace{\inner{ \vecnot{v} }{ \vecnot{w}_i }}_{c_i} - \underbrace{\inner{ \vecnot{x} }{ \vecnot{w}_i }}_0
+= c_i \qquad i \in 1, 2, \ldots, n .
+\end{equation*}
+Thus, there is a one-to-one correspondence between $\vecnot{u} \in S$ and $\vecnot{x}\in W^\perp$ given by $\vecnot{u} = \vecnot{v}-\vecnot{x}$, and this implies
+\begin{equation*}
+\min_{\vecnot{u}\in S} \| \vecnot{u} \|  = \min_{\vecnot{x}\in W^{\perp}} \| \vecnot{v} - \vecnot{x} \|.
+\end{equation*}
+We recognize the RHS as the best approximation of $\vecnot{v}$ by vectors in $W^{\bot}$.
+The optimizer $\vecnot{x}^*$ of this expression is the orthogonal projection of $\vecnot{v}$ onto $W^\perp$.
+The resulting error vector $\vecnot{v}-\vecnot{x}^*$ must therefore be contained in $(W^\perp)^\perp = W$.
+Specifically, the optimal solution $\vecnot{u}^* = \vecnot{v} - \vecnot{x}^*$ is the orthogonal projection of $\vecnot{v} - \vecnot{x}$ onto $W$.
+Since $\vecnot{x} \in W^{\bot}$, we conclude that $\vecnot{u}^*$ is the orthogonal projection of $\vecnot{v}$ onto $W$.
+
+With this knowledge, we use \eqref{eqn:DualNormalEquations} to solve for $\vecnot{s}$, leveraging the fact that $\vecnot{v}$ satisfies $\inner{ \vecnot{v} }{ \vecnot{w}_i } = c_i$ for $i = 1, \ldots, n$.
+Thus, we get $G \vecnot{s} = \vecnot{c}$.
+Furthermore, since $\vecnot{w}_1,\ldots,\vecnot{w}_n$ is a set of linearly independent vectors, the Gramian matrix is full rank and this linear system has a unique solution $\vecnot{s} = G^{-1} \vecnot{c}$.
 \end{proof}
+
+A diagram for a minimum-norm solution problem in $\mathbb{R}^3$ appears in Fig.~\ref{fig:AR-Dual1}.
+Notice how the subset $S$ is a translated version of $W^{\bot}$.
+
+\begin{figure}[hbt]
+\centering{\input{Figures/AR-Dual1}}
+\caption{This illustration offers a visual representation of the minimum-norm problem for $V = \mathbb{R}^3$.
+In this example, there is only one constraint $\inner{ \vecnot{v} }{ \vecnot{e}_3 } = c$.
+Orthogonal complement $W^{\bot}$ is the $xy$-plane and translated set $S$ appears in blue.
+The solution vector $\vecnot{u}$, in blue, is the orthogonal projection of $\vecnot{v} \in S$ onto $W$.}
+\label{fig:AR-Dual1}
+\end{figure}
+
+\begin{example}
+When $V$ is a finite-dimensional vector space endowed with the standard inner product, the problem simplifies.
+As before, let $\vecnot{w}_1 ,\vecnot{w}_2 , \ldots, \vecnot{w}_n \in V$ be a set of linearly independent vectors,
+and define matrix
+\begin{equation*}
+A = \begin{bmatrix} | & | & & | \\ \vecnot{w}_1 & \vecnot{w}_2 & \cdots & \vecnot{w}_n \\ | & | & & | \end{bmatrix} .
+\end{equation*}
+Notice that, in this case, the Gramian matrix becomes $G = A^H A$.
+The solution to the minimum-norm problem for this specific case is therefore given by
+\begin{equation*}
+\vecnot{u}^* = A \left( A^H A \right)^{-1} A^H \vecnot{v} = A \left( A^H A \right)^{-1} \vecnot{c} ,
+\end{equation*} 
+where $\vecnot{c}$ is the constraint vector with $\inner{ \vecnot{u} }{ \vecnot{w}_i } = c_i$ for $i=1, 2, \ldots, n$.
+\end{example}
+
 
 \subsection{Underdetermined Linear Systems}
 
-Let $A \in \ComplexNumbers^{m\times n}$ with $m<n$ be the matrix representation of an underdetermined system of linearly independent equations and $\vecnot{v} \in \ComplexNumbers^m$ be any column vector.
-Then, the dual approximation theorem can be applied to solve the problem
-\[ \min_{\vecnot{s} : A\vecnot{s} = \vecnot{v}} \| \vecnot{s} \| . \]
-To see this as a dual approximation, we can rewrite the constraint as $(A^H)^H \vecnot{s} = \vecnot{v}$ so that the columns of $A^H$ define the vectors $\vecnot{w}_1,\ldots,\vecnot{w}_n$ in Theorem~\ref{thm:dual_approx}.
-Then, the theorem concludes that the minimum norm solution lies in $\mathcal{R}(A^H)$ (i.e., the column space of $A^H$).
-Using \eqref{equation:DualApproximation}, one gathers that $\hat{\vecnot{s}} = A^H \vecnot{t}$ for some $\vecnot{t}$ with $A (A^H \vecnot{t}) = \vecnot{v}$.
-If the rows of $A$ are linearly independent, then the columns of $A^H$ are linearly independent and $(A A^H)^{-1}$ exists.
-In this case, the solution $\hat{\vecnot{s}}$ can be obtained in closed form and is given by
-\[ \hat{\vecnot{s}} = A^H \left( A A^H \right)^{-1} \vecnot{v}. \]
+Let $M \in \ComplexNumbers^{m\times n}$ with $m<n$ be the matrix representation of an underdetermined system of linearly independent equations and $\vecnot{y} \in \ComplexNumbers^m$ be any column vector.
+Since $M$ is a wide matrix, the system of linear equation given by
+\begin{equation*}
+\vecnot{y} = M \vecnot{x}
+\end{equation*}
+has an infinite number of solutions.
+We wish to find the minimum-norm vector $\vecnot{x}^*$ within the solution set $S = \{ \vecnot{s} | M \vecnot{s} = \vecnot{y} \}$,
+\begin{equation*}
+\vecnot{x}^* = \argmin_{\vecnot{x} \in S} \| \vecnot{x} \| .
+\end{equation*}
+To accomplish this goal, we draw a connection between this problem and the dual approximation theorem.
+First, we define $A = M^H$, which will enable us to use established notation.
+The matrix equation $\vecnot{y} = M \vecnot{x} = A^H \vecnot{x}$ can then be interpreted as a set of constraints of the form $\inner{ \vecnot{x} }{ \vecnot{w}_i } = y_i$ where $\vecnot{w}_i$ is the $i$th column of $A$.
+This is precisely the dual approximation of Theorem~\ref{thm:dual_approx}, with finite-dimensional vector space $\mathbb{C}^n$ and the standard inner product.
+Thus, the theorem implies that the minimum norm solution lies in $\mathcal{R}(A)$ or, equivalently, the row space of $M$.
+Using \eqref{equation:DualApproximation}, one gathers that $\hat{\vecnot{y}} = A^H A \vecnot{s} = M M^H \vecnot{s}$.
+Furthermore, by assumption, $M$ has linearly independent rows and, as such, Gramian matrix $A^H A = M M^H$ is invertible.
+The solution to the minimum-norm problem is then given by
+\begin{equation*}
+\vecnot{x}^* = A \vecnot{s} = A \left( A^H A \right)^{-1} \vecnot{y}
+= M^H \left( M M^H \right)^{-1} \vecnot{y} .
+\end{equation*}
+Matrix $M^+ = M^H \left( M M^H \right)^{-1}$ is the Moore-Penrose right inverse, often called the pseudoinverse, and $M M^+ = I$.
 
 
 \section{Projection onto Convex Sets}
@@ -996,7 +1059,7 @@ P_A (\vecnot{v}) \triangleq \arg \min_{\vecnot u\in A}\left\Vert \vecnot u-\vecn
 \]
 \end{definition}
 
-\begin{figure}
+\begin{figure}[hbt]
 \centering
 \begin{tikzpicture}[yscale=0.9,bullet/.style={circle,fill,inner sep=1.00pt,node contents={}}]
  \draw[-latex] (0,0) node[bullet,label=left:{$P_A(\vecnot{v}) \!=\! \vecnot{u}^*$},alias=PC]  -- (15:2.8) node[midway,sloped,above=0.25mm] {$\vecnot{v}\!-\! P_A(\vecnot{v})$}

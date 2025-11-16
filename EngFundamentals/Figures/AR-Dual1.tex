@@ -1,0 +1,22 @@
+\tdplotsetmaincoords{62.5}{120}
+\begin{tikzpicture}[tdplot_main_coords, font=\small, >=stealth', line width=1pt]
+
+\draw[gray, ->] (-2.5, 0, 0) -- (5, 0, 0) node[left] {$x$};
+\draw[gray, ->] (0, -2.5, 0) -- (0, 5, 0) node[below] {$y$};
+\draw[gray, ->] (0, 0, -1) -- (0, 0, 2.5) node[left] {$z$};
+
+\fill[black] (2, 3, 2) circle (2pt) node[right] {$\mathbf{v}$};
+\draw[->, black] (0, 0, 0) -- (2, 3, 2);
+
+\fill[blue] (0, 0, 2) circle (2pt) node[above right] {$\mathbf{u}^*$};
+\draw[->, blue] (0, 0, 0) -- (0, 0, 2);
+
+\draw[dotted] (0, 0, 2) -- (2, 3, 2);
+
+\draw[fill=black] (0, 0, 1.64) -- (0.2, 0.3, 1.64) -- (0.2, 0.3, 2) -- (0, 0, 2) -- cycle;
+
+\draw[fill=gray, opacity = 0.2] (-2, -2, 0) -- (-2, 4, 0) -- (4, 4, 0) -- (4, -2, 0) -- cycle;
+
+\draw[fill=blue, opacity = 0.2] (-2, -2, 2) -- (-2, 4, 2) -- (4, 4, 2) -- (4, -2, 2) -- cycle;
+
+\end{tikzpicture}
