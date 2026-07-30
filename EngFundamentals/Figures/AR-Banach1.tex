@@ -1,0 +1,41 @@
+\tdplotsetmaincoords{70}{110}
+\begin{tikzpicture}[tdplot_main_coords, font=\small, >=stealth', line width=1pt]
+
+% Coordinate System
+\draw[gray, ->] (-3.5,0,0) -- (4,0,0) node[left] {$x$};
+\draw[gray, ->] (0,-1.5,0) -- (0,4,0) node[below] {$y$};
+\draw[gray, ->] (0,0,-2) -- (0,0,3) node[left] {$z$};
+
+% Red Plane
+\draw[red,line width=0.75pt,densely dotted] (0.5,0,1) -- (1.5,0,1);
+\draw[red,line width=0.75pt,densely dotted] (1,0,0.75) -- (1,0,1.25);
+\fill[red] (1, 0, 1) circle (2pt) node[above left] {$\vecnot{w}$};
+\fill[red, opacity=0.2] (-2.5,0,-1.25) -- (3,0,-1.25) -- (3,0,2.25) -- (-2.5,0,2.25) -- cycle;
+
+% Octahedron Center
+\def\x{1}   % shift in x
+\def\y{2}   % shift in y
+\def\z{1}   % shift in z
+\draw[blue,line width=0.75pt,densely dotted] (\x-0.5,\y,\z) -- (\x+0.5,\y,\z);
+\draw[blue,line width=0.75pt,densely dotted] (\x,\y,\z-0.25) -- (\x,\y,\z+0.25);
+\draw[blue,line width=0.75pt,densely dotted] (\x,\y-0.25,\z) -- (\x,\y+0.25,\z);
+\fill[blue] (\x, \y, \z) circle (2pt) node[above right] {$\vecnot{v}$};
+
+% Octahedron Faces
+\fill[fill=blue, opacity = 0.1] (\x-2,\y,\z) -- (\x,\y-2,\z) -- (\x,\y,\z-2) -- cycle;
+\fill[fill=blue, opacity = 0.1] (\x-2,\y,\z) -- (\x,\y-2,\z) -- (\x,\y,\z+2) -- cycle;
+\fill[fill=blue, opacity = 0.1] (\x+2,\y,\z) -- (\x,\y+2,\z) -- (\x,\y,\z+2) -- cycle;
+\fill[fill=blue, opacity = 0.1] (\x,\y+2,\z) -- (\x-2,\y,\z) -- (\x,\y,\z+2) -- cycle;
+\fill[fill=blue, opacity = 0.1] (\x,\y-2,\z) -- (\x+2,\y,\z) -- (\x,\y,\z+2) -- cycle;
+\fill[fill=blue, opacity = 0.1] (\x+2,\y,\z) -- (\x,\y+2,\z) -- (\x,\y,\z-2) -- cycle;
+\fill[fill=blue, opacity = 0.1] (\x,\y+2,\z) -- (\x-2,\y,\z) -- (\x,\y,\z-2) -- cycle;
+\fill[fill=blue, opacity = 0.1] (\x,\y-2,\z) -- (\x+2,\y,\z) -- (\x,\y,\z-2) -- cycle;
+% Octahedron Edges
+\draw[draw=blue, line width=0.75] (\x,\y-2,\z) -- (\x+2,\y,\z) -- (\x,\y+2,\z);
+\draw[draw=blue, line width=0.75] (\x,\y,\z+2) -- (\x,\y-2,\z) -- (\x,\y,\z-2);
+\draw[draw=blue, line width=0.75] (\x,\y,\z+2) -- (\x+2,\y,\z) -- (\x,\y,\z-2);
+\draw[draw=blue, line width=0.75] (\x,\y,\z+2) -- (\x,\y+2,\z) -- (\x,\y,\z-2);
+\draw[draw=blue, dashed, line width=0.75] (\x,\y-2,\z) -- (\x-2,\y,\z) -- (\x,\y+2,\z);
+\draw[draw=blue, dashed, line width=0.75] (\x,\y,\z+2) -- (\x-2,\y,\z) -- (\x,\y,\z-2);
+
+\end{tikzpicture}

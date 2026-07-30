@@ -1,0 +1,19 @@
+\tdplotsetmaincoords{62.5}{120}
+\begin{tikzpicture}[tdplot_main_coords, font=\small, >=stealth', line width = 1pt]
+
+\draw[gray, ->] (-2.5, 0, 0) -- (5, 0, 0) node[left] {$x$};
+\draw[gray, ->] (0, -2.5, 0) -- (0, 5, 0) node[below] {$y$};
+\draw[gray, ->] (0, 0, 0) -- (0, 0, 2.5) node[left] {$z$};
+\draw[gray, dashed] (0, 0, -1) -- (0, 0, 0);
+
+\fill[black] (2, 3, 2) circle (2pt) node[right] {$\vecnot{v}$};
+\draw[->, black] (0, 0, 0) -- (2, 3, 2);
+
+\fill[blue] (2, 3, 0) circle (2pt) node[right] {$\hat{\vecnot{v}}$};
+\draw[->, blue] (0, 0, 0) -- (2, 3, 0);
+
+\draw[dotted] (2, 3, 2) -- (2, 3, 0);
+\draw[fill=black] (2, 3, 0.36) -- (1.8, 2.7, 0.36) -- (1.8, 2.7, 0) -- (2, 3, 0) -- cycle;
+
+\fill[fill=blue, opacity = 0.2] (-2, -2, 0) -- (-2, 4, 0) -- (4, 4, 0) -- (4, -2, 0) -- cycle;
+\end{tikzpicture}
