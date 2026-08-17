@@ -21,19 +21,18 @@ Since both are finite dimensional in our example, the linear transform $T$ is re
 f'(\vecnot{x})(\vecnot{h}) = T \vecnot{h} = J(\vecnot{x}) \; \vecnot{h} .
 \end{equation*}
 Mathematically, such definitions require the structure of a Banach space because one needs the linear structure to compute differences, and the norm topology to define limits.
-Completeness guarantees that limits exist under mild conditions.
+Completeness guarantees that Cauchy sequences converge to limits inside the space.
 
 In Chapter~\ref{chap:metric_spaces}, limits are discussed primarily for sequences but Definition~\ref{def:cont_limit} does extend this to cases where points approach other points.
 By treating Banach spaces as metric spaces, we arrive at the following induced definition of such limits.
 
 \begin{definition}
   For Banach spaces $X,Y$ with $f\colon X \to Y$ and $x,z \in X$, we define $\lim_{x\to z} f(x)$ as follows.
-  For $y\in Y$, we say that $\lim_{x\to z} f(x) = y$ (i.e., the limit as $x \to z$ of $f(x)$ equals $y$) if $f(x_n) \to y$ for all sequences $x_n \in X$ such that $x_n \to y$.
+  For $y\in Y$, we say that $\lim_{x\to z} f(x) = y$ (i.e., the limit as $x \to z$ of $f(x)$ equals $y$) if $f(x_n) \to y$ for all sequences $x_n \in X \setminus \{z\}$ such that $x_n \to z$.
   If there is no such $y\in Y$, then we say the limit does not exist.
   
-  The proof of Theorem~\ref{thm:cont_fun_limit} shows that this is equivalent to: for any $\epsilon> 0$, there is a $\delta >0$ such that, for all $x\in X$ satisfying $\|x - z\|< \delta$, we have $\| y - f(x) \| < \epsilon$.
+  The proof of Theorem~\ref{thm:cont_fun_limit} shows that this is equivalent to: for any $\epsilon> 0$, there is a $\delta >0$ such that, for all $x\in X$ satisfying $0<\|x - z\|< \delta$, we have $\| y - f(x) \| < \epsilon$.
 \end{definition}
-
 
 \begin{definition}
 Let $f \colon X \rightarrow Y$ be a mapping from a vector space $X$ over $\RealNumbers$ to a Banach space $(Y,\|\cdot\|)$.
@@ -77,7 +76,7 @@ Assuming the set $\{ s\in [0,1] | x(s)=0 \}$ has measure 0, show that
 \begin{definition}
 Let $f \colon X \rightarrow Y$ be a mapping from a vector space $X$ over $\RealNumbers$ to a Banach space $(Y,\|\cdot\|)$.
 Then, $f$ is \defn{optimization}{G\^{a}teaux differentiable} at $\vecnot{x}$ if the G\^{a}teaux differential $\delta f (\vecnot{x};\vecnot{h})$ exists for all $\vecnot{h} \in X$ and is a linear function of $\vecnot{h}$.
-If, in addition, $X$ is a Banach space, then $\delta f (\vecnot{x};\vecnot{h})$ must be a continuous linear function of $\vecnot{h}$.
+If $X$ is a Banach space, then we require that $\delta f (\vecnot{x};\vecnot{h})$ is a continuous linear function of $\vecnot{h}$.
 \end{definition}
 
 \begin{remark}
@@ -100,8 +99,9 @@ A function $f\colon \RealNumbers^n \to \RealNumbers^m$ with $f = (f_1,f_2,\ldots
 \frac{\partial  f_2}{\partial  x_1} (\vecnot{x}) & \frac{\partial  f_2}{\partial  x_2} (\vecnot{x}) & \cdots & \frac{\partial  f_2}{\partial  x_n} (\vecnot{x}) \\
 \vdots & \vdots & \ddots & \vdots \\
 \frac{\partial  f_m}{\partial  x_1} (\vecnot{x}) & \frac{\partial  f_m}{\partial  x_2} (\vecnot{x}) & \cdots & \frac{\partial  f_m}{\partial  x_n} (\vecnot{x}) \end{array} \right], \]
-exists and is continuous in $\vecnot{x}$ at $\vecnot{x}=\vecnot{x}_0$.
-A necessary and sufficient condition for this is that each partial derivative is continuous in $\vecnot{x}$ at $\vecnot{x}=\vecnot{x}_0$.
+exists.
+If $J(\vecnot{x})$ exists, then its operator norm $\| J(\vecnot{x}) \| < \infty$ because it is finite-dimensional.
+A sufficient condition for differentiability is that each partial derivative exists and is continuous in $\vecnot{x}$ at $\vecnot{x}=\vecnot{x}_0$.
 
 If $m=1$, then the Jacobian is closely related to the \defn{optimization}{gradient} of the function
 \[ \nabla f(\vecnot{x}) \triangleq f'(\vecnot{x})^H =  \left[ \begin{array}{cccc} \frac{\partial  f}{\partial  x_1} (\vecnot{x}) & \frac{\partial  f}{\partial  x_2} (\vecnot{x}) & \cdots & \frac{\partial  f}{\partial  x_n} (\vecnot{x}) \end{array} \right]^H . \]
@@ -138,69 +138,47 @@ Letting $T=f'(\vecnot{x})$, we can combine this with~\eqref{eq:frechet_def} to s
 Thus, the G\^{a}teaux differential exists and satisfies $\delta f (\vecnot{x};\vecnot{h}) = T (\vecnot{h}) = f'(\vecnot{x}) (\vecnot{h})$.
 \end{proof}
 
-\begin{theorem}
+\begin{theorem} \label{thm:frechet_chain_rule}
 Let $X,Y,Z$ be Banach spaces and let $f \colon X \rightarrow Y$ and $g\colon Y \to Z$ be functions.
 If $f$ is Fr\'{e}chet differentiable at $\vecnot{x}$ and $g$ is Fr\'{e}chet differentiable at $\vecnot{y}=f(\vecnot{x})$, then $(g \circ f) (\vecnot{x}) = g(f(\vecnot{x}))$ is Fr\'{e}chet differentiable at $\vecnot{x}$ with derivative $g'(f(\vecnot{x}))\circ f'(\vecnot{x})$.
 \end{theorem}
 
 \begin{proof}
-For the stated derivatives, the errors in the implied linear approximations are 
-\begin{align*}
-\phi(\vecnot{v}) &= f(\vecnot{x} + \vecnot{v})-f(\vecnot{x}) - f'(\vecnot{x})(\vecnot{v}) \\
-\psi(\vecnot{u}) &= g(\vecnot{y} + \vecnot{u})-g(\vecnot{y}) - g'(\vecnot{y})(\vecnot{u}) \\
-\rho(\vecnot{h}) &= g(f(\vecnot{x} + \vecnot{h})) -g(f(\vecnot{x})) - \left( g'(\vecnot{y}) \circ f'(\vecnot{x})\right) (\vecnot{h}).
-\end{align*}
-From the assumptions of differentiability, we know that the first two approximations become tight for small perturbations.
-In other words,
-\begin{align*}
-\lim_{\vecnot{v} \to \vecnot{0}} \frac{\| \phi (\vecnot{v}) \|_Y}{\|\vecnot{v}\|_X} = 0,  \quad\quad\quad\quad \lim_{\vecnot{u} \to \vecnot{0}} & \frac{\| \psi (\vecnot{u})\|_Z}{\|\vecnot{u}\|_Y} = 0.
-\end{align*}
-Next, we observe that the definition of $\phi$ implies
-\[ g(f(\vecnot{x} + \vecnot{h})) -g(f(\vecnot{x})) = g \big( f(\vecnot{x}) + f'(\vecnot{x})(\vecnot{h}) + \phi(\vecnot{h}) \big) - g(\vecnot{y}). \]
-Combining this with the definition of $\rho$ shows that
-\begin{align*}
-\rho(\vecnot{h}) &= g \big( f(\vecnot{x}) + f'(\vecnot{x})(\vecnot{h}) + \phi(\vecnot{h}) \big) - g(\vecnot{y}) - \left( g'(\vecnot{y}) \circ f'(\vecnot{x})\right) (\vecnot{h}) \\
-&= \psi \big(f'(\vecnot{x})(\vecnot{h}) + \phi(\vecnot{h}) \big) + g'(\vecnot{y})\big( f'(\vecnot{x})(\vecnot{h}) + \phi(\vecnot{h}) \big) - \left( g'(\vecnot{y}) \circ f'(\vecnot{x})\right) (\vecnot{h}) \\
-&= \psi \big(f'(\vecnot{x})(\vecnot{h}) + \phi(\vecnot{h}) \big) + g'(\vecnot{y})(\phi(\vecnot{h})).
-\end{align*}
-We take this opportunity to note that $\|g'(f(\vecnot{x}))\circ f'(\vecnot{x})\| \leq \|g'(f(\vecnot{x}))\| \|f'(\vecnot{x})\| \leq \infty$ because $\|f'(\vecnot{x})\|\leq \infty$ and $\|g'(f(\vecnot{x}))\| <\infty$. 
-Since $\lim_{\vecnot{h} \to \vecnot{0}} \| \phi (\vecnot{h}) \|_Y / \|\vecnot{h}\|_X = 0$, there is a $t>0$ such that $\|\phi(\vecnot{h})\|_Y \leq \|f'(\vecnot{x})\| \|\vecnot{h}\|_X$ if $\|\vecnot{h}\|_X < t$.
-Under the same condition, it follows that $2 \|f'(\vecnot{x})\| \|\vecnot{h}\|_X \geq \|f'(\vecnot{x})\| \|\vecnot{h}\|_X + \| \phi(\vecnot{h}) \|_Y$. 
-Using this, we can write
-\begin{align*}
-\frac{\|\rho(\vecnot{h})\|_Z}{\|\vecnot{h}\|_X}
-&= \frac{\| \psi \big(f'(\vecnot{x})(\vecnot{h}) + \phi(\vecnot{h}) \big) + g'(\vecnot{y})(\phi(\vecnot{h})) \|_Z}{\|\vecnot{h}\|_X} \\
-&\leq 2 \|f'(\vecnot{x})\|  \frac{\| \psi \big(f'(\vecnot{x})(\vecnot{h}) + \phi(\vecnot{h}) \big) \|_Z}{ 2 \|f'(\vecnot{x})\|  \|\vecnot{h}\|_X} + \frac{\|  g'(\vecnot{y})(\phi(\vecnot{h})) \|_Z}{\|\vecnot{h}\|_X} \\
-& \leq 2 \|f'(\vecnot{x})\| \frac{\| \psi \big(f'(\vecnot{x})(\vecnot{h}) + \phi(\vecnot{h}) \big) \|_Z}{\|f'(\vecnot{x})\| \|\vecnot{h}\|_X + \| \phi(\vecnot{h}) \|_Y} + \frac{\|  g'(\vecnot{y})\| \|\phi(\vecnot{h}) \|_Y}{\|\vecnot{h}\|_X} \\
-& \leq 2 \|f'(\vecnot{x})\| \frac{\| \psi \big(f'(\vecnot{x})(\vecnot{h}) + \phi(\vecnot{h}) \big) \|_Z}{\|f'(\vecnot{x}) (\vecnot{h}) + \phi(\vecnot{h})\|_Y} + \frac{\|  g'(\vecnot{y})\| \|\phi(\vecnot{h}) \|_Y}{\|\vecnot{h}\|_X}.
-\end{align*}
-Since $(f'(\vecnot{x}) (\vecnot{h}) + \phi(\vecnot{h})) \to \vecnot{0}$ as $\vecnot{h}\to\vecnot{0}$, it follows that the limit of the RHS, as $\vecnot{h}\to\vecnot{0}$, also exists and equals 0.
-Thus, $\lim_{\vecnot{h} \to \vecnot{0}} \| \rho (\vecnot{h}) \|_Z / \|\vecnot{h}\|_X = 0$ and the Fr\'{e}chet derivative of $g(f(\vecnot{x}))$ exists and satisfies the chain rule.
+Deferred to Section~\ref{sec:opt_def_proof}.
 \end{proof}
 
-%\iffalse
-\begin{theorem} \label{theorem:mean_value_inequality}
-Let $X,Y$ be Banach spaces and $f \colon X \rightarrow Y$ be a function.
-For $\vecnot{x}_1,\vecnot{x}_2 \in X$, let $\vecnot{h} = \vecnot{x}_2 - \vecnot{x}_1$ and assume the G\^{a}teaux differential $\delta f \big( (1-s)\vecnot{x}_1+s\vecnot{x}_2; \vecnot{h}\big)$ exists for all $s\in [0,1]$.
-Then, $\|f(\vecnot{x}_2)-f(\vecnot{x}_1)\| \leq M \| \vecnot{x}_2 - \vecnot{x}_1 \|$, where
-\[ M = \frac{\sup_{s \in [0,1]} \| \delta f \big( (1-s)\vecnot{x}_1+s\vecnot{x}_2; \vecnot{h}\big)\|}{\| \vecnot{x}_2 - \vecnot{x}_1 \|}. \]
+
+\begin{theorem}
+\label{theorem:mean_value_inequality}
+Let \(X,Y\) be Banach spaces and \(f\colon X\to Y\).
+For \(\vecnot{x}_1,\vecnot{x}_2\in X\), let $\vecnot{h}=\vecnot{x}_2-\vecnot{x}_1 \neq \vecnot{0}$
+and assume that the G\^{a}teaux differential $\delta f\big((1-s)\vecnot{x}_1+s\vecnot{x}_2;\vecnot{h}\big)$ exists for every \(s\in[0,1]\).
+Then, we have
+\[
+\|f(\vecnot{x}_2)-f(\vecnot{x}_1)\|
+\leq
+M\|\vecnot{x}_2-\vecnot{x}_1\|,
+\]
+where
+\[
+M
+=
+\frac{
+\displaystyle
+\sup_{s\in[0,1]}
+\left\|
+\delta f\big((1-s)\vecnot{x}_1+s\vecnot{x}_2;\vecnot{h}\big)
+\right\|
+}{
+\|\vecnot{x}_2-\vecnot{x}_1\|
+}.
+\]
 \end{theorem}
+
 \begin{proof}
-For $\vecnot{w}_1 = \frac{1}{2}(\vecnot{x}_1+\vecnot{x}_2)$, observe that
-\begin{align*}
-\frac{\|f(\vecnot{x}_2)-f(\vecnot{x}_1)\|}{\| \vecnot{x}_2 - \vecnot{x}_1 \|} &=  \frac{\|f(\vecnot{x_2})-f(\vecnot{w}_1) + f(\vecnot{w}_1)-f(\vecnot{x}_1)\|}{\| \vecnot{x}_2 - \vecnot{x}_1 \|} \\
-&\leq 
- \frac{\|f(\vecnot{x}_2)-f(\vecnot{w}_1)\| + \|f(\vecnot{w}_1)-f(\vecnot{x}_1)\|}{\| \vecnot{x}_2 - \vecnot{x}_1 \|} \\
-&=  \frac{\|f(\vecnot{x}_2)-f(\vecnot{w}_1)\|}{2 \| \vecnot{x}_2 - \vecnot{w}_1 \|} +  \frac{\|f(\vecnot{w}_1)-f(\vecnot{x}_1)\|}{2 \| \vecnot{w}_1 - \vecnot{x}_1 \|}.
-\end{align*}
-Suppose that $\|f(\vecnot{x}_2)-f(\vecnot{x}_1)\| > M \| \vecnot{x}_2 - \vecnot{x}_1\|$.
-Then, there is an $\epsilon > 0$ such that one or both of the following conditions must hold:
-\[ \frac{\|f(\vecnot{x}_2)-f(\vecnot{w}_1)\|}{\| \vecnot{x}_2 - \vecnot{w}_1 \|} \geq M + \epsilon  \quad \text{and} \quad \frac{\|f(\vecnot{w}_1)-f(\vecnot{x}_1)\|}{\| \vecnot{w}_1 - \vecnot{x}_1 \|} \geq M + \epsilon. \]
-Repeating indefinitely and choosing a satisfying subinterval at each step, one gets a sequence $\vecnot{w}_n$ of midpoints that converges to $\vecnot{x}=  (1-s)\vecnot{x}_1+s\vecnot{x}_2 $ for some $s\in [0,1]$.
-Since the G\^{a}teaux differential $\delta f (\vecnot{x};\vecnot{h})$ exists by assumption, it follows that
-\[ M + \epsilon \leq \frac{\|f(\vecnot{w}_n)-f(\vecnot{x})\|}{\| \vecnot{w}_n - \vecnot{x} \|} = \left\| \frac{f(\vecnot{x}\pm 2^{-n} \vecnot{h})-f(\vecnot{x})}{2^n \| \vecnot{x}_2 - \vecnot{x}_1 \|} \right\| \to \frac{\| \delta f (\vecnot{x};\vecnot{h}) \|}{\| \vecnot{x}_2 - \vecnot{x}_1 \|}. \] 
-This contradicts the definition of $M$ and, thus, $\|f(\vecnot{x}_2)-f(\vecnot{x}_1)\| \leq M \| \vecnot{x}_2 - \vecnot{x}_1\|$.
+Deferred to Section~\ref{sec:opt_def_proof}.
 \end{proof}
+
 
 \begin{lemma}
 Let $X,Y$ be Banach spaces and $f \colon X \rightarrow Y$ be a function.
@@ -212,14 +190,14 @@ Assume $\| f'(\vecnot{x})\| \leq L$ for all $\vecnot{x}$ in a convex set $A\subs
 Then, for any $\vecnot{x}_1 , \vecnot{x}_2 \in A$, let $\vecnot{h} = \vecnot{x}_2 - \vecnot{x}_1$ and notice that Theorem~\ref{theorem:frechet2gateaux} implies that
 \[ \| \delta f \big( \vecnot{x}_1+s\vecnot{h}; \vecnot{h}\big) \|  = \| f'\big( \vecnot{x}_1+s\vecnot{h} \big)(\vecnot{h}) \| \leq \| f'(\vecnot{x}_1 + s \vecnot{h})\| \|\vecnot{h} \|, \] 
 for all $s\in [0,1]$.
-Applying Theorem~\ref{theorem:mean_value_inequality}, we see that $\|f(\vecnot{x}_2)-f(\vecnot{x}_1)\| \leq M \| \vecnot{x}_2 - \vecnot{x}_1\|$ with $M \leq \| f'(\vecnot{x})\| \leq L$.
+Applying Theorem~\ref{theorem:mean_value_inequality}, we obtain $\|f(\vecnot{x}_2)-f(\vecnot{x}_1)\|\leq M\|\vecnot{x}_2-\vecnot{x}_1\|$, where $M\leq\sup_{s\in[0,1]}\|f'(\vecnot{x}_1+s\vecnot h)\|\leq L$.
 This completes the proof.
 \end{proof}
 %\fi
 
 \begin{lemma}
-Let $f \colon X \rightarrow \RealNumbers$ map the Hilbert space $X$ to the real numbers.
-If $\nabla f(\vecnot{x})$ exists and satisfies $ \| \nabla f(\vecnot{y}) - \nabla f(\vecnot{x}) \| \leq L \| \vecnot{y} - \vecnot{x} \|$, then
+Let $f \colon X \rightarrow \RealNumbers$ map the Hilbert space $X$ to the real numbers and $A\subseteq X$ be convex.
+If $\nabla f(\vecnot{x})$ exists for $\vecnot{x}\in A$, and satisfies $ \| \nabla f(\vecnot{x}) - \nabla f(\vecnot{y}) \| \leq L \| \vecnot{x} - \vecnot{y} \|$ for $\vecnot{x},\vecnot{y}\in A$, then, for all $\vecnot{x},\vecnot{y}\in A$, we have
 \[ \big| f(\vecnot{y}) - f(\vecnot{x}) - \tinner{\vecnot{y}-\vecnot{x} }{ \nabla f (\vecnot{x}) } \big| \leq \frac{1}{2} L \| \vecnot{y}-\vecnot{x} \|^2. \]
 \end{lemma}
 
@@ -301,12 +279,12 @@ If the bound holds for all $x\in X$, then the local minimum is also a \defn{func
 
 \begin{theorem}
 Let $(X,\|\cdot\|)$ be a normed vector space and $f\colon X \to \mathbb{R}$ be a real functional.
-If $\delta f (\vecnot{x}_0,\vecnot{h})$ exists and is negative for any $\vecnot{h} \in X$, then $\vecnot{x}_0$ is not a local minimum value.
+If $\delta f (\vecnot{x}_0;\vecnot{h})$ exists and is negative for some $\vecnot{h} \in X$, then $\vecnot{x}_0$ is not a local minimum value.
 \end{theorem}
 \begin{proof}
-First, we apply Lemma~\ref{lemma:gateaux_negative} with the $\vecnot{x}$ and $\vecnot{h}$ for which $\delta f (\vecnot{x}_0,\vecnot{h})<0$.
+First, we apply Lemma~\ref{lemma:gateaux_negative} with the $\vecnot{x}$ and $\vecnot{h}$ for which $\delta f (\vecnot{x}_0;\vecnot{h})<0$.
 This gives a $t_0 >0$ such that $f(\vecnot{x}_0+t \vecnot{h})<f(\vecnot{x}_0)$ for all $t\in (0,t_0)$.
-Thus, there can no be no $\epsilon>0$ satisfying the definition of a local minimum value in  Definition~\ref{definition:minimum_value}.
+Thus, there can be no $\epsilon>0$ satisfying the definition of a local minimum value in  Definition~\ref{definition:minimum_value}.
 \end{proof}
 
 \section{Convex Functionals}
@@ -321,13 +299,14 @@ Let $V$ be a vector space, $A \subseteq V$ be a convex set, and $f \colon V \rig
 Then, a functional $f$ is called \defn{functions}{convex} on $A$ if, for all $\vecnot{a}_1,\vecnot{a}_2 \in A$ and $\lambda\in(0,1)$, we have
 \[ f( \lambda \vecnot{a}_1 + (1-\lambda) \vecnot{a}_2 ) \leq \lambda f( \vecnot{a}_1 ) + (1-\lambda) f ( \vecnot{a}_2 ). \]
 The functional is \textbf{strictly convex} if equality occurs only when $\vecnot{a}_1 = \vecnot{a}_2$.
-A functional is $f$ is called (strictly) \defn{functions}{concave} if $-f$ is (strictly) convex.
+A functional $f$ is called (strictly) \defn{functions}{concave} if $-f$ is (strictly) convex.
 \end{definition}
 
 \begin{definition}
 A Banach space $X$ is called \defn{Banach space}{strictly convex} if the unit ball,  given by $\{ x\in X | \, \| x \| \leq 1 \}$, is a strictly convex set.
-An equivalent condition is that equality in the triangle inequality (i.e., $\| \vecnot{x} + \vecnot{y} \| = \| \vecnot{x} \| + \| \vecnot{y} \|$) for non-zero vectors implies that $ \vecnot{x} = s \vecnot{y} $ for some $s\in F$.
+An equivalent condition is that equality in the triangle inequality (i.e., $\| \vecnot{x} + \vecnot{y} \| = \| \vecnot{x} \| + \| \vecnot{y} \|$) for non-zero vectors implies that $ \vecnot{x} = s \vecnot{y} $ for some $s\in \mathbb{R}_{>0}$.
 \end{definition}
+
 
 \begin{example}
 Let $(X,\|\cdot\|)$ be a normed vector space.
@@ -336,7 +315,7 @@ Proving this is a good introductory exercise.
 \end{example}
 
 \begin{example}
-Let $X$ be an an inner-product space. For $\vecnot{x},\vecnot{y} \in X$ and $\lambda \in (0,1)$,
+Let $X$ be an inner-product space. For $\vecnot{x},\vecnot{y} \in X$ and $\lambda \in (0,1)$,
 \begin{align*}
 \|\lambda \vecnot x + (1-\lambda) \vecnot y \|^2
 &= \lambda^2 \| \vecnot x\|^2 + 2\lambda(1-\lambda) \Real \tinner{ \vecnot x }{  \vecnot y } + (1-\lambda)^2 \|\vecnot y\|^2 \\
@@ -384,7 +363,7 @@ f \left(\vecnot{x}_0 + \lambda (\vecnot{x}-\vecnot{x}_0) \right) \leq f(\vecnot{
 for all $\lambda\in (0,1)$.
 Also, if $f$ is strictly convex, then~\eqref{eq:convex_above_tangent} strict for $\vecnot{x} \neq \vecnot{x}_0$.
 Thus,
-\[  f(\vecnot{x}) \geq f(\vecnot{x}_0) + \frac{f \left(\vecnot{x} + \lambda (\vecnot{x}-\vecnot{x}_0) \right)- f(\vecnot{x}_0)}{\lambda} \]
+\[  f(\vecnot{x}) \geq f(\vecnot{x}_0) + \frac{f \left(\vecnot{x}_0 + \lambda (\vecnot{x}-\vecnot{x}_0) \right)- f(\vecnot{x}_0)}{\lambda} \]
 and taking the limit at $\lambda \downarrow 0$ completes the proof for a convex functional.
 
 For the case where $f$ is strictly convex, we first apply the convex result to see
@@ -399,7 +378,7 @@ where the second inequality holds because \eqref{eq:convex_above_tangent} is a s
 
 \begin{corollary}
 Let $(X,\|\cdot\|)$ be a normed vector space and $f \colon X \rightarrow \RealNumbers$ be a convex functional on a convex set $A \subseteq X$.
-If $f$ is G\^{a}teaux differentiable at $\vecnot{x}_0 \in A$ and $\delta f (\vecnot{x}_0;\vecnot{x}-\vecnot{x}_0) = 0$ for all $\vecnot{x} \in A$, then
+If $f$ is G\^{a}teaux differentiable at $\vecnot{x}_0 \in A$ and $\delta f (\vecnot{x}_0;\vecnot{x}-\vecnot{x}_0) \geq 0$ for all $\vecnot{x} \in A$, then
 \[ f(\vecnot{x}_0) = \min_{\vecnot{x}\in A} f(\vecnot{x}). \]
 If $f$ is strictly convex, $\vecnot{x}_0$ is the unique minimizer over $A$.
 \end{corollary}
@@ -414,7 +393,7 @@ These approaches have become so common that convex Lagrangian optimization probl
 For simplicity, we focus on the case where the domain $\mathcal{D}$ is a subset of the finite-dimensional real space $\RealNumbers^n$.
 
 Constrained non-linear optimization problems over $\mathcal{D} \subseteq \mathbb{R}^n$ can be put into the following \defn{optimization}{standard form}.
-Let $f_i \colon \mathcal{D} \rightarrow \mathbb{R}$ and $h_j \colon \mathcal{D} \rightarrow \mathbb{R}$ be a real functionals on $\mathcal{D}$ for $i=0,1,\ldots,m$ and $j=1,2,\ldots,p$.
+Let $f_i \colon \mathcal{D} \rightarrow \mathbb{R}$ and $h_j \colon \mathcal{D} \rightarrow \mathbb{R}$ be real-valued functions on $\mathcal{D}$ for $i=0,1,\ldots,m$ and $j=1,2,\ldots,p$.
 Then, the standard form is
 \begin{align*}
 \mathrm{minimize} \quad & f_0 (\vecnot{x}) \\
@@ -437,7 +416,7 @@ The \defn{optimization}{optimal value} is
 By convention, $p^*$ is allowed to take infinite values and $p^* = \infty$ if the problem is not feasible.
 \end{definition}
 
-Evaluating the function at any feasible point automatically an upper bound because
+Evaluating the objective function at any feasible point automatically gives an upper bound on $p^*$ because
 \[ p^* \leq f_0 (\vecnot{x}) \; \forall \vecnot{x}\in \mathcal{F}. \]
 
 The optimization of a linear function with arbitrary affine equality and inequality constraints is called a \defn{optimization}{linear program}.
@@ -485,15 +464,15 @@ where $\lambda_i$ is the \defn{optimization}{Lagrange multiplier} associated wit
 \end{definition}
 
 \begin{definition}
-A point $\vecnot{x}^*$ is called \defn{optimization}{locally optimal} if there is an $\epsilon_0 >0$ such that, for all $\epsilon< \epsilon_0$, it holds that $f_0 (\vecnot{x}) \geq f_0 (\vecnot{x}^*)$ for all $\vecnot{x} \in \mathcal{F}$ satisfying $\| \vecnot{x} - \vecnot{x}^* \| < \epsilon$.
+A point $\vecnot{x}^*$ is called \defn{optimization}{locally optimal} if there is an $\epsilon_0>0$ such that $f_0(\vecnot{x})\geq f_0(\vecnot{x}^*)$ for every $\vecnot{x}\in\mathcal F$ satisfying $\|\vecnot{x}-\vecnot{x}^*\|<\epsilon_0$.
 The $i$-th inequality constraint is \defn{optimization}{active} at $\vecnot{x}^*$ if $f_i (\vecnot{x}^*)=0$.
 Otherwise, it is inactive.
 Let $A = \{ i\in \{1,\ldots,m\} \, | \, f_i (\vecnot{x}^*)=0 \}$ be the set of active constraints at $\vecnot{x}^*$.
 \end{definition}
 
 \begin{definition}[Mangasarian-Fromovitz]
-A standard constrained optimization problem satisfies the MF constraint qualification at $\vecnot{x}^*$ if the functions $f_i$ and $h_j$ are all continuously differentiable at $\vecnot{x}^*$ and there exists a vector $\vecnot{w}\in \mathbb{R}^n$ satisfying $\nabla f_i (\vecnot{x}^*)^T \vecnot{w} < 0$ for $i\in A$ and $\nabla h_j (\vecnot{x}^*)^T \vecnot{w} = 0$ for $j = 1,\ldots,p$.
-If the constraints $h_j$ are not all affine, then one additionally needs that the vectors $\nabla h_1 (\vecnot{x}^*),\ldots,\nabla h_p (\vecnot{x}^*) \in \mathbb{R}^n$ form a linearly independent set.
+A standard constrained optimization problem satisfies the MF constraint qualification at $\vecnot{x}^*$ if the functions $f_i$ and $h_j$ are all continuously differentiable at $\vecnot{x}^*$, $\nabla h_1(\vecnot{x}^*),\ldots,\nabla h_p(\vecnot{x}^*)$ are linearly independent, there exists $\vecnot w\in\mathbb R^n$ such that $\nabla h_j(\vecnot{x}^*)^T\vecnot w=0$ for $j = 1,\ldots,p$, and $\nabla f_i(\vecnot{x}^*)^T\vecnot w<0$ for every $i\in A$.
+Redundant affine equalities can be removed before applying this definition.
 \end{definition}
 
 \begin{theorem}[Karush-Kuhn-Tucker]
@@ -507,17 +486,17 @@ If $\vecnot{x}^*$ is a constrained local optimum that satisfies the MF constrain
 \end{theorem}
 
 This theorem provides a necessary condition for a point $\vecnot{x}^*$ to be locally optimal for a constrained optimization problem.
-Before considering its proof, it is useful to discuss the geometric picture underlying its contrapositive statement: if \eqref{eq:KKT1} does not hold for all $\vecnot{\lambda}^* \geq 0$ and $\vecnot{\nu}^* \in \mathbb{R}^p$, then $\vecnot{x}^*$ is not locally optimal.
+Before considering its proof, it is useful to discuss the geometric picture underlying its contrapositive statement: if \eqref{eq:KKT1} does not hold for any $\vecnot{\lambda}^* \geq 0$ and $\vecnot{\nu}^* \in \mathbb{R}^p$, then $\vecnot{x}^*$ is not locally optimal.
 
 Now, consider what happens if we evaluate the function at $\vecnot{x}(t) = \vecnot{x}^* + t \vecnot{y}$ for some direction $\vecnot{y}$ and a sufficiently small $t>0$.
 For any continuously differentiable function $f$, the definition of the derivative implies that
 \[ f(\vecnot{x}(t)) = f(\vecnot{x}^*)+t \nabla f(\vecnot{x}^*)^T \vecnot{y} + o(t), \]
-where $o(t) \to 0$ as $t \to 0$.
+where $o(t)/t=o(1) \to 0$ as $t \to 0$.
 If the problem is unconstrained (e.g., $m=p=0$), then $\nabla f_0 (\vecnot{x}^*)$ must be $\vecnot{0}$.
 This is because the negative gradient $-\nabla f_0 (\vecnot{x}^*)$ gives the direction of steepest descent for the objective function and one is guaranteed to reduce the function by choosing $\vecnot{y}=-\nabla f_0 (\vecnot{x}^*)$ (e.g., see Lemma~\ref{lemma:gateaux_negative}).
 If there are constraints, however, then $\vecnot{x}(t)$ may be infeasible.
 For the $j$-th equality constraint, the definition of the derivative implies that, for sufficiently small $t$, $\vecnot{x}(t)$ will be infeasible if $|\nabla h_j (\vecnot{x}^*)^T \vecnot{y} | > 0$.
-Thus, we certainly need $\nabla h_j (\vecnot{x}^*)^T \vecnot{y}  = 0$ for all $j$.
+Thus, we also need $\nabla h_j (\vecnot{x}^*)^T \vecnot{y}  = 0$ for all $j$.
 
 
 If the $i$-th inequality constraint is active (i.e., $f_i (\vecnot{x}^*)=0$), then the definition of the derivative implies that, for sufficiently small $t$, $\vecnot{x}(t)$ will be infeasible if $\nabla f_i (\vecnot{x}^*)^T \vecnot{y}  > 0$.
@@ -534,10 +513,11 @@ If the constraint is inactive (i.e., $f_i (\vecnot{x}^*)<0$), then due to contin
 \end{figure}
 
 The geometric picture implied by Theorem~\ref{theorem:KKT} is that of a game where one would like to decrease the objective $f_0 (\vecnot{x}^*)$ by choosing $\vecnot{y}$ such that $\nabla f_0 (\vecnot{x}^*)^T \vecnot{y}  < 0$ but there are  constraints on the set of allowable $\vecnot{y}$'s.
-Let $H = \Span ( \{ \nabla h_j (\vecnot{x}^*) \})$ be the subspace of directions that violate the equality constraints at $\vecnot{x}^*$.
-Similarly, let the cone of directions that violate the active inequality constraints is given by
+
+Let $H=\Span\{\nabla h_j(\vecnot{x}^*):j=1,\ldots,p\}$ be the normal space generated by the equality constraints.  Similarly, let $F$ be the cone generated by the normals of the active inequality constraints
 \[ F = \left\{ \sum_{i\in A} \lambda_i \nabla f_i (\vecnot{x}^*) \, \middle| \, \lambda_i \geq 0, i \in A   \right\}. \]
-Thus, one can only pick directions $\vecnot{y}$ that are orthogonal to all vectors in $H$ and also have a non-positive inner product with all vectors in $F$.
+Thus, a first-order feasible direction $\vecnot y$ must lie in $H^\perp$ and satisfy $\vecnot u^T\vecnot y\leq0$ for every $\vecnot u\in F$.
+%Thus, one can only pick directions $\vecnot{y}$ that are orthogonal to all vectors in $H$ and also have a non-positive inner product with all vectors in $F$.
 
 Let the matrix $P$ define the orthogonal projection of $\mathbb{R}^n$ onto $H^\perp$.
 Using this, we can translate the equation~\eqref{eq:KKT1} into the statement
@@ -554,7 +534,7 @@ The challenge in making this proof precise is that, unless the equality constrai
 In standard proofs of this result, this difficulty is overcome by using the implicit function theorem to construct an $\vecnot{x} (t)$ that starts in the direction of $\vecnot{y}$ but is perturbed slightly to remain feasible.
 
 \begin{proof}
-For simplicity, we prove only the case where $h_j (\vecnot{x}) = \vecnot{a}_j^T \vecnot{x} - \vecnot{b}$ is affine.
+For simplicity, we prove only the case where $h_j (\vecnot{x}) = \vecnot{a}_j^T \vecnot{x} - b_j$ is affine for $j=1,\ldots,p$.
 %and $PF$ does contain a line (i.e., $\{\alpha \vecnot{z}\,|\, \alpha \in \mathbb{R}\}$ for some $\vecnot{z}$).
 First, we define 
 \[ \vecnot{y} (\vecnot{\lambda},\vecnot{\nu}) = -\nabla f_0 (\vecnot{x}^*) - \sum_{i=1}^m \lambda_i \nabla f_i (\vecnot{x}^*) - \sum_{j=1}^p \nu_j \underbrace{\nabla h_j (\vecnot{x}^*)}_{\vecnot{a}_j}. \]
@@ -578,14 +558,15 @@ Using this, we can write
 &= (\vecnot{v} - \vecnot{u}^*)^T (\vecnot{v} - \vecnot{u}^*) + (\vecnot{u}^*)^T (\vecnot{v} - \vecnot{u}^*) \\
 &\geq \|\vecnot{y}^*\|^2.
 \end{align*}
-If~\eqref{eq:KKT1} cannot be satisfied by some $\vecnot{\lambda} \in S$ and $\vecnot{\nu} \in \mathbb{R}^p$, then $\vecnot{y}^* \neq \vecnot{0}$ and $\| \vecnot{y}^* \| > 0$.
+If~\eqref{eq:KKT1} cannot be satisfied by any $\vecnot\lambda\in S$ and $\vecnot\nu\in\mathbb R^p$, then $\vecnot{y}^* \neq \vecnot{0}$ and $\| \vecnot{y}^* \| > 0$.
 Thus, a perturbation in the $\vecnot{y}^*$ direction will decrease the value of the objective function while essentially preserving feasibility.
 
-But, the $\vecnot{y}^*$ direction is only guaranteed to preserve feasibility to first order (i.e., $(P \nabla f_i (\vecnot{x}^*))^T \vecnot{y}^*  \leq 0$) for $i = 1,\ldots,m$.
-To fix this, first one needs to augment $\vecnot{y}^*$ with a small amount of some vector $\vecnot{w}$ satisfying $(P \nabla f_i (\vecnot{x}^*))^T \vecnot{w} < 0$ for all $i = 1,\ldots,m$.
-Such a vector is guaranteed by the constraint qualification.
+But, the $\vecnot{y}^*$ direction is only guaranteed to preserve feasibility to first order (i.e., $(P \nabla f_i (\vecnot{x}^*))^T \vecnot{y}^*  \leq 0$) for $i \in A$.
+To fix this, first one needs to augment $\vecnot{y}^*$ with a small amount of some vector $\vecnot{w}$ satisfying $(P \nabla f_i (\vecnot{x}^*))^T \vecnot{w} < 0$ for all $i \in A$.
+Such a vector exists because of constraint qualification guarantees strict decrease for active inequality constraints and inactive constraints remain feasible by continuity.
+
 %Such a $\vecnot{w}$ lies in the ``interior of the polar cone of $PF$'' and will exist as long as $PF$ does not contain a line.
-Then, we can choose some $\delta>0$ such that $(P\nabla f_0 (\vecnot{x}^*))^T (\vecnot{y}^*+\delta \vecnot{w}) \leq -\frac{1}{2} \|\vecnot{y}^* \|$. With this modification, the definition of the derivative implies that, for sufficiently small $t$, $\vecnot{x}(t) = \vecnot{x}^* + t (\vecnot{y}^* + \delta \vecnot{w})$ will be a feasible vector satisfying $f_0 (\vecnot{x}(t)) < f_0 (\vecnot{x}^*)$.
+Then, we can choose some $\delta>0$ such that $(P\nabla f_0 (\vecnot{x}^*))^T (\vecnot{y}^*+\delta \vecnot{w}) \leq -\frac{1}{2} \|\vecnot{y}^* \|^2$. With this modification, the definition of the derivative implies that, for sufficiently small $t$, $\vecnot{x}(t) = \vecnot{x}^* + t (\vecnot{y}^* + \delta \vecnot{w})$ will be a feasible vector satisfying $f_0 (\vecnot{x}(t)) < f_0 (\vecnot{x}^*)$.
 \end{proof}
 
 \subsection{Lagrangian Duality}
@@ -603,8 +584,9 @@ The Lagrangian dual problem
 \mathrm{maximize} \quad & g(\vecnot{\lambda},\vecnot{\nu}) \\
 \mathrm{subject\,to} \quad & \vecnot{\lambda} \geq 0
 \end{align*}
-has a unique maximum value $d^* \leq p^*$.
-This property is known as \defn{optimization}{weak duality}.
+has optimal value $d^*\triangleq\sup_{\vecnot\lambda\ge0,\vecnot\nu}g(\vecnot\lambda,\vecnot\nu)$, and $d^*\le p^*$.
+%has a unique maximum value $d^* \leq p^*$.
+This is called \defn{optimization}{weak duality}.
 \end{lemma}
 
 \begin{proof}
@@ -616,15 +598,18 @@ g(\alpha\vecnot{\lambda}+&(1-\alpha)\vecnot{\lambda}',\alpha\vecnot{\nu}+(1-\alp
 &\geq \inf_{\vecnot{x}\in \mathcal{D}} \alpha L(\vecnot{x},\vecnot{\lambda},\vecnot{\nu}) + \inf_{\vecnot{x}'\in \mathcal{D}} (1-\alpha) L(\vecnot{x}',\vecnot{\lambda}',\vecnot{\nu}') \\
 &= \alpha g(\vecnot{\lambda},\vecnot{\nu}) + (1-\alpha) g(\vecnot{\lambda}',\vecnot{\nu}').
 \end{align*}
-Thus, it follows from Theorem~\ref{theorem:convex_unique_min} that $g$ has a unique maximum value $d^*$ which can be upper bounded by
+For $\vecnot x ' \in \mathcal{F}$, $\vecnot \nu \in \mathbb{R}^p$, and $\vecnot\lambda\ge0$, we have
 \begin{align*}
 g(\vecnot{\lambda},\vecnot{\nu})
 &= \inf_{\vecnot{x}\in \mathcal{D}} L(\vecnot{x},\vecnot{\lambda},\vecnot{\nu})
 \stackrel{(a)}{\leq} \inf_{\vecnot{x}\in \mathcal{F}} L(\vecnot{x},\vecnot{\lambda},\vecnot{\nu}) \\
-&\stackrel{(b)}{=} p^* + \sum_{i=1}^m \lambda_i f_i (\vecnot{x})
+&\stackrel{(b)}{\leq}  f_0(\vecnot x ')+\sum_{i=1}^m \lambda_i f_i(\vecnot x ')
 \stackrel{(c)}{\leq} p^*,
 \end{align*}
-where $(a)$ is implied by $\mathcal{F} \subseteq \mathcal{D}$, $(b)$ follows from $h_j(\vecnot{x}) = 0$ for $\vecnot{x}\in \mathcal{F}$, and $(c)$ holds by combining $f_i(\vecnot{x}) \leq 0$ for $\vecnot{x}\in \mathcal{F}$ and $\lambda_i \geq 0$.
+where $(a)$ is implied by $\mathcal{F} \subseteq \mathcal{D}$, $(b)$ follows from $h_j(\vecnot{x}) = 0$ for $\vecnot{x}'\in \mathcal{F}$, $f_i(\vecnot{x}') \leq 0$ for $\vecnot{x}'\in \mathcal{F}$, and $\lambda_i \geq 0$.
+Then, $(c)$ holds by combining the definition of $p^*$ with the fact that $\vecnot{x}'\in \mathcal{F}$.
+Taking the supremum over dual-feasible multipliers gives $d^*\le p^*$.
+If $\mathcal F$ is empty, $p^*=\infty$ and the conclusion is immediate.
 \end{proof}
 
 The Lagrangian dual function can be $-\infty$ for a wide range of $(\vecnot{\lambda},\vecnot{\nu})$.
@@ -684,19 +669,17 @@ An optimization problem in standard form is called \defn{optimization}{convex} i
 For a convex standard-form optimization problem (i.e.,  satisfying Definition~\ref{def:convex_opt}), show that the feasible set is a convex set.
 \end{problem}
 
-Applying Theorem~\ref{theorem:convex_unique_min} to this setup shows that a convex standard-form optimization problem has a unique minimum value.
-Also, if the function $f_0$ is strictly convex, then the minimum value achieved uniquely.
+Applying Theorem~\ref{theorem:convex_unique_min} to this setup shows that any local minimizer of a convex problem is global.  If an optimum is attained and $f_0$ is strictly convex on the feasible set, then the minimizing point is unique.
 There are a number of stronger conditions that also imply strong duality for convex optimization problems.
 \defn{optimization}{Slater's condition} is stated below as a theorem and its proof can be found in~\cite[Sec.~5.3.2]{Boyd-2004}.
  
 \begin{theorem}[Slater's Condition]
-If a convex optimization problem has a point $\vecnot{x}_0$ where $f_i(\vecnot{x}_0) < 0$ for $i=1,\ldots,m$ and $h_j (\vecnot{x}_0) = 0$ for $j=1,\ldots,p$, then the MF constraint qualification and strong duality both hold for the problem.
-In addition, if all $f_i$ functions are differentiable, then the KKT conditions are necessary and sufficient for optimality.
+If a convex optimization problem has a strictly feasible point $\vecnot{x}_0$, meaning $f_i(\vecnot{x}_0)<0$ for all $i$ and $h_j(\vecnot{x}_0)=0$ for all $j$, then strong duality holds.  
+If, in addition, $f_0,f_1,\ldots,f_m$ are continuously differentiable and redundant affine equalities have been removed, then MF constraint qualification holds at every feasible point and the KKT conditions are necessary and sufficient for optimality.
 \end{theorem}
 
-
 \begin{example}
-For a channel with colored noise, the input distribution that maximizes the achievable information rate can be found by solving the convex optimization problem, known as water-filling, given by
+For $n$ independent channels with noise power $\alpha_i >0$ and an overall power constraint of $P>0$, the channel input powers $x_i$ that maximize the achievable information rate can be found by solving the convex optimization problem, known as water-filling, given by
 \begin{align*}
 \mathrm{minimize} \quad & -\sum_{i=1}^n \log \left( x_i + \alpha_i \right) \\
 \mathrm{subject\,to} \quad & \sum_{i=1}^n x_i = P \\
@@ -707,17 +690,16 @@ Choosing $x_i = \frac{P}{n}$ for $i=1,\ldots,n$ gives a point that satisfies Sla
 
 \begin{example}
 For the water-filling problem, the Lagrangian can be written as
-\[ L(\vecnot{x},\vecnot{\lambda},\nu) = - \sum_{i=1}^n \log(x_i + \alpha_i) - \sum_{i=1}^m \lambda_i x_i + \nu \left( -P + \sum_{i=1}^n x_i \right)  \]
+\[ L(\vecnot{x},\vecnot{\lambda},\nu) = - \sum_{i=1}^n \log(x_i + \alpha_i) - \sum_{i=1}^n \lambda_i x_i + \nu \left( -P + \sum_{i=1}^n x_i \right)  \]
 and the Lagrangian dual is given by $g(\vecnot{\lambda},\nu)
-= \inf_{\vecnot{x}\in \mathbb{R}^n} L(\vecnot{x},\vecnot{\lambda},\nu)$.
+= \inf_{\vecnot{x}\in \mathcal{D}} L(\vecnot{x},\vecnot{\lambda},\nu)$, where \[\mathcal{D} = \{ \vecnot{x} \in \mathbb{R}^n | x_i > -\alpha_i, i=1,\ldots,n \}\] is the natural domain where the objective is well-defined.
 
-If $\lambda_i <0$, then the Lagrangian tends to $-\infty$ as $x_i \to -\infty$.
-Thus, the system is implicitly constrained to have $\lambda_i \geq 0$.
 The first-order optimality conditions, for $i=1,2,\ldots,n$, are given by
 \[ -\frac{1}{x_i + \alpha_i} - \lambda_i + \nu = 0.
 \]
-Solving this for $x_i$ shows that $x_i$ is increasing in $\lambda _i$ (for $\lambda_i \geq 0$) and this implies that $g(\vecnot{\lambda},\nu)$ is decreasing in $\lambda_i$ (for $\lambda_i \geq 0$ and $x_i \geq 0$).
-
+Solving for $x_i$ gives 
+$x_i=1/(\nu-\lambda_i)-\alpha_i$ and shows that we must have $\nu>\lambda_i\geq0$.
+Also, maximization over $\lambda_i\geq0$ chooses $\lambda_i=0$ when $1/\nu-\alpha_i\geq0$ and otherwise chooses $\lambda_i=\nu-1/\alpha_i$.  Thus $x_i=\max\{0,1/\nu-\alpha_i\}$, with $\nu>0$.
 Thus, the expression
 $\max_{\vecnot{\lambda} \geq 0} g(\vecnot{\lambda},\nu)$
 is given by choosing the smallest non-negative $\lambda_i$'s for which $x_i \geq 0$.
@@ -728,3 +710,115 @@ From this, the value of $\nu$ can be determined by solving
 By strong duality, the optimal value of the dual problem equals the optimal value of the original problem.
 Finally, the problem can be easily solved for a range of $P$ values by sweeping through a range of $\nu$ values and computing $P$ in terms of $\nu$.
 \end{example}
+
+\section{Deferred Proofs}
+\label{sec:opt_def_proof}
+
+\subsection{The Chain Rule for Fr\'echet Derivatives}
+\begin{proof}[Proof of Theorem~\ref{thm:frechet_chain_rule}]
+For the stated derivatives, the errors in the implied linear approximations are 
+\begin{align*}
+\phi(\vecnot{v}) &= f(\vecnot{x} + \vecnot{v})-f(\vecnot{x}) - f'(\vecnot{x})(\vecnot{v}) \\
+\psi(\vecnot{u}) &= g(\vecnot{y} + \vecnot{u})-g(\vecnot{y}) - g'(\vecnot{y})(\vecnot{u}) \\
+\rho(\vecnot{h}) &= g(f(\vecnot{x} + \vecnot{h})) -g(f(\vecnot{x})) - \left( g'(\vecnot{y}) \circ f'(\vecnot{x})\right) (\vecnot{h}).
+\end{align*}
+From the assumptions of differentiability, we know that the first two approximations become tight for small perturbations.
+In other words,
+\begin{align*}
+\lim_{\vecnot{v} \to \vecnot{0}} \frac{\| \phi (\vecnot{v}) \|_Y}{\|\vecnot{v}\|_X} = 0,  \quad\quad\quad\quad \lim_{\vecnot{u} \to \vecnot{0}} & \frac{\| \psi (\vecnot{u})\|_Z}{\|\vecnot{u}\|_Y} = 0.
+\end{align*}
+Next, we observe that the definition of $\phi$ implies
+\[ g(f(\vecnot{x} + \vecnot{h})) -g(f(\vecnot{x})) = g \big( f(\vecnot{x}) + f'(\vecnot{x})(\vecnot{h}) + \phi(\vecnot{h}) \big) - g(\vecnot{y}). \]
+Combining this with the definition of $\rho$ shows that
+\begin{align*}
+\rho(\vecnot{h}) &= g \big( f(\vecnot{x}) + f'(\vecnot{x})(\vecnot{h}) + \phi(\vecnot{h}) \big) - g(\vecnot{y}) - \left( g'(\vecnot{y}) \circ f'(\vecnot{x})\right) (\vecnot{h}) \\
+&= \psi \big(f'(\vecnot{x})(\vecnot{h}) + \phi(\vecnot{h}) \big) + g'(\vecnot{y})\big( f'(\vecnot{x})(\vecnot{h}) + \phi(\vecnot{h}) \big) - \left( g'(\vecnot{y}) \circ f'(\vecnot{x})\right) (\vecnot{h}) \\
+&= \psi \big(f'(\vecnot{x})(\vecnot{h}) + \phi(\vecnot{h}) \big) + g'(\vecnot{y})(\phi(\vecnot{h})).
+\end{align*}
+We take this opportunity to note that $\|g'(f(\vecnot{x}))\circ f'(\vecnot{x})\| \leq \|g'(f(\vecnot{x}))\| \|f'(\vecnot{x})\| < \infty$ because $\|f'(\vecnot{x})\| < \infty$ and $\|g'(f(\vecnot{x}))\| <\infty$. 
+
+Since $\lim_{\vecnot{h} \to \vecnot{0}} \| \phi (\vecnot{h}) \|_Y / \|\vecnot{h}\|_X = 0$, there is a $t>0$ such that $\|\phi(\vecnot{h})\|_Y \leq (\|f'(\vecnot{x})\|+1) \|\vecnot{h}\|_X$ if $\|\vecnot{h}\|_X < t$.
+Now, set $\vecnot u(\vecnot h)=f'(\vecnot x)(\vecnot h)+\phi(\vecnot h)$ and observe that, for sufficiently small $\vecnot h$, we have $\|\vecnot u(\vecnot h)\|_Y\leq 2(\|f'(\vecnot x)\|+1)\|\vecnot h\|_X$.
+Using this, we can write
+\begin{align*}
+\frac{\|\rho(\vecnot{h})\|_Z}{\|\vecnot{h}\|_X}
+&= \frac{\| \psi \big(f'(\vecnot{x})(\vecnot{h}) + \phi(\vecnot{h}) \big) + g'(\vecnot{y})(\phi(\vecnot{h})) \|_Z}{\|\vecnot{h}\|_X} \\
+&\leq 2 (\|f'(\vecnot{x})\|+1)  \frac{\| \psi \big(u(\vecnot{h}) \big) \|_Z}{ \| u(\vecnot{h}) \|_Y } + \frac{\|  g'(\vecnot{y})(\phi(\vecnot{h})) \|_Z}{\|\vecnot{h}\|_X} \\
+& \leq 2 (\|f'(\vecnot{x})\|+1) \frac{\| \psi \big( u(\vecnot{h}) \big) \|_Z}{\| u(\vecnot{h}) \|_Y} + \frac{\|  g'(\vecnot{y})\| \|\phi(\vecnot{h}) \|_Y}{\|\vecnot{h}\|_X} \\
+& \leq 2 (\|f'(\vecnot{x})\|+1) \frac{\| \psi \big( u(\vecnot{h}) \big) \|_Z}{\| u(\vecnot{h}) \|_Y} + \frac{\|  g'(\vecnot{y})\| \|\phi(\vecnot{h}) \|_Y}{\|\vecnot{h}\|_X},
+\end{align*}
+where the first quotient is taken to be zero when $\vecnot u(\vecnot h)=\vecnot0$.
+If it is not zero, $u(\vecnot{h}=f'(\vecnot{x}) (\vecnot{h}) + \phi(\vecnot{h}) \to \vecnot{0}$ as $\vecnot{h}\to\vecnot{0}$ and it follows that the limit of the RHS exists and equals 0 as $\vecnot{h}\to\vecnot{0}$.
+Thus, $\lim_{\vecnot{h} \to \vecnot{0}} \| \rho (\vecnot{h}) \|_Z / \|\vecnot{h}\|_X = 0$ and the Fr\'{e}chet derivative of $g(f(\vecnot{x}))$ exists and satisfies the chain rule.
+\end{proof}
+
+\subsection{Banach Mean Value Inequality}
+
+\begin{proof}[Proof of Theorem~\ref{theorem:mean_value_inequality}]
+By assumption, \(\vecnot{h}\neq 0\) and we define $F(s)=f(\vecnot{x}_1+s\vecnot{h})$ for $s\in[0,1]$,
+and let $L
+=
+\sup_{s\in[0,1]}
+\left\|
+\delta f(\vecnot{x}_1+s\vecnot{h};\vecnot{h})
+\right\|$.
+Thus, we let $L=M\|\vecnot{h}\|$ and assume $L<\infty$ because otherwise, the desired inequality is immediate.
+
+For the sake of contradiction, suppose that $\|f(\vecnot{x}_2)-f(\vecnot{x}_1)\| > M\|\vecnot{x}_2-\vecnot{x}_1\|$ which is equivalent to $\|F(1)-F(0)\|>L$.
+Then, we can choose \(K\) such that $L<K<\|F(1)-F(0)\|$.
+Now, we will construct a nested sequence of closed intervals $I_n=[a_n,b_n]\subseteq[0,1]$ such that $b_n-a_n=2^{-n}$ and $\|F(b_n)-F(a_n)\|>K(b_n-a_n)$.
+For \(n=0\), take \(I_0=[0,1]\).
+
+Suppose that \(I_n=[a_n,b_n]\) has been constructed, and let $m_n=\frac{a_n+b_n}{2}$.
+By the triangle inequality, $\|F(b_n)-F(a_n)\|
+\leq
+\|F(b_n)-F(m_n)\|
++
+\|F(m_n)-F(a_n)\|$.
+Since $\|F(b_n)-F(a_n)\|>K(b_n-a_n)$,
+either $\|F(m_n)-F(a_n)\|>K(m_n-a_n)$
+or $\|F(b_n)-F(m_n)\|>K(b_n-m_n)$ must hold.
+Choose \(I_{n+1}\) to be a half of \(I_n\) for which the
+corresponding inequality holds.
+
+Thus, we obtain nested intervals \(I_n=[a_n,b_n]\) satisfying $b_n-a_n=2^{-n}$
+and $\|F(b_n)-F(a_n)\|>K(b_n-a_n)$.
+Since the intervals are nested and their lengths tend to zero, there is
+a unique point $s_*\in\bigcap_{n=0}^{\infty} I_n$.
+Let $\vecnot{x}_*=\vecnot{x}_1+s_*\vecnot{h}.$
+
+Since $s_*\in[a_n,b_n]$, the triangle inequality gives
+\[
+\|F(b_n)-F(a_n)\|
+\leq
+\|F(b_n)-F(s_*)\|+\|F(s_*)-F(a_n)\|.
+\]
+Thus, for each $n$, there must be an endpoint $s_n\in\{a_n,b_n\}$ with $s_n\neq s_*$ such that
+\[
+\frac{\|F(s_n)-F(s_*)\|}{|s_n-s_*|}>K.
+\]
+Indeed, otherwise the triangle inequality would imply $\|F(b_n)-F(a_n)\|\leq K(b_n-a_n)$ which is a contradiction.
+
+Since $s_n,s_*\in I_n$ and $b_n-a_n=2^{-n}$, we have
+$|s_n-s_*|\leq 2^{-n}$ and hence $s_n\to s_*$.
+Let $t_n=s_n-s_*$.
+Then, $t_n\to 0$ and
+\[
+K
+<
+\frac{\|F(s_*+t_n)-F(s_*)\|}{|t_n|}
+=
+\left\|
+\frac{f(\vecnot{x}_*+t_n\vecnot{h})-f(\vecnot{x}_*)}{t_n}
+\right\| \to
+\| \delta f(\vecnot{x}_*;\vecnot{h}) \|
+\]
+because the G\^{a}teaux differential $\delta f(\vecnot{x}_*;\vecnot{h})$ exists. 
+Therefore, $K \leq \|\delta f(\vecnot{x}_*;\vecnot{h})\|
+\leq L$, which contradicts $L<K$ and thus
+\[
+\|f(\vecnot{x}_2)-f(\vecnot{x}_1)\|
+\leq
+M\|\vecnot{x}_2-\vecnot{x}_1\|. \qedhere
+\]
+\end{proof}

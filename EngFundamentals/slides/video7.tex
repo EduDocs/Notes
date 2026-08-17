@@ -121,6 +121,16 @@
 
 \renewcommand{\footnotesep}{-2pt}
 
+% \enablegptcomments before inputting this file to show review comments in notes.
+\newif\ifgptcomments
+\ifdefined\enablegptcomments
+  \gptcommentstrue
+\else
+  \gptcommentsfalse
+\fi
+\newcommand{\gpt}[1]{%
+  \ifgptcomments\par\medskip{\color{blue}\scriptsize\textbf{GPT comment. }#1}\fi}
+
 
 \begin{document}
 
@@ -180,6 +190,7 @@ This can be proven by starting with Zermelo-Fraenkel (ZF) set theory and associa
 		\item Read.
 		\item I should note that (read)
 	\end{enumerate}
+	\gpt{Grammar in cue 1: ``Completeness is a very useful property'' and ``researchers prefer to set up problems.''}
 }
 
 \end{frame}
@@ -215,6 +226,7 @@ One can always complete a metric space $(X,d)$ by considering Cauchy sequences o
 		\item Read.  For example, think of $X$ as the rational numbers, $Y$ as the real numbers, and $\phi$ as the mapping that embeds the rational numbers in the real numbers.  I should also note that an isometry is a function between metric spaces that preserves pairwise distances.
 		\item For example, if a metric space is not complete, then some of its natural limit points have been left out.  This can be repaired by creating new points associated with Cauchy sequences that don't converge.
 	\end{enumerate}
+	\gpt{The first definition conflicts with the earlier course definition of a limit point using a sequence of distinct points: under that definition, a dense set need not make every point a limit point (for example, an isolated point of $X$).  The always-correct definition is $\overline{A}=X$, equivalently every nonempty open ball in $X$ intersects $A$, or every $x\in X$ is the limit of a sequence in $A$ that need not have distinct terms.}
 }
 
 \end{frame}
@@ -286,6 +298,7 @@ But, \textcolor{red}{it does not converge} to a continuous function in $C[-1,1]$
 		\item This figure shows the first few functions in the sequence and we see it's a sequence of continuous functions converging to the step function.  The key problem is that the limit function is not continuous and therefore not in the set $X$.
 		\item Analytically, (read).
 	\end{enumerate}
+	\gpt{This frame is overfull by about 7.6 points in the compiled deck, and the final conclusion sits against the bottom edge.  Consider splitting the definition/formula from the plotted counterexample, or reducing the vertical spacing around the displayed equations.}
 }
 
 \end{frame}
@@ -338,6 +351,7 @@ Define $f\colon X \to X$ with $f(x) = 1-\frac{1}{2}x$ and observe that \vspace{-
 		\item Read.
 		\item Read. Thus, $f$ is a contraction on $X$ with contraction coefficient $\frac{1}{2}$.  The figure shows the graph of $f$.
 	\end{enumerate}
+	\gpt{For the standard definition, specify $0\leq\gamma<1$ (or $\gamma\in[0,1)$), rather than only $\gamma<1$.}
 }
 
 \end{frame}
@@ -408,6 +422,7 @@ Starting from $x_1 = 0.2$, define the sequence $x_{n+1}= \cos(x_n)$ and plot the
 		\item This implies that (read)
 		\item Thus, the contraction mapping theorem implies that the sequence
 	\end{enumerate}
+	\gpt{Cue 6 is incomplete: ``Thus, the contraction mapping theorem implies that the sequence''.  The production script preserves this fragment rather than silently completing it.  Consider finishing the sentence by referring to the displayed convergence to the unique fixed point.}
 }
 
 \end{frame}  
@@ -453,6 +468,9 @@ Several important results in applied mathematics have relatively simple proofs b
 		\item Read.  which provides a method prove the local uniqueness of a function that is defined implicitly.
 		\item Read.  This is related to reinforcement learning and other methods by which computers can learn to play video games.
 	\end{enumerate}
+	\gpt{The Picard statement needs additional domain/existence hypotheses to guarantee a solution on all of $[a,b]$; Lipschitz continuity in $y$ alone is not sufficient as written.}
+	\gpt{In the implicit-function statement, $A\subseteq\mathbb{R}^{n+m}$, so the hypothesis should place $(x_0,y_0)$ in $A$, not $x_0$ in $A$.  It may also be clearer to define $g$ only on a neighborhood of $x_0$, since the conclusion is local.}
+	\gpt{For a finite discounted MDP, the Bellman fixed point/value function is unique and a stationary deterministic optimal policy exists, but the optimal policy need not be unique when actions tie.  Replace ``unique stationary optimal policy'' accordingly.}
 }
 
 \end{frame}
@@ -481,6 +499,7 @@ Several important results in applied mathematics have relatively simple proofs b
 		\color{red}
 		\item Here are some options to continue learning this material. (read) \\ [2mm]  That's it for today.  So, I'll see you next time.
 	\end{enumerate}
+	\gpt{Please verify the section reference: the slides are labeled 2.1.3 throughout, while the suggested reading is Course Notes EF 2.1.6.}
 }
 
 \end{frame}

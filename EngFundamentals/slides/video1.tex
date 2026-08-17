@@ -18,6 +18,23 @@
 \usepackage{bbm}
 \usepackage{pdfpages}
 \usepackage{framed}
+\usepackage{xr}
+
+\externaldocument{../0Set_Theory_and_Logic}
+\makeatletter
+% Beamer wraps \ref in an internal slide link.  For labels imported from the
+% book, extract their PDF destination and create a remote GoTo link instead.
+\newcommand{\bookref}[1]{%
+  \expandafter\expandafter\expandafter\bookref@link\csname r@#1\endcsname\@nil}
+\def\bookref@link#1#2#3#4#5\@nil{%
+  \ifdefined\videoexport #1\else\hyper@linkfile{#1}{../book.pdf}{#4}\fi}
+\makeatother
+
+% The slide-only PDF is rasterized for video production. Keep external links
+% active, but suppress their visible borders in those rendered frames.
+\ifdefined\videoexport
+  \hypersetup{hidelinks}
+\fi
 
 \usepackage[most]{tcolorbox}
 \tcbset{highlight math style={enhanced,
@@ -159,7 +176,7 @@
 \setbeamertemplate{navigation symbols}{\textcolor{blue}{\footnotesize \insertframenumber ~/ \inserttotalframenumber}}
 
 
-\begin{frame}<1-7> \frametitle{1: Logic}
+\begin{frame}<1-7> \frametitle{\bookref{chapter:LogicAndSetTheory}: Logic}
 
 \begin{itemize}
 \item<1-> \textcolor{blue}{Statement} (or proposition)
@@ -211,7 +228,7 @@
 
 
 
-\begin{frame}<1-4> \frametitle{1.1: Basic Definitions}
+\begin{frame}<1-4> \frametitle{\bookref{section:Statements}: Basic Definitions}
 
 \begin{itemize}
 
@@ -295,7 +312,7 @@
 
 
 
-\begin{frame}<1-4> \frametitle{1.2: Conditional Statements (1)}
+\begin{frame}<1-4> \frametitle{\bookref{section:Relations}: Conditional Statements (1)}
 
 \begin{itemize}
 
@@ -354,7 +371,7 @@ So, if it rains and they don't ride their bike, then most people would agree the
 
 
 
-\begin{frame}<1-4> \frametitle{1.2: Conditional Statements (2)}
+\begin{frame}<1-4> \frametitle{\bookref{section:Relations}: Conditional Statements (2)}
 
 \begin{itemize}
 
@@ -414,7 +431,7 @@ So, if it rains and they don't ride their bike, then most people would agree the
 
 
   
-\begin{frame}<1-2> \frametitle{1.2: Compound Statements}
+\begin{frame}<1-2> \frametitle{\bookref{section:Relations}: Compound Statements}
   
 
 \begin{itemize}
@@ -456,7 +473,7 @@ F & F & F & F & T & F & T & F & T & T \\
 \end{frame}
 
 
-\begin{frame}<1-5> \frametitle{1.2: Meta Statements}
+\begin{frame}<1-5> \frametitle{\bookref{section:Relations}: Meta Statements}
 
 \begin{itemize}
 \setlength\itemsep{2mm}
@@ -520,7 +537,7 @@ F & F & F & F & T & F & T & F & T & T \\
 
 \begin{itemize}
  \setlength\itemsep{3mm}
- \item Try the suggested reading: Course Notes EF 1-1.2.2
+ \item Try the suggested reading: Course Notes EF \bookref{chapter:LogicAndSetTheory}--\bookref{subsection:Quantifiers}
  \item Or the optional reading: PAF 1.1-2.6
  \item Also, look at the problems in Assignment 1
 \end{itemize}

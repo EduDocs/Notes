@@ -123,6 +123,16 @@
 
 \renewcommand{\footnotesep}{-2pt}
 
+% \enablegptcomments before inputting this file to show review comments in notes.
+\newif\ifgptcomments
+\ifdefined\enablegptcomments
+  \gptcommentstrue
+\else
+  \gptcommentsfalse
+\fi
+\newcommand{\gpt}[1]{%
+  \ifgptcomments\par\medskip{\color{blue}\scriptsize\textbf{GPT comment. }#1}\fi}
+
 
 \begin{document}
 
@@ -194,6 +204,7 @@ Then, there exists a sequence $x_1,x_2,\ldots \in A$ such that $\lim_n f(x_n) = 
 		\item Read. This is an important concept in analysis that will later allow us to exploit compactness.
 		\item In the live session, we will sketch a proof of this.
 	\end{enumerate}
+	\gpt{The displayed metric uses $x/(1+|x|)$ at $x=\pm\infty$, where the formula is otherwise undefined.  Consider explicitly defining the embedding value at the endpoints as $h(+\infty)=1$ and $h(-\infty)=-1$, then writing the metric as $|h(x)-h(y)|$.}
 }
 
 \end{frame}
@@ -335,6 +346,7 @@ Let $X = (0,1]$ and $Y=[1,\infty)$ be subsets of the standard metric space $\mat
 		\item Read. Small values of $x$ are again problematic and $f$ becomes less and less continuous as $x$ tends to $0$. This will imply that $f$ is not uniformly continuous.
 		\item Read. Now, you can check the math to see that $f$ is not uniformly continuous.
 	\end{enumerate}
+	\gpt{Grammar on overlay 3: replace ``It is uniformly continuous?'' with ``Is it uniformly continuous?''}
 }
 
 \end{frame}
@@ -402,6 +414,7 @@ A function $f  \colon X \rightarrow Y$ is called \textcolor{blue}{Lipschitz cont
 		\item We can... Read. Since the last expression equals $\infty$, this function is not Lipschitz continuous. Actually, this conclusion follows immediately from the fact that its 1st derivative is infinite at $x=0$.
 		\item As an exercise, take a moment now to decide if you think this function is uniformly continuous.
 	\end{enumerate}
+	\gpt{The last sentence of cue 3 should not say that the first derivative ``is infinite'' at zero.  The derivative is not finite at the endpoint and is unbounded as $x\downarrow0$.  Likewise, the displayed supremum is infinite; no individual finite-$z$ expression equals infinity.}
 }
 
 \end{frame}  
@@ -463,6 +476,7 @@ If each $f_n$ is continuous and the sequence $f_n$ converges uniformly to $f \co
 		\color{red}
 		\item Here are some options to continue learning this material. (read) \\ [2mm]  That's it for today.  So, I'll see you next time.
 	\end{enumerate}
+	\gpt{Please verify the section references: this deck labels continuity as 2.1.2 and real-number properties as 2.1.4, while the suggested reading is 2.1.3--2.1.5.  Also, this source contains dormant frames after the first \texttt{\string\end\{document\}}; the current extraction diagnostic counts those frames even though the rendered production deck stops at 24 pages.}
 }
 
 \end{frame}

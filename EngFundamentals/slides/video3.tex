@@ -19,6 +19,21 @@
 \usepackage{bbm}
 \usepackage{pdfpages}
 \usepackage{framed}
+\usepackage{xr-hyper}
+
+\externaldocument{../0Set_Theory_and_Logic}[../book.pdf]
+\makeatletter
+% Beamer wraps \ref in an internal slide link. For labels imported from the
+% book, extract their destination and create a remote link to the book PDF.
+\newcommand{\bookref}[1]{%
+  \expandafter\expandafter\expandafter\bookref@link\csname r@#1\endcsname\@nil}
+\def\bookref@link#1#2#3#4#5\@nil{%
+  \ifdefined\videoexport #1\else\hyper@linkfile{#1}{../book.pdf}{#4}\fi}
+\makeatother
+
+\ifdefined\videoexport
+  \hypersetup{hidelinks}
+\fi
 
 \usepackage[most]{tcolorbox}
 \tcbset{highlight math style={enhanced,
@@ -163,7 +178,7 @@
 \setbeamertemplate{navigation symbols}{\textcolor{blue}{\footnotesize \insertframenumber ~/ \inserttotalframenumber}}
 
 
-\begin{frame}<1-9> \frametitle{1.4: Set Theory}
+\begin{frame}<1-9> \frametitle{\bookref{section:SetTheory}: Set Theory}
 
 \begin{itemize}
 \setlength\itemsep{3mm}
@@ -199,7 +214,7 @@
 
 \end{frame}
 
-\begin{frame}<1-7> \frametitle{1.4: Using Set Theory}
+\begin{frame}<1-7> \frametitle{\bookref{section:SetTheory}: Using Set Theory}
 
 \begin{itemize}
 \setlength\itemsep{2.5mm}
@@ -254,7 +269,7 @@
 \end{frame}
 \fi
 
-\begin{frame}<1-5> \frametitle{1.4: Set Properties}
+\begin{frame}<1-5> \frametitle{\bookref{section:SetTheory}: Set Properties}
 
 \begin{itemize}
 \setlength\itemsep{3mm}
@@ -301,7 +316,7 @@
 
 \setlength{\parskip}{5mm}
 
-\begin{frame} \frametitle{1.4: Venn Diagrams}
+\begin{frame} \frametitle{\bookref{section:SetTheory}: Venn Diagrams}
 
 % Set A or B
 \begin{tikzpicture}
@@ -351,7 +366,7 @@
     
 \end{frame}
 
-\begin{frame}<1-4> \frametitle{1.4: From Logic to Set Theory}
+\begin{frame}<1-4> \frametitle{\bookref{section:SetTheory}: From Logic to Set Theory}
 
 \begin{itemize}
 \setlength\itemsep{3mm}
@@ -389,7 +404,7 @@
 
 \end{frame}
 
-\begin{frame}<1-4> \frametitle{1.4: Relationships Between Sets}
+\begin{frame}<1-4> \frametitle{\bookref{section:SetTheory}: Relationships Between Sets}
 
 \begin{itemize}
 \setlength\itemsep{3mm}
@@ -422,7 +437,7 @@
 \end{frame}
 
 
-\begin{frame}<1-3> \frametitle{1.4: De Morgan, Infinite Operations, and Negation}
+\begin{frame}<1-3> \frametitle{\bookref{section:SetTheory}: De Morgan, Infinite Operations, and Negation}
 
 \begin{itemize}
 \setlength\itemsep{3mm}
@@ -463,7 +478,7 @@
 \end{frame}
 
 
-\begin{frame}{1.4: Foundations of Set Theory}
+\begin{frame}{\bookref{section:SetTheory}: Foundations of Set Theory}
 
 \begin{example}[Russell's Paradox]
 Let $R = \{S|S\notin S\}$ be the set of sets that do not include themselves as members.
@@ -514,7 +529,7 @@ The paradox arises from the fact that this definition leads to the logical contr
 
 \begin{itemize}
  \setlength\itemsep{3mm}
- \item Try the suggested reading: Course Notes EF 1.4
+ \item Try the suggested reading: Course Notes EF \bookref{section:SetTheory}
  \item Or the optional reading: PAF 3.1-3.5
  \item Also, look at the problems in Assignment 2
 \end{itemize}

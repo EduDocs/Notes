@@ -19,6 +19,21 @@
 \usepackage{bbm}
 \usepackage{pdfpages}
 \usepackage{framed}
+\usepackage{xr-hyper}
+
+\externaldocument{../0Set_Theory_and_Logic}[../book.pdf]
+\makeatletter
+% Beamer wraps \ref in an internal slide link. For labels imported from the
+% book, extract their destination and create a remote link to the book PDF.
+\newcommand{\bookref}[1]{%
+  \expandafter\expandafter\expandafter\bookref@link\csname r@#1\endcsname\@nil}
+\def\bookref@link#1#2#3#4#5\@nil{%
+  \ifdefined\videoexport #1\else\hyper@linkfile{#1}{../book.pdf}{#4}\fi}
+\makeatother
+
+\ifdefined\videoexport
+  \hypersetup{hidelinks}
+\fi
 
 \usepackage[most]{tcolorbox}
 \tcbset{highlight math style={enhanced,
@@ -164,7 +179,7 @@
 
 
 
-\begin{frame}<1-3> \frametitle{1.2.2: Propositions and Predicates}
+\begin{frame}<1-3> \frametitle{\bookref{subsection:Quantifiers}: Propositions and Predicates}
 
 \begin{itemize}
 \setlength\itemsep{4mm}
@@ -200,7 +215,7 @@
 \end{frame}
 
 
-\begin{frame}<1-4> \frametitle{1.2.2: Quantifiers}
+\begin{frame}<1-4> \frametitle{\bookref{subsection:Quantifiers}: Quantifiers}
 
 \begin{itemize}
 \setlength\itemsep{2mm}
@@ -252,7 +267,7 @@
 
 
 
-\begin{frame}<1-5> \frametitle{1.2.2: Multiple Quantifiers}
+\begin{frame}<1-5> \frametitle{\bookref{subsection:Quantifiers}: Multiple Quantifiers}
 
 
 
@@ -293,7 +308,7 @@
 
 \end{frame}
 
-\begin{frame}<1-6> \frametitle{1.2.2: Relationships Between Multiple Quantifiers}
+\begin{frame}<1-6> \frametitle{\bookref{subsection:Quantifiers}: Relationships Between Multiple Quantifiers}
 
 \begin{itemize}
 \setlength\itemsep{5mm}
@@ -374,7 +389,7 @@
 
 \end{frame}
 
-\begin{frame}<1-6> \frametitle{1.3: Strategies for Proofs}
+\begin{frame}<1-6> \frametitle{\bookref{section:StrategiesForProofs}: Strategies for Proofs}
 
 \begin{itemize}
 \setlength\itemsep{2.5mm}
@@ -428,7 +443,7 @@
 
 \begin{itemize}
  \setlength\itemsep{3mm}
- \item Try the suggested reading: Course Notes EF 1.2.3-1.3
+ \item Try the suggested reading: Course Notes EF \bookref{subsection:Quantifiers}--\bookref{section:StrategiesForProofs}
  \item Or the optional reading: PAF 1.1-2.6
  \item Also, look at the problems in Assignment 1
 \end{itemize}

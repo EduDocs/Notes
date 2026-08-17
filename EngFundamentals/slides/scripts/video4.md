@@ -149,7 +149,7 @@ For a one-to-one f, the inverse image of a singleton set containing f of x is th
 ## Page 026: 1.5: Applying Functions to Sets (3) (overlay 1 of 3)
 
 Narration:
-In general, one can show that the inverse image of f-of-A contains-A, and f of f inverse of B is contained in B. These expressions hold because f can only compress sets; that is, it can map different inputs to the same value, while the inverse image can only expands sets, that is, it can map a singleton to multiple values.
+In general, one can show that the inverse image of f-of-A contains-A, and f of f inverse of B is contained in B. These expressions hold because f can only compress sets; that is, it can map different inputs to the same value, while the inverse image can only expand sets, that is, it can map a singleton to multiple values.
 
 ## Page 027: 1.5: Applying Functions to Sets (3) (overlay 2 of 3)
 

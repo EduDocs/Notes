@@ -154,8 +154,6 @@ Now, we consider relationships between sets A and B. We say A equals B if both s
 Narration:
 We say A is a subset of B, denoted A subset-equal B, if all elements in A are also in B.; Logically, “A subset B” is equivalent to: for all x, if x in A, then x in B. The quantifier “for all x” refers to all x in the implied universal set. Though, writing “for all x in A” instead wouldn’t change the meaning. 
 
-## Also, some texts use notation without an underline for a subset and use different notation for a proper subset.
-
 ## Page 030: 1.4: Relationships Between Sets (overlay 3 of 4)
 
 Narration:

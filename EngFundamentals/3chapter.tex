@@ -1,14 +1,14 @@
 \chapter{Approximation and Representation}
 
 Consider a Banach space $V$ and a closed subspace $W \subseteq V$.
-For a given a vector $\vecnot{v} \in V$, we seek an element of $W$ that provides a best approximation to $\vecnot{v}$.
+For a given vector $\vecnot{v} \in V$, we seek an element of $W$ that provides a best approximation to $\vecnot{v}$.
 As illustrated in Fig.~\ref{fig:AR-Banach1}, the fundamental problem is to identify a vector $\vecnot{w} \in W$ that minimizes the distance $\| \vecnot{v} - \vecnot{w} \|$.
 
 \begin{figure}[hbt]
 \centering{\input{Figures/AR-Banach1}}
 \caption{In a Banach space, a best approximation  of a vector $\vecnot{v} \in V$ by vectors in $W$ is the element $\vecnot{w} \in W$ that is closest to $\vecnot{v}$ in norm.
-In this example, complete vector space $V=\mathbb{R}^3$ is endowed with the $\ell_1$-norm; the subset $W$ corresponds to the $xz$-plane; the vector $\vecnot{v}$ is the point in blue; and its best approximation $\vecnot{w}$ is shown in red.
-The octahedron represents the iconic $\ell_1$-norm.}
+In this example, the complete vector space $V=\mathbb{R}^3$ is endowed with the $\ell_1$-norm; the subset $W$ corresponds to the $xz$-plane; the vector $\vecnot{v}$ is the point in blue; and its best approximation $\vecnot{w}$ is shown in red.
+The octahedron is the unit ball of the $\ell_1$-norm.}
 \label{fig:AR-Banach1}
 \end{figure}
 
@@ -89,7 +89,7 @@ Observe that $\vecnot{v} -\vecnot{u}_n$ is orthogonal to $\vecnot{w}_j$ for $j \
 &= \inner{ \vecnot{v} }{ \vecnot{w}_j }
 - \inner{ \sum_{i=1}^n \frac{ \inner{ \vecnot{v} }{ \vecnot{w}_i } }{ \left\| \vecnot{w}_i \right\|^2 } \vecnot{w}_i }{ \vecnot{w}_j } \\
 &= \inner{ \vecnot{v} }{ \vecnot{w}_j }
-- \frac{ \inner{ \vecnot{v} }{ \vecnot{w}_j } }{ \left\| \vecnot{w}_i \right\|^2 } \inner{ \vecnot{w}_j }{ \vecnot{w}_j }
+- \frac{ \inner{ \vecnot{v} }{ \vecnot{w}_j } }{ \left\| \vecnot{w}_j \right\|^2 } \inner{ \vecnot{w}_j }{ \vecnot{w}_j }
 = 0.
 \end{split}
 \end{equation*}
@@ -125,29 +125,31 @@ The vector $\vecnot{v}$ is the point in black; and its projection onto $W$ appea
 \end{figure}
 
 \begin{corollary}
-Let $\mathcal{A} = \vecnot{w}_1, \vecnot{w}_2, \ldots$ be a countable orthogonal set of distinct non-zero vectors in an inner-product space $V$ and define $W = \Span(\vecnot{w}_1, \vecnot{w}_2, \ldots)$.
+Let $\vecnot{w}_1, \vecnot{w}_2, \ldots$ be a sequence of non-zero pairwise orthogonal vectors in an inner-product space $V$ and let $W_n = \Span(\vecnot{w}_1, \ldots, \vecnot{w}_n)$.
 If $\vecnot{v} \in V$, then
 \begin{equation*}
-\sum_{\vecnot{w}_i \in \mathcal{A}} \frac{ \left| \inner{ \vecnot{v} }{ \vecnot{w}_i } \right|^2 }{ \left\| \vecnot{w}_i \right\|^2 }
+\sum_{i=1}^\infty \frac{ \left| \inner{ \vecnot{v} }{ \vecnot{w}_i } \right|^2 }{ \left\| \vecnot{w}_i \right\|^2 }
 \leq \left\| \vecnot{v} \right\|^2.
 \end{equation*}
 Moreover, equality holds if and only if
 \begin{equation*}
-\vecnot{v} = \sum_{\vecnot{w}_i \in \mathcal{A}} \frac{ \inner{ \vecnot{v} }{ \vecnot{w}_i } }{ \left\| \vecnot{w}_i \right\|^2 } \vecnot{w}_i .
+\vecnot{v} = \sum_{i=1}^\infty \frac{ \inner{ \vecnot{v} }{ \vecnot{w}_i } }{ \left\| \vecnot{w}_i \right\|^2 } \vecnot{w}_i .
 \end{equation*}
 \end{corollary}
 \begin{proof}
-Let the projection of $\vecnot{v}$ onto the closure of the span of $\vecnot{w}_1,\vecnot{w}_2,\ldots$ (i.e., $\Closure{W}$) be
+Let the projection of $\vecnot{v}$ onto $W_n$ be
 \begin{equation*}
-\vecnot{w} = \sum_{\vecnot{w}_i \in \mathcal{A}} \frac{ \inner{ \vecnot{v} }{ \vecnot{w}_i } }{ \left\| \vecnot{w}_i \right\|^2 } \vecnot{w}_i  .
+\vecnot{v}_n = \sum_{i=1}^n \frac{ \inner{ \vecnot{v} }{ \vecnot{w}_i } }{ \left\| \vecnot{w}_i \right\|^2 } \vecnot{w}_i  .
 \end{equation*}
-By construction, the error vector $\vecnot{u} = \vecnot{v} - \vecnot{w}$ satisfies  $\inner{ \vecnot{u} }{ \vecnot{w} } = 0$ and, hence, $\left\| \vecnot{u} \right\|^2 = \left\| \vecnot{v} \right\|^2 - \left\| \vecnot{w} \right\|^2$.
-Noting that $\| \vecnot{u} \|^2 \geq 0$ and 
+By construction, the error vector $\vecnot{u}_n = \vecnot{v} - \vecnot{v}_n$ satisfies  $\inner{ \vecnot{u}_n }{ \vecnot{v}_n } = 0$ and, hence, $\left\| \vecnot{u}_n \right\|^2 = \left\| \vecnot{v} \right\|^2 - \left\| \vecnot{v}_n \right\|^2$.
+Noting that $\| \vecnot{u}_n \|^2 \geq 0$ and 
 \begin{equation*}
-\left\| \vecnot{w} \right\|^2
-= \sum_{\vecnot{w}_i \in \mathcal{A}} \frac{ \left| \inner{ \vecnot{v} }{ \vecnot{w}_i } \right|^2 }{ \left\| \vecnot{w}_i \right\|^2 },
+\left\| \vecnot{v}_n \right\|^2
+= \sum_{i=1}^n \frac{ \left| \inner{ \vecnot{v} }{ \vecnot{w}_i } \right|^2 }{ \left\| \vecnot{w}_i \right\|^2 },
 \end{equation*}
-we see that $\| \vecnot{w} \|^2 \leq \| \vecnot{v} \|^2$ with equality if and only if $\vecnot{u} = \vecnot{0}$.
+we see that $\| \vecnot{v}_n \|^2 \leq \| \vecnot{v} \|^2$ with equality if and only if $\vecnot{u}_n = \vecnot{0}$.
+Taking the limit, as $n \to \infty$, of the previous equation yields the first result.
+This limit is achieved with equality if and only if $\vecnot{u}_n \to 0$, which is equivalent to the second result.
 \end{proof}
 
 \begin{problem}
@@ -221,7 +223,8 @@ We can explore the structure of linear projections further.
 
 \begin{theorem}
 Consider a vector space $V$ and let $T \colon V \rightarrow V$ be a projection operator.
-The range $\mathcal{R}(T)$ and the $\mathcal{N}(T)$ are disjoint subspaces of $V$.
+%The range $\mathcal{R}(T)$ and the $\mathcal{N}(T)$ are disjoint subspaces of $V$.
+The range $\mathcal{R}(T)$ and nullspace $\mathcal{N}(T)$ are subspaces of $V$ with trivial intersection: $\mathcal{R}(T)\cap\mathcal{N}(T)=\{\vecnot{0}\}$.
 \end{theorem}
 \begin{proof}
 We need to show that, for any $\vecnot{v} \in V - \{0\}$, vector $\vecnot{v}$ cannot be in both the range and nullspace of $T$.
@@ -231,7 +234,8 @@ Conversely, suppose $\vecnot{v}$ is in the nullspace of $T$, then $T \vecnot{v} 
 Yet, $T \vecnot{v} = \vecnot{v}$ for all $\vecnot{v}$ in the range of $T$.
 Therefore, $\vecnot{v}$ cannot be in the range of $T$ unless $\vecnot{v} = \vecnot{0}$.
 Thus, we conclude that only $\vecnot{0} \in V$ is in both the range and nullspace of $T$.
-That is, $\mathcal{R}(T)$ and $\mathcal{N}(T)$ are disjoint subspaces.
+The stated result follows.
+%That is, $\mathcal{R}(T)$ and $\mathcal{N}(T)$ are disjoint subspaces.
 \end{proof}
 
 \begin{example}
@@ -311,6 +315,8 @@ E \left( s_1 \vecnot{v}_1 + \vecnot{v}_2 \right)
 & = s_1 E \vecnot{v}_1 + E \vecnot{v}_2.
 \end{align*}
 Therefore, $E$ is a linear transformation.
+% Do not reiterate this comment
+%\gpt{The displayed sums use the upper limit $\dim(W)$ even when $W$ is infinite-dimensional, where this is not a finite integer.}
 It also follows that $E \vecnot{w}' = \vecnot{0}$ iff $\vecnot{w}' \in W^{\bot}$ because $W^{\bot}$ can be defined by the fact that $\tinner{ \vecnot{w}' }{ \vecnot{w}_i } = 0$ for $i\in \mathbb{N}$.
 
 \iffalse
@@ -379,7 +385,7 @@ Then, the best approximation of $\vecnot{v}\in V$ by vectors in $\mathcal{R}(U)$
 
 \subsection{Normal Equations}
 
-Suppose $V$ is a Hilbert space the subspace $W$ is spanned by $\vecnot{w}_1, \ldots, \vecnot{w}_n \in V$.
+Suppose $V$ is a Hilbert space and the subspace $W$ is spanned by $\vecnot{w}_1, \ldots, \vecnot{w}_n \in V$.
 Consider the situation where the sequence $\vecnot{w}_1, \ldots, \vecnot{w}_n$ is linearly independent, but not orthogonal.
 In this case, it is not possible to apply \eqref{equation:OrthogonalProjectionOrthogonalVectors} directly.
 It is nevertheless possible to obtain a similar expression for the best approximation of $\vecnot{v}$ by vectors in $W$.
@@ -713,7 +719,7 @@ A \defn{applications}{linear regression} problem consists in finding scalars $a$
 y_i \approx a x_i + b
 \end{equation*}
 for $i = 1, \ldots, n$.
-Definite the error component $e_i$ by $e_i = y_i - a x_i - b$, then
+Define the error component $e_i$ by $e_i = y_i - a x_i - b$, then
 \begin{equation*}
 \begin{bmatrix} y_1 \\ \vdots \\ y_n \end{bmatrix}
 = a \begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix}
@@ -732,9 +738,9 @@ where $\vecnot{y} = \left( y_1, \ldots, y_n \right)^T$, $\vecnot{s} = (a, b)^T$,
 A = \begin{bmatrix} x_1 & 1 \\
 \vdots & \vdots \\ x_n & 1 \end{bmatrix} .
 \end{equation*}
-This equation has a form analog to the matrix representation of a least-squares problems.
+This equation has a form analogous to the matrix representation of a least-squares problem.
 Consider the goal of minimizing $\left\| \vecnot{e} \right\|^2$.
-The line that minimizes the sums of the squares of the \emph{vertical} distances between the data abscissas and the line is then given by
+The line that minimizes the sum of the squares of the vertical distances between the data points and the line is then given by
 \begin{equation*}
 \vecnot{s} = \left( A^H A \right)^{-1} A^H \vecnot{y} .
 \end{equation*}
@@ -742,8 +748,8 @@ The line that minimizes the sums of the squares of the \emph{vertical} distances
 
 \subsection{Linear Minimum Mean-Squared Error Estimation}
 
-Let $Y, X_1, \ldots, X_n$ be a set of zero-mean random variables.
-The goal of the linear minimum mean-squared error (LMMSE) estimation  problem is to find coefficients $s_1, \ldots, s_n$ such that
+Let $Y,X_1,\ldots,X_n$ be zero-mean random variables with finite second moment.
+The goal of the linear minimum mean-squared error (LMMSE) estimation problem is to find coefficients $s_1, \ldots, s_n$ such that
 \[ \hat{Y} = s_1 X_1 + \cdots + s_n X_n \]
 minimizes the MSE $\Expect \big[ |Y-\hat{Y}|^2 \big]$.
 Using the inner product defined by
@@ -816,7 +822,7 @@ Using \eqref{equation:ExpectationInnerProduct}, we obtain
 \Expect \left[ Z[t] \overline{X}[t - j] \right]
 = \sum_{k=0}^{K-1} h[k] \Expect \left[ X[t - k] \overline{X}[t - j] \right] .
 \end{equation}
-where $j = 1, \ldots, K-1$.
+where $j = 0, 1, \ldots, K-1$.
 
 For this specific case where the normal equations are defined in terms of the expectation operator, these equations are called the \defn{applications}{Wiener-Hopf} equations.
 The Gramian of the Wiener-Hopf equations can be expressed in a more familiar form using the autocorrelation matrix.
@@ -881,7 +887,7 @@ A suitable cost function for this goal is
 \[ J(\vecnot{h}) = \sum_{t=K}^N \lambda^{N-t} \left| z[t] - \sum_{k=0}^{K-1} h[k] x[t-k] \right|^2, \]
 where the exponential weighting factor $\lambda$ emphasizes the most recently received symbols because, in reality, the channel conditions are changing with time.
 
-Using the vector $\vecnot{z} = \begin{bmatrix} z[K] & z[K+1] & \cdots & z[N] \end{bmatrix}$ and the matrix
+Using the vector $\vecnot{z} = \begin{bmatrix} z[K] & z[K+1] & \cdots & z[N] \end{bmatrix}^T$ and the matrix
 \[ A = \begin{bmatrix} x[K] & x[K-1] & \cdots & x[1] \\ x[K+1] & x[K] & \cdots & x[2] \\ \vdots & \vdots & \ddots & \vdots \\ x[N] & x[N-1] & \cdots & x[N-K+1] \end{bmatrix} , \]
 we can rewrite this cost function as
 \[ J(\vecnot{h}) = (A\vecnot{h}-\vecnot{z})^H \Lambda (A\vecnot{h}-\vecnot{z}), \]
@@ -893,11 +899,11 @@ To see the connection with Wiener filtering, the key observation is that the mat
 This is because, for large $N$ and $\lambda$ close to 1, we have
 \[ \left[ A^H \Lambda A \right]_{ij} = \sum_{t=K}^N \lambda^{N-t} x[t-j+1] \overline{x}[t-i+1] \approx \frac{R_{xx}(i-j)}{1-\lambda} \]
 and
-\[ \left[ A^H \Lambda \vecnot{z} \right]_i = \sum_{t=K}^N \lambda^{N-t} z[t] \overline{x}[t-i+1] \approx \frac{R_{zx}(i)}{1-\lambda}. \]
+\[ \left[ A^H \Lambda \vecnot{z} \right]_i = \sum_{t=K}^N \lambda^{N-t} z[t] \overline{x}[t-i+1] \approx \frac{R_{zx}(i-1)}{1-\lambda}. \]
 
 Another benefit of this approach is that, as each new sample arrives, the solution $\vecnot{h}$ can be updated with low complexity.
 Consider the matrix $G_N = A^H \Lambda A$ and vector $\vecnot{b}_N = A^H \Lambda \vecnot{z}$ as a function of $N$.
-Then, $G_{N+1} = \lambda G_N + \vecnot{u}^H \vecnot{u}$ and $\vecnot{t}_{N+1} = \lambda \vecnot{b}_N + z[N+1] \vecnot{u}^H$, where
+Then, $G_{N+1} = \lambda G_N + \vecnot{u}^H \vecnot{u}$ and $\vecnot{b}_{N+1} = \lambda \vecnot{b}_N + z[N+1] \vecnot{u}^H$, where
 \begin{equation}
 \vecnot{u} = \begin{bmatrix} x[N+1] & x[N] & \cdots & x[N-K+2] \end{bmatrix} .
 \end{equation}
@@ -1027,7 +1033,8 @@ First, we define $A = M^H$, which will enable us to use established notation.
 The matrix equation $\vecnot{y} = M \vecnot{x} = A^H \vecnot{x}$ can then be interpreted as a set of constraints of the form $\inner{ \vecnot{x} }{ \vecnot{w}_i } = y_i$ where $\vecnot{w}_i$ is the $i$th column of $A$.
 This is precisely the dual approximation of Theorem~\ref{thm:dual_approx}, with finite-dimensional vector space $\mathbb{C}^n$ and the standard inner product.
 Thus, the theorem implies that the minimum norm solution lies in $\mathcal{R}(A)$ or, equivalently, the row space of $M$.
-Using \eqref{equation:DualApproximation}, one gathers that $\hat{\vecnot{y}} = A^H A \vecnot{s} = M M^H \vecnot{s}$.
+Using \eqref{equation:DualApproximation}, one gathers that $\vecnot{y} = A^H A \vecnot{s} = M M^H \vecnot{s}$.
+
 Furthermore, by assumption, $M$ has linearly independent rows and, as such, Gramian matrix $A^H A = M M^H$ is invertible.
 The solution to the minimum-norm problem is then given by
 \begin{equation*}
@@ -1043,9 +1050,8 @@ So far, we have focused on the projection of vectors onto subspaces.
 In this section, similar results are obtained for the projection of vectors onto convex sets.
 
 \begin{definition}
-Let $V$ be a vector space.
-The subset $A \subseteq V$ is called a \defn{vector space}{convex set} if, for all $\vecnot{a}_1,\vecnot{a}_2 \in A$ and $\lambda\in(0,1)$, we have $\lambda \vecnot{a}_1 + (1-\lambda) \vecnot{a}_2 \in A$.
-The set is \textbf{strictly convex} if, for all $\vecnot{a}_1,\vecnot{a}_2 \in \Closure{A}$ and $\lambda\in(0,1)$, we have $\lambda \vecnot{a}_1 + (1-\lambda) \vecnot{a}_2 \in \Interior{A}$.
+For a vector space $V$, a subset $A \subseteq V$ is called a \defn{vector space}{convex set} if, for all $\vecnot{a}_1,\vecnot{a}_2 \in A$ and $\lambda\in(0,1)$, we have $\lambda \vecnot{a}_1 + (1-\lambda) \vecnot{a}_2 \in A$.
+Given a norm on $V$ and its induced topology, we say $A$ is \textbf{strictly convex} if $\lambda \vecnot{a}_1 + (1-\lambda) \vecnot{a}_2 \in \Interior{A}$ for $\lambda\in(0,1)$ when $\vecnot{a}_1,\vecnot{a}_2 \in \Closure{A}$ are distinct points.
 \end{definition}
 
 \begin{problem}
@@ -1122,10 +1128,10 @@ The optimality of $\vecnot{u}^*$ implies that
 \begin{align*}
 \| \vecnot{v}-\vecnot{u}^* \|^2
 &\leq \| \vecnot{v}- \vecnot{u}' \|^2 \\
-&\leq \| \vecnot{v}- \vecnot{u}^* - \alpha (\vecnot{u}-\vecnot{u}^*) \|^2 \\
-&= \| \vecnot{v} - \vecnot{u}^* \|^2 + \alpha^2 \| \vecnot{u} - \vecnot{u}^* \|^2 - 2 \alpha \Real \tinner{ v-\vecnot{u}^* \,}{\, \vecnot{u}-\vecnot{u}^* }. 
+&= \| \vecnot{v}- \vecnot{u}^* - \alpha (\vecnot{u}-\vecnot{u}^*) \|^2 \\
+&= \| \vecnot{v} - \vecnot{u}^* \|^2 + \alpha^2 \| \vecnot{u} - \vecnot{u}^* \|^2 - 2 \alpha \Real \tinner{ \vecnot{v}-\vecnot{u}^* \,}{\, \vecnot{u}-\vecnot{u}^* }. 
 \end{align*}
-Thus, $\Real \tinner{ v-\vecnot{u}^* \,}{\, \vecnot{u}-\vecnot{u}^* } \leq \frac{\alpha}{2} \| \vecnot{u} - \vecnot{u}^* \|^2$.
+Thus, $\Real \tinner{ \vecnot{v}-\vecnot{u}^* \,}{\, \vecnot{u}-\vecnot{u}^* } \leq \frac{\alpha}{2} \| \vecnot{u} - \vecnot{u}^* \|^2$.
 One can establish necessity by taking the limit as $\alpha \to 0$.
 For sufficiency, we assume $\Real \tinner{ \vecnot{v}-\vecnot{u}^* }{ \vecnot{u}-\vecnot{u}^* } \leq 0$ and we write
 \begin{align*}
@@ -1136,6 +1142,55 @@ For sufficiency, we assume $\Real \tinner{ \vecnot{v}-\vecnot{u}^* }{ \vecnot{u}
 \end{align*}
 Thus, $\| \vecnot{v}-\vecnot{u} \|^2 \geq \| \vecnot{v} - \vecnot{u}^* \|^2$ for all $\vecnot{u} \in A$ and $\vecnot{u}^* = P_A (\vecnot{v})$.
 \end{proof}
+
+\begin{corollary}
+\label{corollary:convex_projection_nonexpansive}
+Let $A$ be a nonempty closed convex subset of a Hilbert space $V$.
+Then, for all $\vecnot{v},\vecnot{w}\in V$, the projection map $P_A:V\to A$ satisfies
+\[
+\left\|P_A(\vecnot{v})-P_A(\vecnot{w})\right\|
+\leq
+\left\|\vecnot{v}-\vecnot{w}\right\|
+\]
+and $P_A$ is Lipschitz continuous.
+\end{corollary}
+
+\begin{proof}
+Let $\vecnot u=P_A(\vecnot v)$ and $\vecnot x=P_A(\vecnot w)$.
+By Theorem~\ref{theorem:convex_proj_lt0}, the projection of $\vecnot{v}$ gives
+$\Real\tinner{\vecnot v-\vecnot u}{\vecnot x-\vecnot u}\leq 0$.
+Similarly, the projection of $\vecnot w$ implies that $ \Real\tinner{\vecnot w-\vecnot x}{\vecnot u-\vecnot x}\leq 0$.
+Since
+\[
+\vecnot v-\vecnot w
+=
+(\vecnot v-\vecnot u)
++
+(\vecnot u-\vecnot x)
++
+(\vecnot x-\vecnot w),
+\]
+it follows that
+\begin{align*}
+\Real\tinner{\vecnot v-\vecnot w}{\vecnot u-\vecnot x}
+&=
+\Real\tinner{\vecnot v-\vecnot u}{\vecnot u-\vecnot x}
++|\vecnot u-\vecnot x|^2
++\Real\tinner{\vecnot x-\vecnot w}{\vecnot u-\vecnot x} \\
+&\geq |\vecnot u-\vecnot x|^2.
+\end{align*}
+Therefore, the Cauchy--Schwarz inequality implies that
+\[
+\|\vecnot u-\vecnot x\|^2
+\leq
+\Real\tinner{\vecnot v-\vecnot w}{\vecnot u-\vecnot x}
+\leq
+\|\vecnot v-\vecnot w\| \, \|\vecnot u-\vecnot x\|.
+\]
+If $\vecnot u \neq \vecnot x$, dividing by $\|\vecnot u-\vecnot x\|$ gives the stated result.
+If not, it holds trivially.
+\end{proof}
+
 
 \subsection{Projection Properties and Examples}
 
@@ -1156,7 +1211,7 @@ Using the best approximation theorem, it is easy to verify that the orthogonal p
 P_{W}(\vecnot v)=\frac{\inner{ \vecnot v}{\vecnot w} }{\left\Vert \vecnot w\right\Vert ^{2}}\vecnot w.
 \]
 
-A \defn{vector space}{hyperplane} is a closed subspace of $U \subset V$ that satisfies a single linear equality of the form $\inner{ \vecnot v}{\vecnot w} =0$ for all $\vecnot{v}\in U$.
+A \defn{vector space}{hyperplane} is a closed subspace $U\subseteq V$ for which there is a non-zero $\vecnot{w}\in V$ such that $U=\{\vecnot{v}\in V:\inner{\vecnot{v}}{\vecnot{w}}=0\}=\Span(\vecnot{w})^{\bot}$.
 Such a subspace is said to have co-dimension one (e.g., if $\dim(V)=n$, then $\dim(U) = n-1$). Equivalently, $U$ can be seen as the orthogonal complement of a one-dimensional subspace (e.g., $U=W^{\perp}$).
 Thus, we can write
 \[
@@ -1174,7 +1229,7 @@ P_{U+\vecnot v_{0}}(\vecnot v)=\left((\vecnot v-\vecnot v_{0})-\frac{\inner{ \ve
 \end{equation*}
 which does not depend on the choice of $\vecnot v_{0}$.
 
-Next, let $H$ be the subset of $\vecnot v\in V$ satisfying the linear inequality $\tinner{\vecnot v}{\vecnot w}\geq c$. Then, $H$ is a closed convex set known as a \defn{inner-product space}{half space}. For any $\vecnot v\in H$, we have $P_{H}(\vecnot v)=\vecnot v$ and, for any $\vecnot v\notin H$, we have $P_{H}(\vecnot v)=P_{U+\vecnot v_{0}}(\vecnot v)$ because the closest point must lie on the separating hyperplane and achieve the inequality with equality. For any $\vecnot v\in H$, one can put these together to see that
+Next, let $H$ be the subset of $\vecnot v\in V$ satisfying the linear inequality $\tinner{\vecnot v}{\vecnot w}\geq c$. Then, $H$ is a closed convex set known as a \defn{inner-product space}{half space}. For any $\vecnot v\in H$, we have $P_{H}(\vecnot v)=\vecnot v$ and, for any $\vecnot v\notin H$, we have $P_{H}(\vecnot v)=P_{U+\vecnot v_{0}}(\vecnot v)$ because the closest point must lie on the separating hyperplane and achieve the inequality with equality. For any $\vecnot v\in V$, one can put these together to see that
 \begin{equation}
 P_{H}(\vecnot v)=\begin{cases}
 \vecnot v & \text{if }\tinner{\vecnot v}{\vecnot w}\geq c\\
@@ -1225,7 +1280,8 @@ Then, exactly one of the following two conditions hold:
 \end{corollary}
 
 \begin{proof}
-Consider the closed convex set $A = \{B \vecnot{s} \, | \, \vecnot{s} \geq \vecnot{0} \}$, where $\vecnot{s} \geq \vecnot{0}$ denotes $s_i \geq 0$ for $i=1,\ldots,n$.
+Consider the convex set $A = \{B \vecnot{s} \, | \, \vecnot{s} \geq \vecnot{0} \}$, where $\vecnot{s} \geq \vecnot{0}$ denotes $s_i \geq 0$ for $i=1,\ldots,n$.
+It is closed because the set defined by $\vecnot{s} \geq \vecnot{0}$ is closed and the mapping $\vecnot{s} \mapsto B \vecnot{s}$ is continuous.
 If $\vecnot{v} \in A$, then we see that the first condition holds.
 
 If $\vecnot{v} \notin A$, then we apply Theorem~\ref{theorem:convex_point_set_hyperplane} using the standard Hilbert space $\mathbb{R}^m$ to see that there exists $\vecnot{w} \in \mathbb{R}^m$ and $c\in \mathbb{R}$ such that $\vecnot{w}^T \vecnot{v} < c$ and $\vecnot{w}^T \vecnot{u} \geq c$ for all $\vecnot{u} \in A$.
@@ -1282,7 +1338,7 @@ Consider any sequence $(\vecnot u_{1},\vecnot v_{1}),(\vecnot u_{2},\vecnot v_{2
 \]
 If $B$ is compact, then there is a subsequence $\vecnot v_{n_{j}}$ that converges to some $\vecnot v^{*}\in B$.
 Since $\| P_A (\vecnot{v}_n)-\vecnot v_{n} \| \leq \|\vecnot u_{n}-\vecnot v_{n}\| $, we can replace $\vecnot u_{n_{j}}$ by $P_A (\vecnot{v}_{n_j})$ and still achieve the infimum.
-The continuity of $P_A$ also shows that $u_{n_{j}} \to \vecnot{u}^* = P_A (\vecnot{v}^*)$ and this implies $\| \vecnot{u}^* - \vecnot{v}^* \| = d$.
+The continuity of $P_A$ given by Corollary~\ref{corollary:convex_projection_nonexpansive} shows that $u_{n_{j}} \to \vecnot{u}^* = P_A (\vecnot{v}^*)$ and this implies $\| \vecnot{u}^* - \vecnot{v}^* \| = d$.
 Also, $P_B (\vecnot{u}^*) = \vecnot{v}^*$ because $\vecnot{v}^*$ is the unique closest point in $B$ to $\vecnot{u}^*$.
 Notice that $\vecnot v^{*}$ may not be unique (due to the subsequence construction) and, thus, the pair $(\vecnot{u}^*,\vecnot{v}^*)$ is not unique in general.
 
@@ -1291,7 +1347,12 @@ Since $\left\Vert \vecnot u-\vecnot v\right\Vert $ is a convex function on the c
 \[
 M=\left\{ (\vecnot u,\vecnot v)\in A\times B\;\big|\;\left\Vert \vecnot u-\vecnot v\right\Vert =d\right\} .
 \]
-Also, each component of the $(\vecnot{u},\vecnot{v})$ points in $M$ must lie on the boundary of its set because otherwise one could reduce the smallest distance by moving one point along the minimum distance line towards the boundary. Now, suppose that (i) $A$ is strictly convex and (ii) $M$ contains more than one pair of minimizers. Then, condition (ii) implies that there must be two boundary points $\vecnot u_{1},\vecnot u_{2}\in\partial A$ such that $\alpha\vecnot u_{1}+(1-\alpha)\vecnot u_{2}\in\partial A$ for $\alpha\in[0,1]$. But this contradicts condition (i) and shows that, if $A$ is strictly convex, then there is at most one pair $(\vecnot u^{*},\vecnot v^{*})\in M$ of minimizing points.
+Also, each component of the $(\vecnot{u},\vecnot{v})$ points in $M$ must lie on the boundary of its set because otherwise one could reduce the smallest distance by moving one point along the minimum distance line towards the boundary.
+Now, suppose that (i) $A$ is strictly convex and (ii) $M$ contains more than one pair of minimizers.
+Then, condition (ii) implies that there must be two boundary points $\vecnot u_{1},\vecnot u_{2}\in\partial A$ such that $\alpha\vecnot u_{1}+(1-\alpha)\vecnot u_{2}\in\partial A$ for $\alpha\in[0,1]$.
+If $\vecnot{u}_1=\vecnot{u}_2$, uniqueness of the projection of this point onto $B$ gives $\vecnot{v}_1=\vecnot{v}_2$.
+Thus two distinct minimizing pairs must have $\vecnot{u}_1\ne\vecnot{u}_2$.
+But this contradicts condition (i) and shows that, if $A$ is strictly convex, then there is at most one pair $(\vecnot u^{*},\vecnot v^{*})\in M$ of minimizing points.
 \end{proof}
 
 \begin{remark}

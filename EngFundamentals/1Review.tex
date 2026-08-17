@@ -304,7 +304,7 @@ Thus, $f(x_n)$ does not converge to $f(x_0)$ for some sequence where $x_n \to x_
 \begin{definition} \label{def:cont_limit}
 For a limit point $x_0$ of $X$, we say $\lim_{x\to x_0}f(x)=y$ if $f(x_n)\to y$ for every sequence $x_n \in X \setminus\{x_0\}$ such that $x_n\to x_0$.
 The \boldmath%
-\defn{metric space}{limit}~\textbf{of $f$ at $x_0$}\unboldmath~equals $y$ in this case and the limit exists if this is true for some $y\in Y$.
+\defn{metric space}{limit}~\textbf{of $f$ at $x_0$}\unboldmath~equals $y$ in this case and we say the limit exists if this holds for some $y\in Y$.
 %$\lim_{x \to x_0} f(x)$, exists and equals $y\in Y$ if $f(x_n) \to y$ for all sequences $x_n \in X$ such that $x_n \to x_0$.
 Thus, Theorem~\ref{thm:cont_fun_limit} implies that $\lim_{x\to x_0} f(x)=f(x_0)$ if and only if $f$ is continuous at $x_0$.
 Indeed, for any sequence approaching $x_0$, the terms equal to $x_0$ already have image $f(x_0)$, while the remaining terms form a punctured sequence to which the limit definition applies.
@@ -975,17 +975,17 @@ That is, $f^{-1} (O)$ is open.
 \addplot[black] coordinates { (0,0) (0,1.25)};
 \addplot[black, dashed, thin] coordinates {
     (-2,0) (-2,0.3333) (0,0.3333)
-
+%
     (-1,0) (-1,0.5) (0,0.5)
-
+%
     (1,0) (1,0.5) (0,0.5)
-
+%
     (2,0) (2,0.3333) (0,0.3333)
-
+%
     (3,0) (3,0.25) (0,0.25)
-
+%
     (4,0) (4,0.2) (0,0.2)
-
+%
     (5,0) (5,0.1667) (0, 0.1667)};
 
 \addplot[magenta, mark=*] coordinates { (0,1)};
@@ -1038,9 +1038,9 @@ Thus, this is an example of a continuous function along with a set for which $f 
     {0.25*(x-3)^3 + 5};
 \addplot[black, dashed] coordinates {
     (1,0) (1,1.625) (0,1.625)
-
+%
     (3,0) (3,3.375) (0,3.375)
-
+%
     (3,6) (0,6)};
 \addplot[mark=*, draw=blue,fill=white] coordinates {(3, 3.375)};
 \addplot[mark=*, draw=blue,fill=white] coordinates {(3,5)};
