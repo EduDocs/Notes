@@ -1,0 +1,384 @@
+%% Style file for ECE587 - Information Theory Special Topics in High-Dimensional Statistical Inference
+
+
+% Load packages
+\usepackage{amsmath, amssymb,bm, amscd}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue, citecolor=magenta}
+%\hypersetup{colorlinks=true, linkcolor=blue, pdfborderstyle={/S/U/W 1}}
+\usepackage{enumerate,mathtools}
+\usepackage{color}
+\usepackage{setspace}
+
+\usepackage{amsthm}
+\usepackage{graphicx}
+
+
+\usepackage{pgfplots}
+\usetikzlibrary{positioning}
+
+\pgfplotsset{
+    dirac/.style={
+        mark=triangle*,
+        mark options={scale=2},
+        ycomb,
+        scatter,
+        visualization depends on={y/abs(y)-1 \as \sign},
+        scatter/@pre marker code/.code={\scope[rotate=90*\sign,yshift=-2pt]}
+    }
+}
+
+
+% Setup margins
+\setlength{\oddsidemargin}{0. in}
+\setlength{\evensidemargin}{0. in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{9.25 in}
+\setlength{\parindent}{0 in}
+\setlength{\headheight}{14 pt}
+
+
+% Setup header and footer
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot{}
+
+% Define environments
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{cor}{Corollary}
+\numberwithin{lemma}{chapter} 
+\newtheorem{prop}{Proposition}
+\newtheorem{claim}{Claim}
+
+%\newtheorem{prob}{Exercise}[Chapter]
+
+
+\renewcommand{\labelitemii}{$\circ$}
+
+%% Define notations here:
+
+% bold charactors
+\newcommand{\bA}{\bm{A}}
+\newcommand{\bB}{\bm{B}}
+\newcommand{\bC}{\bm{C}}
+\newcommand{\bD}{\bm{D}}
+\newcommand{\bE}{\bm{E}}
+\newcommand{\bF}{\bm{F}}
+\newcommand{\bG}{\bm{G}}
+\newcommand{\bH}{\bm{H}}
+\newcommand{\bI}{\bm{I}}
+\newcommand{\bJ}{\bm{J}}
+\newcommand{\bK}{\bm{K}}
+\newcommand{\bL}{\bm{L}}
+\newcommand{\bM}{\bm{M}}
+\newcommand{\bN}{\bm{N}}
+\newcommand{\bO}{\bm{O}}
+\newcommand{\bP}{\bm{P}}
+\newcommand{\bQ}{\bm{Q}}
+\newcommand{\bR}{\bm{R}}
+\newcommand{\bS}{\bm{S}}
+\newcommand{\bT}{\bm{T}}
+\newcommand{\bU}{\bm{U}}
+\newcommand{\bV}{\bm{V}}
+\newcommand{\bW}{\bm{W}}
+\newcommand{\bX}{\bm{X}}
+\newcommand{\bY}{\bm{Y}}
+\newcommand{\bZ}{\bm{Z}}
+
+\newcommand{\ba}{\bm{a}}
+\newcommand{\bb}{\bm{b}}
+\newcommand{\bc}{\bm{c}}
+\newcommand{\bd}{\bm{d}}
+\newcommand{\be}{\bm{e}}
+%\newcommand{\bf}{\bm{f}}
+\newcommand{\bg}{\bm{g}}
+\newcommand{\bh}{\bm{h}}
+\newcommand{\bi}{\bm{i}}
+\newcommand{\bj}{\bm{j}}
+\newcommand{\bk}{\bm{k}}
+\newcommand{\bl}{\bm{l}}
+%\newcommand{\bm}{\bm{m}}
+\newcommand{\bn}{\bm{n}}
+\newcommand{\bo}{\bm{o}}
+\newcommand{\bp}{\bm{p}}
+\newcommand{\bq}{\bm{q}}
+\newcommand{\br}{\bm{r}}
+\newcommand{\bs}{\bm{s}}
+\newcommand{\bt}{\bm{t}}
+\newcommand{\bu}{\bm{u}}
+\newcommand{\bv}{\bm{v}}
+\newcommand{\bw}{\bm{w}}
+\newcommand{\bx}{\bm{x}}
+\newcommand{\by}{\bm{y}}
+\newcommand{\bz}{\bm{z}}
+
+\newcommand{\btheta}{\bm{\theta}}
+\newcommand{\balpha}{\bm{\alpha}}
+
+
+
+% calligraphic charactors
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cG}{\mathcal{G}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cI}{\mathcal{I}}
+\newcommand{\cJ}{\mathcal{J}}
+\newcommand{\cK}{\mathcal{K}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\cN}{\mathcal{N}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cQ}{\mathcal{Q}}
+\newcommand{\cR}{\mathcal{R}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\cU}{\mathcal{U}}
+\newcommand{\cV}{\mathcal{V}}
+\newcommand{\cW}{\mathcal{W}}
+\newcommand{\cX}{\mathcal{X}}
+\newcommand{\cY}{\mathcal{Y}}
+\newcommand{\cZ}{\mathcal{Z}}
+
+
+% math commands
+
+\newcommand{\one}{\boldsymbol{1}} 
+\newcommand{\goto}{\rightarrow} 
+
+\newcommand{\bEx}{\ensuremath{\mathbb{E}}}
+\newcommand{\bPr}{\ensuremath{\mathbb{P}}}
+\newcommand{\ex}[1]{\ensuremath{\mathbb{E}\left[ #1\right]}}
+\newcommand{\pr}[1]{\ensuremath{\mathbb{P}\left[ #1\right]}}
+\newcommand{\trb}[1]{\gtr\left( #1\right)}
+%\newcommand{\var}[1]{\ensuremath{\operatorname{Var}\left( #1\right)}}
+%\newcommand{\cov}[2]{\ensuremath{\operatorname{Cov}\left( #1, #2\right)}}
+\newcommand{\corr}[2]{\ensuremath{\operatorname{Corr}\left( #1, #2\right)}}
+
+
+\newcommand{\dd}{\mathrm{d}} 
+
+\DeclareMathOperator{\vect}{\mathrm{vect}}
+\DeclareMathOperator{\cov}{\sf Cov}
+\DeclareMathOperator{\var}{\sf Var}
+\DeclareMathOperator{\diag}{\mathrm diag}
+\DeclareMathOperator{\divergence}{\mathrm div}
+
+\DeclareMathOperator{\supp}{\mathrm{supp}}
+\DeclareMathOperator{\rank}{\mathrm{rank}}
+\DeclareMathOperator{\gspan}{\mathrm{span}}
+
+\DeclareMathOperator{\SNR}{\mathsf{SNR}}
+
+\DeclareMathOperator{\mse}{\sf mse}
+\DeclareMathOperator{\mmse}{\sf mmse}
+
+\DeclareMathOperator{\gtr}{tr}
+
+\newcommand{\reals}{\mathbb{R}}
+
+\newcommand{\eps}{\epsilon}
+\newcommand{\normal}{\mathcal{N}}
+
+\let\originalleft\left
+\let\originalright\right
+\renewcommand{\left}{\mathopen{}\mathclose\bgroup\originalleft}
+\renewcommand{\right}{\aftergroup\egroup\originalright}
+
+
+
+\newif\ifmynotes
+%\mynotesfalse
+%\mynotestrue
+\ifmynotes
+	\definecolor{note_text}{rgb}{1,1,1}		
+	\newcommand{\gskip}{\vspace*{1cm}}
+	\newcommand\gnote[1]{\protect\leavevmode\begingroup\Huge\color{note_text}#1\endgroup\ignorespaces}
+	\newenvironment{gnotes}{\Huge\color{red}}{\ignorespacesafterend}
+\else
+	\newcommand{\gnote}[1]{#1\ignorespaces} 	% make commands do nothing. 
+	\definecolor{note_text}{rgb}{0,0,.7}
+%	\newcommand\gnote[1]{\protect\leavevmode\begingroup\color{note_text}#1\endgroup\ignorespaces}
+	\newenvironment{gnotes}{\color{red}}{\ignorespacesafterend}
+%	\newcommand{\gskip}{}
+\fi
+
+
+\newif\ifans
+\long\gdef\answer#1{\ifans\par\smallskip{\color{white} #1}\else\fi}
+
+
+%\def\bea#1\eea{\begin{align*}#1\end{align*}}
+
+%\usepackage{comment}
+%\definecolor{note_text}{rgb}{0.7,0,0}
+%s
+%\newif\ifmynotes
+%\mynotestrue
+%\definecolor{notetext}{rgb}{0.7,0,0}
+%\def\mynote#1{\ifmynotes\textcolor{notetext}{#1}\else\unskip\fi}
+%\specialcomment{note}{\begingroup\color{note_text}}{\endgroup}
+%
+%\mynotestrue
+
+%\usepackage{setspace}
+%\usepackage[nodisplayskipstretch]{setspace}
+
+
+%\definecolor{note_text}{rgb}{0,0,.7}
+%\newcommand{\gnote}[1]{\textcolor{note_text}{\large#1}}
+%\newenvironment{gnotes}{\color{note_text} \large}{\vspace*{.5cm} \ignorespacesafterend}
+
+%\definecolor{notetext}{rgb}{0,0,0}
+
+%\def\mynote#1{\ifmynotes\textcolor{notetext}{#1}\else\unskip\fi}
+
+
+
+
+%\newif\ifmynotes
+%\mynotestrue
+
+%\newcommand{\gnote}[1]{\color{note_text}{#1}\leavevmode\color{black}\ignorespaces}
+%\newcommand{\gnote}[1]{\textcolor{note_text}{#1}\ignorespaces}%s\ignorespacesafterend}
+
+
+%\newenvironment{gnotes}{\begin{minipage}{\textwidth}\color{note_text} \large}{\end{minipage}}%\igsnorespacesafterend}
+
+
+\allowdisplaybreaks
+
+
+
+%% stuff to make the bibliography look good
+\makeatletter
+\renewenvironment{thebibliography}[1]
+     {\section*{References}% <-- this line was changed from \chapter* to \section*
+      \@mkboth{\MakeUppercase\bibname}{\MakeUppercase\bibname}%
+      \list{\@biblabel{\@arabic\c@enumiv}}%
+           {\settowidth\labelwidth{\@biblabel{#1}}%
+            \leftmargin\labelwidth
+            \advance\leftmargin\labelsep
+            \@openbib@code
+            \usecounter{enumiv}%
+            \let\p@enumiv\@empty
+            \renewcommand\theenumiv{\@arabic\c@enumiv}}%
+      \sloppy
+      \clubpenalty4000
+      \@clubpenalty \clubpenalty
+      \widowpenalty4000%
+      \sfcode`\.\@m}
+     {\def\@noitemerr
+       {\@latex@warning{Empty `thebibliography' environment}}%
+      \endlist}
+\makeatother
+
+%%% FILL IN THIS INFORMATION %%
+%\newcommand{\LecNum}{21} %HOMEWORK NUMBER
+%
+%
+%% SOLUTIONS
+%%\newcommand{\gtitle}{HW\HWnum~-- Solutions} % TITLE
+%
+%% WITHOUT SOLUTIONS
+%\newcommand{\gtitle}{Lecture \LecNum} % TITLE
+
+
+
+%\newcounter{probcounter}
+%\newenvironment{prob}{ \refstepcounter{probcounter}%
+% \textbf{Exercise \HWnum.\arabic{probcounter}} }
+%{\bigskip}
+
+
+\newcommand{\slidesheader}[2]{
+
+\addtocounter{chapter} {#1}
+
+
+}
+
+
+\newcommand{\lectureheader}[2]{
+
+
+\addtocounter{chapter} {#1}
+
+% set up header
+\fancyhead[RO,LE]{\thepage}
+\fancyhead[RE,LO]{ ECE 586: Lecture #1}
+
+
+\begin{center}
+{\Large \bf ECE 586: Lecture #1~-- #2}\\
+\smallskip
+{\large Vector Space Methods\\
+Duke University, Fall 2024 }
+\end{center}
+\bigskip
+
+%\let\thefootnote\relax\footnote{These lecture notes are a work in progress. Feedback is greatly appreciated.}
+
+
+{\bf Author:} Galen Reeves\\
+{\bf Last Modified:} \today \\
+
+\vspace{- 36pt}
+
+\renewcommand{\contentsname}{\Large {Outline of lecture:} \vspace{-28pt}}
+\begin{minipage}{\textwidth}
+\tableofcontents 
+\end{minipage}
+
+\thispagestyle{empty}
+
+\medskip
+
+}
+
+
+\newcommand{\homeworkheader}[2]{
+
+
+\addtocounter{chapter} {#1}
+
+% set up header
+\fancyhead[RO,LE]{\thepage}
+\fancyhead[RE,LO]{ECE 586 Homework #1}
+
+
+\begin{center}
+{\Large \bf ECE 586: Homework #1}\\
+\smallskip
+{\large Compressed Sensing and Related Topics\\
+Duke University, Spring 2016 }
+\end{center}
+\bigskip
+%
+%\let\thefootnote\relax\footnote{These lecture notes are a work in progress. Feedback about typos is greatly appreciated.}
+%
+%
+%{\bf Author:} #2\\
+%{\bf Last Modified:} \today \\
+%
+%\vspace{- 36pt}
+%
+%\renewcommand{\contentsname}{\Large {Outline of lecture:} \vspace{-28pt}}
+%\begin{minipage}{\textwidth}
+%\tableofcontents 
+%\end{minipage}
+
+\thispagestyle{empty}
+
+\medskip
+
+}
+

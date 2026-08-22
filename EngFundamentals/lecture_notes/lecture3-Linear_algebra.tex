@@ -1,0 +1,1556 @@
+\documentclass[11pt,twoside]{report}
+
+
+%\newif\ifmynotes
+%\mynotesfalse
+%\mynotestrue
+
+\usepackage{ece586}
+
+
+%% TOGGLE  Notes
+%\newif\ifgnotes
+%\anstrue
+
+%\ifmynotes
+%	\definecolor{note_text}{rgb}{1,1,1}		
+%	\newcommand{\gskip}{\vspace*{1cm}}
+%	\newcommand\gnote[1]{\protect\leavevmode\begingroup\Huge\color{note_text}#1\endgroup\ignorespaces}
+%	\newenvironment{gnotes}{\Huge\color{red}}{\ignorespacesafterend}
+%\else
+%	%\newcommand{\gnote}[1]{#1\ignorespaces} 	% make commands do nothing. 
+%	\definecolor{note_text}{rgb}{0,0,.7}
+%	\newcommand\gnote[1]{\protect\leavevmode\begingroup\color{note_text}#1\endgroup\ignorespaces}
+%	\newenvironment{gnotes}{\color{red}}{\ignorespacesafterend}
+%%	\newcommand{\gskip}{}
+%\fi
+%
+
+\newcommand{\bbN}{{\mathbb{N}}}
+\newcommand{\bbR}{{\mathbb{R}}}
+\newcommand{\bbQ}{{\mathbb{Q}}}
+\newcommand{\bbZ}{{\mathbb{Z}}}
+\newcommand{\bbC}{{\mathbb{C}}}
+\newcommand{\vecnot}{\underline}
+\newcommand{\Id}{{\mathrm{I}}}
+
+\newcommand{\Interior}[1]{\ensuremath{{#1}^{\circ}}}
+\newcommand{\Closure}[1]{\ensuremath{\overline{#1}}}
+\newcommand{\Complement}[1]{\ensuremath{{#1}^{c}}}
+
+\newcommand{\Real}{\mathrm{Re}}
+\newcommand{\Span}{\mathrm{span}}
+\newcommand{\Rank}{\mathrm{rank}}
+\newcommand{\Nullity}{\mathrm{nullity}}
+\newcommand{\Trace}{\mathrm{tr}}
+\newcommand{\Diag}{\mathrm{diag}}
+\DeclareMathOperator*{\esssup}{ess\,sup}
+
+\newcommand{\inner}[2]{{\left\langle #1 \mskip2mu , #2 \right\rangle}}
+\newcommand{\tinner}[2]{{\langle #1 \mskip1mu , #2 \rangle}}
+
+\newcommand{\Expect}{\ensuremath{\mathrm{E}}}
+
+\begin{document}
+
+\lectureheader{3}{Linear Algebra}
+
+
+
+\section*{Overview} 
+
+\begin{itemize}
+%\item In this lecture, we consider noisy linear observation model
+% \[
+% \by = A \bx^\star + \be
+% \]
+% where:
+%\begin{itemize}
+%\item $\bx^\star$ is an unknown $n$-dimensional vector belonging to a set $\cX \subseteq \reals^n$. 
+%\item $A$ is an $m \times n$ measurement matrix
+%\item $\be$ is and $m$-dimensional vector of measurement errors
+%\end{itemize}
+
+
+\item This lecture is based on material in  \cite[Chapters~3 and 6]{chamberland:2023EF}.
+% and \cite[Parts~I--II]{bloch:2011}
+
+
+\end{itemize}
+
+\section{Introduction} 
+
+%\section{Logic Systems} 
+
+\begin{itemize}
+\item Linear algebra is the foundation of engineering mathematics 
+  \begin{itemize}
+  \item This chapter will review and extend your knowledge of linear algebra
+  \item Abstraction allows the application of similar ideas to many different areas
+  \item Your prior experience with real vector spaces makes this possible 
+  \end{itemize}
+\item Abstraction 
+  \begin{itemize}
+  \item Metric spaces provide abstract notions of distance and closeness
+  \item Fields provide abstract notions for arithmetic of scalars ($+,-,\times,/$)
+  \item Vector spaces abstract the additive properties of real vectors
+  \end{itemize}
+  \end{itemize}
+  
+  \subsection{Fields} 
+  
+  \begin{itemize} 
+  
+\item   Consider a set $F$ with binary operations: ``addition"  $+$ and ``multiplication" $\cdot$
+\begin{itemize}
+\item For every pair of elements $s, t \in F$, we require $(s + t) \in F$
+\item For every pair of elements $s, t \in F$, we require $s\cdot  t \in F$
+\end{itemize}
+\item The set $F$ forms a \textbf{field} if the operations $(+,\cdot)$ satisfy the following  for all elements $a,b,c \in F$. 
+\begin{itemize}
+\item Associativity
+\[
+ a + (b + c) = (a + b) + c  \qquad \text{and} \qquad  a \cdot (b \cdot c) = (a \cdot  b) \cdot c
+ \]
+ 
+\item Commutativity:
+\[
+a + b = b + a \qquad \text{and} \qquad  a\cdot b = b \cdot a.
+\]
+\item Identities: There are distinct elements element $0$ and $1$ in $ F$ such that  
+\[
+a + 0 =  a\qquad \text{and} \qquad  a\cdot 1 = a.
+\]
+\item Additive inverse:   For all $a \in F$ there is unique element $-a \in F$ such that 
+\[
+a + (-a) = 0 
+\]
+
+\item Multiplicative inverse:   For all $a \in F\setminus\{0\}$ there is unique element $a^{-1} \in F$ such that 
+\[
+a \cdot a^{-1}  = 1 
+\]
+
+
+%Additive and multiplicative identity: there exist two distinct elements 0 and 1 in F such that a + 0 = a and a ⋅ 1 = a.
+%Additive inverses: for every a in F, there exists an element in F, denoted −a, called the additive inverse of a, such that a + (−a) = 0.
+%Multiplicative inverses: for every a ≠ 0 in F, there exists an element in F, denoted by a−1 or 1/a, called the multiplicative inverse of a, such that a ⋅ a−1 = 1.
+\item Distributivity of multiplication over addition:
+\[
+ a \cdot (b + c) = (a \cdot b) + (a \cdot c)
+ \]
+\end{itemize}
+%\begin{enumerate}
+%\item there is a unique element $0 \in F$ such that $s + 0 = s \;\;\; \forall s \in F$
+%\item addition is commutative: $s + t = t + s \;\;\; \forall s, t \in F$
+%\item addition is associative: $r + (s + t) = (r + s) + t \;\;\; \forall r, s, t \in F$
+%\item for $s \in F$ there is a unique element $(-s) \in F$ such that $s + (-s) = 0$
+%\item multiplication is commutative: $s\cdot t = t \cdot s \;\;\; \forall s,t \in F$
+%\item multiplication is associative: $r\cdot (s \cdot t) = (r\cdot s) \cdot t \;\;\; \forall r, s, t \in F$
+%\item there is a unique non-zero element $1 \in F$ such that $s\cdot 1 = s \;\;\; \forall s \in F$
+%\item for $s \in F \setminus\{0\}$ there is a unique element $s^{-1} \in F$ such that $s s^{-1} = 1$
+%\item multiication distributes over addition: $r (s + t) = rs + rt \;\;\; \forall r, s, t \in F$.
+%\end{enumerate}
+
+
+\item \textbf{Examples:} 
+
+\begin{itemize}
+\item rational numbers $\bbQ$ %with standard addition and multiplication 
+\[
+x = \frac{p}{q} , \quad y  = \frac{r}{s} ,\quad  p,r \in \bbZ, q,s \in \bbN  \quad \implies\begin{dcases}  x + y  = \frac{ p s + q t}{ qs}  \\  x \cdot y =  \frac{ p r}{ qs}  
+\end{dcases}
+\]
+\item real numbers $\bbR$% with standard addition and multiplication 
+\item complex numbers $\bbC$ %with standard addition and multiplication 
+\[
+x = a + bi, \quad y  = c +  di  \quad \implies\begin{dcases}  x + y  = (a + c)  + ( b+ d) i  \\  x \cdot y =  (ac - bd)  + (ad + bc) i 
+\end{dcases}
+\]
+
+\item integers $\bbZ$ with standard addition and multiplication is \emph{not} a field (no mult.\ inverse!) 
+
+
+\item For prime $p$, the set $\{ 0, 1, 2, \dots, p-1\}$ with addition and multiplication modulo $p$ is a field. The additive inverse of $x$ is 
+\[
+-x = p -x \pmod{p} 
+\]
+The multiplicative inverse  of $x$ is the unique element $x^{-1}$ that satisfies  $x \cdot x^{-1} = 1$, or equivalently 
+\[
+x  x^{-1}  =  k p + 1 \quad \text{for some $k \in \bbN$}
+\]
+where the multiplication on the left denotes the standard multiplication of integers. 
+%or equivalently, 
+%\[
+%x \cdot x^{-1}  =  k p + 1 \quad \text{for some $k \in \bbN$}
+%\]
+
+\end{itemize}
+
+\end{itemize}
+
+
+  \subsection{Matrices} 
+  
+  \begin{itemize}
+  \item An $m \times n$ matrix over field $F$ is given by 
+  \begin{equation*}
+A = \begin{bmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+a_{21} & a_{22} & \cdots & a_{2n} \\
+\scalebox{0.75}{\vdots} & \scalebox{0.75}{\vdots} & \scalebox{0.75}{$\ddots$} & \scalebox{0.75}{\vdots} \\
+a_{m1} & a_{m2} & \cdots & a_{mn}
+\end{bmatrix}.
+\end{equation*}
+where $a_{ij} \in F$ for $1 \le i \le m$ and $1 \le j \le n$. This is denoted $A \in F^{m \times n}$. 
+
+\item The \textbf{transpose} of $A \in F^{m \times n}$ is the  matrix $B \in F^{n \times m}$ with 
+\[
+b_{ij} = a_{ji}
+\]
+This transpose is often denoted by $A^\top$. 
+  
+  
+  \item For matrices $A \in F^{m \times n}$ and $B \in F^{n \times p}$ the \textbf{matrix product}  $C = AB$ is the $m \times p$ matrix whose $ij$-th entry is 
+  \[
+  c_{ij} = \sum_{r = 1}^n a_{ir} b_{rj} 
+  \]
+  
+  
+  \item 
+A square matrix $A \in F^{m\times m}$ is \textbf{invertible} if there is a square matrix $B \in F^{m\times m}$ such that 
+\[
+AB=BA=\Id 
+\]
+where $\Id $ is the $m\!\times\! m$ identity.  The inverse is denoted $A^{-1}=B$.
+
+\item  An \textbf{elementary row operation} on an $m \times n$ matrix consists of
+\begin{enumerate}
+\item multiplying a row by a non-zero scalar,
+\item swapping two rows, or
+\item adding a scalar multiple of one row to another row.
+\end{enumerate}
+%An \textbf{elementary column operation} is the same but applied to the columns.
+
+
+\item \textbf{Fact:}  Every elementary row operation on $A \in F^{m \times n}$ can be represented by matrix multiplication (on the left) by some square matrix $E \in F^{m \times m}$
+\[
+\text{original matrix $A$}  \qquad  \text{transformed matrix $B = EA$}
+\]
+For example: 
+%\begin{itemize}
+%\item 
+\begin{align*}
+E =  \begin{bmatrix}
+1 & 0 & 0 \\
+0 & 3 & 0 \\
+0 & 0 & 1 
+\end{bmatrix} \quad &\iff \quad \text{multiply 2nd row by 3} \\
+E =  \begin{bmatrix}
+1 & 0 & 0 \\
+0 & 0 & 1 \\
+0 & 1 & 0  
+\end{bmatrix} \quad &\iff \quad \text{swap 2nd and 3rd rows} \\
+E =  \begin{bmatrix}
+1 & 7 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1  
+\end{bmatrix} \quad &\iff \quad \text{multiply 2nd row by 7 and add to 1st row} 
+\end{align*}
+
+
+  
+  \item A matrix $A \in F^{m\times n}$ is in \textbf{row echelon form} if:
+\begin{enumerate}
+\item Any all-zero row is below all rows with non-zero entries, and
+\item For all rows with non-zero entries, the leading coefficient (i.e., the first non-zero element from the left) is strictly to the right of the leading coefficient of the row above it.
+\end{enumerate}
+Thus, the entries below the leading coefficient in a column are zero. %\\
+%$A$ is in \textbf{column echelon form} if $A^T$ is in row echelon form.
+
+
+\item  A matrix $B \in F^{m\times n}$ is in \textbf{reduced row echelon form} (RREF) if it is:
+\begin{enumerate}
+\item in row echelon form with every leading coefficient equal to 1, and
+\item every leading coefficient is the only non-zero element in its column.
+\end{enumerate}
+%$B$ is \textbf{reduced column echelon form} if $B^T$ is in reduced row echelon form.
+
+
+\item \textbf{Examples} 
+\begin{align*}
+A &= \begin{bmatrix}
+1 & 0 & 2 & 0 \\
+0 & 0 & \!\!-2 & 1 \\
+0 & 0 & 0 & 0 \\
+\end{bmatrix} \qquad \text{ row echelon form} \\
+B &= \begin{bmatrix}
+1 & 0 & 0 & 1 \\
+0 & 0 & 1 & \!\!\!-\frac{1}{2} \\
+0 & 0 & 0 & 0 \\
+\end{bmatrix} \qquad \text{reduced row echelon form} 
+\end{align*}
+
+
+%\item \text{Fact:} \textbf{Gaussian elimination} uses elementary row operations to transform 
+
+
+\item \textbf{Lemma:} For any $m\times n$ matrix $A$ over $F$, one can apply a sequence of elementary row operations that  transform $A$ into a matrix that is in reduced row echelon form. This process is called Gaussian elimination. 
+
+\item \textbf{Example:} 
+\[
+\begin{bmatrix}1&3&1&9\\1&1&-1&1\\3&11&5&35\end{bmatrix}\to \begin{bmatrix}1&3&1&9\\0&-2&-2&-8\\0&2&2&8\end{bmatrix}\to \begin{bmatrix}1&3&1&9\\0&-2&-2&-8\\0&0&0&0\end{bmatrix}\to \begin{bmatrix}1&0&-2&-3\\0&1&1&4\\0&0&0&0\end{bmatrix}
+\]
+
+
+\item \textbf{Lemma:} For any $m\times n$ matrix $A$ over $F$, there is an invertible $m \times m$ matrix $P$ over $F$ such that $PA$ is in reduced row echelon form.
+
+\item \textbf{Proof:}
+\begin{itemize}
+%\item For $A\in F^{m \times n}$, define the augmented matrix $ [A \;\; \Id]$
+\item Apply elementary row operations with matrix representations  $E_1, E_2, \dots E_k$ to transform $A$ into RREF as% $R'$
+\[
+R' = \underbrace{ E_k E_{k-1} \cdots E_1}_{  = P}  A 
+\]
+%where $P $ is the product of the elementary row operations applied to the identity matrix $\Id$. 
+\item  Since elementary row operations are invertible, their product is also  invertible. 
+
+%Elementary row operations imply that $R' = P A'$ for some invertible $P$
+%\item Then, 
+%\[
+%R' = P [A\;\;\Id] = [ P A \;\;P] 
+%\]
+%$R' = [R \;\; P]$ where $R=PA$ is in RREF \qedhere
+\end{itemize}
+
+
+
+\item \textbf{Lemma:} 
+Let $A$ be an $m \times n$ matrix over $F$ with $m<n$. Then, there exists a length-$n$ column vector $\vecnot{x} \neq \vecnot{0}$ (over $F$) such that
+\[
+A \vecnot{x} = \vecnot{0}
+\]
+
+\item \textbf{Proof:} 
+\begin{itemize}
+\item Let $R = P A$ be the RREF where $P$ is invertible. 
+
+%\item Use row reduction to compute the RREF $R=PA$ of $A$, where $P$ is invertible.% by previous lemma.
+
+\item The columns of $R$ containing leading elements can be combined in a linear combination to cancel any other column of $R$. For example, 
+\begin{align}
+%R\vecnot{x} &=
+ \underbrace{\begin{bmatrix}
+1 & 0 & 0 & 1  & 2 \\
+0 & 0 & 1 & \!\!\!-\frac{1}{2} & 1  \\
+0 & 0 & 0 & 0 & 0 \\
+\end{bmatrix}}_{R = PA} \begin{bmatrix}   \!- 1 \\ 0 \\  \tfrac{1}{2}   \\1 \\ 0  \end{bmatrix}   = 0 
+\end{align}
+
+\item Thus, one can construct a vector $\vecnot{x}$ satisfying $R\vecnot{x}=\vecnot{0}$ and observe that $A \vecnot{x} = P^{-1} R \vecnot{x} = \vecnot{0}$. \hfill \qedhere
+\end{itemize}
+
+  
+  \end{itemize}
+
+
+\section{Vector spaces}
+
+
+\begin{itemize}
+\item \textbf{Definition}  A \textbf{vector space} consists of the following,
+\begin{enumerate}
+\item field $F$ of \textbf{scalars} (where $0,1 \in F$ denote the add. and mult. identities)
+\item  set $V$ of \textbf{vectors} (which are often decorated by an underline in these notes)
+\item \textbf{vector addition:} binary operation that maps any pair of vectors $\vecnot{v}, \vecnot{w} \in V$ to a vector $\vecnot{v} + \vecnot{w} \in V$ satisfying four conditions:
+\begin{enumerate}
+\item commutative: 
+\[
+\vecnot{v} + \vecnot{w} = \vecnot{w} + \vecnot{v}
+\]
+\item associative: \[
+\vecnot{u} + (\vecnot{v} + \vecnot{w}) = (\vecnot{u} + \vecnot{v}) + \vecnot{w}
+\]
+\item there is a unique vector $\vecnot{0} \in V$ such that $\vecnot{v} + \vecnot{0} = \vecnot{v}$, $\forall \vecnot{v} \in V$
+\item to each $\vecnot{v} \in V$ there is a unique vector $- \vecnot{v} \in V$ such that $\vecnot{v} + (- \vecnot{v}) = \vecnot{0}$
+\end{enumerate}
+\item \textbf{scalar multiplication:} binary operation that maps any $s \in F$ and $\vecnot{v} \in V$ to a vector $s \vecnot{v} \in V$ satisfying four conditions:
+\begin{enumerate}
+\item the identity is multiplicative identity of the field: 
+\[
+1 \vecnot{v} = \vecnot{v}, \quad \forall \vecnot{v} \in V
+\]
+\item  associative: 
+\[
+(s_1 s_2) \vecnot{v} = s_1 ( s_2 \vecnot{v} )
+\]
+\item scalar multiplication distributes over vector addition: 
+\[
+s ( \vecnot{v} + \vecnot{w} ) = s \vecnot{v} + s \vecnot{w}
+\]
+\item scalar addition distributes scalar multiplication: 
+\[
+(s_1 + s_2) \vecnot{v} = s_1 \vecnot{v} + s_2 \vecnot{v}
+\]
+\end{enumerate}
+\end{enumerate}
+
+\item \textbf{Example} [Standard vector space for $F^n$] \\
+Let $F$ be a field, and let $V=F^n$ be the $n$-fold Cartesian product%, i.e., the set of $n$-tuples $\vecnot{v} = (v_1, \ldots, v_n)$ with $v_1, \dots, v_n \in F$. 
+\[
+F^n = \{ (v_1, \ldots, v_n) \mid v_1, \dots, v_n \in F\}
+\]
+\begin{itemize}
+\item  vector addition  of $\vecnot{v}, \vecnot{w} \in F^n$  is defined by
+\begin{equation*}
+\vecnot{v} + \vecnot{w} = (v_1 + w_1, \ldots, v_n + w_n).
+\end{equation*}
+\item  scalar product of $s \in F$ and $\vecnot{v} \in V$ is defined 
+\[s \vecnot{v} = (s v_1, \ldots, s v_n)\]
+\end{itemize} 
+
+
+\item \textbf{Example}  [General vector space of functions]\\
+Let $X$ be a non-empty set and  let $Y$ be a vector space over $F$. The set $V$ of all functions mapping $X$ to $Y$ defines a vector space were
+\begin{itemize}
+%\item Let $X$ be a non-empty set 
+%\item Let  $Y$ be a vector space over $F$.
+%\item The set $V$ of all functions mapping $X$ to $Y$ defines a vector space
+\item vector addition of two functions $f,g \in V$ is the function $(f+g)\colon X \to Y$ defined by 
+\begin{equation*}
+(f + g)(x) = f(x) + g(x) \quad \forall x \in X,
+\end{equation*}
+the sum the RHS is defined by vector addition in $Y$.
+\item scalar product of $s \in F$ and the function $f \in V$ is the function $sf$ defined by
+\[
+(sf)(x) = s \, f(x)\quad \forall x \in X,
+\]
+the multiplication  on the RHS is defined by scalar multiplication in $Y$.
+\end{itemize}
+
+
+\end{itemize}
+
+\subsection{Subspace}
+
+\begin{itemize}
+
+\item \textbf{Definition:}  Let $V$ be a vector space over $F$.
+A \textbf{subspace} of $V$ is a subset $W \subset V$ which is itself a vector space over $F$.
+
+
+\item \textbf{Lemma} 
+A non-empty subset $W \subset V$ is a subspace of $V$ if and only if, for every pair $\vecnot{w}_1, \vecnot{w}_2 \in W$ and every scalar $s \in F$, the vector $s \vecnot{w}_1 + \vecnot{w}_2 \in W$.
+
+
+
+
+\item \textbf{Example} 
+Let $A$ be an $m \times n$ matrix over $F$.
+Then, the subset $V\subseteq F^{n \times 1}$ of vectors satisfying 
+\[
+A \vecnot{v} = \vecnot{0}
+\]
+forms a subspace.
+
+
+
+
+
+\item  \textbf{Definition:}  A vector $\vecnot{w} \in V$ is said to be a \textbf{linear combination} of the vectors $\vecnot{v}_1, \ldots, \vecnot{v}_n \in V$ provided that there exist scalars $s_1, \ldots, s_n \in F$ such that
+\begin{equation*}
+\vecnot{w} = \sum_{i=1}^n s_i \vecnot{v}_i.
+\end{equation*}
+
+
+
+\item  \textbf{Definition:} %Let $U$ be a set of vectors in $V$.
+The \textbf{span} of a subset  $U$  of vector space $V$ is the set of all finite linear combinations of vectors in $U$.
+\[
+\Span(U) = \left\{ \sum_{i=1}^n s_i \vecnot{v}_i  \mid n \in \bbN,  s_1, \dots, s_n \in F, \vecnot{u}_1, \dots, \vecnot{u}_n \in U  \right \}
+\]
+
+
+\item \textbf{Fact:}  The span of a subset of vector space forms a subspace, i.e.
+\[
+\text{$U$ is subset of vector space $V$} \quad \implies \quad  \text{$\Span(U)$ if a subspace of $V$}
+\]
+\end{itemize}
+
+\subsection{Basis}
+
+\begin{itemize}
+\item \textbf{Definition:} 
+Let $V$ be a vector space over $F$.
+\begin{itemize}
+\item A list of vectors $\vecnot{u}_1, \ldots, \vecnot{u}_n \in V $ is  \textbf{linearly dependent} if there are scalars $s_1, \ldots, s_n \in F$, not all equal to $0$, such that
+\begin{equation*}
+\sum_{i=1}^n s_i \vecnot{u}_i = \vecnot{0}.
+\end{equation*}
+\item  A list that is not linearly dependent is called \textbf{linearly independent}. 
+
+\item A  subset $U \subset V$ is called linearly dependent if there is a finite list $\vecnot{u}_1, \ldots, \vecnot{u}_n \in U$ of distinct vectors that is linearly dependent.
+Otherwise, it is called linearly independent.
+
+\end{itemize}
+
+\item \textbf{Example:} For $V=\bbR^4$, the following vector are linearly independent: %vectors 
+\[
+\vecnot{v}_1=(1,1,0,0), \quad \vecnot{v}_2=(0,1,1,0), \quad \vecnot{v}_3=(0,0,1,1)
+\]
+This is because  $\vecnot{u} = s_1 \vecnot{v}_1 + s_2  \vecnot{v}_2 + s_3  \vecnot{v}_3 = \vecnot{0}$ if and only if  $s_1 \!=\! s_2 \!=\! s_3 \!=\! 0$% (e.g., $u_1 \neq 0$ if $s_1 \neq 0$, $u_4 \neq 0$ if $s_3 \neq 0$, and $u_2 \neq 0$ if $s_2 \neq 0 \, \wedge \, s_1 = 0$).
+
+
+\item \textbf{Facts:} 
+\begin{itemize}
+\item  A set $U \subset V$ is linearly independent if and only if every finite subset of $U$ is linearly independent.
+%\item Any subset of linear independent set is also linearly independent. 
+\item Any subset that contains the $\vecnot{0}$ vector is linearly dependent. 
+\end{itemize}
+
+\item \textbf{Definition:} % Let $V$ be a vector space over $F$. 
+%\begin{itemize}
+%\item  
+A set  of vectors  $\mathcal{B} = \left\{ \vecnot{v}_{\alpha} \mid \alpha \in A \right\}$  in a vector space $V$ is a  \textbf{Hamel basis} for the vector space if %Let $\mathcal{B} = \left\{ \vecnot{v}_{\alpha} | \alpha \in A \right\}$ be a subset of linearly independent vectors from $V$ such that 
+
+\begin{enumerate}[(i)]
+\item  $\cB$ is linearly independent, and
+\item  every $\vecnot{v} \in V$ can be written as a \emph{finite} linear combination of vectors from $\mathcal{B}$, i.e., 
+\[
+\forall \vecnot{v} \in V, \, \exists n \in \bbN, \, \alpha_1, \dots, \alpha_n \in A, s_1, \dots s_n \in F  \quad \text{such that}  \quad \vecnot{v} = \sum_{i=1}^n s_i \vecnot{v}_{\alpha_{i}} 
+\]
+%\item If $V$ has a finite basis, it is \textbf{finite-dimensional}.
+\end{enumerate}
+[Here, the indexing of the basis elements with  $\alpha \in A$ indicates that the set maybe finite, countably infinite, or uncountably infinite].
+
+
+
+
+% The space $V$ is called \textbf{finite-dimensional} if it has a finite basis $\cB$. In this case, 
+%\[
+%V = \Span(\cB) 
+%\]
+
+%\item \textbf{Fact:} The basis decomposition is unique. 
+%\begin{itemize}
+%\item \textbf{Proof:} Assuming otherwise would violate the condition that the basis is linearly independent. 
+%\end{itemize}
+
+
+
+\item \textbf{Definition:} A vector space $V$ is \textbf{finite-dimensional} if it has a finite basis $\cB$. In this case, 
+\[
+V = \Span(\cB) 
+\]
+
+
+
+\item \textbf{Example:}  The \textbf{standard basis} for $F^n$ is the collection of vectors  $\left\{ \vecnot{e}_1, \ldots, \vecnot{e}_n \right\}$ defined by
+%Let $F$ be a field and let $U \subset F^n$ be the list of vectors $\vecnot{e}_1, \ldots, \vecnot{e}_n$ defined by
+\begin{equation*}
+\begin{array}{ccc}
+\vecnot{e}_1 & = & (1, 0, \ldots, 0) \\
+\vecnot{e}_2 & = & (0, 1, \ldots, 0) \\
+\vdots & = & \vdots \\
+\vecnot{e}_n & = & (0, 0, \ldots, 1).
+\end{array}
+\end{equation*}
+For any $\vecnot{v} = (v_1, \ldots, v_n) \in F^n$, we have
+\begin{equation*} %\label{equation:StandardBasisSpan}
+\vecnot{v} = \sum_{i=1}^n v_i \vecnot{e}_i.
+\end{equation*}
+%Thus, the collection $U = \left\{ \vecnot{e}_1, \ldots, \vecnot{e}_n \right\}$ spans $F^n$.
+%Since $\vecnot{v} = \vecnot{0}$ in~\eqref{equation:StandardBasisSpan} if and only if $v_1 = \cdots = v_n = 0$, $U$ is linearly independent.
+%Accordingly, the set $U$ is a basis for $F^{n}$.
+%This basis is termed the \textbf{standard basis} of $F^n$.
+
+
+
+\item \textbf{Theorem:}  
+Every vector space has a Hamel basis. Furthermore, every Hamel basis for a vector space has the same cardinality. 
+
+
+%\item \textbf{Proof of existence:}  The fact that vector space has a Hamel basis is implied by the Hausdorff maximal principle (which is equivalent to the axiom of choice). See textbook. 
+
+\item \textbf{Proof:} 
+\begin{itemize}
+
+\item Existence is implied by the Hausdorff maximal principle (which is equivalent to the axiom of choice). See textbook. 
+% the axiom of choice (which is equivalent to the 
+
+\item To  prove that every basis of a  \emph{finite dimensional} vector space $V$ has the same cardinality, we can use the lemma given below to see hat if  $U = \{\vecnot{u}_1, \dots, \vecnot{u}_n\}$ and $W = \{\vecnot{w}_1, \dots, \vecnot{w}_m\}$ be two bases $V$, then $|U| \le |W|$ and $|W| \le | U|$, which implies that $|U| = |W|$. 
+
+%%, following the proof Theorem 3.3.15 in the textbook. 
+%
+%\item Let $U = \{\vecnot{u}_1, \dots, \vecnot{u}_n\}$ and $W = \{\vecnot{w}_1, \dots, \vecnot{w}_m\}$ be two bases for vector space $V$. 
+%
+%\item Since every vector in $U$ can be written as a finite linear combination of vectors in $W$, there an $m \times n$ matrix $A$  of scalars such that 
+%\[
+%\vecnot{u}_j = \sum_{i=1}^m a_{ij} \vecnot{w}_i \quad \text{for $j = 1, \dots n$} % \qquad \iff \qquad [\vecnot{u}_1, \dots, \vecnot{u}_n]  = A [ \vecnot{v}_1, \dots, \vecnot{v}_m] 
+%%[\vecnot{u}_1, \dots, \vecnot{u}_m]  = A [ \vecnot{v}_1, \dots, \vecnot{v}_m] 
+%\]
+%\item  Assume for the sake of contradiction that $m < n$. Then it follows from a lemma above that  there exist scalars $s_1, \dots, s_n$,  not all zero,  such that $\sum_{j=1}^n   a_{ij}  s_j  = 0$ for all $i = 1, \dots, m$.  For these scalars, we see that
+%\[
+%\sum_{j=1}^n s_j \vecnot{u}_j = \sum_{j=1}^n  s_j  \left(  \sum_{i=1}^m  a_{ij} \vecnot{w}_i \right) = \sum_{j=1}^n    \sum_{i=1}^m  ( a_{ij}  s_j)   \vecnot{w}_i  =\sum_{i=1}^m  \underbrace{ \bigg(  \sum_{j=1}^n   a_{ij}  s_j  \bigg) }_{ = 0} \vecnot{w}_i   = \vecnot{0} 
+%\]
+% This implies that some vector in $U$ can be written as a finite linear combination of the other vectors in $U$, and thus the set $U$ is \emph{linearly dependent}. 
+%
+%\item Since this contradicts the assumption that $U$ is a basis, we conclude that $m \ge n$. 
+%
+%\item A symmetric argument gives $n \ge m$ and thus we have proved that $m = n$. 
+%%$n \times 1$ column vector of scalars $\vecnot{s}$ not equal to $\vecnot{0}$ such that  
+%%To see every basis has the same cardinality, assume  for the purposes of contradiction that $\cB$ and $\cC$ are two bases for $V$ with $|\cB| \le |\cC|$. This implies there is an injective function $f \colon \cB \to \cC$ as well a vector  $\vecnot{v}$ that is in $\cC$ but not in the range of $f$.  Since $\cB$ is a basis, the vectors $\vecnot{v}$  can be expressed as a finite linear combination of elements 
+\end{itemize}
+
+
+
+\item \textbf{Lemma:} Let $V$ be a finite dimensional vector space that is spanned by a finite set of vectors  $W = \{ \vecnot{w}_1, \dots , \vecnot{w}_n\}$, 
+% i.e., 
+%\[
+%\Span(W)  = V
+%\]
+If $U= \{\vecnot{u}_1, \dots, \vecnot{u}_m\} \subset V$ is linearly independent, then $m \le n$. 
+
+%Let  $U = \{\vecnot{u}_1, \dots, \vecnot{u}_n\}$  and $W = \{\vecnot{w}_1, \dots, \vecnot{w}_m\}$ be subsets of vector space $V$. If $U$ is linearly independent and $V = \Span(W)$ then $m \ge  n$. 
+
+\item \textbf{Proof:} 
+
+\begin{itemize}
+\item Since every vector in $U$ can be written as a linear combination of vectors in $W$, there an $n \times m$ matrix $A$  of scalars such that 
+\[
+\vecnot{u}_j = \sum_{i=1}^n a_{ij} \vecnot{w}_i \quad \text{for $j = 1, \dots m$} 
+\]
+\item  Assume for the sake of contradiction that $m > n$. Then it follows from a lemma above that  there exist scalars $s_1, \dots, s_m$,  not all zero,  such that $\sum_{j=1}^m   a_{ij}  s_j  = 0$ for all $i = 1, \dots, n$.  For these scalars, we see that
+\[
+\sum_{j=1}^m s_j \vecnot{u}_j = \sum_{j=1}^m  s_j  \left(  \sum_{i=1}^n  a_{ij} \vecnot{w}_i \right) = \sum_{j=1}^m    \sum_{i=1}^n  ( a_{ij}  s_j)   \vecnot{w}_i  =\sum_{i=1}^n  \underbrace{ \bigg(  \sum_{j=1}^m   a_{ij}  s_j  \bigg) }_{ = 0} \vecnot{w}_i   = \vecnot{0} 
+\]
+ This implies that some vector in $U$ can be written as a finite linear combination of the other vectors in $U$, and thus the set $U$ is \emph{linearly dependent}, which is a contradiction. 
+
+%\item Since this contradicts the assumption that $U$ is a basis, we conclude that $m \ge n$. 
+\end{itemize}
+
+
+% Let $V$ be a finite-dimensional  vector space that is spanned by the subset $W = \left\{ \vecnot{w}_1, \ldots, \vecnot{w}_n \right\}$. If $U = \left\{ \vecnot{u}_1, \ldots, \vecnot{u}_m \right\} \subset V$ is a linearly independent set of vectors, then $m\leq n$.
+
+
+%\item \textbf{Theorem:} Let $V$ be a finite-dimensional  vector space that is spanned by the subset $W = \left\{ \vecnot{w}_1, \ldots, \vecnot{w}_n \right\}$. If $U = \left\{ \vecnot{u}_1, \ldots, \vecnot{u}_m \right\} \subset V$ is a linearly independent set of vectors, then $m\leq n$.
+
+%\item \textbf{Fact:} Every basis of a finite dimensional vector space has the same number of vectors. 
+
+\item \textbf{Definition:} The \textbf{dimension} of a finite-dimensional vector space is the number of elements in any (and hence every) basis for $V$,
+\[
+\dim(V) = |\cB|, \quad \text{where $\cB$ is a basis for $V$}
+\]
+%It is denoted by $\dim(V)$.
+
+
+
+
+
+%\item \textbf{Theorem:} 
+%Let $A$ be an $n \times n$ matrix over $F$ whose columns, denoted by $\vecnot{a}_1, \ldots, \vecnot{a}_n$, form a linearly independent set of vectors in $F^{n}$.
+%Then $A$ is invertible.
+
+\item \textbf{Theorem:} For an $n \times n$ matrix $A = [ \vecnot{a}_1, \dots, \vecnot{a}_n] \in F^{n \times n}$, the following statements are equivalent:
+\begin{enumerate}[(i)]
+\item $A$ is invertible
+\item the columns $\{\vecnot{a}_1, \dots, \vecnot{a}_n\}$ form a basis for $F^n$. 
+\item the columns $\{\vecnot{a}_1, \dots, \vecnot{a}_n\}$ are linearly independent 
+%If $A = [ \vecnot{a}_1, \dots, \vecnot{a}_n] \in F^{n \times n}$ is an invertible matrix, then the columns $\{ \vecnot{a}_1, \dots, \vecnot{a}_n\}$  form a basis for $F^n$.
+\end{enumerate}
+
+
+
+
+
+\item \textbf{Proof:} (i) $\implies$ (iii)
+\begin{itemize}
+\item For a column vector $\vecnot{v}  =(v_1, \dots, v_n)^\top$ in $F^{n}$ we have
+\[
+A \vecnot{v} = \sum_{i=1}^n v_i \vecnot{a}_i
+\]
+\item Since $A$ is invertible
+\[
+A \vecnot{v} = \vecnot{0}  \quad \iff \quad \Id \vecnot{v}  = A^{-1} \vecnot{0}  \quad \iff \quad \vecnot{v}= \vecnot{0}
+\]
+%\item Similarly, the rows of $A$ will also form a basis for $F^n$.
+and thus $\sum_{i=1}^n v_i \vecnot{a}_i = 0$ if and only if $v_1, \dots, v_n = 0$ .
+\end{itemize}
+
+
+\item \textbf{Proof:} (iii) $\implies$ (ii)
+\begin{itemize}
+%\item (ii) $\implies$ (iii) follows from definition of a basis. 
+
+\item Suppose for the sake of contradiction that the columns $\{\vecnot{a}_1, \dots, \vecnot{a}_n\}$ are linearly independent but do not form a basis of $F^n$. Then, there exists $\vecnot{v} \in F^n$ such that the set of $n+1$ vectors  $\{\vecnot{a}_1, \dots, \vecnot{a}_n, \vecnot{v}\}$ is \emph{linearly independent}. But, this leads to a contradiction since, the  vector space  $F^n$ is spanned by set of  $n$-standard basis vectors, and thus every linearly independent subset must have cardinality no greater than $n$. 
+
+%contradicts the fact that every set of linearly independent vectors in $F^n$ must have cardinality no greater than $n$ (which holds because the vector space  $F^n$ is spanned by collection collection of $n$-standard basis vectors). 
+
+%But this implies that the dimension of $F^n$ is at least $n+1$, which contradicts the fact that the dimension is equal to $n$. 
+\end{itemize}
+
+
+
+\item \textbf{Proof:} (ii) $\implies$ (i)
+\begin{itemize}
+\item  Since $\{a_1, \dots, a_n\}$ is a basis for $F^n$ we can write any $\vecnot{v} \in F^n$ as a linear combination of these basis vectors. 
+
+\item  In particular, for  each $j = 1, \dots, n$, there exist scalars $b_{ij}$ for $i = 1, \dots , n$ such that 
+%Specifically, for the standard basis vector $\vecnot{e}_j$, $j =1,2, \dots ,n$, there
+ %$b_{ij} \in F$
+  such that the $j$-th standard basis vector $\vecnot{e}_j$ satisfies
+\[
+\vecnot{e}_j = \sum_{i=1}^n b_{ij} \vecnot{a}_i
+\]
+
+\item For the $n \times n$ matrix $B = (b_{ij})$, it follows that
+\[
+A B  = [ \vecnot{e}_1, \dots, \vecnot{e}_n] = \Id
+\]
+%and so $A$ is invertible with $A^{-1} = B$. 
+
+\item 
+This also implies that the \emph{columns} of $B$ are linearly independent. To see why, note that  for every $\vecnot{v} \in F^n$, we have
+\[
+B \vecnot{v} = \vecnot{0}  \quad \implies \quad  A B\vecnot{v} =  \vecnot{0}  \quad \implies \quad \vecnot{v} =  \vecnot{0} 
+\]
+
+\item By (iii) $\implies$ (ii) the columns of $B$ form a basis for $F^n$, and so we can apply the same argument as above to see that there exists and $n \times n$ matrix $C$ such that $B C = \Id$
+
+\item Finally, we have
+\[
+A = A (BC) = A B C  = (AB) C  = C  \quad \implies \quad \text{$A$ is invertible with $A^{-1} = B $}
+\]
+%(since otherwise, there exist $\vecnot{v} \ne \vecnot{0}$ such that $B \vecnot{v} = 0$ and so $A B \vecnot{v} = 0$
+
+%\item Let $W = \Span(\vecnot{a}_i, \dots, \vecnot{a}_n)$ and $U = F^n$, 
+
+%\item Clearly $W \subset F^n$. Assume for the sake of contradiction that $W \ne U$. 
+%
+%\item Then, there exists...
+%\item Similarly, the rows of $A$ will also form a basis for $F^n$.
+\end{itemize}
+
+
+\end{itemize}
+
+\subsection{Coordinate system} 
+
+\begin{itemize}
+
+\item The \textbf{sum} of subsets  $U$ and $W$ of a vector space $V$ is defined by
+\begin{equation*}
+U + W \coloneqq \left\{ \vecnot{u} + \vecnot{w} \mid \vecnot{u} \in U, \, \vecnot{w} \in W  \right \} 
+%U + W \coloneqq \left\{ \vecnot{v} \in V \mid  \exists \vecnot{u} \in U, \exists \vecnot{w} \in W, \vecnot{v} = \vecnot{u} + \vecnot{w} \right\}
+\end{equation*}
+Note that the sum is a subset of $V$. 
+
+%\item  \textbf{Definitions:} Let $U,W$ be subsets of a vector space $V$.
+%\begin{itemize}
+
+
+\item 
+Subspaces $U$ and $W$ of a vector space are called \textbf{disjoint} if $U \cap W = \{\vecnot{0}\}$. The sum of disjoint subspaces is called a  \textbf{direct sum} and is denoted by  $U \oplus W$. 
+%\[
+%U \oplus W  \coloneqq \left\{ \vecnot{u} + \vecnot{w} \mid \vecnot{u} \in U, \, \vecnot{w} \in W  \right \} \quad  \text{for disjoint subspaces $U, W$}
+%\]
+
+
+%\item 
+%For disjoint subspaces $U$ and $W$ in a vector space, their \textbf{direct sum}  equals their sum but is denoted by $U \oplus W$ to emphasize that $U$ and $W$ are disjoint.
+
+%\end{itemize}
+
+\item \textbf{Fact:} If $U$ and $W$ are disjoint subspaces then any $\vecnot{v} \in U \oplus W$ has a \emph{unique} decomposition:
+\[
+\vecnot{v} = \vecnot{u} + \vecnot{w}, \quad \text{ where $\vecnot{u} \in U$ and $\vecnot{w} \in W$}
+\]
+% where $\vecnot{u} \in U$ and $\vecnot{w} \in W$.
+
+\item \textbf{Question:} How does one show uniqueness? 
+\begin{itemize}
+\item Assume there exists $\vecnot{u}, \vecnot{u}' \in U$ and $\vecnot{w}, \vecnot{w} \in W$ such that
+\[
+\vecnot{v} = \vecnot{u} + \vecnot{w} , \quad \text{and} \quad  \vecnot{v} = \vecnot{u}' + \vecnot{w}' 
+\]
+\item We know that
+\[
+\vecnot{0} =  \vecnot{u}  - \vecnot{u}'  + \vecnot{w} -  \vecnot{w}'  %\quad \implies \quad   \vecnot{u}  - \vecnot{u}'  =  \vecnot{w}' -  \vecnot{w}
+\]
+\item Using the property $U \cap W = \{ \vecnot{0} \}$, we need to show that 
+\[
+\vecnot{u}  - \vecnot{u}' = \vecnot{0} \quad \text{and} \quad  \vecnot{w}  - \vecnot{w}'  = \vecnot{0}
+\] 
+\end{itemize}
+
+
+
+\item \textbf{Definition:} 
+If $V$ is a finite-dimensional vector space, an \textbf{ordered basis} for $V$ is a finite list of vectors  that is linearly independent and spans $V$.
+
+
+\item \textbf{Note:} If  $\mathcal{B} = (\vecnot{v}_1, \ldots, \vecnot{v}_n )$ is an ordered basis for $V$, then the set $\left\{ \vecnot{v}_1, \ldots, \vecnot{v}_n \right\}$ is a basis for $V$. However, basis defined in terms of of a set does not specify an order. 
+%But, $\mathcal{B}$ defines the set and a specific ordering for the vectors.
+
+
+\item  \textbf{Definition:} 
+For a finite-dimensional vector space $V$ with ordered basis $\mathcal{B}=(\vecnot{v}_1, \ldots, \vecnot{v}_n )$, the \textbf{coordinate vector} of $\vecnot{v} \in V$ is denoted by $\left[ \vecnot{v} \right]_{\mathcal{B}}$ and equals the unique vector $\vecnot{s} = F^n$ such that 
+\[ 
+\vecnot{v} = \sum_{i=1}^n s_i \vecnot{v}_i. 
+\]  
+
+
+\item \textbf{Example:} Consider $V = \bbR^4$ with ordered basis 
+%Try computing $[(1,2,3,4)]_\mathcal{B}$ for 
+\[
+\mathcal{B} = ( (1,1,1,1),(0,1,1,1),(0,0,1,1),(0,0,0,1) )
+\]
+The vector $\vecnot{v} = (1,2,3,4)$ can be expressed as
+\[
+\vecnot{v} =  (1,1,1,1) + (0,1,1,1) + (0,0,1,1) + (0,0,0,1)
+\]
+Hence, the coordinate vector is 
+\[
+[(1,2,3,4)]_\mathcal{B} = (1,1,1,1)
+\]
+
+\item \textbf{Example:}  Let $\cA = (\vecnot{v}_1, \vecnot{v}_2)$ be a basis for $V$ and  define new basis $\cB = (\vecnot{w}_1, \vecnot{w}_2)$ according to 
+\begin{align*}
+\vecnot{w}_1 = \vecnot{v}_1+ \vecnot{v}_2, \quad \vecnot{w}_2 = \vecnot{v}_2
+%\vecnot{u}= \vecnot{v}_1+  \frac{1}{2} \vecnot{v}_2
+\end{align*}
+Clearly, the coordinate vector of 
+\[
+\vecnot{u}= \vecnot{v}_1+  \frac{1}{2} \vecnot{v}_2%  \quad \iff \quad [\vecnot{u}]_{\cA} = (1, 1/2) 
+\]
+in basis $\cA$ is given by 
+\[
+ [\vecnot{u}]_{\cA} = \begin{bmatrix} 1 \\  \tfrac{1}{2} \end{bmatrix} 
+ \]
+ What is the coordinate vector of $\vecnot{u}$ in basis $\cB$?
+
+
+%What is the coordinate vector  $[\vecnot{u}]_{\cB}$?
+%\[
+%\vecnot{u}= \vecnot{v}_1+  \frac{1}{2} \vecnot{v}_2
+%\]
+\begin{itemize}
+\item Observe that
+\[
+ [\vecnot{w}_1]_{\cB}  = \begin{bmatrix} 1 \\  0 \end{bmatrix} , \qquad   [\vecnot{w}_1]_{\cA}  = \begin{bmatrix} 1 \\  1 \end{bmatrix}  \qquad   [\vecnot{w}_2]_{\cB}  = \begin{bmatrix} 0 \\  1 \end{bmatrix} , \qquad   [\vecnot{w}_2]_{\cA}  = \begin{bmatrix} 0  \\  1 \end{bmatrix}  
+\]
+\item Defining the $2 \times 2$ matrix 
+\[
+P = \begin{bmatrix} 1 & 0 \\ 1 & 1 \end{bmatrix}  
+\]
+we see that
+\[
+ [\vecnot{v}]_{\cA}  = P [\vecnot{v}]_{\cB}  \quad \text{for all $\vecnot{v} \in V$}
+\]
+
+\item The matrix $P$ is invertible with
+\[
+P^{-1} =  \begin{bmatrix} 1 & 0 \\ -1 & 1 \end{bmatrix} 
+\] 
+\item Hence, 
+\[
+  [\vecnot{v}]_{\cB}  = P^{-1}   [\vecnot{v}]_{\cA}  \quad \text{for all $\vecnot{v} \in V$}
+\]
+and so 
+\[
+[\vecnot{u}]_{\cB}  =  \begin{bmatrix} 1 & 0 \\ -1 & 1 \end{bmatrix} \begin{bmatrix} 1 \\  \tfrac{1}{2} \end{bmatrix}  = \begin{bmatrix} 1 \\ - \tfrac{1}{2} \end{bmatrix} 
+\]
+\end{itemize} 
+
+
+
+
+\end{itemize}
+
+
+\section{Linear transforms} 
+
+\begin{itemize}
+\item \textbf{Definition:} Let $V$ and $W$ be vector spaces over a field $F$.
+A \textbf{linear transform} from $V$ to $W$ is a function $T$ from $V$ into $W$ such that 
+\begin{equation*}
+T \left( s \vecnot{v}_1 + \vecnot{v}_2 \right)
+= s T \vecnot{v}_1 + T \vecnot{v}_2  \vspace{-2mm}
+\end{equation*}
+for all vectors $\vecnot{v}_1, \vecnot{v}_2 \in V$ and all scalars $s \in F$ (i.e., $T$ is linear).
+
+\item \textbf{Example:} Let $A$ be a fixed $m \times n$ matrix over $F$.
+The function $T$ defined by 
+\[
+T \left( \vecnot{v} \right) = A \vecnot{v}
+\]
+is a linear transformation from $F^{n \times 1}$ into $F^{m \times 1}$.
+
+\item \textbf{Example:}  Let $V$ be the space of continuous functions from $[0,1]$ to $\bbR$. Define $T$ by  
+\begin{equation*}
+(Tf)(x) = \int_{0}^x f(t) dt .  \vspace{-2mm}
+\end{equation*}
+Then, $T$ is a linear transform from $V$ to $V$ because $Tf$ is continuous.
+
+
+\item \textbf{Definition:} 
+For a linear transformation $T \colon V \to W$, 
+\begin{itemize}
+\item  The \textbf{range}  is the subspace of vectors $\vecnot{w} \in W$ such that $\vecnot{w} = T \vecnot{v}$ for some $\vecnot{v} \in V$, 
+\[
+ \mathcal{R}(T)\coloneqq% \{ \vecnot{w}\in W \mid \exists \vecnot{v}\in V \textrm{ s.t. } T\vecnot{v} = \vecnot{w} \} =
+  \{ T \vecnot{v} \mid \vecnot{v} \in V\}. 
+\]
+
+\item  The \textbf{nullspace} of $T\colon V \to W$ is the subspace of vectors $\vecnot{v} \in V$ such that $T \vecnot{v} = \vecnot{0}$,
+\[ 
+\mathcal{N}(T)  \coloneqq \{ \vecnot{v}\in V \mid T \vecnot{v} = \vecnot{0} \} 
+\]
+
+\end{itemize} 
+
+\item  \textbf{Theorem:}  
+Let $V,W$ be vector spaces over $F$ and $\mathcal{B} = \{ \vecnot{v}_{\alpha} \mid \alpha \in A \}$ be a Hamel basis for $V$.
+For each mapping $G \colon \mathcal{B} \rightarrow W$, there is a \emph{unique} linear transformation $T \colon V \rightarrow W$ such that
+\[
+T \vecnot{v}_{\alpha} = G \left( \vecnot{v}_{\alpha} \right) \quad  \text{for all $\alpha \in A$}
+\]
+
+\item \textbf{Proof:} 
+
+\begin{itemize}
+\item \textbf{Existence:} For every $\vecnot{v} \in V$ we have
+\[
+\vecnot{v} = \sum_{i=1}^n s_{\alpha_i} \vecnot{v}_{\alpha_i}
+\]
+where each $s_{\alpha_i}$ is a linear function of $ \vecnot{v} $. Define the mapping $T \colon V \to W$ according to % $T\vecnot{v}$ according to 
+\[
+T \vecnot{v} = \sum_{i=1}^n s_{\alpha_i} G( \vecnot{v}_{\alpha_i}) 
+\]
+
+%\item \textbf{Linearity:} The uniqueness of the expansion in the basis and the properties of the vector space imply the coefficients $s_\alpha$ are linear 
+
+\item \textbf{Uniqueness:} If $U$ and $T$ are linear mappings such that $U \vecnot{v}_{\alpha}= T \vecnot{v}_{\alpha}  =  G(\vecnot{v}_{\alpha})$ for all $\alpha \in A$ then 
+\[
+ U \vecnot{v} =U  \left( \sum_{i=1}^n s_{\alpha_i} \vecnot{v}_{\alpha_i} \right) =\sum_{i=1}^n s_{\alpha_i} U \vecnot{v}_{\alpha_i}  =    \sum_{i=1}^n s_{\alpha_i} T  \vecnot{v}_{\alpha_i}  = T \vecnot{v} \quad \text{for all $\vecnot{v} \in V$}
+ \]. 
+
+
+
+
+\end{itemize}
+
+\item \textbf{Definition:}  For a linear tranform $T \colon V \to W$, 
+\begin{itemize}
+\item The \textbf{rank} of $T$ is the dimension of  is  range, 
+\[
+\rank(T)  = \dim( \mathcal{R}(T)) 
+\]
+\item The  \textbf{nullity} of $T$ is the dimension of its nullspace 
+\[
+\Nullity (T)  = \dim( \mathcal{N}(T)) 
+\]
+
+\end{itemize}
+%Let $V$ and $W$ be vector spaces over a field $F$, and let $T$ be a linear transformation from $V$ into $W$.
+%The \textbf{rank} of $T$ is the dimension of the range of $T$ and the \textbf{nullity} of $T$ is the dimension of the nullspace of $T$.
+
+
+\item \textbf{Theorem:} 
+%Let $V$ and $W$ be vector spaces over the field $F$ and let $T$ be a linear transformation from $V$ into $W$.
+For a finite dimensional vector space $V,$  the rank and nullity of a linear transformation $T \colon V  \to  W$ satisfy 
+\begin{equation*}
+\Rank (T) + \Nullity (T) = \dim (V)
+\end{equation*}
+
+
+\item \textbf{Proof:}  See textbook. 
+
+
+
+\item \textbf{Theorem}
+If $A$ is an $m \times n$ matrix with entries in the field $F$, then 
+\begin{equation*} 
+\mathrm{row~rank} (A) \coloneqq \dim( \mathcal{R}(A^T)) =  \dim( \mathcal{R}(A))\eqqcolon \Rank (A).
+\end{equation*}
+
+
+
+
+\end{itemize}
+
+
+\section{Normed vector spaces} 
+
+
+
+\begin{itemize}
+
+\item A normed vector space is a vector space over the \emph{real} or \emph{complex} numbers in which is a norm provides a generalization of the concept of the ``length'' of a vector. 
+
+\item \textbf{Definition:} 
+A \textbf{norm} on vector space $V$ is a real-valued function $\left\| \cdot \right\| \colon V \rightarrow \bbR$ that satisfies the following properties.
+\begin{enumerate}
+\item $\left\| \vecnot{v} \right\| \geq 0 \quad \forall \vecnot{v} \in V$;
+equality holds if and only if $\vecnot{v} = \vecnot{0}$ \hfill (Positive definite)
+\item $\left\| s \vecnot{v} \right\| = |s| \left\| \vecnot{v} \right\| \quad \forall \vecnot{v} \in V, s \in F$ \hfill (Absolute homogeneity)
+\item $\left\| \vecnot{v} + \vecnot{w} \right\| \leq  
+\left\| \vecnot{v} \right\| + \left\| \vecnot{w} \right\| \quad \forall \vecnot{v}, \vecnot{w} \in V$. \hfill (Triangle inequality)
+\end{enumerate}
+
+
+\item The \textbf{induced metric} for a normed vector space is 
+\[
+d \left( \vecnot{v}, \vecnot{w} \right)
+= \left\| \vecnot{v} - \vecnot{w} \right\|
+\]
+
+
+\end{itemize}
+
+\subsection{Lebesgue spaces} 
+\begin{itemize}
+
+
+\item % [$\ell_p$ norms for  $\mathbb{R}^n$ and $\mathbb{C}^n$] 
+ For $1 \le p \le \infty$, the $\ell_p$ norms for $\mathbb{R}^n$ (or $\mathbb{C}^n$):
+\begin{enumerate}
+\item the $l^1$ norm: 
+\[
+\left\| \vecnot{v} \right\|_1 = \sum_{i=1}^n |v_i|
+\]
+\item the $l^p$ norm: 
+\[
+\left\| \vecnot{v} \right\|_p = \left( \sum_{i=1}^n |v_i|^p \right)^{\frac{1}{p}}, \quad p \in (1,\infty)
+\]
+\item the $l^{\infty}$ norm: 
+\[
+\left\| \vecnot{v} \right\|_{\infty} = \max_{i = 1,\ldots, n} \{ |v_i| \}
+\]
+\end{enumerate}
+\item The $\ell_p$-balls $\{ \vecnot{x} \mid  \|\vecnot{x}\|_p \le 1\}$  in $\bbR^2$ are given by
+\begin{center}
+\begin{tikzpicture}%[>=Stealth]
+   \foreach \i in {0,...,2}{
+     \begin{scope}[xshift=\i*4.5cm]
+      \draw [<->] (-1.2,0)--(1.2,0);
+      \draw [<->] (0,-1.2)--(0,1.2);
+%     \draw[red, shorten <=-1cm, shorten >=-3mm] (0,1)--(2,0) node [near end, above] {$\ker A$};
+    \end{scope}
+   }
+   \begin{scope}[draw=blue, thick, densely dashed]
+     \draw [] (-1,0)--(0,1)--(1,0)--(0,-1)--cycle;
+%     \draw [](4.5,0) circle (0.88cm);
+      \draw [](4.5,0) circle (1cm);
+     \draw [xshift=9cm] (-1,-1) rectangle (1,1);
+     
+%     \begin{scope}[xshift=9cm]
+  %     \draw [domain=0:90,samples=100,smooth,variable=\t] plot({-1*cos(\t)^(3)},{1*sin(\t)^(3)});
+    %   \draw [domain=0:90,samples=100,smooth,variable=\t] plot({-1*cos(\t)^(3)},{-1*sin(\t)^(3)});
+    %   \draw [domain=0:90,samples=100,smooth,variable=\t] plot({1*cos(\t)^(3)},{-1*sin(\t)^(3)});
+     %  \draw [domain=0:90,samples=100,smooth,variable=\t] plot({1*cos(\t)^(3)},{1*sin(\t)^(3)});
+    % \end{scope}
+     %\foreach \i [count=\j from 0] in {(0,1),(.39,.79),(0,1)} \scoped [xshift=\j*4.5cm] { 
+    % \foreach \i [count=\j from 0] in {(0,1),(0,1),(0,1)} \scoped [xshift=\j*4.5cm] { 
+%   	\draw[fill=black, black] \i circle (1pt) node [above right] {$\bx^\star$};
+%	\draw[fill=black, black] \i circle (1pt) node [above right] {$0$};
+    %  \draw [Circle[width=3pt, length=3pt, fill=black, black]] (0,0)--(0,1);        
+%    \draw [{Circle[width=3pt, length=3pt, fill=black, black]}-{Circle[width=3pt, length=3pt, fill=black, black]}, shorten <=-1.5pt, black,  shorten >=-1.5pt] (0,0)  -- \i node [above right] {$\bx^\star$} ; 
+   %  };
+   \end{scope}
+   \foreach \i [count=\j from 0] in {1,2,\infty} \scoped [xshift=\j*4.5cm] { \node [anchor=mid west] at (0,-1.5) {$p=\i$}; };
+\end{tikzpicture}
+\end{center}
+
+\item \textbf{Example} If $\vecnot{x} = (1,-2,3)$ then
+\[
+\|\vecnot{x}\|_1 = 6, \qquad \|\vecnot{x}\|_\infty = 3,  \qquad \|\vecnot{x}\|_2= \sqrt{ 1 + 4 + 9} = \sqrt{14}
+\]
+
+\item  The $L^p$ norm for  vector space of functions from $[a, b]$ to $\bbR$ (or $\bbC$):
+\begin{enumerate}
+\item the $L^1$ norm: 
+\[
+\left\| f(t) \right\|_1 = \int_a^b |f(t)| \dd t
+\]
+\item the $L^p$ norm: 
+\[
+\left\| f(t) \right\|_p = \left( \int_a^b |f(t)|^p \dd t \right)^{\frac{1}{p}}, \quad p \in (1,\infty)
+\]
+
+\item the $L^{\infty}$ norm: 
+\[
+\left\| f(t) \right\|_{\infty} = \esssup_{[a,b]} \{ | f(t) | \}
+\]
+\end{enumerate}
+[Note: The integrals used in the definitions above is the Lesbesgue integral defined in measure theory. This is a generalization of the Reimann integral.] 
+
+
+
+
+%\item  $L^p$ spaces (or Lebesgue spaces) is the space of measurable function with finite $L^p$ norm. 
+
+\item The $L^p$ space is the vector space of all functions with \emph{finite} norm. 
+
+
+
+
+\item \textbf{Example:} Consider the space $L^1$ of functions from $(0,1]$ to $\bbR$. 
+\begin{itemize}
+\item The function $f(x) = 1/\sqrt{x}$ has has finite norm
+\[
+\| f\|_1 %= \int_0^1 |f(x)|  \, \dd x  
+=  \int_0^1\frac{1}{\sqrt{x}}  \, \dd x =2 % \qquad  \implies f \in L^1
+\]
+and thus  $f $ is in the space $L^1$. 
+\item The function $g(x) = 1/x$ does not have finite norm
+\[
+\| g\|_1  =  \int_0^1\frac{1}{x}  \, \dd x =  \infty%$1/3% \qquad  \implies f \in L^1
+\]
+and thus $g $ is not in the space  $L^1$. 
+
+\item The function $f$ is not in the space $L^2$ because $\|f\|_2 =  \sqrt{\|g\|_1 } =  \infty$. 
+
+%\item But the function function $g$ is in $L^2$, since 
+\end{itemize}
+
+%The function $f(x) = 1/x^2$ is is the space $L^1$ of functions from $(0,1]$ to $\bbR$. 
+\item \textbf{Note:} The general definition of the  $L^p$ norm is defined for \emph{measure spaces}. This definition includes the ones given above as special cases. It also allows for weighted versions such as
+\begin{align*}
+\|\vecnot{v} \|_{\ell^p(w)} =  \left( \sum_{i }  |x_i|^p w_i \right)^{1/p} , \qquad \| f\|_{L^p(X, w)} =  \left( \int_X  |f(x)|^p w(x) \, \dd x \right)^{1/p} 
+\end{align*}
+where $w_i$ and $w(x)$ are positive real weights 
+\end{itemize}
+
+\subsection{Properties} 
+
+\begin{itemize}
+
+%\item \textbf{Norm vs. metric} F
+\item \textbf{Norm vs. metric:}  Recall that any norm defined the \textbf{induced metric} via 
+\[
+d \left( \vecnot{v}, \vecnot{w} \right)
+= \left\| \vecnot{v} - \vecnot{w} \right\|
+\]
+Going, the other direction, the norm $\|\cdot\|$ can be recovered from $d$ by considering the distance to the zero vector: 
+\[
+\|\vecnot{v}\| = d(\vecnot{v} ,\vecnot{0}) 
+\]
+
+
+%Consider the vector space $\bbR^n$ with Euclidean metric 
+%\[
+%d \left( \vecnot{v}, \vecnot{w} \right) = \| \vecnot{v} - \vec{w} \|_2 
+%= \sqrt{ (v_1 - w_1)^2 + \cdots + (v_n - w_n)^2 }.
+%\]
+
+\item \textbf{Question:}  Can any metric be used the define a norm? 
+\begin{itemize}
+\item Consider the vector space $\bbR^n$ with Euclidean metric 
+\[
+d \left( \vecnot{v}, \vecnot{w} \right) = \| \vecnot{v} - \vec{w} \|_2 
+= \sqrt{ (v_1 - w_1)^2 + \cdots + (v_n - w_n)^2 }.
+\]
+
+\item We have seen previously that a \emph{bounded metric} on $\bbR^n$ can be defined by
+\[
+\bar{d} \left( \vecnot{v}, \vecnot{w} \right)
+\coloneqq \min \left\{ d \left( \vecnot{v}, \vecnot{w} \right), 1 \right\}
+\]
+\item However, the function  $f \colon \bbR^n \to \bbR$ by
+\[
+f(\vecnot{v}) = \bar{d} ( \vecnot{v}, 0) 
+\]
+does not define a norm because it is not absolutely homogenous, e.g., 
+\[
+\bar{d} \left( 2 \vecnot{e}_1, \vecnot{0} \right) = 1 \ne  2  = 2 \bar{d} \left( \vecnot{e}_1, \vecnot{0} \right)
+\]
+
+%\item However, a metric that is shift / scale invariant \emph{does} define a norm 
+
+\end{itemize} 
+
+\item \textbf{Fact:} If $d$ is a metric that is shift and scale invariant, then $\|\vecnot{x}  \|_*  \coloneqq d(\vecnot{x}, 0)$ defines a norm. 
+\begin{itemize}
+\item Absolute homogeneity holds because
+\[
+\| s \vecnot{x} \|_* = d( s \vecnot{x}, \vecnot{0}) = | s| d( \vecnot{x},\vecnot{0}) = |s| \|  \vecnot{x} \|_*
+\]
+\item Triangle inequality holds because
+\[
+\| \vecnot{x} +\vecnot{w} \|_* = d( \vecnot{x} +\vecnot{w}, \vecnot{0}) = d( \vecnot{x} , \vecnot{0})  +  d( \vecnot{w}, \vecnot{0})  = \| \vecnot{x}  \|_*  + \|\vecnot{w} \|_* 
+\]
+
+\end{itemize}
+
+\item  A vector $\vecnot{v} \in V$ is called \textbf{normalized} if $\left\| \vecnot{v} \right\| = 1$.
+For any $\vecnot{v} \neq \vecnot{0}$, consider 
+\begin{equation*}
+\vecnot{u} = \vecnot{v}\, / \left\| \vecnot{v} \right\|
+\end{equation*}
+with norm $\left\| \vecnot{u} \right\| = 1$.
+A normalized vector is called a \textbf{unit vector}.
+
+
+%\begin{block}
+%We have not shown the $\ell^p$ and $L^p$ norms satisfy all the required properties.
+%To prove the triangle inequality, one requires the Minkowski inequality which is stated in the notes.
+%\end{block}
+
+\item  For a vector space $V$ over $\mathbb{R}$ or $\mathbb{C}$, two norms (denoted $\|\cdot\|_{V}$ and $\|\cdot\|_{V'}$) are called \textbf{equivalent} if, for all $\vecnot{v} \in V$, there are positive reals $m,M$ such that
+\begin{align*} 
+m \| \vecnot{v} \|_{V'} & \leq \| \vecnot{v} \|_V \leq M \| \vecnot{v} \|_{V'}.
+\end{align*}
+
+
+\item \textbf{Lemma:}  For finite-dimensional normed spaces, all norms are equivalent.
+
+\item \textbf{Proof:} See textbook. 
+
+
+\item \textbf{Theorem:} [H\"older Inequality] 
+Let $p, q \in [1, \infty]$ such that $1/p + 1/q = 1$ (where $1/0 = \infty$)
+\begin{itemize}
+\item If $\vecnot{u} \in \ell_p$ and $\vecnot{v} \in \ell_q$ then the pointwise product $\vecnot{w} = (u_1 v_1, u_2v_2, \dots )$ is in $\ell_1$ and 
+\[
+\left\|\vecnot{w}  \right \|_1 \le \left \| \vecnot{u} \right \|_p \left \| \vecnot{v} \right \|_q
+\]
+\item If $f \in L_p$ and $g \in L_q$ then the pointwise product $h(x) = f(x)g(x)$ is in $L_1$ and 
+\[
+\left\| h \right \|_1 \le \left \| f \right \|_p \left \| g \right \|_q
+\]
+\end{itemize}
+
+
+\end{itemize}
+
+
+\subsection{Banach Spaces} 
+
+\begin{itemize}
+\item \textbf{Definition:} A complete normed vector space is called a \textbf{Banach space}
+
+\item \textbf{Examples:}
+\begin{itemize}
+\item Vector spaces $\mathbb{R}^n$ (or $\mathbb{C}^n$) with any well-defined norm are Banach spaces.
+
+\item The vector space  $\mathbb{R}^\infty$ real sequences $(v_1,v_2,v_3,\ldots)$ is a Banach space with norm 
+\[
+ \|\vecnot{v} \|_p = \left(\sum_{i=1}^\infty |v_i |^p \right)^{1/p}, \qquad p \ge 1
+\]
+
+
+\item The vector space of continuous functions $f \colon [a,b] \to \mathbb{R}$ is a Banach space under the norm 
+\[ \left\| f(t) \right\| = \sup_{t\in [a,b]} f(t)
+ \]
+ However, this space is \emph{not} a Banach space under the $L_p$ norm for $1 \le p < \infty$. 
+\end{itemize}
+
+
+
+%\end{itemize}
+
+
+%\subsection{More on convergence}
+
+%\begin{itemize} 
+\item Convergence of real sums
+\begin{itemize}
+\item For real numbers $a_1, a_2, \cdots $ we have
+\[
+\sum_{i=1}^\infty a_i \quad \text{converges}  \quad \iff \quad b_n \coloneqq \sum_{i=n}^\infty a_i  \to 0 \quad \text{``tail vanishes''} 
+\]
+
+\item A sequence \textbf{absolutely summable} if 
+\[
+\sum_{i=1}^\infty |a_i| < \infty %\quad  \quad \implies \quad  \sum_{i=n}^\infty  |a_i| \to  0 \quad \implies \quad b_n \to 0
+\]
+
+
+
+\item Absolute summability implies convergence 
+\[
+\sum_{i=1}^\infty |a_i| < \infty \quad  \quad \implies \quad  \sum_{i=n}^\infty  |a_i| \to  0 \quad \implies \quad b_n \to 0
+\]
+
+\end{itemize}
+
+%\item Convergence of sums in a Banach space
+
+%\begin{itemize}
+\item \textbf{Lemma:} Let $\vecnot{v}_1, \vecnot{v}_2, \dots$ be a sequence in a Banach space. 
+If 
+\[
+\sum_{i=1}^\infty \| \vecnot{v}_i \| =  a <\infty
+\]
+then %$\vecnot{u}_n=  \sum_{i=1}^n \vecnot{v}_i$ satisfies $\vecnot{u}_n \to\vecnot{u}$ with $\| \vecnot{u} \| \leq  a$.
+\[
+\vecnot{u}_n\coloneqq   \sum_{i=1}^n \vecnot{v}_i  \to\vecnot{u} = \sum_{n=1}^\infty \vecnot{v}_n , \qquad \text{with $\| \vecnot{u} \| \leq  a$}
+\]
+
+
+\item \textbf{Proof:} 
+
+\begin{itemize}
+\item Let $a_n = \sum_{i=1}^n \| \vecnot{v}_i \|$ and observe that, for $n\!>\!m$, 
+\[ |a_n - a_m| = \left| \sum_{i=1}^n \| \vecnot{v}_i \| - \sum_{i=1}^m \| \vecnot{v}_i \|  \right| = \sum_{i=m+1}^n \| \vecnot{v}_i \| \] 
+\vspace{-2mm}
+\[ \|\vecnot{u}_n - \vecnot{u}_m \| = \left\| \sum_{i=1}^n \vecnot{v}_i - \sum_{i=1}^m \vecnot{v}_i  \right\| = \left\| \sum_{i=m+1}^n \vecnot{v}_i \right\| \leq \sum_{i=m+1}^n \| \vecnot{v}_i \| \] 
+
+\item Since $\sum_{i=1}^\infty \| \vecnot{v}_i \|$ converges in $\bbR$, $a_n$ must be a Cauchy sequence 
+
+\item Since $\|\vecnot{u}_n - \vecnot{u}_m\| \leq |a_n - a_m|$, $\vecnot{u}_n$ is also a Cauchy sequence 
+
+\item Once $\vecnot{u}_n$ converges, the norm bound given by the triangle inequality \hfill \qedhere
+
+\end{itemize}
+
+
+
+\item \textbf{Definition:} A Banach space $V$ has a \textbf{Schauder basis}, $\vecnot{v}_1, \vecnot{v}_2, \ldots$, if every $\vecnot{v} \in V$ can be written uniquely as
+\[ \vecnot{v} = \sum_{i=1}^\infty s_i \vecnot{v}_i, \]
+where convergence is determined by the norm topology. 
+
+
+\item \textbf{Question:} Is a Schauder basis linearly independent? 
+\begin{itemize}
+\item 
+YES --- This follows from the  \emph{uniqueness} of the decomposition 
+\end{itemize}
+
+
+
+\item  \textbf{Hamel vs. Schauder} 
+\begin{itemize}
+\item A Hamel basis always exists, but Schauder basis may not.
+\item  The Schauder basis is potentially  \emph{smaller} since it is necessarily countable whereas the Hamel basis maybe uncountable.
+\item  The representation in the   Schauder may require an infinite number of terms (hence the need for completeness) whereas the representation in the Hamel basis is necessarily an finite linear combination: 
+\end{itemize}
+
+\item \textbf{Example:} Let $V = \mathbb{R}^\infty$ be the vector space of real sequences.
+The \textbf{standard Schauder basis} is the countably infinite extension $\{\vecnot{e}_1 ,\vecnot{e}_2, \ldots \}$ of the standard basis.
+
+
+\item \textbf{Example:}  For $1 < p < \infty$, the complex exponentials $\{ 1, e^{\pm ix}, e^{ \pm 2ix} , e^{ \pm 3 ix} , \dots\}$ form a  Schauder basis for the $L^p$ space on complex function on $[0, 2 \pi]$. However, for $p =1$ this set is \emph{not} a  Schauder basis because there are functions in $L^1$ whose Fourier series does not converge in the $L^1$ norm. 
+
+\item \textbf{Definition}  A \textbf{closed subspace} of a Banach space is a subspace that is a closed set in the topology generated by the norm.
+
+
+\item \textbf{Question: } Let $V$ be the $L^p$ space of functions on   $[0,1]$ and let $U$ be the subset of \emph{continuous} functions. Is the $U$ is a closed subspace? 
+\begin{itemize}
+\item  If $1 \le p < \infty$ --- NO, recall that the limit of continuous functions need not be continuous. 
+\item If $p = \infty$ --- YES, the sup norm metrizes uniform convergence of functions. 
+\end{itemize}
+
+
+
+\item \textbf{Theorem:}  All finite dimensional subspaces of a Banach space are closed.
+
+
+\item \textbf{Example:} The span of a infinite linearly independent set is \emph{not} closed. 
+\begin{itemize}
+\item Let $W = \{\vecnot{w}_1 ,\vecnot{w}_2 , \ldots \}$ be a linearly independent sequence of normalized vectors in a Banach space.
+The span of $W$ only includes finite linear combinations.
+\item However, a sequence of finite linear combinations, like \vspace{-2mm}
+\[ \vecnot{u}_n = \sum_{i=1}^n \frac{1}{i^2} \vecnot{w}_i , \vspace{-1.5mm} \]  converges to $\lim_{n\to \infty} \vecnot{u}_n$ if it exists. Thus, the span of $W$ is not closed.
+\end{itemize}
+
+\end{itemize}
+
+
+
+
+\subsection{Operator norms} 
+
+\begin{itemize}
+
+\item \textbf{Definition:} Let $L(V,W)$ be the vector space of all linear transforms from $V$ into $W$, where $V$ and $W$ are vector spaces over a field $F$.
+
+\item \textbf{Definition:} Let $V$ and $W$ be two normed vector spaces. The  induced \textbf{operator norm} of linear transform $T \in L(V,W)$ is defined as
+\begin{equation*}
+\left\| T \right\|_{\mathrm{op}}
+\coloneqq  \sup_{ \vecnot{v} \in V -  \left\{ \vecnot{0} \right\} }
+\frac{ \left\| T \vecnot{v} \right\|_W }{ \left\| \vecnot{v} \right\|_V }
+%= \sup_{\vecnot{v} \in V, \left\| \vecnot{v} \right\|_V = 1 }\left\| T \vecnot{v} \right\|_W .
+\end{equation*}
+[Often, one simply writes $\left\| T \right\|$ instead of $\left\| T \right\|_{\mathrm{op}}$ when the context is clear] 
+
+\item \textbf{Fact:} The supremum in the definition of the operator norm can be restricted to unit vectors: 
+\begin{equation*}
+%\left\| T \right\|_{\mathrm{op}}\coloneqq 
+ \sup_{ \vecnot{v} \in V \setminus \left\{ \vecnot{0} \right\} }
+\frac{ \left\| T \vecnot{v} \right\|_W }{ \left\| \vecnot{v} \right\|_V } =  \sup_{ \vecnot{v} \in V \setminus \left\{ \vecnot{0} \right\} }
+\left\| T \frac{  \vecnot{v}}{ \left\| \vecnot{v} \right\|_V } \right\|_W 
+= \sup_{\vecnot{v} \in V, \left\| \vecnot{v} \right\|_V = 1 }
+\left\| T \vecnot{v} \right\|_W .
+\end{equation*}
+
+
+\item \textbf{Fact:} The induced operator norm satisfies
+\[
+\| T \vecnot{u} \| \le \| T \| \| \vecnot{u} \| \quad \text{for all $\vecnot{u} \in V$}
+\]
+\item \textbf{Proof:}  If $\vecnot{u} = \vecnot{0}$ then both sides of inequality are zero. For nonzero $\vecnot{u}$, this holds because
+\[
+ \sup_{ \vecnot{v} \in V - \left\{ \vecnot{0} \right\} }
+\frac{ \left\| T \vecnot{v} \right\|_W }{ \left\| \vecnot{v} \right\|_V } \le \frac{ \left\| T \vecnot{u} \right\|_W }{ \left\| \vecnot{u} \right\|_V } \quad \text{for all $\vecnot{u} \in V$}
+\]
+
+\item \textbf{Definition:} For the space $L(V,V)$ of linear operators on $V$, a norm is  \textbf{submultiplicative} if 
+\[
+\| T U \| \leq \|T\| \|U\| \quad \text{for all $T,U \in L(V,V)$}
+\]
+
+
+\item \textbf{Fact:} The induced operator norm is submultiplicative.
+
+\item \textbf{Proof:} For any  $\vecnot{v} \in V - \{ \vecnot{0}\}$ set $\vecnot{w} = T \vecnot{u}$. Then, 
+\begin{align*}
+\frac{ \| UT \vecnot{v} \|}{\| \vecnot{v} \| }   \le \frac{ \| U \| \left \| T \vecnot{v} \right \|}{\| \vecnot{v} \| }  
+% & = \frac{  \| U\vecnot{w}  \|}{{\| \vecnot{v} \| } }   \le\| U\|  \left\| \vecnot{w} \right \| = \| U\| \left \| T \vecnot{v} \right \| \\
+& \le\| U\| \left \| T \right \|  %\|  \vecnot{v} \|
+\end{align*} 
+Since this inequality holds for all  $\vecnot{v} \in V - \{ \vecnot{0}\}$  it also applies to the supremum, which is equal to $\| U T\|$. 
+%\[
+%\| UT \vecnot{v} \| \le\| U\| \left \| T \vecnot{v} \right \|\le\| U\| \left \| T \right \|  \|  \vecnot{v} \|
+%\]
+
+
+\item \textbf{Definition:}  A linear transform is \textbf{bounded} if its induced operator norm is finite
+
+\item \textbf{Theorem:} A linear transform $T \colon V \to W$ is bounded if and only if it is continuous. 
+
+\item \textbf{Proof:} 
+\begin{itemize}
+\item Suppose that $T$ is bounded, i.e.,  there exists $M$ such that  $\left\| T \vecnot{v} \right\| \leq M \left\| \vecnot{v} \right\|$ for all $\vecnot{v} \in V$.
+\item If $\vecnot{v}_1, \vecnot{v}_2, \ldots$ is a convergent sequence in $V$, then 
+\begin{equation*}
+\left\| T \vecnot{v}_i - T \vecnot{v}_j \right\|
+= \left\| T ( \vecnot{v}_i - \vecnot{v}_j ) \right\|
+\leq  M \left\| \vecnot{v}_i - \vecnot{v}_j \right\| . 
+\end{equation*}
+This implies $T \vecnot{v}_1, T \vecnot{v}_2, \ldots$ is convergent in $W$ and, thus, $T$ is continuous.
+\item Conversely, assume $T$ is continuous and notice that $T \vecnot{0} = \vecnot{0}$.
+Then, for any $\epsilon > 0$, there is a $\delta>0$ such that $\| T \vecnot{v} \| < \epsilon$ for all $\| \vecnot{v} \| < \delta$. Since 
+\[
+\left\|  \frac{ \delta \vecnot{u} }{2 \left\| \vecnot{u} \right\| } \right\| = \frac{\delta}{2}  < \delta 
+\]
+it follows that
+%It follows that 
+\begin{equation*}
+\left\| T \vecnot{u} \right\|
+= \left\| T \frac{ \delta \vecnot{u} }{2 \left\| \vecnot{u} \right\| } \right\|
+\frac{ 2 \left\| \vecnot{u} \right\| }{ \delta }
+< \frac{2 \epsilon}{ \delta } \left\| \vecnot{u} \right\|
+\end{equation*}
+and $M = \frac{2 \epsilon}{\delta}$ serves as an upper bound on $\|T\|$.
+\end{itemize}
+
+\item A norm on a vector space of matrices is called a \textbf{matrix norm}.
+
+\item For $A\in F^{m\times n}$, the \textbf{matrix norm} induced by the $\ell^p$ vector norm $\|\cdot\|_p$,  is:
+\[ \left\| A \right\|_p  \coloneqq \max_{\left\| \vecnot{v} \right\|_p = 1} \left\| A \vecnot{v} \right\|_p. \]
+
+\item  In special cases, there are exact formulae:
+\begin{align*}
+\left\| A \right\|_{\infty} &=
+%\max_{\left\| \vecnot{v} \right\|_{\infty} = 1} \left\| A \vecnot{v} \right\|_{\infty}=
+\max_{i} \sum_{j} |a_{ij}| \\
+\left\| A \right\|_{1} &= 
+%\max_{\left\| \vecnot{v} \right\|_{1} = 1} \left\| A \vecnot{v} \right\|_{1} =
+\max_{j} \sum_{i} |a_{ij}| \\
+\left\| A \right\|_{2} &= 
+%\max_{\left\| \vecnot{v} \right\|_{2} = 1} \left\| A \vecnot{v} \right\|_{2} =
+\sqrt{\rho (A^H A)} \, ,
+\end{align*}
+[In the last expression,  $\rho(A^HA)$ is the maximum absolute value of  all eigenvalues $A^H A$  and $A^H$ is the conjugate transpose, i.e., if $A$ is $m \times n$ then $B = A^H$ is the $n \times m$ matrix such that $B_{i,j}$ is the complex conjugate of $A_{j,i}$]. 
+
+
+\item \textbf{Definition:} Let $W$ be a vector space over $F$ and let $T\colon W \to W$ be a linear operator.
+A scalar $\lambda \in F$ is an \textbf{eigenvalue} of $T$ if there exists a non-zero vector $\vecnot{v} \in W$ with 
+\[
+T \vecnot{v} = \lambda \vecnot{v}
+\]
+Any vector $\vecnot{v}$ such that  $T \vecnot{v} = \lambda \vecnot{v}$  is called an \textbf{eigenvector} of $T$ associated with the eigenvalue value $\lambda$.
+
+
+\item  \textbf{Definition:}
+A matrix $A \in F^{n \times n}$ is \textbf{diagonalizable} if there is an invertible matrix $V \in F^{n \times n}$ (whose columns are eigenvectors) such that $V^{-1} A V = \Lambda$ is diagonal.
+\newcommand*{\vertbar}{\rule[-1ex]{0.5pt}{2.5ex}}
+
+\[ A \underbrace{\begin{bmatrix} \vertbar & \vertbar & & \vertbar \\ \vecnot{v}_1 & \vecnot{v}_2 & \cdots & \vecnot{v}_n \\ \vertbar & \vertbar & & \vertbar \end{bmatrix}}_{V} = \begin{bmatrix} \vertbar & \vertbar & & \vertbar \\ \vecnot{v}_1 & \vecnot{v}_2 & \cdots & \vecnot{v}_n \\ \vertbar & \vertbar & & \vertbar \end{bmatrix} \underbrace{\begin{bmatrix} \lambda_1 & & & \\ & \lambda_2 & & \\ & & \ddots & \\ & & & \lambda_n \end{bmatrix}}_{\Lambda} \]
+
+
+\item \textbf{Example:}
+\begin{itemize}
+\item  If $A$ is diagonalizable, then 
+\begin{align*}
+A^m  & =(V \Lambda V^{-1})^m  =V \Lambda^m  V^{-1}
+\end{align*}
+where
+\begin{align*}
+ \Lambda^m  = \begin{bmatrix} \lambda^m_1 & & & \\ & \lambda^m_2 & & \\ & & \ddots & \\ & & & \lambda^m_n \end{bmatrix}
+ \end{align*}
+ And $A^m$ converges to zero if $|\lambda_i| < 1$ for all $i$
+\item Alternatively, $\|A \| <1$ for a \emph{submultiplicative norm}, then
+\begin{align*}
+\| A^m\|   &  \le \| A^{m-1} \| \left\| A \right\| \le \| A \|^m \to 0  
+\end{align*}
+Thus $\|A \|$ gives an upper bound on the rate of convergence. 
+\end{itemize} 
+ 
+
+\item \textbf{Theorem:} [Neumann Expansion] Let $\| \cdot \|$ be a submultiplicative norm on the vector space $L(V,V)$ and let $T \in L(V,V)$ be a linear operator with $\left\| T \right\| < 1$.
+Then, $(\Id-T)^{-1}$ exists and 
+\[ (\Id-T)^{-1} = \sum_{i=0}^{\infty} T^i. \]
+[This is a generalization the geometric series.]
+\item \textbf{Proof:} 
+\begin{itemize}
+\item Observe that 
+\[
+\sum_{i=0}^{\infty} \| T^i \| \leq \sum_{i=0}^{\infty} \| T \|^i = \frac{1}{1-\|T\|} \quad \text{ because $\|T\|<1$}
+\]
+
+\item Recall an infinite sum $\,\sum_{i=0}^{\infty} T^i$ converges if $\sum_{i=0}^{\infty} \| T^i \|$ converges 
+
+\item Next, observe that 
+\[
+(\Id - T) \left( \Id + T + T^2 + \cdots + T^{n-1} \right) = \Id - T^n 
+\]
+
+\item $T^n \to 0$ because $ \left\| T^n \right\| \leq \left\| T \right\|^n \rightarrow 0$ since $\left\| T \right\| < 1$ \vspace{1mm}
+
+\item Thus, $\sum_{i=0}^{\infty} T^i$ is a right inverse for $I-T$ 
+
+\item Same argument works on the left, so we're done. \hfill \qedhere
+
+\end{itemize}
+
+\item \textbf{Note:} the  Neumann expansion can be used to numerically approximate the inverse of a matrix using the fist $m$ terms in the expansion: 
+\begin{align*}
+( \Id - T)^{-1}\vecnot{v}  \approx \sum_{i=0}^{m-1} T^i \vecnot{v} 
+\end{align*}
+This is much faster if $m \ll n$. 
+\begin{itemize}
+\item The error satisfies: 
+\begin{align*}
+ \left\| ( \Id - T)^{-1}-  \sum_{i=0}^{m-1}  T^i   \right \|    =  \left\| \sum_{i =m+1}^\infty  T^i   \right \|    \le  \sum_{i =m+1}^\infty   \left\|  T^i   \right \|   \le  \sum_{i =m+1}^\infty   \left\|  T   \right \|^i 
+ =   \frac{ \|T\|^m}{ 1- \|T\|}
+ \end{align*}
+\item If the $\|\cdot\| = \|\cdot\|_\mathrm{op}$ is the induced operator norm, then 
+\begin{align*}
+\left\| ( \Id - T)^{-1} \vecnot{v} -  \sum_{i=0}^{m-1} T^i \vecnot{v}  \right \| &    \le \left\| ( \Id - T)^{-1}-  \sum_{i=0}^{m-1}  T^i   \right \|_\mathrm{op}   \| \vecnot{v} \| \le   \frac{ \|T\|_\mathrm{op}^m}{ 1- \|T\|_\mathrm{op} } \| \vecnot{v} \|
+\end{align*}
+\end{itemize} 
+
+
+
+
+\end{itemize}
+
+
+
+\bibliographystyle{alpha}%{IEEEtran}
+\bibliography{/Users/galenreeves/Dropbox/Library/long_names,/Users/galenreeves/Dropbox/Library/library} 
+\end{document}
+

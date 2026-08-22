@@ -1,0 +1,441 @@
+\documentclass[11pt,twoside]{report}
+
+
+%\newif\ifmynotes
+%\mynotesfalse
+%\mynotestrue
+
+\usepackage{ece586}
+
+
+%% TOGGLE  Notes
+%\newif\ifgnotes
+%\anstrue
+
+%\ifmynotes
+%	\definecolor{note_text}{rgb}{1,1,1}		
+%	\newcommand{\gskip}{\vspace*{1cm}}
+%	\newcommand\gnote[1]{\protect\leavevmode\begingroup\Huge\color{note_text}#1\endgroup\ignorespaces}
+%	\newenvironment{gnotes}{\Huge\color{red}}{\ignorespacesafterend}
+%\else
+%	%\newcommand{\gnote}[1]{#1\ignorespaces} 	% make commands do nothing. 
+%	\definecolor{note_text}{rgb}{0,0,.7}
+%	\newcommand\gnote[1]{\protect\leavevmode\begingroup\color{note_text}#1\endgroup\ignorespaces}
+%	\newenvironment{gnotes}{\color{red}}{\ignorespacesafterend}
+%%	\newcommand{\gskip}{}
+%\fi
+%
+
+\newcommand{\bbN}{{\mathbb{N}}}
+\newcommand{\bbR}{{\mathbb{R}}}
+\newcommand{\bbQ}{{\mathbb{Q}}}
+\newcommand{\bbZ}{{\mathbb{Z}}}
+\newcommand{\bbC}{{\mathbb{C}}}
+\newcommand{\vecnot}{\underline}
+\newcommand{\Id}{{\mathrm{I}}}
+\newcommand{\Herm}{{\mathrm{H}}}
+
+\newcommand{\Interior}[1]{\ensuremath{{#1}^{\circ}}}
+\newcommand{\Closure}[1]{\ensuremath{\overline{#1}}}
+\newcommand{\Complement}[1]{\ensuremath{{#1}^{c}}}
+
+\newcommand{\Real}{\mathrm{Re}}
+\newcommand{\Span}{\mathrm{span}}
+\newcommand{\Rank}{\mathrm{rank}}
+\newcommand{\Nullity}{\mathrm{nullity}}
+\newcommand{\Trace}{\mathrm{tr}}
+\newcommand{\Diag}{\mathrm{diag}}
+\DeclareMathOperator*{\esssup}{ess\,sup}
+\DeclareMathOperator*{\minimize}{minimize}
+
+\newcommand{\inner}[2]{{\left\langle #1 \mskip2mu , #2 \right\rangle}}
+\newcommand{\tinner}[2]{{\langle #1 \mskip1mu , #2 \rangle}}
+
+\newcommand{\Expect}{\ensuremath{\mathrm{E}}}
+
+\begin{document}
+
+\lectureheader{8}{Matrix Analysis}
+
+
+
+\section*{Overview} 
+
+\begin{itemize}
+%\item In this lecture, we consider noisy linear observation model
+% \[
+% \by = A \bx^\star + \be
+% \]
+% where:
+%\begin{itemize}
+%\item $\bx^\star$ is an unknown $n$-dimensional vector belonging to a set $\cX \subseteq \reals^n$. 
+%\item $A$ is an $m \times n$ measurement matrix
+%\item $\be$ is and $m$-dimensional vector of measurement errors
+%\end{itemize}
+
+
+\item This lecture is based on material in  \cite[Chapters 7,8, and 6]{chamberland:2023EF}.%,  \cite[Chapter~7]{luenberger:1997}, and \cite{clarke:2013}
+% and \cite[Parts~I--II]{bloch:2011}
+
+
+\end{itemize}
+
+
+\section{Eigenvalue Decomposition}
+
+\begin{itemize}
+\item Let $V$ be a vector space over $F$ and let $T\colon V \to V$ be a linear operator.
+An \textbf{eigenvalue} of $T$ is a scalar $\lambda \in F$ such that there exists a non-zero vector $\vecnot{v} \in V$ with 
+\[
+T \vecnot{v} = \lambda \vecnot{v}
+\]
+Any vector $\vecnot{v}$ such that $T \vecnot{v} = \lambda \vecnot{v}$ is called an \textbf{eigenvector} of $T$ associated with the eigenvalue value $\lambda$.
+
+\item \textbf{Definition:} A square matrix $B$ is \textbf{diagonalizable} if there is an invertible matrix $S$ (whose columns are eigenvectors) such that 
+\[
+S^{-1} B S = \Lambda \quad \text{ is diagonal.}
+\]
+
+
+\item \textbf{Theorem:} Any Hermitian matrix $B$ can be diagonalized by a unitary matrix $U$ such that 
+\[
+U^\Herm B U = \Lambda \quad  \text{is a real-valued diagonal matrix.}
+\]
+
+
+\item \textbf{Proof:} See text book. 
+
+\item \textbf{Note:} Matrices $A^\Herm A$ and $A A^\Herm$ always Hermitian and positive semidefinite. To see this, observe that for $\vecnot{x} $, we have 
+\[
+\vecnot{x}^\Herm A^\Herm A \vecnot{x} = \| A \vecnot{x} \|^2 \ge 0 
+\]
+
+\end{itemize}
+
+
+\section{Singular Value Decomposition} 
+
+\begin{itemize}
+\item The \textbf{singular value decomposition} (SVD) of a rank-$r$ matrix $A \in \bbC^{m \times n}$ is 
+\begin{equation*}
+A = U \Sigma V^\Herm
+=\begin{bmatrix}  U_1 & U_2 \end{bmatrix} 
+\begin{bmatrix} \Sigma_1 & 0 \\ 0 & 0 \end{bmatrix} 
+\begin{bmatrix}  V_1^\Herm \\ V_2^\Herm  \end{bmatrix} = U_1 \Sigma_1 V_1^\Herm,
+\end{equation*}
+where
+\begin{itemize}
+\item $U  =[ U_1, U_2]$ % [ \vecnot{u}_1, \dots, \vecnot{u}_m]$ 
+is an $m \times m$ unitary matrix and $U_1$ is $m \times r$
+\item $V = [ V_1, V_2]] $ is an $n \times n$ unitary matrix and $V_1$ is $n \times r$. 
+%\item $\Sigma$ is an a $m \times n$ real diagonal matrix of the form 
+%\[
+%\Sigma = \begin{bmatrix} \sigma_1 \\ &   \ddots \\ && \sigma_r \\ &&& 0 
+%\end{bmatrix} 
+%\]
+%
+%\item $U \in \bbC^{m \times m}$ and $V \in \bbC^{n \times n}$ are unitary and 
+%\item $U_1 \in \bbC^{m \times r}$, $U_2 \in \bbC^{m \times m-r}$, $V_1 \in \bbC^{n \times r}$, and $V_2 \in \bbC^{n \times n-r}$ have orthonormal columns.
+\item  $\Sigma_1 \in \bbR^{r \times r}$  is a diagonal matrix containing the non-zero singular values 
+\[ \sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_r > 0. \]
+\end{itemize}
+
+
+\item The factorization $A = U \Sigma V^\Herm$ is called the \textbf{full SVD} of the matrix $A$ while the factorization $A = U_1 \Sigma_1 V_1$ is called the \textbf{compact SVD} of $A$.
+
+
+\item %Letting $U = [ \vecnot{u}_1, \dots, \vecnot{u}_m]$ and $V = [ \vecnot{v}_1, \dots, \vecnot{v}_n]$, 
+The SVD can aslo be expressed as the sum of rank-one matrices
+\[
+A = \sum_{i=1}^r \sigma_i \vecnot{u}_i \vecnot{v}_i^\Herm
+\]
+where 
+\begin{itemize}
+\item The left-singular vectors $\vecnot{u}_1, \dots, \vecnot{u}_m \in \bbC^m$ are the columns of $U$
+\item The right-singular vector $ \vecnot{v}_1, \dots, \vecnot{v}_n \in\bbC^n$ are the columns of $V$
+\end{itemize}
+
+\item \textbf{Properties:} 
+\begin{enumerate}[(1)]
+\item The singular values $\sigma_1, \dots \sigma_r$ are determined uniquely by the matrix $A$.  They corresponds to the positive square roots of the nonzero eigenvalues of $n \times n$ positive semidefinite matrix $A^\Herm A$ (or equivalently the $m \times m$ positive semidefinite matrix $AA^\Herm$).  % are the same as the z
+%\item The columns of $U_1\in \bbC^{m \times r}$ form an orthonormal basis for $\cR(A)$. 
+%\item The columns of $U_2$ form an orthonormal basis for $\cN(A^\top)$
+%\item The columns of $V_1$ form an orthonormal basis for $\cR(A^\top)$. 
+%\item The columns of $V_2$ form an orthonormal basis for $\cN(A)$. 
+\item The matrices $U_1 \in \bbC^{m \times r}$, $U_2 \in \bbC^{m \times (m-r)}$, $V_1 \in \bbC^{n \times r}$, $V_2 \in \bbC^{n \times (n-r)}$ provide orthonormal bases for the four fundamental subspaces:
+\begin{align*}
+%\Span(\vecnot{u}_1, \dots , \vecnot{u}_r) & = 
+\cR(U_1) & = \cR(A)\\
+\cR(U_2) & = \cN(A^\top)\\
+\cR(V_1) & = \cR(A^\top)\\
+\cR(V_2) & = \cN(A)
+%\Span(\vecnot{u}_1, \dots , \vecnot{u}_r) = \cR(A)
+\end{align*}
+\end{enumerate}
+
+
+\item  If $A$ is a real $m \times n$ matrix then it has a singular value decomposition of the form $A = U \Sigma V^\top$ where $U \in \bbR^{n \times n}$ and $V \in \bbR^{n \times n}$ are orthogonal matrices. 
+
+%\item The \textbf{compact SVD} is the factorization % nonzero singular values:
+%\begin{equation*}
+%A %= U \Sigma V^\Herm
+%%=\begin{bmatrix}  U_1 & U_2 \end{bmatrix} 
+%%\begin{bmatrix} \Sigma_1 & 0 \\ 0 & 0 \end{bmatrix} 
+%%\begin{bmatrix}  V_1^\Herm \\ V_2^\Herm  \end{bmatrix} 
+%= U_1 \Sigma_1 V_1^\Herm,
+%\end{equation*}
+%where 
+%\begin{itemize}
+%\item  $U_1 \in \bbC^{m \times r}$ has orthonormal columns, i.e., $U_1^\Herm U_1 = \Id_r$
+%\item  $V_1 \in \bbC^{n \times r}$ has orthonormal columns, i.e., $V_1^\Herm V_1 = \Id_r$
+%\end{itemize}
+
+
+%The compact SVD of a rank-$r$ matrix retains only the $r$ columns of $U,V$ associated with non-zero singular values.
+
+
+
+
+
+
+%\item Idea to find orthonormal changes of basis $U,V$ so that $U^\Herm A V$ is diagonal
+
+\item \textbf{Construction:} Let $A $ be a complex $m \times n$ matrix with rank $r$%The SVD of $A \in \bbC^{m \times n}$ can be obtained from the 
+%\begin{enumerate}
+%\item Let 
+%\end{enumerate}
+
+
+\begin{itemize}
+\item The $n \times n$ positive definite matrix $A^\Herm A$ can be diagonalized by an $n \times n$ unitary matrix $V = [ \vecnot{v}_1, \dots , \vecnot{v}_n]$ such that 
+\[
+A^\Herm A  = V \Lambda V^\top , \qquad \Lambda = \diag(\lambda_1, \dots, \lambda_r, 0, \dots, 0)
+\]
+where $\lambda_1 \ge \lambda_2 \ge \dots \ge \lambda_r > 0$ are the positive real eigenvalues arranged in a non-increasing order. 
+
+\item The singular values are the positive square roots of the eigenvalues
+\[
+\sigma_i = \sqrt{\lambda_i}
+\]
+
+
+\item  %Let $\vecnot{v}_1, \ldots, \vecnot{v}_r$ be orthonormal eigenvectors of $A^\Herm A$ with positive eigenvalues $\sigma_1^2,\ldots,\sigma_r^2$. 
+Since $\vecnot{v}_i$ is an eigenvector with eigenvalue $\sigma_i^2$, it follows that 
+\[
+A^\Herm A \vecnot{v}_i = \sigma^2_i \vecnot{v}_i  \quad \implies \quad \|A \vecnot{v}_i\| ^2 = \vecnot{v}_i^\Herm A^\Herm A \vecnot{v}_i = \sigma_i^2
+\]
+
+\item Then, the left-singular vectors $\vecnot{u}_1, \dots, \vecnot{u}_r \in \bbR^m$ corresponding to non-zero singular values are given by %according to 
+\[
+u_i \coloneqq \sigma_i^{-1} A \vecnot{v}_i
+\] 
+To see that these are orthonormal, observe that $\| u_i\| = \frac{1}{\sigma_i} \| A  A \vecnot{v}_i\| = 1$ and 
+%\[
+%\| u_i\| = \frac{1}{\sigma_i} \| A  A \vecnot{v}_i\| = 1
+%\]
+%and 
+%
+% \[\|A \vecnot{v}_i\| ^2 = \vecnot{v}_i^\Herm (A^\Herm A \vecnot{v}_i) =  \vecnot{v}_i^\Herm (\sigma_i^2\vecnot{v}_i) = \sigma_i^2 \]
+%
+%\item  This implies that $\|A \vecnot{v}_i\| = \sigma_i$.
+%So $\vecnot{u}_i = \frac{1}{\sigma_i} A\vecnot{v}_i$ has $\| \vecnot{u}_i \| \!=\! 1$ and 
+\begin{align*}
+%A A^\Herm \vecnot{u}_i &= \frac{1}{\sigma_i} A A^\Herm A \vecnot{v}_i = \frac{1}{\sigma_i} \sigma_i^2 A \vecnot{v}_i = \sigma_i^2 \vecnot{u}_i
+%\\
+\vecnot{u}_j^\Herm \vecnot{u}_i &= \left(\frac{1}{\sigma_j} A \vecnot{v}_j \right)^\Herm \left(\frac{1}{\sigma_i} A \vecnot{v}_i \right) =\frac{1}{\sigma_i \sigma_j} \vecnot{v}_j^\Herm (A^\Herm A) \vecnot{v}_i = \delta_{i,j}  
+\end{align*}
+
+
+\item For $U_1 = [\vecnot{u}_1,\ldots,\vecnot{u}_r]$ and $V_1 = [\vecnot{v}_1,\ldots,\vecnot{v}_r]$, this gives 
+\[
+A  \begin{bmatrix}  V_1 &  V_2 \end{bmatrix}  =  \begin{bmatrix}  U_1 \Sigma_1 &  0_{m \times (n-r)} \end{bmatrix}
+\]
+where $\Sigma_1$ is a $r \times r$ diagonal matrix with diagonal entries $\sigma_1,\ldots,\sigma_r$
+
+\item %If cols of $V_2$ are an orthonormal basis for $\mathcal{N}(A)$, then $A[V_1 \; V_2]=U_1 [\Sigma_1 \; 0].$
+Thus, right multiplication by $V^\Herm = [V_1^\Herm \; V_2^\Herm]$ gives the \textbf{compact SVD} 
+ \[  A = U_1 \Sigma_1 V_1^\Herm, \]
+where the columns of $U_1, V_1$ are orthonormal bases for $\mathcal{R}(A), \mathcal{R}(A^\Herm)$
+
+\item The  matrix $U_2 \in \bbC^{m \times (m-r)}$ can be chosen arbitrarily subject to the constraint that its columns form an orthonormal basis for $\cN(A^\top)$ 
+\end{itemize}
+
+\item \textbf{Example:} 
+Consider the matrix 
+\[ A = \begin{bmatrix} 
+1 & 1 \\
+5 & -1 \\
+-1 & 5 
+\end{bmatrix}  \]
+
+\begin{itemize}
+
+\item  An eigenvalue decomposition of $A^\Herm A$ is given by
+\[
+A^\Herm A = \begin{bmatrix} 
+27 & -9 \\
+-9 & 27
+\end{bmatrix} 
+=  V \Lambda V^\Herm
+=  \left( \frac{1}{\sqrt{2}}\begin{bmatrix} 
+-1 & 1 \\
+1 & 1 
+\end{bmatrix}  \right) 
+%\begin{bmatrix} 
+%-\frac{1}{\sqrt{2}}  & \frac{1}{\sqrt{2}}  \\
+%\frac{1}{\sqrt{2}}  & \frac{1}{\sqrt{2}}  
+%\end{bmatrix} 
+\begin{bmatrix} 
+36 & 0 \\
+0 & 18
+\end{bmatrix} 
+\left( \frac{1}{\sqrt{2}} \begin{bmatrix} 
+-1 & 1 \\
+1 & 1 
+\end{bmatrix} \right)
+\]
+
+\item 
+This implies $\Sigma_1 = \Lambda^{1/2}$ and $V_1 = V$.
+Thus, we find $U_1 = A V_1 \Sigma_1^{-1}$ with 
+\[ 
+U_1 = \begin{bmatrix} 
+1 & 1 \\
+5 & -1 \\
+-1 & 5 
+\end{bmatrix} 
+\left( \frac{1}{\sqrt{2}} \begin{bmatrix} 
+-1 & 1 \\
+1 & 1
+\end{bmatrix}  \right)
+ \begin{bmatrix} 
+\frac{1}{\sqrt{36}} & 0 \\
+0 & \frac{1}{\sqrt{18}}
+\end{bmatrix} 
+= \begin{bmatrix} 
+0 & \frac{1}{3} \\
+\frac{1}{\sqrt{2}} & \frac{2}{3}  \\
+-\frac{1}{\sqrt{2}} & \frac{2}{3} 
+\end{bmatrix} 
+\]
+
+\item 
+Putting this all together, we have the compressed SVD 
+\[ 
+A = U_1 \Sigma_1 V_1^\Herm 
+= \begin{bmatrix} 
+0 & \frac{1}{3} \\
+\frac{1}{\sqrt{2}} & \frac{2}{3}  \\
+-\frac{1}{\sqrt{2}} & \frac{2}{3} 
+\end{bmatrix} 
+ \begin{bmatrix} 
+\sqrt{36} & 0 \\
+0 & \sqrt{18}
+\end{bmatrix} 
+\left( \frac{1}{\sqrt{2}}  \begin{bmatrix} 
+-1 & 1 \\
+1 & 1 
+\end{bmatrix} \right). \]
+\end{itemize}
+
+\end{itemize}
+
+
+\subsection{Best Approximation} 
+
+\begin{itemize}
+\item \textbf{Definition:} Let $A \in \mathbb{C}^{m\times n}$ have SVD $A=U \Sigma V^\Herm$ where $\vecnot{u}_1,\ldots,\vecnot{u}_m$ and $\vecnot{v}_1,\ldots,\vecnot{v}_n$ are the columns of $U$ and $V$.
+Then, the $k$-truncated SVD expansion of $A$ is 
+\[ \mathcal{T}_k (A) \coloneqq \sum_{i=1}^k \sigma_i \; \vecnot{u}_i \, \vecnot{v}_i^\Herm \]
+
+
+\item% \textbf{Definition:} 
+The \textbf{Frobenius} norm $\|\cdot\|_F$ %The Frobenius norm $\|\cdot\|_F$ 
+ is matrix norm induced by inner product $\tinner{ A }{ B } \coloneqq \text{Tr} (B^\Herm A)$ on the vector space $\mathbb{C}^{m \times n}$. It satisfies
+ \begin{align*}
+ \| A\|^2_F  =  \sqrt{ \gtr(A^\Herm A) } = \sqrt{ \sum_{i=1}^m \sum_{j=1}^n |A_{ij}|^2}
+ \end{align*}
+
+\item \textbf{Eckart–Young Theorem:} In terms of the Frobenius norm $\| A \|_F^2 \coloneqq \sum_{ij} |a_{ij}|^2$, the best rank-$k$ approximation of $A \in \mathbb{C}^{m\times n}$ is given by the $k$-truncated SVD expansion: 
+\[ \min_{B \in \mathbb{C}^{m\times n}: \, \text{rank}(B)=k} \| A - B \|_F  = \| A - \mathcal{T}_k (A) \|_F \]
+
+\end{itemize}
+
+
+\subsection{Principal Component Analysis (PCA)} 
+
+\begin{itemize}
+\item  \textbf{Problem:} For a given set of $N$ data points $\vecnot x_{1},\vecnot x_{2},\ldots,\vecnot x_{N}\in\mathbb{R}^{n}$, what $p$-dimensional affine subspace $W\subset\mathbb{R}^{n}$ minimizes the approximation error 
+\[
+\sum_{i=1}^{N}\|\vecnot x_{i}-P_{W}(\vecnot x_{i})\|^{2}.
+\]
+
+\item 
+\textbf{Solution:} Using $\vecnot w_{0}=\frac{1}{N}\sum_{i=1}^{N}\vecnot x_{i}$, we define the mean-corrected data matrix \vspace{-1.5mm}
+\[ A=[\vecnot x_{1}-\vecnot w_{0},\ldots,\vecnot x_{N}-\vecnot w_{0}]. \]
+
+
+
+\item 
+Then, the problem can solved using the SVD $A=U\Sigma V^\top$.  In particular, one can define $U_{p} \coloneqq [\vecnot u_{1},\ldots,\vecnot u_{p}]$ and choose $W = \textrm{span}(U_p) + \vecnot{w}_0$ so that 
+\[ P_{W}(\vecnot x)=U_{p}U_{p}^{T}(\vecnot x-\vecnot w_{0})+\vecnot w_{0} . \]
+
+\vspace{-1mm}
+
+For dimension reduction, one stores $\vecnot y_{i}=U_{p}^{T}\vecnot x_{i}\in\mathbb{R}^{p}$ instead of $\vecnot x_{i}\in\mathbb{R}^{n}$.
+
+
+
+\item Note: This solution essentially replaces $A$ by the $p$-truncated SVD $\mathcal{T}_p (A)$
+
+\end{itemize}
+
+\section{Moore-Penrose Pseudo Inverse}
+
+\begin{itemize}
+
+
+\item For a matrix $A \in \bbC^{m\times n}$, the Moore-Penrose pseudo-inverse is the unique matrix $A^+ \in \bbC^{n\times m}$ satisfying the following four conditions: 
+\begin{enumerate}
+\item $A A^+ A = A$ \hfill  $A A^+$ is idempotent
+\item $A^+ A A^+ = A^+$  \hfill $A^+ A$ is idempotent
+\item $(A A^+)^\Herm = A A^+$ \hfill   $A A^+$ is Hermitian
+\item $(A^+ A)^\Herm = A^+ A$ \hfill $A^+ A$ is Hermitian
+\end{enumerate}
+
+\item \textbf{Lemma:} 
+From the compact SVD $A = U_1 \Sigma_1 V_1^\Herm$, the Moore-Penrose pseudo-inverse is 
+\[
+A^+ = V_1
+\Sigma_1^{-1} U_1^\Herm
+\]
+Furthermore:
+\begin{itemize}
+\item $A A^+$ is the orthogonal projection on to $\cR(A)$
+\item $A^+ A$ is the orthogonal projection on $\cR(A^\top)$
+\end{itemize}
+
+
+\item \textbf{Proof:} 
+\begin{enumerate}
+\item $A A^+ A = U_1 {\color{blue}(\Sigma_1 V_1^\Herm  V_1
+\Sigma_1^{-1} U_1^\Herm  U_1)} \Sigma_1 V_1^\Herm = A $
+\item $A^+ A A^+ =  V_1
+{\color{blue}(\Sigma_1^{-1} U_1^\Herm U_1 \Sigma_1 V_1^\Herm  V_1)}
+\Sigma_1^{-1} U_1^\Herm  = A^+$
+\item $(A A^+)^\Herm = \big(U_1 {\color{blue}(\Sigma_1 V_1^\Herm V_1
+\Sigma_1^{-1})} U_1^\Herm \big)^\Herm  = {U_1 U_1^\Herm} = A A^+$
+\item $(A^+ A)^\Herm = \big(V_1 {\color{blue}(\Sigma_1^{-1} U_1^\Herm U_1
+\Sigma_1)} V_1^\Herm \big)^\Herm  = {V_1 V_1^\Herm} = A^+ A$ \qedhere
+\end{enumerate}
+
+%\item Thus, $A A^+$ and $A^+ A$ are projection matrices onto $\mathcal{R}(A)$ and $\mathcal{R}(A^\Herm)$.
+
+\end{itemize}
+
+
+
+\bibliographystyle{alpha}%{IEEEtran}
+\bibliography{/Users/galenreeves/Dropbox/Library/long_names,/Users/galenreeves/Dropbox/Library/library} 
+\end{document}
+

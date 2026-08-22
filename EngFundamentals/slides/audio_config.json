@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "sample_rate": 24000,
+  "timing": {
+    "overlay_lead_seconds": 0.2,
+    "new_slide_lead_seconds": 0.5,
+    "overlay_tail_seconds": 0.65,
+    "slide_tail_seconds": 1.4,
+    "final_tail_seconds": 1.25
+  },
+  "say": {
+    "voice": "Alex",
+    "rate": 175
+  },
+  "qwen3": {
+    "seed": 42,
+    "clone_mode": "x-vector",
+    "reference_audio": "/Users/hpfister/overleaf/qary_bpqm_slides_isit26/video_work/voices/coben_hold_tight_ch1_first29_hp2.wav",
+    "reference_text": "",
+    "reference_text_file": "",
+    "language": "English",
+    "voice_name": "coben"
+  },
+  "qwen3_remote": {
+    "url": "http://127.0.0.1:8765",
+    "service_id": "qwen3-tts-1.7b-base-coben-hp2-xvector-v1",
+    "token_env": "DCC_TTS_TOKEN",
+    "timeout_seconds": 600,
+    "seed": 42,
+    "language": "English",
+    "voice_name": "coben"
+  }
+}

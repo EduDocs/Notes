@@ -1,0 +1,1279 @@
+\documentclass[11pt,twoside]{report}
+
+
+%\newif\ifmynotes
+%\mynotesfalse
+%\mynotestrue
+
+\usepackage{ece586}
+
+
+%% TOGGLE  Notes
+%\newif\ifgnotes
+%\anstrue
+
+%\ifmynotes
+%	\definecolor{note_text}{rgb}{1,1,1}		
+%	\newcommand{\gskip}{\vspace*{1cm}}
+%	\newcommand\gnote[1]{\protect\leavevmode\begingroup\Huge\color{note_text}#1\endgroup\ignorespaces}
+%	\newenvironment{gnotes}{\Huge\color{red}}{\ignorespacesafterend}
+%\else
+%	%\newcommand{\gnote}[1]{#1\ignorespaces} 	% make commands do nothing. 
+%	\definecolor{note_text}{rgb}{0,0,.7}
+%	\newcommand\gnote[1]{\protect\leavevmode\begingroup\color{note_text}#1\endgroup\ignorespaces}
+%	\newenvironment{gnotes}{\color{red}}{\ignorespacesafterend}
+%%	\newcommand{\gskip}{}
+%\fi
+%
+
+\newcommand{\bbN}{{\mathbb{N}}}
+\newcommand{\bbR}{{\mathbb{R}}}
+\newcommand{\bbQ}{{\mathbb{Q}}}
+\newcommand{\bbZ}{{\mathbb{Z}}}
+
+\begin{document}
+
+\lectureheader{1}{Logic and Set Theory}
+
+
+
+\section*{Overview} 
+
+\begin{itemize}
+%\item In this lecture, we consider noisy linear observation model
+% \[
+% \by = A \bx^\star + \be
+% \]
+% where:
+%\begin{itemize}
+%\item $\bx^\star$ is an unknown $n$-dimensional vector belonging to a set $\cX \subseteq \reals^n$. 
+%\item $A$ is an $m \times n$ measurement matrix
+%\item $\be$ is and $m$-dimensional vector of measurement errors
+%\end{itemize}
+
+
+\item This lecture is based on material in  \cite[Chapter~1]{chamberland:2023EF} and \cite[Parts~I--II]{bloch:2011}
+
+
+\end{itemize}
+
+\section{Logic} 
+
+%\section{Logic Systems} 
+
+\begin{itemize}
+
+%\item A formal system of logic  consists of  
+%\begin{itemize}
+%%\item Argument is \textbf{valid} if conclusion follows from the premie. 
+%\item a formal language 
+%\item axioms
+%\item a proof system for determining the truth of a statement from the axioms. 
+%\end{itemize}
+%
+%\item A mathematical proof is a argument showing that a ``formula'' (i.e., compound statement) is true for every possible truth value of its constituents.  
+%\begin{itemize}
+%\item premise $P$ leads to conclusion  $Q$, i.e., the implication $P \to Q$ is true 
+%\item  argument is \textbf{logically valid} if  $P \to Q$ is a tautology.
+%\item first-order logic is \textbf{complete} $\iff $   all valid arguments can be proven
+%\item first-order logic is \textbf{sound} $\iff $  all arguments that can be proven are valid %  in the sense that every argument that can be proven is valid. 
+%
+%\item However, some arguments which are neither valid nor invalid. 
+%%For example,
+%%\[
+%%\exists x, \exists y, \neg (x = y) 
+%%\]
+%\end{itemize}
+
+\item A formal system of logic  consists of  a formal language, axioms, and a proof system for determining the validity of a statement from the axioms. 
+%\begin{itemize}
+%%\item Argument is \textbf{valid} if conclusion follows from the premie. 
+%\item Consistent (or sound) if implications of axioms do not contain a contradiction. 
+%\item Complete if all valid implications follow from the axioms
+%\item Decidable if there is a terming algorithm that determines if an implication is valid. 
+%\end{itemize}
+
+\item In this course we dispense with full formality  (especially  formal languages) and focus on the  essential ingredients of the standard logic systems used in mathematics: 
+%\begin{itemize}
+%\item Formal language
+%\item Axioms
+%\item Proof system 
+%\end{itemize}
+
+%\item \textbf{Classical logic} (a.k.a.\ standard logic)
+
+\begin{itemize}
+\item \textbf{Propositional logic}  (a.k.a.\ zeroth-order logic)  constructs logical statements from a primitive collection of  ``atomic'' statements
+
+\item \textbf{Predicate logic}  (a.k.a.\ first-order logic)  constructs logical statements from a primitive collection of statements \emph{with additional structure}
+\end{itemize}
+
+
+\item \textbf{Remark:} First-order logic has an  axiomatic formulation that is consistent and complete but not decidable
+\begin{itemize}
+\item  \textbf{Consistent \& Complete:}   An argument if valid if and only if it can be proved from axioms
+\item \textbf{Decidable:}  Whether an argument is can be determined in finite time. 
+%\item  Semidecidable: algorithm determines the truth of any postulated implication, if it terminates. But, termination is guaranteed only if postulate is true
+%\end{itemize}
+%
+%\item \textbf{Remark:} First-order logic is \textbf{complete} in the sense that an argument is valid if and only if it can be proved from the axioms. However, it is not \textbf{decidable} in the sense that there 
+%\end{itemize}
+\end{itemize}
+
+
+
+%\begin{itemize}
+
+%\item \textbf{Propositional logic} (also known as zeroth-order Logic) is a 
+
+\item \textbf{Definition:}  A \textbf{logical statement} (or proposition) is a declarative sentence that is either true,  T,  or false, F, but not both. Often denoted using symbols $P, Q, R , \dots$%,% where $P$ takes values in the set $\{ T, F\}$. 
+
+\item \textbf{Example:} Are the following statements?
+\begin{itemize}
+\item ``This course is at Duke University'' -- YES
+\item ``The real number $\sqrt{2}$ is rational''  -- YES
+\item ``Wash your hands before dinner''  -- NO, this is  command
+\item ``If you wash your hands you won't get sick" -- YES
+%\item ``$x \ge 3$'' -- YES if $x$ is a specific number (e.g., $x = 4$) but unclear if $x$ is unspecifed
+\end{itemize}
+
+
+\item \textbf{Remark:} By convention, if a statement is not false then it must be true. This is known as the law of the excluded middle. 
+% For example, the statement 
+%\[
+%P = \text{ ``every person over ten feet tall has blue hair" } 
+%\]
+%cannot be false because nobody is over ten feet tall. Hence, the statement is true. 
+
+
+%is not false, and so it must be true 
+%\begin{itemize}
+%
+%  \item \textcolor{blue}{A declarative sentence that is true or false, but not both}
+%  
+%  \item Ex. ``This video was recorded for a course at Duke University'' 
+%  
+%  \item Ex. ``The real number $\sqrt{2}$ is rational'' 
+%  
+%  \item Ex. ``Wash your hands before dinner'' \textcolor{red}{not a statement!}
+%
+%\end{itemize}
+%
+%
+%
+%\item Combining statements
+%
+%\begin{itemize}
+%
+%
+%  \item One can also \textcolor{blue}{form new statements from old ones} using English expressions: and; or; not; if, then; if and only if
+%  \item<6-> Ex. ``Duke is located in Durham, NC \textcolor{red}{or} all real numbers are rational''
+%  
+%  \item Note: symbols \textcolor{blue}{$P,Q,R,\ldots$} used to denote abstract statements 
+%
+%\end{itemize}
+
+\end{itemize}
+
+\subsection{Operations} 
+
+
+
+
+\begin{itemize}
+
+\item \textbf{Definitions:} 
+\begin{itemize}
+\item A \textbf{logical connective}  is an operation that combines logical statements to form a new logical statement. 
+\item The new statement is called a \textbf{compound proposition} or \textbf{propositional formula} 
+%Statements can be combined via operations (called logical connectives) to form new statements
+\end{itemize}
+
+
+\item   Unary operation: 
+\begin{itemize}
+\item  \textbf{negation:}  $\neg P  $ = ``not $P$''
+\begin{center}
+  \begin{tabular}{|c|c|}
+  \hline
+  $P$ & $\neg P$ \\
+  \hline
+  T & F \\
+  F & T \\
+  \hline
+  \end{tabular}
+  \end{center} 
+ \end{itemize}
+
+\item  Binary operations: %Two statements $P$ and $Q$ can be combined  form a new statement: 
+
+\begin{itemize}
+
+\item  \textbf{conjunction:} $P \wedge Q $ = ``both $P$ and $Q$'' 
+ \begin{center}
+  \begin{tabular}{|c|c|c|}
+  \hline
+  $P$ & $Q$ & $P \wedge Q$ \\
+  \hline
+  T & T & T \\
+  T & F & F \\
+  F & T & F \\
+  F & F & F \\
+  \hline
+  \end{tabular}
+  \end{center} 
+
+%\begin{itemize}
+%
+%  \item Binary operation on logical propositions (\textcolor{red}{denoted $P \wedge Q$}) that
+%  \textcolor{blue}{is true only if both statements are true, and is false otherwise}
+%\end{itemize}
+
+
+
+\item  \textbf{disjunction:}  $P \vee Q $ = ``either $P$ or $Q$,  or both'' 
+%\item  \textbf{negation:}  $\neg P  $ = ``not $P$'' 
+
+
+  \begin{center}
+  \begin{tabular}{|c|c|c|}
+  \hline
+  $P$ & $Q$ & $P \vee Q$ \\
+  \hline
+  T & T & T \\
+  T & F & T \\
+  F & T & T  \\
+  F & F & F \\
+  \hline
+  \end{tabular}
+  \end{center} 
+  
+  
+
+\item  \textbf{conditional connective:}  $P \to Q$ = ``if $P$ then $Q$'' 
+
+  \begin{center}
+  \begin{tabular}{|c|c|c|}
+  \hline
+  $P$ & $Q$ & $P \to  Q$ \\
+  \hline
+  T & T & T \\
+  T & F & F \\
+  F & T & T  \\
+  F & F & T \\
+  \hline
+  \end{tabular}
+  \end{center} 
+ $P$ is called the \textbf{antecedent} and $Q$ is called the \textbf{consequent}
+%\begin{itemize}
+%  \item Binary operation on logical propositions (\textcolor{red}{denoted $P \vee Q$}) that: 
+%  \textcolor{blue}{is true if either statement is true, and false otherwise}
+%\end{itemize}
+
+\item  \textbf{biconditional:}  $P \leftrightarrow Q$ = ``$P$ if and only if  $Q$'' 
+
+  \begin{center}
+  \begin{tabular}{|c|c|c|}
+  \hline
+  $P$ & $Q$ & $P  \leftrightarrow   Q$ \\
+  \hline
+  T & T & T \\
+  T & F & F \\
+  F & T & F  \\
+  F & F & T \\
+  \hline
+  \end{tabular}
+  \end{center} 
+\end{itemize}
+
+
+  \item \textbf{Example} 
+  \begin{itemize}
+  \item $P$ = ``you wash hands''
+  \item $Q$ = ``you get sick''
+  \item $P \to \neg Q$  = ``if you wash hands you won't get sick''
+  \item $\neg (P \to \neg Q)$  =    ``you wash hands and you get sick''
+  \end{itemize}
+  
+\item Combining multiple operations results in \textbf{propositional formual} or \textbf{compound operation} 
+\[
+(P \rightarrow R) \wedge (Q \vee \neg R)
+\]  
+%\item 
+The truth table for this formula can be evaluated constructively:
+%In general, there is a mechanical way to compute the truth table: \\
+\begin{center}
+\begin{tabular}{|c|c|c|ccccccc|}
+\hline
+$P$ & $Q$ & $R$
+& $(P$ & $\rightarrow$ & $R)$ & $\wedge$ & $(Q$ & $\vee$ & $\neg R)$ \\
+\hline
+T & T & T & T & T & T & T & T & T & F \\
+T & T & F & T & F & F & F & T & T & T \\
+T & F & T & T & T & T & F & F & F & F \\
+T & F & F & T & F & F & F & F & T & T \\
+F & T & T & F & T & T & T & T & T & F \\
+F & T & F & F & T & F & T & T & T & T \\
+F & F & T & F & T & T & F & F & F & F \\
+F & F & F & F & T & F & T & F & T & T \\
+& & & 1 & 5 & 2 & 7 & 3 & 6 & 4 \\
+\hline
+\end{tabular} .
+\end{center}
+  \end{itemize}
+  
+  
+\subsection{Relations} 
+ 
+   \begin{itemize}
+\item  \textbf{Definition:}  A \textbf{relation} (or meta statement) is logical statement about propositional formulas (i.e., compound operations). % compound operations on logical statements (i.e. propositional formulas).  %(While the output of operation, the output of a relation is not a logical statement). 
+
+
+%\item For the following, let $R(P, Q)$ and $S(P, Q)$ be operations on logical statements $P$ and $Q$ 
+
+
+\item \textbf{Equivalence:}  
+Two operations $R(P, Q)$ and $S(P, Q)$ on logical statements $P$ and $Q$ are equivalent
+%$R$ and $S$ are equivalent
+  if they define the same truth table, i.e. 
+\[
+ \text{$R(P, Q) \leftrightarrow  S(P, Q)$  is true for all possible values of $P$ and $Q$}
+\]
+This is denoted
+\[
+R \iff S %\qquad \text{means that   $R \leftrightarrow S$ for al } 
+\]
+
+\item \textbf{Examples:}
+\begin{itemize}
+\item  \textbf{De Morgan's laws: }
+\begin{align*}
+\neg  (P \wedge Q) \iff \neg P \vee \neg Q\\
+\neg  (P \vee Q) \iff \neg P \wedge \neg Q
+\end{align*}
+i.e., the negation of ``$P$ and $Q$'' is equivalent to ``not $P$ or not $Q$'''
+
+\item \textbf{Contrapositive:}
+\[
+P \to Q \iff  \neg Q \to\neg P 
+\]
+i.e., the negation of ``if $P$ then $Q$''  is equivalent to ``if not $Q$ then  not $P$'''
+\end{itemize}
+
+
+\item \textbf{Implication:} Operation  $R(P, Q)$  implies operation $S(P, Q)$ if
+\[
+ \text{$R(P, Q) \to S(P, Q)$ is true for all possible values of $P$ and $Q$}
+\]
+This is denoted 
+\[
+R \implies  S %\qquad \text{means that   $R \leftrightarrow S$ for al } 
+\]
+%$P \implies Q$ = asserts 
+
+
+\item \textbf{Examples:} %If $R$ = ``sky is blue and grass is green''  and $S $ = ``sky is not red'' then 
+\begin{itemize}
+\item $P \implies P \vee Q$
+\item $P \wedge Q \implies P$
+\item $\neg (P \to Q )  \implies  Q$
+\end{itemize}
+
+%\[
+%R \implies S
+%\]
+
+
+
+
+
+
+\item \textbf{Tautology}:  Operation  $R(P, Q)$ is a tautology if 
+\[
+ \text{$R(P, Q)$ is true for all possible values of $P$ and $Q$}
+\]
+
+
+\item \textbf{Contradiction}:  Operation  $R(P, Q)$ is a contradiction  if 
+\[
+ \text{$R(P, Q)$ is false for all possible values of $P$ and $Q$}
+\]
+
+\item \textbf{Examples:} 
+\begin{itemize}
+\item $P \vee \neg P$ is a  tautology
+\item $P \wedge \neg P$ is a contradiction 
+\end{itemize}
+
+
+%\item \textbf{Remark:} Propositional logic (a.k.a.\ zeroth-order logic) has an  axiomatic formulation that is consistent, complete, and decidable
+%\begin{itemize}
+%\item Consistent: implications of axioms do not contain a contradiction
+%\item Complete: all valid implications follow from the axioms
+%\item Decidable: terminating algorithm determines if any implication is valid or not
+%\end{itemize}
+
+
+  \end{itemize}
+  
+\subsection{Quantifiers} 
+
+\begin{itemize}
+\item \textbf{Predicate logic} % (a.k.a.\ first-order logic) is a generalization of propositional logic (a.k.a.\ zeroth-order logic) that
+ allows allows the use of statements that contain variables: 
+\begin{itemize}
+\item Let $U$ be a set of elements (``the universe'') %and $P(x)$ be a statement can can be applied to any $x \in U$. 
+\item predicate $P(x)$ ia statement can can be applied to any $x \in U$
+\item $x$ is called a free variable 
+\end{itemize}
+
+
+\item \textbf{Quantifies} allow statements about collections of elements
+\begin{itemize}
+\item \textbf{Universal:}  $\forall x \in U,\,  P(x)$  $\iff$  ``$P(x)$ is true for all $x \in U$'' 
+\item \textbf{Existential:} $\exists x \in U,\,  P(x)$  $\iff$  ``there exists $x \in U$ such that  $P(x)$ is true'' 
+\end{itemize}
+
+
+\item Negation 
+\begin{align*}
+\neg ( \forall x \in U, P(x)) \quad & \iff  \quad ( \exists x \in U, \neg P(x)) \\
+\neg ( \exists x \in U, P(x))  \quad & \iff  \quad ( \forall  x \in U, \neg P(x)) 
+\end{align*}
+
+
+
+\item \textbf{Example:} 
+\begin{itemize}
+\item $U$ = collection of all vehicles
+\item $P(x)$ = ``$x$ has 4 tires''
+\item ``not all vehicles have 4 tires'' $\iff$ ``there is a vehicle that does not have 4 tires''
+\end{itemize}
+
+\item \textbf{Fact:}  If $S = \emptyset$ is the empty set then %If $P(x)$ is a predicate on free variable $x \in U$  and $S = \emptyset $ is the empty set:
+\begin{itemize}
+\item $\exists x \in S\, , P(x)$ is always false (obviously)
+\item $\forall x \in S, \, P(x)$ is always  true (because its negation $\exists x \in S, \, \neg P(x)$ is necessarily false)
+\end{itemize}
+
+
+
+
+
+\item \textbf{Example:}  %Inconsistencies can arise when dealing with quantifiers over empty set. 
+\begin{itemize}
+\item $U$ = ``people in the word''
+\item $P(x)$  = ``person $x$ has blue hair''
+\item $S$ = ``people over ten feet tall''
+\item $\forall x \in X, P(x)$  $\iff$   ``every person over ten feet tall has blue hair''
+
+
+%\item $\neg (\forall x \in X, P(x))$ $\iff$   $\exists x \in X, \neg P(x)$  $\iff$ ``there is a person  over 10 feet with blue hair''
+%\item In this case  $\forall x \in S\,  P(x)$ is true (because its negation is false) but the statment $\exists x \in S, \,  P(x)$ is false. 
+\end{itemize}
+
+
+\item \textbf{Question:} Does the following implication holds? 
+\[
+\forall x\in U , \, P(x) \quad \overset{?}{\implies}  \quad \exists x\in U , \, P(x)
+\]
+\begin{itemize}
+\item If $U$ is non empty --- YES
+\item If $U$ is empty set --- NO
+\end{itemize}
+
+\item Let $P(x,y)$ be predicate with two free variables $x \in X$ and $ y \in Y$
+\begin{itemize}
+\item $\forall x \in X,\,  \exists y \in Y,  \, P(x,y)$  $\iff$  ``for all $x \in X$ there exists $y \in Y$ s.t.\ $P(x,y)$ is true''
+\item  $Q(x) = ( \exists y \in Y, P(x,y))$ is a predicate with free variable $x$
+\end{itemize}
+
+%\item \textbf{Question:} Does the following equivalence hold:
+%\[
+%\forall x ,\,  \exists y,  \, P(x,y)  \quad \overset{?}{ \iff} \quad \exists y,    \,  \forall  x, \, P(x,y)
+%\]
+%%\[
+%%\forall x \in X,\,  \exists y \in Y,  \, P(x,y)  \quad \overset{?}{ \iff} \quad  \forall  \exists y \in Y,  \,   x \in X,\, P(x,y)
+%%\]
+%No -- order matters 
+
+\item Implications and equivalences (assuming $X$ and $Y$ are nonempty) 
+\begin{align*}
+ \forall x, \, \forall y,\,  P(x,y)  \quad & \iff   \quad  \forall x, \, \forall y,\,  P(x,y)  \\
+\exists x, \,\exists y,\,  P(x,y)  \quad & \iff   \quad \exists y, \, \exists x,\,  P(x,y)  \\
+   \forall x, \, \forall y,\,  P(x,y)  \quad & \implies   \quad  \exists x , \, \forall x,\,  P(x,y)   \qquad  \text{(Since $X$ is nonempty)}\\
+\exists x, \, \forall y\,  P(x,y)  \quad & \implies   \quad  \forall y, \, \exists x,\,  P(x,y)  
+%\neg ( \forall x \in X,\;  \exists y \in Y,\,  P(x,y)) \quad & \iff  \quad  \forall x \in X, \, \exists y \in Y, \,  \neg P(x,y)
+\end{align*}
+
+
+
+
+\item Negation 
+\begin{align*}
+\neg ( \forall x ,\;  \forall y ,\,  P(x,y))  \quad & \iff   \quad \exists x,\, \exists y, \,  \neg P(x,y) \\
+\neg ( \exists  x,\;  \forall y,\,  P(x,y)) \quad & \iff  \quad  \forall x, \, \exists y, \,  \neg P(x,y)
+\end{align*}
+
+
+
+
+%\item \textbf{Remark:} Predicate  logic  (first order logic) has an  axiomatic formulation that is consistent, complete, and semidecidable
+%\begin{itemize}
+%\item  Semidecidable: algorithm determines the truth of any postulated implication, if it terminates. But, termination is guaranteed only if postulate is true
+%\end{itemize}
+
+  \end{itemize}
+  
+  
+\section{Proof techniques}  
+
+\begin{itemize}
+\item A \textbf{proof} is a sequence of verifiable steps from assumptions (a.k.a.\ the premise)  to the conclusion
+
+\item Types of proofs for $P \to Q$
+\begin{itemize} 
+ \item  \textbf{Direct}: Assume $P$ true and give steps that lead to $Q$
+ \item   \textbf{Contrapositive}: Proof of the equivalent statement $\neg Q \rightarrow \neg P$
+ \item  \textbf{Contradiction}: Using $\neg (P \rightarrow Q) \iff P \wedge \neg Q$, one supposes that both $P$ and $\neg Q$ are true and then gives steps leading to a contradiction
+ \item   \textbf{Induction}: For predicate $P(n)$, prove $Q=$``$\forall n\in\mathbb{N}, P(n)$'' by establishing the premise $P=$``$P(1) \wedge (\forall n\in \mathbb{N}, P(n) \rightarrow P(n\!+\!1))$''
+\end{itemize}
+
+\item \textbf{Example:} Give a \textbf{direct} proof of the following statement: 
+\[
+\text{``for all $n \in \mathbb{N}$, if $n$ is even then $n^2$ is even''} 
+\]
+\textbf{Proof:} 
+\begin{align*}
+\text{``$n$ is even''}   \quad &\iff \quad \exists k \in \mathbb{N}, \, n = 2k\\
+%&\iff \quad \exists k \in \mathbb{N}, \, n^2 = 4k\\
+%&\iff \quad \exists k' \in \mathbb{N}, \, n = 2k'\\
+%& \implies \quad n^2 =4 k^2  = (2 ( 2k^2)) \\
+&\implies \quad \exists k' \in \mathbb{N}, \, n^2 = 2k', \qquad \text{ since $n^2 =4 k^2  = (2 ( 2k^2))$}\\
+& \implies \quad \text{ ``$n^2$ is even''}
+\end{align*}
+
+
+\item \textbf{Example} Use \textbf{contradiction} to prove
+\[
+\text{``if $x^2 = 2$ and $x$ real, then $x$ is not rational''} 
+\]
+\textbf{Proof:} 
+\begin{itemize}
+\item $P(x) = $ ``$x^2 = 2$''
+\item $Q(x) = $ ``$x$ is rational'' $\iff$ ``$\exists p,q \in \mathbb{N},\, q \ne 0, x = p/q$''
+\item Goal it so show that
+\[ \forall x \in \mathbb{R},\,   ( P(x) \to \neg Q(x)) 
+\]
+
+%\item Definition of rational  
+%\[
+%Q(x) \iff  \text{ ``$\exists p,q \in \mathbb{N},\, q \ne 0, x = p/q$''}
+%\]
+
+\item Assume for sake of contradiction the conclusion is false, i.e., 
+\[
+ \exists x \in \mathbb{R},\,   P(x) \wedge  Q(x)
+\]
+
+%\item ``$x$ is rational'' $\iff$  $\exists p,q \in \mathbb{N},\, q \ne 0, x = p/q$''
+%\item Suppose $\sqrt{2}$ is rational. Then $\sqrt{2} = p/q$, $q \ne 0$
+
+\item WLOG assume $p,q$ are coprime (no common divisors)
+\begin{align*}
+p = x q \quad \implies \quad p^2 = 2 q^2 \quad  \implies  \quad \text{$p^2$ is even} \quad  \implies  \quad \text{$p$ is even} 
+%\quad \implies \quad (2k)^2   = 2 q^2 \quad \implies \quad 2k^2 = q^2
+  %\quad  \implies  \quad \text{$p^2$ is even} 
+   %\quad  \implies  \quad \text{$p$ is even} \wedge \text{$q$ is even}
+\end{align*}
+Hence, $\exists k \in \mathbb{N}$, $p = 2k$. Plugging this back in, we see that
+\begin{align*}
+ (2k)^2 = 2 q^2 \quad \implies \quad 2k^2 = q^2 \quad  \implies  \quad \text{$q^2$ is even} \quad  \implies  \quad \text{$q$ is even} 
+%\quad \implies \quad (2k)^2   = 2 q^2 \quad \implies \quad 2k^2 = q^2
+  %\quad  \implies  \quad \text{$p^2$ is even} 
+   %\quad  \implies  \quad \text{$p$ is even} \wedge \text{$q$ is even}
+\end{align*}
+%\item If $p $ is even then $p^2 $ is even 
+%
+%\begin{align*}
+%p = \sqrt{2} q \quad \implies \quad p^2 = 2 q^2 \quad \implies \quad (2k)^2   = 2 q^2 \quad \implies \quad 2k^2 = q^2  \quad  \implies  \quad \text{$q^2$ is even}
+%\end{align*}
+\item But $p$ is even and $q$ is even contradicts the assumption that $p$ and $q$ are coprime. Thus we conclude that no such $x$ exists. 
+\end{itemize}
+
+
+\item \textbf{Example} Use \textbf{induction} to prove
+\[
+\forall n \in \mathbb{N}, \quad \sum_{i=1}^n i  = \frac{n^2 + n}{2} 
+\]
+\textbf{Proof} 
+\begin{itemize}
+\item Set $P(n) = $ ``$ \sum_{i=1}^n i  = \frac{n^2 + n}{2}$''
+\item The desired conclusion can  be written equivalently as follows: 
+\begin{align*}
+\forall n \in \mathbb{N}, \, P(n)  \quad & \iff \quad  P(1) \wedge P(2) \wedge P(3) \wedge \cdots\\
+& \iff \quad  P(1) \wedge ( P(1) \to  P(2)  ) \wedge  ( P(2) \to P(3) )  \wedge \cdots\\
+& \iff \quad  P(1) \wedge ( \forall n \in \mathbb{N}, \,  ( P(n) \to  P(n+1)  )  ) \
+\end{align*}
+where  $P(n) = $ ``$ \sum_{i=1}^n i  = \frac{n^2 + n}{2}$''
+
+\item First verify the ``base case''
+\[
+ \frac{ 1^2 + 1}{2} = 1   \quad \implies \quad P(1) \text{ is true} 
+\]
+\item Then shows that $P(n) \to P(n+1)$ holds for all $n$
+\[
+\sum_{i=1}^{n+1} i = \sum_{i=1}^{n} i  + (n+1) = \frac{n^2 + n}{2}  + (n+1)  = \frac{ n^2 + 3n + 2}{ 2}  = \frac{ (n+1)^2  + (n+1)}{2} 
+\]
+where second equality follow from $P(n)$
+\end{itemize} 
+
+\end{itemize}
+
+
+  
+\section{Set Theory} 
+
+\begin{itemize}
+\item Defining sets. 
+\begin{itemize}
+\item A set $A$ is a collection of elements, e.g., the set of vowels in the alphabet is 
+\[
+A = \{ a, e, i, o, u\} 
+\]
+\item Often denoted by capital letter such that $A, B, C, X, Y$, etc.
+
+\item Order does not matter. Repeated elements have not effect, e.g., 
+\[
+A =  \{ i, o, a, e, \}  = \{a, e, i, o, u, e, o  \} 
+\]
+
+\item A \textbf{singleton} is a set containing exactly one element, such as $\{a\}$. 
+
+\item The \textbf{empty set } $\emptyset = \{ \} $ is the set that contains no elements. 
+\end{itemize}
+
+\item Standard sets:
+\begin{itemize}
+\item integers $\bbZ = \{ 0, \pm 1, \pm2, \cdots\}$
+\item natural numbers $\bbN = \{ 1,2,3,\cdots\}$
+\item real numbers $\bbR = (- \infty, \infty) $
+\item complex numbers $\mathbb{C} $%= \{ x + i y  \mid x, y \in\bbR\}$  where $i = \sqrt{-1}$. 
+\end{itemize}
+
+\item Building new sets from old:
+\begin{itemize}
+\item  \textbf{Set builder notation:}  For logical predicate $P(x)$ defined for $x \in X$, 
+\[
+A = \{x  \in X \mid P(x)\}  = \text{``the set of all elements of $X$ such that $P(x)$ is true''}
+\]
+
+\item If no $x \in X$ satisfies $P(x)$, then the result is the empty set $\emptyset$
+
+\item Examples: 
+\[
+\bbN = \{ x \in \bbZ \mid x\ge 1\}, \qquad \mathbb{C} = \{ x + i y  \mid x, y \in\bbR\}
+\]
+\end{itemize}
+
+\end{itemize}
+
+
+\subsection{Operations} 
+\begin{itemize}
+
+
+
+\item Operations on sets $A,B$ 
+\begin{itemize} 
+  \item \textbf{Union} of $A$ and $B$ ($A\cup B$): set of elements in either $A$ or $B$
+%This means that $A \cup B = \{ x\in A \textrm{ or } x\in B \}$ is also defined by
+\[ x\in A\cup B \iff  (x\in A)\vee (x\in B) \]
+  \item \textbf{Intersection} of $A$ and $B$ ($A\cap B$): set of elements in both $A$ and $B$
+%This means that $A\cap B = \{x\in A | x\in B \}$ is also defined by
+\[ x\in A\cap B \iff  (x\in A)\wedge (x\in B) \]
+  \item \textbf{Set difference} $A-B$ (or $A \setminus \!B$): set of elements in $A$ but not in $B$
+%This means that
+\[ x\in A-B \iff (x\in A)\wedge (x\notin B) \]
+  \item  \textbf{Complement} $A^c$ for implied universal set $U$ is defined by $A^c = U-A$
+  \[ x\in A^c \iff x \notin A \]
+\end{itemize}
+
+
+
+% Definition of circles
+\def\firstcircle{(0,0) circle (1.5cm)}
+\def\secondcircle{(0:2cm) circle (1.5cm)}
+
+\colorlet{circle edge}{blue!50}
+\colorlet{circle area}{blue!20}
+
+\tikzset{filled/.style={fill=circle area, draw=circle edge, thick},outline/.style={draw=circle edge, thick}}
+
+\setlength{\parskip}{5mm}
+
+%\begin{frame} \frametitle{1.4: Venn Diagrams}
+
+% Set A or B
+\begin{tikzpicture}
+    \draw[filled] \firstcircle node {$A$}
+                  \secondcircle node {$B$};
+    \node[anchor=south] at (current bounding box.north) {$A \cup B$};
+\end{tikzpicture}
+\hspace{1in}
+%\hfill
+% Set A and B
+\begin{tikzpicture}
+    \begin{scope}
+        \clip \firstcircle;
+        \fill[filled] \secondcircle;
+    \end{scope}
+    \draw[outline] \firstcircle node {$A$};
+    \draw[outline] \secondcircle node {$B$};
+    \node[anchor=south] at (current bounding box.north) {$A \cap B$};
+\end{tikzpicture}
+
+% Set A^c = U - A
+\begin{tikzpicture}
+	\draw[filled, even odd rule] (-1.55,-1.75) rectangle (3.25,1.75) \firstcircle node {$A$}; 
+    \node at (2.1,1.3) {$A^c = U-A$};
+    \node[blue] at (2.75,-1.2) {$U$};
+\end{tikzpicture}
+\hspace{1in}
+%\hfill
+% Set A but not B
+\begin{tikzpicture}
+    \begin{scope}
+        \clip \firstcircle;
+        \draw[filled, even odd rule] \firstcircle node {$A$}
+                                     \secondcircle;
+    \end{scope}
+    \draw[outline] \firstcircle
+                   \secondcircle node {$B$};
+    \node[anchor=south] at (current bounding box.north) {$A - B$};
+\end{tikzpicture}
+
+
+
+\item Relationships between sets $A,B$ 
+\begin{itemize} 
+  \item $A$ \textbf{equals} $B$ (denoted $A=B$) if both sets have the same elements
+\[ 
+A=B\iff \forall x\,  \left( (x\in A)\leftrightarrow (x\in B) \right) 
+\]
+  \item $A$ is a \textbf{subset} of $B$ (denoted $A\subseteq B$) if all elements in $A$ are also in $B$
+\[ 
+A\subseteq B
+  \iff \forall x\,  \left( (x\in A)\rightarrow (x\in B) \right) \]
+ \item $A$ is a \textbf{proper subset} of $B$ (denoted $A\subset B$) if $A\subseteq B$ and $A\neq B$ 
+\item Two sets are called \textbf{disjoint} if 
+  \[
+  A\cap B = \emptyset
+  \]
+\end{itemize}
+
+
+\item De Morgan's $\neg (P \vee Q) = \neg P \wedge \neg Q$ with $P = ``x \in A"$ and $Q=``x\in B"$ implies: 
+\begin{align*}
+(A \cup B)^c & = A^c \cap B^c
+%\\ (A \cap B)^c & = A^c \cup B^c,
+\end{align*}
+
+\item  For index set $I$ and indexed collection of sets $\{S_\alpha : \alpha \in I\}$ the infinite unions and intersections are defined by:
+  \begin{align*}
+  \bigcup_{\alpha \in I} S_{\alpha}
+  &\coloneqq \{ x\mid x \in S_{\alpha} \text{ for some } \alpha \in I \} \\
+  \bigcap_{\alpha \in I} S_{\alpha}
+  &\coloneqq \{ x \mid x \in S_{\alpha} \text{ for all } \alpha \in I \} 
+  \end{align*}  
+  
+
+\item \textbf{Example:} Let
+\[
+A_n = \{ x \in \bbN \mid x \ge 1\} 
+\]
+Then:
+  \begin{align*}
+  \bigcup_{n \in \bbN } A_{n} & = A_1 = \bbN, \qquad 
+  \bigcap_{n \in \bbN } A_n     = \emptyset
+  \end{align*}  
+  
+  
+\item  De Morgan's identity still applies:
+  \begin{align*}
+  ``x \in \bigcup_{\alpha \in I} S_{\alpha}" &\iff  ``\exists \alpha \in I, x\in S_\alpha" \\
+  ``x \in \left(\bigcup_{\alpha \in I} S_{\alpha}\right)^c" &\iff  ``\forall \alpha \in I, x \notin S_\alpha" \iff  ``x \in \bigcap_{\alpha \in I} S^c_{\alpha}"
+  \end{align*}  
+  
+
+\item \textbf{Remark:}  If $I = \emptyset$ is the empty set then
+\begin{itemize}
+\item $\displaystyle \bigcup_{\alpha \in I} S_\alpha = \emptyset$  (obviously) 
+\item $\displaystyle \bigcap_{\alpha \in I} S_\alpha =  U$   where $U$ is the implied universal set. This follows from De Morgans:
+\[
+\left( \displaystyle \bigcap_{\alpha \in I} S_\alpha \right)^c =  \displaystyle \bigcup_{\alpha \in I} S^c_\alpha = \emptyset
+\]
+along with $\emptyset^c = U - \emptyset = U$. 
+%This is more difficult to define because one needs to understand the ``universal'' set.  
+\end{itemize} 
+
+%\begin{itemize}
+%
+%%\end{center} 
+%%
+%  \item \textbf{containment / set inclusion}: $A \subset B$ means $A \implies B$. 
+%\begin{center}
+%\begin{tikzpicture}
+%\draw[fill=red, fill opacity=.2, draw = red, thick] (0,0) ellipse (3 and 1.5);
+%\draw[fill=white, draw = blue, thick] (-1,0) circle (1);
+%\draw[fill=blue, fill opacity=0.2, draw = blue, thick] (-1,0) circle (1);
+%\node[text = red] at (1,0) (B) {$B$};
+%\node[text = blue] at (-1,0) (A) {$A$};
+%\end{tikzpicture}
+%\end{center} 
+%
+%\item \textbf{Complement:} $A^c$  =  ``not $A$'' =  $\{\omega\in\Omega: \omega \notin A\}$
+%                         
+%                         
+%\item \textbf{Union and intersection:}  If $A_\alpha \subset \Omega$ for each $\alpha$, then 
+%\begin{align*}
+%\bigcup_{\alpha} A_\alpha  & =  \{\omega:  \omega \in A_\alpha \text{ for at
+%    least one } \alpha \} \\ 
+%    \bigcap_{\alpha} A_\alpha  & =  \{\omega:  \omega \in A_\alpha \text{ for all } \alpha \} 
+%\end{align*}
+%%
+%%over \textbf{arbitrary} index set: 
+%%\begin{align*}
+%% \bigcup_{\alpha} A_\alpha &=  \{\omega:  \omega \in A_\alpha \text{ for at
+%%    least one } \alpha \} \\ 
+%% A \cup B    &=  \text{``$A$ or $B$ (or perhaps both)''}
+%%\end{align*}
+%% [ Later we'll see it sometimes matters if the index set has
+%%   finitely-many, countably-many, or uncountably-many elements;
+%%   this definition works for all those cases ]
+%%
+%%\item \textbf{Intersection} over arbitrary index set:
+%%\begin{align*}
+%% \bigcap_{\alpha} A_\alpha &=  \{\omega:  \omega \in A_\alpha \text{ for
+%%                           all } \alpha \} \\ 
+%% A \cap B  &=  A B  =  \text{``both $A$ and $B$''}
+%%\end{align*}
+%\item \textbf{Set difference}:  Those $\omega\in\Omega$ in $A$ but not in $B$:
+%\[
+% A \backslash B  = A \cap B^c
+%\]
+%
+%
+%
+%\item \textbf{Symmetric difference}:
+%\begin{align*}
+% A \Delta B  %&= (A \cap B^c) \cup (A^c \cap B) \\
+%             &= (A \backslash B) \cup (B \backslash A)\\
+%             &= (A \cup B) \backslash (A \cap B)\\
+%             &=  \text{``in exactly one of $A$, $B$''}
+%\end{align*}
+%
+%\begin{center}
+%\begin{tikzpicture}
+%\draw[fill=red, fill opacity=.2, draw = red, thick] (0,0) ellipse (3 and 1.5);
+%%\draw[fill=white, draw = blue, thick] (1,0) circle (1);
+%\draw[fill=blue, fill opacity=0.2, draw = blue, thick] (3,0) ellipse (3 and 1.5);
+%\node at (-1.2,0) (A) {$A \setminus B$};
+%\node  at (4.2,0) (B) {$B \setminus A$};
+%\node at (1.5,0) (B) {$A \cap B$};
+%\end{tikzpicture}
+%\end{center} 
+%%\begin{center}
+%%
+%%\color{purple} [Illustration of symmetric difference]
+%%\vspace{1in} 
+%%\end{center} 
+%
+%
+%%{\color{gray}
+%%\need{1}
+%%\item Relations: 
+%%  \begin{itemize}
+%%  \item containment:  $A \subset B:$ ``$A$ implies $B$''  ($A \cap B = A$)
+%
+%
+%  \item disjoint:     $A \cap B = \emptyset$: ``$A$, $B$ mutually exclusive''
+%  \item equality:     $A = B$: ``$A$ if-and-only-if $B$''
+%%\end{itemize}
+%\item   De Morgan's Laws:
+%\[
+%        \Big( \bigcup_{\alpha} A_{\alpha} \Big)^c  
+%        =  \bigcap_{\alpha} \big(A_{\alpha}^c\big) \qquad\qquad
+%        \Big( \bigcap_{\alpha} A_{\alpha} \Big)^c
+%        =  \bigcup_{\alpha} \big(A_{\alpha} ^c\big)
+%\]
+%
+%%}
+%
+%%\item \textbf{Cardinality and countable versus uncountable} 
+%
+\end{itemize}
+
+
+
+\subsection{Cardinality} 
+\begin{itemize}
+
+
+\item \textbf{Cardinality:} 
+\begin{itemize}
+
+\item For a set with finite number of elements the \textbf{cardinality}  $|A|$ is the number of elements in $A$, e.g., 
+\[
+| \{a, e, i, o, u\} | = 5
+\]
+This is sometime denoted $\# A$
+\item How does one define cardinality for sets of an infinite number of elements?  
+
+\item  $|A| \le  |B|$ if  there exists a one-to-one function (injection) $f \colon  A \hookrightarrow B$, i.e., 
+\[
+x \ne  y \quad \implies f(x) \ne f(y) 
+\]
+%\begin{center}
+%\color{purple} [Illustration of injection from $A$ to $B$]
+%\vspace{1in} 
+%\end{center} 
+\item  $|A| = |B$ iff there exists a bijection between $A$ and $B$ , i.e., one-to-one function $f \colon A \to B$ with one-to-one  inverse $f^{-1} \colon B \to A$
+        \end{itemize} 
+        
+        
+\item \textbf{Fact:} 
+%\textbf{Theorem:} (Schr\"oder--Bernstein)
+\[ 
+(|A|\le |B|) \wedge (|B| \le |A|) \implies (|A| = |B|)
+ \]
+ i.e., $|A|\le  |B|$ and $|B | \le | A|$ implies there exists a one-to-one invertible mapping $f\colon  A \leftrightarrow B$
+
+%\item Countable $\ne$ Infinite ( Cantor arg if time allows; note $c =  2^{\aleph_0}>\aleph_0$ )
+%\item Define injection, cardinality     $\#A \le \#B$ if exists 1:1 $\phi:  A \hookrightarrow B$   (not   necessarily a surjection--- \ie, \emph{into} but maybe not \emph{onto}.)
+%\item \emph{State}  $(\#A \le \#B) \cap (\#B \le \#A)
+%          \Rightarrow (\#A = \#B)$, \ie, $\#A\le\#B$ and $\#B\le\#A$
+%          implies there exists 1:1 invertible mapping $\phi:  A
+%          \leftrightarrow B$
+%          
+      
+          
+\item \textbf{Example:}  Show $| \bbN| =| \bbN^2|$
+\begin{itemize}
+ %  $\# \bbN \le \# \bbN^2$ 
+\item  $| \bbN| \le |\bbN|$?    Easy,  map each element $x \in \bbN$ to the the element $(x, 1) \in \bbN^2$
+\item  $|\bbN^2| \le | \bbN|$? Use diagonal counting argument
+%\begin{center}
+%\color{purple} 
+\[(1,1) \to 1, \quad (2,1) \to 2, \quad (1,2) \to 3, 	\quad (3,1) \to 4, \quad (2,2) \to 5 , \quad (3, 1) \to 6\]
+%\vspace{.2in} 
+%\end{center} 
+\item Hence $| \bbN|  = | \bbN^2|$% for any integer $k$. All are countable. 
+\end{itemize} 
+          
+ \item \textbf{Example:} Show $|\bbN| = | \bbQ|$   %(since $\bbQ$ is the same as $\bbN^2$)
+\begin{itemize}
+\item  $|\bbN | \le | \bbQ|$  (easy) % since $\bbN \subset \bbQ$
+\item $|\bbQ|  \le  | \bbN^2 |  =  |  \bbN | $
+%\item Follows since $\bbQ$ is the same as $\bbN^2$
+\end{itemize} 
+%\begin{center}
+%           \color{purple} (since $\bbQ$ is the same as $\bbN^2$)
+%%\vspace{1in} 
+%\end{center} 
+
+ 
+  \item \textbf{Example:} Show $\# \bbN <   \# \bbR$  
+%  {\color{purple} 
+  \begin{itemize}
+\item   See Cantor's diagonalization argument if interested. 
+%\item Let $T$ be set of  infinite binary strings. Since there is injection from $T$ to $\bbR$ we have $\#T \le \#R$. 
+%
+%\item Suppose for contradiction that $\# T \le   \# \bbN$. Then $T = \bigcup_{n \in \bbN} \{s_n\}$ for an enumeration $s_1, s_2, \dots$ of points in $T$. 
+%\item However, for any such enumeration there exists an element $s \in T$ such that, $\forall n,  \, s \ne s_n$. (Choose $s$ to have $n$-th entry equal to complement of $n$-th entry in $s_n$)
+%
+%\item Thus, $  \# \bbN < \# T \le \# \reals$.
+\end{itemize} 
+%}
+ 
+\item \textbf{Termonology:} 
+\begin{itemize}
+\item   \textbf{countably infinite}  means same cardinality as $\bbN$
+\item \textbf{countable} (or enumerable) mean finite or countably infinity. 
+
+\item \textbf{uncountable} means cardinality strictly greater than $\bbN$. 
+%
+%\item     ``$i,j,n$'' (Latin) subscripts $\to$ \emph{countable} 
+%                 union/intersection/sum/... \\
+% \item    ``$\alpha,\beta,\gamma$'' (Greek) subscripts $\to$ \emph{arbitrary}
+%                 (could be uncountable)\\
+%  \item    ``Countable'' means \emph{finite or countably infinite}.
+     \end{itemize} 
+\end{itemize}
+
+\subsection{Relations}
+
+\begin{itemize}
+\item For sets $A$ and $B$ the  \textbf{Cartesian product} $A \times B$ of two sets is the set of ordered pairs:
+\[
+A \times B = \{ (a,b) \mid a \in A, b \in B\} 
+\]
+Here the parentheses denotes an ordered list such that $(a,b)$ and $(b,a)$ are not the same in general.  For $n$-tuples from the same set, the notation $A^n$ denotes the $n$-fold product $A^n = A \times A \times \cdots A$
+
+\item \textbf{Example:} If $A = \{ a, b \}$  then 
+\[
+A^3  = \{ (a,a,a), (a, a, b), (a, b, a), (a, b, b) ,  (b,a,a), (b, a, b), (b, b, a), (b, b, b)  \} 
+\]
+
+
+\item \textbf{Definition:} A \textbf{relation} $\sim$ between elements of a set $A$ is defined by a subset $R \subseteq A \times A $   according to 
+\[
+x \sim y \quad \iff \quad (x,y) \in R 
+\]
+Equivalently, $R = \{ (x,y) \mid x \sim y\}$. 
+
+
+\item A relation $\sim$ on set $A$ is called an \textbf{equivalence relation} if it satisfies three properties: 
+\begin{itemize}
+  \item \textbf{Reflexive} if $x\sim x$ holds for all $x\in A$, i.e., $\forall x\in A, (x,x) \in R$)
+  \item \textbf{Symmetric} if $x\sim y$ then $y\sim x$ for all $x,y\in A$
+  \item \textbf{Transitive} if $x\sim y$ and $y\sim z$, then $x\sim z$ for all $x,y,z\in A$
+\end{itemize}
+
+
+\item \textbf{Example:}  If $A = \bbR$ is the real line and $x \sim y$  if $x \ge y$ then  $R = \{ (x,y) \mid x \ge y\}$. This relation is reflexive and transitive but not symmetric. 
+
+
+\item \textbf{Example:} (Birthday) Let $A$ be the set of people and set $P(x,y)$ = ``$x$ has same birthday as $y$''. This is an equivalence relations. 
+
+\item  For set $A$, a  \textbf{partition} $\cP$  is a collection of nonempty disjoint subsets of $A$ such that such that every element of $A$ belongs to exactly one  element of $\cP$. 
+% = \{ A_\alpha \mid \alpha \in I\}$  whose union is equal to $A$, i.e., 
+%such  $A = \bigcup_{\alpha \in I} A_\alpha$. 
+\[
+\emptyset \notin \in \cP, \qquad  \bigcup_{X  \in \cP } X  = A , \qquad    \forall X, Y \in \cP, \; X \ne Y  \implies A \cap B = \emptyset
+ \]
+
+\item \textbf{Example:} (Birthday continued) Let $A$ be the set of people. % and $\sim$ be equivalence relation defied  set $x \sim y$ if $x$ has same birthday as $y$. '
+Define
+\[
+A_{ij} = \text{``subset of people whose birthday is on $i$-th day of $j$-th month''}
+\]
+Then $\cP = \{ A_{ij} \}$ defines a partition of people. 
+
+
+\item \textbf{Fact:} An equivalence relation $\sim$  on a set $A$ defines a partition of the set into disjoint equivalence classes, denoted by 
+\[
+[a] \coloneqq \{ x \in A \mid x \sim a\}  \qquad \text{``equivalence class of element $a$''} 
+\]
+The set of all equivalence classes is called the \textbf{quotient set} and is denoted by 
+\[
+A \setminus \sim\,  \coloneqq\{ [a] \mid a \in A\} 
+\]
+
+\item \textbf{Example:} (Birthday continued) Let $A$ be the set of people  and $\sim$ be equivalence relation defied  set $x \sim y$ if $x$ has same birthday as $y$. For each person $a\in A$, there exists exactly one pair $(i, j)$ such that 
+\[
+[a]  = A_{i,j} 
+\]
+Hence, the quotient set is equal to the partition indexed by the months and days of the year: 
+\[
+A /\sim \,   = \{ A_{ij} \} 
+\]
+
+
+\item \textbf{Example:} Let $\sim$ be the relation on $\bbR$ defined such that $x\sim y$ if $x^2 = y^2$. Then
+\[
+[x] = \{ x , - x\}, \qquad \bbR /\sim\,   %=  \{[x] \mid x \in \bbR \}  
+= \{ \{ x, - x\} \mid x \in [0, \infty)\} =  \{ \{ x, - x\} \mid x \in (-\infty, 0]\} 
+\]
+
+
+\item \textbf{Example:} (Modulo numbers)  Let $A = \bbZ$ and fix $p \in\bbN$. 
+\begin{itemize}
+\item Define relation $x\sim y $ if the remainder from division by $p$ is the same, i.e., 
+\[
+x \sim y  \iff  \text{$\exists j,k,r \in \bbZ$  such that $x = jp +r$ and $y = kp + r$}
+%\quad \exists k,j \in \bbN, \text{ s.t.\  $x = k p + r$ and $y  = jp + r$ }
+\]
+
+\item Some  equivalence classess are
+\begin{align*}
+[0]  &= \{ \cdots , - p, 0, p, 2p, 3p, \cdots\} \\
+[1]  &= \{ \cdots , - p+1, 1, p+1, 2p+1, 3p+1, \cdots\} \\
+[p-1]  &= \{ \cdots , - 1, p-1, 2p-1, 3p-1, \cdots\} 
+\end{align*}
+
+\item Notice that these equivalence classes has linear structure: 
+\[
+[1] = [0] +1
+\]
+where $[0]+1$ denote the set obtained by adding $1$ to every element of $[0]$. 
+\end{itemize}
+
+
+
+\end{itemize}
+\section{Functions} 
+
+
+\begin{itemize}
+\item A \textbf{function} $f \colon X \to Y$   assigns  one value $f(x) \in Y$ to each element $x\in X$. 
+\begin{itemize}
+\item $X$ is called the domain
+\item  $Y$ is called the codomain 
+\item the range is the set  $\{ y \in Y \mid \exists x \in X , y = f(x) \} \subseteq Y$
+\end{itemize}
+\item \textbf{Defintion:} (Formal)  A function $f$ from set $X$ to set $Y$ is defined by the subset $F \subset X \times Y$ such that $A_x = \{ y\in Y \mid (x,y) \in F\}$ has exactly one element for each $x \in X$. The value of $f$ at $x \in X$, denoted $f(x)$, is the unique element in $A_x$. 
+
+
+\item Two functions are said to be \textbf{equal} if they have the same domain, codomain, and value of all elements in the domain. 
+
+
+
+\item \textbf{Example:} ($L_p$ spaces) Sometimes it is useful to define an equivalence class on a set of functions such that two functions. One example is the $L_2$ space of all functions $f \colon [0,1] \to \bbR$  such that
+\[
+\int_0^1| f(x)|^2 \, \dd x < \infty
+\]
+(Here, the integral is the Lebesgue integral which require measure theory to define properly.) Then, one says that $f\sim g$ if the square of their difference integrates to zero, i.e., 
+\[
+\int_0^1 | f(x) - g(x)|^2  \, \dd x  = 0 
+\]
+In this way, two function can be equivalent event if they differ on a countable number of points. 
+
+
+\item A function $f \colon X \to Y$ is called: 
+\begin{itemize}
+  \item \textbf{one-to-one} or \textbf{injective} if
+  \[
+  \forall x,x'\in X, \,  \text{ if $f(x)=f(x')$ then $x=x'$} 
+  \]
+  
+  \item \textbf{onto} or \textbf{surjective} if its range $\{ f(x) \mid x\in X\}$ equals $Y$, i.e., 
+    \[
+  \forall y\in Y, \,  \exists x \in X, \,   f(x) = y %\exist \text{ if $f(x)=f(x')$ then $x=x'$} 
+  \]
+  
+  \item \textbf{one-to-one correspondence} or \textbf{bijective} if both one-to-one and onto
+\end{itemize}
+
+
+\item \textbf{Question:} Is the function $f(x) = x^2$ invertible?
+\begin{itemize}
+\item YES --- if domain is $X = [0, \infty)$
+\item NO --- if domain is $X =\bbR$
+\end{itemize}
+
+\item Inversion 
+\begin{itemize}
+  \item A bijective function has a unique \textbf{inverse function} $f^{-1} \colon Y\rightarrow X$ satisfying: 
+  \[
+  \forall x\in X,\,  f^{-1}(f(x)) = x \qquad \text{and} \qquad \forall y\in Y, f(f^{-1}(y)) = y
+  \]
+  \item Any one-to-one function $f \colon X\rightarrow Y$ defines a bijective function $g \colon X \rightarrow R$ where $R$ is the range of $f$ and $g(x)=f(x)$ for all $x\in X$
+ \end{itemize}
+ 
+ 
+ \end{itemize}
+ 
+ \subsection{Set-valued functions}
+ \begin{itemize}
+
+\item \textbf{Definition:} For $f \colon X \to Y$ and subset $A \subseteq X$, the \textbf{image} of $A$ under of $f$ is the set
+\[
+f(A) \coloneqq \{ y \in Y \mid \exists x \in A, \,   f(x) = y\}  = \{ f(x) \mid x \in A\} 
+\]
+Using this notation,  the range of $f$ is given by $f(X)$. 
+
+\begin{center}
+[Illustration of image]
+\vspace*{.2in}
+\end{center}
+
+
+\item \textbf{Definition:} For $f \colon X \to Y$ and subset $C \subseteq U$, the \textbf{inverse image} or\textbf{preimage}  of $C$ is the set
+\[
+f^{-1}(C) \coloneqq \{ x \in X  \mid f(x) \in C\} 
+\]
+
+%Using this notation,  the range of $f$ is given by $f(X)$. 
+
+\begin{center}
+[Illustration of preimage]
+\vspace*{.2in}
+\end{center}
+
+
+\item For a one-to-one function $f$, the inverse image of singleton $\{f(x)\}$ is a singleton
+\[
+f^{-1}( \{ f(x)\}) = \{ x\} 
+\]
+
+
+
+\item \textbf{Example:} Let $f \colon \bbR \to \bbR$ be defined by $f(x) = x^2$. The image of $A = [1, 2]$ is 
+\[
+B = f(A) = [1,4]
+\]
+and the preimage of $B$ is 
+\[
+f^{-1}(B)  =  [-2,1] \cup [1,2] \supset A
+\]
+
+\item \textbf{Example:} Let $f \colon \bbR \to \bbR$ be defined by $f(x) = x^2+1$. The preimage of $B = [0, 2]$ is 
+\[
+A = f^{-1}(B) = [-1,1]
+\]
+and the image  of $A$ is 
+\[
+f(A)  = f( [-1, 1]) =   [1,2] \subset B 
+\]
+
+
+\item \textbf{Problem 1.5.4} For all $f \colon X \to Y$, $A \subseteq X$ and $B \subseteq Y$ we have
+\begin{enumerate}[(a)]
+\item $x \in A \implies f(x) \in f(A)$
+\item $y \in f(A) \implies \exists x \in A, \, f(x) = y$
+\item $x \in f^{-1}(B) \implies f(x) \in B$%,  and thus 
+%\[
+%f( f^{-1}(B)) \subseteq B
+%\]
+\item $f(x) \in B \implies x \in f^{-1}(B)$%, and thus
+%\[
+%f^{-1}( f(A)) \supseteq A  %\quad \text{and} \quad f( f^{-1}(B)) \subseteq B
+%\]
+\end{enumerate}
+Thus 
+\[
+f^{-1}( f(A)) \supseteq A  \quad \text{and} \quad f( f^{-1}(B)) \subseteq B
+\]
+
+
+\item \textbf{Question:} For $f \colon X \to Y$ and collection of subsets $A_i \in X$ for $i \in I$, 
+does it hold that? 
+\[
+f(\bigcup_{i \in I} A_i )  = \bigcup_{i \in I} f(A_i) 
+\]
+YES
+\begin{itemize}
+\item Need to show that for all $y \in Y$, 
+\[
+y \in f(\bigcup_{i \in I} A_i )  \iff y  \in  \bigcup_{i \in I} f(A_i) 
+\]
+
+\item Proof of $\implies$
+\begin{align*}
+y \in f(\bigcup_{i \in I} A_i ) & \implies  \exists  x  \in \bigcup_{i \in I} A_i, \, f(x)  = y\\
+& \implies \exists i \in I, \, \exists x \in A_i, \,  f(x) = y \\
+& \implies \exists i \in I, \,  y \in f(A_i) \\
+& \implies y \in \bigcup_{i \in I} f(A_i )
+\end{align*}
+
+\end{itemize}
+
+
+\end{itemize}
+
+
+\bibliographystyle{alpha}%{IEEEtran}
+\bibliography{/Users/galenreeves/Dropbox/Library/long_names,/Users/galenreeves/Dropbox/Library/library} 
+\end{document}
+

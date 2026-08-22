@@ -1,0 +1,203 @@
+\documentclass[10pt,english]{article}
+
+\usepackage{amsmath,amssymb,amsthm}
+%\usepackage{enumerate}
+%\usepackage{stfloats}
+\usepackage{bbm}
+%\usepackage{framed}
+
+\usepackage{tikz,pgf,pgfplots}
+\usepgflibrary{shapes}
+\usetikzlibrary{%
+  arrows,%
+  arrows.meta,
+  backgrounds,
+  shapes.misc,% wg. rounded rectangle
+  shapes.arrows,%
+  shapes,%
+  calc,%
+  chains,%
+  matrix,%
+  positioning,% wg. " of "
+  scopes,%
+  decorations.pathmorphing,% /pgf/decoration/random steps | erste Graphik
+  shadows,%
+  backgrounds,%
+  fit,%
+  petri,%
+  quotes
+}
+
+\pgfplotsset{compat=1.12}
+
+%%  Dimensions
+%%
+\topmargin             0in
+\headheight            0in
+\headsep               0in
+\textheight          8.5in
+\textwidth           6.5in
+\evensidemargin        0in
+\oddsidemargin         0in
+
+\newcommand{\ul}[1]{\underline{#1}}
+\renewcommand{\Pr}{\mathbb{P}}
+
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\mbb}[1]{\mathbb{#1}}
+%\newcommand{\expt}{\mbb{E}}
+%\newcommand{\dd}{\mathrm{d}}
+\input{macros}
+
+\begin{document}
+
+
+
+\title{ECE 586: Vector Space Methods \\ Lecture Outlines}
+\author{Henry D. Pfister \\ \univ}
+\date{}
+%\date{August 20th, 2020}
+\maketitle
+
+\section*{Lecture 1}
+
+\begin{itemize}
+  \item Introduce yourself
+  \item Review Video-0 (intro) slides focusing on questions.  They should have watched the video.
+  \item Review Video-1 slides briefly.  Focus on slides 4-6 (i.e., conditional connective and meta statement).  They should have watched the video.
+  \item Have them complete in class one part of problems 2 and 3 from homework 1.
+  \item Do one truth table example?
+\end{itemize}
+
+\section*{Lecture 2}
+
+While very briefly reviewing slides,  emphasize:
+\begin{itemize}
+  \item Focus on slides 3-4 with multiple quantifiers.
+  \item Prove ``$\sqrt{2}$ is irrational'' (see slide 6).  First, start with this weak formulation and walk through the formalization to ``If $x \in \mathbb{R}$ and $x^2=2$, then $x$ is not rational'' while defining all terms along the way.
+  \begin{itemize}
+    \item Suppose $x$ is a non-negative rational number and $x^2=2$ where the rational numbers are defined by $\mathbb{Q} = \{ p/q \in \mathbb{R} \,|\, p\in \mathbb{Z}, q \in \mathbb{N} \}$.
+    \item Since reducing a fraction does not change its value, we can further assume that $p/q$ in reduced form where $p$ and $q$ are coprime integers (i.e., they have no common factor greater than 1).
+    \item This implies that there exist integers $p>0$ and $q>0$ such that $(p/q)^2 = 2$ or $p^2 = 2 q^2$.
+    \item Thus, $p^2$ is an even number (note: one should define even formally as $\{e \in \mathbb{Z} \,|\, \exists k \in \mathbb{Z}, e=2k \}$).
+    \item This implies that $p$ itself is even (i.e., one can prove that '' if $k$ is not even, then $k^2$ is not even).
+    \item Because $p$ is even, there exists an integer $r$ satisfying $p = 2r$.
+    \item  We then obtain the equation $(2r)^2 = 2q^2$, which is equivalent to $2r^2 = q^2$ after simplification.
+    \item  Because $2r^2$ is even, it follows that $q^2$ is even, which means that $q$ is also even.
+    \item We conclude that $p$ and $q$ are both even. But this contradicts the fact that $p/q$ is irreducible.
+    \item Hence, there is no rational $x$  such that $x^2 = 2$ and, thus  $\sqrt{2}$ is irrational.
+  \end{itemize}
+  \item Prove sum identity from slide 6 via induction.  Emphasize that one proves $P(n) \to P(n+1)$ by writing down $P(n+1)$ and then using $P(n)$ to simplify.
+\end{itemize}
+
+\section*{Lecture 3}
+
+While very briefly reviewing slides,  emphasize:
+\begin{itemize}
+  \item Talk about countability of rationals and $\mathbb{N}^2$ and $\mathbb{Z}^2$.  For any fixed element in set, enumeration must show element in finite time.  What orderings don't work?
+  \item Emphasize connection between set theory and logic
+  \item Show logical De Morgan's is equivalent to set theoretical De Morgan's
+  \item Emphasize definition of infinite union and intersection does not require sequences or limits
+  \item Describe Russell's paradox and note problem is unrestricted comprehension
+  \item In this class, we avoid issues by working with explicitly defined sets
+\end{itemize}
+Add homework problems
+
+
+\section*{Lecture 4}
+
+While very briefly reviewing slides,  emphasize:
+\begin{itemize}
+  \item Give examples of $\leq,\geq,<,>,=$ as relations
+  \item Discuss birthday example along with equivalence classes
+  \item State powerset example where $A = \mathcal{P}(\{1,2,3\})$ and $X,Y \in A$ are equivalent (i.e., $X\sim Y$) if $|X|=|Y|$.
+  Ask students to find equivalence classes and quotient set for this case. 
+  \item For functions, start with the thought question, is $x^2$ invertible? (A: depends on domain!)
+  \item $f:\mathbb{R} \to \mathbb{R}$, $f(x)=x^2$ is not invertible but restriction to $\mathbb{R}_{\geq 0}$ is.
+  What about $x^2 + 1$?
+\end{itemize}
+
+\section*{Lecture 5}
+
+While very briefly reviewing slides,  emphasize:
+\begin{itemize}
+  \item Foundational role of real numbers with absolute distance
+  \item Prove $|a+b| \leq |a|+ |b|$ using two cases: $a,b$ non-zero with same sign and its negation
+  \item For space of continuous functions, emphasize above inequality and separate optimization
+  \item From $x_1 = 2$, show rationals $x_{n+1} = \frac{x_n}{2} + \frac{1}{x_n}$ satisfy $x_n - \sqrt{2} \to 0$
+  \item Topology Q1: ``open ball'' is open according to defn? (Write formal  logical statement, don't solve)
+  \item Topology Q2: Show union of two open sets is open using defn of open
+  \item Draw pictures of interior, limit point, closure, and boundary   
+\end{itemize}
+
+
+\section*{Lecture 6}
+
+While very briefly reviewing slides,  emphasize:
+\begin{itemize}
+  \item Extended real numbers as metric space and topology of this space
+  \item Definition of supremum: ``upper bound'' and ``no smaller upper bound''
+  \item Prove that the definition of supremum implies a sequence achieving supremum
+  \item Use this to prove a bounded non-decreasing real sequence converges to supremum
+  \item Apply this to show that, if a sum is absolutely convergent, then the sum converges
+  \item Draw pictures and use examples to explain different types of continuity 
+\end{itemize}
+
+
+\section*{Lecture 7}
+
+While very briefly reviewing slides,  emphasize:
+\begin{itemize}
+  \item completeness as a desirable property that you can choose when setting up the problem
+  
+  \item Student question: show a closed subset of a complete space is complete
+
+  \item L2 function distance integral?
+
+  \item Explain contraction pictures
+
+  \item Prove contraction mapping theorem
+  
+  \item Explain $f(x) = \cos(x) $ example
+  
+  \item Highlight useful applications
+\end{itemize}  
+
+\section*{Lecture 8}
+
+define complete and compact for subsets
+
+closed subset of complete space is complete
+
+closed subset of a compact space is compact
+
+Prove Bolzano-Weierstrauss for reals
+
+Compactness subsequence proof
+
+Discuss applications to probability?
+
+continuous function on a compact set
+
+\section*{Lecture 9}
+
+emphasize different views of matrix product
+
+class question: Matrix for elementary row op
+
+discuss invertible
+
+class question: Why is product of invertible invertible?
+
+foundation of dimension
+Class question: Why?
+
+
+  
+%\bibliographystyle{alpha}
+%\footnotesize
+%\bibliography{IEEEabrv,WCLabrv,WCLbib,WCLnewbib}
+%\end{frame}
+
+
+\end{document}

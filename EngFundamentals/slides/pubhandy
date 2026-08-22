@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Check arguments
+if [ $# -ne 1 ]
+then
+  echo "Usage: pubhandy NUMBER"
+  exit 65
+fi
+
+sed s/,english\\]/,english,handout\\]/g slides_ch$1.tex > temp.tex
+pdflatex temp
+pdflatex temp
+cp temp.pdf slides_ch$1_handout.pdf
+cp temp.pdf ~/workweb/courses/ece586/slides_ch$1.pdf
+

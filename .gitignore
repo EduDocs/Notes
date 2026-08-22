@@ -12,3 +12,8 @@
 *.synctex.gz
 *.pdf
 .DS_Store
+auxdir/
+__pycache__/
+*.pyc
+*.fls
+*.fdb_latexmk

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Check arguments
+if [ $# -ne 1 ]
+then
+  echo "Usage: pubvideo NUMBER"
+  exit 65
+fi
+
+makevideo $1
+cp video$1.pdf ~/workweb/courses/ece586/video$1.pdf
+cp video$1_s.pdf ~/workweb/courses/ece586/video$1_s.pdf
+

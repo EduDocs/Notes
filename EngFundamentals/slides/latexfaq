@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Check arguments
+if [ $# -ne 1 ]
+then
+  echo "Usage: latexfaq NUMBER"
+  exit 65
+fi
+
+pdflatex faq$1.tex
+cp faq$1.pdf ~/workweb/courses/ece586/faq$1.pdf
+

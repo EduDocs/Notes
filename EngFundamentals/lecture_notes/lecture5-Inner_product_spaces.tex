@@ -1,0 +1,677 @@
+\documentclass[11pt,twoside]{report}
+
+
+%\newif\ifmynotes
+%\mynotesfalse
+%\mynotestrue
+
+\usepackage{ece586}
+
+
+%% TOGGLE  Notes
+%\newif\ifgnotes
+%\anstrue
+
+%\ifmynotes
+%	\definecolor{note_text}{rgb}{1,1,1}		
+%	\newcommand{\gskip}{\vspace*{1cm}}
+%	\newcommand\gnote[1]{\protect\leavevmode\begingroup\Huge\color{note_text}#1\endgroup\ignorespaces}
+%	\newenvironment{gnotes}{\Huge\color{red}}{\ignorespacesafterend}
+%\else
+%	%\newcommand{\gnote}[1]{#1\ignorespaces} 	% make commands do nothing. 
+%	\definecolor{note_text}{rgb}{0,0,.7}
+%	\newcommand\gnote[1]{\protect\leavevmode\begingroup\color{note_text}#1\endgroup\ignorespaces}
+%	\newenvironment{gnotes}{\color{red}}{\ignorespacesafterend}
+%%	\newcommand{\gskip}{}
+%\fi
+%
+
+\newcommand{\bbN}{{\mathbb{N}}}
+\newcommand{\bbR}{{\mathbb{R}}}
+\newcommand{\bbQ}{{\mathbb{Q}}}
+\newcommand{\bbZ}{{\mathbb{Z}}}
+\newcommand{\bbC}{{\mathbb{C}}}
+\newcommand{\vecnot}{\underline}
+\newcommand{\Id}{{\mathrm{I}}}
+\newcommand{\Herm}{{\mathrm{H}}}
+
+\newcommand{\Interior}[1]{\ensuremath{{#1}^{\circ}}}
+\newcommand{\Closure}[1]{\ensuremath{\overline{#1}}}
+\newcommand{\Complement}[1]{\ensuremath{{#1}^{c}}}
+
+\newcommand{\Real}{\mathrm{Re}}
+\newcommand{\Span}{\mathrm{span}}
+\newcommand{\Rank}{\mathrm{rank}}
+\newcommand{\Nullity}{\mathrm{nullity}}
+\newcommand{\Trace}{\mathrm{tr}}
+\newcommand{\Diag}{\mathrm{diag}}
+\DeclareMathOperator*{\esssup}{ess\,sup}
+
+\newcommand{\inner}[2]{{\left\langle #1 \mskip2mu , #2 \right\rangle}}
+\newcommand{\tinner}[2]{{\langle #1 \mskip1mu , #2 \rangle}}
+
+\newcommand{\Expect}{\ensuremath{\mathrm{E}}}
+
+\begin{document}
+
+\lectureheader{5}{Inner product spaces}
+
+
+
+\section*{Overview} 
+
+\begin{itemize}
+%\item In this lecture, we consider noisy linear observation model
+% \[
+% \by = A \bx^\star + \be
+% \]
+% where:
+%\begin{itemize}
+%\item $\bx^\star$ is an unknown $n$-dimensional vector belonging to a set $\cX \subseteq \reals^n$. 
+%\item $A$ is an $m \times n$ measurement matrix
+%\item $\be$ is and $m$-dimensional vector of measurement errors
+%\end{itemize}
+
+
+\item This lecture is based on material in  \cite[Chapters~3 and 6]{chamberland:2023EF}.
+% and \cite[Parts~I--II]{bloch:2011}
+\item Previously we have seen that:
+\begin{itemize}
+\item A \textbf{vector space} is a set $V$ over a field that $F$ that is closed under vector addition and scalar multiplication. A Hamel \textbf{basis} is a collection of linearity independent vectors that spans the space.  The dimension is the cardinality of any (and thus every) basis. 
+
+\item A \textbf{normed vector space} is a vector space with a norm $\| \cdot\|$ that allows for a notion of length. A normed vector space is a metric space under the metric induced by the norm. 
+
+\item A \textbf{complete normed vector} space is called a \textbf{Banach space}.  Completeness ensures that limits (including  infinite summations) are well defined elements of the space. 
+\item A Banach space is  \textbf{separable} if and only if it has Schauder basis, i.e., a countable collection of linearity independent vectors whose span is dense in the space. 
+
+\end{itemize}
+
+\item This lecture focuses on normed vectors spaces with additional structure defined by an \textbf{inner product}:
+\begin{itemize}
+\item An inner product enables  angles, orthogonality and projections
+\item Every  \emph{finite dimensional} inner product space equivalent to the  Euclidean space, i.e., the vector space $\bbR^n$ with $\ell^2$ norm for some $n \in \bbN$. %standard inner product% and % with $\ell^2$ norm: %with $\ell_2$ norm.:%-sequence space 
+%\[
+%\ell^2 =\left \{ (x_1, x_2,  \ldots x_n)   \mid \sum_{i=1}^\infty |x_i|^2 < \infty \right\}
+%\]
+\item A \textbf{complete inner product space} is called a \textbf{Hilbert space}
+\item Every \textbf{separable} Hilbert space is equivalent to the space $\ell^2$ of square summable sequences: %-sequence space 
+\[
+\ell^2 =\left \{ x_1, x_2,  \ldots  \mid \sum_{i=1}^\infty |x_i|^2 < \infty \right\}
+\]
+\end{itemize} 
+
+\end{itemize}
+
+
+
+%\section{Inner product spaces} 
+
+
+\section{Inner products} 
+
+
+
+
+
+
+\begin{itemize}
+\item \textbf{Definition:} Let $F$ be the field of real numbers or the field of complex numbers, and assume $V$ is a vector space over $F$.
+An \textbf{inner product} on $V$ is a function which assigns to each ordered pair of vectors $\vecnot{v}, \vecnot{w} \in V$ a scalar $\inner{ \vecnot{v} }{ \vecnot{w} } \in F$ in such a way that for all $\vecnot{u}, \vecnot{v}, \vecnot{w} \in V$ and any scalar $s \in F$
+\begin{enumerate}
+%\item $\inner{ \vecnot{u} + \vecnot{v} }{ \vecnot{w} }  = \inner{ \vecnot{u} }{ \vecnot{w} } + \inner{ \vecnot{v} }{ \vecnot{w} }$ 
+\item $\inner{ s \vecnot{u} + \vecnot{v} }{ \vecnot{w} } = s \inner{ \vecnot{u} }{ \vecnot{w} } + \inner{ \vecnot{v} }{ \vecnot{w} }$
+ \hfill linearity in first arguement 
+\item $\inner{ \vecnot{v} }{ \vecnot{w} }= \overline{ \inner{ \vecnot{w} }{ \vecnot{v} } }$, [where overbar is complex conjugation] \hfill conjugate symmetry\item $\inner{ \vecnot{v} }{ \vecnot{v} } \geq 0$ with equality iff $\vecnot{v} = \vecnot{0}$ \hfill positive-definiteness
+\end{enumerate}
+
+
+\item Note that these conditions imply that the inner product is antilinear (a.k.a.\ conjugate-linear)  in its second argument: 
+\begin{align*}
+%\inner{ s \vecnot{v} + \vecnot{w} }{ \vecnot{u}  }
+%&= s \inner{ \vecnot{v} }{ \vecnot{u} }+ \inner{ \vecnot{w} }{ \vecnot{u} } \\
+\inner{ \vecnot{u} }{ s \vecnot{v} + \vecnot{w} }
+&= \inner{ \vecnot{u} }{ \vecnot{w} } + \overline{s} \inner{ \vecnot{u} }{ \vecnot{v} }
+\end{align*}
+
+
+\item \textbf{Examples:}
+\begin{itemize}
+\item {} [Standard Inner Product on $F^n$]
+Consider the inner product on $F^n$ defined by 
+\begin{equation*}
+\inner{ \vecnot{v} }{ \vecnot{w} } = \inner{ (v_1, \ldots, v_n) }{ (w_1, \ldots, w_n) }
+\coloneqq\sum_{j=1}^n v_j \overline{w}_j.
+\end{equation*}
+For column vectors, it follows that $ \inner{ \vecnot{v} }{ \vecnot{w} } = \vecnot{w}^\Herm \vecnot{v} $
+
+
+\item {} [Standard Inner Product on a Function Space]
+Let $V$ be the vector space of all continuous complex-valued functions on the unit interval $[0,1]$.
+Then, the following defines an inner product 
+\begin{equation*}
+\inner{ f }{ g } = \int_0^1 f(t) \overline{g(t)} \, dt
+\end{equation*}
+
+
+\item{} [Inner Product on Space of Random Variables]
+Let $W$ be a set of real-valued random variables with finite 2nd moments.
+Then, $V = \Span (W)$ is a vector space over $\bbR$ with inner product 
+\[ \inner{ X }{ Y } =\ex{ XY} \]
+\end{itemize}
+
+\item \textbf{Theorem:} 
+Let $V$ be a finite-dimensional space with ordered basis $\mathcal{B} = \vecnot{w}_1, \ldots, \vecnot{w}_n$.
+Then, any inner product on $V$ is determined by the values
+\begin{equation*}
+g_{ij} = \inner{ \vecnot{w}_j }{ \vecnot{w}_i }.
+\end{equation*}
+The $n \times n$ matrix $G = (g_{ij})$ is called the \textbf{weight matrix} of the inner product in the ordered basis $\mathcal{B}$ and inner produce satisfies 
+\[
+\inner{ \vecnot{u} }{ \vecnot{v} } =  \left[ \vecnot{v} \right]_{\mathcal{B}}^\Herm G \left[ \vecnot{u} \right]_{\mathcal{B}}
+\]
+where $\left[ \vecnot{u} \right]_{\mathcal{B}} = (s_1,\ldots,s_n)$ and $\left[ \vecnot{v} \right]_{\mathcal{B}} = (t_1,\ldots,t_n)$ are the coordinate matrices of $\vecnot{u}$, $\vecnot{v}$ in the ordered basis $\mathcal{B}$.
+
+\item \textbf{Proof:} 
+If $\vecnot{u} = \sum_{j} s_j \vecnot{w}_j$ and $\vecnot{v} = \sum_{i} t_i \vecnot{w}_i$, then \vspace{-1.5mm}
+\begin{alignat*}{3} 
+\inner{ \vecnot{u} }{ \vecnot{v} }
+&= \tinner{ \textstyle\sum_{j} s_j \vecnot{w}_j }{ \vecnot{v} }  && \text{basis representation of $\vecnot{w}$}\\
+& = \textstyle\sum_{j} s_j \inner{ \vecnot{w}_j }{ \vecnot{v} }  & \qquad & \text{linear in 1st argument}\\
+&= \textstyle\sum_{j} s_j \inner{ \vecnot{w}_j }{ \textstyle\sum_{i} t_i \vecnot{w}_i } && \text{basis representation of $\vecnot{v}$} \\
+& = \textstyle\sum_{j} \textstyle\sum_{i} s_j \overline{t}_i \inner{ \vecnot{w}_j }{ \vecnot{w}_i }  &&\text{antilinear in its 2nd argument} \\
+&= \textstyle\sum_{j} \textstyle\sum_{i} \overline{t}_i g_{ij} s_j\\
+& = \left[ \vecnot{v} \right]_{\mathcal{B}}^\Herm G \left[ \vecnot{u} \right]_{\mathcal{B}}
+\end{alignat*}
+
+
+
+\item \textbf{Property:} There is a one-to-one correspondence between inner product on finite dimensional space and positive definite matrix
+
+\begin{itemize}
+\item The weight matrix $G$ of an inner product is a  \textbf{Hermitian} matrix, i.e., 
+\[G = G^\Herm
+\]
+This follows  since $g_{ij} = \inner{ \vecnot{w}_j }{ \vecnot{w}_i } = \overline{\inner{ \vecnot{w}_i }{ \vecnot{w}_j }} = \overline{g_{ji}}$. 
+
+
+\item The weight matrix $G$ of an inner product is  a \textbf{positive definite} matrix, i.e, 
+\[
+ \vecnot{w}^\Herm G \vecnot{w} > 0 \quad \text{for all $\vecnot{w} \neq \vecnot{0}$ }
+\]
+This follows from the positive definiteness of the inner product. % $\inner{ \vecnot{v} }{ \vecnot{v} } = \vecnot{w}^\Herm G \vecnot{w} > 0$ for all $\vecnot{w} \neq \vecnot{0}$ .
+
+
+
+
+\item Going the other direction, if  $G$ is an $n \times n$ matrix that is Hermitian and positive definite, then the following expression is a well-defined inner product on $V$:
+\begin{equation*}
+\inner{ \vecnot{u} }{ \vecnot{v} }_G
+= \left[ \vecnot{v} \right]_{\mathcal{B}}^\Herm G \left[ \vecnot{u} \right]_{\mathcal{B}}.
+\end{equation*}
+
+\end{itemize}
+
+
+
+\item \textbf{Definition:} %[Induced Norm]<1->
+Let $V$ be an inner-product space with inner product $\tinner{ \cdot }{ \cdot }$. This inner product naturally defines the \textbf{induced norm} 
+\begin{equation*}
+\left\| \vecnot{v} \right\| = \inner{ \vecnot{v} }{ \vecnot{v} }^{\frac{1}{2}}.
+\end{equation*}
+
+\item \textbf{Theorem:}  [Cauchy-Schwarz inequality]  For any $\vecnot{v}, \vecnot{w}$ in an inner product space $V$, 
+\[
+\left| \inner{ \vecnot{v} }{ \vecnot{w} } \right| \leq \left\| \vecnot{v} \right\| \left\| \vecnot{w} \right\| 
+\]
+Furthermore, if $\vecnot{v}$ and $\vecnot{w}$ are nonzero, then equality holds if and only if $\vecnot{v} = s \vecnot{w}$ for some field element $s$. 
+
+
+
+
+\item \textbf{Question:} Consider the vector space $\bbR^2$ with inner product 
+\[
+\inner{\vecnot{v}}{\vecnot{w}} \coloneqq v_1 w_1 + 2  v_2 w_2
+\]
+What is the length of the vector $(1,2)$? \\
+\[
+\| (1,2) \|  = \sqrt{  \inner{ (1,2)}{(1,2)}  }  = \sqrt{  1 \cdot 1 + 2 \cdot 2  }  = \sqrt{9} = 3
+\] 
+Keep in mind that the length is defined by the norm induced by the inner product. 
+\end{itemize}
+
+
+
+%\item \textbf{Theorem:}  If $V$ is an inner-product space over $F$ and $\| \vecnot{v} \| \coloneqq \sqrt{\inner{ \vecnot{v} }{ \vecnot{v} }}$, then for any $\vecnot{v}, \vecnot{w} \in V$ and any $s\in F$, it follows that
+%\begin{enumerate}
+%\item $\left\| s \vecnot{v} \right\| = |s| \left\| \vecnot{v} \right\|$
+%\item $\left\| \vecnot{v} \right\| > 0$ for $\vecnot{v} \neq \vecnot{0}$
+%\item $\left| \inner{ \vecnot{v} }{ \vecnot{w} } \right| \leq \left\| \vecnot{v} \right\| \left\| \vecnot{w} \right\|$ with equality iff $\vecnot{v} = \vecnot{0}$, $\vecnot{w}=\vecnot{0}$, or $\vecnot{v} = s \vecnot{w}$
+%\item $\left\| \vecnot{v} + \vecnot{w} \right\| \leq \left\| \vecnot{v} \right\| + \left\| \vecnot{w} \right\|$ with equality iff $\vecnot{v} = \vecnot{0}$, $\vecnot{w}=\vecnot{0}$, or $\vecnot{v} = s \vecnot{w}$.
+%\end{enumerate}
+%
+%\item \textbf{Proof Sketch:} 
+%The first two follow immediately from definitions.
+%The third inequality, $\left| \inner{ \vecnot{v} }{ \vecnot{w} } \right| \leq \left\| \vecnot{v} \right\| \left\| \vecnot{w} \right\|$, is called the \textbf{Cauchy-Schwarz inequality}.
+%The fourth inequality is the triangle inequality for the induced norm and can be shown using the Cauchy-Schwarz inequality.
+%
+
+
+
+
+
+\section{Orthogonality and projection} 
+
+\begin{itemize}
+
+\item \textbf{Definition:}  Let $\vecnot{v}$ and $\vecnot{w}$ be vectors in inner-product space $V$. Then, $\vecnot{v}$ and $\vecnot{w}$ are \textbf{orthogonal} if 
+\[
+%\text{$\vecnot{v}$ and $\vecnot{w}$ are \textbf{orthogonal}} \quad \iff \quad 
+\inner{\vecnot{v}}{ \vecnot{w}} = 0 % \quad \iff \quad \vecnot{v} \perp \vecnot{w} 
+\]
+This is denoted by $\vecnot{v} \perp \vecnot{w} $
+% is \textbf{orthogonal} to $\vecnot{w}$ (denoted $\vecnot{v} \bot \vecnot{w}$) \textbf{iff $\inner{ \vecnot{v} }{ \vecnot{w} } = 0$}. Since this implies $\inner{ \vecnot{w} }{ \vecnot{v} } = 0$, $\vecnot{w}$ is also orthogonal to $\vecnot{v}$, we simply say that \textbf{$\vecnot{v}$ and $\vecnot{w}$ are orthogonal}.
+
+
+
+\item \textbf{Pythagorean Theorem:} In an inner product space, if two vectors $\vecnot{v}$ and $\vecnot{w}$  are orthogonal then 
+\[
+ \| \vecnot{v}  + \vecnot{w}\|^2 = \| \vecnot{v} \|^2  + \|\vecnot{w}\|^2
+\]
+
+\item \textbf{Proof:} 
+\begin{align*}
+\| \vecnot{v}  + \vecnot{w}\|^2 & = \inner{ \vecnot{v}  + \vecnot{w}}{\vecnot{v}  + \vecnot{w}} \\
+& =  \inner{ \vecnot{v} }{\vecnot{v}  } +  \inner{ \vecnot{v} }{ \vecnot{w}} +  \inner{ \vecnot{w}}{ \vecnot{v} } +  \inner{   \vecnot{w}}{  \vecnot{w}}\\
+& = \|v\|^2 +  \Real \inner{ \vecnot{v} }{ \vecnot{w}} +   \|\vecnot{w}\|^2
+%& = \| \vecnot{v} \|^2  + \|\vecnot{w}\|^2
+\end{align*}
+
+
+\item \textbf{Definition:} Let $\vecnot{w},\vecnot{v}$ be vectors in an inner-product space $V$ with inner product $\tinner{ \cdot }{ \cdot }$. The \textbf{projection} of $\vecnot{w}$ onto $\vecnot{v}$ is defined to be 
+%\begin{tabular}{>{\centering}m{2in} m{2in}}
+\[
+ \vecnot{u} = \frac{\inner{ \vecnot{w} }{ \vecnot{v} }}{\|\vecnot{v}\|^2} \vecnot{v} 
+ \]
+
+
+
+\begin{center}
+
+%$ \vecnot{w} = \displaystyle\frac{\inner{ \vecnot{v} }{ \vecnot{u} }}{\|\vecnot{u}\|^2} \vecnot{u} $ &
+\begin{tikzpicture}[scale=0.6]
+  \coordinate (v1) at (0,0);
+  \coordinate (v2) at (4,3);
+  \coordinate (v3) at (6,0);
+  \coordinate (v4) at (4,0);
+  \coordinate (v5) at (0,3);
+  \path[draw] (3.6,0) -- (3.6,0.4) -- (4,0.4);
+  \node (v0) at (-0.25,-0.1) {$\vecnot{0}$};
+  \draw[-latex,thick] (v1) -- node[at end,above] {$\vecnot{w}$} (v2);
+  \draw[-latex,thick] (v1) -- node[at end,below] {$\vecnot{v}$} (v3);
+  \draw[-latex,thick] (v1) -- node[at end, below] {$\vecnot{u}$} (v4);
+  \draw[thick,dashed] (v4) --  (v2);
+  \draw[-latex,thick] (v1) -- node[right,near end] {$\vecnot{w}-\vecnot{u}$} (v5);
+\end{tikzpicture}
+%\end{tabular}
+\end{center}
+
+\item \textbf{Lemma:} 
+Let $\vecnot{u}$ be the projection of $\vecnot{w}$ onto $\vecnot{v}$.
+Then, 
+\[
+\tinner{ \vecnot{w}-\vecnot{u} }{ \vecnot{u} } = 0
+\]
+and
+\[ \|\vecnot{w}-\vecnot{u}\|^2 =  \|\vecnot{w}\|^2 - \| \vecnot{u} \|^2 = \|\vecnot{w}\|^2 - \frac{|\tinner{ \vecnot{w} }{ \vecnot{v} }|^2}{\|\vecnot{v}\|^2}. \]
+
+
+\item \textbf{Proof:} 
+\begin{itemize}
+\item To prove the first statement, first observe that
+\begin{alignat*}{3}
+\tinner{ \vecnot{w} - \vecnot{u} }{ \vecnot{v} } & = \tinner{ \vecnot{w} }{ \vecnot{v} } - \tinner{ \vecnot{u} }{ \vecnot{v} }&\qquad & \text{linearity 1st arg.}\\
+&  = \tinner{ \vecnot{w} }{ \vecnot{v} } - \frac{\inner{ \vecnot{w} }{ \vecnot{v} }}{\|\vecnot{v}\|^2} \tinner{ \vecnot{v} }{ \vecnot{v} }&& \text{linearity 1st arg. + definition of proj.}\\
+&  = 0 && \tinner{ \vecnot{v} }{ \vecnot{v} } = \|\vecnot{v} \|^2
+\end{alignat*}
+Then, since $\vecnot{u} = s \vecnot{v}$ for some scalar $s$, it follows that $\tinner{ \vecnot{w}-\vecnot{u} }{ \vecnot{u} } =  0$.
+\item For the second statment, we use  $\tinner{ \vecnot{w}-\vecnot{u} }{ \vecnot{u} } = 0$ to write
+\begin{align*}
+\|\vecnot{w}\|^2 &= \|(\vecnot{w}-\vecnot{u})+\vecnot{u}\|^2\\
+&= \tinner{ (\vecnot{w}-\vecnot{u})+\vecnot{u}}{(\vecnot{w}-\vecnot{u})+\vecnot{u}} \\
+&= \|\vecnot{w}-\vecnot{u}\|^2 + 2 \Real \tinner{ \vecnot{w}-\vecnot{u} }{ \vecnot{u} } + \|\vecnot{u}\|^2\\
+& = \|\vecnot{w}-\vecnot{u}\|^2 + \|\vecnot{u}\|^2
+\end{align*}
+\item The proof is completed by noting that $\|\vecnot{u}\|^2 = |\tinner{ \vecnot{w} }{ \vecnot{v} }|^2 / \|\vecnot{v}\|^2$.
+\end{itemize} 
+
+
+
+\item \textbf{Proof of Cauchy-Schwarz Inequality:} 
+
+\begin{itemize}
+\item If $\vecnot{v} =0$, then both sides are zero and inequality holds with equality. 
+
+\item Assume $\vecnot{v} \ne 0$. Let 
+\begin{align*}
+\vecnot{u} = \frac{ \inner{\vecnot{w}}{\vecnot{v}}}{ \| \vecnot{v}\|^2} \vecnot{v}   \qquad \text{(projection of $\vecnot{w}$ onto $\vecnot{v}$)}
+\end{align*}
+\item From Lemma, we know that 
+\begin{align*}
+0 \le \| \vecnot{w} - \vecnot{u} \|^2  = \| \vecnot{w}\|^2 - \frac{| \inner{\vecnot{w}}{\vecnot{v}}|^2}{ \| \vecnot{v}\|^2} 
+\end{align*}
+\item Rearranging gives
+\[
+\left| \inner{ \vecnot{v} }{ \vecnot{w} } \right|^2 \le \left\| \vecnot{v} \right\|^2 \left\| \vecnot{w} \right\|^2 \quad \implies \quad \left| \inner{ \vecnot{v} }{ \vecnot{w} } \right| \leq \left\| \vecnot{v} \right\| \left\| \vecnot{w} \right\| 
+\]
+\end{itemize}
+
+\item \textbf{Proof of Triangle Inequality:} 
+\begin{itemize}
+\item For any $\vecnot{u}, \vecnot{w}$, we have
+\begin{alignat*}{3}
+\| \vecnot{u} + \vecnot{w} \|^2 & = \| \vecnot{u}  \|^2  + 2 \Real \inner{\vecnot{v}}{ \vecnot{w}}  + \| \vecnot{w} \|^2 \\
+& \le  \| \vecnot{u}  \|^2  + 2 |\inner{\vecnot{v}}{ \vecnot{w}} |  + \| \vecnot{w} \|^2 \\
+& \le  \| \vecnot{u}  \|^2  + 2\left\| \vecnot{v} \right\| \left\| \vecnot{w} \right\|   + \| \vecnot{w} \|^2 &\qquad & \text{Cauchy-Schwarz}\\
+& = \left( \| \vecnot{u}  \| +\| \vecnot{w} \| \right)^2
+\end{alignat*}
+\item Taking the positive square root of both sides completes the proof. 
+\end{itemize}
+
+\item \textbf{Definitions:}  Let $V$ be an inner-product space:% and $U,W$ be subspaces.
+\begin{itemize}
+\item Two  subspaces $U$ and $W$  are orthogonal if 
+% is an \textbf{orthogonal} to the subspace $W$ (denoted $U \bot W$) if: 
+\[
+U \perp W \qquad \iff \qquad  \vecnot{u} \perp \vecnot{w} \text{  for all } \vecnot{u}\in U \text{ and } \vecnot{w}\in W. 
+ \]
+
+
+\item  A subset $W$ is an \textbf{orthogonal set} if all distinct pairs in $W$ are orthogonal, i., 
+\[
+\vecnot{u} \perp \vecnot{w} \quad \text{for all distinct pairs $\vecnot{u}, \vecnot{v}$ in $W$}
+\]
+\item  A orthogonal set is \textbf{orthonormal} if all vectors normalized. 
+
+\end{itemize} 
+
+
+\item \textbf{Example:}
+For $\bbR^n$ with standard inner product, the standard basis is an orthonormal.
+
+
+
+\item \textbf{Example:}
+Let $V$ be the vector space (over $\bbC$) of continuous functions $f\colon [0,1]\to\mathbb{C}$ with the standard inner product. Let
+\[
+f_n(x) = \sqrt{2} \cos 2 \pi n x \qquad \text{and} \qquad g_n (x) = \sqrt{2} \sin 2 \pi n x
+\]
+Then, $\{ 1, f_1, g_1, f_2, g_2, \ldots \}$ is a countably infinite orthonormal set and a Schauder basis for the closure of $V$.
+
+
+
+
+\item \textbf{Lemma:} 
+Let $V$ be an inner-product space and $W\subset V$ be an orthogonal set of non-zero vectors.
+Let 
+\[
+\vecnot{v} = s_1 \vecnot{w}_1 + \cdots + s_n \vecnot{w}_n
+\]
+be a linear combination of distinct vectors in $W$. Then, 
+\[ 
+s_i = \frac{ \inner{ \vecnot{v} }{ \vecnot{w}_i } }{ \left\| \vecnot{w}_i \right\|^2 }
+\]
+
+
+\item \textbf{Proof:} 
+The inner product $\inner{ \vecnot{v} }{ \vecnot{w}_i }$ is given by 
+\begin{equation*}
+\begin{split}
+\inner{ \vecnot{v} }{ \vecnot{w}_i }
+&= \inner{ \textstyle\sum_j s_j \vecnot{w}_j }{ \vecnot{w}_i }
+= \sum_j s_j \inner{ \vecnot{w}_j }{ \vecnot{w}_i }
+= s_i \inner{ \vecnot{w}_i }{ \vecnot{w}_i } .
+\end{split} \vspace{-2.5mm}
+\end{equation*}
+Dividing both sides by $\| \vecnot{w}_i \|^2 = \inner{ \vecnot{w}_i }{ \vecnot{w}_i } > 0$, gives the stated result.
+
+
+\item \textbf{Theorem:} 
+An orthogonal set of non-zero vectors is linearly independent.
+
+\item \textbf{Proof:} 
+\begin{itemize}
+\item Let $\vecnot{w}_1, \vecnot{w}_2, \dots$ be a list of orthogonal vectors. 
+
+\item %Assume for the sake of contradiction there exists
+Assume for the sake of contradiction that there exist scalars $s_1, \dots, s_n \in F$, not all equal to zero,  such that %let % that are not all equal tot zero such that 
+\[
+%\vecnot{v}
+\vecnot{0}  = \sum_{i=1}^n s_i \vecnot{w}_i  %=\vecnot{0} 
+\]
+
+\item By orthogonality, we know that 
+\[
+s_i  = \frac{ \inner{\vecnot{0}}{ \vecnot{w}_i}}{ \| \vecnot{w}_i\|^2} = 0
+\]
+which implies  $s_1 = s_2 = \cdots = s_n = 0$. 
+\item Since this contradicts the assumption that the $s_i$ are not all equal to zero, we conclude that no such scalars exists, and thus $\vecnot{w}_1, \vecnot{w}_2, \dots$  is linearly independent. 
+\end{itemize}
+
+
+\item \textbf{Gram-Schmidt Process:} 
+Let $V$ be an inner-product space and assume $\textcolor{purple}{\vecnot{v}_1, \ldots, \vecnot{v}_n}$ are linearly independent vectors in $V$.
+Then, an orthogonal set of vectors $\textcolor{blue}{\vecnot{w}_1, \ldots, \vecnot{w}_n}$ with the same span is produced by %\textbf{Gram-Schmidt process}:
+\begin{enumerate}
+\item Initialize with
+\[
+\textcolor{blue}{\vecnot{w}_1} = \textcolor{purple}{\vecnot{v}_1}
+\]
+
+\item For $m=1,\ldots,n-1$, define
+\begin{equation*}
+\textcolor{blue}{\vecnot{w}_{m+1}} = \textcolor{purple}{\vecnot{v}_{m+1}} - \sum_{i=1}^m \frac{ \inner{ \textcolor{purple}{\vecnot{v}_{m+1}} }{ \textcolor{blue}{\vecnot{w}_i }} } { \left\|\textcolor{blue}{ \vecnot{w}_i} \right\|^2 }{ \textcolor{blue}{\vecnot{w}_i}}
+\end{equation*}
+\end{enumerate}
+
+
+\item \textbf{Proof Sketch:}
+
+\begin{itemize}
+\item Assume that $\vecnot{w}_{1}, \dots, \vecnot{w}_m$ are orthogonal with 
+\[
+\Span(\vecnot{w}_{1} , \dots, \vecnot{w}_m ) = \Span(\vecnot{v}_{1} , \dots, \vecnot{v}_m )
+\]
+
+
+\item  This implies that $\vecnot{w}_{m+1} \ne 0$. Otherwise, $\vecnot{v}_{m+1}$ would be a linear combination of $\vecnot{w}_1, \ldots, \vecnot{w}_m$ and hence a linear combination of $\vecnot{v}_1, \ldots, \vecnot{v}_m$, thus contradicting the linear independence of $\vecnot{v}_{1} , \dots, \vecnot{v}_m$. 
+
+\item  Moreover,  $\vecnot{w}_{m+1}$ and $\vecnot{w}_j$ are orthogonal for $j=1,\ldots,m$: 
+\begin{alignat*}{3}
+\inner{ \vecnot{w}_{m+1} }{ \vecnot{w}_j }
+&= \inner{ \vecnot{v}_{m+1} }{ \vecnot{w}_j }
+- \sum_{i=1}^m \frac{ \inner{ \vecnot{v}_{m+1} }{ \vecnot{w}_i } } { \left\| \vecnot{w}_i \right\|^2 }
+\inner{ \vecnot{w}_i }{ \vecnot{w}_j } &\qquad&\text{linearity in 1st arg.} \\
+&= \inner{ \vecnot{v}_{m+1} }{ \vecnot{w}_j }
+- \frac{ \inner{ \vecnot{v}_{m+1} }{ \vecnot{w}_j } } { \left\| \vecnot{w}_j \right\|^2 }   \inner{\vecnot{w}_{j} }{ \vecnot{w}_j }&\quad & %\text{orthogonality $\implies$ 
+\text{since $ \inner{\vecnot{v}_{m+1} }{ \vecnot{w}_i } = \delta_{ij}$}\\
+& = 0
+\end{alignat*}
+\end{itemize}
+
+
+
+\item \textbf{Example:} Let $V = \bbR^3$ be the standard vector space equipped with the standard inner product and define 
+\begin{align*}
+\vecnot{v}_1 &= (2,2,1) \\
+\vecnot{v}_2 &= (3,6,0) \\
+\vecnot{v}_3 &= (6,3,9)
+\end{align*}
+
+\begin{itemize}
+\item Applying the Gram-Schmidt process to $\vecnot{v}_1, \vecnot{v}_2, \vecnot{v}_3$ results in: 
+\begin{align*}
+\vecnot{w}_1 &= \textcolor{blue}{(2,2,1)} \\
+\vecnot{w}_2 &= (3,6,0)
+- \frac{ \inner{ (3,6,0) }{ (2,2,1) } }{ 9 } (2,2,1) \\
+&= (3,6,0) - 2 (2,2,1) \\
+& = \textcolor{blue}{(-1,2,-2)} \\
+\vecnot{w}_3 &= \vecnot{v}_3
+- \frac{ \inner{ (6,3,9) }{ (2,2,1) } }{ 9 } (2,2,1)
+- \frac{ \inner{ (6,3,9) }{ (-1,2,-2) } }{ 9 } (-1,2,-2) \\
+&= (6,3,9) - 3 (2,2,1) + 2 (-1,2,-2)\\
+&  = \textcolor{blue}{(-2,1,2)}
+\end{align*}
+
+
+
+\item It is easily verified that $\{ \vecnot{w}_1, \vecnot{w}_2, \vecnot{w}_3\}$ is an orthogonal set of vectors.
+
+\end{itemize} 
+
+
+\item \textbf{Definition:} 
+Let $V$ be an inner-product space and $W$ be any set of vectors in $V$. The \textbf{orthogonal complement} of $W$ denoted by $W^{\bot}$ is the set of all vectors in $V$ that are orthogonal to every vector in $W$ or
+\begin{equation*}
+W^{\bot} = \left\{ \vecnot{v} \in V \mid  \tinner{ \vecnot{v} }{ \vecnot{w} } = 0 \; \forall \; \vecnot{w}\in W \right\}. 
+\end{equation*}
+
+
+
+\item \textbf{Example:} 
+For the standard inner product space $V = \bbR^3$, let subspace $U$ be spanned by
+\begin{align*}
+\vecnot{u}_1 &= (2,2,1) \\
+\vecnot{u}_2 &= (3,6,0).
+\end{align*}
+Find the orthogonal complement $U^\perp$ of $U$. 
+\begin{itemize}
+\item Applying Gram-Schmidt to the $\vecnot{u}_1, \vecnot{u}_2$ gives the orthogonal basis, 
+\begin{align*}
+\vecnot{w}_1 &= \textcolor{blue}{(2,2,1)} \\
+\vecnot{w}_2 & = \textcolor{blue}{(-1,2,-2)} 
+\end{align*}
+\item For any $\vecnot{u}$ that is not in $\Span(\vecnot{u}_1, \vecnot{u}_2) =\Span( \vecnot{w}_1, \vecnot{w}_2)$ the subspace $U^\perp$ is spanned by 
+\begin{align*}
+\vecnot{w} =\vecnot{v} - \frac{ \inner{\vecnot{v}  }{ \vecnot{w}_1 } }{ \|\vecnot{w}_1\|^2 } \vecnot{w}_1 -  \frac{ \inner{\vecnot{v}  }{ \vecnot{w}_2 } }{ \|\vecnot{w}_2\|^2 } \vecnot{w}_2
+\end{align*}
+For example, if $\vecnot{u}  = (6,3,9)$ then  $\vecnot{w} = (-2,1,2)$
+\end{itemize}
+
+\end{itemize}
+
+\section{Hilbert spaces} 
+\begin{itemize} 
+
+\item \textbf{Definition:}  A complete inner-product space is called a \textbf{Hilbert space}.
+
+
+\item \textbf{Example:} 
+Consider the Banach space $\ell^2$ of infinite real/complex sequences with norm 
+\[
+\|\vecnot{v}\| = \left( \sum_{i=1}^\infty |v_i|^2 \right)^{1/2} < \infty
+\]
+The set $\ell^2$ with the standard inner product is a Hilbert space  because that norm is induced by the inner product.
+
+
+
+\item \textbf{Theorem:} 
+If Hilbert space $V$  is \emph{separable} (i.e., it has a countable dense subset) then there is a linear transform $T:V\to \ell^2$ such that 
+\[
+\inner{ \vecnot{u} }{ \vecnot{v} }_V = \inner{ T\vecnot{u} }{ T\vecnot{v} }_{\ell^2} \quad \text{for all $\vecnot{u},\vecnot{v} \in V$}
+\]
+
+\item Thus, any separable Hilbert space is equivalent to the Hilbert space $\ell^2$.
+
+
+\item \textbf{Example:} The space $L^2([0,1)]$ of real-valued function on the unit interval is a separable Hilbert space with countable basis given by the Fourier basis. Parseval's theorem states that for any two functions in this space,  the inner product $\inner{\cdot}{\cdot}_{L^2}$ is equal to the inner product $\inner{ \cdot }{ \cdot}_{\ell^2}$ applied to the Fourier series coefficients of the functions. 
+
+
+
+\item \textbf{Definition:}  
+A complex matrix $U\in \bbC^{n\times n}$ is called \textbf{unitary} if $U^\Herm U = I$.
+Similarly, a real matrix $Q\in \bbR^{n\times n}$ is called \textbf{orthogonal} if $Q^T Q = I$.
+
+
+
+\item \textbf{Theorem:}  
+Let $V =\bbC^n$ be the standard inner product space and let  $U\in \bbC^{n\times n}$ define a linear operator on $V$.
+Then, the following conditions are equivalent:
+\begin{enumerate}
+\item[(i)] The columns of $U$ form an orthonormal basis, i.e.,  
+\[
+U^\Herm U = \Id
+\]
+\item[(ii)] the rows of $U$ form an orthonormal basis, i.e., 
+\[
+U U^\Herm = \Id
+\]
+\item[(iii)] $U$ preserves inner products, i.e., 
+\[
+\tinner{ U \vecnot{v} }{ U \vecnot{w} } = \tinner{ \vecnot{v} }{ \vecnot{w} } \quad \text{for all $\vecnot{u},\vecnot{v}\in V$}
+\]
+\item[(iv)] $U$ is an isometry, i.e., 
+\[
+\| U \vecnot{v} \| = \| \vecnot{v}\| \quad \text{for all $\vecnot{v} \in V$}
+\]
+\end{enumerate}
+
+
+
+\item \textbf{Proof:}  
+\begin{itemize}
+\item (i) $\iff $ (ii): A square matrix has linearly independent columns (or rows) if an only if it is invertible: %If $U$ has 
+\begin{align*}
+U^\Herm U = \Id  \quad %& \iff  \quad(  U^\Herm U = \Id)  \, \wedge \, \text{$U$ invertible} \\
+& \iff  \quad  U^{-1} = U^\Herm \quad \iff \quad  U U^\Herm = \Id  
+\end{align*}
+%orthonormal columns, then $U^\Herm U = \Id$ then $U^\Herm = U^{-1}$ and so so 
+%Orthogonal columns implies $U$ invertible and $U^\Herm U = I$ implies $U^\Herm = U^{-1}$.
+\item (i) $\implies$ (iii): 
+\[
+\tinner{ U \vecnot{v} }{ U \vecnot{w} } = \vecnot{w}^\Herm U^\Herm U \vecnot{v} = \vecnot{w}^\Herm \vecnot{v} = \tinner{ \vecnot{v} }{ \vecnot{w} }\]
+
+\item (iii) $\implies$ (iv): 
+\[
+\| U \vecnot{v} \| =\tinner{ U \vecnot{v} }{ U \vecnot{v} }^{1/2}  \overset{\text{(iii)}}{ =} \tinner{ \vecnot{v} }{  \vecnot{v} }^{1/2}  = \| U \vecnot{v} \|
+\]
+
+\item (iv) $\implies$ (i): 
+\begin{align*}
+\text{(iv)} \quad \iff  \quad \forall \vecnot{v}, \,   \| U \vecnot{v} \|^2 \!- \| \vecnot{v} \|^2= 0 \quad \iff \quad  \forall \vecnot{v}, \,  \vecnot{v}^\Herm (U^\Herm U - \Id) \vecnot{v} = 0 
+\end{align*}
+Hence, (iv) implies that all eigenvalues of $U^\Herm U$ must be 0. Combined with the fact that $U$ is Hermition, this implies  that $U^\Herm U - I = 0$.
+
+\end{itemize} 
+%{\it(i)}$\Rightarrow${\it(ii)}: Orthogonal columns implies $U$ invertible and $U^\Herm U = I$ implies $U^\Herm = U^{-1}$.
+%{\it(i)}$\Rightarrow${\it(iii)}: $\tinner{ U \vecnot{v} }{ U \vecnot{w} } = \vecnot{w}^\Herm U^\Herm U \vecnot{v} = \vecnot{w}^\Herm \vecnot{v} = \tinner{ \vecnot{v} }{ \vecnot{w} }$ and $\vecnot{w}=\vecnot{v}$ gives {\it(iv)}.
+%{\it(iv)}$\Rightarrow${\it(i)}:
+%$\vecnot{v}^\Herm (U^\Herm U \!-\! I) \vecnot{v} \!=\! \| U \vecnot{v} \|^2 \!-\! \| \vecnot{v} \|^2 \!=\! 0$
+%%because $\| U \vecnot{v} \| \!=\! \| \vecnot{v}\|$
+%and, since $U^\Herm U \!-\! I$ is Hermitian, all eigenvalues must be 0 so that $U^\Herm U - I = 0$.
+
+
+\item \textbf{Definition:}  
+Let $V$ be a vector space over a field $F$.
+A linear transformation $f$ from $V$ into the scalar field $F$ is called a \textbf{linear functional} on $V$, i.e., $f\colon V \to F$ is a function on $V$ such that
+\begin{equation*}
+f \left( s \vecnot{v}_1 + \vecnot{v}_2 \right)
+= s f \left( \vecnot{v}_1 \right) + f \left( \vecnot{v}_2 \right)
+\end{equation*}
+for all $\vecnot{v}_1, \vecnot{v}_2 \in V$ and $s \in F$.
+
+
+\item \textbf{Riesz Representation Theorem:} % [Riesz]
+Let $V$ be a Hilbert space. For every continuous linear function $f$ on $V$, there % and $f$ be a continuous linear functional on $V$ there
+ exists a unique vector $\vecnot{v} \in V$ such that 
+\[
+f \left( \vecnot{w} \right) = \inner{ \vecnot{w} }{ \vecnot{v} } \quad \text{for all $\vecnot{w} \in V$}
+\]
+
+
+
+\end{itemize}
+
+\bibliographystyle{alpha}%{IEEEtran}
+\bibliography{/Users/galenreeves/Dropbox/Library/long_names,/Users/galenreeves/Dropbox/Library/library} 
+\end{document}
+

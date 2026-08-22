@@ -1,0 +1,443 @@
+\documentclass[11pt,twoside]{report}
+
+
+%\newif\ifmynotes
+%\mynotesfalse
+%\mynotestrue
+
+\usepackage{ece586}
+
+
+%% TOGGLE  Notes
+%\newif\ifgnotes
+%\anstrue
+
+%\ifmynotes
+%	\definecolor{note_text}{rgb}{1,1,1}		
+%	\newcommand{\gskip}{\vspace*{1cm}}
+%	\newcommand\gnote[1]{\protect\leavevmode\begingroup\Huge\color{note_text}#1\endgroup\ignorespaces}
+%	\newenvironment{gnotes}{\Huge\color{red}}{\ignorespacesafterend}
+%\else
+%	%\newcommand{\gnote}[1]{#1\ignorespaces} 	% make commands do nothing. 
+%	\definecolor{note_text}{rgb}{0,0,.7}
+%	\newcommand\gnote[1]{\protect\leavevmode\begingroup\color{note_text}#1\endgroup\ignorespaces}
+%	\newenvironment{gnotes}{\color{red}}{\ignorespacesafterend}
+%%	\newcommand{\gskip}{}
+%\fi
+%
+
+\newcommand{\bbN}{{\mathbb{N}}}
+\newcommand{\bbR}{{\mathbb{R}}}
+\newcommand{\bbQ}{{\mathbb{Q}}}
+\newcommand{\bbZ}{{\mathbb{Z}}}
+\newcommand{\bbC}{{\mathbb{C}}}
+\newcommand{\vecnot}{\underline}
+\newcommand{\Id}{{\mathrm{I}}}
+\newcommand{\Herm}{{\mathrm{H}}}
+
+\newcommand{\Interior}[1]{\ensuremath{{#1}^{\circ}}}
+\newcommand{\Closure}[1]{\ensuremath{\overline{#1}}}
+\newcommand{\Complement}[1]{\ensuremath{{#1}^{c}}}
+
+\newcommand{\Real}{\mathrm{Re}}
+\newcommand{\Span}{\mathrm{span}}
+\newcommand{\Rank}{\mathrm{rank}}
+\newcommand{\Nullity}{\mathrm{nullity}}
+\newcommand{\Trace}{\mathrm{tr}}
+\newcommand{\Diag}{\mathrm{diag}}
+\DeclareMathOperator*{\esssup}{ess\,sup}
+\DeclareMathOperator*{\minimize}{minimize}
+
+\newcommand{\inner}[2]{{\left\langle #1 \mskip2mu , #2 \right\rangle}}
+\newcommand{\tinner}[2]{{\langle #1 \mskip1mu , #2 \rangle}}
+
+\newcommand{\Expect}{\ensuremath{\mathrm{E}}}
+
+\begin{document}
+
+\lectureheader{9}{Optimization}
+
+
+
+\section*{Overview} 
+
+\begin{itemize}
+%\item In this lecture, we consider noisy linear observation model
+% \[
+% \by = A \bx^\star + \be
+% \]
+% where:
+%\begin{itemize}
+%\item $\bx^\star$ is an unknown $n$-dimensional vector belonging to a set $\cX \subseteq \reals^n$. 
+%\item $A$ is an $m \times n$ measurement matrix
+%\item $\be$ is and $m$-dimensional vector of measurement errors
+%\end{itemize}
+
+
+\item This lecture is based on material in  \cite[Chapters 4 and 5]{chamberland:2023EF} and \cite{bauschke:2017}.%,  \cite[Chapter~7]{luenberger:1997}, and \cite{clarke:2013}
+% and \cite[Parts~I--II]{bloch:2011}
+
+
+\end{itemize}
+
+
+\section{Projection onto a Convex Set} 
+
+\begin{itemize}
+
+\item Convexity is a useful property defined for sets, spaces, and functionals that simplifies analysis and optimization.
+
+
+\item \textbf{Definition:} A set $A$ of vector space $V$ is called \textbf{convex} if it is closed under convex combinations of its elements, i.e., 
+\[
+\lambda \vecnot{a}_1 + (1- \lambda) \vecnot{a}_2 \in A \quad \text{for all $\vecnot{a}_1, \vecnot{a}_2 \in A$ and $\lambda \in (0,1)$}
+\]
+It is called \textbf{strictly convex} 
+\[
+\lambda \vecnot{a}_1 + (1- \lambda) \vecnot{a}_2 \in \Interior{A} \quad \text{for all $\vecnot{a}_1, \vecnot{a}_2 \in \Closure{A}$ and $\lambda \in (0,1)$}
+\]
+\begin{center}
+\begin{tikzpicture}%[%rotate=270,scale=0.75]
+    \draw[rotate=-45,fill=gray!30] (-1.8,-1.8) ellipse (30pt and 45pt);
+    \draw[thick] (-3.2,-0.6) -- (-2.0,0.4);
+    \fill (-3.2,-0.6) circle[radius=1.5pt];
+    \fill (-2.0,0.4) circle[radius=1.5pt];
+    
+    \begin{scope}[shift={(1,0)}]
+    \draw[fill=gray!30] (0,0) to [out=140,in=90] (-1,-1)
+    to [out=-90,in=240] (0.8,-0.6)
+    to [out=60,in=-60] (1.2,1.2)
+    to [out=120,in=90] (0.3,0.7)
+    to [out=-90,in=20] (0.3,0)
+    to [out=200,in=-40] (0,0);
+    \draw[thick] (-0.5,-0.5) -- (0.7,0.7);
+    \fill (-0.5,-0.5) circle[radius=1.5pt];
+    \fill (0.7,0.7) circle[radius=1.5pt];
+    \end{scope}
+\end{tikzpicture}
+\end{center}
+
+
+\item \textbf{Examples:} Let $V$ be a vector space:
+\begin{itemize}
+\item A subspace $W$  is convex. 
+
+\item An affine subspace (a.k.a.\ shifted subspace) of the form 
+\[
+A = \vecnot{v}_0 + W = \{ \vecnot{v}_0 + \vecnot{w} \mid \vecnot{w} \in W\}  %\quad \text{where $\vecnot{v}_0 \in V$ and  $W$ is a subspace}
+\]
+for given point $\vecnot{v}_0 \in V$ and subspace $W$ is a convex set
+
+\item The intersection of convex sets is convex (but the union of convex sets is not convex in general) %need not be convex)
+
+\item The set of all functions $f \colon V \to \bbR$ whose range is contained in the interval $[a, b]$. i.e., 
+\[
+a \le   f(\vecnot{x})  \le b  \quad \forall \vecnot{x} \in V
+\]
+%To see this apply the triangle inequality to any convex combination of functions in the set. 
+
+\item The set of $n \times n$ positive semidefinite matrices. [In fact this set is closed under linear combinations with \emph{positive} coefficients] 
+
+
+\item The empty set is convex since the `for all'' qualifier over the empty set is trivially true. 
+\end{itemize}
+
+
+%\item \textbf{Proof:} 
+
+%\end{itemize}
+%\subsection{Projection} 
+%\begin{itemize}
+
+\item Let $A$ be a subset of a Hilbert space $V$. Recall  a  best approximation of a point $\vecnot{v} \in V$ from $A$ is a solution to the optimization problem: 
+\[
+\minimize \, \| \vecnot{w} - \vecnot{u} \| \quad \text{subject to} \quad \vecnot{u} \in A
+\]
+%\begin{itemize}
+\item Previously, we showed that if $A$ is a closed subspace with countable orthogonal basis, then best approximation \emph{exists} and is \emph{unique}. Moreover, the orthogonal projection on $A$ is a mapping $P_A \colon V \to A$ that is \emph{linear} and characterized by the orthogonality condition: 
+\[
+\vecnot{u}^* = P_A (\vecnot{v}) \quad \iff \quad  \vecnot{u}^* \in A \quad \text{ and} \quad  \inner{ \vecnot{v}-\vecnot{u}^* }{ \vecnot{u} } = 0 \quad \text{for all $\vecnot{u}\in A$}
+\]
+
+%\end{itemize}
+
+
+\item The notion of an orthogonal projection generalizes to the setting where $A$ is a closed convex set of Hilbert space $V$. The projection theorem state below guarantees the existence and uniqueness of the best approximation in this setting. Thus, the 
+%The following theorem generalizes this result to the setting of a closed convex set. %  For Hilbert space $V$ and closed convex set $A\subseteq V$, 
+ orthogonal projection of $\vecnot{v}\in V$ onto $A$ is a well-defined mapping $P_{A}:V\rightarrow A$ given by 
+ \[
+P_A (\vecnot{v}) \coloneqq \arg \min_{\vecnot u\in A}\left\Vert \vecnot u-\vecnot v\right\Vert 
+\]
+
+\item  In contrast to the orthogonal projection operator for a subspace, the projection operator for closed convex set is nonlinear in general. This mapping satisfies a generalization  the orthogonally condition given by
+\[
+\Real{\inner{\vecnot{v} - P_A (\vecnot{v}) }{ \vecnot{u}  - P_A (\vecnot{v}) }}   \le 0 \quad \text{for all $ \vecnot{u} \in A$}
+\]
+
+\begin{center}
+\begin{tikzpicture}[yscale=0.9,bullet/.style={circle,fill,inner sep=1.00pt,node contents={}}]
+ \draw[-latex] (0,0) node[bullet,label=left:{$P_A(\vecnot{v}) \!=\! \vecnot{u}^*$},alias=PC]  -- (15:2.2) node[midway,sloped,above=0.25mm] {$\vecnot{v}\!-\! P_A(\vecnot{v})$}
+    node[bullet,label=above right:$\vecnot{v}$,alias=v];
+\draw[-latex] (PC) -- ++ (-115:2.65) node[pos=0.57,above=0.25mm,sloped]{$\vecnot{u}\!-\! P_A(\vecnot{v})$}     node[bullet,label=below left:$\vecnot{u}$];
+\fill[black,fill,opacity=0.1] (PC) to[out=105,in=0] ++ (-0.75,1) to[out=180,in=105] ++ (-1.5,-3)
+ node[above right,opacity=1]{$A$} to[out=-75,in=180] ++ (1.25,-1) to[out=0,in=-75] node[sloped, inner xsep=10mm, inner ysep=0, opacity=1, fill=black, pos=0.999] {} cycle;
+\end{tikzpicture}
+
+\end{center} 
+
+\item \textbf{Projection Theorem:} If $A$ is nonempty closed convex subset of Hilbert space $V$ then the best approximation exists and is unique. 
+% The orthogonal projection of $\vecnot v\in V$ onto a nonempty closed convex set $A\subseteq V$ exists and is unique. 
+Furthermore,  for any $\vecnot{v} \notin A$, 
+\[
+\vecnot{u}^* = P_A (\vecnot{v}) \quad \iff \quad  \vecnot{u}^* \in A \quad \text{ and} \quad  \Real{\inner{ \vecnot{v}-\vecnot{u}^* }{ \vecnot{u}-\vecnot{u}^* }} \le 0 \quad \text{for all $\vecnot{u}\in A$}\]
+
+
+\item \textbf{Proof of existence and uniqueness} 
+
+\begin{itemize}
+\item Let $d \coloneqq \inf_{ \vecnot{u} \in A} \| \vecnot{u} - \vecnot{v} \|$ be the distance between $\vecnot{v}$ and $A$ and let $\vecnot{u}_n$ be a sequence in $A$ such that achieves this distance, i.e., 
+\[
+\| \vecnot{u}_n -\vecnot{v} \| \to d
+\]
+
+\item We now use convexity of $A$ argue the sequence  $\vecnot{u}_n$ is Cauchy. For any $n,m \in \bbN$, convexity of $A$ ensures that $\frac{1}{2} \vecnot{u}_n + \frac{1}{2} \vecnot{u}_m  \in A$ and thus 
+\[
+ \| \vecnot{v}  - \tfrac{1}{2}  ( \vecnot{u}_n + \vecnot{u}_m)  \| \ge  d
+\]
+Using the parallelogram law, we can write 
+\begin{alignat*}{3}
+\| \vecnot{u}_m -\vecnot{u}_n \|^2  &  =\| (\vecnot{v} - \vecnot{u}_n)  -( \vecnot{v} - \vecnot{u}_m)  \|^2 \\
+&  = 2 \| \vecnot{v} - \vecnot{u}_n \|^2 + 2 \|  \vecnot{v} - \vecnot{u}_m  \|^2   - \| (\vecnot{v} - \vecnot{u}_n)  + ( \vecnot{v} - \vecnot{u}_m)  \|^2 \\
+&  = 2 \| \vecnot{v} - \vecnot{u}_n \|^2 + 2 \|  \vecnot{v} - \vecnot{u}_m  \|^2   - 4  \| \vecnot{v}  - \tfrac{1}{2}  ( \vecnot{u}_n + \vecnot{u}_m)  \|^2\\
+&  \le  2 \| \vecnot{v} - \vecnot{u}_n \|^2 + 2 \|  \vecnot{v} - \vecnot{u}_m  \|^2   - 4d^2\\ %&& \text{since $ \frac{\vecnot{u}_n + \vecnot{u}_m}{2}  \in A$}
+&  =  2(  \| \vecnot{v} - \vecnot{u}_n \|^2 - d^2)  + 2 (  \|  \vecnot{v} - \vecnot{u}_m  \|^2   - d^2)  
+\end{alignat*}
+Since both terms on the right-hand side converge to zero, we conclude that $\vecnot{u}_n$ is Cauchy.
+%, i.e., for every $\eps > 0$, there exists $N \in \bbN$ such that $\| \vecnot{u}_m -\vecnot{u}_n \|^2 \le \eps$ for all $m, n \ge N$. 
+
+
+\item \textbf{Existence:} Since $A$ is a closed subset of a complete space is it complete. Since  $\vecnot{u}_n$ Cauchy sequence in $A$ it follows that $\vecnot{u}_n \to \vecnot{u}^*$ for some $\vecnot{u}^* \in A$ that is a best approximation of $\vecnot{v}$, i.e.,  $\| \vecnot{v} - \vecnot{u}^*\| = d$. %. Moreover, since $ %u converges to a limit $\vecnot{u}^* \in A$. 
+
+\item \textbf{Uniqueness:}  Let $\vecnot{u}_1$ and $\vecnot{u}_2$ be best approximations of $\vecnot{v}$ in the set $A$. Then the inequality derivative above gives $\| \vecnot{u}_1 - \vecnot{u}_2\|  \le 0$, and so $\vecnot{u}_1 = \vecnot{u}_2$
+
+\end{itemize}
+
+
+\item \textbf{Remark:} Note that the key steps in the proof fails if $A$ is not convex. If this set is not convex, then  %a sequence $\vecnot{u}_n$ can satisfy
+ the condition  $\| \vecnot{u}_n - \vecnot{v} \| \to d$ does not imply that $ \vecnot{u}_n$ is convergent. 
+
+
+\item \textbf{Proof of $\implies$} 
+\begin{itemize}
+\item Let $\vecnot{u}^* = P_A (\vecnot{v}) $ be unique projection of $\vecnot{v}$ onto $A$
+\item For any $\vecnot{u} \in A$ and $\alpha \in (0,1)$ convexity of $A$ implies that $\vecnot{u}' = (1-\alpha) \vecnot{u}^* + \alpha \vecnot{u} \in A$. 
+\item Starting with the fact that $\vecnot{u}^*$ achieves the minimum, we can write
+\begin{align*}
+\| \vecnot{v} - \vecnot{u}^*\|^2 &  \le \| \vecnot{v} - \vecnot{u}'\|^2 \\
+&  = \| \vecnot{v} - \vecnot{u}^*   - \alpha ( \vecnot{u} - \vecnot{u}^*) \|^2 \\
+&  = \| \vecnot{v} - \vecnot{u}^*\|^2    + \alpha^2 \|\vecnot{u} - \vecnot{u}^*\|^2 -  2 \alpha \Real{\inner{ \vecnot{v} - \vecnot{u}^*}{ \vecnot{u} - \vecnot{u}^*}}
+\end{align*}
+and thus 
+\[
+\Real{\inner{ \vecnot{v} - \vecnot{u}^*}{ \vecnot{u} - \vecnot{u}^*}} \le \frac{ \alpha}{2} \|\vecnot{u} - \vecnot{u}^*\|^2
+\] 
+\item Since this holds for all $\alpha \in (0,1)$, we can take the  $\alpha \to 0^+$ limit to conclude that
+\[
+\Real{\inner{ \vecnot{v} - \vecnot{u}^*}{ \vecnot{u} - \vecnot{u}^*}} \le \frac{ \alpha}{2} \|\vecnot{u} - \vecnot{u}^*\|^2
+\] 
+\end{itemize}
+
+\end{itemize}
+
+\section{Minimization of a Convex Function} 
+
+\begin{itemize}
+
+
+\item Let $V$ be a vector space, $A \subseteq V$ be a convex set, and $f \colon V \rightarrow \bbR$ be a functional.
+The functional $f$ is called \textbf{convex} on $A$ if, for all $\vecnot{a}_1,\vecnot{a}_2 \in A$ and $\lambda\in(0,1)$,
+\[ f( \lambda \vecnot{a}_1 + (1-\lambda) \vecnot{a}_2 ) \leq \lambda f( \vecnot{a}_1 ) + (1-\lambda) f ( \vecnot{a}_2 )  \]
+It is \textbf{strictly convex} if equality implies $\vecnot{a}_1 = \vecnot{a}_2$.
+
+\begin{center}
+\begin{tikzpicture}
+  \begin{axis}[axis x line=center,
+    axis y line=center, small,width=1.8in,height=1.5in,xmin=-1,xmax=2,ymin=-1.5,ymax=1]
+     \addplot[mark=*, thick, black] coordinates {(0,-1)(1.2,-0.8)};
+     \addplot[red,smooth,thick,-] coordinates  {
+    (-0.8,0.7) (0.2,-1.3) (1.2,-0.8) (2.2,0.7)};
+  \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\item \textbf{Remark:} Equivalently, a  functional $f \colon A \to \bbR$ is convex if its \textbf{epigraph}
+\[
+\{ (\vecnot{x}, y)  \in A \times y \mid f(\vecnot{y}) \le y\} 
+\]
+is a convex subset of $A \times \bbR$. 
+
+% is convex if and only if its \textbf{epigraph} is a convex set
+
+\item \textbf{Definition:}  A real-valued functional $f$ defined on normed vector space  $(X,\|\cdot\|)$ achieves a \textbf{local minimum value} at $\vecnot{x}_0 \in X$ ie there exists  $\epsilon > 0$ such that
+\[
+f(\vecnot{x}) \geq f(\vecnot{x}_0) \quad \text{for all $\vecnot{x}\in X$ such that  $\| \vecnot{x} - \vecnot{x}_0 \| < \epsilon$}
+\]
+If this lower bound holds for all $x\in X$, then the local minimum is also a \textbf{global minimum value}.
+
+
+\item \textbf{Theorem:} 
+Let $(X,\|\cdot\|)$ be a normed vector space, $A \subseteq X$ be a convex set, and $f \colon X \rightarrow \bbR$ be a convex functional on $A$. 
+\begin{enumerate}[(i)]
+
+\item Any local minimum value of $f$ on $A$ is also a global minimum value on $A$.
+
+\item If $f$ is strictly convex on $A$ and achieves a local minimum value on $A$, then there is a unique point $\vecnot{x}_0 \in A$ that achieves the global minimum value on $A$.
+\end{enumerate}
+
+
+\item \textbf{Proof:} 
+\begin{itemize}
+\item Let $\vecnot{x}_0 \in A$ be a point that achieves a local minimum value $f(\vecnot{x}_0)$. 
+
+\item Suppose for the sake of contradiction  that there exists $\vecnot{x}_1 \in A$ that  achieves a local minimum value $f(\vecnot{x}_1) < f(\vecnot{x}_0)$. 
+
+\item For any $\eps > 0$, choose  $0 < \lambda < \frac{ \eps}{ \| \vecnot{x}_0 - \vecnot{x}_1\|}$ and set 
+\[
+%0 < \lambda < \frac{ \eps}{ \| \vecnot{x}_0 - \vecnot{x}_1\|} \quad \text{and} \quad
+ \vecnot{x}  = (1- \lambda)  \vecnot{x}_0   + \lambda  \vecnot{x}_1
+\]
+
+\item Then $\|  \vecnot{x} -  \vecnot{x}_0\| = \lambda  \| \vecnot{x}_0 - \vecnot{x}_1\|  < \eps$ and 
+\[
+f( \vecnot{x}) = f( (1- \lambda)  \vecnot{x}_0   + \lambda  \vecnot{x}_1)  \le (1- \lambda) f( \vecnot{x}_0 ) + \lambda  f(\vecnot{x}_1) <   f( \vecnot{x}_0 ) 
+\]
+This contradicts the fact that $f$ achieves  a local minimum value at $\vecnot{x}_0$.
+\end{itemize}
+
+
+\item \textbf{Theorem:} If $f$ has a directional derivative  at $\vecnot{x}_0 \in A$ in the direction $\vecnot{x}-\vecnot{x}_0$, then 
+\[ 
+f(\vecnot{x}) \geq f(\vecnot{x}_0) +  f' (\vecnot{x}_0;\vecnot{x}-\vecnot{x}_0) %f'(\vecnot{x}_0)(\vecnot{x}-\vecnot{x}_0) 
+\]
+for all $\vecnot{x}\in A$.
+
+\item \textbf{Proof:}
+By convexity of $A$ and $f$ we have 
+\[
+f(\vecnot{x}) \ge f(\vecnot{x}_0) +  \frac{ f(\vecnot{x} + \lambda( \vecnot{x} - \vecnot{x}_0)) - f(\vecnot{x}_0)}{\lambda}, \quad \text{for all $\lambda \in (0,1)$}
+\]
+Taking the $\lambda \to 0^+$ limit gives the stated inequality. 
+
+ \item \textbf{Corollary:}  
+If $f$ has directional derivatives in all directions at $\vecnot{x}_0 \in A$ and they all equal zero, then \vspace{-2mm}
+\[ 
+f(\vecnot{x}_0) = \min_{\vecnot{x}\in A} f(\vecnot{x})
+\]
+If $f$ is strictly convex, then $\vecnot{x}_0$ is the unique minimizer over $A$.
+
+
+
+\end{itemize}
+
+
+\section{Alternating Projections} 
+
+
+\begin{itemize}
+\item Many optimization problems can be expressed as finding a point in the intersection of multiple subsets $C_1, \dots C_m$ of a vector space. 
+\[
+\bigcap_{i=1}^m C_m 
+\]
+Often, each $C_m$ models a ``simple'' constraint and the goal is to find at least one  ``solution'' $\vecnot{v} \in V$ that satisfies all of thee constraints. 
+
+
+\item \textbf{Example:} Given $A \in\bbR^{m \times n}$ and $\vecnot{b} \in \bbR^m$ find solution to system of linear equation 
+\[
+\vecnot{b} = A \vecnot{x} 
+\]
+This is an intersection of the constraints 
+\[
+C_i = \Big\{ \vecnot{x} \mid b_i = \sum_{j=1}^n a_{i,j} x_j  \Big\}  \quad \text{for $i = 1, \dots, m$}
+\]
+
+
+\item \textbf{Alternating projections for subsspaces:}
+
+\begin{itemize}
+\item Let $P_U$ and $P_W$ be orthogonal projections onto closed subspaces $U$ and  $W$ of a Hilbert space $V$. 
+\item For arbitrary $\vecnot{v}_0 \in V$ construct sequence $\vecnot{v}_0$ according to 
+\[
+\vecnot v_{n+1}=\begin{cases}
+P_{U}\vecnot v_{n} & \text{if }n\text{ is even}\\
+P_{W}\vecnot v_{n} & \text{if }n\text{ is odd}.
+\end{cases}
+\]
+
+
+
+\end{itemize}
+
+
+\item \textbf{Theorem:} The sequence $\vecnot v_{n}$ converges to $P_{U\cap W}\vecnot v_{0}$, its orthogonal projection onto $U\cap W$.
+
+
+\item \textbf{Alternating projections for convex sets:}
+\begin{itemize}
+\item Let $C_{1},C_{2},\ldots,C_{m}$ be closed convex subsets in a Hilbert space $V$.
+\item  Starting from any $\vecnot v_{0}\in V$, the alternating projection algorithm computes 
+\begin{align*}
+\vecnot v_{i+1} & = (1-s) \vecnot{v}_i + s\, P_{C_{\sigma(i)}}(\vecnot v_{i}),
+\end{align*}
+where $\sigma(i)=(i\bmod m)+1$ and $s\in(0,1]$ is a step size .
+
+
+\end{itemize}
+
+
+
+\item \textbf{Theorem:} If $V$ is a finite dimensional and the intersection is nonempty,   then there exists $\vecnot{v} \in \cap_{i=1}^m C_m$ such that $\vecnot v_{i+1}  \to \vecnot{v}$.  Furthermore, if the each subspace is affine then the  $\vecnot{v}$ is the orthogonal projection of $\vecnot{v}_0$. (If the sets are not affine then the limit need not be the orthogonal projection.) 
+
+
+
+\item \textbf{Kaczmarz Method:} 
+\begin{itemize}
+\item For a matrix $A\in\mathbb{R}^{m\times n}$ and vector $\vecnot b\in\mathbb{R}^{m}$ the goal is to find a solution $\vecnot{x} \in \bbR^n$ to the system of linear equations
+\[
+A \vecnot{x} = \vecnot{b}
+\]
+
+\item  Starting with initialization $\vecnot{v}_0 = \vecnot{0}$ and define sequence $\vecnot v_{i+1}$ to be the projection of $\vecnot v_{i}$ onto the affine subspace
+\[
+C_{i}=\left\{ \vecnot v\in\mathbb{R}^{n}\,\middle|\:\sum_{k=1}^{n}a_{\sigma(i),k}v_{k}=b_{\sigma(i)}\right\} ,
+\]
+where $\sigma(i)=(i\bmod m)+1$.
+
+\item This can be implemented using the update rule
+\begin{equation*}
+\vecnot v_{i+1}=  P_{C_{\sigma(i)}} (\vecnot{v}_i) = \vecnot v_{i}- \frac{\tinner{\vecnot v_{i}}{\vecnot a_{\sigma(i)}}-b_{\sigma(i)}}{\text{\ensuremath{\|}}\vecnot a_{\sigma(i)}\|^{2}}\vecnot a_{\sigma(i)},
+\end{equation*}
+
+
+\item If a solution exists, then $v_{i+1}$ converges to the solution with minimum norm, i.e, the solution to 
+\[
+\minimize \|\vecnot{x} \| \quad \text{subject to} \quad A \vecnot{x} = \vecnot{b} 
+\]
+\item More generally, faster convergence can be achieved using updates of the form 
+\begin{equation*}
+\vecnot v_{i+1}= (1-s) \vecnot{v}_i + s \, P_{C_{\sigma(i)}} (\vecnot{v}_i) = \vecnot v_{i}- s \frac{\tinner{\vecnot v_{i}}{\vecnot a_{\sigma(i)}}-b_{\sigma(i)}}{\text{\ensuremath{\|}}\vecnot a_{\sigma(i)}\|^{2}}\vecnot a_{\sigma(i)},
+\end{equation*}
+where $s\in(0,1]$ is the step-size. 
+
+\end{itemize}
+
+\end{itemize}
+
+
+
+
+
+
+\bibliographystyle{alpha}%{IEEEtran}
+\bibliography{/Users/galenreeves/Dropbox/Library/long_names,/Users/galenreeves/Dropbox/Library/library} 
+\end{document}
+
