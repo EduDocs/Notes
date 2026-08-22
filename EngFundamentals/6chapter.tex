@@ -1,5 +1,7 @@
 \chapter{Canonical Forms}
 
+\gpt{Chapter-level feedback: The eigenvalue, matrix-function, Jordan-form, and matrix-power arc is highly relevant to dynamical systems and signal processing.  The Hermitian spectral theorem, however, belongs here before Jordan form; Hermitian matrices are discussed in this chapter, while the theorem itself is deferred to the SVD chapter and matrix norms have already relied on it.  Consider organizing the chapter as diagonalization, Hermitian spectral theorem, matrix functions and dynamics, then Jordan form as an advanced algebraic extension.  It would also help mathematically mature students to state explicitly that Jordan form is structurally important but usually a poor numerical algorithm because it is highly sensitive to perturbations.}
+
 \section{Eigenvalues and Eigenvectors}
 \index{eigenvalues}
 
@@ -7,6 +9,7 @@
 Let $V$ be a vector space over the field $F$ and let $T$ be a linear operator on $V$.
 An \defn{eigenvalues}{eigenvalue} of $T$ is a scalar $\lambda \in F$ such that there exists a non-zero vector $\vecnot{v} \in V$ with $T \vecnot{v} = \lambda \vecnot{v}$.
 Any vector $\vecnot{v}$ such that $T \vecnot{v} = \lambda \vecnot{v}$ is called an \defn{eigenvalues}{eigenvector} of $T$ associated with the eigenvalue value $\lambda$.
+\gpt{Line above: ``eigenvalue value'' should be ``eigenvalue''.}
 \end{definition}
 
 \begin{definition}
@@ -56,6 +59,7 @@ Let $\lambda$ be an eigenvalue of the matrix $A$.
 The \defn{eigenvalues}{eigenspace} associated with $\lambda$ is the set $E_\lambda = \{ \vecnot{v} \in V | A \vecnot{v} = \lambda \vecnot{v} \}$.
 The \defn{eigenvalues}{algebraic multiplicity} of $\lambda$ is the multiplicity of the zero at $t=\lambda$ in the characteristic polynomial $\chi_A (t)$.
 The \defn{eigenvalues}{geometric multiplicity} of an eigenvalue $\lambda$ is equal to dimension of the eigenspace $E_\lambda$ or $\textrm{nullity}(A - t I)$.
+\gpt{Line above: ``equal to dimension'' should be ``equal to the dimension'', and ``$\operatorname{nullity}(A-tI)$'' should be ``$\operatorname{nullity}(A-\lambda I)$''.}
 \end{definition}
 
 \begin{theorem}
@@ -70,6 +74,7 @@ Suppose that
 for scalars $c_1, c_2, \ldots, c_k$.
 Notice that one can annihilate $\vecnot{v}_j$ from this equation by multiplying both sides by $(A-\lambda_j I)$.
 So, multiplying both sides by a product of these matrices gives
+\gpt{In the displayed equation below, ``$c_j\vecnot v_i$'' should be ``$c_i\vecnot v_i$''.}
 \begin{align*}
 \prod_{j=1,j\neq m}^k (A-\lambda_j I) \sum_{i=1}^k c_j \vecnot{v}_i
 &= \left( \prod_{j=1,j\neq m}^k (A-\lambda_j I) \right) c_m \vecnot{v}_m \\
@@ -206,6 +211,7 @@ Let $A$ be an $n\times n$ Hermitian matrix (i.e., $A^H = A$).
 Then, the eigenvalues of $A$ are real and the eigenvectors associated with distinct eigenvalues are orthogonal.
 \end{lemma}
 \begin{proof}
+\gpt{The proof below contains a missing square in line 212, a missing Hermitian transpose in line 216, and an invalid ``without loss of generality'' exclusion of the zero eigenvalue.  Suggested replacement for the entire proof: ``If $A\vecnot v=\lambda_1\vecnot v$, then $\vecnot v^HA\vecnot v=\lambda_1\|\vecnot v\|^2$.  The left side is real because $A=A^H$, and $\vecnot v\ne0$, so $\lambda_1$ is real.  If also $A\vecnot w=\lambda_2\vecnot w$, then Hermitian symmetry gives $\lambda_1\vecnot w^H\vecnot v=\vecnot w^HA\vecnot v=(A\vecnot w)^H\vecnot v=\lambda_2\vecnot w^H\vecnot v$, where both eigenvalues are real.  Thus $(\lambda_1-\lambda_2)\vecnot w^H\vecnot v=0$, proving orthogonality when $\lambda_1\ne\lambda_2$.''}
 First, we notice that $A = A^H$ implies $\vecnot{v}^H A \vecnot{v}$ is real because
 \[ \overline{s} = \left( \vecnot{v}^H A \vecnot{v} \right)^H = \vecnot{v}^H A^H \vecnot{v} = \vecnot{v}^H A \vecnot{v} = s. \]
 If $A \vecnot{v} = \lambda_1 \vecnot{v}$, left multiplication by $\vecnot{v}^H$ shows that
@@ -230,6 +236,7 @@ is given by
 
 It turns out that this formula can be extended to coupled differential equations.
 Let $A$ be a diagonalizable matrix and consider the the set of 1st order linear differential equations defined by
+\gpt{Line above: ``the the'' should be ``the''.}
 \[ \frac{d}{dt} \vecnot{x}(t) = A \vecnot{x}(t). \]
 Using the decomposition $A = S \Lambda S^{-1}$ and the substitution $\vecnot{x}(t) = S \vecnot{y}(t)$, we find that
 \begin{align*}
@@ -336,6 +343,7 @@ Since $S$ is nonsingular, there are exactly $n$ linearly independent eigenvector
 
 \begin{definition}
 The \defn{eigenvalues}{Jordan normal form} of any matrix $A\in \mathbb{C}^{n \times n}$ with $l \leq n$ linearly independent eigenvectors can be written as
+\gpt{Presentation and logic: this ``definition'' also asserts the Jordan-form existence and uniqueness theorem without proof, and the phrase ``with $l\le n$ linearly independent eigenvectors'' does not define $l$ until the blocks appear.  Suggested replacement opening: ``Every matrix $A\in\mathbb C^{n\times n}$ is similar to a block-diagonal matrix $J$, called a Jordan normal form: $A=TJT^{-1}$.  Its diagonal blocks are Jordan blocks.  The number $l$ of blocks equals the total geometric multiplicity of the eigenvalues.''  State uniqueness up to block order as part of the theorem, then define a Jordan block separately.}
 \begin{equation*}
 A = T J T^{-1} ,
 \end{equation*}
@@ -367,8 +375,10 @@ Moreover, two matrices are similar iff they are both similar to the same Jordan 
 Since every matrix is similar to a Jordan block matrix, one can gain some insight by studying Jordan blocks.
 In fact, Jordan blocks exemplify the way that matrices can be degenerate.
 For example, $J_m (\lambda)$ has the single eigenvector $\vecnot{e}_1$ (i.e., the standard basis vector) and satisfies
+\gpt{Mathematical wording: a Jordan block has infinitely many eigenvectors, namely all nonzero scalar multiples of $\vecnot e_1$.  Replace ``has the single eigenvector $\vecnot e_1$'' with ``has the one-dimensional eigenspace $\operatorname{span}\{\vecnot e_1\}$''.}
 \[ J_m (0) \vecnot{e}_{j+1} = \vecnot{e}_j \; \textrm{ for } \; j=1,2,\ldots,m-1. \]
 So, the reason this matrix has only one eigenvector is that left-multiplication by this matrix shifts all elements in a vector up element.
+\gpt{Line above: replace ``has only one eigenvector'' with ``has only one linearly independent eigenvector'', and ``up element'' with ``up one position''.}
 
 Computing the Jordan normal form of a matrix can be broken into two parts.
 First, one can identify, for each distinct eigenvalue $\lambda$, the \defn{eigenvalues}{generalized eigenspace}
@@ -376,9 +386,11 @@ First, one can identify, for each distinct eigenvalue $\lambda$, the \defn{eigen
 Let $\lambda_1 , \ldots , \lambda_k$ be the distinct eigenvalues of $A$ ordered by decreasing magnitude.
 Let $d_j$ be the dimension of $G_{\lambda_j}$, which is equal to the sum of the sizes of the Jordan blocks associated with $\lambda$, then $\sum_{j=1}^k d_j = n$.
 Let $T$ be a matrix whose first $d_1$ columns for a basis for $G_{\lambda_1}$, next $d_2$ columns form a basis for $G_{\lambda_2}$, and so on.
+\gpt{Two lines above: ``associated with $\lambda$'' should be ``associated with $\lambda_j$'', the comma before ``then'' should end the sentence, and ``columns for a basis'' should be ``columns form a basis''.}
 In this case, the matrix $T^{-1} A T$ is block diagonal and the $j$-th block $B_j$ is associated with the eigenvalue $\lambda_j$.
 
 To put $A$ in Jordan normal form, we now need to transform each block matrix $B$ into Jordan normal form.
+\gpt{Mathematical error in the construction below: $\mathcal N((B-\lambda I)^{j-1})^\bot$ is not ``the subspace not mapped to zero'' (that set is not a subspace); moreover $V_1=\mathcal N(I)^\bot$ is the whole space, so the claimed progression and $\operatorname{basis}(V_j-V_{j-1})$ cannot work as stated.  Suggested replacement: ``Let $N=B-\lambda I$ and $d_k=\dim\ker N^k$, with $d_0=0$.  Then $d_k-d_{k-1}$ is the number of Jordan blocks of size at least $k$, and $2d_k-d_{k-1}-d_{k+1}$ is the number of blocks of size exactly $k$.  Jordan chains are formed by choosing vectors $v_k$ with $N^kv_k=0$ and $N^{k-1}v_k\ne0$, then using $v_k,Nv_k,\ldots,N^{k-1}v_k$ in reverse order.''  A fully rigorous chain-selection algorithm needs quotient spaces or compatible complements; otherwise, consider presenting only the dimension formula and the worked example.}
 One can do this by identifying the subspace $V_j$ that is not mapped to $\vecnot{0}$ by $(B-\lambda I)^{j-1}$ (i.e., $\mathcal{N}\left((B- \lambda I)^{j-1} \right)^\bot$).
 This gives the sequence $V_1,\ldots,V_J$ of non-empty subspaces (e.g., $V_j$ is empty for $j>J$).
 Now, we can form a sequence of bases $W_J, W_{J-1},\ldots, W_1$ recursively starting from $W_J$ with
@@ -411,6 +423,7 @@ This gives
 = \begin{bmatrix} 1 \\ -1 \\ -1 \\ 3 \end{bmatrix} .
 \end{equation*}
 Using the pseudoinverse of $(A-\lambda_1 I)$, one finds that $\vecnot{w} = \left[ \frac{11}{12} \; \frac{37}{12} \; \frac{1}{12} \; \frac{9}{12} \right]$.
+\gpt{Line above: append ``$^T$'' to the displayed row so that $\vecnot w$ is a column vector.}
 Using this, we construct the Jordan normal form by noting that
 \begin{align*}
 \begin{bmatrix} 4 & 0 & 1 & 0 \\ 2 & 2 & 3 & 0 \\ -1 & 0 & 2 & 0 \\ 4 & 0 & 1 & 2 \end{bmatrix}
@@ -445,6 +458,7 @@ If $A$ is diagonalizable, then $A^k = T \Lambda^k T^{-1}$ and it is easy to see 
 Since all finite-dimensional vector norms are equivalent, we know that $ \| \Lambda^k \| \leq M \| \Lambda^k \|_1 = M \rho(A)^k $.
 Therefore, $A$ is convergent if $\rho(A)<1$.
 If $\rho(A)\geq 1$, then it is easy to show that $\| \Lambda^k \| > 0$ and therefore that $\| A^k \| > 0$.
+\gpt{Logical omission: being positive for each $k$ does not preclude convergence to zero.  Suggested replacement: ``If $\rho(A)\ge1$, an eigenvector $\vecnot v$ for an eigenvalue $\lambda$ of maximum modulus satisfies $A^k\vecnot v=\lambda^k\vecnot v$, so $A^k\vecnot v$ does not tend to zero; hence $A^k$ cannot tend to the zero matrix.''}
 For general matrices, we can instead use the Jordan normal form and the following lemma.
 
 \begin{lemma}
@@ -459,6 +473,7 @@ Using the Binomial formula, we write
 & \leq \sum_{i=0}^{m-1} \binom{k}{i} | \lambda |^{k-i},
 \end{align*}
 where the second step follows from the fact that $\| N^i \|$ is $1$ for $i=1,\ldots,m-1$ and zero for $i\geq m$.
+\gpt{Precision: ``$\|N^i\|=1$'' is not true for an arbitrary matrix norm.  Since convergence is norm-independent in finite dimensions, specify the induced $1$-, $2$-, or $\infty$-norm here (for which the shift powers do have norm $1$), or retain factors $\|N^i\|$ and bound the finitely many of them by a constant.}
 Notice that $| \binom{k}{i} \lambda^{k-i} | \leq k^{m-1} | \lambda |^{k-m+1} $ for $0 \leq i \leq m-1$.
 Since $k^{m-1} | \lambda |^{k-m+1} \rightarrow 0$ as $k\rightarrow \infty$ iff $| \lambda | <1$, we see that each term in the sum converges to zero under the same condition.
 On the other hand, if $ |\lambda | \geq 1$, then $| \left[ (\lambda I + N)^k \right]_{1,1} | \geq 1$ for all $k\geq 0$.
@@ -472,6 +487,7 @@ A matrix $A \in \mathbb{C}^{n\times n}$ is convergent iff $\rho(A)<1$.
 Using the Jordan normal form, we can write $A = T J T^{-1}$, where $J$ is a block diagonal with $k$ Jordan blocks $J_1,\ldots,J_k$.
 Since $J$ is block diagonal, we also have that $\| J^k \| \leq \sum_{i=1}^k \| J_i^k \|$.
 If $\rho(A)<1$, then the eigenvalue $\lambda$ associated with each Jordan block satisfies $\| \lambda \| < 1$.
+\gpt{Line above: ``$\|\lambda\|<1$'' should be ``$|\lambda|<1$''.}
 In this case, the lemma shows that $\| J_i^k \| \rightarrow 0$ which implies that $\| J^k \| \rightarrow 0$.
 Therefore, $\| A^k \| \rightarrow 0$ and $A$ is convergent.
 On the other hand, if $\rho(A) \geq 1$, then there is a Jordan block $J_i$ with $| \lambda | \geq 1$ and $| [ J_i^k ]_{1,1} | \geq 1$ for all $k\geq 0$.
@@ -481,6 +497,7 @@ In some cases, one can make stronger statements about large powers of a matrix.
 
 \begin{definition}
 A matrix $A$ has a \textbf{unique eigenvalue of maximum modulus} if the Jordan block associated with that eigenvalue is $1\times 1$ and all other Jordan blocks are associated with eigenvalues of smaller magnitude.
+\gpt{Terminology and hypothesis: ``unique eigenvalue of maximum modulus'' ordinarily means only strict spectral dominance; it does not imply that the eigenvalue is algebraically simple, and there may be several Jordan blocks for that same eigenvalue.  The theorem needs a nonzero, algebraically simple, strictly dominant eigenvalue.  Suggested replacement: ``A matrix $A$ has a simple dominant eigenvalue $\lambda_1\ne0$ if $\lambda_1$ has algebraic multiplicity one and every other eigenvalue $\lambda$ satisfies $|\lambda|<|\lambda_1|$.''  Use this term in the theorem as well.}
 \end{definition}
 
 The following theorem shows that a properly normalized matrix of this type converges to a non-zero limit.
@@ -498,9 +515,11 @@ This implies that $B^n = T J^n T^{-1}$ converges to $T \vecnot{e}_1 \vecnot{e}_1
 
 By construction, the first column of $T$ is the right eigenvector $\vecnot{u}$ and satisfies $A \vecnot{u} = \lambda_1 \vecnot{u}$.
 Likewise, the first row of $T^{-1}$ is the left eigenvector $\vecnot{v}^H$ associated with the eigenvalue $1$ because $B^H = T^{-H} J^H T^H$ and the first column of $T^{-H}$ (i.e., Hermitian conjugate of first row of $T^{-1}$) is the right eigenvector of $A^H$ associated with $\lambda_1$.
+\gpt{Mathematical inconsistency: this sentence switches from $B^H$ to $A^H$, and a left eigenvector satisfying $\vecnot v^HA=\lambda_1\vecnot v^H$ corresponds to an eigenvector of $A^H$ with eigenvalue $\overline{\lambda_1}$, not $\lambda_1$.  Suggested replacement: ``The first-row identity obtained from $T^{-1}B=JT^{-1}$ is $\vecnot v^HB=\vecnot v^H$.  Multiplying by $\lambda_1$ gives $\vecnot v^HA=\lambda_1\vecnot v^H$ (equivalently, $A^H\vecnot v=\overline{\lambda_1}\vecnot v$).''}
 Therefore, $\vecnot{v}^H A = \lambda_1 \vecnot{v}^H$.
 Finally, the fact that $\vecnot{u} = B^n \vecnot{u} \rightarrow \vecnot{u} \vecnot{v}^H \vecnot{u}$ implies that $\vecnot{v}^H \vecnot{u} = 1$.
 \end{proof}
 
 
 
+\gpt{Topic suggestion: the final dominant-eigenvalue theorem is a natural place for a short power-method example and, optionally, the Perron--Frobenius theorem for nonnegative matrices.  That would turn the asymptotic result into a concrete signal-processing/numerical tool and also clarify why normalization and a spectral gap matter.}

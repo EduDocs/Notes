@@ -41,8 +41,8 @@ Narration:
 
 Narration:
 [[seed 47]]
- The first example concerns approximation error in linear systems. Suppose you know that a vector b satisfies A x equals b, for an invertible matrix A.
- To be concrete; picture real three-dimensional vectors and a three-by-three matrix.
+The first example concerns approximation error in linear systems. Suppose you know that a vector b satisfies A x equals b, for an invertible matrix A;
+To be concrete; picture real three-dimensional vectors and a three-by-three matrix.
 
 ## Page 005: Example Problem 1 (overlay 2 of 7)
 
@@ -60,18 +60,18 @@ But, what if A is not known perfectly? This happens frequently in practical prob
 ## Page 007: Example Problem 1 (overlay 4 of 7)
 
 Narration:
-Let's assume that we know A-hat equals A plus E, where the error matrix E is small. The key question is how we should define small.
- In this course, that question will be considered in some detail.
+Let's assume that we know A-hat equals A plus E, where the error matrix E is small. The key question is how we should define small;
+In this course, that question will be considered in some detail.
 
 ## Page 008: Example Problem 1 (overlay 5 of 7)
 
 Narration:
-Now we can compute x hat as A-hat, inverse times b. But what can we say about x minus x hat? Given A-hat, we can compute an estimate, but we need to understand the difference between that estimate and the true value.
+Now we can compute x hat as-A hat, inverse times b. But what can we say about x minus x hat? Given A-hat, we can compute an estimate, but we need to understand the difference between that estimate and the true value.
 
 ## Page 009: Example Problem 1 (overlay 6 of 7)
 
 Narration:
-Metric spaces formalize distance and closeness in the field of topology.  To answer the above question, one can define distances between objects. In particular, we want distances between vectors and distances between matrices. From these, we can also define lengths of those objects.
+Metric spaces formalize distance and closeness in the field of topology.  To answer the above question, one can define distances between objects; In particular, we want distances between vectors and distances between matrices. From these, we can also define lengths of those objects.
 
 ## Page 010: Example Problem 1 (overlay 7 of 7)
 
@@ -104,7 +104,7 @@ Given f of x, one can solve this via optimization. If you do this, the expressio
 ## Page 015: Example Problem 2 (overlay 5 of 6)
 
 Narration:
-This course will show that there is also a simple, intuitive approach. "We will explore the geometric reason why the problem simplifies."
+This course will show that there is also a simple, intuitive approach. "And, we will explore the geometric reason why the problem simplifies."
 
 ## Page 016: Example Problem 2 (overlay 6 of 6)
 
@@ -114,7 +114,7 @@ The solution comes from orthogonality and linear algebra. We compute the four co
 ## Page 017: Example Problem 3 (overlay 1 of 6)
 
 Narration:
-Our third example concerns convex optimization. Consider a real-valued function f of x on a real interval from a to b. We will use the displayed curve as a running example.
+Our third example concerns convex optimization. Consider a real function f of x on the real interval from a to b. We will use the displayed curve as a running example.
 
 ## Page 018: Example Problem 3 (overlay 2 of 6)
 
@@ -124,7 +124,7 @@ A chord of f is a line connecting the points x comma f of x, and y comma f of y.
 ## Page 019: Example Problem 3 (overlay 3 of 6)
 
 Narration:
-The function is convex if every chord lies above the function. More precisely, for lambda between zero and one, f of lambda x plus one minus lambda times y is at most lambda f of x plus one minus lambda times f of y. The left side is the function value at a point between x and y. The right side is the height of the chord at that same point. From this definition, the example function is convex.
+The function is convex if all chords lie above the function. More precisely, for lambda between zero and one, f of lambda x plus one minus lambda times y is at most lambda f of x plus one minus lambda times f of y. The left side is the function value at a point between x and y. The right side is the height of the chord at that same point. From this definition, the example function is convex.
 
 ## Page 020: Example Problem 3 (overlay 4 of 6)
 
@@ -142,7 +142,7 @@ Narration:
 ## Page 022: Example Problem 3 (overlay 6 of 6)
 
 Narration:
-"Yes!"  A convex function also lies above any tangent line. Therefore, the minimum of f is at least the minimum, over the interval, of the tangent-line expression f of x naught plus x minus x naught times f prime of x naught. By minimizing this simpler affine function, we obtain a lower bound. Convexity is important in advanced mathematics because these ideas extend naturally to functions that map multidimensional vectors to real numbers.
+"Yes."  A convex function also lies above any tangent line. For any x naught in the interval, the minimum of f is at least the minimum, over the interval, of the tangent-line expression f of x naught plus x minus x naught times f prime of x naught. By minimizing this simpler affine function, we obtain a lower bound. Convexity is important in advanced mathematics because these ideas extend naturally to functions that map multidimensional vectors to real numbers.
 
 ## Page 023: Course Overview and Philosophy (overlay 1 of 3)
 
@@ -157,7 +157,7 @@ The second theme is standard theorems and their proof. Our focus is on the mathe
 ## Page 025: Course Overview and Philosophy (overlay 3 of 3)
 
 Narration:
-Assignments provide the practice needed to build these skills. Written homework builds knowledge of definitions and techniques, while computer assignments demonstrate practical applications. Think of these as training for a sport: each workout provides a small gain, but consistent effort leads to significant improvement over time. Although some material is challenging, historically most students have become proficient in most of the topics.
+Assignments provide the practice needed to build these skills. Written homework builds knowledge of definitions and techniques, while computer assignments demonstrate practical applications. Think of these as training for a sport: each workout provides a small gain, but consistent effort leads to significant improvement over time; "Although some material is challenging, historically most students have become proficient in most of the topics."
 
 ## Page 026: Learning Strategies (overlay 1 of 2)
 

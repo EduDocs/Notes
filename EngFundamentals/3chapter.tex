@@ -2,7 +2,7 @@
 
 Consider a Banach space $V$ and a closed subspace $W \subseteq V$.
 For a given vector $\vecnot{v} \in V$, we seek an element of $W$ that provides a best approximation to $\vecnot{v}$.
-As illustrated in Fig.~\ref{fig:AR-Banach1}, the fundamental problem is to identify a vector $\vecnot{w} \in W$ that minimizes the distance $\| \vecnot{v} - \vecnot{w} \|$.
+As illustrated in Figure~\ref{fig:AR-Banach1}, the fundamental problem is to identify a vector $\vecnot{w} \in W$ that minimizes the distance $\| \vecnot{v} - \vecnot{w} \|$.
 
 \begin{figure}[hbt]
 \centering{\input{Figures/AR-Banach1}}
@@ -112,7 +112,7 @@ If every vector in $V$ has an orthogonal projection onto $W$, then the mapping $
 \end{definition}
 
 One can use Theorem~\ref{theorem:OrthogonalSubspaceDirectSum} to verify that this is consistent with the concept of orthogonal projection from Definition~\ref{definition:OrthogonalProjection}.
-An illustrative diagram of an orthogonal projection appears in Fig,~\ref{fig:AR-Projection1}.
+An illustrative diagram of an orthogonal projection appears in Figure~\ref{fig:AR-Projection1}.
 Theorem~\ref{theorem:OrthogonalProjection} also implies the following result, known as Bessel's inequality.
 
 \begin{figure}[hbt]
@@ -467,7 +467,7 @@ If the inequality is strict, $M$ is \defn{matrix}{positive-definite}.
 \end{definition}
 
 An important aspect of positive-definite matrices is that they are always invertible.
-This follows from noting that $M\vecnot{v} = \vecnot{0}$ for $\vecnot{v}\neq\vecnot{0}$ implies that $\vecnot{v}^H M \vecnot{v} = \vecnot{0}$ and contradicts the definition of positive definite.
+This follows from noting that $M\vecnot{v} = \vecnot{0}$ for $\vecnot{v}\neq\vecnot{0}$ implies that $\vecnot{v}^H M \vecnot{v} = 0$ and contradicts the definition of positive definite.
 
 \begin{theorem}
 A Gramian matrix $G$ is always positive-semidefinite.
@@ -575,8 +575,9 @@ In matrix form, this yields the familiar equation
 \begin{equation*}
 G \vecnot{s} = \vecnot{t}.
 \end{equation*}
-To ensure that this extremum is in fact a minimum, one can compute the 2nd derivative to show that the Hessian is $G$.
-%we compute the 2nd derivative
+Since $J$ is a convex quadratic and $G$ is positive semidefinite, every solution of $G\vecnot s=\vecnot t$ is a global minimizer.
+If $G$ is positive definite, then the minimizer is unique.
+%we compute the mixed Wirtinger derivative $\partial^2J/(\partial\overline{\vecnot s}\,\partial\vecnot s^T)$
 %\begin{equation*}
 %\frac{\partial}{\partial\vecnot{\overline{s}}} \frac{\partial}{\partial\vecnot{\overline{s}}} J \left( \vecnot{s} \right) = G .
 %\end{equation*}
@@ -740,10 +741,11 @@ A = \begin{bmatrix} x_1 & 1 \\
 \end{equation*}
 This equation has a form analogous to the matrix representation of a least-squares problem.
 Consider the goal of minimizing $\left\| \vecnot{e} \right\|^2$.
-The line that minimizes the sum of the squares of the vertical distances between the data points and the line is then given by
+If the two columns of $A$ are linearly independent, then the line that minimizes the sum of the squares of the vertical distances between the data points and the line is then given by
 \begin{equation*}
-\vecnot{s} = \left( A^H A \right)^{-1} A^H \vecnot{y} .
+\vecnot{s} = \left( A^H A \right)^{-1} A^H \vecnot{y}.
 \end{equation*}
+Otherwise, the minimizing line is not unique and any solution of $A^H (A \vecnot{s}-\vecnot{y})=\vecnot{0}$ minimizes the sum of squares.
 
 
 \subsection{Linear Minimum Mean-Squared Error Estimation}
@@ -792,7 +794,7 @@ If the matrix $G$ is invertible, the minimum mean-squared error is given by
 
 \subsection{The Wiener Filter}
 
-Suppose that the sequence of zero-mean random variables $\left\{ X[t] \right\}$ is wide-sense stationary, and consider the FIR filter
+Consider a sequence of zero-mean random variables $\left\{ X[t] \right\}$ its FIR filter output
 \begin{equation*}
 \begin{split}
 Y[t] &= \sum_{k=0}^{K-1} h[k] X[t - k] \\
@@ -801,7 +803,7 @@ Y[t] &= \sum_{k=0}^{K-1} h[k] X[t - k] \\
 = \left( \vecnot{X}[t] \right)^T \vecnot{h} .
 \end{split}
 \end{equation*}
-The goal is to design this filter in such a way that its output is as close as possible to a desired sequence $\left\{ Z[t] \right\}$.
+The goal is to design this filter in such a way that its output is as close as possible to a desired sequence of zero-mean random variables $\left\{ Z[t] \right\}$.
 In particular, we want to minimize the mean-squared error
 \begin{equation*}
 \left\| Z[t] - Y[t] \right\|^2
@@ -826,8 +828,7 @@ where $j = 0, 1, \ldots, K-1$.
 
 For this specific case where the normal equations are defined in terms of the expectation operator, these equations are called the \defn{applications}{Wiener-Hopf} equations.
 The Gramian of the Wiener-Hopf equations can be expressed in a more familiar form using the autocorrelation matrix.
-Recall that $\{ X[t] \}$ is a wide-sense stationary process.
-As such, we have
+If the zero-mean processes $\{X[t]\}$ and $\{Z[t]\}$ are jointly wide-sense stationary (i.e., their autocorrelation and cross-correlation functions exist and are shift invariant), then we have
 \begin{equation*}
 R_{xx} (j-k) = R_{xx} (j, k) = \Expect \left[ X[t-k] \overline{X}[t-j] \right]
 = \inner{ X[t-k] }{ X[t-j] } .
@@ -980,7 +981,7 @@ Thus, there is a one-to-one correspondence between $\vecnot{u} \in S$ and $\vecn
 We recognize the RHS as the best approximation of $\vecnot{v}$ by vectors in $W^{\bot}$.
 The optimizer $\vecnot{x}^*$ of this expression is the orthogonal projection of $\vecnot{v}$ onto $W^\perp$.
 The resulting error vector $\vecnot{v}-\vecnot{x}^*$ must therefore be contained in $(W^\perp)^\perp = W$.
-Specifically, the optimal solution $\vecnot{u}^* = \vecnot{v} - \vecnot{x}^*$ is the orthogonal projection of $\vecnot{v} - \vecnot{x}$ onto $W$.
+Specifically, the optimal solution $\vecnot{u}^* = \vecnot{v} - \vecnot{x}^*$ is the orthogonal projection of $\vecnot{v} - \vecnot{x}^*$ onto $W$.
 Since $\vecnot{x} \in W^{\bot}$, we conclude that $\vecnot{u}^*$ is the orthogonal projection of $\vecnot{v}$ onto $W$.
 
 With this knowledge, we use \eqref{eqn:DualNormalEquations} to solve for $\vecnot{s}$, leveraging the fact that $\vecnot{v}$ satisfies $\inner{ \vecnot{v} }{ \vecnot{w}_i } = c_i$ for $i = 1, \ldots, n$.
@@ -988,7 +989,7 @@ Thus, we get $G \vecnot{s} = \vecnot{c}$.
 Furthermore, since $\vecnot{w}_1,\ldots,\vecnot{w}_n$ is a set of linearly independent vectors, the Gramian matrix is full rank and this linear system has a unique solution $\vecnot{s} = G^{-1} \vecnot{c}$.
 \end{proof}
 
-A diagram for a minimum-norm solution problem in $\mathbb{R}^3$ appears in Fig.~\ref{fig:AR-Dual1}.
+A diagram for a minimum-norm solution problem in $\mathbb{R}^3$ appears in Figure~\ref{fig:AR-Dual1}.
 Notice how the subset $S$ is a translated version of $W^{\bot}$.
 
 \begin{figure}[hbt]
@@ -1059,7 +1060,7 @@ Show that the intersection of convex sets is convex.
 \end{problem}
 
 \begin{definition}
-Let $V$ be a Hilbert space and $A\subseteq V$ be a closed convex set. The \textbf{orthogonal projection} of $\vecnot{v} \in V$ onto $A$ is the mapping $P_A \colon V \to A$ defined by
+Let $V$ be a Hilbert space and $A\subseteq V$ be a nonempty closed convex set. The \textbf{orthogonal projection} of $\vecnot{v} \in V$ onto $A$ is defined by $P_A \colon V \to A$ with
 \[
 P_A (\vecnot{v}) \triangleq \arg \min_{\vecnot u\in A}\left\Vert \vecnot u-\vecnot v\right\Vert. 
 \]
@@ -1086,7 +1087,7 @@ This implies that the closed ball of radius $d$ in $V$ contains a line segment o
 The following theorem instead uses vector space methods to establish the same result for all closed convex $A$.
 
 \begin{theorem}
-\label{theorem:HilbertProjectionTheorem} For Hilbert space $V$, the orthogonal projection of $\vecnot v \in V$ onto a closed convex set $A\subseteq V$ exists and is unique.
+\label{theorem:HilbertProjectionTheorem} For Hilbert space $V$, the orthogonal projection of $\vecnot v \in V$ onto a nonempty closed convex set $A\subseteq V$ exists and is unique.
 \end{theorem}
 \begin{proof}
 
@@ -1175,9 +1176,9 @@ it follows that
 \Real\tinner{\vecnot v-\vecnot w}{\vecnot u-\vecnot x}
 &=
 \Real\tinner{\vecnot v-\vecnot u}{\vecnot u-\vecnot x}
-+|\vecnot u-\vecnot x|^2
++\|\vecnot u-\vecnot x\|^2
 +\Real\tinner{\vecnot x-\vecnot w}{\vecnot u-\vecnot x} \\
-&\geq |\vecnot u-\vecnot x|^2.
+&\geq \|\vecnot u-\vecnot x\|^2.
 \end{align*}
 Therefore, the Cauchy--Schwarz inequality implies that
 \[
@@ -1197,7 +1198,7 @@ If not, it holds trivially.
 Let $A$ be a closed convex subset of a Hilbert space $V$ over $\RealNumbers$.
 By drawing a simple picture (e.g., see Figure~\ref{fig:pocs}), one can see that projecting $\vecnot{v}$ onto $A$ is an operation that is translation invariant.
 Specifically, this means that translating the set $A$ and the vector $\vecnot v$ by the same vector $\vecnot v_{0}$ results in an output that is also translated by $\vecnot v_{0}$.
-Mathematically, this means that, for all $\vecnot v,\vecnot v_{0}\in V$, the projection onto $V$ satisfies
+Mathematically, this means that, for all $\vecnot v,\vecnot v_{0}\in V$, the projection onto $A$ satisfies
 \begin{align*}
 P_{A+\vecnot v_{0}}(\vecnot v+\vecnot v_{0}) & =\arg\min_{\vecnot u\in A+\vecnot v_{0}}\left\Vert \vecnot u-\vecnot v-\vecnot v_{0}\right\Vert \nonumber \\
  & =\vecnot v_{0}+\arg\min_{\vecnot u'\in A}\left\Vert (\vecnot u'+\vecnot v_{0})-\vecnot v-\vecnot v_{0}\right\Vert \nonumber \\
@@ -1281,7 +1282,7 @@ Then, exactly one of the following two conditions hold:
 
 \begin{proof}
 Consider the convex set $A = \{B \vecnot{s} \, | \, \vecnot{s} \geq \vecnot{0} \}$, where $\vecnot{s} \geq \vecnot{0}$ denotes $s_i \geq 0$ for $i=1,\ldots,n$.
-It is closed because the set defined by $\vecnot{s} \geq \vecnot{0}$ is closed and the mapping $\vecnot{s} \mapsto B \vecnot{s}$ is continuous.
+It is closed because it is a polyhedron equal to the intersection of finitely many closed half-spaces.
 If $\vecnot{v} \in A$, then we see that the first condition holds.
 
 If $\vecnot{v} \notin A$, then we apply Theorem~\ref{theorem:convex_point_set_hyperplane} using the standard Hilbert space $\mathbb{R}^m$ to see that there exists $\vecnot{w} \in \mathbb{R}^m$ and $c\in \mathbb{R}$ such that $\vecnot{w}^T \vecnot{v} < c$ and $\vecnot{w}^T \vecnot{u} \geq c$ for all $\vecnot{u} \in A$.
@@ -1317,7 +1318,13 @@ This completes the proof.
 
 \subsection{Minimum Distance Between Two Convex Sets}
 
-Now, consider the smallest distance between two disjoint closed convex sets $A,B\subseteq V$. In this case, a unique solution may exist but a some things can go wrong. If the two sets are not strictly convex (e.g., consider two squares), then it is clearly possible for their to multiple pairs of points that achieve the minimum distance. Even if the two sets are strictly convex, one may find that the infimum is achieved as the points wander off to infinity. For example, consider the strictly convex hyperbolic sets $A=\left\{ (x,y)|x^{2}-y^{2}\geq1,x>0\right\} $ and $B=\left\{ (x,y)|y^{2}-x^{2}\geq1,y\geq0\right\} $. These two sets share the line $x=y>0$ as an asymptote, so their infimal distance is 0.
+Now consider the smallest distance between two disjoint closed convex sets $A,B\subseteq V$.  Several things can go wrong.
+
+Now, consider the smallest distance between two disjoint closed convex sets $A,B\subseteq V$.
+In this case, a unique solution may exist but a some things can go wrong.
+If the sets are not strictly convex (consider two squares, for example), multiple pairs of points may attain the minimum distance.
+Even if both sets are strictly convex, a minimizing sequence may escape to infinity, so the infimum need not be attained.
+For example, consider the strictly convex hyperbolic sets $A=\left\{ (x,y)|x^{2}-y^{2}\geq1,x>0\right\} $ and $B=\left\{ (x,y)|y^{2}-x^{2}\geq1,y\geq0\right\} $. These two sets share the line $x=y>0$ as an asymptote, so their infimal distance is 0.
 
 To understand this behavior, we first note that the distance $f\left(\vecnot u,\vecnot v\right)=\left\Vert \vecnot u-\vecnot v\right\Vert $ is a convex function on the convex product set $A\times B$.
 It follows that any local minimum value is a global minimum value distance.

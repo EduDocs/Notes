@@ -1,5 +1,7 @@
 \chapter{Logic and Set Theory}\label{chapter:LogicAndSetTheory}
 
+\gpt{Chapter-level feedback: Consider adding two short proof workshops after ``Strategies for Proofs'': one on proving a set identity element by element and one on disproving a quantified claim with a counterexample.  These exercises would reinforce the mathematical-maturity goal and prepare students directly for metric-space proofs in the next chapter.}
+
 
 \begin{quote}
 To criticize mathematics for its abstraction is to miss the point entirely.
@@ -33,6 +35,7 @@ We will simply not develop their formal axiomatic foundations.
 
 The rules we follow in dealing with sets are derived from established axioms.
 At some point of your academic career, you may wish to study set theory and logic in greater detail.
+\gpt{Line above: replace ``At some point of your academic career'' with ``At some point in your academic career''.}
 Our main purpose here is to learn how to state mathematical results clearly and how to prove them.
 
 
@@ -194,7 +197,7 @@ F & F & T & T \tabularnewline
 \hline
 \end{tabular} .
 \end{center}
-For instance, the statement ``The Aggies won their last football game or the Aggies did not win their last football game'' is true regardless of whether the Aggies actually defeated their latest opponent.
+For instance, the statement ``The \mascots won their last football game or the \mascots did not win their last football game'' is true regardless of whether the \mascots actually defeated their latest opponent.
 
 The negation of a tautology is a \defn{logic}{contradiction}, a statement that is necessarily false regardless of the truth values of its propositional variables.
 The statement $P \wedge \neg P$ is a contradiction, and its truth table is
@@ -429,7 +432,8 @@ Using the connection to conjunction and disjunction, these rules are actually eq
 
 One can also define predicates with multiple free variables such as $P(x,y)=$``$x$ contains $y$''.
 Once again, these statements are assumed to be true or false for every choice of $x,y$.
-There are 8 possible quantifiers for a 2-variable predicate and they are typically organized around some natural implications.
+If each of the two variables is quantified exactly once, there are eight possible quantifications pairs.
+Logical equivalences reduce these to six distinct forms, which are organized below by natural implications.
 Assuming that $x,y$ are taken from non-empty sets, one finds that
 \[ \begin{array}{ccccccc}
   \forall x, \forall y, P(x,y) & \Rightarrow & \exists x, \forall y, P(x,y) & \Rightarrow & \forall y, \exists x, P(x,y) & \Rightarrow & \exists y, \exists x, P(x,y) \\
@@ -487,7 +491,7 @@ A proof should be written in grammatically correct English.
 Complete sentences should be used, with full punctuation.
 In particular, every sentence should end with a period, even if the sentence ends in a displayed equation.
 Mathematical formulas and symbols are parts of sentences, and are treated no differently than words.
-One way to learn to construct proofs is to read a lot of well written proofs, to write progressively more difficult proofs, and to get detailed feedback on the proofs you write.
+One way to learn to construct proofs is to read a lot of well-written proofs, to write progressively more difficult proofs, and to get detailed feedback on the proofs you write.
 
 
 \paragraph{Direct Proof:}
@@ -644,8 +648,8 @@ Axiomatic set theory eliminates this paradox by not allowing unrestricted compre
 Another reasonable conclusion is that Russell's paradox shows that the set $R$ cannot exist in any consistent theory of sets.
 
 Another common question is whether there are ``sets that contain themselves''.
-In naive set theory, the answer is yes and some examples are the ``set of all sets'' and the ``set of all abstract ideas''.
-This is a weakness of naive set theory and, in the ZF axiomatic formulation, such sets are not allowed and no set contains itself.
+In naive set theory, the answer is yes (e.g., the ``set of all sets'' and the ``set of all abstract ideas'') but these are not legitimate examples in a coherent theory.
+They exemplify a fatal flaw in naive set theory and, in the ZF axiomatic formulation, such sets are not allowed and no set may contain itself.
 
 There are a few standard relationships defined between any two sets $A,B$.
 \begin{definition}
@@ -752,11 +756,11 @@ Consider the set $\mathbb{N}^2 = \{ (a,b) | a,b\in\mathbb{N} \}$ of ordered pair
 If one associates the element $(a,b)$ with the fraction $a/b$, then the entire set is associated with the set of (possibly reducible) fractions.
 Now, consider the equivalence relation $(a,b) \sim (c,d)$ if $ad=bc$.
 In this case, two ordered pairs are equivalent if their associated fractions evaluate to the same real number.
-The quotient set $\mathbb{N}^2 / \!\! \sim$ can therefore be associated with the set of reduced fractions.
+Thus, the quotient set $\mathbb{N}^2 / \!\! \sim$ can be identified with the positive rational numbers $\mathbb{Q}_{>0}$.
 \end{example}
 
 Unfortunately, this section will not end on a happy note by saying that the ZFC axiomatic formulation of set theory is consistent.
-Instead, we observe that Kurt G\"{o}del's Incompleteness Theorems imply that, if ZFC is consistent, then this cannot be proven using statements in ZFC and, moreover, it cannot be complete.
+Instead, we observe that because ZFC is an axiomatized theory strong enough to express elementary arithmetic, G\"odel's incompleteness theorems imply that, if ZFC is consistent, then ZFC cannot prove its own consistency and is not syntactically complete.
 On the other hand, if ZFC is inconsistent, then it contains a paradox and one can prove anything using statements in ZFC.
 Since ZFC avoids the classical set-theoretic paradoxes and no contradiction has been found in it so far, it remains the most widely used foundational system for mathematics.
 
@@ -794,7 +798,8 @@ Functions can also be applied to sets in a natural way.
 For a function $f \colon X\rightarrow Y$ and subset $A\subseteq X$, the \defn{functions}{image} of $A$ under $f$ is
 \[ f(A) \triangleq \{ y\in Y | \exists x\in A \textrm{ s.t. } f(x)=y\} = \{f(x) | x\in A\}. \]
 Using this definition, the range of $f$ is simply $f(X)$.
-One benefit of allowing functions to have set-valued images is that a set-valued inverse image always exists.
+One benefit of extending the idea of function evaluation to an image operation on subsets is that a corresponding preimage operation exists for every function, whether or not the function is invertible.
+
 % Do no reiterate this comment.
 %\gpt{This wording risks conflating the preimage operator with an inverse function.}
 
@@ -844,6 +849,7 @@ Show that the following expressions hold:
 (3) & \; f^{-1} \left( \bigcup_{i\in I} B_i \right) = \bigcup_{i\in I} f^{-1} \left( B_i \right) &
 (4) & \; f^{-1} \left( \bigcap_{i\in I} B_i \right) = \bigcap_{i\in I} f^{-1} \left( B_i \right). 
 \end{align*}
-Next, assume $I\ne\emptyset$ and give an example in which the inclusion in (2) is strict.
-Then, show that equality holds in (2) when $f$ is injective.
+Now, assume $I\ne\emptyset$ and doe the following.
+Give an example where the inclusion in (2) is strict.
+Show that equality holds in (2) when $f$ is injective.
 \end{problem}

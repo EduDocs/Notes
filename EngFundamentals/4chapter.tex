@@ -1,5 +1,7 @@
 \chapter{Linear Transformations and Operators}
 
+\gpt{Chapter-level feedback: Duality, operator norms, adjoints, and pseudoinverses are excellent choices for both signal processing and quantum computing.  The chapter would be easier to navigate if it more clearly separated finite-dimensional matrix facts from infinite-dimensional operator theory.  In particular, the matrix 2-norm derivation depends on eigenvalues and the Hermitian spectral theorem, which appear only in later chapters; consider moving ``Matrix Norms'' after the spectral theorem or revisiting it after the SVD.  Conversely, place the general Riesz theorem before the Optimization chapter if that chapter is to use Hilbert-space gradients.}
+
 \section{The Algebra of Linear Transformations}
 
 \begin{theorem}
@@ -117,7 +119,7 @@ Therefore, neither transformation is invertible.
 
 \begin{example}
 Consider the normed vector space $V$ of semi-infinite real sequences $\mathbb{R}^\omega$ with finitely many non-zero terms under the $\ell^2$ norm.
-For the standard Schauder basis $\{\vecnot{e}_1,\vecnot{e}_2,\ldots\}$, let $T \colon V \rightarrow V$ be the linear transformation that satisfies $T \vecnot{e}_i = i^{-1} \vecnot{e}_i$ for $i=1,2,\ldots$.
+For the standard basis $\{\vecnot{e}_1,\vecnot{e}_2,\ldots\}$, let $T \colon V \rightarrow V$ be the linear transformation that satisfies $T \vecnot{e}_i = i^{-1} \vecnot{e}_i$ for $i=1,2,\ldots$.
 Likewise, let the linear transformation $U \colon V \rightarrow V$ satisfy $U \vecnot{e}_i = i \vecnot{e}_i$ for $i=1,2,\ldots$.
 It is easy to verify that $U = T^{-1}$ and $UT = TU = I$.
 \end{example}
@@ -239,14 +241,14 @@ That is, the unique expression for $\vecnot{v}$ as a linear combination of $\vec
 \end{proof}
 
 One important use of the dual space is to define the transpose of a linear transform in a way that generalizes to infinite dimensional vector spaces.
-Let $V,W$ be vector spaces over $F$ and $T \colon V \rightarrow W$ be a linear transform.
-If $g \in W^*$ is a linear functional on $W$ (i.e., $g \colon W \rightarrow F$), then $f\colon V \to F$ (i.e., $f\in V^*$) defined by $\vecnot{v} \mapsto g(T\vecnot{v})$ is a linear functional on $V$.
-The \defn{linear transform}{transpose} of $T$ is the implied mapping $U \colon W^* \rightarrow V^*$ that satisfies $f(\vecnot{v})=g(T\vecnot{v})\in V^*$ for all $g\in W^*$ and all $\vecnot{v}\in V$.
+Let $V,W$ be vector spaces over $F$ and let $T \colon V \rightarrow W$ be a linear transform.
+Assume $g \in W^*$ is a linear functional on $W$ and $f \in V^*$ is a linear functional on $V$.
+The \defn{linear transform}{transpose} of $T$ is the implied mapping $U \colon W^* \rightarrow V^*$ that maps $g$ to the unique $f$ satisfying $f(\vecnot{v})=g(T\vecnot{v})$ for all $\vecnot{v}\in V$.
 If $V,W$ are finite-dimensional, then one can identify $V=V^*$ and $W=W^*$ via isomorphism and recover the standard transpose mapping $U \colon W \rightarrow V$ implied by the matrix transpose.
 The details of this definition are not used in the remainder of these notes, but can be useful in understanding the subtleties of infinite dimensional spaces.
 
 For vector spaces without topological structure, we use $V^*$ to denote the algebraic dual (i.e., the set of linear functionals).
-If $V$ has a norm, the we instead use $V^*$ to denote the continuous dual (i.e., the set of continuous linear functionals).
+If $V$ has a norm, then we instead use $V^*$ to denote the continuous dual (i.e., the set of continuous linear functionals).
 For infinite dimensional Hilbert spaces, we will see later that the notion of the dual space and adjoint (i.e., transpose) simplifies because one can identify $V=V^*$ via isomorphism.
 The interesting case that does not simplify is that of linear transforms between infinite dimensional Banach spaces.
 
@@ -386,7 +388,7 @@ By Lemma~\ref{lemma:FiniteDimNormsEquiv}, there is a real $m$ such that  $|s_1| 
 \subsection{The Neumann Expansion}
 
 \begin{theorem}
-For a Banach space $V$ with a submultiplicative operator norm $\| \cdot \|$, let $T \colon V \rightarrow V$ a linear operator with $\left\| T \right\| < 1$.
+For a Banach space $V$ that has a submultiplicative operator norm $\| \cdot \|$, let $T \colon V \rightarrow V$ be a linear operator with $\left\| T \right\| < 1$.
 Then, $(I-T)^{-1}$ exists and
 \[ (I-T)^{-1} = \sum_{i=0}^{\infty} T^i. \]
 \end{theorem}
@@ -394,8 +396,13 @@ Then, $(I-T)^{-1}$ exists and
 First, we observe that the sequence
 \[ A_n = \sum_{i=0}^{n-1} T^i.\]
 is Cauchy.  This follows from the fact that, for $m<n$, we have
-\[ \| A_n - A_m \| = \left\| \sum_{i=m}^{n-1} T^i \right\| \leq \sum_{i=m}^{n-1} \| T \|^i = \frac{\| T \|^m - \| T \|^n}{1 - \| T \|} \leq  \frac{\| T \|^m}{1 - \| T \|}. \]
-Since this goes to zero as $m\rightarrow \infty$, we see that the limit $\lim_{n\rightarrow \infty} A_n$ exists.
+\[ \| A_n - A_m \| = \left\| \sum_{i=m}^{n-1} T^i \right\| \leq \sum_{i=m}^{n-1} \| T \|^i = \frac{\| T \|^m - \| T \|^n}{1 - \| T \|} \leq  \frac{\| T \|^m}{1 - \| T \|} \]
+and this goes to zero as $m\rightarrow \infty$.
+
+For any fixed $\vecnot{v}\in V$, we note that $A_n \vecnot{v}$ converges in $V$ because \[\| A_n \vecnot{v} - A_m \vecnot{v} \| \leq \| A_n - A_m \| \| \vecnot{v}\|. \]
+This identifies a pointwise limit for the $A_n$ mapping.
+Since $\| A_n \|$ stays bounded, the limit of $A_n$ inherits linearity and is bounded.
+Thus, $\lim_{n\rightarrow \infty} A_n$ exists and equals a bounded linear operator.
 
 Next, we observe that
 \[ (I - T) \left( I + T + T^2 + \cdots + T^{n-1} \right) = I - T^n . \]
@@ -426,15 +433,15 @@ The 2-norm of a matrix can be found by solving
 \max_{\| \vecnot{v} \|=1} \left\| A \vecnot{v} \right\|_{2}^{2}
 = \max_{\| \vecnot{v} \|=1} \vecnot{v}^H A^H A \vecnot{v} .
 \end{equation*}
-Using the Lagrange multiplier technique, one seeks to minimize
+One can solve this via constrained optimization by introducing the Lagrangian
 \begin{equation*}
 J = \vecnot{v}^H A^H A \vecnot{v} - \lambda \vecnot{v}^H \vecnot{v} .
 \end{equation*}
-Taking the gradient with respect to $\vecnot{v}$ and equating the result to zero, we get
+The stationary condition with respect to $\vecnot{v}$ shows that
 \begin{equation*}
 A^H A \vecnot{v} = \lambda \vecnot{v} .
 \end{equation*}
-The corresponding $\vecnot{v}$ must be an eigenvector of the matrix $A^H A$.
+This implies that $\vecnot{v}$ must be an eigenvector of the matrix $A^H A$.
 Left multiplying this equation by $\vecnot{v}^H$ and using the fact that $\vecnot{v}^H \vecnot{v} = 1$, we obtain
 \begin{equation*}
 \vecnot{v}^H A^H A \vecnot{v} = \lambda \vecnot{v}^H \vecnot{v} = \lambda .
@@ -537,9 +544,9 @@ Let $R \colon V^* \rightarrow V$ be the implied Riesz mapping from continuous li
 Then, $f(\vecnot{v}) = \tinner{ \vecnot{v} }{ R( f ) }$ for all $f \in V^*$.
 The isomorphism can be shown by verifying that $R( s f_1 + f_2 ) = \overline{s} R(f_1) + R(f_2)$.
 
-The mapping $R$ is a conjugate-linear isometric (i.e., $\| f \| = \| R(f) \|$) bijection and is linear over $\mathbb R$.
-It provides a canonical self-duality we typically pretend $V=V^*$, but retaining the distinction between $V$ and $V^*$ avoids conjugation errors.
-
+For complex spaces, the mapping $R$ is a conjugate-linear isometric (i.e., $\| f \| = \| R(f) \|$) bijection between $V^*$ and $V$.
+For real spaces, it is a linear isometric isomorphism over $\mathbb R$)
+It provides a canonical self-duality and we typically pretend $V=V^*$, but retaining the distinction between $V$ and $V^*$ avoids conjugation errors.
 
 \begin{theorem}
 Let $V$ and $W$ be Hilbert spaces, and assume $T \colon V \rightarrow W$ is a continuous linear transformation.
@@ -578,6 +585,7 @@ For all $\vecnot{v} \in V$,
 \end{equation*}
 Since this holds for all $\vecnot{v} \in V$, we gather from Lemma~\ref{lemma:DualSpaceSeparatesPoints} that $T^* \left( s \vecnot{w}_1 + \vecnot{w}_2 \right) = s T^* \vecnot{w}_1 + T^* \vecnot{w}_2$.
 Therefore, $T^*$ is linear.
+\gpt{Omission: the theorem claims that $T^*$ is bounded, but the proof establishes only existence, linearity, and uniqueness.  Add the estimate $\|T^*\vecnot w\|=\|f_{\vecnot w}\|\leq\|T\|\,\|\vecnot w\|$, which gives $\|T^*\|\leq\|T\|$ (and applying the same argument to $T^*$ yields equality).}
 The uniqueness of $T^*$ is inherited from Theorem~\ref{theorem:FunctionalInnerProduct} because, for each $\vecnot{w}\in W$, the vector $T^* \vecnot{w}$ is determined uniquely as the vector $\vecnot{v}'$ such that $\inner{ T \vecnot{v} }{ \vecnot{w} } = \inner{ \vecnot{v} }{ \vecnot{v}' }$ for all $\vecnot{v} \in V$.
 \end{proof}
 

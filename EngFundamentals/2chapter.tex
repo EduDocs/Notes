@@ -1,13 +1,11 @@
 \chapter{Linear Algebra}
 
-
 \section{Fields}
 
 This section focuses on key properties of the real and complex numbers that make them useful for linear algebra.
 Consider a set $F$ of objects and two operations on the elements of $F$, addition and multiplication.
-For every pair of elements $s, t \in F$ then their sum $(s + t) \in F$.
-For every pair of elements $s, t \in F$ then their product $st \in F$.
-Suppose that these two operations satisfy
+For every $s,t\in F$, both their sum $s+t$ and their product $st$ belong to $F$.
+Furthermore, suppose the operations satisfy:
 \begin{enumerate}
 \item addition is commutative: $s + t = t + s, \; \forall s, t \in F$
 \item addition is associative: $r + (s + t) = (r + s) + t, \; \forall r, s, t \in F$
@@ -24,7 +22,7 @@ Then, the set $F$ together with these two operations is a \textbf{field}.
 
 \begin{example}
 The real numbers with the usual operations of addition and multiplication form a field.
-The complex numbers with these two operations also form a field.
+The complex numbers with standard operations also form a field.
 \end{example}
 
 \begin{example}
@@ -48,7 +46,7 @@ s + t \sqrt{2} + u + v \sqrt{2} = (s+u) + (t+v) \sqrt{2} \in F \\
 \end{gather*}
 where we assume $(s,t)\neq(0,0)$ in the last equation and $s^2-2t^2\ne0$ because $(s/t)^2=2$ is impossible for rational $s$ and $t$.
 The remaining properties are straightforward to prove.
-Also, the field $s + t \sqrt{2}$, where $s$ and $t$ are rational, is a subfield of the real numbers.
+Since $F \subset \RealNumbers$ is a field with compatible operations, it is a subfield of the real numbers.
 \end{example}
 
 
@@ -346,16 +344,12 @@ The space $V$ is \defn{vector space}{finite-dimensional} if it has a finite basi
 
 Using this definition, we note that a basis decomposition $\vecnot{v} = \sum_{i=1}^n s_i \vecnot{v}_{\alpha_i}$ must be unique because the difference between any two distinct decompositions produces a finite linear dependency in the basis and, hence, a contradiction.
 
-\begin{theorem}
+\begin{theorem} \label{theorem:hamel_basis}
 Every vector space has a Hamel basis.
 \end{theorem}
 \begin{proof}
-Let $X$ be the set of linearly independent subsets of $V$.
-For $x, y \in X$ consider the strict partial order defined by proper inclusion.
-By the maximum principle (see Appendix~\ref{app:maximum-principle}), for each $x \in X$, there exists a maximal chain (i.e., simply ordered subset $Z$ of $X$ containing $x$).
-%If $\operatorname{span}(Z)\ne V$, then adjoining a vector outside the span preserves linear independence, which gives a contradiction.
-%Thus, the maximal element $Z$ forms a Hamel basis for $V$.
-Let $\mathcal B=\bigcup_{S\in Z}S$.  Then $\mathcal B$ is linearly independent.  If $\operatorname{span}(\mathcal B)\ne V$, adjoining a vector outside this span produces a larger linearly independent set, and hence a larger chain, a contradiction.  Thus $\mathcal B$ is a Hamel basis for $V$.
+For finite-dimensional vector spaces, this is obvious.
+For the infinite-dimensional case, this is deferred to Section~\ref{section:linear_deferred}.
 \end{proof}
 
 \begin{example}
@@ -799,7 +793,7 @@ If $V$ is finite-dimensional, then
 Let $\vecnot{v}_1, \ldots, \vecnot{v}_k$ be a basis for $\mathcal{N}(T)$, the nullspace of $T$.
 There are vectors $\vecnot{v}_{k+1}, \ldots, \vecnot{v}_n \in V$ such that $\vecnot{v}_1, \ldots, \vecnot{v}_n$ is a basis for $V$.
 We want to show that $T \vecnot{v}_{k+1}, \ldots, T \vecnot{v}_n$ is a basis for the range of $T$.
-The vectors $T \vecnot{v}_1, \ldots, T \vecnot{v}_n$ certainly span $\mathcal{R}(T)$ and, since $T \vecnot{v}_j = \vecnot{0}$ for $j = 1, \ldots, k$, it follows that $T \vecnot{v}_{k+1}, \ldots, \vecnot{v}_n$ span $\mathcal{R}(T)$.
+The vectors $T \vecnot{v}_1, \ldots, T \vecnot{v}_n$ certainly span $\mathcal{R}(T)$ and, since $T \vecnot{v}_j = \vecnot{0}$ for $j = 1, \ldots, k$, it follows that $T \vecnot{v}_{k+1}, \ldots, T\vecnot{v}_n$ span $\mathcal{R}(T)$.
 Suppose that there exist scalars $s_{k+1}, \ldots, s_n$ such that
 \begin{equation*}
 \sum_{j=k+1}^n s_j T \vecnot{v}_j = \vecnot{0}.
@@ -836,7 +830,7 @@ If $A$ is an $m \times n$ matrix with entries in the field $F$, then
 Let $R=PA$ be the reduced row echelon form of $A$, where $P$ is invertible.
 Since elementary row operations preserve the row space, $R=PA$ implies the row space of $R$ is a subset of the row space of $A$.
 Likewise, $A=P^{-1}R$ gives the reverse inclusion. 
-Thus, the rows of $R$ form a basis for the row space of $A$ and $\mathrm{row~rank} (A) = r$, where $r$ is the number of non-zero rows in $R$.
+Thus, the nonzero rows of $R$ form a basis for the row space of $A$ and $\mathrm{row~rank} (A) = r$, where $r$ is the number of non-zero rows in $R$.
 Next, we write $A=P^{-1}R$ and observe that each column of $R$ has non-zero entries only in the first $r$ rows.
 Thus, each column of $A$ is a linear combination of the first $r$ columns in $P^{-1}$.
 Thus, the column space of $A$ is spanned by $r$ vectors and $\Rank (A) \leq \mathrm{row~rank} (A)$.
@@ -905,7 +899,7 @@ Is the function $f$ a norm?
 \begin{table}[p]
 \fbox{ \begin{minipage}[t]{\textwidth}
 
-\subsection*{What are $L^p$ spaces? What is the Lebesgue Integral?}
+\subsection*{What are $L^p$ spaces? What is the Lebesgue Integral?*}
 
 Many important spaces include functions that are not Riemann integrable.
 For $X = [a,b]^d$, the Lebesgue integral of $f\colon X \to \mathbb{R}$ is defined using measure theory and is often used in advanced probability courses.
@@ -918,8 +912,8 @@ For $1\le p<\infty$, $L^p(X)$ is the normed vector space of equivalence classes 
 \[
 \left\Vert f\right\Vert _{L^{p}}\triangleq\left(\int_{X}\left|f(x)\right|^{p}dx\right)^{1/p}
 \]
-is finite (since measurable implies existence).
-Of course, this definition begs the question, ``What is the Lebesgue integral?''. For these notes, we use the following.
+exists (automatically via measurability) and is finite.
+This definition begs the question, ``What is the Lebesgue integral?''. For these notes, we use the following.
 \begin{definition}
 The \defn{integral}{Lebesgue integral} is a generalization of the Riemann integral that applies to wider class of functions. The values of these two integrals coincide on the set of Riemann integrable functions.
 Loosely speaking, one can construct any non-negative function $f\in L^{p}(X)$ by considering sequences $f_{1},f_{2},\ldots$ of ``simple'' functions formed by rounding values of $f$ down to values in a finite set $S_i \subset [0,\infty)$ where $\{0\} \subset S_1 \subset S_2 \subset \cdots \subset [0,\infty)$.
@@ -927,7 +921,7 @@ Loosely speaking, one can construct any non-negative function $f\in L^{p}(X)$ by
 By construction, the sequence of functions is non-decreasing (i.e., $f_{n+1}(x)\geq f_{n}(x)$ for all $x\in X$) and, therefore, it converges pointwise to a limit function $f(x)$.
 Moreover, the Lebesgue integral of each simple function is easy to define.
 Thus, this sequence of simple functions gives rise to a non-decreasing sequence of Lebesgue integrals and one defines the Lebesgue integral of $f(x)$ to be the limit of this sequence.
-In fact, the non-negative functions in $L^{p}(X)$ are in one-to-one correspondence with the limits of non-decreasing sequences of simple functions that satisfy $\left\Vert f_{n}\right\Vert _{L^{p}}\rightarrow M<\infty$, up to a.e. equivalence.
+In fact, the every non-negative function in $L^{p}(X)$ is the pointwise limit of a non-decreasing sequence of simple functions that satisfies $\left\Vert f_{n}\right\Vert _{L^{p}}\rightarrow M<\infty$ for some $M>0$. %, up to a.e. equivalence.
 \end{definition}
 
 \begin{definition}
@@ -963,12 +957,17 @@ The following functions are examples of norms for $\mathbb{R}^n$ and $\mathbb{C}
 \end{example}
 
 \begin{example}
-Similarly, norms can be defined for the vector space of functions from $[a, b]$ to $\RealNumbers$ (or $\ComplexNumbers$) with
+For definitions of integration that are linear, the space of functions where $|f(t)|^p$ is integrable forms a vector space on which norms can be defined.
+Strictly speaking, one must identify functions $f$ and $g$ as equal almost everywhere if the integral of $|f(t)-g(t)|^p$ is zero.
+For the space $L^p ([a,b])$ of Lebesgue integrable functions from $[a, b]$ to $\RealNumbers$ (or $\ComplexNumbers$), these norms are denoted by
 \begin{enumerate}
 \item the $L^1$ norm: $\left\| f(t) \right\|_1 = \int_a^b |f(t)| dt$
 \item the $L^p$ norm: $\left\| f(t) \right\|_p = \left( \int_a^b |f(t)|^p dt \right)^{\frac{1}{p}}, \quad p \in (1,\infty)$
 \item the $L^{\infty}$ norm: $\left\| f(t) \right\|_{\infty} = \esssup_{[a,b]} \{ | f(t) | \}$.
 \end{enumerate}
+A very nice property of these $L^p$ spaces is that they are complete.
+For Riemann integrable functions, one can define things similarly but the resulting space is not complete.
+However, the completion of the Riemann integrable space equals the Lebesgue integrable space.
 \end{example}
 
 \index{integral}
@@ -1523,7 +1522,7 @@ If $V$ is an inner-product space and $\| \cdot \|$ is its associated induced nor
 \begin{enumerate}
 \item $\left\| s \vecnot{v} \right\| = |s| \left\| \vecnot{v} \right\|$
 \item $\left\| \vecnot{v} \right\| > 0$ for $\vecnot{v} \neq \vecnot{0}$
-\item $\left| \inner{ \vecnot{v} }{ \vecnot{w} } \right| \leq \left\| \vecnot{v} \right\| \left\| \vecnot{w} \right\|$ with equality iff $\vecnot{w}=\vecnot{0}$ or $\vecnot{v} = s \vecnot{w}$ for some real $s\geq 0$.
+\item $\left| \inner{ \vecnot{v} }{ \vecnot{w} } \right| \leq \left\| \vecnot{v} \right\| \left\| \vecnot{w} \right\|$ with equality iff $v$ and $w$ are linearly dependent
 \item $\left\| \vecnot{v} + \vecnot{w} \right\| \leq \left\| \vecnot{v} \right\| + \left\| \vecnot{w} \right\|$ with equality iff $\vecnot{w}=\vecnot{0}$ or $\vecnot{v} = s \vecnot{w}$ for some real $s\geq 0$.
 \end{enumerate}
 \end{theorem}
@@ -1553,11 +1552,12 @@ we have
 { \left\| \vecnot{v} \right\|^2 } ,
 \end{align}
 where equality holds iff $\vecnot{w}-\vecnot{u}=\vecnot{0}$, or equivalently iff $\vecnot{w}=\vecnot{0}$ or $\vecnot{v} = s \vecnot{w}$.
-Rearranging \eqref{equation:DifferenceProjection} by isolating the inner product component and cross-multiplying, we find that
+Rearranging \eqref{equation:DifferenceProjection} by isolating the inner product and cross-multiplying, we find that
 \begin{equation*}
 \left| \inner{ \vecnot{v} }{ \vecnot{w} } \right|^2 = \left| \inner{ \vecnot{w} }{ \vecnot{v} } \right|^2 \leq \left\| \vecnot{v} \right\|^2 \left\| \vecnot{w} \right\|^2,
 \end{equation*}
-with equality iff $\vecnot{v}=\vecnot{0}$, $\vecnot{w}=\vecnot{0}$, or $\vecnot{v} = s \vecnot{w}$.
+with equality iff $\vecnot{v}=\vecnot{0}$, $\vecnot{w}=\vecnot{0}$, or $\vecnot{v} = s \vecnot{w}$ for $s\in F$.
+We note that these conditions are equivalent to linear dependence of $\vecnot{v}$ and $\vecnot{w}$.
 %Note that the $\vecnot{v}=\vecnot{0}$ case is checked separately because it is assumed above that $\vecnot{v}\neq \vecnot{0}$.
 Using this, we get the fourth property
 \begin{equation*}
@@ -1614,7 +1614,7 @@ The standard basis of $\RealNumbers^n$ is an orthonormal set with respect to the
 \end{example}
 
 \begin{example}
-Let $V$ be the vector space (over $\ComplexNumbers$) of continuous complex-valued functions on the interval $0 \leq x \leq 1$ with the inner product
+Let $V=L^2 ([0,1])$ be the vector space (over $\ComplexNumbers$) of (square-integrable) complex-valued functions on the interval $0 \leq x \leq 1$ with the inner product
 \begin{equation*}
 \inner{ f }{ g } = \int_0^1 f(x) \overline{g(x)} dx.
 \end{equation*}
@@ -1749,8 +1749,7 @@ W^{\bot} = \left\{ \vecnot{v} \in V \big| \tinner{ \vecnot{v} }{ \vecnot{w} } = 
 \end{definition}
 
 \begin{problem} \label{problem:WbotSubspace}
-Let $W$ be any subset of vector space $V$.
-Show that $W^{\bot}$ is a closed subspace of $V$ and that any vector in the subspace spanned by $W$ is orthogonal to any vector in $W^{\bot}$.
+Let $W$ be any subset of an inner-product space $V$.
 \end{problem}
 \noindent
 \textbf{S~\ref{problem:WbotSubspace}}.
@@ -1851,7 +1850,7 @@ The union of the sets in this chain is orthonormal and maximal because otherwise
 This shows the existence of a maximal orthonormal set $\left\{ \vecnot{v}_{\alpha} | \alpha \in A \right\}$, where $A_0 \subset A$.
 
 Let $W$ be the closed subspace of $V$ generated by $\left\{ \vecnot{v}_{\alpha} | \alpha \in A \right\}$.
-If $W \neq V$, then we can use Theorem~\ref{theorem:OrthogonalProjection} to project some vector in $V \setminus W$ onto $W$.
+If $W \neq V$, then we can use Theorem~\ref{theorem:OrthogonalProjection} from the next chapter to project some vector in $V \setminus W$ onto $W$.
 The normalized error vector is a unit vector $\vecnot{u} \in W^{\bot}$.
 This contradicts the maximality of the system $\left\{ \vecnot{v}_{\alpha} | \alpha \in A \right\}$.
 Hence, $W = V$ and we have enlarged the orthonormal set $x$ to a basis.
@@ -1870,7 +1869,7 @@ Conversely, if $V$ has a countable orthonormal basis, then linear combinations w
 
 \begin{lemma} \label{lem:hilbert_sum_convergence}
 Let $V$ be a Hilbert space and $\vecnot{v}_1,\vecnot{v}_2,\ldots$ be a countable orthogonal set.
-Then, $\vecnot{v} = \sum_{i=1}^\infty \vecnot{v}_i$ exists if and only $\sum_{i=1}^\infty \|\vecnot{v}_i\|^2 = M < \infty$.
+Then, $\vecnot{v} = \sum_{i=1}^\infty \vecnot{v}_i$ exists if and only if $\sum_{i=1}^\infty \|\vecnot{v}_i\|^2 = M < \infty$.
 \end{lemma}
 \begin{proof}
 For $\vecnot{u}_n = \sum_{i=1}^n \vecnot{v}_i$ and $w_n = \sum_{i=1}^n \|\vecnot{v}_i\|^2$, orthogonality implies that
@@ -1988,4 +1987,17 @@ f \left( \vecnot{u} \right) = \inner{ \vecnot{u} }{ \vecnot{v} }
 for all $\vecnot{u} \in V$.
 \fi
 
+\end{proof}
+
+\section{Deferred Proofs*} \label{section:linear_deferred}
+
+\subsection*{Proof All Vector Spaces have Hamel Bases}
+
+\begin{proof}[Proof of~\ref{theorem:hamel_basis}]
+Let $X$ be the set of linearly independent subsets of $V$.
+For $x, y \in X$ consider the strict partial order defined by proper inclusion.
+By the maximum principle (see Appendix~\ref{app:maximum-principle}), for each $x \in X$, there exists a maximal chain (i.e., simply ordered subset $Z$ of $X$ containing $x$).
+%If $\operatorname{span}(Z)\ne V$, then adjoining a vector outside the span preserves linear independence, which gives a contradiction.
+%Thus, the maximal element $Z$ forms a Hamel basis for $V$.
+Let $\mathcal B=\bigcup_{S\in Z}S$.  Then $\mathcal B$ is linearly independent.  If $\operatorname{span}(\mathcal B)\ne V$, adjoining a vector outside this span produces a larger linearly independent set, and hence a larger chain, a contradiction.  Thus $\mathcal B$ is a Hamel basis for $V$.
 \end{proof}

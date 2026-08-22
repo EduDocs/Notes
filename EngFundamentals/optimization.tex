@@ -1,5 +1,7 @@
 \chapter{Optimization}
 
+\gpt{Chapter-level feedback: KKT conditions, duality, Slater's condition, and water-filling are excellent topics for graduate ECE students.  The balance is less effective: more than a quarter of the chapter develops Banach-space derivatives, while unconstrained optimization receives essentially one necessary condition and no algorithmic example.  Consider presenting finite-dimensional gradients, Hessians, gradient descent, and convex first-order conditions first; then place G\^{a}teaux and Fr\'echet derivatives in an advanced section that generalizes the familiar theory.  A short worked gradient-descent example with a convergence bound under Lipschitz gradient/strong convexity would connect the mathematical maturity goals to the algorithms students will use.}
+
 
 
 The foundation of engineering is the ability to use math and physics to design and optimize complex systems.
@@ -94,14 +96,13 @@ In this case, the \defn{optimization}{Fr\'{e}chet derivative} at $\vecnot{x}$ eq
 \end{definition}
 
 \begin{example}
-A function $f\colon \RealNumbers^n \to \RealNumbers^m$ with $f = (f_1,f_2,\ldots,f_m)^T$ is (Fr\'{e}chet) differentiable at $\vecnot{x}_0$ if the mapping $J$ from $\RealNumbers^n$ to the \defn{optimization}{Jacobian matrix},
+A function $f\colon \RealNumbers^n \to \RealNumbers^m$ with $f = (f_1,f_2,\ldots,f_m)^T$ is (Fr\'{e}chet) differentiable at $\vecnot{x}_0$ if $f(\vecnot{x}_0 + \vecnot{h})=f(\vecnot{x}_0)+J(\vecnot{x}_0) \vecnot{h} + o(\|\vecnot{h}\|)$ where $J$ is the mapping from $\RealNumbers^n$ to the \defn{optimization}{Jacobian matrix},
 \[ J(\vecnot{x})=f'(\vecnot{x}) \triangleq \left[ \begin{array}{cccc} \frac{\partial  f_1}{\partial  x_1} (\vecnot{x}) & \frac{\partial  f_1}{\partial  x_2} (\vecnot{x}) & \cdots & \frac{\partial  f_1}{\partial  x_n} (\vecnot{x}) \\
 \frac{\partial  f_2}{\partial  x_1} (\vecnot{x}) & \frac{\partial  f_2}{\partial  x_2} (\vecnot{x}) & \cdots & \frac{\partial  f_2}{\partial  x_n} (\vecnot{x}) \\
 \vdots & \vdots & \ddots & \vdots \\
-\frac{\partial  f_m}{\partial  x_1} (\vecnot{x}) & \frac{\partial  f_m}{\partial  x_2} (\vecnot{x}) & \cdots & \frac{\partial  f_m}{\partial  x_n} (\vecnot{x}) \end{array} \right], \]
-exists.
-If $J(\vecnot{x})$ exists, then its operator norm $\| J(\vecnot{x}) \| < \infty$ because it is finite-dimensional.
-A sufficient condition for differentiability is that each partial derivative exists and is continuous in $\vecnot{x}$ at $\vecnot{x}=\vecnot{x}_0$.
+\frac{\partial  f_m}{\partial  x_1} (\vecnot{x}) & \frac{\partial  f_m}{\partial  x_2} (\vecnot{x}) & \cdots & \frac{\partial  f_m}{\partial  x_n} (\vecnot{x}) \end{array} \right]. \]
+In that case, all entries of the Jacobian matrix are finite and its operator norm satisfies $\| J(\vecnot{x}) \| < \infty$ because it is finite-dimensional.
+A stronger but sufficient condition differentiability is that all partial derivatives exist and are continuous in a neighborhood of $\vecnot x_0$.
 
 If $m=1$, then the Jacobian is closely related to the \defn{optimization}{gradient} of the function
 \[ \nabla f(\vecnot{x}) \triangleq f'(\vecnot{x})^H =  \left[ \begin{array}{cccc} \frac{\partial  f}{\partial  x_1} (\vecnot{x}) & \frac{\partial  f}{\partial  x_2} (\vecnot{x}) & \cdots & \frac{\partial  f}{\partial  x_n} (\vecnot{x}) \end{array} \right]^H . \]
@@ -113,6 +114,7 @@ This is because derivatives can be understood as linear transforms and either or
 Let $X$ be a Hilbert space over $\RealNumbers$ and $f\colon X \to \RealNumbers$ be a real functional.
 If the Fr\'{e}chet derivative $f'(\vecnot{x})$ exists, then it is a continuous linear functional on $X$.
 Thus, the Riesz representation theorem guarantees that there is a vector $\vecnot{u} \in X$ such that
+\gpt{Ordering/assumption issue: the Riesz theorem proved earlier in these notes is explicitly finite-dimensional, whereas this example allows an arbitrary Hilbert space.  Either restrict $X$ to be finite-dimensional here, state the general Riesz representation theorem before this example, or add a forward reference to its later proof.}
 $ f'(\vecnot{x})(\vecnot{h}) = \tinner{\vecnot{h} }{ \vecnot{u} } $ for all $\vecnot{h}\in X$.
 This vector is called the gradient $\nabla f(\vecnot{x})$ and it follows that
 $$ f'(\vecnot{x})(\vecnot{h}) = \tinner{\vecnot{h} }{ \nabla f (\vecnot{x}) } \text{ for all } \vecnot{h}\in X. $$
@@ -273,8 +275,8 @@ For unconstrained optimization, however, linear functionals are not interesting 
 \begin{definition}
 \label{definition:minimum_value}
 Let $(X,\|\cdot\|)$ be a normed vector space.
-Then, a real functional $f \colon X \rightarrow \RealNumbers$ achieves a \defn{optimization}{local minimum value} at $\vecnot{x}_0 \in X$ if there is an $\epsilon > 0$ such that, for all $\vecnot{x}\in X$ satisfying $\| \vecnot{x} - \vecnot{x}_0 \| < \epsilon$, we have  $f(\vecnot{x}) \geq f(\vecnot{x}_0)$.
-If the bound holds for all $x\in X$, then the local minimum is also a \defn{functions}{global minimum value}.
+Then, a real functional $f \colon X \rightarrow \RealNumbers$ achieves a \defn{optimization}{local minimum value} $\vecnot{x}_0 \in A$ on $A$ if there is an $\epsilon > 0$ such that, for all $\vecnot{x}\in A$ satisfying $\| \vecnot{x} - \vecnot{x}_0 \| < \epsilon$, we have  $f(\vecnot{x}) \geq f(\vecnot{x}_0)$.
+If the bound holds for all $\vecnot{x} \in A$, then the local minimum is also a \defn{functions}{global minimum value} on $A$.
 \end{definition}
 
 \begin{theorem}
@@ -334,7 +336,7 @@ Then, any local minimum value of $f$ on $A$ is a global minimum value on $A$.
 If the functional is strictly convex on $A$ and achieves a local minimum value on $A$, then there is a unique point $\vecnot{x}_0 \in A$ that achieves the global minimum value on $A$.
 \end{theorem}
 \begin{proof}
-Let $\vecnot{x}_0 \in A$ a point where the functional achieves a local minimum value.
+Let $\vecnot{x}_0 \in A$ be a point where the functional achieves a local minimum value.
 Proving by contradiction, we suppose that there is another point $\vecnot{x}_1 \in A$ such that $f(\vecnot{x}_1) <f(\vecnot{x}_0)$.
 From the definition of a local minimum value, we find an $\epsilon > 0$ such that $f(\vecnot{x}) \geq f(\vecnot{x}_0)$ for all $\vecnot{x} \in A$ satisfying $\| \vecnot{x} - \vecnot{x}_0 \| < \epsilon$.
 Choosing $\lambda < \frac{\epsilon}{\smash{\| \vecnot{x}_0 - \vecnot{x}_1 \|}}$ in $(0,1)$ and $\vecnot{x} = (1-\lambda) \vecnot{x}_0 + \lambda \vecnot{x}_1$ implies that $\| \vecnot{x} - \vecnot{x}_0 \| < \epsilon $
@@ -361,7 +363,7 @@ By the convexity of $A$ and $f$, we have $\vecnot{x}_0 + \lambda (\vecnot{x}- \v
 f \left(\vecnot{x}_0 + \lambda (\vecnot{x}-\vecnot{x}_0) \right) \leq f(\vecnot{x}_0) + \lambda \left( f(\vecnot{x}) - f(\vecnot{x}_0) \right)
 \end{equation}
 for all $\lambda\in (0,1)$.
-Also, if $f$ is strictly convex, then~\eqref{eq:convex_above_tangent} strict for $\vecnot{x} \neq \vecnot{x}_0$.
+Also, if $f$ is strictly convex, then~\eqref{eq:convex_above_tangent} is strict for $\vecnot{x} \neq \vecnot{x}_0$.
 Thus,
 \[  f(\vecnot{x}) \geq f(\vecnot{x}_0) + \frac{f \left(\vecnot{x}_0 + \lambda (\vecnot{x}-\vecnot{x}_0) \right)- f(\vecnot{x}_0)}{\lambda} \]
 and taking the limit at $\lambda \downarrow 0$ completes the proof for a convex functional.
@@ -535,6 +537,7 @@ In standard proofs of this result, this difficulty is overcome by using the impl
 
 \begin{proof}
 For simplicity, we prove only the case where $h_j (\vecnot{x}) = \vecnot{a}_j^T \vecnot{x} - b_j$ is affine for $j=1,\ldots,p$.
+\gpt{Proof-scope omission: Add citation for general case.}
 %and $PF$ does contain a line (i.e., $\{\alpha \vecnot{z}\,|\, \alpha \in \mathbb{R}\}$ for some $\vecnot{z}$).
 First, we define 
 \[ \vecnot{y} (\vecnot{\lambda},\vecnot{\nu}) = -\nabla f_0 (\vecnot{x}^*) - \sum_{i=1}^m \lambda_i \nabla f_i (\vecnot{x}^*) - \sum_{j=1}^p \nu_j \underbrace{\nabla h_j (\vecnot{x}^*)}_{\vecnot{a}_j}. \]
@@ -584,7 +587,7 @@ The Lagrangian dual problem
 \mathrm{maximize} \quad & g(\vecnot{\lambda},\vecnot{\nu}) \\
 \mathrm{subject\,to} \quad & \vecnot{\lambda} \geq 0
 \end{align*}
-has optimal value $d^*\triangleq\sup_{\vecnot\lambda\ge0,\vecnot\nu}g(\vecnot\lambda,\vecnot\nu)$, and $d^*\le p^*$.
+has optimal value $d^*\triangleq\sup_{\vecnot\lambda\ge0,\vecnot\nu}g(\vecnot\lambda,\vecnot\nu)$, and $p^*\geq d^*$.
 %has a unique maximum value $d^* \leq p^*$.
 This is called \defn{optimization}{weak duality}.
 \end{lemma}
@@ -598,16 +601,16 @@ g(\alpha\vecnot{\lambda}+&(1-\alpha)\vecnot{\lambda}',\alpha\vecnot{\nu}+(1-\alp
 &\geq \inf_{\vecnot{x}\in \mathcal{D}} \alpha L(\vecnot{x},\vecnot{\lambda},\vecnot{\nu}) + \inf_{\vecnot{x}'\in \mathcal{D}} (1-\alpha) L(\vecnot{x}',\vecnot{\lambda}',\vecnot{\nu}') \\
 &= \alpha g(\vecnot{\lambda},\vecnot{\nu}) + (1-\alpha) g(\vecnot{\lambda}',\vecnot{\nu}').
 \end{align*}
-For $\vecnot x ' \in \mathcal{F}$, $\vecnot \nu \in \mathbb{R}^p$, and $\vecnot\lambda\ge0$, we have
+For $\vecnot \nu \in \mathbb{R}^p$ and $\vecnot\lambda\ge0$, we have
 \begin{align*}
 g(\vecnot{\lambda},\vecnot{\nu})
 &= \inf_{\vecnot{x}\in \mathcal{D}} L(\vecnot{x},\vecnot{\lambda},\vecnot{\nu})
 \stackrel{(a)}{\leq} \inf_{\vecnot{x}\in \mathcal{F}} L(\vecnot{x},\vecnot{\lambda},\vecnot{\nu}) \\
-&\stackrel{(b)}{\leq}  f_0(\vecnot x ')+\sum_{i=1}^m \lambda_i f_i(\vecnot x ')
+&\stackrel{(b)}{\leq}  \inf_{\vecnot{x}\in \mathcal{F}} f_0(\vecnot x ) %+\sum_{i=1}^m \lambda_i f_i(\vecnot x ')
 \stackrel{(c)}{\leq} p^*,
 \end{align*}
-where $(a)$ is implied by $\mathcal{F} \subseteq \mathcal{D}$, $(b)$ follows from $h_j(\vecnot{x}) = 0$ for $\vecnot{x}'\in \mathcal{F}$, $f_i(\vecnot{x}') \leq 0$ for $\vecnot{x}'\in \mathcal{F}$, and $\lambda_i \geq 0$.
-Then, $(c)$ holds by combining the definition of $p^*$ with the fact that $\vecnot{x}'\in \mathcal{F}$.
+where $(a)$ is implied by $\mathcal{F} \subseteq \mathcal{D}$, $(b)$ follows from $h_j(\vecnot{x}) = 0$ for $\vecnot{x} \in \mathcal{F}$, $f_i(\vecnot{x}) \leq 0$ for $\vecnot{x}\in \mathcal{F}$, and $\lambda_i \geq 0$.
+Then, $(c)$ holds by combining the definition of $p^*$ with the fact that $\vecnot{x}\in \mathcal{F}$.
 Taking the supremum over dual-feasible multipliers gives $d^*\le p^*$.
 If $\mathcal F$ is empty, $p^*=\infty$ and the conclusion is immediate.
 \end{proof}
@@ -714,7 +717,7 @@ Finally, the problem can be easily solved for a range of $P$ values by sweeping 
 \section{Deferred Proofs}
 \label{sec:opt_def_proof}
 
-\subsection{The Chain Rule for Fr\'echet Derivatives}
+\subsection*{The Chain Rule for Fr\'echet Derivatives}
 \begin{proof}[Proof of Theorem~\ref{thm:frechet_chain_rule}]
 For the stated derivatives, the errors in the implied linear approximations are 
 \begin{align*}
@@ -738,7 +741,7 @@ Combining this with the definition of $\rho$ shows that
 We take this opportunity to note that $\|g'(f(\vecnot{x}))\circ f'(\vecnot{x})\| \leq \|g'(f(\vecnot{x}))\| \|f'(\vecnot{x})\| < \infty$ because $\|f'(\vecnot{x})\| < \infty$ and $\|g'(f(\vecnot{x}))\| <\infty$. 
 
 Since $\lim_{\vecnot{h} \to \vecnot{0}} \| \phi (\vecnot{h}) \|_Y / \|\vecnot{h}\|_X = 0$, there is a $t>0$ such that $\|\phi(\vecnot{h})\|_Y \leq (\|f'(\vecnot{x})\|+1) \|\vecnot{h}\|_X$ if $\|\vecnot{h}\|_X < t$.
-Now, set $\vecnot u(\vecnot h)=f'(\vecnot x)(\vecnot h)+\phi(\vecnot h)$ and observe that, for sufficiently small $\vecnot h$, we have $\|\vecnot u(\vecnot h)\|_Y\leq 2(\|f'(\vecnot x)\|+1)\|\vecnot h\|_X$.
+Now, set $u(\vecnot h)=f'(\vecnot x)(\vecnot h)+\phi(\vecnot h)$ and observe that, for sufficiently small $\vecnot h$, we have $\| u(\vecnot h)\|_Y\leq 2(\|f'(\vecnot x)\|+1)\|\vecnot h\|_X$.
 Using this, we can write
 \begin{align*}
 \frac{\|\rho(\vecnot{h})\|_Z}{\|\vecnot{h}\|_X}
@@ -747,12 +750,12 @@ Using this, we can write
 & \leq 2 (\|f'(\vecnot{x})\|+1) \frac{\| \psi \big( u(\vecnot{h}) \big) \|_Z}{\| u(\vecnot{h}) \|_Y} + \frac{\|  g'(\vecnot{y})\| \|\phi(\vecnot{h}) \|_Y}{\|\vecnot{h}\|_X} \\
 & \leq 2 (\|f'(\vecnot{x})\|+1) \frac{\| \psi \big( u(\vecnot{h}) \big) \|_Z}{\| u(\vecnot{h}) \|_Y} + \frac{\|  g'(\vecnot{y})\| \|\phi(\vecnot{h}) \|_Y}{\|\vecnot{h}\|_X},
 \end{align*}
-where the first quotient is taken to be zero when $\vecnot u(\vecnot h)=\vecnot0$.
-If it is not zero, $u(\vecnot{h}=f'(\vecnot{x}) (\vecnot{h}) + \phi(\vecnot{h}) \to \vecnot{0}$ as $\vecnot{h}\to\vecnot{0}$ and it follows that the limit of the RHS exists and equals 0 as $\vecnot{h}\to\vecnot{0}$.
+where the first quotient is taken to be zero when $u(\vecnot h)=\vecnot0$.
+If it is not zero, $u(\vecnot{h})=f'(\vecnot{x}) (\vecnot{h}) + \phi(\vecnot{h}) \to \vecnot{0}$ as $\vecnot{h}\to\vecnot{0}$ and it follows that the limit of the RHS exists and equals 0 as $\vecnot{h}\to\vecnot{0}$.
 Thus, $\lim_{\vecnot{h} \to \vecnot{0}} \| \rho (\vecnot{h}) \|_Z / \|\vecnot{h}\|_X = 0$ and the Fr\'{e}chet derivative of $g(f(\vecnot{x}))$ exists and satisfies the chain rule.
 \end{proof}
 
-\subsection{Banach Mean Value Inequality}
+\subsection*{Banach Mean Value Inequality}
 
 \begin{proof}[Proof of Theorem~\ref{theorem:mean_value_inequality}]
 By assumption, \(\vecnot{h}\neq 0\) and we define $F(s)=f(\vecnot{x}_1+s\vecnot{h})$ for $s\in[0,1]$,

@@ -370,8 +370,10 @@ For example, we will use the fact that ``every Cauchy sequence of real numbers c
 This property, known as completeness, is the focus of Section~\ref{sec:metspace_complete} and can be established by formally constructing the real numbers as equivalence classes of Cauchy sequences of rational numbers.
 
 To discuss notions of extreme values for sets of real numbers, we also define the \defn{topology}{extended real numbers} $\overline{\RealNumbers}$ by augmenting the real numbers to include limit points for unbounded sequences $\overline{\RealNumbers} \triangleq \RealNumbers \cup \{ \infty,-\infty\}$.
-Using the metric $d_{\overline{\RealNumbers}} (x,y) \triangleq |\frac{x}{1+|x|} - \frac{y}{1+|y|}|$ with $\frac{x}{1+|x|}|_{x = \pm \infty} \triangleq \pm 1$, this defines the standard metric space of extended real numbers.
+Let $h:\overline{\mathbb R}\to[-1,1]$ be defined by $h(x)=x/(1+|x|)$ for $x\in\mathbb R$ and $h(\pm\infty)=\pm1$.
+Then, the extended real line equipped with the metric $d_{\overline{\mathbb R}}(x,y)=|h(x)-h(y)|$ defines the standard metric space of extended real numbers.
 Later, we will see that this is actually a compact metric space.
+This follows from the fact that $h$ is continuous on $[-\infty,\infty]$ and its range is $[-1,1]$.
 The main difference from $\RealNumbers$ is that, for  $x_n \in \overline{\RealNumbers}$, the statement  $x_n \to \infty$ is well defined and equivalent to $\forall M>0, \, \exists N\in \mathbb{N}, \, \forall n>N, \, x_n > M$.
 \begin{definition}
 The \defn{set theory}{supremum} (or least upper bound) of $X\subseteq \RealNumbers$, denoted $\sup X$, is the smallest extended real number $M \in \overline{\RealNumbers}$ such that $x\leq M$ for all $x\in X$.
@@ -536,7 +538,7 @@ It is possible for a sequence in a metric space $X$ to satisfy the Cauchy criter
 
 \begin{example}
 \label{example:ContinuousFunctionsCauchy}
-Let $X=C[-1,1]$ be the space of continuous functions that map $[-1,1]$ to $\mathbb{R}$ and satisfy $\left\| f \right\|_2 < \infty$, where $\left\| f \right\|_2$ denotes the $L^2$ norm
+Let $X=C[-1,1]$ be the space of continuous functions that map $[-1,1]$ to $\mathbb{R}$ and note that $\left\| f \right\|_2 < \infty$, where $\left\| f \right\|_2$ denotes the $L^2$ norm
 \begin{equation*}
 \left\| f \right\|_2 \triangleq \left( \int_{-1}^1 |f(t)|^2 dt \right)^{\frac{1}{2}}.
 \end{equation*}
@@ -621,6 +623,8 @@ Let $\mathcal C(\mathbb Q)$ denote the set of all Cauchy sequences $q_1, q_2, \l
 Then, the set of equivalence classes (or quotient set) $\mathcal{C}(\mathbb{Q}) / \! \sim$ is in one-to-one correspondence with the real numbers.
 This construction is the standard completion of $\mathbb{Q}$.
 Since every Cauchy sequence of rationals converges to a real number, the isometry is given by mapping each equivalence class to its limit point in $\RealNumbers$.
+For Cauchy sequence equivalence classes $[q_n]$ and $[r_n]$ with real limits $q$ and $r$, the metrics satisfy
+\[d_{\mathcal{C}(\mathbb Q)}([q_n],[r_n])=\lim_{n\to\infty}|q_n-r_n|=|q-r|=d_{\RealNumbers}(q,r). \]
 \end{example}
 
 \begin{definition}
@@ -692,13 +696,17 @@ Therefore, $\cos(x)$ is a contraction on $[0,1]$ and the sequence $x_{n+1} = \co
 A metric space $(X,d)$ is \defn{metric space}{totally bounded} if, for any $\epsilon > 0$, there exists a finite set of $B_d (x,\epsilon)$ balls that cover (i.e., whose union equals) $X$.
 \end{definition}
 
-\begin{definition}
+\begin{definition} \label{definition:metric_compact}
 A metric space is \defn{metric space}{compact} if it is complete~and~totally~bounded.
 \end{definition}
 
-The closed interval $[0,1]\subset \RealNumbers$ is compact.
+For example, the closed interval $[0,1]\subset \RealNumbers$ is compact.
 In fact, a subset of $\RealNumbers^n$ is compact if and only if it is closed and bounded.
 On the other hand, the standard metric space of real numbers is not compact because it is not totally bounded.
+
+\begin{remark}
+For general topology, compactness is described by Definition~\ref{definition:topology_compact}.
+\end{remark}
 
 \begin{theorem}
 \label{thm:CompactClosedSubsetCompact}
@@ -825,6 +833,8 @@ While compactness does not depend on the choice of metric, completeness and tota
 \begin{example}
 While most of the spaces discussed in these notes are metrizable, there is a very common notion of convergence that is not metrizable.
 We note without proof that  the topology of pointwise convergence on the set of functions $f \colon [0,1]\rightarrow \RealNumbers$ (called the product topology) is not metrizable.
+This follows from the fact that $[0,1]$ is uncountable.
+In constrast, pointwise convergence of real functions on a countable domain is metrizable.
 \end{example}
 
 
@@ -903,6 +913,13 @@ Since every real number is a limit point of rational numbers, it follows that $\
 This also implies that $\RealNumbers$, the standard metric space of real numbers, is separable.
 \end{example}
 
+\begin{definition} \label{definition:topology_compact}
+A topological space $X$ is \defn{topology}{compact} if every covering of $X$ by open sets contains a finite subcover.
+\end{definition}
+
+\begin{remark}
+For metric spaces, this is equivalent to the earlier Definition~\ref{definition:metric_compact}.
+\end{remark}
 
 \subsection{Continuity}
 

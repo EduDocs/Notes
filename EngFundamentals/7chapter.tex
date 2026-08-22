@@ -1,10 +1,13 @@
 \chapter{Singular Value Decomposition}
 
+\gpt{Chapter-level feedback: SVD is an essential culmination for ECE students, but this short chapter currently stops just before its most illuminating consequences.  After the four fundamental subspaces, consider adding the variational characterization $\sigma_1=\max_{\|x\|=1}\|Ax\|$, the Eckart--Young--Mirsky best rank-$k$ approximation theorem, and a brief discussion of conditioning.  For the quantum-computing audience, a short section identifying the Schmidt decomposition of a bipartite pure state as an SVD would connect the linear algebra directly to entanglement.  The polar decomposition would also tie SVD back to projection and least squares.  Move the Hermitian spectral theorem to the preceding Canonical Forms chapter, then let this chapter use it as the clean starting point for SVD.}
+
 
 \section{Diagonalization of Hermitian Matrices}
 
 \begin{lemma}[Schur Decomposition]
 For any square matrix $A$, there exists a unitary matrix $U$ such that
+\gpt{Missing hypothesis: this statement is valid for complex square matrices; a real matrix need not have a real Schur form that is triangular (the real Schur form is only block upper triangular).  Replace ``For any square matrix $A$'' with ``For any $A\in\mathbb C^{n\times n}$''.}
 \begin{equation*}
 U^H A U = T
 \end{equation*}
@@ -39,6 +42,7 @@ A U_n = \begin{bmatrix} A \vecnot{x}_1 & \cdots & A \vecnot{x}_n \end{bmatrix}
 \vecnot{0} & A_{n-1} \end{bmatrix} ,
 \end{equation*}
 where we have used the convenient notation
+\gpt{In the displayed matrix below, ``$\vecnot s_{2,n}$'' should be the scalar ``$s_{2,n}$''.}
 \begin{equation*}
 A_{n-1} = \begin{bmatrix} s_{2,2} & \cdots & \vecnot{s}_{2,n} \\
 \vdots & \ddots & \vdots \\
@@ -170,10 +174,12 @@ Hence,
 U^H A V = \Diag \left( \sqrt{\lambda_1}, \ldots, \sqrt{\lambda_n} \right)
 = \Sigma ,
 \end{equation*}
+\gpt{Dimension issue: when $m\ne n$, $\Sigma$ is rectangular, so writing it as the diagonal of all $n$ eigenvalues is ambiguous (and impossible if the notation creates an $n\times n$ matrix).  Suggested replacement: ``Hence $U^HAV=\Sigma\in\mathbb R^{m\times n}$, where $\Sigma_{ii}=\sqrt{\lambda_i}$ for $1\le i\le p=\min(m,n)$ and all off-diagonal entries are zero.''  It would also clarify line 159 to say that the first $r$ vectors span $\mathcal R(A)$, so every orthonormal completion lies in $\mathcal R(A)^\bot=\mathcal N(A^H)$ and therefore has $\vecnot u_i^HA=0$.}
 as desired.
 \end{proof}
 
 This proof gives a recipe for computing the SVD of an arbitrary matrix.
+\gpt{Numerical caveat: forming $A^HA$ squares the condition number and can lose the smallest singular values, so this is not the usual stable recipe for computing an SVD.  Suggested replacement: ``This proof gives a conceptual way to derive the SVD from a Hermitian eigenvalue problem.  In numerical work one typically uses bidiagonalization-based SVD algorithms rather than explicitly forming $A^HA$.''}
 Consider the matrix 
 \[ A = \left[ \begin{array}{cc}
 1 & 1 \\
@@ -251,11 +257,14 @@ where $U \in \ComplexNumbers^{m \times m}$ and $V \in \ComplexNumbers^{n \times 
 The diagonal matrix $\Sigma_1 \in \RealNumbers^{r \times r}$ contains the non-zero singular values
 \[ \sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_r > 0. \]
 The factorization $A = U \Sigma V^H$ is called the \textbf{full SVD} of the matrix $A$ while the factorization $A = U_1 \Sigma_1 V_1$ is called the \defn{matrix}{compact SVD} of $A$.
+\gpt{Line above: the compact SVD should be ``$A=U_1\Sigma_1V_1^H$''; the Hermitian transpose is missing.}
 The compact SVD of a rank-$r$ matrix retains only the $r$ columns of $U,V$ associated with non-zero singular values.
 
 Let $X,Y$ be inner product spaces and let $A$ define a mapping from $X$ to $Y$.
 Then, the columns of $V_1$ form an orthonormal basis for the vectors in $X$ that are mapped to non-zero vectors (i.e., $\mathcal{N}(A)^\bot$) while the columns of $V_2$ form an orthonormal basis of $\mathcal{N}(A)$.
+\gpt{Mathematical error: the set of vectors mapped to nonzero vectors is $X\setminus\mathcal N(A)$, not $\mathcal N(A)^\bot$, and it is not a subspace.  Suggested replacement: ``Then the columns of $V_1$ form an orthonormal basis for $\mathcal N(A)^\bot=\mathcal R(A^H)$, while the columns of $V_2$ form an orthonormal basis for $\mathcal N(A)$.''}
 Likewise, the columns of $U_1$ form a orthonormal basis for the vectors in $Y$ that lie in the range of $A$ while the vectors in $U_2$ form orthonormal basis for $\mathcal{R}(A)^\bot$.
+\gpt{Line above: ``form a orthonormal basis'' should be ``form an orthonormal basis'', and ``form orthonormal basis'' should be ``form an orthonormal basis''.}
 It follows that the full SVD computes orthonormal bases for all of the four fundamental subspaces of the matrix $A$.
 For example, it is easy to show that
 \begin{align*}
@@ -265,6 +274,7 @@ For example, it is easy to show that
 \mathcal{N}(A^H) &= \textrm{span} (U_2)
 \end{align*}
 To see this, notice that $A \sum_{i=1}^t c_i \vecnot{v}_i = \sum_{i=1}^t c_i \sigma_i \vecnot{u}_i$.
+\gpt{Line above: $t$ is undefined, and the formula using nonzero singular values is intended for $1\le i\le r$.  Replace both upper limits ``$t$'' with ``$r$'', or introduce $t\le r$.}
 
 From this, we can compute easily any projection onto a fundamental subspace.
 First, we point out that the projection onto the column space of any matrix $W\in \mathbb{C}^{m \times n}$ with orthonormal columns (i.e., $W^H W = I$) is given by
@@ -280,6 +290,7 @@ P_{\mathcal{N}(A^H)} &= U_2 U_2^H = I - U_1 U_1^H.
 This decomposition also provides a rank revealing decomposition of a rank-$r$ matrix
 \[ A = \sum_{i=1}^r \sigma_i \vecnot{u}_i \vecnot{v}_i^H, \]
 where $\vecnot{u}_i$ is the $i$th column of $U$ and $\vecnot{v}$ is the $i$th column of $V$.
+\gpt{Line above: ``$\vecnot v$'' should be ``$\vecnot v_i$''.}
 This shows $A$ as the sum of $r$ rank-1 matrices.
 It also allows one to compute
 \begin{align*}
@@ -295,3 +306,4 @@ It also follows from the fact that the pseudoinverse of a scalar $\sigma$ is $\s
 
 
 
+\gpt{Omission: students may infer that the singular vectors are unique.  Suggested addition: ``The singular values are uniquely determined.  Singular vectors associated with a repeated singular value are not unique: any unitary change of basis within the corresponding singular subspaces gives another SVD.  Zero-singular-value bases are likewise nonunique.''}
