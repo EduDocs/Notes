@@ -96,6 +96,7 @@ It is called \textbf{strictly convex}
 \[
 \lambda \vecnot{a}_1 + (1- \lambda) \vecnot{a}_2 \in \Interior{A} \quad \text{for all $\vecnot{a}_1, \vecnot{a}_2 \in \Closure{A}$ and $\lambda \in (0,1)$}
 \]
+% \gpt{Suggested cut/paste hypothesis: work in a normed vector space and require distinct $a_1,a_2\in\overline A$ in the strict-convexity clause; closure and interior require a topology.}
 \begin{center}
 \begin{tikzpicture}%[%rotate=270,scale=0.75]
     \draw[rotate=-45,fill=gray!30] (-1.8,-1.8) ellipse (30pt and 45pt);
@@ -163,6 +164,7 @@ a \le   f(\vecnot{x})  \le b  \quad \forall \vecnot{x} \in V
 
 
 \item The notion of an orthogonal projection generalizes to the setting where $A$ is a closed convex set of Hilbert space $V$. The projection theorem state below guarantees the existence and uniqueness of the best approximation in this setting. Thus, the 
+% \gpt{Suggested cut/paste qualification: require $A$ to be nonempty as well as closed and convex. The revised book also records the nonexpansive bound $\|P_A(v)-P_A(w)\|\leq\|v-w\|$.}
 %The following theorem generalizes this result to the setting of a closed convex set. %  For Hilbert space $V$ and closed convex set $A\subseteq V$, 
  orthogonal projection of $\vecnot{v}\in V$ onto $A$ is a well-defined mapping $P_{A}:V\rightarrow A$ given by 
  \[
@@ -326,6 +328,7 @@ By convexity of $A$ and $f$ we have
 \[
 f(\vecnot{x}) \ge f(\vecnot{x}_0) +  \frac{ f(\vecnot{x} + \lambda( \vecnot{x} - \vecnot{x}_0)) - f(\vecnot{x}_0)}{\lambda}, \quad \text{for all $\lambda \in (0,1)$}
 \]
+% \gpt{Suggested cut/paste correction: the numerator must evaluate along the segment from $x_0$ to $x$, namely $f(x_0+\lambda(x-x_0))-f(x_0)$.}
 Taking the $\lambda \to 0^+$ limit gives the stated inequality. 
 
  \item \textbf{Corollary:}  
@@ -334,6 +337,7 @@ If $f$ has directional derivatives in all directions at $\vecnot{x}_0 \in A$ and
 f(\vecnot{x}_0) = \min_{\vecnot{x}\in A} f(\vecnot{x})
 \]
 If $f$ is strictly convex, then $\vecnot{x}_0$ is the unique minimizer over $A$.
+% \gpt{Suggested constrained optimality condition: ``If $f'(x_0;x-x_0)\geq0$ for every $x\in A$, then $x_0$ is a global minimizer; if $f$ is strictly convex, it is unique.'' Requiring zero in all directions is unnecessarily strong and may include infeasible directions.}
 
 
 
@@ -440,4 +444,3 @@ where $s\in(0,1]$ is the step-size.
 \bibliographystyle{alpha}%{IEEEtran}
 \bibliography{/Users/galenreeves/Dropbox/Library/long_names,/Users/galenreeves/Dropbox/Library/library} 
 \end{document}
-

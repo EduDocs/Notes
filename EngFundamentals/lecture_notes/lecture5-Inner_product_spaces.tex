@@ -83,6 +83,7 @@
 
 \item A \textbf{complete normed vector} space is called a \textbf{Banach space}.  Completeness ensures that limits (including  infinite summations) are well defined elements of the space. 
 \item A Banach space is  \textbf{separable} if and only if it has Schauder basis, i.e., a countable collection of linearity independent vectors whose span is dense in the space. 
+% \gpt{Suggested replacement: ``A Banach space is separable if it has a Schauder basis, but the converse fails in general. Every separable Hilbert space does have a countable orthonormal basis.''}
 
 \end{itemize}
 
@@ -151,12 +152,14 @@ Then, the following defines an inner product
 \begin{equation*}
 \inner{ f }{ g } = \int_0^1 f(t) \overline{g(t)} \, dt
 \end{equation*}
+% \gpt{Suggested cut/paste qualification: if completeness is needed later, take $V=L^2([0,1])$ modulo equality almost everywhere. The continuous-function subspace has this inner product but is not complete in the induced norm.}
 
 
 \item{} [Inner Product on Space of Random Variables]
 Let $W$ be a set of real-valued random variables with finite 2nd moments.
 Then, $V = \Span (W)$ is a vector space over $\bbR$ with inner product 
 \[ \inner{ X }{ Y } =\ex{ XY} \]
+% \gpt{Suggested cut/paste qualification: identify random variables that are equal almost surely; otherwise $\mathbb E[X^2]=0$ need not imply that $X$ is the zero pointwise function.}
 \end{itemize}
 
 \item \textbf{Theorem:} 
@@ -292,6 +295,7 @@ This is denoted by $\vecnot{v} \perp \vecnot{w} $
 \[
  \vecnot{u} = \frac{\inner{ \vecnot{w} }{ \vecnot{v} }}{\|\vecnot{v}\|^2} \vecnot{v} 
  \]
+% \gpt{Suggested cut/paste hypothesis: require $\vecnot{v}\neq\vecnot{0}$ before defining projection onto $\vecnot{v}$.}
 
 
 
@@ -374,6 +378,7 @@ Then, since $\vecnot{u} = s \vecnot{v}$ for some scalar $s$, it follows that $\t
 & \le  \| \vecnot{u}  \|^2  + 2\left\| \vecnot{v} \right\| \left\| \vecnot{w} \right\|   + \| \vecnot{w} \|^2 &\qquad & \text{Cauchy-Schwarz}\\
 & = \left( \| \vecnot{u}  \| +\| \vecnot{w} \| \right)^2
 \end{alignat*}
+% \gpt{Suggested cut/paste correction throughout this display: replace the unintended $\vecnot{v}$ by $\vecnot{u}$ in both inner products and in the Cauchy--Schwarz bound.}
 \item Taking the positive square root of both sides completes the proof. 
 \end{itemize}
 
@@ -674,4 +679,3 @@ f \left( \vecnot{w} \right) = \inner{ \vecnot{w} }{ \vecnot{v} } \quad \text{for
 \bibliographystyle{alpha}%{IEEEtran}
 \bibliography{/Users/galenreeves/Dropbox/Library/long_names,/Users/galenreeves/Dropbox/Library/library} 
 \end{document}
-

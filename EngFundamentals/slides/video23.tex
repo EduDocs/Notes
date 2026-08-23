@@ -472,6 +472,7 @@ The Lagrangian dual function is concave and the \textcolor{blue}{Lagrangian dual
 has a unique max value $d^* \leq p^*$.
 This property is known as \textcolor{blue}{weak duality}.
 \end{lemma}
+% \gpt{Suggested cut/paste correction: ``The dual optimal value is $d^*=\sup_{\lambda\geq0,\nu}g(\lambda,\nu)$ and satisfies $d^*\leq p^*$.''  Concavity does not imply a unique maximizer, and the supremum need not be attained.}
 
 \begin{definition}<3->
 If $d^* = p^*$, then one says that \textcolor{blue}{strong duality} holds for the problem.
@@ -500,6 +501,7 @@ g(\vecnot{\lambda},\vecnot{\nu})
 \stackrel{(c)}{\leq} p^*, \vspace{-3mm}
 \end{align*}
 where $(a)$ is implied by $\mathcal{F} \subseteq \mathcal{D}$, $(b)$ follows from $h_j(\vecnot{x}) = 0$ for $\vecnot{x}\in \mathcal{F}$, and $(c)$ holds by combining $f_i(\vecnot{x}) \leq 0$ for $\vecnot{x}\in \mathcal{F}$ and $\lambda_i \geq 0$.
+% \gpt{Suggested replacement proof: for any primal-feasible $x'$ and any $\lambda\geq0$, $g(\lambda,\nu)=\inf_{x\in\mathcal D}L(x,\lambda,\nu)\leq L(x',\lambda,\nu)\leq f_0(x')$.  Taking the infimum over feasible $x'$ and then the supremum over dual-feasible multipliers gives $d^*\leq p^*$.  This avoids the invalid step that pulls an unspecified feasible $x$ out of an infimum.}
 
 \end{frame}
 

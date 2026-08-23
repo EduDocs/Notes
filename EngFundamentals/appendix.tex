@@ -1,6 +1,6 @@
-\chapter{Optional Topics}
+\chapter{Optional Details}
 
-\gpt{Appendix-level feedback: These topics are worthwhile for students who want to understand where existence results in infinite-dimensional linear algebra come from.  However, the label ``Optional Topics'' conflicts with Chapter~3's proof that every vector space has a Hamel basis, which explicitly invokes the maximum principle here.  Either mark that Hamel-basis theorem and proof optional too, or move a concise statement of the Hausdorff maximal principle immediately before its first use and retain this appendix for the equivalences with choice and well-ordering.  For this ECE audience, the latter material is best kept optional unless transfinite arguments are used elsewhere.}
+% \gpt{Appendix-level feedback: These topics are worthwhile for students who want to understand where existence results in infinite-dimensional linear algebra come from.  However, the label ``Optional Topics'' conflicts with Chapter~3's proof that every vector space has a Hamel basis, which explicitly invokes the maximum principle here.  Either mark that Hamel-basis theorem and proof optional too, or move a concise statement of the Hausdorff maximal principle immediately before its first use and retain this appendix for the equivalences with choice and well-ordering.  For this ECE audience, the latter material is best kept optional unless transfinite arguments are used elsewhere.}
 
 \section{Dealing with Infinity*}
 
@@ -25,7 +25,6 @@ c: \mathcal{Y}  \rightarrow \bigcup_{Y \in \mathcal{Y}} Y
 satisfying $c(Y) \in Y$ for every $Y \in \mathcal{Y}$.
 \end{lemma}
 \begin{proof}
-\gpt{The construction below has a type error: $Y'\cap Z$ is a singleton set of ordered pairs, so the displayed map has neither the domain nor the values required by the lemma.  Suggested replacement for lines 48--55: ``For each $Y\in\mathcal Y$, the set $Z\cap Y'$ contains exactly one ordered pair, say $(Y,y_Y)$.  Define $c:\mathcal Y\to\bigcup_{Y\in\mathcal Y}Y$ by $c(Y)=y_Y$.  Since $(Y,y_Y)\in Y'$, we have $y_Y\in Y$, so $c$ is the desired choice function.''}
 The difference between the axiom of choice and the lemma is that in the latter statement the sets of the collection $\mathcal{Y}$ need not be disjoint.
 Given an element $Y \in \mathcal{Y}$, define the set $Y'$ by
 \begin{equation*}
@@ -48,14 +47,17 @@ This is a collection of disjoint nonempty subsets of
 \mathcal{Y} \times \bigcup_{Y \in \mathcal{Y}} Y.
 \end{equation*}
 By the axiom of choice, there exists a set $Z$ having exactly one element in common with each element of $\mathcal{Z}$.
-Define the function
-\begin{equation*}
-c: \mathcal{Z} \rightarrow
-\mathcal{Y} \times \bigcup_{Y \in \mathcal{Y}} Y
-\end{equation*}
-by $c \left( Y' \right) = Y' \cap Z$.
-This function $c$ implicitly provides the rule for a function from $\mathcal{Y}$ to the set $\bigcup_{Y \in \mathcal{Y}} Y$ such that $y$ belongs to $Y$ whenever $\left( Y, y \right) \in Z$.
-This rule is the desired choice function.
+For each $Y\in\mathcal Y$, the set $Z\cap Y'$ contains exactly one ordered pair, say $(Y,y_Y)$.
+Define \[ c:\mathcal Y\to\bigcup_{Y\in\mathcal Y}Y\] by $Y \mapsto y_Y$.
+Since $(Y,y_Y)\in Y'$, we have $y_Y\in Y$, so $c$ is the desired choice function.
+% Define the function
+% \begin{equation*}
+% c: \mathcal{Z} \rightarrow
+% \mathcal{Y} \times \bigcup_{Y \in \mathcal{Y}} Y
+% \end{equation*}
+% by $c \left( Y' \right) = Y' \cap Z$.
+% This function $c$ implicitly provides the rule for a function from $\mathcal{Y}$ to the set $\bigcup_{Y \in \mathcal{Y}} Y$ such that $y$ belongs to $Y$ whenever $\left( Y, y \right) \in Z$.
+% This rule is the desired choice function.
 \end{proof}
 
 
@@ -91,9 +93,8 @@ There exists an uncountable well-ordered set.
 Let $X$ be an ordered set.
 Given $x \in X$, the set
 \begin{equation*}
-Y_x = \left\{ y \in Y | y < x \right\}
+Y_x = \left\{ y \in X | y < x \right\}
 \end{equation*}
-\gpt{In the displayed definition above, ``$y\in Y$'' should be ``$y\in X$''; $Y$ is undefined here.}
 is called the \textbf{section} of $X$ by $x$.
 \end{definition}
 
@@ -104,7 +105,7 @@ There exists an uncountable well-ordered set, every section of which is countabl
 The well-ordering principle is a necessary tool in proofs by induction when the set over which the induction process is applied is not a segment of the natural numbers; this is the so-called transfinite induction.
 
 
-\subsection{The Maximum Principle}
+\subsection{The Hausdorff Maximum Principle}
 \label{app:maximum-principle}
 
 A \defn{set theory}{strict partial order} $\prec$ on a set $X$ is a relation such that for all $x, y, z \in X$
@@ -115,7 +116,7 @@ A \defn{set theory}{strict partial order} $\prec$ on a set $X$ is a relation suc
 
 A strict partial order is similar to a simple order, except that it need not be true that for every distinct $x, y \in X$, either $x \prec y$ or $y \prec x$.
 
-\begin{fact}[The maximum principle]
+\begin{fact}[Hausdorff maximum principle]
 Let $X$ be a set and suppose that $\prec$ is a strict partial order on $X$.
 If $Y$ is a subset of $X$ that is simply ordered by $\prec$, then there exists a maximal simply ordered subset $Z$ of $X$ containing $Y$.
 \end{fact}
@@ -127,7 +128,4 @@ Furthermore, each of them is equivalent to the axiom of choice.
 Let $\prec$ be a strict partial order on $X$.
 For $x, y \in X$, the relation $x \preceq y$ holds if $x \prec y$ or $x = y$.
 The relation $\preceq$ so defined is called a \defn{set theory}{partial order} on $X$.
-For example, the inclusion relation $\subset$ on a collection of sets is a partial order, whereas proper inclusion is a strict partial order.
-\gpt{Notation: if $\subset$ is used elsewhere for proper inclusion, this sentence contradicts itself.  Suggested replacement: ``For example, inclusion $\subseteq$ is a partial order on a collection of sets, whereas proper inclusion $\subsetneq$ is a strict partial order.''}
-
-\gpt{Terminology: this result is usually called the ``Hausdorff maximal principle.''  Using that name here will help students recognize the standard equivalent form of the axiom of choice and distinguish it from unrelated maximum principles in analysis.}
+For example, the inclusion relation $\subseteq$ on a collection of sets is a partial order, whereas proper inclusion $\subsetneq$ is a strict partial order.

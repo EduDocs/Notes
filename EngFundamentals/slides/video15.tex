@@ -205,12 +205,14 @@ Then, the following defines an inner product \vspace{-1.5mm}
 = \textstyle\int_0^1 f(t) \overline{g(t)} \, dt
 \end{equation*}
 \end{example}
+% \gpt{Suggested cut/paste qualification: if this example is meant to introduce the Hilbert space used later, take $V=L^2([0,1])$ modulo equality almost everywhere.  The continuous-function subspace has this inner product but is not complete in the induced norm.}
 
 \begin{example}[Inner Product on Space of Random Variables]<3->
 Let $W$ be a set of real-valued random variables with finite 2nd moments.
 Then, $V = \Span (W)$ is a vector space over $\RealNumbers$ with inner product \vspace{-1.5mm}
 \[ \inner{ X }{ Y } = \Expect \left[ XY \right] \]
 \end{example}
+% \gpt{Suggested cut/paste qualification: identify random variables that are equal almost surely; otherwise $\mathbb{E}[X^2]=0$ need not imply that $X$ is the zero pointwise function.}
 
 
 \end{frame}
@@ -313,6 +315,7 @@ $ \vecnot{u} = \displaystyle\frac{\inner{ \vecnot{w} }{ \vecnot{v} }}{\|\vecnot{
 \end{tikzpicture}
 \end{tabular}
 \end{definition}
+% \gpt{Suggested cut/paste hypothesis: require $\vecnot{v}\neq\vecnot{0}$ before defining projection onto $\vecnot{v}$, since the formula divides by $\|\vecnot{v}\|^2$.}
 
 \end{frame}
 
@@ -355,6 +358,7 @@ If $V$ is an inner-product space over $F$ and $\| \vecnot{v} \| \triangleq \sqrt
 \item $\left\| \vecnot{v} + \vecnot{w} \right\| \leq \left\| \vecnot{v} \right\| + \left\| \vecnot{w} \right\|$ with equality iff $\vecnot{v} = \vecnot{0}$, $\vecnot{w}=\vecnot{0}$, or $\vecnot{v} = s \vecnot{w}$.
 \end{enumerate}
 \end{theorem}
+% \gpt{Suggested cut/paste equality cases: Cauchy--Schwarz has equality iff the vectors are linearly dependent; triangle inequality has equality iff one vector is a nonnegative real multiple of the other (including the zero cases).  An arbitrary complex or negative scalar is too broad for the triangle equality case.}
 
 \begin{proof}[Sketch of Proof]<2->
 The first two follow immediately from definitions.

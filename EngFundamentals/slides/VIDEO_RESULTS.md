@@ -110,12 +110,13 @@ Use the remote-backed canonical video for production. Preserve backend-specific 
 ### Completed outputs
 
 All four videos were initially built on 2026-08-01 with remote Qwen3-TTS, the
-Coben x-vector voice, and default seed 42. Video 3 was refreshed on 2026-08-06;
-the table reports the current outputs.
+Coben x-vector voice, and default seed 42. Video 3 was refreshed on 2026-08-06
+and Video 1 was regenerated with the hp2 Coben reference on 2026-08-22; the
+table reports the current outputs.
 
 | Video | Frames | Overlay pages / clips | Speech | Timed narration | Canonical MP4 | Size |
 |---|---:|---:|---:|---:|---:|---:|
-| 1: Propositional Logic | 8 | 28 pages / 29 clips | 454.00 s | 487.90 s | 487.93 s | 9.85 MB |
+| 1: Propositional Logic | 8 | 28 pages / 33 clips | 452.96 s | 487.66 s | 487.67 s | 8.51 MB |
 | 2: Predicate Logic | 8 | 29 pages / 30 cues | 711.60 s | 746.45 s | 746.47 s | 15.57 MB |
 | 3: Set Theory | 10 | 39 pages / 52 clips | 635.92 s | 686.22 s | 686.23 s | 13.16 MB |
 | 4: Relations and Functions | 9 | 29 pages / 39 clips | 497.84 s | 538.04 s | 538.07 s | 10.79 MB |
@@ -452,3 +453,123 @@ by 1 ms. The AAC level is -26.0 dBFS mean and -3.6 dBFS peak.
 A final cache-only run reused all 32 speech chunks and all 27 timed pages and
 did not request a DCC allocation. Stable review copies of the four changed raw
 speech clips are in `build/video0/review-clips/` with page-specific filenames.
+
+## Video 1 hp2 voice regeneration
+
+Video 1 was regenerated on 2026-08-22 with the Coben hp2 x-vector reference
+and service identity `qwen3-tts-1.7b-base-coben-hp2-xvector-v1`. Before the
+refresh, its former remote audio cache, timed WAVs, continuous narration WAV,
+logs, and canonical MP4 were copied to
+`build/video1/backups/2026-08-22-pre-hp2/`. The verified backup has 149 files,
+occupies 96 MB, and preserves the prior canonical MP4, narration WAV, and
+metadata SHA-256 values:
+`53604817cf9eaf9c822c938c3178d8da0b523e248ea1077be62fc3612ff5c4e6`,
+`3a602cb1bb665e3e489ccc41cc6e8208d0c845a17596fdbddea48a482ac124f9`, and
+`c16d23c6a454ddc693ddbd653cbd2548a9344880ba8a235862cdd06916532a8f`.
+
+The new service selected an RTX 5000 Ada in `gpu-common` with BF16 and SDPA.
+It synthesized all 29 speech chunks and rebuilt all 28 timed pages; the video
+renderer rebuilt all 28 video segments. All requests returned HTTP 200 without
+retries, timeouts, or tracebacks, and automatic cleanup cancelled service job
+53006348 after synthesis.
+
+The hp2 result contains 450.72 seconds of speech and 484.62 seconds of timed
+PCM narration. Concatenating all 28 timed page WAV payloads reproduces the
+continuous narration byte-for-byte; both have PCM SHA-256
+`5c9f0e3ad334def8d4064b3fc06e6aa446aedf2c948cba919ba802c8960bbcca`.
+The canonical H.264/AAC MP4 is 484.6333 seconds at 908 by 510 and 30 fps, with
+mono 24-kHz AAC, a mean volume of -25.8 dBFS, and a peak of -3.9 dBFS. Its
+file SHA-256 is
+`a6bb09c69e95ace5a1170604470860200bd8d55e96dcc281b3bfadbfb2dfd713`.
+The video and audio streams differ by 25 ms, within one 30-fps frame; a full
+FFmpeg decode completed without error. A final cache-only run reused all 29
+speech chunks and all 28 timed pages without requesting a DCC allocation.
+
+## Video 1 script refresh and Page 3 alternate take
+
+Video 1 was rebuilt on 2026-08-22 after the current reviewed-script edits and
+a new Page 3 alternate take. Page 3 retains the authored text, but uses the
+page-local Qwen seed `43` rather than the default `42` to obtain a fresh take
+of “recorded for a course at Duke University.” The current script also changed
+pages 7, 9, 13--16, 20--22, 24, 26, and 27; its current `graduates` lexicon
+entry also changed page 19. The remote run synthesized 14 clips and reused 15,
+rebuilt 14 timed pages and reused 14, and rebuilt 21 video segments while
+reusing seven. The RTX 5000 Ada BF16 requests completed without retries,
+timeouts, or tracebacks, and cleanup cancelled service job 53007758.
+
+The current result has 436.64 seconds of speech and 470.54 seconds of timed
+PCM narration. The 28 page WAV payloads concatenate byte-for-byte to the
+continuous narration WAV, with PCM SHA-256
+`2e3d076838a558ff44d3aeb4ba7e24140864ce1fc57ead12faba9a35592cb19e`.
+The canonical MP4 is 470.5667 seconds, 8,603,460 bytes, H.264 at 908 by 510
+and 30 fps, with mono 24-kHz AAC. Its SHA-256 is
+`2ee48cdac07e6b2434d1cc4d9055b0622e450e5ee6653e8975660ab22137059d`.
+Its mean and peak AAC levels are -25.4 dBFS and -3.5 dBFS. A full FFmpeg decode
+completed without error; the MP4 duration differs from the PCM narration by
+27 ms, within one 30-fps frame. A final cache-only run reused all 29 clips and
+all 28 timed pages without requesting DCC. Stable copies of the 14 regenerated clips are in
+`build/video1/review-clips/`.
+
+## Video 1 current-script regeneration
+
+Video 1 was incrementally regenerated on 2026-08-22 from the next set of
+authored script and pronunciation edits. The current build synthesized 11
+speech clips, reused 18, rebuilt 11 timed pages, and reused 17; the renderer
+rebuilt 12 video segments and reused 16. The availability-aware controller
+selected an immediately available RTX 5000 Ada in `scavenger-gpu` with BF16.
+All requests completed without retries, timeouts, or tracebacks, and automatic
+cleanup cancelled service job 53020708.
+
+The current result contains 439.04 seconds of speech and 472.94 seconds of
+timed PCM narration. The 28 timed page WAVs concatenate byte-for-byte into the
+continuous narration WAV, with PCM SHA-256
+`7b817e96d813c2605fe08adbf736e1f04ed852b7c2c8e13c1b52474e8204777e`.
+The canonical H.264/AAC MP4 is 472.9667 seconds, 8,644,316 bytes, at 908 by
+510 and 30 fps, with mono 24-kHz AAC. Its SHA-256 is
+`c625457bad1eb881d13ca4bc8e520d7db7241f3e180a496f85f4e8d99b0ea6a1`.
+Full FFmpeg decoding completed without error; a final cache-only run reused all
+29 speech chunks and all 28 timed pages without requesting DCC.
+
+## Video 1 split-cue regeneration
+
+Video 1 was incrementally regenerated on 2026-08-22 from the latest authored
+script and pronunciation edits. The current script has 33 speech chunks across
+28 rendered overlay pages. The production run synthesized nine changed chunks,
+reused 24, rebuilt five timed pages, and reused 23; the renderer rebuilt seven
+video segments and reused 21. The availability-aware controller selected an RTX
+5000 Ada in `scavenger-gpu` with BF16. All requests completed without retries,
+timeouts, HTTP errors, or tracebacks, and automatic cleanup cancelled service
+job 53036809.
+
+The current result contains 453.12 seconds of speech and 487.82 seconds of
+timed PCM narration. Concatenating the 28 timed page WAV payloads reproduces
+the continuous narration WAV byte-for-byte; both have PCM SHA-256
+`c463b57e6188bad81b267237464cbffa2bffd3a7fefb059badef4d731c5c284e`.
+The canonical H.264/AAC MP4 is 487.8333 seconds, 8,873,695 bytes, at 908 by
+510 and 30 fps, with mono 24-kHz AAC. Its SHA-256 is
+`9b086e85331668263b9a6e1e6ca262007ea9b1469ada13b235f9b142b9b8e5bb`.
+Full FFmpeg decoding completed without error; the final AAC level is -25.6 dBFS
+mean and -3.9 dBFS peak. A final cache-only run reused all 33 speech chunks and
+all 28 timed pages without requesting DCC.
+
+## Video 1 conditional and meta-statement refresh
+
+Video 1 was incrementally regenerated on 2026-08-23 after the current edits to
+the Page 20 conditional examples and two Page 26 meta-statement cues. The
+remote production run synthesized five speech chunks, reused 28, rebuilt two
+timed pages, and reused 26; the renderer rebuilt four video segments and reused
+24. The controller selected an RTX 5000 Ada in `scavenger-gpu` with BF16, and
+automatic cleanup cancelled service job 53039028. The successful remote run had
+no request retries, timeouts, HTTP errors, or tracebacks.
+
+The result contains 452.96 seconds of speech and 487.66 seconds of timed PCM
+narration. The continuous narration WAV has SHA-256
+`f097ef02f7bbc0b734e89fcfbbd8f070be84457780cbafadc2dc4363e3ec030f`.
+The canonical H.264/AAC MP4 is 487.6667 seconds, 8,925,888 bytes, at 908 by
+510 and 30 fps, with mono 24-kHz AAC. Its SHA-256 is
+`791ee51f6cd3983d18d618521e08c7d77e72bef99170367cabca874d5ce0fdfc`.
+Full FFmpeg decoding completed without error; the audio and video streams differ
+by 30 ms, within one 30-fps frame. The final AAC level is -25.7 dBFS mean and
+-3.9 dBFS peak. A final cache-only verification reused all 33 speech chunks and
+all 28 timed pages without requesting DCC. Stable review copies of the five
+regenerated clips are in `build/video1/review-clips/latest-2026-08-23/`.

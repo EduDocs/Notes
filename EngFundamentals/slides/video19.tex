@@ -207,6 +207,7 @@ i.e., \textcolor{blue}{all rows of $A$ orthogonal to $\vecnot{x}$} or $\vecnot{x
 \begin{definition}<4-> [Adjoint]
 Let $V$ and $W$ be Hilbert spaces, and assume $T \colon V \rightarrow W$ is a continuous linear transformation (i.e., $\| T \|_{\mathrm{op}} < \infty$).
 Then, the \textcolor{blue}{adjoint $T^*$} is the unique linear transformation mapping $W$ to $V$ such that \vspace{-2mm}
+% \gpt{Suggested cut/paste correction: say ``the unique bounded linear transformation $T^*\colon W\to V$.''  For bounded $T$ between Hilbert spaces, the adjoint is bounded as well.}
 \begin{equation*}
 \inner{ T \vecnot{v} }{ \vecnot{w} }_W
 = \inner{ \vecnot{v} }{ T^* \vecnot{w} }_V \quad\quad \text{for all }\vecnot{v} \in V, \vecnot{w} \in W
@@ -304,4 +305,3 @@ So, $\vecnot{y}^T \vecnot{b} \neq 0$ implies $\vecnot{b} \notin \mathcal{R}(A)$.
 \end{frame}
 
 \end{document}
-

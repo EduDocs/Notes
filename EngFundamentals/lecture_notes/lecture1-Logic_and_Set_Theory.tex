@@ -113,6 +113,7 @@
 \begin{itemize}
 \item  \textbf{Consistent \& Complete:}   An argument if valid if and only if it can be proved from axioms
 \item \textbf{Decidable:}  Whether an argument is can be determined in finite time. 
+% \gpt{Suggested cut/paste clarification from the revised book: ``First-order logic is complete in the sense that every logically valid formula is provable, and validity is semidecidable but not decidable. This does not mean that every first-order theory is complete.''}
 %\item  Semidecidable: algorithm determines the truth of any postulated implication, if it terminates. But, termination is guaranteed only if postulate is true
 %\end{itemize}
 %
@@ -1190,6 +1191,7 @@ Using this notation,  the range of $f$ is given by $f(X)$.
 
 
 \item \textbf{Definition:} For $f \colon X \to Y$ and subset $C \subseteq U$, the \textbf{inverse image} or\textbf{preimage}  of $C$ is the set
+% \gpt{Suggested cut/paste correction: replace $C\subseteq U$ by $C\subseteq Y$. For every function, this preimage operator is defined on subsets of the codomain; it is not an inverse function.}
 \[
 f^{-1}(C) \coloneqq \{ x \in X  \mid f(x) \in C\} 
 \]
@@ -1217,6 +1219,7 @@ and the preimage of $B$ is
 \[
 f^{-1}(B)  =  [-2,1] \cup [1,2] \supset A
 \]
+% \gpt{Suggested cut/paste correction: $f^{-1}([1,4])=[-2,-1]\cup[1,2]$. The first interval currently has the wrong right endpoint. More generally, $f(f^{-1}(B))=B\cap f(X)$.}
 
 \item \textbf{Example:} Let $f \colon \bbR \to \bbR$ be defined by $f(x) = x^2+1$. The preimage of $B = [0, 2]$ is 
 \[
@@ -1276,4 +1279,3 @@ y \in f(\bigcup_{i \in I} A_i ) & \implies  \exists  x  \in \bigcup_{i \in I} A_
 \bibliographystyle{alpha}%{IEEEtran}
 \bibliography{/Users/galenreeves/Dropbox/Library/long_names,/Users/galenreeves/Dropbox/Library/library} 
 \end{document}
-

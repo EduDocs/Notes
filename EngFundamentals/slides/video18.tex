@@ -349,6 +349,7 @@ For the weighted problem, let $H=B^H B$ and write
 \begin{frame}{4.4.2: Linear Minimum Mean-Squared Error Estimation}
 
 Let $Y, X_1, \ldots, X_n$ be zero-mean random variables.
+% \gpt{Suggested cut/paste hypothesis: ``Let $Y,X_1,\ldots,X_n$ be zero-mean random variables with finite second moments.''  The displayed inner products and mean-squared error require this.}
 Linear minimum mean-squared error (LMMSE) estimation finds $s_1, \ldots, s_n$ such that
 \[ \hat{Y} = s_1 X_1 + \cdots + s_n X_n \]
 minimizes the mean squared-error $\Expect[|Y-\hat{Y}|^2]$.
@@ -424,6 +425,7 @@ Then, the solution $\vecnot{w}$ satisfies \vspace{-3mm}
 \[ \vecnot{w} = \sum_{i=1}^n s_i \vecnot{w}_i \in W, \vspace{-2.75mm} \]
 where $s_1,s_2,\ldots,s_n$ can be found by solving \eqref{eqn:DualNormalEquations} with $\inner{ \vecnot{v} }{ \vecnot{w}_i } = c_i$.
 \end{theorem}
+% \gpt{Optional book figure for this frame: add \texttt{\string\usepackage\{tikz-3dplot\}} in the preamble and \texttt{\string\input\{../Figures/AR-Dual1.tex\}} near the theorem; it depicts the affine constraint set, $W^\perp$, and the minimum-norm solution.}
 
 \end{frame}
 
@@ -482,4 +484,3 @@ Thus, the solution $\hat{\vecnot{s}}$ can be obtained in closed form and is give
 
 
 \end{document}
-

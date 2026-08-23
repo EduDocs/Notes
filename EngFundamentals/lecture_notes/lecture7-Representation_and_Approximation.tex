@@ -193,6 +193,7 @@ s =\frac{ \max \{ x_i\} +\min \{ x_i\}}{2}
 \item \textbf{Example:} Let $V = \ell^2$ be the Hilbert space of square summable sequences and let $W$ be the span of the standard basis vectors, such that $V$ is equal to the closure of $W$. 
 %(Recall that this is the space of all \emph{finite} combinations) %such that $V$ is equal to the closure of $W$. 
 For any  $\vecnot{v}  \in V$ that is not in $W$ (i.e., any square summable sequence with an infinite number of nonzero entries) a best approximation of $\vecnot{w}$ in $V$ does not exists. 
+% \gpt{Suggested cut/paste correction: ``For $v\in V\setminus W$, a best approximation of $v$ by vectors in $W$ does not exist.'' Here $W$ is the nonclosed finite span and $v$ lies in its closure.}
 
 %. The sequence $\vecnot{v}  \in V$ defined by $v_i = 1/i^2$, we see that the $\vecnot{v}$ is in the closure of $W$ 
 
@@ -268,6 +269,8 @@ For any  $\vecnot{v}  \in V$ that is not in $W$ (i.e., any square summable seque
 \begin{equation*}
 \vecnot{w} = \sum_{i=1}^{\dim (W)} \frac{ \inner{ \vecnot{v} }{ \vecnot{w}_i } }{ \left\| \vecnot{w}_i \right\|^2 } \vecnot{w}_i . 
 \end{equation*}
+% \gpt{Suggested cut/paste correction: for a countably infinite orthogonal basis, write $\sum_{i=1}^{\infty}$; use $\sum_{i=1}^{\dim W}$ only when $W$ is finite-dimensional.}
+% \gpt{Optional figures from the revised book: load \texttt{tikz-3dplot} and place \texttt{\string\input\{../Figures/AR-Banach1.tex\}} and \texttt{\string\input\{../Figures/AR-Hilbert1.tex\}} here to contrast best approximation in $\ell^1$ and Hilbert geometry.}
 [Note: The implied linear mapping $T \colon V \to W$ defined by $T(\vecnot{v}) = \vecnot{w}$ is called the \textbf{orthogonal projection} of $V$ onto $W$.]
 \end{enumerate}
 
@@ -349,6 +352,8 @@ A = \begin{bmatrix}
 \item \textbf{Theorem:}  
 Let $V$ be a vector space and $T \colon V \rightarrow V$ be a  linear projection operator.
 Then, the range $\mathcal{R}(T)$ and the  null space $\mathcal{N}(T)$ are disjoint subspaces of $V$.
+% \gpt{Suggested cut/paste correction: replace ``disjoint subspaces'' by ``subspaces with trivial intersection,'' since $\mathcal R(T)\cap\mathcal N(T)=\{0\}$.}
+% \gpt{Optional book figure: load \texttt{tikz-3dplot} and add \texttt{\string\input\{../Figures/AR-Projection1.tex\}} near the orthogonal-projection discussion; it shows $v$, $P_Wv$, and the residual over a plane.}
 
 \item \textbf{Proof:}  
 \begin{itemize}
@@ -636,6 +641,7 @@ but they solve a different problem and they reduce to
 
 \begin{itemize}
 \item  Let $Y, X_1, \ldots, X_n$ be zero-mean random variables.
+% \gpt{Suggested cut/paste hypothesis: require $Y,X_1,\ldots,X_n$ to have finite second moments so that the inner products and mean-squared error are finite.}
 Linear minimum mean-squared error (LMMSE) estimation finds $s_1, \ldots, s_n$ such that
 \[ \hat{Y} = s_1 X_1 + \cdots + s_n X_n \]
 minimizes the mean squared-error $\Expect[|Y-\hat{Y}|^2]$.
@@ -694,6 +700,7 @@ The solution $\vecnot{w}$ to the dual approximation problem  satisfies
 \[ \vecnot{w} = \sum_{i=1}^n s_i \vecnot{w}_i %\in W,
   \]
 where $s_1,s_2,\ldots,s_n$ can be found by solving \eqref{eq:least_squares} with $\inner{ \vecnot{v} }{ \vecnot{w}_i } = c_i$.
+% \gpt{Optional book figure: load \texttt{tikz-3dplot} and add \texttt{\string\input\{../Figures/AR-Dual1.tex\}} here; it depicts the affine constraint set, $W^\perp$, and the minimum-norm solution.}
 
 \item \textbf{Example: } For $A \in \mathbb{C}^{m\times n}$ with $m<n$ and $\vecnot{v} \in \mathbb{C}^m$, consider the underdetermined linear system $A \vecnot{s} = \vecnot{v}$.
 Then, the dual approximation theorem can be applied to solve the minimum-norm problem
@@ -799,6 +806,7 @@ Hence, the above lemma recovers the rank-nullity theorem:
 
 \item  \textbf{Definition:} Let  $(V, \inner{\cdot}{\cdot}_V)$ and $(W, \inner{\cdot}{\cdot}_w)$ be Hilbert spaces, and assume $T \colon V \rightarrow W$ is a continuous linear transformation (i.e., $\| T \|_{\mathrm{op}} < \infty$).
 Then, the \textbf{adjoint} $T^*$ is the unique linear transformation mapping $W$ to $V$ such that \vspace{-2mm}
+% \gpt{Suggested cut/paste correction: say ``the unique bounded linear transformation $T^*\colon W\to V$.'' For bounded $T$ between Hilbert spaces, the adjoint is bounded.}
 \begin{equation*}
 \inner{ T \vecnot{v} }{ \vecnot{w} }_W
 = \inner{ \vecnot{v} }{ T^* \vecnot{w} }_V \quad\quad \text{for all }\vecnot{v} \in V, \vecnot{w} \in W
@@ -822,4 +830,3 @@ Then, the \textbf{adjoint} $T^*$ is the unique linear transformation mapping $W$
 \bibliographystyle{alpha}%{IEEEtran}
 \bibliography{/Users/galenreeves/Dropbox/Library/long_names,/Users/galenreeves/Dropbox/Library/library} 
 \end{document}
-

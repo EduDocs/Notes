@@ -255,6 +255,7 @@ Let $\vecnot{v}_1, \vecnot{v}_2, \ldots$ be a convergent sequence in $V$, then \
 \leq  M \left\| \vecnot{v}_i - \vecnot{v}_j \right\| . \vspace{-1mm}
 \end{equation*}
 This implies $T \vecnot{v}_1, T \vecnot{v}_2, \ldots$ is convergent in $W$ and, thus, $T$ is continuous. \vspace{1mm}
+% \gpt{Suggested cut/paste proof repair: if $v_i\to v$, write $\|Tv_i-Tv\|=\|T(v_i-v)\|\leq M\|v_i-v\|\to0$.  The current Cauchy-sequence argument would require completeness of $W$.}
 
 Conversely, assume $T$ is continuous and notice that $T \vecnot{0} = \vecnot{0}$.
 Then, for any $\epsilon > 0$, there is a $\delta>0$ such that $\| T \vecnot{v} \| < \epsilon$ for all $\| \vecnot{v} \| < \delta$.
@@ -311,6 +312,7 @@ where the $\rho(B)$ is the maximum absolute value of all eigenvalues.
 Let $W$ be a vector space over $F$ and let $T\colon W \to W$ be a linear operator.
 A scalar $\lambda \in F$ is an \textcolor{blue}{eigenvalue} of $T$ if there exists a non-zero vector $\vecnot{v} \in W$ with $T \vecnot{v} = \lambda \vecnot{v}$.
 Any vector $\vecnot{v}$ such that $T \vecnot{v} = \lambda \vecnot{v}$ is called an \textcolor{blue}{eigenvector} of $T$ associated with the eigenvalue value $\lambda$.
+% \gpt{Suggested cut/paste typo fix: replace ``eigenvalue value'' by ``eigenvalue.''}
 \end{definition}
 
 \begin{definition}<2->
@@ -334,6 +336,7 @@ A matrix $A \in F^{n \times n}$ is \textcolor{blue}{diagonalizable} if there is 
 
 \begin{theorem}<1->
 Let $\| \cdot \|$ be a submultiplicative operator norm on the space $L(V,V)$ and let $T \in L(V,V)$ be a linear operator with $\left\| T \right\| < 1$.
+% \gpt{Suggested cut/paste hypothesis from the revised book: ``Let $V$ be a Banach space and $T\in\mathcal{L}(V,V)$ satisfy $\|T\|<1$.''  Completeness is what guarantees convergence of the operator series.}
 Then, $(I-T)^{-1}$ exists and \vspace{-2mm}
 \[ (I-T)^{-1} = \sum_{i=0}^{\infty} T^i. \]
 \end{theorem}
@@ -383,4 +386,3 @@ Then, $(I-T)^{-1}$ exists and \vspace{-2mm}
 
 
 \end{document}
-

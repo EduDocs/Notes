@@ -329,6 +329,7 @@ Let $Y=\RealNumbers$ and suppose that $\delta f (\vecnot{x};\vecnot{h})$ exists 
 Let $f \colon X \rightarrow Y$ be a mapping from a vector space $X$ to a Banach space $(Y,\|\cdot\|)$.
 Then, $f$ is \textcolor{blue}{G\^{a}teaux differentiable} at $\vecnot{x}$ if the G\^{a}teaux differential $\delta f (\vecnot{x};\vecnot{h})$ exists for all $\vecnot{h} \in X$ and is a continuous linear function of $\vecnot{h}$.
 \end{definition}
+% \gpt{Suggested cut/paste hypothesis: make $X$ a normed (or Banach) space before requiring $h\mapsto\delta f(x;h)$ to be continuous; continuity is not defined on a bare vector space.}
 
 \end{frame}
 
@@ -386,6 +387,7 @@ Let $f \colon X \rightarrow \RealNumbers$ map the Hilbert space $X$ to the real 
 If $\nabla f(\vecnot{x})$ exists and satisfies $ \| \nabla f(\vecnot{y}) - \nabla f(\vecnot{x}) \| \leq L \| \vecnot{y} - \vecnot{x} \|$, then \vspace{-3mm}
 \[ \big| f(\vecnot{y}) - f(\vecnot{x}) - \tinner{\vecnot{y}-\vecnot{x} }{ \nabla f (\vecnot{x}) } \big| \leq \frac{1}{2} L \| \vecnot{y}-\vecnot{x} \|^2. \]
 \end{lemma}
+% \gpt{Suggested cut/paste hypothesis from the revised book: choose a convex set $A\subseteq X$, assume the Lipschitz-gradient bound for every $x,y\in A$, and state the conclusion for $x,y\in A$; convexity keeps the line segment used in the proof inside the domain.}
 \vspace{-1mm}
 \begin{proof}<2->
 Let $\vecnot{h} = \vecnot{y}-\vecnot{x}$ and $\phi(t) = f(\vecnot{x} + t \vecnot{h})$. Then, $\phi'(t) = \tinner{ \vecnot{h} }{ \nabla f(\vecnot{x} + t \vecnot{h}) }$ and \vspace{-2.5mm}

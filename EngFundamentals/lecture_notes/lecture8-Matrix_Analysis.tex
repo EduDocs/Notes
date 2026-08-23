@@ -90,6 +90,7 @@ An \textbf{eigenvalue} of $T$ is a scalar $\lambda \in F$ such that there exists
 T \vecnot{v} = \lambda \vecnot{v}
 \]
 Any vector $\vecnot{v}$ such that $T \vecnot{v} = \lambda \vecnot{v}$ is called an \textbf{eigenvector} of $T$ associated with the eigenvalue value $\lambda$.
+% \gpt{Suggested cut/paste typo fix: replace ``eigenvalue value'' by ``eigenvalue.''}
 
 \item \textbf{Definition:} A square matrix $B$ is \textbf{diagonalizable} if there is an invertible matrix $S$ (whose columns are eigenvectors) such that 
 \[
@@ -142,6 +143,7 @@ is an $m \times m$ unitary matrix and $U_1$ is $m \times r$
 
 
 \item The factorization $A = U \Sigma V^\Herm$ is called the \textbf{full SVD} of the matrix $A$ while the factorization $A = U_1 \Sigma_1 V_1$ is called the \textbf{compact SVD} of $A$.
+% \gpt{Suggested cut/paste correction: the compact SVD is $A=U_1\Sigma_1V_1^\Herm$; the conjugate transpose is missing.}
 
 
 \item %Letting $U = [ \vecnot{u}_1, \dots, \vecnot{u}_m]$ and $V = [ \vecnot{v}_1, \dots, \vecnot{v}_n]$, 
@@ -175,6 +177,7 @@ where
 
 
 \item  If $A$ is a real $m \times n$ matrix then it has a singular value decomposition of the form $A = U \Sigma V^\top$ where $U \in \bbR^{n \times n}$ and $V \in \bbR^{n \times n}$ are orthogonal matrices. 
+% \gpt{Suggested cut/paste dimension correction: $U\in\mathbb R^{m\times m}$ and $V\in\mathbb R^{n\times n}$.}
 
 %\item The \textbf{compact SVD} is the factorization % nonzero singular values:
 %\begin{equation*}
@@ -211,6 +214,7 @@ where
 \[
 A^\Herm A  = V \Lambda V^\top , \qquad \Lambda = \diag(\lambda_1, \dots, \lambda_r, 0, \dots, 0)
 \]
+% \gpt{Suggested cut/paste correction for the complex case: use $A^\Herm A=V\Lambda V^\Herm$, not $V\Lambda V^\top$.}
 where $\lambda_1 \ge \lambda_2 \ge \dots \ge \lambda_r > 0$ are the positive real eigenvalues arranged in a non-increasing order. 
 
 \item The singular values are the positive square roots of the eigenvalues
@@ -230,6 +234,7 @@ A^\Herm A \vecnot{v}_i = \sigma^2_i \vecnot{v}_i  \quad \implies \quad \|A \vecn
 u_i \coloneqq \sigma_i^{-1} A \vecnot{v}_i
 \] 
 To see that these are orthonormal, observe that $\| u_i\| = \frac{1}{\sigma_i} \| A  A \vecnot{v}_i\| = 1$ and 
+% \gpt{Suggested cut/paste correction: $\|u_i\|=\sigma_i^{-1}\|A\vecnot{v}_i\|=1$; remove the duplicated $A$.}
 %\[
 %\| u_i\| = \frac{1}{\sigma_i} \| A  A \vecnot{v}_i\| = 1
 %\]
@@ -355,9 +360,11 @@ The \textbf{Frobenius} norm $\|\cdot\|_F$ %The Frobenius norm $\|\cdot\|_F$
  \begin{align*}
  \| A\|^2_F  =  \sqrt{ \gtr(A^\Herm A) } = \sqrt{ \sum_{i=1}^m \sum_{j=1}^n |A_{ij}|^2}
  \end{align*}
+% \gpt{Suggested replacement: ``$\|A\|_F=\sqrt{\operatorname{tr}(A^\Herm A)}=\sqrt{\sum_{i=1}^m\sum_{j=1}^n|A_{ij}|^2}$,'' equivalently $\|A\|_F^2=\operatorname{tr}(A^\Herm A)=\sum_{i,j}|A_{ij}|^2$. The current line mixes the squared norm with square roots and uses an undefined \texttt{\string\gtr}.}
 
 \item \textbf{Eckart–Young Theorem:} In terms of the Frobenius norm $\| A \|_F^2 \coloneqq \sum_{ij} |a_{ij}|^2$, the best rank-$k$ approximation of $A \in \mathbb{C}^{m\times n}$ is given by the $k$-truncated SVD expansion: 
 \[ \min_{B \in \mathbb{C}^{m\times n}: \, \text{rank}(B)=k} \| A - B \|_F  = \| A - \mathcal{T}_k (A) \|_F \]
+% \gpt{Suggested cut/paste theorem statement: minimize over $\operatorname{rank}(B)\leq k$. Also note that repeated singular values can make the singular vectors and best rank-$k$ approximant nonunique.}
 
 \end{itemize}
 
@@ -438,4 +445,3 @@ Furthermore:
 \bibliographystyle{alpha}%{IEEEtran}
 \bibliography{/Users/galenreeves/Dropbox/Library/long_names,/Users/galenreeves/Dropbox/Library/library} 
 \end{document}
-

@@ -1,8 +1,5 @@
 \chapter{Logic and Set Theory}\label{chapter:LogicAndSetTheory}
 
-\gpt{Chapter-level feedback: Consider adding two short proof workshops after ``Strategies for Proofs'': one on proving a set identity element by element and one on disproving a quantified claim with a counterexample.  These exercises would reinforce the mathematical-maturity goal and prepare students directly for metric-space proofs in the next chapter.}
-
-
 \begin{quote}
 To criticize mathematics for its abstraction is to miss the point entirely.
 Abstraction is what makes mathematics work.
@@ -34,8 +31,7 @@ Although our treatment of logic and set theory will be informal, the logical arg
 We will simply not develop their formal axiomatic foundations.
 
 The rules we follow in dealing with sets are derived from established axioms.
-At some point of your academic career, you may wish to study set theory and logic in greater detail.
-\gpt{Line above: replace ``At some point of your academic career'' with ``At some point in your academic career''.}
+At some point in your academic career, you may wish to study set theory and logic in greater detail.
 Our main purpose here is to learn how to state mathematical results clearly and how to prove them.
 
 
@@ -575,6 +571,59 @@ Next, define $P(n)$ to be the statement $\forall m\in S_n,\,Q(m)$.
 If one proves $P(1)$ and $P(n)\to P(n+1)$ for every $n\in \mathbb{N}$, then induction gives $P(n)$ for all $n\in \mathbb{N}$.
 Since every $m\in S_\infty$ belongs to some $S_n$, it follows that $Q(m)$ holds for every $m\in S_\infty$.
 
+% Proof example
+\begin{example}
+Two sets are equal precisely when they have the same elements.
+Use this fact to prove the distributive identity in set theory,
+\[
+A\cap(B\cup C)=(A\cap B)\cup(A\cap C).
+\]
+Before reading the proof, try proving the two inclusions separately by starting with an arbitrary element of one side and showing that it belongs to the other side; the proof below combines both directions into a chain of equivalences.
+
+Proof. Fix an arbitrary element $x$.
+Combining the definitions of intersection and union with the distributive law of logic, we have
+\begin{align*}
+x\in A\cap(B\cup C)
+&\iff x\in A \,\wedge\, (x\in B \,\vee\, x\in C)\\
+&\iff (x\in A \,\wedge\, x\in B)
+       \vee (x\in A \,\wedge\, x\in C)\\
+&\iff x\in(A\cap B)\cup(A\cap C).
+\end{align*}
+Because this equivalence holds for every $x$, the two sets have exactly the same elements and are therefore equal.
+Notice that the arbitrary-element step turns a statement about whole sets into a sequence of logical statements about one element.
+\end{example}
+
+% Proof example
+\begin{example}
+Consider disproving the following quantified claim,
+\[
+\forall (x_n)\in\mathbb{R}^{\mathbb{N}},\quad
+\forall \epsilon>0,\quad
+\exists N\in\mathbb{N},\quad
+\forall n\geq N,\quad |x_n|<\epsilon.
+\]
+In words, the claim says that every real sequence eventually lies within every positive distance of zero.
+To disprove a universally quantified claim, it is enough to give one counterexample that satisfies the negation of the claim.
+
+Counterexample.
+Let $x_n=1$ for every $n\in\mathbb{N}$, and choose $\epsilon=1/2$.
+For every proposed $N\in\mathbb{N}$, take $n=N$.
+Then $n\geq N$, but
+\[
+|x_n|=1 \geq \frac12.
+\]
+Thus, the original claim is false.
+Its negation makes the required witnesses explicit:
+\[
+\exists (x_n)\in\mathbb{R}^{\mathbb{N}},\quad
+\exists \epsilon>0,\quad
+\forall N\in\mathbb{N},\quad
+\exists n\geq N,\quad |x_n|\geq\epsilon.
+\]
+Tracking the order of these quantifiers and choosing an appropriate witness is a proof technique that will be useful in the next chapter on metric spaces.
+\end{example}
+
+
 \section{Set Theory}\label{section:SetTheory}
 Set theory is generally considered to be the foundation of all modern mathematics.
 This means that most mathematical objects (numbers, relations, functions, etc.) are defined in terms of sets.
@@ -849,7 +898,7 @@ Show that the following expressions hold:
 (3) & \; f^{-1} \left( \bigcup_{i\in I} B_i \right) = \bigcup_{i\in I} f^{-1} \left( B_i \right) &
 (4) & \; f^{-1} \left( \bigcap_{i\in I} B_i \right) = \bigcap_{i\in I} f^{-1} \left( B_i \right). 
 \end{align*}
-Now, assume $I\ne\emptyset$ and doe the following.
+Now, assume $I\ne\emptyset$ and do the following.
 Give an example where the inclusion in (2) is strict.
 Show that equality holds in (2) when $f$ is injective.
 \end{problem}

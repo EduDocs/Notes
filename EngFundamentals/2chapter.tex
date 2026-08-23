@@ -902,34 +902,47 @@ Is the function $f$ a norm?
 \subsection*{What are $L^p$ spaces? What is the Lebesgue Integral?*}
 
 Many important spaces include functions that are not Riemann integrable.
-For $X = [a,b]^d$, the Lebesgue integral of $f\colon X \to \mathbb{R}$ is defined using measure theory and is often used in advanced probability courses.
-Since there are many non-zero Lebesgue-integrable functions whose integral is zero, this definition has a subtlety.
-The Lebesgue integral of a non-negative function is zero if and only if the function equals zero \defn{integral}{almost everywhere} (abbreviated a.e.).
-Therefore, two functions are \emph{equal almost everywhere} if the norm of their difference is zero. 
+For the set $X = [a,b]^d$, the Lebesgue integral of $f\colon X \to \mathbb{R}$ is defined using measure theory and is often used in advanced probability courses.
+For these notes, a \defn{integral}{measurable set} $A\subseteq X$ is a Borel set: an element of the smallest collection of subsets of $X$ that contains all rectangles and is closed under complements and countable unions.
+Lebesgue measure assigns to each measurable set $A$ a volume $\mu(A)$ that agrees with the usual volume on rectangles.
+A function $f\colon X\to\mathbb R$ is called \defn{integral}{measurable} if the set $f^{-1}\big( (t,\infty] \big) =\{x\in X:f(x)>t\}$ is measurable for every $t\in\mathbb R$. \\[1mm]
+A function is zero \defn{integral}{almost everywhere} (a.e.) if $\mu\big(\{x\in X:f(x)\neq 0\}=0$.
+Likewise, two functions $f$ and $g$ are \emph{equal almost everywhere} if they differ on a set of measure zero.
 Strictly speaking, a vector space of ``functions" with the $L^p$ norm actually has elements that are equivalence classes of functions defined by \emph{equality almost everywhere}.
-
-For $1\le p<\infty$, $L^p(X)$ is the normed vector space of equivalence classes (modulo equality a.e.) of measurable functions $f\colon X\to\mathbb R$ such that the Lebesgue integral
+For $1\le p<\infty$, $L^p(X)$ is the normed vector space of equivalence classes (modulo equality a.e.) of measurable functions $f\colon X\to\mathbb R$ with finite $L^{p}$ norm,
 \[
-\left\Vert f\right\Vert _{L^{p}}\triangleq\left(\int_{X}\left|f(x)\right|^{p}dx\right)^{1/p}
+\left\Vert f\right\Vert _{L^{p}}
+\triangleq
+\left(\int_{X}\left|f(x)\right|^{p}dx\right)^{1/p}.
 \]
-exists (automatically via measurability) and is finite.
-This definition begs the question, ``What is the Lebesgue integral?''. For these notes, we use the following.
-\begin{definition}
-The \defn{integral}{Lebesgue integral} is a generalization of the Riemann integral that applies to wider class of functions. The values of these two integrals coincide on the set of Riemann integrable functions.
-Loosely speaking, one can construct any non-negative function $f\in L^{p}(X)$ by considering sequences $f_{1},f_{2},\ldots$ of ``simple'' functions formed by rounding values of $f$ down to values in a finite set $S_i \subset [0,\infty)$ where $\{0\} \subset S_1 \subset S_2 \subset \cdots \subset [0,\infty)$.
-%\footnote{In measure theory, these functions are called \emph{simple functions} and are defined as measurable functions where $f(X)$ is a finite set.}
-By construction, the sequence of functions is non-decreasing (i.e., $f_{n+1}(x)\geq f_{n}(x)$ for all $x\in X$) and, therefore, it converges pointwise to a limit function $f(x)$.
-Moreover, the Lebesgue integral of each simple function is easy to define.
-Thus, this sequence of simple functions gives rise to a non-decreasing sequence of Lebesgue integrals and one defines the Lebesgue integral of $f(x)$ to be the limit of this sequence.
-In fact, the every non-negative function in $L^{p}(X)$ is the pointwise limit of a non-decreasing sequence of simple functions that satisfies $\left\Vert f_{n}\right\Vert _{L^{p}}\rightarrow M<\infty$ for some $M>0$. %, up to a.e. equivalence.
-\end{definition}
+For measurable functions, $f=g \text{ a.e.}$ is equivalent to $\|f-g\|_{L^p}=0$.
 
 \begin{definition}
-A set $A\subseteq X$ is called \defn{integral}{Lebesgue measurable} when its indicator $\mathbf 1_A$ is measurable.
-In this case, its \defn{integral}{Lebesgue measure} is equal to the Lebesgue integral $\mu(A)=\int_X\mathbf 1_A\,dx$ of its indicator function.
+The \defn{integral}{Lebesgue integral} is a generalization of the Riemann integral that applies to a wider class of functions.
+The values of these two integrals coincide on the set of Riemann integrable functions.
+% A non-negative \defn{integral}{simple function} has the form
+% \[
+% s(x)=\sum_{j=1}^r c_j\mathbf 1_{A_j}(x),
+% \]
+% where $c_j\geq 0$ and the sets $A_j$ are measurable.
+% Its Lebesgue integral is defined by
+% \[
+% \int_X s(x)\,dx
+% \triangleq
+% \sum_{j=1}^r c_j\mu(A_j).
+% \]
+Loosely speaking, one can construct any non-negative measurable function $f$ by considering sequences $f_{1},f_{2},\ldots$ of simple functions formed by rounding values of $f$ down to values in a finite set $S_i \subset [0,\infty)$ where $\{0\} \subset S_1 \subset S_2 \subset \cdots \subset [0,\infty)$.
+By construction, the sequence of functions is non-decreasing (i.e., $f_{n+1}(x)\geq f_{n}(x)$ for all $x\in X$) and converges pointwise to $f(x)$.
+Also, the Lebesgue integral of $f_n$ is defined by
+\[ L_n = \int_X f_n (x) \, dx = \sum_{s\in S_n} \mu(f^{-1}(s))\, s. \]
+The Lebesgue integral of $f$ equals the limit of the non-decreasing sequence $L_n$.
 \end{definition}
+
+For a measurable set $A\subseteq X$, its \defn{integral}{Lebesgue measure} is equal to the Lebesgue integral of its indicator function:
+\[
+\mu(A)=\int_X\mathbf 1_A(x)\,dx.
+\]
 \end{minipage}}
-
 \end{table}
 
 By the properties of a metric, we have

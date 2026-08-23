@@ -172,6 +172,7 @@ It is \textcolor{blue}{strictly convex} if, for all $\vecnot{a}_1,\vecnot{a}_2 \
 %we have
 $\lambda \vecnot{a}_1 + (1-\lambda) \vecnot{a}_2 \in \Interior{A}$.
 \end{definition}
+% \gpt{Suggested cut/paste hypothesis: work in a normed vector space and require distinct $a_1,a_2\in\overline A$ in the strict-convexity clause; the closure/interior notation needs a topology, and equal endpoints cannot yield an interior point in general.}
 \end{minipage}
 \hfill
 \begin{minipage}{0.22\textwidth}
@@ -268,6 +269,7 @@ If $f$ has directional derivatives in all directions at $\vecnot{x}_0 \in A$ and
 \[ f(\vecnot{x}_0) = \min_{\vecnot{x}\in A} f(\vecnot{x}). \vspace{-2mm} \]
 If $f$ is strictly convex, then $\vecnot{x}_0$ is the unique minimizer over $A$.
 \end{corollary}
+% \gpt{Suggested cut/paste constrained optimality condition: ``If $\delta f(x_0;x-x_0)\geq0$ for every $x\in A$, then $x_0$ is a global minimizer of convex $f$ on $A$; if $f$ is strictly convex, it is unique.''  Requiring zero in all directions is unnecessarily strong and may refer to infeasible directions.}
 
 \visible<2->{Prove corollary in live session}
 
@@ -289,6 +291,7 @@ If $f$ is strictly convex, then $\vecnot{x}_0$ is the unique minimizer over $A$.
 \hspace{3mm} The projection of vectors onto subspaces can be generalized to convex sets\\[-2mm]
 
 For Hilbert space $V$ and closed convex set $A\subseteq V$, let $P_{A}:V\rightarrow A$ denote the orthogonal projection of $\vecnot{v}\in V$ onto $A$: \vspace{-1mm}
+% \gpt{Suggested cut/paste hypothesis: require $A$ to be nonempty as well as closed and convex.  The revised book also adds the useful conclusion $\|P_A(v)-P_A(w)\|\leq\|v-w\|$.}
 \[
 P_A (\vecnot{v}) \triangleq \arg \min_{\vecnot u\in A}\left\Vert \vecnot u-\vecnot v\right\Vert \vspace{-1mm} 
 \]
@@ -332,4 +335,3 @@ For any $\vecnot{v} \notin A$, we have $\vecnot{u}^* = P_A (\vecnot{v})$ iff $\t
 \end{frame}
 
 \end{document}
-

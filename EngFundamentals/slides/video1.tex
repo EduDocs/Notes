@@ -20,12 +20,20 @@
 \usepackage{framed}
 \usepackage{xr}
 
-\externaldocument{../0Set_Theory_and_Logic}
+\IfFileExists{../0Set_Theory_and_Logic.aux}{%
+  \externaldocument{../0Set_Theory_and_Logic}%
+}{%
+  \externaldocument{../auxdir/0Set_Theory_and_Logic}%
+}
 \makeatletter
 % Beamer wraps \ref in an internal slide link.  For labels imported from the
 % book, extract their PDF destination and create a remote GoTo link instead.
 \newcommand{\bookref}[1]{%
-  \expandafter\expandafter\expandafter\bookref@link\csname r@#1\endcsname\@nil}
+  \ifcsname r@#1\endcsname
+    \expandafter\expandafter\expandafter\bookref@link\csname r@#1\endcsname\@nil
+  \else
+    \ref{#1}%
+  \fi}
 \def\bookref@link#1#2#3#4#5\@nil{%
   \ifdefined\videoexport #1\else\hyper@linkfile{#1}{../book.pdf}{#4}\fi}
 \makeatother
@@ -200,7 +208,7 @@
 \begin{itemize}
   \setlength\itemsep{1mm}
   \item One can also \textcolor{blue}{form new statements from old ones} using English expressions: and; or; not; if, then; if and only if
-  \item<6-> Ex. ``\univ is located in \city \textcolor{red}{or} all real numbers are rational''
+  \item<6-> Ex. ``\univ is in \city \textcolor{red}{or} all real numbers are rational''
   
   \item<7-> Note: symbols \textcolor{blue}{$P,Q,R,\ldots$} used to denote abstract statements 
 
@@ -344,12 +352,12 @@ F & F & T \\
 
 \begin{itemize}
 \setlength\itemsep{1.5mm}
-\item When $P$ is false, some people guess the truth value should be undefined. But, the values shown above are \textcolor{blue}{universally accepted} in logic
+\item When $P$ is false, some people guess that the truth value should be undefined. But, the values shown here are \textcolor{blue}{universally accepted} in logic
 
 \item<3-> Intuitively, one can think of $P \rightarrow Q$ as a \textcolor{blue}{promise that $Q$ is true whenever $P$ is true}. When $P$ is false, the promise is kept by default
 
 \item<4-> Ex. Suppose a friend promises \textcolor{blue}{``if it is sunny tomorrow, I will ride my bike"}.  We say their statement is \textcolor{blue}{true if they keep their promise}.
-So, if it rains and they don't ride their bike, then most people would agree they've kept their promise.
+So, if it rains and they don't ride their bike, then most people would agree that they've kept their promise.
 
 \end{itemize}
 \end{itemize}
@@ -498,14 +506,14 @@ F & F & F & F & T & F & T & F & T & T \\
 
 \vspace{1mm}
 
-\item<4-> An \textcolor{blue}{implication $R \Rightarrow S$} is a meta statement (e.g., for $R(P,Q),S(P,Q)$) \vspace{1mm}
+\item<4-> The \textcolor{blue}{implication $R \Rightarrow S$} is a meta statement (e.g., for $R(P,Q),S(P,Q)$) \vspace{1mm}
 \begin{itemize}
   \setlength\itemsep{1.5mm}
  \item that states $R(P,Q) \rightarrow S(P,Q)$ is always true (i.e., \textcolor{blue}{$R \rightarrow S$ is a tautology})
  \item Ex. $(P \rightarrow Q) \wedge P \Rightarrow Q$ because $(P \rightarrow Q) \wedge P \rightarrow Q$ is a tautology
 \end{itemize}
 
-\item<5-> An \textcolor{blue}{equivalence $R \Leftrightarrow S$} is a meta statement (e.g., for $R(P,Q),S(P,Q)$) \vspace{1mm}
+\item<5-> The \textcolor{blue}{equivalence $R \Leftrightarrow S$} is a meta statement (e.g., for $R(P,Q),S(P,Q)$) \vspace{1mm}
 \begin{itemize}
   \setlength\itemsep{1.5mm}
  \item that states $R(P,Q) \leftrightarrow S(P,Q)$ is always true (i.e., \textcolor{blue}{$R \leftrightarrow S$ is a tautology})
@@ -573,4 +581,5 @@ F & F & F & F & T & F & T & F & T & T \\
 
 \backupend
 
+\fi
 \end{document}

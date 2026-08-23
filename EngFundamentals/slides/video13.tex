@@ -213,6 +213,7 @@ Similarly, for the vector space of functions from $[a, b]$ to $\RealNumbers$ (or
 \end{example}
 
 For infinite dimensional spaces, \textcolor{red}{only vectors with finite norm} are included.
+% \gpt{Suggested cut/paste qualification: define $L^p([a,b])$ using measurable functions modulo equality almost everywhere; otherwise the displayed integral can vanish for a nonzero pointwise function and is only a seminorm.}
 
 \end{frame}
 
@@ -279,6 +280,7 @@ m \| \vecnot{v} \|_{V'} & \leq \| \vecnot{v} \|_V \leq M \| \vecnot{v} \|_{V'}.
 \begin{lemma} 
 For finite-dimensional normed spaces, all norms are equivalent.
 \end{lemma}
+% \gpt{Suggested cut/paste quantifier repair: ``Two norms are equivalent if there exist constants $m,M>0$ such that $m\|v\|_{V'}\leq\|v\|_V\leq M\|v\|_{V'}$ for every $v\in V$.''  The constants must be uniform in $v$.}
 
 \end{frame}
 
@@ -307,12 +309,14 @@ Vector spaces $\mathbb{R}^n$ (or $\mathbb{C}^n$) with any well-defined norm are 
 Let $V = \mathbb{R}^\infty$ be the Banach space of real sequences $(v_1,v_2,v_3,\ldots)$ with norm \vspace{-3mm}
 \[ \|\vecnot{v} \|_p = \left(\sum_{i=1}^\infty |v_i |^p \right)^{1/p}. \]
 \end{example}
+% \gpt{Suggested cut/paste correction: replace $\mathbb{R}^{\infty}$ by $\ell^p=\{v:\sum_i|v_i|^p<\infty\}$ (for $1\leq p<\infty$).  The space of all real sequences is not normed by this formula.}
 
 
 \begin{example}<4->
 The vector space of continuous functions $f \colon [a,b] \to \mathbb{R}$ is a Banach space under the norm \vspace{-2.5mm}
 \[ \left\| f(t) \right\| = \sup_{t\in [a,b]} f(t). \vspace*{-0.5mm}\]
 \end{example}
+% \gpt{Suggested cut/paste correction: $\|f\|_{\infty}=\sup_{t\in[a,b]}|f(t)|$.}
 
 \end{frame}
 
@@ -328,6 +332,7 @@ where convergence is determined by the norm topology.
 Let $V = \mathbb{R}^\infty$ be the vector space of real sequences.
 The \textcolor{blue}{standard Schauder basis} is the countably infinite extension $\{\vecnot{e}_1 ,\vecnot{e}_2, \ldots \}$ of the standard basis.
 \end{example}
+% \gpt{Suggested cut/paste correction: use $V=\ell^p$ (for $1\leq p<\infty$); the standard unit vectors form a Schauder basis there, not on the unrestricted sequence space $\mathbb{R}^{\infty}$.}
 
 \begin{block}{Caveat}<2->
 Although all commonly used Banach spaces have a Schauder basis, some do not.
@@ -385,6 +390,7 @@ However, a sequence of finite linear combinations, like \vspace{-2mm}
 \[ \vecnot{u}_n = \sum_{i=1}^n \frac{1}{i^2} \vecnot{w}_i , \vspace{-1.5mm} \]  converges to $\lim_{n\to \infty} \vecnot{u}_n$ if it exists.
 Thus, the span of $W$ is not closed.
 \end{example}
+% \gpt{Suggested replacement from the revised book: assume $(w_i)$ is a normalized Schauder basis and use $u=\sum_{i=1}^{\infty}i^{-2}w_i$.  Then the partial sums lie in $\operatorname{span}\{w_i\}$, converge to $u$, and uniqueness of the Schauder expansion shows $u$ is not a finite linear combination.  Linear independence alone does not guarantee the displayed series converges.}
 \vspace{-0.5mm}
 
 \visible<3->{Show convergence in live session.}
@@ -418,4 +424,3 @@ Thus, the span of $W$ is not closed.
 
 
 \end{document}
-

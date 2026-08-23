@@ -1,6 +1,6 @@
 \chapter{Optimization}
 
-\gpt{Chapter-level feedback: KKT conditions, duality, Slater's condition, and water-filling are excellent topics for graduate ECE students.  The balance is less effective: more than a quarter of the chapter develops Banach-space derivatives, while unconstrained optimization receives essentially one necessary condition and no algorithmic example.  Consider presenting finite-dimensional gradients, Hessians, gradient descent, and convex first-order conditions first; then place G\^{a}teaux and Fr\'echet derivatives in an advanced section that generalizes the familiar theory.  A short worked gradient-descent example with a convergence bound under Lipschitz gradient/strong convexity would connect the mathematical maturity goals to the algorithms students will use.}
+%\gpt{Chapter-level feedback: KKT conditions, duality, Slater's condition, and water-filling are excellent topics for graduate ECE students.  The balance is less effective: more than a quarter of the chapter develops Banach-space derivatives, while unconstrained optimization receives essentially one necessary condition and no algorithmic example.  Consider presenting finite-dimensional gradients, Hessians, gradient descent, and convex first-order conditions first; then place G\^{a}teaux and Fr\'echet derivatives in an advanced section that generalizes the familiar theory.  A short worked gradient-descent example with a convergence bound under Lipschitz gradient/strong convexity would connect the mathematical maturity goals to the algorithms students will use.}
 
 
 
@@ -113,8 +113,7 @@ This is because derivatives can be understood as linear transforms and either or
 \begin{example}
 Let $X$ be a Hilbert space over $\RealNumbers$ and $f\colon X \to \RealNumbers$ be a real functional.
 If the Fr\'{e}chet derivative $f'(\vecnot{x})$ exists, then it is a continuous linear functional on $X$.
-Thus, the Riesz representation theorem guarantees that there is a vector $\vecnot{u} \in X$ such that
-\gpt{Ordering/assumption issue: the Riesz theorem proved earlier in these notes is explicitly finite-dimensional, whereas this example allows an arbitrary Hilbert space.  Either restrict $X$ to be finite-dimensional here, state the general Riesz representation theorem before this example, or add a forward reference to its later proof.}
+Thus, the Riesz representation theorem (see Theorem~\ref{theorem:riesz_finite} for finite dimension and Theorem~\ref{theorem:FunctionalInnerProduct} for the general case) guarantees that there is a vector $\vecnot{u} \in X$ such that
 $ f'(\vecnot{x})(\vecnot{h}) = \tinner{\vecnot{h} }{ \vecnot{u} } $ for all $\vecnot{h}\in X$.
 This vector is called the gradient $\nabla f(\vecnot{x})$ and it follows that
 $$ f'(\vecnot{x})(\vecnot{h}) = \tinner{\vecnot{h} }{ \nabla f (\vecnot{x}) } \text{ for all } \vecnot{h}\in X. $$
@@ -537,7 +536,7 @@ In standard proofs of this result, this difficulty is overcome by using the impl
 
 \begin{proof}
 For simplicity, we prove only the case where $h_j (\vecnot{x}) = \vecnot{a}_j^T \vecnot{x} - b_j$ is affine for $j=1,\ldots,p$.
-\gpt{Proof-scope omission: Add citation for general case.}
+%\gpt{Proof-scope omission: Add citation for general case.}
 %and $PF$ does contain a line (i.e., $\{\alpha \vecnot{z}\,|\, \alpha \in \mathbb{R}\}$ for some $\vecnot{z}$).
 First, we define 
 \[ \vecnot{y} (\vecnot{\lambda},\vecnot{\nu}) = -\nabla f_0 (\vecnot{x}^*) - \sum_{i=1}^m \lambda_i \nabla f_i (\vecnot{x}^*) - \sum_{j=1}^p \nu_j \underbrace{\nabla h_j (\vecnot{x}^*)}_{\vecnot{a}_j}. \]

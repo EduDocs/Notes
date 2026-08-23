@@ -222,6 +222,7 @@ where (i) $U \in \ComplexNumbers^{m \times m}$ and $V \in \ComplexNumbers^{n \ti
 \vspace{1mm}
 
 The factorization $A = U \Sigma V^H$ is called the \textcolor{blue}{full SVD} of the matrix $A$ while the factorization $A = U_1 \Sigma_1 V_1$ is called the \textcolor{blue}{compact SVD} of $A$.
+% \gpt{Suggested cut/paste correction: the compact SVD is $A=U_1\Sigma_1V_1^H$; the conjugate transpose is missing here.}
 \\[1mm] The compact SVD of a rank-$r$ matrix retains only the $r$ columns of $U,V$ associated with non-zero singular values.
 
 \end{frame}
@@ -406,6 +407,7 @@ Then, the \textcolor{blue}{$k$-truncated SVD expansion of $A$} is \vspace{-2mm}
 In terms of the Frobenius norm $\| A \|_F^2 \triangleq \sum_{ij} |a_{ij}|^2$, the best rank-$k$ approximation of $A \in \mathbb{C}^{m\times n}$ is given by the $k$-truncated SVD expansion: \vspace{-2mm}
 \[ \min_{B \in \mathbb{C}^{m\times n}: \, \text{rank}(B)=k} \| A - B \|_F  = \| A - \mathcal{T}_k (A) \|_F \]
 \end{theorem}
+% \gpt{Suggested cut/paste theorem statement: minimize over $\operatorname{rank}(B)\leq k$, not only rank exactly $k$.  Also note that repeated singular values can make the singular vectors and best rank-$k$ approximant nonunique.}
 
 \vspace{2mm}
 

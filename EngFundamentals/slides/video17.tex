@@ -206,6 +206,7 @@ $ \vecnot{u} = \displaystyle\frac{\inner{ \vecnot{w} }{ \vecnot{v} }}{\|\vecnot{
 \end{tabular}
 \vspace{-2.5mm}
 \end{definition}
+% \gpt{Suggested cut/paste hypothesis: require $\vecnot{v}\neq\vecnot{0}$ wherever projection onto $\vecnot{v}$ is defined.}
 
 \vspace{-1mm}
 
@@ -238,11 +239,13 @@ Then,
 \begin{equation*}
 \vecnot{w} = \sum_{i=1}^{\dim (W)} \frac{ \inner{ \vecnot{v} }{ \vecnot{w}_i } }{ \left\| \vecnot{w}_i \right\|^2 } \vecnot{w}_i . \vspace{-1mm}
 \end{equation*}
+% \gpt{Suggested cut/paste correction: for a countably infinite orthogonal basis, write $\sum_{i=1}^{\infty}$; retain $\sum_{i=1}^{\dim W}$ only in the finite-dimensional case.}
 Note: the implied linear mapping $T\colon V \to W$ defined by $T(\vecnot{v}) = \vecnot{w}$ is called the \textcolor{blue}{orthogonal projection} of $V$ onto $W$.
 \end{enumerate}
 \end{theorem}
 
 Proof in live session.
+% \gpt{Optional book figures for this frame: add \texttt{\string\usepackage\{tikz-3dplot\}} in the preamble and place \texttt{\string\input\{../Figures/AR-Banach1.tex\}} and \texttt{\string\input\{../Figures/AR-Hilbert1.tex\}} side by side to contrast nonunique $\ell^1$ best approximation with unique Hilbert-space projection.}
 
 \end{frame}
 
@@ -323,6 +326,8 @@ A = \begin{bmatrix}
 Let $V$ be a vector space and $T \colon V \rightarrow V$ be a (linear) projection operator.
 Then, the range $\mathcal{R}(T)$ and the $\mathcal{N}(T)$ are disjoint subspaces of $V$.
 \end{theorem}
+% \gpt{Suggested cut/paste correction: replace ``disjoint subspaces'' by ``subspaces with trivial intersection,'' since $\mathcal{R}(T)\cap\mathcal{N}(T)=\{0\}$.}
+% \gpt{Optional book figure for the orthogonal-projection sequence: add \texttt{\string\usepackage\{tikz-3dplot\}} and \texttt{\string\input\{../Figures/AR-Projection1.tex\}}; it shows $v$, $P_Wv$, and the orthogonal residual over a plane.}
 
 \begin{proof}
 For any non-zero $\vecnot{v} \in \mathcal{R}(T)$, there is a non-zero $\vecnot{w} \in V$ such that $\vecnot{v} = T\vecnot{w}$.  Thus, $T\vecnot{v} = T^2  \vecnot{w} = T \vecnot{w} = \vecnot{v}$ and $T$ projects onto $\mathcal{R}(T)$. Since $\vecnot{v} \neq \vecnot{0}$, we have $\vecnot{v} \notin \mathcal{N}(T)$.
@@ -402,6 +407,5 @@ If $\mathcal{R}(P) \perp \mathcal{N}(P)$, then $P=P^H$ because  $\tinner{P\vecno
 
 
 \end{document}
-
 
 

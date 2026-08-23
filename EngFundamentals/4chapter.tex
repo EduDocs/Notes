@@ -1,6 +1,6 @@
 \chapter{Linear Transformations and Operators}
 
-\gpt{Chapter-level feedback: Duality, operator norms, adjoints, and pseudoinverses are excellent choices for both signal processing and quantum computing.  The chapter would be easier to navigate if it more clearly separated finite-dimensional matrix facts from infinite-dimensional operator theory.  In particular, the matrix 2-norm derivation depends on eigenvalues and the Hermitian spectral theorem, which appear only in later chapters; consider moving ``Matrix Norms'' after the spectral theorem or revisiting it after the SVD.  Conversely, place the general Riesz theorem before the Optimization chapter if that chapter is to use Hilbert-space gradients.}
+% \gpt{Chapter-level feedback: Duality, operator norms, adjoints, and pseudoinverses are excellent choices for both signal processing and quantum computing.  The chapter would be easier to navigate if it more clearly separated finite-dimensional matrix facts from infinite-dimensional operator theory.  In particular, the matrix 2-norm derivation depends on eigenvalues and the Hermitian spectral theorem, which appear only in later chapters; consider moving ``Matrix Norms'' after the spectral theorem or revisiting it after the SVD.  Conversely, place the general Riesz theorem before the Optimization chapter if that chapter is to use Hilbert-space gradients.}
 
 \section{The Algebra of Linear Transformations}
 
@@ -585,7 +585,13 @@ For all $\vecnot{v} \in V$,
 \end{equation*}
 Since this holds for all $\vecnot{v} \in V$, we gather from Lemma~\ref{lemma:DualSpaceSeparatesPoints} that $T^* \left( s \vecnot{w}_1 + \vecnot{w}_2 \right) = s T^* \vecnot{w}_1 + T^* \vecnot{w}_2$.
 Therefore, $T^*$ is linear.
-\gpt{Omission: the theorem claims that $T^*$ is bounded, but the proof establishes only existence, linearity, and uniqueness.  Add the estimate $\|T^*\vecnot w\|=\|f_{\vecnot w}\|\leq\|T\|\,\|\vecnot w\|$, which gives $\|T^*\|\leq\|T\|$ (and applying the same argument to $T^*$ yields equality).}
+
+To verify that $T^*$ is bounded, we start by writing
+\[  |\inner{ \vecnot{v} }{ T^* \vecnot{w} }| = |\inner{ T \vecnot{v} }{ \vecnot{w} }| \leq \|T \vecnot{v}\| \|\vecnot{w}\| \leq \| T \| \|\vecnot{v}\| \|\vecnot{w}\|.  \]
+Then, we substitute $\vecnot{v}=T^* \vecnot{w}$ into the far LHS and the far RHS to see that
+\[  |\inner{ \vecnot{v} }{ T^* \vecnot{w} }| = |\inner{ T^* \vecnot{w} }{ T^* \vecnot{w} }| = \| T^* \vecnot{w}\|^2 \leq \| T \|  \|T^* \vecnot{w}\| \|\vecnot{w}\|. \]
+Dividing by $\|T^* \vecnot{w}\| \|\vecnot{w}\|$ and optimizing over $\vecnot{w} \neq \vecnot{0}$ shows that $\|T^* \| \leq \|T \|$.
+
 The uniqueness of $T^*$ is inherited from Theorem~\ref{theorem:FunctionalInnerProduct} because, for each $\vecnot{w}\in W$, the vector $T^* \vecnot{w}$ is determined uniquely as the vector $\vecnot{v}'$ such that $\inner{ T \vecnot{v} }{ \vecnot{w} } = \inner{ \vecnot{v} }{ \vecnot{v}' }$ for all $\vecnot{v} \in V$.
 \end{proof}
 
