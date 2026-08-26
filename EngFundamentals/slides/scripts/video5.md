@@ -25,7 +25,7 @@ What is topology and why do we study it? It is the study of geometric properties
 ## Page 003: 2.1: Introduction (overlay 2 of 6)
 
 Narration:
-Why do we study it? Engineers approximate real things by mathematical objects. Here are two questions that it can help answer. Question one: can a matrix A be approximated closely by a lower rank matrix? Question two: can a function f of x be approximated well by a degree-two polynomial?
+Why do we study it? Engineers approximate real things by mathematical objects. Here are two questions that topology can help answer. [[pause 0.2]] First, can a matrix A be approximated closely by a lower-rank matrix? [[pause 0.2]] Second, can a function f of x be approximated well by a degree-two polynomial?
 
 ## Page 004: 2.1: Introduction (overlay 3 of 6)
 
@@ -35,27 +35,27 @@ In engineering, a topology is typically defined using a metric. Thus, this cours
 ## Page 005: 2.1: Introduction (overlay 4 of 6)
 
 Narration:
-Metric spaces. A metric space, X comma d, is a set X along with a metric d of x y. The quantity d of x y is called the distance between the points x and y. This definition is a useful abstraction of spaces with some notion of distance between any two points.
+A metric space, X comma d, is a set X along with a metric d of x-y. The quantity d of x-y is called the distance between the points x and y. This definition is a useful abstraction of spaces with some notion of distance between any two points.
 
 ## Page 006: 2.1: Introduction (overlay 5 of 6)
 
 Narration:
-A metric on a set X is a function d from X cross X to the real numbers such that: one, d of x y is greater than or equal to zero for all x and y in X, with equality if and only if x equals y. This is called non-negativity. Two, d of x y equals d of y x for all x and y in X. This is called symmetry. These rules can be seen as an abstraction of Euclidean space, whose notion of distance retains some key properties of Euclidean distance.
+A metric on a set X is a function d from X-cross-X to the real numbers with the following properties. [[pause 0.2]] First, “d of x-y is greater than or equal to zero” for all x and y in X, with equality if and only if x equals y. This is called non-negativity. [[pause 0.2]] Second, “d of x-y equals d of y-x” for all x and y in X. This is called symmetry. These rules can be seen as an abstraction of Euclidean space, whose notion of distance retains some key properties of Euclidean distance.
 
 ## Page 007: 2.1: Introduction (overlay 6 of 6)
 
 Narration:
-Three, d of x y plus d of y z is greater than or equal to d of x z for all x, y, and z in X. This is called the triangle inequality. For example, suppose x is where you work, z is where you live, and y is where you buy groceries. Then, the triangle inequality abstracts the idea that stopping by the store on your way home cannot make your trip home shorter.
+Third, “d of x-y plus d of y-z is greater than or equal to d of x-z” for all x, y, and z in X. This is called the triangle inequality. For example, suppose x is where you work, z is where you live, and y is where you buy groceries. Then the triangle inequality abstracts the idea that stopping by the store on your way home cannot make your trip home shorter.
 
 ## Page 008: 2.1: Standard Examples of Metric Spaces (overlay 1 of 3)
 
 Narration:
-First, consider the real numbers, X equals R, with the absolute distance d of x y equal to the absolute value of x minus y. This example is the standard foundation for real analysis. One holds because the absolute value of a number is non-negative and equals zero if and only if that number is zero. Two holds because swapping x and y doesn’t change the absolute value. Three follows from: the absolute value of x minus z equals the absolute value of the quantity x minus y, plus the quantity y minus z, which is less than or equal to the absolute value of x minus y, plus the absolute value of y minus z.
+First, consider the real numbers, X equals R, with the absolute distance d of x-y equal to the absolute value of x minus y. This example is the standard foundation for real analysis. Non-negativity holds because the absolute value of a number is non-negative and equals zero if and only if that number is zero. Symmetry holds because swapping x and y doesn’t change the absolute value. The triangle inequality follows because “the absolute value of x minus z” equals “the absolute value of the quantity x minus y, plus the quantity y minus z,” which is less than or equal to “the absolute value of x minus y, plus the absolute value of y minus z.”
 
 ## Page 009: 2.1: Standard Examples of Metric Spaces (overlay 2 of 3)
 
 Narration:
-Next, consider the example of real n-dimensional vectors, X equals R to the n, with the Euclidean metric d of x y equal to the square root of x-one minus y-one, squared, plus, and so on, plus x-n minus y-n, squared. Properties one and two are easy; three is a bit harder and will be shown later.
+Next, consider real n-dimensional vectors, X equals R to the n, with the Euclidean metric d of x-y equal to the square root of x-one minus y-one, squared, plus, and so on, plus x-n minus y-n, squared. Non-negativity and symmetry are immediate; the triangle inequality is a bit harder and will be shown later.
 
 ## Page 010: 2.1: Standard Examples of Metric Spaces (overlay 3 of 3)
 
@@ -65,17 +65,17 @@ Finally, consider the set of continuous functions f from the interval a to b int
 ## Page 011: 2.1: Important Concepts in Metric Spaces (overlay 1 of 3)
 
 Narration:
-First, let us consider the set of points with distance less than epsilon from a point x. This is called the open ball of radius epsilon centered at x, and it is given by B sub d of x comma epsilon, defined as the set of y in X such that d of x y is less than epsilon. This is illustrated in the figure. Also, the statement denoted P, namely, “for all a in B sub d of x comma epsilon, there is a delta greater than zero such that B sub d of a comma delta is a subset of B sub d of x comma epsilon,” says that all points in the open ball of radius epsilon also have an open ball around them, of radius delta less than epsilon, that lies entirely inside the original ball. You will be asked to prove this in the homework.
+First, consider the set of points with distance less than epsilon from a point x. This is called the open ball of radius epsilon centered at x, and it is given by B sub d of x-comma-epsilon: the set of y in X such that d of x-y is less than epsilon. This is illustrated in the figure. [[pause 0.2]] The statement denoted P says that every point in this open ball has a smaller open ball around it that lies entirely inside the original ball. You will be asked to prove this in the homework.
 
 ## Page 012: 2.1: Important Concepts in Metric Spaces (overlay 2 of 3)
 
 Narration:
-Next, consider an infinite list x-one, x-two, x-three, and so on, of points in X. Formally, we say that a sequence x sub i in X, for i in the natural numbers, is equivalent to x sub i equals f of i, for a function f from the natural numbers to X. For example, for X equal to the real numbers and d of x y equal to the absolute value of x minus y, let x sub n equal one plus one over n, all raised to the power n, for n in the natural numbers. It is well-known that this sequence converges to the constant e. A sequence is also illustrated in the figure.
+Next, consider an infinite list x-one, x-two, x-three, and so on, of points in X. Formally, a sequence is a function f from the natural numbers to X, with x sub i equal to f of i. [[pause 0.2]] For example, for X equal to the real numbers and d of x-y equal to the absolute value of x minus y, let x sub n equal one plus one over n, all raised to the power n. It is well-known that this sequence converges to the constant e. A sequence is also illustrated in the figure.
 
 ## Page 013: 2.1: Important Concepts in Metric Spaces (overlay 3 of 3)
 
 Narration:
-Finally, consider a sequence of points that approaches another point. Formally, we say that a sequence x sub n converges to x in X, denoted x sub n arrow x, if, for any epsilon greater than zero, there is a natural number M such that d of x comma x sub n is less than epsilon for all n greater than M. In the figure, one can imagine the example sequence converging to the point x.
+Finally, consider a sequence of points that approaches another point. Formally, a sequence x sub n converges to x in X, denoted x sub n arrow x, if, for any epsilon greater than zero, there is a natural number M such that d of x-comma-x sub n is less than epsilon for all n greater than M. In the figure, one can imagine the example sequence converging to the point x.
 
 ## Page 014: 2.1: Convergence: Examples and Counterexamples (overlay 1 of 5)
 
@@ -85,7 +85,7 @@ A sequence x-one, x-two, and so on, in X comma d is a Cauchy sequence if, for an
 ## Page 015: 2.1: Convergence: Examples and Counterexamples (overlay 2 of 5)
 
 Narration:
-Theorem: every convergent sequence is a Cauchy sequence. The proof will be given in the lecture. This means that the tail of a convergent sequence must only contain points that are close to each other.
+The following theorem states that every convergent sequence is a Cauchy sequence. The proof will be given in the lecture. This means that the tail of a convergent sequence contains only points that are close to each other.
 
 ## Page 016: 2.1: Convergence: Examples and Counterexamples (overlay 3 of 5)
 
@@ -95,7 +95,7 @@ What about the converse? In calculus and real analysis, it is also common to pro
 ## Page 017: 2.1: Convergence: Examples and Counterexamples (overlay 4 of 5)
 
 Narration:
-But this doesn’t work in all metric spaces! No, there is a counterexample. Take the metric space X comma d with the rationals, X equals Q, and d of x y equal to the absolute value of x minus y. Take the sequence with x-one equal to two and x sub n plus one equal to f of x sub n, defined as one half x sub n plus one over x sub n, which is rational. One can show that x sub n is a Cauchy sequence and that the absolute value of x sub n minus the square root of two converges to zero.
+But this does not work in all metric spaces. Here is a counterexample. Take the metric space X-comma-d with the rationals, X equals Q, and d of x-y equal to the absolute value of x minus y. Take the sequence with x-one equal to two and x sub n plus one equal to f of x sub n, defined as one half x sub n plus one over x sub n, which is rational. One can show that x sub n is a Cauchy sequence and that the absolute value of x sub n minus the square root of two converges to zero.
 
 ## Page 018: 2.1: Convergence: Examples and Counterexamples (overlay 5 of 5)
 
@@ -115,7 +115,7 @@ A subset W of X comma d is closed if its complement, W complement equals X minus
 ## Page 021: 2.1.1: Metric Topology (overlay 3 of 3)
 
 Narration:
-Based on these definitions, one can prove the following theorem. One, the empty set and X are open sets. Two, any union of open sets is open. Three, any finite intersection of open sets is open. These results will be proven in class or in homework problems.
+Based on these definitions, one can prove the following theorem. [[pause 0.2]] First, the empty set and X are open sets. [[pause 0.2]] Second, any union of open sets is open. [[pause 0.2]] Third, any finite intersection of open sets is open. These results will be proven in class or in homework problems.
 
 ## Page 022: 2.1.1: Interior, Limit points, and Closure (overlay 1 of 6)
 
@@ -160,4 +160,4 @@ The boundary. For W a subset of X, the boundary of W is the closure minus the in
 ## Page 030: Next Steps
 
 Narration:
-Here are some options to continue learning this material. To continue studying after this video, try the suggested reading: Course Notes EF 2.1 through 2.1.2. Or the optional reading: MMA 2.1. Also, look at the problems in Assignment 3. [[pause 0.5]] That’s it for today. So, I’ll see you next time.
+Here are some options to continue learning this material. To continue studying after this video, try the suggested reading: Course Notes E F two point one through two point one point two. Or the optional reading: M M A two point one. Also, look at the problems in Assignment three. [[pause 0.5]] That’s it for today. So, I’ll see you next time.

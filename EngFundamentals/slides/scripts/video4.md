@@ -23,29 +23,29 @@ Welcome to the fourth video lecture for ECE 586, Vector-Space Methods. Today, we
 Pause-after: 1
 
 Narration:
-Now let's consider sets of tuples and vectors.; For sets A-and-B, the Cartesian product A-cross B is the set of ordered pairs. Thus, A-cross-B is defined as the set of pairs a-comma-b such that a-in-A and b-in-B.; For n-tuples from the same set, we write A-to-the power n to denote the n-fold product of A with itself. [[pause 0.5]] For example, if A-is the set containing a-and-b, and B is the set containing c-and-d, then-A cross-B is the set containing a-c; a-d; b-c; and b-d. [[pause 0.5]] A, squared, which is A, cross-A, is the set containing a, a; a, b; b-a; and b-b. [[pause 0.5]] And-A cubed equals the set shown on the last line.
+Now let’s consider sets of tuples and vectors. [[pause 0.2]] For sets A-and-B, the Cartesian product A-cross-B is the set of ordered pairs. Thus, A-cross-B is the set of pairs a-comma-b such that a is in A and b is in B. [[pause 0.2]] For n-tuples from the same set, we write A to the power n to denote the n-fold product of A with itself. [[pause 0.3]] For example, if A is the set containing a-and-b, and B is the set containing c-and-d, then A-cross-B is the set containing a-comma-c, a-comma-d, b-comma-c, and b-comma-d. [[pause 0.3]] A squared, which is A-cross-A, is the set containing a-comma-a, a-comma-b, b-comma-a, and b-comma-b. [[pause 0.3]] And A cubed equals the set shown on the last line.
 
 ## Page 003: 1.4: Cartesian Products and Abstract Relations (overlay 2 of 2)
 
 Narration:
-A relation; tilde; between elements of A is defined by a subset R of A cross A. Specifically, we say the relation x tilde y holds if and only if the pair x comma y is in R. Relations are abstractions of binary comparisons like equals, less than, greater than, less than or equal to, and greater than or equal to.
+A relation, spoken “tilde,” between elements of A is defined by a subset R of A-cross-A. Specifically, “x tilde y” holds if and only if the pair x-comma-y is in R. Relations are abstractions of binary comparisons like equals, less than, greater than, less than or equal to, and greater than or equal to.
 
 ## Page 004: 1.4: Properties of Relations (overlay 1 of 5)
 
 Narration:
-The relation tilde on-A is said to be reflexive if; x tilde x holds for all x in-A. That is, for all x in-A, the pair x comma x is in R. [[pause 0.5]] It is symmetric if; whenever x tilde y, then y tilde x, for all x and y in-A. [[pause 0.5]] It is transitive if; whenever x tilde y; and y tilde z; then x tilde z.
+The relation tilde on A is reflexive if “x tilde x” holds for all x in A. That is, for all x in A, the pair x-comma-x is in R. [[pause 0.3]] It is symmetric if, whenever “x tilde y,” then “y tilde x,” for all x and y in A. [[pause 0.3]] It is transitive if, whenever “x tilde y” and “y tilde z,” then “x tilde z.”
 
 ## Page 005: 1.4: Properties of Relations (overlay 2 of 5)
 
 Pause-after: 2.5
 
 Narration:
-It is an equivalence relation if it is reflexive, symmetric, and transitive. For example, let A be a set of people; and; let P of x y be the statement “x has the same birthday, month and day, as y.” Define the relation tilde such that x tilde y holds if and only if P of x y is true. Then, R equals the set of pairs x comma y in-A cross-A such that P of x y is true.
+It is an equivalence relation if it is reflexive, symmetric, and transitive. [[pause 0.2]] For example, let A be a set of people, and let P of x-y be the statement “x has the same birthday, month, and day as y.” Define the relation tilde such that “x tilde y” holds if and only if P of x-y is true. Then R is the set of pairs x-comma-y in A-cross-A such that P of x-y is true.
 
 ## Page 006: 1.4: Properties of Relations (overlay 3 of 5)
 
 Narration:
-This partitions-A into disjoint equivalence classes: the equivalence class containing-a is defined as the set of x in-A such that x tilde a. Thus, the-a inside square brackets denotes the set of all elements that are equivalent to a. These definitions imply that each element is in exactly one equivalence class.
+This relation partitions A into disjoint equivalence classes. The equivalence class containing a is the set of x in A such that “x tilde a.” Thus, a inside square brackets denotes the set of all elements equivalent to a. These definitions imply that each element is in exactly one equivalence class.
 
 ## Page 007: 1.4: Properties of Relations (overlay 4 of 5)
 
@@ -60,12 +60,12 @@ The set of equivalence classes for tilde is called its quotient set and denoted 
 ## Page 009: 1.5: Functions (overlay 1 of 7)
 
 Narration:
-A function f from X to Y is defined by a subset F of X cross Y such that the set of y-values achieved by each x (denoted by A-sub x) has exactly one element. The value of f at x in X, denoted f of x, is the unique element in A sub x.
+A function f from X to Y is defined by a subset F of X-cross-Y such that the set of y-values achieved by each x, denoted A sub x, has exactly one element. The value of f at x in X, denoted f of x, is the unique element in A sub x.
 
 ## Page 010: 1.5: Functions (overlay 2 of 7)
 
 Narration:
-Now, we can unpack this definition. A function f mapping X to Y assigns one value, f of x; which lives in Y, to each x in X.
+Now, we can unpack this definition. A function f mapping X to Y assigns one value, f of x, in Y to each x in X.
 
 ## Page 011: 1.5: Functions (overlay 3 of 7)
 
@@ -75,7 +75,7 @@ The notation f from X to Y identifies the domain X and the codomain Y.
 ## Page 012: 1.5: Functions (overlay 4 of 7)
 
 Narration:
-The range of f is the subset of Y achieved by f;  In math, it is the set of y in Y; such that there exists x in X; with y equal to f of x.
+The range of f is the subset of Y achieved by f. [[pause 0.2]] In mathematics, it is the set of y in Y such that there exists x in X with y equal to f of x.
 
 ## Page 013: 1.5: Functions (overlay 5 of 7)
 
@@ -90,7 +90,7 @@ In basic math, functions are often described by graphs and formulas. This leads 
 ## Page 015: 1.5: Functions (overlay 7 of 7)
 
 Narration:
-For example, Cauchy published an incorrect proof of the false assertion that; “a sequence of continuous functions converging everywhere has a continuous limit.”
+For example, Cauchy published an incorrect proof of the false assertion that “a sequence of continuous functions converging everywhere has a continuous limit.”
 
 ## Page 016: 1.5: Properties of Functions (overlay 1 of 3)
 
@@ -100,17 +100,17 @@ Two functions are equal if they have the same domain, codomain, and value for al
 ## Page 017: 1.5: Properties of Functions (overlay 2 of 3)
 
 Narration:
-A function f from X to Y is called one-to-one, or injective, if, for all x and x prime in X; if f of x equals f of x prime, then x equals x prime; [[pause 0.4]] It is called onto, or surjective, if its range equals Y; [[pause 0.4]] It is called a one-to-one correspondence, or bijective, if it is both one-to-one, and onto.
+A function f from X to Y is called one-to-one, or injective, if, for all x and x prime in X, “f of x equals f of x prime” implies “x equals x prime.” [[pause 0.3]] It is called onto, or surjective, if its range equals Y. [[pause 0.3]] It is called a one-to-one correspondence, or bijective, if it is both one-to-one and onto.
 
 ## Page 018: 1.5: Properties of Functions (overlay 3 of 3)
 
 Narration:
-A bijective function has a unique inverse function, f inverse mapping Y to X, satisfying: for all x in X, f inverse of f of x equals x; and, for all y in Y, f of f inverse of y equals y; [[pause 0.4]] Any one-to-one function f from X to Y automatically defines a bijective function g from X to R; where R is the range of f, and g of x equals, f of x, for all x in X; [[pause 0.4]] This allows one to define an inverse function closely related to a one-to-one function.
+A bijective function has a unique inverse function, f inverse mapping Y to X. It satisfies “for all x in X, f inverse of f of x equals x,” and “for all y in Y, f of f inverse of y equals y.” [[pause 0.3]] Any one-to-one function f from X to Y automatically defines a bijective function g from X to R, where R is the range of f, and g of x equals f of x for all x in X. [[pause 0.3]] This allows one to define an inverse function closely related to a one-to-one function.
 
 ## Page 019: 1.5: Applying Functions to Sets (1) (overlay 1 of 3)
 
 Narration:
-For f mapping X to Y and a subset-A of X, the image of A under f is the set of y in Y such that there exists x in-A with f of x equal to y.; In shorthand, we can write this as the set of f of x values achieved by all x in A.
+For f mapping X to Y and a subset A of X, the image of A under f is the set of y in Y such that there exists x in A with f of x equal to y. [[pause 0.2]] In shorthand, this is the set of f of x values achieved by all x in A.
 
 ## Page 020: 1.5: Applying Functions to Sets (1) (overlay 2 of 3)
 
@@ -127,7 +127,7 @@ This implies that the range of f can be written simply as the image of X under f
 ## Page 022: 1.5: Applying Functions to Sets (2) (overlay 1 of 4)
 
 Narration:
-The preimage, or inverse image; of a subset C of Y is defined by: f inverse of C equals the set of x in X such that f of x is in C.
+The preimage, or inverse image, of a subset C of Y is defined by “f inverse of C equals the set of x in X such that f of x is in C.”
 
 ## Page 023: 1.5: Applying Functions to Sets (2) (overlay 2 of 4)
 
@@ -149,19 +149,19 @@ For a one-to-one f, the inverse image of a singleton set containing f of x is th
 ## Page 026: 1.5: Applying Functions to Sets (3) (overlay 1 of 3)
 
 Narration:
-In general, one can show that the inverse image of f-of-A contains-A, and f of f inverse of B is contained in B. These expressions hold because f can only compress sets; that is, it can map different inputs to the same value, while the inverse image can only expand sets, that is, it can map a singleton to multiple values.
+In general, one can show that the inverse image of f of A contains A, and f of f inverse of B is contained in B. These expressions hold because f can only compress sets: it can map different inputs to the same value. Conversely, the inverse image can expand sets: it can map a singleton to multiple values.
 
 ## Page 027: 1.5: Applying Functions to Sets (3) (overlay 2 of 3)
 
 Narration:
-The left figure shows a function f from the real numbers to the real numbers defined by f of x equals x squared; let A equal the interval from one to two, and notice that B, which is f of A, equals the interval from one to four. But, f inverse of B equals the union of intervals; from minus two to minus one and from one to two which is a proper superset of A.
+The left figure shows a function f from the real numbers to the real numbers defined by f of x equals x squared. Let A equal the interval from one to two, and notice that B, which is f of A, equals the interval from one to four. But f inverse of B equals the union of the intervals from minus two to minus one and from one to two, which is a proper superset of A.
 
 ## Page 028: 1.5: Applying Functions to Sets (3) (overlay 3 of 3)
 
 Narration:
-The right figure shows a function f from the real numbers to the real numbers defined by f of x equals x squared plus one; Let B equal the interval from zero to two, and notice that A, which is f inverse of B, equals the interval from minus one to one. But, f of A, which is f of the interval from minus one to one, equals the interval from one to two, which is a proper subset of B.
+The right figure shows a function f from the real numbers to the real numbers defined by f of x equals x squared plus one. Let B equal the interval from zero to two, and notice that A, which is f inverse of B, equals the interval from minus one to one. But f of A, which is f of the interval from minus one to one, equals the interval from one to two, which is a proper subset of B.
 
 ## Page 029: Next Steps
 
 Narration:
-Here are some options to continue learning this material. To continue studying after this video, try the suggested reading: Course Notes EF 1.5. Or the optional reading: PAF Sections 4.1 through 5.3. Also, look at the problems in Assignment 2. [[pause 0.5]] That’s it for today. So, I’ll see you next time.
+Here are some options to continue learning this material. To continue studying after this video, try the suggested reading: Course Notes E F one point five. Or the optional reading: P A F Sections four point one through five point three. Also, look at the problems in Assignment two. [[pause 0.5]] That’s it for today. So, I’ll see you next time.
