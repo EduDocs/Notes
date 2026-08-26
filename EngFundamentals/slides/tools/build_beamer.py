@@ -71,6 +71,8 @@ def main() -> None:
     source = args.source.resolve()
     output = args.output.resolve()
     output.parent.mkdir(parents=True, exist_ok=True)
+    auxdir = output.parent / "auxdir"
+    auxdir.mkdir(exist_ok=True)
     generated_tex = output.with_suffix(".tex")
     write_if_changed(generated_tex, transformed_source(source.read_text(encoding="utf-8"), args.mode))
 
@@ -80,13 +82,12 @@ def main() -> None:
 
     command = [
         latexmk,
-        "-pdf",
-        "-silent",
-        "-shell-escape",
+        "-synctex=1",
         "-interaction=nonstopmode",
-        "-halt-on-error",
         "-file-line-error",
+        "-pdf",
         "-outdir=" + str(output.parent),
+        "-auxdir=" + str(auxdir),
         str(generated_tex),
     ]
     subprocess.run(command, cwd=source.parent, check=True)

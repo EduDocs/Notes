@@ -185,6 +185,7 @@ The square matrix $B$ is \textcolor{blue}{diagonalizable} if there is an inverti
 %We also assume, without loss of generality, that $\lambda_1 \neq 0$.
 %Therefore, if $\lambda_2 \neq \lambda_1$, then $\vecnot{w}^H \vecnot{v} = 0$ and the eigenvectors are orthogonal.
 %\end{proof}
+% \gpt{If the commented Hermitian-eigenvector proof is restored, use the August 23 repair: from $Av=\lambda_1v$, $v^HAv=\lambda_1\|v\|^2$ is real, hence $\lambda_1\in\mathbb R$; if $Aw=\lambda_2w$, then $\lambda_1w^Hv=w^HAv=(Aw)^Hv=\lambda_2w^Hv$, so distinct eigenvalues imply $w^Hv=0$.}
 
 \begin{theorem}<3->
 Any Hermitian matrix $B$ can be diagonalized by a unitary matrix $U$ so that $U^H B U = \Lambda$ is a real-valued diagonal matrix.
@@ -223,6 +224,7 @@ where (i) $U \in \ComplexNumbers^{m \times m}$ and $V \in \ComplexNumbers^{n \ti
 
 The factorization $A = U \Sigma V^H$ is called the \textcolor{blue}{full SVD} of the matrix $A$ while the factorization $A = U_1 \Sigma_1 V_1$ is called the \textcolor{blue}{compact SVD} of $A$.
 % \gpt{Suggested cut/paste correction: the compact SVD is $A=U_1\Sigma_1V_1^H$; the conjugate transpose is missing here.}
+% \gpt{Suggested addition from the August 23 book: ``The singular values are uniquely determined, but singular vectors associated with a repeated singular value are not unique.  The zero-singular-value right and left vectors may be any orthonormal bases of $\mathcal N(A)$ and $\mathcal N(A^H)$, respectively.''}
 \\[1mm] The compact SVD of a rank-$r$ matrix retains only the $r$ columns of $U,V$ associated with non-zero singular values.
 
 \end{frame}
@@ -230,6 +232,7 @@ The factorization $A = U \Sigma V^H$ is called the \textcolor{blue}{full SVD} of
 \begin{frame}{9: Singular Value Decomposition: Construction}
 
 Idea to find orthonormal changes of basis $U,V$ so that $U^H A V$ is diagonal
+% \gpt{Suggested numerical caveat from the August 23 book: ``This $A^HA$ construction is a conceptual proof, not the usual stable numerical algorithm: explicitly forming $A^HA$ squares the condition number and can lose small singular values.  Numerical SVD routines typically begin with bidiagonalization.''}
 
 \begin{itemize}
 \setlength\itemsep{3mm}

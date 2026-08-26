@@ -1,12 +1,12 @@
 all: book
 
+LATEXMK = latexmk -synctex=1 -interaction=nonstopmode -file-line-error -pdf -outdir=. -auxdir=auxdir
+
 book: book.tex
-	pdflatex book.tex
-	bibtex book
-	makeindex book.idx
-	pdflatex book.tex
-	pdflatex book.tex
-	sh makechap.sh
+	mkdir -p auxdir
+	$(LATEXMK) book.tex
+	sh auxdir/makechap.sh
 
 clean:
-	rm -f *.idx *.aux *.dvi *.log *.ps book.pdf
+	$(LATEXMK) -C book.tex
+	rm -rf auxdir

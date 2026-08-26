@@ -147,8 +147,6 @@
 
 \begin{document}
 
-\ifslow
-
 \title{ECE 586: Vector Space Methods \\ Lecture 2 Flip Video: Predicate Logic}
 \author{Henry D. Pfister \\ \univ}
 \date{}
@@ -238,12 +236,13 @@
    \neg \left(\exists x\!\in\! U, P(x) \right) &\Leftrightarrow \left( \forall x\!\in\! U, \neg P(x) \right) \\[-9mm]
  \end{align*}   
 \end{itemize}
+\vspace{-2mm}
 
 \item<4-> Examples \vspace{0.5mm}
 \begin{itemize}
  \setlength\itemsep{1.5mm}
  \item ``Not all vehicles have 4 tires'' $\Leftrightarrow$ ``There is a vehicle that does not have 4~tires''$\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!$
- \item ``There does not exist a vehicle with 4 tires'' $\Leftrightarrow$ ``No vehicle has 4 tires''\hspace*{-15mm}
+ \item ``There does not exist a vehicle with 4 tires'' $\Leftrightarrow$ ``All vehicles do not have 4 tires''\hspace*{-15mm}
   
 \end{itemize}
 
@@ -323,8 +322,6 @@
     
 \end{itemize}
 
-\gpt{Suggested cut/paste clarification from the revised book: ``There are eight syntactic choices, but commuting two universal quantifiers and commuting two existential quantifiers leaves six distinct quantified statements.''}
-
  \item<6-> These results and their symmetric pairs can be visualized with \\[-3mm] {\small \color{blue} \[ \begin{array}{ccccccc}
    \forall x, \forall y, P(x,y) & \Rightarrow & \exists x, \forall y, P(x,y) & \Rightarrow & \forall y, \exists x, P(x,y) & \Rightarrow & \exists y, \exists x, P(x,y) \\
    \Updownarrow &&&&&& \Updownarrow \\
@@ -378,8 +375,6 @@
 \end{itemize}
 \end{itemize}
 
-\gpt{Suggested replacement for the predicate-logic claim: ``First-order logic is complete in the sense that every logically valid formula is provable, and validity is semidecidable.  This does not mean that every first-order theory is complete or that validity is decidable.''}
-
 \note{
 	\vspace{2mm}
 	\begin{enumerate}[<alert@+>]
@@ -392,6 +387,7 @@
 }
 
 \end{frame}
+
 
 \begin{frame}<1-6> \frametitle{\bookref{section:StrategiesForProofs}: Strategies for Proofs}
 

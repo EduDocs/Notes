@@ -160,6 +160,7 @@ where
 \item \textbf{Properties:} 
 \begin{enumerate}[(1)]
 \item The singular values $\sigma_1, \dots \sigma_r$ are determined uniquely by the matrix $A$.  They corresponds to the positive square roots of the nonzero eigenvalues of $n \times n$ positive semidefinite matrix $A^\Herm A$ (or equivalently the $m \times m$ positive semidefinite matrix $AA^\Herm$).  % are the same as the z
+% \gpt{Suggested addition from the August 23 book: ``Singular vectors associated with a repeated singular value are not unique.  The zero-singular-value right and left vectors may be any orthonormal bases of $\mathcal N(A)$ and $\mathcal N(A^\Herm)$, respectively.''}
 %\item The columns of $U_1\in \bbC^{m \times r}$ form an orthonormal basis for $\cR(A)$. 
 %\item The columns of $U_2$ form an orthonormal basis for $\cN(A^\top)$
 %\item The columns of $V_1$ form an orthonormal basis for $\cR(A^\top)$. 
@@ -204,6 +205,7 @@ where
 %\item Idea to find orthonormal changes of basis $U,V$ so that $U^\Herm A V$ is diagonal
 
 \item \textbf{Construction:} Let $A $ be a complex $m \times n$ matrix with rank $r$%The SVD of $A \in \bbC^{m \times n}$ can be obtained from the 
+% \gpt{Suggested numerical caveat from the August 23 book: ``This $A^\Herm A$ construction is a conceptual proof, not the usual stable numerical algorithm: explicitly forming $A^\Herm A$ squares the condition number and can lose small singular values.  Numerical SVD routines typically begin with bidiagonalization.''}
 %\begin{enumerate}
 %\item Let 
 %\end{enumerate}

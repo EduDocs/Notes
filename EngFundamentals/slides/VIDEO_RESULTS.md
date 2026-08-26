@@ -10,8 +10,8 @@
 - Reviewed narration: `scripts/video0.md`
 - Production backend: remote Qwen3-TTS on Duke DCC CUDA
 - Model: `Qwen/Qwen3-TTS-12Hz-1.7B-Base`
-- Voice: Coben hp2 reference, x-vector cloning
-- Service identity: `qwen3-tts-1.7b-base-coben-hp2-xvector-v1`
+- Voice: Coben hp3 reference, x-vector cloning
+- Service identity: `qwen3-tts-1.7b-base-coben-hp3-xvector-v1`
 - Canonical output: `build/video0/video0_qwen3-clone-coben.mp4` (the filename
   describes the cloned voice; its production audio profile is remote)
 - Canonical audio metadata: `build/video0/audio/qwen3-remote-coben/metadata.json`
@@ -85,7 +85,7 @@ An incremental production run reused 28 chunks and synthesized four changed chun
 - The default seed is `42`; the reviewed script uses page overrides including 43, 44, 45, and 47.
 - Current timed narration contains 7.8 seconds of page lead, 27.6 seconds of page tail, and 3.45 seconds of explicit internal pauses.
 - Timing-only changes rebuild timed WAVs and affected video state without regenerating speech.
-- The voice reference is `coben_hold_tight_ch1_first29_hp2.wav`, a 29.49-second,
+- The voice reference is `coben_hold_tight_ch1_first29_hp3.wav`, a 29.49-second,
   mono, 16-bit, 44.1-kHz PCM recording. No exact transcript is available, so
   x-vector mode remains the production default.
 
@@ -117,7 +117,7 @@ table reports the current outputs.
 | Video | Frames | Overlay pages / clips | Speech | Timed narration | Canonical MP4 | Size |
 |---|---:|---:|---:|---:|---:|---:|
 | 1: Propositional Logic | 8 | 28 pages / 33 clips | 452.96 s | 487.66 s | 487.67 s | 8.51 MB |
-| 2: Predicate Logic | 8 | 29 pages / 30 cues | 711.60 s | 746.45 s | 746.47 s | 15.57 MB |
+| 2: Predicate Logic | 8 | 29 pages / 30 cues | 675.44 s | 710.29 s | 710.30 s | 12.98 MB |
 | 3: Set Theory | 10 | 39 pages / 52 clips | 635.92 s | 686.22 s | 686.23 s | 13.16 MB |
 | 4: Relations and Functions | 9 | 29 pages / 39 clips | 497.84 s | 538.04 s | 538.07 s | 10.79 MB |
 
@@ -573,3 +573,56 @@ by 30 ms, within one 30-fps frame. The final AAC level is -25.7 dBFS mean and
 -3.9 dBFS peak. A final cache-only verification reused all 33 speech chunks and
 all 28 timed pages without requesting DCC. Stable review copies of the five
 regenerated clips are in `build/video1/review-clips/latest-2026-08-23/`.
+
+## Video 2 hp2 voice regeneration
+
+Video 2 was regenerated on 2026-08-23 with the Coben hp2 x-vector reference
+and service identity `qwen3-tts-1.7b-base-coben-hp2-xvector-v1`. Before the
+refresh, the prior-voice remote audio cache, video-work state, logs, and
+canonical MP4 were copied to `build/video2/backups/2026-08-23-pre-hp2/`. The
+verified backup contains 223 files and occupies 222 MB; its preserved MP4,
+narration WAV, and metadata SHA-256 values are respectively
+`2b3dac998a2d7e7abfa64ff4f122465711fe04d2d14c52bb4e0b8d8b1ddf3860`,
+`7eb33010103b9008cc498cc48327d6512c998a9766499388be71a032bf6557ff`, and
+`5fc4af4e50e53431b4c9d52d9cade00c06a3e11cb7dccd93cdac72e3f1e16d43`.
+
+All 30 current speech chunks were newly synthesized and all 29 timed pages and
+video segments were rebuilt. The availability-aware controller selected an
+immediately available RTX 2080 in `gpu-common` with FP16 and SDPA; all remote
+requests succeeded without retries, timeouts, HTTP errors, or tracebacks, and
+automatic cleanup cancelled service job 53127465.
+
+The hp2 result contains 675.44 seconds of speech and 710.29 seconds of timed
+PCM narration. The continuous narration WAV has SHA-256
+`daf61065612a2c785512fc3e33343a39cfdf1076dcdb0f78c662d48ce6904ac6`.
+The canonical H.264/AAC MP4 is 710.3000 seconds, 13,615,511 bytes, at 908 by
+510 and 30 fps, with mono 24-kHz AAC. Its SHA-256 is
+`4e8e947873edd499f0f018e23ef30af563c8536bcaf35f013b3619bfcb77faf2`.
+Full FFmpeg decoding completed without error; audio and video stream durations
+differ by 28 ms, within one 30-fps frame. The final AAC level is -25.6 dBFS
+mean and -3.5 dBFS peak. A final cache-only run reused all 30 clips and all 29
+timed pages without requesting DCC.
+
+## Video 2 hp3 voice regeneration
+
+Video 2 was regenerated on 2026-08-24 with the Coben hp3 x-vector reference
+`coben_hold_tight_ch1_first29_hp3.wav`. The 29.49-second mono, 16-bit,
+44.1-kHz PCM reference was uploaded to
+`/hpc/group/pfisterlab/hp83/dcc-ai/voices/` and verified there with SHA-256
+`eee11132b2cb130a97ae3042419a510be6d948dec563641b89847eac3d662aa3`.
+The service identity was bumped to
+`qwen3-tts-1.7b-base-coben-hp3-xvector-v1`, so none of the hp2 speech cache
+was eligible for reuse.
+
+The first build exposed a malformed `[[pause 0,2]]` marker on Page 7 of
+`scripts/video2.md`; it was corrected to `[[pause 0.2]]` before synthesis.
+The clean run selected an RTX 5000 Ada in `gpu-common` with BF16 and SDPA,
+synthesized all 31 chunks, and rebuilt all 29 timed pages without HTTP errors
+or retries. It produced 698.3 seconds of speech and 733.4 seconds of timed
+PCM narration. The continuous narration WAV has SHA-256
+`f703ebed07d7a7cd8fd3b815cd900f343a68c680fdd9ff1c4eb8630f80a1b48e`.
+
+The canonical H.264/AAC MP4 is 733.4000 seconds, 12,894,254 bytes, at 908 by
+510 and 30 fps. Its SHA-256 is
+`61eae84b33d25a9dc7641c96675203b90ce5d771b8e1075de023744f5c6df551`.
+Automatic cleanup stopped the DCC service after synthesis.

@@ -404,6 +404,8 @@
 
 \end{frame}
 
+% \gpt{Suggested new proof-workshop frame from the August 23 book: prove $A\cap(B\cup C)=(A\cap B)\cup(A\cap C)$ element by element.  For arbitrary $x$, write $x\in A\cap(B\cup C)\Leftrightarrow[x\in A\wedge(x\in B\vee x\in C)]\Leftrightarrow[(x\in A\wedge x\in B)\vee(x\in A\wedge x\in C)]\Leftrightarrow x\in(A\cap B)\cup(A\cap C)$.  Since the equivalence holds for every $x$, the sets are equal.}
+
 \begin{frame}<1-4> \frametitle{\bookref{section:SetTheory}: Relationships Between Sets}
 
 \begin{itemize}
@@ -480,13 +482,15 @@
 
 \begin{frame}{\bookref{section:SetTheory}: Foundations of Set Theory}
 
+\vspace{4mm}
+
 \begin{example}[Russell's Paradox]
 Let $R = \{S|S\notin S\}$ be the set of sets that do not include themselves as members.
-This set exists in naive set theory simply because it is described by the above sentence.
+This set is not forbidden by naive set theory because it is described by the above sentence.
 The paradox arises from the fact that this definition leads to the logical contradiction: $R\notin R \leftrightarrow R\in R$.
 \end{example}
 
-\vspace{-3mm}
+\vspace{-3.5mm}
 
 \begin{itemize}
 \setlength\itemsep{3mm}
@@ -496,17 +500,13 @@ The paradox arises from the fact that this definition leads to the logical contr
 \begin{itemize} 
   \setlength\itemsep{1.5mm}
   \item It shows that \textcolor{blue}{naive set theory is not consistent} because it allows constructions leading to contradictions
-  \item It is avoided in axiomatic formulations by restricting constructions
   \item It also implies that $R$ cannot exist in any consistent set theory
-  %\item Are their sets that contains themselves? In naive set theory, the answer is yes.  Some examples are the ``set of all sets'' and the ``set of all abstract ideas''
-  %\item ZF axiomatic formulation has theorem: ``no set contains itself''
+  \item It is avoided in ZF axiomatic formulation by restricting set comprehension %and explicitly with the theorem: ``no set contains itself''
 \end{itemize}
 
 \item<4-> This class will use naive set theory while avoiding such statements
 
 \end{itemize}
-
-\gpt{Suggested cut/paste repair from the revised book: ``Under unrestricted comprehension, the description $R=\{S\mid S\notin S\}$ would be required to define a set, producing Russell's contradiction.  The alleged `set of all sets' and similar self-containing examples are not legitimate sets in ZF/ZFC; the paradox motivates restricting set formation.''}
 
 \note{
 	\vspace{4mm}

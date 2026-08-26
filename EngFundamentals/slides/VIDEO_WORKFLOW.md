@@ -138,7 +138,7 @@ For a pronunciation-only diagnostic, use `make pronunciation-test BACKEND=say` o
 
 ## Voice reference and cloning mode
 
-The default reference is the 29.49-second, mono, 16-bit, 44.1-kHz PCM `coben_hold_tight_ch1_first29_hp2.wav` recording derived from the previous ISIT deck. The production service keeps a copy under group storage and handles its input resampling. No exact transcript was found beside the recording, so both local and remote configuration use reference-audio-only x-vector cloning.
+The default reference is the 29.49-second, mono, 16-bit, 44.1-kHz PCM `coben_hold_tight_ch1_first29_hp3.wav` recording derived from the previous ISIT deck. The production service keeps a copy under group storage and handles its input resampling. No exact transcript was found beside the recording, so both local and remote configuration use reference-audio-only x-vector cloning.
 
 For an authorized reference with an exact transcript, local debugging can use ICL mode:
 
