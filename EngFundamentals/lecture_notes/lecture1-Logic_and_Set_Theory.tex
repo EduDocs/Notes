@@ -85,7 +85,7 @@
 %%\]
 %\end{itemize}
 
-\item A formal system of logic  consists of  a formal language, axioms, and a proof system for determining the validity of a statement from the axioms. 
+\item A formal deductive system consists of a formal language, axioms, and inference rules used to derive theorems. 
 %\begin{itemize}
 %%\item Argument is \textbf{valid} if conclusion follows from the premie. 
 %\item Consistent (or sound) if implications of axioms do not contain a contradiction. 
@@ -105,16 +105,14 @@
 \begin{itemize}
 \item \textbf{Propositional logic}  (a.k.a.\ zeroth-order logic)  constructs logical statements from a primitive collection of  ``atomic'' statements
 
-\item \textbf{Predicate logic}  (a.k.a.\ first-order logic)  constructs logical statements from a primitive collection of statements \emph{with additional structure}
+\item \textbf{Predicate logic}  (a.k.a.\ first-order predicate logic)  constructs logical statements from a primitive collection of statements \emph{with additional structure}
 \end{itemize}
 
-
-\item \textbf{Remark:} First-order logic has an  axiomatic formulation that is consistent and complete but not decidable
+\item \textbf{Remark:} First-order predicate logic is complete in the sense that every logically valid formula is provable, and validity is semidecidable but not decidable. 
 \begin{itemize}
 \item  \textbf{Consistent \& Complete:}   An argument if valid if and only if it can be proved from axioms
-\item \textbf{Decidable:}  Whether an argument is can be determined in finite time. 
-% \gpt{Suggested cut/paste clarification from the revised book: ``First-order logic is complete in the sense that every logically valid formula is provable, and validity is semidecidable but not decidable. This does not mean that every first-order theory is complete.''}
-%\item  Semidecidable: algorithm determines the truth of any postulated implication, if it terminates. But, termination is guaranteed only if postulate is true
+\item \textbf{Decidable:}  True if an argument can be determined in finite time. 
+\item  \textbf{Semidecidable:} algorithm determines the truth of any postulated implication, if it terminates. But, termination is guaranteed only if postulate is true
 %\end{itemize}
 %
 %\item \textbf{Remark:} First-order logic is \textbf{complete} in the sense that an argument is valid if and only if it can be proved from the axioms. However, it is not \textbf{decidable} in the sense that there 
@@ -133,13 +131,14 @@
 \begin{itemize}
 \item ``This course is at Duke University'' -- YES
 \item ``The real number $\sqrt{2}$ is rational''  -- YES
-\item ``Wash your hands before dinner''  -- NO, this is  command
-\item ``If you wash your hands you won't get sick" -- YES
+\item ``Wash your hands before dinner''  -- NO, this is a command
+\item ``If you wash your hands, then you won't get sick'' -- YES
 %\item ``$x \ge 3$'' -- YES if $x$ is a specific number (e.g., $x = 4$) but unclear if $x$ is unspecifed
 \end{itemize}
 
 
 \item \textbf{Remark:} By convention, if a statement is not false then it must be true. This is known as the law of the excluded middle. 
+% \gpt{Mathematical precision: the law of excluded middle is the assertion $P\vee\neg P$.  The claim that every proposition has exactly one of the truth values true and false is the principle of bivalence; in classical logic it implies that ``not false'' means true.}
 % For example, the statement 
 %\[
 %P = \text{ ``every person over ten feet tall has blue hair" } 
@@ -296,7 +295,8 @@
   \item $\neg (P \to \neg Q)$  =    ``you wash hands and you get sick''
   \end{itemize}
   
-\item Combining multiple operations results in \textbf{propositional formual} or \textbf{compound operation} 
+\item Combining multiple operations results in \textbf{propositional formula} or \textbf{compound formula} 
+% \gpt{Typos/terminology: replace ``propositional formual'' by ``propositional formula'' and ``compound operation'' by ``compound proposition'' (or ``compound formula'').}
 \[
 (P \rightarrow R) \wedge (Q \vee \neg R)
 \]  
@@ -327,7 +327,8 @@ F & F & F & F & T & F & T & F & T & T \\
 \subsection{Relations} 
  
    \begin{itemize}
-\item  \textbf{Definition:}  A \textbf{relation} (or meta statement) is logical statement about propositional formulas (i.e., compound operations). % compound operations on logical statements (i.e. propositional formulas).  %(While the output of operation, the output of a relation is not a logical statement). 
+\item  \textbf{Definition:}  A \textbf{relation} (or meta statement) is a logical relation between propositional formulas (i.e., compound operations). % compound operations on logical statements (i.e. propositional formulas).  %(While the output of operation, the output of a relation is not a logical statement). 
+% \gpt{Standard terminology: rename this subsection ``Logical Equivalence and Logical Consequence.''  $R$ and $S$ are formulas, not operations.  If every truth assignment satisfying $R$ also satisfies $S$, standard notation is semantic entailment $R\models S$; if they have the same truth value under every assignment, write semantic equivalence $R\equiv S$.  This also distinguishes these meta-level relations from the object-language connectives $\to$ and $\leftrightarrow$.}
 
 
 %\item For the following, let $R(P, Q)$ and $S(P, Q)$ be operations on logical statements $P$ and $Q$ 
@@ -358,7 +359,7 @@ i.e., the negation of ``$P$ and $Q$'' is equivalent to ``not $P$ or not $Q$'''
 \[
 P \to Q \iff  \neg Q \to\neg P 
 \]
-i.e., the negation of ``if $P$ then $Q$''  is equivalent to ``if not $Q$ then  not $P$'''
+i.e., ``if $P$ then $Q$''  is equivalent to ``if not $Q$ then  not $P$'''
 \end{itemize}
 
 
@@ -375,10 +376,11 @@ R \implies  S %\qquad \text{means that   $R \leftrightarrow S$ for al }
 
 \item \textbf{Examples:} %If $R$ = ``sky is blue and grass is green''  and $S $ = ``sky is not red'' then 
 \begin{itemize}
-\item $P \implies P \vee Q$
-\item $P \wedge Q \implies P$
-\item $\neg (P \to Q )  \implies  Q$
+\item $P \implies P \vee Q$ ?
+\item $P \wedge Q \implies P$ ?
+\item $\neg (P \to Q )  \implies  Q$ ?
 \end{itemize}
+% \gpt{The first two implications above are valid, but the third is false: $\neg(P\to Q)\equiv P\wedge\neg Q$, so it implies $\neg Q$, not $Q$.  Suggested replacement for the third line: $\neg(P\to Q)\implies\neg Q$.}
 
 %\[
 %R \implies S
@@ -405,6 +407,7 @@ R \implies  S %\qquad \text{means that   $R \leftrightarrow S$ for al }
 \item $P \vee \neg P$ is a  tautology
 \item $P \wedge \neg P$ is a contradiction 
 \end{itemize}
+% \gpt{Terminology: tautology and contradiction classify formulas, not operations.  A tautology is valid under every truth assignment; a contradiction is unsatisfiable.  A formula true under some assignments and false under others is commonly called a contingency.  Introducing ``satisfiable'' here would also prepare students for later logic terminology.}
 
 
 %\item \textbf{Remark:} Propositional logic (a.k.a.\ zeroth-order logic) has an  axiomatic formulation that is consistent, complete, and decidable
@@ -423,13 +426,16 @@ R \implies  S %\qquad \text{means that   $R \leftrightarrow S$ for al }
 \item \textbf{Predicate logic} % (a.k.a.\ first-order logic) is a generalization of propositional logic (a.k.a.\ zeroth-order logic) that
  allows allows the use of statements that contain variables: 
 \begin{itemize}
-\item Let $U$ be a set of elements (``the universe'') %and $P(x)$ be a statement can can be applied to any $x \in U$. 
-\item predicate $P(x)$ ia statement can can be applied to any $x \in U$
+\item Let $U$ be a set of elements (``the  universe'') %and $P(x)$ be a statement can can be applied to any $x \in U$. 
+% \gpt{Terminology: $U$ is usually called the ``domain of discourse'' (or ``universe of discourse'').  ``Universal set'' is more common in elementary set theory and can misleadingly suggest a set containing every mathematical object.}
+\item predicate $P(x)$ is a statement that can be applied to any $x \in U$
 \item $x$ is called a free variable 
+% \gpt{Terminology omission: after applying $\forall x$ or $\exists x$, the variable $x$ is \textbf{bound}.  A formula with no free variables is a \textbf{sentence} (or closed formula), and only a sentence has a truth value without first assigning values to variables.}
 \end{itemize}
 
 
 \item \textbf{Quantifies} allow statements about collections of elements
+% \gpt{Typos in the introductory lines above: replace ``allows allows'' by ``allows,'' ``predicate $P(x)$ ia statement can can be applied'' by ``the predicate $P(x)$ is a statement that can be applied,'' and ``Quantifies'' by ``Quantifiers.''}
 \begin{itemize}
 \item \textbf{Universal:}  $\forall x \in U,\,  P(x)$  $\iff$  ``$P(x)$ is true for all $x \in U$'' 
 \item \textbf{Existential:} $\exists x \in U,\,  P(x)$  $\iff$  ``there exists $x \in U$ such that  $P(x)$ is true'' 
@@ -456,6 +462,7 @@ R \implies  S %\qquad \text{means that   $R \leftrightarrow S$ for al }
 \item $\exists x \in S\, , P(x)$ is always false (obviously)
 \item $\forall x \in S, \, P(x)$ is always  true (because its negation $\exists x \in S, \, \neg P(x)$ is necessarily false)
 \end{itemize}
+% \gpt{Standard terminology: the universal statement over the empty set is \textbf{vacuously true}; call this phenomenon ``vacuous truth.''  This phrase is used routinely in analysis, especially when checking definitions over empty collections.}
 
 
 
@@ -467,6 +474,7 @@ R \implies  S %\qquad \text{means that   $R \leftrightarrow S$ for al }
 \item $P(x)$  = ``person $x$ has blue hair''
 \item $S$ = ``people over ten feet tall''
 \item $\forall x \in X, P(x)$  $\iff$   ``every person over ten feet tall has blue hair''
+% \gpt{Typos/notation: replace ``people in the word'' by ``people in the world,'' and replace $\forall x\in X$ by $\forall x\in S$ because $S$ is the set of people over ten feet tall and $X$ is undefined here.}
 
 
 %\item $\neg (\forall x \in X, P(x))$ $\iff$   $\exists x \in X, \neg P(x)$  $\iff$ ``there is a person  over 10 feet with blue hair''
@@ -475,6 +483,7 @@ R \implies  S %\qquad \text{means that   $R \leftrightarrow S$ for al }
 
 
 \item \textbf{Question:} Does the following implication holds? 
+% \gpt{Grammar: replace ``Does the following implication holds?'' by ``Does the following implication hold?''; below, write ``nonempty'' and ``the empty set.''}
 \[
 \forall x\in U , \, P(x) \quad \overset{?}{\implies}  \quad \exists x\in U , \, P(x)
 \]
@@ -506,6 +515,7 @@ R \implies  S %\qquad \text{means that   $R \leftrightarrow S$ for al }
 \exists x, \, \forall y\,  P(x,y)  \quad & \implies   \quad  \forall y, \, \exists x,\,  P(x,y)  
 %\neg ( \forall x \in X,\;  \exists y \in Y,\,  P(x,y)) \quad & \iff  \quad  \forall x \in X, \, \exists y \in Y, \,  \neg P(x,y)
 \end{align*}
+% \gpt{Two quantified formulas above are malformed.  In the first line, commute the quantifiers on the right: $\forall y\,\forall x\,P(x,y)$.  In the third line, use $\exists x\,\forall y\,P(x,y)$ on the right; the current expression binds $x$ twice and leaves $y$ free.}
 
 
 
@@ -539,6 +549,7 @@ R \implies  S %\qquad \text{means that   $R \leftrightarrow S$ for al }
  \item  \textbf{Contradiction}: Using $\neg (P \rightarrow Q) \iff P \wedge \neg Q$, one supposes that both $P$ and $\neg Q$ are true and then gives steps leading to a contradiction
  \item   \textbf{Induction}: For predicate $P(n)$, prove $Q=$``$\forall n\in\mathbb{N}, P(n)$'' by establishing the premise $P=$``$P(1) \wedge (\forall n\in \mathbb{N}, P(n) \rightarrow P(n\!+\!1))$''
 \end{itemize}
+% \gpt{Standard proof terminology: use ``proof by contraposition'' rather than ``contrapositive'' for the method.  For mathematical induction, name the \textbf{base case}, \textbf{induction hypothesis} (assume $P(n)$ for an arbitrary $n$), and \textbf{inductive step} (deduce $P(n+1)$).  Avoid reusing $P$ and $Q$ for both predicates and whole propositions.}
 
 \item \textbf{Example:} Give a \textbf{direct} proof of the following statement: 
 \[
@@ -564,6 +575,7 @@ R \implies  S %\qquad \text{means that   $R \leftrightarrow S$ for al }
 \item $P(x) = $ ``$x^2 = 2$''
 \item $Q(x) = $ ``$x$ is rational'' $\iff$ ``$\exists p,q \in \mathbb{N},\, q \ne 0, x = p/q$''
 \item Goal it so show that
+% \gpt{Mathematical/wording correction: because $x^2=2$ permits negative $x$, define rationality using $p\in\mathbb Z$ and $q\in\mathbb Z\setminus\{0\}$ (or $q\in\mathbb N$ with $p\in\mathbb Z$).  Also replace ``Goal it so show'' by ``The goal is to show.''}
 \[ \forall x \in \mathbb{R},\,   ( P(x) \to \neg Q(x)) 
 \]
 
@@ -581,6 +593,7 @@ R \implies  S %\qquad \text{means that   $R \leftrightarrow S$ for al }
 %\item Suppose $\sqrt{2}$ is rational. Then $\sqrt{2} = p/q$, $q \ne 0$
 
 \item WLOG assume $p,q$ are coprime (no common divisors)
+% \gpt{Terminology/precision: say ``write $x=p/q$ in lowest terms, so $\gcd(p,q)=1$'' or ``$p$ and $q$ are relatively prime.''  Coprime integers do share the divisor $1$, so the parenthetical should be ``no common divisor greater than $1$.''}
 \begin{align*}
 p = x q \quad \implies \quad p^2 = 2 q^2 \quad  \implies  \quad \text{$p^2$ is even} \quad  \implies  \quad \text{$p$ is even} 
 %\quad \implies \quad (2k)^2   = 2 q^2 \quad \implies \quad 2k^2 = q^2
@@ -594,6 +607,7 @@ Hence, $\exists k \in \mathbb{N}$, $p = 2k$. Plugging this back in, we see that
   %\quad  \implies  \quad \text{$p^2$ is even} 
    %\quad  \implies  \quad \text{$p$ is even} \wedge \text{$q$ is even}
 \end{align*}
+% \gpt{Proof omission in the two chains above: both use the converse ``if an integer's square is even, then the integer is even.''  State or prove this lemma first (for example, by the contrapositive: the square of an odd integer is odd).}
 %\item If $p $ is even then $p^2 $ is even 
 %
 %\begin{align*}
@@ -616,6 +630,7 @@ Hence, $\exists k \in \mathbb{N}$, $p = 2k$. Plugging this back in, we see that
 & \iff \quad  P(1) \wedge ( P(1) \to  P(2)  ) \wedge  ( P(2) \to P(3) )  \wedge \cdots\\
 & \iff \quad  P(1) \wedge ( \forall n \in \mathbb{N}, \,  ( P(n) \to  P(n+1)  )  ) \
 \end{align*}
+% \gpt{TeX typo: remove the stray final backslash after the last parenthesis in the preceding aligned display.}
 where  $P(n) = $ ``$ \sum_{i=1}^n i  = \frac{n^2 + n}{2}$''
 
 \item First verify the ``base case''
@@ -627,6 +642,7 @@ where  $P(n) = $ ``$ \sum_{i=1}^n i  = \frac{n^2 + n}{2}$''
 \sum_{i=1}^{n+1} i = \sum_{i=1}^{n} i  + (n+1) = \frac{n^2 + n}{2}  + (n+1)  = \frac{ n^2 + 3n + 2}{ 2}  = \frac{ (n+1)^2  + (n+1)}{2} 
 \]
 where second equality follow from $P(n)$
+% \gpt{Grammar: replace ``Then shows'' by ``Then show'' and ``where second equality follow'' by ``where the second equality follows.''}
 \end{itemize} 
 
 \end{itemize}
@@ -650,6 +666,7 @@ A = \{ a, e, i, o, u\}
 \[
 A =  \{ i, o, a, e, \}  = \{a, e, i, o, u, e, o  \} 
 \]
+% \gpt{Mathematical/typographical error: the first displayed set omits $u$, so the asserted equality is false.  Suggested replacement: $A=\{i,o,u,a,e\}=\{a,e,i,o,u,e,o\}$.  Also replace ``have not effect'' by ``have no effect.''}
 
 \item A \textbf{singleton} is a set containing exactly one element, such as $\{a\}$. 
 
@@ -700,6 +717,7 @@ A = \{x  \in X \mid P(x)\}  = \text{``the set of all elements of $X$ such that $
 \[ x\in A-B \iff (x\in A)\wedge (x\notin B) \]
   \item  \textbf{Complement} $A^c$ for implied universal set $U$ is defined by $A^c = U-A$
   \[ x\in A^c \iff x \notin A \]
+% \gpt{Terminology/notation: $A\setminus B$ is the standard notation for \textbf{set difference} (also called the relative complement of $B$ in $A$); $A-B$ can be confused with arithmetic subtraction.  The notation $A^c$ denotes the complement of $A$ relative to a specified ambient set $U$.}
 \end{itemize}
 
 
@@ -769,6 +787,7 @@ A=B\iff \forall x\,  \left( (x\in A)\leftrightarrow (x\in B) \right)
 A\subseteq B
   \iff \forall x\,  \left( (x\in A)\rightarrow (x\in B) \right) \]
  \item $A$ is a \textbf{proper subset} of $B$ (denoted $A\subset B$) if $A\subseteq B$ and $A\neq B$ 
+% \gpt{Notation convention: $\subset$ is ambiguous across texts---some authors allow equality.  Use $A\subsetneq B$ for ``proper subset'' and reserve $A\subseteq B$ for arbitrary inclusion.}
 \item Two sets are called \textbf{disjoint} if 
   \[
   A\cap B = \emptyset
@@ -777,12 +796,14 @@ A\subseteq B
 
 
 \item De Morgan's $\neg (P \vee Q) = \neg P \wedge \neg Q$ with $P = ``x \in A"$ and $Q=``x\in B"$ implies: 
+% \gpt{Notation: logical formulas are equivalent rather than literally equal; replace $\neg(P\vee Q)=\neg P\wedge\neg Q$ by $\neg(P\vee Q)\iff\neg P\wedge\neg Q$.}
 \begin{align*}
 (A \cup B)^c & = A^c \cap B^c
 %\\ (A \cap B)^c & = A^c \cup B^c,
 \end{align*}
 
 \item  For index set $I$ and indexed collection of sets $\{S_\alpha : \alpha \in I\}$ the infinite unions and intersections are defined by:
+% \gpt{Terminology: call these \textbf{indexed} or \textbf{arbitrary unions and intersections}, not infinite unions and intersections, because the index set $I$ may be finite or empty.  The family $(S_\alpha)_{\alpha\in I}$ is an indexed family of sets.}
   \begin{align*}
   \bigcup_{\alpha \in I} S_{\alpha}
   &\coloneqq \{ x\mid x \in S_{\alpha} \text{ for some } \alpha \in I \} \\
@@ -800,6 +821,7 @@ Then:
   \bigcup_{n \in \bbN } A_{n} & = A_1 = \bbN, \qquad 
   \bigcap_{n \in \bbN } A_n     = \emptyset
   \end{align*}  
+% \gpt{Mathematical error: as defined, every $A_n=\mathbb N$, so both the union and intersection equal $\mathbb N$.  To obtain the stated union/intersection, define $A_n=\{x\in\mathbb N:x\ge n\}$; then $\bigcup_nA_n=\mathbb N$ and $\bigcap_nA_n=\emptyset$.}
   
   
 \item  De Morgan's identity still applies:
@@ -813,6 +835,7 @@ Then:
 \begin{itemize}
 \item $\displaystyle \bigcup_{\alpha \in I} S_\alpha = \emptyset$  (obviously) 
 \item $\displaystyle \bigcap_{\alpha \in I} S_\alpha =  U$   where $U$ is the implied universal set. This follows from De Morgans:
+% \gpt{Typo: replace ``De Morgans'' by ``De Morgan's law.''}
 \[
 \left( \displaystyle \bigcap_{\alpha \in I} S_\alpha \right)^c =  \displaystyle \bigcup_{\alpha \in I} S^c_\alpha = \emptyset
 \]
@@ -931,6 +954,7 @@ along with $\emptyset^c = U - \emptyset = U$.
 | \{a, e, i, o, u\} | = 5
 \]
 This is sometime denoted $\# A$
+% \gpt{Grammar: replace ``sometime'' by ``sometimes.''}
 \item How does one define cardinality for sets of an infinite number of elements?  
 
 \item  $|A| \le  |B|$ if  there exists a one-to-one function (injection) $f \colon  A \hookrightarrow B$, i.e., 
@@ -951,6 +975,7 @@ x \ne  y \quad \implies f(x) \ne f(y)
 (|A|\le |B|) \wedge (|B| \le |A|) \implies (|A| = |B|)
  \]
  i.e., $|A|\le  |B|$ and $|B | \le | A|$ implies there exists a one-to-one invertible mapping $f\colon  A \leftrightarrow B$
+% \gpt{Standard terminology: this result is the \textbf{Cantor--Schröder--Bernstein theorem}.  Its conclusion is that there exists a \textbf{bijection} $f\colon A\to B$; ``one-to-one invertible mapping'' and the arrow $A\leftrightarrow B$ are nonstandard here.}
 
 %\item Countable $\ne$ Infinite ( Cantor arg if time allows; note $c =  2^{\aleph_0}>\aleph_0$ )
 %\item Define injection, cardinality     $\#A \le \#B$ if exists 1:1 $\phi:  A \hookrightarrow B$   (not   necessarily a surjection--- \ie, \emph{into} but maybe not \emph{onto}.)
@@ -969,6 +994,7 @@ x \ne  y \quad \implies f(x) \ne f(y)
 %\begin{center}
 %\color{purple} 
 \[(1,1) \to 1, \quad (2,1) \to 2, \quad (1,2) \to 3, 	\quad (3,1) \to 4, \quad (2,2) \to 5 , \quad (3, 1) \to 6\]
+% \gpt{Two errors above: the first inequality should be $|\mathbb N|\leq|\mathbb N^2|$, and the diagonal enumeration repeats $(3,1)$.  The sixth pair should be $(1,3)$, giving $(1,1),(2,1),(1,2),(3,1),(2,2),(1,3),\ldots$.}
 %\vspace{.2in} 
 %\end{center} 
 \item Hence $| \bbN|  = | \bbN^2|$% for any integer $k$. All are countable. 
@@ -978,6 +1004,7 @@ x \ne  y \quad \implies f(x) \ne f(y)
 \begin{itemize}
 \item  $|\bbN | \le | \bbQ|$  (easy) % since $\bbN \subset \bbQ$
 \item $|\bbQ|  \le  | \bbN^2 |  =  |  \bbN | $
+% \gpt{Proof omission: explain the injection $\mathbb Q\hookrightarrow\mathbb N^2$, since signed numerators and nonunique fraction representations must be handled.  One option is to use the unique reduced representation $p/q$ with $p\in\mathbb Z$, $q\in\mathbb N$, $q>0$, and encode the signed integer $p$ as a natural number.}
 %\item Follows since $\bbQ$ is the same as $\bbN^2$
 \end{itemize} 
 %\begin{center}
@@ -1003,8 +1030,10 @@ x \ne  y \quad \implies f(x) \ne f(y)
 \begin{itemize}
 \item   \textbf{countably infinite}  means same cardinality as $\bbN$
 \item \textbf{countable} (or enumerable) mean finite or countably infinity. 
+% \gpt{Typos/grammar: replace ``Termonology'' by ``Terminology'' and ``mean finite or countably infinity'' by ``means finite or countably infinite.''}
 
 \item \textbf{uncountable} means cardinality strictly greater than $\bbN$. 
+% \gpt{Terminology: define \textbf{countable} as finite or in bijection with $\mathbb N$ (also ``at most countable''), \textbf{countably infinite} as in bijection with $\mathbb N$, and \textbf{uncountable} simply as ``not countable.''  ``Enumerable'' is sometimes used for countable, while ``denumerable'' specifically means countably infinite; because usage varies, state the convention explicitly.}
 %
 %\item     ``$i,j,n$'' (Latin) subscripts $\to$ \emph{countable} 
 %                 union/intersection/sum/... \\
@@ -1014,7 +1043,28 @@ x \ne  y \quad \implies f(x) \ne f(y)
      \end{itemize} 
 \end{itemize}
 
-\subsection{Relations}
+
+\subsection{Russell's Paradox}
+\begin{itemize}
+\item Set-builder notation is safe when it selects elements from a specified set $X$.  If one instead allows \textbf{unrestricted comprehension}, then one is allowing every property $P(S)$ to define a set $\{S \in \mathbb{S} \mid P(S)\}$, where $\mathbb{S}$ represents the set of all sets.
+
+\item For $P(S) =$ ``Set $S$ does not contain itself'', this gives the set
+\[
+R \coloneqq \{S \in \mathbb{S} \mid S \notin S\}.
+\]
+Set-builder notation implies that $S\in R$ if and only if $S \notin S$.
+Evaluating this statement with $S=R$ gives
+\[
+R \in R \;\leftrightarrow\; R \notin R,
+\]
+which is a contradiction.  This is \textbf{Russell's paradox}.
+
+\item Therefore, $R$ cannot exist in any consistent theory of sets.  Axiomatic set theory avoids the paradox by restricting set formation. In this course, we use standard set constructions with explicit ambient sets and this avoids such contradictions.
+\end{itemize}
+
+
+
+\section{Relations}
 
 \begin{itemize}
 \item For sets $A$ and $B$ the  \textbf{Cartesian product} $A \times B$ of two sets is the set of ordered pairs:
@@ -1022,6 +1072,7 @@ x \ne  y \quad \implies f(x) \ne f(y)
 A \times B = \{ (a,b) \mid a \in A, b \in B\} 
 \]
 Here the parentheses denotes an ordered list such that $(a,b)$ and $(b,a)$ are not the same in general.  For $n$-tuples from the same set, the notation $A^n$ denotes the $n$-fold product $A^n = A \times A \times \cdots A$
+% \gpt{Grammar/notation: replace ``parentheses denotes'' by ``parentheses denote,'' and write the final product as $A\times\cdots\times A$ (with $n$ factors).}
 
 \item \textbf{Example:} If $A = \{ a, b \}$  then 
 \[
@@ -1034,6 +1085,7 @@ A^3  = \{ (a,a,a), (a, a, b), (a, b, a), (a, b, b) ,  (b,a,a), (b, a, b), (b, b,
 x \sim y \quad \iff \quad (x,y) \in R 
 \]
 Equivalently, $R = \{ (x,y) \mid x \sim y\}$. 
+% \gpt{Terminology: this is a \textbf{binary relation on $A$}.  More generally, a binary relation \emph{from $A$ to $B$} is a subset of $A\times B$.  Saying ``on $A$'' signals that both coordinates come from the same set.}
 
 
 \item A relation $\sim$ on set $A$ is called an \textbf{equivalence relation} if it satisfies three properties: 
@@ -1042,19 +1094,24 @@ Equivalently, $R = \{ (x,y) \mid x \sim y\}$.
   \item \textbf{Symmetric} if $x\sim y$ then $y\sim x$ for all $x,y\in A$
   \item \textbf{Transitive} if $x\sim y$ and $y\sim z$, then $x\sim z$ for all $x,y,z\in A$
 \end{itemize}
+% \gpt{Typo in the reflexive bullet: remove the unmatched closing parenthesis after $R$.}
 
 
 \item \textbf{Example:}  If $A = \bbR$ is the real line and $x \sim y$  if $x \ge y$ then  $R = \{ (x,y) \mid x \ge y\}$. This relation is reflexive and transitive but not symmetric. 
+% \gpt{Standard classification: $\geq$ on $\mathbb R$ is a \textbf{total order} (with the orientation opposite to $\leq$).  In addition to being reflexive and transitive, it is antisymmetric and total/connex.  Introducing ``partial order'' and ``total order'' avoids presenting this merely as a failed equivalence relation.}
 
 
 \item \textbf{Example:} (Birthday) Let $A$ be the set of people and set $P(x,y)$ = ``$x$ has same birthday as $y$''. This is an equivalence relations. 
+% \gpt{Grammar: write ``$x$ has the same birthday as $y$'' and ``This is an equivalence relation.''}
 
 \item  For set $A$, a  \textbf{partition} $\cP$  is a collection of nonempty disjoint subsets of $A$ such that such that every element of $A$ belongs to exactly one  element of $\cP$. 
+% \gpt{Terminology: the members of a partition are conventionally called its \textbf{blocks}, \textbf{parts}, or \textbf{cells}.  Thus, say that every element of $A$ lies in exactly one block of $\mathcal P$.}
 % = \{ A_\alpha \mid \alpha \in I\}$  whose union is equal to $A$, i.e., 
 %such  $A = \bigcup_{\alpha \in I} A_\alpha$. 
 \[
 \emptyset \notin \in \cP, \qquad  \bigcup_{X  \in \cP } X  = A , \qquad    \forall X, Y \in \cP, \; X \ne Y  \implies A \cap B = \emptyset
  \]
+% \gpt{The partition sentence repeats ``such that,'' and the display has two mathematical typos.  Suggested replacement: $\emptyset\notin\mathcal P$, $\bigcup_{X\in\mathcal P}X=A$, and $\forall X,Y\in\mathcal P,\ X\neq Y\Rightarrow X\cap Y=\emptyset$.  The current display has the invalid $\notin\in$ and uses undefined $A\cap B$ instead of $X\cap Y$.}
 
 \item \textbf{Example:} (Birthday continued) Let $A$ be the set of people. % and $\sim$ be equivalence relation defied  set $x \sim y$ if $x$ has same birthday as $y$. '
 Define
@@ -1062,6 +1119,7 @@ Define
 A_{ij} = \text{``subset of people whose birthday is on $i$-th day of $j$-th month''}
 \]
 Then $\cP = \{ A_{ij} \}$ defines a partition of people. 
+% \gpt{Omission: specify the index set and exclude empty date classes, since impossible dates (and possibly February 29 in a particular population) give empty $A_{ij}$, while partition blocks must be nonempty.  For example, use $\mathcal P=\{A_{ij}:A_{ij}\neq\emptyset\}$.}
 
 
 \item \textbf{Fact:} An equivalence relation $\sim$  on a set $A$ defines a partition of the set into disjoint equivalence classes, denoted by 
@@ -1072,8 +1130,10 @@ The set of all equivalence classes is called the \textbf{quotient set} and is de
 \[
 A \setminus \sim\,  \coloneqq\{ [a] \mid a \in A\} 
 \]
+% \gpt{Notation error: the quotient by an equivalence relation is conventionally $A/\!\sim$, not $A\setminus\sim$.  The later birthday example already uses $A/\sim$.}
 
 \item \textbf{Example:} (Birthday continued) Let $A$ be the set of people  and $\sim$ be equivalence relation defied  set $x \sim y$ if $x$ has same birthday as $y$. For each person $a\in A$, there exists exactly one pair $(i, j)$ such that 
+% \gpt{Typos: replace ``be equivalence relation defied set'' by ``be the equivalence relation defined by'' and insert ``the'' in ``has the same birthday.''}
 \[
 [a]  = A_{i,j} 
 \]
@@ -1091,12 +1151,14 @@ A /\sim \,   = \{ A_{ij} \}
 
 
 \item \textbf{Example:} (Modulo numbers)  Let $A = \bbZ$ and fix $p \in\bbN$. 
+% \gpt{Standard terminology: rename this ``Congruence modulo $p$.''  Write $x\equiv y\pmod p$ when $p\mid(x-y)$; the equivalence classes are \textbf{residue classes modulo $p$}, and the quotient is denoted $\mathbb Z/p\mathbb Z$.  Avoid $\mathbb Z_p$ unless its meaning is declared, because that notation can instead denote the $p$-adic integers.}
 \begin{itemize}
 \item Define relation $x\sim y $ if the remainder from division by $p$ is the same, i.e., 
 \[
 x \sim y  \iff  \text{$\exists j,k,r \in \bbZ$  such that $x = jp +r$ and $y = kp + r$}
 %\quad \exists k,j \in \bbN, \text{ s.t.\  $x = k p + r$ and $y  = jp + r$ }
 \]
+% \gpt{Terminology/precision: if $r$ is called a remainder, require $0\leq r<p$.  Alternatively, define congruence more directly by $x\sim y\iff p\mid(x-y)$; the current unrestricted integer $r$ describes congruence but not a unique division remainder.}
 
 \item Some  equivalence classess are
 \begin{align*}
@@ -1110,6 +1172,7 @@ x \sim y  \iff  \text{$\exists j,k,r \in \bbZ$  such that $x = jp +r$ and $y = k
 [1] = [0] +1
 \]
 where $[0]+1$ denote the set obtained by adding $1$ to every element of $[0]$. 
+% \gpt{Typos/grammar in this paragraph: replace ``classess'' by ``classes,'' ``classes has'' by ``classes have,'' and ``denote'' by ``denotes.''  More precisely, this is additive coset structure rather than vector-space linear structure.}
 \end{itemize}
 
 
@@ -1125,10 +1188,14 @@ where $[0]+1$ denote the set obtained by adding $1$ to every element of $[0]$.
 \item  $Y$ is called the codomain 
 \item the range is the set  $\{ y \in Y \mid \exists x \in X , y = f(x) \} \subseteq Y$
 \end{itemize}
+% \gpt{Terminology: many modern texts call $f(X)$ the \textbf{image} of $f$ and reserve \textbf{codomain} for the declared target $Y$.  ``Range'' is used inconsistently for either one, so explicitly declaring ``range/image $f(X)$'' will prevent ambiguity.}
 \item \textbf{Defintion:} (Formal)  A function $f$ from set $X$ to set $Y$ is defined by the subset $F \subset X \times Y$ such that $A_x = \{ y\in Y \mid (x,y) \in F\}$ has exactly one element for each $x \in X$. The value of $f$ at $x \in X$, denoted $f(x)$, is the unique element in $A_x$. 
+% \gpt{Typos/notation: replace ``Defintion'' by ``Definition,'' ``from set $X$ to set $Y$'' by ``from a set $X$ to a set $Y$,'' and preferably use $F\subseteq X\times Y$ because equality is allowed (for example, when $X$ is a singleton and $Y$ contains only its assigned value).}
+% \gpt{Standard terminology: the subset $F=\{(x,f(x)):x\in X\}$ is the \textbf{graph} of $f$.  For a general map, $f^{-1}(\{y\})$ is the \textbf{fiber} (or level set) over $y$; here the singleton attached to each $x$ is better described directly as the unique output rather than as $A_x$.}
 
 
 \item Two functions are said to be \textbf{equal} if they have the same domain, codomain, and value of all elements in the domain. 
+% \gpt{Wording: replace ``value of all elements'' by ``the same value at every element of the domain.''}
 
 
 
@@ -1141,6 +1208,7 @@ where $[0]+1$ denote the set obtained by adding $1$ to every element of $[0]$.
 \int_0^1 | f(x) - g(x)|^2  \, \dd x  = 0 
 \]
 In this way, two function can be equivalent event if they differ on a countable number of points. 
+% \gpt{This paragraph has an incomplete opening sentence and omits measurability.  Suggested replacement: ``Sometimes it is useful to define an equivalence relation on a set of functions.  The space $L^2([0,1])$ consists of equivalence classes of Lebesgue-measurable functions with finite $\int_0^1|f|^2$, where $f\sim g$ iff $\int_0^1|f-g|^2=0$, equivalently $f=g$ almost everywhere.''  Also replace ``two function ... event'' by ``two functions ... even.''  They may differ on any measure-zero set, not only a countable one.}
 
 
 \item A function $f \colon X \to Y$ is called: 
@@ -1164,6 +1232,7 @@ In this way, two function can be equivalent event if they differ on a countable 
 \item YES --- if domain is $X = [0, \infty)$
 \item NO --- if domain is $X =\bbR$
 \end{itemize}
+% \gpt{Mathematical omission: invertibility depends on both domain and codomain.  The first answer is YES only for $f\colon[0,\infty)\to[0,\infty)$.  For $f\colon[0,\infty)\to\mathbb R$, the map is not onto and hence is not invertible.}
 
 \item Inversion 
 \begin{itemize}
@@ -1172,15 +1241,18 @@ In this way, two function can be equivalent event if they differ on a countable 
   \forall x\in X,\,  f^{-1}(f(x)) = x \qquad \text{and} \qquad \forall y\in Y, f(f^{-1}(y)) = y
   \]
   \item Any one-to-one function $f \colon X\rightarrow Y$ defines a bijective function $g \colon X \rightarrow R$ where $R$ is the range of $f$ and $g(x)=f(x)$ for all $x\in X$
+% \gpt{Terminology: replacing the codomain $Y$ by the image $R=f(X)$ is called \textbf{corestricting} $f$ to its image.  Thus every injection becomes a bijection after corestriction to its image.}
  \end{itemize}
  
  
  \end{itemize}
  
  \subsection{Set-valued functions}
+% \gpt{Terminology: the following image and preimage operations are induced set maps $f(\cdot)\colon\mathcal P(X)\to\mathcal P(Y)$ and $f^{-1}(\cdot)\colon\mathcal P(Y)\to\mathcal P(X)$, not ``set-valued functions'' in the usual sense of a map that assigns a set to each point.  Consider renaming the subsection ``Images and Preimages of Sets.''}
  \begin{itemize}
 
 \item \textbf{Definition:} For $f \colon X \to Y$ and subset $A \subseteq X$, the \textbf{image} of $A$ under of $f$ is the set
+% \gpt{Typo: replace ``under of $f$'' by ``under $f$.''}
 \[
 f(A) \coloneqq \{ y \in Y \mid \exists x \in A, \,   f(x) = y\}  = \{ f(x) \mid x \in A\} 
 \]
@@ -1192,8 +1264,7 @@ Using this notation,  the range of $f$ is given by $f(X)$.
 \end{center}
 
 
-\item \textbf{Definition:} For $f \colon X \to Y$ and subset $C \subseteq U$, the \textbf{inverse image} or\textbf{preimage}  of $C$ is the set
-% \gpt{Suggested cut/paste correction: replace $C\subseteq U$ by $C\subseteq Y$. For every function, this preimage operator is defined on subsets of the codomain; it is not an inverse function.}
+\item \textbf{Definition:} For $f \colon X \to Y$ and subset $C \subseteq Y$, the \textbf{inverse image} or \textbf{preimage} of $C$ is the set
 \[
 f^{-1}(C) \coloneqq \{ x \in X  \mid f(x) \in C\} 
 \]
@@ -1219,7 +1290,7 @@ B = f(A) = [1,4]
 \]
 and the preimage of $B$ is 
 \[
-f^{-1}(B)  =  [-2,1] \cup [1,2] \supset A
+f^{-1}(B)  =  [-2,-1] \cup [1,2] \supset A
 \]
 % \gpt{Suggested cut/paste correction: $f^{-1}([1,4])=[-2,-1]\cup[1,2]$. The first interval currently has the wrong right endpoint. More generally, $f(f^{-1}(B))=B\cap f(X)$.}
 
@@ -1250,26 +1321,28 @@ Thus
 \[
 f^{-1}( f(A)) \supseteq A  \quad \text{and} \quad f( f^{-1}(B)) \subseteq B
 \]
+% \gpt{Useful strengthening/omission: $f(f^{-1}(B))=B\cap f(X)$ for every $B\subseteq Y$.  Also, $f^{-1}(f(A))=A$ for every $A\subseteq X$ iff $f$ is injective.}
 
 
-\item \textbf{Question:} For $f \colon X \to Y$ and collection of subsets $A_i \in X$ for $i \in I$, 
-does it hold that? 
+\item \textbf{Question:} For $f \colon X \to Y$ and collection of subsets $A_i \subseteq X$ for $i \in I$, 
+does the following identity hold? 
+% \gpt{Notation/grammar: replace $A_i\in X$ by $A_i\subseteq X$, and replace ``does it hold that?'' by ``does the following identity hold?''}
 \[
-f(\bigcup_{i \in I} A_i )  = \bigcup_{i \in I} f(A_i) 
+f\left(\bigcup_{i \in I} A_i \right)  = \bigcup_{i \in I} f(A_i) 
 \]
 YES
 \begin{itemize}
 \item Need to show that for all $y \in Y$, 
 \[
-y \in f(\bigcup_{i \in I} A_i )  \iff y  \in  \bigcup_{i \in I} f(A_i) 
+y \in f\left(\bigcup_{i \in I} A_i \right)  \iff y  \in  \bigcup_{i \in I} f(A_i) 
 \]
 
-\item Proof of $\implies$
+\item Proof of $\Longleftrightarrow$
 \begin{align*}
-y \in f(\bigcup_{i \in I} A_i ) & \implies  \exists  x  \in \bigcup_{i \in I} A_i, \, f(x)  = y\\
-& \implies \exists i \in I, \, \exists x \in A_i, \,  f(x) = y \\
-& \implies \exists i \in I, \,  y \in f(A_i) \\
-& \implies y \in \bigcup_{i \in I} f(A_i )
+y \in f\left(\bigcup_{i \in I} A_i \right) & \Longleftrightarrow  \exists  x  \in \bigcup_{i \in I} A_i, \, f(x)  = y\\
+& \Longleftrightarrow \exists i \in I, \, \exists x \in A_i, \,  f(x) = y \\
+& \Longleftrightarrow \exists i \in I, \,  y \in f(A_i) \\
+& \Longleftrightarrow y \in \bigcup_{i \in I} f(A_i )
 \end{align*}
 
 \end{itemize}
@@ -1279,5 +1352,5 @@ y \in f(\bigcup_{i \in I} A_i ) & \implies  \exists  x  \in \bigcup_{i \in I} A_
 
 
 \bibliographystyle{alpha}%{IEEEtran}
-\bibliography{../book.bib} 
+\bibliography{book.bib} 
 \end{document}

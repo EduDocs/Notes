@@ -25,7 +25,7 @@ What is topology and why do we study it? It is the study of geometric properties
 ## Page 003: 2.1: Introduction (overlay 2 of 6)
 
 Narration:
-Why do we study it? Engineers approximate real things by mathematical objects. Here are two questions that topology can help answer. [[pause 0.2]] First, can a matrix A be approximated closely by a lower-rank matrix? [[pause 0.2]] Second, can a function f of x be approximated well by a degree-two polynomial?
+Engineers approximate real things by mathematical objects. Here are two questions that topology can help answer. [[pause 0.2]] First, can a matrix A be approximated closely by a lower-rank matrix? [[pause 0.2]] Second, can a function f of x be approximated well by a degree-two polynomial?
 
 ## Page 004: 2.1: Introduction (overlay 3 of 6)
 
@@ -55,12 +55,12 @@ First, consider the real numbers, X equals R, with the absolute distance d of x-
 ## Page 009: 2.1: Standard Examples of Metric Spaces (overlay 2 of 3)
 
 Narration:
-Next, consider real n-dimensional vectors, X equals R to the n, with the Euclidean metric d of x-y equal to the square root of x-one minus y-one, squared, plus, and so on, plus x-n minus y-n, squared. Non-negativity and symmetry are immediate; the triangle inequality is a bit harder and will be shown later.
+Next, consider real n-dimensional vectors, X equals R to the n, with the Euclidean distance as our metric. Non-negativity and symmetry are immediate; the triangle inequality is a bit harder and will be shown later.
 
 ## Page 010: 2.1: Standard Examples of Metric Spaces (overlay 3 of 3)
 
 Narration:
-Finally, consider the set of continuous functions f from the interval a to b into the real numbers, with the metric d of f g equal to the maximum, over x in the interval a to b, of the absolute value of f of x minus g of x. For this metric, many of the properties are inherited from the absolute distance inside the maximum. In particular, properties one and two follow naturally. For the triangle inequality, we observe that: [[pause 0.5]] (a) the absolute difference between f of x and h of x is unchanged by adding and subtracting g of x inside the absolute value, [[pause 0.5]] (b) the absolute value of the sum of two numbers is upper bounded by the sum of their absolute values, [[pause 0.5]] (c) the maximum of the sum of two functions is only increased by maximizing them separately.
+Finally, consider the set of continuous functions f from the interval a to b into the real numbers, with the metric d of f g equal to the maximum, over x in the interval a to b, of the absolute value of f of x minus g of x. For this metric, many of the properties are inherited from the absolute distance inside the maximum. In particular, properties one and two follow naturally. For the triangle inequality, we observe that: [[pause 0.5]] the absolute difference between f of x and h of x is unchanged by adding and subtracting g of x inside the absolute value, [[pause 0.5]] the absolute value of the sum of two numbers is upper bounded by the sum of their absolute values, [[pause 0.5]] the maximum of the sum of two functions is only increased by maximizing them separately.
 
 ## Page 011: 2.1: Important Concepts in Metric Spaces (overlay 1 of 3)
 
@@ -70,9 +70,11 @@ First, consider the set of points with distance less than epsilon from a point x
 ## Page 012: 2.1: Important Concepts in Metric Spaces (overlay 2 of 3)
 
 Narration:
-Next, consider an infinite list x-one, x-two, x-three, and so on, of points in X. Formally, a sequence is a function f from the natural numbers to X, with x sub i equal to f of i. [[pause 0.2]] For example, for X equal to the real numbers and d of x-y equal to the absolute value of x minus y, let x sub n equal one plus one over n, all raised to the power n. It is well-known that this sequence converges to the constant e. A sequence is also illustrated in the figure.
+Next, consider an infinite list x-one, x-two, x-three, and so on, of points in X. [[pause 0.3]] Formally, this is a sequence x sub i in X for i in the natural numbers. This is equivalent to x sub i equal to f of i where f is a function from the natural numbers to X. [[pause 0.2]] For example, for X equal to the real numbers and d of x-y equal to the absolute value of x minus y, let x sub n equal one plus one over n, all raised to the power n. It is well-known that this sequence converges to the constant e. A sequence is also illustrated in the figure.
 
 ## Page 013: 2.1: Important Concepts in Metric Spaces (overlay 3 of 3)
+
+Pause-after: 0.5
 
 Narration:
 Finally, consider a sequence of points that approaches another point. Formally, a sequence x sub n converges to x in X, denoted x sub n arrow x, if, for any epsilon greater than zero, there is a natural number M such that d of x-comma-x sub n is less than epsilon for all n greater than M. In the figure, one can imagine the example sequence converging to the point x.
@@ -100,12 +102,12 @@ But this does not work in all metric spaces. Here is a counterexample. Take the 
 ## Page 018: 2.1: Convergence: Examples and Counterexamples (overlay 5 of 5)
 
 Narration:
-But, according to the definitions, x sub n does not converge! This is because convergence requires that the limit is in X, but the square root of two is not in Q. Thus, this counterexample follows from the irrationality of the square root of two. Later, we will see that the converse is true for complete metric spaces.
+But, according to the definitions, x sub n does not converge! This is because convergence requires that the limit is in X, but we know the the square root of two is not rational. Later, we will see that the converse is true for complete metric spaces.
 
 ## Page 019: 2.1.1: Metric Topology (overlay 1 of 3)
 
 Narration:
-In mathematics, a topology is a collection of “open” sets satisfying certain properties. It’s likely that many of you have been exposed informally to the idea of open and closed sets, such as intervals of real numbers. In this class, we will make these notions precise for metric spaces. Let W be a subset of a metric space X comma d. The set W is called open if, for every w-naught in W, there is an epsilon greater than zero such that B sub d of w-naught comma epsilon is a subset of W.
+In mathematics, a topology is a collection of “open” sets satisfying certain properties. It’s likely that many of you have been exposed informally to the idea of open and closed sets, such as intervals of real numbers. In this class, we will make these notions precise for metric spaces. Let W be a subset of a metric space X comma d. The set W is called open if, for every w-naught in W, there is an epsilon greater than zero such that the open ball of radius epsilon around w-naught is a subset of W.
 
 ## Page 020: 2.1.1: Metric Topology (overlay 2 of 3)
 
@@ -120,7 +122,8 @@ Based on these definitions, one can prove the following theorem. [[pause 0.2]] F
 ## Page 022: 2.1.1: Interior, Limit points, and Closure (overlay 1 of 6)
 
 Narration:
-Sometimes it is useful to consider only the points in a set that are not part of a boundary. This is called the interior of the set and, formally, for a metric space X comma d and a subset W of X: a point w-naught in W is in the interior of W, denoted W with a superscript circle, if there is a delta greater than zero such that B sub d of w-naught comma delta is a subset of W. This implies that w-naught is surrounded by an open ball in W.
+[[seed 43]]
+Sometimes it is useful to consider only the points in a set that are not part of a boundary. This is called the interior of the set and, formally, for a metric space X comma d and a subset W of X: a point w-naught in W is in the interior of W, denoted W with a superscript circle, if there is a delta greater than zero such that the open ball of radius delta around w-naught is a subset of W. Thus, w-naught is surrounded by an open ball in W.
 
 ## Page 023: 2.1.1: Interior, Limit points, and Closure (overlay 2 of 6)
 
@@ -135,7 +138,7 @@ It can also be useful to consider a set along with all additional points lying o
 ## Page 025: 2.1.1: Interior, Limit points, and Closure (overlay 4 of 6)
 
 Narration:
-These sets have a few nice properties. First, one can show that the interior is open.
+These sets have a few nice properties. For example, one can show that the interior is open.
 
 ## Page 026: 2.1.1: Interior, Limit points, and Closure (overlay 5 of 6)
 
@@ -150,12 +153,12 @@ Lastly, one can show that the closure of W equals the union of W and all its lim
 ## Page 028: A Few More Things (overlay 1 of 2)
 
 Narration:
-Consider the standard metric space of real numbers R. Any open set can be written as a countable disjoint union of open intervals. But, what about closed sets? For closed sets, De Morgan’s law implies that any closed set can be written as the countable disjoint intersection of closed intervals. But, exotic sets like the Cantor set show that they cannot be written as the countable union of closed sets. In higher dimensions, this fails for any connected set that is not a ball. This is because the disjoint union of multiple open balls cannot be connected.
+Consider the standard metric space of real numbers R. Any open set can be written as a countable disjoint union of open intervals. But, what about closed sets? For closed sets, De Morgan’s law implies that any closed set can be written as the countable disjoint intersection of closed intervals. But, exotic sets like the Cantor set show that they cannot be written as the countable union of closed sets. In higher dimensions, a connected set that is not a ball cannot be written as the countable union of disjoint closed balls.
 
 ## Page 029: A Few More Things (overlay 2 of 2)
 
 Narration:
-The boundary. For W a subset of X, the boundary of W is the closure minus the interior. Thus, the closure is the union of the set and its boundary. In the figure, the boundary is the union of the dashed and solid lines. Alternatively, a point x in X is on the boundary of W if, for all delta greater than zero, B sub d of x comma delta contains a point in W and a point not in W. Thus, boundary points are either in the set and arbitrarily close to points outside the set, or outside the set and arbitrarily close to points inside the set.
+For a subset W of X, the boundary of W is the closure minus the interior. Thus, the closure is the union of the set and its boundary. In the figure, the boundary is the union of the dashed and solid lines. Alternatively, a point x in X is on the boundary of W if, for all delta greater than zero, an open ball of radius delta around x contains a point in W and a point not in W. Thus, boundary points are either in the set and arbitrarily close to points outside the set, or outside the set and arbitrarily close to points inside the set.
 
 ## Page 030: Next Steps
 

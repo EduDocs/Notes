@@ -74,7 +74,7 @@ Let X equal the interval from zero, exclusive, to one, inclusive, and Y equal th
 ## Page 014: Continuous vs. Uniformly Continuous (overlay 2 of 4)
 
 Narration:
-For all x-naught in X and epsilon greater than zero, we can choose delta equal to epsilon x-naught squared over one plus epsilon x-naught, and observe that: the absolute value of one over x minus one over x-naught equals the absolute value of x-naught minus x over x times x-naught, which is less than the quantity epsilon x-naught squared over one plus epsilon x-naught, divided by x-naught times the quantity x-naught minus epsilon x-naught squared over one plus epsilon x-naught. This equals epsilon over the product of one plus epsilon x-naught and the quantity one minus epsilon x-naught over one plus epsilon x-naught, which equals epsilon. But, you can check the math and see that f is continuous all the same.
+For all x-naught in X and epsilon greater than zero, we can choose delta equal to epsilon x-naught squared over one plus epsilon x-naught, and observe that: the absolute value of one over x minus one over x-naught equals the absolute value of x-naught minus x over x times x-naught, which is less than the quantity epsilon x-naught squared over one plus epsilon x-naught, divided by x-naught times the quantity x-naught minus epsilon x-naught squared over one plus epsilon x-naught. [[pause 0.3]] This equals epsilon over the product of one plus epsilon x-naught and the quantity one minus epsilon x-naught over one plus epsilon x-naught, which equals epsilon. But, you can check the math and see that f is continuous all the same.
 
 ## Page 015: Continuous vs. Uniformly Continuous (overlay 3 of 4)
 

@@ -57,17 +57,17 @@ The logical statement “a is a member of the set capital A” is denoted “a i
 ## Page 010: 1.4: Set Theory (overlay 9 of 9)
 
 Narration:
-Its negation, “a is not a member of the set capital A,” is denoted “a-not-in A.”
+Its negation, “a is not a member of the set, capital-A,” is denoted "a, not-in A",
 
 ## Page 011: 1.4: Using Set Theory (overlay 1 of 7)
 
 Narration:
-We can define a set by listing its elements. For the standard English vowels, A equals the set containing a, e, i, o, and u.
+One can present a set by listing its elements. The standard English vowels form a set A containing a, e; i, o, and u.
 
 ## Page 012: 1.4: Using Set Theory (overlay 2 of 7)
 
 Narration:
-Element order is irrelevant: the set containing i, o, u, a, and e is the same as the set A. Repeated elements have no effect: the presentation a, e, i, o, u, e, and o is the same as the set A.
+Element order is irrelevant: the set containing i, o, u, a, and e is the same as the set A. Repeated elements have no effect: the set presented as a, e, i, o, u, e, and o is the same as the set A.
 
 ## Page 013: 1.4: Using Set Theory (overlay 3 of 7)
 
@@ -82,7 +82,7 @@ Standard sets are written with blackboard bold letters: the integers are denoted
 ## Page 015: 1.4: Using Set Theory (overlay 5 of 7)
 
 Narration:
-To construct new sets from old sets, one often uses set-builder notation. [[pause 0.2]] For a logical predicate P of x, defined for x in X, “A is the set of elements in X such that P of x is true” is denoted by “A equals the set of x in X such that P of x.”
+To build new sets from old, one often uses set-builder notation. [[pause 0.2]] For a logical predicate P of x, defined for x in X, “A is the set of elements in X such that P of x is true” is denoted by “A equals the set of x in X such that P of x.”
 
 ## Page 016: 1.4: Using Set Theory (overlay 6 of 7)
 
@@ -127,7 +127,7 @@ Here, we see Venn diagrams for some standard set operations. The sets A-and-B ar
 ## Page 024: 1.4: From Logic to Set Theory (overlay 1 of 4)
 
 Narration:
-Now, we discuss operations on sets. The union of A-and-B, denoted A-union-B, is the set of elements in either A-or-B. [[pause 0.2]] Logically, “x is in A-union-B” if and only if “x is in A or x is in B.” Here and below, we use the notation for equivalence because this biconditional holds for all x, A, and B.
+Now, we discuss operations on sets. The union of A-and-B, denoted A-union-B, is the set of elements in either A-or-B. [[pause 0.2]] Logically, x is in "A-union-B" if and only if “x is in A or x is in B.” Here and below, we use the notation for equivalence because this biconditional holds for all choices of x, A, and B.
 
 ## Page 025: 1.4: From Logic to Set Theory (overlay 2 of 4)
 
@@ -142,22 +142,22 @@ The set difference A-minus-B, also denoted A backslash B, is the set of elements
 ## Page 027: 1.4: From Logic to Set Theory (overlay 4 of 4)
 
 Narration:
-For an implied universal set U, the complement of A, denoted A-superscript-c, equals U-minus-A. [[pause 0.2]] Logically, “x is in the complement of A” if and only if “x is not in A.”
+The complement of A, denoted A-superscript-c, equals U-minus-A, for an implied universal set U. [[pause 0.2]] Logically, we know that "x is in the complement of A" if and only if "x is not in A".
 
 ## Page 028: 1.4: Relationships Between Sets (overlay 1 of 4)
 
 Narration:
-Now, we consider relationships between sets A and B. We say A equals B if both sets have the same elements. [[pause 0.3]] Logically, “A equals B” is equivalent to “for all x, x is in A if and only if x is in B.” The “for all x” refers to all x in the implied universal set. However, for this operation, we could also write “for all x in A union B” without changing the meaning.
+Now, we consider relationships between sets A and B. We say A equals B (denoted A equals sign B) if both sets have the same elements. [[pause 0.3]] Logically, “A equals B” is equivalent to “for all x, x is in A if and only if x is in B.” The “for all x” refers to all x in the implied universal set. However, for this operation, we could also write “for all x in A, union-B” without changing the meaning.
 
 ## Page 029: 1.4: Relationships Between Sets (overlay 2 of 4)
 
 Narration:
-We say A is a subset of B, denoted A subset-equal B, if all elements in A are also in B. [[pause 0.2]] Logically, “A is a subset of B” is equivalent to “for all x, if x is in A, then x is in B.” The quantifier “for all x” refers to all x in the implied universal set. Though, writing “for all x in A” instead wouldn’t change the meaning.
+We say A is a subset of B, denoted A subset-equal B, if all elements in A are also in B. [[pause 0.2]] Logically, “A is a subset of B” is equivalent to “for all x, if x is in A, then x is in B.” Again, the quantifier “for all x” refers to all x in the implied universal set. Though, writing “for all x in A” instead wouldn’t change the meaning.
 
 ## Page 030: 1.4: Relationships Between Sets (overlay 3 of 4)
 
 Narration:
-We say A is a proper subset of B, denoted-A proper-subset B, if A is a subset of B and A is not equal to B. In this case, there must be some element in B that is not in A.
+We say A is a proper subset of B, denoted-A proper-subset B, if A is a subset of B and A is not equal to B. [[pause 0.3]] In this case, there must be some element in B that is not in A.
 
 ## Page 031: 1.4: Relationships Between Sets (overlay 4 of 4)
 
@@ -167,7 +167,7 @@ Two sets are called disjoint if their intersection equals the empty set.
 ## Page 032: 1.4: De Morgan, Infinite Operations, and Negation (overlay 1 of 3)
 
 Narration:
-De-Morgan’s rule says the negation of “P or Q” is equivalent to “not P and not Q,” with P and Q denoting the statements “x is in A” and “x is in B,” respectively. [[pause 0.3]] This implies that the complement of A-union-B equals the complement of A intersect the complement of B. This is because membership in the complement of a set is logically the same as negation of membership in that set.
+De-Morgan’s rule says the negation of “P or Q” is equivalent to “not P and not Q,” with P and Q denoting the statements “x is in A” and “x is in B,” respectively. [[pause 0.3]] This implies that the complement of A, union-B equals the complement of A intersect the complement of B. This is because membership in the complement of a set is logically the same as negation of membership in that set.
 
 ## Page 033: 1.4: De Morgan, Infinite Operations, and Negation (overlay 2 of 3)
 
@@ -182,7 +182,7 @@ Now, we can apply De-Morgan’s identity by translating to logic, negating, and 
 ## Page 035: 1.4: Foundations of Set Theory (overlay 1 of 4)
 
 Narration:
-Naive set theory allows one to define any set described by a sentence. Russell’s paradox is a famous example that exposed a major problem with naive set theory. [[pause 0.3]] Let R be the set of sets that do not include themselves as members. This set exists in naive set theory, simply because it is described by the above sentence. The paradox arises because “R is in R” if and only if “R is not in R.” [[pause 0.3]] In particular, the set-builder construction implies that, if a set does not include itself as a member, then it must be in R. Also, if R includes itself as a member, then logically it cannot be in R.
+Naive set theory allows one to define any set described by a sentence. Russell’s paradox is a famous example that exposed a major problem with naive set theory. [[pause 0.3]] Let R be the set of sets that do not include themselves as members. This set is not forbidden by naive set theory because it is described by the above sentence. The paradox arises because “R is in R” if and only if “R is not in R.” [[pause 0.3]] In particular, the set-builder construction implies that, if R includes itself as a member, then it will not be included in R.  Also, if a set does not include itself as a member, then it must be in-R.
 
 ## Page 036: 1.4: Foundations of Set Theory (overlay 2 of 4)
 
@@ -192,7 +192,7 @@ In naive set theory, there are sets that contain themselves. For example, consid
 ## Page 037: 1.4: Foundations of Set Theory (overlay 3 of 4)
 
 Narration:
-What does Russell’s paradox show? It shows that naive set theory is not consistent because it allows constructions leading to contradictions. It is avoided in axiomatic formulations by restricting constructions. It also implies that Russell’s set R cannot exist in any consistent set theory.
+What does Russell’s paradox show? It shows that naive set theory is not consistent because it allows constructions leading to contradictions.  It implies that Russell’s set R cannot exist in any consistent set theory. It is avoided in the Zee-Eff axiomatic formulation by restricting set comprehension.
 
 ## Page 038: 1.4: Foundations of Set Theory (overlay 4 of 4)
 

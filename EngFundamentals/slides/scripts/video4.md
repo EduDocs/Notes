@@ -23,17 +23,19 @@ Welcome to the fourth video lecture for ECE 586, Vector-Space Methods. Today, we
 Pause-after: 1
 
 Narration:
-Now let’s consider sets of tuples and vectors. [[pause 0.2]] For sets A-and-B, the Cartesian product A-cross-B is the set of ordered pairs. Thus, A-cross-B is the set of pairs a-comma-b such that a is in A and b is in B. [[pause 0.2]] For n-tuples from the same set, we write A to the power n to denote the n-fold product of A with itself. [[pause 0.3]] For example, if A is the set containing a-and-b, and B is the set containing c-and-d, then A-cross-B is the set containing a-comma-c, a-comma-d, b-comma-c, and b-comma-d. [[pause 0.3]] A squared, which is A-cross-A, is the set containing a-comma-a, a-comma-b, b-comma-a, and b-comma-b. [[pause 0.3]] And A cubed equals the set shown on the last line.
+Now let’s consider sets of tuples and vectors. [[pause 0.2]] For sets A-and-B, the Cartesian product A, cross-B is the set of ordered pairs. Thus, A, cross-B is the set of pairs a-comma-b such that a is in A and b is in B. [[pause 0.2]] For n-tuples from the same set, we write A to the power n to denote the n-fold product of A with itself. [[pause 0.3]] For example, if A is the set containing c-and-d, and B is the set containing e-and-f, then A, cross-B is the set containing c-comma-e, c-comma-f, d-comma-e, and d-comma-f. [[pause 0.3]] A squared, which is A, cross-A, is the set containing c-comma c, c-comma-d, d-comma-c, and d-comma-d. [[pause 0.3]] And A, cubed equals the set shown on the last line.
 
 ## Page 003: 1.4: Cartesian Products and Abstract Relations (overlay 2 of 2)
 
+Pause-after: 0.1
+
 Narration:
-A relation, spoken “tilde,” between elements of A is defined by a subset R of A-cross-A. Specifically, “x tilde y” holds if and only if the pair x-comma-y is in R. Relations are abstractions of binary comparisons like equals, less than, greater than, less than or equal to, and greater than or equal to.
+A relation, "red aloud as tilde", between elements of A is defined by a subset R of A, cross-A. Specifically, “x tilde y” holds if and only if the pair x-comma-y is in R. [[pause 0.2]] Relations are abstractions of binary comparisons like equals, less than, greater than, less than or equal to, and greater than or equal to. 
 
 ## Page 004: 1.4: Properties of Relations (overlay 1 of 5)
 
 Narration:
-The relation tilde on A is reflexive if “x tilde x” holds for all x in A. That is, for all x in A, the pair x-comma-x is in R. [[pause 0.3]] It is symmetric if, whenever “x tilde y,” then “y tilde x,” for all x and y in A. [[pause 0.3]] It is transitive if, whenever “x tilde y” and “y tilde z,” then “x tilde z.”
+The relation tilde on A is reflexive if “x tilde x” holds for all x in A. That is, for all x in A, the pair x-comma-x is in R. [[pause 0.3]] It is symmetric if, whenever “x tilde y,” then “y tilde x,” for all x and y in A. [[pause 0.3]] It is transitive if, whenever “x tilde y” and “y tilde z”, then “x tilde z”. for all x y and z in A.
 
 ## Page 005: 1.4: Properties of Relations (overlay 2 of 5)
 
@@ -100,12 +102,12 @@ Two functions are equal if they have the same domain, codomain, and value for al
 ## Page 017: 1.5: Properties of Functions (overlay 2 of 3)
 
 Narration:
-A function f from X to Y is called one-to-one, or injective, if, for all x and x prime in X, “f of x equals f of x prime” implies “x equals x prime.” [[pause 0.3]] It is called onto, or surjective, if its range equals Y. [[pause 0.3]] It is called a one-to-one correspondence, or bijective, if it is both one-to-one and onto.
+A function f from X to Y is called injective, or one-to-one, if, for all x and x prime in X, “f of x equals f of x prime” implies “x equals x prime.” [[pause 0.3]] It is called surjective, or onto, if its range equals Y. [[pause 0.3]] It is called bijective, or a one-to-one correspondence, if it is both injective and surjective. Although the last name is easily confusable with one-to-one, it is standard in English.
 
 ## Page 018: 1.5: Properties of Functions (overlay 3 of 3)
 
 Narration:
-A bijective function has a unique inverse function, f inverse mapping Y to X. It satisfies “for all x in X, f inverse of f of x equals x,” and “for all y in Y, f of f inverse of y equals y.” [[pause 0.3]] Any one-to-one function f from X to Y automatically defines a bijective function g from X to R, where R is the range of f, and g of x equals f of x for all x in X. [[pause 0.3]] This allows one to define an inverse function closely related to a one-to-one function.
+A by-jective function has a unique inverse function, f inverse mapping Y to X. It satisfies “for all x in X, f inverse of f of x equals x,” and “for all y in Y, f of, f-inverse-y equals y.” [[pause 0.3]] Any one-to-one function f from X to Y automatically defines a bijective function g from X to R, where R is the range of f, and g of x equals f of x for all x in X. [[pause 0.3]] This allows one to define an inverse function closely related to a one-to-one function.
 
 ## Page 019: 1.5: Applying Functions to Sets (1) (overlay 1 of 3)
 
@@ -149,7 +151,7 @@ For a one-to-one f, the inverse image of a singleton set containing f of x is th
 ## Page 026: 1.5: Applying Functions to Sets (3) (overlay 1 of 3)
 
 Narration:
-In general, one can show that the inverse image of f of A contains A, and f of f inverse of B is contained in B. These expressions hold because f can only compress sets: it can map different inputs to the same value. Conversely, the inverse image can expand sets: it can map a singleton to multiple values.
+In general, one can show that, for f, the inverse image of "f of A", must contain A.  In contrast, the image of, "the inverse image of B" must be contained in B. These expressions hold because f can only compress sets: it can map different inputs to the same value. Conversely, the inverse image can only expand sets: it can map a singleton to multiple values.
 
 ## Page 027: 1.5: Applying Functions to Sets (3) (overlay 2 of 3)
 

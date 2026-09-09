@@ -47,7 +47,12 @@ Local output and caches include the device name, for example `video0_qwen3-local
 - `build/videoN/logs/audio-PROFILE.log` records generation and cache decisions.
 - `build/videoN/logs/dcc-PROFILE.log` records DCC submission, readiness, tunnel, and service diagnostics.
 
-Generated files live under `build/`, except for the legacy PDFs maintained by `make slides`.
+Generated files live under `build/`, except for the two legacy distribution PDFs
+maintained by `make slides`. Whenever distribution slides are recompiled, refresh
+the root-level `videoN_s.pdf` from `build/videoN/slides.pdf` and `videoN_h.pdf`
+from `build/videoN/handout.pdf` (the `slides` target does this automatically).
+Only these `_s` and `_h` copies are needed in general; keep video and review PDFs
+under `build/`.
 
 ## Pipeline
 

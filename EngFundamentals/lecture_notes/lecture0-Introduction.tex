@@ -40,12 +40,14 @@
 
 \begin{itemize}
 \item The is an applied math class for graduate studeinds in data science and signal processing. The high level goals are: 
+% \gpt{Typos/style: replace ``The is'' by ``This is,'' ``studeinds'' by ``students,'' and ``high level'' by ``high-level.''}
 \begin{itemize}
   \item Review and extend undergraduate knowledge  of  linear systems, vector spaces, matrices, and optimization
   
   \item  Teach the vocabulary and basic mathematical concepts necessary to read and understand papers and textbooks
   
   \item Emphasis is on general techniques that extend to advanced problems
+% \gpt{Grammar: add an article and verb: ``The emphasis is on general techniques that extend to advanced problems.''}
    
 
 
@@ -81,6 +83,7 @@
 
 \begin{itemize}
   \item Suppose you know a vector $\vecnot{b}$ satisfies \[A \vecnot{x} = \vecnot{b}\] for an invertible matrix $A$. 
+% \gpt{Mathematical wording: $\vecnot{x}$, not $\vecnot{b}$, is the vector that satisfies the system.  Suggested replacement: ``Suppose $A\vecnot{x}=\vecnot{b}$, where $A$ is an invertible matrix and $\vecnot{b}$ is known.''}
   \begin{itemize}
  \item  To compute $\vecnot{x}$, you could multiply by $A^{-1}$ to get 
   \[A^{-1} \vecnot{b} = A^{-1} (A \vecnot{x}) = \vecnot{x}\!\!\!\!\!\!\!\!\!\]
@@ -90,15 +93,18 @@
   \item  Let's assume we know $\hat{A} = A + E$ where the \textcolor{blue}{error matrix $E$ is ``small''}
   
   \item  Now, we can compute $\hat{\vecnot{x}} = \hat{A}^{-1} \vecnot{b}$. \textcolor{blue}{But, what can we say about $\vecnot{x}-\hat{\vecnot{x}}\;$?} \vspace{3mm}
+% \gpt{Mathematical omission: ``$E$ is small'' does not by itself state that $\hat A=A+E$ is invertible.  Add this assumption, or give a sufficient condition such as $\lVert A^{-1}E\rVert<1$ for a subordinate matrix norm.}
 
 \end{itemize}
 
 \item  The mathematical study of ``closeness'' is called \textbf{topology} 
+% \gpt{Mathematical precision: topology studies notions such as neighborhoods, continuity, and convergence without necessarily assigning numerical distances.  Because the next bullets explicitly define distances and lengths, ``metric-space theory'' (or ``metric geometry and topology'') is more precise here.}
 
 \begin{itemize}
   \item Define ``distance''  between objects (e.g., vectors, matrices)
   \item Define a constant $c(\hat{A})$ such that
   \[ \text{distance}(\vecnot{x},\hat{\vecnot{x}}) \leq c(\hat{A}) \; \text{distance}(A,\hat{A}) = c(\hat{A}) \; \text{length}(E)  \]
+% \gpt{The displayed absolute-error bound cannot generally use a constant depending only on $\hat A$: scaling $\vecnot b$ scales both solutions while leaving $A$ and $\hat A$ fixed.  For a subordinate norm, $\vecnot{x}-\hat{\vecnot{x}}=\hat A^{-1}E\vecnot{x}$, so $\lVert\vecnot{x}-\hat{\vecnot{x}}\rVert\leq\lVert\hat A^{-1}\rVert\,\lVert E\rVert\,\lVert\vecnot{x}\rVert$.  Also replace ``length'' by ``norm'' and state which vector/matrix norms are used.}
 \end{itemize}
 \end{itemize}
 
@@ -112,9 +118,11 @@
   \begin{itemize}
   
   \item A key question is, ``What do we mean by good?'' max error? avg error?
+% \gpt{Wording: capitalize and spell out the alternatives, for example, ``Do we mean maximum error or average error?''  Note that average signed error, average absolute error, and mean squared error are different criteria.}
   
   \item A standard approach is to minimize the \textcolor{blue}{mean squared error} and this gives
   \[ \min_{a_0,a_1,a_2,a_3} \int_0^1 \left[ f(x) - (a_0+a_1 x+ a_2 x^2+a_3 x^3) \right]^2 dx \]
+% \gpt{Mathematical omission: assume at least $f\in L^2([0,1])$ so that the objective is finite and the orthogonal-projection argument applies.  Since the interval has length $1$, this integral equals the mean squared error; on a general interval $[a,b]$, the mean includes the factor $1/(b-a)$.}
   
   \item  Given $f(x)$ and the ability to integrate, one \textcolor{blue}{can solve this via brute force}
   
@@ -129,6 +137,7 @@
 
   \item  Compute $a_0,a_1,a_2,a_3$ using system of 4 \textbf{linear equations}  ($k=0,1,2,3$) given by
   \[ \int_0^1 (a_0+a_1 x+ a_2 x^2+a_3 x^3) x^k dx = \int_0^1 f(x)x^k dx. \]
+% \gpt{Grammar/derivation: write ``using a system of four linear equations.''  It would also help to state why these are the optimality conditions: the residual must be orthogonal to every polynomial of degree at most $3$, and it suffices to test the basis $1,x,x^2,x^3$.  The associated Gram matrix is positive definite, so the coefficients are unique.}
 
  \end{itemize}
  \begin{center}
@@ -151,12 +160,16 @@
 \begin{itemize}
 
 \item Let $f(x)$ be a function on the the real interval $[a,b]$
+% \gpt{Typo/notation: remove the repeated ``the'' and write ``Let $f\colon[a,b]\to\mathbb R$.''}
 \begin{itemize}
 \item A \textbf{chord} of $f$ is a linear connecting $(x, f(x))$ and $(y, f(y))$. 
+% \gpt{Grammar/definition: replace ``a linear'' by ``the line segment.''  More precisely, a chord of the graph connects $(x,f(x))$ and $(y,f(y))$ for $x,y\in[a,b]$.}
 \item function $f$ is convex $\iff $ all chords lie above the function, i.e., for all $\lambda \in [0,1]$, 
 \[ f(\lambda x +(1-\lambda) y) \leq \lambda f(x) + (1-\lambda) f(y) \] 
+% \gpt{Mathematical/grammatical omission: begin ``The function $f$'' and quantify all three variables: ``for all $x,y\in[a,b]$ and all $\lambda\in[0,1]$.''}
 
 \item Convexity implies all local minima have the same \textbf{minimum value} 
+% \gpt{Suggested strengthening: ``Every local minimizer of a convex function on a convex domain is a global minimizer; consequently, all local minimizers have the same value.''}
 
 
 \end{itemize}
@@ -181,9 +194,11 @@
 \item A convex function lies above any tangent line and 
   \[ \min_{x\in [a,b]} f(x) \geq \min_{x\in [a,b]} \left[ f(x_0)+(x-x_0) f'(x_0) \right] 
   \]
+% \gpt{Mathematical omission: this derivative formula requires $f$ to be differentiable at $x_0\in[a,b]$ (with suitable one-sided interpretation at an endpoint).  For a nondifferentiable convex function, replace $f'(x_0)$ by a subgradient $g\in\partial f(x_0)$; the supporting-line inequality is $f(x)\geq f(x_0)+g(x-x_0)$.}
   
   \item The minimum of the tangent provides a lower bound for any choice of $x_0$. 
     \item Maximizing over $x_0$ recovers the minimum!
+% \gpt{Precision: specify $x_0\in[a,b]$ and the assumptions under which the maximum is attained.  For differentiable convex $f$ on the compact interval $[a,b]$, choosing a global minimizer $x_0$ makes the supporting-line lower bound exact (using the appropriate endpoint derivative when the minimizer is an endpoint).}
 \end{itemize}
 \end{itemize}
 
@@ -193,3 +208,4 @@
 \bibliography{/Users/galenreeves/Dropbox/Library/long_names,/Users/galenreeves/Dropbox/Library/library} 
 \end{document}
 
+% \gpt{Build portability: the absolute bibliography paths above refer to another user's home directory and will fail on other machines.  Use repository-relative bibliography files, or remove the bibliography commands if this lecture has no citations.}

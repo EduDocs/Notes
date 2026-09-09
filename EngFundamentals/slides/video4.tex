@@ -190,11 +190,11 @@
   %Build sets by grouping elements into vectors
   \item For sets $A,B$, the \textcolor{blue}{Cartesian product} $A\times B$ is the set of ordered pairs \[ A \times B \triangleq \{(a,b) \,|\, a\in A, b\in B\}\]
   \item For $n$-tuples from the same set, we write $A^n=A\times A \times \cdots \times A$
-  \item Ex. For $A  = \{ a,b \}$ and $B  = \{ c,d \}$, then we have
+  \item Ex. For $A  = \{ c,d \}$ and $B  = \{ e,f \}$, then we have
 \begin{align*}
-A\times B &= \{(a,c),(a,d),(b,c),(b,d) \} \\
-A^2 = A \times A &= \{ (a,a),(a,b),(b,a),(b,b) \} \\
-\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\! A^3 = \{ (a,a,a),(a,a,b),&(a,b,a),(a,b,b),(b,a,a),(b,a,b),(b,b,a),(b,b,b) \} \\
+A\times B &= \{(c,e),(c,f),(d,e),(d,f) \} \\
+A^2 = A \times A &= \{ (c,c),(c,d),(d,c),(d,d) \} \\
+\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\! A^3 = \{ (c,c,c),(c,c,d),&(c,d,c),(c,d,d),(d,c,c),(d,c,d),(d,d,c),(d,d,d) \} \\
 \end{align*}
 \end{itemize}
 \end{itemize}
@@ -308,22 +308,20 @@ The \textcolor{blue}{value} of $f$ at $x\in X$, \textcolor{blue}{denoted $f(x)$}
 \item<2-> A function $f \colon X \to Y$ is called: \vspace{1mm}
 \begin{itemize}
   \setlength\itemsep{1.5mm}
-  \item \textcolor{blue}{one-to-one} or \textcolor{blue}{injective} if, $\forall x,x'\in X$, if $f(x)=f(x')$ then $x=x'$
-  \item \textcolor{blue}{onto} or \textcolor{blue}{surjective} if its range $\{ f(x) | x\in X\}$ equals $Y$
-  \item \textcolor{blue}{one-to-one correspondence} or \textcolor{blue}{bijective} if it is 
-  both one-to-one and onto
+  \item \textcolor{blue}{injective} or \textcolor{blue}{one-to-one} if, $\forall x,x'\in X$, $f(x)=f(x')$ implies $x=x'$
+  \item \textcolor{blue}{surjective} or \textcolor{blue}{onto} if its range $\{ f(x) | x\in X\}$ equals $Y$
+  \item \textcolor{blue}{bijective} or a \textcolor{blue}{one-to-one correspondence}\footnote<2->{Though easily confusable with one-to-one, this is the standard term in English.} if both injective and surjective
 \end{itemize}
 
 \item<3-> Inversion \vspace{1mm}
 \begin{itemize}
   \setlength\itemsep{1.5mm}
-  \item A bijective function has a unique \textcolor{blue}{inverse function} $f^{-1} \colon Y\rightarrow X$ satisfying: $\forall x\in X, f^{-1}(f(x)) = x$ and $\forall y\in Y, f(f^{-1}(y)) = y$
-  \item Any one-to-one function $f \colon X\rightarrow Y$ automatically defines a bijective function $g \colon X \rightarrow R$ where $R$ is the range of $f$ and $g(x)=f(x)$ for all $x\in X$
+  \item A bijective function has a unique \textcolor{blue}{inverse function} $f^{-1} \colon Y\rightarrow X$ satisfying: \\[0.75mm]$\quad \forall x\in X, f^{-1}(f(x)) = x$ and $\forall y\in Y, f(f^{-1}(y)) = y$
+  \item A one-to-one function $f \colon X\rightarrow Y$ automatically defines a bijective function \\[0.75mm] $\quad g \colon X \rightarrow R$ where $R$ is the range of $f$ and $g(x)=f(x)$ for all $x\in X$
 
 \end{itemize}
 
 \end{itemize}
-\note{\gpt{This frame has three rendered overlays but no speaker notes.  Suggested narration should distinguish carefully among codomain and range: surjectivity means the range equals the declared codomain, while injectivity means each attained value has at most one preimage.  This distinction also explains why restricting an injective function's codomain to its range makes it bijective.}}
 \end{frame}    
 
 

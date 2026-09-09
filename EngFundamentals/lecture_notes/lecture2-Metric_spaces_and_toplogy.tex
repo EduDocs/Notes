@@ -230,7 +230,18 @@ d(x_m, x_n ) \le d(x_m, x) + d(x, x_n) \le  \eps/2 + \eps/2  = \eps
 \[
 x_1 = 2, \qquad x_{n+1} = \frac{1}{2} x_n + \frac{1}{x_n} 
 \]
-\item Can show that $(x_n)$ is a Cauchy sequence and $| c_n - \sqrt{2} | \to 0$. But $\sqrt{2}$ is irrational and to the sequence does not convergence to a limit in $X$. 
+\item The arithmetic-geometric mean inequality shows that $x_n \geq \sqrt{2}$ for every $n$.  Thus,
+\begin{align*}
+\left|x_{n+1}-\sqrt{2}\right|
+&= \left|\frac{x_n^2+2-2\sqrt{2}x_n}{2x_n}\right| \\
+&= \frac{\left|x_n-\sqrt{2}\right|^2}{2x_n}
+ \leq \frac{1}{2}\left|x_n-\sqrt{2}\right|^2.
+\end{align*}
+Since $|x_1-\sqrt{2}|<1$, this gives
+\[
+\left|x_n-\sqrt{2}\right| \leq 2^{-(n-1)}\left|x_1-\sqrt{2}\right| \longrightarrow 0.
+\]
+Hence $(x_n)$ converges to $\sqrt{2}$ in $\mathbb{R}$ and is therefore Cauchy.  But $\sqrt{2}$ is irrational, so $(x_n)$ does not converge to a limit in $X=\mathbb{Q}$.
 \end{itemize}
 
 
@@ -263,7 +274,11 @@ x_1 = 2, \qquad x_{n+1} = \frac{1}{2} x_n + \frac{1}{x_n}
 
 
 
-\color{gray}
+\item \textbf{Definition:} A subset $A$ of a metric space $(Y,d_Y)$ is \textbf{dense} in $Y$ if every open ball in $Y$ intersects $A$, i.e.,
+\[
+\forall y \in Y,\ \forall \eps>0, \qquad B_{d_Y}(y,\eps) \cap A \ne \emptyset.
+\]
+
 \item \textbf{Definition:} 
 The \textbf{completion} of a metric space $(X,d_X)$ consists of a complete metric space $(Y,d_Y)$ and an isometry $\phi  \colon X \rightarrow Y$ such that $\phi(X)$ is a dense subset of $Y$.
 Moreover, the completion is unique up to isometry.
@@ -271,8 +286,6 @@ Moreover, the completion is unique up to isometry.
 
 \item \textbf{Fact:} 
 One can always complete a metric space $(X,d)$ by considering Cauchy sequences of elements in $X$.
-
-\color{black}
 
 
 \item \textbf{Example:}
@@ -294,7 +307,13 @@ f_n(t) \coloneqq \begin{dcases}
 \end{equation*}
 
 
-\item One can show that this is a Cauchy sequence in $(X,d)$ 
+\item This is a Cauchy sequence in $(X,d)$.  For $m,n \geq N$, the functions $f_m$ and $f_n$ differ only on $\left(-\tfrac{1}{N},\tfrac{1}{N}\right)$ and satisfy $|f_m(t)-f_n(t)|\leq 1$.  Therefore,
+\begin{align*}
+\left\|f_m-f_n\right\|_2^2
+&= \int_{-1}^{1} |f_m(t)-f_n(t)|^2\,dt \\
+&\leq \int_{-1/N}^{1/N} 1\,dt
+= \frac{2}{N} \longrightarrow 0.
+\end{align*}
 \item But, \emph{it does not converge} to a continuous function in $C[-1,1]$
 \end{itemize}
 
@@ -738,9 +757,7 @@ The boundary is the union of the dashed and solid lines.
 %  \end{itemize}
 
 
-\item \textbf{Definition:} A subset $A$ of a metric space $(X,d)$ is \textbf{dense} in $X$ if every $x\in X$ is a limit point of the set $A$.
-This is equivalent to the closure $\overline{A}$ being equal to $X$.
-% \gpt{Suggested replacement from the revised book: ``$A$ is dense in $X$ if every nonempty open ball in $X$ intersects $A$, equivalently $\overline A=X$.'' Requiring every point to be a limit point is too strong when isolated points are present.}
+\item A subset $A$ is dense in $X$ if and only if its closure satisfies $\overline{A}=X$.
 
 
 \item \textbf{Example:}
@@ -1314,5 +1331,5 @@ This set of functions, with the metric
 
 
 \bibliographystyle{alpha}%{IEEEtran}
-\bibliography{/Users/galenreeves/Dropbox/Library/long_names,/Users/galenreeves/Dropbox/Library/library} 
+\bibliography{../book.bib} 
 \end{document}
