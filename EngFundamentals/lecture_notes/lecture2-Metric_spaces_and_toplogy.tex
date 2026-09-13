@@ -176,7 +176,7 @@ B_d(a,\delta) \subseteq B_d(x,\eps)
 \]
 This is denoted variously as 
 \[
-\lim_{n\to \infty} x_n = x , \qquad \text{or} \qquad x_n \to x  \text{  as $n \to \infty$}% \qquad \text{or} \qquad x_n \xrightarrow{n\to\infty} x
+\lim_{n\to \infty} x_n = x , \qquad \text{or} \qquad x_n \to x  \text{  (as $n \to \infty$)}% \qquad \text{or} \qquad x_n \xrightarrow{n\to\infty} x
 \]
 
 \item \textbf{Definition:} 
@@ -1030,8 +1030,7 @@ d \left( f(x),f(y) \right) \le \gamma  d(x,y), \quad \text{for all $x,y \in A$}
 \end{center}
 
 \item \textbf{Contraction Mapping Theorem}
-Let $(X,d)$ be a complete metric space and $f$ be a contraction on a closed subset $A \subseteq X$.
-% \gpt{Suggested cut/paste theorem hypothesis: ``Let $(X,d)$ be complete, let $A\subseteq X$ be nonempty and closed, and let $f\colon X\to X$ satisfy $f(A)\subseteq A$ and $d(f(x),f(y))\leq\gamma d(x,y)$ for all $x,y\in A$, with $0\leq\gamma<1$.''}
+Let $(X,d)$ be complete, let $A\subseteq X$ be nonempty and closed, and let $f\colon X\to X$ be a contraction on $A \subseteq X$.
 Then, 
 \begin{itemize}
 \setlength\itemsep{3mm}
@@ -1056,9 +1055,8 @@ d(x,y) = d(f(x),f(y)) \le \gamma d(x,y)
 \begin{itemize}
 \item  By induction, we have 
 \[
-d(x_{n}, x_{n+1}) = d(f(x_{n-1}), f(x_n)) \le \gamma d(x_{n}, x_{n+1}) 
+d(x_{n}, x_{n+1}) = d(f(x_{n-1}), f(x_n)) \le \gamma d(x_{n-1}, x_{n}) 
 \]
-% \gpt{Suggested cut/paste correction: the last factor must be $d(x_{n-1},x_n)$, so the line reads $d(x_n,x_{n+1})\leq\gamma d(x_{n-1},x_n)$.}
 and so 
 \[
 d(x_{n}, x_{n+1}) \le \gamma^{n-1} d( x_1,x_2)
@@ -1183,9 +1181,8 @@ x_n \to x \quad \text{for some $x \in X$}
 \item \textbf{Definition:} A metric space $(X,d)$ is \textbf{totally bounded} if, for any $\epsilon > 0$, there exists a finite set of radius-$\epsilon$ balls that cover $X$, i.e., 
 \[
 \forall \eps > 0, \exists N \in \bbN,   x_1, x_2, \dots , x_N \in X, \qquad 
-\bigcup_{x\in S} B_d (x,\epsilon) = X
+\bigcup_{i=1}^{N} B_d (x_i ,\epsilon) = X
 \]
-% \gpt{Suggested cut/paste correction: $S$ is undefined. Use $X=\bigcup_{i=1}^{N}B_d(x_i,\epsilon)$.}
 
 
 \begin{center}
@@ -1305,8 +1302,7 @@ i, j \ge N_\eps  \qquad \implies \quad d(x_{n_i^i}, x_{n_j^j})  < \eps
 
 
 
-\item \textbf{Theorem:}  Let $X$ be a metric space and $f \colon X\rightarrow \bbR$ be a continuous function from $X$ to $\mathbb{R}$. If $A$ is a compact subset of $X$, then there exists $x\in A$ such that $f(x)=\sup f(A)$ (i.e., $f$ achieves a maximum on $A$).
-% \gpt{Suggested cut/paste hypothesis: require $A$ to be nonempty and compact.}
+\item \textbf{Theorem:}  Let $X$ be a metric space and $f \colon X\rightarrow \bbR$ be a continuous function from $X$ to $\mathbb{R}$. If $A$ is a nonempty compact subset of $X$, then there exists $x\in A$ such that $f(x)=\sup f(A)$ (i.e., $f$ achieves a maximum on $A$).
 
 \item \textbf{Theorem:}  
 Let $(X,d)$ be a compact metric space and $C(X)$ be the set of continuous functions mapping $X$ to $\mathbb{R}$.
